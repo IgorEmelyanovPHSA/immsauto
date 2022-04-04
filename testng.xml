@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Clinic-In Box Workflow Suit">
+    <test name="Regression">
+        <classes>
+            <class name="ClinicInBoxTC">
+                <methods>
+                    <include name="LoginAsClinician"/>
+                </methods>
+            </class>
+            <class name="InClinicExperience.Dose1VaccineAdmimistration">
+                <methods>
+                    <include name="ghgfgfhfhfhgg"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
