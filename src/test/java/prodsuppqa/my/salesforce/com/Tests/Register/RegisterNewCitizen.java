@@ -11,10 +11,6 @@ public class RegisterNewCitizen extends BaseTest {
         System.out.println("Register a new Citizen PRODSUPPQA");
         /*----Login as an Clinician In-Clinic Experience --*/
         System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-        //loginPage.enterClinicianUserName();
-        //loginPage.enterClinicianPW();
-        //loginPage.clickLoginButton();
-        //InClinicExperiencePage inClinicExperiencePage = loginPage.clickLoginButton();
         InClinicExperiencePage inClinicExperiencePage = loginPage.loginWith();
         //Thread.sleep(10000);
         /*----Go to Register Tab ---*/
