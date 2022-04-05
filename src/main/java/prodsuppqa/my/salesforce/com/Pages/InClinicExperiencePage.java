@@ -1,5 +1,6 @@
 package prodsuppqa.my.salesforce.com.Pages;
 
+import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +19,11 @@ public class InClinicExperiencePage extends BasePage {
 
     @FindBy(xpath = ".//button[@title = ' Create New Profile']")
     private WebElement register_button;
+
+    @FindBy(xpath = ".//button[text() = 'Search']")
+    private WebElement search_assistant;
+    private By search_assistant1 = By.xpath(".//button[text() = 'Search']");
+
 
     public InClinicExperiencePage(WebDriver driver) {
         super(driver);
@@ -38,6 +44,20 @@ public class InClinicExperiencePage extends BasePage {
         //click(relatedTab2);
         //this.register_tab.click();
     }
+
+    public void SearchForCitizen(String citizen){
+        waitForElementToBeLocated(driver,search_assistant1,10);
+        WebElement element = driver.findElement(search_assistant1);
+        //element.click();
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+        element.sendKeys(citizen);
+        //element.sendKeys(Keys.ENTER);
+        executor.executeScript("arguments[0].setAttribute('value', arguments[1])", element, citizen);
+        executor.executeScript("arguments[0].value='\"+ keysToSend +\"';", element);
+    }
+
+
 
 
 
