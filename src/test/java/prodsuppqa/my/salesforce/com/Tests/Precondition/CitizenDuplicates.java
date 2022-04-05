@@ -23,8 +23,8 @@ public class CitizenDuplicates extends BaseTest {
         Thread.sleep(5000);
         /*----Search for Participant account ---*/
         System.out.println("/*----Search for Participant account ---*/");
-        //inClinicExperiencePage.SearchForCitizen("Barbie");
-        Thread.sleep(5000);
+        inClinicExperiencePage.SearchForCitizen("BARBIE");
+        //Thread.sleep(5000);
     }
 
 }
