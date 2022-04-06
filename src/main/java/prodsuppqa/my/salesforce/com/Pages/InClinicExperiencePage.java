@@ -1,10 +1,7 @@
 package prodsuppqa.my.salesforce.com.Pages;
 
-import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class InClinicExperiencePage extends BasePage {
@@ -28,6 +25,14 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement search_input;
     private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
 
+    @FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
+    private WebElement user_found;
+    private By user_found1 = By.xpath(".//a[@title='Giacinta BCVaxCaudelier']");
+
+    @FindBy(xpath = "//*/div/a/lightning-icon/lightning-primitive-icon")
+    private WebElement delete_Imms_record;
+    private By delete_Imms_record1 = By.xpath("//*/div/a/lightning-icon/lightning-primitive-icon");
+
 
     public InClinicExperiencePage(WebDriver driver) {
         super(driver);
@@ -47,6 +52,22 @@ public class InClinicExperiencePage extends BasePage {
         //this.register_tab1.click();
         //click(relatedTab2);
         //this.register_tab.click();
+    }
+
+    public boolean userFound() throws InterruptedException {
+        waitForElementToBeLocated(driver,delete_Imms_record1,15);
+        WebElement element = driver.findElement(delete_Imms_record1);
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(5000);
+        return false;
+    }
+
+    public void deleteImmRecord() throws InterruptedException {
+        waitForElementToBeLocated(driver,user_found1,15);
+        WebElement element = driver.findElement(user_found1);
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 
     public void SearchForCitizen(String citizen) throws InterruptedException {
