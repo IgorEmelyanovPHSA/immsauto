@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.354 sec <<< FAILURE! - in TestSuite
+Can_login_as_Clinician_to_PRODSUPPQA(prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest)  Time elapsed: 0.035 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "prodsuppqa.my.salesforce.com.Pages.LoginPage.enterClinicianUserName()" because "this.loginPage" is null
+	at prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest.Can_login_as_Clinician_to_PRODSUPPQA(ClinicianLoginTest.java:12)
+
