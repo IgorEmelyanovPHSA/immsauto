@@ -8,12 +8,18 @@ public class LoginPage extends BasePage {
 
     private final String CLINICIAN_PRODSUPPQA = "clinician_igor1@bcvaxprodsuppqa.ca";
     private final String CLINICIAN_PW_PRODSUPPQA = "Technology1990!!!!!";
+    private final String PPHIS_PRODSUPPQA = "auto_operationpphis@deloitte.ca.bcvaxprodsuppqa";
+    private final String PPHIS_PW_PRODSUPPQA = "Technology1990!!!!!";
 
     @FindBy(id = "username")
     private WebElement clinician_prodsuppqa;
+    @FindBy(id = "username")
+    private WebElement pphis_prodsuppqa;
 
     @FindBy(id = "password")
     private WebElement clinician_pw_prodsuppqa;
+    @FindBy(id = "password")
+    private WebElement pphis_pw_prodsuppqa;
 
     @FindBy(id = "Login")
     private WebElement login_button;
@@ -38,8 +44,16 @@ public class LoginPage extends BasePage {
         this.clinician_prodsuppqa.sendKeys(CLINICIAN_PRODSUPPQA);
     }
 
+    public void enterPPHISUserName(){
+        this.pphis_prodsuppqa.sendKeys(PPHIS_PRODSUPPQA);
+    }
+
     public void enterClinicianPW(){
         this.clinician_pw_prodsuppqa.sendKeys(CLINICIAN_PW_PRODSUPPQA);
+    }
+
+    public void enterPPHIS_PW(){
+        this.pphis_pw_prodsuppqa.sendKeys(PPHIS_PW_PRODSUPPQA);
     }
 
     public void pressSubmitButton(){
@@ -70,6 +84,15 @@ public class LoginPage extends BasePage {
         //return clickLoginButton();
         this.login_button.click();
         return new InClinicExperiencePage(driver);
+    }
+
+    public SupplyConsolePage loginAsPPHIS() {
+        this.enterPPHISUserName();
+        //setUsername(username);
+        this.enterPPHIS_PW();
+        //return clickLoginButton();
+        this.login_button.click();
+        return new SupplyConsolePage(driver);
     }
     
 
