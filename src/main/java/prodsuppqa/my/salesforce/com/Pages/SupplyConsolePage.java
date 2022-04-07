@@ -24,6 +24,11 @@ public class SupplyConsolePage extends BasePage {
     //private By container_checkbox_1_ = By.xpath("(.//span[@class = 'slds-checkbox_faux'])[2]");
 
 
+    @FindBy(xpath = ".//button[text() = 'Transfer']")
+    private WebElement bulk_transfers_button;
+    private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
+
+
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
     }
@@ -59,6 +64,13 @@ public class SupplyConsolePage extends BasePage {
         List<WebElement> rows = driver.findElements(rows_count_path_1);
         //rows.size();
         return(rows.size());
+    }
+
+    public void clickBulkTransfersButton() throws InterruptedException {
+        waitForElementToBeLocated(driver, bulk_transfers_button_1, 10);
+        WebElement element = driver.findElement(bulk_transfers_button_1);
+        this.bulk_transfers_button.click();
+        //click(bulk_transfers_button_1);
     }
 
 
