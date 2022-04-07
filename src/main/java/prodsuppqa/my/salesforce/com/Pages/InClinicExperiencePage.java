@@ -34,9 +34,9 @@ public class InClinicExperiencePage extends BasePage {
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
 
-    @FindBy(xpath = "(//*[@id='2568:0']/div/a)") ////A[@title='Show 2 more actions'
+    @FindBy(xpath = "(.//span[text() = 'Show more actions'])") ////A[@title='Show 2 more actions'
     private WebElement select_Imms_record;
-    private By select_Imms_record1 = By.xpath("//*[@id='2568:0']/div/a)");
+    private By select_Imms_record1 = By.xpath("(.//span[text() = 'Show more actions'])");
 
     @FindBy(xpath = "//A[@title='Delete']")
     private WebElement delete_Imms_record;
@@ -111,9 +111,10 @@ public class InClinicExperiencePage extends BasePage {
         js.executeScript("window.scrollBy(0,1000)");*/
         waitForElementToBeLocated(driver,select_Imms_record1,15);
         WebElement element = driver.findElement(select_Imms_record1);
+        //element.click();
         JavascriptExecutor executor=(JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].scrollIntoView(true).click();", element);
-        Thread.sleep(5000);
+        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(10000);
         /*waitForElementToBeLocated(driver,delete_Imms_record1,10);
         WebElement element1 = driver.findElement(delete_Imms_record1);
         JavascriptExecutor executor1=(JavascriptExecutor)driver;
