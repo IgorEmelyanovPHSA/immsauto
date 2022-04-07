@@ -34,9 +34,9 @@ public class InClinicExperiencePage extends BasePage {
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
 
-    @FindBy(xpath = "(//*[@id='2568:0']/div/a)") ////A[@title='Show 2 more actions'
+    @FindBy(xpath = "(//A[@title='Show 2 more actions']")
     private WebElement select_Imms_record;
-    private By select_Imms_record1 = By.xpath("//*[@id='2568:0']/div/a)");
+    private By select_Imms_record1 = By.xpath("//A[@title='Show 2 more actions']");
 
     @FindBy(xpath = "//A[@title='Delete']")
     private WebElement delete_Imms_record;
