@@ -169,4 +169,6 @@ public class InClinicExperiencePage extends BasePage {
         JavascriptExecutor executor=(JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
     }
+
 }
+
