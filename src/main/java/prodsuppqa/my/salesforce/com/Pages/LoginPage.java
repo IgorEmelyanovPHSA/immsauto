@@ -71,6 +71,7 @@ public class LoginPage extends BasePage {
         this.login_button.click();
         return new InClinicExperiencePage(driver);
     }
+    
 
     public void verifyAlertSuccess(){
         this.alertSuccess.isDisplayed();
