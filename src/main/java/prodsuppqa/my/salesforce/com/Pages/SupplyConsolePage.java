@@ -24,14 +24,64 @@ public class SupplyConsolePage extends BasePage {
     //private By container_checkbox_1_ = By.xpath("(.//span[@class = 'slds-checkbox_faux'])[2]");
 
 
+
     @FindBy(xpath = ".//button[text() = 'Transfer']")
     private WebElement bulk_transfers_button;
     private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 
 
+    @FindBy(xpath = "//span[contains(text(),\"Supply Locations\")]")
+    private WebElement  SupplyLocations;
+
+    public void clickSupplyLocations(){
+        SupplyLocations.click();
+
+    }
+
+    @FindBy(xpath = "//button[@class=\"slds-button slds-button--reset downIcon slds-m-top_xxx-small slds-p-right_xxx-small\"]")
+    private WebElement  clickViewAllBtn;
+
+    public void clickClickViewAllBtn(){
+        clickViewAllBtn.click();
+    }
+
+    @FindBy(xpath = "//body/div[4]/div[2]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[3]/a[1]/span[1]")
+    private WebElement  clickAllBtn;
+
+    public void clickClickAllBtn(){
+        clickAllBtn.click();
+    }
+
+    @FindBy(xpath = "//a[contains(text(),\"Atlin Health Centre\")]")
+    private WebElement  firstRow;
+
+    public void clickFirstRow(){
+        firstRow.click();
+    }
+    @FindBy(xpath = "")
+    private WebElement  RequestSupplies;
+
+    public void clickRequestSupplies(){
+        RequestSupplies.click();
+    }
+
+
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
     }
+
+
+
+
+   //public void SupplyLocations() throws InterruptedException {
+      //waitForElementToBeLocated(driver, supply_Locations1, 10);
+      //WebElement element = driver.findElement(click_user_Locate1);
+      //JavascriptExecutor executor = (JavascriptExecutor) driver;
+      //executor.executeScript("arguments[0].click();", element);
+
+
+
+
 
     public void clickSupplyLocationsTab() throws InterruptedException {
         waitForElementToBeLocated(driver, supply_locations_tab1, 10);
@@ -75,3 +125,4 @@ public class SupplyConsolePage extends BasePage {
 
 
 }
+
