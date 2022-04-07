@@ -28,8 +28,11 @@ public class CitizenDuplicates extends BaseTest {
         inClinicExperiencePage.userFound();
         System.out.println("/*----User found and Navigated to record page ---*/");
         Thread.sleep(5000);
-        inClinicExperiencePage.clickRegisterTab();
+        inClinicExperiencePage.clickRelatedTab();
         System.out.println("/*---- Navigated to Person Account related tab ---*/");
+        Thread.sleep(5000);
+        inClinicExperiencePage.deleteImmRecord();
+        Thread.sleep(5000);
 
     }
 
