@@ -7,7 +7,6 @@ import org.testng.annotations.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
-
 public class BaseTest {
     private WebDriver driver;
     //private static final WebDriver driver = new ChromeDriver();

@@ -23,8 +23,17 @@ public class CitizenDuplicates extends BaseTest {
         Thread.sleep(5000);
         /*----Search for Participant account ---*/
         System.out.println("/*----Search for Participant account ---*/");
-        inClinicExperiencePage.SearchForCitizen("BARBIE");
-        //Thread.sleep(5000);
+        inClinicExperiencePage.SearchForCitizen("Giacinta BCVaxCaudelier");
+        System.out.println("/*----Search for Giacinta is Successful ---*/");
+        inClinicExperiencePage.userFound();
+        System.out.println("/*----User found and Navigated to record page ---*/");
+        Thread.sleep(5000);
+        inClinicExperiencePage.clickRelatedTab();
+        System.out.println("/*---- Navigated to Person Account related tab ---*/");
+        Thread.sleep(5000);
+        inClinicExperiencePage.deleteImmRecord();
+        Thread.sleep(5000);
+
     }
 
 }
