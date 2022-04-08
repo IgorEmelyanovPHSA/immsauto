@@ -6,13 +6,15 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class SupplyConsolePage extends BasePage {
-    @FindBy(xpath = ".//span[text() = 'Supply Locations']")
+    @FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
     private WebElement supply_locations_tab;
-    private By supply_locations_tab1 = By.xpath("(.//a[@title = 'Supply Locations'])");
+    private By supply_locations_tab1 = By.xpath("(.//span[@class = 'slds-truncate'])[2]");
 
-    @FindBy(linkText = "Automation Supply Location_1")
+    @FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
+    //@FindBy(linkText = "Automation Supply Location_1")
     private WebElement supply_supply_location_1;
-    private By supply_supply_location_1_ = By.linkText("Automation Supply Location_1");
+    //private By supply_supply_location_1_ = By.linkText("Automation Supply Location_1");
+    private By supply_supply_location_1_ = By.xpath(".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']");
 
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)")
     private WebElement rows_count_path;

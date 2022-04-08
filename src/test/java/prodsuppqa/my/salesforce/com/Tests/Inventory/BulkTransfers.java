@@ -11,7 +11,7 @@ import static java.lang.Thread.*;
 public class BulkTransfers extends BaseTest {
 
     @Test
-    public void Can_do_Bulk_transfers_by_Quantity_as_PPHIS_PRODSUPPQA() throws InterruptedException {
+    public void Can_do_Bulk_transfers_by_Dosages_as_PPHIS_PRODSUPPQA() throws InterruptedException {
         System.out.println("/*1.----Login as an PPHIS_prodsuppqa to Supply Console --*/");
         SupplyConsolePage supplyConsolePagePage = loginPage.loginAsPPHIS();
         System.out.println("/*2.----Go to Supply Locations Tab --*/");
@@ -46,6 +46,7 @@ public class BulkTransfers extends BaseTest {
 
 
     }
+
 
 
 
