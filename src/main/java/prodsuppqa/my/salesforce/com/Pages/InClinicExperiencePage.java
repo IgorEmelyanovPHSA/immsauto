@@ -33,9 +33,9 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement click_related_tab;
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
-    @FindBy(xpath = "(//SPAN[@id='window']")
+    @FindBy(xpath = "(//th[@data-label='Immunization Record'] //a[@class='flex-wrap-ie11 slds-truncate']")
     private WebElement select_Imms_record;
-    private By select_Imms_record1 = By.xpath("//SPAN[@id='window']");
+    private By select_Imms_record1 = By.xpath("//th[@data-label='Immunization Record'] //a[@class='flex-wrap-ie11 slds-truncate']]");
 
     @FindBy(xpath = ".//button[@class='slds-button slds-button_icon-border-filled']")
     private WebElement imms_drop_down;
@@ -49,9 +49,9 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement delete_record_button;
     private By delete_record_button1 = By.xpath("//span[@dir='ltr'][text()='Delete']");
 
-    @FindBy(xpath = "(//span[@id='window']")
+    @FindBy(xpath = "(//th[@data-label='Rules Engine Response Name']//a[@class='flex-wrap-ie11 slds-truncate']")
     private WebElement select_rern_record;
-    private By select_rern_record1 = By.xpath("//SPAN[@id='window']");
+    private By select_rern_record1 = By.xpath("//th[@data-label='Rules Engine Response Name']//a[@class='flex-wrap-ie11 slds-truncate']");
 
 
     /*@FindBy(xpath = "//BUTTON[@name='Delete'][text()='Delete']")
@@ -169,6 +169,5 @@ public class InClinicExperiencePage extends BasePage {
         JavascriptExecutor executor=(JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
     }
-
 }
 
