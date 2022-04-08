@@ -15,8 +15,9 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*1.----Login as an PPHIS_prodsuppqa to Supply Console --*/");
         SupplyConsolePage supplyConsolePagePage = loginPage.loginAsPPHIS();
         System.out.println("/*2.----Go to Supply Locations Tab --*/");
+        supplyConsolePagePage.verifyIsSupplyPageDisplayed();
+        //Thread.sleep(5000);
         supplyConsolePagePage.clickSupplyLocationsTab();
-        //Thread.sleep(10000);
         System.out.println("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocations();
         Thread.sleep(5000);

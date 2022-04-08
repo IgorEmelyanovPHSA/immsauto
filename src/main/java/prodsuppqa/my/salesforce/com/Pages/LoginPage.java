@@ -27,8 +27,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Submit')]")
     private WebElement submit_button;
 
-    @FindBy(xpath = "//div[contains(text(),'The form was successfully submitted!')]")
-    private WebElement alertSuccess;
+    @FindBy(xpath = ".//input[@value='Log In to Sandbox']")
+    private WebElement login_page_displayed;
 
     //private By clinicianField = By.id("username");
     //private By passwordField = By.id("password");
@@ -96,8 +96,8 @@ public class LoginPage extends BasePage {
     }
     
 
-    public void verifyAlertSuccess(){
-        this.alertSuccess.isDisplayed();
+    public void verifyIsLoginPageDisplayed(){
+        this.login_page_displayed.isDisplayed();
     }
 
 

@@ -64,13 +64,17 @@ public class SupplyConsolePage extends BasePage {
         RequestSupplies.click();
     }
 
+    @FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
+    private WebElement supply_page_displayed;
+
 
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
     }
 
     public void clickSupplyLocationsTab() throws InterruptedException {
-        waitForElementToBeLocated(driver, supply_locations_tab1, 10);
+        //waitForElementToBeLocated(driver, supply_locations_tab1, 10);
+        waitForElementToBeVisible(driver,supply_locations_tab,10);
         WebElement element = driver.findElement(supply_locations_tab1);
         //waitForElementToBeVisible(driver, element, 10);
         //JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -80,7 +84,8 @@ public class SupplyConsolePage extends BasePage {
     }
 
     public void clickOnSupplyLocations() throws InterruptedException {
-        waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
+        //waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
+        waitForElementToBeVisible(driver,supply_supply_location_1,10);
         WebElement element = driver.findElement(supply_supply_location_1_);
         this.supply_supply_location_1.click();
     }
@@ -107,6 +112,11 @@ public class SupplyConsolePage extends BasePage {
         WebElement element = driver.findElement(bulk_transfers_button_1);
         this.bulk_transfers_button.click();
         //click(bulk_transfers_button_1);
+    }
+
+    public void verifyIsSupplyPageDisplayed(){
+        waitForElementToBeVisible(driver, supply_page_displayed, 10);
+        this.supply_page_displayed.isDisplayed();
     }
 
 
