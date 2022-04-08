@@ -38,7 +38,9 @@ public class BulkTransfers extends BaseTest {
         }
         System.out.println("/*6.----Click on bulk Transfer button --*/");
         supplyConsolePagePage.clickBulkTransfersButton();
-        Thread.sleep(10000);
+        Thread.sleep(5000);
+        System.out.println("/*7.----Enter the Dosages values for 3 row Transfers --*/");
+
 
 
 

@@ -23,8 +23,6 @@ public class SupplyConsolePage extends BasePage {
     //private WebElement container_checkbox_1;
     //private By container_checkbox_1_ = By.xpath("(.//span[@class = 'slds-checkbox_faux'])[2]");
 
-
-
     @FindBy(xpath = ".//button[text() = 'Transfer']")
     private WebElement bulk_transfers_button;
     private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
@@ -35,7 +33,6 @@ public class SupplyConsolePage extends BasePage {
 
     public void clickSupplyLocations(){
         SupplyLocations.click();
-
     }
 
     @FindBy(xpath = "//button[@class=\"slds-button slds-button--reset downIcon slds-m-top_xxx-small slds-p-right_xxx-small\"]")
@@ -69,19 +66,6 @@ public class SupplyConsolePage extends BasePage {
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
     }
-
-
-
-
-   //public void SupplyLocations() throws InterruptedException {
-      //waitForElementToBeLocated(driver, supply_Locations1, 10);
-      //WebElement element = driver.findElement(click_user_Locate1);
-      //JavascriptExecutor executor = (JavascriptExecutor) driver;
-      //executor.executeScript("arguments[0].click();", element);
-
-
-
-
 
     public void clickSupplyLocationsTab() throws InterruptedException {
         waitForElementToBeLocated(driver, supply_locations_tab1, 10);
