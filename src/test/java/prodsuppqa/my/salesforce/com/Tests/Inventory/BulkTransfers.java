@@ -15,8 +15,9 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*1.----Login as an PPHIS_prodsuppqa to Supply Console --*/");
         SupplyConsolePage supplyConsolePagePage = loginPage.loginAsPPHIS();
         System.out.println("/*2.----Go to Supply Locations Tab --*/");
+        Thread.sleep(5000);
         supplyConsolePagePage.verifyIsSupplyPageDisplayed();
-        //Thread.sleep(5000);
+        Thread.sleep(5000);
         supplyConsolePagePage.clickSupplyLocationsTab();
         System.out.println("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocations();
@@ -41,6 +42,15 @@ public class BulkTransfers extends BaseTest {
         supplyConsolePagePage.clickBulkTransfersButton();
         Thread.sleep(5000);
         System.out.println("/*7.----Enter the Dosages values for 3 row Transfers --*/");
+        int k=3;
+        while (k <= 7){
+            supplyConsolePagePage.enterBulkTransferDosages(k);
+            int n=k-2;
+            System.out.println("/*---     dose slot N%: " +n);
+            Thread.sleep(1000);
+            k=k+2;
+        }
+
 
 
 
