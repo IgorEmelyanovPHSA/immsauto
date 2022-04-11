@@ -27,9 +27,10 @@ public class CitizenDuplicates extends BaseTest {
         System.out.println("/*----Search for Giacinta is Successful ---*/");
         inClinicExperiencePage.userFound();
         System.out.println("/*----User found and Navigated to record page ---*/");
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         inClinicExperiencePage.clickRelatedTab();
         System.out.println("/*---- Navigated to Person Account related tab ---*/");
+<<<<<<< HEAD
         Thread.sleep(2000);
         inClinicExperiencePage.selectImmsRecord();
         System.out.println("/*---- User navigated to Imms record ---*/");
@@ -51,6 +52,12 @@ public class CitizenDuplicates extends BaseTest {
         System.out.println("/*---- Navigated to Person Account related tab ---*/");
         inClinicExperiencePage.deletePersonAccount();
         System.out.println("/*---- Person Account deleted Successfully ---*/");
+=======
+        Thread.sleep(5000);
+        inClinicExperiencePage.deleteImmRecord();
+        Thread.sleep(5000);
+
+>>>>>>> 48c370e605e5a802f1f4a2134cf9d21ed89b9d75
     }
 
 }
