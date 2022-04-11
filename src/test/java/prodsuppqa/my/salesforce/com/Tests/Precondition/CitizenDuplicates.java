@@ -27,26 +27,13 @@ public class CitizenDuplicates extends BaseTest {
         System.out.println("/*----Search for Giacinta is Successful ---*/");
         inClinicExperiencePage.userFound();
         System.out.println("/*----User found and Navigated to record page ---*/");
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         inClinicExperiencePage.clickRelatedTab();
         System.out.println("/*---- Navigated to Person Account related tab ---*/");
-        Thread.sleep(2000);
-        inClinicExperiencePage.selectImmsRecord();
-        System.out.println("/*---- User navigated to Imms record ---*/");
-        Thread.sleep(2000);
-        inClinicExperiencePage.deleteImmsRecord();
-        System.out.println("/*---- Imms record deleted Successfully ---*/");
-        Thread.sleep(2000);
-        inClinicExperiencePage.clickRelatedTab();
-        System.out.println("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-        inClinicExperiencePage.selectRERNRecord();
-        System.out.println("/*---- User navigated to RERN record ---*/");
-        Thread.sleep(2000);
-        inClinicExperiencePage.deleteRERNRecord();
-        System.out.println("/*---- RERN record deleted Successfully ---*/");
-        Thread.sleep(2000);
-        inClinicExperiencePage.deletePersonAccount();
-        System.out.println("/*---- Person Account deleted Successfully ---*/");
+        Thread.sleep(5000);
+        inClinicExperiencePage.deleteImmRecord();
+        Thread.sleep(5000);
+
     }
 
 }
