@@ -2,6 +2,7 @@ package prodsuppqa.my.salesforce.com.Pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class SupplyConsolePage extends BasePage {
     private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 
 
-    @FindBy(xpath = "//span[contains(text(),\"Supply Locations\")]")
+    @FindBy(xpath = ".//input[@class='slds-combobox__input slds-input']")
     private WebElement  SupplyLocations;
 
     public void clickSupplyLocations(){
@@ -66,6 +67,15 @@ public class SupplyConsolePage extends BasePage {
 
     @FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
     private WebElement supply_page_displayed;
+
+    @FindBy(xpath = ".//input[@placeholder='Search Supply Locations...']")
+    private WebElement search_supply_location_To;
+    private By search_supply_location_To_ = By.xpath(".//input[@placeholder='Search Supply Locations...']");
+
+    @FindBy(xpath = "//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']")
+    private WebElement select_supply_location_To;
+    private By select_supply_location_To_ =
+            By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
 
 
 
@@ -130,6 +140,17 @@ public class SupplyConsolePage extends BasePage {
         click(dose_1_);
         element.sendKeys("1");
     }
+
+    public void selectSupplyLocatonTo() throws InterruptedException {
+        waitForElementToBeVisible(driver, search_supply_location_To, 10);
+        search_supply_location_To.sendKeys("Automation Supply Location_2");
+        waitForElementToBeVisible(driver, select_supply_location_To, 10);
+        select_supply_location_To.click();
+        //#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
+        //#search_supply_location_To.sendKeys(Keys.ENTER);
+    }
+
+
 
 
 }
