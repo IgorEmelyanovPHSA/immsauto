@@ -39,12 +39,16 @@ public class CitizenDuplicates extends BaseTest {
         Thread.sleep(2000);
         inClinicExperiencePage.clickRelatedTab();
         System.out.println("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
+        Thread.sleep(5000);
         inClinicExperiencePage.selectRERNRecord();
         System.out.println("/*---- User navigated to RERN record ---*/");
         Thread.sleep(2000);
         inClinicExperiencePage.deleteRERNRecord();
         System.out.println("/*---- RERN record deleted Successfully ---*/");
         Thread.sleep(2000);
+        inClinicExperiencePage.clickRelatedTab();
+        Thread.sleep(2000);
+        System.out.println("/*---- Navigated to Person Account related tab ---*/");
         inClinicExperiencePage.deletePersonAccount();
         System.out.println("/*---- Person Account deleted Successfully ---*/");
     }
