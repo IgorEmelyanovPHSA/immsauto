@@ -50,7 +50,8 @@ public class BulkTransfers extends BaseTest {
             Thread.sleep(1000);
             k=k+2;
         }
-
+        System.out.println("/*8.----select 'To' Automation Location_2  --*/");
+        System.out.println("/*9.----click Transfer button --*/");
 
 
 
