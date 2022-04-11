@@ -73,7 +73,7 @@ public class Register {
        // loginPage.enterLastName();
         //loginPage.pressSubmitButton();
         Thread.sleep(5000);
-        loginPage.verifyAlertSuccess();
+        loginPage.verifyIsLoginPageDisplayed();
 
     }
 

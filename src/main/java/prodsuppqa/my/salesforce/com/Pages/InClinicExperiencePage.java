@@ -33,19 +33,34 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement click_related_tab;
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
-
-    @FindBy(xpath = "(//A[@title='Show 2 more actions']")
+    @FindBy(xpath = "(//th[@data-label='Immunization Record'] //a[@class='flex-wrap-ie11 slds-truncate']")
     private WebElement select_Imms_record;
-    private By select_Imms_record1 = By.xpath("//A[@title='Show 2 more actions']");
+    private By select_Imms_record1 = By.xpath("//th[@data-label='Immunization Record'] //a[@class='flex-wrap-ie11 slds-truncate']]");
 
-    @FindBy(xpath = "//A[@title='Delete']")
-    private WebElement delete_Imms_record;
-    private By delete_Imms_record1 = By.xpath("//A[@title='Delete']");
+    @FindBy(xpath = ".//button[@class='slds-button slds-button_icon-border-filled']")
+    private WebElement imms_drop_down;
+    private By imms_drop_down1 = By.xpath(".//button[@class='slds-button slds-button_icon-border-filled']");
+
+    @FindBy(xpath = "//a[@runtime_platform_actions-ribbonmenuitem_ribbonmenuitem='']")
+    private WebElement imms_drop_down_del;
+    private By imms_drop_down_del1 = By.xpath(".//a[@runtime_platform_actions-ribbonmenuitem_ribbonmenuitem='']");
+
+    @FindBy(xpath = "//span[@dir='ltr'][text()='Delete']")
+    private WebElement delete_record_button;
+    private By delete_record_button1 = By.xpath("//span[@dir='ltr'][text()='Delete']");
+
+    @FindBy(xpath = "(//th[@data-label='Rules Engine Response Name']//a[@class='flex-wrap-ie11 slds-truncate']")
+    private WebElement select_rern_record;
+    private By select_rern_record1 = By.xpath("//th[@data-label='Rules Engine Response Name']//a[@class='flex-wrap-ie11 slds-truncate']");
 
 
-    @FindBy(xpath = "button[text()='Delete']")
+    /*@FindBy(xpath = "//BUTTON[@name='Delete'][text()='Delete']")
+    private WebElement delete_rern_record;
+    private By delete_rern_record1 = By.xpath("//BUTTON[@name='Delete'][text()='Delete'])");*/
+
+    @FindBy(xpath = "//button[text()='Delete']")
     private WebElement delete_person_account;
-    private By delete_person_account1 = By.xpath("button[text()='Delete']");
+    private By delete_person_account1 = By.xpath("//button[text()='Delete']");
 
     public InClinicExperiencePage(WebDriver driver) {
         super(driver);
@@ -106,19 +121,53 @@ public class InClinicExperiencePage extends BasePage {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public void deleteImmRecord() throws InterruptedException {
-        /*JavascriptExecutor js = null;
-        js.executeScript("window.scrollBy(0,1000)");*/
-        waitForElementToBeLocated(driver,select_Imms_record1,15);
+    public void selectImmsRecord() throws InterruptedException {
+        waitForElementToBeLocated(driver,select_Imms_record1,10);
         WebElement element = driver.findElement(select_Imms_record1);
         JavascriptExecutor executor=(JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].scrollIntoView(true).click();", element);
-        Thread.sleep(5000);
-        /*waitForElementToBeLocated(driver,delete_Imms_record1,10);
-        WebElement element1 = driver.findElement(delete_Imms_record1);
-        JavascriptExecutor executor1=(JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click;", element1);
-        Thread.sleep(5000);*/
+        executor.executeScript("arguments[0].click();", element);
     }
 
+    public void deleteImmsRecord() throws InterruptedException {
+        waitForElementToBeLocated(driver,imms_drop_down1,10);
+        WebElement element = driver.findElement(imms_drop_down1);
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+        waitForElementToBeLocated(driver,imms_drop_down_del1,10);
+        WebElement element1 = driver.findElement(imms_drop_down_del1);
+        JavascriptExecutor executor1=(JavascriptExecutor)driver;
+        executor1.executeScript("arguments[0].click();", element1);
+        Thread.sleep(5000);
+        waitForElementToBeLocated(driver, delete_record_button1,10);
+        WebElement element2 = driver.findElement(delete_record_button1);
+        JavascriptExecutor executor2=(JavascriptExecutor)driver;
+        executor2.executeScript("arguments[0].click();", element2);
+    }
+
+    public void selectRERNRecord() throws InterruptedException {
+        waitForElementToBeLocated(driver,select_rern_record1,10);
+        WebElement element = driver.findElement(select_rern_record1);
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void deleteRERNRecord() throws InterruptedException {
+        waitForElementToBeLocated(driver,delete_person_account1,10);
+        WebElement element = driver.findElement(delete_person_account1);
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(5000);
+        waitForElementToBeLocated(driver,delete_record_button1,10);
+        WebElement element1 = driver.findElement(delete_record_button1);
+        JavascriptExecutor executor1=(JavascriptExecutor)driver;
+        executor1.executeScript("arguments[0].click();", element1);
+    }
+
+    public void deletePersonAccount() throws InterruptedException {
+        waitForElementToBeLocated(driver,delete_person_account1,10);
+        WebElement element = driver.findElement(delete_person_account1);
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
 }
+
