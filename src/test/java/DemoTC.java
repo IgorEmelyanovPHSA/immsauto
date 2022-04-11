@@ -70,7 +70,7 @@ public class DemoTC {
         //loginPage.enterLastName();
         //loginPage.pressSubmitButton();
         Thread.sleep(5000);
-        loginPage.verifyIsLoginPageDisplayed();
+        loginPage.verifyAlertSuccess();
 
     }
 
@@ -85,7 +85,7 @@ public class DemoTC {
         loginPage.clickLoginButton();
         //loginPage.loginWith();
         Thread.sleep(5000);
-        loginPage.verifyIsLoginPageDisplayed();
+        //loginPage.verifyAlertSuccess();
     }
 
 

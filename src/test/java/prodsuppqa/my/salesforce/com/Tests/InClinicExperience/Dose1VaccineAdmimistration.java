@@ -76,7 +76,7 @@ public class Dose1VaccineAdmimistration {
         //loginPage.enterLastName();
         loginPage.pressSubmitButton();
         Thread.sleep(5000);
-        loginPage.verifyIsLoginPageDisplayed();
+        loginPage.verifyAlertSuccess();
 
     }
 
