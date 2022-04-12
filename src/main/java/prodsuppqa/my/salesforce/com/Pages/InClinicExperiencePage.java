@@ -25,7 +25,8 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement search_input;
     private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
 
-    @FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
+    //@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
+    @FindBy(xpath = ".//a[@title='Giacinta BCVaxCaudelier']")
     private WebElement user_found;
     private By user_found1 = By.xpath(".//a[@title='Giacinta BCVaxCaudelier']");
 
@@ -57,7 +58,6 @@ public class InClinicExperiencePage extends BasePage {
     @FindBy(xpath = "//BUTTON[@name='Delete'][text()='Delete']")
     private WebElement delete_rern_record;
     private By delete_rern_record1 = By.xpath("//*[@id='brandBand_2']/div/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___flexipage__default_rec_-l___-d-d-h__-h-c_-rules_-engine_-response__c___-v-i-e-w/forcegenerated-flexipage_default_rec_l_ddh__hc_rules_engine_response__c__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[1]/slot/flexipage-component2/slot/records-lwc-highlights-panel/records-lwc-record-layout/forcegenerated-highlightspanel_ddh__hc_rules_engine_response__c___012000000000000aaa___compact___view___recordlayout2/records-highlights2/div[1]/div/div[3]/div/runtime_platform_actions-actions-ribbon/ul/li[2]/runtime_platform_actions-action-renderer/runtime_platform_actions-executor-aura-legacy/slot/slot/lightning-button/button");
-
     @FindBy(xpath = "//button[text()='Delete']")
     private WebElement delete_person_account;
     private By delete_person_account1 = By.xpath("//button[text()='Delete']");
@@ -67,7 +67,7 @@ public class InClinicExperiencePage extends BasePage {
     }
 
     public void SearchForCitizen(String citizen) throws InterruptedException {
-        // waitForElementToBeLocated(driver,search_assistant1,10);
+        //waitForElementToBeLocated(driver,search_assistant1,10);
         waitForElementToBeVisible(driver, search_assistant, 10);
         WebElement search_navigator = driver.findElement(search_assistant1);
         search_navigator.click();
@@ -75,43 +75,46 @@ public class InClinicExperiencePage extends BasePage {
         WebElement search_input = driver.findElement(search_input1);
         search_input.sendKeys(citizen);
         search_input.sendKeys(Keys.RETURN);
-        //Thread.sleep(5000);
-        //element.clear();
-        //JavascriptExecutor executor=(JavascriptExecutor)driver;
-        //executor.executeScript("arguments[0].click();", element);
-        //element.sendKeys(citizen);
-        //element.sendKeys(citizen);
-        //executor.executeScript("arguments[0].setAttribute('value', arguments[1])", element, citizen);
-        //executor.executeScript("arguments[0].value='\"+ keysToSend +\"';", element);
-        //Thread.sleep(5000);
-        //element.click();
-        //element.sendKeys(Keys.RETURN);
+        /*Thread.sleep(5000);
+        element.clear();
+        JavascriptExecutor executor=(JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+        element.sendKeys(citizen);
+        element.sendKeys(citizen);
+        executor.executeScript("arguments[0].setAttribute('value', arguments[1])", element, citizen);
+        executor.executeScript("arguments[0].value='\"+ keysToSend +\"';", element);
+        Thread.sleep(5000);
+        element.click();
+        element.sendKeys(Keys.RETURN);*/
         Thread.sleep(5000);
     }
 
     public void clickRegisterTab() throws InterruptedException {
-        // explicit wait - to wait for the compose button to be click-able
-        //WebDriverWait wait = new WebDriverWait(driver,30);
-        //wait.until(ExpectedConditions.visibilityOf(register_tab));
+        /*explicit wait - to wait for the compose button to be click-able
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOf(register_tab));*/
         waitForElementToBeLocated(driver,register_tab1,10);
         WebElement element = driver.findElement(register_tab1);
         //waitForElementToBeVisible(driver, element, 10);
         JavascriptExecutor executor=(JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
-        //driver.findElement(By.xpath(".//a[@title = 'Register']")).click();
-        //this.register_button.click();
-        //this.register_tab1.click();
-        //click(relatedTab2);
-        //this.register_tab.click();
+        /*driver.findElement(By.xpath(".//a[@title = 'Register']")).click();
+        this.register_button.click();
+        this.register_tab1.click();
+        click(relatedTab2);
+        this.register_tab.click();*/
     }
 
     public boolean userFound() throws InterruptedException {
-        waitForElementToBeLocated(driver,user_found1,10);
+        if(!isDisplayed(user_found1)) {
+            return false;
+        }
+        waitForElementToBeLocated(driver, user_found1, 10);
         WebElement element = driver.findElement(user_found1);
         JavascriptExecutor executor=(JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
         Thread.sleep(5000);
-        return false;
+        return true;
     }
 
     public void clickRelatedTab() throws InterruptedException {
@@ -121,14 +124,18 @@ public class InClinicExperiencePage extends BasePage {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public void selectImmsRecord() throws InterruptedException {
+    public boolean selectImmsRecord() throws InterruptedException {
         //To scroll down the page to see Imms Record
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,600)", "");
+        if(!isDisplayed(select_Imms_record1)) {
+            return false;
+        }
         waitForElementToBeLocated(driver,select_Imms_record1,10);
         WebElement element = driver.findElement(select_Imms_record1);
         JavascriptExecutor executor=(JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
+        return true;
     }
 
     public void deleteImmsRecord() throws InterruptedException {
@@ -147,14 +154,18 @@ public class InClinicExperiencePage extends BasePage {
         executor2.executeScript("arguments[0].click();", element2);
     }
 
-    public void selectRERNRecord() throws InterruptedException {
+    public boolean selectRERNRecord() throws InterruptedException {
         //To scroll down the page to see RERN Record
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1100)", "");
+        if(!isDisplayed(select_rern_record1)) {
+            return false;
+        }
         waitForElementToBeLocated(driver,select_rern_record1,10);
         WebElement element = driver.findElement(select_rern_record1);
         JavascriptExecutor executor=(JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
+        return true;
     }
 
     public void deleteRERNRecord() throws InterruptedException {
@@ -179,6 +190,7 @@ public class InClinicExperiencePage extends BasePage {
         WebElement element1 = driver.findElement(delete_record_button1);
         JavascriptExecutor executor1=(JavascriptExecutor)driver;
         executor1.executeScript("arguments[0].click();", element1);
+        Thread.sleep(2000);
     }
 
 }
