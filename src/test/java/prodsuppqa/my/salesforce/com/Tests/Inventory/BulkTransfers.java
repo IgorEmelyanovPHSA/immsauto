@@ -9,7 +9,7 @@ import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 import static java.lang.Thread.*;
 
 public class BulkTransfers extends BaseTest {
-
+    
     @Test
     public void Can_do_Bulk_transfers_by_Dosages_as_PPHIS_PRODSUPPQA() throws InterruptedException {
         System.out.println("/*1.----Login as an PPHIS_prodsuppqa to Supply Console --*/");
@@ -22,11 +22,11 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocations();
         Thread.sleep(5000);
-        System.out.println("/*4.----Get count records --*/");
-        int count = supplyConsolePagePage.getRowsCount();
-        System.out.println("/*---     count:" +count);
+        System.out.println("/*4.----Get Supply Containers count records --*/");
+        int countSupplyContainers = supplyConsolePagePage.getRowsSupplyContainersFromCount();
+        System.out.println("/*---     count:" +countSupplyContainers);
         System.out.println("/*5.----Click on Container's records Checkboxes --*/");
-        if (count >= 3){
+        if (countSupplyContainers >= 3){
             int k=2;
             while (k <= 4){
                 supplyConsolePagePage.clickOnCheckbox(k);
@@ -58,15 +58,36 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*10.----click Close Modal button --*/");
         supplyConsolePagePage.clickBulkTransfersCloseButton();
-        Thread.sleep(5000);
-
-
-
-
+        Thread.sleep(2000);
+        System.out.println("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
+        supplyConsolePagePage.clickTransactionsTab();
+        Thread.sleep(2000);
+        System.out.println("/*12----Getting id for the latest created Transaction 'To'--*/");
+        System.out.println("/*12.1----Get Transactions 'From' count records --*/");
+        int countTransactions = supplyConsolePagePage.getRowsTransactionsFromCount();
+        System.out.println("/*---  transactions 'from' count:" +countTransactions);
+        System.out.println("/*12.2----Click on the last created Transactions to get the transactions id's 'TOO' --*/");
+        int nn = 1;
+        int kk = countTransactions;
+        // while (nn <= 3 ){
+        supplyConsolePagePage.clickOnTransactionsFrom(kk);
+        System.out.println("/*--transactions record number --*/:" +kk);
+        //kk=countTransactions-1;
+        //System.out.println("/*---     record number: " +kk);
+        Thread.sleep(10000);
+        //nn++;
+        //}
+        
+        
+        
+        
+        
+        
+        
     }
-
-
-
-
-
+    
+    
+    
+    
+    
 }
