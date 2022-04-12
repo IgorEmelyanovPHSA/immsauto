@@ -22,11 +22,11 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocations();
         Thread.sleep(5000);
-        System.out.println("/*4.----Get count records --*/");
-        int count = supplyConsolePagePage.getRowsCount();
-        System.out.println("/*---     count:" +count);
+        System.out.println("/*4.----Get Supply Containers count records --*/");
+        int countSupplyContainers = supplyConsolePagePage.getRowsSupplyContainersFromCount();
+        System.out.println("/*---     count:" +countSupplyContainers);
         System.out.println("/*5.----Click on Container's records Checkboxes --*/");
-        if (count >= 3){
+        if (countSupplyContainers >= 3){
             int k=2;
             while (k <= 4){
                 supplyConsolePagePage.clickOnCheckbox(k);
@@ -58,7 +58,14 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*10.----click Close Modal button --*/");
         supplyConsolePagePage.clickBulkTransfersCloseButton();
+        Thread.sleep(2000);
+        System.out.println("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
+        supplyConsolePagePage.clickTransactionsTab();
         Thread.sleep(5000);
+        System.out.println("/*12.----Getting id for the latest created Transaction 'From'--*/");
+        System.out.println("/*13.----Get count records --*/");
+        int countTransactions = supplyConsolePagePage.getRowsTransactionsFromCount();
+        System.out.println("/*---  transactions 'from' count:" +countTransactions);
 
 
 

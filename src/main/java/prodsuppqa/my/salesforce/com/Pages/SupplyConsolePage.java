@@ -22,8 +22,8 @@ public class SupplyConsolePage extends BasePage {
     private By supply_supply_location_1_ = By.xpath(".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']");
 
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)")
-    private WebElement rows_count_path;
-    private By rows_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)");
+    private WebElement rows_supply_containers_from_count_path;
+    private By rows_supply_containers_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)");
 
     @FindBy(xpath = ".//button[text() = 'Transfer']")
     private WebElement bulk_transfers_button;
@@ -99,6 +99,15 @@ public class SupplyConsolePage extends BasePage {
     @FindBy(xpath = "//section[@role='dialog']//button[text()='Close']")
     private WebElement bulk_dialog_close_button;
     private By bulk_dialog_close_button_1 = By.xpath("//section[@role='dialog']//button[text()='Close']");
+
+    @FindBy(xpath = "(.//a[text() = 'Transactions'])")
+    private WebElement transactions_tab;
+    private By transactions_tab_1 = By.xpath("(.//a[text() = 'Transactions'])");
+
+
+    @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)")
+    private WebElement rows_transactions_from_count_path;
+    private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
 
 
     public SupplyConsolePage(WebDriver driver) {
@@ -199,10 +208,10 @@ public class SupplyConsolePage extends BasePage {
         click(container_checkbox_1_);
     }
 
-    public int getRowsCount() throws InterruptedException {
+    public int getRowsSupplyContainersFromCount() throws InterruptedException {
         //waitForElementToBeClickable(driver, container_checkbox_1, 10);
         //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
-        List<WebElement> rows = driver.findElements(rows_count_path_1);
+        List<WebElement> rows = driver.findElements(rows_supply_containers_from_count_path_1);
         //rows.size();
         return (rows.size());
     }
@@ -243,9 +252,21 @@ public class SupplyConsolePage extends BasePage {
         waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
         click(bulk_transfers_dialog_button_1);
     }
+
     public void clickBulkTransfersCloseButton() throws InterruptedException {
         waitForElementToBeLocated(driver, bulk_dialog_close_button_1, 10);
         click(bulk_dialog_close_button_1);
+    }
+
+    public void clickTransactionsTab() throws InterruptedException {
+        waitForElementToBeLocated(driver, transactions_tab_1, 10);
+        click(transactions_tab_1);
+    }
+
+    public int getRowsTransactionsFromCount() throws InterruptedException {
+        waitForElementToBeVisible(driver, rows_transactions_from_count_path, 10);
+        List<WebElement> rows = driver.findElements(rows_transactions_from_count_path_1);
+        return (rows.size());
     }
 
 
