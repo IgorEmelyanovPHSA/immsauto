@@ -29,11 +29,16 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement user_found;
     private By user_found1 = By.xpath(".//a[@title='Giacinta BCVaxCaudelier']");
 
-    @FindBy(xpath = "(//a[@data-label='Related']")
+    @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
-    @FindBy(xpath = "(//SPAN[@id='window']")
+
+
+
+
+    @FindBy(xpath = "(//A[@title='Show 2 more actions'])")
+
     private WebElement select_Imms_record;
     private By select_Imms_record1 = By.xpath("/html/body/div[4]/div[1]/section/div[1]/div[2]/div[2]/div[1]/div/div/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-b-c-h_-participant_-record_-page___-account___-v-i-e-w/forcegenerated-flexipage_bch_participant_record_page_account__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[2]/div[1]/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/flexipage-tab2[2]/slot/flexipage-component2[6]/slot/lst-related-list-container/div/div[2]/lst-related-list-single-container/laf-progressive-container/slot/lst-related-list-single-app-builder-mapper/article/lst-related-list-view-manager/lst-common-list-internal/div/div/lst-primary-display-manager/div/lst-primary-display/lst-primary-display-grid/lst-customized-datatable/div[2]/div/div/table/tbody/tr/th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/force-lookup/div/records-hoverable-link/div/a/slot/slot/span");
 
@@ -49,7 +54,7 @@ public class InClinicExperiencePage extends BasePage {
     private WebElement delete_record_button;
     private By delete_record_button1 = By.xpath("//span[@dir='ltr'][text()='Delete']");
 
-    @FindBy(xpath = "(//span[@id='window']")
+    @FindBy(xpath = "(//span[@id='window'])")
     private WebElement select_rern_record;
     private By select_rern_record1 = By.xpath("/html/body/div[4]/div[1]/section/div[1]/div[2]/div[2]/div[1]/div/div/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-b-c-h_-participant_-record_-page___-account___-v-i-e-w/forcegenerated-flexipage_bch_participant_record_page_account__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[2]/div[1]/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/flexipage-tab2[2]/slot/flexipage-component2[6]/slot/lst-related-list-container/div/div[7]/lst-related-list-single-container/laf-progressive-container/slot/lst-related-list-single-app-builder-mapper/article/lst-related-list-view-manager/lst-common-list-internal/div/div/lst-primary-display-manager/div/lst-primary-display/lst-primary-display-grid/lst-customized-datatable/div[2]/div/div/table/tbody/tr/th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/force-lookup/div/records-hoverable-link/div/a/slot/slot/span");
 
