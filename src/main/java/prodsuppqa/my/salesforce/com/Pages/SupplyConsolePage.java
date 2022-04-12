@@ -1,16 +1,15 @@
 package prodsuppqa.my.salesforce.com.Pages;
 
-import org.checkerframework.common.reflection.qual.NewInstance;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
-import org.openqa.selenium.support.ui.Select;
 
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-
-import java.security.Key;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class SupplyConsolePage extends BasePage {
     @FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
@@ -131,8 +130,14 @@ public class SupplyConsolePage extends BasePage {
         checkBox.click();
     }
 
-    public void inputRequestDate(String inputDate) {
-        this.inputDate.sendKeys(inputDate, Keys.ENTER);
+    public void inputRequestDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+    
+        String tomorrowAsString = dateFormat.format(tomorrow);
+        this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
     }
 
     public void clickNextButton() {

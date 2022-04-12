@@ -36,7 +36,7 @@ public class Requisition extends BaseTest {
         Thread.sleep(3000);
         supplyConsolePagePage.clickInput1();
         Thread.sleep(3000);
-        supplyConsolePagePage.inputRequestDate("Apr 22, 2022");
+        supplyConsolePagePage.inputRequestDate();
         //   supplyConsolePagePage.clickRequestedDeliveryDate();
         Thread.sleep(3000);
         System.out.println("/*----8. Choose Urgency --*/");
