@@ -269,5 +269,18 @@ public class SupplyConsolePage extends BasePage {
         return (rows.size());
     }
 
+    public void clickOnTransactionsFrom(int kk) throws InterruptedException {
+        By transactions_from_1_ = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
+        waitForElementToBeLocated(driver, transactions_from_1_, 10);
+        //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
+        WebElement element = driver.findElement(transactions_from_1_);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        //element.click();
+        //this.container_checkbox_1.click();
+        //click(transactions_from_1_);
+    }
+
 
 }
