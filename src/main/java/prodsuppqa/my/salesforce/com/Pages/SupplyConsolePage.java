@@ -29,6 +29,10 @@ public class SupplyConsolePage extends BasePage {
     private WebElement bulk_transfers_button;
     private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 
+    @FindBy(xpath = "(//section[@role='dialog']//button[text() = 'Transfer'])")
+    private WebElement bulk_transfers_dialog_button;
+    private By bulk_transfers_dialog_button_1 = By.xpath("(//section[@role='dialog']//button[text() = 'Transfer'])");
+
     @FindBy(xpath = ".//input[@class='slds-combobox__input slds-input']")
     private WebElement  SupplyLocations;
 
@@ -91,6 +95,11 @@ public class SupplyConsolePage extends BasePage {
     private WebElement select_supply_location_To;
     private By select_supply_location_To_ =
             By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
+
+    @FindBy(xpath = "//section[@role='dialog']//button[text()='Close']")
+    private WebElement bulk_dialog_close_button;
+    private By bulk_dialog_close_button_1 = By.xpath("//section[@role='dialog']//button[text()='Close']");
+
 
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
@@ -231,10 +240,12 @@ public class SupplyConsolePage extends BasePage {
     }
 
     public void clickBulkTransfersModalButton() throws InterruptedException {
-        waitForElementToBeLocated(driver, bulk_transfers_button_1, 10);
-        WebElement element = driver.findElement(bulk_transfers_button_1);
-        this.bulk_transfers_button.click();
-        //click(bulk_transfers_button_1);
+        waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
+        click(bulk_transfers_dialog_button_1);
+    }
+    public void clickBulkTransfersCloseButton() throws InterruptedException {
+        waitForElementToBeLocated(driver, bulk_dialog_close_button_1, 10);
+        click(bulk_dialog_close_button_1);
     }
 
 
