@@ -52,9 +52,13 @@ public class BulkTransfers extends BaseTest {
         }
         System.out.println("/*8.----select 'To' Automation Supply Location_2  --*/");
         supplyConsolePagePage.selectSupplyLocatonTo();
-        Thread.sleep(10000);
-        System.out.println("/*9.----click Transfer ok button --*/");
-
+        Thread.sleep(2000);
+        System.out.println("/*9.----click Transfer dialog Modal button --*/");
+        supplyConsolePagePage.clickBulkTransfersModalButton();
+        Thread.sleep(2000);
+        System.out.println("/*10.----click Close Modal button --*/");
+        supplyConsolePagePage.clickBulkTransfersCloseButton();
+        Thread.sleep(5000);
 
 
 

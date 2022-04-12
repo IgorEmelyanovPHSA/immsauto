@@ -5,7 +5,7 @@ import prodsuppqa.my.salesforce.com.Pages.InClinicExperiencePage;
 import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 
 public class CitizenDuplicates extends BaseTest {
-
+    
     @Test(testName ="Login to InClinicExperience as Clinician and search for Dupls PRODSUPPQA")
     public void Can_search_and_remove_Citizen_participant_account() throws InterruptedException {
         System.out.println("Searching and Removing Citizen Duplicates PRODSUPPQA");
@@ -54,12 +54,12 @@ public class CitizenDuplicates extends BaseTest {
                 System.out.println("/*---- RERN record deleted Successfully ---*/");
                 Thread.sleep(2000);
             }
-                inClinicExperiencePage.clickRelatedTab();
-                Thread.sleep(2000);
-                System.out.println("/*---- Navigated to Person Account related tab ---*/");
-                inClinicExperiencePage.deletePersonAccount();
-                System.out.println("/*---- Person Account deleted Successfully ---*/");
-                Thread.sleep(2000);
+            inClinicExperiencePage.clickRelatedTab();
+            Thread.sleep(2000);
+            System.out.println("/*---- Navigated to Person Account related tab ---*/");
+            inClinicExperiencePage.deletePersonAccount();
+            System.out.println("/*---- Person Account deleted Successfully ---*/");
+            Thread.sleep(2000);
         }
     }
     
