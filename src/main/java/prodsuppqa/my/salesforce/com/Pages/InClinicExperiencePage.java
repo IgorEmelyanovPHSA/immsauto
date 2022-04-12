@@ -26,9 +26,9 @@ public class InClinicExperiencePage extends BasePage {
     private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
 
     //@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
-    @FindBy(xpath = ".//a[@title='Giacinta BCVaxCaudelier']")
+    @FindBy(xpath = ".//a[@title='BCYONE BCYDEMOADD']")
     private WebElement user_found;
-    private By user_found1 = By.xpath(".//a[@title='Giacinta BCVaxCaudelier']");
+    private By user_found1 = By.xpath(".//a[@title='BCYONE BCYDEMOADD']");
 
     @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
@@ -133,6 +133,7 @@ public class InClinicExperiencePage extends BasePage {
         //To scroll down the page to see Imms Record
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,600)", "");
+        Thread.sleep(5000);
         if(!isDisplayed(select_Imms_record1)) {
             return false;
         }
@@ -163,6 +164,7 @@ public class InClinicExperiencePage extends BasePage {
         //To scroll down the page to see RERN Record
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1100)", "");
+        Thread.sleep(5000);
         if(!isDisplayed(select_rern_record1)) {
             return false;
         }
