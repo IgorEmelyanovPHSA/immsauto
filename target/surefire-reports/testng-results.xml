@@ -2,30 +2,30 @@
 <testng-results ignored="2" total="3" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-04-05T14:39:45 PDT" name="Surefire suite" finished-at="2022-04-05T14:39:45 PDT" duration-ms="87">
+  <suite started-at="2022-04-12T16:09:20 PDT" name="Surefire suite" finished-at="2022-04-12T16:09:20 PDT" duration-ms="111">
     <groups>
     </groups>
-    <test started-at="2022-04-05T14:39:45 PDT" name="Surefire test" finished-at="2022-04-05T14:39:45 PDT" duration-ms="87">
+    <test started-at="2022-04-12T16:09:20 PDT" name="Surefire test" finished-at="2022-04-12T16:09:20 PDT" duration-ms="111">
       <class name="prodsuppqa.my.salesforce.com.Tests.BaseTest">
-        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.BaseTest@2d2e5f00]" started-at="2022-04-05T14:39:39 PDT" name="beforeSuite" finished-at="2022-04-05T14:39:45 PDT" duration-ms="5954" status="PASS">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.BaseTest@2d2e5f00]" started-at="2022-04-12T16:09:13 PDT" name="beforeSuite" finished-at="2022-04-12T16:09:20 PDT" duration-ms="6847" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method is-config="true" signature="cleanUp()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.BaseTest@2d2e5f00]" started-at="2022-04-05T14:39:45 PDT" name="cleanUp" finished-at="2022-04-05T14:39:47 PDT" duration-ms="1992" status="PASS">
+        <test-method is-config="true" signature="cleanUp()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.BaseTest@2d2e5f00]" started-at="2022-04-12T16:09:20 PDT" name="cleanUp" finished-at="2022-04-12T16:09:21 PDT" duration-ms="981" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanUp -->
       </class> <!-- prodsuppqa.my.salesforce.com.Tests.BaseTest -->
       <class name="prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-05T14:39:45 PDT" name="setUp" finished-at="2022-04-05T14:39:45 PDT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-12T16:09:20 PDT" name="setUp" finished-at="2022-04-12T16:09:20 PDT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-05T14:39:45 PDT" name="beforeMethod" finished-at="2022-04-05T14:39:45 PDT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-12T16:09:20 PDT" name="beforeMethod" finished-at="2022-04-12T16:09:20 PDT" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="Can_login_as_Clinician_to_PRODSUPPQA()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-05T14:39:45 PDT" name="Can_login_as_Clinician_to_PRODSUPPQA" finished-at="2022-04-05T14:39:45 PDT" duration-ms="2" status="FAIL">
+        <test-method signature="Can_login_as_Clinician_to_PRODSUPPQA()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-12T16:09:20 PDT" name="Can_login_as_Clinician_to_PRODSUPPQA" finished-at="2022-04-12T16:09:20 PDT" duration-ms="3" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "prodsuppqa.my.salesforce.com.Pages.LoginPage.enterClinicianUserName()" because "this.loginPage" is null]]>
@@ -71,11 +71,11 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:121)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Can_login_as_Clinician_to_PRODSUPPQA -->
-        <test-method is-config="true" signature="afterMethod()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-05T14:39:45 PDT" name="afterMethod" finished-at="2022-04-05T14:39:45 PDT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-12T16:09:20 PDT" name="afterMethod" finished-at="2022-04-12T16:09:20 PDT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-05T14:39:45 PDT" name="tearDown" finished-at="2022-04-05T14:39:45 PDT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest@568bf312]" started-at="2022-04-12T16:09:20 PDT" name="tearDown" finished-at="2022-04-12T16:09:20 PDT" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
