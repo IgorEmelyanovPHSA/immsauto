@@ -1,9 +1,15 @@
 package prodsuppqa.my.salesforce.com.Pages;
 
+import org.checkerframework.common.reflection.qual.NewInstance;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+
 import org.openqa.selenium.support.ui.Select;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import java.security.Key;
 import java.util.List;
 
 public class SupplyConsolePage extends BasePage {
@@ -30,7 +36,6 @@ public class SupplyConsolePage extends BasePage {
     private WebElement bulk_transfers_button;
     private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 
-
     @FindBy(xpath = ".//input[@class='slds-combobox__input slds-input']")
     private WebElement  SupplyLocations;
 
@@ -38,32 +43,67 @@ public class SupplyConsolePage extends BasePage {
         SupplyLocations.click();
     }
 
-    @FindBy(xpath = "//button[@class=\"slds-button slds-button--reset downIcon slds-m-top_xxx-small slds-p-right_xxx-small\"]")
-    private WebElement  clickViewAllBtn;
+    @FindBy(xpath = "//button[contains(text(),\"Request Supplies\")]")
+    private WebElement request_supplies;
+    private By request_supplies_1 = By.xpath("//button[contains(text(),\"Request Supplies\")]");
 
-    public void clickClickViewAllBtn(){
-        clickViewAllBtn.click();
+    @FindBy(xpath = "//input[@class=\"slds-combobox__input slds-input\"]")
+    private WebElement shipTo_address;
+    private By shipTo_address_ = By.xpath("//input[@class=\"slds-combobox__input slds-input\"]");
+
+    @FindBy(xpath = "//input[@class=\"slds-input\"]")
+    private WebElement requestedDeliveryDate;
+    private By requested_delivery_date = By.xpath("//input[@class=\"slds-input\"]");
+
+
+
+    @FindBy(xpath = "//div[@class=\"slds-form-element__control slds-grow\"]//input")
+    private WebElement requestedDose;
+    private By requested_dose = By.xpath("//div[@class=\"slds-form-element__control slds-grow\"]//input");
+
+    @FindBy(xpath = "//button[contains(text(),\"Save\")]")
+    private WebElement saveButton;
+    private By save_button = By.xpath("//button[contains(text(),\"Save\")]");
+
+    @FindBy(xpath = "//input[@class=\"slds-combobox__input slds-input\"]")
+    private WebElement shipAddress;
+    private By ship_address = By.xpath("//input[@class=\"slds-combobox__input slds-input\"]");
+
+    @FindBy(xpath = "//tbody/tr[1]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
+    private WebElement checkBox;
+    private By check_box = By.xpath("//tbody/tr[1]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
+
+    @FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
+    private WebElement inputDate;
+    private By input_data = By.xpath( "//input[@name=\"BCH_Requested_Delivery_Date__c\"]");
+
+    @FindBy(xpath = "//button[contains(text(),\"Next\")]")
+    private WebElement nextButton;
+    private By next_button = By.xpath("//button[contains(text(),\"Next\")]");
+
+    @FindBy(xpath = "//button[contains(text(),\"Submit Requisition\")]")
+    private WebElement submitRequisition;
+    private By submit_requisition = By.xpath("//button[contains(text(),\"Submit Requisition\")]");
+
+    //@FindBy
+    // //button[@class="slds-button slds-button_brand cuf-publisherShareButton undefined uiButton"]----Save
+    ////span[contains(text(),"Select a date for Expected Delivery Date")]-----expected date
+
+
+    public void inputRequestedDose(String inputDose) {
+        this.requestedDose.sendKeys(inputDose);
+
     }
 
-    @FindBy(xpath = "//body/div[4]/div[2]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[3]/a[1]/span[1]")
-    private WebElement  clickAllBtn;
+    public void clickSaveButton() {
+        this.saveButton.click();
 
-    public void clickClickAllBtn(){
-        clickAllBtn.click();
     }
 
-    @FindBy(xpath = "//a[contains(text(),\"Atlin Health Centre\")]")
-    private WebElement  firstRow;
-
-    public void clickFirstRow(){
-        firstRow.click();
+    public void inputShipAddress(String inputAddress) {
+        this.shipAddress.sendKeys(inputAddress);
     }
-    @FindBy(xpath = "")
-    private WebElement  RequestSupplies;
 
-    public void clickRequestSupplies(){
-        RequestSupplies.click();
-    }
 
     @FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
     private WebElement supply_page_displayed;
@@ -77,7 +117,45 @@ public class SupplyConsolePage extends BasePage {
     private By select_supply_location_To_ =
             By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
 
+    public void clickInput() {
+        WebElement products = driver.findElement(By.xpath(" //span[contains(text(),\"Atlin Health Centre\")]"));
+        products.click();
+    }
 
+    public void clickInput1() {
+        WebElement products = driver.findElement(By.xpath("//a[contains(text(),\"Atlin Health Centre\")]"));
+        products.click();
+    }
+
+    public void clickCheckBox() {
+        checkBox.click();
+    }
+
+    public void inputRequestDate(String inputDate) {
+        this.inputDate.sendKeys(inputDate, Keys.ENTER);
+    }
+
+    public void clickNextButton() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", nextButton);
+        waitForElementToBeVisible(driver, nextButton, 10);
+        this.nextButton.click();
+    }
+    public void clickSubmitRequisition(){
+        waitForElementToBeVisible(driver, submitRequisition, 10);
+        WebElement element = driver.findElement(submit_requisition);
+        this.submitRequisition.click();
+    }
+
+
+
+
+    public void SupplyLocations() throws InterruptedException {
+        waitForElementToBeLocated(driver, By.xpath("//span[contains(text(),\"Supply Locations\")]"), 10);
+        WebElement supplyLocationPath = driver.findElement(By.xpath("//span[contains(text(),\"Supply Locations\")]"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", supplyLocationPath);
+
+    }
 
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
@@ -101,8 +179,27 @@ public class SupplyConsolePage extends BasePage {
         this.supply_supply_location_1.click();
     }
 
+    public void clickRequestSupplies() throws InterruptedException {
+        waitForElementToBeLocated(driver, request_supplies_1, 10);
+        WebElement element = driver.findElement(request_supplies_1);
+        this.request_supplies.click();
+    }
+
+    public void clickShipToAddress() throws InterruptedException {
+        waitForElementToBeLocated(driver, shipTo_address_, 10);
+        WebElement element = driver.findElement(shipTo_address_);
+        this.shipTo_address.click();
+
+    }
+
+    public void clickRequestedDeliveryDate() throws InterruptedException {
+        waitForElementToBeLocated(driver, requested_delivery_date, 10);
+        WebElement element = driver.findElement(requested_delivery_date);
+        this.requestedDeliveryDate.click();
+    }
+
     public void clickOnCheckbox(int k) throws InterruptedException {
-        By container_checkbox_1_ = By.xpath("(.//span[@class = 'slds-checkbox_faux'])["+ k +"]");
+        By container_checkbox_1_ = By.xpath("(.//span[@class = 'slds-checkbox_faux'])[" + k + "]");
         waitForElementToBeLocated(driver, container_checkbox_1_, 10);
         //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
         WebElement element = driver.findElement(container_checkbox_1_);
@@ -115,7 +212,7 @@ public class SupplyConsolePage extends BasePage {
         //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
         List<WebElement> rows = driver.findElements(rows_count_path_1);
         //rows.size();
-        return(rows.size());
+        return (rows.size());
     }
 
     public void clickBulkTransfersButton() throws InterruptedException {
@@ -151,7 +248,4 @@ public class SupplyConsolePage extends BasePage {
     }
 
 
-
-
 }
-
