@@ -26,9 +26,9 @@ public class InClinicExperiencePage extends BasePage {
     private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
     
     //@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
-    @FindBy(xpath = ".//a[@title='BCYONE BCYDEMOADD']")
+    @FindBy(xpath = ".//a[@title='BCYONE BCydemoadd']")
     private WebElement user_found;
-    private By user_found1 = By.xpath(".//a[@title='BCYONE BCYDEMOADD']");
+    private By user_found1 = By.xpath(".//a[@title='BCYONE BCydemoadd']");
     
     @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
