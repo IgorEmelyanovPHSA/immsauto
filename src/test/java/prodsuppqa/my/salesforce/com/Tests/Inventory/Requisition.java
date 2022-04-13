@@ -18,7 +18,7 @@ public class Requisition extends BaseTest {
         SupplyConsolePage supplyConsolePagePage = loginPage.loginAsPPHIS();
         System.out.println("/*----2. Go to Supply Locations Tab --*/");
         supplyConsolePagePage.clickSupplyLocationsTab();
-        //Thread.sleep(10000);
+        Thread.sleep(4000);
         System.out.println("/*----3. Locate on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocations();
         Thread.sleep(5000);
@@ -53,11 +53,19 @@ public class Requisition extends BaseTest {
         Thread.sleep(3000);
         System.out.println("/*----12. Save Quantity and Doses --*/");
         supplyConsolePagePage.clickSaveButton();
-        Thread.sleep(6000);
+        Thread.sleep(3000);
         System.out.println("/*----13. Submit Requisition --*/");
         supplyConsolePagePage.clickSubmitRequisition();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         System.out.println("/*----14. Confirm and Save Requisition --*/");
+//        supplyConsolePagePage.clickSaveSubmitRequisition();
+//        Thread.sleep(3000);
+//        System.out.println("/*----15. Click Calender of Expected Delivery Date--*/");
+//        supplyConsolePagePage.clickExpectedDeliveryDateCalendar();
+//        Thread.sleep(3000);
+//        System.out.println("/*----16. Choose The Expected Delivery Date--*/");
+//        System.out.println("/*----17. Save Chosen Expected Delivery Date--*/");
+//        System.out.println("/*----18. Approve Requisition--*/");
 
 
 

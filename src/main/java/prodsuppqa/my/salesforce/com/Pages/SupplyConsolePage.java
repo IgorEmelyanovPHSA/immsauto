@@ -12,7 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.security.Key;
 import java.util.List;
 
-public class SupplyConsolePage extends BasePage {
+ public class SupplyConsolePage extends BasePage {
+
     @FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
     private WebElement supply_locations_tab;
     private By supply_locations_tab1 = By.xpath("(.//span[@class = 'slds-truncate'])[2]");
@@ -76,13 +77,27 @@ public class SupplyConsolePage extends BasePage {
     private WebElement nextButton;
     private By next_button = By.xpath("//button[contains(text(),\"Next\")]");
 
-    @FindBy(xpath = "//button[contains(text(),\"Submit Requisition\")]")
+    @FindBy(xpath = "//button[@name=\"BCH_Requisition__c.BCH_Submit_Requisition\"]")
     private WebElement submitRequisition;
-    private By submit_requisition = By.xpath("//button[contains(text(),\"Submit Requisition\")]");
+    //private By submit_requisition = By.xpath("//button[contains(text(),\"Submit Requisition\")]");
 
-    //@FindBy
-    // //button[@class="slds-button slds-button_brand cuf-publisherShareButton undefined uiButton"]----Save
-    ////span[contains(text(),"Select a date for Expected Delivery Date")]-----expected date
+    public void inputRequestedDose(String inputDose) {
+        this.requestedDose.sendKeys(inputDose);
+
+    }
+
+    public void clickSaveButton() {
+        this.saveButton.click();
+    }
+
+    @FindBy (xpath = "button[@class=\"slds-button slds-button_brand cuf-publisherShareButton undefined uiButton\"]")
+    private WebElement saveSubmitRequisition;
+    private By save_Submit_Requisition = By.xpath("button[@class=\"slds-button slds-button_brand cuf-publisherShareButton undefined uiButton\"]");
+
+    @FindBy (xpath = "span[contains(text(),\"Select a date for Expected Delivery Date\")]" )
+    private WebElement expectedDeliveryDateCalendar;
+    private By expected_delivery_date_calendar = By.xpath("span[contains(text(),\"Select a date for Expected Delivery Date\")]" );
+
 
     @FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
     private WebElement supply_page_displayed;
@@ -93,8 +108,7 @@ public class SupplyConsolePage extends BasePage {
 
     @FindBy(xpath = "//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']")
     private WebElement select_supply_location_To;
-    private By select_supply_location_To_ =
-            By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
+    private By select_supply_location_To_ = By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
 
     @FindBy(xpath = "//section[@role='dialog']//button[text()='Close']")
     private WebElement bulk_dialog_close_button;
@@ -112,14 +126,6 @@ public class SupplyConsolePage extends BasePage {
 
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
-    }
-
-    public void inputRequestedDose(String inputDose) {
-        this.requestedDose.sendKeys(inputDose);
-    }
-
-    public void clickSaveButton() {
-        this.saveButton.click();
     }
 
     public void inputShipAddress(String inputAddress) {
@@ -151,10 +157,38 @@ public class SupplyConsolePage extends BasePage {
     }
 
     public void clickSubmitRequisition(){
-        waitForElementToBeVisible(driver, submitRequisition, 10);
-        WebElement element = driver.findElement(submit_requisition);
+        //waitForElementToBeVisible(driver, submitRequisition, 10);
+        //WebElement element = driver.findElement(submit_requisition);
         this.submitRequisition.click();
     }
+
+//    public void clickSaveSubmitRequisition() {
+//        waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
+//        WebElement element = driver.findElement(save_Submit_Requisition);
+//        this.saveSubmitRequisition.click();
+//    }
+//    public void clickExpectedDeliveryDateCalendar() {
+//        waitForElementToBeVisible(driver, expectedDeliveryDateCalendar, 10);
+//        WebElement element = driver.findElement(expected_delivery_date_calendar);
+//        this.expectedDeliveryDateCalendar.click();
+//    }
+
+
+    public void clickSaveSubmitRequisition() {
+        waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
+        WebElement element = driver.findElement(save_Submit_Requisition);
+        this.saveSubmitRequisition.click();
+    }
+    public void clickExpectedDeliveryDateCalendar() {
+        waitForElementToBeVisible(driver, expectedDeliveryDateCalendar, 10);
+        WebElement element = driver.findElement(expected_delivery_date_calendar);
+        this.expectedDeliveryDateCalendar.click();
+    }
+
+
+
+
+
 
     public void SupplyLocations() throws InterruptedException {
         waitForElementToBeLocated(driver, By.xpath("//span[contains(text(),\"Supply Locations\")]"), 10);
