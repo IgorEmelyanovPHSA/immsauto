@@ -9,7 +9,7 @@ import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 import static java.lang.Thread.*;
 
 public class BulkTransfers extends BaseTest {
-
+    
     @Test
     public void Can_do_Bulk_transfers_by_Dosages_as_PPHIS_PRODSUPPQA() throws InterruptedException {
         System.out.println("/*1.----Login as an PPHIS_prodsuppqa to Supply Console --*/");
@@ -69,25 +69,25 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*12.2----Click on the last created Transactions to get the transactions id's 'TOO' --*/");
         int nn = 1;
         int kk = countTransactions;
-       // while (nn <= 3 ){
-            supplyConsolePagePage.clickOnTransactionsFrom(kk);
-            System.out.println("/*--transactions record number --*/:" +kk);
-            //kk=countTransactions-1;
-            //System.out.println("/*---     record number: " +kk);
-            Thread.sleep(10000);
-            //nn++;
+        // while (nn <= 3 ){
+        supplyConsolePagePage.clickOnTransactionsFrom(kk);
+        System.out.println("/*--transactions record number --*/:" +kk);
+        //kk=countTransactions-1;
+        //System.out.println("/*---     record number: " +kk);
+        Thread.sleep(10000);
+        //nn++;
         //}
-
-
-
-
-
-
-
+        
+        
+        
+        
+        
+        
+        
     }
-
-
-
-
-
+    
+    
+    
+    
+    
 }

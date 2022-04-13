@@ -9,11 +9,10 @@ import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 import static java.lang.Thread.*;
 
 public class Requisition extends BaseTest {
-
+    
     @Test
     public void Create_Requisition_as_PPHIS_PRODSUPPQA() throws InterruptedException {
-
-
+        
         System.out.println("/*----1. Login as an PPHIS_prodsuppqa to Supply Console --*/");
         SupplyConsolePage supplyConsolePagePage = loginPage.loginAsPPHIS();
         System.out.println("/*----2. Go to Supply Locations Tab --*/");
@@ -36,7 +35,7 @@ public class Requisition extends BaseTest {
         Thread.sleep(3000);
         supplyConsolePagePage.clickInput1();
         Thread.sleep(3000);
-        supplyConsolePagePage.inputRequestDate("Apr 22, 2022");
+        supplyConsolePagePage.inputRequestDate();
         //   supplyConsolePagePage.clickRequestedDeliveryDate();
         Thread.sleep(3000);
         System.out.println("/*----8. Choose Urgency --*/");
@@ -68,9 +67,6 @@ public class Requisition extends BaseTest {
 //        System.out.println("/*----18. Approve Requisition--*/");
 
 
-
-
     }
-
-
+    
 }
