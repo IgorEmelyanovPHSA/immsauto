@@ -124,8 +124,11 @@ import java.util.Locale;
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)")
     private WebElement rows_transactions_from_count_path;
     private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
-    
-    
+
+    @FindBy(xpath = "(.//a[text() = 'Related'])[2]")
+    private WebElement supply_transactions_Related_tab;
+    private By supply_transactions_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])[2]");
+
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
     }
@@ -315,15 +318,15 @@ import java.util.Locale;
     
     public void clickOnTransactionsFrom(int kk) throws InterruptedException {
         By transactions_from_1_ = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
-        waitForElementToBeLocated(driver, transactions_from_1_, 10);
-        //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
         WebElement element = driver.findElement(transactions_from_1_);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        waitForElementToBeLocated(driver, transactions_from_1_, 10);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        //element.click();
-        //this.container_checkbox_1.click();
-        //click(transactions_from_1_);
     }
+    public void clickSupplyTransactionRelatedTab() throws InterruptedException {
+         waitForElementToBeLocated(driver, supply_transactions_Related_tab_1, 10);
+         click(supply_transactions_Related_tab_1);
+     }
     
 }

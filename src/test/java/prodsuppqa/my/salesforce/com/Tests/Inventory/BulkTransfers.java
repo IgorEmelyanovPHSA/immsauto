@@ -62,18 +62,21 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickTransactionsTab();
         Thread.sleep(2000);
-        System.out.println("/*12----Getting id for the latest created Transaction 'To'--*/");
-        System.out.println("/*12.1----Get Transactions 'From' count records --*/");
+        System.out.println("/*12----Getting id for the latest created Transaction 'From' and 'To'--*/");
+        System.out.println("/*12.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countTransactions = supplyConsolePagePage.getRowsTransactionsFromCount();
-        System.out.println("/*---  transactions 'from' count:" +countTransactions);
-        System.out.println("/*12.2----Click on the last created Transactions to get the transactions id's 'TOO' --*/");
+        System.out.println("/*---  Outgoing transactions 'from' count:" +countTransactions);
+        System.out.println("/*12.2----Click on the latest created Outgoing Transactions --*/");
         int nn = 1;
-        int kk = countTransactions;
+        int kk = countTransactions-1;
         // while (nn <= 3 ){
         supplyConsolePagePage.clickOnTransactionsFrom(kk);
         System.out.println("/*--transactions record number --*/:" +kk);
+        Thread.sleep(2000);
         //kk=countTransactions-1;
         //System.out.println("/*---     record number: " +kk);
+        System.out.println("/*12.3---Click on Supply Transaction STRX-... Related Tab --*/");
+        supplyConsolePagePage.clickSupplyTransactionRelatedTab();
         Thread.sleep(10000);
         //nn++;
         //}
