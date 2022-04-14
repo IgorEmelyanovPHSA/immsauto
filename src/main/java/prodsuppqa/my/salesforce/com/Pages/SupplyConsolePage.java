@@ -1,15 +1,9 @@
 package prodsuppqa.my.salesforce.com.Pages;
 
-import org.checkerframework.common.reflection.qual.NewInstance;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
-import org.openqa.selenium.support.ui.Select;
 
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-
-import java.security.Key;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -82,13 +76,14 @@ import java.util.Locale;
     private WebElement nextButton;
     private By next_button = By.xpath("//button[contains(text(),\"Next\")]");
 
-    @FindBy (xpath = "//body/div[4]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/footer[1]/button[2]/span[1]")
+    @FindBy (xpath = "//button[@title=\"Save\"]")
     private WebElement saveSubmitRequisition;
-    //private By save_Submit_Requisition = By.xpath("//button[@title=\"Save\"]");
+    private By save_Submit_Requisition = By.xpath("//button[@title=\"Save\"]");
 
     @FindBy(xpath = "//button[contains(text(),\"Submit Requisition\")]")
     private WebElement submitRequisition;
     private By submit_requisition = By.xpath("//button[contains(text(),\"Submit Requisition\")]");
+
 
      @FindBy(xpath = "//button[@title='Edit Expected Delivery Date']")
      private WebElement editExpectedDeliveryDate;
@@ -113,11 +108,9 @@ import java.util.Locale;
 
 
 
-
-
     @FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
     private WebElement supply_page_displayed;
-    
+
     @FindBy(xpath = ".//input[@placeholder='Search Supply Locations...']")
     private WebElement search_supply_location_To;
     private By search_supply_location_To_ = By.xpath(".//input[@placeholder='Search Supply Locations...']");
@@ -125,7 +118,6 @@ import java.util.Locale;
     @FindBy(xpath = "//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']")
     private WebElement select_supply_location_To;
     private By select_supply_location_To_ = By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
-
 
     @FindBy(xpath = "//section[@role='dialog']//button[text()='Close']")
     private WebElement bulk_dialog_close_button;
@@ -135,12 +127,22 @@ import java.util.Locale;
     private WebElement transactions_tab;
     private By transactions_tab_1 = By.xpath("(.//a[text() = 'Transactions'])");
     
-    
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)")
     private WebElement rows_transactions_from_count_path;
     private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
-    
-    
+
+    @FindBy(xpath = "(.//a[text() = 'Related'])[2]")
+    private WebElement supply_transactions_Related_tab;
+    private By supply_transactions_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])[2]");
+
+    @FindBy(xpath = ".//span[contains(text(),'SSHP-00')]")
+    private WebElement supply_shipment_name;
+    private By supply_shipment_name_1 = By.xpath(".//span[contains(text(),'SSHP-00')]");
+
+    @FindBy(xpath = ".//span[contains(text(),'Transaction From')] and .//span[contains(text(),'STRX-')]")
+    private WebElement outgoing_supply_transaction_id;
+    private By outgoing_supply_transaction_id_1 = By.xpath(".//span[contains(text(),'Transaction From')] and .//span[contains(text(),'STRX-')]");
+
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
     }
@@ -344,14 +346,44 @@ import java.util.Locale;
     public void clickOnTransactionsFrom(int kk) throws InterruptedException {
         By transactions_from_1_ = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
         waitForElementToBeLocated(driver, transactions_from_1_, 10);
-        //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
+        Thread.sleep(5000);
         WebElement element = driver.findElement(transactions_from_1_);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        //waitForElementToBeLocated(driver, transactions_from_1_, 10);
+        Thread.sleep(5000);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        //element.click();
-        //this.container_checkbox_1.click();
-        //click(transactions_from_1_);
+        Thread.sleep(5000);
     }
-    
+
+    public void clickSupplyTransactionRelatedTab() throws InterruptedException {
+        waitForElementToBeLocated(driver, supply_transactions_Related_tab_1, 10);
+        Thread.sleep(2000);
+        driver.findElement(supply_transactions_Related_tab_1);
+        Thread.sleep(2000);
+        click(supply_transactions_Related_tab_1);
+     }
+
+    public void clickOnSupplyShipmentName() throws InterruptedException {
+        waitForElementToBeLocated(driver, supply_shipment_name_1, 10);
+        click(supply_shipment_name_1);
+     }
+
+    public String getSupplyShipmentTransactionId() throws InterruptedException {
+        waitForElementToBeLocated(driver, supply_shipment_name_1, 10);
+        WebElement element = driver.findElement(supply_shipment_name_1);
+        element.getText();
+        return(element.getText());
+     }
+
+    public String getOutgoingSupplyTransactionId() throws InterruptedException {
+         waitForElementToBeLocated(driver, outgoing_supply_transaction_id_1, 10);
+         WebElement element = driver.findElement(outgoing_supply_transaction_id_1);
+         element.getText();
+         //element.getAttribute("value");
+         return(element.getText());
+     }
+
+
+
 }
