@@ -2,6 +2,7 @@ package prodsuppqa.my.salesforce.com.Tests.Inventory;
 
 
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import prodsuppqa.my.salesforce.com.Pages.SupplyConsolePage;
 import prodsuppqa.my.salesforce.com.Tests.BaseTest;
@@ -17,15 +18,16 @@ public class Requisition extends BaseTest {
         SupplyConsolePage supplyConsolePagePage = loginPage.loginAsPPHIS();
         System.out.println("/*----2. Go to Supply Locations Tab --*/");
         supplyConsolePagePage.clickSupplyLocationsTab();
-        Thread.sleep(4000);
+        Thread.sleep(3000);
         System.out.println("/*----3. Locate on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocations();
-        Thread.sleep(5000);
+        Thread.sleep(4000);
         System.out.println("/*----4. Navigate to Request Supplies --*/");
         supplyConsolePagePage.clickRequestSupplies();
+        Thread.sleep(3000);
         System.out.println("/*----5. Choose Ship To Address --*/");
         // supplyConsolePagePage.clickShipToAddress();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         System.out.println("/*----6. Locate on Automation Supply Location_2 --*/");
         supplyConsolePagePage.inputShipAddress("Atlin Health Centre");
         //  supplyConsolePagePage.clickOnSupplyLocations();
@@ -36,7 +38,6 @@ public class Requisition extends BaseTest {
         supplyConsolePagePage.clickInput1();
         Thread.sleep(3000);
         supplyConsolePagePage.inputRequestDate();
-        //   supplyConsolePagePage.clickRequestedDeliveryDate();
         Thread.sleep(3000);
         System.out.println("/*----8. Choose Urgency --*/");
         supplyConsolePagePage.clickNextButton();
@@ -57,14 +58,24 @@ public class Requisition extends BaseTest {
         supplyConsolePagePage.clickSubmitRequisition();
         Thread.sleep(5000);
         System.out.println("/*----14. Confirm and Save Requisition --*/");
-//        supplyConsolePagePage.clickSaveSubmitRequisition();
-//        Thread.sleep(3000);
-//        System.out.println("/*----15. Click Calender of Expected Delivery Date--*/");
-//        supplyConsolePagePage.clickExpectedDeliveryDateCalendar();
-//        Thread.sleep(3000);
-//        System.out.println("/*----16. Choose The Expected Delivery Date--*/");
-//        System.out.println("/*----17. Save Chosen Expected Delivery Date--*/");
-//        System.out.println("/*----18. Approve Requisition--*/");
+        supplyConsolePagePage.clickSaveSubmitRequisition();
+        Thread.sleep(3000);
+        System.out.println("/*----15. Click Edit Expected Delivery Date--*/");
+        supplyConsolePagePage.clickEditExpectedDeliveryDate();
+        Thread.sleep(3000);
+        System.out.println("/*----16. Click Calender of Expected Delivery Date--*/");
+        supplyConsolePagePage.clickExpectedDeliveryDateCalendar();
+        Thread.sleep(3000);
+        System.out.println("/*----17. Choose The Expected Delivery Date--*/");
+        supplyConsolePagePage.inputExpectedDate();
+        Thread.sleep(3000);
+        System.out.println("/*----18. Save Chosen Expected Delivery Date--*/");
+        supplyConsolePagePage.clickSaveExpectedDeliveryDate();
+        Thread.sleep(3000);
+        System.out.println("/*----19. Approve Requisition--*/");
+        //supplyConsolePagePage.clickApproveRequisition();
+
+
 
 
     }

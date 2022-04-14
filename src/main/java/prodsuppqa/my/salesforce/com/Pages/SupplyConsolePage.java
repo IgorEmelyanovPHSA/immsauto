@@ -82,22 +82,37 @@ import java.util.Locale;
     private WebElement nextButton;
     private By next_button = By.xpath("//button[contains(text(),\"Next\")]");
 
-
-
-
-    @FindBy (xpath = "button[@class=\"slds-button slds-button_brand cuf-publisherShareButton undefined uiButton\"]")
+    @FindBy (xpath = "//body/div[4]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/footer[1]/button[2]/span[1]")
     private WebElement saveSubmitRequisition;
-    private By save_Submit_Requisition = By.xpath("button[@class=\"slds-button slds-button_brand cuf-publisherShareButton undefined uiButton\"]");
+    //private By save_Submit_Requisition = By.xpath("//button[@title=\"Save\"]");
 
-    @FindBy (xpath = "span[contains(text(),\"Select a date for Expected Delivery Date\")]" )
-    private WebElement expectedDeliveryDateCalendar;
-    private By expected_delivery_date_calendar = By.xpath("span[contains(text(),\"Select a date for Expected Delivery Date\")]" );
-
-
-    
     @FindBy(xpath = "//button[contains(text(),\"Submit Requisition\")]")
     private WebElement submitRequisition;
     private By submit_requisition = By.xpath("//button[contains(text(),\"Submit Requisition\")]");
+
+     @FindBy(xpath = "//button[@title='Edit Expected Delivery Date']")
+     private WebElement editExpectedDeliveryDate;
+     private By edit_Expected_Delivery_Date = By.xpath("//button[@title='Edit Expected Delivery Date']");
+
+     @FindBy (xpath = "//input[@name ='BCH_Expected_Delivery_Date__c']" )
+     private WebElement expectedDeliveryDateCalendar;
+     private By expected_delivery_date_calendar = By.xpath("//input[@name ='BCH_Expected_Delivery_Date__c']" );
+
+     @FindBy(xpath = "//input[@name=\"BCH_Expected_Delivery_Date__c\"]")
+     private WebElement inputExpectedDate;
+     private By input_expected_data = By.xpath( "//input[@name=\"BCH_Expected_Delivery_Date__c\"]");
+
+     @FindBy (xpath = "//button[contains(text(),'Save')]" )
+     private  WebElement saveExpectedDeliveryDate;
+     private  By save_expected_delivery_date = By.xpath("//button[contains(text(),'Save')]");
+
+     @FindBy (xpath = "//button[contains(text(),'Approve Requisition')]")
+     private  WebElement approveRequisition;
+     private  By approve_Requisition = By.xpath("//button[contains(text(),'Approve Requisition')]");
+
+
+
+
 
 
     @FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
@@ -137,7 +152,7 @@ import java.util.Locale;
     public void clickSaveButton() {
         this.saveButton.click();
     }
-   public void inputShipAddress(String inputAddress) {
+    public void inputShipAddress(String inputAddress) {
        this.shipAddress.sendKeys(inputAddress);
    }
     
@@ -172,33 +187,47 @@ import java.util.Locale;
     }
     
     public void clickSubmitRequisition(){
-        //waitForElementToBeVisible(driver, submitRequisition, 10);
-        //WebElement element = driver.findElement(submit_requisition);
+        waitForElementToBeVisible(driver, submitRequisition, 10);
+        WebElement element = driver.findElement(submit_requisition);
         this.submitRequisition.click();
     }
 
-//    public void clickSaveSubmitRequisition() {
-//        waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
-//        WebElement element = driver.findElement(save_Submit_Requisition);
-//        this.saveSubmitRequisition.click();
-//    }
-//    public void clickExpectedDeliveryDateCalendar() {
-//        waitForElementToBeVisible(driver, expectedDeliveryDateCalendar, 10);
-//        WebElement element = driver.findElement(expected_delivery_date_calendar);
-//        this.expectedDeliveryDateCalendar.click();
-//    }
-
 
     public void clickSaveSubmitRequisition() {
-        waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
-        WebElement element = driver.findElement(save_Submit_Requisition);
+        //waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
+        //WebElement element = driver.findElement(save_Submit_Requisition);
         this.saveSubmitRequisition.click();
+    }
+
+    public void clickEditExpectedDeliveryDate(){
+        waitForElementToBeVisible(driver, editExpectedDeliveryDate, 10);
+        WebElement element = driver.findElement(edit_Expected_Delivery_Date);
+        this.editExpectedDeliveryDate.click();
     }
     public void clickExpectedDeliveryDateCalendar() {
         waitForElementToBeVisible(driver, expectedDeliveryDateCalendar, 10);
         WebElement element = driver.findElement(expected_delivery_date_calendar);
         this.expectedDeliveryDateCalendar.click();
     }
+     public void inputExpectedDate() {
+         Calendar calendar = Calendar.getInstance();
+         calendar.add(Calendar.DAY_OF_YEAR, 1);
+         Date tomorrow = calendar.getTime();
+         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+
+         String tomorrowAsString = dateFormat.format(tomorrow);
+         this.inputExpectedDate.sendKeys(tomorrowAsString, Keys.ENTER);
+     }
+     public void clickSaveExpectedDeliveryDate(){
+         waitForElementToBeVisible(driver, saveExpectedDeliveryDate, 10);
+         WebElement element = driver.findElement(save_expected_delivery_date);
+         this.saveExpectedDeliveryDate.click();
+     }
+     public void clickApproveRequisition(){
+         waitForElementToBeVisible(driver, approveRequisition, 10);
+         WebElement element = driver.findElement(approve_Requisition);
+         this.approveRequisition.click();
+     }
 
     public void SupplyLocations() throws InterruptedException {
         waitForElementToBeLocated(driver, By.xpath("//span[contains(text(),\"Supply Locations\")]"), 10);
@@ -219,7 +248,6 @@ import java.util.Locale;
     }
     
     public void clickOnSupplyLocations() throws InterruptedException {
-        //waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
         waitForElementToBeVisible(driver,supply_supply_location_1,10);
         WebElement element = driver.findElement(supply_supply_location_1_);
         this.supply_supply_location_1.click();
