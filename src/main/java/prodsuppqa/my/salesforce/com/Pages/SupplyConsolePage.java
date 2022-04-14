@@ -111,7 +111,10 @@ public class SupplyConsolePage extends BasePage {
     @FindBy(xpath = "(.//a[text() = 'Transactions'])")
     private WebElement transactions_tab;
     private By transactions_tab_1 = By.xpath("(.//a[text() = 'Transactions'])");
-    
+    //private By transactions_tab_1 = By.xpath("(.//span[text() = 'Automation Supply Location_1'] and .//a[text() = 'Transactions'])");
+
+
+
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
     private WebElement rows_transactions_from_count_path;
     //private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
@@ -381,6 +384,14 @@ public class SupplyConsolePage extends BasePage {
         element.getText();
         return(element.getText());
      }
+
+    public void closeAutomationLocation_1Tab() throws InterruptedException {
+        //do {
+            WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+            closetab.click();
+        //} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
+
+    }
 
 
 
