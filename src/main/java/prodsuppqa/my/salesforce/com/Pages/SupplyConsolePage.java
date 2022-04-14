@@ -316,7 +316,19 @@ public class SupplyConsolePage extends BasePage {
         //return(dataTableActualRowCount);
         return (rows.size());
     }
-    
+
+    public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
+        By outgoing_transactions_id = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
+        waitForElementToBeLocated(driver, outgoing_transactions_id, 10);
+        Thread.sleep(5000);
+        WebElement element = driver.findElement(outgoing_transactions_id);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(5000);
+        element.getText();
+        //element.getAttribute("value");
+        return(element.getText());
+    }
+
     public void clickOnTransactionsFrom(int kk) throws InterruptedException {
         By transactions_from_1_ = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
         waitForElementToBeLocated(driver, transactions_from_1_, 10);
@@ -331,10 +343,15 @@ public class SupplyConsolePage extends BasePage {
     }
 
     public void clickSupplyTransactionRelatedTab() throws InterruptedException {
-        waitForElementToBeLocated(driver, supply_transactions_Related_tab_1, 10);
         Thread.sleep(2000);
-        click(transactions_tab_1);
-
+        WebElement element = driver.findElement(supply_transactions_Related_tab_1);
+        isDisplayed(supply_transactions_Related_tab_1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        //element.click();
+        //waitForElementToBeLocated(driver, supply_transactions_Related_tab_1, 10);
+        //Thread.sleep(2000);
+        //click(transactions_tab_1);
         //waitForElementToBeVisible(driver, supply_transactions_Related_tab, 10);
         //Thread.sleep(2000);
         //driver.findElement(supply_transactions_Related_tab_1);
@@ -354,13 +371,7 @@ public class SupplyConsolePage extends BasePage {
         return(element.getText());
      }
 
-    public String getOutgoingSupplyTransactionId() throws InterruptedException {
-         waitForElementToBeLocated(driver, outgoing_supply_transaction_id_1, 10);
-         WebElement element = driver.findElement(outgoing_supply_transaction_id_1);
-         element.getText();
-         //element.getAttribute("value");
-         return(element.getText());
-     }
+
 
 
 

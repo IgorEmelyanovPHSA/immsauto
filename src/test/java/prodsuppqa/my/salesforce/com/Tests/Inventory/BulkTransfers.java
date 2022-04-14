@@ -67,34 +67,40 @@ public class BulkTransfers extends BaseTest {
         int countTransactions = supplyConsolePagePage.getRowsTransactionsFromCount();
         Thread.sleep(5000);
         System.out.println("/*---  Outgoing transactions 'from' count:" +countTransactions);
-        System.out.println("/*12.2----Click on the latest created Outgoing Transactions --*/");
         int nn = 1;
         int kk = countTransactions;
         // while (nn <= 3 ){
+        System.out.println("/*12.2---Get Outgoing Transaction id 'form' --*/");
+        String outgoingSupplyTransactionId = supplyConsolePagePage.getOutgoingSupplyTransactionId(kk);
+        System.out.println("/*--outgoing Supply Transaction From id --*/:" +outgoingSupplyTransactionId);
+        System.out.println("/*12.3----Click on the latest created Outgoing Transactions --*/");
         supplyConsolePagePage.clickOnTransactionsFrom(kk);
         System.out.println("/*--transactions record number --*/:" +kk);
         Thread.sleep(5000);
+
+
         //kk=countTransactions-1;
         //System.out.println("/*---     record number: " +kk);
-        System.out.println("/*12.3---Click on Supply Transaction STRX-... Related Tab --*/");
-        supplyConsolePagePage.clickSupplyTransactionRelatedTab();
-        Thread.sleep(2000);
-        System.out.println("/*12.4---Get Outgoing Transaction id 'form' --*/");
-        String outgoingShipmentTransactionId = supplyConsolePagePage.getSupplyShipmentTransactionId();
-        System.out.println("/*--outgoing Shipment Transaction id --*/:" +outgoingShipmentTransactionId);
-        System.out.println("/*12.5---Click on Supply Shipment name SSHP-... --*/");
-        supplyConsolePagePage.clickOnSupplyShipmentName();
-        Thread.sleep(2000);
-        System.out.println("/*12.6---Get Outgoing Transaction id 'form' --*/");
-        //String outgoingId;
-        //String outgoingSupplyTransactionId = supplyConsolePagePage.getOutgoingSupplyTransactionId();
-        //System.out.println("/*--outgoing Supply Transaction From id --*/:" +outgoingSupplyTransactionId);
-        Thread.sleep(2000);
-        System.out.println("/*12.7---Get Incoming Transaction id 'to' --*/");
-        Thread.sleep(2000);
-        //nn++;
-        //}
-        
+
+        //System.out.println("/*12.3---Click on Supply Transaction STRX-... Related Tab --*/");
+        //supplyConsolePagePage.clickSupplyTransactionRelatedTab();
+        //Thread.sleep(2000);
+        //System.out.println("/*12.4---Get Outgoing Transaction id 'form' --*/");
+        //String outgoingShipmentTransactionId = supplyConsolePagePage.getSupplyShipmentTransactionId();
+        //System.out.println("/*--outgoing Shipment Transaction id --*/:" +outgoingShipmentTransactionId);
+        //System.out.println("/*12.5---Click on Supply Shipment name SSHP-... --*/");
+        //supplyConsolePagePage.clickOnSupplyShipmentName();
+        //Thread.sleep(2000);
+        //System.out.println("/*12.6---Get Outgoing Transaction id 'form' --*/");
+        ////String outgoingId;
+        ////String outgoingSupplyTransactionId = supplyConsolePagePage.getOutgoingSupplyTransactionId();
+        ////System.out.println("/*--outgoing Supply Transaction From id --*/:" +outgoingSupplyTransactionId);
+        //Thread.sleep(2000);
+        //System.out.println("/*12.7---Get Incoming Transaction id 'to' --*/");
+        //Thread.sleep(2000);
+        ////nn++;
+        ////}
+
         
         
         
