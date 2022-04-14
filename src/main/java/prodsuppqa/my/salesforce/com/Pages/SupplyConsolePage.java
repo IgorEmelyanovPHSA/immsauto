@@ -11,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
- public class SupplyConsolePage extends BasePage {
+
+public class SupplyConsolePage extends BasePage {
 
     @FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
     private WebElement supply_locations_tab;
@@ -107,13 +108,13 @@ import java.util.Locale;
     private WebElement transactions_tab;
     private By transactions_tab_1 = By.xpath("(.//a[text() = 'Transactions'])");
     
-    @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)")
+    @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
     private WebElement rows_transactions_from_count_path;
-    private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
+    //private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
 
-    @FindBy(xpath = "(.//a[text() = 'Related'])[2]")
+    @FindBy(xpath = "(.//a[text() = 'Related'])")
     private WebElement supply_transactions_Related_tab;
-    private By supply_transactions_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])[2]");
+    private By supply_transactions_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
 
     @FindBy(xpath = ".//span[contains(text(),'SSHP-00')]")
     private WebElement supply_shipment_name;
@@ -306,7 +307,13 @@ import java.util.Locale;
     
     public int getRowsTransactionsFromCount() throws InterruptedException {
         waitForElementToBeVisible(driver, rows_transactions_from_count_path, 10);
-        List<WebElement> rows = driver.findElements(rows_transactions_from_count_path_1);
+        List<WebElement> rows = rows_transactions_from_count_path.findElements(By.tagName("tr"));
+        //List<WebElement> rows = driver.findElements(rows_transactions_from_count_path_1);
+        //int dataTableActualRowCount=0;
+        //JavascriptExecutor js=(JavascriptExecutor)driver;
+        //dataTableActualRowCount =  ((Number)js.executeScript("return $('#example').DataTable().rows().data().toArray().length;")).intValue();
+        //System.out.println("coubt=" +dataTableActualRowCount);
+        //return(dataTableActualRowCount);
         return (rows.size());
     }
     
@@ -326,9 +333,13 @@ import java.util.Locale;
     public void clickSupplyTransactionRelatedTab() throws InterruptedException {
         waitForElementToBeLocated(driver, supply_transactions_Related_tab_1, 10);
         Thread.sleep(2000);
-        driver.findElement(supply_transactions_Related_tab_1);
-        Thread.sleep(2000);
-        click(supply_transactions_Related_tab_1);
+        click(transactions_tab_1);
+
+        //waitForElementToBeVisible(driver, supply_transactions_Related_tab, 10);
+        //Thread.sleep(2000);
+        //driver.findElement(supply_transactions_Related_tab_1);
+        //Thread.sleep(2000);
+        //click(supply_transactions_Related_tab_1);
      }
 
     public void clickOnSupplyShipmentName() throws InterruptedException {
