@@ -108,7 +108,7 @@ public class BulkTransfers extends BaseTest {
         supplyConsolePagePage.clickOnSupplyLocation_2();
         Thread.sleep(2000);
         System.out.println("/*15.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePagePage.clickTransactionsTab();
+        //supplyConsolePagePage.clickTransactionsTab();
         Thread.sleep(5000);
 
         
