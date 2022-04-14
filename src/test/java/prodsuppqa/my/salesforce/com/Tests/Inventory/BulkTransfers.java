@@ -20,7 +20,7 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(5000);
         supplyConsolePagePage.clickSupplyLocationsTab();
         System.out.println("/*3.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePagePage.clickOnSupplyLocations();
+        supplyConsolePagePage.clickOnSupplyLocation_1();
         Thread.sleep(5000);
         System.out.println("/*4.----Get Supply Containers count records --*/");
         int countSupplyContainers = supplyConsolePagePage.getRowsSupplyContainersFromCount();
@@ -100,6 +100,16 @@ public class BulkTransfers extends BaseTest {
         //Thread.sleep(2000);
         ////nn++;
         ////}
+
+        Thread.sleep(2000);
+        System.out.println("/*13.----Go to Supply Locations Tab --*/");
+        supplyConsolePagePage.clickSupplyLocationsTab();
+        System.out.println("/*14.----Click on Automation Supply Location_2 --*/");
+        supplyConsolePagePage.clickOnSupplyLocation_2();
+        Thread.sleep(2000);
+        System.out.println("/*15.----Go to Transactions Tab of Automation Supply Location_2 --*/");
+        supplyConsolePagePage.clickTransactionsTab();
+        Thread.sleep(5000);
 
         
         

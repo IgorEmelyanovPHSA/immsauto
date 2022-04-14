@@ -21,7 +21,11 @@ public class SupplyConsolePage extends BasePage {
     @FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
     private WebElement supply_supply_location_1;
     private By supply_supply_location_1_ = By.xpath(".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']");
-    
+
+    @FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_2']")
+    private WebElement supply_supply_location_2;
+    private By supply_supply_location_2_ = By.xpath(".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']");
+
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)")
     private WebElement rows_supply_containers_from_count_path;
     private By rows_supply_containers_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)");
@@ -216,11 +220,18 @@ public class SupplyConsolePage extends BasePage {
         this.supply_locations_tab.click();
     }
     
-    public void clickOnSupplyLocations() throws InterruptedException {
+    public void clickOnSupplyLocation_1() throws InterruptedException {
         //waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
         waitForElementToBeVisible(driver,supply_supply_location_1,10);
         WebElement element = driver.findElement(supply_supply_location_1_);
         this.supply_supply_location_1.click();
+    }
+
+    public void clickOnSupplyLocation_2() throws InterruptedException {
+        //waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
+        waitForElementToBeVisible(driver,supply_supply_location_2,10);
+        WebElement element = driver.findElement(supply_supply_location_2_);
+        this.supply_supply_location_2.click();
     }
     
     public void clickRequestSupplies() throws InterruptedException {

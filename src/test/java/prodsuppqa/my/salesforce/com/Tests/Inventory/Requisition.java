@@ -19,7 +19,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePagePage.clickSupplyLocationsTab();
 		Thread.sleep(3000);
 		System.out.println("/*----3. Locate on Automation Supply Location_1 --*/");
-		supplyConsolePagePage.clickOnSupplyLocations();
+		supplyConsolePagePage.clickOnSupplyLocation_1();
 		Thread.sleep(4000);
 		System.out.println("/*----4. Navigate to Request Supplies --*/");
 		supplyConsolePagePage.clickRequestSupplies();
@@ -60,16 +60,16 @@ public class Requisition extends BaseTest {
 		supplyConsolePagePage.clickSaveSubmitRequisition();
 		Thread.sleep(3000);
 		System.out.println("/*----15. Click Edit Expected Delivery Date--*/");
-		supplyConsolePagePage.clickEditExpectedDeliveryDate();
+		//supplyConsolePagePage.clickEditExpectedDeliveryDate();
 		Thread.sleep(3000);
 		System.out.println("/*----16. Click Calender of Expected Delivery Date--*/");
 		supplyConsolePagePage.clickExpectedDeliveryDateCalendar();
 		Thread.sleep(3000);
 		System.out.println("/*----17. Choose The Expected Delivery Date--*/");
-		supplyConsolePagePage.inputExpectedDate();
+		//supplyConsolePagePage.inputExpectedDate();
 		Thread.sleep(3000);
 		System.out.println("/*----18. Save Chosen Expected Delivery Date--*/");
-		supplyConsolePagePage.clickSaveExpectedDeliveryDate();
+		//supplyConsolePagePage.clickSaveExpectedDeliveryDate();
 		Thread.sleep(3000);
 		System.out.println("/*----19. Approve Requisition--*/");
 		//supplyConsolePagePage.clickApproveRequisition();
