@@ -20,8 +20,10 @@ public class CitizenDuplicates extends BaseTest {
 		System.out.println("/*----Search for Participant account ---*/");
 		inClinicExperiencePage.SearchForCitizen("BCYONE BCydemoadd");
 		System.out.println("/*----Search for BCYONE is Successful ---*/");
-		while (inClinicExperiencePage.userFound()) {
+		if (!inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User --> BCYONE not found and return---*/");
+		}
+		while (inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User found and Navigated to record page ---*/");
 			Thread.sleep(2000);
 			inClinicExperiencePage.clickRelatedTab();
