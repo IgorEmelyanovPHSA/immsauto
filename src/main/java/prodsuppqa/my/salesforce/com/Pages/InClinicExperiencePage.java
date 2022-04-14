@@ -196,9 +196,11 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void closeDeletedPersonAccount() {
-		WebElement products = driver.findElement(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']"));
-		products.click();
+	public void closeDeletedPersonAccountTabs() {
+		do {
+			WebElement closetab = driver.findElement(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']"));
+			closetab.click();
+		} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
 	}
 }
 
