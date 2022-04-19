@@ -101,10 +101,10 @@ public class BulkTransfers extends BaseTest {
         ////nn++;
         ////}
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         System.out.println("/*13.----Close Automation_Supply_Location_1 Tab --*/");
         supplyConsolePagePage.closeAutomationLocationTab();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         System.out.println("/*14.----Go to Supply Locations Tab --*/");
         supplyConsolePagePage.clickSupplyLocationsTab();
         Thread.sleep(2000);

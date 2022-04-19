@@ -389,10 +389,11 @@ public class SupplyConsolePage extends BasePage {
      }
 
     public void closeAutomationLocationTab() throws InterruptedException {
-        //do {
+        do {
             WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
             closetab.click();
-        //} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
+            Thread.sleep(2000);
+        } while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 
     }
 
