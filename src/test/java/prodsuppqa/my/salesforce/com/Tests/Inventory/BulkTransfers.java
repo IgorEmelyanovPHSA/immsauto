@@ -27,11 +27,11 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*---     count:" +countSupplyContainers);
         System.out.println("/*5.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3){
-            int k=2;
-            while (k <= 4){
-                supplyConsolePagePage.clickOnCheckbox(k);;
-                int n=k-1;
-                System.out.println("/*---     containers record number: " +n);
+            int k=1;
+            while (k <= 3){
+                supplyConsolePagePage.clickOnSupplyContainerCheckbox(k);
+                //int n=k-1;
+                System.out.println("/*---     containers record number: " +k);
                 Thread.sleep(1000);
                 k++;
             }
@@ -121,12 +121,15 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*18.----Click on Checkboxes Incoming Transactions --*/");
         if (countIncomingTransactions >= 3){
+            //int j=countIncomingTransactions + 5;
             int j=countIncomingTransactions;
             int i=1;
+            //int jj;
             while (i <= 3){
-                supplyConsolePagePage.clickOnCheckbox(j);
-                j=j--;
+                supplyConsolePagePage.clickOnIncomingTransactionsCheckbox(j);
+                //jj=j-5;
                 System.out.println("/*---     incoming transaction record number: " +j);
+                j=--j;
                 Thread.sleep(1000);
                 i++;
             }
@@ -138,6 +141,8 @@ public class BulkTransfers extends BaseTest {
 
         System.out.println("/*1?----Close Automation_Supply_Location_2 Tab --*/");
         supplyConsolePagePage.closeAutomationLocationTab();
+
+        Thread.sleep(10000);
 
 
         
