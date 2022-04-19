@@ -22,16 +22,16 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePagePage.clickOnSupplyLocation_1();
         Thread.sleep(5000);
-        System.out.println("/*4.----Get Supply Containers count records --*/");
+        System.out.println("/*4.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePagePage.getRowsSupplyContainersFromCount();
         System.out.println("/*---     count:" +countSupplyContainers);
         System.out.println("/*5.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3){
             int k=2;
             while (k <= 4){
-                supplyConsolePagePage.clickOnCheckbox(k);
+                supplyConsolePagePage.clickOnCheckbox(k);;
                 int n=k-1;
-                System.out.println("/*---     record number: " +n);
+                System.out.println("/*---     containers record number: " +n);
                 Thread.sleep(1000);
                 k++;
             }
@@ -64,17 +64,17 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(5000);
         System.out.println("/*12----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*12.1----Get how many Outgoing Transactions 'From' count records --*/");
-        int countTransactions = supplyConsolePagePage.getRowsTransactionsFromCount();
+        int countOutgoingTransactions = supplyConsolePagePage.getRowsOutgoingTransactionsCount();
         Thread.sleep(5000);
-        System.out.println("/*---  Outgoing transactions 'from' count:" +countTransactions);
+        System.out.println("/*---  Outgoing transactions 'from' count:" +countOutgoingTransactions);
         int nn = 1;
-        int kk = countTransactions;
+        int kk = countOutgoingTransactions;
         // while (nn <= 3 ){
         System.out.println("/*12.2---Get Outgoing Transaction id 'form' --*/");
         String outgoingSupplyTransactionId = supplyConsolePagePage.getOutgoingSupplyTransactionId(kk);
         System.out.println("/*--outgoing Supply Transaction From id --*/:" +outgoingSupplyTransactionId);
         System.out.println("/*12.3----Click on the latest created Outgoing Transactions --*/");
-        supplyConsolePagePage.clickOnTransactionsFrom(kk);
+        supplyConsolePagePage.clickOnOutgoingTransactions(kk);
         System.out.println("/*--transactions record number --*/:" +kk);
         Thread.sleep(5000);
 
@@ -103,7 +103,7 @@ public class BulkTransfers extends BaseTest {
 
         Thread.sleep(2000);
         System.out.println("/*13.----Close Automation_Supply_Location_1 Tab --*/");
-        supplyConsolePagePage.closeAutomationLocation_1Tab();
+        supplyConsolePagePage.closeAutomationLocationTab();
         Thread.sleep(2000);
         System.out.println("/*14.----Go to Supply Locations Tab --*/");
         supplyConsolePagePage.clickSupplyLocationsTab();
@@ -113,7 +113,32 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         supplyConsolePagePage.clickTransactionsTab();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+        System.out.println("/*17----Get how many Incoming Transactions 'To' count records --*/");
+        int countIncomingTransactions = supplyConsolePagePage.getRowsIncomingTransactionsCount();
+        Thread.sleep(2000);
+        System.out.println("/*---  Incoming transactions 'to' count:" +countIncomingTransactions);
+        Thread.sleep(2000);
+        System.out.println("/*18.----Click on Checkboxes Incoming Transactions --*/");
+        if (countIncomingTransactions >= 3){
+            int j=countIncomingTransactions;
+            int i=1;
+            while (i <= 3){
+                supplyConsolePagePage.clickOnCheckbox(j);
+                j=j--;
+                System.out.println("/*---     incoming transaction record number: " +j);
+                Thread.sleep(1000);
+                i++;
+            }
+        }else {
+            System.out.println("/*--not all 3 Incoming Transaction records are there--*/");
+        }
+
+
+
+        System.out.println("/*1?----Close Automation_Supply_Location_2 Tab --*/");
+        supplyConsolePagePage.closeAutomationLocationTab();
+
 
         
         

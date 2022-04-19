@@ -116,8 +116,8 @@ public class SupplyConsolePage extends BasePage {
 
 
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
-    private WebElement rows_transactions_from_count_path;
-    //private By rows_transactions_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
+    private WebElement rows_outgoing_transactions_count_path;
+    //private By rows_outgoing_transactions_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
 
     @FindBy(xpath = "(.//a[text() = 'Related'])")
     private WebElement supply_transactions_Related_tab;
@@ -130,6 +130,9 @@ public class SupplyConsolePage extends BasePage {
     @FindBy(xpath = ".//span[contains(text(),'Transaction From')] and .//span[contains(text(),'STRX-')]")
     private WebElement outgoing_supply_transaction_id;
     private By outgoing_supply_transaction_id_1 = By.xpath(".//span[contains(text(),'Transaction From')] and .//span[contains(text(),'STRX-')]");
+
+    @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[1]")
+    private WebElement rows_incoming_transactions_count_path;
 
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
@@ -319,9 +322,9 @@ public class SupplyConsolePage extends BasePage {
         click(transactions_tab_1);
     }
     
-    public int getRowsTransactionsFromCount() throws InterruptedException {
-        waitForElementToBeVisible(driver, rows_transactions_from_count_path, 10);
-        List<WebElement> rows = rows_transactions_from_count_path.findElements(By.tagName("tr"));
+    public int getRowsOutgoingTransactionsCount() throws InterruptedException {
+        waitForElementToBeVisible(driver, rows_outgoing_transactions_count_path, 10);
+        List<WebElement> rows = rows_outgoing_transactions_count_path.findElements(By.tagName("tr"));
         //List<WebElement> rows = driver.findElements(rows_transactions_from_count_path_1);
         //int dataTableActualRowCount=0;
         //JavascriptExecutor js=(JavascriptExecutor)driver;
@@ -334,26 +337,26 @@ public class SupplyConsolePage extends BasePage {
     public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
         By outgoing_transactions_id = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
         waitForElementToBeLocated(driver, outgoing_transactions_id, 10);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         WebElement element = driver.findElement(outgoing_transactions_id);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         element.getText();
         //element.getAttribute("value");
         return(element.getText());
     }
 
-    public void clickOnTransactionsFrom(int kk) throws InterruptedException {
+    public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
         By transactions_from_1_ = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
         waitForElementToBeLocated(driver, transactions_from_1_, 10);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         WebElement element = driver.findElement(transactions_from_1_);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
         //waitForElementToBeLocated(driver, transactions_from_1_, 10);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     public void clickSupplyTransactionRelatedTab() throws InterruptedException {
@@ -385,12 +388,18 @@ public class SupplyConsolePage extends BasePage {
         return(element.getText());
      }
 
-    public void closeAutomationLocation_1Tab() throws InterruptedException {
+    public void closeAutomationLocationTab() throws InterruptedException {
         //do {
             WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
             closetab.click();
         //} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
 
+    }
+
+    public int getRowsIncomingTransactionsCount() throws InterruptedException {
+        waitForElementToBeVisible(driver, rows_incoming_transactions_count_path, 10);
+        List<WebElement> rows = rows_incoming_transactions_count_path.findElements(By.tagName("tr"));
+        return (rows.size());
     }
 
 
