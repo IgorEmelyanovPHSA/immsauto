@@ -94,6 +94,15 @@ public class LoginPage extends BasePage {
         this.login_button.click();
         return new SupplyConsolePage(driver);
     }
+
+    public RequisitionFlowPage loginAsPPHIS1() {
+        this.enterPPHISUserName();
+        //setUsername(username);
+        this.enterPPHIS_PW();
+        //return clickLoginButton();
+        this.login_button.click();
+        return new RequisitionFlowPage(driver);
+    }
     
 
     public void verifyAlertSuccess(){
