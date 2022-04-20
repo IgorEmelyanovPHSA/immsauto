@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static java.awt.SystemColor.window;
+
 
 public class SupplyConsolePage extends BasePage {
 
@@ -133,6 +135,22 @@ public class SupplyConsolePage extends BasePage {
 
     @FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[1]")
     private WebElement rows_incoming_transactions_count_path;
+
+    @FindBy(xpath = ".//button[text() = 'Confirm Transfer']")
+    private WebElement bulk_confirm_incoming_transfers_button;
+    private By bulk_confirm_incoming_transfers_button_1 = By.xpath(".//button[text() = 'Confirm Transfer']");
+
+    @FindBy(xpath = ".//span[text() = 'Select Supply Distributor']")
+    private WebElement search_incoming_supply_distributor;
+    private By search_incoming_supply_distributor_ = By.xpath(".//span[text() = 'Select Supply Distributor']");
+
+    @FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000000398']")
+    private WebElement select_incoming_supply_distributor;
+    private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000000398']");
+
+    @FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
+    private WebElement confirm_incoming_transfers_modal_button;
+    private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
 
     public SupplyConsolePage(WebDriver driver) {
         super(driver);
@@ -293,7 +311,7 @@ public class SupplyConsolePage extends BasePage {
         waitForElementToBeLocated(driver, dose_1_, 10);
         WebElement element = driver.findElement(dose_1_);
         //((JavascriptExecutor) driver).executeScript("arguments[0].scrollRight = arguments[0].scrollWidth", element);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
         click(dose_1_);
         element.sendKeys("1");
     }
@@ -351,7 +369,7 @@ public class SupplyConsolePage extends BasePage {
         waitForElementToBeLocated(driver, transactions_from_1_, 10);
         Thread.sleep(2000);
         WebElement element = driver.findElement(transactions_from_1_);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
         //waitForElementToBeLocated(driver, transactions_from_1_, 10);
         Thread.sleep(2000);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -410,6 +428,44 @@ public class SupplyConsolePage extends BasePage {
         WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
         //this.incoming_transaction_checkbox_1.click();
         click(incoming_transaction_checkbox_1_);
+    }
+
+    public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
+        waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(bulk_confirm_incoming_transfers_button_1);
+        Thread.sleep(2000);
+        //scroll up
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-1000)");
+        Thread.sleep(1000);
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
+        //Thread.sleep(1000);
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
+        //Thread.sleep(1000);
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+        //Thread.sleep(1000);
+        click(bulk_confirm_incoming_transfers_button_1);
+    }
+
+    public void selectIncomingSupplyDistribution() throws InterruptedException {
+        waitForElementToBeVisible(driver, search_incoming_supply_distributor, 10);
+        WebElement element = driver.findElement(search_incoming_supply_distributor_);
+        Thread.sleep(2000);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+        Thread.sleep(1000);
+        search_incoming_supply_distributor.click();
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, select_incoming_supply_distributor, 10);
+        Thread.sleep(2000);
+        select_incoming_supply_distributor.click();
+        //#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
+        //#search_supply_location_To.sendKeys(Keys.ENTER);
+    }
+    public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
+        waitForElementToBeLocated(driver, confirm_incoming_transfers_modal_button_1, 10);
+        WebElement element = driver.findElement(confirm_incoming_transfers_modal_button_1);
+        //this.bulk_confirm_incoming_transfers_button.click();
+        click(confirm_incoming_transfers_modal_button_1);
     }
 
 

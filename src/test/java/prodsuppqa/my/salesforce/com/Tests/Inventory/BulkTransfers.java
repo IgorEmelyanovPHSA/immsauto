@@ -81,11 +81,8 @@ public class BulkTransfers extends BaseTest {
         supplyConsolePagePage.clickOnOutgoingTransactions(kk);
         System.out.println("/*--transactions record number --*/:" +kk);
         Thread.sleep(5000);
-
-
         //kk=countTransactions-1;
         //System.out.println("/*---     record number: " +kk);
-
         //System.out.println("/*12.3---Click on Supply Transaction STRX-... Related Tab --*/");
         //supplyConsolePagePage.clickSupplyTransactionRelatedTab();
         //Thread.sleep(2000);
@@ -104,7 +101,6 @@ public class BulkTransfers extends BaseTest {
         //Thread.sleep(2000);
         ////nn++;
         ////}
-
         Thread.sleep(3000);
         System.out.println("/*14.----Close All Tab's --*/");
         supplyConsolePagePage.closeAutomationLocationTab();
@@ -140,8 +136,17 @@ public class BulkTransfers extends BaseTest {
         }else {
             System.out.println("/*--not all 3 Incoming Transaction records are there--*/");
         }
-
-
+        System.out.println("/*20----click Confirm Incoming button Transfer --*/");
+        supplyConsolePagePage.clickBulkConfirmIncomingTransfersButton();
+        Thread.sleep(2000);
+        System.out.println("/*21.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
+        supplyConsolePagePage.selectIncomingSupplyDistribution();
+        Thread.sleep(2000);
+        System.out.println("/*20----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
+        supplyConsolePagePage.clickOnConfirmModalIncomingTransactionButton();
+        Thread.sleep(1000);
+        System.out.println("/*--Successful message has been shown up --*/");
+        Thread.sleep(7000);
 
         System.out.println("/*1?----Close Automation_Supply_Location_2 Tab --*/");
         supplyConsolePagePage.closeAutomationLocationTab();
