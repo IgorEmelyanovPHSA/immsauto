@@ -13,7 +13,7 @@ public class Requisition extends BaseTest {
 		RequisitionFlowPage requisitionFlowPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----1. Login as an PPHIS_prodsuppqa to Supply Console --*/");
 		Thread.sleep(3000);
-		requisitionFlowPage.closeTab();
+		//requisitionFlowPage.closeTab();
 		System.out.println("/*----2. Close open Tabs --*/");
 		Thread.sleep(3000);
 		requisitionFlowPage.clickDropdownMenu();

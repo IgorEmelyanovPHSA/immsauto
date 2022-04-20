@@ -1,5 +1,6 @@
 package prodsuppqa.my.salesforce.com.Pages;
 
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
@@ -138,15 +139,12 @@ public class RequisitionFlowPage extends BasePage {
 	
 	public void clickInput() throws InterruptedException {
 		WebElement products = driver.findElement(By.xpath("//span[contains(text(),\"Atlin Health Centre\")]"));
-		
 		products.click();
 	}
 	
 	public void clickInput1() throws InterruptedException {
 		WebElement products = driver.findElement(By.xpath("//a[contains(text(),\"Atlin Health Centre\")]"));
-		
-		products.click();
-	}
+		products.click();	}
 	
 	public void clickRequestedDeliveryDate() throws InterruptedException {
 		this.requestedDeliveryDate.click();
