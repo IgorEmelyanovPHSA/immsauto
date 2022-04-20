@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -408,9 +409,14 @@ public class SupplyConsolePage extends BasePage {
 
     public void closeAutomationLocationTab() throws InterruptedException {
         do {
-            WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-            closetab.click();
-            Thread.sleep(2000);
+            try{
+                WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+                closetab.click();
+                Thread.sleep(2000);
+            }catch (NoSuchElementException e){
+                System.out.println("/*---there are no Tab's to close anymore");
+            }
+
         } while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 
     }
@@ -436,7 +442,7 @@ public class SupplyConsolePage extends BasePage {
         WebElement element = driver.findElement(bulk_confirm_incoming_transfers_button_1);
         Thread.sleep(2000);
         //scroll up
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-1000)");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-1500)");
         Thread.sleep(1000);
         //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
         //Thread.sleep(1000);
