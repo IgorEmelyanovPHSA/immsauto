@@ -258,8 +258,8 @@ public class SupplyConsolePage extends BasePage {
         this.requestedDeliveryDate.click();
     }
     
-    public void clickOnCheckbox(int k) throws InterruptedException {
-        By container_checkbox_1_ = By.xpath("(.//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+    public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
+        By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
         waitForElementToBeLocated(driver, container_checkbox_1_, 10);
         //waitForElementToBeLocated(driver, container_checkbox_1_, 10);
         WebElement element = driver.findElement(container_checkbox_1_);
@@ -335,7 +335,7 @@ public class SupplyConsolePage extends BasePage {
     }
 
     public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
-        By outgoing_transactions_id = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
+        By outgoing_transactions_id = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions2']//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
         waitForElementToBeLocated(driver, outgoing_transactions_id, 10);
         Thread.sleep(2000);
         WebElement element = driver.findElement(outgoing_transactions_id);
@@ -347,7 +347,7 @@ public class SupplyConsolePage extends BasePage {
     }
 
     public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
-        By transactions_from_1_ = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
+        By transactions_from_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions2']//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
         waitForElementToBeLocated(driver, transactions_from_1_, 10);
         Thread.sleep(2000);
         WebElement element = driver.findElement(transactions_from_1_);
@@ -389,10 +389,11 @@ public class SupplyConsolePage extends BasePage {
      }
 
     public void closeAutomationLocationTab() throws InterruptedException {
-        //do {
+        do {
             WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
             closetab.click();
-        //} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
+            Thread.sleep(2000);
+        } while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 
     }
 
@@ -400,6 +401,15 @@ public class SupplyConsolePage extends BasePage {
         waitForElementToBeVisible(driver, rows_incoming_transactions_count_path, 10);
         List<WebElement> rows = rows_incoming_transactions_count_path.findElements(By.tagName("tr"));
         return (rows.size());
+    }
+
+    public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
+        By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+        waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
+        //waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
+        WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
+        //this.incoming_transaction_checkbox_1.click();
+        click(incoming_transaction_checkbox_1_);
     }
 
 
