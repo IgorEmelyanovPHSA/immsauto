@@ -18,10 +18,10 @@ public class CitizenDuplicates extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("BCYONE BCydemoadd");
-		System.out.println("/*----Search for BCYONE is Successful ---*/");
+		inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+		System.out.println("/*----Search for Ludovika is Successful ---*/");
 		if (!inClinicExperiencePage.userFound()) {
-			System.out.println("/*----User --> BCYONE not found and return---*/");
+			System.out.println("/*----User --> Ludovika not found and return---*/");
 		}
 		while (inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User found and Navigated to record page ---*/");
@@ -60,8 +60,8 @@ public class CitizenDuplicates extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("BCYONE BCydemoadd");
-			System.out.println("/*----Search for BCYONE is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
 	
