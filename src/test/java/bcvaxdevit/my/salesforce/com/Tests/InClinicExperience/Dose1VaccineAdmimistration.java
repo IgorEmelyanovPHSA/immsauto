@@ -1,10 +1,12 @@
+package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
+
 import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 
-public class DemoTC {
+public class Dose1VaccineAdmimistration {
 	private static final WebDriver driver = new ChromeDriver();
 	
 	@BeforeSuite
@@ -46,9 +48,14 @@ public class DemoTC {
 		driver.close();
 	}
 	
-	@Test(testName = "Demo Test Case")
+	@Test(testName = "Login to InclincExperienceas as Admin")
+	public static void LoginAsAdmin() throws InterruptedException {
+		System.out.println("This is Precondition TC for removing Duplicates as Admin");
+	}
+	
+	@Test(testName = "Removing Duplicates as Clinician")
 	public static void LoginAsClinician() throws InterruptedException {
-		System.out.println("This is the webdrive Demo test");
+		System.out.println("This is Precondition TC for removing Duplicates as Clinitian");
 		//System.out.println("Hello folks!");
 		//System.setProperty("webdriver.chrome.driver","chromedriver");
 		//WebDriver driver = new ChromeDriver();
@@ -63,24 +70,10 @@ public class DemoTC {
 		LoginPage loginPage = new LoginPage(driver);
 		//loginPage.enterFirstName();
 		//loginPage.enterLastName();
-		//loginPage.pressSubmitButton();
+		loginPage.pressSubmitButton();
 		Thread.sleep(5000);
 		loginPage.verifyAlertSuccess();
 		
-	}
-	
-	@Test(testName = "Login to InClinicExperience as Clinician BCVAXDEVIT")
-	public static void LoginAsClinicianToProdSuppQA() throws InterruptedException {
-		System.out.println("Login to InClinicExperience as Clinician BCVAXDEVIT");
-		driver.get(Utils.BASE_URL_BCVAXDEVIT);
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterClinicianUserName();
-		loginPage.enterClinicianPW();
-		Thread.sleep(2000);
-		loginPage.clickLoginButton();
-		//loginPage.loginWith();
-		Thread.sleep(5000);
-		//loginPage.verifyAlertSuccess();
 	}
 	
 	
