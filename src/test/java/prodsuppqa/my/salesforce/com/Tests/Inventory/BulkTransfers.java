@@ -142,16 +142,15 @@ public class BulkTransfers extends BaseTest {
         System.out.println("/*21.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
         supplyConsolePagePage.selectIncomingSupplyDistribution();
         Thread.sleep(2000);
-        System.out.println("/*20----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
+        System.out.println("/*22.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePagePage.clickOnConfirmModalIncomingTransactionButton();
         Thread.sleep(1000);
-        System.out.println("/*--Successful message has been shown up --*/");
-        Thread.sleep(7000);
-
-        System.out.println("/*1?----Close Automation_Supply_Location_2 Tab --*/");
+        System.out.println("/*23.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
+        supplyConsolePagePage.successMessageAppear();
+        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        System.out.println("/*24----Close Automation_Supply_Location_2 Tab --*/");
         supplyConsolePagePage.closeAutomationLocationTab();
-
-        Thread.sleep(10000);
+        Thread.sleep(5000);
 
 
         

@@ -473,6 +473,16 @@ public class SupplyConsolePage extends BasePage {
         //this.bulk_confirm_incoming_transfers_button.click();
         click(confirm_incoming_transfers_modal_button_1);
     }
+    public void successMessageAppear() throws InterruptedException {
+        try{
+            WebElement successMessage = driver.findElement(By.xpath(".//div[text() = 'Success!']"));
+            Thread.sleep(2000);
+            System.out.println("/* ----the toast success message has been Appears");
+        }catch (NoSuchElementException e){
+            System.out.println("/*---there are no success confirmation Message for Bulk Transfers to be Appears");
+            throw new RuntimeException("/*---there are no success confirmation Message to be Appears--*/");
+        }
+    }
 
 
 
