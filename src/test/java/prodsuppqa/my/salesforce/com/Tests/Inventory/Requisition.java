@@ -6,17 +6,17 @@ import prodsuppqa.my.salesforce.com.Pages.RequisitionPage;
 import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 
 public class Requisition extends BaseTest {
-
+	
 	@Test
 	public void Create_Requisition_as_PPHIS_PRODSUPPQA() throws InterruptedException {
-
+		
 		System.out.println("/*----1. Login as an PPHIS_prodsuppqa to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
-//        System.out.println("/*----000. Close Other Tabs --*/");
-//        requisitionFlowPage.closeTab();
-		Thread.sleep(4000);
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		requisitionPage.displaySupplyConsolePage();
+		Thread.sleep(4000);
+		System.out.println("/*----000. Close Other Tabs --*/");
+		requisitionPage.closeTabs();
 		Thread.sleep(4000);
 		requisitionPage.clickDropdownMenu();
 		Thread.sleep(6000);
@@ -76,19 +76,17 @@ public class Requisition extends BaseTest {
 		requisitionPage.enterApprovedDose("1");
 		Thread.sleep(5000);
 		System.out.println("/*----22. Save Approved Request Dose--*/");
-		//requisitionPage.clickSaveApprovedRequisition();
+		requisitionPage.clickSaveApprovedRequisition();
 		Thread.sleep(3000);
 		System.out.println("/*----23. Ship Requisition--*/");
-		//requisitionPage.clickShipRequisition();
+		requisitionPage.clickShipRequisition();
 		System.out.println("/*----24. Save Shipping Requisition--*/");
-		//requisitionPage.clickSaveShipRequisition();
+		requisitionPage.clickSaveShipRequisition();
 		Thread.sleep(3000);
 		System.out.println("/*----25. Receive Requisition--*/");
 		//requisitionPage.clickReceiveRequisition.click();
-
-
-
-
+		
+		
 	}
-
+	
 }
