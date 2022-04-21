@@ -475,6 +475,7 @@ public class SupplyConsolePage extends BasePage {
     }
     public void successMessageAppear() throws InterruptedException {
         try{
+            waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success!']"), 10);
             WebElement successMessage = driver.findElement(By.xpath(".//div[text() = 'Success!']"));
             Thread.sleep(2000);
             System.out.println("/* ----the toast success message has been Appears");
