@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 	
+/*	private final String Precondition_BCVAXDEVIT = "automation_precondition@deloitte.ca.bcvaxdevit";
+	private final String Precondition_PW_BCVAXDEVIT = "Technology1990!!!!!";*/
 	private final String CLINICIAN_BCVAXDEVIT = "auto_clinician@deloitte.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_BCVAXDEVIT = "Technology1990!!!!!";
 	private final String PPHIS_BCVAXDEVIT = "autooperationpphis@deloitte.ca.bcvaxdevit";
