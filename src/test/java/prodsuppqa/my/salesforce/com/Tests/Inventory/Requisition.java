@@ -2,86 +2,93 @@ package prodsuppqa.my.salesforce.com.Tests.Inventory;
 
 
 import org.testng.annotations.Test;
-import prodsuppqa.my.salesforce.com.Pages.RequisitionFlowPage;
+import prodsuppqa.my.salesforce.com.Pages.RequisitionPage;
 import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 
 public class Requisition extends BaseTest {
-	
+
 	@Test
 	public void Create_Requisition_as_PPHIS_PRODSUPPQA() throws InterruptedException {
-		
-		RequisitionFlowPage requisitionFlowPage = loginPage.loginAsPPHIS1();
+
 		System.out.println("/*----1. Login as an PPHIS_prodsuppqa to Supply Console --*/");
+		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
+//        System.out.println("/*----000. Close Other Tabs --*/");
+//        requisitionFlowPage.closeTab();
+		Thread.sleep(4000);
+		System.out.println("/*----2. Locate Dropdown Menu --*/");
+		requisitionPage.displaySupplyConsolePage();
+		Thread.sleep(4000);
+		requisitionPage.clickDropdownMenu();
+		Thread.sleep(6000);
+		System.out.println("/*----3. Navigate to Supply Locations --*/");
+		requisitionPage.clickSupplyLocationInDropdown();
+		Thread.sleep(6000);
+		System.out.println("/*----4. Locate on Automation Supply Location_1 --*/");
+		requisitionPage.clickSupplyLocationName();
+		Thread.sleep(4000);
+		System.out.println("/*----5. Navigate to Request Supplies --*/");
+		requisitionPage.clickRequestSupplies();
 		Thread.sleep(3000);
-		//requisitionFlowPage.closeTab();
-		System.out.println("/*----2. Close open Tabs --*/");
+		System.out.println("/*----6. Choose Ship To Address --*/");
+		requisitionPage.inputShipAddress();
+		System.out.println("/*----7. Locate on Automation Supply Location_1 --*/");
+		requisitionPage.LocateAddress("Atlin Health Centre");
+		System.out.println("/*----8. Choose Requested Delivery Date --*/");
 		Thread.sleep(3000);
-		requisitionFlowPage.clickDropdownMenu();
-		System.out.println("/*----3. Locate and click on Dropdown Menu --*/");
+		requisitionPage.inputRequestDate();
+		System.out.println("/*----9. Choose Urgency --*/");
+		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
-		requisitionFlowPage.clickSupplyLocationInDropdown();
-		System.out.println("/*----4. Navigate to Supply Locations --*/");
+		System.out.println("/*----10. Add Requisition Line Items --*/");
+		requisitionPage.clickLineItemCheckBox();
 		Thread.sleep(3000);
-		requisitionFlowPage.clickSupplyLocationName();
-		System.out.println("/*----5. Locate on Automation Supply Location_1 --*/");
+		System.out.println("/*----11. Select requested Trades --*/");
+		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
-		requisitionFlowPage.clickRequestSupplies();
-		System.out.println("/*----6. Navigate to Request Supplies --*/");
+		System.out.println("/*----12. Input Requested Quantity and Doses --*/");
+		requisitionPage.inputRequestedDose("1");
 		Thread.sleep(3000);
-		//requisitionFlowPage.clickShipToAddress();
+		System.out.println("/*----13. Save Quantity and Doses --*/");
+		requisitionPage.clickSaveButton();
 		Thread.sleep(3000);
-		System.out.println("/*----6. Locate on Automation Supply Location_2 --*/");
-		requisitionFlowPage.inputShipAddress("Atlin Health Centre");
-		//  supplyConsolePagePage.clickOnSupplyLocations();
-		System.out.println("/*----7. Choose Requested Delivery Date --*/");
-		Thread.sleep(3000);
-		requisitionFlowPage.clickInput();
-		Thread.sleep(3000);
-		requisitionFlowPage.clickInput1();
-		Thread.sleep(3000);
-		requisitionFlowPage.inputRequestDate();
-		Thread.sleep(3000);
-		System.out.println("/*----8. Choose Urgency --*/");
-		requisitionFlowPage.clickNextButton();
-		Thread.sleep(3000);
-		System.out.println("/*----9. Add Requisition Line Items --*/");
-		requisitionFlowPage.clickLineItemCheckBox();
-		Thread.sleep(3000);
-		System.out.println("/*----10. Select requested Trades --*/");
-		requisitionFlowPage.clickNextButton();
-		Thread.sleep(3000);
-		System.out.println("/*----11. Input Requested Quantity and Doses --*/");
-		requisitionFlowPage.inputRequestedDose("1");
-		Thread.sleep(3000);
-		System.out.println("/*----12. Save Quantity and Doses --*/");
-		requisitionFlowPage.clickSaveButton();
-		Thread.sleep(3000);
-		System.out.println("/*----13. Submit Requisition --*/");
-		requisitionFlowPage.clickSubmitRequisition();
+		System.out.println("/*----14. Submit Requisition --*/");
+		requisitionPage.clickSubmitRequisition();
 		Thread.sleep(5000);
-		System.out.println("/*----14. Confirm and Save Requisition --*/");
-		requisitionFlowPage.clickSaveSubmitRequisition();
+		System.out.println("/*----15. Confirm and Save Requisition --*/");
+		requisitionPage.clickSaveSubmitRequisition();
 		Thread.sleep(5000);
-		System.out.println("/*----15. Click Edit Expected Delivery Date--*/");
-		requisitionFlowPage.clickEditExpectedDeliveryDate();
+		System.out.println("/*----16. Click Edit Expected Delivery Date--*/");
+		requisitionPage.clickEditExpectedDeliveryDate();
 		Thread.sleep(3000);
-		System.out.println("/*----16. Click Calender of Expected Delivery Date--*/");
-		requisitionFlowPage.clickExpectedDeliveryDateCalendar();
+		System.out.println("/*----17. Click Calender of Expected Delivery Date--*/");
+		requisitionPage.clickExpectedDeliveryDateCalendar();
 		Thread.sleep(3000);
-		System.out.println("/*----17. Choose The Expected Delivery Date--*/");
-		requisitionFlowPage.inputExpectedDate();
+		System.out.println("/*----18. Choose The Expected Delivery Date--*/");
+		requisitionPage.inputExpectedDate();
 		Thread.sleep(3000);
-		System.out.println("/*----18. Save Chosen Expected Delivery Date--*/");
-		requisitionFlowPage.clickSaveExpectedDeliveryDate();
+		System.out.println("/*----19. Save Chosen Expected Delivery Date--*/");
+		requisitionPage.clickSaveExpectedDeliveryDate();
 		Thread.sleep(3000);
-		System.out.println("/*----19. Approve Requisition--*/");
-		requisitionFlowPage.clickApproveRequisition();
+		System.out.println("/*----20. Approve Requisition--*/");
+		requisitionPage.clickApproveRequisition();
+		Thread.sleep(3000);
+		System.out.println("/*----21. Select Supply Container With Entering Approved Request Dose--*/");
+		requisitionPage.enterApprovedDose("1");
 		Thread.sleep(5000);
-		System.out.println("/*----20. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionFlowPage.enterApprovedDose("1");
-		Thread.sleep(9000);
-		//requisitionFlowPage.closeTabs();
-		
+		System.out.println("/*----22. Save Approved Request Dose--*/");
+		//requisitionPage.clickSaveApprovedRequisition();
+		Thread.sleep(3000);
+		System.out.println("/*----23. Ship Requisition--*/");
+		//requisitionPage.clickShipRequisition();
+		System.out.println("/*----24. Save Shipping Requisition--*/");
+		//requisitionPage.clickSaveShipRequisition();
+		Thread.sleep(3000);
+		System.out.println("/*----25. Receive Requisition--*/");
+		//requisitionPage.clickReceiveRequisition.click();
+
+
+
+
 	}
-	
+
 }
