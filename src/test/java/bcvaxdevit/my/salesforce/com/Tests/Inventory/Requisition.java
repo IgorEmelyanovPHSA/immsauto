@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import bcvaxdevit.my.salesforce.com.Pages.RequisitionFlowPage;
 
@@ -9,6 +10,7 @@ public class Requisition extends BaseTest {
 	
 	@Test
 	public void Can_Create_Requisition_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+		TestcaseID = "193935";
 		RequisitionFlowPage requisitionFlowPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----1. Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 		Thread.sleep(3000);
@@ -80,6 +82,7 @@ public class Requisition extends BaseTest {
 		requisitionFlowPage.enterApprovedDose("1");
 		Thread.sleep(9000);
 		//requisitionFlowPage.closeTabs();
+
 		
 	}
 	
