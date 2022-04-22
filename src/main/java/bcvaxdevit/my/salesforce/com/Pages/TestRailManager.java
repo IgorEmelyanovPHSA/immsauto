@@ -25,8 +25,8 @@ public class TestRailManager {
         client.setPassword(TESTRAIL_PASSWORD);
         Map data = new HashMap();
         data.put("status_id", status);
-        //data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation");
-        data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation"
+        //data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation.");
+        data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation."
                 + "\r\n"+ logOutputTestSteps);
         client.sendPost("add_result_for_case/"+testRunId+"/"+testCaseId+"",data);
 

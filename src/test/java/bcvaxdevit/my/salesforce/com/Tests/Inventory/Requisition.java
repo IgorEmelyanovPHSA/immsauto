@@ -82,6 +82,7 @@ public class Requisition extends BaseTest {
 		requisitionFlowPage.enterApprovedDose("1");
 		Thread.sleep(9000);
 		//requisitionFlowPage.closeTabs();
+		Assert.assertTrue(false);
 
 		
 	}
