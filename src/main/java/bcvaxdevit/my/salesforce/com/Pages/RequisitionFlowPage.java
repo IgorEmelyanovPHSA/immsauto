@@ -144,7 +144,8 @@ public class RequisitionFlowPage extends BasePage {
 	
 	public void clickInput1() throws InterruptedException {
 		WebElement products = driver.findElement(By.xpath("//a[contains(text(),\"Atlin Health Centre\")]"));
-		products.click();	}
+		products.click();
+	}
 	
 	public void clickRequestedDeliveryDate() throws InterruptedException {
 		this.requestedDeliveryDate.click();
