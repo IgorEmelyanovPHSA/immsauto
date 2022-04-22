@@ -17,7 +17,7 @@ public class TestRailManager {
 
 
     public static void addResultsForTestCase(String testCaseId, int status,
-                                             String error, String bios) throws IOException, APIException {
+                                             String error, String logOutputTestSteps) throws IOException, APIException {
         String testRunId = TEST_RUN_ID;
 
         APIClient client = new APIClient(RAILS_ENGINE_URL);
@@ -26,7 +26,8 @@ public class TestRailManager {
         Map data = new HashMap();
         data.put("status_id", status);
         //data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation");
-        data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation" +"     /"+ bios);
+        data.put("comment",  "Test Executed - Status updated automatically from Selenium Java test automation"
+                + "\r\n"+ logOutputTestSteps);
         client.sendPost("add_result_for_case/"+testRunId+"/"+testCaseId+"",data);
 
     }

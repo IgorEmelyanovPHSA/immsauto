@@ -20,20 +20,21 @@ public class BaseTest {
     private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
     protected LoginPage loginPage;
     PrintStream old;
-    ByteArrayOutputStream log;
+    ByteArrayOutputStream logOutputSteps;
 
 
     @BeforeSuite
     public void beforeSuite()
     {
-        System.out.println("This will execute before the Suite");
+        //---This will execute before the Suite
         // Create a stream to hold the log output
-        log = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(log);
+        logOutputSteps = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(logOutputSteps);
         // IMPORTANT: Save the old System.out!
         old = System.out;
         // Tell Java to use your special stream
         System.setOut(ps);
+        System.out.println("This will execute before the Suite");
         // ChromeDriver location set up in Utils class
         //System.setProperty("webdriver.chrome.whitelistedIps", "");
         driver = new ChromeDriver();
@@ -70,10 +71,10 @@ public class BaseTest {
         System.out.flush();
         System.setOut(old);
         if(result.getStatus()==ITestResult.SUCCESS){
-            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", log.toString());
+            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
         }
         else if(result.getStatus()==ITestResult.FAILURE){
-            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(),log.toString());
+            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(),logOutputSteps.toString());
         }
 
     }
