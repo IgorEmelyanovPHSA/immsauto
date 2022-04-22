@@ -3,17 +3,17 @@
 <suite thread-count="1" name="Failed suite [Surefire suite]" verbose="0">
   <test thread-count="1" name="Surefire test(failed)" verbose="0">
     <classes>
-      <class name="prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest">
+      <class name="bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest">
         <methods>
-          <include name="Can_login_as_Clinician_to_PRODSUPPQA"/>
+          <include name="tearDown"/>
           <include name="beforeMethod"/>
+          <include name="Can_login_as_Clinician_to_PRODSUPPQA"/>
           <include name="cleanUp"/>
           <include name="setUp"/>
           <include name="afterMethod"/>
           <include name="beforeSuite"/>
-          <include name="tearDown"/>
         </methods>
-      </class> <!-- prodsuppqa.my.salesforce.com.Tests.Login.ClinicianLoginTest -->
+      </class> <!-- bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest -->
     </classes>
   </test> <!-- Surefire test(failed) -->
 </suite> <!-- Failed suite [Surefire suite] -->

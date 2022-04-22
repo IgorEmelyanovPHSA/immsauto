@@ -1,13 +1,17 @@
 package bcvaxdevit.my.salesforce.com.Tests;
 
 import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
+import bcvaxdevit.my.salesforce.com.Pages.TestRailManager;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITest;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
+    protected  String TestcaseID;
     private WebDriver driver;
     //private static final WebDriver driver = new ChromeDriver();
     private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
@@ -47,9 +51,16 @@ public class BaseTest {
 
 
     @AfterMethod
-    public void afterMethod()
+    public void afterMethod(ITestResult result) throws Throwable
     {
         System.out.println("This will execute after the Method");
+        if(result.getStatus()==ITestResult.SUCCESS){
+            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS,"");
+        }
+        else if(result.getStatus()==ITestResult.FAILURE){
+            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString());
+        }
+
     }
 
 
