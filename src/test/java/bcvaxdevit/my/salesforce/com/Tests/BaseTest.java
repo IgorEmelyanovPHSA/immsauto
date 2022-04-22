@@ -8,6 +8,9 @@ import org.testng.ITest;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 //import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
@@ -16,11 +19,21 @@ public class BaseTest {
     //private static final WebDriver driver = new ChromeDriver();
     private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
     protected LoginPage loginPage;
+    PrintStream old;
+    ByteArrayOutputStream log;
+
 
     @BeforeSuite
     public void beforeSuite()
     {
         System.out.println("This will execute before the Suite");
+        // Create a stream to hold the log output
+        log = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(log);
+        // IMPORTANT: Save the old System.out!
+        old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
         // ChromeDriver location set up in Utils class
         //System.setProperty("webdriver.chrome.whitelistedIps", "");
         driver = new ChromeDriver();
@@ -54,11 +67,13 @@ public class BaseTest {
     public void afterMethod(ITestResult result) throws Throwable
     {
         System.out.println("This will execute after the Method");
+        System.out.flush();
+        System.setOut(old);
         if(result.getStatus()==ITestResult.SUCCESS){
-            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS,"");
+            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", log.toString());
         }
         else if(result.getStatus()==ITestResult.FAILURE){
-            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString());
+            TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(),log.toString());
         }
 
     }
