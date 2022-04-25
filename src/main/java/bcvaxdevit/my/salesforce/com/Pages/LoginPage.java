@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 	
-	/*	private final String Precondition_BCVAXDEVIT = "automation_precondition@deloitte.ca.bcvaxdevit";
-		private final String Precondition_PW_BCVAXDEVIT = "Technology1990!!!!!";*/
+	private final String Precondition_BCVAXDEVIT = "sunil.anne@phsa.ca.bcvaxdevit";
+	private final String Precondition_PW_BCVAXDEVIT = "Sqlserver@3";
 	private final String CLINICIAN_BCVAXDEVIT = "auto_clinician@deloitte.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_BCVAXDEVIT = "Technology1990!!!!!";
 	private final String PPHIS_BCVAXDEVIT = "autooperationpphis@deloitte.ca.bcvaxdevit";
@@ -22,7 +22,8 @@ public class LoginPage extends BasePage {
 	private WebElement pphis_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement clinician_cib_bcvaxdevit;
-
+	@FindBy(id = "username")
+	private WebElement Precondition_bcvaxdevit;
 	
 	@FindBy(id = "password")
 	private WebElement clinician_pw_bcvaxdevit;
@@ -30,6 +31,8 @@ public class LoginPage extends BasePage {
 	private WebElement pphis_pw_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement clinician_pw_cib_bcvaxdevit;
+	@FindBy(id = "password")
+	private WebElement Precondition_pw_bcvaxdevit;
 	
 	@FindBy(id = "Login")
 	private WebElement login_button;
@@ -53,22 +56,30 @@ public class LoginPage extends BasePage {
 		this.clinician_bcvaxdevit.sendKeys(CLINICIAN_BCVAXDEVIT);
 	}
 	
+	public void Precondition_BCVAXDEVIT() {
+		this.Precondition_bcvaxdevit.sendKeys(Precondition_BCVAXDEVIT);
+	}
+	
 	public void enterPPHISUserName() {
 		this.pphis_bcvaxdevit.sendKeys(PPHIS_BCVAXDEVIT);
 	}
-
+	
 	public void enterClinicianCIBUserName() {
 		this.clinician_cib_bcvaxdevit.sendKeys(CLINICIAN_CIB_BCVAXDEVIT);
 	}
-
+	
 	public void enterClinicianPW() {
 		this.clinician_pw_bcvaxdevit.sendKeys(CLINICIAN_PW_BCVAXDEVIT);
 	}
-
+	
 	public void enterPPHIS_PW() {
 		this.pphis_pw_bcvaxdevit.sendKeys(PPHIS_PW_BCVAXDEVIT);
 	}
-
+	
+	public void enterPrecond_PW() {
+		this.Precondition_pw_bcvaxdevit.sendKeys(Precondition_PW_BCVAXDEVIT);
+	}
+	
 	public void enterClinicianCIBPW() {
 		this.clinician_pw_cib_bcvaxdevit.sendKeys(CLINICIAN_PW_CIB_BCVAXDEVIT);
 	}
@@ -103,6 +114,15 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
+	public InClinicExperiencePage loginasPrecocondition() {
+		this.Precondition_BCVAXDEVIT();
+		//setUsername(username);
+		this.enterPrecond_PW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new InClinicExperiencePage(driver);
+	}
+	
 	public SupplyConsolePage loginAsPPHIS() {
 		this.enterPPHISUserName();
 		//setUsername(username);
@@ -125,7 +145,7 @@ public class LoginPage extends BasePage {
 	public void verifyAlertSuccess() {
 		this.alertSuccess.isDisplayed();
 	}
-
+	
 	public ClinicInBoxPage loginAsClinicianCIB() {
 		this.enterClinicianCIBUserName();
 		//setUsername(username);
