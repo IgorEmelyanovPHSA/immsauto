@@ -83,7 +83,7 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Approve Requisition')]")
 	private WebElement approveRequisition;
 	
-	@FindBy(xpath = "//div[@class=\"slds-form-element__control slds-grow\"]//input")
+	@FindBy(xpath = "//tbody//tr//td[7]//div//input")
 	private WebElement ApprovedDose;
 	
 	@FindBy(xpath = "//button[contains(text(),\"Save\")]")
@@ -98,7 +98,29 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//input[@class ='default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup']")
 	private WebElement distributionName;
 	private By distributionName2 = By.xpath("//input[@class ='default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup']");
-	
+
+
+	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
+	private WebElement SearchSupplyDistributions;
+	//private By SearchSupplyDistributions1 = By.xpath("//input[@placeholder=\"Search Supply Distributions...\"]");
+	public void clickSearchSupplyDistributions(){
+		this.SearchSupplyDistributions.click();
+	}
+
+	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
+	private WebElement searchbyName;
+	private By searchbyName2 = By.xpath("//span[contains(text(),'SDST-0000000398')]");
+
+	public void SelectSupplyDistributionTo2(String jasonInout) throws InterruptedException {
+		//waitForElementToBeLocated(driver,distributionName,10);
+		waitForElementToBeVisible(driver, searchbyName, 10);
+		WebElement search_input = driver.findElement(searchbyName2);
+		this.searchbyName.sendKeys(jasonInout);
+		search_input.click();
+	}
+
+
+
 	public RequisitionPage(WebDriver driver) {
 		super(driver);
 	}
@@ -107,7 +129,22 @@ public class RequisitionPage extends BasePage {
 		waitForElementToBeVisible(driver, supply_console_page_displayed, 10);
 		this.supply_console_page_displayed.isDisplayed();
 	}
-	
+
+
+	@FindBy(xpath = "//h2[contains(text(),'Ship Requisition')]")
+	private WebElement verified ;
+	public String ShipRequisition(){
+		return verified.getText();
+	}
+
+	@FindBy(xpath = "//button[contains(text(),'Receive Requisition')]")
+	private WebElement receiveRequestBtn;
+
+	public void clickReceiveRequestBtn() {
+		this.receiveRequestBtn.click();
+
+		//this.shipAddress.sendKeys(inputAddress);
+	}
 	
 	public void clickDropdownMenu() {
 		this.dropdownMenu.click();
@@ -243,10 +280,16 @@ public class RequisitionPage extends BasePage {
 //        driver.findElement(By.xpath("//*[@data-key='close'][@class='slds-button__icon']")).click();
 //    }
 	
-	public void enterApprovedDose(String inputDose) {
+	public void enterApprovedDose(String inputDose) throws InterruptedException {
+
+		//WebElement jusbox= driver.findElement(By.xpath("//input[@name='a3Y4m0000005v13EAA/a2j4m000000B6i8AAC']"));
+		//
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", ApprovedDose);
+
 		this.ApprovedDose.sendKeys(inputDose);
 	}
-	
+
+
 	public void clickSaveApprovedRequisition() {
 		this.saveApprovedRequisition.click();
 	}
