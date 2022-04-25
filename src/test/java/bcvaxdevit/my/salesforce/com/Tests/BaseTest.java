@@ -11,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-//import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
     protected  String TestcaseID;
@@ -31,9 +30,9 @@ public class BaseTest {
         logOutputSteps = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(logOutputSteps);
         // IMPORTANT: Save the old System.out!
-        old = System.out;
+        //old = System.out;
         // Tell Java to use your special stream
-        System.setOut(ps);
+        //System.setOut(ps);
         System.out.println("This will execute before the Suite");
         // ChromeDriver location set up in Utils class
         //System.setProperty("webdriver.chrome.whitelistedIps", "");

@@ -13,13 +13,13 @@ public class BookingDose1 extends BaseTest {
         System.out.println("/*1.----Login as an Clinician to CIB --*/");
         ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
         Thread.sleep(2000);
-        System.out.println("/*3.----Clinic In Box(IPM) page displayed --*/");
+        System.out.println("/*2.----Clinic In Box(IPM) page displayed --*/");
         clinicInBox.verifyIsClinicInBoxPageDisplayed();
         Thread.sleep(5000);
-        System.out.println("/*4.----Close All previously opened Tab's --*/");
+        System.out.println("/*3.----Close All previously opened Tab's --*/");
         clinicInBox.closeAllTabs();
         Thread.sleep(5000);
-        System.out.println("/*5.----click Register New Citizen -Ludovika --*/");
+        System.out.println("/*4.----click Register New Citizen -Ludovika --*/");
         clinicInBox.clickRegisterButton();
         Thread.sleep(2000);
 

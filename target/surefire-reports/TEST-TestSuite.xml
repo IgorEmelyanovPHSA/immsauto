@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="5.674" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="5.634" tests="4" errors="0" skipped="2" failures="2">
   <properties>
     <property name="idea.version" value="2021.3.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -59,28 +59,33 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="Can_login_as_Clinician_to_PRODSUPPQA" classname="bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest" time="0.011">
+  <testcase name="Can_login_as_Clinician_to_PRODSUPPQA" classname="bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest" time="0.02">
     <failure message="Cannot invoke &quot;bcvaxdevit.my.salesforce.com.Pages.LoginPage.enterClinicianUserName()&quot; because &quot;this.loginPage&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "bcvaxdevit.my.salesforce.com.Pages.LoginPage.enterClinicianUserName()" because "this.loginPage" is null
-	at bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest.Can_login_as_Clinician_to_PRODSUPPQA(ClinicianLoginTest.java:12)
+	at bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest.Can_login_as_Clinician_to_PRODSUPPQA(ClinicianLoginTest.java:13)
 </failure>
-    <system-out><![CDATA[This will execute before the Suite
-This will execute before the Class
-This will execute before the Method
-/*----Login as an Clinician In-Clinic Experience --*/
-]]></system-out>
     <system-err><![CDATA[log4j:WARN No appenders could be found for logger (org.testng.internal.Graph).
 log4j:WARN Please initialize the log4j system properly.
 log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
-Starting ChromeDriver 100.0.4896.60 (6a5d10861ce8de5fce22564658033b43cb7de047-refs/branch-heads/4896@{#875}) on port 65165
+Starting ChromeDriver 100.0.4896.60 (6a5d10861ce8de5fce22564658033b43cb7de047-refs/branch-heads/4896@{#875}) on port 52522
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully.
-Apr. 21, 2022 1:40:49 P.M. org.openqa.selenium.remote.ProtocolHandshake createSession
+Apr. 25, 2022 3:32:45 P.M. org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: W3C
-Apr. 21, 2022 1:40:49 P.M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr. 25, 2022 3:32:45 P.M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find an exact match for CDP version 100, so returning the closest version found: 99
-Apr. 21, 2022 1:40:49 P.M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr. 25, 2022 3:32:45 P.M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 INFO: Found CDP implementation for version 100 of 99
 ]]></system-err>
+  </testcase>
+  <testcase name="afterMethod" classname="bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest" time="0.022">
+    <failure message="Cannot invoke &quot;java.io.ByteArrayOutputStream.toString()&quot; because &quot;this.logOutputSteps&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "java.io.ByteArrayOutputStream.toString()" because "this.logOutputSteps" is null
+</failure>
+  </testcase>
+  <testcase name="tearDown" classname="bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="cleanUp" classname="bcvaxdevit.my.salesforce.com.Tests.BaseTest" time="0">
+    <skipped/>
   </testcase>
 </testsuite>
