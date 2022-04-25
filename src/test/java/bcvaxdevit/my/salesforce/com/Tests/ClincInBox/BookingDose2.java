@@ -1,4 +1,4 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClincInBox;
 
-public class VaccineAdministrationDose1 {
+public class BookingDose2 {
 }

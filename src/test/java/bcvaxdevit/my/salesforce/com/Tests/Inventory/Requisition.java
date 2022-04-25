@@ -10,7 +10,7 @@ public class Requisition extends BaseTest {
 	
 	@Test
 	public void Can_Create_Requisition_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "193935";
+		TestcaseID = "193935"; //C193935
 		RequisitionFlowPage requisitionFlowPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----1. Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 		Thread.sleep(3000);
