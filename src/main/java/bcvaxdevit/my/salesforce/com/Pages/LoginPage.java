@@ -13,16 +13,23 @@ public class LoginPage extends BasePage {
 	private final String CLINICIAN_PW_BCVAXDEVIT = "Technology1990!!!!!";
 	private final String PPHIS_BCVAXDEVIT = "autooperationpphis@deloitte.ca.bcvaxdevit";
 	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!";
+	private final String CLINICIAN_CIB_BCVAXDEVIT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
+	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!";
 	
 	@FindBy(id = "username")
 	private WebElement clinician_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement pphis_bcvaxdevit;
+	@FindBy(id = "username")
+	private WebElement clinician_cib_bcvaxdevit;
+
 	
 	@FindBy(id = "password")
 	private WebElement clinician_pw_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement pphis_pw_bcvaxdevit;
+	@FindBy(id = "password")
+	private WebElement clinician_pw_cib_bcvaxdevit;
 	
 	@FindBy(id = "Login")
 	private WebElement login_button;
@@ -49,13 +56,21 @@ public class LoginPage extends BasePage {
 	public void enterPPHISUserName() {
 		this.pphis_bcvaxdevit.sendKeys(PPHIS_BCVAXDEVIT);
 	}
-	
+
+	public void enterClinicianCIBUserName() {
+		this.clinician_cib_bcvaxdevit.sendKeys(CLINICIAN_CIB_BCVAXDEVIT);
+	}
+
 	public void enterClinicianPW() {
 		this.clinician_pw_bcvaxdevit.sendKeys(CLINICIAN_PW_BCVAXDEVIT);
 	}
-	
+
 	public void enterPPHIS_PW() {
 		this.pphis_pw_bcvaxdevit.sendKeys(PPHIS_PW_BCVAXDEVIT);
+	}
+
+	public void enterClinicianCIBPW() {
+		this.clinician_pw_cib_bcvaxdevit.sendKeys(CLINICIAN_PW_CIB_BCVAXDEVIT);
 	}
 	
 	public void pressSubmitButton() {
@@ -109,6 +124,15 @@ public class LoginPage extends BasePage {
 	
 	public void verifyAlertSuccess() {
 		this.alertSuccess.isDisplayed();
+	}
+
+	public ClinicInBoxPage loginAsClinicianCIB() {
+		this.enterClinicianCIBUserName();
+		//setUsername(username);
+		this.enterClinicianCIBPW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new ClinicInBoxPage(driver);
 	}
 	
 	
