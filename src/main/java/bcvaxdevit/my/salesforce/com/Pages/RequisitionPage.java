@@ -108,14 +108,14 @@ public class RequisitionPage extends BasePage {
 	}
 
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
-	private WebElement searchbyName;
-	private By searchbyName2 = By.xpath("//span[contains(text(),'SDST-0000000398')]");
+	private WebElement searchByName;
+	private By searchByName2 = By.xpath("//span[contains(text(),'SDST-0000001499')]");
 
-	public void SelectSupplyDistributionTo2(String jasonInout) throws InterruptedException {
+	public void SelectSupplyDistributionTo2(String DistributionName) throws InterruptedException {
 		//waitForElementToBeLocated(driver,distributionName,10);
-		waitForElementToBeVisible(driver, searchbyName, 10);
-		WebElement search_input = driver.findElement(searchbyName2);
-		this.searchbyName.sendKeys(jasonInout);
+		waitForElementToBeVisible(driver, searchByName, 10);
+		WebElement search_input = driver.findElement(searchByName2);
+		this.searchByName.sendKeys(DistributionName);
 		search_input.click();
 	}
 
@@ -299,6 +299,8 @@ public class RequisitionPage extends BasePage {
 	}
 
 	public void clickSaveShipRequisition() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,-400)", "");
 		this.saveShipRequisition.click();
 	}
 
