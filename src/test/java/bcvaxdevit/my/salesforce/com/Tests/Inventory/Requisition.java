@@ -9,7 +9,7 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Requisition extends BaseTest {
-
+	
 	@Test
 	public void Create_Requisition_as_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "193935"; //C193935
@@ -84,10 +84,10 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
 		Thread.sleep(7000);
-
-		String actual ="Ship Requisition";
-		Assert.assertEquals(requisitionPage.ShipRequisition(),actual);
-
+		
+		String actual = "Ship Requisition";
+		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
+		
 		System.out.println("/*----25. Save Shipping Requisition--*/");
 		requisitionPage.clickSaveShipRequisition();
 		Thread.sleep(3000);
@@ -97,8 +97,8 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----27. Receive Requisition--*/");
 		requisitionPage.clickSearchSupplyDistributions();
 		Thread.sleep(3000);
-		//requisitionPage.SelectSupplyDistributionTo2("SDST-0000000398");
-
+		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001499");
+		Thread.sleep(3000);
 	}
-
+	
 }
