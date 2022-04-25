@@ -11,7 +11,7 @@ public class CitizenDuplicates extends BaseTest {
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWith();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
 		/*----Go to Register Tab ---*/
 		System.out.println("/*----Go to Register Tab ---*/");
 		inClinicExperiencePage.clickRegisterTab();
