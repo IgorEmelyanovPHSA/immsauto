@@ -8,6 +8,7 @@ public class CitizenDuplicates extends BaseTest {
 	
 	@Test(testName = "Login to InClinicExperience as Clinician and search for Dupls BCVAXDEVIT")
 	public void Can_search_and_remove_Citizen_participant_account() throws InterruptedException {
+		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
