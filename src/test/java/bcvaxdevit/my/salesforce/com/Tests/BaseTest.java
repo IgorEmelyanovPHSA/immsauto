@@ -29,9 +29,9 @@ public class BaseTest {
         // Create a stream to hold the log output
         logOutputSteps = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(logOutputSteps);
-        // IMPORTANT: Save the old System.out!
+        // Save the old System.out!
         old = System.out;
-        // Tell Java to use your special stream
+        // Redirect log special stream to logOutput for TestRail
         System.setOut(ps);
         System.out.println("This will execute before the Suite");
         // ChromeDriver location set up in Utils class
