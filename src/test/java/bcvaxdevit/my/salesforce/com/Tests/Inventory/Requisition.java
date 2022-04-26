@@ -9,11 +9,15 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Requisition extends BaseTest {
-
+	
 	@Test
+
 	public void Create_Requisition_as_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "193935"; //C193935
-		System.out.println("/*----1. Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+
+
+
+		System.out.println("/*----1. Login as an PPHIS_prodsuppqa to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		requisitionPage.displaySupplyConsolePage();
@@ -83,10 +87,11 @@ public class Requisition extends BaseTest {
 		Thread.sleep(4000);
 		System.out.println("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
-		Thread.sleep(7000);
 
-		String actual ="Ship Requisition";
-		Assert.assertEquals(requisitionPage.ShipRequisition(),actual);
+		Thread.sleep(7000);
+		
+		String actual = "Ship Requisition";
+		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
 
 		System.out.println("/*----25. Save Shipping Requisition--*/");
 		requisitionPage.clickSaveShipRequisition();
@@ -97,8 +102,11 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----27. Receive Requisition--*/");
 		requisitionPage.clickSearchSupplyDistributions();
 		Thread.sleep(3000);
-		//requisitionPage.SelectSupplyDistributionTo2("SDST-0000000398");
+		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001499");
+		Thread.sleep(3000);
+		requisitionPage.clickSaveReceiveRequisition();
+		Thread.sleep(5000);
 
 	}
-
+	
 }

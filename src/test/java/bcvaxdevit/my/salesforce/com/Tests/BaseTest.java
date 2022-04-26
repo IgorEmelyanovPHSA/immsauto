@@ -81,17 +81,17 @@ public class BaseTest {
 
     @AfterClass
     public void tearDown() {
-        System.out.println("This will execute after the Class");
-        //driver.manage().deleteAllCookies();
-        //driver.close();
-        //driver.quit();
+//        System.out.println("This will execute after the Class");
+//        driver.manage().deleteAllCookies();
+//        driver.close();
+//        driver.quit();
     }
 
     @AfterSuite
     public void cleanUp(){
-        System.out.println("This will execute after the Suite");
-        driver.manage().deleteAllCookies();
-        driver.close();
+//        System.out.println("This will execute after the Suite");
+//        driver.manage().deleteAllCookies();
+//        driver.close();
     }
 
 }
