@@ -27,6 +27,7 @@ public class RequisitionPage extends BasePage {
 	
 	
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
+
 	private WebElement supply_supply_location_1;
 	
 	
@@ -110,6 +111,7 @@ public class RequisitionPage extends BasePage {
 
 
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
+
 	private WebElement searchByName;
 	private By searchByName2 = By.xpath("//div[@class='primaryLabel slds-truncate slds-lookup__result-text']");
 
@@ -121,7 +123,6 @@ public class RequisitionPage extends BasePage {
 		waitForElementToBeVisible(driver, searchByName, 10);
 		WebElement search_input = driver.findElement(searchByName2);
 		this.searchByName.sendKeys(DistributionName);
-
 
 		search_input.click();
 		
@@ -318,7 +319,6 @@ public class RequisitionPage extends BasePage {
 		WebElement search_input = driver.findElement(distributionName2);
 		search_input.click();
 	}
-
 
 	public void clickSaveReceiveRequisition(){
 		this.saveReceiveRequisition.click();
