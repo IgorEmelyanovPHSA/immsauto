@@ -9,12 +9,12 @@ import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 public class Requisition extends BaseTest {
 	
 	@Test
-
-	public void Create_Requisition_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	
+	public void Create_Requisition_as_an_PPHIS_BCVAXUAT() throws InterruptedException {
 		TestcaseID = "193935"; //C193935
-
-
-		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
+		
+		
+		System.out.println("/*----1. Login as an PPHIS_BCVAXUAT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		requisitionPage.displaySupplyConsolePage();
@@ -84,12 +84,12 @@ public class Requisition extends BaseTest {
 		Thread.sleep(4000);
 		System.out.println("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
-
+		
 		Thread.sleep(7000);
 		
 		String actual = "Ship Requisition";
 		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
-
+		
 		System.out.println("/*----25. Save Shipping Requisition--*/");
 		requisitionPage.clickSaveShipRequisition();
 		Thread.sleep(3000);
@@ -103,8 +103,8 @@ public class Requisition extends BaseTest {
 		Thread.sleep(3000);
 		requisitionPage.clickSaveReceiveRequisition();
 		Thread.sleep(5000);
-
+		
 	}
-
-	}
+	
+}
 	

@@ -72,7 +72,7 @@ public class DemoTC {
 	@Test(testName = "Login to InClinicExperience as Clinician BCVAXDEVIT")
 	public static void LoginAsClinicianToProdSuppQA() throws InterruptedException {
 		System.out.println("Login to InClinicExperience as Clinician BCVAXDEVIT");
-		driver.get(Utils.BASE_URL_BCVAXDEVIT);
+		driver.get(Utils.BASE_URL_BCVAXUAT);
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.enterClinicianUserName();
 		loginPage.enterClinicianPW();
