@@ -29,10 +29,10 @@ public class BaseTest {
         // Create a stream to hold the log output
         logOutputSteps = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(logOutputSteps);
-        // IMPORTANT: Save the old System.out!
-        //old = System.out;
-        // Tell Java to use your special stream
-        //System.setOut(ps);
+        // Save the old System.out!
+        old = System.out;
+        // Redirect log special stream to logOutput for TestRail
+        System.setOut(ps);
         System.out.println("This will execute before the Suite");
         // ChromeDriver location set up in Utils class
         //System.setProperty("webdriver.chrome.whitelistedIps", "");
@@ -89,9 +89,9 @@ public class BaseTest {
 
     @AfterSuite
     public void cleanUp(){
-//        System.out.println("This will execute after the Suite");
-//        driver.manage().deleteAllCookies();
-//        driver.close();
+        System.out.println("This will execute after the Suite");
+        driver.manage().deleteAllCookies();
+        driver.close();
     }
 
 }

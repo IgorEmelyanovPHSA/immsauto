@@ -29,6 +29,7 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_pw_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement pphis_pw_bcvaxdevit;
+
 	@FindBy(id = "password")
 	private WebElement clinician_pw_cib_bcvaxdevit;
 	@FindBy(id = "password")
