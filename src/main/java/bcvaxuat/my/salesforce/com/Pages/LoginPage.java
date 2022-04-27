@@ -9,11 +9,11 @@ public class LoginPage extends BasePage {
 	
 	private final String Precondition_BCVAXUAT = "sunil.anne@phsa.ca.bcvaxuat";
 	private final String Precondition_PW_BCVAXUAT = "Sqlserver@2";
-	private final String CLINICIAN_BCVAXUAT = "auto_clinician@deloitte.ca.bcvaxdevit";
+	private final String CLINICIAN_BCVAXUAT = "ADD REQUIRED USERNAME";
 	private final String CLINICIAN_PW_BCVAXUAT = "Technology1990!!!!!";
-	private final String PPHIS_BCVAXUAT = "autooperationpphis@deloitte.ca.bcvaxdevit";
+	private final String PPHIS_BCVAXUAT = "ADD REQUIRED USERNAME";
 	private final String PPHIS_PW_BCVAXUAT = "Technology1990!!!!!";
-	private final String CLINICIAN_CIB_BCVAXUAT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
+	private final String CLINICIAN_CIB_BCVAXUAT = "ADD REQUIRED USERNAME";
 	private final String CLINICIAN_PW_CIB_BCVAXUAT = "Technology1990!!!!!";
 	
 	@FindBy(id = "username")
