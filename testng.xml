@@ -3,12 +3,12 @@
 <suite name="Clinic-In Box Workflow Suit">
     <test name="Regression">
         <classes>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkTransfers">
+            <class name="BulkTransfers">
                 <methods>
                     <include name="Can_do_Bulk_transfers_by_Dosages_as_PPHIS_BCVAXDEVIT"/>
                 </methods>
             </class>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkTransfers">
+            <class name="BulkTransfers">
                 <methods>
                     <include name="ghgfgfhfhfhgg"/>
                 </methods>
