@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
+package bcvaxdevit.my.salesforce.com.Tests.ClincInBox;
 
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
