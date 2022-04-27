@@ -1,0 +1,39 @@
+2022-04-26 16:19:02 INFO  BookingDose1:18 - -------------------log4 test
+2022-04-26 16:19:02 ERROR BookingDose1:19 - -------------------log4 test
+2022-04-26 16:20:49 INFO  BookingDose1:18 - -------------------log4 test
+2022-04-26 16:20:49 ERROR BookingDose1:19 - -------------------log4 test
+2022-04-26 16:25:12 INFO  BookingDose1:18 - /*1.----Login as an Clinician to CIB --*/
+2022-04-26 16:25:17 INFO  BookingDose1:22 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-26 16:27:21 INFO  BookingDose1:18 - /*1.----Login as an Clinician to CIB --*/
+2022-04-26 16:27:25 INFO  BookingDose1:22 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-26 16:29:07 INFO  BookingDose1:18 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 10:29:58 INFO  BookingDose1:18 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 10:30:01 INFO  BookingDose1:22 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:09:34 INFO  BookingDose1:18 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 16:09:37 INFO  BookingDose1:22 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:11:48 INFO  BookingDose1:18 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 16:11:52 INFO  BookingDose1:22 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:16:50 INFO  BookingDose1:19 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 16:16:53 INFO  BookingDose1:23 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:19:41 INFO  BookingDose1:19 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 16:19:44 INFO  BookingDose1:23 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:50:04 INFO  BookingDose1:20 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 16:50:07 INFO  BookingDose1:24 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:53:26 INFO  BookingDose1:20 - /*1.----Login as an Clinician to CIB --*/
+2022-04-27 16:53:29 INFO  BookingDose1:24 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-27 16:53:48 WARN  WebSocketHandler:142 - onError
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)

@@ -2,30 +2,30 @@
 <testng-results ignored="2" total="3" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-04-25T15:32:46 PDT" name="Surefire suite" finished-at="2022-04-25T15:32:46 PDT" duration-ms="80">
+  <suite started-at="2022-04-27T16:36:30 PDT" name="Surefire suite" finished-at="2022-04-27T16:36:30 PDT" duration-ms="38">
     <groups>
     </groups>
-    <test started-at="2022-04-25T15:32:46 PDT" name="Surefire test" finished-at="2022-04-25T15:32:46 PDT" duration-ms="80">
+    <test started-at="2022-04-27T16:36:30 PDT" name="Surefire test" finished-at="2022-04-27T16:36:30 PDT" duration-ms="38">
       <class name="bcvaxdevit.my.salesforce.com.Tests.BaseTest">
-        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.BaseTest@75f9eccc]" started-at="2022-04-25T15:32:42 PDT" name="beforeSuite" finished-at="2022-04-25T15:32:46 PDT" duration-ms="4622" status="PASS">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.BaseTest@45f45fa1]" started-at="2022-04-27T16:36:26 PDT" name="beforeSuite" finished-at="2022-04-27T16:36:30 PDT" duration-ms="3620" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method is-config="true" signature="cleanUp()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.BaseTest@75f9eccc]" started-at="2022-04-25T15:32:46 PDT" name="cleanUp" finished-at="2022-04-25T15:32:46 PDT" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="cleanUp()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.BaseTest@45f45fa1]" started-at="2022-04-27T16:36:30 PDT" name="cleanUp" finished-at="2022-04-27T16:36:30 PDT" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanUp -->
       </class> <!-- bcvaxdevit.my.salesforce.com.Tests.BaseTest -->
       <class name="bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@105fece7]" started-at="2022-04-25T15:32:46 PDT" name="setUp" finished-at="2022-04-25T15:32:46 PDT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@20d3d15a]" started-at="2022-04-27T16:36:30 PDT" name="setUp" finished-at="2022-04-27T16:36:30 PDT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@105fece7]" started-at="2022-04-25T15:32:46 PDT" name="beforeMethod" finished-at="2022-04-25T15:32:46 PDT" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@20d3d15a]" started-at="2022-04-27T16:36:30 PDT" name="beforeMethod" finished-at="2022-04-27T16:36:30 PDT" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="Can_login_as_Clinician_to_PRODSUPPQA()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@105fece7]" started-at="2022-04-25T15:32:46 PDT" name="Can_login_as_Clinician_to_PRODSUPPQA" finished-at="2022-04-25T15:32:46 PDT" duration-ms="3" status="FAIL">
+        <test-method signature="Can_login_as_Clinician_to_PRODSUPPQA()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@20d3d15a]" started-at="2022-04-27T16:36:30 PDT" name="Can_login_as_Clinician_to_PRODSUPPQA" finished-at="2022-04-27T16:36:30 PDT" duration-ms="2" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "bcvaxdevit.my.salesforce.com.Pages.LoginPage.enterClinicianUserName()" because "this.loginPage" is null]]>
@@ -71,11 +71,11 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:121)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Can_login_as_Clinician_to_PRODSUPPQA -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@105fece7]" started-at="2022-04-25T15:32:46 PDT" name="afterMethod" finished-at="2022-04-25T15:32:46 PDT" duration-ms="3" status="FAIL">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@20d3d15a]" started-at="2022-04-27T16:36:30 PDT" name="afterMethod" finished-at="2022-04-27T16:36:30 PDT" duration-ms="2" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=Can_login_as_Clinician_to_PRODSUPPQA status=FAILURE method=ClinicianLoginTest.Can_login_as_Clinician_to_PRODSUPPQA()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@105fece7] output={null}]]]>
+                <![CDATA[[TestResult name=Can_login_as_Clinician_to_PRODSUPPQA status=FAILURE method=ClinicianLoginTest.Can_login_as_Clinician_to_PRODSUPPQA()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@20d3d15a] output={null}]]]>
               </value>
             </param>
           </params>
@@ -85,7 +85,7 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:121)
             </message>
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException: Cannot invoke "java.io.ByteArrayOutputStream.toString()" because "this.logOutputSteps" is null
-at bcvaxdevit.my.salesforce.com.Tests.BaseTest.afterMethod(BaseTest.java:77)
+at bcvaxdevit.my.salesforce.com.Tests.BaseTest.afterMethod(BaseTest.java:71)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -129,7 +129,7 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:121)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@105fece7]" started-at="2022-04-25T15:32:46 PDT" name="tearDown" finished-at="2022-04-25T15:32:46 PDT" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:bcvaxdevit.my.salesforce.com.Tests.Login.ClinicianLoginTest@20d3d15a]" started-at="2022-04-27T16:36:30 PDT" name="tearDown" finished-at="2022-04-27T16:36:30 PDT" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
