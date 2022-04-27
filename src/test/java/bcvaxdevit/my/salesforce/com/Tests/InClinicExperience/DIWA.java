@@ -17,6 +17,6 @@ public class DIWA  extends BaseTest {
         System.out.println("/*----2. Go to Related Tab fro Person Account--*/");
         System.out.println("/*----3. clinck on 'create Immunisation Record' quick action --*/");
 
-        //Assert.assertTrue(false);
+        Assert.assertTrue(false);
     }
 }
