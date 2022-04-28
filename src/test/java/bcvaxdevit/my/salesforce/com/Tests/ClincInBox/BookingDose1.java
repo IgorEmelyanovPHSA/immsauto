@@ -42,6 +42,24 @@ public class BookingDose1 extends BaseTest {
         String dateOfBirth = "Sep 21, 1923";
         clinicInBox.enterDateOfBirth(dateOfBirth);
         Thread.sleep(2000);
+        System.out.println("/*7.----Enter Postal code--*/");
+        String postalCode = "V3L5L2";
+        clinicInBox.enterPostalCode(postalCode);
+        Thread.sleep(2000);
+        System.out.println("/*8.----Enter PHN--*/");
+        String phnNumber = "9746170911";
+        clinicInBox.enterPNH(phnNumber);
+        Thread.sleep(2000);
+        System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
+        clinicInBox.clickNonIndigenousRadioButton();
+        Thread.sleep(2000);
+        System.out.println("/*10.----click Verify PHN button --*/");
+        clinicInBox.clickVerifyPHNButton();
+        Thread.sleep(2000);
+        System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
+        clinicInBox.successMessageAppear();
+        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        System.out.println("/*12.----click Next button --*/");
 
     }
 

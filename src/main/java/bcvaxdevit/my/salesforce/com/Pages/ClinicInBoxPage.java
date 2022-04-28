@@ -3,12 +3,6 @@ package bcvaxdevit.my.salesforce.com.Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 public class ClinicInBoxPage extends BasePage {
 
     @FindBy(xpath = ".//button[text() = 'Register New Citizen']")
@@ -57,6 +51,22 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "(.//input[@name = 'PersonBirthdate'])")
     private WebElement date_of_birth;
     private By date_of_birth1 =By.xpath("(.//input[@name = 'PersonBirthdate'])");
+
+    @FindBy(xpath = "(.//input[@name = 'DDH_HC_Zip_Code'])")
+    private WebElement postal_code;
+    private By postal_code1 =By.xpath("(.//input[@name = 'DDH_HC_Zip_Code'])");
+
+    @FindBy(xpath = "(.//input[@name = 'HC_Personal_Health_Number'])")
+    private WebElement phn;
+    private By phn1 =By.xpath("(.//input[@name = 'HC_Personal_Health_Number'])");
+
+    @FindBy(xpath = "(.//input[@name = 'BCH_Indigenous'])[2]")
+    private WebElement non_indigenous_radio_button;
+    private By non_indigenous_radio_button1 = By.xpath("(.//input[@name = 'BCH_Indigenous'])[2]");
+
+    @FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
+    private WebElement verify_phn_button;
+    private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
 
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
@@ -148,6 +158,41 @@ public class ClinicInBoxPage extends BasePage {
         waitForElementToBeLocated(driver, date_of_birth1, 10);
         date_of_birth.sendKeys(dateofbirth);
     }
+
+    public void enterPostalCode(String postalcode) throws InterruptedException {
+        waitForElementToBeLocated(driver, postal_code1, 10);
+        postal_code.sendKeys(postalcode);
+    }
+
+    public void enterPNH(String phn_number) throws InterruptedException {
+        waitForElementToBeLocated(driver, phn1, 10);
+        phn.sendKeys(phn_number);
+    }
+
+    public void clickNonIndigenousRadioButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
+        WebElement element = driver.findElement(non_indigenous_radio_button1);
+        non_indigenous_radio_button.click();
+    }
+
+    public void clickVerifyPHNButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, verify_phn_button, 10);
+        WebElement element = driver.findElement(verify_phn_button1);
+        verify_phn_button.click();
+    }
+
+    public void successMessageAppear() throws InterruptedException {
+        //try {
+            waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
+            driver.findElement(By.xpath(".//div[text() = 'Success']"));
+            Thread.sleep(2000);
+            System.out.println("/* ----the toast success message has been Appears");
+       // } catch (NoSuchElementException e) {
+            //System.out.println("/*---there are no success toast Message for Verify PHN to be Appears");
+            //throw new RuntimeException("/*---there are no success Message to be Appears--*/");
+       // }
+    }
+
 
 
 
