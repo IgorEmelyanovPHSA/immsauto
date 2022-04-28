@@ -30,7 +30,10 @@ public class BookingDose1 extends BaseTest {
         System.out.println("/*4.----click Register New Citizen -Ludovika --*/");
         clinicInBox.clickRegisterButton();
         Thread.sleep(2000);
-
+        System.out.println("/*5.----Enter First Name Ludovika--*/");
+        String firstName = "Ludovika";
+        clinicInBox.enterFirstName(firstName);
+        Thread.sleep(2000);
 
     }
 
