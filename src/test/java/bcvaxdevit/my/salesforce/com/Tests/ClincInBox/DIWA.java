@@ -1,5 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClincInBox;
 
+import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
+import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,13 +12,48 @@ import java.io.PrintStream;
 import static org.junit.Assert.assertThat;
 
 public class DIWA  extends BaseTest {
+
+
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "219745"; //C219745
-        System.out.println("/*----1. Login as an Clinician to ICE --*/");
-        System.out.println("/*----2. Go to Related Tab fro Person Account--*/");
-        System.out.println("/*----3. clinck on 'create Immunisation Record' quick action --*/");
+        //TestcaseID = "219745"; //C219745
+        System.out.println("/*----1. Login as an Clinician to CIB  --*/");
 
-        Assert.assertTrue(false);
+        System.out.println("/*----2. Close all previously opened Tabs --*/");
+        System.out.println("/*----3. Navigate to global search bar--*/");
+        System.out.println("/*----4. Search for Participant account--*/");
+        ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
+
+        System.out.println("/*----5. Select DIWA Citizen ---*/");
+
+        clinicInBoxPage.SearchDIWACitizen("Maegan BCVaxVillage");
+        System.out.println("/*----Search for Maegan BCVaxVillage ---*/");
+        if (!clinicInBoxPage.userFound()) {
+            System.out.println("/*----User --> Maegan BCVaxVillage not found and return---*/");
+        }
+        while (clinicInBoxPage.userFound()) {
+            System.out.println("/*----User found and Navigated to record page ---*/");
+            Thread.sleep(2000);
+            clinicInBoxPage.clickRelatedTab();
+            System.out.println("/*---- Navigated to Person Account related tab ---*/");
+            Thread.sleep(2000);
+        }
+
+        System.out.println("/*----6. Locate The Related Tab Under Person Account ---*/");
+        clinicInBoxPage.clickCreatImmunizationRecord();
+        System.out.println("/*----7. Click Creat Immunization Record ---*/");
+        clinicInBoxPage.clickSelectAnOptionDropdown();
+        Thread.sleep(3000);
+        System.out.println("/*----8. Select COVID19-mRNA as an Option  ---*/");
+        //clinicInBoxPage.clickCovid19mRNA();
+        System.out.println("/*----9. Enter a Clinic Location ---*/");
+        //clinicInBoxPage.enterClinicLocation();
+        System.out.println("/*---10. Select a Date and Time Administration ---*/");
+        //clinicInBoxPage.SelectDateAndTime();
+        Thread.sleep(3000);
+        System.out.println("/*---11. Fill the Consent Fields ---*/");
+
+
+
     }
 }

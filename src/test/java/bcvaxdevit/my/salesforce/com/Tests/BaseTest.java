@@ -80,13 +80,20 @@ public class BaseTest {
 //        driver.manage().deleteAllCookies();
 //        driver.close();
 //        driver.quit();
-	}
-	
-	@AfterSuite
-	public void cleanUp() {
-		System.out.println("This will execute after the Suite");
-		driver.manage().deleteAllCookies();
-		driver.close();
-	}
-	
+
+    }
+
+    @AfterSuite
+    public void cleanUp(){
+
+        System.out.println("This will execute after the Suite");
+        driver.manage().deleteAllCookies();
+        driver.close();
+
+        System.out.println("This will execute after the Suite");
+        driver.manage().deleteAllCookies();
+        driver.close();
+
+    }
+
 }
