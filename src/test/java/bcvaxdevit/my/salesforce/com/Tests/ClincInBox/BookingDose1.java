@@ -6,6 +6,7 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.Test;
+//import org.testng.log4testng.Logger;
 
 public class BookingDose1 extends BaseTest {
     static Logger log = Logger.getLogger(BookingDose1.class);
@@ -13,6 +14,7 @@ public class BookingDose1 extends BaseTest {
     @Test
     public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
         TestcaseID = "192878"; //C192878
+        //System.setProperty("log4j.properties", "hjjfhjf");
         PropertyConfigurator.configure("log4j.properties");
         System.out.println("/*1.----Login as an Clinician to CIB --*/");
         log.info("/*1.----Login as an Clinician to CIB --*/");
