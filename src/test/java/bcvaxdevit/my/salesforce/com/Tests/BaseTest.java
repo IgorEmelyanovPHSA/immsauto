@@ -89,9 +89,15 @@ public class BaseTest {
 
     @AfterSuite
     public void cleanUp(){
+
         System.out.println("This will execute after the Suite");
         driver.manage().deleteAllCookies();
         driver.close();
+
+        System.out.println("This will execute after the Suite");
+        driver.manage().deleteAllCookies();
+        driver.close();
+
     }
 
 }

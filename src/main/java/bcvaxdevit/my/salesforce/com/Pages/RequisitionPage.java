@@ -124,6 +124,7 @@ public class RequisitionPage extends BasePage {
 		WebElement search_input = driver.findElement(searchByName2);
 		this.searchByName.sendKeys(DistributionName);
 
+
 		search_input.click();
 		
 		/*waitForElementToBeVisible(driver, clinicName, 10);
@@ -308,6 +309,7 @@ public class RequisitionPage extends BasePage {
 
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveShipRequisition);
 		waitForElementToBeVisible(driver, saveShipRequisition, 10);
+
 
 
 		this.saveShipRequisition.click();

@@ -3,6 +3,12 @@ package bcvaxdevit.my.salesforce.com.Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ClinicInBoxPage extends BasePage {
 
     @FindBy(xpath = ".//button[text() = 'Register New Citizen']")
@@ -33,9 +39,89 @@ public class ClinicInBoxPage extends BasePage {
             }
         } while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
     }
-
     public void verifyIsClinicInBoxPageDisplayed() {
         waitForElementToBeVisible(driver, clinicinbox_page_displayed, 10);
         this.clinicinbox_page_displayed.isDisplayed();
     }
+
+
+    public void SearchDIWACitizen(String citizen ) throws InterruptedException {
+        //waitForElementToBeLocated(driver,search_assistant1,10);
+        //waitForElementToBeVisible(driver, search_assistant, 15);
+        WebElement search_navigator = driver.findElement(search_assistant1);
+        search_navigator.click();
+        //  waitForElementToBeVisible(driver, search_input, 10);
+        Thread.sleep(5000);
+        WebElement search_input = driver.findElement(search_input1);
+        search_input.sendKeys(citizen,Keys.ENTER);
+        // search_input.sendKeys(Keys.RETURN);
+
+    }
+
+    public boolean userFound() throws InterruptedException {
+
+        waitForElementToBeLocated(driver, user_found1, 10);
+        WebElement element = driver.findElement(user_found1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(5000);
+        return true;
+    }
+    public void clickRelatedTab() throws InterruptedException {
+        waitForElementToBeLocated(driver, click_related_tab1, 10);
+        WebElement element = driver.findElement(click_related_tab1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+    public void clickCreatImmunizationRecord() throws InterruptedException {
+        waitForElementToBeLocated(driver, creat_Immunization_Record1, 10);
+        WebElement element = driver.findElement(creat_Immunization_Record1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+    public void clickSelectAnOptionDropdown() {
+        this.select_an_option.click();
+    }
+//    public void inputRequestDate() {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DAY_OF_YEAR, 1);
+//        Date tomorrow = calendar.getTime();
+//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+//
+//        String tomorrowAsString = dateFormat.format(tomorrow);
+//        this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
+//    }
+
+    @FindBy(xpath = ".//span[text() = 'Register']")
+    private WebElement register_tab;
+    private By register_tab1 = By.xpath("(.//a[@title = 'Register'])");
+
+    @FindBy(xpath = ".//button[@aria-label = 'Search']")
+    private WebElement search_assistant;
+    private By search_assistant1 = By.xpath(".//button[@aria-label = 'Search']");
+
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement search_input;
+    private By search_input1 = By.xpath("//input[@placeholder = 'Search...']");
+
+    @FindBy(xpath = ".//a[@title='Maegan BCVaxVillage']")
+    private WebElement user_found;
+    private By user_found1 = By.xpath(".//a[@title='Maegan BCVaxVillage']");
+
+    @FindBy(xpath = "(//a[@data-label='Related'])")
+    private WebElement click_related_tab;
+    private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
+
+    @FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
+    private WebElement creat_Immunization_Record;
+    private By creat_Immunization_Record1 = By.xpath("/button[contains(text(),'Create Immunization Record')]");
+
+    @FindBy(xpath = "//option[contains(text(),'Select an option')]")
+    private WebElement select_an_option;
+    private By select_an_option1 =By.xpath("//option[contains(text(),'Select an option')]");
+
 }
+
+
+
+

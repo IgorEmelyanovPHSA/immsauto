@@ -155,6 +155,15 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
 	}
+	public ClinicInBoxPage loginAsDIWA() {
+		this.enterClinicianCIBUserName();
+		//setUsername(username);
+		this.enterClinicianCIBPW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new ClinicInBoxPage(driver);
+	}
+
 	
 	
 }
