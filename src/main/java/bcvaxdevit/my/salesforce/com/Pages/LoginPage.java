@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
 	private final String CLINICIAN_BCVAXDEVIT = "auto_clinician@deloitte.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_BCVAXDEVIT = "Technology1990!!!!!";
 	private final String PPHIS_BCVAXDEVIT = "autooperationpphis@deloitte.ca.bcvaxdevit";
-	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!";
+	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!!";
 	private final String CLINICIAN_CIB_BCVAXDEVIT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!";
 	
