@@ -123,10 +123,7 @@ public class RequisitionPage extends BasePage {
 		waitForElementToBeVisible(driver, searchByName, 10);
 		WebElement search_input = driver.findElement(searchByName2);
 		this.searchByName.sendKeys(DistributionName);
-
-
 		search_input.click();
-		
 		/*waitForElementToBeVisible(driver, clinicName, 10);
 		WebElement search_input = driver.findElement(clinicName2);
 		search_input.click();*/

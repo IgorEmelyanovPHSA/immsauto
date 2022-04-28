@@ -76,7 +76,7 @@ public class BaseTest {
 	
 	@AfterClass
 	public void tearDown() {
-//        System.out.println("This will execute after the Class");
+       System.out.println("This will execute after the Class");
 //        driver.manage().deleteAllCookies();
 //        driver.close();
 //        driver.quit();

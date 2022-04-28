@@ -54,6 +54,10 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement last_name;
     private By last_name1 =By.xpath("(.//input[@name = 'LastName'])");
 
+    @FindBy(xpath = "(.//input[@name = 'PersonBirthdate'])")
+    private WebElement date_of_birth;
+    private By date_of_birth1 =By.xpath("(.//input[@name = 'PersonBirthdate'])");
+
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
     }
@@ -131,14 +135,18 @@ public class ClinicInBoxPage extends BasePage {
 //    }
 
     public void enterFirstName(String firstname) throws InterruptedException {
-        //private By doses_1 = By.xpath("(.//input[@class = 'slds-input'])[2]");
-        //By dose_1_ = By.xpath("(.//input[@class = 'slds-input'])[" + k + "]");
         waitForElementToBeLocated(driver, first_name1, 10);
-        //WebElement element = driver.findElement(dose_1_);
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollRight = arguments[0].scrollWidth", element);
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-        //click(dose_1_);
         first_name.sendKeys(firstname);
+    }
+
+    public void enterLastName(String lastname) throws InterruptedException {
+        waitForElementToBeLocated(driver, last_name1, 10);
+        last_name.sendKeys(lastname);
+    }
+
+    public void enterDateOfBirth(String dateofbirth) throws InterruptedException {
+        waitForElementToBeLocated(driver, date_of_birth1, 10);
+        date_of_birth.sendKeys(dateofbirth);
     }
 
 

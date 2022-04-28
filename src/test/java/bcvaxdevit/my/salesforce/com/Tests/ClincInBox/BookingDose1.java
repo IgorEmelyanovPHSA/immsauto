@@ -34,6 +34,14 @@ public class BookingDose1 extends BaseTest {
         String firstName = "Ludovika";
         clinicInBox.enterFirstName(firstName);
         Thread.sleep(2000);
+        System.out.println("/*6.----Enter Last Name BCVaxLimeburn--*/");
+        String lastName = "BCVaxLimeburn";
+        clinicInBox.enterLastName(lastName);
+        Thread.sleep(2000);
+        System.out.println("/*6.----Enter Date of birth--*/");
+        String dateOfBirth = "Sep 21, 1923";
+        clinicInBox.enterDateOfBirth(dateOfBirth);
+        Thread.sleep(2000);
 
     }
 
