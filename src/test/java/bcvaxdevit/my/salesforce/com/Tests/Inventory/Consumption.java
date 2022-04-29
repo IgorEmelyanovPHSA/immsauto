@@ -9,7 +9,7 @@ public class Consumption extends BaseTest {
 	@Test
 	
 	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "189594"; //189594
+		TestcaseID = "1294543"; //1294543
 		System.out.println("/*----1. Login as an Clinician_BCVAXDEVIT to Supply Console --*/");
 		System.out.println("/*----2. Navigate to Health Connect - Supply Console --*/");
 		System.out.println("/*----3. Identify Supply location with some stock --*/");
