@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 public class Consumption extends BaseTest {
 	
 	
-	@Test
-	
+	@Test(testName = "Inventory Management - Consumption (vaccination)")
 	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "1294543"; //1294543
 		System.out.println("/*----1. Login as an Clinician_BCVAXDEVIT to Supply Console --*/");
