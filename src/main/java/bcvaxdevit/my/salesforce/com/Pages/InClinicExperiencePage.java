@@ -63,6 +63,23 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement delete_person_account;
 	private By delete_person_account1 = By.xpath("//button[text()='Delete']");
 	
+	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
+	private WebElement select_app_launcher;
+	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
+	
+	@FindBy(xpath = "//p[text()='Health Connect - Supply Console']")
+	private WebElement click_healthconnect_app;
+	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
+	
+	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
+	private WebElement dropdownMenu;
+	
+	@FindBy(xpath = "//body/div[4]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/section[1]/div[1]/div[1]/ul[1]/li[7]/div[1]/a[1]/span[2]/span[1]")
+	private WebElement supplyLocationInDropdown;
+	
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
+	private WebElement select_desired_supply_loc;
+	
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
 	}
@@ -76,34 +93,15 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement search_input = driver.findElement(search_input1);
 		search_input.sendKeys(citizen);
 		search_input.sendKeys(Keys.RETURN);
-        /*Thread.sleep(5000);
-        element.clear();
-        JavascriptExecutor executor=(JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", element);
-        element.sendKeys(citizen);
-        element.sendKeys(citizen);
-        executor.executeScript("arguments[0].setAttribute('value', arguments[1])", element, citizen);
-        executor.executeScript("arguments[0].value='\"+ keysToSend +\"';", element);
-        Thread.sleep(5000);
-        element.click();
-        element.sendKeys(Keys.RETURN);*/
 		Thread.sleep(5000);
 	}
 	
 	public void clickRegisterTab() throws InterruptedException {
-        /*explicit wait - to wait for the compose button to be click-able
-        WebDriverWait wait = new WebDriverWait(driver,30);
-        wait.until(ExpectedConditions.visibilityOf(register_tab));*/
 		waitForElementToBeLocated(driver, register_tab1, 10);
 		WebElement element = driver.findElement(register_tab1);
 		//waitForElementToBeVisible(driver, element, 10);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-        /*driver.findElement(By.xpath(".//a[@title = 'Register']")).click();
-        this.register_button.click();
-        this.register_tab1.click();
-        click(relatedTab2);
-        this.register_tab.click();*/
 	}
 	
 	public boolean userFound() throws InterruptedException {
@@ -196,11 +194,37 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void closeDeletedPersonAccountTabs() {
+	public void closeOpenTabs() {
 		do {
 			WebElement closetab = driver.findElement(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']"));
 			closetab.click();
 		} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
 	}
+	
+	public void selectHealthConnectApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		WebElement element = driver.findElement(select_app_launcher1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
+		WebElement element1 = driver.findElement(click_healthconnect_app1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+	
+	public void clickDropdownMenu() {
+		this.dropdownMenu.click();
+	}
+	
+	public void selectSupplyLocationFromDropdown() {
+		this.supplyLocationInDropdown.click();
+	}
+	
+	public void selectSupplyLocationName() throws InterruptedException {
+		this.select_desired_supply_loc.click();
+	}
+	
 }
 

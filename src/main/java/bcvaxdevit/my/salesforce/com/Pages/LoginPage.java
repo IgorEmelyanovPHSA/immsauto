@@ -15,6 +15,8 @@ public class LoginPage extends BasePage {
 	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!!";
 	private final String CLINICIAN_CIB_BCVAXDEVIT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!";
+	private final String CLINICIAN_Consumption_BCVAXDEVIT = "auto_clinician_consumption@phsa.ca.bcvaxdevit";
+	private final String CLINICIAN_PW_Consumption_BCVAXDEVIT = "Technology1990!!!!!!";
 	
 	@FindBy(id = "username")
 	private WebElement clinician_bcvaxdevit;
@@ -24,16 +26,19 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_cib_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxdevit;
+	@FindBy(id = "username")
+	private WebElement Consumption_bcvaxdevit;
 	
 	@FindBy(id = "password")
 	private WebElement clinician_pw_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement pphis_pw_bcvaxdevit;
-
 	@FindBy(id = "password")
 	private WebElement clinician_pw_cib_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement Precondition_pw_bcvaxdevit;
+	@FindBy(id = "password")
+	private WebElement Cosumption_pw_bcvaxdevit;
 	
 	@FindBy(id = "Login")
 	private WebElement login_button;
@@ -69,6 +74,10 @@ public class LoginPage extends BasePage {
 		this.clinician_cib_bcvaxdevit.sendKeys(CLINICIAN_CIB_BCVAXDEVIT);
 	}
 	
+	public void enterClinicianConUserName() {
+		this.Consumption_bcvaxdevit.sendKeys(CLINICIAN_Consumption_BCVAXDEVIT);
+	}
+	
 	public void enterClinicianPW() {
 		this.clinician_pw_bcvaxdevit.sendKeys(CLINICIAN_PW_BCVAXDEVIT);
 	}
@@ -83,6 +92,10 @@ public class LoginPage extends BasePage {
 	
 	public void enterClinicianCIBPW() {
 		this.clinician_pw_cib_bcvaxdevit.sendKeys(CLINICIAN_PW_CIB_BCVAXDEVIT);
+	}
+	
+	public void enterConsumption_PW() {
+		this.Cosumption_pw_bcvaxdevit.sendKeys(CLINICIAN_PW_Consumption_BCVAXDEVIT);
 	}
 	
 	public void pressSubmitButton() {
@@ -142,6 +155,15 @@ public class LoginPage extends BasePage {
 		return new RequisitionPage(driver);
 	}
 	
+	public InClinicExperiencePage loginWithClinicianCon() {
+		this.enterClinicianConUserName();
+		//setUsername(username);
+		this.enterConsumption_PW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new InClinicExperiencePage(driver);
+	}
+	
 	
 	public void verifyAlertSuccess() {
 		this.alertSuccess.isDisplayed();
@@ -155,6 +177,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
 	}
+	
 	public ClinicInBoxPage loginAsDIWA() {
 		this.enterClinicianCIBUserName();
 		//setUsername(username);
@@ -163,7 +186,6 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
 	}
-
 	
 	
 }

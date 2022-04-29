@@ -57,7 +57,7 @@ public class CitizenDuplicates extends BaseTest {
 			Thread.sleep(2000);
 			inClinicExperiencePage.clickRegisterTab();
 			Thread.sleep(5000);
-			inClinicExperiencePage.closeDeletedPersonAccountTabs();
+			inClinicExperiencePage.closeOpenTabs();
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
