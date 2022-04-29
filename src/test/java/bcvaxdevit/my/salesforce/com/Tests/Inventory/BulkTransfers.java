@@ -9,7 +9,7 @@ public class BulkTransfers extends BaseTest {
     
     @Test
     public void Can_do_Bulk_transfers_by_Dosages_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "137394"; //C137394
+        TestcaseID = "220061"; //C220061
         System.out.println("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);

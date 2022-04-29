@@ -10,7 +10,7 @@
             </class>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkTransfers">
                 <methods>
-                    <include name="ghgfgfhfhfhgg"/>
+                    <include name="Precondition"/>
                 </methods>
             </class>
         </classes>
