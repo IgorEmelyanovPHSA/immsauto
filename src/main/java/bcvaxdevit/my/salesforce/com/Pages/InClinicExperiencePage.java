@@ -80,6 +80,9 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
 	private WebElement select_desired_supply_loc;
 	
+	@FindBy(xpath = "//a[Contains(.,Inventory Management - Consumption(Vaccination)')]")
+	private WebElement select_desired_supply_container;
+	
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
 	}
@@ -201,12 +204,26 @@ public class InClinicExperiencePage extends BasePage {
 		} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
 	}
 	
+	public void closeTabsHCA() throws InterruptedException {
+		do {
+			try {
+				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+				closetab.click();
+				Thread.sleep(2000);
+			} catch (NoSuchElementException e) {
+				System.out.println("/*---there are no Tab's to close anymore");
+			}
+			
+		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
+		
+	}
+	
 	public void selectHealthConnectApp() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_app_launcher1, 10);
 		WebElement element = driver.findElement(select_app_launcher1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
 		WebElement element1 = driver.findElement(click_healthconnect_app1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
@@ -224,6 +241,10 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectSupplyLocationName() throws InterruptedException {
 		this.select_desired_supply_loc.click();
+	}
+	
+	public void selectSupplyContainer() throws InterruptedException {
+		this.select_desired_supply_container.click();
 	}
 	
 }

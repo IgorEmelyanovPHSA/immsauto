@@ -16,6 +16,7 @@ public class Consumption extends BaseTest {
 		System.out.println("/*----2. Navigate to Health Connect - Supply Console --*/");
 		inClinicExperiencePage.selectHealthConnectApp();
 		Thread.sleep(2000);
+		inClinicExperiencePage.closeTabsHCA();
 		System.out.println("/*----3. Click Dropdown Menu --*/");
 		inClinicExperiencePage.clickDropdownMenu();
 		Thread.sleep(2000);
@@ -24,6 +25,10 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*----5. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
+		Thread.sleep(2000);
+		inClinicExperiencePage.selectSupplyContainer();
+		System.out.println("/*----6. Click and navigate to the supply container --> 'Automation Java - SDST-0000001558'--*/");
+		Thread.sleep(2000);
 		System.out.println("/*----2. Navigate to Health Connect - Supply Console --*/");
 		System.out.println("/*----3. Identify Supply location with some stock --*/");
 		System.out.println("/*----4. Identify matching clinic with the supply location--*/");
