@@ -16,6 +16,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = ".//button[@title = ' Create New Profile']")
 	private WebElement register_button;
+	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
 	
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
@@ -71,17 +72,78 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_healthconnect_app;
 	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
 	
+	@FindBy(xpath = "//p[text()='In-Clinic Experience']")
+	private WebElement click_ice_app;
+	private By click_ice_app1 = By.xpath("//p[text()='In-Clinic Experience']");
+	
 	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
 	private WebElement dropdownMenu;
 	
-	@FindBy(xpath = "//body/div[4]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/section[1]/div[1]/div[1]/ul[1]/li[7]/div[1]/a[1]/span[2]/span[1]")
+	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
 	private WebElement supplyLocationInDropdown;
 	
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
 	private WebElement select_desired_supply_loc;
 	
-	@FindBy(xpath = "//a[Contains(.,Inventory Management - Consumption(Vaccination)')]")
+	@FindBy(xpath = "//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]")
 	private WebElement select_desired_supply_container;
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]");
+	
+	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
+	private WebElement supply_console_App_displayed;
+	private By supply_console_App_displayed1 = By.xpath(".//span[@title='Health Connect - Supply Console']");
+	
+	@FindBy(xpath = "//a[@title='Supply Locations']")
+	private WebElement supply_location_displayed;
+	private By supply_location_displayed1 = By.xpath("//a[@title='Supply Locations']");
+	
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
+	private WebElement get_remaining_doses;
+	private By get_remaining_doses1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
+	
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
+	private WebElement get_remaining_Qty;
+	private By get_remaining_Qty1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
+	
+	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
+	private WebElement first_name;
+	private By first_name1 = By.xpath("(.//input[@name = 'FirstName'])");
+	
+	@FindBy(xpath = "(.//input[@name = 'LastName'])")
+	private WebElement last_name;
+	private By last_name1 = By.xpath("(.//input[@name = 'LastName'])");
+	
+	@FindBy(xpath = "(.//input[@name = 'PersonBirthdate'])")
+	private WebElement date_of_birth;
+	private By date_of_birth1 = By.xpath("(.//input[@name = 'PersonBirthdate'])");
+	
+	@FindBy(xpath = "(.//input[@name = 'DDH_HC_Zip_Code'])")
+	private WebElement postal_code;
+	private By postal_code1 = By.xpath("(.//input[@name = 'DDH_HC_Zip_Code'])");
+	
+	@FindBy(xpath = "(.//input[@name = 'HC_Personal_Health_Number'])")
+	private WebElement phn;
+	private By phn1 = By.xpath("(.//input[@name = 'HC_Personal_Health_Number'])");
+	
+	@FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
+	private WebElement email;
+	private By email1 = By.xpath("(.//input[@name = 'PersonEmail'])");
+	
+	@FindBy(xpath = "(.//input[@name = 'ConfirmEmail'])")
+	private WebElement confirm_email;
+	private By confirm_email1 = By.xpath("(.//input[@name = 'ConfirmEmail'])");
+	
+	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
+	private WebElement verify_phn_button;
+	private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
+	
+	@FindBy(xpath = ".//button[@title='Next']")
+	private WebElement click_next_button;
+	private By click_next_button1 = By.xpath(".//button[@title='Next']");
+	
+	@FindBy(xpath = "(.//input[@name = 'BCH_Indigenous'])[2]")
+	private WebElement non_indigenous_radio_button;
+	private By non_indigenous_radio_button1 = By.xpath("(.//input[@name = 'BCH_Indigenous'])[2]");
 	
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -211,7 +273,7 @@ public class InClinicExperiencePage extends BasePage {
 				closetab.click();
 				Thread.sleep(2000);
 			} catch (NoSuchElementException e) {
-				System.out.println("/*---there are no Tab's to close anymore");
+				System.out.println("/*---there are no Tab's to close");
 			}
 			
 		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
@@ -236,15 +298,123 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectSupplyLocationFromDropdown() {
+		
 		this.supplyLocationInDropdown.click();
 	}
 	
 	public void selectSupplyLocationName() throws InterruptedException {
+		waitForElementToBeVisible(driver, select_desired_supply_loc, 10);
 		this.select_desired_supply_loc.click();
 	}
 	
 	public void selectSupplyContainer() throws InterruptedException {
-		this.select_desired_supply_container.click();
+		waitForElementToBeLocated(driver, select_desired_supply_container1, 10);
+		WebElement element = driver.findElement(select_desired_supply_container1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+	}
+	
+	public boolean displaySupplyConsolePage() {
+		return isDisplayed(supply_console_App_displayed1);
+	}
+	
+	public boolean supplyLocDisplayed() {
+		return isDisplayed(supply_location_displayed1);
+	}
+	
+	public String getValueOfRemainingDoses() throws InterruptedException {
+		WebElement element = driver.findElement(get_remaining_doses1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String getValueOfRemainingQty() throws InterruptedException {
+		WebElement element = driver.findElement(get_remaining_Qty1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public void selectICEFromApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		WebElement element = driver.findElement(select_app_launcher1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_ice_app1, 10);
+		WebElement element1 = driver.findElement(click_ice_app1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+	
+	public void clickRegisterButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, register_button, 10);
+		WebElement element = driver.findElement(register_button_1);
+		register_button.click();
+	}
+	
+	public void enterFirstName(String firstname) throws InterruptedException {
+		waitForElementToBeLocated(driver, first_name1, 10);
+		first_name.sendKeys(firstname);
+	}
+	
+	public void enterLastName(String lastname) throws InterruptedException {
+		waitForElementToBeLocated(driver, last_name1, 10);
+		last_name.sendKeys(lastname);
+	}
+	
+	public void enterDateOfBirth(String dateofbirth) throws InterruptedException {
+		waitForElementToBeLocated(driver, date_of_birth1, 10);
+		date_of_birth.sendKeys(dateofbirth);
+	}
+	
+	public void enterPostalCode(String postalcode) throws InterruptedException {
+		waitForElementToBeLocated(driver, postal_code1, 10);
+		postal_code.sendKeys(postalcode);
+	}
+	
+	public void enterPNH(String phn_number) throws InterruptedException {
+		waitForElementToBeLocated(driver, phn1, 10);
+		phn.sendKeys(phn_number);
+	}
+	
+	public void clickNonIndigenousRadioButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
+		WebElement element = driver.findElement(non_indigenous_radio_button1);
+		non_indigenous_radio_button.click();
+	}
+	
+	public void clickVerifyPHNButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, verify_phn_button, 10);
+		WebElement element = driver.findElement(verify_phn_button1);
+		verify_phn_button.click();
+	}
+	
+	public void successMessage() throws InterruptedException {
+		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
+		driver.findElement(By.xpath(".//div[text() = 'Success']"));
+		Thread.sleep(2000);
+	}
+	
+	public void clickNextButton() throws InterruptedException{
+		waitForElementToBeVisible(driver, click_next_button, 10);
+		WebElement element = driver.findElement(click_next_button1);
+		click_next_button.click();
+	}
+	
+	public void enterEmail(String enteremail) throws InterruptedException {
+		waitForElementToBeLocated(driver, email1, 10);
+		email.sendKeys(enteremail);
+	}
+	
+	public void confirmEmail(String confirmemail) throws InterruptedException {
+		waitForElementToBeLocated(driver, confirm_email1, 10);
+		confirm_email.sendKeys(confirmemail);
 	}
 	
 }
