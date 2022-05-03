@@ -24,10 +24,6 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement search_input;
     private By search_input1 = By.xpath("//input[@placeholder = 'Search...']");
 
-//    @FindBy(xpath = ".//a[@title='Maegan BCVaxVillage']")
-//    private WebElement user_found;
-//    private By user_found1 = By.xpath(".//a[@title='Maegan BCVaxVillage']");
-
     @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
@@ -67,6 +63,17 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
     private WebElement verify_phn_button;
     private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
+
+    @FindBy(xpath = "(.//button[@title = 'Next'])")
+    private WebElement next_button;
+    private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
+
+    @FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
+    private WebElement user_found;
+    private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
+
+    @FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
+    private WebElement inputDiwaDate;
 
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
@@ -194,17 +201,12 @@ public class ClinicInBoxPage extends BasePage {
     }
 
 
-    @FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
-    private WebElement user_found;
-    private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
 
-
-
-
-
-
-    @FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
-    private WebElement inputDiwaDate;
+    public void clickNextButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, next_button, 10);
+        WebElement element = driver.findElement(next_button1);
+        next_button.click();
+    }
 
 
 }

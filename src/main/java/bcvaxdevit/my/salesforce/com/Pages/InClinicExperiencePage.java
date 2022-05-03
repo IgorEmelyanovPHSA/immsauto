@@ -8,9 +8,10 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = ".//span[text() = 'Register']")
 	private WebElement register_tab;
-    
-   /* @FindBy(xpath = ".//a[@title = 'Register']")
-    private WebElement register_tab;*/
+	
+	@FindBy(xpath = ".//button[text() = 'Register']")
+	private WebElement register_confirmation_page_button;
+	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 	
 	private By register_tab1 = By.xpath("(.//a[@title = 'Register'])");
 	
@@ -145,6 +146,30 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement non_indigenous_radio_button;
 	private By non_indigenous_radio_button1 = By.xpath("(.//input[@name = 'BCH_Indigenous'])[2]");
 	
+	@FindBy(xpath = ".//button[text()= 'Review Details']")
+	private WebElement review_details;
+	private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
+	
+	@FindBy(xpath = "//button[@title='Check Eligibility']")
+	private WebElement click_eligibility_button;
+	private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
+	
+	@FindBy(xpath = ".//div[@class='DDHHC_CheckEligibility']")
+	private WebElement click_eligibility_dropdown;
+	private By click_eligibility_dropdown1 = By.xpath("(.//div[@class='DDHHC_CheckEligibility'])");
+	
+	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
+	private WebElement select_covid19_option_from_dropdown;
+	private By select_covid19_option_from_dropdown1 = By.xpath("(.//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination'])");
+	
+	@FindBy(xpath = ".//a[@data-label= 'Appointment Scheduling']")
+	private WebElement appointment_scheduling_tab;
+	private By appointment_scheduling_tab1 = By.xpath(".//a[@data-label= 'Appointment Scheduling']");
+	
+	@FindBy(xpath = ".//a[@data-label= 'Search clinic name']")
+	private WebElement click_search_clinic;
+	private By click_search_clinic1 = By.xpath(".//a[@data-label= 'Search clinic name']");
+	
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
 	}
@@ -164,7 +189,13 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickRegisterTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, register_tab1, 10);
 		WebElement element = driver.findElement(register_tab1);
-		//waitForElementToBeVisible(driver, element, 10);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
+		waitForElementToBeLocated(driver, register_confirmation_page_button1, 10);
+		WebElement element = driver.findElement(register_confirmation_page_button1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
@@ -401,7 +432,7 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void clickNextButton() throws InterruptedException{
+	public void clickNextButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_next_button, 10);
 		WebElement element = driver.findElement(click_next_button1);
 		click_next_button.click();
@@ -416,6 +447,50 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeLocated(driver, confirm_email1, 10);
 		confirm_email.sendKeys(confirmemail);
 	}
+	
+	public void clickReviewDetails() throws InterruptedException {
+		waitForElementToBeVisible(driver, review_details, 10);
+		WebElement element = driver.findElement(review_details1);
+		review_details.click();
+	}
+	
+	public void clickEligibilityButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_eligibility_button1, 10);
+		WebElement element = driver.findElement(click_eligibility_button1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		/*waitForElementToBeLocated(driver, click_eligibility_dropdown1, 10);
+		WebElement element2 = driver.findElement(click_eligibility_dropdown1);
+		JavascriptExecutor executor2 = (JavascriptExecutor) driver;
+		executor2.executeScript("arguments[0].click();", element2);*/
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_covid19_option_from_dropdown1, 10);
+		WebElement element1 = driver.findElement(select_covid19_option_from_dropdown1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+	
+	public void userIsEligibleSuccessMsg() throws InterruptedException {
+		waitForElementToBeLocated(driver, By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for ''COVID_19_Vaccination.'])"), 20);
+		driver.findElement(By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for ''COVID_19_Vaccination.'])"));
+		Thread.sleep(2000);
+	}
+	
+	public void navigateAppointmentSchedulingTab() throws InterruptedException {
+		waitForElementToBeLocated(driver, appointment_scheduling_tab1, 10);
+		WebElement element = driver.findElement(appointment_scheduling_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void clickToSearchClinic() throws InterruptedException {
+		waitForElementToBeLocated(driver, appointment_scheduling_tab1, 10);
+		WebElement element = driver.findElement(appointment_scheduling_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
 	
 }
 
