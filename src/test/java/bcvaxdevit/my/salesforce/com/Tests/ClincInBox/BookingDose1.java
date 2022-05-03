@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClincInBox;
 
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
+import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.apache.log4j.Logger;
@@ -60,7 +61,11 @@ public class BookingDose1 extends BaseTest {
         clinicInBox.successMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         System.out.println("/*12.----click Next button --*/");
+        clinicInBox.clickNextButton();
+        Thread.sleep(2000);
 
     }
+
+
 
 }

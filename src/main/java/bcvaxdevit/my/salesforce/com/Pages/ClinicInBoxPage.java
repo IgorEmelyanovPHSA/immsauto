@@ -68,6 +68,10 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement verify_phn_button;
     private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
 
+    @FindBy(xpath = "(.//button[@title = 'Next'])")
+    private WebElement next_button;
+    private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
+
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
     }
@@ -191,6 +195,12 @@ public class ClinicInBoxPage extends BasePage {
             //System.out.println("/*---there are no success toast Message for Verify PHN to be Appears");
             //throw new RuntimeException("/*---there are no success Message to be Appears--*/");
        // }
+    }
+
+    public void clickNextButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, next_button, 10);
+        WebElement element = driver.findElement(next_button1);
+        next_button.click();
     }
 
 

@@ -119,3 +119,44 @@ java.net.SocketException: Connection reset
 2022-04-28 16:55:34 INFO  BookingDose1:24 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-04-28 16:58:00 INFO  BookingDose1:20 - /*1.----Login as an Clinician to CIB --*/
 2022-04-28 16:58:04 INFO  BookingDose1:24 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-29 16:15:15 INFO  BookingDose1:82 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:15:19 INFO  BookingDose1:86 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-29 16:16:24 INFO  BookingDose1:82 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:18:58 INFO  BookingDose1:82 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:20:29 INFO  BookingDose1:82 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:20:33 INFO  BookingDose1:86 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-29 16:22:13 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:22:17 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-29 16:24:23 INFO  BookingDose1:23 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:33:19 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:33:23 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-04-29 16:35:57 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-04-29 16:36:02 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-02 09:04:16 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-02 09:04:22 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-02 10:48:26 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-02 10:48:31 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-03 13:10:54 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-03 13:10:57 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-03 13:13:08 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-03 13:13:12 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-03 13:50:19 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-03 13:50:22 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-03 14:59:18 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-03 14:59:21 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-03 15:00:05 WARN  WebSocketHandler:142 - onError
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
