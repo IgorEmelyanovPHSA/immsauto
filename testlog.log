@@ -160,3 +160,5 @@ java.net.SocketException: Connection reset
 	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-05-03 16:15:46 INFO  BookingDose1:21 - /*1.----Login as an Clinician to CIB --*/
+2022-05-03 16:15:50 INFO  BookingDose1:25 - /*2.----Clinic In Box(IPM) page displayed --*/
