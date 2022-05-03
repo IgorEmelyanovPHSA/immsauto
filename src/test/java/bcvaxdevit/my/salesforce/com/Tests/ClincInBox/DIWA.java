@@ -18,11 +18,14 @@ public class DIWA  extends BaseTest {
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws InterruptedException {
         //TestcaseID = "220554"; //C22054
         System.out.println("/*----1. Login as an Clinician to CIB  --*/");
-
+        ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
+        Thread.sleep(4000);
         System.out.println("/*----2. Close all previously opened Tabs --*/");
+        clinicInBoxPage.closeAllTabs();
+        Thread.sleep(3000);
+        System.out.println("/*----3. Close Other Tabs --*/");
         System.out.println("/*----3. Navigate to global search bar--*/");
         System.out.println("/*----4. Search for Participant account--*/");
-        ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
 
         System.out.println("/*----5. Select DIWA Citizen ---*/");
 
@@ -41,6 +44,7 @@ public class DIWA  extends BaseTest {
 
         System.out.println("/*----6. Locate The Related Tab Under Person Account ---*/");
         clinicInBoxPage.clickCreatImmunizationRecord();
+        Thread.sleep(3000);
         System.out.println("/*----7. Click Creat Immunization Record ---*/");
         clinicInBoxPage.clickSelectAnOptionDropdown();
         Thread.sleep(3000);

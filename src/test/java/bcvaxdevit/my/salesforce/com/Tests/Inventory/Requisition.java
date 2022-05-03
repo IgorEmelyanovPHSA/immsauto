@@ -12,8 +12,12 @@ public class Requisition extends BaseTest {
 	
 	@Test
 
-	public void Can_Create_Requisition_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "219972"; //C219972
+
+	public void Create_Requisition_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
+		TestcaseID = "1307910"; //C193935
+
+
+
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----2. Locate Dropdown Menu --*/");

@@ -20,8 +20,8 @@ public class BaseTest {
 	protected LoginPage loginPage;
 	PrintStream old;
 	ByteArrayOutputStream logOutputSteps;
-	
-	
+
+
 	@BeforeSuite
 	public void beforeSuite() {
 		//---This will execute before the Suite
@@ -41,7 +41,7 @@ public class BaseTest {
 		driver.get(BCVAXDEVIT_URL);
 		loginPage = new LoginPage(driver);
 	}
-	
+
 	@BeforeClass
 	public void setUp() {
 		System.out.println("This will execute before the Class");
@@ -51,15 +51,15 @@ public class BaseTest {
 		//driver.manage().window().maximize();
 		//driver.get(PRODSUPPQA_URL);
 		//loginPage=new LoginPage(driver);
-		
+
 	}
-	
+
 	@BeforeMethod
 	public void beforeMethod() {
 		System.out.println("This will execute before the Method");
 	}
-	
-	
+
+
 	@AfterMethod
 	public void afterMethod(ITestResult result) throws Throwable {
 		System.out.println("This will execute after the Method");
@@ -70,24 +70,28 @@ public class BaseTest {
 		} else if (result.getStatus() == ITestResult.FAILURE) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
 		}
-		
+
 	}
-	
-	
+
+
 	@AfterClass
 	public void tearDown() {
+
        System.out.println("This will execute after the Class");
+
 //        driver.manage().deleteAllCookies();
 //        driver.close();
 //        driver.quit();
 
-    }
-
-    @AfterSuite
-    public void cleanUp(){
-		System.out.println("This will execute after the Suite");
-        driver.manage().deleteAllCookies();
-        driver.close();
 	}
 
+		@AfterSuite
+		public void cleanUp () {
+		System.out.println("This will execute after the Suite");
+		driver.manage().deleteAllCookies();
+		driver.close();
+    }
+
 }
+
+
