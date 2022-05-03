@@ -14,7 +14,8 @@ public class Requisition extends BaseTest {
 
 
 	public void Create_Requisition_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "1307910"; //C193935
+
+		//TestcaseID = "1307910"; //C193935
 
 
 

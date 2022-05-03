@@ -180,6 +180,7 @@ public class ClinicInBoxPage extends BasePage {
         verify_phn_button.click();
     }
 
+
     public void successMessageAppear() throws InterruptedException {
         //try {
             waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
@@ -192,6 +193,7 @@ public class ClinicInBoxPage extends BasePage {
        // }
     }
 
+
     @FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
     private WebElement user_found;
     private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
@@ -200,8 +202,10 @@ public class ClinicInBoxPage extends BasePage {
 
 
 
+
     @FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
     private WebElement inputDiwaDate;
+
 
 }
 
