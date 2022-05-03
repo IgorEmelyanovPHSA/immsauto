@@ -15,8 +15,12 @@ public class LoginPage extends BasePage {
 	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!!";
 	private final String CLINICIAN_CIB_BCVAXDEVIT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!";
+
 	private final String CLINICIAN_Consumption_BCVAXDEVIT = "auto_clinician_consumption@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_Consumption_BCVAXDEVIT = "Technology1990!!!!!!";
+
+	private final String DIWA_BCVAXDEVIT = "jason.yulghun@phsa.ca.bcvaxdevit";
+	private final String DIWA_PW_BCVAXDEVIT = "phsa*phsa7";
 	
 	@FindBy(id = "username")
 	private WebElement clinician_bcvaxdevit;
@@ -26,8 +30,12 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_cib_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxdevit;
+
 	@FindBy(id = "username")
 	private WebElement Consumption_bcvaxdevit;
+
+	@FindBy(id = "username")
+	private WebElement diwa_bcvaxdevit;
 	
 	@FindBy(id = "password")
 	private WebElement clinician_pw_bcvaxdevit;
@@ -37,8 +45,13 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_pw_cib_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement Precondition_pw_bcvaxdevit;
+
 	@FindBy(id = "password")
 	private WebElement Cosumption_pw_bcvaxdevit;
+
+
+	@FindBy(id = "password")
+	private WebElement diwa_pw_bcvaxdevit;
 	
 	@FindBy(id = "Login")
 	private WebElement login_button;
@@ -101,6 +114,10 @@ public class LoginPage extends BasePage {
 	public void pressSubmitButton() {
 		this.submit_button.click();
 	}
+
+	public void enterDIWA_UserName(){this.diwa_bcvaxdevit.sendKeys(DIWA_BCVAXDEVIT);}
+
+	public void enterDIWA_PW(){this.diwa_pw_bcvaxdevit.sendKeys(DIWA_PW_BCVAXDEVIT);}
 	
 	//public void setUsername (String username){
 	//  type(username,clinicianField);
@@ -179,9 +196,9 @@ public class LoginPage extends BasePage {
 	}
 	
 	public ClinicInBoxPage loginAsDIWA() {
-		this.enterClinicianCIBUserName();
+		this.enterDIWA_UserName();
 		//setUsername(username);
-		this.enterClinicianCIBPW();
+		this.enterDIWA_PW();
 		//return clickLoginButton();
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);

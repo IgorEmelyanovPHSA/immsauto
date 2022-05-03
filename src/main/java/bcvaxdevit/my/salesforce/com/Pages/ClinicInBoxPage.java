@@ -24,9 +24,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement search_input;
     private By search_input1 = By.xpath("//input[@placeholder = 'Search...']");
 
-    @FindBy(xpath = ".//a[@title='Maegan BCVaxVillage']")
-    private WebElement user_found;
-    private By user_found1 = By.xpath(".//a[@title='Maegan BCVaxVillage']");
+//    @FindBy(xpath = ".//a[@title='Maegan BCVaxVillage']")
+//    private WebElement user_found;
+//    private By user_found1 = By.xpath(".//a[@title='Maegan BCVaxVillage']");
 
     @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
@@ -97,14 +97,13 @@ public class ClinicInBoxPage extends BasePage {
 
     public void SearchDIWACitizen(String citizen ) throws InterruptedException {
         //waitForElementToBeLocated(driver,search_assistant1,10);
-        //waitForElementToBeVisible(driver, search_assistant, 15);
+        waitForElementToBeVisible(driver, search_assistant, 10);
         WebElement search_navigator = driver.findElement(search_assistant1);
         search_navigator.click();
-        //  waitForElementToBeVisible(driver, search_input, 10);
-        Thread.sleep(5000);
+        waitForElementToBeVisible(driver, search_input, 10);
         WebElement search_input = driver.findElement(search_input1);
-        search_input.sendKeys(citizen,Keys.ENTER);
-        // search_input.sendKeys(Keys.RETURN);
+        search_input.sendKeys(citizen);
+        search_input.sendKeys(Keys.RETURN);
 
     }
 
@@ -193,8 +192,16 @@ public class ClinicInBoxPage extends BasePage {
        // }
     }
 
+    @FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
+    private WebElement user_found;
+    private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
 
 
+
+
+
+    @FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
+    private WebElement inputDiwaDate;
 
 }
 
