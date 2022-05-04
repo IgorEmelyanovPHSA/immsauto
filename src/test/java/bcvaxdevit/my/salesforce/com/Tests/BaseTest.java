@@ -63,13 +63,13 @@ public class BaseTest {
 	@AfterMethod
 	public void afterMethod(ITestResult result) throws Throwable {
 		System.out.println("This will execute after the Method");
-		System.out.flush();
+/*		System.out.flush();
 		System.setOut(old);
 		if (result.getStatus() == ITestResult.SUCCESS) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
-		}
+		}*/
 
 	}
 
