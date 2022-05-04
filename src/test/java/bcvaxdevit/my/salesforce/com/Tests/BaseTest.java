@@ -14,7 +14,7 @@ import java.io.PrintStream;
 
 public class BaseTest {
 	protected String TestcaseID;
-	private WebDriver driver;
+	WebDriver driver;
 	//private static final WebDriver driver = new ChromeDriver();
 	private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
 	protected LoginPage loginPage;
@@ -35,11 +35,11 @@ public class BaseTest {
 		System.out.println("This will execute before the Suite");
 		// ChromeDriver location set up in Utils class
 		//System.setProperty("webdriver.chrome.whitelistedIps", "");
-		driver = new ChromeDriver();
+	/*	driver = new ChromeDriver();
 		System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
 		driver.manage().window().maximize();
 		driver.get(BCVAXDEVIT_URL);
-		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(driver);*/
 	}
 
 	@BeforeClass
@@ -59,6 +59,22 @@ public class BaseTest {
 		System.out.println("This will execute before the Method");
 	}
 
+	@BeforeTest
+	public void beforeTest() {
+		System.out.println("This will execute before the Test");
+		driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
+		driver.manage().window().maximize();
+		driver.get(BCVAXDEVIT_URL);
+		loginPage = new LoginPage(driver);
+	}
+
+	@AfterTest
+	public void afterTest() {
+		System.out.println("This will execute after the Test");
+		driver.manage().deleteAllCookies();
+		driver.close();
+	}
 
 	@AfterMethod
 	public void afterMethod(ITestResult result) throws Throwable {
@@ -73,7 +89,6 @@ public class BaseTest {
 
 	}
 
-
 	@AfterClass
 	public void tearDown() {
 		System.out.println("This will execute after the Class");
@@ -82,8 +97,6 @@ public class BaseTest {
 	@AfterSuite
 		public void cleanUp () {
 		System.out.println("This will execute after the Suite");
-		driver.manage().deleteAllCookies();
-		driver.close();
     }
 
 }
