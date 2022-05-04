@@ -15,13 +15,8 @@ public class LoginPage extends BasePage {
 	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!!";
 	private final String CLINICIAN_CIB_BCVAXDEVIT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!";
-<<<<<<< Updated upstream
-
 	private final String CLINICIAN_Consumption_BCVAXDEVIT = "auto_clinician_consumption@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_Consumption_BCVAXDEVIT = "Technology1990!!!!!!";
-
-=======
->>>>>>> Stashed changes
 	private final String DIWA_BCVAXDEVIT = "jason.yulghun@phsa.ca.bcvaxdevit";
 	private final String DIWA_PW_BCVAXDEVIT = "phsa*phsa7";
 	
@@ -33,14 +28,9 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_cib_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxdevit;
-
 	@FindBy(id = "username")
-<<<<<<< Updated upstream
 	private WebElement Consumption_bcvaxdevit;
-
 	@FindBy(id = "username")
-=======
->>>>>>> Stashed changes
 	private WebElement diwa_bcvaxdevit;
 	
 	@FindBy(id = "password")
@@ -51,15 +41,10 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_pw_cib_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement Precondition_pw_bcvaxdevit;
-
 	@FindBy(id = "password")
-<<<<<<< Updated upstream
 	private WebElement Cosumption_pw_bcvaxdevit;
-
-
 	@FindBy(id = "password")
-=======
->>>>>>> Stashed changes
+
 	private WebElement diwa_pw_bcvaxdevit;
 	
 	@FindBy(id = "Login")
