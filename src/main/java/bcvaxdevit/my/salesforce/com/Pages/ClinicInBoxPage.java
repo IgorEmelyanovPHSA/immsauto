@@ -3,6 +3,12 @@ package bcvaxdevit.my.salesforce.com.Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ClinicInBoxPage extends BasePage {
 
     @FindBy(xpath = ".//button[text() = 'Register New Citizen']")
@@ -75,6 +81,21 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
     private WebElement inputDiwaDate;
 
+    @FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
+    private WebElement covidmRna;
+    private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
+
+    @FindBy(xpath = "// button[@title = 'icon']")
+    private WebElement search_location;
+    private By search_location1 = By.xpath("// button[@title = 'icon']");
+
+    @FindBy(xpath = "//input[@data-id = 'userinput']")
+    private WebElement search_clinic;
+    private By search_clinic1 = By.xpath("//input[@data-id = 'userinput']");
+
+    @FindBy(xpath = "//button[@title=\"Select a date for undefined\"]")
+    private WebElement enterDate;
+
     @FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
     private WebElement email;
     private By email1 = By.xpath("(.//input[@name = 'PersonEmail'])");
@@ -98,6 +119,7 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = ".//button[text() = 'Register']")
     private WebElement register_confirmation_page_button;
     private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
+
 
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
@@ -164,15 +186,33 @@ public class ClinicInBoxPage extends BasePage {
     public void clickSelectAnOptionDropdown() {
         this.select_an_option.click();
     }
-//    public void inputRequestDate() {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.DAY_OF_YEAR, 1);
-//        Date tomorrow = calendar.getTime();
-//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-//
-//        String tomorrowAsString = dateFormat.format(tomorrow);
-//        this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
-//    }
+    public void selectOption(String vaccine) throws InterruptedException {
+        //waitForElementToBeLocated(driver,clinicName,10);
+        waitForElementToBeVisible(driver, covidmRna, 10);
+        WebElement search_input = driver.findElement(covidmRna2);
+        search_input.click();
+    }
+
+    public void searchClinicLocation(String clinic) throws InterruptedException {
+        //waitForElementToBeLocated(driver,search_location1,10);
+        waitForElementToBeVisible(driver, search_location, 10);
+        WebElement search_navigator = driver.findElement(search_location1);
+        search_navigator.click();
+        waitForElementToBeVisible(driver, search_clinic, 10);
+        WebElement search_input = driver.findElement(search_clinic1);
+        search_input.sendKeys(clinic);
+        search_input.sendKeys(Keys.RETURN);
+        Thread.sleep(5000);
+    }
+    public void selectDateAndTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+
+        String tomorrowAsString = dateFormat.format(tomorrow);
+        this.enterDate.sendKeys(tomorrowAsString, Keys.ENTER);
+    }
 
     public void enterFirstName(String firstname) throws InterruptedException {
         waitForElementToBeLocated(driver, first_name1, 10);
