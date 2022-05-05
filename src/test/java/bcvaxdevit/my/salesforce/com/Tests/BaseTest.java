@@ -35,23 +35,16 @@ public class BaseTest {
 		System.out.println("This will execute before the Suite");
 		// ChromeDriver location set up in Utils class
 		//System.setProperty("webdriver.chrome.whitelistedIps", "");
-	/*	driver = new ChromeDriver();
+		driver = new ChromeDriver();
 		System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
 		driver.manage().window().maximize();
 		driver.get(BCVAXDEVIT_URL);
-		loginPage = new LoginPage(driver);*/
+		loginPage = new LoginPage(driver);
 	}
 
 	@BeforeClass
 	public void setUp() {
 		System.out.println("This will execute before the Class");
-		// ChromeDriver location set up in Utils class
-		//driver = new ChromeDriver();
-		//System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
-		//driver.manage().window().maximize();
-		//driver.get(PRODSUPPQA_URL);
-		//loginPage=new LoginPage(driver);
-
 	}
 
 	@BeforeMethod
@@ -62,18 +55,11 @@ public class BaseTest {
 	@BeforeTest
 	public void beforeTest() {
 		System.out.println("This will execute before the Test");
-		driver = new ChromeDriver();
-		System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
-		driver.manage().window().maximize();
-		driver.get(BCVAXDEVIT_URL);
-		loginPage = new LoginPage(driver);
 	}
 
 	@AfterTest
 	public void afterTest() {
 		System.out.println("This will execute after the Test");
-		driver.manage().deleteAllCookies();
-		driver.close();
 	}
 
 	@AfterMethod
@@ -97,6 +83,8 @@ public class BaseTest {
 	@AfterSuite
 		public void cleanUp () {
 		System.out.println("This will execute after the Suite");
+		driver.manage().deleteAllCookies();
+		driver.quit();
     }
 
 }
