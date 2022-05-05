@@ -108,10 +108,6 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement review_details;
     private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
 
-    @FindBy(xpath = "//button[@title='Check Eligibility']")
-    private WebElement click_eligibility_button;
-    private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
-
     @FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
     private WebElement select_covid19_option_from_dropdown;
     private By select_covid19_option_from_dropdown1 = By.xpath("(.//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination'])");
@@ -119,6 +115,14 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = ".//button[text() = 'Register']")
     private WebElement register_confirmation_page_button;
     private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
+
+    @FindBy(xpath = "(.//a[text() = 'Related'])")
+    private WebElement person_account_Related_tab;
+    private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
+
+    @FindBy(xpath = "//button[@title='Check Eligibility']")
+    private WebElement click_eligibility_button;
+    private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
 
 
     public ClinicInBoxPage(WebDriver driver) {
@@ -285,7 +289,29 @@ public class ClinicInBoxPage extends BasePage {
         review_details.click();
     }
 
-    public void clickEligibilityButton() throws InterruptedException {
+    public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
+        waitForElementToBeLocated(driver, register_confirmation_page_button1, 10);
+        WebElement element = driver.findElement(register_confirmation_page_button1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void successRegisteredMessageAppear() throws InterruptedException {
+        waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
+        driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
+        Thread.sleep(2000);
+        System.out.println("/* ----the toast success Citizen Registered message has been Appears");
+    }
+
+    public void clickOnPersonAccountRelatedTab() throws InterruptedException {
+        Thread.sleep(2000);
+        WebElement element = driver.findElement(person_account_Related_tab_1);
+        isDisplayed(person_account_Related_tab_1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void clickOnEligibilityButton() throws InterruptedException {
         waitForElementToBeLocated(driver, click_eligibility_button1, 10);
         WebElement element = driver.findElement(click_eligibility_button1);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -294,20 +320,15 @@ public class ClinicInBoxPage extends BasePage {
 		WebElement element2 = driver.findElement(click_eligibility_dropdown1);
 		JavascriptExecutor executor2 = (JavascriptExecutor) driver;
 		executor2.executeScript("arguments[0].click();", element2);*/
-        Thread.sleep(2000);
+       /* Thread.sleep(2000);
         waitForElementToBeLocated(driver, select_covid19_option_from_dropdown1, 10);
         WebElement element1 = driver.findElement(select_covid19_option_from_dropdown1);
         JavascriptExecutor executor1 = (JavascriptExecutor) driver;
         executor1.executeScript("arguments[0].click();", element1);
-        Thread.sleep(2000);
+        Thread.sleep(2000);*/
     }
 
-    public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
-        waitForElementToBeLocated(driver, register_confirmation_page_button1, 10);
-        WebElement element = driver.findElement(register_confirmation_page_button1);
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-    }
+
 
 
 }
