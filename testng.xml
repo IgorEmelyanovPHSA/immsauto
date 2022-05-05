@@ -3,14 +3,14 @@
 <suite name="Clinic-In Box Workflow Suit">
     <test name="Regression">
         <classes>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.Precondition.CitizenDuplicates">
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2">
                 <methods>
-                    <include name="Can_search_and_remove_Citizen_participant_account"/>
+                    <include name="Test1"/>
                 </methods>
             </class>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose1">
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2">
                 <methods>
-                    <include name="Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT"/>
+                    <include name="Test2"/>
                 </methods>
             </class>
         </classes>
