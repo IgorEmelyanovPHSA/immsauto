@@ -16,7 +16,7 @@ public class DIWA  extends BaseTest {
 
     @Test(testName = "DIWA Create DIWA Immunisation record without Appointments(Java)")
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "220554"; //C22054
+        TestcaseID = "220544"; //C22054
         System.out.println("/*----1. Login as an Clinician to CIB  --*/");
         ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
         Thread.sleep(4000);
@@ -46,16 +46,50 @@ public class DIWA  extends BaseTest {
         clinicInBoxPage.clickCreatImmunizationRecord();
         Thread.sleep(3000);
         System.out.println("/*----7. Click Creat Immunization Record ---*/");
+        //clinicInBoxPage.clickConfirmToProceed();
+        System.out.println("/*----8. Click Creat Immunization Record ---*/");
         clinicInBoxPage.clickSelectAnOptionDropdown();
         Thread.sleep(3000);
-        System.out.println("/*----8. Select COVID19-mRNA as an Option  ---*/");
-        //clinicInBoxPage.clickCovid19mRNA();
-        System.out.println("/*----9. Enter a Clinic Location ---*/");
-        //clinicInBoxPage.enterClinicLocation();
-        System.out.println("/*---10. Select a Date and Time Administration ---*/");
-        //clinicInBoxPage.SelectDateAndTime();
+        System.out.println("/*----9. Select COVID19-mRNA as an Option  ---*/");
+        clinicInBoxPage.selectOption("COVID19-mRNA");
         Thread.sleep(3000);
-        System.out.println("/*---11. Fill the Consent Fields ---*/");
+        System.out.println("/*----10. Enter a Clinic Location ---*/");
+        clinicInBoxPage.searchClinicLocation("Atlin Health Center");
+        Thread.sleep(3000);
+        System.out.println("/*---11. Select a Date and Time Administration ---*/");
+        clinicInBoxPage.selectDateAndTime();
+        Thread.sleep(3000);
+        System.out.println("/*---12. Click Record Immunization ---*/");
+        //clinicInBoxPage.clickRecordImmunization();
+        Thread.sleep(3000);
+        System.out.println("/*---13. Scroll down to Immunization Information and Click Edit---*/");
+        Thread.sleep(3000);
+        System.out.println("/*---14. Select Provider ---*/");
+        //clinicInBoxPage.selectProvider();
+        Thread.sleep(3000);
+        System.out.println("/*---15. Reset Lot Number ---*/");
+        //clinicInBoxPage.resetLotNumber();
+        Thread.sleep(3000);
+        System.out.println("/*---16. Select Injection Site ---*/");
+        //clinicInBoxPage.selectInjectionSite();
+        Thread.sleep(3000);
+        System.out.println("/*---17. Write Revision Reason ---*/");
+        //clinicInBoxPage.writeRevisionReason();
+        Thread.sleep(3000);
+        System.out.println("/*---18. Save Immunization Information ---*/");
+        //clinicInBoxPage.saveImmunizationInformation();
+        Thread.sleep(3000);
+        System.out.println("/*---19. Confirm and Save Administration ---*/");
+        //clinicInBoxPage.confirmAndSaveAdministration();
+        Thread.sleep(3000);
+        System.out.println("/*---20. Vaccine Administration Summary Confirm and Save ---*/");
+        //clinicInBoxPage.summaryConfirmAndSave();
+        Thread.sleep(3000);
+
+
+
+
+
 
 
 
