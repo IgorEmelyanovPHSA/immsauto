@@ -85,7 +85,6 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement covidmRna;
     private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
 
-
     @FindBy(xpath = "// button[@title = 'icon']")
     private WebElement search_location;
     private By search_location1 = By.xpath("// button[@title = 'icon']");
@@ -97,11 +96,29 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//button[@title=\"Select a date for undefined\"]")
     private WebElement enterDate;
 
+    @FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
+    private WebElement email;
+    private By email1 = By.xpath("(.//input[@name = 'PersonEmail'])");
 
+    @FindBy(xpath = "(.//input[@name = 'ConfirmEmail'])")
+    private WebElement confirm_email;
+    private By confirm_email1 = By.xpath("(.//input[@name = 'ConfirmEmail'])");
 
+    @FindBy(xpath = ".//button[text()= 'Review Details']")
+    private WebElement review_details;
+    private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
 
+    @FindBy(xpath = "//button[@title='Check Eligibility']")
+    private WebElement click_eligibility_button;
+    private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
 
+    @FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
+    private WebElement select_covid19_option_from_dropdown;
+    private By select_covid19_option_from_dropdown1 = By.xpath("(.//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination'])");
 
+    @FindBy(xpath = ".//button[text() = 'Register']")
+    private WebElement register_confirmation_page_button;
+    private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 
 
     public ClinicInBoxPage(WebDriver driver) {
@@ -234,7 +251,6 @@ public class ClinicInBoxPage extends BasePage {
         verify_phn_button.click();
     }
 
-
     public void successMessageAppear() throws InterruptedException {
         //try {
             waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
@@ -247,12 +263,50 @@ public class ClinicInBoxPage extends BasePage {
        // }
     }
 
-
-
     public void clickNextButton() throws InterruptedException {
         waitForElementToBeVisible(driver, next_button, 10);
         WebElement element = driver.findElement(next_button1);
         next_button.click();
+    }
+
+    public void enterEmail(String enteremail) throws InterruptedException {
+        waitForElementToBeLocated(driver, email1, 10);
+        email.sendKeys(enteremail);
+    }
+
+    public void confirmEmail(String confirmemail) throws InterruptedException {
+        waitForElementToBeLocated(driver, confirm_email1, 10);
+        confirm_email.sendKeys(confirmemail);
+    }
+
+    public void clickReviewDetails() throws InterruptedException {
+        waitForElementToBeVisible(driver, review_details, 10);
+        WebElement element = driver.findElement(review_details1);
+        review_details.click();
+    }
+
+    public void clickEligibilityButton() throws InterruptedException {
+        waitForElementToBeLocated(driver, click_eligibility_button1, 10);
+        WebElement element = driver.findElement(click_eligibility_button1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+		/*waitForElementToBeLocated(driver, click_eligibility_dropdown1, 10);
+		WebElement element2 = driver.findElement(click_eligibility_dropdown1);
+		JavascriptExecutor executor2 = (JavascriptExecutor) driver;
+		executor2.executeScript("arguments[0].click();", element2);*/
+        Thread.sleep(2000);
+        waitForElementToBeLocated(driver, select_covid19_option_from_dropdown1, 10);
+        WebElement element1 = driver.findElement(select_covid19_option_from_dropdown1);
+        JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+        executor1.executeScript("arguments[0].click();", element1);
+        Thread.sleep(2000);
+    }
+
+    public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
+        waitForElementToBeLocated(driver, register_confirmation_page_button1, 10);
+        WebElement element = driver.findElement(register_confirmation_page_button1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 
 
