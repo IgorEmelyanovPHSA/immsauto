@@ -38,9 +38,9 @@ public class RequisitionPage extends BasePage {
 	private WebElement shipAddress;
 	private By shipAddress1 = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
 	
-	@FindBy(xpath = "//span[contains(text(),\"Atlin Health Centre\")]")
+	@FindBy(xpath = "//span[contains(text(),'All Ages - Atlin Health Centre')]")
 	private WebElement clinicName;
-	private By clinicName2 = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
+	private By clinicName2 = By.xpath("//span[contains(text(),'All Ages - Atlin Health Centre')]");
 
 //    @FindBy (xpath ="//a[contains(text(),\"Atlin Health Centre\")]")
 //    private WebElement clinicName;
@@ -54,7 +54,7 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),\"Next\")]")
 	private WebElement nextButton;
 	
-	@FindBy(xpath = "//tbody/tr[13]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
+	@FindBy(xpath = "//tbody/tr[5]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
 	private WebElement checkBox;
 	
 	@FindBy(xpath = "//div[@class=\"slds-form-element__control slds-grow\"]//input")
@@ -224,7 +224,7 @@ public class RequisitionPage extends BasePage {
 	
 	
 	public void clickLineItemCheckBox() throws InterruptedException {
-		By check_box = By.xpath("//tbody/tr[13]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
+		By check_box = By.xpath("//tbody/tr[5]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
 		WebElement element = driver.findElement(check_box);
 		//Scroll to select the desired line item
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -237,6 +237,7 @@ public class RequisitionPage extends BasePage {
 	
 	
 	public void clickSaveButton() {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveButton);
 		this.saveButton.click();
 	}
 	
