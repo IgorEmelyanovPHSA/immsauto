@@ -29,60 +29,72 @@ public class DIWA  extends BaseTest {
 
         System.out.println("/*----5. Select DIWA Citizen ---*/");
 
-        clinicInBoxPage.SearchDIWACitizen("Maegan BCVaxVillage");
+        clinicInBoxPage.SearchDIWACitizen("Maegan bcvaxvillage");
         System.out.println("/*----Search for Maegan BCVaxVillage ---*/");
-        if (!clinicInBoxPage.userFound()) {
-            System.out.println("/*----User --> Maegan BCVaxVillage not found and return---*/");
-        }
-        while (clinicInBoxPage.userFound()) {
-            System.out.println("/*----User found and Navigated to record page ---*/");
-            Thread.sleep(2000);
-            clinicInBoxPage.clickRelatedTab();
-            System.out.println("/*---- Navigated to Person Account related tab ---*/");
-            Thread.sleep(2000);
-        }
+        Thread.sleep(4000);
+        clinicInBoxPage.userClickCitizen();
+        Thread.sleep(4000);
+        clinicInBoxPage.userClickInTable();
 
+//        if (!clinicInBoxPage.userFound()) {
+//            System.out.println("/*----User --> Maegan BCVaxVillage not found and return---*/");
+//        }
+//        while (clinicInBoxPage.userFound()) {
+//            System.out.println("/*----User found and Navigated to record page ---*/");
+//            Thread.sleep(2000);
+//            clinicInBoxPage.clickRelatedTab();
+//            System.out.println("/*---- Navigated to Person Account related tab ---*/");
+//            Thread.sleep(2000);
+//        }
+        Thread.sleep(2000);
         System.out.println("/*----6. Locate The Related Tab Under Person Account ---*/");
-        clinicInBoxPage.clickCreatImmunizationRecord();
+        System.out.println("/*----7. Click Confirm ---*/");
+        clinicInBoxPage.clickConfirmBtn();
         Thread.sleep(3000);
-        System.out.println("/*----7. Click Creat Immunization Record ---*/");
-        //clinicInBoxPage.clickConfirmToProceed();
         System.out.println("/*----8. Click Creat Immunization Record ---*/");
+        clinicInBoxPage.clickCreatImmunizationRecord();
+        System.out.println("/*----9. Select an Option ---*/");
         clinicInBoxPage.clickSelectAnOptionDropdown();
         Thread.sleep(3000);
         System.out.println("/*----9. Select COVID19-mRNA as an Option  ---*/");
         clinicInBoxPage.selectOption("COVID19-mRNA");
         Thread.sleep(3000);
         System.out.println("/*----10. Enter a Clinic Location ---*/");
-        clinicInBoxPage.searchClinicLocation("Atlin Health Center");
+        clinicInBoxPage.searchClinicLocation("All Ages - Atlin Health Centre");
         Thread.sleep(3000);
         System.out.println("/*---11. Select a Date and Time Administration ---*/");
         clinicInBoxPage.selectDateAndTime();
         Thread.sleep(3000);
         System.out.println("/*---12. Click Record Immunization ---*/");
-        //clinicInBoxPage.clickRecordImmunization();
+        clinicInBoxPage.clickRecordImmunization();
         Thread.sleep(3000);
-        System.out.println("/*---13. Scroll down to Immunization Information and Click Edit---*/");
+        System.out.println("/*---13. Select Informed Consent Provider ---*/");
+        clinicInBoxPage.informedConsentProvider();
+        System.out.println("/*---14. Enter Consent Effective To Date---*/");
+        clinicInBoxPage.enterConsentEffectiveToDate();
+        System.out.println("/*---15. Save Consent---*/");
+        clinicInBoxPage.clickSaveConsent();
+        System.out.println("/*---16. Scroll down to Immunization Information and Click Edit---*/");
         Thread.sleep(3000);
-        System.out.println("/*---14. Select Provider ---*/");
+        System.out.println("/*---17. Select Provider ---*/");
         //clinicInBoxPage.selectProvider();
         Thread.sleep(3000);
-        System.out.println("/*---15. Reset Lot Number ---*/");
+        System.out.println("/*---18. Reset Lot Number ---*/");
         //clinicInBoxPage.resetLotNumber();
         Thread.sleep(3000);
-        System.out.println("/*---16. Select Injection Site ---*/");
+        System.out.println("/*---19. Select Injection Site ---*/");
         //clinicInBoxPage.selectInjectionSite();
         Thread.sleep(3000);
-        System.out.println("/*---17. Write Revision Reason ---*/");
+        System.out.println("/*---20. Write Revision Reason ---*/");
         //clinicInBoxPage.writeRevisionReason();
         Thread.sleep(3000);
-        System.out.println("/*---18. Save Immunization Information ---*/");
+        System.out.println("/*---21. Save Immunization Information ---*/");
         //clinicInBoxPage.saveImmunizationInformation();
         Thread.sleep(3000);
-        System.out.println("/*---19. Confirm and Save Administration ---*/");
+        System.out.println("/*---22. Confirm and Save Administration ---*/");
         //clinicInBoxPage.confirmAndSaveAdministration();
         Thread.sleep(3000);
-        System.out.println("/*---20. Vaccine Administration Summary Confirm and Save ---*/");
+        System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
         //clinicInBoxPage.summaryConfirmAndSave();
         Thread.sleep(3000);
 
