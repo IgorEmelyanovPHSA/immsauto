@@ -12,15 +12,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+
 public class BaseTest {
 	protected String TestcaseID;
-	WebDriver driver;
+	public WebDriver driver;
+	//private static WebDriver driver;
 	//private static final WebDriver driver = new ChromeDriver();
 	private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
 	protected LoginPage loginPage;
 	PrintStream old;
 	ByteArrayOutputStream logOutputSteps;
-
 
 	@BeforeSuite
 	public void beforeSuite() {
@@ -33,13 +34,6 @@ public class BaseTest {
 		// Redirect log special stream to logOutput for TestRail
 		System.setOut(ps);
 		System.out.println("This will execute before the Suite");
-		// ChromeDriver location set up in Utils class
-		//System.setProperty("webdriver.chrome.whitelistedIps", "");
-	/*	driver = new ChromeDriver();
-		System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
-		driver.manage().window().maximize();
-		driver.get(BCVAXDEVIT_URL);
-		loginPage = new LoginPage(driver);*/
 	}
 
 	@BeforeClass
@@ -54,54 +48,24 @@ public class BaseTest {
 
 	}
 
-	@BeforeMethod
-	public void beforeMethod() {
-		System.out.println("This will execute before the Method");
-	}
-
-<<<<<<< Updated upstream
 	@BeforeTest
 	public void beforeTest() {
 		System.out.println("This will execute before the Test");
+	}
+	@BeforeMethod
+	public void beforeMethod() {
+		System.out.println("This will execute before the Method");
+		// ChromeDriver location set up in Utils class
+		// System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
 		driver = new ChromeDriver();
-		System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
 		driver.manage().window().maximize();
 		driver.get(BCVAXDEVIT_URL);
 		loginPage = new LoginPage(driver);
 	}
-
-	@AfterTest
-	public void afterTest() {
-		System.out.println("This will execute after the Test");
-		driver.manage().deleteAllCookies();
-		driver.close();
-	}
-
+	/////////////////After///////////////////
 	@AfterMethod
 	public void afterMethod(ITestResult result) throws Throwable {
-//		System.out.println("This will execute after the Method");
-//		System.out.flush();
-//		System.setOut(old);
-//		if (result.getStatus() == ITestResult.SUCCESS) {
-//			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
-//		} else if (result.getStatus() == ITestResult.FAILURE) {
-//			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
-//		}
 
-	}
-
-	@AfterClass
-	public void tearDown() {
-		System.out.println("This will execute after the Class");
-	}
-
-	@AfterSuite
-		public void cleanUp () {
-		System.out.println("This will execute after the Suite");
-=======
-
-	@AfterMethod
-	public void afterMethod(ITestResult result) throws Throwable {
 		System.out.println("This will execute after the Method");
 		System.out.flush();
 		System.setOut(old);
@@ -111,6 +75,20 @@ public class BaseTest {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
 		}
 
+		System.out.println("This will execute after the Method");
+		driver.manage().deleteAllCookies();
+		driver.close();
+		System.out.flush();
+		System.setOut(old);
+		if (result.getStatus() == ITestResult.SUCCESS) {
+			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
+		} else if (result.getStatus() == ITestResult.FAILURE) {
+			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
+		}
+	}
+	@AfterTest
+	public void afterTest() {
+		System.out.println("This will execute after the Test");
 	}
 
 
@@ -123,13 +101,15 @@ public class BaseTest {
 
 	}
 
-		@AfterSuite
-		public void cleanUp () {
+	@AfterSuite
+	public void cleanUp () {
 		System.out.println("This will execute after the Suite");
 		driver.manage().deleteAllCookies();
 		driver.close();
->>>>>>> Stashed changes
-    }
+
+
+	}
+
 
 }
 
