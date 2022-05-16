@@ -16,7 +16,7 @@ public class CitizenDuplicates extends BaseTest {
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {
-			System.out.println("/*---- Navigate to Health Connect - Supply Console --*/");
+			System.out.println("/*---- Navigate to ICE APP --*/");
 			inClinicExperiencePage.selectIceApp();
 			Thread.sleep(2000);
 		}
