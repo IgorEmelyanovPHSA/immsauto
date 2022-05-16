@@ -94,6 +94,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement supply_console_App_displayed;
 	private By supply_console_App_displayed1 = By.xpath(".//span[@title='Health Connect - Supply Console']");
 	
+	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
+	private WebElement ice_App_displayed;
+	private By ice_App_displayed1 = By.xpath(".//span[@title='In-Clinic Experience']");
+	
 	@FindBy(xpath = "//a[@title='Supply Locations']")
 	private WebElement supply_location_displayed;
 	private By supply_location_displayed1 = By.xpath("//a[@title='Supply Locations']");
@@ -324,6 +328,19 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
+	public void selectIceApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		WebElement element = driver.findElement(select_app_launcher1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_ice_app1, 10);
+		WebElement element1 = driver.findElement(click_ice_app1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+	
 	public void clickDropdownMenu() {
 		this.dropdownMenu.click();
 	}
@@ -348,6 +365,10 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public boolean displaySupplyConsolePage() {
 		return isDisplayed(supply_console_App_displayed1);
+	}
+	
+	public boolean displayIceApp() {
+		return isDisplayed(ice_App_displayed1);
 	}
 	
 	public boolean supplyLocDisplayed() {
