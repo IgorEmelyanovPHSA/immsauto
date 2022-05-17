@@ -45,7 +45,7 @@ public class BaseTest {
 		// Save the old System.out!
 		//old = System.out;
 		// Redirect log special stream to logOutput for TestRail
-		System.setOut(ps);
+		//System.setOut(ps);
 		// ChromeDriver location set up in Utils class
 		// System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
 		driver = new ChromeDriver();
@@ -59,11 +59,11 @@ public class BaseTest {
 		System.out.println("This will execute after the Method");
 		System.out.flush();
 		//System.setOut(old);
-		if (result.getStatus() == ITestResult.SUCCESS) {
+		/*if (result.getStatus() == ITestResult.SUCCESS) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
-		}
+		}*/
 		driver.manage().deleteAllCookies();
 		driver.close();
 	}

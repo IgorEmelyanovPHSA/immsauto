@@ -152,6 +152,12 @@ public class BookingDose1 extends BaseTest {
         System.out.println("/*20----Go to Appointment Tab --*/");
         clinicInBox.clickAppointmentTab();
         Thread.sleep(2000);
+        System.out.println("/*21----click on 'Search clinic name' tab --*/");
+        clinicInBox.clickOnSearchClinicNameTab();
+        Thread.sleep(2000);
+        System.out.println("/*22----select the Clinic --*/");
+        clinicInBox.selectClinic();
+        Thread.sleep(2000);
 
 
     }

@@ -153,6 +153,14 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement appointment_tab;
     private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 
+    @FindBy(xpath = ".//a[text()='Search clinic name']")
+    private WebElement search_clinic_name_tab;
+    private By search_clinic_name_tab1 = By.xpath(".//a[text()='Search clinic name']");
+
+    @FindBy(xpath = "//input[@name='clinicstag']")
+    private WebElement select_clinic;
+    private By select_clinic1 = By.xpath("//input[@name='clinicstag']");
+
 
     /*---------Constructor-------*/
     public ClinicInBoxPage(WebDriver driver) {
@@ -203,7 +211,6 @@ public class ClinicInBoxPage extends BasePage {
         WebElement search_input = driver.findElement(search_input1);
         search_input.sendKeys(citizen);
         search_input.sendKeys(Keys.RETURN);
-
     }
 
     public boolean userFound() throws InterruptedException {
@@ -223,10 +230,6 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickCreatImmunizationRecord() throws InterruptedException {
-//        waitForElementToBeLocated(driver, creat_Immunization_Record1, 10);
-//        WebElement element = driver.findElement(creat_Immunization_Record1);
-//        JavascriptExecutor executor = (JavascriptExecutor) driver;
-//        executor.executeScript("arguments[0].click();", element);
         creat_Immunization_Record.click();
     }
 
@@ -257,7 +260,6 @@ public class ClinicInBoxPage extends BasePage {
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-
         String todayAsString = dateFormat.format(today);
         this.enterDate.sendKeys(todayAsString, Keys.ENTER);
     }
@@ -271,18 +273,11 @@ public class ClinicInBoxPage extends BasePage {
         informedConsentProvider.click();
     }
 
-
     public void enterConsentEffectiveToDate() throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-
-//    @FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
-//    private WebElement user_found;
-//    private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
-
-
         String tomorrowAsString = dateFormat.format(tomorrow);
         this.consentEffectiveToDate.sendKeys(tomorrowAsString, Keys.ENTER);
     }
@@ -290,8 +285,6 @@ public class ClinicInBoxPage extends BasePage {
     public void clickSaveConsent() throws InterruptedException {
         saveConsentBtn.click();
     }
-
-
 
     public void enterFirstName(String firstname) throws InterruptedException {
         waitForElementToBeLocated(driver, first_name1, 10);
@@ -407,6 +400,19 @@ public class ClinicInBoxPage extends BasePage {
     public void clickAppointmentTab() throws InterruptedException {
         waitForElementToBeVisible(driver, appointment_tab, 10);
         appointment_tab.click();
+    }
+
+    public void clickOnSearchClinicNameTab() throws InterruptedException {
+        waitForElementToBeVisible(driver, search_clinic_name_tab, 10);
+        search_clinic_name_tab.click();
+    }
+
+    public void selectClinic() throws InterruptedException {
+        waitForElementToBeVisible(driver, select_clinic, 10);
+        select_clinic.click();
+        Thread.sleep(2000);
+        select_clinic.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
+        select_clinic.sendKeys(Keys.RETURN);
     }
 
 
