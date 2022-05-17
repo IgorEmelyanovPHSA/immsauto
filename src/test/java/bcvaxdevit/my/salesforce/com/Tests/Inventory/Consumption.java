@@ -182,6 +182,9 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickToSearchClinic();
 		System.out.println("/*29.Click on search clinic tab --*/");
 		Thread.sleep(2000);
+		inClinicExperiencePage.SearchForClinic("Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic");
+		System.out.println("/*29.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
+		Thread.sleep(2000);
 		
 	}
 	
