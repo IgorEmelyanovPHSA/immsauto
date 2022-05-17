@@ -119,16 +119,8 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Maegan bcvaxvillage')]")
     private WebElement clickCitizen;
 
-    public void userClickCitizen() throws InterruptedException {
-        clickCitizen.click();
-    }
-
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
-
-    public void userClickInTable() throws InterruptedException {
-        selectCitizenInTable.click(); //
-    }
 
     @FindBy(xpath = "//footer//div//button[2]")
     private WebElement confirmBtn;
@@ -139,19 +131,12 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder = 'Search People...']")
     private WebElement informedConsentProvider;
 
-
     @FindBy(xpath = "//input[@name=\"effectiveToDate\"]")
     private WebElement consentEffectiveToDate;
-
 
     @FindBy(xpath = "//button[contains(text(),'Save Consent')]")
     private WebElement saveConsentBtn;
 
-
-
-    public void clickConfirmBtn() throws InterruptedException {
-        confirmBtn.click();
-    }
     @FindBy(xpath = "(.//a[text() = 'Related'])")
     private WebElement person_account_Related_tab;
     private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
@@ -160,9 +145,28 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement click_eligibility_button;
     private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
 
+    @FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
+    private WebElement covid_eligibility_option;
+    private By covid_eligibility_option1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
 
+
+
+    /*---------Constructor-------*/
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
+    }
+
+
+    /*-------------Methods--------------*/
+    public void userClickCitizen() throws InterruptedException {
+        clickCitizen.click();
+    }
+
+    public void userClickInTable() throws InterruptedException {
+        selectCitizenInTable.click(); //
+    }
+    public void clickConfirmBtn() throws InterruptedException {
+        confirmBtn.click();
     }
 
     public void clickRegisterButton() throws InterruptedException {
@@ -394,6 +398,12 @@ public class ClinicInBoxPage extends BasePage {
         JavascriptExecutor executor1 = (JavascriptExecutor) driver;
         executor1.executeScript("arguments[0].click();", element1);
         Thread.sleep(2000);*/
+    }
+
+    public void selectEligibilityOption() throws InterruptedException {
+        waitForElementToBeVisible(driver, covid_eligibility_option, 10);
+        WebElement element = driver.findElement(review_details1);
+        covid_eligibility_option.click();
     }
 
 
