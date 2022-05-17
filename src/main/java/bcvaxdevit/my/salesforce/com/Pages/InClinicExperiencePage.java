@@ -522,8 +522,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
-		waitForElementToBeLocated(driver, appointment_scheduling_tab1, 10);
-		WebElement element = driver.findElement(appointment_scheduling_tab1);
+		waitForElementToBeLocated(driver,click_search_clinic1 , 10);
+		WebElement element = driver.findElement(click_search_clinic1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
