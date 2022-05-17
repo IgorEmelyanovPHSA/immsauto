@@ -26,28 +26,12 @@ public class BaseTest {
 	@BeforeSuite
 	public void beforeSuite() {
 		//---This will execute before the Suite
-		// Create a stream to hold the log output
-		logOutputSteps = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(logOutputSteps);
-		// Save the old System.out!
-		old = System.out;
-		// Redirect log special stream to logOutput for TestRail
-		System.setOut(ps);
 		System.out.println("This will execute before the Suite");
 	}
-
 	@BeforeClass
 	public void setUp() {
 		System.out.println("This will execute before the Class");
-		// ChromeDriver location set up in Utils class
-		//driver = new ChromeDriver();
-		//System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
-		//driver.manage().window().maximize();
-		//driver.get(PRODSUPPQA_URL);
-		//loginPage=new LoginPage(driver);
-
 	}
-
 	@BeforeTest
 	public void beforeTest() {
 		System.out.println("This will execute before the Test");
@@ -55,6 +39,13 @@ public class BaseTest {
 	@BeforeMethod
 	public void beforeMethod() {
 		System.out.println("This will execute before the Method");
+		// Create a stream to hold the log output
+		logOutputSteps = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(logOutputSteps);
+		// Save the old System.out!
+		//old = System.out;
+		// Redirect log special stream to logOutput for TestRail
+		System.setOut(ps);
 		// ChromeDriver location set up in Utils class
 		// System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
 		driver = new ChromeDriver();
@@ -67,7 +58,7 @@ public class BaseTest {
 	public void afterMethod(ITestResult result) throws Throwable {
 		System.out.println("This will execute after the Method");
 		System.out.flush();
-		System.setOut(old);
+		//System.setOut(old);
 		if (result.getStatus() == ITestResult.SUCCESS) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
@@ -80,17 +71,10 @@ public class BaseTest {
 	public void afterTest() {
 		System.out.println("This will execute after the Test");
 	}
-
-
 	@AfterClass
 	public void tearDown() {
-//		System.out.println("This will execute after the Class");
-//        driver.manage().deleteAllCookies();
-//        driver.close();
-//        driver.quit();
-
+		System.out.println("This will execute after the Class");
 	}
-
 	@AfterSuite
 	public void cleanUp () {
 		System.out.println("This will execute after the Suite");

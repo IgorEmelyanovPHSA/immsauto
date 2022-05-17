@@ -402,7 +402,7 @@ public class ClinicInBoxPage extends BasePage {
 
     public void selectEligibilityOption() throws InterruptedException {
         waitForElementToBeVisible(driver, covid_eligibility_option, 10);
-        WebElement element = driver.findElement(review_details1);
+        WebElement element = driver.findElement(covid_eligibility_option1);
         covid_eligibility_option.click();
     }
 
