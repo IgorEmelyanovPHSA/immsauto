@@ -19,6 +19,13 @@ public class BookingDose1 extends BaseTest {
         /*----Login as an Clinician In-Clinic Experience --*/
         System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
         InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+        if (inClinicExperiencePage.displayIceApp()) {
+            System.out.println("/*---- User already on ICE--*/");
+        } else {
+            System.out.println("/*---- Navigate to ICE APP --*/");
+            inClinicExperiencePage.selectIceApp();
+            Thread.sleep(2000);
+        }
         /*----Go to Register Tab ---*/
         System.out.println("/*----Go to Register Tab ---*/");
         inClinicExperiencePage.clickRegisterTab();
@@ -149,13 +156,16 @@ public class BookingDose1 extends BaseTest {
         System.out.println("/*19----select vaccination option -> COVID_19_Vaccination --*/");
         clinicInBox.selectEligibilityOption();
         Thread.sleep(2000);
-        System.out.println("/*20----Go to Appointment Tab --*/");
+        System.out.println("/*20.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
+        clinicInBox.successEligibilityMessageAppear();
+        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        System.out.println("/*21----Go to Appointment Tab --*/");
         clinicInBox.clickAppointmentTab();
         Thread.sleep(2000);
-        System.out.println("/*21----click on 'Search clinic name' tab --*/");
+        System.out.println("/*22----click on 'Search clinic name' tab --*/");
         clinicInBox.clickOnSearchClinicNameTab();
         Thread.sleep(2000);
-        System.out.println("/*22----select the Clinic --*/");
+        System.out.println("/*23----select the Clinic --*/");
         clinicInBox.selectClinic();
         Thread.sleep(2000);
 
@@ -169,6 +179,13 @@ public class BookingDose1 extends BaseTest {
         /*----Login as an Clinician In-Clinic Experience --*/
         System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
         InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+        if (inClinicExperiencePage.displayIceApp()) {
+            System.out.println("/*---- User already on ICE--*/");
+        } else {
+            System.out.println("/*---- Navigate to ICE APP --*/");
+            inClinicExperiencePage.selectIceApp();
+            Thread.sleep(2000);
+        }
         /*----Go to Register Tab ---*/
         System.out.println("/*----Go to Register Tab ---*/");
         inClinicExperiencePage.clickRegisterTab();

@@ -415,6 +415,13 @@ public class ClinicInBoxPage extends BasePage {
         select_clinic.sendKeys(Keys.RETURN);
     }
 
+    public void successEligibilityMessageAppear() throws InterruptedException {
+        waitForElementToBeLocated(driver, By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"), 20);
+        driver.findElement(By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"));
+        Thread.sleep(2000);
+        System.out.println("/* ----the toast Eligibility success message has been Appears");
+    }
+
 
 
 
