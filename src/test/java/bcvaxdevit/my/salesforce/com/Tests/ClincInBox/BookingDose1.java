@@ -149,6 +149,9 @@ public class BookingDose1 extends BaseTest {
         System.out.println("/*19----select vaccination option -> COVID_19_Vaccination --*/");
         clinicInBox.selectEligibilityOption();
         Thread.sleep(2000);
+        System.out.println("/*20----Go to Appointment Tab --*/");
+        clinicInBox.clickAppointmentTab();
+        Thread.sleep(2000);
 
 
     }

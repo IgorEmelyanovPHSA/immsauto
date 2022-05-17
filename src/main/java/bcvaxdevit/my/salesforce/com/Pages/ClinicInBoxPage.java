@@ -149,6 +149,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement covid_eligibility_option;
     private By covid_eligibility_option1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
 
+    @FindBy(xpath = ".//a[@id = 'customTab__item']")
+    private WebElement appointment_tab;
+    private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 
 
     /*---------Constructor-------*/
@@ -317,13 +320,11 @@ public class ClinicInBoxPage extends BasePage {
 
     public void clickNonIndigenousRadioButton() throws InterruptedException {
         waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-        WebElement element = driver.findElement(non_indigenous_radio_button1);
         non_indigenous_radio_button.click();
     }
 
     public void clickVerifyPHNButton() throws InterruptedException {
         waitForElementToBeVisible(driver, verify_phn_button, 10);
-        WebElement element = driver.findElement(verify_phn_button1);
         verify_phn_button.click();
     }
 
@@ -341,7 +342,6 @@ public class ClinicInBoxPage extends BasePage {
 
     public void clickNextButton() throws InterruptedException {
         waitForElementToBeVisible(driver, next_button, 10);
-        WebElement element = driver.findElement(next_button1);
         next_button.click();
     }
 
@@ -357,7 +357,6 @@ public class ClinicInBoxPage extends BasePage {
 
     public void clickReviewDetails() throws InterruptedException {
         waitForElementToBeVisible(driver, review_details, 10);
-        WebElement element = driver.findElement(review_details1);
         review_details.click();
     }
 
@@ -402,8 +401,12 @@ public class ClinicInBoxPage extends BasePage {
 
     public void selectEligibilityOption() throws InterruptedException {
         waitForElementToBeVisible(driver, covid_eligibility_option, 10);
-        WebElement element = driver.findElement(covid_eligibility_option1);
         covid_eligibility_option.click();
+    }
+
+    public void clickAppointmentTab() throws InterruptedException {
+        waitForElementToBeVisible(driver, appointment_tab, 10);
+        appointment_tab.click();
     }
 
 
