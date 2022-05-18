@@ -165,8 +165,17 @@ public class BookingDose1 extends BaseTest {
         System.out.println("/*22----click on 'Search clinic name' tab --*/");
         clinicInBox.clickOnSearchClinicNameTab();
         Thread.sleep(2000);
-        System.out.println("/*23----select the Clinic --*/");
-        clinicInBox.selectClinic();
+        System.out.println("/*23----search the Clinic --*/");
+        clinicInBox.searchClinicName();
+        Thread.sleep(2000);
+        System.out.println("/*24----click on Option Facility location  --*/");
+        clinicInBox.clickOnFacilityOptionLocation();
+        Thread.sleep(2000);
+        System.out.println("/*25----select Active booking appointment day  --*/");
+        clinicInBox.selectBookingAppointmentDay();
+        Thread.sleep(2000);
+        System.out.println("/*26----select the time slot  --*/");
+        clinicInBox.selectTimeSlotAppointment();
         Thread.sleep(2000);
 
 
