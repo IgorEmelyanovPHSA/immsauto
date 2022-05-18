@@ -29,8 +29,6 @@ public class DIWA  extends BaseTest {
         Thread.sleep(4000);
         clinicInBoxPage.userClickCitizen();
         Thread.sleep(4000);
-        clinicInBoxPage.userClickInTable();
-
 //        if (!clinicInBoxPage.userFound()) {
 //            System.out.println("/*----User --> Maegan BCVaxVillage not found and return---*/");
 //        }
