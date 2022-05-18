@@ -125,13 +125,8 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Maegan bcvaxvillage')]")
     private WebElement clickCitizen;
 
-
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
-
-    public void userClickInTable() throws InterruptedException {
-        selectCitizenInTable.click(); //
-    }
 
     @FindBy(xpath = "//footer//div//button[2]")
     private WebElement confirmBtn;
@@ -142,14 +137,11 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder = 'Search People...']")
     private WebElement informedConsentProvider;
 
-
     @FindBy(xpath = "//input[@name=\"effectiveToDate\"]")
     private WebElement consentEffectiveToDate;
 
-
     @FindBy(xpath = "//button[contains(text(),'Save Consent')]")
     private WebElement saveConsentBtn;
-
 
     @FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
     private WebElement editImmunizationInformation;
@@ -162,11 +154,42 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement click_eligibility_button;
     private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
 
+    @FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
+    private WebElement covid_eligibility_option;
+    private By covid_eligibility_option1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
 
+    @FindBy(xpath = ".//a[@id = 'customTab__item']")
+    private WebElement appointment_tab;
+    private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
+
+    @FindBy(xpath = ".//a[text()='Search clinic name']")
+    private WebElement search_clinic_name_tab;
+    private By search_clinic_name_tab1 = By.xpath(".//a[text()='Search clinic name']");
+
+    @FindBy(xpath = "//input[@name='clinicstag']")
+    private WebElement search_clinic_name;
+    private By select_clinic_name1 = By.xpath("//input[@name='clinicstag']");
+
+    @FindBy(xpath = "(.//button[@name = 'facility'])[1]")
+    private WebElement option_loc_facility;
+    private By select_option_loc_facility1 = By.xpath("(.//button[@name = 'facility'])[1]");
+
+    @FindBy(xpath = "(.//button[@class = 'slds-day active-day'])[1]")
+    private WebElement booking_app_active_day;
+    private By booking_app_active_day1 = By.xpath("(.//button[@class = 'slds-day active-day'])[1]");
+
+    @FindBy(xpath = "(.//button[@name='timeslot'])[1]")
+    private WebElement time_slot_appointment;
+    private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'])[1]");
+
+
+    /*---------Constructor-------*/
     public ClinicInBoxPage(WebDriver driver) {
         super(driver);
     }
 
+
+    /*-------------Methods--------------*/
     public void clickRegisterButton() throws InterruptedException {
         waitForElementToBeVisible(driver, register_button, 10);
         WebElement element = driver.findElement(register_button_1);
@@ -198,7 +221,6 @@ public class ClinicInBoxPage extends BasePage {
         WebElement search_input = driver.findElement(search_input1);
         search_input.sendKeys(citizen);
         search_input.sendKeys(Keys.RETURN);
-
     }
 
     public void userClickCitizen() throws InterruptedException {
@@ -226,10 +248,6 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickCreatImmunizationRecord() throws InterruptedException {
-//        waitForElementToBeLocated(driver, creat_Immunization_Record1, 10);
-//        WebElement element = driver.findElement(creat_Immunization_Record1);
-//        JavascriptExecutor executor = (JavascriptExecutor) driver;
-//        executor.executeScript("arguments[0].click();", element);
         creat_Immunization_Record.click();
     }
 
@@ -285,7 +303,6 @@ public class ClinicInBoxPage extends BasePage {
         informedConsentProvider.click();
     }
 
-
     public void enterConsentEffectiveToDate() throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -308,7 +325,6 @@ public class ClinicInBoxPage extends BasePage {
     public void clickEditBtn() throws InterruptedException {
         editImmunizationInformation.click();
     }
-
 
     public void enterFirstName(String firstname) throws InterruptedException {
         waitForElementToBeLocated(driver, first_name1, 10);
@@ -337,13 +353,11 @@ public class ClinicInBoxPage extends BasePage {
 
     public void clickNonIndigenousRadioButton() throws InterruptedException {
         waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-        WebElement element = driver.findElement(non_indigenous_radio_button1);
         non_indigenous_radio_button.click();
     }
 
     public void clickVerifyPHNButton() throws InterruptedException {
         waitForElementToBeVisible(driver, verify_phn_button, 10);
-        WebElement element = driver.findElement(verify_phn_button1);
         verify_phn_button.click();
     }
 
@@ -360,8 +374,8 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickNextButton() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", next_button);
         waitForElementToBeVisible(driver, next_button, 10);
-        WebElement element = driver.findElement(next_button1);
         next_button.click();
     }
 
@@ -377,7 +391,6 @@ public class ClinicInBoxPage extends BasePage {
 
     public void clickReviewDetails() throws InterruptedException {
         waitForElementToBeVisible(driver, review_details, 10);
-        WebElement element = driver.findElement(review_details1);
         review_details.click();
     }
 
@@ -419,6 +432,64 @@ public class ClinicInBoxPage extends BasePage {
         executor1.executeScript("arguments[0].click();", element1);
         Thread.sleep(2000);*/
     }
+
+    public void selectEligibilityOption() throws InterruptedException {
+        waitForElementToBeVisible(driver, covid_eligibility_option, 10);
+        covid_eligibility_option.click();
+    }
+
+    public void successEligibilityMessageAppear() throws InterruptedException {
+        waitForElementToBeLocated(driver, By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"), 20);
+        driver.findElement(By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"));
+        Thread.sleep(2000);
+        System.out.println("/* ----the toast Eligibility success message has been Appears");
+    }
+
+    public void clickAppointmentTab() throws InterruptedException {
+        waitForElementToBeVisible(driver, appointment_tab, 10);
+        appointment_tab.click();
+    }
+
+    public void clickOnSearchClinicNameTab() throws InterruptedException {
+        waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
+        WebElement element = driver.findElement(search_clinic_name_tab1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void searchClinicName() throws InterruptedException {
+        waitForElementToBeVisible(driver, search_clinic_name, 10);
+        search_clinic_name.click();
+        Thread.sleep(2000);
+        search_clinic_name.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
+        search_clinic_name.sendKeys(Keys.RETURN);
+    }
+
+    public void clickOnFacilityOptionLocation() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, option_loc_facility, 10);
+        option_loc_facility.click();
+    }
+
+    public void selectBookingAppointmentDay() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, booking_app_active_day, 10);
+        booking_app_active_day.click();
+    }
+
+    public void selectTimeSlotAppointment() throws InterruptedException {
+        //scroll down
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        //Thread.sleep(2000);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, time_slot_appointment, 10);
+        time_slot_appointment.click();
+    }
+
+
 
 
 }

@@ -32,6 +32,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement user_found;
 	private By user_found1 = By.xpath(".//a[@title='Ludovika BCVaxLimeburn']");
 	
+	@FindBy(xpath = ".//a[@title='Dacia Bcvaxdod']")
+	private WebElement user_dacia_found;
+	private By user_dacia_found1 = By.xpath(".//a[@title='Dacia Bcvaxdod']");
+	
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
@@ -93,6 +97,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_console_App_displayed;
 	private By supply_console_App_displayed1 = By.xpath(".//span[@title='Health Connect - Supply Console']");
+	
+	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
+	private WebElement ice_App_displayed;
+	private By ice_App_displayed1 = By.xpath(".//span[@title='In-Clinic Experience']");
 	
 	@FindBy(xpath = "//a[@title='Supply Locations']")
 	private WebElement supply_location_displayed;
@@ -167,8 +175,12 @@ public class InClinicExperiencePage extends BasePage {
 	private By appointment_scheduling_tab1 = By.xpath(".//a[@data-label= 'Appointment Scheduling']");
 	
 	@FindBy(xpath = ".//a[@data-label= 'Search clinic name']")
-	private WebElement click_search_clinic;
-	private By click_search_clinic1 = By.xpath(".//a[@data-label= 'Search clinic name']");
+	private WebElement click_select_search_clinic;
+	private By click_select_search_clinic1 = By.xpath(".//a[@data-label= 'Search clinic name']");
+	
+	@FindBy(xpath = "//input[@name='clinicstag']")
+	private WebElement select_clinic;
+	private By select_clinic1 = By.xpath("//input[@name='clinicstag']");
 	
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -206,6 +218,18 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		waitForElementToBeLocated(driver, user_found1, 10);
 		WebElement element = driver.findElement(user_found1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		return true;
+	}
+	
+	public boolean userDaciaFound() throws InterruptedException {
+		if (!isDisplayed(user_dacia_found1)) {
+			return false;
+		}
+		waitForElementToBeLocated(driver, user_dacia_found1, 10);
+		WebElement element = driver.findElement(user_dacia_found1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(5000);
@@ -324,6 +348,19 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
+	public void selectIceApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		WebElement element = driver.findElement(select_app_launcher1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_ice_app1, 10);
+		WebElement element1 = driver.findElement(click_ice_app1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+	
 	public void clickDropdownMenu() {
 		this.dropdownMenu.click();
 	}
@@ -348,6 +385,10 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public boolean displaySupplyConsolePage() {
 		return isDisplayed(supply_console_App_displayed1);
+	}
+	
+	public boolean displayIceApp() {
+		return isDisplayed(ice_App_displayed1);
 	}
 	
 	public boolean supplyLocDisplayed() {
@@ -485,12 +526,22 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
-		waitForElementToBeLocated(driver, appointment_scheduling_tab1, 10);
-		WebElement element = driver.findElement(appointment_scheduling_tab1);
+		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
+		WebElement element = driver.findElement(click_select_search_clinic1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	
+	public void SearchForClinic(String clinic) throws InterruptedException {
+		//waitForElementToBeLocated(driver,search_assistant1,10);
+		waitForElementToBeVisible(driver, select_clinic, 10);
+		WebElement search_navigator = driver.findElement(select_clinic1);
+		search_navigator.click();
+		waitForElementToBeVisible(driver, select_clinic, 10);
+		WebElement search_input = driver.findElement(select_clinic1);
+		search_input.sendKeys(clinic);
+		search_input.sendKeys(Keys.RETURN);
+		Thread.sleep(5000);
+	}
 }
 

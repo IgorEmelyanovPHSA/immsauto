@@ -13,6 +13,13 @@ public class CitizenDuplicates extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		if (inClinicExperiencePage.displayIceApp()) {
+			System.out.println("/*---- User already on ICE--*/");
+		} else {
+			System.out.println("/*---- Navigate to ICE APP --*/");
+			inClinicExperiencePage.selectIceApp();
+			Thread.sleep(2000);
+		}
 		/*----Go to Register Tab ---*/
 		System.out.println("/*----Go to Register Tab ---*/");
 		inClinicExperiencePage.clickRegisterTab();

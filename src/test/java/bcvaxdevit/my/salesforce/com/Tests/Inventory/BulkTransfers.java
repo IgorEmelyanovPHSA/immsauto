@@ -61,7 +61,7 @@ public class BulkTransfers extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*12.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         System.out.println("/*13.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
         Thread.sleep(5000);
