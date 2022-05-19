@@ -14,19 +14,14 @@ public class DIWA  extends BaseTest {
         TestcaseID = "221409"; //C221409
         System.out.println("/*----1. Login as an Clinician to CIB  --*/");
         ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         System.out.println("/*----2. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
-        Thread.sleep(3000);
-        System.out.println("/*----3. Close Other Tabs --*/");
-        System.out.println("/*----3. Navigate to global search bar--*/");
-        System.out.println("/*----4. Search for Participant account--*/");
-
-        System.out.println("/*----5. Select DIWA Citizen ---*/");
-
+        Thread.sleep(5000);
+        System.out.println("/*----3. Search for Participant account Maegan BCVaxVillage ---*/");
         clinicInBoxPage.SearchDIWACitizen("Maegan bcvaxvillage");
-        System.out.println("/*----Search for Maegan BCVaxVillage ---*/");
-        Thread.sleep(4000);
+        Thread.sleep(2000);
+        System.out.println("/*----4. select Citizen from search results --*/");
         clinicInBoxPage.userClickCitizen();
         Thread.sleep(4000);
 //        if (!clinicInBoxPage.userFound()) {
@@ -37,7 +32,7 @@ public class DIWA  extends BaseTest {
 //            Thread.sleep(2000);}
 
             clinicInBoxPage.clickRelatedTab();
-            System.out.println("/*---- Navigated to Person Account related tab ---*/");
+            System.out.println("/*----5. Navigated to Person Account related tab ---*/");
             Thread.sleep(2000);
 
         Thread.sleep(2000);

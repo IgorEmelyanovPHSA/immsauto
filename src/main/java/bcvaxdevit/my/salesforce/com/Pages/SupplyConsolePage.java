@@ -414,9 +414,7 @@ public class SupplyConsolePage extends BasePage {
 			} catch (NoSuchElementException e) {
 				System.out.println("/*---there are no Tab's to close anymore");
 			}
-			
 		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
-		
 	}
 	
 	public int getRowsIncomingTransactionsCount() throws InterruptedException {

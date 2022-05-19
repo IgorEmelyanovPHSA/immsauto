@@ -27,9 +27,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement search_assistant;
     private By search_assistant1 = By.xpath(".//button[@aria-label = 'Search']");
 
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    @FindBy(xpath = ".//input[@placeholder = 'Search Profiles and more...']")
     private WebElement search_input;
-    private By search_input1 = By.xpath("//input[@placeholder = 'Search...']");
+    private By search_input1 = By.xpath(".//input[@placeholder = 'Search Profiles and more...']");
 
     @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
@@ -86,9 +86,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement covidmRna;
     private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
 
-    @FindBy(xpath = "// button[@title = 'icon']")
+    @FindBy(xpath = ".//button[@title = 'icon']")
     private WebElement search_location;
-    private By search_location1 = By.xpath("// button[@title = 'icon']");
+    private By search_location1 = By.xpath(".//button[@title = 'icon']");
 
     @FindBy(xpath = "//input[@data-id = 'userinput']")
     private WebElement search_clinic;
@@ -122,8 +122,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement register_confirmation_page_button;
     private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 
-    @FindBy(xpath = "//a[contains(text(),'Maegan bcvaxvillage')]")
-    private WebElement clickCitizen;
+    @FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]")
+    private WebElement click_on_citizen;
+    private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]");
 
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
@@ -215,16 +216,30 @@ public class ClinicInBoxPage extends BasePage {
 
     public void SearchDIWACitizen(String citizen) throws InterruptedException {
         waitForElementToBeVisible(driver, search_assistant, 10);
-        WebElement search_navigator = driver.findElement(search_assistant1);
-        search_navigator.click();
+        Thread.sleep(2000);
+        //WebElement search_navigator = driver.findElement(search_assistant1);
+        search_assistant.click();
+        //search_navigator.click();
+        Thread.sleep(2000);
         waitForElementToBeVisible(driver, search_input, 10);
-        WebElement search_input = driver.findElement(search_input1);
+        Thread.sleep(2000);
+        search_input.click();
+        Thread.sleep(2000);
+        //WebElement search_input = driver.findElement(search_input1);
         search_input.sendKeys(citizen);
+        Thread.sleep(2000);
         search_input.sendKeys(Keys.RETURN);
+        Thread.sleep(2000);
     }
 
     public void userClickCitizen() throws InterruptedException {
-        clickCitizen.click();
+        waitForElementToBeVisible(driver, click_on_citizen, 10);
+        Thread.sleep(2000);
+        WebElement element = driver.findElement(click_on_citizen1);
+        Thread.sleep(2000);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        //click_on_citizen.click();
     }
 
     public void clickConfirmBtn() throws InterruptedException {
@@ -263,21 +278,26 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void searchClinicLocation(String clinic) throws InterruptedException {
-        waitForElementToBeLocated(driver, search_location1, 10);
-        waitForElementToBeVisible(driver, search_location, 10);
-
-        WebElement search_navigator = driver.findElement(search_location1);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", search_navigator);
-        search_navigator.click();
+        //waitForElementToBeLocated(driver, search_location1, 10);
+        //waitForElementToBeVisible(driver, search_location, 10);
+        Thread.sleep(2000);
+        //WebElement search_navigator = driver.findElement(search_location1);
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", search_navigator);
+        //search_navigator.click();
+        //search_location.click();
+        //Thread.sleep(2000);
         waitForElementToBeVisible(driver, search_clinic, 10);
-        WebElement search_input = driver.findElement(search_clinic1);
-        this.search_clinic.sendKeys(clinic);
+        Thread.sleep(2000);
+        //WebElement search_input = driver.findElement(search_clinic1);
+        //Thread.sleep(2000);
+        search_clinic.sendKeys(clinic);
+        Thread.sleep(2000);
         search_input.sendKeys(Keys.RETURN);
-        waitForElementToBeVisible(driver, finalClick1, 10);
+        //waitForElementToBeVisible(driver, finalClick1, 10);
 //        finalClick1.click();
 //        Thread.sleep(3000);
-        finalClick.click();
-        search_input.click();
+        //finalClick.click();
+        //search_input.click();
         Thread.sleep(2000);
 
     }
