@@ -27,9 +27,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement search_assistant;
     private By search_assistant1 = By.xpath(".//button[@aria-label = 'Search']");
 
-    @FindBy(xpath = ".//input[@placeholder = 'Search Profiles and more...']")
+    @FindBy(xpath = ".//lightning-input[@class = 'saInput slds-grow slds-form-element']")
     private WebElement search_input;
-    private By search_input1 = By.xpath(".//input[@placeholder = 'Search Profiles and more...']");
+    private By search_input1 = By.xpath(".//lightning-input[@class = 'saInput slds-grow slds-form-element']");
 
     @FindBy(xpath = "(//a[@data-label='Related'])")
     private WebElement click_related_tab;
@@ -201,8 +201,9 @@ public class ClinicInBoxPage extends BasePage {
         do {
             try {
                 WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+                Thread.sleep(1000);
                 closetab.click();
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (NoSuchElementException e) {
                 System.out.println("/*---there are no Tab's to close anymore");
             }
@@ -292,7 +293,7 @@ public class ClinicInBoxPage extends BasePage {
         //Thread.sleep(2000);
         search_clinic.sendKeys(clinic);
         Thread.sleep(2000);
-        search_input.sendKeys(Keys.RETURN);
+        search_clinic.sendKeys(Keys.RETURN);
         //waitForElementToBeVisible(driver, finalClick1, 10);
 //        finalClick1.click();
 //        Thread.sleep(3000);

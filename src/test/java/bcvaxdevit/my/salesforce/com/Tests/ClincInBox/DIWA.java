@@ -15,9 +15,12 @@ public class DIWA  extends BaseTest {
         System.out.println("/*----1. Login as an Clinician to CIB  --*/");
         ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
         Thread.sleep(2000);
+        System.out.println("/*2.----Clinic In Box page displayed --*/");
+        clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
+        Thread.sleep(5000);
         System.out.println("/*----2. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         System.out.println("/*----3. Search for Participant account Maegan BCVaxVillage ---*/");
         clinicInBoxPage.SearchDIWACitizen("Maegan bcvaxvillage");
         Thread.sleep(2000);
