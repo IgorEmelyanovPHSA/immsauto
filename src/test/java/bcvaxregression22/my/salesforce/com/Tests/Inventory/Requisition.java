@@ -10,8 +10,10 @@ public class Requisition extends BaseTest {
 	
 	@Test
 	public void Create_Requisition_as_an_PPHIS_BCVAXREGRESSION22() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
+		//TestcaseID = "219865"; //C219865
+		TestcaseID = "220561"; //C220561
 		System.out.println("/*----1. Login as an PPHIS_BCVAXREGRESSION22 to Supply Console --*/");
+
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		requisitionPage.displaySupplyConsolePage();
@@ -24,7 +26,7 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----4. Navigate to Supply Locations --*/");
 		requisitionPage.clickSupplyLocationInDropdown();
 		Thread.sleep(6000);
-		System.out.println("/*----5. Locate on Automation Supply Location_1 --*/");
+		System.out.println("/*----5. Locate on Abby Pharmacy --*/");
 		requisitionPage.clickSupplyLocationName();
 		Thread.sleep(4000);
 		System.out.println("/*----6. Navigate to Request Supplies --*/");
@@ -97,7 +99,7 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickSearchSupplyDistributions();
 		Thread.sleep(3000);
 		System.out.println("/*----28. Select Distribution--*/");
-		requisitionPage.SelectSupplyDistributionTo2("SDST-0000005278");
+		requisitionPage.SelectSupplyDistributionTo2();
 		Thread.sleep(3000);
 		System.out.println("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();

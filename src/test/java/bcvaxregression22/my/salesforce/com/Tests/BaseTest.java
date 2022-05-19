@@ -73,10 +73,8 @@ public class BaseTest {
 		System.out.println("This will execute after the Test");
 	}
 	@AfterSuite
-		public void cleanUp () {
+	public void cleanUp () {
 		System.out.println("This will execute after the Suite");
 	}
 
 }
-
-

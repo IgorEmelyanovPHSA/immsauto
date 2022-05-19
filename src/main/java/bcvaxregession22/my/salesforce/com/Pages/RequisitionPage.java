@@ -26,11 +26,12 @@ public class RequisitionPage extends BasePage {
 	private WebElement SupplyLocations;
 	
 	
-	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
-
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Abby Pharmacy']")
 	private WebElement supply_supply_location_1;
-	
-	
+	private By supply_supply_location_12 = By.xpath(".//th//a[@data-refid='recordId' and @title='Abby Pharmacy']");
+
+
+
 	@FindBy(xpath = "//button[contains(text(),\"Request Supplies\")]")
 	private WebElement request_supplies;
 	
@@ -118,12 +119,12 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
 
-	public void SelectSupplyDistributionTo2(String DistributionName) throws InterruptedException {
-		//waitForElementToBeLocated(driver,distributionName,10);
+	public void SelectSupplyDistributionTo2() throws InterruptedException {
 		waitForElementToBeVisible(driver, searchByName, 10);
-		WebElement search_input = driver.findElement(searchByName2);
-		this.searchByName.sendKeys(DistributionName);
-		search_input.click();
+		searchByName.sendKeys("SDST-0000005286");
+		waitForElementToBeVisible(driver, searchByName, 10);
+		searchByName.click();
+
 		/*waitForElementToBeVisible(driver, clinicName, 10);
 		WebElement search_input = driver.findElement(clinicName2);
 		search_input.click();*/
