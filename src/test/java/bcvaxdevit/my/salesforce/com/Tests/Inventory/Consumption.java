@@ -9,8 +9,6 @@ import org.testng.annotations.Test;
 
 public class Consumption extends BaseTest {
 	
-	ClinicInBoxPage clinicInBoxPage;
-	
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -244,11 +242,10 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		String remainingDoses1 = inClinicExperiencePage.getValueOfRemainingDoses();
 		System.out.println("/*----46. remaining doses are: -->" + remainingDoses1);
-		Assert.assertEquals(Long.parseLong(remainingDoses), Long.parseLong(remainingDoses1) + 1);
+		Assert.assertEquals(Double.parseDouble(remainingDoses), Double.parseDouble(remainingDoses1) + 1.00);
 		Thread.sleep(2000);
 		String remainingQty1 = inClinicExperiencePage.getValueOfRemainingQty();
-		//double remainingQtyValue = Double.valueOf(remainingDoses1+0.10);
-		Assert.assertEquals(Double.parseDouble(remainingQty), Double.parseDouble(remainingQty1) + 0.10);
+		Assert.assertEquals(Double.parseDouble(remainingQty), Double.parseDouble(remainingQty1) + 0.1);
 		System.out.println("/*----47. remaining doses are: -->" + remainingQty1);
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
