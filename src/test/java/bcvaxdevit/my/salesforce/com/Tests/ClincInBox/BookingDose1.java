@@ -197,7 +197,7 @@ public class BookingDose1 extends BaseTest {
         InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
         Thread.sleep(2000);
         System.out.println("/*33----In-clinic Experience ->Vaccine Admin page appears up --*/");
-        InClinicExperience.validateVaccineAdnimPageOpen();
+        InClinicExperience.validateVaccineAdminPageOpen();
 
 
         

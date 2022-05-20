@@ -648,7 +648,7 @@ public class InClinicExperiencePage extends BasePage {
 		confirm_save_adm_btn.click();
 	}
 
-	public boolean validateVaccineAdnimPageOpen() throws InterruptedException {
+	public boolean validateVaccineAdminPageOpen() throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
 			System.out.println("/*---Vaccine admin ICE page shown up");
