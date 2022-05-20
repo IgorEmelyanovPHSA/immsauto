@@ -182,9 +182,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_clinic;
 	private By select_clinic1 = By.xpath("//input[@name='clinicstag']");
 	
-	@FindBy(xpath = "(.//button[@name = 'facility'])[1]")
+	@FindBy(xpath = "(.//button[@name = 'facility'][1])")
 	private WebElement option_loc_facility;
-	private By select_option_loc_facility1 = By.xpath("(.//button[@name = 'facility'])[1]");
+	private By select_option_loc_facility1 = By.xpath("(.//button[@name = 'facility'][1])");
 	
 	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'][1])")
 	private WebElement booking_app_active_day;
@@ -559,7 +559,10 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(click_select_search_clinic1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -575,8 +578,10 @@ public class InClinicExperiencePage extends BasePage {
 		select_clinic.sendKeys(Keys.RETURN);
 	}
 	
-	public void  clickFacilityOptionLocation() throws InterruptedException {
+	public void clickFacilityOptionLocation() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
