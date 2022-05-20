@@ -83,12 +83,12 @@ public class Requisition extends BaseTest {
 		Thread.sleep(4000);
 		System.out.println("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
-
+		
 		Thread.sleep(7000);
 		
 		String actual = "Ship Requisition";
 		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
-
+		
 		System.out.println("/*----25. Save Shipping Requisition--*/");
 		requisitionPage.clickSaveShipRequisition();
 		Thread.sleep(3000);
@@ -104,8 +104,8 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();
 		Thread.sleep(5000);
-
+		
 	}
-
-	}
+	
+}
 	

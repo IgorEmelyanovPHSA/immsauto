@@ -22,20 +22,23 @@ public class BaseTest {
 	protected LoginPage loginPage;
 	PrintStream old;
 	ByteArrayOutputStream logOutputSteps;
-
+	
 	@BeforeSuite
 	public void beforeSuite() {
 		//---This will execute before the Suite
 		System.out.println("This will execute before the Suite");
 	}
+	
 	@BeforeClass
 	public void setUp() {
 		System.out.println("This will execute before the Class");
 	}
+	
 	@BeforeTest
 	public void beforeTest() {
 		System.out.println("This will execute before the Test");
 	}
+	
 	@BeforeMethod
 	public void beforeMethod() {
 		System.out.println("This will execute before the Method");
@@ -53,6 +56,7 @@ public class BaseTest {
 		driver.get(BCVAXDEVIT_URL);
 		loginPage = new LoginPage(driver);
 	}
+	
 	/////////////////After///////////////////
 	@AfterMethod
 	public void afterMethod(ITestResult result) throws Throwable {
@@ -67,18 +71,21 @@ public class BaseTest {
 		driver.manage().deleteAllCookies();
 		driver.close();
 	}
+	
 	@AfterTest
 	public void afterTest() {
 		System.out.println("This will execute after the Test");
 	}
+	
 	@AfterClass
 	public void tearDown() {
 		System.out.println("This will execute after the Class");
 	}
+	
 	@AfterSuite
-	public void cleanUp () {
+	public void cleanUp() {
 		System.out.println("This will execute after the Suite");
 	}
-
-
+	
+	
 }
