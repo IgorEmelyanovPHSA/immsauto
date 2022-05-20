@@ -217,8 +217,12 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//button[@title='Confirm & Save Administration'])")
 	private WebElement confirm_save_adm_btn;
 	private By confirm_save_adm_btn1 = By.xpath("//button[@title='Confirm & Save Administration'])");
-	
-	
+
+	@FindBy(xpath = ".//h2[text() = 'Vaccine Administration']")
+	private WebElement validate_vaccine_admin_page_open;
+	private By validate_vaccine_admin_page_open1 = By.xpath(".//h2[text() = 'Vaccine Administration']");
+
+
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
 	}
@@ -637,6 +641,17 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, confirm_save_adm_btn, 10);
 		confirm_save_adm_btn.click();
+	}
+
+	public boolean validateVaccineAdnimPageOpen() throws InterruptedException {
+		try {
+			waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
+			System.out.println("/*---Vaccine admin ICE page shown up");
+			return true;
+		} catch (NoSuchElementException e){
+			System.out.println("/*---no Vaccine Admin ICE Page show up");
+			return false;
+		}
 	}
 	
 }

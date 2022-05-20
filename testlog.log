@@ -745,3 +745,7 @@ java.net.SocketException: Connection reset
 2022-05-20 11:23:56 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-20 12:43:45 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-20 12:43:49 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-20 15:15:31 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-05-20 15:15:35 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-20 16:41:05 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-05-20 16:41:09 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/

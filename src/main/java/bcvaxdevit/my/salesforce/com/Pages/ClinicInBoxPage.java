@@ -1,9 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
-import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -195,6 +193,10 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
     private WebElement vlidate_appointment_confirm_message;
     private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
+
+    @FindBy(xpath = "(.//button[@name='navigateToICE'])")
+    private WebElement click_navigate_to_ICE_btn;
+    private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE'])");
 
 
     /*---------Constructor-------*/
@@ -520,6 +522,16 @@ public class ClinicInBoxPage extends BasePage {
         }
     }
 
+    public void refreshBrowser() throws InterruptedException {
+        driver.navigate().refresh();
+    }
+
+    public InClinicExperiencePage ClickGoToInClinicExperienceButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
+        click_navigate_to_ICE_btn.click();
+        Thread.sleep(2000);
+        return new InClinicExperiencePage(driver);
+    }
 
 
 }
