@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Pages;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -90,9 +91,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement search_location;
     private By search_location1 = By.xpath(".//button[@title = 'icon']");
 
-    @FindBy(xpath = "//input[@data-id = 'userinput']")
+    @FindBy(xpath = ".//input[@data-id = 'userinput']")
     private WebElement search_clinic;
-    private By search_clinic1 = By.xpath("//input[@data-id = 'userinput']");
+    private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
 
     @FindBy(xpath = "//li[@data-label='All Ages - Atlin Health Centre']")
     private WebElement finalClick;
@@ -292,8 +293,19 @@ public class ClinicInBoxPage extends BasePage {
         //WebElement search_input = driver.findElement(search_clinic1);
         //Thread.sleep(2000);
         search_clinic.sendKeys(clinic);
+        //search_clinic.click();
         Thread.sleep(2000);
-        search_clinic.sendKeys(Keys.RETURN);
+        By select_an_option1111 = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
+        driver.findElement(select_an_option1111).click();
+
+
+
+        //Select select_clinic = new Select(driver.findElement(search_clinic1));
+        //select_clinic.selectByVisibleText("All Ages - Atlin Health Centre");
+        //clinc.selectByIndex(1);
+
+
+        //search_clinic.sendKeys(Keys.RETURN);
         //waitForElementToBeVisible(driver, finalClick1, 10);
 //        finalClick1.click();
 //        Thread.sleep(3000);
