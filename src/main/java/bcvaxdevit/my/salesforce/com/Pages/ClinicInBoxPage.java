@@ -280,39 +280,14 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void searchClinicLocation(String clinic) throws InterruptedException {
-        //waitForElementToBeLocated(driver, search_location1, 10);
-        //waitForElementToBeVisible(driver, search_location, 10);
         Thread.sleep(2000);
-        //WebElement search_navigator = driver.findElement(search_location1);
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", search_navigator);
-        //search_navigator.click();
-        //search_location.click();
-        //Thread.sleep(2000);
         waitForElementToBeVisible(driver, search_clinic, 10);
         Thread.sleep(2000);
-        //WebElement search_input = driver.findElement(search_clinic1);
-        //Thread.sleep(2000);
         search_clinic.sendKeys(clinic);
-        //search_clinic.click();
         Thread.sleep(2000);
-        By select_an_option1111 = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
-        driver.findElement(select_an_option1111).click();
-
-
-
-        //Select select_clinic = new Select(driver.findElement(search_clinic1));
-        //select_clinic.selectByVisibleText("All Ages - Atlin Health Centre");
-        //clinc.selectByIndex(1);
-
-
-        //search_clinic.sendKeys(Keys.RETURN);
-        //waitForElementToBeVisible(driver, finalClick1, 10);
-//        finalClick1.click();
-//        Thread.sleep(3000);
-        //finalClick.click();
-        //search_input.click();
+        By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
+        driver.findElement(select_dropdown_option).click();
         Thread.sleep(2000);
-
     }
 
     public void selectDateAndTime() {
