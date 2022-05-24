@@ -306,11 +306,11 @@ public class ClinicInBoxPage extends BasePage {
     public void selectDateAndTime() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tomorrow = calendar.getTime();
+        Date yesterday = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 
-        String tomorrowAsString = dateFormat.format(tomorrow);
-        this.enterDate.sendKeys(tomorrowAsString, Keys.ENTER);
+        String yesterdayAsString = dateFormat.format(yesterday);
+        this.enterDate.sendKeys(yesterdayAsString, Keys.ENTER);
     }
 
     public void clickRecordImmunization() throws InterruptedException {
