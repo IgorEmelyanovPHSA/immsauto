@@ -1,6 +1,5 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
-import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
@@ -90,9 +89,9 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement search_location;
     private By search_location1 = By.xpath(".//button[@title = 'icon']");
 
-    @FindBy(xpath = "//input[@data-id = 'userinput']")
+    @FindBy(xpath = ".//input[@data-id = 'userinput']")
     private WebElement search_clinic;
-    private By search_clinic1 = By.xpath("//input[@data-id = 'userinput']");
+    private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
 
     @FindBy(xpath = "//li[@data-label='All Ages - Atlin Health Centre']")
     private WebElement finalClick;
@@ -182,6 +181,22 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "(.//button[@name='timeslot'])[1]")
     private WebElement time_slot_appointment;
     private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'])[1]");
+
+    @FindBy(xpath = ".//button[text() = 'Next']")
+    private WebElement click_next_button;
+    private By click_next_button1 = By.xpath(".//button[text() = 'Next']");
+
+    @FindBy(xpath = ".//button[text() = 'Confirm appointment']")
+    private WebElement click_confirm_appointment_button;
+    private By click_confirm_appointment_button1 = By.xpath(".//button[text() = 'Confirm appointment']");
+
+    @FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
+    private WebElement vlidate_appointment_confirm_message;
+    private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
+
+    @FindBy(xpath = "(.//button[@name='navigateToICE'])")
+    private WebElement click_navigate_to_ICE_btn;
+    private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE'])");
 
 
     /*---------Constructor-------*/
@@ -279,28 +294,14 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void searchClinicLocation(String clinic) throws InterruptedException {
-        //waitForElementToBeLocated(driver, search_location1, 10);
-        //waitForElementToBeVisible(driver, search_location, 10);
         Thread.sleep(2000);
-        //WebElement search_navigator = driver.findElement(search_location1);
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", search_navigator);
-        //search_navigator.click();
-        //search_location.click();
-        //Thread.sleep(2000);
         waitForElementToBeVisible(driver, search_clinic, 10);
         Thread.sleep(2000);
-        //WebElement search_input = driver.findElement(search_clinic1);
-        //Thread.sleep(2000);
         search_clinic.sendKeys(clinic);
         Thread.sleep(2000);
-        search_clinic.sendKeys(Keys.RETURN);
-        //waitForElementToBeVisible(driver, finalClick1, 10);
-//        finalClick1.click();
-//        Thread.sleep(3000);
-        //finalClick.click();
-        //search_input.click();
+        By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
+        driver.findElement(select_dropdown_option).click();
         Thread.sleep(2000);
-
     }
 
     public void selectDateAndTime() {
@@ -442,16 +443,6 @@ public class ClinicInBoxPage extends BasePage {
         WebElement element = driver.findElement(click_eligibility_button1);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-		/*waitForElementToBeLocated(driver, click_eligibility_dropdown1, 10);
-		WebElement element2 = driver.findElement(click_eligibility_dropdown1);
-		JavascriptExecutor executor2 = (JavascriptExecutor) driver;
-		executor2.executeScript("arguments[0].click();", element2);*/
-       /* Thread.sleep(2000);
-        waitForElementToBeLocated(driver, select_covid19_option_from_dropdown1, 10);
-        WebElement element1 = driver.findElement(select_covid19_option_from_dropdown1);
-        JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-        executor1.executeScript("arguments[0].click();", element1);
-        Thread.sleep(2000);*/
     }
 
     public void selectEligibilityOption() throws InterruptedException {
@@ -472,7 +463,10 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickOnSearchClinicNameTab() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+        Thread.sleep(2000);
         waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
+        Thread.sleep(2000);
         WebElement element = driver.findElement(search_clinic_name_tab1);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
@@ -501,16 +495,43 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void selectTimeSlotAppointment() throws InterruptedException {
-        //scroll down
-        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
-        //Thread.sleep(2000);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
         Thread.sleep(2000);
         waitForElementToBeVisible(driver, time_slot_appointment, 10);
         time_slot_appointment.click();
     }
 
+    public void clickOnNextButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, click_next_button, 10);
+        click_next_button.click();
+    }
 
+    public void clickOnConfirmButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, click_confirm_appointment_button, 10);
+        click_confirm_appointment_button.click();
+    }
+
+    public boolean validateAppointmentConfirmedScreen() throws InterruptedException {
+        try {
+            waitForElementToBeVisible(driver, vlidate_appointment_confirm_message, 10);
+            System.out.println("/*---'Appointment Confirmed!' message shown up");
+            return true;
+        } catch (NoSuchElementException e){
+            System.out.println("/*---the screen does not show up 'Appointment Confirmed!'");
+            return false;
+        }
+    }
+
+    public void refreshBrowser() throws InterruptedException {
+        driver.navigate().refresh();
+    }
+
+    public InClinicExperiencePage ClickGoToInClinicExperienceButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
+        click_navigate_to_ICE_btn.click();
+        Thread.sleep(2000);
+        return new InClinicExperiencePage(driver);
+    }
 
 
 }
