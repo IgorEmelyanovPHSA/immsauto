@@ -164,9 +164,17 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement appointment_tab;
     private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 
-    @FindBy(xpath = ".//a[text()='Search clinic name']")
+    @FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
+    private WebElement click_reason_radiobutton;
+    private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
+
+    @FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
+    private WebElement click_more_search_tabs;
+    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
+
+    @FindBy(xpath = ".//span[text()='Search clinic name']")
     private WebElement search_clinic_name_tab;
-    private By search_clinic_name_tab1 = By.xpath(".//a[text()='Search clinic name']");
+    private By search_clinic_name_tab1 = By.xpath(".//span[text()='Search clinic name']");
 
     @FindBy(xpath = "//input[@name='clinicstag']")
     private WebElement search_clinic_name;
@@ -199,11 +207,6 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "(.//button[@name='navigateToICE'])")
     private WebElement click_navigate_to_ICE_btn;
     private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
-
-    @FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
-    private WebElement click_more_search_tabs;
-    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
-
 
     /*---------Constructor-------*/
     public ClinicInBoxPage(WebDriver driver) {
@@ -476,8 +479,19 @@ public class ClinicInBoxPage extends BasePage {
         waitForElementToBeVisible(driver, appointment_tab, 10);
         appointment_tab.click();
     }
+    public void clickOnReasonForVisit() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+        waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
+        click_reason_radiobutton.click();
+    }
 
-    public void clickOnSearchClinicNameTab() throws InterruptedException {
+    public void clickOnMoreSearchTabs() throws InterruptedException {
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, click_more_search_tabs, 10);
+        click_more_search_tabs.click();
+    }
+
+    public void selectSearchClinicNameTab() throws InterruptedException {
         waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
         Thread.sleep(2000);
         WebElement element = driver.findElement(search_clinic_name_tab1);
@@ -508,9 +522,11 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void selectTimeSlotAppointment() throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
         Thread.sleep(2000);
         waitForElementToBeVisible(driver, time_slot_appointment, 10);
+        Thread.sleep(2000);
         time_slot_appointment.click();
     }
 
@@ -546,12 +562,7 @@ public class ClinicInBoxPage extends BasePage {
         return new InClinicExperiencePage(driver);
     }
 
-    public void clickOnMoreSearchTabs() throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, click_more_search_tabs, 10);
-        click_more_search_tabs.click();
-    }
+
 
 
 }
