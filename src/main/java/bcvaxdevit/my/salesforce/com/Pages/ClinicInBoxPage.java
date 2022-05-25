@@ -488,8 +488,6 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickOnSearchClinicNameTab() throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-        Thread.sleep(2000);
         waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
         Thread.sleep(2000);
         WebElement element = driver.findElement(search_clinic_name_tab1);
@@ -559,6 +557,8 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickOnMoreSearchTabs() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+        Thread.sleep(2000);
         waitForElementToBeVisible(driver, click_more_search_tabs, 10);
         click_more_search_tabs.click();
     }
