@@ -308,7 +308,7 @@ public class ClinicInBoxPage extends BasePage {
         waitForElementToBeVisible(driver, search_clinic, 10);
         Thread.sleep(2000);
         search_clinic.sendKeys(clinic);
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
         driver.findElement(select_dropdown_option).click();
         Thread.sleep(2000);
