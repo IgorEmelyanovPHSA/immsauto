@@ -749,5 +749,46 @@ java.net.SocketException: Connection reset
 2022-05-20 15:15:35 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-20 16:41:05 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-20 16:41:09 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+<<<<<<< HEAD
 2022-05-25 00:34:50 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-25 00:34:54 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+=======
+2022-05-20 16:50:30 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-05-20 16:50:35 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-24 12:38:08 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-05-24 12:38:12 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-24 12:39:45 WARN  WebSocketHandler:142 - onError
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-05-24 13:03:16 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-05-24 13:03:20 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-05-24 13:04:59 WARN  WebSocketHandler:142 - onError
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+>>>>>>> 2d3c74e7e47583f878d6b01558cd4fde1ace54b2

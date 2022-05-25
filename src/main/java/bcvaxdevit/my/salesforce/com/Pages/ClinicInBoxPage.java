@@ -35,7 +35,7 @@ public class ClinicInBoxPage extends BasePage {
     private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
     @FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
-    private WebElement creat_Immunization_Record;
+    private WebElement create_Immunization_Record;
     //private By creat_Immunization_Record1 = By.xpath("/button[contains(text(),'Create Immunization Record')]");
 
     @FindBy(xpath = "//option[contains(text(),'Select an option')]")
@@ -129,7 +129,12 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement selectCitizenInTable; //
 
     @FindBy(xpath = ".//button[text() = 'Confirm']")
+
     private WebElement confirmBtn;
+
+    private WebElement confirm_button;
+    private By confirm_button1 = By.xpath("(.//button[text() = 'Confirm'])");
+
 
     @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
     private WebElement recordImmunizationBtn;
@@ -259,7 +264,15 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickConfirmBtn() throws InterruptedException {
+
         this.confirmBtn.click();
+
+        waitForElementToBeVisible(driver, confirm_button, 10);
+        confirm_button.click();
+        /*WebElement element = driver.findElement(confirm_button1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);*/
+
     }
 
     public boolean userFound() throws InterruptedException {
@@ -279,7 +292,7 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickCreatImmunizationRecord() throws InterruptedException {
-        creat_Immunization_Record.click();
+        create_Immunization_Record.click();
     }
 
     public void clickSelectAnOptionDropdown() {
