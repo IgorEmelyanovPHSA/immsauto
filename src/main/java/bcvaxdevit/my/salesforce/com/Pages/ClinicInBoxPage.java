@@ -128,10 +128,7 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
 
-    @FindBy(xpath = ".//button[text() = 'Confirm']")
-
-    private WebElement confirmBtn;
-
+    @FindBy(xpath = "(.//button[text() = 'Confirm'])")
     private WebElement confirm_button;
     private By confirm_button1 = By.xpath("(.//button[text() = 'Confirm'])");
 
@@ -267,9 +264,9 @@ public class ClinicInBoxPage extends BasePage {
         //click_on_citizen.click();
     }
 
-    public void clickConfirmBtn() throws InterruptedException {
-
-        this.confirmBtn.click();
+    public void clickConfirmButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, confirm_button, 10);
+        confirm_button.click();
     }
 
     public boolean userFound() throws InterruptedException {
