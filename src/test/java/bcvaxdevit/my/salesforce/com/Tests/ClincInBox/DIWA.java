@@ -45,7 +45,7 @@ public class DIWA extends BaseTest {
 		System.out.println("/*----7. Click Confirm ---*/");
 		System.out.println("/*----8. Click Creat Immunization Record ---*/");
 		clinicInBoxPage.clickCreatImmunizationRecord();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		System.out.println("/*----9. Select an Option ---*/");
 		clinicInBoxPage.clickConfirmBtn();
 		Thread.sleep(3000);
@@ -79,13 +79,13 @@ public class DIWA extends BaseTest {
 		clinicInBoxPage.clickRecordImmunization();
 		Thread.sleep(3000);
 		System.out.println("/*---13. Select Informed Consent Provider ---*/");
-		clinicInBoxPage.informedConsentProvider();
+		//clinicInBoxPage.informedConsentProvider();
 		System.out.println("/*---14. Enter Consent Effective To Date---*/");
-		clinicInBoxPage.enterConsentEffectiveToDate();
+		//clinicInBoxPage.enterConsentEffectiveToDate();
 		System.out.println("/*---15. Save Consent---*/");
-		clinicInBoxPage.clickSaveConsent();
+		//clinicInBoxPage.clickSaveConsent();
 		System.out.println("/*---16. Scroll down to Immunization Information and Click Edit---*/");
-		clinicInBoxPage.clickEditBtn();
+		//clinicInBoxPage.clickEditBtn();
 		Thread.sleep(3000);
 		System.out.println("/*---17. Select Provider ---*/");
 		//clinicInBoxPage.selectProvider();
