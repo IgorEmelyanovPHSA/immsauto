@@ -205,7 +205,7 @@ public class ClinicInBoxPage extends BasePage {
 
     @FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
     private WebElement click_more_search_tabs;
-    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])");
+    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 
 
     /*---------Constructor-------*/
