@@ -199,6 +199,10 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement click_navigate_to_ICE_btn;
     private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE'])");
 
+    @FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
+    private WebElement click_more_search_tabs;
+    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])");
+
 
     /*---------Constructor-------*/
     public ClinicInBoxPage(WebDriver driver) {
@@ -536,6 +540,11 @@ public class ClinicInBoxPage extends BasePage {
         click_navigate_to_ICE_btn.click();
         Thread.sleep(2000);
         return new InClinicExperiencePage(driver);
+    }
+
+    public void clickOnMoreSearchTabs() throws InterruptedException {
+        waitForElementToBeVisible(driver, click_more_search_tabs, 10);
+        click_more_search_tabs.click();
     }
 
 
