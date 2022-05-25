@@ -98,7 +98,7 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'All Ages - Atlin Health Centre')]")
     private WebElement finalClick1;
 
-    @FindBy(xpath = "//button[@title=\"Select a date for undefined\"]")
+    @FindBy(xpath = "//input[@class=\"slds-input\"]")
     private WebElement enterDate;
 
     @FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
@@ -128,7 +128,7 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
 
-    @FindBy(xpath = "//footer//div//button[2]")
+    @FindBy(xpath = ".//button[text() = 'Confirm']")
     private WebElement confirmBtn;
 
     @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
@@ -196,7 +196,7 @@ public class ClinicInBoxPage extends BasePage {
 
     @FindBy(xpath = "(.//button[@name='navigateToICE'])")
     private WebElement click_navigate_to_ICE_btn;
-    private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE'])");
+    private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
 
 
     /*---------Constructor-------*/
@@ -259,7 +259,7 @@ public class ClinicInBoxPage extends BasePage {
     }
 
     public void clickConfirmBtn() throws InterruptedException {
-        confirmBtn.click();
+        this.confirmBtn.click();
     }
 
     public boolean userFound() throws InterruptedException {
@@ -307,12 +307,20 @@ public class ClinicInBoxPage extends BasePage {
     public void selectDateAndTime() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date yesterday = calendar.getTime();
+        Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 
-        String yesterdayAsString = dateFormat.format(yesterday);
-        this.enterDate.sendKeys(yesterdayAsString, Keys.ENTER);
+        String todayAsString = dateFormat.format(today);
+        this.enterDate.sendKeys(todayAsString, Keys.ENTER);
     }
+
+//    Calendar calendar = Calendar.getInstance();
+//		calendar.add(Calendar.DAY_OF_YEAR, 1);
+//    Date tomorrow = calendar.getTime();
+//    DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+//
+//    String tomorrowAsString = dateFormat.format(tomorrow);
+//		this.inputExpectedDate.sendKeys(tomorrowAsString, Keys.ENTER);
 
     public void clickRecordImmunization() throws InterruptedException {
         waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
