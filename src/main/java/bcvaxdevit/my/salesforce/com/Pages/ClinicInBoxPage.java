@@ -205,7 +205,7 @@ public class ClinicInBoxPage extends BasePage {
 
     @FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
     private WebElement click_more_search_tabs;
-    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])");
+    private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 
 
     /*---------Constructor-------*/
@@ -270,13 +270,6 @@ public class ClinicInBoxPage extends BasePage {
     public void clickConfirmBtn() throws InterruptedException {
 
         this.confirmBtn.click();
-
-        waitForElementToBeVisible(driver, confirm_button, 10);
-        confirm_button.click();
-        /*WebElement element = driver.findElement(confirm_button1);
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);*/
-
     }
 
     public boolean userFound() throws InterruptedException {
