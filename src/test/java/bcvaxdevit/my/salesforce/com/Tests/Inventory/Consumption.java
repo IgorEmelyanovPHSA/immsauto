@@ -181,6 +181,9 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		System.out.println("/*-- 29.Navigate to Appointment Scheduling Tab --*/");
 		Thread.sleep(2000);
+		inClinicExperiencePage.clickReasonForVisit();
+		System.out.println("/*-- 30.Click on reason for visit --*/");
+		Thread.sleep(2000);
 		inClinicExperiencePage.clickToSearchClinic();
 		System.out.println("/*-- 30.Click on search clinic tab --*/");
 		Thread.sleep(2000);
