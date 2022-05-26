@@ -222,9 +222,18 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement validate_vaccine_admin_page_open;
 	private By validate_vaccine_admin_page_open1 = By.xpath(".//h2[text() = 'Vaccine Administration']");
 
+	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
+	private WebElement ice_page_displayed;
 
+	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
+	}
+
+	/*-------------Methods--------------*/
+	public void verifyIsICEpageDisplayed() {
+		waitForElementToBeVisible(driver, ice_page_displayed, 10);
+		ice_page_displayed.isDisplayed();
 	}
 	
 	public void SearchForCitizen(String citizen) throws InterruptedException {
@@ -658,6 +667,8 @@ public class InClinicExperiencePage extends BasePage {
 			return false;
 		}
 	}
+
+
 	
 }
 

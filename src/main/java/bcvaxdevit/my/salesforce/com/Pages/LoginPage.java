@@ -9,7 +9,7 @@ public class LoginPage extends BasePage {
 	
 	private final String Precondition_BCVAXDEVIT = "sunil.anne@phsa.ca.bcvaxdevit";
 	private final String Precondition_PW_BCVAXDEVIT = "Sqlserver@3";
-	private final String CLINICIAN_BCVAXDEVIT = "auto_clinician@deloitte.ca.bcvaxdevit";
+	private final String CLINICIAN_ICE_BCVAXDEVIT = "auto_clinician@deloitte.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_BCVAXDEVIT = "Technology1990!!!!!!!";
 	private final String PPHIS_BCVAXDEVIT = "autooperationpphis@deloitte.ca.bcvaxdevit";
 	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!!!";
@@ -69,8 +69,8 @@ public class LoginPage extends BasePage {
 		super(driver);
 	}
 	
-	public void enterClinicianUserName() {
-		this.clinician_bcvaxdevit.sendKeys(CLINICIAN_BCVAXDEVIT);
+	public void enterClinicianICEUserName() {
+		this.clinician_bcvaxdevit.sendKeys(CLINICIAN_ICE_BCVAXDEVIT);
 	}
 	
 	public void Precondition_BCVAXDEVIT() {
@@ -89,7 +89,7 @@ public class LoginPage extends BasePage {
 		this.Consumption_bcvaxdevit.sendKeys(CLINICIAN_Consumption_BCVAXDEVIT);
 	}
 	
-	public void enterClinicianPW() {
+	public void enterClinicianICEPW() {
 		this.clinician_pw_bcvaxdevit.sendKeys(CLINICIAN_PW_BCVAXDEVIT);
 	}
 	
@@ -134,10 +134,10 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
-	public InClinicExperiencePage loginWith() {
-		this.enterClinicianUserName();
+	public InClinicExperiencePage loginAsClinicianICE() {
+		this.enterClinicianICEUserName();
 		//setUsername(username);
-		this.enterClinicianPW();
+		this.enterClinicianICEPW();
 		//return clickLoginButton();
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
