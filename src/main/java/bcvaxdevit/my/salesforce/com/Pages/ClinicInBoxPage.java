@@ -129,15 +129,7 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     @FindBy(xpath = "//button[text() = 'Confirm']")
-=======
-    @FindBy(xpath = "(.//button[text() = 'Confirm'])")
->>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
-=======
-    @FindBy(xpath = "(.//button[text() = 'Confirm'])")
->>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
     private WebElement confirm_button;
     private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
 
@@ -279,15 +271,7 @@ public class ClinicInBoxPage extends BasePage {
 
     public void clickConfirmButton() throws InterruptedException {
         waitForElementToBeVisible(driver, confirm_button, 10);
-<<<<<<< HEAD
-<<<<<<< HEAD
         this.confirm_button.click();
-=======
-        confirm_button.click();
->>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
-=======
-        confirm_button.click();
->>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
     }
 
     public boolean userFound() throws InterruptedException {
@@ -576,17 +560,6 @@ public class ClinicInBoxPage extends BasePage {
         Thread.sleep(2000);
         return new InClinicExperiencePage(driver);
     }
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
-=======
->>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
-
 
 }
 
