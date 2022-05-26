@@ -228,6 +228,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_reason_radiobutton;
 	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
 
+	@FindBy(xpath = "(.//a[text() = 'Related'])")
+	private WebElement person_account_Related_tab;
+	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -677,7 +681,24 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 
+	public void successRegisteredMessageAppear() throws InterruptedException {
+		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
+		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
+		Thread.sleep(2000);
+		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
+	}
 
-	
+	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(person_account_Related_tab_1);
+		isDisplayed(person_account_Related_tab_1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+
+
+
+
 }
 
