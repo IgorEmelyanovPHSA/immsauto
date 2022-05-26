@@ -74,8 +74,8 @@ public class DemoTC {
 		System.out.println("Login to InClinicExperience as Clinician BCVAXDEVIT");
 		driver.get(Utils.BASE_URL_BCVAXDEVIT);
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterClinicianUserName();
-		loginPage.enterClinicianPW();
+		loginPage.enterClinicianICEUserName();
+		loginPage.enterClinicianICEPW();
 		Thread.sleep(2000);
 		loginPage.clickLoginButton();
 		//loginPage.loginWith();

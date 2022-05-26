@@ -225,6 +225,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
 	private WebElement ice_page_displayed;
 
+	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
+	private WebElement click_reason_radiobutton;
+	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -569,6 +573,12 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(appointment_scheduling_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void clickReasonForVisit() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
+		click_reason_radiobutton.click();
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
