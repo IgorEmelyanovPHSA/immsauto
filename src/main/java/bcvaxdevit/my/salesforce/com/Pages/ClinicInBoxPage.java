@@ -560,7 +560,6 @@ public class ClinicInBoxPage extends BasePage {
         Thread.sleep(2000);
         return new InClinicExperiencePage(driver);
     }
-
 }
 
 
