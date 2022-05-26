@@ -197,14 +197,14 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		inClinicExperience.refreshBrowser();
 		Thread.sleep(2000);
 		System.out.println("/*33----Go to back to the Citizen Related Tab --*/");
-		//clinicInBox.clickRelatedTab();
+		inClinicExperience.clickRelatedTab();
 		Thread.sleep(2000);
 		System.out.println("/*34----click on In-clinic Experience button --*/");
-		//clinicInBox.ClickGoToInClinicExperienceButton();
+		inClinicExperience.ClickGoToInClinicExperienceButton();
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		Thread.sleep(2000);
 		System.out.println("/*35----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		//InClinicExperience.validateVaccineAdminPageOpen();
+		inClinicExperience.validateVaccineAdminPageOpen();
 
 	}
 

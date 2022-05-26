@@ -595,6 +595,12 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
 	}
+
+	public void clickOnMoreSearchTabs() throws InterruptedException {
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
+		click_more_search_tabs.click();
+	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
@@ -714,12 +720,6 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 
-	public void clickOnMoreSearchTabs() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
-		click_more_search_tabs.click();
-	}
-
 	public void selectSearchClinicNameTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
 		Thread.sleep(2000);
@@ -737,7 +737,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
