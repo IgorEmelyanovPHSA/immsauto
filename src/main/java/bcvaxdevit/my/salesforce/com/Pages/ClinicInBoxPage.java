@@ -130,7 +130,11 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement selectCitizenInTable; //
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     @FindBy(xpath = "//button[text() = 'Confirm']")
+=======
+    @FindBy(xpath = "(.//button[text() = 'Confirm'])")
+>>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
 =======
     @FindBy(xpath = "(.//button[text() = 'Confirm'])")
 >>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
@@ -276,7 +280,11 @@ public class ClinicInBoxPage extends BasePage {
     public void clickConfirmButton() throws InterruptedException {
         waitForElementToBeVisible(driver, confirm_button, 10);
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.confirm_button.click();
+=======
+        confirm_button.click();
+>>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
 =======
         confirm_button.click();
 >>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
@@ -571,8 +579,11 @@ public class ClinicInBoxPage extends BasePage {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
 =======
 >>>>>>> 5505bfd8fda39c581ff08bc122c332f9e1e713d3
 
