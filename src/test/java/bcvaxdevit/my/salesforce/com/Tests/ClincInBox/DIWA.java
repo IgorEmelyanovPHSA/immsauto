@@ -47,7 +47,7 @@ public class DIWA extends BaseTest {
 		clinicInBoxPage.clickCreatImmunizationRecord();
 		Thread.sleep(4000);
 		System.out.println("/*----9. Select an Option ---*/");
-		clinicInBoxPage.clickConfirmBtn();
+		clinicInBoxPage.clickConfirmButton();
 		Thread.sleep(3000);
 		clinicInBoxPage.clickSelectAnOptionDropdown();
 		Thread.sleep(3000);
@@ -111,4 +111,5 @@ public class DIWA extends BaseTest {
 	
 	
 	}
+
 }

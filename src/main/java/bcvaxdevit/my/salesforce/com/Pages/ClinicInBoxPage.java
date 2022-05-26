@@ -99,7 +99,8 @@ public class ClinicInBoxPage extends BasePage {
     private WebElement finalClick1;
 
     @FindBy(xpath = "//input[@class=\"slds-input\"]")
-    private WebElement enterDate;
+    private WebElement inputDate;
+    private By inputDate1 = By.xpath("//input[@class=\"slds-input\"]");
 
     @FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
     private WebElement email;
@@ -128,12 +129,9 @@ public class ClinicInBoxPage extends BasePage {
     @FindBy(xpath = "//a[@id='relatedListsTab__item']")
     private WebElement selectCitizenInTable; //
 
-    @FindBy(xpath = ".//button[text() = 'Confirm']")
-
-    private WebElement confirmBtn;
-
+    @FindBy(xpath = "//button[text() = 'Confirm']")
     private WebElement confirm_button;
-    private By confirm_button1 = By.xpath("(.//button[text() = 'Confirm'])");
+    private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
 
 
     @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
@@ -257,6 +255,7 @@ public class ClinicInBoxPage extends BasePage {
         Thread.sleep(2000);
     }
 
+
     public void userClickCitizen() throws InterruptedException {
         waitForElementToBeVisible(driver, click_on_citizen, 10);
         Thread.sleep(2000);
@@ -267,9 +266,9 @@ public class ClinicInBoxPage extends BasePage {
         //click_on_citizen.click();
     }
 
-    public void clickConfirmBtn() throws InterruptedException {
-
-        this.confirmBtn.click();
+    public void clickConfirmButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, confirm_button, 10);
+        this.confirm_button.click();
     }
 
     public boolean userFound() throws InterruptedException {
@@ -321,7 +320,7 @@ public class ClinicInBoxPage extends BasePage {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 
         String todayAsString = dateFormat.format(today);
-        this.enterDate.sendKeys(todayAsString, Keys.ENTER);
+        this.inputDate.sendKeys(todayAsString, Keys.ENTER);
     }
 
 //    Calendar calendar = Calendar.getInstance();
@@ -349,9 +348,6 @@ public class ClinicInBoxPage extends BasePage {
         Date yesterday = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 
-//    @FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
-//    private WebElement user_found;
-//    private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
 
 
         String yesterdayAsString = dateFormat.format(yesterday);
@@ -555,6 +551,8 @@ public class ClinicInBoxPage extends BasePage {
         waitForElementToBeVisible(driver, click_more_search_tabs, 10);
         click_more_search_tabs.click();
     }
+
+
 
 
 }
