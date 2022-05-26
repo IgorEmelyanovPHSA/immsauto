@@ -232,6 +232,18 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement person_account_Related_tab;
 	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
 
+	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
+	private WebElement click_more_search_tabs;
+	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
+
+	@FindBy(xpath = ".//span[text()='Search clinic name']")
+	private WebElement search_clinic_name_tab;
+	private By search_clinic_name_tab1 = By.xpath(".//span[text()='Search clinic name']");
+
+	@FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
+	private WebElement vlidate_appointment_confirm_message;
+	private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -621,7 +633,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectTimeSlotForAppointment() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(time_slot_appointment1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -638,10 +651,15 @@ public class InClinicExperiencePage extends BasePage {
 		appt_confirm_btn.click();
 	}
 	
-	public void AppointmentConfirmationMessage() throws InterruptedException {
-		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Appointment Confirmed!']"), 20);
-		driver.findElement(By.xpath(".//div[text() = 'Appointment Confirmed!']"));
-		Thread.sleep(2000);
+	public boolean AppointmentConfirmationMessage() throws InterruptedException {
+		try {
+			waitForElementToBeVisible(driver, vlidate_appointment_confirm_message, 10);
+			System.out.println("/*---'Appointment Confirmed!' message shown up");
+			return true;
+		} catch (NoSuchElementException e) {
+			System.out.println("/*---the screen does not show up 'Appointment Confirmed!'");
+			return false;
+		}
 	}
 	
 	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
@@ -694,6 +712,39 @@ public class InClinicExperiencePage extends BasePage {
 		isDisplayed(person_account_Related_tab_1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void clickOnMoreSearchTabs() throws InterruptedException {
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
+		click_more_search_tabs.click();
+	}
+
+	public void selectSearchClinicNameTab() throws InterruptedException {
+		waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(search_clinic_name_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void searchClinicName() throws InterruptedException {
+		waitForElementToBeVisible(driver, select_clinic, 10);
+		select_clinic.click();
+		Thread.sleep(2000);
+		select_clinic.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
+		select_clinic.sendKeys(Keys.RETURN);
+	}
+
+	public void clickOnFacilityOptionLocation() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, option_loc_facility, 10);
+		option_loc_facility.click();
+	}
+
+	public void refreshBrowser() throws InterruptedException {
+		driver.navigate().refresh();
 	}
 
 
