@@ -262,9 +262,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_vaccine_agent_dropdown;
 	private By click_vaccine_agent_dropdown1 = By.xpath(".//button[@aria-label = 'Agent, Select an option']");
 
-	@FindBy(xpath = "(.//span[text() = 'COVID-19 mRNA'])[1]']")
+	@FindBy(xpath = ".//span[text() = 'COVID-19 mRNA']")
 	private WebElement select_vaccine_agent_dropdown;
-	private By select_vaccine_agent_dropdown1 = By.xpath("(.//span[text() = 'COVID-19 mRNA'])[1]");
+	private By select_vaccine_agent_dropdown1 = By.xpath(".//span[text() = 'COVID-19 mRNA']");
 
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
@@ -709,7 +709,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgent() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
