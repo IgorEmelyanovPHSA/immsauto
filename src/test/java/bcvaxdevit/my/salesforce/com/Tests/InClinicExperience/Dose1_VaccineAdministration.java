@@ -94,6 +94,12 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		Thread.sleep(5000);
+		System.out.println("/*5.----- Click on User Defaults Tab --*/");
+		inClinicExperience.clickUserDefaultsTab();
+		Thread.sleep(2000);
+		System.out.println("/*5.----- Enter current date for UserDefaults --*/");
+		inClinicExperience.inputCurrentDateUserDefaults();
+		Thread.sleep(2000);
 		System.out.println("/*5.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
 		System.out.println("/*6.----click Register button New Citizen -Ludovika --*/");
@@ -205,6 +211,16 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*35----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();
+		Thread.sleep(5000);
+		System.out.println("/*-- 40---Click confirm and Save Button on Home Page --*/");
+		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		Thread.sleep(5000);
+		System.out.println("/*-- 41---Click Save Consent Button --*/");
+		inClinicExperience.ClickSaveConsentButton();
+		Thread.sleep(5000);
+		System.out.println("/*-- 42---Click Confirm and Save Administration Button --*/");
+		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
 
 	}
 

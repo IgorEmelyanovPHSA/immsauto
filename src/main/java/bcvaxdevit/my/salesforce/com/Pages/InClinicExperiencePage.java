@@ -3,6 +3,12 @@ package bcvaxdevit.my.salesforce.com.Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class InClinicExperiencePage extends BasePage {
 	
@@ -243,6 +249,14 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
 	private WebElement vlidate_appointment_confirm_message;
 	private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
+
+	@FindBy(xpath = "//input[@name='BCH_Date__c']")
+	private WebElement input_current_date;
+	private By input_current_date1 = By.xpath("//input[@name='BCH_Date__c']");
+
+	@FindBy(xpath = ".//span[text() = 'User Defaults']")
+	private WebElement user_defaults_tab;
+	private By user_defaults_tab1 = By.xpath(".//span[text() = 'User Defaults']");
 
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
@@ -746,6 +760,29 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void refreshBrowser() throws InterruptedException {
 		driver.navigate().refresh();
+	}
+
+	public void clickUserDefaultsTab() throws InterruptedException {
+		waitForElementToBeLocated(driver, user_defaults_tab1, 10);
+		WebElement element = driver.findElement(user_defaults_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void inputCurrentDateUserDefaults() throws InterruptedException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 0);
+		Date today = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		waitForElementToBeVisible(driver, input_current_date, 10);
+		String todayAsString = dateFormat.format(today);
+		input_current_date.click();
+		Thread.sleep(2000);
+		input_current_date.clear();
+		Thread.sleep(2000);
+		input_current_date.sendKeys(todayAsString);
+		Thread.sleep(2000);
+		input_current_date.sendKeys(Keys.ENTER);
 	}
 
 
