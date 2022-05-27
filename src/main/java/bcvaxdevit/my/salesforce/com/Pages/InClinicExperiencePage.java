@@ -258,6 +258,19 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement user_defaults_tab;
 	private By user_defaults_tab1 = By.xpath(".//span[text() = 'User Defaults']");
 
+	@FindBy(xpath = ".//button[@aria-label = 'Agent, Select an option']")
+	private WebElement click_vaccine_agent_dropdown;
+	private By click_vaccine_agent_dropdown1 = By.xpath(".//button[@aria-label = 'Agent, Select an option']");
+
+	@FindBy(xpath = "(.//span[text() = 'COVID-19 mRNA'])[1]']")
+	private WebElement select_vaccine_agent_dropdown;
+	private By select_vaccine_agent_dropdown1 = By.xpath("(.//span[text() = 'COVID-19 mRNA'])[1]");
+
+	@FindBy(xpath = ".//h1[text() = 'Client Search']")
+	private WebElement validate_home_client_search_page_open;
+	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
+
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -694,6 +707,16 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, confirm_and_save_btn_home, 10);
 		confirm_and_save_btn_home.click();
 	}
+
+	public void selectVaccineAgent() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
+		click_vaccine_agent_dropdown.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
+		select_vaccine_agent_dropdown.click();
+	}
 	
 	public void ClickSaveConsentButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, save_consent_btn, 10);
@@ -783,6 +806,17 @@ public class InClinicExperiencePage extends BasePage {
 		input_current_date.sendKeys(todayAsString);
 		Thread.sleep(2000);
 		input_current_date.sendKeys(Keys.ENTER);
+	}
+
+	public boolean validateHomePageShownUp() throws InterruptedException {
+		try {
+			waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
+			System.out.println("/*---Home page-Client Search page shown up");
+			return true;
+		} catch (NoSuchElementException e){
+			System.out.println("/*---no Home page-Client Search page show up");
+			return false;
+		}
 	}
 
 
