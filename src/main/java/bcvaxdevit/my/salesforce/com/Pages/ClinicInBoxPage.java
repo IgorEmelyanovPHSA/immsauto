@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ClinicInBoxPage extends BasePage {
-	
+	/*---------Properties-------*/
 	@FindBy(xpath = ".//button[text() = 'Register New Citizen']")
 	private WebElement register_button;
 	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");

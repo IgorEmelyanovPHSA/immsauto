@@ -19,6 +19,8 @@ public class LoginPage extends BasePage {
 	private final String CLINICIAN_PW_Consumption_BCVAXDEVIT = "Technology1990!!!!!!";
 	private final String DIWA_BCVAXDEVIT = "autocliniciandiwa2@phsa.ca.bcvaxdevit";
 	private final String DIWA_PW_BCVAXDEVIT = "phsa7phsa*";
+	private final String CALLCENTERAGENT_CC_BCVAXDEVIT = "autocallcenteragent@deloitte.ca.bcvaxdevit";
+	private final String CALLCENTERAGENT_PW_CC_BCVAXDEVIT = "Technology1990!!!!!!!";
 
 	
 	@FindBy(id = "username")
@@ -116,6 +118,10 @@ public class LoginPage extends BasePage {
 	public void enterDIWA_UserName(){this.diwa_bcvaxdevit.sendKeys(DIWA_BCVAXDEVIT);}
 
 	public void enterDIWA_PW(){this.diwa_pw_bcvaxdevit.sendKeys(DIWA_PW_BCVAXDEVIT);}
+
+	public void enterCalCenterAgentCC_UserName(){this.diwa_bcvaxdevit.sendKeys(CALLCENTERAGENT_CC_BCVAXDEVIT);}
+
+	public void enterCalCenterAgentCC_PW(){this.diwa_pw_bcvaxdevit.sendKeys(CALLCENTERAGENT_PW_CC_BCVAXDEVIT);}
 	
 	//public void setUsername (String username){
 	//  type(username,clinicianField);
@@ -200,6 +206,15 @@ public class LoginPage extends BasePage {
 		//return clickLoginButton();
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
+	}
+
+	public CallCenterConsolePage loginAsCalCenterAgentCC() {
+		this.enterCalCenterAgentCC_UserName();
+		//setUsername(username);
+		this.enterCalCenterAgentCC_PW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new CallCenterConsolePage(driver);
 	}
 	
 	
