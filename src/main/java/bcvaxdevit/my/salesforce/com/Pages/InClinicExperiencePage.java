@@ -99,9 +99,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_agent_value;
 	private By click_agent_value1 = By.xpath("(//button[@class='slds-combobox__input slds-input_faux'])[1]");
 	
-	@FindBy(xpath = ".//button[@data-value='COVID-19 Virus Like Particle UPDATE']")
+	@FindBy(xpath = "(//span[text()='COVID-19 Virus Like Particle UPDATE'])[1]")
 	private WebElement select_agent_name;
-	private By select_agent_name1 = By.xpath(".//button[@data-value='COVID-19 Virus Like Particle UPDATE']");
+	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 Virus Like Particle UPDATE'])[1]");
 	
 	@FindBy(xpath = "//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]")
 	private WebElement select_desired_supply_container;
@@ -380,7 +380,7 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean selectRERNRecord() throws InterruptedException {
 		//To scroll down the page to see RERN Record
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,900)", "");
+		js.executeScript("window.scrollBy(0,750)", "");
 		Thread.sleep(5000);
 		if (!isDisplayed(select_rern_record1)) {
 			return false;
@@ -829,13 +829,11 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 	}
-
-	public void SelectAgentValue() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_agent_name1, 10);
-		WebElement element1 = driver.findElement(select_agent_name1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-		Thread.sleep(2000);
+	
+	public void SelectAgentValue(String Agent) throws InterruptedException {
+		waitForElementToBeVisible(driver, select_agent_name, 10);
+		WebElement search_input = driver.findElement(select_agent_name1);
+		search_input.click();
 	}
 	
 }

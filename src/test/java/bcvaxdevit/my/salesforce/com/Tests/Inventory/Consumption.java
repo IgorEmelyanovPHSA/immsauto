@@ -220,11 +220,11 @@ public class Consumption extends BaseTest {
 		System.out.println("/*-- 40---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
-		System.out.println("/*-- 41---Click Save Consent Button --*/");
+		System.out.println("/*-- 41---Click to select Agent --*/");
 		inClinicExperiencePage.ClickAgentValue();
 		Thread.sleep(2000);
 		System.out.println("/*-- 41--- Click to select the Agent --*/");
-		inClinicExperiencePage.SelectAgentValue();
+		inClinicExperiencePage.SelectAgentValue("COVID-19 Virus Like Particle UPDATE");
 		Thread.sleep(2000);
 		System.out.println("/*-- 41--- Select Agent From the Picklist Value --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
