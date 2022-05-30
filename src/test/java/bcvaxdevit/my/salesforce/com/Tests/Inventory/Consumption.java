@@ -1,9 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
-import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -118,6 +116,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		inClinicExperiencePage.selectICEFromApp();
 		System.out.println("/*-- 10. Navigate to In Clinic Experience App --*/");
+		Thread.sleep(2000);
 		inClinicExperiencePage.clickRegisterTab();
 		System.out.println("/*-- 11. Click on register Tab --*/");
 		inClinicExperiencePage.closeTabsHCA();
@@ -172,7 +171,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickEligibilityButton();
 		System.out.println("/*-- 27.click on check eligibility button on person account and select covid19 option --*/");
 		Thread.sleep(2000);
-		inClinicExperiencePage.selectCovid19Option();
+		inClinicExperiencePage.selectCovid19option();
 		System.out.println("/*-- 27.1.select covid19 option --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.userIsEligibleSuccessMsg();
@@ -184,12 +183,16 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickReasonForVisit();
 		System.out.println("/*-- 30.Click on reason for visit --*/");
 		Thread.sleep(2000);
-		inClinicExperiencePage.clickToSearchClinic();
-		System.out.println("/*-- 30.Click on search clinic tab --*/");
+		
+		inClinicExperiencePage.clickOnMoreSearchTabs();
+		System.out.println("/*-- 31.Click on More tabs dropdown --*/");
+		Thread.sleep(2000);
+		inClinicExperiencePage.selectSearchClinicNameTab();
+		System.out.println("/*-- 32.Select Search clinic from the More tabs dropdown --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.SearchForClinic();
 		System.out.println("/*-- 31.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		System.out.println("/*-- 32----select appointment booking --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		Thread.sleep(2000);
@@ -218,6 +221,12 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
 		System.out.println("/*-- 41---Click Save Consent Button --*/");
+		inClinicExperiencePage.ClickAgentValue();
+		Thread.sleep(2000);
+		System.out.println("/*-- 41--- Click to select the Agent --*/");
+		inClinicExperiencePage.SelectAgentValue();
+		Thread.sleep(2000);
+		System.out.println("/*-- 41--- Select Agent From the Picklist Value --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(5000);
 		System.out.println("/*-- 42---Click Confirm and Save Administration Button --*/");
