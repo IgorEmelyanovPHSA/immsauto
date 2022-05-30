@@ -204,8 +204,6 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*35----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
-		
-		
 	}
 	
 	@Test(priority = 3)

@@ -749,10 +749,6 @@ java.net.SocketException: Connection reset
 2022-05-20 15:15:35 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-20 16:41:05 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-20 16:41:09 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
-<<<<<<< HEAD
-2022-05-25 00:34:50 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
-2022-05-25 00:34:54 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
-=======
 2022-05-20 16:50:30 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-20 16:50:35 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-24 12:38:08 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
@@ -957,7 +953,7 @@ java.net.SocketException: Connection reset
 2022-05-27 09:09:37 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-27 09:09:42 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-27 09:11:28 WARN  WebSocketHandler:142 - onError
-java.net.SocketException: Connection reset
+    java.net.SocketException: Connection reset
 	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
 	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
 	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)
