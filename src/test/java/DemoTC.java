@@ -1,8 +1,8 @@
-import prodsuppqa.my.salesforce.com.Pages.LoginPage;
+import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-import prodsuppqa.my.salesforce.com.Pages.Utils;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 
 public class DemoTC {
 	private static final WebDriver driver = new ChromeDriver();
@@ -69,13 +69,13 @@ public class DemoTC {
 		
 	}
 	
-	@Test(testName = "Login to InClinicExperience as Clinician PRODSUPPQA")
+	@Test(testName = "Login to InClinicExperience as Clinician BCVAXDEVIT")
 	public static void LoginAsClinicianToProdSuppQA() throws InterruptedException {
-		System.out.println("Login to InClinicExperience as Clinician PRODSUPPQA");
-		driver.get(Utils.BASE_URL_PRODSUPPQA);
+		System.out.println("Login to InClinicExperience as Clinician BCVAXDEVIT");
+		driver.get(Utils.BASE_URL_BCVAXDEVIT);
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterClinicianUserName();
-		loginPage.enterClinicianPW();
+		loginPage.enterClinicianICEUserName();
+		loginPage.enterClinicianICEPW();
 		Thread.sleep(2000);
 		loginPage.clickLoginButton();
 		//loginPage.loginWith();

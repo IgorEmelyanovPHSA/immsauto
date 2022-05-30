@@ -3,14 +3,14 @@
 <suite name="Clinic-In Box Workflow Suit">
     <test name="Regression">
         <classes>
-            <class name="ClinicInBoxTC">
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2">
                 <methods>
-                    <include name="LoginAsClinician"/>
+                    <include name="Test1"/>
                 </methods>
             </class>
-            <class name="InClinicExperience.Dose1VaccineAdmimistration">
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2">
                 <methods>
-                    <include name="ghgfgfhfhfhgg"/>
+                    <include name="Test2"/>
                 </methods>
             </class>
         </classes>
