@@ -241,11 +241,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
 	private WebElement click_reason_radiobutton;
 	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
-	
+
 	@FindBy(xpath = "(.//a[text() = 'Related'])")
 	private WebElement person_account_Related_tab;
 	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-	
+
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
@@ -277,7 +277,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
 	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
-	
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -744,7 +744,7 @@ public class InClinicExperiencePage extends BasePage {
 			return false;
 		}
 	}
-	
+
 	public void successRegisteredMessageAppear() throws InterruptedException {
 		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
 		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
@@ -821,7 +821,7 @@ public class InClinicExperiencePage extends BasePage {
 			return false;
 		}
 	}
-	
+
 	public void ClickAgentValue() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_agent_value1, 10);
 		WebElement element = driver.findElement(click_agent_value1);
@@ -829,7 +829,7 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 	}
-	
+
 	public void SelectAgentValue() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_agent_name1, 10);
 		WebElement element1 = driver.findElement(select_agent_name1);
