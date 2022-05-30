@@ -162,7 +162,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		inClinicExperience.clickEligibilityButton();
 		Thread.sleep(2000);
 		System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
-		inClinicExperience.selectCovid19Option();
+		inClinicExperience.selectCovid19option();
 		Thread.sleep(2000);
 		System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
 		inClinicExperience.userIsEligibleSuccessMsg();
