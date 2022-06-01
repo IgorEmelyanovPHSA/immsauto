@@ -150,24 +150,24 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*18.----click on person Account Related Tab --*/");
 		clinicInBox.clickOnPersonAccountRelatedTab();
 		Thread.sleep(2000);
-		System.out.println("/*18.----click on Eligibility button --*/");
-		clinicInBox.clickOnEligibilityButton();
-		Thread.sleep(2000);
-		System.out.println("/*19----select vaccination option -> COVID_19_Vaccination --*/");
-		clinicInBox.selectEligibilityOption();
-		Thread.sleep(2000);
-		System.out.println("/*20.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-		clinicInBox.successEligibilityMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		//System.out.println("/*18.----click on Eligibility button --*/");
+		//clinicInBox.clickOnEligibilityButton();
+		//Thread.sleep(2000);
+		//System.out.println("/*19----select vaccination option -> COVID_19_Vaccination --*/");
+		//clinicInBox.selectEligibilityOption();
+		//Thread.sleep(2000);
+		//System.out.println("/*20.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
+		//clinicInBox.successEligibilityMessageAppear();
+		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		System.out.println("/*21----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(2000);
 		System.out.println("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
 		clinicInBox.clickOnReasonForVisit();
 		Thread.sleep(2000);
-		System.out.println("/*23----click on 'More' search tab --*/");
-		clinicInBox.clickOnMoreSearchTabs();
-		Thread.sleep(2000);
+		//System.out.println("/*23----click on 'More' search tab --*/");
+		//clinicInBox.clickOnMoreSearchTabs();
+		//Thread.sleep(2000);
 		System.out.println("/*24----select 'Search clinic name' tab --*/");
 		clinicInBox.selectSearchClinicNameTab();
 		Thread.sleep(2000);
@@ -199,7 +199,6 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.clickRelatedTab();
 		Thread.sleep(2000);
 		System.out.println("/*34----click on In-clinic Experience button --*/");
-		//clinicInBox.ClickGoToInClinicExperienceButton();
 		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		Thread.sleep(2000);
 		System.out.println("/*35----In-clinic Experience ->Vaccine Admin page appears up --*/");

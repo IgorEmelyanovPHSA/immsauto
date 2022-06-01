@@ -158,24 +158,24 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*23.----click on person Account Related Tab --*/");
 		inClinicExperience.clickOnPersonAccountRelatedTab();
 		Thread.sleep(2000);
-		System.out.println("/*24.----click on Eligibility button --*/");
-		inClinicExperience.clickEligibilityButton();
-		Thread.sleep(2000);
-		System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
-		inClinicExperience.selectCovid19option();
-		Thread.sleep(2000);
-		System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-		inClinicExperience.userIsEligibleSuccessMsg();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		//System.out.println("/*24.----click on Eligibility button --*/");
+		//inClinicExperience.clickEligibilityButton();
+		//Thread.sleep(2000);
+		//System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
+		//inClinicExperience.selectCovid19option();
+		//Thread.sleep(2000);
+		//System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
+		//inClinicExperience.userIsEligibleSuccessMsg();
+		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		System.out.println("/*27----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
 		Thread.sleep(2000);
 		System.out.println("/*28----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
 		inClinicExperience.clickReasonForVisit();
 		Thread.sleep(2000);
-		System.out.println("/*29----click on 'More' search tab --*/");
-		inClinicExperience.clickOnMoreSearchTabs();
-		Thread.sleep(2000);
+		//System.out.println("/*29----click on 'More' search tab --*/");
+		//inClinicExperience.clickOnMoreSearchTabs();
+		//Thread.sleep(2000);
 		System.out.println("/*30----select 'Search clinic name' tab --*/");
 		inClinicExperience.selectSearchClinicNameTab();
 		Thread.sleep(2000);

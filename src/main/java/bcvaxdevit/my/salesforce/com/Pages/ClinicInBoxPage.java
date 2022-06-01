@@ -173,9 +173,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 	
-	@FindBy(xpath = ".//span[text()='Search clinic name']")
+	@FindBy(xpath = ".//a[text()='Search clinic name']")
 	private WebElement search_clinic_name_tab;
-	private By search_clinic_name_tab1 = By.xpath(".//span[text()='Search clinic name']");
+	private By search_clinic_name_tab1 = By.xpath(".//a[text()='Search clinic name']");
 	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement search_clinic_name;
@@ -480,6 +480,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickOnReasonForVisit() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
 	}
@@ -515,7 +516,8 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectBookingAppointmentDay() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
 		booking_app_active_day.click();
@@ -523,7 +525,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void selectTimeSlotAppointment() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, time_slot_appointment, 10);
 		Thread.sleep(2000);
