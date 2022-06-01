@@ -70,46 +70,46 @@ public class DIWA extends BaseTest {
 //                multiples.get(i).click();
 //            }
 //        }
-		
+		clinicInBoxPage.clickTimeBox();
 		Thread.sleep(3000);
 		System.out.println("/*---11. Select a Date and Time Administration ---*/");
-		clinicInBoxPage.selectDateAndTime();
+		//clinicInBoxPage.selectDateAndTime();
 		Thread.sleep(3000);
 		System.out.println("/*---12. Click Record Immunization ---*/");
 		clinicInBoxPage.clickRecordImmunization();
 		Thread.sleep(3000);
 		System.out.println("/*---13. Select Informed Consent Provider ---*/");
-		//clinicInBoxPage.informedConsentProvider();
+		//clinicInBoxPage.informedConsentProvider("Jason Yulghun");
 		System.out.println("/*---14. Enter Consent Effective To Date---*/");
-		//clinicInBoxPage.enterConsentEffectiveToDate();
+		clinicInBoxPage.enterConsentEffectiveToDate();
 		System.out.println("/*---15. Save Consent---*/");
-		//clinicInBoxPage.clickSaveConsent();
+		clinicInBoxPage.clickSaveConsent();
 		System.out.println("/*---16. Scroll down to Immunization Information and Click Edit---*/");
 		//clinicInBoxPage.clickEditBtn();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		System.out.println("/*---17. Select Provider ---*/");
-		//clinicInBoxPage.selectProvider();
-		Thread.sleep(3000);
+		clinicInBoxPage.selectImmunizingAgentProvider("JY Automation");
+		Thread.sleep(2000);
 		System.out.println("/*---18. Reset Lot Number ---*/");
-		//clinicInBoxPage.resetLotNumber();
-//        Thread.sleep(3000);
-//        System.out.println("/*---19. Select Injection Site ---*/");
-//        //clinicInBoxPage.selectInjectionSite();
-//        Thread.sleep(3000);
-//        System.out.println("/*---20. Write Revision Reason ---*/");
-//        //clinicInBoxPage.writeRevisionReason();
-//        Thread.sleep(3000);
-//        System.out.println("/*---21. Save Immunization Information ---*/");
-//        //clinicInBoxPage.saveImmunizationInformation();
-//        Thread.sleep(3000);
-//        System.out.println("/*---22. Confirm and Save Administration ---*/");
-//        //clinicInBoxPage.confirmAndSaveAdministration();
-//        Thread.sleep(3000);
-//        System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
-//        //clinicInBoxPage.summaryConfirmAndSave();
-//        Thread.sleep(3000);
-	
-	
+		clinicInBoxPage.resetLotNumber("300042698 - Exp. 2021 June 18");
+		Thread.sleep(3000);
+		System.out.println("/*---19. Select Injection Site ---*/");
+		clinicInBoxPage.selectInjectionSite("Arm - Left deltoid");
+		Thread.sleep(3000);
+		System.out.println("/*---20. Write Revision Reason ---*/");
+		//clinicInBoxPage.writeRevisionReason();
+		Thread.sleep(3000);
+		System.out.println("/*---21. Save Immunization Information ---*/");
+		clinicInBoxPage.saveImmunizationInformation();
+		Thread.sleep(3000);
+		System.out.println("/*---22. Confirm and Save Administration ---*/");
+		clinicInBoxPage.confirmAndSaveAdministration();
+		Thread.sleep(3000);
+		System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
+		clinicInBoxPage.summaryConfirmAndSave();
+		Thread.sleep(3000);
+		
+		
 	}
-
+	
 }

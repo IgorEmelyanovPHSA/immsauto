@@ -98,9 +98,9 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//span[contains(text(),'All Ages - Atlin Health Centre')]")
 	private WebElement finalClick1;
 	
-	@FindBy(xpath = "//input[@class=\"slds-input\"]")
+	@FindBy(xpath = "//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right']")
 	private WebElement inputDate;
-	private By inputDate1 = By.xpath("//input[@class=\"slds-input\"]");
+	private By inputDate1 = By.xpath("//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right']");
 	
 	@FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
 	private WebElement email;
@@ -133,21 +133,44 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement confirm_button;
 	private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
 	
-	
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
 	private WebElement recordImmunizationBtn;
 	
 	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement informedConsentProvider;
+	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
 	
 	@FindBy(xpath = "//input[@name=\"effectiveToDate\"]")
 	private WebElement consentEffectiveToDate;
 	
 	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
-	private WebElement saveConsentBtn;
+	private WebElement saveConsentButton;
+	
+	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
+	private WebElement selectLotNumber;
+	
+	
+	@FindBy(xpath = "//button[@name='injectionSite']")
+	private WebElement selectSite;
+	
 	
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
+	
+	@FindBy(xpath = "(//div[@class='slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right'])[1]")
+	private WebElement immunizingAgentProvider;
+	private By immunizingAgentProvider1 = By.xpath("(//div[@class='slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right'])[1]");
+	
+	@FindBy(xpath = "(//button[@type='submit'])[1]")
+	private WebElement saveAgain;
+	
+	@FindBy(xpath = "//button[@title='Confirm & Save Administration']")
+	private WebElement confirmAndSave;
+	
+	
+	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
+	private WebElement lastConfirmAndSave;
+	
 	
 	@FindBy(xpath = "(.//a[text() = 'Related'])")
 	private WebElement person_account_Related_tab;
@@ -315,6 +338,25 @@ public class ClinicInBoxPage extends BasePage {
 		driver.findElement(select_dropdown_option).click();
 		Thread.sleep(2000);
 	}
+//	public void clickTimeBox() throws InterruptedException {
+//		waitForElementToBeVisible(driver, inputDate, 10);
+//		this.inputDate.click();
+//	}
+	
+	public void clickTimeBox() throws InterruptedException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 0);
+		Date today = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		waitForElementToBeVisible(driver, inputDate, 10);
+		String todayAsString = dateFormat.format(today);
+		waitForElementToBeVisible(driver, inputDate, 10);
+		this.inputDate.click();
+		Thread.sleep(2000);
+		this.inputDate.sendKeys(todayAsString);
+		Thread.sleep(2000);
+		this.inputDate.sendKeys(Keys.ENTER);
+	}
 	
 	public void selectDateAndTime() {
 		Calendar calendar = Calendar.getInstance();
@@ -339,30 +381,71 @@ public class ClinicInBoxPage extends BasePage {
 		recordImmunizationBtn.click();
 	}
 	
-	public void informedConsentProvider() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
-		waitForElementToBeVisible(driver, informedConsentProvider, 10);
-		informedConsentProvider.click();
+	public void informedConsentProvider(String providerName) throws InterruptedException {
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
+		waitForElementToBeVisible(driver, informedConsentProvider, 15);
+		this.informedConsentProvider.click();
+		Thread.sleep(2000);
+		this.informedConsentProvider.sendKeys(providerName);
+		Thread.sleep(2000);
 	}
 	
 	public void enterConsentEffectiveToDate() throws InterruptedException {
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
+		calendar.add(Calendar.DAY_OF_YEAR, -1);
 		Date yesterday = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		
 		
 		String yesterdayAsString = dateFormat.format(yesterday);
 		this.consentEffectiveToDate.sendKeys(yesterdayAsString, Keys.ENTER);
 	}
 	
 	public void clickSaveConsent() throws InterruptedException {
-		saveConsentBtn.click();
+		saveConsentButton.click();
 	}
 	
 	public void clickEditBtn() throws InterruptedException {
 		editImmunizationInformation.click();
 	}
+	
+	public void selectImmunizingAgentProvider(String agentProviderName) throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizingAgentProvider);
+		waitForElementToBeVisible(driver, immunizingAgentProvider, 15);
+		this.immunizingAgentProvider.click();
+		Thread.sleep(2000);
+		this.immunizingAgentProvider.sendKeys(agentProviderName);
+		Thread.sleep(2000);
+	}
+	
+	public void saveImmunizationInformation() throws InterruptedException {
+		saveAgain.click();
+	}
+	
+	public void confirmAndSaveAdministration() throws InterruptedException {
+		confirmAndSave.click();
+	}
+	
+	public void summaryConfirmAndSave() throws InterruptedException {
+		lastConfirmAndSave.click();
+	}
+	
+	public void resetLotNumber(String lotNumberInfo) throws InterruptedException {
+		waitForElementToBeVisible(driver, selectLotNumber, 15);
+		this.selectLotNumber.click();
+		Thread.sleep(2000);
+		this.selectLotNumber.sendKeys(lotNumberInfo);
+		Thread.sleep(2000);
+	}
+	
+	public void selectInjectionSite(String siteInfo) throws InterruptedException {
+		waitForElementToBeVisible(driver, selectSite, 10);
+		this.selectSite.click();
+		Thread.sleep(2000);
+		this.selectSite.sendKeys(siteInfo);
+		Thread.sleep(2000);
+		selectSite.click();
+	}
+	
 	
 	public void enterFirstName(String firstname) throws InterruptedException {
 		waitForElementToBeLocated(driver, first_name1, 10);
