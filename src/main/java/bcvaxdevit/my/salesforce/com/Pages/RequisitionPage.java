@@ -111,7 +111,6 @@ public class RequisitionPage extends BasePage {
 
 
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
-
 	private WebElement searchByName;
 	private By searchByName2 = By.xpath("//div[@class='primaryLabel slds-truncate slds-lookup__result-text']");
 
