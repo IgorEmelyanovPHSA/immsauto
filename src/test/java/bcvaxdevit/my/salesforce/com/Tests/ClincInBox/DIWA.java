@@ -92,24 +92,24 @@ public class DIWA extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*---18. Reset Lot Number ---*/");
 		clinicInBoxPage.resetLotNumber("300042698 - Exp. 2021 June 18");
-        Thread.sleep(3000);
-        System.out.println("/*---19. Select Injection Site ---*/");
-        clinicInBoxPage.selectInjectionSite("Arm - Left deltoid");
-        Thread.sleep(3000);
-        System.out.println("/*---20. Write Revision Reason ---*/");
-        //clinicInBoxPage.writeRevisionReason();
-        Thread.sleep(3000);
-        System.out.println("/*---21. Save Immunization Information ---*/");
-        clinicInBoxPage.saveImmunizationInformation();
-        Thread.sleep(3000);
-        System.out.println("/*---22. Confirm and Save Administration ---*/");
-        clinicInBoxPage.confirmAndSaveAdministration();
-        Thread.sleep(3000);
-        System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
-        clinicInBoxPage.summaryConfirmAndSave();
-        Thread.sleep(3000);
-	
-	
+		Thread.sleep(3000);
+		System.out.println("/*---19. Select Injection Site ---*/");
+		clinicInBoxPage.selectInjectionSite("Arm - Left deltoid");
+		Thread.sleep(3000);
+		System.out.println("/*---20. Write Revision Reason ---*/");
+		//clinicInBoxPage.writeRevisionReason();
+		Thread.sleep(3000);
+		System.out.println("/*---21. Save Immunization Information ---*/");
+		clinicInBoxPage.saveImmunizationInformation();
+		Thread.sleep(3000);
+		System.out.println("/*---22. Confirm and Save Administration ---*/");
+		clinicInBoxPage.confirmAndSaveAdministration();
+		Thread.sleep(3000);
+		System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
+		clinicInBoxPage.summaryConfirmAndSave();
+		Thread.sleep(3000);
+		
+		
 	}
-
+	
 }
