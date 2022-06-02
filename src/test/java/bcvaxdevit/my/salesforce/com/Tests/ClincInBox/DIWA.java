@@ -2,11 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.ClincInBox;
 
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class DIWA extends BaseTest {
 	
@@ -78,38 +74,52 @@ public class DIWA extends BaseTest {
 		System.out.println("/*---12. Click Record Immunization ---*/");
 		clinicInBoxPage.clickRecordImmunization();
 		Thread.sleep(3000);
+		if (clinicInBoxPage.clickPopupYesButtonIfDisplayed())
+			System.out.println("/*---13.Pop up window is displayed and clicked  ---*/");
+		Thread.sleep(5000);
+		System.out.println("/*---14. select date of Administration ---*/");
+		clinicInBoxPage.selectDateOfAdministration();
+		Thread.sleep(2000);
 		System.out.println("/*---13. Select Informed Consent Provider ---*/");
-		//clinicInBoxPage.informedConsentProvider("Jason Yulghun");
-		System.out.println("/*---14. Enter Consent Effective To Date---*/");
-		clinicInBoxPage.enterConsentEffectiveToDate();
-		System.out.println("/*---15. Save Consent---*/");
+//		clinicInBoxPage.informedConsentProvider("Jason Yulghun");
+//		System.out.println("/*---14. Enter Consent Effective To Date---*/");
+//		clinicInBoxPage.enterConsentEffectiveToDate();
+//		System.out.println("/*---15. Save Consent---*/");
 		clinicInBoxPage.clickSaveConsent();
-		System.out.println("/*---16. Scroll down to Immunization Information and Click Edit---*/");
-		//clinicInBoxPage.clickEditBtn();
 		Thread.sleep(2000);
-		System.out.println("/*---17. Select Provider ---*/");
-		clinicInBoxPage.selectImmunizingAgentProvider("JY Automation");
+//		System.out.println("/*---16. Scroll down to Immunization Information and Click Edit---*/");
+//		clinicInBoxPage.clickEditBtn();
+//		Thread.sleep(2000);
+		System.out.println("/*---17. Click on the Immunization provider field ---*/");
+		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
-		System.out.println("/*---18. Reset Lot Number ---*/");
-		clinicInBoxPage.resetLotNumber("300042698 - Exp. 2021 June 18");
-		Thread.sleep(3000);
-		System.out.println("/*---19. Select Injection Site ---*/");
-		clinicInBoxPage.selectInjectionSite("Arm - Left deltoid");
-		Thread.sleep(3000);
-		System.out.println("/*---20. Write Revision Reason ---*/");
-		//clinicInBoxPage.writeRevisionReason();
-		Thread.sleep(3000);
-		System.out.println("/*---21. Save Immunization Information ---*/");
+		System.out.println("/*---17. Select Provider-->JY Automation ---*/");
+		clinicInBoxPage.selectProvider("JY Automation");
+		Thread.sleep(20000);
+		System.out.println("/*---18. Select Lot Number Field value set a Lot ---*/");
+		clinicInBoxPage.selectToSetLot();
+		Thread.sleep(2000);
+		System.out.println("/*---19. Select Lot -->300042698 - Exp. 2021 June 18 ---*/");
+		clinicInBoxPage.selectLot("300042698 - Exp. 2021 June 18");
+		Thread.sleep(2000);
+		System.out.println("/*---20. Select Injection Site ---*/");
+		clinicInBoxPage.selectInjectionSite();
+		Thread.sleep(2000);
+		System.out.println("/*---21. Select Dosage---*/");
+		clinicInBoxPage.selectDosage();
+		Thread.sleep(2000);
+//		System.out.println("/*---20. Write Revision Reason ---*/");
+//		//clinicInBoxPage.writeRevisionReason();
+//		Thread.sleep(3000);
+		System.out.println("/*---22. Save Immunization Information ---*/");
 		clinicInBoxPage.saveImmunizationInformation();
-		Thread.sleep(3000);
-		System.out.println("/*---22. Confirm and Save Administration ---*/");
+		Thread.sleep(2000);
+		System.out.println("/*---23. Confirm and Save Administration ---*/");
 		clinicInBoxPage.confirmAndSaveAdministration();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
 		clinicInBoxPage.summaryConfirmAndSave();
-		Thread.sleep(3000);
-		
-		
+		Thread.sleep(2000);
 	}
 	
 }
