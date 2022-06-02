@@ -232,6 +232,10 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "(.//button[@name='navigateToICE'])")
 	private WebElement click_navigate_to_ICE_btn;
 	private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
+
+	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]")
+	private WebElement click_Dose2_citizen;
+	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
 	
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
@@ -407,6 +411,30 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickEditBtn() throws InterruptedException {
 		editImmunizationInformation.click();
+	}
+
+	public void SearchDose2Citizen(String citizen) throws InterruptedException {
+		waitForElementToBeVisible(driver, search_assistant, 10);
+		Thread.sleep(2000);
+		search_assistant.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, search_input, 10);
+		Thread.sleep(2000);
+		search_input.click();
+		Thread.sleep(2000);
+		search_input.sendKeys(citizen);
+		Thread.sleep(2000);
+		search_input.sendKeys(Keys.RETURN);
+		Thread.sleep(2000);
+	}
+	public void clickDose2Citizen() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_Dose2_citizen, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(click_Dose2_citizen1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		//click_Dose2_citizen.click();
 	}
 
 	public void selectImmunizingAgentProvider(String agentProviderName) throws InterruptedException{
