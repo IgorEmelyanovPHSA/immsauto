@@ -36,7 +36,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement create_Immunization_Record;
-	//private By creat_Immunization_Record1 = By.xpath("/button[contains(text(),'Create Immunization Record')]");
+	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
 	
 	@FindBy(xpath = "//option[contains(text(),'Select an option')]")
 	private WebElement select_an_option;
@@ -144,7 +144,7 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
 	
-	@FindBy(xpath = "//input[@name=\"effectiveToDate\"]")
+	@FindBy(xpath = "//input[@name='effectiveToDate']")
 	private WebElement consentEffectiveToDate;
 	
 	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
@@ -152,7 +152,6 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
 	private WebElement selectLotNumber;
-	
 	
 	@FindBy(xpath = "//button[@name='injectionSite']")
 	private WebElement selectSite;
@@ -259,7 +258,6 @@ public class ClinicInBoxPage extends BasePage {
 		super(driver);
 	}
 	
-	
 	/*-------------Methods--------------*/
 	public void clickRegisterButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, register_button, 10);
@@ -303,7 +301,6 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
 		Thread.sleep(2000);
@@ -311,7 +308,6 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		//click_on_citizen.click();
 	}
 	
 	public void clickConfirmButton() throws InterruptedException {
@@ -360,10 +356,6 @@ public class ClinicInBoxPage extends BasePage {
 		driver.findElement(select_dropdown_option).click();
 		Thread.sleep(2000);
 	}
-//	public void clickTimeBox() throws InterruptedException {
-//		waitForElementToBeVisible(driver, inputDate, 10);
-//		this.inputDate.click();
-//	}
 	
 	public void clickTimeBox() throws InterruptedException {
 		Calendar calendar = Calendar.getInstance();
@@ -380,7 +372,10 @@ public class ClinicInBoxPage extends BasePage {
 		this.inputDate.sendKeys(Keys.ENTER);
 	}
 	
-	public void selectDateOfAdministration() throws InterruptedException {
+	public boolean selectDateOfAdministration() throws InterruptedException {
+		if (!isDisplayed(inputDate1)) {
+			return false;
+		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, -1);
 		Date today = calendar.getTime();
@@ -395,6 +390,7 @@ public class ClinicInBoxPage extends BasePage {
 		this.inputDate.sendKeys(todayAsString);
 		Thread.sleep(2000);
 		this.inputDate.sendKeys(Keys.ENTER);
+		return true;
 	}
 	
 	public void selectDateAndTime() {
@@ -406,14 +402,6 @@ public class ClinicInBoxPage extends BasePage {
 		String todayAsString = dateFormat.format(today);
 		this.inputDate.sendKeys(todayAsString, Keys.ENTER);
 	}
-
-//    Calendar calendar = Calendar.getInstance();
-//		calendar.add(Calendar.DAY_OF_YEAR, 1);
-//    Date tomorrow = calendar.getTime();
-//    DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-//
-//    String tomorrowAsString = dateFormat.format(tomorrow);
-//		this.inputExpectedDate.sendKeys(tomorrowAsString, Keys.ENTER);
 	
 	public void clickRecordImmunization() throws InterruptedException {
 		waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
@@ -433,8 +421,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void informedConsentProvider(String providerName) throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
-		waitForElementToBeVisible(driver, informedConsentProvider, 15);
+		waitForElementToBeVisible(driver, informedConsentProvider, 10);
 		this.informedConsentProvider.click();
 		Thread.sleep(2000);
 		this.informedConsentProvider.sendKeys(providerName);
@@ -526,7 +513,6 @@ public class ClinicInBoxPage extends BasePage {
 		executor1.executeScript("arguments[0].click();", element1);
 	}
 	
-	
 	public void enterFirstName(String firstname) throws InterruptedException {
 		waitForElementToBeLocated(driver, first_name1, 10);
 		first_name.sendKeys(firstname);
@@ -568,10 +554,6 @@ public class ClinicInBoxPage extends BasePage {
 		driver.findElement(By.xpath(".//div[text() = 'Success']"));
 		Thread.sleep(2000);
 		System.out.println("/* ----the toast success message has been Appears");
-		// } catch (NoSuchElementException e) {
-		//System.out.println("/*---there are no success toast Message for Verify PHN to be Appears");
-		//throw new RuntimeException("/*---there are no success Message to be Appears--*/");
-		// }
 	}
 	
 	public void clickNextButton() throws InterruptedException {
@@ -671,7 +653,6 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
@@ -679,7 +660,6 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectBookingAppointmentDay() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
@@ -687,7 +667,6 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectTimeSlotAppointment() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, time_slot_appointment, 10);
@@ -726,8 +705,5 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		return new InClinicExperiencePage(driver);
 	}
+	
 }
-
-
-
-

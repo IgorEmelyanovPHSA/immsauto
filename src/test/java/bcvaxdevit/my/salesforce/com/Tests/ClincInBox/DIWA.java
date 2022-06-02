@@ -13,84 +13,51 @@ public class DIWA extends BaseTest {
 		System.out.println("/*----1. Login as an Clinician to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
 		Thread.sleep(2000);
-		System.out.println("/*2.----Clinic In Box page displayed --*/");
+		System.out.println("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);
-		System.out.println("/*----2. Close all previously opened Tabs --*/");
+		System.out.println("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
 		Thread.sleep(2000);
-		System.out.println("/*----3. Search for Participant account Maegan BCVaxVillage ---*/");
+		System.out.println("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
 		clinicInBoxPage.SearchDIWACitizen("Maegan bcvaxvillage");
 		Thread.sleep(2000);
-		System.out.println("/*----4. select Citizen from search results --*/");
+		System.out.println("/*----5. select Citizen from search results --*/");
 		clinicInBoxPage.userClickCitizen();
 		Thread.sleep(4000);
-//        if (!clinicInBoxPage.userFound()) {
-//            System.out.println("/*----User --> Maegan BCVaxVillage not found and return---*/");
-//        }
-//        while (clinicInBoxPage.userFound()) {
-//            System.out.println("/*----User found and Navigated to record page ---*/");
-//            Thread.sleep(2000);}
-		
+		System.out.println("/*----6. Navigated to Person Account related tab ---*/");
 		clinicInBoxPage.clickRelatedTab();
-		System.out.println("/*----5. Navigated to Person Account related tab ---*/");
-		Thread.sleep(2000);
-		
-		Thread.sleep(2000);
-		System.out.println("/*----6. Locate The Related Tab Under Person Account ---*/");
-		System.out.println("/*----7. Click Confirm ---*/");
-		System.out.println("/*----8. Click Creat Immunization Record ---*/");
+		System.out.println("/*----7. Click Creat Immunization Record ---*/");
 		clinicInBoxPage.clickCreatImmunizationRecord();
 		Thread.sleep(4000);
-		System.out.println("/*----9. Select an Option ---*/");
+		System.out.println("/*----8. Click confirm Buttonon the popup window---*/");
 		clinicInBoxPage.clickConfirmButton();
 		Thread.sleep(3000);
+		System.out.println("/*----9. Select an Option ---*/)");
 		clinicInBoxPage.clickSelectAnOptionDropdown();
 		Thread.sleep(3000);
-		System.out.println("/*----9. Select COVID19-mRNA as an Option  ---*/");
+		System.out.println("/*----10. Select COVID19-mRNA as an Option  ---*/");
 		clinicInBoxPage.selectOption("COVID19-mRNA");
 		Thread.sleep(3000);
-		System.out.println("/*----10. Enter a Clinic Location ---*/");
+		System.out.println("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
 		clinicInBoxPage.searchClinicLocation("All Ages - Atlin Health Centre");
 		Thread.sleep(3000);
-
-//        String selectedLocation = "All Ages - Atlin Health Centre";
-//        List<WebElement> multiples = driver.findElements(By.xpath("//li[@class='slds-listbox__item']"));
-//        System.out.println(multiples);
-//
-//        for(int i=0; i<multiples.size();i++)
-//        {
-//            String CurrentOption = multiples.get(i).getText();
-//            if(CurrentOption.contains(selectedLocation)){
-//               // System.out.println("Atlin" + CurrentOption);
-//                multiples.get(i).click();
-//            }
-//        }
+		System.out.println("/*---12. Select a Date and Time of Administration ---*/");
 		clinicInBoxPage.clickTimeBox();
 		Thread.sleep(3000);
-		System.out.println("/*---11. Select a Date and Time Administration ---*/");
-		//clinicInBoxPage.selectDateAndTime();
-		Thread.sleep(3000);
-		System.out.println("/*---12. Click Record Immunization ---*/");
+		System.out.println("/*---13. Click Record Immunization ---*/");
 		clinicInBoxPage.clickRecordImmunization();
 		Thread.sleep(3000);
 		if (clinicInBoxPage.clickPopupYesButtonIfDisplayed())
-			System.out.println("/*---13.Pop up window is displayed and clicked  ---*/");
+			System.out.println("/*---13.1. Pop up window is displayed and clicked  ---*/");
 		Thread.sleep(5000);
 		System.out.println("/*---14. select date of Administration ---*/");
-		clinicInBoxPage.selectDateOfAdministration();
-		Thread.sleep(2000);
-		System.out.println("/*---13. Select Informed Consent Provider ---*/");
-//		clinicInBoxPage.informedConsentProvider("Jason Yulghun");
-//		System.out.println("/*---14. Enter Consent Effective To Date---*/");
-//		clinicInBoxPage.enterConsentEffectiveToDate();
-//		System.out.println("/*---15. Save Consent---*/");
+		if (clinicInBoxPage.selectDateOfAdministration())
+			Thread.sleep(2000);
+		System.out.println("/*---15. Select Informed Consent Provider ---*/");
 		clinicInBoxPage.clickSaveConsent();
 		Thread.sleep(2000);
-//		System.out.println("/*---16. Scroll down to Immunization Information and Click Edit---*/");
-//		clinicInBoxPage.clickEditBtn();
-//		Thread.sleep(2000);
-		System.out.println("/*---17. Click on the Immunization provider field ---*/");
+		System.out.println("/*---16. Click on the Immunization provider field ---*/");
 		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
 		System.out.println("/*---17. Select Provider-->JY Automation ---*/");
@@ -108,16 +75,13 @@ public class DIWA extends BaseTest {
 		System.out.println("/*---21. Select Dosage---*/");
 		clinicInBoxPage.selectDosage();
 		Thread.sleep(2000);
-//		System.out.println("/*---20. Write Revision Reason ---*/");
-//		//clinicInBoxPage.writeRevisionReason();
-//		Thread.sleep(3000);
 		System.out.println("/*---22. Save Immunization Information ---*/");
 		clinicInBoxPage.saveImmunizationInformation();
 		Thread.sleep(2000);
 		System.out.println("/*---23. Confirm and Save Administration ---*/");
 		clinicInBoxPage.confirmAndSaveAdministration();
 		Thread.sleep(2000);
-		System.out.println("/*---23. Vaccine Administration Summary Confirm and Save ---*/");
+		System.out.println("/*---24. Vaccine Administration Summary Confirm and Save ---*/");
 		clinicInBoxPage.summaryConfirmAndSave();
 		Thread.sleep(2000);
 	}
