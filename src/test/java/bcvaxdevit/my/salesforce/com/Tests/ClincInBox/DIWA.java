@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 public class DIWA extends BaseTest {
 	
-	
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "221409"; //C221409
@@ -27,10 +26,10 @@ public class DIWA extends BaseTest {
 		Thread.sleep(4000);
 		System.out.println("/*----6. Navigated to Person Account related tab ---*/");
 		clinicInBoxPage.clickRelatedTab();
-		System.out.println("/*----7. Click Creat Immunization Record ---*/");
+		System.out.println("/*----7. Click Create Immunization Record ---*/");
 		clinicInBoxPage.clickCreatImmunizationRecord();
 		Thread.sleep(4000);
-		System.out.println("/*----8. Click confirm Buttonon the popup window---*/");
+		System.out.println("/*----8. Click confirm Button on the popup window---*/");
 		clinicInBoxPage.clickConfirmButton();
 		Thread.sleep(3000);
 		System.out.println("/*----9. Select an Option ---*/)");
