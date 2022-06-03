@@ -13,7 +13,7 @@ import java.util.Locale;
 
 
 public class SupplyConsolePage extends BasePage {
-	
+	/*---------Properties-------*/
 	@FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
 	private WebElement supply_locations_tab;
 	private By supply_locations_tab1 = By.xpath("(.//span[@class = 'slds-truncate'])[2]");
@@ -148,11 +148,17 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
 	private WebElement confirm_incoming_transfers_modal_button;
 	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
-	
+
+	@FindBy(xpath = "(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]")
+	private WebElement click_container_dropdown_menu;
+	private By click_container_dropdown_menu1 = By.xpath("(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]");
+
+	/*---------Constructor-------*/
 	public SupplyConsolePage(WebDriver driver) {
 		super(driver);
 	}
-	
+
+	/*-------------Methods--------------*/
 	public void inputRequestedDose(String inputDose) {
 		this.requestedDose.sendKeys(inputDose);
 	}
@@ -276,7 +282,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
-		By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+		By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='c_hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
 		waitForElementToBeLocated(driver, container_checkbox_1_, 10);
 		//waitForElementToBeLocated(driver, container_checkbox_1_, 10);
 		WebElement element = driver.findElement(container_checkbox_1_);
@@ -481,6 +487,12 @@ public class SupplyConsolePage extends BasePage {
 			System.out.println("/*---there are no success confirmation Message for Bulk Transfers to be Appears");
 			throw new RuntimeException("/*---there are no success confirmation Message to be Appears--*/");
 		}
+	}
+
+	public void clickOnContainerDropDownMenu() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_container_dropdown_menu1, 10);
+		Thread.sleep(2000);
+		click_container_dropdown_menu.click();
 	}
 	
 	
