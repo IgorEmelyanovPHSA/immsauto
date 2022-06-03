@@ -2,6 +2,7 @@ com\gurock\testrail\APIClient.class
 bcvaxdevit\my\salesforce\com\Pages\RequisitionPage.class
 bcvaxdevit\my\salesforce\com\Pages\TestRailManager.class
 com\gurock\testrail\APIException.class
+bcvaxdevit\my\salesforce\com\Pages\CallCenterConsolePage.class
 bcvaxdevit\my\salesforce\com\Pages\Utils.class
 bcvaxdevit\my\salesforce\com\Pages\InClinicExperiencePage.class
 bcvaxdevit\my\salesforce\com\Pages\BasePage.class

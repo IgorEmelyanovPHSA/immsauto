@@ -113,9 +113,9 @@ public class ReceiveSupplies extends BaseTest {
 		System.out.println("/*-- 26. Cancel Button is Present on Layout --*/");
 		inClinicExperiencePage.ValidateCancelButtonIsDisplayedOnReceiveSupplies();
 		Thread.sleep(2000);
-		System.out.println("/*-- 27. Cancel Button is Present on Layout --*/");
-		inClinicExperiencePage.clickSupplyItemTextBox();
-		Thread.sleep(2000);
+//		System.out.println("/*-- 27. Cancel Button is Present on Layout --*/");
+//		inClinicExperiencePage.clickSupplyItemTextBox();
+//		Thread.sleep(2000);
 //		System.out.println("/*-- 28. Select AstraZeneca ChAdOx1-S - ABX3120 Supply Item --*/");
 //		inClinicExperiencePage.selectSupplyItem("AstraZeneca ChAdOx1-S - ABX3120");
 //		Thread.sleep(20000);

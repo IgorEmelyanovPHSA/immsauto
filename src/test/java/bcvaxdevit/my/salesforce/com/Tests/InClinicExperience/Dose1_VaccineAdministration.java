@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 public class Dose1_VaccineAdministration extends BaseTest {
-
+	
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -78,7 +78,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
-
+	
 	@Test(priority = 2)
 	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "153420"; //C153420
@@ -228,10 +228,10 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*-- 46---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-
-
+		
+		
 	}
-
+	
 	@Test(priority = 3)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -298,8 +298,6 @@ public class Dose1_VaccineAdministration extends BaseTest {
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
-
-
-
-
+	
+	
 }

@@ -27,7 +27,7 @@ public class RequisitionPage extends BasePage {
 	
 	
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
-
+	
 	private WebElement supply_supply_location_1;
 	
 	
@@ -108,15 +108,15 @@ public class RequisitionPage extends BasePage {
 	public void clickSearchSupplyDistributions() {
 		this.SearchSupplyDistributions.click();
 	}
-
-
+	
+	
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
 	private WebElement searchByName;
 	private By searchByName2 = By.xpath("//div[@class='primaryLabel slds-truncate slds-lookup__result-text']");
-
+	
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
-
+	
 	public void SelectSupplyDistributionTo2(String DistributionName) throws InterruptedException {
 		//waitForElementToBeLocated(driver,distributionName,10);
 		waitForElementToBeVisible(driver, searchByName, 10);
@@ -302,12 +302,11 @@ public class RequisitionPage extends BasePage {
 	public void clickSaveShipRequisition() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,-400)", "");
-
+		
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveShipRequisition);
 		waitForElementToBeVisible(driver, saveShipRequisition, 10);
-
-
-
+		
+		
 		this.saveShipRequisition.click();
 	}
 	
@@ -317,11 +316,11 @@ public class RequisitionPage extends BasePage {
 		WebElement search_input = driver.findElement(distributionName2);
 		search_input.click();
 	}
-
-	public void clickSaveReceiveRequisition(){
+	
+	public void clickSaveReceiveRequisition() {
 		this.saveReceiveRequisition.click();
 	}
-
+	
 	public void closeTabs() throws InterruptedException {
 		do {
 			try {

@@ -974,6 +974,16 @@ java.net.SocketException: Connection reset
 2022-05-30 09:16:59 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-30 09:30:05 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-30 09:30:08 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+<<<<<<< HEAD
+2022-06-02 09:50:17 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-06-02 09:50:22 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-02 09:56:02 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-06-02 09:56:07 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-02 14:26:12 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-06-02 14:26:17 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-02 16:55:59 INFO  BookingDose2:19 - /*1.----Login as an Clinician to CIB --*/
+2022-06-02 16:56:04 INFO  BookingDose2:23 - /*2.----Clinic In Box(IPM) page displayed --*/
+=======
 2022-05-30 11:51:41 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-05-30 11:51:45 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 2022-05-30 11:52:18 WARN  WebSocketHandler:142 - onError
@@ -1158,3 +1168,4 @@ java.net.SocketException: Connection reset
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2022-06-01 15:38:02 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-06-01 15:38:07 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+>>>>>>> aa77e7e28a0bbf82f6c14be82cffc2ec051c93b4
