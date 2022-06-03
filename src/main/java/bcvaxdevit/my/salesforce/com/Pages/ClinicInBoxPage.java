@@ -474,7 +474,7 @@ public class ClinicInBoxPage extends BasePage {
 		//click_Dose2_citizen.click();
 	}
 
-	public void selectImmunizingAgentProvider(String agentProviderName) throws InterruptedException{
+	public void selectImmunizingAgentProvider() throws InterruptedException{
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizingAgentProvider);
 		waitForElementToBeVisible(driver, immunizingAgentProvider, 10);
 		this.immunizingAgentProvider.click();
