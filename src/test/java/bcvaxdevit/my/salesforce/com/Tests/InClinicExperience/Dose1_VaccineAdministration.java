@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 public class Dose1_VaccineAdministration extends BaseTest {
-
+	
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -78,7 +78,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
-
+	
 	@Test(priority = 2)
 	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "153420"; //C153420
@@ -158,24 +158,24 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*23.----click on person Account Related Tab --*/");
 		inClinicExperience.clickOnPersonAccountRelatedTab();
 		Thread.sleep(2000);
-		System.out.println("/*24.----click on Eligibility button --*/");
-		inClinicExperience.clickEligibilityButton();
-		Thread.sleep(2000);
-		System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
-		inClinicExperience.selectCovid19option();
-		Thread.sleep(2000);
-		System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-		inClinicExperience.userIsEligibleSuccessMsg();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		//System.out.println("/*24.----click on Eligibility button --*/");
+		//inClinicExperience.clickEligibilityButton();
+		//Thread.sleep(2000);
+		//System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
+		//inClinicExperience.selectCovid19option();
+		//Thread.sleep(2000);
+		//System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
+		//inClinicExperience.userIsEligibleSuccessMsg();
+		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		System.out.println("/*27----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
 		Thread.sleep(2000);
 		System.out.println("/*28----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
 		inClinicExperience.clickReasonForVisit();
 		Thread.sleep(2000);
-		System.out.println("/*29----click on 'More' search tab --*/");
-		inClinicExperience.clickOnMoreSearchTabs();
-		Thread.sleep(2000);
+		//System.out.println("/*29----click on 'More' search tab --*/");
+		//inClinicExperience.clickOnMoreSearchTabs();
+		//Thread.sleep(2000);
 		System.out.println("/*30----select 'Search clinic name' tab --*/");
 		inClinicExperience.selectSearchClinicNameTab();
 		Thread.sleep(2000);
@@ -228,10 +228,10 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*-- 46---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-
-
+		
+		
 	}
-
+	
 	@Test(priority = 3)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -298,8 +298,6 @@ public class Dose1_VaccineAdministration extends BaseTest {
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
-
-
-
-
+	
+	
 }

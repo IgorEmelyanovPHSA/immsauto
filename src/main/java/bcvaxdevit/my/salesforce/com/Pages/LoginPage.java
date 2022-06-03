@@ -21,7 +21,7 @@ public class LoginPage extends BasePage {
 	private final String DIWA_PW_BCVAXDEVIT = "phsa7phsa*";
 	private final String CALLCENTERAGENT_CC_BCVAXDEVIT = "autocallcenteragent@deloitte.ca.bcvaxdevit";
 	private final String CALLCENTERAGENT_PW_CC_BCVAXDEVIT = "Technology1990!!!!!!!";
-
+	
 	
 	@FindBy(id = "username")
 	private WebElement clinician_bcvaxdevit;
@@ -31,11 +31,11 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_cib_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxdevit;
-
+	
 	@FindBy(id = "username")
 	private WebElement Consumption_bcvaxdevit;
-
-
+	
+	
 	@FindBy(id = "username")
 	private WebElement diwa_bcvaxdevit;
 	
@@ -47,7 +47,7 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_pw_cib_bcvaxdevit;
 	@FindBy(id = "password")
 	private WebElement Precondition_pw_bcvaxdevit;
-
+	
 	@FindBy(id = "password")
 	private WebElement Cosumption_pw_bcvaxdevit;
 	@FindBy(id = "password")
@@ -114,14 +114,22 @@ public class LoginPage extends BasePage {
 	public void pressSubmitButton() {
 		this.submit_button.click();
 	}
-
-	public void enterDIWA_UserName(){this.diwa_bcvaxdevit.sendKeys(DIWA_BCVAXDEVIT);}
-
-	public void enterDIWA_PW(){this.diwa_pw_bcvaxdevit.sendKeys(DIWA_PW_BCVAXDEVIT);}
-
-	public void enterCalCenterAgentCC_UserName(){this.diwa_bcvaxdevit.sendKeys(CALLCENTERAGENT_CC_BCVAXDEVIT);}
-
-	public void enterCalCenterAgentCC_PW(){this.diwa_pw_bcvaxdevit.sendKeys(CALLCENTERAGENT_PW_CC_BCVAXDEVIT);}
+	
+	public void enterDIWA_UserName() {
+		this.diwa_bcvaxdevit.sendKeys(DIWA_BCVAXDEVIT);
+	}
+	
+	public void enterDIWA_PW() {
+		this.diwa_pw_bcvaxdevit.sendKeys(DIWA_PW_BCVAXDEVIT);
+	}
+	
+	public void enterCalCenterAgentCC_UserName() {
+		this.diwa_bcvaxdevit.sendKeys(CALLCENTERAGENT_CC_BCVAXDEVIT);
+	}
+	
+	public void enterCalCenterAgentCC_PW() {
+		this.diwa_pw_bcvaxdevit.sendKeys(CALLCENTERAGENT_PW_CC_BCVAXDEVIT);
+	}
 	
 	//public void setUsername (String username){
 	//  type(username,clinicianField);
@@ -207,7 +215,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
 	}
-
+	
 	public CallCenterConsolePage loginAsCalCenterAgentCC() {
 		this.enterCalCenterAgentCC_UserName();
 		//setUsername(username);

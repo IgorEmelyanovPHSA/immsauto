@@ -269,9 +269,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 	
-	@FindBy(xpath = ".//span[text()='Search clinic name']")
+	@FindBy(xpath = ".//a[text()='Search clinic name']")
 	private WebElement search_clinic_name_tab;
-	private By search_clinic_name_tab1 = By.xpath(".//span[text()='Search clinic name']");
+	private By search_clinic_name_tab1 = By.xpath(".//a[text()='Search clinic name']");
 	
 	@FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
 	private WebElement vlidate_appointment_confirm_message;
@@ -448,7 +448,7 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean selectRERNRecord() throws InterruptedException {
 		//To scroll down the page to see RERN Record
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,750)", "");
+		js.executeScript("window.scrollBy(0,900)", "");
 		Thread.sleep(5000);
 		if (!isDisplayed(select_rern_record1)) {
 			return false;
@@ -730,6 +730,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void clickReasonForVisit() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
 	}
@@ -757,16 +758,16 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		Thread.sleep(2000);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
 	}
 	
 	public void selectAppointment() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
 		booking_app_active_day.click();
@@ -774,7 +775,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectTimeSlotForAppointment() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(time_slot_appointment1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
