@@ -153,6 +153,10 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement click_container_dropdown_menu;
 	private By click_container_dropdown_menu1 = By.xpath("(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]");
 
+	@FindBy(xpath = ".//a/span[text() = 'Transfer']")
+	private WebElement select_Transfer_from_dropdown;
+	private By select_Transfer_from_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
+
 	/*---------Constructor-------*/
 	public SupplyConsolePage(WebDriver driver) {
 		super(driver);
@@ -491,8 +495,17 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_container_dropdown_menu1, 10);
+		WebElement element = driver.findElement(click_container_dropdown_menu1);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		Thread.sleep(2000);
 		click_container_dropdown_menu.click();
+	}
+
+	public void selectTransferFromDropDown() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_Transfer_from_dropdown1, 10);
+		Thread.sleep(2000);
+		select_Transfer_from_dropdown.click();
 	}
 	
 	

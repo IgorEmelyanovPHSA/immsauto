@@ -81,7 +81,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
 
     @Test(priority = 2)
     public void Can_do_Dose2_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "153420"; //C153420
+        TestcaseID = "219918"; //C219918
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
         InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
         Thread.sleep(2000);

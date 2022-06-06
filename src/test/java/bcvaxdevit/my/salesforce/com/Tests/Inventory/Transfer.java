@@ -27,8 +27,14 @@ public class Transfer extends BaseTest {
         System.out.println("/*6.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
         System.out.println("/*---     count:" + countSupplyContainers);
-        System.out.println("/*7.----Click on Container's dropdown ->Transfer --*/");
+        System.out.println("/*7.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+        // print quantity and doses
+        System.out.println("/*8.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnContainerDropDownMenu();
+        Thread.sleep(2000);
+        System.out.println("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
+        supplyConsolePage.selectTransferFromDropDown();
+        Thread.sleep(2000);
 
         //System.out.println("/*8.----Click on bulk Transfer button --*/");
         //supplyConsolePage.clickBulkTransfersButton();
