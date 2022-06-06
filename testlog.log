@@ -1169,21 +1169,11 @@ java.net.SocketException: Connection reset
 2022-06-01 15:38:02 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
 2022-06-01 15:38:07 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
 >>>>>>> aa77e7e28a0bbf82f6c14be82cffc2ec051c93b4
-2022-06-06 08:17:32 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
-2022-06-06 08:17:36 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
-2022-06-06 08:19:33 WARN  WebSocketHandler:142 - onError
-java.net.SocketException: Connection reset
-	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
-	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:426)
-	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)
-	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
-	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
-	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-06-03 10:47:29 INFO  BookingDose2:19 - /*1.----Login as an Clinician to CIB --*/
+2022-06-03 10:47:34 INFO  BookingDose2:23 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-03 11:17:57 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-06-03 11:18:02 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-03 11:20:23 INFO  BookingDose1:88 - /*1.----Login as an Clinician to CIB --*/
+2022-06-03 11:20:27 INFO  BookingDose1:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-05 22:47:19 INFO  BookingDose2:89 - /*1.----Login as an Clinician to CIB --*/
+2022-06-05 22:47:24 INFO  BookingDose2:93 - /*2.----Clinic In Box(IPM) page displayed --*/
