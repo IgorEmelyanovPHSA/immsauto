@@ -84,6 +84,9 @@ public class DIWA extends BaseTest {
 		System.out.println("/*---24. Vaccine Administration Summary Confirm and Save ---*/");
 		clinicInBoxPage.summaryConfirmAndSave();
 		Thread.sleep(2000);
+		System.out.println("/*---25. Navigate to Related tab and Confirm new Imms Record is created ---*/");
+		clinicInBoxPage.clickRelatedTab();
+		Thread.sleep(2000);
 	}
 	
 }
