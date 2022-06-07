@@ -24,11 +24,16 @@ public class Transfer extends BaseTest {
         System.out.println("/*5.----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.clickOnSupplyLocation_1();
         Thread.sleep(5000);
-        System.out.println("/*6.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
-        System.out.println("/*---     count:" + countSupplyContainers);
+        //System.out.println("/*-- 7. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
+        //supplyConsolePage.selectSupplyContainer();
+        Thread.sleep(2000);
         System.out.println("/*7.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        // print quantity and doses before
+        String remainingDoses = supplyConsolePage.getValueOfRemainingDoses();
+        System.out.println("/*-- . remaining doses are: -->" + remainingDoses);
+        Thread.sleep(2000);
+        String remainingQty = supplyConsolePage.getValueOfRemainingQty();
+        System.out.println("/*-- . remaining Quantity are: -->" + remainingQty);
+        Thread.sleep(2000);
         System.out.println("/*8.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnContainerDropDownMenu();
         Thread.sleep(2000);

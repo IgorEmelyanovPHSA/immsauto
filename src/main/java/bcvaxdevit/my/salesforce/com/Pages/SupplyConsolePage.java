@@ -157,6 +157,19 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Transfer_from_dropdown;
 	private By select_Transfer_from_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
 
+	@FindBy(xpath = "//a[contains(text(),'Pfizer mRNA BNT162b2 - EK4241')]")
+	private WebElement select_desired_supply_container;
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Pfizer mRNA BNT162b2 - EK4241')]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses;
+	private By get_remaining_doses1 = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty;
+	private By get_remaining_Qty1 = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+
 	/*---------Constructor-------*/
 	public SupplyConsolePage(WebDriver driver) {
 		super(driver);
@@ -506,6 +519,30 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, select_Transfer_from_dropdown1, 10);
 		Thread.sleep(2000);
 		select_Transfer_from_dropdown.click();
+	}
+
+	public void selectSupplyContainer() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_desired_supply_container1, 10);
+		WebElement element = driver.findElement(select_desired_supply_container1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+	}
+
+	public String getValueOfRemainingDoses() throws InterruptedException {
+		WebElement element = driver.findElement(get_remaining_doses1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public String getValueOfRemainingQty() throws InterruptedException {
+		WebElement element = driver.findElement(get_remaining_Qty1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
 	}
 	
 	
