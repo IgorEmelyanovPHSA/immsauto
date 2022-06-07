@@ -41,7 +41,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//a[@title='Dacia Bcvaxdod']")
 	private WebElement user_dacia_found;
 	private By user_dacia_found1 = By.xpath(".//a[@title='Dacia Bcvaxdod']");
-
+	
 	@FindBy(xpath = ".//a[@title='Hugues BCVaxLampard']")
 	private WebElement user_Hugues_found;
 	private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues BCVaxLampard']");
@@ -349,6 +349,25 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement choose_supply_item;
 	private By choose_supply_item1 = By.xpath("//span[contains(text(),'AstraZeneca ChAdOx1-S - ABX3120')]");
 	
+	@FindBy(xpath = "(//input[@class='slds-input'])[2]")
+	private WebElement click_to_select_quantity;
+	private By click_to_select_quantity1 = By.xpath("(//input[@class='slds-input'])[2]");
+	
+	@FindBy(xpath = "//button[@name='distributionBox']")
+	private WebElement supply_distribution_to;
+	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
+	
+	@FindBy(xpath = "//span[@title='Automation Java - SDST-0000001558']")
+	private WebElement select_supply_distributor;
+	private By select_supply_distributor1 = By.xpath("//span[@title='Automation Java - SDST-0000001558']");
+	
+	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
+	private WebElement click_reason;
+	private By click_reason1 = By.xpath("//button[@aria-label='Reason for Reception, --None--']");
+	
+	@FindBy(xpath = "//span[@title='Other']")
+	private WebElement select_reason;
+	private By select_reason1 = By.xpath("//span[@title='Other']");
 	
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
@@ -386,6 +405,7 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+	
 	public boolean userFound() throws InterruptedException {
 		if (!isDisplayed(user_found1)) {
 			return false;
@@ -1023,6 +1043,11 @@ public class InClinicExperiencePage extends BasePage {
 		save_button_receive_supplies.isDisplayed();
 	}
 	
+	public void ClickSaveButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
+		save_button_receive_supplies.click();
+	}
+	
 	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
 		waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
 		cancel_button_receive_supplies.isDisplayed();
@@ -1041,6 +1066,39 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, choose_supply_item, 10);
 		WebElement search_input = driver.findElement(choose_supply_item1);
 		search_input.click();
+	}
+	
+	public void enterQuantity() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_quantity1, 10);
+		WebElement element = driver.findElement(click_to_select_quantity1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		click(click_to_select_quantity1);
+		element.sendKeys("1");
+	}
+	
+	public void selectIncomingSupplyDistribution() throws InterruptedException {
+		waitForElementToBeVisible(driver, supply_distribution_to, 10);
+		WebElement element = driver.findElement(supply_distribution_to1);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(1000);
+		supply_distribution_to.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_supply_distributor, 10);
+		Thread.sleep(2000);
+		select_supply_distributor.click();
+	}
+	
+	public void selectReasonForReception() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_reason1, 10);
+		WebElement element = driver.findElement(click_reason1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_reason1, 10);
+		WebElement element1 = driver.findElement(select_reason1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
 	}
 	
 }
