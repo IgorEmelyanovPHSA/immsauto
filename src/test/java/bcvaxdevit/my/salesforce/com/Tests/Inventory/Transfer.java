@@ -28,7 +28,7 @@ public class Transfer extends BaseTest {
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
         System.out.println("/*---     count:" + countSupplyContainers);
         System.out.println("/*7.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        // print quantity and doses
+        // print quantity and doses before
         System.out.println("/*8.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnContainerDropDownMenu();
         Thread.sleep(2000);
