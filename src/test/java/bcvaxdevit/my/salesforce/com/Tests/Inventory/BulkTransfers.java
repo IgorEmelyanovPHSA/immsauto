@@ -73,7 +73,7 @@ public class BulkTransfers extends BaseTest {
 		int nn = 1;
 		int kk = countOutgoingTransactions;
 		// while (nn <= 3 ){
-		System.out.println("/*14.2---Get Outgoing Transaction id 'form' --*/");
+		System.out.println("/*14.2---Get Outgoing Transaction id 'from' --*/");
 		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
 		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
 		System.out.println("/*14.3----Click on the latest created Outgoing Transactions --*/");

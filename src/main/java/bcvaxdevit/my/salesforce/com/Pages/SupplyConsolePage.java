@@ -364,8 +364,10 @@ public class SupplyConsolePage extends BasePage {
 	public void selectSupplyLocatonTo() throws InterruptedException {
 		waitForElementToBeVisible(driver, search_supply_location_To, 10);
 		search_supply_location_To.sendKeys("Automation Supply Location_2");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_supply_location_To, 10);
 		select_supply_location_To.click();
+		Thread.sleep(2000);
 		//#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
 		//#search_supply_location_To.sendKeys(Keys.ENTER);
 	}
@@ -552,20 +554,23 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	public String getValueOfRemainingDoses() throws InterruptedException {
+	public Double getValueOfRemainingDoses() throws InterruptedException {
 		WebElement element = driver.findElement(get_remaining_doses1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",",""));
+		return (doses);
 	}
 
-	public String getValueOfRemainingQty() throws InterruptedException {
+
+	public Double getValueOfRemainingQty() throws InterruptedException {
 		WebElement element = driver.findElement(get_remaining_Qty1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",",""));
+		return (quantity);
 	}
 
 	public void enterTransferDosages(String doses) throws InterruptedException {
