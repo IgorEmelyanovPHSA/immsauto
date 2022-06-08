@@ -169,6 +169,7 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_Qty;
 	private By get_remaining_Qty1 = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -567,6 +568,21 @@ public class SupplyConsolePage extends BasePage {
 		return (element.getText());
 	}
 
+	public void enterTransferDosages(String doses) throws InterruptedException {
+		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
+		waitForElementToBeLocated(driver, Doses, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(Doses);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(2000);
+		click(Doses);
+		Thread.sleep(2000);
+		element.clear();
+		Thread.sleep(2000);
+		element.sendKeys(doses);
+
+	}
+
 	public void selectWastageFromDropDown() throws InterruptedException {
 		click(selectWastageFromDropDown);
 		Thread.sleep(2000);
@@ -590,7 +606,9 @@ public class SupplyConsolePage extends BasePage {
 		scrollTop(btnWastageOnContainerWastagePopUp);
 		click(btnWastageOnContainerWastagePopUp);
 		Thread.sleep(2000); //To handle success message
-		//Need to add validation for successful message
-	}
+		//Need to add validation for successful mess
 
+	}
+	
+	
 }
