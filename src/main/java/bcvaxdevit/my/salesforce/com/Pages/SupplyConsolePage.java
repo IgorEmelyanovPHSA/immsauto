@@ -170,6 +170,29 @@ public class SupplyConsolePage extends BasePage {
 	private By get_remaining_Qty1 = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wastage Tab //
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@FindBy(xpath = ".//a/span[text()='Wastage']")
+	private WebElement selectWastageFromDropDown;
+
+	@FindBy(xpath = "//input[@name='HC_Remaining_Measures__c']")
+	private WebElement actualRemainingDoses;
+
+	@FindBy(xpath = "//label[(text()='Doses')]/..//input[@type='text']")
+	private WebElement dosesText;
+
+	@FindBy(xpath = "//button[@name='BCH_Reason_for_Wastage__c']")
+	private WebElement reasonForWastageValueFromDropDown;
+
+	@FindBy(xpath = "//span[@title='CCI: Handling Error']")
+	private WebElement dropDownValueCCIHandlingError;
+
+	@FindBy(xpath = "//h2[text()='Container - Wastage']/../..//button[(text()='Wastage')]")
+	private WebElement btnWastageOnContainerWastagePopUp;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*---------Constructor-------*/
 	public SupplyConsolePage(WebDriver driver) {
 		super(driver);
@@ -557,6 +580,33 @@ public class SupplyConsolePage extends BasePage {
 		element.clear();
 		Thread.sleep(2000);
 		element.sendKeys(doses);
+
+	}
+
+	public void selectWastageFromDropDown() throws InterruptedException {
+		click(selectWastageFromDropDown);
+		Thread.sleep(2000);
+	}
+
+	public double getActualRemainingDoses() {
+		String value = getValue(actualRemainingDoses);
+		Double actualDosage = Double.parseDouble(value.replaceAll(",",""));
+		return actualDosage;
+	}
+
+	public void setDosesAmountToWaste(String value) {
+		typeIn(dosesText, value);
+	}
+
+	public void selectReasonForWastageDropDown() {
+		reasonForWastageValueFromDropDown.click();
+		click(dropDownValueCCIHandlingError);
+	}
+	public void clickBtnWastageAtContainerWastagePopUp() throws InterruptedException {
+		scrollTop(btnWastageOnContainerWastagePopUp);
+		click(btnWastageOnContainerWastagePopUp);
+		Thread.sleep(2000); //To handle success message
+		//Need to add validation for successful mess
 
 	}
 	

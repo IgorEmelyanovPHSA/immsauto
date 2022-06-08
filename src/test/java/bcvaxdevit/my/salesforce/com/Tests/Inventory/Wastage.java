@@ -10,8 +10,8 @@ import static org.testng.Assert.assertEquals;
 public class Wastage extends BaseTest {
 
     @Test
-    public void inventoryManagementWastageByDosagesAS_PPHIS_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "220550"; //Need to update TestCaseID //C219942 Python -> Java
+    public void inventoryManagementWastage_ByDosagesAS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+        TestcaseID = "219942"; //Need to update TestCaseID //C219942 Python -> Java
         double wastageDosesAmount = 3;
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
