@@ -77,7 +77,7 @@ public class Consumption extends BaseTest {
 	
 	@Test(priority = 2)
 	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "219969"; //C219969
+		TestcaseID = "222359"; //C219969->C222359
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
 		Thread.sleep(2000);
