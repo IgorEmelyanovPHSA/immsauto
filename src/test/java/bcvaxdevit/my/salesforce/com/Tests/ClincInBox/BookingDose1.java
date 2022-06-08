@@ -81,7 +81,7 @@ public class BookingDose1 extends BaseTest {
 	
 	@Test(priority = 2)
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "192878"; //C192878
+		TestcaseID = "222364"; //C192878
 		//System.setProperty("log4j.properties", "hjjfhjf");
 		PropertyConfigurator.configure("log4j.properties");
 		System.out.println("/*1.----Login as an Clinician to CIB --*/");

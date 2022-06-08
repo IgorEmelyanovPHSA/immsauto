@@ -83,7 +83,7 @@ public class BookingDose2 extends BaseTest {
 	@Test(testName = "Clinician can do Dose#2 Vaccine Administration pathway for new Registered Citizen in ICE")
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
 
-		//TestcaseID = "219926"; C219926
+		//TestcaseID = "222368"; C219926
 		PropertyConfigurator.configure("log4j.properties");
 		System.out.println("/*1.----Login as an Clinician to CIB --*/");
 		log.info("/*1.----Login as an Clinician to CIB --*/");
