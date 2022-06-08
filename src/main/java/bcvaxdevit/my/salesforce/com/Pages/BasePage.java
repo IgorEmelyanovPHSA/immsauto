@@ -1,23 +1,26 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 // All Pages are inheriting from this class
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 
-public abstract class BasePage {
+public abstract class BasePage <T> {
 	protected WebDriver driver;
-	
+	public WebDriverWait wait;
+
+	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
+
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		//wait = new WebDriverWait(driver, TIMEOUT, POLLING);
 		//PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
 	}
@@ -65,6 +68,56 @@ public abstract class BasePage {
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(webElement));
 		return element;
 	}
-	
-	
+
+	public String getValue(WebElement element) {
+		return element.getAttribute("value");
+	}
+
+	public T click(WebElement element) {
+		waitForVisibility(element);
+		element.click();
+		return (T)this;
+	}
+
+	public T typeIn(WebElement element, String text) {
+		waitForVisibility(element);
+		element.clear();
+		element.sendKeys(text);
+		return (T)this;
+	}
+
+	public T waitForVisibility(WebElement element){
+		try{
+			wait.until(ExpectedConditions.visibilityOfAllElements(element));
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while waiting for visibility:"+e.getMessage());
+			wait.until(ExpectedConditions.visibilityOfAllElements(element));
+		}
+		return (T)this;
+	}
+
+	public T scrollTop(WebElement element){
+		try{
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		} catch (WebDriverException e){
+			log("WebDriverException occurred while scrolling: "+e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e){
+			log(e.toString());
+		}
+		return (T)this;
+	}
+
+	public static String getLogTime() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return LOG_TIMESTAMP_FORMAT.format(timestamp);
+	}
+
+	public static void log(String msg){
+		System.out.println(getLogTime()+" "+msg);
+	}
+
 }
