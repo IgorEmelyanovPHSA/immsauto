@@ -11,12 +11,12 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 
-public abstract class BasePage <T> {
+public abstract class BasePage<T> {
 	protected WebDriver driver;
 	public WebDriverWait wait;
-
+	
 	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
-
+	
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -68,56 +68,56 @@ public abstract class BasePage <T> {
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(webElement));
 		return element;
 	}
-
+	
 	public String getValue(WebElement element) {
 		return element.getAttribute("value");
 	}
-
+	
 	public T click(WebElement element) {
 		waitForVisibility(element);
 		element.click();
-		return (T)this;
+		return (T) this;
 	}
-
+	
 	public T typeIn(WebElement element, String text) {
 		waitForVisibility(element);
 		element.clear();
 		element.sendKeys(text);
-		return (T)this;
+		return (T) this;
 	}
-
-	public T waitForVisibility(WebElement element){
-		try{
+	
+	public T waitForVisibility(WebElement element) {
+		try {
 			wait.until(ExpectedConditions.visibilityOfAllElements(element));
 		} catch (WebDriverException e) {
-			log("WebDriverException occurred while waiting for visibility:"+e.getMessage());
+			log("WebDriverException occurred while waiting for visibility:" + e.getMessage());
 			wait.until(ExpectedConditions.visibilityOfAllElements(element));
 		}
-		return (T)this;
+		return (T) this;
 	}
-
-	public T scrollTop(WebElement element){
-		try{
+	
+	public T scrollTop(WebElement element) {
+		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-		} catch (WebDriverException e){
-			log("WebDriverException occurred while scrolling: "+e.getMessage());
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		}
 		try {
 			Thread.sleep(500);
-		} catch (Exception e){
+		} catch (Exception e) {
 			log(e.toString());
 		}
-		return (T)this;
+		return (T) this;
 	}
-
+	
 	public static String getLogTime() {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return LOG_TIMESTAMP_FORMAT.format(timestamp);
 	}
-
-	public static void log(String msg){
-		System.out.println(getLogTime()+" "+msg);
+	
+	public static void log(String msg) {
+		System.out.println(getLogTime() + " " + msg);
 	}
-
+	
 }
