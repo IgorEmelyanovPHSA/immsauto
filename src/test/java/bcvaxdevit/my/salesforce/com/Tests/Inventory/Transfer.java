@@ -40,6 +40,8 @@ public class Transfer extends BaseTest {
         System.out.println("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
         Thread.sleep(2000);
+        System.out.println("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
+        supplyConsolePage.enterTransferDosages("10");
 
         //System.out.println("/*8.----Click on bulk Transfer button --*/");
         //supplyConsolePage.clickBulkTransfersButton();

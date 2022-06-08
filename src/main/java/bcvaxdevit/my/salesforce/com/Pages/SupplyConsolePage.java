@@ -544,6 +544,21 @@ public class SupplyConsolePage extends BasePage {
 		element.getText();
 		return (element.getText());
 	}
+
+	public void enterTransferDosages(String doses) throws InterruptedException {
+		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
+		waitForElementToBeLocated(driver, Doses, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(Doses);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(2000);
+		click(Doses);
+		Thread.sleep(2000);
+		element.clear();
+		Thread.sleep(2000);
+		element.sendKeys(doses);
+
+	}
 	
 	
 }
