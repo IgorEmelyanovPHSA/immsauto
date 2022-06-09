@@ -92,7 +92,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
 	private WebElement supplyLocationInDropdown;
 	
-	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Abbotsford - Abby Pharmacy']")
 	private WebElement select_desired_supply_loc;
 	
 	@FindBy(xpath = "(//button[@class='slds-combobox__input slds-input_faux'])[1]")
@@ -105,7 +105,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = "//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]")
 	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]");
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Moderna mRNA-1273 - 300042460 (2022-04-08 18:41:04)')]");
 	
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_console_App_displayed;
@@ -648,7 +648,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
 		Thread.sleep(2000);
-		select_clinic.sendKeys("Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic");
+		select_clinic.sendKeys("Age 12 and Above - Abbotsford - Abby Pharmacy");
 		select_clinic.sendKeys(Keys.RETURN);
 	}
 	

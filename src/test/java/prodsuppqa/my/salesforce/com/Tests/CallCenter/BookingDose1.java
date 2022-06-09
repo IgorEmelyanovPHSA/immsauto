@@ -10,7 +10,7 @@ public class BookingDose1 extends BaseTest {
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
-		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
+		System.out.println("Searching and Removing Citizen Duplicates PRODSSUPQA");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();

@@ -10,7 +10,7 @@ public class Consumption extends BaseTest {
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
-		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
+		System.out.println("Searching and Removing Citizen Duplicates PRODSSUPQA");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
@@ -87,6 +87,7 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.selectHealthConnectApp();
 			Thread.sleep(2000);
 		}
+		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		System.out.println("/*-- 3. Close all open tabs --*/");
 		if (inClinicExperiencePage.supplyLocDisplayed()) {
@@ -180,20 +181,15 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		System.out.println("/*-- 29.Navigate to Appointment Scheduling Tab --*/");
 		Thread.sleep(2000);
-		inClinicExperiencePage.clickReasonForVisit();
-		System.out.println("/*-- 30.Click on reason for visit --*/");
-		Thread.sleep(2000);
-		
-		inClinicExperiencePage.clickOnMoreSearchTabs();
-		System.out.println("/*-- 31.Click on More tabs dropdown --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.selectSearchClinicNameTab();
-		System.out.println("/*-- 32.Select Search clinic from the More tabs dropdown --*/");
+//		inClinicExperiencePage.clickReasonForVisit();
+//		System.out.println("/*-- 30.Click on reason for visit --*/");
+//		Thread.sleep(2000);
+		inClinicExperiencePage.clickToSearchClinic();
+		System.out.println("/*-- 30.Click on More tabs dropdown --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.SearchForClinic();
 		System.out.println("/*-- 31.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
 		Thread.sleep(2000);
-		System.out.println("/*-- 32----select appointment booking --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		Thread.sleep(2000);
 		System.out.println("/*-- 33----select Appointment --*/");
@@ -270,7 +266,7 @@ public class Consumption extends BaseTest {
 	@Test(priority = 3)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
-		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
+		System.out.println("Searching and Removing Citizen Duplicates PRODSSUPQA");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
