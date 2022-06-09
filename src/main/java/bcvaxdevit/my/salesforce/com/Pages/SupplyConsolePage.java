@@ -390,8 +390,14 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void clickTransactionsTab() throws InterruptedException {
-		waitForElementToBeLocated(driver, transactions_tab_1, 10);
-		click(transactions_tab_1);
+		//scroll up
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, transactions_tab, 10);
+		//WebElement element = driver.findElement(transactions_tab_1);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(2000);
+		transactions_tab.click();
 	}
 	
 	public int getRowsOutgoingTransactionsCount() throws InterruptedException {
@@ -643,6 +649,14 @@ public class SupplyConsolePage extends BasePage {
 		return (Factor);
 	}
 
+	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
+		By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[" + j + "]");
+		waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
+		//waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
+		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
+		//this.incoming_transaction_checkbox_1.click();
+		click(incoming_transaction_checkbox_1_);
+	}
 
 	
 }
