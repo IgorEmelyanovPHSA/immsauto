@@ -154,8 +154,8 @@ public class SupplyConsolePage extends BasePage {
 	private By click_container_dropdown_menu1 = By.xpath("(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]");
 
 	@FindBy(xpath = ".//a/span[text() = 'Transfer']")
-	private WebElement select_Transfer_from_dropdown;
-	private By select_Transfer_from_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
+	private WebElement select_Transfer_in_dropdown;
+	private By select_Transfer_in_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
 
 	@FindBy(xpath = "//a[contains(text(),'Pfizer mRNA BNT162b2 - EK4241')]")
 	private WebElement select_desired_supply_container;
@@ -176,6 +176,12 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//input[@name = 'BCH_Product_Name__c']")
 	private WebElement get_trade_name;
 	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
+
+	@FindBy(xpath = ".//a/span[text() = 'Confirm']")
+	private WebElement select_Confirm_in_dropdown;
+	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
+
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -554,9 +560,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void selectTransferFromDropDown() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_Transfer_from_dropdown1, 10);
+		waitForElementToBeLocated(driver, select_Transfer_in_dropdown1, 10);
 		Thread.sleep(2000);
-		select_Transfer_from_dropdown.click();
+		select_Transfer_in_dropdown.click();
 	}
 
 	public void selectSupplyContainer() throws InterruptedException {
@@ -656,6 +662,12 @@ public class SupplyConsolePage extends BasePage {
 		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
 		//this.incoming_transaction_checkbox_1.click();
 		click(incoming_transaction_checkbox_1_);
+	}
+
+	public void selectConfirmIncomingDropDown() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 10);
+		Thread.sleep(2000);
+		select_Confirm_in_dropdown.click();
 	}
 
 	

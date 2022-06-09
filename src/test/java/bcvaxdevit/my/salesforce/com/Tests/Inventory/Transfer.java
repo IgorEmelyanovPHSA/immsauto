@@ -119,7 +119,8 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
         Thread.sleep(2000);
         System.out.println("/*21.----select Confirm from the Incoming dropdown menu --*/");
-        //supplyConsolePage.selectConfirmIncomingDropDown();
+        supplyConsolePage.selectConfirmIncomingDropDown();
+        Thread.sleep(2000);
 
         //System.out.println("/*21----click Confirm Incoming button Transfer --*/");
         //supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
