@@ -169,6 +169,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_Qty;
 	private By get_remaining_Qty1 = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
+	@FindBy(xpath = ".//input[@name = 'HC_Product_Measure__c']")
+	private WebElement get_dose_conversation_factor;
+	private By get_dose_conversation_factor1 = By.xpath(".//input[@name = 'HC_Product_Measure__c']");
+
+	@FindBy(xpath = ".//input[@name = 'BCH_Product_Name__c']")
+	private WebElement get_trade_name;
+	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -555,6 +562,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public Double getValueOfRemainingDoses() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_doses1, 10);
 		WebElement element = driver.findElement(get_remaining_doses1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
@@ -565,6 +573,7 @@ public class SupplyConsolePage extends BasePage {
 
 
 	public Double getValueOfRemainingQty() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty1, 10);
 		WebElement element = driver.findElement(get_remaining_Qty1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
@@ -607,13 +616,33 @@ public class SupplyConsolePage extends BasePage {
 		reasonForWastageValueFromDropDown.click();
 		click(dropDownValueCCIHandlingError);
 	}
+
 	public void clickBtnWastageAtContainerWastagePopUp() throws InterruptedException {
 		scrollTop(btnWastageOnContainerWastagePopUp);
 		click(btnWastageOnContainerWastagePopUp);
 		Thread.sleep(2000); //To handle success message
 		//Need to add validation for successful mess
-
 	}
-	
+
+	public String getVaccineName() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_trade_name1, 10);
+		WebElement element = driver.findElement(get_trade_name1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String tradeName = getValue(get_trade_name);
+		return (tradeName);
+	}
+
+	public double getDoseConversationFactor() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_dose_conversation_factor1, 10);
+		WebElement element = driver.findElement(get_dose_conversation_factor1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String conversationFactor = getValue(get_dose_conversation_factor);
+		Double Factor = Double.parseDouble(conversationFactor.replaceAll(",",""));
+		return (Factor);
+	}
+
+
 	
 }
