@@ -73,8 +73,9 @@ public abstract class BasePage<T> {
 		return element.getAttribute("value");
 	}
 	
-	public T click(WebElement element) {
+	public T click(WebElement element) throws InterruptedException {
 		waitForVisibility(element);
+		waitForElementToBeClickable(element);
 		element.click();
 		return (T) this;
 	}
@@ -85,7 +86,24 @@ public abstract class BasePage<T> {
 		element.sendKeys(text);
 		return (T) this;
 	}
-	
+
+	public T waitForElementToBeClickable(WebElement element) throws InterruptedException {
+		int tries = 0;
+
+		while(tries<5){
+			try{
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				return (T)this;
+			} catch (StaleElementReferenceException e) {
+				log("StaleElementReferenceException occurred while waiting for element to be clickable: "+e.getMessage());
+				Thread.sleep(1000);
+			}
+			tries = tries + 1;
+		}
+
+		throw new RuntimeException("Element is not clickable.");
+	}
+
 	public T waitForVisibility(WebElement element) {
 		try {
 			wait.until(ExpectedConditions.visibilityOfAllElements(element));
