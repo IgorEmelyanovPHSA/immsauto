@@ -181,6 +181,10 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Confirm_in_dropdown;
 	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
 
+	@FindBy(xpath = ".//a[text() = 'Related Items']")
+	private WebElement click_on_related_item_tab;
+	private By click_on_related_item_tab_1 = By.xpath(".//a[text() = 'Related Items']");
+
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -670,5 +674,16 @@ public class SupplyConsolePage extends BasePage {
 		select_Confirm_in_dropdown.click();
 	}
 
-	
+	public void clickOnRelatedItemTab() throws InterruptedException {
+		//scroll up
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-850)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_on_related_item_tab_1, 10);
+		Thread.sleep(1000);
+		WebElement element = driver.findElement(click_on_related_item_tab_1);
+		Thread.sleep(2000);
+		click_on_related_item_tab.click();
+	}
+
+
 }

@@ -24,6 +24,7 @@ public class Transfer extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
+        ////// Supply Location_1 -> Outcoming
         System.out.println("/*5.----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.clickOnSupplyLocation_1();
         Thread.sleep(5000);
@@ -96,6 +97,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
         Thread.sleep(2000);
+        ///////////////// Supply Location_2 -> Incoming //////////////////////////
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         supplyConsolePage.clickOnSupplyLocation_2();
         Thread.sleep(2000);
@@ -106,37 +108,47 @@ public class Transfer extends BaseTest {
         Double remainingQty_before_SupplyLocation2 = supplyConsolePage.getValueOfRemainingQty();
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_SupplyLocation2);
         Thread.sleep(2000);
-        System.out.println("/*18.----Go to Transactions Tab of Automation Supply Location_2 --*/");
+        System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         supplyConsolePage.clickTransactionsTab();
         Thread.sleep(2000);
-        System.out.println("/*19----Get how many Incoming Transactions 'To' count records --*/");
+        System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
         Thread.sleep(2000);
         System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
         Thread.sleep(2000);
-        System.out.println("/*20----Click on the latest created Incoming Transactions DropDown Menu --*/");
+        System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
         int j = countIncomingTransactions;
         supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
         Thread.sleep(2000);
-        System.out.println("/*21.----select Confirm from the Incoming dropdown menu --*/");
+        System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
         supplyConsolePage.selectConfirmIncomingDropDown();
         Thread.sleep(2000);
+        System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
+        supplyConsolePage.selectIncomingSupplyDistribution();
+        Thread.sleep(2000);
+        System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
+        supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+        Thread.sleep(1000);
+        System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
+        supplyConsolePage.successMessageAppear();
+        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        System.out.println("/*29.----click on Related Item Tab --*/");
+        supplyConsolePage.clickOnRelatedItemTab();
+        Thread.sleep(2000);
+        System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
+        Double remainingDoses_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingDoses();
+        System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_SupplyLocation2);
+        Thread.sleep(2000);
+        Double remainingQty_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingQty();
+        System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_SupplyLocation2);
+        Thread.sleep(2000);
+        System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
+        Assert.assertEquals(remainingDoses_before_SupplyLocation2 + 10, remainingDoses_after_SupplyLocation2);
+        //assertEquals(remainingDoses_before, remainingDoses_after);
+        Assert.assertEquals((remainingDoses_before_SupplyLocation2 + 10)/dose_conversation_factor, remainingQty_after_SupplyLocation2);
+        Thread.sleep(2000);
 
-        //System.out.println("/*21----click Confirm Incoming button Transfer --*/");
-        //supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
-        //Thread.sleep(2000);
-        //System.out.println("/*22.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        //supplyConsolePage.selectIncomingSupplyDistribution();
-        //Thread.sleep(2000);
-        //System.out.println("/*23.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
-        //supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-        //Thread.sleep(1000);
-        //System.out.println("/*24.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        //supplyConsolePage.successMessageAppear();
-        //Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-        //System.out.println("/*25----Close Automation_Supply_Location_2 Tab --*/");
-        //supplyConsolePage.closeAutomationLocationTab();
-        //Thread.sleep(5000);
+
 
 
     }
