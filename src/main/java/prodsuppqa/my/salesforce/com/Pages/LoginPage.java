@@ -17,8 +17,8 @@ public class LoginPage extends BasePage {
 	private final String CLINICIAN_PW_CIB_PRODSUPPQA = "Technology1990!!!!!";
 	private final String CLINICIAN_Consumption_PRODSUPPQA = "";
 	private final String CLINICIAN_PW_Consumption_PRODSUPPQA = "Technology1990!!!!!!";
-	private final String DIWA_PRODSUPPQA = "a";
-	private final String DIWA_PW_PRODSUPPQA = "phsa7phsa*";
+	private final String DIWA_PRODSUPPQA = "jyauto@phsa.ca.prodsuppqa";
+	private final String DIWA_PW_PRODSUPPQA = "Phsaphsa**";
 	private final String CALLCENTERAGENT_CC_PRODSUPPQA = "";
 	private final String CALLCENTERAGENT_PW_CC_PRODSUPPQA = "Technology1990!!!!!!!";
 	

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestRailManager {
-    public static String TEST_RUN_ID = "4189";
+    public static String TEST_RUN_ID = "4236";
     public static String TESTRAIL_USERNAME = "Igor.Emelyanov@phsa.ca";
     public static String TESTRAIL_PASSWORD = "Bcvaxtestrail07*";
     public static String RAILS_ENGINE_URL = "https://qmsoftwaretest.testrail.io/";
