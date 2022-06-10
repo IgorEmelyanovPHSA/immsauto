@@ -176,9 +176,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//span[@title='JY-Auto Prodsupp']");
 
-	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+	@FindBy(xpath = "//li[@title='EL0203 - Exp. 2022 December 30']")
 	private WebElement select_lot;
-	private By select_lot1 = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	private By select_lot1 = By.xpath("//li[@title='EL0203 - Exp. 2022 December 30']");
 
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
