@@ -57,6 +57,8 @@ public class DIWA extends BaseTest {
 		System.out.println("/*---15. Select Informed Consent Provider ---*/");
 		//clinicInBoxPage.enterConsentEffectiveToDate();
 		Thread.sleep(3000);
+		clinicInBoxPage.selectInformedConsentProvider();
+		Thread.sleep(2000);
 		clinicInBoxPage.informedConsentProvider("JY-Auto Prodsupp");
 		Thread.sleep(2000);
 		clinicInBoxPage.clickSaveConsent();
