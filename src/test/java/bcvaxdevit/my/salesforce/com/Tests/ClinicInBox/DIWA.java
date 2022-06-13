@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Tests.ClincInBox;
+package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;

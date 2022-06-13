@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Clinic-In Box Workflow Suit">
-    <test name="Regression">
+<suite name="BCVAXDEVIT">
+    <test name="Smoke">
         <classes>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2">
-                <methods>
-                    <include name="Test1"/>
-                </methods>
-            </class>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2">
-                <methods>
-                    <include name="Test2"/>
-                </methods>
-            </class>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose1"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose2"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.DIWA"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose1_VaccineAdministration"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose2_VaccineAdministration"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.CallCenter.BookingDose1"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.CallCenter.BookingDose2"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkTransfers"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Transfer"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Requisition"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Consumption"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -1,13 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
 
-import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import bcvaxdevit.my.salesforce.com.Tests.ClincInBox.BookingDose2;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 public class Dose2_VaccineAdministration extends BaseTest {
