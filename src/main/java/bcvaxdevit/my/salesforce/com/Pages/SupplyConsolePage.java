@@ -1,15 +1,12 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 
 public class SupplyConsolePage extends BasePage {
@@ -181,16 +178,23 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Confirm_in_dropdown;
 	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
 
+	@FindBy(xpath = ".//a[text() = 'Related Items']")
+	private WebElement click_on_related_item_tab;
+	private By click_on_related_item_tab_1 = By.xpath(".//a[text() = 'Related Items']");
+
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@FindBy(xpath = ".//a/span[text()='Wastage']")
+	@FindBy(xpath = "//a/span[text()='Wastage']")
 	private WebElement selectWastageFromDropDown;
 
 	@FindBy(xpath = "//input[@name='HC_Remaining_Measures__c']")
 	private WebElement actualRemainingDoses;
+
+	@FindBy(xpath = "//label[(text()='Dose Conversion Factor')]/..//input[@type='text']")
+	private WebElement doseConversionFactorForSingleWastage;
 
 	@FindBy(xpath = "//label[(text()='Doses')]/..//input[@type='text']")
 	private WebElement dosesText;
@@ -203,6 +207,12 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//h2[text()='Container - Wastage']/../..//button[(text()='Wastage')]")
 	private WebElement btnWastageOnContainerWastagePopUp;
+
+	@FindBy(xpath = "//button[text() = 'Wastage']")
+	private WebElement btnBulkWastageSupplyPage;
+
+	@FindBy(xpath = "//h2[text() = 'Container - Wastage']/../..//button[text() = 'Wastage']")
+	private WebElement btnBulkWastageContainerWastagePage;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -624,7 +634,12 @@ public class SupplyConsolePage extends BasePage {
 		typeIn(dosesText, value);
 	}
 
-	public void selectReasonForWastageDropDown() {
+	public double getDoseConversionFactor() {
+		double doseConversionFactor = Double.parseDouble(getValue(doseConversionFactorForSingleWastage));
+		return doseConversionFactor;
+	}
+
+	public void selectReasonForWastageDropDown() throws InterruptedException {
 		reasonForWastageValueFromDropDown.click();
 		click(dropDownValueCCIHandlingError);
 	}
@@ -634,6 +649,53 @@ public class SupplyConsolePage extends BasePage {
 		click(btnWastageOnContainerWastagePopUp);
 		Thread.sleep(2000); //To handle success message
 		//Need to add validation for successful mess
+	}
+
+	public void clickBulkWastageButton() throws InterruptedException {
+		click(btnBulkWastageSupplyPage);
+	}
+
+	public void clickWastageButtonContainerWastagePage() throws InterruptedException {
+		click(btnBulkWastageContainerWastagePage);
+	}
+
+	public HashMap countDosesAndQuantityMap(int numberOfRows) {
+		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityMap = new HashMap<>();
+		int d = 3;
+		int q = 4;
+		for (int i = 0; i < numberOfRows; i++) {
+			ArrayList<Double> value = new ArrayList<>();
+			WebElement remainingDosesWebElement = driver.findElement(By.xpath("(//lightning-formatted-number)[" + d + "]"));
+			WebElement remainingQuantityWebElement = driver.findElement(By.xpath("(//lightning-formatted-number)[" + q + "]"));
+			Double remainingDoses = Double.parseDouble(getValue(remainingDosesWebElement));
+			Double remainingQuantity = Double.parseDouble(getValue(remainingQuantityWebElement));
+			Double doseConversionFactor = remainingDoses / remainingQuantity;
+			value.add(remainingDoses);
+			value.add(remainingQuantity);
+			value.add(doseConversionFactor);
+			remainingDosesAndQuantityMap.put(i, value);
+			log("Row number " + i + " / Remaining Doses = " + remainingDoses + " / Remaining Quantity = " + remainingQuantity
+					+ " / Dose Conversion Factor = " + doseConversionFactor);
+			d = d + 4;
+			q = q + 4;
+		}
+		return remainingDosesAndQuantityMap;
+	}
+
+	public void enterBulkWastageByDosageWithReasonForWastage(int amount, int numberOfRows) throws InterruptedException {
+		//By dosage wastage
+		int y = 0;
+		int k = 4;
+		while (y < numberOfRows) {
+			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
+			typeIn(dosesDynamicFiled, String.valueOf(amount));
+			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
+			click(reasonForWastageDynamicDropDown);
+			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title='CCI: Handling Error'])[" + (y + 1) + "]"));
+			click(reasonForWastageDynamicFiled);
+			k = k + 3;
+			y++;
+		}
 	}
 
 	public String getVaccineName() throws InterruptedException {
@@ -670,5 +732,16 @@ public class SupplyConsolePage extends BasePage {
 		select_Confirm_in_dropdown.click();
 	}
 
-	
+	public void clickOnRelatedItemTab() throws InterruptedException {
+		//scroll up
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-850)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_on_related_item_tab_1, 10);
+		Thread.sleep(1000);
+		WebElement element = driver.findElement(click_on_related_item_tab_1);
+		Thread.sleep(2000);
+		click_on_related_item_tab.click();
+	}
+
+
 }
