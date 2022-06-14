@@ -216,13 +216,17 @@ public class Consumption extends BaseTest {
 		System.out.println("/*-- 40---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
-		System.out.println("/*-- 41---Click to select Agent --*/");
-		inClinicExperiencePage.ClickAgentValue();
-		Thread.sleep(2000);
-		System.out.println("/*-- 41--- Click to select the Agent --*/");
-		inClinicExperiencePage.SelectAgentValue("COVID-19 Virus Like Particle UPDATE");
-		Thread.sleep(2000);
-		System.out.println("/*-- 41--- Select Agent From the Picklist Value --*/");
+		System.out.println("/*----Search for Participant account ---*/");
+		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+		System.out.println("/*----Search for Dacia is Successful ---*/");
+		
+//		System.out.println("/*-- 41---Click to select Agent --*/");
+//		inClinicExperiencePage.ClickAgentValue();
+//		Thread.sleep(2000);
+//		System.out.println("/*-- 41--- Click to select the Agent --*/");
+//		inClinicExperiencePage.SelectAgentValue("COVID-19 Virus Like Particle UPDATE");
+//		Thread.sleep(2000);
+//		System.out.println("/*-- 41--- Select Agent From the Picklist Value --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(5000);
 		System.out.println("/*-- 42---Click Confirm and Save Administration Button --*/");
