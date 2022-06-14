@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import jdk.jfr.Description;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.Test;
@@ -12,6 +13,7 @@ public class BookingDose1 extends BaseTest {
 	static Logger log = Logger.getLogger(BookingDose1.class);
 	
 	@Test(priority = 1)
+	@Description("Pre_conditions_step_Remove_Dups_Citizen_participant_account")
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
@@ -79,6 +81,7 @@ public class BookingDose1 extends BaseTest {
 	}
 	
 	@Test(priority = 2)
+	@Description("Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT")
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "222364"; //C192878
 		//System.setProperty("log4j.properties", "hjjfhjf");
@@ -205,6 +208,7 @@ public class BookingDose1 extends BaseTest {
 	}
 	
 	@Test(priority = 3)
+	@Description("Post_conditions_step_Remove_Dups_Citizen_participant_account")
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");

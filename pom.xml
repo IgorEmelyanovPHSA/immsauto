@@ -28,7 +28,6 @@
                     <suiteXmlFiles>
                     <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <groups>${target_group}</groups>
                     <argLine> -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                 </configuration>
@@ -54,7 +53,6 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.9</version>
             </plugin>
-
         </plugins>
     </build>
 
@@ -102,6 +100,7 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.13.5</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
