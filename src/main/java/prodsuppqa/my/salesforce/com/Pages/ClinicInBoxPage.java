@@ -140,9 +140,13 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
 	private WebElement recordImmunizationBtn;
 
-	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
+	@FindBy(xpath = "//input[@placeholder='Search People...']")
+	private WebElement informedProvider;
+	private By informedProvider1 = By.xpath("//input[@placeholder='Search People...']");
+
+	@FindBy(xpath = "//span[@title='JY-Auto Prodsupp']")
 	private WebElement informedConsentProvider;
-	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
+	private By informedConsentProvider1 = By.xpath("//span[@title='JY-Auto Prodsupp']");
 
 	@FindBy(xpath = "//input[@name='effectiveToDate']")
 	private WebElement consentEffectiveToDate;
@@ -163,7 +167,7 @@ public class ClinicInBoxPage extends BasePage {
 
 	@FindBy(xpath = "//span[@title='0.3']")
 	private WebElement select_dosage;
-	private By select_dosage1 = By.xpath("//span[@title='0.5']");
+	private By select_dosage1 = By.xpath("//span[@title='0.3']");
 
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
@@ -176,9 +180,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//span[@title='JY-Auto Prodsupp']");
 
-	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+	@FindBy(xpath = "//li[@title='EL0203 - Exp. 2022 December 30']")
 	private WebElement select_lot;
-	private By select_lot1 = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	private By select_lot1 = By.xpath("//li[@title='EL0203 - Exp. 2022 December 30']");
 
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
@@ -381,7 +385,7 @@ public class ClinicInBoxPage extends BasePage {
 			return false;
 		}
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 0);
+		calendar.add(Calendar.DATE, -1);
 		Date today = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 
@@ -423,12 +427,16 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		return true;
 	}
+	public void selectInformedConsentProvider() throws InterruptedException{
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedProvider);
+		waitForElementToBeVisible(driver, informedProvider, 10);
+		this.informedProvider.click();
+	}
 
 	public void informedConsentProvider(String providerName) throws InterruptedException {
 		waitForElementToBeVisible(driver, informedConsentProvider, 10);
-		this.informedConsentProvider.click();
-		Thread.sleep(2000);
-		this.informedConsentProvider.sendKeys(providerName);
+		WebElement informedConsentProvider = driver.findElement(informedConsentProvider1);
+		informedConsentProvider.click();
 		Thread.sleep(2000);
 	}
 

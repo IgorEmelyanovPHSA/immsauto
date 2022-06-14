@@ -57,6 +57,10 @@ public class DIWA extends BaseTest {
 		System.out.println("/*---15. Select Informed Consent Provider ---*/");
 		//clinicInBoxPage.enterConsentEffectiveToDate();
 		Thread.sleep(3000);
+		clinicInBoxPage.selectInformedConsentProvider();
+		Thread.sleep(2000);
+		clinicInBoxPage.informedConsentProvider("JY-Auto Prodsupp");
+		Thread.sleep(2000);
 		clinicInBoxPage.clickSaveConsent();
 		Thread.sleep(2000);
 		System.out.println("/*---16. Click on the Immunization provider field ---*/");
@@ -68,8 +72,8 @@ public class DIWA extends BaseTest {
 		System.out.println("/*---18. Select Lot Number Field value set a Lot ---*/");
 		clinicInBoxPage.selectToSetLot();
 		Thread.sleep(2000);
-		System.out.println("/*---19. Select Lot -->300042698 - Exp. 2021 June 18 ---*/");
-		clinicInBoxPage.selectLot("300042698 - Exp. 2021 June 18");
+		System.out.println("/*---19. Select Lot -->EL0203 - Exp. 2022 December 30 ---*/");
+		clinicInBoxPage.selectLot("EL0203 - Exp. 2022 December 30");
 		Thread.sleep(2000);
 		System.out.println("/*---20. Select Injection Site ---*/");
 		clinicInBoxPage.selectInjectionSite();
