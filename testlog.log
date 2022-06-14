@@ -1291,3 +1291,5 @@ java.net.SocketException: Connection reset
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2022-06-14 11:55:48 INFO  BookingDose2:88 - /*1.----Login as an Clinician to CIB --*/
 2022-06-14 11:55:53 INFO  BookingDose2:92 - /*2.----Clinic In Box(IPM) page displayed --*/
+2022-06-14 13:37:39 INFO  BookingDose1:87 - /*1.----Login as an Clinician to CIB --*/
+2022-06-14 13:37:44 INFO  BookingDose1:91 - /*2.----Clinic In Box(IPM) page displayed --*/
