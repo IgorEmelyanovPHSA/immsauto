@@ -118,6 +118,12 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.selectICEFromApp();
 		System.out.println("/*-- 10. Navigate to In Clinic Experience App --*/");
 		Thread.sleep(2000);
+		inClinicExperiencePage.clickUserDefaultsTab();
+		System.out.println("/*-- 10.1 Click on User Defaults Tab  --*/");
+		Thread.sleep(2000);
+		System.out.println("/*-- 10.2 Enter current date for UserDefaults --*/");
+		inClinicExperiencePage.inputCurrentDateUserDefaults();
+		Thread.sleep(2000);
 		inClinicExperiencePage.clickRegisterTab();
 		System.out.println("/*-- 11. Click on register Tab --*/");
 		inClinicExperiencePage.closeTabsHCA();
