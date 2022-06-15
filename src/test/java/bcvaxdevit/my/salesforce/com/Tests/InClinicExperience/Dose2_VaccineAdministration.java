@@ -189,6 +189,8 @@ public class Dose2_VaccineAdministration extends BaseTest {
         inClinicExperience.clickNextButtonApptSchedulingPage();
         Thread.sleep(2000);
         System.out.println("/*36----click Confirm Appointment button  --*/");
+        inClinicExperience.clickVerifyContactInformation();
+        Thread.sleep(2000);
         inClinicExperience.clickAppointmentConfirmButton();
         Thread.sleep(2000);
         System.out.println("/*37----see 'Appointment Confirmed!' screen --*/");
