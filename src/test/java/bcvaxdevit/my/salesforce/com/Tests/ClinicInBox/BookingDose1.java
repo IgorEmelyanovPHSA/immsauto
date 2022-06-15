@@ -185,22 +185,25 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*29----click Next button  --*/");
 		clinicInBox.clickOnNextButton();
 		Thread.sleep(2000);
-		System.out.println("/*30----click Confirm Appointment button  --*/");
+		System.out.println("/*30----click Verify Contact Information Checkbox  --*/");
+		clinicInBox.clickVerifyContactInformation();
+		Thread.sleep(2000);
+		System.out.println("/*31----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*31----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*32----see 'Appointment Confirmed!' screen --*/");
 		clinicInBox.validateAppointmentConfirmedScreen();
 		Thread.sleep(2000);
-		System.out.println("/*32----Refresh page --*/");
+		System.out.println("/*33----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		Thread.sleep(2000);
-		System.out.println("/*33----Go to back to the Citizen Related Tab --*/");
+		System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
 		clinicInBox.clickRelatedTab();
 		Thread.sleep(2000);
-		System.out.println("/*34----click on In-clinic Experience button --*/");
+		System.out.println("/*35----click on In-clinic Experience button --*/");
 		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		Thread.sleep(2000);
-		System.out.println("/*35----In-clinic Experience ->Vaccine Admin page appears up --*/");
+		System.out.println("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 	}
 	
