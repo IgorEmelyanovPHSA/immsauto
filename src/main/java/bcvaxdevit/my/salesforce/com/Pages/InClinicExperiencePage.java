@@ -550,7 +550,7 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(select_app_launcher1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
 		WebElement element1 = driver.findElement(click_healthconnect_app1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
