@@ -282,8 +282,8 @@ public class InClinicExperiencePage extends BasePage {
 	private By search_clinic_name_tab1 = By.xpath(".//a[text()='Search clinic name']");
 	
 	@FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
-	private WebElement vlidate_appointment_confirm_message;
-	private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
+	private WebElement validate_appointment_confirm_message;
+	private By validate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
 	
 	@FindBy(xpath = "//input[@name='BCH_Date__c']")
 	private WebElement input_current_date;
@@ -550,7 +550,7 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(select_app_launcher1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
 		WebElement element1 = driver.findElement(click_healthconnect_app1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
@@ -834,7 +834,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public boolean AppointmentConfirmationMessage() throws InterruptedException {
 		try {
-			waitForElementToBeVisible(driver, vlidate_appointment_confirm_message, 10);
+			waitForElementToBeVisible(driver, validate_appointment_confirm_message, 10);
 			System.out.println("/*---'Appointment Confirmed!' message shown up");
 			return true;
 		} catch (NoSuchElementException e) {
