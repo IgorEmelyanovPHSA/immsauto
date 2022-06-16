@@ -223,6 +223,7 @@ public class RequisitionPage extends BasePage {
 	}
 
 	public void clickSaveButton() {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveButton);
 		this.saveButton.click();
 	}
 	
@@ -274,6 +275,7 @@ public class RequisitionPage extends BasePage {
 	}
 	
 	public void clickSaveApprovedRequisition() {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveApprovedRequisition);
 		this.saveApprovedRequisition.click();
 	}
 	
