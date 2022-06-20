@@ -268,6 +268,14 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
 	private WebElement click_reason_radiobutton;
 	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
+
+	@FindBy(xpath = ".//span[text() = 'Select One']")
+	private WebElement click_early_booking_reason;
+	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
+
+	@FindBy(xpath = ".//span[text() = 'Travel']")
+	private WebElement select_early_booking_reason;
+	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
 	
 	@FindBy(xpath = "(.//a[text() = 'Related'])")
 	private WebElement person_account_Related_tab;
@@ -772,6 +780,16 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
+	}
+
+	public void selectEarlyBookingReason() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
+		Thread.sleep(2000);
+		click_early_booking_reason.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_early_booking_reason, 10);
+		Thread.sleep(2000);
+		select_early_booking_reason.click();
 	}
 	
 	public void clickOnMoreSearchTabs() throws InterruptedException {
