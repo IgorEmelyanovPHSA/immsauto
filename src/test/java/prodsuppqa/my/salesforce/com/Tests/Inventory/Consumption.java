@@ -118,6 +118,12 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.selectICEFromApp();
 		System.out.println("/*-- 10. Navigate to In Clinic Experience App --*/");
 		Thread.sleep(2000);
+		inClinicExperiencePage.clickUserDefaultsTab();
+		System.out.println("/*-- 10.1 Click on User Defaults Tab  --*/");
+		Thread.sleep(2000);
+		System.out.println("/*-- 10.2 Enter current date for UserDefaults --*/");
+		inClinicExperiencePage.inputCurrentDateUserDefaults();
+		Thread.sleep(2000);
 		inClinicExperiencePage.clickRegisterTab();
 		System.out.println("/*-- 11. Click on register Tab --*/");
 		inClinicExperiencePage.closeTabsHCA();
@@ -216,13 +222,17 @@ public class Consumption extends BaseTest {
 		System.out.println("/*-- 40---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
-		System.out.println("/*-- 41---Click to select Agent --*/");
-		inClinicExperiencePage.ClickAgentValue();
-		Thread.sleep(2000);
-		System.out.println("/*-- 41--- Click to select the Agent --*/");
-		inClinicExperiencePage.SelectAgentValue("COVID-19 Virus Like Particle UPDATE");
-		Thread.sleep(2000);
-		System.out.println("/*-- 41--- Select Agent From the Picklist Value --*/");
+		System.out.println("/*----Search for Participant account ---*/");
+		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+		System.out.println("/*----Search for Dacia is Successful ---*/");
+		
+//		System.out.println("/*-- 41---Click to select Agent --*/");
+//		inClinicExperiencePage.ClickAgentValue();
+//		Thread.sleep(2000);
+//		System.out.println("/*-- 41--- Click to select the Agent --*/");
+//		inClinicExperiencePage.SelectAgentValue("COVID-19 Virus Like Particle UPDATE");
+//		Thread.sleep(2000);
+//		System.out.println("/*-- 41--- Select Agent From the Picklist Value --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(5000);
 		System.out.println("/*-- 42---Click Confirm and Save Administration Button --*/");

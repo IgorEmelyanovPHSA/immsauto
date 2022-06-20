@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends BasePage {
 	
 	private final String Precondition_PRODSUPPQA = "sunil.anne@phsa.ca.prodsuppqa";
-	private final String Precondition_PW_PRODSUPPQA = "Sqlserver@3";
+	private final String Precondition_PW_PRODSUPPQA = "Sqlserver@4";
 	private final String CLINICIAN_ICE_PRODSUPPQA = "";
 	private final String CLINICIAN_PW_PRODSUPPQA = "Technology1990!!!!!!!";
 	private final String PPHIS_PRODSUPPQA = "auto_operationpphis@deloitte.ca.bcvaxprodsuppqa";
