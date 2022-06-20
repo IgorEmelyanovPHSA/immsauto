@@ -73,7 +73,7 @@ public class DIWA extends BaseTest {
 		clinicInBoxPage.selectToSetLot();
 		Thread.sleep(2000);
 		System.out.println("/*---19. Select Lot -->EL0203 - Exp. 2022 December 30 ---*/");
-		clinicInBoxPage.selectLot("EL0203 - Exp. 2022 December 30");
+		clinicInBoxPage.selectLot("123 - Exp. 2022 August 26");
 		Thread.sleep(2000);
 		System.out.println("/*---20. Select Injection Site ---*/");
 		clinicInBoxPage.selectInjectionSite();

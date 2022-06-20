@@ -165,9 +165,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 
-	@FindBy(xpath = "//span[@title='0.3']")
+	@FindBy(xpath = "//span[@title='0.5']")
 	private WebElement select_dosage;
-	private By select_dosage1 = By.xpath("//span[@title='0.3']");
+	private By select_dosage1 = By.xpath("//span[@title='0.5']");
 
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
@@ -180,9 +180,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//span[@title='JY-Auto Prodsupp']");
 
-	@FindBy(xpath = "//li[@title='EL0203 - Exp. 2022 December 30']")
+	@FindBy(xpath = "//li[@title='123 - Exp. 2022 August 26']")
 	private WebElement select_lot;
-	private By select_lot1 = By.xpath("//li[@title='EL0203 - Exp. 2022 December 30']");
+	private By select_lot1 = By.xpath("//li[@title='123 - Exp. 2022 August 26']");
 
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
