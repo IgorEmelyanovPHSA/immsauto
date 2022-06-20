@@ -1,20 +1,22 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import io.qameta.allure.Story;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static bcvaxdevit.my.salesforce.com.Pages.BasePage.log;
 import static org.testng.Assert.assertTrue;
 
+@Listeners({TestListener.class})
 public class BulkWastages extends BaseTest {
 
-
-    @Test
+    @Story("C222356: Inventory Management - Wastage Bulk (Java)")
+    @Test(groups = {"Smoke"})
     public void Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS_BCVAXDEVIT() throws InterruptedException {
         TestcaseID = "222356"; //C222356
         int amountOfDosesToWaste = 1;

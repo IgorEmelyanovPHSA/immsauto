@@ -2,18 +2,19 @@ package bcvaxdevit.my.salesforce.com.Tests;
 
 import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
 import bcvaxdevit.my.salesforce.com.Pages.TestRailManager;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITest;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 
 public class BaseTest {
+	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
 	protected String TestcaseID;
 	public WebDriver driver;
 	//private static WebDriver driver;
@@ -86,6 +87,18 @@ public class BaseTest {
 	public void cleanUp() {
 		System.out.println("This will execute after the Suite");
 	}
-	
-	
+
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public static String getLogTime() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return LOG_TIMESTAMP_FORMAT.format(timestamp);
+	}
+
+	public static void log(String msg) {
+		System.out.println(getLogTime() + " " + msg);
+	}
+
 }
