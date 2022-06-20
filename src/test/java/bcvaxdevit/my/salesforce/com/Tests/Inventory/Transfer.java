@@ -1,10 +1,15 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
+
+@Listeners({TestListener.class})
 public class Transfer extends BaseTest {
 
     @Test
@@ -30,10 +35,10 @@ public class Transfer extends BaseTest {
         //supplyConsolePage.selectSupplyContainer();
         Thread.sleep(2000);
         System.out.println("/*6.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        Double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
+        double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
         System.out.println("/*-- . remaining doses are: -->" + remainingDoses_before);
         Thread.sleep(2000);
-        Double remainingQty_before = supplyConsolePage.getValueOfRemainingQty();
+        double remainingQty_before = supplyConsolePage.getValueOfRemainingQty();
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before);
         Thread.sleep(2000);
         System.out.println("/*7.----Click on Container's dropdown --*/");
@@ -48,7 +53,7 @@ public class Transfer extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*10.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;
-        Double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         Thread.sleep(2000);
         System.out.println("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
@@ -63,16 +68,16 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickBulkTransfersCloseButton();
         Thread.sleep(5000);
         System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
-        Double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses();
+        double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses();
         System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after);
         Thread.sleep(2000);
-        Double remainingQty_after = supplyConsolePage.getValueOfRemainingQty();
+        double remainingQty_after = supplyConsolePage.getValueOfRemainingQty();
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after);
         Thread.sleep(2000);
         System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-        Assert.assertEquals(java.util.Optional.of(remainingDoses_before - 10), remainingDoses_after);
+        assertEquals((remainingDoses_before - 10), remainingDoses_after);
         //assertEquals(remainingDoses_before, remainingDoses_after);
-        Assert.assertEquals(java.util.Optional.of((remainingDoses_before - 10) / dose_conversation_factor), remainingQty_after);
+        assertEquals(((remainingDoses_before - 10) / dose_conversation_factor), remainingQty_after);
         Thread.sleep(2000);
         System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -100,10 +105,10 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickOnSupplyLocation_2();
         Thread.sleep(2000);
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        Double remainingDoses_before_SupplyLocation2 = supplyConsolePage.getValueOfRemainingDoses();
+        double remainingDoses_before_SupplyLocation2 = supplyConsolePage.getValueOfRemainingDoses();
         System.out.println("/*-- . remaining doses are: -->" + remainingDoses_before_SupplyLocation2);
         Thread.sleep(2000);
-        Double remainingQty_before_SupplyLocation2 = supplyConsolePage.getValueOfRemainingQty();
+        double remainingQty_before_SupplyLocation2 = supplyConsolePage.getValueOfRemainingQty();
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_SupplyLocation2);
         Thread.sleep(2000);
         System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
@@ -134,16 +139,16 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
         Thread.sleep(2000);
         System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
-        Double remainingDoses_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingDoses();
+        double remainingDoses_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingDoses();
         System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_SupplyLocation2);
         Thread.sleep(2000);
-        Double remainingQty_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingQty();
+        double remainingQty_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingQty();
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_SupplyLocation2);
         Thread.sleep(2000);
         System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-        Assert.assertEquals(java.util.Optional.of(remainingDoses_before_SupplyLocation2 + 10), remainingDoses_after_SupplyLocation2);
+        assertEquals(remainingDoses_before_SupplyLocation2 + 10, remainingDoses_after_SupplyLocation2);
         //assertEquals(remainingDoses_before, remainingDoses_after);
-        Assert.assertEquals(java.util.Optional.of((remainingDoses_before_SupplyLocation2 + 10) / dose_conversation_factor), remainingQty_after_SupplyLocation2);
+        assertEquals(((remainingDoses_before_SupplyLocation2 + 10) / dose_conversation_factor), remainingQty_after_SupplyLocation2);
         Thread.sleep(2000);
 
 
