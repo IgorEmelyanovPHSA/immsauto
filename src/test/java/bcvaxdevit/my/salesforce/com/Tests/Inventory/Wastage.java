@@ -1,20 +1,24 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import io.qameta.allure.Story;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static bcvaxdevit.my.salesforce.com.Pages.BasePage.log;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Listeners({TestListener.class})
 public class Wastage extends BaseTest {
 
-    @Test
+    @Story("C222357: Inventory Management - Wastage(Java)")
+    @Test(groups = {"Smoke"})
     public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS_BCVAXDEVIT() throws InterruptedException {
         TestcaseID = "222357"; //222357
         int numberOfRows = 1; //Default value, wasting from first row only
