@@ -4,6 +4,7 @@ import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
 
 public class Transfer extends BaseTest {
 
