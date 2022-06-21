@@ -77,7 +77,6 @@ public class Transfer extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
         assertEquals((remainingDoses_before - 10), remainingDoses_after);
-        //assertEquals(remainingDoses_before, remainingDoses_after);
         assertEquals(((remainingDoses_before - 10) / dose_conversation_factor), remainingQty_after);
         Thread.sleep(2000);
         System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
@@ -148,7 +147,6 @@ public class Transfer extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
         assertEquals(remainingDoses_before_SupplyLocation2 + 10, remainingDoses_after_SupplyLocation2);
-        //assertEquals(remainingDoses_before, remainingDoses_after);
         assertEquals(((remainingDoses_before_SupplyLocation2 + 10) / dose_conversation_factor), remainingQty_after_SupplyLocation2);
         Thread.sleep(2000);
 
