@@ -157,7 +157,7 @@ public class Transfer extends BaseTest {
 
     @Test
     public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "222360"; //C222360
+        TestcaseID = "220557";
         System.out.println("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
