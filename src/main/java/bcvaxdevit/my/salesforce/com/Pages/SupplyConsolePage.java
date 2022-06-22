@@ -662,13 +662,10 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void selectReasonForWastageDropDown() throws InterruptedException {
-		reasonForWastageValueFromDropDown.click();
-		//Thread.sleep(2000); //Debug test
-		//click(dropDownValueCCIHandlingError);
+		click(reasonForWastageValueFromDropDown);
 		reasonForWastageValueFromDropDown.sendKeys("c");
 		reasonForWastageValueFromDropDown.sendKeys(Keys.ENTER);
-
-
+//		click(dropDownValueCCIHandlingError); // Working on local but have difficulty clicking on Jenkins
 	}
 
 	public void clickBtnWastageAtContainerWastagePopUp() throws InterruptedException {
