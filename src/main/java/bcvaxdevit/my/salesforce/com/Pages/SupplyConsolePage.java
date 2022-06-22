@@ -217,6 +217,9 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//a/span[text()='Wastage']")
 	private WebElement selectWastageFromDropDown;
 
+	@FindBy(xpath = "//a/span[text()='Adjustment']")
+	private WebElement selectAdjustmentFromDropDown;
+
 	@FindBy(xpath = "//input[@name='HC_Remaining_Measures__c']")
 	private WebElement actualRemainingDoses;
 
@@ -226,6 +229,9 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//label[(text()='Doses')]/..//input[@type='text']")
 	private WebElement dosesText;
 
+	@FindBy(xpath = "//button[@name='BCH_Reason_for_Adjustment__c']")
+	private WebElement reasonForAdjustmentFromDropDown;
+
 	@FindBy(xpath = "//button[@name='BCH_Reason_for_Wastage__c']")
 	private WebElement reasonForWastageValueFromDropDown;
 
@@ -234,6 +240,9 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//h2[text()='Container - Wastage']/../..//button[(text()='Wastage')]")
 	private WebElement btnWastageOnContainerWastagePopUp;
+
+	@FindBy(xpath = "//h2[text()='Container - Adjustment']/../..//button[(text()='Adjustment')]")
+	private WebElement btnAdjustmentOnContainerWastagePopUp;
 
 	@FindBy(xpath = "//button[text() = 'Wastage']")
 	private WebElement btnBulkWastageSupplyPage;
@@ -655,6 +664,11 @@ public class SupplyConsolePage extends BasePage {
 
 	}
 
+	public void selectAdjustmentFromDropDown() throws InterruptedException {
+		click(selectAdjustmentFromDropDown);
+		Thread.sleep(2000);
+	}
+
 	public void selectWastageFromDropDown() throws InterruptedException {
 		click(selectWastageFromDropDown);
 		Thread.sleep(2000);
@@ -666,7 +680,7 @@ public class SupplyConsolePage extends BasePage {
 		return actualDosage;
 	}
 
-	public void setDosesAmountToWaste(String value) {
+	public void setDosesAmount(String value) {
 		typeIn(dosesText, value);
 	}
 
@@ -675,9 +689,15 @@ public class SupplyConsolePage extends BasePage {
 		return doseConversionFactor;
 	}
 
+	public void selectReasonForAdjustmentDropDown() throws InterruptedException {
+		click(reasonForAdjustmentFromDropDown);
+		reasonForAdjustmentFromDropDown.sendKeys("a"); //Administered Vaccine
+		reasonForAdjustmentFromDropDown.sendKeys(Keys.ENTER);
+	}
+
 	public void selectReasonForWastageDropDown() throws InterruptedException {
 		click(reasonForWastageValueFromDropDown);
-		reasonForWastageValueFromDropDown.sendKeys("c");
+		reasonForWastageValueFromDropDown.sendKeys("c"); //CCI: Equipment Malfunction
 		reasonForWastageValueFromDropDown.sendKeys(Keys.ENTER);
 //		click(dropDownValueCCIHandlingError); // Working on local but have difficulty clicking on Jenkins
 	}
@@ -687,6 +707,12 @@ public class SupplyConsolePage extends BasePage {
 		click(btnWastageOnContainerWastagePopUp);
 		Thread.sleep(2000); //To handle success message
 		//Need to add validation for successful mess
+	}
+
+	public void clickBtnAdjustmentAtContainerAdjustmentPopUp() throws InterruptedException {
+		scrollTop(btnAdjustmentOnContainerWastagePopUp);
+		click(btnAdjustmentOnContainerWastagePopUp);
+		Thread.sleep(2000); //To handle success message
 	}
 
 	public void clickBulkWastageButton() throws InterruptedException {
