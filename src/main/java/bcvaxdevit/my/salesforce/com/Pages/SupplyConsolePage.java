@@ -641,6 +641,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public void selectReasonForWastageDropDown() throws InterruptedException {
 		reasonForWastageValueFromDropDown.click();
+		Thread.sleep(2000); //Debug test
 		click(dropDownValueCCIHandlingError);
 	}
 

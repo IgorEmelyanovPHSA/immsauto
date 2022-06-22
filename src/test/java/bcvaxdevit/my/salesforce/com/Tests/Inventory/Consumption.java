@@ -90,6 +90,7 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.selectHealthConnectApp();
 			Thread.sleep(2000);
 		}
+		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 3. Close all open tabs --*/");
 		if (inClinicExperiencePage.supplyLocDisplayed()) {

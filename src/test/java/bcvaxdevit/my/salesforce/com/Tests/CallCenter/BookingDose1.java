@@ -180,16 +180,19 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*29----click Next button  --*/");
 		callCenterConsole.clickOnNextButton();
 		Thread.sleep(2000);
-		System.out.println("/*30----click Confirm Appointment button  --*/");
+		System.out.println("/*30----click Verify Contact Information Checkbox  --*/");
+		callCenterConsole.clickVerifyContactInformation();
+		Thread.sleep(2000);
+		System.out.println("/*31----click Confirm Appointment button  --*/");
 		callCenterConsole.clickOnConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*31----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*32----see 'Appointment Confirmed!' screen --*/");
 		callCenterConsole.validateAppointmentConfirmedScreen();
 		Thread.sleep(2000);
-		System.out.println("/*32----Refresh page --*/");
+		System.out.println("/*33----Refresh page --*/");
 		callCenterConsole.refreshBrowser();
 		Thread.sleep(2000);
-		System.out.println("/*33----Go to back to the Citizen Related Tab --*/");
+		System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
 		callCenterConsole.clickRelatedTab();
 		Thread.sleep(2000);
 		

@@ -128,6 +128,10 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
+
+	@FindBy(xpath = "//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]")
+	private WebElement verify_contact_information_checkbox;
+	private By verify_contact_information_checkbox1 = By.xpath("(//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]");
 	
 	
 	/*---------Constructor-------*/
@@ -373,6 +377,13 @@ public class CallCenterConsolePage extends BasePage {
 		WebElement element = driver.findElement(click_related_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void clickVerifyContactInformation() throws InterruptedException {
+		scrollTop(verify_contact_information_checkbox);
+		Thread.sleep(2000);
+		verify_contact_information_checkbox.click();
+		Thread.sleep(2000);
 	}
 	
 	

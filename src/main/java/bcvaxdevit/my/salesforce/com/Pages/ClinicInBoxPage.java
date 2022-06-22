@@ -256,7 +256,11 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]")
 	private WebElement click_Dose2_citizen;
 	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
-	
+
+	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
+	private WebElement confirmation_popup;
+	private By confirmation_popup1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
+
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
 		super(driver);
@@ -733,6 +737,12 @@ public class ClinicInBoxPage extends BasePage {
 		click_navigate_to_ICE_btn.click();
 		Thread.sleep(2000);
 		return new InClinicExperiencePage(driver);
+	}
+
+	public void clickVerifyContactInformation() throws InterruptedException {
+		scrollTop(confirmation_popup);
+		click(confirmation_popup);
+		Thread.sleep(2000);
 	}
 	
 }
