@@ -176,7 +176,7 @@ public class Transfer extends BaseTest {
         //System.out.println("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
         //supplyConsolePage.selectSupplyContainer();
         Thread.sleep(2000);
-        /////////////////////Doses and Quantity BEFORE///////////////////////////////////
+        /////////////////////Doses and Quantity BEFORE//////////////////////////////////
         System.out.println("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses();
         System.out.println("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
