@@ -18,7 +18,7 @@ public class Adjustments extends BaseTest {
 
     @Test
     public void Can_Do_Single_Adjustment_ByDosages_AS_PPHIS_BCVAXDEVIT() throws InterruptedException {
-        TestcaseID = "C222369"; //C222369
+        TestcaseID = "222369"; //C222369
         int numberOfRows = 1; //Default value, adjustment from first row only
         double amountOfDosesToAdjust = 30; //Must be positive value only
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
