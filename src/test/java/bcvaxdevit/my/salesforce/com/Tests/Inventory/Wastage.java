@@ -58,11 +58,11 @@ public class Wastage extends BaseTest {
         log("/*----Amount Wastage Doses " +amountOfDosesToWaste +" --*/");
 
         log("/*9.----set Wastage Doses amount --*/");
-        supplyConsolePage.setDosesAmountToWaste(Double.toString(amountOfDosesToWaste));
+        supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
         double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
         log("/*----Quantity Remaining Doses After Wastage " +remainingDosesAfterWastage +" --*/");
 
-        log("/*10.----Reason For Wastage Wastage: 'CCI: Handling Error' --*/");
+        log("/*10.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
         supplyConsolePage.selectReasonForWastageDropDown();
 
         log("/*11----Clicking on btn Wastage --*/");
