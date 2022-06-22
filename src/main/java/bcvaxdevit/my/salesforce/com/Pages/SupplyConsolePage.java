@@ -142,9 +142,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement bulk_confirm_incoming_transfers_button;
 	private By bulk_confirm_incoming_transfers_button_1 = By.xpath(".//button[text() = 'Confirm Transfer']");
 
-	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
+	@FindBy(xpath = ".//span[text() = 'Select Supply Distributor']")
 	private WebElement search_incoming_supply_distributor;
-	private By search_incoming_supply_distributor_ = By.xpath(".//span[contains(text(),'Select an Option')]");
+	private By search_incoming_supply_distributor_ = By.xpath(".//span[text() = 'Select Supply Distributor']");
+
+	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
+	private WebElement search_incoming_supply_distributor_1_2;
+	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 
 	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000001484']")
 	private WebElement select_incoming_supply_distributor;
@@ -778,12 +782,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void selectSameClinicSupplyDistribution() throws InterruptedException {
-		waitForElementToBeVisible(driver, search_incoming_supply_distributor, 10);
-		WebElement element = driver.findElement(search_incoming_supply_distributor_);
+		waitForElementToBeVisible(driver, search_incoming_supply_distributor_1_2, 10);
+		WebElement element = driver.findElement(search_incoming_supply_distributor_1_2_);
 		Thread.sleep(2000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		Thread.sleep(1000);
-		search_incoming_supply_distributor.click();
+		search_incoming_supply_distributor_1_2.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_same_clinic_supply_distributor_1_2, 10);
 		Thread.sleep(2000);
