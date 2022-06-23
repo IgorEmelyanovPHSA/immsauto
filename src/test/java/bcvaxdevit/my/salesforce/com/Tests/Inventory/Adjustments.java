@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -16,11 +17,24 @@ import static org.testng.Assert.assertTrue;
 @Listeners({TestListener.class})
 public class Adjustments extends BaseTest {
 
-    @Test
-    public void Can_Do_Single_Adjustment_ByDosages_AS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    @DataProvider(name = "value")
+    public static Object[][] primeNumbers() {
+        return new Object[][] {{"25"},{"-30"}};
+    }
+
+    @Test(dataProvider = "value")
+    public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws InterruptedException {
         TestcaseID = "222369"; //C222369
+        double amountOfDosesToAdjust = Double.parseDouble(value);
+        boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
+        if(isNegativeFlag == false){
+            log("/*0.----Positive Scenario: Can_Do_Single_Adjustment_ByDosages_Positive_Value_AS_PPHIS_BCVAXDEVIT--*/");
+        }
+        else{
+            log("/*0.----Negative Scenario: Can_Do_Single_Adjustment_ByDosages_Negative_Value_AS_PPHIS_BCVAXDEVIT--*/");
+        }
+        log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
         int numberOfRows = 1; //Default value, adjustment from first row only
-        double amountOfDosesToAdjust = 30; //Must be positive value only
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
@@ -59,7 +73,7 @@ public class Adjustments extends BaseTest {
         supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToAdjust));
 
         double remainingDosesAfterAdjustmentInPopUp = supplyConsolePage.getActualRemainingDoses();
-        log("/*----Quantity Remaining Doses After Adjustment " + remainingDosesAfterAdjustmentInPopUp + " --*/");
+        log("/*----Remaining Doses After Adjustment " + remainingDosesAfterAdjustmentInPopUp + " --*/");
 
         log("/*10.----Reason For Adjustment: 'Administered Vaccine' --*/");
         supplyConsolePage.selectReasonForAdjustmentDropDown();
@@ -106,10 +120,10 @@ public class Adjustments extends BaseTest {
             double doseConversionAfterAdjustment = calculated.get(2);
 
             //Comparing results
-            log("Compering remaining doses after adjustment " +remainingDosesAfterAdjustment + " vs calculated doses after adjustment" +calculatedDosesAfterAdjustment);
+            log("Compering remaining doses after adjustment " +remainingDosesAfterAdjustment + " vs calculated doses after adjustment " +calculatedDosesAfterAdjustment);
             assertTrue(Double.compare(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment) == 0, "Values are different!");
 
-            log("Compering remaining quantity after adjustment " +remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment" +calculatedRemainingQuantityAfterAdjustment);
+            log("Compering remaining quantity after adjustment " +remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " +calculatedRemainingQuantityAfterAdjustment);
             assertTrue(Double.compare(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment) == 0, "Values are different!");
 
             log("Compering dose conversion factor before adjustment " +doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " +doseConversionAfterAdjustment);
@@ -119,5 +133,7 @@ public class Adjustments extends BaseTest {
             assertTrue(Double.compare(doseConversionFactorRead, doseConversionAfterAdjustment) == 0, "Values are different!"); //Actual read UI value
         }
     }
-
+    public static boolean isNegative(double d) {
+        return Double.compare(d, 0.0) < 0;
+    }
 }
