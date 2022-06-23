@@ -1,6 +1,6 @@
 package Utilities;
 
-import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -24,7 +24,7 @@ public class TestListener extends BaseTest implements ITestListener {
 //            try {
 //                FileUtils.copyFile(fileSrc, new File("C:\\temp\\scren.png"));
 //            } catch (IOException e) {
-//                System.out.println(e.getMessage());
+//                log(e.getMessage());
 //            }
             //Remove this block
             return ((TakesScreenshot)dr).getScreenshotAs(OutputType.BYTES);
