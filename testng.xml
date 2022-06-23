@@ -3,10 +3,11 @@
 <suite name="Automation run against PRODSUPPQA">
     <test name="Smoke">
         <classes>
+            <class name="prodsuppqa.my.salesforce.com.Tests.ClinicInBox.DIWA"/>
             <class name="prodsuppqa.my.salesforce.com.Tests.Inventory.ReceiveSupplies"/>
             <class name="prodsuppqa.my.salesforce.com.Tests.Inventory.Consumption"/>
             <class name="prodsuppqa.my.salesforce.com.Tests.Inventory.Requisition"/>
-            <class name="prodsuppqa.my.salesforce.com.Tests.ClinicInBox.DIWA"/>
+
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
