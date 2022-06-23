@@ -3,7 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Portal;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Test;
 
-public class BookingAppointment extends BaseTest {
+public class Dose1_CitizenBookingAppointment extends BaseTest {
 	
 	@Test
 	public void citizenPortalFlowDoseOne() throws InterruptedException {

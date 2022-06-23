@@ -119,4 +119,5 @@ public class Adjustments extends BaseTest {
             assertTrue(Double.compare(doseConversionFactorRead, doseConversionAfterAdjustment) == 0, "Values are different!"); //Actual read UI value
         }
     }
+
 }
