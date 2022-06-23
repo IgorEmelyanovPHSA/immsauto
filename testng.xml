@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Clinic-In Box Workflow Suit">
-    <test name="Regression">
+<suite name="Automation run against PRODSUPPQA">
+    <test name="Smoke">
         <classes>
-            <class name="BookingDose2">
-                <methods>
-                    <include name="Test1"/>
-                </methods>
-            </class>
-            <class name="BookingDose2">
-                <methods>
-                    <include name="Test2"/>
-                </methods>
-            </class>
+            <class name="prodsuppqa.my.salesforce.com.Tests.Inventory.ReceiveSupplies"/>
+            <class name="prodsuppqa.my.salesforce.com.Tests.Inventory.Consumption"/>
+            <class name="prodsuppqa.my.salesforce.com.Tests.Inventory.Requisition"/>
+            <class name="prodsuppqa.my.salesforce.com.Tests.ClinicInBox.DIWA"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

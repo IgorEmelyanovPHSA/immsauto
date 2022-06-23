@@ -7,8 +7,8 @@ import prodsuppqa.my.salesforce.com.Tests.BaseTest;
 public class BulkTransfers extends BaseTest {
 	
 	@Test
-	public void Can_do_Bulk_transfers_by_Dosages_as_PPHIS_PRODSUPPQA() throws InterruptedException {
-		TestcaseID = "220061"; //C220061
+	public void Can_do_Bulk_transfers_from_one_Clinic_to_Another_by_Dosages_as_PPHIS_PRODSUPPQA() throws InterruptedException {
+		TestcaseID = "222358"; //C222358
 		System.out.println("/*1.----Login as an PPHIS_PRODSUPPQA to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(5000);

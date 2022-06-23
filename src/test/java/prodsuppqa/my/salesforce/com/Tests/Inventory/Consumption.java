@@ -76,7 +76,7 @@ public class Consumption extends BaseTest {
 	
 	@Test(priority = 2)
 	public void Validate_Consumption_as_an_Clinician_PRODSUPPQA() throws InterruptedException {
-		TestcaseID = "219969"; //C219969
+		TestcaseID = "222359"; //C222359
 		System.out.println("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
 		Thread.sleep(2000);

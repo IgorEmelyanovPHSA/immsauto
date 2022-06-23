@@ -1,4 +1,4 @@
-package prodsuppqa.my.salesforce.com.Tests.ClincInBox;
+package prodsuppqa.my.salesforce.com.Tests.ClinicInBox;
 
 import prodsuppqa.my.salesforce.com.Pages.ClinicInBoxPage;
 import prodsuppqa.my.salesforce.com.Tests.BaseTest;
