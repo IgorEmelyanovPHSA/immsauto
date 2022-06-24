@@ -1,7 +1,6 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
-import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;

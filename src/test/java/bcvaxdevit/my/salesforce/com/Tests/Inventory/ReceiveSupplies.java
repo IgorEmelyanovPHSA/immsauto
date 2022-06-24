@@ -4,7 +4,7 @@ import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import static bcvaxdevit.my.salesforce.com.Pages.BasePage.log;
+
 
 public class ReceiveSupplies extends BaseTest {
 	@Test()

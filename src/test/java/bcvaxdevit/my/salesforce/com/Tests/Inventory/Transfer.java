@@ -5,8 +5,6 @@ import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertTrue;
-
 import static org.testng.Assert.assertEquals;
 
 

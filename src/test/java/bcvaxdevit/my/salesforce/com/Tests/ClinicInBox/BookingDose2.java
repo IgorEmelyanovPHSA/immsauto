@@ -1,10 +1,14 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+
+@Listeners({TestListener.class})
 public class BookingDose2 extends BaseTest {
 
 	@Test(priority = 1)

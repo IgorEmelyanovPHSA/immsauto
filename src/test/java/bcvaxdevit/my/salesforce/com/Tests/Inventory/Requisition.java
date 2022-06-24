@@ -6,15 +6,12 @@ import org.testng.annotations.Test;
 import bcvaxdevit.my.salesforce.com.Pages.RequisitionPage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Requisition extends BaseTest {
 	
 	@Test
 	public void Create_Requisition_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
-		
 		TestcaseID = "220561"; //C220561
-		
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
