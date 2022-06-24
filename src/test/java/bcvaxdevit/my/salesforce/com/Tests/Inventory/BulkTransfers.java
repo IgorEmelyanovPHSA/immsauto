@@ -15,7 +15,7 @@ public class BulkTransfers extends BaseTest {
 		TestcaseID = "222358";
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
