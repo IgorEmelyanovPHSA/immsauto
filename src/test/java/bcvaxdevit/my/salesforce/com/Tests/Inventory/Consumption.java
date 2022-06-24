@@ -82,9 +82,9 @@ public class Consumption extends BaseTest {
 		TestcaseID = "222359"; //C219969->C222359
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		inClinicExperiencePage.closeTabsHCA();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		if (inClinicExperiencePage.displaySupplyConsolePage()) {
 			log("/*-- 2. User already on Health Connect - Supply Console --*/");
 		} else {

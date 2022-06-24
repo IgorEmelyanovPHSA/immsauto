@@ -15,7 +15,7 @@ public class DIWA extends BaseTest {
 		TestcaseID = "221409"; //C221409
 		log("/*----1. Login as an Clinician to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);
