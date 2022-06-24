@@ -9,80 +9,77 @@ import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 public class Requisition extends BaseTest {
 	
 	@Test
-	
 	public void Create_Requisition_as_an_PPHIS_BCVAXUAT() throws InterruptedException {
-		TestcaseID = "193935"; //C193935
-		
-		
-		System.out.println("/*----1. Login as an PPHIS_BCVAXUAT to Supply Console --*/");
+		TestcaseID = "220561"; //C220561
+		log("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
-		System.out.println("/*----2. Locate Dropdown Menu --*/");
+		log("/*----2. Locate Dropdown Menu --*/");
 		requisitionPage.displaySupplyConsolePage();
 		Thread.sleep(4000);
-		System.out.println("/*----3. Close Other Tabs --*/");
+		log("/*----3. Close Other Tabs --*/");
 		requisitionPage.closeTabs();
 		Thread.sleep(4000);
 		requisitionPage.clickDropdownMenu();
 		Thread.sleep(6000);
-		System.out.println("/*----4. Navigate to Supply Locations --*/");
+		log("/*----4. Navigate to Supply Locations --*/");
 		requisitionPage.clickSupplyLocationInDropdown();
 		Thread.sleep(6000);
-		System.out.println("/*----5. Locate on Automation Supply Location_1 --*/");
+		log("/*----5. Locate on Automation Supply Location_1 --*/");
 		requisitionPage.clickSupplyLocationName();
 		Thread.sleep(4000);
-		System.out.println("/*----6. Navigate to Request Supplies --*/");
+		log("/*----6. Navigate to Request Supplies --*/");
 		requisitionPage.clickRequestSupplies();
 		Thread.sleep(3000);
-		System.out.println("/*----7. Choose Ship To Address --*/");
+		log("/*----7. Choose Ship To Address --*/");
 		requisitionPage.inputShipAddress();
-		System.out.println("/*----8. Locate on Automation Supply Location_1 --*/");
+		log("/*----8. Locate on Automation Supply Location_1 --*/");
 		requisitionPage.LocateAddress("Atlin Health Centre");
-		System.out.println("/*----9. Choose Requested Delivery Date --*/");
+		log("/*----9. Choose Requested Delivery Date --*/");
 		Thread.sleep(3000);
 		requisitionPage.inputRequestDate();
-		System.out.println("/*----10. Choose Urgency --*/");
+		log("/*----10. Choose Urgency --*/");
 		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
-		System.out.println("/*----11. Add Requisition Line Items --*/");
+		log("/*----11. Add Requisition Line Items --*/");
 		requisitionPage.clickLineItemCheckBox();
 		Thread.sleep(3000);
-		System.out.println("/*----12. Select requested Trades --*/");
+		log("/*----12. Select requested Trades --*/");
 		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
-		System.out.println("/*----13. Input Requested Quantity and Doses --*/");
+		log("/*----13. Input Requested Quantity and Doses --*/");
 		requisitionPage.inputRequestedDose("1");
 		Thread.sleep(3000);
-		System.out.println("/*----14. Save Quantity and Doses --*/");
+		log("/*----14. Save Quantity and Doses --*/");
 		requisitionPage.clickSaveButton();
 		Thread.sleep(3000);
-		System.out.println("/*----15. Submit Requisition --*/");
+		log("/*----15. Submit Requisition --*/");
 		requisitionPage.clickSubmitRequisition();
 		Thread.sleep(5000);
-		System.out.println("/*----16. Confirm and Save Requisition --*/");
+		log("/*----16. Confirm and Save Requisition --*/");
 		requisitionPage.clickSaveSubmitRequisition();
 		Thread.sleep(5000);
-		System.out.println("/*----17. Click Edit Expected Delivery Date--*/");
+		log("/*----17. Click Edit Expected Delivery Date--*/");
 		requisitionPage.clickEditExpectedDeliveryDate();
 		Thread.sleep(3000);
-		System.out.println("/*----18. Click Calender of Expected Delivery Date--*/");
+		log("/*----18. Click Calender of Expected Delivery Date--*/");
 		requisitionPage.clickExpectedDeliveryDateCalendar();
 		Thread.sleep(3000);
-		System.out.println("/*----19. Choose The Expected Delivery Date--*/");
+		log("/*----19. Choose The Expected Delivery Date--*/");
 		requisitionPage.inputExpectedDate();
 		Thread.sleep(3000);
-		System.out.println("/*----20. Save Chosen Expected Delivery Date--*/");
+		log("/*----20. Save Chosen Expected Delivery Date--*/");
 		requisitionPage.clickSaveExpectedDeliveryDate();
 		Thread.sleep(3000);
-		System.out.println("/*----21. Approve Requisition--*/");
+		log("/*----21. Approve Requisition--*/");
 		requisitionPage.clickApproveRequisition();
 		Thread.sleep(4000);
-		System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("1");
+		log("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
+		requisitionPage.enterApprovedDose("10");
 		Thread.sleep(5000);
-		System.out.println("/*----23. Save Approved Request Dose--*/");
+		log("/*----23. Save Approved Request Dose--*/");
 		requisitionPage.clickSaveApprovedRequisition();
 		Thread.sleep(4000);
-		System.out.println("/*----24. Ship Requisition--*/");
+		log("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
 		
 		Thread.sleep(7000);
@@ -90,21 +87,22 @@ public class Requisition extends BaseTest {
 		String actual = "Ship Requisition";
 		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
 		
-		System.out.println("/*----25. Save Shipping Requisition--*/");
+		log("/*----25. Save Shipping Requisition--*/");
 		requisitionPage.clickSaveShipRequisition();
 		Thread.sleep(3000);
-		System.out.println("/*----26. Receive Requisition--*/");
+		log("/*----26. Receive Requisition--*/");
 		requisitionPage.clickReceiveRequestBtn();
 		Thread.sleep(3000);
-		System.out.println("/*----27. Receive Requisition--*/");
+		log("/*----27. Search Distribution--*/");
 		requisitionPage.clickSearchSupplyDistributions();
 		Thread.sleep(3000);
+		log("/*----28. Select Distribution--*/");
 		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001499");
 		Thread.sleep(3000);
+		log("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();
 		Thread.sleep(5000);
 		
 	}
 	
 }
-	

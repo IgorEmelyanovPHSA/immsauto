@@ -27,7 +27,7 @@ public class RequisitionPage extends BasePage {
 	
 	
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
-
+	
 	private WebElement supply_supply_location_1;
 	
 	
@@ -41,9 +41,6 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//span[contains(text(),\"Atlin Health Centre\")]")
 	private WebElement clinicName;
 	private By clinicName2 = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
-
-//    @FindBy (xpath ="//a[contains(text(),\"Atlin Health Centre\")]")
-//    private WebElement clinicName;
 	
 	@FindBy(xpath = "//input[@class=\"slds-input\"]")
 	private WebElement requestedDeliveryDate;
@@ -54,7 +51,7 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),\"Next\")]")
 	private WebElement nextButton;
 	
-	@FindBy(xpath = "//tbody/tr[13]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
+	@FindBy(xpath = "//tbody/tr[10]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
 	private WebElement checkBox;
 	
 	@FindBy(xpath = "//div[@class=\"slds-form-element__control slds-grow\"]//input")
@@ -104,33 +101,28 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//input[@placeholder='Search Supply Distributions...']")
 	private WebElement SearchSupplyDistributions;
 	
-	//private By SearchSupplyDistributions1 = By.xpath("//input[@placeholder=\"Search Supply Distributions...\"]");
+	
 	public void clickSearchSupplyDistributions() {
 		this.SearchSupplyDistributions.click();
 	}
-
-
+	
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
-
 	private WebElement searchByName;
 	private By searchByName2 = By.xpath("//div[@class='primaryLabel slds-truncate slds-lookup__result-text']");
-
+	
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
-
+	
 	public void SelectSupplyDistributionTo2(String DistributionName) throws InterruptedException {
 		//waitForElementToBeLocated(driver,distributionName,10);
 		waitForElementToBeVisible(driver, searchByName, 10);
 		WebElement search_input = driver.findElement(searchByName2);
 		this.searchByName.sendKeys(DistributionName);
-
 		search_input.click();
-		
 		/*waitForElementToBeVisible(driver, clinicName, 10);
 		WebElement search_input = driver.findElement(clinicName2);
 		search_input.click();*/
 	}
-	
 	
 	public RequisitionPage(WebDriver driver) {
 		super(driver);
@@ -153,8 +145,6 @@ public class RequisitionPage extends BasePage {
 	
 	public void clickReceiveRequestBtn() {
 		this.receiveRequestBtn.click();
-		
-		//this.shipAddress.sendKeys(inputAddress);
 	}
 	
 	public void clickDropdownMenu() {
@@ -186,14 +176,11 @@ public class RequisitionPage extends BasePage {
 	}
 	
 	public void clickRequestSupplies() throws InterruptedException {
-		
 		this.request_supplies.click();
 	}
 	
 	public void inputShipAddress() {
 		this.shipAddress.click();
-		
-		//this.shipAddress.sendKeys(inputAddress);
 	}
 	
 	public void LocateAddress(String clinic) throws InterruptedException {
@@ -217,16 +204,14 @@ public class RequisitionPage extends BasePage {
 		this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
 	}
 	
-	
 	public void clickNextButton() {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", nextButton);
 		waitForElementToBeVisible(driver, nextButton, 10);
 		this.nextButton.click();
 	}
 	
-	
 	public void clickLineItemCheckBox() throws InterruptedException {
-		By check_box = By.xpath("//tbody/tr[13]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
+		By check_box = By.xpath("//tbody/tr[12]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
 		WebElement element = driver.findElement(check_box);
 		//Scroll to select the desired line item
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -237,7 +222,6 @@ public class RequisitionPage extends BasePage {
 		this.requestedDose.sendKeys(inputDose);
 	}
 	
-	
 	public void clickSaveButton() {
 		this.saveButton.click();
 	}
@@ -247,7 +231,6 @@ public class RequisitionPage extends BasePage {
 	}
 	
 	public void clickSaveSubmitRequisition() {
-		
 		this.saveSubmitRequisition.click();
 	}
 	
@@ -286,11 +269,7 @@ public class RequisitionPage extends BasePage {
 //    }
 	
 	public void enterApprovedDose(String inputDose) throws InterruptedException {
-		
-		//WebElement jusbox= driver.findElement(By.xpath("//input[@name='a3Y4m0000005v13EAA/a2j4m000000B6i8AAC']"));
-		//
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", ApprovedDose);
-		
 		this.ApprovedDose.sendKeys(inputDose);
 	}
 	
@@ -305,11 +284,8 @@ public class RequisitionPage extends BasePage {
 	public void clickSaveShipRequisition() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,-400)", "");
-
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveShipRequisition);
 		waitForElementToBeVisible(driver, saveShipRequisition, 10);
-
-
 		this.saveShipRequisition.click();
 	}
 	
@@ -319,11 +295,11 @@ public class RequisitionPage extends BasePage {
 		WebElement search_input = driver.findElement(distributionName2);
 		search_input.click();
 	}
-
-	public void clickSaveReceiveRequisition(){
+	
+	public void clickSaveReceiveRequisition() {
 		this.saveReceiveRequisition.click();
 	}
-
+	
 	public void closeTabs() throws InterruptedException {
 		do {
 			try {
@@ -331,7 +307,7 @@ public class RequisitionPage extends BasePage {
 				closetab.click();
 				Thread.sleep(2000);
 			} catch (NoSuchElementException e) {
-				System.out.println("/*---there are no Tab's to close anymore");
+				log("/*---there are no Tab's to close anymore");
 			}
 			
 		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));

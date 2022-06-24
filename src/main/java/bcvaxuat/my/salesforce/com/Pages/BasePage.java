@@ -1,23 +1,26 @@
 package bcvaxuat.my.salesforce.com.Pages;
 // All Pages are inheriting from this class
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 
-public abstract class BasePage {
+public abstract class BasePage<T> {
 	protected WebDriver driver;
+	public WebDriverWait wait;
+	
+	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
 	
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		//wait = new WebDriverWait(driver, TIMEOUT, POLLING);
 		//PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
 	}
@@ -66,5 +69,73 @@ public abstract class BasePage {
 		return element;
 	}
 	
+	public String getValue(WebElement element) {
+		return element.getAttribute("value");
+	}
+	
+	public T click(WebElement element) throws InterruptedException {
+		waitForVisibility(element);
+		waitForElementToBeClickable(element);
+		element.click();
+		return (T) this;
+	}
+	
+	public T typeIn(WebElement element, String text) {
+		waitForVisibility(element);
+		element.clear();
+		element.sendKeys(text);
+		return (T) this;
+	}
+	
+	public T waitForElementToBeClickable(WebElement element) throws InterruptedException {
+		int tries = 0;
+		
+		while (tries < 5) {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				return (T) this;
+			} catch (StaleElementReferenceException e) {
+				log("StaleElementReferenceException occurred while waiting for element to be clickable: " + e.getMessage());
+				Thread.sleep(1000);
+			}
+			tries = tries + 1;
+		}
+		
+		throw new RuntimeException("Element is not clickable.");
+	}
+	
+	public T waitForVisibility(WebElement element) {
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElements(element));
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while waiting for visibility:" + e.getMessage());
+			wait.until(ExpectedConditions.visibilityOfAllElements(element));
+		}
+		return (T) this;
+	}
+	
+	public T scrollTop(WebElement element) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+		return (T) this;
+	}
+	
+	public static String getLogTime() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return LOG_TIMESTAMP_FORMAT.format(timestamp);
+	}
+	
+	public static void log(String msg) {
+		log(getLogTime() + " " + msg);
+	}
 	
 }

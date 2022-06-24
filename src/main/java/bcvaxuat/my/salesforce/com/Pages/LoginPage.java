@@ -9,12 +9,19 @@ public class LoginPage extends BasePage {
 	
 	private final String Precondition_BCVAXUAT = "sunil.anne@phsa.ca.bcvaxuat";
 	private final String Precondition_PW_BCVAXUAT = "Sqlserver@2";
-	private final String CLINICIAN_BCVAXUAT = "ADD REQUIRED USERNAME";
-	private final String CLINICIAN_PW_BCVAXUAT = "Technology1990!!!!!";
-	private final String PPHIS_BCVAXUAT = "ADD REQUIRED USERNAME";
-	private final String PPHIS_PW_BCVAXUAT = "Technology1990!!!!!";
-	private final String CLINICIAN_CIB_BCVAXUAT = "ADD REQUIRED USERNAME";
+	private final String CLINICIAN_ICE_BCVAXUAT = "auto_clinician@deloitte.ca.bcvaxdevit";
+	private final String CLINICIAN_PW_BCVAXUAT = "Technology1990!!!!!!!";
+	private final String PPHIS_BCVAXUAT = "autooperationpphis@deloitte.ca.bcvaxdevit";
+	private final String PPHIS_PW_BCVAXUAT = "Technology1990!!!!!!!";
+	private final String CLINICIAN_CIB_BCVAXUAT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_CIB_BCVAXUAT = "Technology1990!!!!!";
+	private final String CLINICIAN_Consumption_BCVAXUAT = "auto_clinician_consumption@phsa.ca.bcvaxdevit";
+	private final String CLINICIAN_PW_Consumption_BCVAXUAT = "Technology1990!!!!!!";
+	private final String DIWA_BCVAXUAT = "autocliniciandiwa2@phsa.ca.bcvaxdevit";
+	private final String DIWA_PW_BCVAXUAT = "phsa7phsa*";
+	private final String CALLCENTERAGENT_CC_BCVAXUAT = "autocallcenteragent@deloitte.ca.bcvaxdevit";
+	private final String CALLCENTERAGENT_PW_CC_BCVAXUAT = "Technology1990!!!!!!!";
+	
 	
 	@FindBy(id = "username")
 	private WebElement clinician_bcvaxuat;
@@ -25,15 +32,26 @@ public class LoginPage extends BasePage {
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxuat;
 	
+	@FindBy(id = "username")
+	private WebElement Consumption_bcvaxuat;
+	
+	
+	@FindBy(id = "username")
+	private WebElement diwa_bcvaxuat;
+	
 	@FindBy(id = "password")
 	private WebElement clinician_pw_bcvaxuat;
 	@FindBy(id = "password")
 	private WebElement pphis_pw_bcvaxuat;
-	
 	@FindBy(id = "password")
 	private WebElement clinician_pw_cib_bcvaxuat;
 	@FindBy(id = "password")
 	private WebElement Precondition_pw_bcvaxuat;
+	
+	@FindBy(id = "password")
+	private WebElement Cosumption_pw_bcvaxuat;
+	@FindBy(id = "password")
+	private WebElement diwa_pw_bcvaxuat;
 	
 	@FindBy(id = "Login")
 	private WebElement login_button;
@@ -53,8 +71,8 @@ public class LoginPage extends BasePage {
 		super(driver);
 	}
 	
-	public void enterClinicianUserName() {
-		this.clinician_bcvaxuat.sendKeys(CLINICIAN_BCVAXUAT);
+	public void enterClinicianICEUserName() {
+		this.clinician_bcvaxuat.sendKeys(CLINICIAN_ICE_BCVAXUAT);
 	}
 	
 	public void Precondition_BCVAXUAT() {
@@ -69,7 +87,11 @@ public class LoginPage extends BasePage {
 		this.clinician_cib_bcvaxuat.sendKeys(CLINICIAN_CIB_BCVAXUAT);
 	}
 	
-	public void enterClinicianPW() {
+	public void enterClinicianConUserName() {
+		this.Consumption_bcvaxuat.sendKeys(CLINICIAN_Consumption_BCVAXUAT);
+	}
+	
+	public void enterClinicianICEPW() {
 		this.clinician_pw_bcvaxuat.sendKeys(CLINICIAN_PW_BCVAXUAT);
 	}
 	
@@ -85,8 +107,28 @@ public class LoginPage extends BasePage {
 		this.clinician_pw_cib_bcvaxuat.sendKeys(CLINICIAN_PW_CIB_BCVAXUAT);
 	}
 	
+	public void enterConsumption_PW() {
+		this.Cosumption_pw_bcvaxuat.sendKeys(CLINICIAN_PW_Consumption_BCVAXUAT);
+	}
+	
 	public void pressSubmitButton() {
 		this.submit_button.click();
+	}
+	
+	public void enterDIWA_UserName() {
+		this.diwa_bcvaxuat.sendKeys(DIWA_BCVAXUAT);
+	}
+	
+	public void enterDIWA_PW() {
+		this.diwa_pw_bcvaxuat.sendKeys(DIWA_PW_BCVAXUAT);
+	}
+	
+	public void enterCalCenterAgentCC_UserName() {
+		this.diwa_bcvaxuat.sendKeys(CALLCENTERAGENT_CC_BCVAXUAT);
+	}
+	
+	public void enterCalCenterAgentCC_PW() {
+		this.diwa_pw_bcvaxuat.sendKeys(CALLCENTERAGENT_PW_CC_BCVAXUAT);
 	}
 	
 	//public void setUsername (String username){
@@ -106,10 +148,10 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
-	public InClinicExperiencePage loginWith() {
-		this.enterClinicianUserName();
+	public InClinicExperiencePage loginAsClinicianICE() {
+		this.enterClinicianICEUserName();
 		//setUsername(username);
-		this.enterClinicianPW();
+		this.enterClinicianICEPW();
 		//return clickLoginButton();
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
@@ -142,6 +184,15 @@ public class LoginPage extends BasePage {
 		return new RequisitionPage(driver);
 	}
 	
+	public InClinicExperiencePage loginWithClinicianCon() {
+		this.enterClinicianConUserName();
+		//setUsername(username);
+		this.enterConsumption_PW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new InClinicExperiencePage(driver);
+	}
+	
 	
 	public void verifyAlertSuccess() {
 		this.alertSuccess.isDisplayed();
@@ -154,6 +205,24 @@ public class LoginPage extends BasePage {
 		//return clickLoginButton();
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
+	}
+	
+	public ClinicInBoxPage loginAsDIWA() {
+		this.enterDIWA_UserName();
+		//setUsername(username);
+		this.enterDIWA_PW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new ClinicInBoxPage(driver);
+	}
+	
+	public CallCenterConsolePage loginAsCalCenterAgentCC() {
+		this.enterCalCenterAgentCC_UserName();
+		//setUsername(username);
+		this.enterCalCenterAgentCC_PW();
+		//return clickLoginButton();
+		this.login_button.click();
+		return new CallCenterConsolePage(driver);
 	}
 	
 	

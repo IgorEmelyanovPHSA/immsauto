@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Clinic-In Box Workflow Suit">
-    <test name="Regression">
+<suite name="Automation run against BCVAXUAT">
+    <test name="Smoke">
         <classes>
-            <class name="BulkTransfers">
-                <methods>
-                    <include name="Can_do_Bulk_transfers_by_Dosages_as_PPHIS_BCVAXDEVIT"/>
-                </methods>
-            </class>
-            <class name="BulkTransfers">
-                <methods>
-                    <include name="ghgfgfhfhfhgg"/>
-                </methods>
-            </class>
+            <class name="BookingDose1"/>
+            <class name="BookingDose2"/>
+            <class name="DIWA"/>
+            <class name="Dose1_VaccineAdministration"/>
+            <class name="Dose2_VaccineAdministration"/>
+            <class name="BookingDose1"/>
+            <class name="BookingDose2"/>
+            <class name="ReceiveSupplies"/>
+            <class name="Transfer"/>
+            <class name="BulkTransfers"/>
+            <class name="Wastage"/>
+            <class name="BulkWastages"/>
+            <class name="Requisition"/>
+            <class name="Consumption"/>
+            <class name="Adjustments"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
