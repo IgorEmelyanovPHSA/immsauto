@@ -428,12 +428,12 @@ public class ClinicInBoxPage extends BasePage {
 		return true;
 	}
 	
-	public void informedConsentProvider(String providerName) throws InterruptedException {
+	public void informedConsentProvider() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
 		waitForElementToBeVisible(driver, informedConsentProvider, 10);
 		this.informedConsentProvider.click();
-		Thread.sleep(2000);
-		this.informedConsentProvider.sendKeys(providerName);
-		Thread.sleep(2000);
+
+
 	}
 	
 	public void enterConsentEffectiveToDate() throws InterruptedException {
