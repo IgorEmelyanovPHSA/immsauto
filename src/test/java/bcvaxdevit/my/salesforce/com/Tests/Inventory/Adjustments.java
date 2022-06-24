@@ -3,6 +3,8 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureLifecycle;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -25,13 +27,16 @@ public class Adjustments extends BaseTest {
     @Test(dataProvider = "value")
     public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws InterruptedException {
         TestcaseID = "222369"; //C222369
+        AllureLifecycle lifecycle = Allure.getLifecycle();
         double amountOfDosesToAdjust = Double.parseDouble(value);
         boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
         if(isNegativeFlag == false){
             log("/*0.----Positive Scenario: Can_Do_Single_Adjustment_ByDosages_Positive_Value_AS_PPHIS_BCVAXDEVIT--*/");
+            lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByDosages_Positive_Value_AS_PPHIS_BCVAXDEVIT"));
         }
         else{
             log("/*0.----Negative Scenario: Can_Do_Single_Adjustment_ByDosages_Negative_Value_AS_PPHIS_BCVAXDEVIT--*/");
+            lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByDosages_Negative_Value_AS_PPHIS_BCVAXDEVIT"));
         }
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
         int numberOfRows = 1; //Default value, adjustment from first row only
