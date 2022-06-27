@@ -3,21 +3,21 @@
 <suite name="Automation run against BCVAXUAT">
     <test name="Smoke">
         <classes>
-            <class name="BookingDose1"/>
-            <class name="BookingDose2"/>
-            <class name="DIWA"/>
-            <class name="Dose1_VaccineAdministration"/>
-            <class name="Dose2_VaccineAdministration"/>
-            <class name="BookingDose1"/>
-            <class name="BookingDose2"/>
-            <class name="ReceiveSupplies"/>
-            <class name="Transfer"/>
-            <class name="BulkTransfers"/>
-            <class name="Wastage"/>
-            <class name="BulkWastages"/>
-            <class name="Requisition"/>
-            <class name="Consumption"/>
-            <class name="Adjustments"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.ClinicInBox.BookingDose1"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.ClinicInBox.BookingDose2"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.ClinicInBox.DIWA"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.InClinicExperience.Dose1_VaccineAdministration"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.InClinicExperience.Dose2_VaccineAdministration"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.CallCenter.BookingDose1"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.CallCenter.BookingDose2"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.ReceiveSupplies"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Transfer"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.BulkTransfers"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Wastage"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.BulkWastages"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Requisition"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Consumption"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Adjustments"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
