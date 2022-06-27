@@ -1,10 +1,12 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import static bcvaxdevit.my.salesforce.com.Pages.BasePage.log;
 
+@Listeners({TestListener.class})
 public class DIWA extends BaseTest {
 	
 	
@@ -13,7 +15,7 @@ public class DIWA extends BaseTest {
 		TestcaseID = "221409"; //C221409
 		log("/*----1. Login as an Clinician to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);

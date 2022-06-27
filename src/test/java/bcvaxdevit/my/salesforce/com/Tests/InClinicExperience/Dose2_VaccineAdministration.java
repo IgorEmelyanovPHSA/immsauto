@@ -1,9 +1,12 @@
 package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners({TestListener.class})
 public class Dose2_VaccineAdministration extends BaseTest {
 
     @Test(priority = 1)
@@ -183,7 +186,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
         inClinicExperience.clickOnFacilityOptionLocation();
         Thread.sleep(2000);
         System.out.println("/*33----select Active booking appointment day  --*/");
-        inClinicExperience.selectAppointment();
+        inClinicExperience.selectBookingAppointmentDay();
         Thread.sleep(2000);
         System.out.println("/*34----select the time slot  --*/");
         inClinicExperience.selectTimeSlotForAppointment();

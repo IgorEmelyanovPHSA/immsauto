@@ -25,7 +25,7 @@ public class Wastage extends BaseTest {
         double amountOfDosesToWaste = 3;
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
 
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
@@ -58,11 +58,11 @@ public class Wastage extends BaseTest {
         log("/*----Amount Wastage Doses " +amountOfDosesToWaste +" --*/");
 
         log("/*9.----set Wastage Doses amount --*/");
-        supplyConsolePage.setDosesAmountToWaste(Double.toString(amountOfDosesToWaste));
+        supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
         double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
         log("/*----Quantity Remaining Doses After Wastage " +remainingDosesAfterWastage +" --*/");
 
-        log("/*10.----Reason For Wastage Wastage: 'CCI: Handling Error' --*/");
+        log("/*10.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
         supplyConsolePage.selectReasonForWastageDropDown();
 
         log("/*11----Clicking on btn Wastage --*/");

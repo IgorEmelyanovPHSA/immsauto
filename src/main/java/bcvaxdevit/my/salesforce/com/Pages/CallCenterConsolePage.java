@@ -328,15 +328,15 @@ public class CallCenterConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
 	}
-	
+
 	public void selectBookingAppointmentDay() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
 		booking_app_active_day.click();
 	}
-	
+
+
 	public void selectTimeSlotAppointment() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
@@ -378,9 +378,10 @@ public class CallCenterConsolePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-
 	public void clickVerifyContactInformation() throws InterruptedException {
-		scrollTop(verify_contact_information_checkbox);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
 		Thread.sleep(2000);
 		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);

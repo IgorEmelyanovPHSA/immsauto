@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests;
 
 import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
 import bcvaxdevit.my.salesforce.com.Pages.TestRailManager;
+import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
@@ -17,53 +18,40 @@ public class BaseTest {
 	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
 	protected String TestcaseID;
 	public WebDriver driver;
-	//private static WebDriver driver;
-	//private static final WebDriver driver = new ChromeDriver();
+	private ByteArrayOutputStream logOutputSteps;
 	private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
 	protected LoginPage loginPage;
-	PrintStream old;
-	ByteArrayOutputStream logOutputSteps;
 	
-	@BeforeSuite
-	public void beforeSuite() {
-		//---This will execute before the Suite
-		System.out.println("This will execute before the Suite");
-	}
+//	@BeforeSuite
+//	public void beforeSuite() {
+//		//---This will execute before the Suite
+//		System.out.println("This will execute before the Suite");
+//	}
+//
+//	@BeforeClass
+//	public void setUp() {
+//		System.out.println("This will execute before the Class");
+//	}
+//
+//	@BeforeTest
+//	public void beforeTest() {
+//		System.out.println("This will execute before the Test");
+//	}
 	
-	@BeforeClass
+	@BeforeMethod(alwaysRun = true)
 	public void setUp() {
-		System.out.println("This will execute before the Class");
-	}
-	
-	@BeforeTest
-	public void beforeTest() {
-		System.out.println("This will execute before the Test");
-	}
-	
-	@BeforeMethod
-	public void beforeMethod() {
-		System.out.println("This will execute before the Method");
-		// Create a stream to hold the log output
-		logOutputSteps = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(logOutputSteps);
-		// Save the old System.out!
-		old = System.out;
-		// Redirect log special stream to logOutput for TestRail
-		System.setOut(ps);
-		// ChromeDriver location set up in Utils class
-		// System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
+		log("This will execute before the Method");
+		captureBothStreams();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get(BCVAXDEVIT_URL);
-		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(getDriver());
 	}
 	
 	/////////////////After///////////////////
-	@AfterMethod
-	public void afterMethod(ITestResult result) throws Throwable {
-		System.out.println("This will execute after the Method");
-		System.out.flush();
-		System.setOut(old);
+	@AfterMethod(alwaysRun = true)
+	public void tearDown(ITestResult result) throws Throwable {
+		log("This will execute after the Method");
 		if (result.getStatus() == ITestResult.SUCCESS) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
@@ -73,23 +61,31 @@ public class BaseTest {
 		driver.close();
 	}
 	
-	@AfterTest
-	public void afterTest() {
-		System.out.println("This will execute after the Test");
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		System.out.println("This will execute after the Class");
-	}
-	
-	@AfterSuite
-	public void cleanUp() {
-		System.out.println("This will execute after the Suite");
-	}
+//	@AfterTest
+//	public void afterTest() {
+//		System.out.println("This will execute after the Test");
+//	}
+//
+//	@AfterClass
+//	public void tearDown() {
+//		System.out.println("This will execute after the Class");
+//	}
+//
+//	@AfterSuite
+//	public void cleanUp() {
+//		System.out.println("This will execute after the Suite");
+//	}
 
 	public WebDriver getDriver() {
 		return driver;
+	}
+
+	private void captureBothStreams(){
+		logOutputSteps = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(logOutputSteps);
+		TeeOutputStream bothStreams = new TeeOutputStream(ps, System.out);
+		PrintStream both = new PrintStream(bothStreams);
+		System.setOut(both);
 	}
 
 	public static String getLogTime() {

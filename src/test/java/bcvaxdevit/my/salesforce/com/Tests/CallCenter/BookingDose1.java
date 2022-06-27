@@ -1,10 +1,13 @@
 package bcvaxdevit.my.salesforce.com.Tests.CallCenter;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.CallCenterConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
 	
 	@Test(priority = 1)
@@ -79,7 +82,7 @@ public class BookingDose1 extends BaseTest {
 		TestcaseID = "153418"; //C153418
 		System.out.println("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		Thread.sleep(5000);

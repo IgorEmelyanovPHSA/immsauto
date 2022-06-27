@@ -17,6 +17,7 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkWastages"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Requisition"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Consumption"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Adjustments"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

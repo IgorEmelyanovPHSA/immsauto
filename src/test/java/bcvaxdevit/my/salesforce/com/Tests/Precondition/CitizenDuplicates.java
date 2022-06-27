@@ -3,7 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Precondition;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Test;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
-import static bcvaxdevit.my.salesforce.com.Pages.BasePage.log;
+
 
 public class CitizenDuplicates extends BaseTest {
 	

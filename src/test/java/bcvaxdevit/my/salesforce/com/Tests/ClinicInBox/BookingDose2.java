@@ -1,10 +1,14 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 
+import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+
+@Listeners({TestListener.class})
 public class BookingDose2 extends BaseTest {
 
 	@Test(priority = 1)
@@ -79,7 +83,7 @@ public class BookingDose2 extends BaseTest {
 		TestcaseID = "222368";
 		System.out.println("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("/*2.----Clinic In Box(IPM) page displayed --*/");
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);
