@@ -243,8 +243,8 @@ public class InClinicExperiencePage extends BasePage {
 	private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
 	
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
-	private WebElement confirmation_popup;
-	private By confirmation_popup1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
+	private WebElement verify_contact_information_checkbox;
+	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
 	
 	@FindBy(xpath = "(.//button[@title='Confirm & Save Identification'])")
 	private WebElement confirm_and_save_btn_home;
@@ -532,10 +532,11 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void closeOpenTabs() {
+	public void closeOpenTabs() throws InterruptedException {
 		do {
 			WebElement closetab = driver.findElement(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']"));
 			closetab.click();
+			Thread.sleep(2000);
 		} while (isDisplayed(By.xpath("//*[@data-key='close'][@class='slds-icon slds-icon-text-default slds-icon_xx-small']")));
 	}
 	
@@ -821,10 +822,8 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
 	}
-	
-	public void selectAppointment() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", booking_app_active_day);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+	public void selectBookingAppointmentDay() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
 		booking_app_active_day.click();
@@ -875,20 +874,23 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickVerifyContactInformation() throws InterruptedException {
-		scrollTop(confirmation_popup);
-		click(confirmation_popup);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
+		Thread.sleep(2000);
+		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
 		
-		public void selectVaccineAgent () throws InterruptedException {
-			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
-			Thread.sleep(2000);
-			waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
-			click_vaccine_agent_dropdown.click();
-			Thread.sleep(2000);
-			waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
-			select_vaccine_agent_dropdown.click();
-		}
+	public void selectVaccineAgent () throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
+		click_vaccine_agent_dropdown.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
+		select_vaccine_agent_dropdown.click();
+	}
 		
 		public void ClickSaveConsentButton () throws InterruptedException {
 			waitForElementToBeVisible(driver, save_consent_btn, 10);

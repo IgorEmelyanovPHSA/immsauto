@@ -258,8 +258,8 @@ public class ClinicInBoxPage extends BasePage {
 	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
 
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
-	private WebElement confirmation_popup;
-	private By confirmation_popup1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
+	private WebElement verify_contact_information_checkbox;
+	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
 
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
@@ -693,7 +693,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectBookingAppointmentDay() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
 		booking_app_active_day.click();
@@ -709,11 +709,13 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickOnNextButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_next_button, 10);
+		Thread.sleep(2000);
 		click_next_button.click();
 	}
 	
 	public void clickOnConfirmButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_confirm_appointment_button, 10);
+		Thread.sleep(2000);
 		click_confirm_appointment_button.click();
 	}
 	
@@ -740,8 +742,11 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void clickVerifyContactInformation() throws InterruptedException {
-		scrollTop(confirmation_popup);
-		click(confirmation_popup);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
+		Thread.sleep(2000);
+		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
 	

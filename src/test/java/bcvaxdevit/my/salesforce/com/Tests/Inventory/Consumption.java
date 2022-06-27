@@ -199,7 +199,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		Thread.sleep(2000);
 		log("/*-- 33----select Appointment --*/");
-		inClinicExperiencePage.selectAppointment();
+		inClinicExperiencePage.selectBookingAppointmentDay();
 		Thread.sleep(2000);
 		log("/*-- 34---- select time slot for Appointment --*/");
 		inClinicExperiencePage.selectTimeSlotForAppointment();

@@ -79,7 +79,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 	
 	@Test(priority = 2)
 	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "219955"; //C219955
+		TestcaseID = "153420"; //C219955
 		System.out.println("/*1.----Login as an Clinician to ICE --*/");
 		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
 		Thread.sleep(5000);
@@ -184,7 +184,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		inClinicExperience.clickOnFacilityOptionLocation();
 		Thread.sleep(2000);
 		System.out.println("/*33----select Active booking appointment day  --*/");
-		inClinicExperience.selectAppointment();
+		inClinicExperience.selectBookingAppointmentDay();
 		Thread.sleep(2000);
 		System.out.println("/*34----select the time slot  --*/");
 		inClinicExperience.selectTimeSlotForAppointment();
