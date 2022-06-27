@@ -9,8 +9,6 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.io.IOException;
-
 public class TestListener extends BaseTest implements ITestListener {
 
     private static String getTestMethodName(ITestResult result){
@@ -18,15 +16,7 @@ public class TestListener extends BaseTest implements ITestListener {
     }
 
     @Attachment(value = "Screenshot of {1}", type = "image/png")
-    public byte[] saveScreenshotPNG (WebDriver dr, String testCaseName) throws IOException{
-            //Remove this, only for testing
-//            File fileSrc = ((TakesScreenshot)dr).getScreenshotAs(OutputType.FILE);
-//            try {
-//                FileUtils.copyFile(fileSrc, new File("C:\\temp\\scren.png"));
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
-            //Remove this block
+    public byte[] saveScreenshotPNG (WebDriver dr, String testCaseName){
             return ((TakesScreenshot)dr).getScreenshotAs(OutputType.BYTES);
     }
 
