@@ -75,17 +75,18 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----21. Approve Requisition--*/");
 		requisitionPage.clickApproveRequisition();
 		Thread.sleep(4000);
+		requisitionPage.clickSaveApprovedRequisition();
+		Thread.sleep(3000);
 		System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("10");
+		requisitionPage.enterApprovedDose("5");
 		Thread.sleep(5000);
 		System.out.println("/*----23. Save Approved Request Dose--*/");
 		requisitionPage.clickSaveApprovedRequisition();
 		Thread.sleep(4000);
 		System.out.println("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
-		
 		Thread.sleep(7000);
-		
+
 		String actual = "Ship Requisition";
 		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
 		

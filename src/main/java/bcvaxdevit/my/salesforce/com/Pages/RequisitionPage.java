@@ -211,7 +211,7 @@ public class RequisitionPage extends BasePage {
 	}
 
 	public void clickLineItemCheckBox() throws InterruptedException {
-		By check_box = By.xpath("//tbody/tr[12]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
+		By check_box = By.xpath("//tbody/tr[9]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
 		WebElement element = driver.findElement(check_box);
 		//Scroll to select the desired line item
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
