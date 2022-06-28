@@ -17,6 +17,7 @@ public class Consumption extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			log("/*---- User already on ICE--*/");
 		} else {

@@ -615,8 +615,6 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, click_container_dropdown_menu1, 10);
 		WebElement element = driver.findElement(click_container_dropdown_menu1);
 		Thread.sleep(2000);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		Thread.sleep(2000);
 		click_container_dropdown_menu.click();
 	}
 
@@ -635,9 +633,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public Double getValueOfRemainingDoses() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, get_remaining_doses_, 10);
 		WebElement element = driver.findElement(get_remaining_doses_);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",",""));
@@ -648,7 +648,7 @@ public class SupplyConsolePage extends BasePage {
 	public Double getValueOfRemainingQty() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",",""));
@@ -814,9 +814,7 @@ public class SupplyConsolePage extends BasePage {
 	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
 		By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[" + j + "]");
 		waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
-		//waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
 		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
-		//this.incoming_transaction_checkbox_1.click();
 		click(incoming_transaction_checkbox_1_);
 	}
 
@@ -828,7 +826,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnRelatedItemTab() throws InterruptedException {
 		//scroll up
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-850)");
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_on_related_item_tab_1, 10);
 		Thread.sleep(1000);

@@ -16,7 +16,7 @@ public class Transfer extends BaseTest {
         TestcaseID = "220550"; //C220550
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-        Thread.sleep(11000);
+        Thread.sleep(10000);
         //Assert.assertTrue(false);
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
