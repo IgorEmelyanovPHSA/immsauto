@@ -14,13 +14,13 @@ public class LoginPage extends BasePage {
 	private final String PPHIS_BCVAXDEVIT = "autooperationpphis@deloitte.ca.bcvaxdevit";
 	private final String PPHIS_PW_BCVAXDEVIT = "Technology1990!!!!!!!";
 	private final String CLINICIAN_CIB_BCVAXDEVIT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
-	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!!";
+	private final String CLINICIAN_PW_CIB_BCVAXDEVIT = "Technology1990!!!!!!!";
 	private final String CLINICIAN_Consumption_BCVAXDEVIT = "auto_clinician_consumption@phsa.ca.bcvaxdevit";
 	private final String CLINICIAN_PW_Consumption_BCVAXDEVIT = "Technology1990!!!!!!";
 	private final String DIWA_BCVAXDEVIT = "autocliniciandiwa2@phsa.ca.bcvaxdevit";
 	private final String DIWA_PW_BCVAXDEVIT = "phsa7phsa*";
 	private final String CALLCENTERAGENT_CC_BCVAXDEVIT = "autocallcenteragent@deloitte.ca.bcvaxdevit";
-	private final String CALLCENTERAGENT_PW_CC_BCVAXDEVIT = "Technology1990!!!!!!!";
+	private final String CALLCENTERAGENT_PW_CC_BCVAXDEVIT = "Technology1990!!!!!!!!";
 	
 	
 	@FindBy(id = "username")
