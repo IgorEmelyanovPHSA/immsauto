@@ -853,7 +853,7 @@ public class SupplyConsolePage extends BasePage {
 	public Double getValueOfRemainingDosesDistribution_1_2() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_doses_distribution_1_2_, 10);
 		WebElement element = driver.findElement(get_remaining_doses_distribution_1_2_);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",",""));
@@ -864,7 +864,7 @@ public class SupplyConsolePage extends BasePage {
 	public Double getValueOfRemainingQtyDistribution_1_2() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_1_2_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_1_2_);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",",""));
