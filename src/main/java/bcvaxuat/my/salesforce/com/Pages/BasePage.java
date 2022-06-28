@@ -135,7 +135,7 @@ public abstract class BasePage<T> {
 	}
 	
 	public static void log(String msg) {
-		log(getLogTime() + " " + msg);
+		System.out.println(getLogTime() + " " + msg);
 	}
 	
 }
