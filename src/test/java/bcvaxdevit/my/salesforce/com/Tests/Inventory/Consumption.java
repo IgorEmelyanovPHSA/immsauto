@@ -243,6 +243,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 43---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
+		log("/*-- 47---the Home - Client Search supposed to showing up  --*/");
+		inClinicExperiencePage.validateHomePageShownUp();
+		Thread.sleep(3000);
 		log("/*-- 44. Navigate to Health Connect - Supply Console --*/");
 		inClinicExperiencePage.selectHealthConnectApp();
 		Thread.sleep(2000);
@@ -267,8 +270,8 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		Double remainingDoses1 = inClinicExperiencePage.getValueOfRemainingDoses();
 		log("/*-- 49. remaining doses are: -->" + remainingDoses1);
-		remainingDoses=remainingDoses - 1;
-		assertEquals(remainingDoses, remainingDoses1);
+		remainingDoses = remainingDoses - 1;//consumed expected value
+		assertEquals(remainingDoses1, remainingDoses);
 		//Assert.assertEquals(Double.parseDouble(remainingDoses), Double.parseDouble(remainingDoses1) + 1.00);
 		Thread.sleep(2000);
 //		String remainingQty1 = inClinicExperiencePage.getValueOfRemainingQty();
