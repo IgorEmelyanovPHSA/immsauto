@@ -177,7 +177,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*30----select 'Search clinic name' tab --*/");
 		inClinicExperience.selectSearchClinicNameTab();
 		Thread.sleep(2000);
-		System.out.println("/*31----search the Clinic --*/");
+		System.out.println("/*31----search the Clinic Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center --*/");
 		inClinicExperience.searchClinicName();
 		Thread.sleep(2000);
 		System.out.println("/*32----click on Option Facility location  --*/");
@@ -217,7 +217,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*-- 43---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
-		System.out.println("/*-- 44---select Vaccine Agent  COVID-19 mRNA --*/");
+		System.out.println("/*-- 44---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		inClinicExperience.selectVaccineAgent();
 		Thread.sleep(3000);
 		System.out.println("/*-- 45---Click Save Consent Button --*/");

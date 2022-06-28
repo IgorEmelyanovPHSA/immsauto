@@ -109,11 +109,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//button[@class='slds-combobox__input slds-input_faux'])[1]")
 	private WebElement click_agent_value;
 	private By click_agent_value1 = By.xpath("(//button[@class='slds-combobox__input slds-input_faux'])[1]");
-	
-	@FindBy(xpath = "(//span[text()='COVID-19 Virus Like Particle UPDATE'])[1]")
+
+	@FindBy(xpath = "(//span[text()='COVID-19 Virus-like Particle'])[1]")
 	private WebElement select_agent_name;
-	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 Virus Like Particle UPDATE'])[1]");
-	
+	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 Virus-like Particle'])[1]");
+
 	@FindBy(xpath = "//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]")
 	private WebElement select_desired_supply_container;
 	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]");
@@ -626,14 +626,16 @@ public class InClinicExperiencePage extends BasePage {
 		return isDisplayed(supply_location_displayed1);
 	}
 	
-	public String getValueOfRemainingDoses() throws InterruptedException {
+	public Double getValueOfRemainingDoses() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_doses1, 10);
 		WebElement element = driver.findElement(get_remaining_doses1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",",""));
+		return (doses);
 	}
-	
+
 	public String getDoseConversionFactor() throws InterruptedException {
 		WebElement element = driver.findElement(get_dose_conversion_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -874,7 +876,11 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickVerifyContactInformation() throws InterruptedException {
+		//Scrolling to bottom of the page
+		//((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
 		Thread.sleep(2000);
@@ -1000,13 +1006,13 @@ public class InClinicExperiencePage extends BasePage {
 			executor.executeScript("arguments[0].click();", element);
 			Thread.sleep(2000);
 		}
-		
+
 		public void SelectAgentValue (String Agent) throws InterruptedException {
 			waitForElementToBeVisible(driver, select_agent_name, 10);
 			WebElement search_input = driver.findElement(select_agent_name1);
 			search_input.click();
 		}
-		
+
 		public void clickSupplyDistribution () throws InterruptedException {
 			waitForElementToBeLocated(driver, click_supply_distribution1, 10);
 			WebElement element = driver.findElement(click_supply_distribution1);
