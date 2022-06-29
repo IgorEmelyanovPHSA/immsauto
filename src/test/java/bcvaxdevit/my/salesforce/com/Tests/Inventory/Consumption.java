@@ -113,7 +113,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 6. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 7. Click and navigate to the supply container --> 'Moderna (Spikevax) - EL0203-CC01 (2022-06-29 12:43 p.m)' --*/");
+		log("/*-- 7. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203 (2022-06-29 04:07 p.m)' --*/");
 		inClinicExperiencePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		double remainingDoses_before = inClinicExperiencePage.getValueOfRemainingDoses();
@@ -266,18 +266,18 @@ public class Consumption extends BaseTest {
 		log("/*-- 47. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 48. Click and navigate to the supply container --> 'Moderna (Spikevax) - EL0203-CC01' --*/");
+		log("/*-- 48. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
 		inClinicExperiencePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		//////////Validation for Dosages and Qty After Consumption
 		System.out.println("/*--49.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
 		double remainingDoses_after = inClinicExperiencePage.getValueOfRemainingDoses();
 		log("/*-- 50. remaining doses After Consumption: -->" + remainingDoses_after);
-		assertEquals(remainingDoses_after, remainingDoses_before + 0.3*2);
+		assertEquals(remainingDoses_after, remainingDoses_before + 1);
 		Thread.sleep(2000);
 		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
 		log("/*-- 51. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, (remainingDoses_before + 0.3*2)/14);
+		assertEquals(remainingQty_after, (remainingDoses_before + 1)/5);
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 52. Close all open tabs --*/");

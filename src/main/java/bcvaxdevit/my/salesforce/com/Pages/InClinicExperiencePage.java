@@ -117,9 +117,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
 
-	@FindBy(xpath = "//a[contains(text(),'Moderna (Spikevax) - EL0203-CC01')]")
+	@FindBy(xpath = "//a[contains(text(),'Pfizer mRNA BNT162b2 - EL0203')]")
 	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Moderna (Spikevax) - EL0203-CC01')]");
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Pfizer mRNA BNT162b2 - EL0203')]");
 	
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_console_App_displayed;
@@ -622,6 +622,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectSupplyContainer() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,150)", "");
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, select_desired_supply_container1, 10);
 		WebElement element = driver.findElement(select_desired_supply_container1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
