@@ -208,7 +208,8 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//a[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
 	private By click_on_related_item_tab_1 = By.xpath(".//a[text() = 'Related Items']");
-	
+
+
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -236,18 +237,24 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = "//span[@title='CCI: Handling Error']")
 	private WebElement dropDownValueCCIHandlingError;
-	
+
 	@FindBy(xpath = "//h2[text()='Container - Wastage']/../..//button[(text()='Wastage')]")
 	private WebElement btnWastageOnContainerWastagePopUp;
-	
+
 	@FindBy(xpath = "//h2[text()='Container - Adjustment']/../..//button[(text()='Adjustment')]")
 	private WebElement btnAdjustmentOnContainerWastagePopUp;
-	
+
 	@FindBy(xpath = "//button[text() = 'Wastage']")
 	private WebElement btnBulkWastageSupplyPage;
-	
+
+	@FindBy(xpath = "//button[text() = 'Adjustment']")
+	private WebElement btnBulkAdjustmentSupplyPage;
+
 	@FindBy(xpath = "//h2[text() = 'Container - Wastage']/../..//button[text() = 'Wastage']")
 	private WebElement btnBulkWastageContainerWastagePage;
+
+	@FindBy(xpath = "//h2[text() = 'Container - Adjustment']/../..//button[text() = 'Adjustment']")
+	private WebElement btnBulkAdjustmentContainerAdjustmentPage;
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -713,13 +720,21 @@ public class SupplyConsolePage extends BasePage {
 		click(btnAdjustmentOnContainerWastagePopUp);
 		Thread.sleep(2000); //To handle success message
 	}
-	
+
 	public void clickBulkWastageButton() throws InterruptedException {
 		click(btnBulkWastageSupplyPage);
 	}
-	
+
+	public void clickBulkAdjustmentButton() throws InterruptedException {
+		click(btnBulkAdjustmentSupplyPage);
+	}
+
 	public void clickWastageButtonContainerWastagePage() throws InterruptedException {
 		click(btnBulkWastageContainerWastagePage);
+	}
+
+	public void clickAdjustmentButtonContainerAdjustmentPage() throws InterruptedException {
+		click(btnBulkAdjustmentContainerAdjustmentPage);
 	}
 	
 	public HashMap countDosesAndQuantityMap(int numberOfRows) {
@@ -760,7 +775,23 @@ public class SupplyConsolePage extends BasePage {
 			y++;
 		}
 	}
-	
+
+	public void enterBulkAdjustmentByDosageWithReasonForAdjustment(double amount, int numberOfRows) throws InterruptedException {
+		//By dosage
+		int y = 0;
+		int k = 4;
+		while (y < numberOfRows) {
+			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
+			typeIn(dosesDynamicFiled, Double.toString(amount));
+			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
+			click(reasonDynamicDropDown);
+			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title='Administered Vaccine'])[" + (y + 1) + "]"));
+			click(selectReasonFromDynamicDropDown);
+			k = k + 3;
+			y++;
+		}
+	}
+
 	public String getVaccineName() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_trade_name1, 10);
 		WebElement element = driver.findElement(get_trade_name1);
