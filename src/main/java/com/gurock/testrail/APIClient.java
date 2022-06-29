@@ -46,7 +46,7 @@ public class APIClient {
 	
 	/**
 	 * Get/Set User
-	 *
+	 * <p>
 	 * Returns/sets the user used for authenticating the API requests.
 	 */
 	public String getUser() {
@@ -59,7 +59,7 @@ public class APIClient {
 	
 	/**
 	 * Get/Set Password
-	 *
+	 * <p>
 	 * Returns/sets the password used for authenticating the API requests.
 	 */
 	public String getPassword() {
@@ -72,20 +72,20 @@ public class APIClient {
 	
 	/**
 	 * Send Get
-	 *
+	 * <p>
 	 * Issues a GET request (read) against the API and returns the result
 	 * (as Object, see below).
-	 *
+	 * <p>
 	 * Arguments:
-	 *
+	 * <p>
 	 * uri                  The API method to call including parameters
-	 *                      (e.g. get_case/1)
-	 *
+	 * (e.g. get_case/1)
+	 * <p>
 	 * Returns the parsed JSON response as standard object which can
 	 * either be an instance of JSONObject or JSONArray (depending on the
 	 * API method). In most cases, this returns a JSONObject instance which
 	 * is basically the same as java.util.Map.
-	 *
+	 * <p>
 	 * If 'get_attachment/:attachment_id', returns a String
 	 */
 	public Object sendGet(String uri, String data)
@@ -100,19 +100,19 @@ public class APIClient {
 	
 	/**
 	 * Send POST
-	 *
+	 * <p>
 	 * Issues a POST request (write) against the API and returns the result
 	 * (as Object, see below).
-	 *
+	 * <p>
 	 * Arguments:
-	 *
+	 * <p>
 	 * uri                  The API method to call including parameters
-	 *                      (e.g. add_case/1)
+	 * (e.g. add_case/1)
 	 * data                 The data to submit as part of the request (e.g.,
-	 *                      a map)
-	 *                      If adding an attachment, must be the path
-	 *                      to the file
-	 *
+	 * a map)
+	 * If adding an attachment, must be the path
+	 * to the file
+	 * <p>
 	 * Returns the parsed JSON response as standard object which can
 	 * either be an instance of JSONObject or JSONArray (depending on the
 	 * API method). In most cases, this returns a JSONObject instance which

@@ -86,7 +86,7 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
 		Thread.sleep(7000);
-
+		
 		String actual = "Ship Requisition";
 		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
 		
