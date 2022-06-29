@@ -82,7 +82,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
         TestcaseID = "219918"; //C219918
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
         InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
-        Thread.sleep(2000);
+        Thread.sleep(10000);
         System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
         inClinicExperience.verifyIsICEpageDisplayed();
         Thread.sleep(5000);
