@@ -5,6 +5,7 @@ import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})

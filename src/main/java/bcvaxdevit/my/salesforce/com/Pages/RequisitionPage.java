@@ -41,7 +41,7 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//span[contains(text(),\"Atlin Health Centre\")]")
 	private WebElement clinicName;
 	private By clinicName2 = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
-
+	
 	@FindBy(xpath = "//input[@class=\"slds-input\"]")
 	private WebElement requestedDeliveryDate;
 	
@@ -101,11 +101,11 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//input[@placeholder='Search Supply Distributions...']")
 	private WebElement SearchSupplyDistributions;
 	
-
+	
 	public void clickSearchSupplyDistributions() {
 		this.SearchSupplyDistributions.click();
 	}
-
+	
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
 	private WebElement searchByName;
 	private By searchByName2 = By.xpath("//div[@class='primaryLabel slds-truncate slds-lookup__result-text']");
@@ -123,7 +123,7 @@ public class RequisitionPage extends BasePage {
 		WebElement search_input = driver.findElement(clinicName2);
 		search_input.click();*/
 	}
-
+	
 	public RequisitionPage(WebDriver driver) {
 		super(driver);
 	}
@@ -203,13 +203,13 @@ public class RequisitionPage extends BasePage {
 		String tomorrowAsString = dateFormat.format(tomorrow);
 		this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
 	}
-
+	
 	public void clickNextButton() {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", nextButton);
 		waitForElementToBeVisible(driver, nextButton, 10);
 		this.nextButton.click();
 	}
-
+	
 	public void clickLineItemCheckBox() throws InterruptedException {
 		By check_box = By.xpath("//tbody/tr[9]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
 		WebElement element = driver.findElement(check_box);
@@ -221,7 +221,7 @@ public class RequisitionPage extends BasePage {
 	public void inputRequestedDose(String inputDose) {
 		this.requestedDose.sendKeys(inputDose);
 	}
-
+	
 	public void clickSaveButton() {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveButton);
 		this.saveButton.click();
