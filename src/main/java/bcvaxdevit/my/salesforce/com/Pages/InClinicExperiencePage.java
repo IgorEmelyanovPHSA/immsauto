@@ -110,13 +110,13 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_agent_value;
 	private By click_agent_value1 = By.xpath("(//button[@class='slds-combobox__input slds-input_faux'])[1]");
 
-	@FindBy(xpath = "(//span[text()='COVID-19 Virus-like Particle'])[1]")
+	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
-	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 Virus-like Particle'])[1]");
+	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
 
-	@FindBy(xpath = "//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]")
+	@FindBy(xpath = "//a[contains(text(),'Moderna (Spikevax) - EL0203-CC01')]")
 	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]");
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Moderna (Spikevax) - EL0203-CC01')]");
 	
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_console_App_displayed;
@@ -659,13 +659,15 @@ public class InClinicExperiencePage extends BasePage {
 		element.getText();
 		return (element.getText());
 	}
-	
-	public String getValueOfRemainingQty() throws InterruptedException {
+
+	public Double getValueOfRemainingQty() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty1, 10);
 		WebElement element = driver.findElement(get_remaining_Qty1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",",""));
+		return (quantity);
 	}
 	
 	public void selectICEFromApp() throws InterruptedException {
@@ -1007,7 +1009,7 @@ public class InClinicExperiencePage extends BasePage {
 			Thread.sleep(2000);
 		}
 
-		public void SelectAgentValue (String Agent) throws InterruptedException {
+		public void SelectAgentValue () throws InterruptedException {
 			waitForElementToBeVisible(driver, select_agent_name, 10);
 			WebElement search_input = driver.findElement(select_agent_name1);
 			search_input.click();

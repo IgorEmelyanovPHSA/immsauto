@@ -112,14 +112,14 @@ public class Consumption extends BaseTest {
 		log("/*-- 6. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 7. Click and navigate to the supply container --> 'Medicago TradeName - MedicagoTestLot001' --*/");
+		log("/*-- 7. Click and navigate to the supply container --> 'Moderna (Spikevax) - EL0203-CC01 (2022-06-29 12:43 p.m)' --*/");
 		inClinicExperiencePage.selectSupplyContainer();
 		Thread.sleep(2000);
-		Double remainingDoses = inClinicExperiencePage.getValueOfRemainingDoses();
-		log("/*-- 8. remaining doses are: -->" + remainingDoses);
+		double remainingDoses_before = inClinicExperiencePage.getValueOfRemainingDoses();
+		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
 		Thread.sleep(2000);
-		String remainingQty = inClinicExperiencePage.getValueOfRemainingQty();
-		log("/*-- 9. remaining doses are: -->" + remainingQty);
+		double remainingQty_before = inClinicExperiencePage.getValueOfRemainingQty();
+		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 10. Close all open tabs --*/");
@@ -232,8 +232,8 @@ public class Consumption extends BaseTest {
 		log("/*-- 43---Click to select Agent --*/");
 		inClinicExperiencePage.ClickAgentValue();
 		Thread.sleep(2000);
-		log("/*-- 44--- Select Agent From the Picklist Value ->COVID-19 Virus-like Particle --*/");
-		inClinicExperiencePage.SelectAgentValue("COVID-19 Virus-like Particle");
+		log("/*-- 44--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
+		inClinicExperiencePage.SelectAgentValue();
 		Thread.sleep(2000);
 		//System.out.println("/*-- 41---select Vaccine Agent  COVID-19 mRNA --*/");
 		//inClinicExperiencePage.selectVaccineAgent();
@@ -265,21 +265,21 @@ public class Consumption extends BaseTest {
 		log("/*-- 47. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 48. Click and navigate to the supply container --> 'Medicago TradeName - MedicagoTestLot001' --*/");
+		log("/*-- 48. Click and navigate to the supply container --> 'Moderna (Spikevax) - EL0203-CC01' --*/");
 		inClinicExperiencePage.selectSupplyContainer();
 		Thread.sleep(2000);
-		Double remainingDoses1 = inClinicExperiencePage.getValueOfRemainingDoses();
-		log("/*-- 49. remaining doses are: -->" + remainingDoses1);
-		remainingDoses = remainingDoses - 1;//consumed expected value
-		assertEquals(remainingDoses1, remainingDoses);
-		//Assert.assertEquals(Double.parseDouble(remainingDoses), Double.parseDouble(remainingDoses1) + 1.00);
+		//////////Validation for Dosages and Qty After Consumption
+		System.out.println("/*--49.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
+		double remainingDoses_after = inClinicExperiencePage.getValueOfRemainingDoses();
+		log("/*-- 50. remaining doses After Consumption: -->" + remainingDoses_after);
+		assertEquals(remainingDoses_after, remainingDoses_before + 0.3*2);
 		Thread.sleep(2000);
-//		String remainingQty1 = inClinicExperiencePage.getValueOfRemainingQty();
-//		Assert.assertEquals(Double.parseDouble(remainingQty), Double.parseDouble(remainingQty1) + 0.1);
-//		log("/*-- 49. remaining doses are: -->" + remainingQty1);
-//		Thread.sleep(2000);
+		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
+		log("/*-- 51. remaining Qty After: -->" + remainingQty_after);
+		assertEquals(remainingQty_after, (remainingDoses_before + 0.3*2)/14);
+		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 50. Close all open tabs --*/");
+		log("/*-- 52. Close all open tabs --*/");
 		
 	}
 	
