@@ -38,6 +38,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement user_found;
 	private By user_found1 = By.xpath(".//a[@title='Ludovika BCVaxLimeburn']");
 	
+	private WebElement user_Gill_found;
+	private By user_Gill_found1 = By.xpath(".//a[@title='Gill BCVaxOrigan']");
+	
 	@FindBy(xpath = ".//a[@title='Dacia Bcvaxdod']")
 	private WebElement user_dacia_found;
 	private By user_dacia_found1 = By.xpath(".//a[@title='Dacia Bcvaxdod']");
@@ -109,11 +112,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//button[@class='slds-combobox__input slds-input_faux'])[1]")
 	private WebElement click_agent_value;
 	private By click_agent_value1 = By.xpath("(//button[@class='slds-combobox__input slds-input_faux'])[1]");
-
+	
 	@FindBy(xpath = "(//span[text()='COVID-19 Virus-like Particle'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 Virus-like Particle'])[1]");
-
+	
 	@FindBy(xpath = "//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]")
 	private WebElement select_desired_supply_container;
 	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Medicago TradeName - MedicagoTestLot001')]");
@@ -268,11 +271,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
 	private WebElement click_reason_radiobutton;
 	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
-
+	
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
 	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
-
+	
 	@FindBy(xpath = ".//span[text() = 'Travel']")
 	private WebElement select_early_booking_reason;
 	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
@@ -448,6 +451,18 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		waitForElementToBeLocated(driver, user_dacia_found1, 10);
 		WebElement element = driver.findElement(user_dacia_found1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		return true;
+	}
+	
+	public boolean userGillFound() throws InterruptedException {
+		if (!isDisplayed(user_Gill_found1)) {
+			return false;
+		}
+		waitForElementToBeLocated(driver, user_Gill_found1, 10);
+		WebElement element = driver.findElement(user_Gill_found1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(5000);
@@ -632,10 +647,10 @@ public class InClinicExperiencePage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Doses = element.getText();
-		Double doses = Double.parseDouble(Doses.replaceAll(",",""));
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-
+	
 	public String getDoseConversionFactor() throws InterruptedException {
 		WebElement element = driver.findElement(get_dose_conversion_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -784,7 +799,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
 	}
-
+	
 	public void selectEarlyBookingReason() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
@@ -824,6 +839,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
 	}
+	
 	public void selectBookingAppointmentDay() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
@@ -887,8 +903,8 @@ public class InClinicExperiencePage extends BasePage {
 		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
-		
-	public void selectVaccineAgent () throws InterruptedException {
+	
+	public void selectVaccineAgent() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
@@ -897,246 +913,246 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
 		select_vaccine_agent_dropdown.click();
 	}
-		
-		public void ClickSaveConsentButton () throws InterruptedException {
-			waitForElementToBeVisible(driver, save_consent_btn, 10);
-			save_consent_btn.click();
-		}
-		
-		public void ClickConfirmAndSaveAdministrationButton () throws InterruptedException {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(0,1000)", "");
-			Thread.sleep(2000);
-			waitForElementToBeVisible(driver, confirm_save_adm_btn, 10);
-			confirm_save_adm_btn.click();
-		}
-		
-		public boolean validateVaccineAdminPageOpen () throws InterruptedException {
-			try {
-				waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
-				System.out.println("/*---Vaccine admin ICE page shown up");
-				return true;
-			} catch (NoSuchElementException e) {
-				System.out.println("/*---no Vaccine Admin ICE Page show up");
-				return false;
-			}
-		}
-		
-		public void successRegisteredMessageAppear () throws InterruptedException {
-			waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
-			driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
-			Thread.sleep(2000);
-			System.out.println("/* ----the toast success Citizen Registered message has been Appears");
-		}
-		
-		public void clickOnPersonAccountRelatedTab () throws InterruptedException {
-			Thread.sleep(2000);
-			WebElement element = driver.findElement(person_account_Related_tab_1);
-			isDisplayed(person_account_Related_tab_1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-		}
-		
-		public void selectSearchClinicNameTab () throws InterruptedException {
-			waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
-			Thread.sleep(2000);
-			WebElement element = driver.findElement(search_clinic_name_tab1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-		}
-		
-		public void searchClinicName () throws InterruptedException {
-			waitForElementToBeVisible(driver, select_clinic, 10);
-			select_clinic.click();
-			Thread.sleep(2000);
-			select_clinic.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
-			select_clinic.sendKeys(Keys.RETURN);
-		}
-		
-		public void clickOnFacilityOptionLocation () throws InterruptedException {
-			//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-			Thread.sleep(2000);
-			waitForElementToBeVisible(driver, option_loc_facility, 10);
-			option_loc_facility.click();
-		}
-		
-		public void refreshBrowser () throws InterruptedException {
-			driver.navigate().refresh();
-		}
-		
-		public void clickUserDefaultsTab () throws InterruptedException {
-			waitForElementToBeLocated(driver, user_defaults_tab1, 10);
-			WebElement element = driver.findElement(user_defaults_tab1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-		}
-		
-		public void inputCurrentDateUserDefaults () throws InterruptedException {
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DATE, 0);
-			Date today = calendar.getTime();
-			DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-			waitForElementToBeVisible(driver, input_current_date, 10);
-			String todayAsString = dateFormat.format(today);
-			input_current_date.click();
-			Thread.sleep(2000);
-			input_current_date.clear();
-			Thread.sleep(2000);
-			input_current_date.sendKeys(todayAsString);
-			Thread.sleep(2000);
-			input_current_date.sendKeys(Keys.ENTER);
-		}
-		
-		public boolean validateHomePageShownUp () throws InterruptedException {
-			try {
-				waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
-				System.out.println("/*---Home page-Client Search page shown up");
-				return true;
-			} catch (NoSuchElementException e) {
-				System.out.println("/*---no Home page-Client Search page show up");
-				return false;
-			}
-		}
-		
-		public void ClickAgentValue () throws InterruptedException {
-			waitForElementToBeLocated(driver, click_agent_value1, 10);
-			WebElement element = driver.findElement(click_agent_value1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-			Thread.sleep(2000);
-		}
-
-		public void SelectAgentValue (String Agent) throws InterruptedException {
-			waitForElementToBeVisible(driver, select_agent_name, 10);
-			WebElement search_input = driver.findElement(select_agent_name1);
-			search_input.click();
-		}
-
-		public void clickSupplyDistribution () throws InterruptedException {
-			waitForElementToBeLocated(driver, click_supply_distribution1, 10);
-			WebElement element = driver.findElement(click_supply_distribution1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-		}
-		
-		public void SelectDropDownToClickReceiveSuppliesButton () throws InterruptedException {
-			waitForElementToBeLocated(driver, select_drpdown_to_receive_supplies1, 10);
-			WebElement element = driver.findElement(select_drpdown_to_receive_supplies1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-			Thread.sleep(2000);
-		}
-		
-		public void ClickDropDownToClickReceiveSuppliesButton () throws InterruptedException {
-			waitForElementToBeLocated(driver, click_to_select_receive_supplies1, 10);
-			WebElement element1 = driver.findElement(click_to_select_receive_supplies1);
-			JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-			executor1.executeScript("arguments[0].click();", element1);
-		}
-		
-		public String validateSupplyItemField () throws InterruptedException {
-			WebElement element = driver.findElement(validate_supply_item_field1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-			Thread.sleep(2000);
-			element.getText();
-			return (element.getText());
-		}
-		
-		public String validateQTYField () throws InterruptedException {
-			WebElement element = driver.findElement(validate_qty_field1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-			Thread.sleep(2000);
-			element.getText();
-			return (element.getText());
-		}
-		
-		public String validateDCFField () throws InterruptedException {
-			WebElement element = driver.findElement(validate_dcf_field1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-			Thread.sleep(2000);
-			element.getText();
-			return (element.getText());
-		}
-		
-		public String validateDosesField () throws InterruptedException {
-			WebElement element = driver.findElement(validate_doses_field1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-			Thread.sleep(2000);
-			element.getText();
-			return (element.getText());
-		}
-		
-		public String validateSupplyDistributionToField () throws InterruptedException {
-			WebElement element = driver.findElement(supply_distribution_to_field1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-			Thread.sleep(2000);
-			element.getText();
-			return (element.getText());
-		}
-		
-		public void ValidateSaveButtonIsDisplayedOnReceiveSupplies () throws InterruptedException {
-			waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
-			save_button_receive_supplies.isDisplayed();
-		}
-		
-		public void ClickSaveButton () throws InterruptedException {
-			waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
-			save_button_receive_supplies.click();
-		}
-		
-		public void ValidateCancelButtonIsDisplayedOnReceiveSupplies () throws InterruptedException {
-			waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
-			cancel_button_receive_supplies.isDisplayed();
-		}
-		
-		public void clickSupplyItemTextBox () throws InterruptedException {
-			waitForElementToBeLocated(driver, click_to_select_supply_item1, 10);
-			WebElement element1 = driver.findElement(click_to_select_supply_item1);
-			JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-			executor1.executeScript("arguments[0].click();", element1);
-		}
-		
-		public void selectSupplyItem (String supplyItem) throws InterruptedException {
-			WebElement element = driver.findElement(choose_supply_item1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-			waitForElementToBeVisible(driver, choose_supply_item, 10);
-			WebElement search_input = driver.findElement(choose_supply_item1);
-			search_input.click();
-		}
-		
-		public void enterQuantity () throws InterruptedException {
-			waitForElementToBeLocated(driver, click_to_select_quantity1, 10);
-			WebElement element = driver.findElement(click_to_select_quantity1);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-			click(click_to_select_quantity1);
-			element.sendKeys("1");
-		}
-		
-		public void selectIncomingSupplyDistribution () throws InterruptedException {
-			waitForElementToBeVisible(driver, supply_distribution_to, 10);
-			WebElement element = driver.findElement(supply_distribution_to1);
-			Thread.sleep(2000);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-			Thread.sleep(1000);
-			supply_distribution_to.click();
-			Thread.sleep(2000);
-			waitForElementToBeVisible(driver, select_supply_distributor, 10);
-			Thread.sleep(2000);
-			select_supply_distributor.click();
-		}
-		
-		public void selectReasonForReception () throws InterruptedException {
-			waitForElementToBeLocated(driver, click_reason1, 10);
-			WebElement element = driver.findElement(click_reason1);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", element);
-			Thread.sleep(2000);
-			waitForElementToBeLocated(driver, select_reason1, 10);
-			WebElement element1 = driver.findElement(select_reason1);
-			JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-			executor1.executeScript("arguments[0].click();", element1);
-		}
-		
+	
+	public void ClickSaveConsentButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, save_consent_btn, 10);
+		save_consent_btn.click();
 	}
+	
+	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1000)", "");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, confirm_save_adm_btn, 10);
+		confirm_save_adm_btn.click();
+	}
+	
+	public boolean validateVaccineAdminPageOpen() throws InterruptedException {
+		try {
+			waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
+			System.out.println("/*---Vaccine admin ICE page shown up");
+			return true;
+		} catch (NoSuchElementException e) {
+			System.out.println("/*---no Vaccine Admin ICE Page show up");
+			return false;
+		}
+	}
+	
+	public void successRegisteredMessageAppear() throws InterruptedException {
+		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
+		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
+		Thread.sleep(2000);
+		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
+	}
+	
+	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(person_account_Related_tab_1);
+		isDisplayed(person_account_Related_tab_1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void selectSearchClinicNameTab() throws InterruptedException {
+		waitForElementToBeLocated(driver, search_clinic_name_tab1, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(search_clinic_name_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void searchClinicName() throws InterruptedException {
+		waitForElementToBeVisible(driver, select_clinic, 10);
+		select_clinic.click();
+		Thread.sleep(2000);
+		select_clinic.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
+		select_clinic.sendKeys(Keys.RETURN);
+	}
+	
+	public void clickOnFacilityOptionLocation() throws InterruptedException {
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, option_loc_facility, 10);
+		option_loc_facility.click();
+	}
+	
+	public void refreshBrowser() throws InterruptedException {
+		driver.navigate().refresh();
+	}
+	
+	public void clickUserDefaultsTab() throws InterruptedException {
+		waitForElementToBeLocated(driver, user_defaults_tab1, 10);
+		WebElement element = driver.findElement(user_defaults_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void inputCurrentDateUserDefaults() throws InterruptedException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 0);
+		Date today = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		waitForElementToBeVisible(driver, input_current_date, 10);
+		String todayAsString = dateFormat.format(today);
+		input_current_date.click();
+		Thread.sleep(2000);
+		input_current_date.clear();
+		Thread.sleep(2000);
+		input_current_date.sendKeys(todayAsString);
+		Thread.sleep(2000);
+		input_current_date.sendKeys(Keys.ENTER);
+	}
+	
+	public boolean validateHomePageShownUp() throws InterruptedException {
+		try {
+			waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
+			System.out.println("/*---Home page-Client Search page shown up");
+			return true;
+		} catch (NoSuchElementException e) {
+			System.out.println("/*---no Home page-Client Search page show up");
+			return false;
+		}
+	}
+	
+	public void ClickAgentValue() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_agent_value1, 10);
+		WebElement element = driver.findElement(click_agent_value1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+	}
+	
+	public void SelectAgentValue(String Agent) throws InterruptedException {
+		waitForElementToBeVisible(driver, select_agent_name, 10);
+		WebElement search_input = driver.findElement(select_agent_name1);
+		search_input.click();
+	}
+	
+	public void clickSupplyDistribution() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_supply_distribution1, 10);
+		WebElement element = driver.findElement(click_supply_distribution1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	public void SelectDropDownToClickReceiveSuppliesButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_drpdown_to_receive_supplies1, 10);
+		WebElement element = driver.findElement(select_drpdown_to_receive_supplies1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+	}
+	
+	public void ClickDropDownToClickReceiveSuppliesButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_receive_supplies1, 10);
+		WebElement element1 = driver.findElement(click_to_select_receive_supplies1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+	
+	public String validateSupplyItemField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_supply_item_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String validateQTYField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_qty_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String validateDCFField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_dcf_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String validateDosesField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_doses_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String validateSupplyDistributionToField() throws InterruptedException {
+		WebElement element = driver.findElement(supply_distribution_to_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
+		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
+		save_button_receive_supplies.isDisplayed();
+	}
+	
+	public void ClickSaveButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
+		save_button_receive_supplies.click();
+	}
+	
+	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
+		waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
+		cancel_button_receive_supplies.isDisplayed();
+	}
+	
+	public void clickSupplyItemTextBox() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_supply_item1, 10);
+		WebElement element1 = driver.findElement(click_to_select_supply_item1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+	
+	public void selectSupplyItem(String supplyItem) throws InterruptedException {
+		WebElement element = driver.findElement(choose_supply_item1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		waitForElementToBeVisible(driver, choose_supply_item, 10);
+		WebElement search_input = driver.findElement(choose_supply_item1);
+		search_input.click();
+	}
+	
+	public void enterQuantity() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_quantity1, 10);
+		WebElement element = driver.findElement(click_to_select_quantity1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		click(click_to_select_quantity1);
+		element.sendKeys("1");
+	}
+	
+	public void selectIncomingSupplyDistribution() throws InterruptedException {
+		waitForElementToBeVisible(driver, supply_distribution_to, 10);
+		WebElement element = driver.findElement(supply_distribution_to1);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(1000);
+		supply_distribution_to.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_supply_distributor, 10);
+		Thread.sleep(2000);
+		select_supply_distributor.click();
+	}
+	
+	public void selectReasonForReception() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_reason1, 10);
+		WebElement element = driver.findElement(click_reason1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_reason1, 10);
+		WebElement element1 = driver.findElement(select_reason1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+	
+}
 
