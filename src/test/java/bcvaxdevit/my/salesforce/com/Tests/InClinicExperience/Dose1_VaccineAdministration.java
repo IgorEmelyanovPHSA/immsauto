@@ -168,9 +168,9 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*27----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
 		Thread.sleep(2000);
-		System.out.println("/*28----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		inClinicExperience.clickReasonForVisit();
-		Thread.sleep(2000);
+		//System.out.println("/*28----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
+		//inClinicExperience.clickReasonForVisit();
+		//Thread.sleep(2000);
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);

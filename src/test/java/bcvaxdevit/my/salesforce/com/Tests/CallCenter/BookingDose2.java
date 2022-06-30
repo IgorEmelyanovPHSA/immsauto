@@ -144,13 +144,13 @@ public class BookingDose2 extends BaseTest {
 		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
 		callCenterConsole.clickRefreshForecastButton();
-		Thread.sleep(5000);
+		Thread.sleep(10000);//wait for refresh
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
 		Thread.sleep(2000);
-		log("/*22----click on reason for Visit for visit 'Covid-19 Vaccine' radiobutton --*/");
-		callCenterConsole.clickOnReasonForVisit();
-		Thread.sleep(2000);
+		//log("/*22----click on reason for Visit for visit 'Covid-19 Vaccine' radiobutton --*/");
+		//callCenterConsole.clickOnReasonForVisit();
+		//Thread.sleep(2000);
 		log("/*24----select 'Search clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
 		Thread.sleep(2000);
