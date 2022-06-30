@@ -416,7 +416,9 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
 		waitForElementToBeLocated(driver, register_confirmation_page_button1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(register_confirmation_page_button1);
+		Thread.sleep(2000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
@@ -1020,6 +1022,8 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		
 		public void ClickAgentValue () throws InterruptedException {
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+			Thread.sleep(2000);
 			waitForElementToBeLocated(driver, click_agent_value1, 10);
 			WebElement element = driver.findElement(click_agent_value1);
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
