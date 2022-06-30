@@ -10,9 +10,7 @@ public class Requisition extends BaseTest {
 	
 	@Test
 	public void Create_Requisition_as_an_PPHIS_PRODSUPPQA() throws InterruptedException {
-		
 		TestcaseID = "220561"; //C220561
-		
 		System.out.println("/*----1. Login as an PPHIS_PRODSUPPQA to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
