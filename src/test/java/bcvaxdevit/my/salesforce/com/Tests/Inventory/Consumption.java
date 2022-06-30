@@ -188,9 +188,9 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		log("/*-- 28.Navigate to Appointment Scheduling Tab --*/");
 		Thread.sleep(2000);
-		inClinicExperiencePage.clickReasonForVisit();
-		log("/*-- 29.Click on reason for visit --*/");
-		Thread.sleep(2000);
+		//log("/*-- 29.Click on reason for visit --*/");
+		//inClinicExperiencePage.clickReasonForVisit();
+		//Thread.sleep(2000);
 		System.out.println("/*30----click on reason Early Booking Reason - Travel --*/");
 		inClinicExperiencePage.selectEarlyBookingReason();
 		Thread.sleep(2000);

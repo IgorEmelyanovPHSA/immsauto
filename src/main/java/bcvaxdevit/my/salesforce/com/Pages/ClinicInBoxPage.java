@@ -686,7 +686,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
