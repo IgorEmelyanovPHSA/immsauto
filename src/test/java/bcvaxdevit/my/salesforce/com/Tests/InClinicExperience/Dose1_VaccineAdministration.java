@@ -98,10 +98,16 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*6.----- Enter current date for UserDefaults --*/");
 		inClinicExperience.inputCurrentDateUserDefaults();
 		Thread.sleep(2000);
-		System.out.println("/*7.----- Click on register Tab --*/");
+		System.out.println("/*7.----- Click on Save defaults button --*/");
+		inClinicExperience.clickSaveDefaultsButton();
 		Thread.sleep(2000);
+		System.out.println("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
-		System.out.println("/*8.----click Register button New Citizen -Ludovika --*/");
+		Thread.sleep(2000);
+		System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
+		inClinicExperience.clickSaveModalDefaultsButton();
+		Thread.sleep(2000);
+		System.out.println("/*8.----click Register button New Citizen - Ludovika --*/");
 		inClinicExperience.clickRegisterButton();
 		Thread.sleep(2000);
 		System.out.println("/*9.----Enter First Name Ludovika--*/");

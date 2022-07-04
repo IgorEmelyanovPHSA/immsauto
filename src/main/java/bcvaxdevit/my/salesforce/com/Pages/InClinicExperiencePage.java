@@ -24,6 +24,14 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//button[@title = ' Create New Profile']")
 	private WebElement register_button;
 	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
+
+	@FindBy(xpath = ".//button[text()='Save']")
+	private WebElement click_save_defaults_button;
+	private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
+
+	@FindBy(xpath = ".//button[@class='slds-button slds-button_brand saveBtn']")
+	private WebElement click_save_modal_defaults_button;
+	private By click_save_modal_defaults_button_ = By.xpath(".//button[@class='slds-button slds-button_brand saveBtn']");
 	
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
@@ -707,6 +715,20 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, register_button, 10);
 		WebElement element = driver.findElement(register_button_1);
 		register_button.click();
+	}
+
+	public void clickSaveDefaultsButton() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_save_defaults_button, 10);
+		WebElement element = driver.findElement(click_save_defaults_button_);
+		click_save_defaults_button.click();
+	}
+
+	public void clickSaveModalDefaultsButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_save_modal_defaults_button, 10);
+		WebElement element = driver.findElement(click_save_modal_defaults_button_);
+		click_save_modal_defaults_button.click();
 	}
 	
 	public void enterFirstName(String firstname) throws InterruptedException {
