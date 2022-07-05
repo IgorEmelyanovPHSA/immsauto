@@ -150,13 +150,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement search_incoming_supply_distributor_1_2;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 	
-	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000001484']")
+	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000000338']")
 	private WebElement select_incoming_supply_distributor;
-	private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000001484']");
+	private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000000338']");
 	
-	@FindBy(xpath = "//span[@title='Automation Supply Distribution_1_2 - SDST-0000001499']")
+	@FindBy(xpath = "//span[@title='Automation Supply Distribution_1_2 - SDST-0000000337']")
 	private WebElement select_same_clinic_supply_distributor_1_2;
-	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[@title='Automation Supply Distribution_1_2 - SDST-0000001499']");
+	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[@title='Automation Supply Distribution_1_2 - SDST-0000000337']");
 	
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
@@ -171,9 +171,9 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Transfer_in_dropdown;
 	private By select_Transfer_in_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
 	
-	@FindBy(xpath = "//a[contains(text(),'Pfizer mRNA BNT162b2 - EK4241')]")
+	@FindBy(xpath = "//a[contains(text(),'Moderna mRNA-1273 - 300042698-CC03')]")
 	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Pfizer mRNA BNT162b2 - EK4241')]");
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Moderna mRNA-1273 - 300042698-CC03')]");
 	
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses;
