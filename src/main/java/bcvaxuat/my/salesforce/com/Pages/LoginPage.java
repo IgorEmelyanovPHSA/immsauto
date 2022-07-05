@@ -9,8 +9,8 @@ public class LoginPage extends BasePage {
 	
 	private final String Precondition_BCVAXUAT = "sunil.anne@phsa.ca.bcvaxuat";
 	private final String Precondition_PW_BCVAXUAT = "Sqlserver@2";
-	private final String CLINICIAN_ICE_BCVAXUAT = "auto_clinician@deloitte.ca.bcvaxdevit";
-	private final String CLINICIAN_PW_BCVAXUAT = "Technology1990!!!!!!!";
+	private final String CLINICIAN_ICE_BCVAXUAT = "auto_clinician@deloitte.ca.bcvaxuat";
+	private final String CLINICIAN_PW_BCVAXUAT = "Technology1990!!!!!!!!";
 	private final String PPHIS_BCVAXUAT = "autooperationpphis1@deloitte.ca.bcvaxuat";
 	private final String PPHIS_PW_BCVAXUAT = "Technology1990!!!!";
 	private final String CLINICIAN_CIB_BCVAXUAT = "auto_clinician_cib@phsa.ca.bcvaxdevit";
