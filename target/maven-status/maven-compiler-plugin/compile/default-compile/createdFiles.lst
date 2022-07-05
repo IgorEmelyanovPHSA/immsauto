@@ -1,2 +1,11 @@
+bcvaxuat\my\salesforce\com\Pages\CallCenterConsolePage.class
 com\gurock\testrail\APIClient.class
+bcvaxuat\my\salesforce\com\Pages\SupplyConsolePage.class
+bcvaxuat\my\salesforce\com\Pages\InClinicExperiencePage.class
+bcvaxuat\my\salesforce\com\Pages\Utils.class
 com\gurock\testrail\APIException.class
+bcvaxuat\my\salesforce\com\Pages\RequisitionPage.class
+bcvaxuat\my\salesforce\com\Pages\ClinicInBoxPage.class
+bcvaxuat\my\salesforce\com\Pages\LoginPage.class
+bcvaxuat\my\salesforce\com\Pages\BasePage.class
+bcvaxuat\my\salesforce\com\Pages\TestRailManager.class
