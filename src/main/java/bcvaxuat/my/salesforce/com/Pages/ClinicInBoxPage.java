@@ -74,9 +74,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement next_button;
 	private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
 	
-	@FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
+	@FindBy(xpath = ".//a[@title='Maegan BCVaxVillage']")
 	private WebElement user_found;
-	private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
+	private By user_found1 = By.xpath(".//a[@title='Maegan BCVaxVillage']");
 	
 	@FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
 	private WebElement inputDiwaDate;
@@ -122,9 +122,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement register_confirmation_page_button;
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 	
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]")
+	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan BCVaxVillage')]")
 	private WebElement click_on_citizen;
-	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]");
+	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'BCVaxVillage')]");
 	
 	@FindBy(xpath = "//a[@id='relatedListsTab__item']")
 	private WebElement selectCitizenInTable; //
@@ -172,9 +172,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement immunizingAgentProvider;
 	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
 	
-	@FindBy(xpath = "//span[@title='JY Automation']")
+	@FindBy(xpath = "//span[@title='Clinician Automation']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='JY Automation']");
+	private By select_provider1 = By.xpath("//span[@title='Clinician Automation']");
 	
 	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
 	private WebElement select_lot;
@@ -428,13 +428,20 @@ public class ClinicInBoxPage extends BasePage {
 		return true;
 	}
 	
-	public void informedConsentProvider(String providerName) throws InterruptedException {
+//	public void informedConsentProvider() throws InterruptedException {
+//		waitForElementToBeVisible(driver, informedConsentProvider, 10);
+//		this.informedConsentProvider.click();
+//		Thread.sleep(2000);
+//		this.informedConsentProvider.sendKeys();
+//		Thread.sleep(2000);
+//	}
+
+	public void informedConsentProvider() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
 		waitForElementToBeVisible(driver, informedConsentProvider, 10);
 		this.informedConsentProvider.click();
-		Thread.sleep(2000);
-		this.informedConsentProvider.sendKeys(providerName);
-		Thread.sleep(2000);
 	}
+
 	
 	public void enterConsentEffectiveToDate() throws InterruptedException {
 		Calendar calendar = Calendar.getInstance();

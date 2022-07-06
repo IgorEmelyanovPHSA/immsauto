@@ -10,7 +10,7 @@ public class Requisition extends BaseTest {
 	
 	@Test
 	public void Create_Requisition_as_an_PPHIS_BCVAXUAT() throws InterruptedException {
-		TestcaseID = "220561"; //C220561
+		//TestcaseID = "220561"; //C220561
 		log("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		log("/*----2. Locate Dropdown Menu --*/");
@@ -33,7 +33,7 @@ public class Requisition extends BaseTest {
 		log("/*----7. Choose Ship To Address --*/");
 		requisitionPage.inputShipAddress();
 		log("/*----8. Locate on Automation Supply Location_1 --*/");
-		requisitionPage.LocateAddress("Atlin Health Centre");
+		requisitionPage.LocateAddress("All Ages - Atlin Health Centre");
 		log("/*----9. Choose Requested Delivery Date --*/");
 		Thread.sleep(3000);
 		requisitionPage.inputRequestDate();

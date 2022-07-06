@@ -11,6 +11,7 @@ public class DIWA extends BaseTest {
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXUAT() throws InterruptedException {
 		TestcaseID = "221409"; //C221409
 		log("/*----1. Login as an Clinician to CIB  --*/");
+		//ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
 		Thread.sleep(2000);
 		log("/*-- 2. Clinic In Box page displayed --*/");
@@ -20,7 +21,7 @@ public class DIWA extends BaseTest {
 		clinicInBoxPage.closeAllTabs();
 		Thread.sleep(2000);
 		log("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
-		clinicInBoxPage.SearchDIWACitizen("Maegan bcvaxvillage");
+		clinicInBoxPage.SearchDIWACitizen("Maegan BCVaxVillage");
 		Thread.sleep(2000);
 		log("/*----5. select Citizen from search results --*/");
 		clinicInBoxPage.userClickCitizen();
@@ -55,13 +56,17 @@ public class DIWA extends BaseTest {
 		if (clinicInBoxPage.selectDateOfAdministration())
 			Thread.sleep(2000);
 		log("/*---15. Select Informed Consent Provider ---*/");
+		clinicInBoxPage.informedConsentProvider();
+		Thread.sleep(2000);
+		clinicInBoxPage.selectProvider("Clinician Automation");
+		Thread.sleep(20000);
 		clinicInBoxPage.clickSaveConsent();
 		Thread.sleep(2000);
 		log("/*---16. Click on the Immunization provider field ---*/");
 		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
-		log("/*---17. Select Provider-->JY Automation ---*/");
-		clinicInBoxPage.selectProvider("JY Automation");
+		log("/*---17. Select Provider-->Clinician Automation ---*/");
+		clinicInBoxPage.selectProvider("Clinician Automation");
 		Thread.sleep(20000);
 		log("/*---18. Select Lot Number Field value set a Lot ---*/");
 		clinicInBoxPage.selectToSetLot();

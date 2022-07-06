@@ -38,9 +38,9 @@ public class RequisitionPage extends BasePage {
 	private WebElement shipAddress;
 	private By shipAddress1 = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
 	
-	@FindBy(xpath = "//span[contains(text(),\"Atlin Health Centre\")]")
+	@FindBy(xpath = "//span[contains(text(),\"All Ages - Atlin Health Centre\")]")
 	private WebElement clinicName;
-	private By clinicName2 = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
+	private By clinicName2 = By.xpath("//span[contains(text(),\"All Ages - Atlin Health Centre\")]");
 	
 	@FindBy(xpath = "//input[@class=\"slds-input\"]")
 	private WebElement requestedDeliveryDate;
