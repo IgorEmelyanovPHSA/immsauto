@@ -65,7 +65,9 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@dir='ltr'][text()='Delete']")
 	private WebElement delete_record_button;
 	private By delete_record_button1 = By.xpath("//span[@dir='ltr'][text()='Delete']");
-	
+	private By delete_record_button2 = By.xpath("//span[text()='Delete']");
+
+
 	@FindBy(xpath = "(//span[@id='window'])")
 	private WebElement select_rern_record;
 	private By select_rern_record1 = By.xpath("/html/body/div[4]/div[1]/section/div[1]/div[2]/div[2]/div[1]/div/div/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-b-c-h_-participant_-record_-page___-account___-v-i-e-w/forcegenerated-flexipage_bch_participant_record_page_account__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[2]/div[1]/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/flexipage-tab2[2]/slot/flexipage-component2[5]/slot/lst-related-list-container/div/div[8]/lst-related-list-single-container/laf-progressive-container/slot/lst-related-list-single-app-builder-mapper/article/lst-related-list-view-manager/lst-common-list-internal/div/div/lst-primary-display-manager/div/lst-primary-display/lst-primary-display-grid/lst-customized-datatable/div[2]/div/div/table/tbody/tr/th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/force-lookup/div/records-hoverable-link/div");
@@ -380,7 +382,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@title='Other']")
 	private WebElement select_reason;
 	private By select_reason1 = By.xpath("//span[@title='Other']");
-	
+
+	private By deleteRecordDropDown = By.cssSelector(".windowViewMode-normal runtime_platform_actions-actions-ribbon .slds-button_last");
+
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -516,6 +521,23 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeLocated(driver, delete_record_button1, 10);
 		WebElement element1 = driver.findElement(delete_record_button1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+
+	public void deleteImmunRecord() throws InterruptedException {
+		waitForElementToBeLocated(driver, deleteRecordDropDown, 10);
+		WebElement element = driver.findElement(deleteRecordDropDown);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, delete_record_button2, 10);
+		WebElement element1 = driver.findElement(delete_record_button2);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(3000);
+		waitForElementToBeLocated(driver, delete_record_button1, 10);
+		WebElement element2 = driver.findElement(delete_record_button1);
+		JavascriptExecutor executor2 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 	}
 	
@@ -1128,6 +1150,21 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element1 = driver.findElement(select_reason1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
+	}
+
+	public void goToClientProfileViaSearch(String client) throws InterruptedException {
+		//waitForElementToBeLocated(driver,search_assistant1,10);
+		waitForElementToBeVisible(driver, search_assistant, 10);
+		WebElement search_navigator = driver.findElement(search_assistant1);
+		search_navigator.click();
+		waitForElementToBeVisible(driver, search_input, 10);
+		WebElement search_input = driver.findElement(search_input1);
+		search_input.sendKeys(client);
+		search_input.sendKeys(Keys.RETURN);
+		Thread.sleep(5000);
+		WebElement clientLink = driver.findElement(By.xpath(String.format("//a[contains(text(), '%s')]", client)));
+		clientLink.click();
+		Thread.sleep(5000);
 	}
 	
 }
