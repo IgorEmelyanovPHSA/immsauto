@@ -226,10 +226,6 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		log("/*-- 47---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-
-		inClinicExperience.goToClientProfileViaSearch("Ludovika BCVaxLimeburn");
-		int a  = 3;
-		
 	}
 	
 	@Test(priority = 3)
