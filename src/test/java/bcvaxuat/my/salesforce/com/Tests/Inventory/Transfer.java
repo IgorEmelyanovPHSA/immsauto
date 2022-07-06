@@ -33,7 +33,7 @@ public class Transfer extends BaseTest {
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
 		Thread.sleep(5000);
-		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
+		//log("/*-- 6. Click and navigate to the supply container --> 'Moderna mRNA-1273 - 300042698-CC03' --*/");
 		//supplyConsolePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -50,7 +50,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.selectTransferFromDropDown();
 		Thread.sleep(2000);
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
-		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+		String tradeName = supplyConsolePage.getVaccineName();//Moderna mRNA-1273 - 300042698-CC03
 		log("/*--  the Trade Name is:  " + tradeName);
 		Thread.sleep(2000);
 		log("/*10.----Picked up the Dose Conversation Factor --*/");
@@ -173,7 +173,7 @@ public class Transfer extends BaseTest {
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
 		Thread.sleep(5000);
-		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
+		//log("/*-- 6. Click and navigate to the supply container --> 'Moderna mRNA-1273 - 300042698-CC03' --*/");
 		//supplyConsolePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		/////////////////////Doses and Quantity BEFORE//////////////////////////////////
@@ -199,7 +199,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.selectTransferFromDropDown();
 		Thread.sleep(2000);
 		log("/*10.----Picked up the Trade Vaccine Name --*/");
-		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+		String tradeName = supplyConsolePage.getVaccineName();//Moderna mRNA-1273 - 300042698-CC03
 		log("/*--  the Trade Name is:  " + tradeName);
 		Thread.sleep(2000);
 		log("/*11.----Picked up the Dose Conversation Factor --*/");
