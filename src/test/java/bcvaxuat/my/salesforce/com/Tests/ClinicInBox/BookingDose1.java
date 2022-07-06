@@ -3,14 +3,11 @@ package bcvaxuat.my.salesforce.com.Tests.ClinicInBox;
 import bcvaxuat.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxuat.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.Test;
-//import org.testng.log4testng.Logger;
+
 
 public class BookingDose1 extends BaseTest {
-	static Logger log = Logger.getLogger(BookingDose1.class);
-	
+
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -82,14 +79,10 @@ public class BookingDose1 extends BaseTest {
 	@Test(priority = 2)
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXUAT() throws InterruptedException {
 		TestcaseID = "222364"; //C192878
-		//System.setProperty("log4j.properties", "hjjfhjf");
-		PropertyConfigurator.configure("log4j.properties");
 		log("/*1.----Login as an Clinician to CIB --*/");
-		log.info("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*2.----Clinic In Box(IPM) page displayed --*/");
-		log.info("/*2.----Clinic In Box(IPM) page displayed --*/");
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");

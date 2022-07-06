@@ -80,7 +80,7 @@ public class BookingDose2 extends BaseTest {
 		TestcaseID = "222368";
 		log("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*2.----Clinic In Box(IPM) page displayed --*/");
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);

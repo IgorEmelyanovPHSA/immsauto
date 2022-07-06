@@ -45,6 +45,9 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//a[@title='Hugues BCVaxLampard']")
 	private WebElement user_Hugues_found;
 	private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues BCVaxLampard']");
+
+	private WebElement user_Gill_found;
+	private By user_Gill_found1 = By.xpath(".//a[@title='Gill BCVaxOrigan']");
 	
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;
@@ -243,8 +246,8 @@ public class InClinicExperiencePage extends BasePage {
 	private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
 	
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
-	private WebElement confirmation_popup;
-	private By confirmation_popup1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
+	private WebElement verify_contact_information_checkbox;
+	private By verify_contact_information_checkbox_ = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
 	
 	@FindBy(xpath = "(.//button[@title='Confirm & Save Identification'])")
 	private WebElement confirm_and_save_btn_home;
@@ -876,10 +879,13 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, confirm_and_save_btn_home, 10);
 		confirm_and_save_btn_home.click();
 	}
-	
+
 	public void clickVerifyContactInformation() throws InterruptedException {
-		scrollTop(confirmation_popup);
-		click(confirmation_popup);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
+		Thread.sleep(2000);
+		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
 	
@@ -1131,6 +1137,18 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element1 = driver.findElement(select_reason1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
+	}
+
+	public boolean userGillFound() throws InterruptedException {
+		if (!isDisplayed(user_Gill_found1)) {
+			return false;
+		}
+		waitForElementToBeLocated(driver, user_Gill_found1, 10);
+		WebElement element = driver.findElement(user_Gill_found1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		return true;
 	}
 
 }
