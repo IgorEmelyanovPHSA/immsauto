@@ -43,7 +43,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 			} else {
 				log("/*---- User navigated to Imms record ---*/");
 				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
+				inClinicExperiencePage.deleteImmunRecord();
 				log("/*---- Imms record deleted Successfully ---*/");
 				Thread.sleep(2000);
 			}
@@ -226,7 +226,9 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		log("/*-- 47---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-		
+
+		inClinicExperience.goToClientProfileViaSearch("Ludovika BCVaxLimeburn");
+		int a  = 3;
 		
 	}
 	
