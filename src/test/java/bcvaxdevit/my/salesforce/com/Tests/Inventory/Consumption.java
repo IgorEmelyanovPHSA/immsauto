@@ -251,6 +251,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
+		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
+		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		Thread.sleep(3000);
@@ -280,11 +283,11 @@ public class Consumption extends BaseTest {
 		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
 		double remainingDoses_after = inClinicExperiencePage.getValueOfRemainingDoses();
 		log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
-		assertEquals(remainingDoses_after, remainingDoses_before + 1);
+		assertEquals(remainingDoses_after, remainingDoses_before - 1);
 		Thread.sleep(2000);
 		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, (remainingDoses_before + 1)/5);
+		assertEquals(remainingQty_after, (remainingDoses_before - 1)/5);
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");
