@@ -81,7 +81,6 @@ public class BookingDose2 extends BaseTest {
     @Test(priority = 2)
     public void Can_Book_Dose2_Appointment_as_Call_Center_Agent_BCVAXUAT() throws InterruptedException {
         TestcaseID = "222323"; //C222323
-        TestcaseID = "222323"; //C222323
         log("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
         CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
         Thread.sleep(5000);
@@ -149,9 +148,12 @@ public class BookingDose2 extends BaseTest {
         log("/*21----Go to Appointment Tab --*/");
         callCenterConsole.clickAppointmentTab();
         Thread.sleep(2000);
-        //log("/*22----click on reason for Visit for visit 'Covid-19 Vaccine' radiobutton --*/");
-        //callCenterConsole.clickOnReasonForVisit();
-        //Thread.sleep(2000);
+        log("/*21----click on reason for Visit for visit 'Covid-19 Vaccine' radiobutton --*/");
+        callCenterConsole.clickOnReasonForVisit();
+        Thread.sleep(2000);
+        log("/*21----click on reason Early Booking Reason --*/");
+        callCenterConsole.selectEarlyBookingReason();
+        Thread.sleep(2000);
         log("/*24----select 'Search clinic name' tab --*/");
         callCenterConsole.selectSearchClinicNameTab();
         Thread.sleep(2000);

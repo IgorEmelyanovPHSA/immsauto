@@ -179,18 +179,18 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses;
 	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 	
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_distribution_1_2;
-	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 	
 	
 	@FindBy(xpath = "(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty;
 	private By get_remaining_Qty_ = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 	
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_1_2;
-	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 	
 	
 	@FindBy(xpath = ".//input[@name = 'HC_Product_Measure__c']")
