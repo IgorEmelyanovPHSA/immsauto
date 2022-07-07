@@ -26,7 +26,16 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)")
 	private WebElement rows_supply_containers_from_count_path;
 	private By rows_supply_containers_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)");
-	
+
+	@FindBy(xpath = "//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']")
+	private WebElement btnTransferDraftOnTransactionsPage;
+
+	@FindBy(xpath = "//h2[@class='slds-text-heading_medium slds-hyphenate']/../..//button[text() = 'Transfer']")
+	private WebElement btnTransferDraftOnContainerTransferPage;
+
+	@FindBy(xpath = "//button[contains(text(),'Transfer Transactions')]")
+	private WebElement btnTransferTransactionsDraftOnTransactionsPage;
+
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
 	private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
@@ -137,7 +146,10 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[1]")
 	private WebElement rows_incoming_transactions_count_path;
-	
+
+	@FindBy(xpath = "//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux']")
+	private WebElement rows_draft_transactions_count_path;
+
 	@FindBy(xpath = ".//button[text() = 'Confirm Transfer']")
 	private WebElement bulk_confirm_incoming_transfers_button;
 	private By bulk_confirm_incoming_transfers_button_1 = By.xpath(".//button[text() = 'Confirm Transfer']");
@@ -209,7 +221,11 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement click_on_related_item_tab;
 	private By click_on_related_item_tab_1 = By.xpath(".//a[text() = 'Related Items']");
 
+	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
+	private WebElement btnEditOnTrasactionPage;
 
+	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Cancel')]")
+	private WebElement btnCancelTransfer;
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -243,6 +259,9 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//h2[text()='Container - Adjustment']/../..//button[(text()='Adjustment')]")
 	private WebElement btnAdjustmentOnContainerWastagePopUp;
+
+	@FindBy(xpath = "//button[contains(text(),'draft')]")
+	private WebElement btnSaveAsDraftOnContainerWastagePopUp;
 
 	@FindBy(xpath = "//button[text() = 'Wastage']")
 	private WebElement btnBulkWastageSupplyPage;
@@ -550,7 +569,52 @@ public class SupplyConsolePage extends BasePage {
 		List<WebElement> rows = rows_incoming_transactions_count_path.findElements(By.tagName("tr"));
 		return (rows.size());
 	}
-	
+
+	public int getRowsDraftTransactionsCount() {
+		scrollTop(rows_draft_transactions_count_path);
+		List<WebElement> rows = driver.findElements(By.xpath("//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux']"));
+		return (rows.size());
+	}
+
+	public String getLatestDraftTransactionId(int value) {
+		//Offset due to 0 is not a real value
+		int offset = value-1;
+		WebElement draftTransactionElement = driver.findElement(By.xpath("(//a[@title='draftTransactionFromName'])[" + offset + "]"));
+		String draftTransactionId = draftTransactionElement.getText();
+		return draftTransactionId;
+	}
+
+	public void clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(int value) throws InterruptedException {
+		WebElement draftTransactionElement = driver.findElement(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + value + "]"));
+		click(draftTransactionElement);
+		click(btnTransferDraftOnTransactionsPage);
+		click(btnTransferTransactionsDraftOnTransactionsPage);
+	}
+
+	public void clickDropDownLatestDraftTransactionsAndConfirmTransfer(int countDraftTransactions, double amountOfDosesToAdjustInDraftEdit) throws InterruptedException {
+		//Offset due to 0 is not a real value
+		int offset = countDraftTransactions-1;
+		WebElement draftTransactionElement = driver.findElement
+				(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small'])[" + offset + "]"));
+		click(draftTransactionElement);
+		click(btnEditOnTrasactionPage);
+		setDosesAmount(String.valueOf(amountOfDosesToAdjustInDraftEdit));
+		click(btnTransferDraftOnContainerTransferPage);
+		Thread.sleep(2000);
+		clickBulkTransfersCloseButton();
+		Thread.sleep(2000);
+	}
+
+	public void clickDropDownLatestDraftTransactionsAndCancelTransfer(int countDraftTransactions) throws InterruptedException {
+		//Offset due to 0 is not a real value
+		int offset = countDraftTransactions-1;
+		WebElement draftTransactionElement = driver.findElement
+				(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small'])[" + offset + "]"));
+		click(draftTransactionElement);
+		click(btnCancelTransfer);
+		Thread.sleep(2000);
+	}
+
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
 		By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
 		waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
@@ -718,6 +782,12 @@ public class SupplyConsolePage extends BasePage {
 	public void clickBtnAdjustmentAtContainerAdjustmentPopUp() throws InterruptedException {
 		scrollTop(btnAdjustmentOnContainerWastagePopUp);
 		click(btnAdjustmentOnContainerWastagePopUp);
+		Thread.sleep(2000); //To handle success message
+	}
+
+	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
+		scrollTop(btnSaveAsDraftOnContainerWastagePopUp);
+		click(btnSaveAsDraftOnContainerWastagePopUp);
 		Thread.sleep(2000); //To handle success message
 	}
 
