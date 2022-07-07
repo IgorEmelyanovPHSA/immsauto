@@ -232,11 +232,12 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		System.out.println("/*44.---the Home - Client Search showing up  --*/");
+		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
+		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
+		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-		
-		
 	}
 	
 	@Test(priority = 3)
