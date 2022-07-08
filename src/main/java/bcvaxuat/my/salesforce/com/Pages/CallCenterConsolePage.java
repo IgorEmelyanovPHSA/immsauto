@@ -132,8 +132,20 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = "//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]")
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]");
-	
-	
+
+	@FindBy(xpath = "(//button[@title='Primary action'])[1]")
+	private WebElement refresh_forecast_button;
+	private By refresh_forecast_button1 = By.xpath("(//button[@title='Primary action'])[1]");
+
+	@FindBy(xpath = "")
+	private WebElement selectAppointment;
+	private By selectAppointment1 = By.xpath("/html/body/div[4]/div[1]/section/div[1]/div/div[2]/div[2]/section/div/div/section/div/div[2]/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-h-c_-participant_-record_-page22___-account___-v-i-e-w/forcegenerated-flexipage_hc_participant_record_page22_account__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[2]/div[1]/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/flexipage-tab2[2]/slot/flexipage-component2[3]/slot/lst-related-list-container/div/div[1]/lst-related-list-single-container/laf-progressive-container/slot/lst-related-list-single-app-builder-mapper/article/lst-related-list-view-manager/lst-common-list-internal/div/div/lst-primary-display-manager/div/lst-primary-display/lst-primary-display-grid/lst-customized-datatable/div[2]/div/div/table/tbody/tr/th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/force-lookup/div/records-hoverable-link/div");
+
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose #']/../..//LIGHTNING-FORMATTED-NUMBER[@data-output-element-id='output-field']")
+	private WebElement getDoseNumber;
+	private By getDoseNumber1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose #']/../..//LIGHTNING-FORMATTED-NUMBER[@data-output-element-id='output-field']");
+
+
 	/*---------Constructor-------*/
 	public CallCenterConsolePage(WebDriver driver) {
 		super(driver);
@@ -257,6 +269,12 @@ public class CallCenterConsolePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+
+	public void clickRefreshForecastButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, refresh_forecast_button, 10);
+		WebElement element = driver.findElement(refresh_forecast_button1);
+		refresh_forecast_button.click();
+	}
 	
 	public void clickOnEligibilityButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_eligibility_button1, 10);
@@ -322,8 +340,7 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
@@ -380,10 +397,33 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickVerifyContactInformation() throws InterruptedException {
-		scrollTop(verify_contact_information_checkbox);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
 		Thread.sleep(2000);
 		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
+	}
+
+	public void selectAppointmentRecord() throws InterruptedException {
+		//To scroll down the page to see RERN Record
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,500)", "");
+		waitForElementToBeLocated(driver, selectAppointment1, 10);
+		WebElement element = driver.findElement(selectAppointment1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+	}
+
+	public Double getValueOfDosesNumber() throws InterruptedException {
+		waitForElementToBeLocated(driver, getDoseNumber1, 10);
+		WebElement element = driver.findElement(getDoseNumber1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
 	}
 	
 	
