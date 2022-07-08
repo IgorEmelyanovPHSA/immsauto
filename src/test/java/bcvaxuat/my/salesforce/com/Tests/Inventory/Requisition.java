@@ -7,10 +7,10 @@ import bcvaxuat.my.salesforce.com.Pages.RequisitionPage;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 
 public class Requisition extends BaseTest {
-	
+
 	@Test
 	public void Create_Requisition_as_an_PPHIS_BCVAXUAT() throws InterruptedException {
-		//TestcaseID = "220561"; //C220561
+		TestcaseID = "220561"; //C220561
 		log("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		log("/*----2. Locate Dropdown Menu --*/");
@@ -73,20 +73,22 @@ public class Requisition extends BaseTest {
 		log("/*----21. Approve Requisition--*/");
 		requisitionPage.clickApproveRequisition();
 		Thread.sleep(4000);
+		requisitionPage.clickSaveApprovedRequisition();
+		Thread.sleep(3000);
 		log("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("10");
+		requisitionPage.enterApprovedDose("5");
 		Thread.sleep(5000);
 		log("/*----23. Save Approved Request Dose--*/");
 		requisitionPage.clickSaveApprovedRequisition();
 		Thread.sleep(4000);
 		log("/*----24. Ship Requisition--*/");
 		requisitionPage.clickShipRequisition();
-		
+
 		Thread.sleep(7000);
-		
+
 		String actual = "Ship Requisition";
 		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
-		
+
 		log("/*----25. Save Shipping Requisition--*/");
 		requisitionPage.clickSaveShipRequisition();
 		Thread.sleep(3000);
@@ -102,7 +104,7 @@ public class Requisition extends BaseTest {
 		log("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();
 		Thread.sleep(5000);
-		
+
 	}
-	
+
 }
