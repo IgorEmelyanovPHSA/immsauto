@@ -21,7 +21,7 @@ public class BaseTest {
 	private ByteArrayOutputStream logOutputSteps;
 	private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
 	protected LoginPage loginPage;
-	
+
 //	@BeforeSuite
 //	public void beforeSuite() {
 //		//---This will execute before the Suite
@@ -60,7 +60,7 @@ public class BaseTest {
 		driver.manage().deleteAllCookies();
 		driver.close();
 	}
-	
+
 //	@AfterTest
 //	public void afterTest() {
 //		System.out.println("This will execute after the Test");
@@ -75,26 +75,26 @@ public class BaseTest {
 //	public void cleanUp() {
 //		System.out.println("This will execute after the Suite");
 //	}
-
+	
 	public WebDriver getDriver() {
 		return driver;
 	}
-
-	private void captureBothStreams(){
+	
+	private void captureBothStreams() {
 		logOutputSteps = new ByteArrayOutputStream();
 		PrintStream ps = new PrintStream(logOutputSteps);
 		TeeOutputStream bothStreams = new TeeOutputStream(ps, System.out);
 		PrintStream both = new PrintStream(bothStreams);
 		System.setOut(both);
 	}
-
+	
 	public static String getLogTime() {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return LOG_TIMESTAMP_FORMAT.format(timestamp);
 	}
-
+	
 	public static void log(String msg) {
 		System.out.println(getLogTime() + " " + msg);
 	}
-
+	
 }

@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
-
+	
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -157,9 +157,9 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*21----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(2000);
-		System.out.println("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		clinicInBox.clickOnReasonForVisit();
-		Thread.sleep(2000);
+		//System.out.println("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
+		//clinicInBox.clickOnReasonForVisit();
+		//Thread.sleep(2000);
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//clinicInBox.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);

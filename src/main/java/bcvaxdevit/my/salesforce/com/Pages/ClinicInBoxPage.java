@@ -256,11 +256,11 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]")
 	private WebElement click_Dose2_citizen;
 	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
-
+	
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
-
+	
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
 		super(driver);
@@ -432,8 +432,8 @@ public class ClinicInBoxPage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
 		waitForElementToBeVisible(driver, informedConsentProvider, 10);
 		this.informedConsentProvider.click();
-
-
+		
+		
 	}
 	
 	public void enterConsentEffectiveToDate() throws InterruptedException {
@@ -686,7 +686,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
@@ -740,7 +740,7 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		return new InClinicExperiencePage(driver);
 	}
-
+	
 	public void clickVerifyContactInformation() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
 		Thread.sleep(2000);

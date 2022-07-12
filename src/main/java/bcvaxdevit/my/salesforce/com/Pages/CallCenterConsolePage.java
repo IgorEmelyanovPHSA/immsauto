@@ -234,6 +234,7 @@ public class CallCenterConsolePage extends BasePage {
 	
 	public void enterEmail(String enteremail) throws InterruptedException {
 		waitForElementToBeLocated(driver, email1, 10);
+		Thread.sleep(2000);
 		email.sendKeys(enteremail);
 	}
 	
@@ -249,6 +250,7 @@ public class CallCenterConsolePage extends BasePage {
 	
 	public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
 		waitForElementToBeLocated(driver, register_confirmation_page_button1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(register_confirmation_page_button1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -296,11 +298,12 @@ public class CallCenterConsolePage extends BasePage {
 	
 	public void clickAppointmentTab() throws InterruptedException {
 		waitForElementToBeVisible(driver, appointment_tab, 10);
+		Thread.sleep(2000);
 		appointment_tab.click();
 	}
 	
 	public void clickOnReasonForVisit() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
@@ -340,7 +343,7 @@ public class CallCenterConsolePage extends BasePage {
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();

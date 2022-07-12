@@ -15,7 +15,6 @@ public class TestRailManager {
 	public static final int TEST_CASE_PASSED_STATUS = 1;
 	public static final int TEST_CASE_FAILED_STATUS = 5;
 	
-	
 	public static void addResultsForTestCase(String testCaseId, int status,
 	                                         String error, String logOutputTestSteps) throws IOException, APIException {
 		String testRunId = TEST_RUN_ID;

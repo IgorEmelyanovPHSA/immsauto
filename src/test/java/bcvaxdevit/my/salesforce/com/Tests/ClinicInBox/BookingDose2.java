@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class BookingDose2 extends BaseTest {
-
+	
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219918"; //C219918
@@ -77,7 +77,7 @@ public class BookingDose2 extends BaseTest {
 			System.out.println("/*----Search for Hugues BCVaxLampard is Successful ---*/");
 		}
 	}
-
+	
 	@Test(priority = 2)
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "222368";
@@ -97,10 +97,10 @@ public class BookingDose2 extends BaseTest {
 		//System.out.println("/*----4. select Citizen from search results --*/");
 		//clinicInBox.clickDose2Citizen();
 		//Thread.sleep(2000);
-
-
+		
+		
 	}
-
+	
 	@Test(priority = 3)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -167,6 +167,6 @@ public class BookingDose2 extends BaseTest {
 			System.out.println("/*----Search for Hugues BCVaxLampard is Successful ---*/");
 		}
 	}
-
-
+	
+	
 }
