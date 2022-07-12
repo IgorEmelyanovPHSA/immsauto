@@ -733,6 +733,20 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys(doses);
 		
 	}
+
+	public void enterTransferQuantity(String quantity) throws InterruptedException {
+		By Quantity = By.xpath("//lightning-input//label[text()='Quantity']//following-sibling::div/input[@class='slds-input']");
+		waitForElementToBeLocated(driver, Quantity, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(Quantity);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(2000);
+		click(Quantity);
+		Thread.sleep(2000);
+		element.clear();
+		Thread.sleep(2000);
+		element.sendKeys(quantity);
+	}
 	
 	public void selectAdjustmentFromDropDown() throws InterruptedException {
 		click(selectAdjustmentFromDropDown);
