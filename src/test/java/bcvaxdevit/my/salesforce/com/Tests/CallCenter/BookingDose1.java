@@ -166,7 +166,7 @@ public class BookingDose1 extends BaseTest {
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//callCenterConsole.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
-		System.out.println("/*24----select 'Search clinic name' tab --*/");
+		System.out.println("/*24----select 'Search by Clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
 		Thread.sleep(2000);
 		System.out.println("/*25----search the Clinic --*/");
@@ -190,7 +190,7 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*31----click Confirm Appointment button  --*/");
 		callCenterConsole.clickOnConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*32----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*32----see 'Appointment confirmed!' screen --*/");
 		callCenterConsole.validateAppointmentConfirmedScreen();
 		Thread.sleep(2000);
 		System.out.println("/*33----Refresh page --*/");
