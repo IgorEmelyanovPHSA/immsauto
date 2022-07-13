@@ -221,10 +221,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement appointment_scheduling_tab;
 	private By appointment_scheduling_tab1 = By.xpath(".//a[@data-label= 'Appointment Scheduling']");
 	
-	@FindBy(xpath = ".//a[text()='Search clinic name']")
-	private WebElement click_select_search_clinic;
-	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search clinic name']");
-	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement select_clinic;
 	private By select_clinic1 = By.xpath("//input[@name='clinicstag']");
@@ -849,15 +845,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
 		click_more_search_tabs.click();
 	}
-	
-	public void clickToSearchClinic() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(click_select_search_clinic1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
+
 	public void SearchForClinic() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
@@ -992,7 +980,7 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-		
+
 	public void selectSearchByClinicNameTab () throws InterruptedException {
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);

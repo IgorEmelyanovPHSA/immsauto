@@ -201,8 +201,8 @@ public class Consumption extends BaseTest {
 		System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");
 		inClinicExperiencePage.selectEarlyBookingReason();
 		Thread.sleep(2000);
-		log("/*--34.----select 'Search clinic name' tab --*/");
-		inClinicExperiencePage.clickToSearchClinic();
+		log("/*--34.----select 'Search by Clinic name' tab --*/");
+		inClinicExperiencePage.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
 		log("/*-- 35.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
 		inClinicExperiencePage.SearchForClinic();
@@ -225,7 +225,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 41.---Click Appointment Confirm Button --*/");
 		inClinicExperiencePage.clickAppointmentConfirmButton();
 		Thread.sleep(2000);
-		log("/*-- 42.---Appointment Confirmed! Message Displayed --*/");
+		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		Thread.sleep(2000);
 		log("/*-- 43.---Navigate to person account Related Tab --*/");

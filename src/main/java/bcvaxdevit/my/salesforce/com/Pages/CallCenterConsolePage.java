@@ -129,9 +129,9 @@ public class CallCenterConsolePage extends BasePage {
 	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 	
-	@FindBy(xpath = "//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]")
+	@FindBy(xpath = "//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]")
 	private WebElement verify_contact_information_checkbox;
-	private By verify_contact_information_checkbox1 = By.xpath("(//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]");
+	private By verify_contact_information_checkbox1 = By.xpath("(//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]");
 	
 	@FindBy(xpath = "(//button[@title='Primary action'])[1]")
 	private WebElement refresh_forecast_button;
