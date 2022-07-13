@@ -29,7 +29,7 @@ public class Requisition extends BaseTest {
 		Thread.sleep(4000);
 		System.out.println("/*----6. Navigate to Request Supplies --*/");
 		requisitionPage.clickRequestSupplies();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		System.out.println("/*----7. Choose Ship To Address --*/");
 		requisitionPage.inputShipAddress();
 		System.out.println("/*----8. Locate on Automation Supply Location_1 --*/");
@@ -74,7 +74,7 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickApproveRequisition();
 		Thread.sleep(4000);
 		System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("1");
+		requisitionPage.enterApprovedDose("5");
 		Thread.sleep(5000);
 		System.out.println("/*----23. Save Approved Request Dose--*/");
 		requisitionPage.clickSaveApprovedRequisition();
