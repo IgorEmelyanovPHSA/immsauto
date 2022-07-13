@@ -903,10 +903,10 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean AppointmentConfirmationMessage() throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_appointment_confirm_message, 10);
-			System.out.println("/*---'Appointment Confirmed!' message shown up");
+			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
 		} catch (NoSuchElementException e) {
-			System.out.println("/*---the screen does not show up 'Appointment Confirmed!'");
+			System.out.println("/*---the screen does not show up 'Appointment confirmed!'");
 			return false;
 		}
 	}

@@ -163,8 +163,8 @@ public class BookingDose1 extends BaseTest {
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//clinicInBox.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
-		System.out.println("/*24----select 'Search clinic name' tab --*/");
-		clinicInBox.selectSearchClinicNameTab();
+		System.out.println("/*24----select 'Search by Clinic name' tab --*/");
+		clinicInBox.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
 		System.out.println("/*25----search the Clinic --*/");
 		clinicInBox.searchClinicName();
@@ -187,7 +187,7 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*31----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*32----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*32----see 'Appointment confirmed!' screen --*/");
 		clinicInBox.validateAppointmentConfirmedScreen();
 		Thread.sleep(2000);
 		System.out.println("/*33----Refresh page --*/");
