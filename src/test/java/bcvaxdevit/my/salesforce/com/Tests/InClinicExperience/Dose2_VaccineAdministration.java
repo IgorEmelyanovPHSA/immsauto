@@ -183,8 +183,8 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
-		System.out.println("/*28.----select 'Search clinic name' tab --*/");
-		inClinicExperience.selectSearchClinicNameTab();
+		System.out.println("/*28.----select 'Search by Clinic name' tab --*/");
+		inClinicExperience.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
 		System.out.println("/*29.----search the Clinic Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center--*/");
 		inClinicExperience.searchClinicName();
@@ -206,7 +206,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		Thread.sleep(2000);
 		inClinicExperience.clickAppointmentConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*35.----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*35.----see 'Appointment confirmed!' screen --*/");
 		inClinicExperience.AppointmentConfirmationMessage();
 		Thread.sleep(2000);
 		System.out.println("/*36.----Refresh page --*/");
