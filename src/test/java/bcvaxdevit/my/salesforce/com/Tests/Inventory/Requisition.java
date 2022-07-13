@@ -78,7 +78,7 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickSaveApprovedRequisition();
 		Thread.sleep(3000);
 		System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("6");
+		requisitionPage.enterApprovedDose("1");
 		Thread.sleep(5000);
 		System.out.println("/*----23. Save Approved Request Dose--*/");
 		requisitionPage.clickSaveApprovedRequisition();
