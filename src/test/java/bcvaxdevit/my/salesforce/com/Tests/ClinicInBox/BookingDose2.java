@@ -90,7 +90,7 @@ public class BookingDose2 extends BaseTest {
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		Thread.sleep(5000);
-		System.out.println("/*----3. Search for Participant account Hugues BCVaxLampard ---*/");
+		System.out.println("/*----4. Search for Participant account Hugues BCVaxLampard ---*/");
 		Thread.sleep(2000);
 		clinicInBox.SearchDose2Citizen("Hugues BCVaxLampard");
 		Thread.sleep(2000);
