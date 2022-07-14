@@ -591,6 +591,17 @@ public class SupplyConsolePage extends BasePage {
 		click(btnTransferTransactionsDraftOnTransactionsPage);
 	}
 
+	public void clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(int countDraftTransactions, int numberOfRows) throws InterruptedException {
+
+		for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
+			WebElement draftTransactionElement = driver.findElement(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + i + "]"));
+			click(draftTransactionElement);
+		}
+		scrollTop(btnTransferDraftOnTransactionsPage);
+		click(btnTransferDraftOnTransactionsPage);
+		click(btnTransferTransactionsDraftOnTransactionsPage);
+	}
+
 	public void clickDropDownLatestDraftTransactionsAndConfirmTransfer(int countDraftTransactions, double amountOfDosesToAdjustInDraftEdit) throws InterruptedException {
 		//Offset due to 0 is not a real value
 		int offset = countDraftTransactions-1;
