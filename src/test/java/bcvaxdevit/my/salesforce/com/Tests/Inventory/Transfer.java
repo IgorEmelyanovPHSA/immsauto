@@ -34,7 +34,7 @@ public class Transfer extends BaseTest {
 		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
 		//supplyConsolePage.selectSupplyContainer();
 		Thread.sleep(2000);
-		log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+		log("/*6.----Getting Remaining Doses/Remaining Quantity - Before --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
 		log("/*-- . remaining doses are: -->" + remainingDoses_before);
 		Thread.sleep(2000);
@@ -68,7 +68,7 @@ public class Transfer extends BaseTest {
 		System.out.println("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersCloseButton();
 		Thread.sleep(5000);
-		System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
+		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity - After --*/");
 		double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses();
 		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after);
 		Thread.sleep(2000);
@@ -138,7 +138,7 @@ public class Transfer extends BaseTest {
 		System.out.println("/*29.----click on Related Item Tab --*/");
 		supplyConsolePage.clickOnRelatedItemTab();
 		Thread.sleep(2000);
-		System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
+		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
 		double remainingDoses_after_SupplyLocation2 = supplyConsolePage.getValueOfRemainingDoses();
 		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_SupplyLocation2);
 		Thread.sleep(2000);
