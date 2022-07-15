@@ -329,9 +329,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement supply_distribution_to;
 	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
 	
-	@FindBy(xpath = "//span[@title='None - SDST-0000000393']")
+	@FindBy(xpath = "//span[@title='Supply Distribution_1_1 - SDST-0000000419']")
 	private WebElement select_supply_distributor;
-	private By select_supply_distributor1 = By.xpath("//span[@title='None - SDST-0000000393']");
+	private By select_supply_distributor1 = By.xpath("//span[@title='Supply Distribution_1_1 - SDST-0000000419']");
 	
 	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
 	private WebElement click_reason;
@@ -345,13 +345,13 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement cancel_button_receive_supplies;
 	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
 	
-	@FindBy(xpath = "(//a[text()='None - SDST-0000000393'])[1]")
+	@FindBy(xpath = "(//a[text()='Supply Distribution_1_1 - SDST-0000000419'])[1]")
 	private WebElement click_supply_distribution;
-	private By click_supply_distribution1 = By.xpath("(//a[text()='None - SDST-0000000393'])[1]");
+	private By click_supply_distribution1 = By.xpath("(//a[text()='Supply Distribution_1_1 - SDST-0000000419'])[1]");
 	
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000000393']")
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000000419']")
 	private WebElement get_supply_distribution_name;
-	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000000393']");
+	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000000419']");
 	
 	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Automation Java']")
 	private WebElement get_supply_distribution_description;
@@ -733,6 +733,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void SearchForClinic() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_clinic, 10);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", select_clinic);
 		select_clinic.click();
 		Thread.sleep(2000);
 		select_clinic.sendKeys("Age 12 and Above - Abbotsford - Abby Pharmacy");
@@ -740,12 +741,11 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		Thread.sleep(2000);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
-		option_loc_facility.click();
+		option_loc_facility.click();    
 	}
 	
 	public void selectAppointment() throws InterruptedException {
