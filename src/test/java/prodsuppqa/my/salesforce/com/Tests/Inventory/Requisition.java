@@ -74,7 +74,7 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickApproveRequisition();
 		Thread.sleep(4000);
 		System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("5");
+		requisitionPage.enterApprovedDose("1");
 		Thread.sleep(5000);
 		System.out.println("/*----23. Save Approved Request Dose--*/");
 		requisitionPage.clickSaveApprovedRequisition();
@@ -97,7 +97,7 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickSearchSupplyDistributions();
 		Thread.sleep(3000);
 		System.out.println("/*----28. Select Distribution--*/");
-		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001499");
+		requisitionPage.SelectSupplyDistributionTo2("SDST-0000000415");
 		Thread.sleep(3000);
 		System.out.println("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();
