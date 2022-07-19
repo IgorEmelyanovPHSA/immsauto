@@ -454,7 +454,7 @@ public class SupplyConsolePage extends BasePage {
 		this.supply_page_displayed.isDisplayed();
 	}
 	
-	public void enterBulkTransferDosages(int k) throws InterruptedException {
+	public void enterBulkTransferByDosages(int k) throws InterruptedException {
 		//private By doses_1 = By.xpath("(.//input[@class = 'slds-input'])[2]");
 		By dose_1_ = By.xpath("(.//input[@class = 'slds-input'])[" + k + "]");
 		waitForElementToBeLocated(driver, dose_1_, 10);
@@ -462,6 +462,15 @@ public class SupplyConsolePage extends BasePage {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollRight = arguments[0].scrollWidth", element);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		click(dose_1_);
+		element.sendKeys("1");
+	}
+
+	public void enterBulkTransferByQuantity(int k) throws InterruptedException {
+		By qty_1_ = By.xpath("(.//input[@class = 'slds-input'])[" + k + "]");
+		waitForElementToBeLocated(driver, qty_1_, 10);
+		WebElement element = driver.findElement(qty_1_);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		click(qty_1_);
 		element.sendKeys("1");
 	}
 	

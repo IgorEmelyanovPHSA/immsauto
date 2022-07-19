@@ -67,7 +67,7 @@ public class BulkDrafts extends BaseTest {
         log("/*9.----Enter the Dosages values for 3 row Transfers --*/");
         int k = 3;
         while (k <= 7) {
-            supplyConsolePage.enterBulkTransferDosages(k);
+            supplyConsolePage.enterBulkTransferByDosages(k);
             int n = k - 2;
             log("/*---     dose slot N%: " + n);
             Thread.sleep(1000);
