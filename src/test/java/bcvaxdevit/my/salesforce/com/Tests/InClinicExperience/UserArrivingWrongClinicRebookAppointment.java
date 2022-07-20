@@ -98,9 +98,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 15. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
 		Thread.sleep(2000);
-		System.out.println("/*-- 16.----- Click on Save changes defaults button Modal window --*/");
-		inClinicExperiencePage.clickSaveModalDefaultsButton();
-		Thread.sleep(2000);
+//		System.out.println("/*-- 16.----- Click on Save changes defaults button Modal window --*/");
+//		inClinicExperiencePage.clickSaveModalDefaultsButton();
+//		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 17. Close any open Tabs --*/");
 		inClinicExperiencePage.clickRegisterButton();
