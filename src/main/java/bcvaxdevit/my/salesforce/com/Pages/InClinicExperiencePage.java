@@ -704,6 +704,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(click_select_search_clinic1);
@@ -878,6 +880,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void SearchForClinic() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
 		Thread.sleep(2000);
