@@ -96,7 +96,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 //		inClinicExperiencePage.selectEarlyBookingReason();
 //		Thread.sleep(2000);
 		log("/*--34.----select 'Search clinic name' tab --*/");
-		//??????inClinicExperiencePage.clickToSearchClinic();
+		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
 		log("/*-- 35.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
 		inClinicExperiencePage.SearchForClinic();
