@@ -12,7 +12,71 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_DupsJodie_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
+		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
+		/*----Login as an Clinician In-Clinic Experience --*/
+		log("/*----Login as an Clinician In-Clinic Experience --*/");
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
+		if (inClinicExperiencePage.displayIceApp()) {
+			log("/*---- User already on ICE--*/");
+		} else {
+			log("/*---- Navigate to ICE APP --*/");
+			inClinicExperiencePage.selectIceApp();
+			Thread.sleep(2000);
+		}
+		/*----Go to Register Tab ---*/
+		log("/*----Go to Register Tab ---*/");
+		inClinicExperiencePage.clickRegisterTab();
+		Thread.sleep(5000);
+		/*----Search for Participant account ---*/
+		log("/*----Search for Participant account ---*/");
+		inClinicExperiencePage.SearchForCitizen("Jodie Morten BCVaxCluff");
+		log("/*----Search for Jodie is Successful ---*/");
+		if (!inClinicExperiencePage.userJodieFound()) {
+			log("/*----User --> Jodie not found and return---*/");
+		}
+		while (inClinicExperiencePage.userJodieFound()) {
+			log("/*----User found and Navigated to record page ---*/");
+			Thread.sleep(2000);
+			inClinicExperiencePage.clickRelatedTab();
+			log("/*---- Navigated to Person Account related tab ---*/");
+			Thread.sleep(2000);
+			if (!inClinicExperiencePage.selectImmsRecord()) {
+				log("/*----No Imms Record found and return---*/");
+			} else {
+				log("/*---- User navigated to Imms record ---*/");
+				Thread.sleep(2000);
+				inClinicExperiencePage.deleteImmsRecord();
+				log("/*---- Imms record deleted Successfully ---*/");
+				Thread.sleep(2000);
+			}
+			inClinicExperiencePage.clickRelatedTab();
+			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
+			Thread.sleep(5000);
+			if (!inClinicExperiencePage.selectRERNRecord()) {
+				log("/*----No RERN Record found and return---*/");
+			} else {
+				log("/*---- User navigated to RERN record ---*/");
+				Thread.sleep(2000);
+				inClinicExperiencePage.deleteRERNRecord();
+				log("/*---- RERN record deleted Successfully ---*/");
+				Thread.sleep(2000);
+			}
+			log("/*---- Navigated to Person Account related tab ---*/");
+			inClinicExperiencePage.deletePersonAccount();
+			log("/*---- Person Account deleted Successfully ---*/");
+			Thread.sleep(2000);
+			inClinicExperiencePage.clickRegisterTab();
+			Thread.sleep(5000);
+			inClinicExperiencePage.closeOpenTabs();
+			log("/*---- Close the deleted Person Account ---*/");
+			Thread.sleep(2000);
+			log("/*----Re Searching for the Participant account ---*/");
+			inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
+			log("/*----Search for Jodie is Successful ---*/");
+		}
 	}
+	
 	
 	@Test(priority = 2)
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_BCVAXDEVIT() throws InterruptedException {
@@ -128,10 +192,98 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
 		Thread.sleep(5000);
+		log("/*-- 44.--- Rebook Appointment --*/");
+		inClinicExperiencePage.ClickRebookAppointment();
+		Thread.sleep(5000);
+		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
+		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
+		Thread.sleep(5000);
+		log("/*-- 46---Click to select Agent --*/");
+		inClinicExperiencePage.ClickAgentValue();
+		Thread.sleep(2000);
+		log("/*-- 47--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
+		inClinicExperiencePage.SelectAgentValue();
+		Thread.sleep(2000);
+		log("/*-- 48---Click Save Consent Button --*/");
+		inClinicExperiencePage.ClickSaveConsentButton();
+		Thread.sleep(5000);
+		log("/*-- 49---Click Confirm and Save Administration Button --*/");
+		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
+		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
+		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
+		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
+		inClinicExperiencePage.validateHomePageShownUp();
+		Thread.sleep(3000);
 	}
 	
 	@Test(priority = 3)
 	public void Post_conditions_step_Remove_DupsJodie_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
+		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
+		/*----Login as an Clinician In-Clinic Experience --*/
+		log("/*----Login as an Clinician In-Clinic Experience --*/");
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
+		if (inClinicExperiencePage.displayIceApp()) {
+			log("/*---- User already on ICE--*/");
+		} else {
+			log("/*---- Navigate to ICE APP --*/");
+			inClinicExperiencePage.selectIceApp();
+			Thread.sleep(2000);
+		}
+		/*----Go to Register Tab ---*/
+		log("/*----Go to Register Tab ---*/");
+		inClinicExperiencePage.clickRegisterTab();
+		Thread.sleep(5000);
+		/*----Search for Participant account ---*/
+		log("/*----Search for Participant account ---*/");
+		inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
+		log("/*----Search for Jodie is Successful ---*/");
+		if (!inClinicExperiencePage.userJodieFound()) {
+			log("/*----User --> Jodie not found and return---*/");
+		}
+		while (inClinicExperiencePage.userJodieFound()) {
+			log("/*----User found and Navigated to record page ---*/");
+			Thread.sleep(2000);
+			inClinicExperiencePage.clickRelatedTab();
+			log("/*---- Navigated to Person Account related tab ---*/");
+			Thread.sleep(2000);
+			if (!inClinicExperiencePage.selectImmsRecord()) {
+				log("/*----No Imms Record found and return---*/");
+			} else {
+				log("/*---- User navigated to Imms record ---*/");
+				Thread.sleep(2000);
+				inClinicExperiencePage.deleteImmsRecord();
+				log("/*---- Imms record deleted Successfully ---*/");
+				Thread.sleep(2000);
+			}
+			inClinicExperiencePage.clickRelatedTab();
+			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
+			Thread.sleep(5000);
+			if (!inClinicExperiencePage.selectRERNRecord()) {
+				log("/*----No RERN Record found and return---*/");
+			} else {
+				log("/*---- User navigated to RERN record ---*/");
+				Thread.sleep(2000);
+				inClinicExperiencePage.deleteRERNRecord();
+				log("/*---- RERN record deleted Successfully ---*/");
+				Thread.sleep(2000);
+			}
+			log("/*---- Navigated to Person Account related tab ---*/");
+			inClinicExperiencePage.deletePersonAccount();
+			log("/*---- Person Account deleted Successfully ---*/");
+			Thread.sleep(2000);
+			inClinicExperiencePage.clickRegisterTab();
+			Thread.sleep(5000);
+			inClinicExperiencePage.closeOpenTabs();
+			log("/*---- Close the deleted Person Account ---*/");
+			Thread.sleep(2000);
+			log("/*----Re Searching for the Participant account ---*/");
+			inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
+			log("/*----Search for Jodie is Successful ---*/");
+		}
 	}
 }
+

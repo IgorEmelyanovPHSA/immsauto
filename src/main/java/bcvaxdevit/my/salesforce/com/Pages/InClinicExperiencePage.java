@@ -50,7 +50,7 @@ public class InClinicExperiencePage extends BasePage {
 	private By user_Gill_found1 = By.xpath(".//a[@title='Gill BCVaxOrigan']");
 	
 	private WebElement user_Jodie_found;
-	private By user_Jodie_found1 = By.xpath(".//a[@title='Jodie BCVaxCluff']");
+	private By user_Jodie_found1 = By.xpath(".//a[@title='Jodie Morten BCVaxCluff']");
 
 	@FindBy(xpath = ".//a[@title='Dacia Bcvaxdod']")
 	private WebElement user_dacia_found;
@@ -252,6 +252,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_navigate_to_ICE_btn;
 	private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
 	
+	@FindBy(xpath = ".//button[text() = 'Rebook at Current Location']")
+	private WebElement click_to_rebook_button;
+	private By click_to_rebook_button1 = By.xpath(".//button[text() = 'Rebook at Current Location']");
+	
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
@@ -329,7 +333,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = ".//a[text()='Search clinic name']")
 	private WebElement click_select_search_clinic;
-	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search clinic name']");
+	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by Clinic name']");
 	
 	@FindBy(xpath = "(//a[text()='Automation Java - SDST-0000001558'])[1]")
 	private WebElement click_supply_distribution;
@@ -929,6 +933,11 @@ public class InClinicExperiencePage extends BasePage {
 	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
 		click_navigate_to_ICE_btn.click();
+	}
+	
+	public void ClickRebookAppointment() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_to_rebook_button, 10);
+		click_to_rebook_button.click();
 	}
 	
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
