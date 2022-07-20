@@ -56,6 +56,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//a[@title='Hugues BCVaxLampard']")
 	private WebElement user_Hugues_found;
 	private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues BCVaxLampard']");
+
+	@FindBy(xpath = ".//a[@title='Alexandro BCVaxDa Costa']")
+	private WebElement user_Costa_found;
+	private By user_Costa_found1 = By.xpath(".//a[@title='Alexandro BCVaxDa Costa']");
 	
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;
@@ -461,6 +465,18 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		waitForElementToBeLocated(driver, user_dacia_found1, 10);
 		WebElement element = driver.findElement(user_dacia_found1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		return true;
+	}
+
+	public boolean userCostaFound() throws InterruptedException {
+		if (!isDisplayed(user_Costa_found1)) {
+			return false;
+		}
+		waitForElementToBeLocated(driver, user_Costa_found1, 10);
+		WebElement element = driver.findElement(user_Costa_found1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(5000);
