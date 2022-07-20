@@ -327,6 +327,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement validate_home_client_search_page_open;
 	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
 	
+	@FindBy(xpath = ".//a[text()='Search clinic name']")
+	private WebElement click_select_search_clinic;
+	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search clinic name']");
+	
 	@FindBy(xpath = "(//a[text()='Automation Java - SDST-0000001558'])[1]")
 	private WebElement click_supply_distribution;
 	private By click_supply_distribution1 = By.xpath("(//a[text()='Automation Java - SDST-0000001558'])[1]");
@@ -693,6 +697,14 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
+	}
+	
+	public void clickToSearchClinic() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(click_select_search_clinic1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
 	}
 	
 	public String getSupplyDistributionDescription() throws InterruptedException {
