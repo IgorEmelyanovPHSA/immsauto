@@ -199,6 +199,9 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses_container3_distribution_1_2;
 	private By get_remaining_doses_container3_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container4_distribution_1_2;
+	private By get_remaining_doses_container4_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_distribution_1_2;
@@ -219,6 +222,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container3_distribution_1_2;
 	private By get_remaining_Qty_container3_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container4_distribution_1_2;
+	private By get_remaining_Qty_container4_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_1_2;
@@ -428,9 +435,8 @@ public class SupplyConsolePage extends BasePage {
 	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
 		By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='c_hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
 		waitForElementToBeLocated(driver, container_checkbox_1_, 10);
-		//waitForElementToBeLocated(driver, container_checkbox_1_, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(container_checkbox_1_);
-		//this.container_checkbox_1.click();
 		click(container_checkbox_1_);
 	}
 	
@@ -775,6 +781,15 @@ public class SupplyConsolePage extends BasePage {
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
+
+	public Double getValueOfRemainingDoses_Container4_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_doses_container4_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container4_distribution_1_2_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
 	
 	public Double getValueOfRemainingQty() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_, 10);
@@ -805,10 +820,19 @@ public class SupplyConsolePage extends BasePage {
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
 	}
+
 	public Double getValueOfRemainingQty_Container3_Distribution_1_2() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_container3_distribution_1_2_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_container3_distribution_1_2_);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+	public Double getValueOfRemainingQty_Container4_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container4_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container4_distribution_1_2_);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));

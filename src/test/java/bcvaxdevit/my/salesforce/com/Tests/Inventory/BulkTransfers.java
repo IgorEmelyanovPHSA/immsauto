@@ -30,6 +30,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
 		Thread.sleep(5000);
+		/////////////////////Doses and Quantity BEFORE//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
@@ -68,7 +69,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*9.----Click on bulk Transfer button --*/");
 		supplyConsolePage.clickBulkTransfersButton();
 		Thread.sleep(5000);
-		log("/*10.----Enter the Dosages values for 3 row Transfers --*/");
+		log("/*10.----Enter the Dosages values (1 dose) for 3 row Transfers --*/");
 		int k = 3;
 		while (k <= 7) {
 			supplyConsolePage.enterBulkTransferByDosages(k);
@@ -86,6 +87,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersCloseButton();
 		Thread.sleep(5000);
+		/////////////////////Doses and Quantity AFTER Automation Location1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
@@ -428,15 +430,128 @@ public class BulkTransfers extends BaseTest {
 		Thread.sleep(5000);
 	}
 
-
-
-	//@Test
-	//public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
-	//TestcaseID = "222360";
-	//System.out.println("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-	//SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-	//Thread.sleep(5000);
-	
-	//}
+	@Test(priority = 3)
+	public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+		TestcaseID = "222358";
+		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		Thread.sleep(10000);
+		System.out.println("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		Thread.sleep(5000);
+		System.out.println("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeAutomationLocationTab();
+		Thread.sleep(2000);
+		System.out.println("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+		System.out.println("/*5.----Click on Automation Supply Location_1 --*/");
+		supplyConsolePage.clickOnSupplyLocation_1();
+		Thread.sleep(5000);
+		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
+		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
+		//// for the same Clinic - Supply Distribution_1_1 - containers#1 and #2
+		log("/*- container#1 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
+		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
+		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
+		Thread.sleep(2000);
+		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Distribution_1_1();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
+		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EL0203*/");
+		double remainingDoses_before_Lot_EL0203_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container2_Distribution_1_1();
+		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EL0203_Distribution_1_1);
+		Thread.sleep(2000);
+		double remainingQty_before_Lot_EL0203_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container2_Distribution_1_1();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EL0203_Distribution_1_1);
+		//// for the same Clinic but Supply Distribution_1_2 - containers #3 and #4
+		log("/*- container#3 -Automation Supply Distribution_1_2 & Pfizer mRNA BNT162b2 - EK4241*/");
+		double remainingDoses_before_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses_Container3_Distribution_1_2();
+		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_2);
+		Thread.sleep(2000);
+		double remainingQty_before_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty_Container3_Distribution_1_2();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_2);
+		log("/*- container#4 -Automation Supply Distribution_1_2 & Pfizer mRNA BNT162b2 - EL0203*/");
+		double remainingDoses_before_Lot_EL0203_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses_Container4_Distribution_1_2();
+		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EL0203_Distribution_1_2);
+		Thread.sleep(2000);
+		double remainingQty_before_Lot_EL0203_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty_Container4_Distribution_1_2();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EL0203_Distribution_1_2);
+		/////////Do Transfer from Distribution_1_1 to Distribution_1_2 for the same Clinic/////////
+		log("/*7.----Get Supply Containers count outcoming records --*/");
+		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		log("/*---     count:" + countSupplyContainers);
+		log("/*8.----Click on Container's records Checkboxes --*/");
+		if (countSupplyContainers >= 3) {
+			int k = 1;
+			while (k <= 2) {
+				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
+				//int n=k-1;
+				log("/*---     containers record number: " + k);
+				Thread.sleep(1000);
+				k++;
+			}
+		} else {
+			log("/*--not enough records for Bulk actions--*/");
+		}
+		log("/*9.----Click on bulk Transfer button --*/");
+		supplyConsolePage.clickBulkTransfersButton();
+		Thread.sleep(5000);
+		log("/*10.----Enter the Dosages values (1 Dose) for 3 row Transfers --*/");
+		int k = 3;
+		while (k <= 5) {
+			supplyConsolePage.enterBulkTransferByDosages(k);
+			int n = k - 2;
+			log("/*---     dose slot N%: " + n);
+			Thread.sleep(1000);
+			k = k + 2;
+		}
+		log("/*11.----select 'To' Automation Supply Location_1  --*/");
+		supplyConsolePage.selectSupplyLocation_1_To();
+		Thread.sleep(2000);
+		log("/*12.----select 'To' Distribution_1_2 for the same Clinic  --*/");
+		supplyConsolePage.selectSameClinicSupplyDistribution();
+		Thread.sleep(2000);
+		log("/*13.----click Transfer dialog Modal button --*/");
+		supplyConsolePage.clickBulkTransfersModalButton();
+		Thread.sleep(2000);
+		log("/*14.----click Close Modal button --*/");
+		supplyConsolePage.clickBulkTransfersCloseButton();
+		Thread.sleep(5000);
+		/////////////////////Doses and Quantity AFTER Automation Location_1///////////////////////////////////
+		log("/*15.----Getting Remaining Doses/Remaining Quantity - AFTER - for the same Clinic --*/");
+		log("/*- container#1 - Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
+		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
+		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
+		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Distribution_1_1();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
+		log("/*- container#2 - Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EL0203*/");
+		double remainingDoses_after_Lot_EL0203_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container2_Distribution_1_1();
+		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EL0203_Distribution_1_1);
+		double remainingQty_after_Lot_EL0203_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container2_Distribution_1_1();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EL0203_Distribution_1_1);
+		log("/*- container#3 - Supply Distribution_1_2 & Pfizer mRNA BNT162b2 - EK4241*/");
+		double remainingDoses_after_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses_Container3_Distribution_1_2();
+		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_2);
+		double remainingQty_after_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty_Container3_Distribution_1_2();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_2);
+		log("/*- container#4 - Supply Distribution_1_2 & Pfizer mRNA BNT162b2 - EL0203*/");
+		double remainingDoses_after_Lot_EL0203_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses_Container4_Distribution_1_2();
+		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EL0203_Distribution_1_2);
+		double remainingQty_after_Lot_EL0203_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty_Container4_Distribution_1_2();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EL0203_Distribution_1_2);
+		//////////Validation for Distribution_1_1(From) and Distribution_1_2(To)
+		log("/*16.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
+		log("/*----Validation for container#1 Distribution_1_1 - EK4241");
+		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1);
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, ((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1) / 5));
+		log("/*----Validation for container#2 Distribution_1_1 - EL0203");
+		assertEquals(remainingDoses_after_Lot_EL0203_Distribution_1_1, remainingDoses_before_Lot_EL0203_Distribution_1_1 - 1);
+		assertEquals(remainingQty_after_Lot_EL0203_Distribution_1_1, ((remainingDoses_before_Lot_EL0203_Distribution_1_1 - 1) / 5));
+		log("/*----Validation for container#3 Distribution_1_2 - EK4241");
+		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_2, remainingDoses_before_Lot_EK4241_Distribution_1_2 + 1);
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_2, ((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 1) / 5));
+		log("/*----Validation for container#4 Distribution_1_2 - EL0203");
+		assertEquals(remainingDoses_after_Lot_EL0203_Distribution_1_2, remainingDoses_before_Lot_EL0203_Distribution_1_2 + 1);
+		assertEquals(remainingQty_after_Lot_EL0203_Distribution_1_2, ((remainingDoses_before_Lot_EL0203_Distribution_1_2 + 1) / 5));
+	}
 	
 }

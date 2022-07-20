@@ -444,7 +444,6 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.enterTransferQuantity("10");
 		System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
 		supplyConsolePage.selectSupplyLocation_1_To();
-		;
 		Thread.sleep(2000);
 		System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
 		supplyConsolePage.selectSameClinicSupplyDistribution();
