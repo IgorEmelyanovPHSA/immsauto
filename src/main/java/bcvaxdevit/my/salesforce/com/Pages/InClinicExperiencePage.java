@@ -48,6 +48,9 @@ public class InClinicExperiencePage extends BasePage {
 
 	private WebElement user_Gill_found;
 	private By user_Gill_found1 = By.xpath(".//a[@title='Gill BCVaxOrigan']");
+	
+	private WebElement user_Jodie_found;
+	private By user_Jodie_found1 = By.xpath(".//a[@title='Jodie BCVaxCluff']");
 
 	@FindBy(xpath = ".//a[@title='Dacia Bcvaxdod']")
 	private WebElement user_dacia_found;
@@ -473,6 +476,18 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		waitForElementToBeLocated(driver, user_Gill_found1, 10);
 		WebElement element = driver.findElement(user_Gill_found1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		return true;
+	}
+	
+	public boolean userJodieFound() throws InterruptedException {
+		if (!isDisplayed(user_Jodie_found1)) {
+			return false;
+		}
+		waitForElementToBeLocated(driver, user_Jodie_found1, 10);
+		WebElement element = driver.findElement(user_Jodie_found1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(5000);
@@ -1019,18 +1034,34 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 		
-	public void inputCurrentDateUserDefaults () throws InterruptedException {
+  public void inputCurrentDateUserDefaults () throws InterruptedException {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DATE, 0);
+			Date today = calendar.getTime();
+			DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+			waitForElementToBeVisible(driver, input_current_date, 10);
+			String todayAsString = dateFormat.format(today);
+			input_current_date.click();
+			Thread.sleep(2000);
+			input_current_date.clear();
+			Thread.sleep(2000);
+			input_current_date.sendKeys(todayAsString);
+			Thread.sleep(2000);
+			input_current_date.sendKeys(Keys.ENTER);
+		}
+	
+	public void inputPreviousDateUserDefaults () throws InterruptedException {
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 0);
-		Date today = calendar.getTime();
+		calendar.add(Calendar.DATE, -1);
+		Date previousDay = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 		waitForElementToBeVisible(driver, input_current_date, 10);
-		String todayAsString = dateFormat.format(today);
+		String previousDateAsString = dateFormat.format(previousDay);
 		input_current_date.click();
 		Thread.sleep(2000);
 		input_current_date.clear();
 		Thread.sleep(2000);
-		input_current_date.sendKeys(todayAsString);
+		input_current_date.sendKeys(previousDateAsString);
 		Thread.sleep(2000);
 		input_current_date.sendKeys(Keys.ENTER);
 	}
