@@ -104,9 +104,9 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		System.out.println("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
 		Thread.sleep(2000);
-		System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
-		inClinicExperience.clickSaveModalDefaultsButton();
-		Thread.sleep(2000);
+		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
+		//inClinicExperience.clickSaveModalDefaultsButton();
+		//Thread.sleep(2000);
 		System.out.println("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
 		inClinicExperience.clickRegisterButton();
 		Thread.sleep(2000);
