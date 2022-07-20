@@ -201,8 +201,8 @@ public class Consumption extends BaseTest {
 		System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");
 		inClinicExperiencePage.selectEarlyBookingReason();
 		Thread.sleep(2000);
-		log("/*--34.----select 'Search clinic name' tab --*/");
-		inClinicExperiencePage.clickToSearchClinic();
+		log("/*--34.----select 'Search by Clinic name' tab --*/");
+		inClinicExperiencePage.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
 		log("/*-- 35.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
 		inClinicExperiencePage.SearchForClinic();
@@ -225,7 +225,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 41.---Click Appointment Confirm Button --*/");
 		inClinicExperiencePage.clickAppointmentConfirmButton();
 		Thread.sleep(2000);
-		log("/*-- 42.---Appointment Confirmed! Message Displayed --*/");
+		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		Thread.sleep(2000);
 		log("/*-- 43.---Navigate to person account Related Tab --*/");
@@ -250,6 +250,9 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
+		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
+		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
@@ -280,11 +283,11 @@ public class Consumption extends BaseTest {
 		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
 		double remainingDoses_after = inClinicExperiencePage.getValueOfRemainingDoses();
 		log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
-		assertEquals(remainingDoses_after, remainingDoses_before + 1);
+		assertEquals(remainingDoses_after, remainingDoses_before - 1);
 		Thread.sleep(2000);
 		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, (remainingDoses_before + 1)/5);
+		assertEquals(remainingQty_after, (remainingDoses_before - 1)/5);
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");

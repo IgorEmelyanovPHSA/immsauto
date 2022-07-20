@@ -183,8 +183,8 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
-		System.out.println("/*28.----select 'Search clinic name' tab --*/");
-		inClinicExperience.selectSearchClinicNameTab();
+		System.out.println("/*28.----select 'Search by Clinic name' tab --*/");
+		inClinicExperience.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
 		System.out.println("/*29.----search the Clinic Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center--*/");
 		inClinicExperience.searchClinicName();
@@ -206,7 +206,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		Thread.sleep(2000);
 		inClinicExperience.clickAppointmentConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*35.----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*35.----see 'Appointment confirmed!' screen --*/");
 		inClinicExperience.AppointmentConfirmationMessage();
 		Thread.sleep(2000);
 		System.out.println("/*36.----Refresh page --*/");
@@ -234,11 +234,12 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		System.out.println("/*44.---the Home - Client Search showing up  --*/");
+		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
+		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
+		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-		
-		
 	}
 	
 	@Test(priority = 3)
