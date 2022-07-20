@@ -30,10 +30,10 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-		System.out.println("/*----Search for Hugues BCVaxLampard is Successful ---*/");
+		inClinicExperiencePage.SearchForCitizen("Hugues Fawn BCVaxLampard");
+		System.out.println("/*----Search for Hugues Fawn BCVaxLampard is Successful ---*/");
 		if (!inClinicExperiencePage.userLampardFound()) {
-			System.out.println("/*----User --> Hugues BCVaxLampard not found and return---*/");
+			System.out.println("/*----User --> Hugues Fawn BCVaxLampard not found and return---*/");
 		}
 		while (inClinicExperiencePage.userLampardFound()) {
 			System.out.println("/*----User found and Navigated to record page ---*/");
@@ -72,8 +72,8 @@ public class Dose2_VaccineAdministration extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-			System.out.println("/*----Search for Hugues BCVaxLampard is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Hugues Fawn BCVaxLampard");
+			System.out.println("/*----Search for Hugues Fawn BCVaxLampard is Successful ---*/");
 		}
 	}
 	
@@ -262,10 +262,10 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-		System.out.println("/*----Search for Hugues BCVaxLampard is Successful ---*/");
+		inClinicExperiencePage.SearchForCitizen("Hugues Fawn BCVaxLampard");
+		System.out.println("/*----Search for Hugues Fawn BCVaxLampard is Successful ---*/");
 		if (!inClinicExperiencePage.userLampardFound()) {
-			System.out.println("/*----User --> Hugues BCVaxLampard not found and return---*/");
+			System.out.println("/*----User --> Hugues Fawn BCVaxLampard not found and return---*/");
 		}
 		while (inClinicExperiencePage.userLampardFound()) {
 			System.out.println("/*----User found and Navigated to record page ---*/");
@@ -304,8 +304,8 @@ public class Dose2_VaccineAdministration extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-			System.out.println("/*----Search for Hugues BCVaxLampard is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Hugues Fawn BCVaxLampard");
+			System.out.println("/*----Search for Hugues Fawn BCVaxLampard is Successful ---*/");
 		}
 	}
 	
