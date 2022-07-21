@@ -21,7 +21,8 @@ public class LoginPage extends BasePage {
 	private final String DIWA_PW_BCVAXDEVIT = "phsa7phsa*";
 	private final String CALLCENTERAGENT_CC_BCVAXDEVIT = "autocallcenteragent@deloitte.ca.bcvaxdevit";
 	private final String CALLCENTERAGENT_PW_CC_BCVAXDEVIT = "Technology1990!!!!!!!!";
-	
+	private final String CALLCENTERAGENT_Portal_BCVAXDEVIT = "auto_callcenter_portal@phsa.ca.bcvaxdevit";
+	private final String CALLCENTERAGENT_PW_Portal_BCVAXDEVIT = "Technology1990!!!!!!";
 	
 	@FindBy(id = "username")
 	private WebElement clinician_bcvaxdevit;
