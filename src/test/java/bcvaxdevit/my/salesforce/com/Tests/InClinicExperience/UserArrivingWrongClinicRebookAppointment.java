@@ -30,7 +30,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Jodie Morten BCVaxCluff");
+		inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
 		log("/*----Search for Jodie is Successful ---*/");
 		if (!inClinicExperiencePage.userJodieFound()) {
 			log("/*----User --> Jodie not found and return---*/");
@@ -76,6 +76,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 			log("/*----Search for Jodie is Successful ---*/");
 		}
 	}
+	
 	
 	
 	@Test(priority = 2)
