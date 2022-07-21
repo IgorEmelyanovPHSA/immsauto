@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Tests.Inventory;
+package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
@@ -6,13 +6,11 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 @Listeners({TestListener.class})
-public class Consumption extends BaseTest {
+public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	
 	@Test(priority = 1)
-	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
+	public void Pre_conditions_step_Remove_DupsJodie_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
@@ -32,12 +30,12 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
-		log("/*----Search for Dacia is Successful ---*/");
-		if (!inClinicExperiencePage.userDaciaFound()) {
-			log("/*----User --> Dacia not found and return---*/");
+		inClinicExperiencePage.SearchForCitizen("Jodie Morten BCVaxCluff");
+		log("/*----Search for Jodie is Successful ---*/");
+		if (!inClinicExperiencePage.userJodieFound()) {
+			log("/*----User --> Jodie not found and return---*/");
 		}
-		while (inClinicExperiencePage.userDaciaFound()) {
+		while (inClinicExperiencePage.userJodieFound()) {
 			log("/*----User found and Navigated to record page ---*/");
 			Thread.sleep(2000);
 			inClinicExperiencePage.clickRelatedTab();
@@ -74,233 +72,154 @@ public class Consumption extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
-			log("/*----Search for Dacia is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
+			log("/*----Search for Jodie is Successful ---*/");
 		}
 	}
 	
+	
 	@Test(priority = 2)
-	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "222359"; //C219969->C222359
+	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_BCVAXDEVIT() throws InterruptedException {
+		TestcaseID = "219910"; //C219910
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
 		Thread.sleep(5000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
-		if (inClinicExperiencePage.displaySupplyConsolePage()) {
-			log("/*-- 2. User already on Health Connect - Supply Console --*/");
-		} else {
-			log("/*-- 2.1. Navigate to Health Connect - Supply Console --*/");
-			inClinicExperiencePage.selectHealthConnectApp();
-			Thread.sleep(2000);
-		}
-		Thread.sleep(2000);
-		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 3. Close all open tabs --*/");
-		if (inClinicExperiencePage.supplyLocDisplayed()) {
-			log("/*-- 4. User is already on Supply loc--*/");
-		} else {
-			log("/*-- 4.1. Click Dropdown Menu --*/");
-			inClinicExperiencePage.clickDropdownMenu();
-			Thread.sleep(5000);
-			log("/*-- 4.2. Navigate and Select Supply Locations --*/");
-			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-			Thread.sleep(2000);
-		}
-		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 5. Close all open tabs --*/");
-		Thread.sleep(2000);
-		log("/*-- 6. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		inClinicExperiencePage.selectSupplyLocationName();
-		Thread.sleep(2000);
-		log("/*-- 7. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203 (2022-06-29 04:07 p.m)' --*/");
-		inClinicExperiencePage.selectSupplyContainer();
-		Thread.sleep(2000);
-		double remainingDoses_before = inClinicExperiencePage.getValueOfRemainingDoses();
-		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
-		Thread.sleep(2000);
-		double remainingQty_before = inClinicExperiencePage.getValueOfRemainingQty();
-		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
-		Thread.sleep(2000);
-		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 10. Close all open tabs --*/");
-		Thread.sleep(2000);
 		inClinicExperiencePage.selectICEFromApp();
-		log("/*-- 11. Navigate to In Clinic Experience App --*/");
+		log("/*-- 2. Navigate to In Clinic Experience App --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickUserDefaultsTab();
-		log("/*-- 12. Click on User Defaults Tab  --*/");
+		log("/*-- 3. Click on User Defaults Tab  --*/");
 		Thread.sleep(2000);
-		log("/*-- 13. Enter current date for UserDefaults --*/");
-		inClinicExperiencePage.inputCurrentDateUserDefaults();
+		log("/*-- 4. Enter current date for UserDefaults --*/");
+		inClinicExperiencePage.inputPreviousDateUserDefaults();
 		Thread.sleep(2000);
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
 		inClinicExperiencePage.clickSaveDefaultsButton();
 		Thread.sleep(2000);
-		log("/*-- 15. Click on register Tab --*/");
+		log("/*-- 5. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(2000);
-		//System.out.println("/*-- 16.----- Click on Save changes defaults button Modal window --*/");
-		//inClinicExperiencePage.clickSaveModalDefaultsButton();
-		//Thread.sleep(2000);
+		Thread.sleep(2000);//
 		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 17. Close any open Tabs --*/");
+		log("/*-- 6. Close any open Tabs --*/");
 		inClinicExperiencePage.clickRegisterButton();
-		log("/*-- 18. Register New User --> Dacia --*/");
-		String firstName = "Dacia";
+		log("/*-- 7. Register New User --> Jodie --*/");
+		String firstName = "Jodie";
 		inClinicExperiencePage.enterFirstName(firstName);
-		log("/*-- 19.----Enter First Name Dacia --*/");
+		log("/*-- 8.----Enter First Name Jodie --*/");
 		Thread.sleep(2000);
-		String lastName = "Bcvaxdod";
+		String lastName = "BCVaxCluff";
 		inClinicExperiencePage.enterLastName(lastName);
-		log("/*-- 20.----Enter Last Name Bcvaxdod --*/");
+		log("/*-- 9.----Enter Last Name BCVaxCluff --*/");
 		Thread.sleep(2000);
-		String dateOfBirth = "May 19, 1904";//1904-05-19
+		String dateOfBirth = "May 13, 2006";//2006-05-13
 		inClinicExperiencePage.enterDateOfBirth(dateOfBirth);
-		log("/*-- 21.----Enter Date of birth --*/");
+		log("/*-- 10.----Enter Date of birth --*/");
 		Thread.sleep(2000);
 		String postalCode = "V7N3K1";
 		inClinicExperiencePage.enterPostalCode(postalCode);
-		log("/*-- 22.----Enter Postal code --*/");
+		log("/*-- 11.----Enter Postal code --*/");
 		Thread.sleep(2000);
-		String phnNumber = "9746172456";
+		String phnNumber = "9746172488";
 		inClinicExperiencePage.enterPNH(phnNumber);
-		log("/*-- 23.----Enter PHN --*/");
+		log("/*-- 12.----Enter PHN --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickNonIndigenousRadioButton();
-		log("/*-- 24.----click on non-Indigenous person radiobutton --*/");
+		log("/*-- 13.----click on non-Indigenous person radiobutton --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickVerifyPHNButton();
-		log("/*-- 25.----click Verify PHN button --*/");
+		log("/*-- 14.----click Verify PHN button --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.successMessage();
-		log("/*-- 26.'PNH match successful' --*/");
+		log("/*-- 15.'PNH match successful' --*/");
 		inClinicExperiencePage.clickNextButton();
-		log("/*-- 27.'Click next button --*/");
+		log("/*-- 16.'Click next button --*/");
 		Thread.sleep(5000);
 		String email = "test@qa.com";
 		inClinicExperiencePage.enterEmail(email);
-		log("/*-- 28.'Enter email address --*/");
+		log("/*-- 17.'Enter email address --*/");
 		Thread.sleep(2000);
 		String email1 = "test@qa.com";
 		inClinicExperiencePage.confirmEmail(email1);
-		log("/*-- 29.'Confirm email address --*/");
+		log("/*-- 18.'Confirm email address --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickReviewDetails();
-		log("/*-- 30.Click review details Button --*/");
+		log("/*-- 19.Click review details Button --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
-		log("/*-- 31.Click register Button on confirmation page --*/");
+		log("/*-- 20.Click register Button on confirmation page --*/");
 		Thread.sleep(5000);
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
-		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
+		log("/*-- 21.Navigate to Appointment Scheduling Tab --*/");
+		Thread.sleep(2000);//
+		log("/*--22.----select 'Search clinic name' tab --*/");
+		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
-		//log("/*-- 29.Click on reason for visit --*/");
-		//inClinicExperiencePage.clickReasonForVisit();
-		//Thread.sleep(2000);
-		System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");
-		inClinicExperiencePage.selectEarlyBookingReason();
-		Thread.sleep(2000);
-		log("/*--34.----select 'Search by Clinic name' tab --*/");
-		inClinicExperiencePage.selectSearchByClinicNameTab();
-		Thread.sleep(2000);
-		log("/*-- 35.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
+		log("/*-- 23.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
 		inClinicExperiencePage.SearchForClinic();
 		Thread.sleep(2000);
-		log("/*--36.----click on Option Facility location  --*/");
+		log("/*--24.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		Thread.sleep(2000);
-		log("/*--37.----select Appointment Day --*/");
+		log("/*--25.----select Appointment Day --*/");
 		inClinicExperiencePage.selectBookingAppointmentDay();
 		Thread.sleep(2000);
-		log("/*--38.---- select time slot for Appointment --*/");
+		log("/*--26.---- select time slot for Appointment --*/");
 		inClinicExperiencePage.selectTimeSlotForAppointment();
 		Thread.sleep(2000);
-		log("/*--39.---Click Next Button to Schedule Appointment --*/");
+		log("/*--27.---Click Next Button to Schedule Appointment --*/");
 		inClinicExperiencePage.clickNextButtonApptSchedulingPage();
 		Thread.sleep(2000);
-		log("/*40.----click Verify Contact Info checkbox  --*/");
+		log("/*28.----click Verify Contact Info checkbox  --*/");
 		inClinicExperiencePage.clickVerifyContactInformation();
 		Thread.sleep(2000);
-		log("/*-- 41.---Click Appointment Confirm Button --*/");
+		log("/*-- 29.---Click Appointment Confirm Button --*/");
 		inClinicExperiencePage.clickAppointmentConfirmButton();
 		Thread.sleep(2000);
-		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
+		log("/*-- 30.---Appointment Confirmed! Message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		Thread.sleep(2000);
-		log("/*-- 43.---Navigate to person account Related Tab --*/");
+		log("/*-- 31.---Navigate to person account Related Tab --*/");
 		inClinicExperiencePage.clickRelatedTab();
 		Thread.sleep(2000);
-		log("/*-- 44.---Click Go To In clinic experience button --*/");
+		log("/*-- 32.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
 		Thread.sleep(5000);
-		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
+		log("/*-- 33.--- Rebook Appointment --*/");
+		inClinicExperiencePage.ClickRebookAppointment();
+		Thread.sleep(5000);
+		log("/*-- 34---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
-		log("/*-- 46---Click to select Agent --*/");
+		log("/*-- 35---Click to select Agent --*/");
 		inClinicExperiencePage.ClickAgentValue();
 		Thread.sleep(2000);
-		log("/*-- 47--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
+		log("/*-- 36--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
 		inClinicExperiencePage.SelectAgentValue();
 		Thread.sleep(2000);
-		//System.out.println("/*-- 41---select Vaccine Agent  COVID-19 mRNA --*/");
-		//inClinicExperiencePage.selectVaccineAgent();
-		log("/*-- 48---Click Save Consent Button --*/");
+		log("/*-- 37---Click Save Consent Button --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(5000);
-		log("/*-- 49---Click Confirm and Save Administration Button --*/");
+		log("/*-- 38---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
+		System.out.println("/*39.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
+		log("/*-- 40---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		Thread.sleep(3000);
-		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
-		inClinicExperiencePage.selectHealthConnectApp();
-		Thread.sleep(2000);
-		log("/*-- 52. Close any open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
-		Thread.sleep(2000);
-		if (inClinicExperiencePage.supplyLocDisplayed()) {
-			log("/*-- 52.1 User is already on Supply loc --*/");
-		} else {
-			log("/*-- 52.1. Click Dropdown Menu --*/");
-			inClinicExperiencePage.clickDropdownMenu();
-			Thread.sleep(5000);
-			log("/*-- 52.2. Navigate and Select Supply Locations --*/");
-			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-			Thread.sleep(2000);
-		}
-		log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		inClinicExperiencePage.selectSupplyLocationName();
-		Thread.sleep(2000);
-		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
-		inClinicExperiencePage.selectSupplyContainer();
-		Thread.sleep(2000);
-		//////////Validation for Dosages and Qty After Consumption
-		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
-		double remainingDoses_after = inClinicExperiencePage.getValueOfRemainingDoses();
-		log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
-		assertEquals(remainingDoses_after, remainingDoses_before - 1);
-		Thread.sleep(2000);
-		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
-		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, (remainingDoses_before - 1)/5);
-		Thread.sleep(2000);
-		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 58. Close all open tabs --*/");
-		
 	}
 	
 	@Test(priority = 3)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
+	public void Post_conditions_step_Remove_DupsJodie_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			log("/*---- User already on ICE--*/");
 		} else {
@@ -314,12 +233,12 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
-		log("/*----Search for Dacia is Successful ---*/");
-		if (!inClinicExperiencePage.userDaciaFound()) {
-			log("/*----User --> Dacia not found and return---*/");
+		inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
+		log("/*----Search for Jodie is Successful ---*/");
+		if (!inClinicExperiencePage.userJodieFound()) {
+			log("/*----User --> Jodie not found and return---*/");
 		}
-		while (inClinicExperiencePage.userDaciaFound()) {
+		while (inClinicExperiencePage.userJodieFound()) {
 			log("/*----User found and Navigated to record page ---*/");
 			Thread.sleep(2000);
 			inClinicExperiencePage.clickRelatedTab();
@@ -356,10 +275,9 @@ public class Consumption extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
-			log("/*----Search for Dacia is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Jodie BCVaxCluff");
+			log("/*----Search for Jodie is Successful ---*/");
 		}
-		
 	}
-	
 }
+

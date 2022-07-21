@@ -326,21 +326,24 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void selectSearchClinicNameTab() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
+
 	public void searchClinicName() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, search_clinic_name, 10);
 		search_clinic_name.click();
 		Thread.sleep(2000);
 		search_clinic_name.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
 		search_clinic_name.sendKeys(Keys.RETURN);
 	}
-	
+
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
