@@ -62,7 +62,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = ".//a[@title='Alexandro BCVaxDa Costa']")
 	private WebElement user_Costa_found;
-	private By user_Costa_found1 = By.xpath(".//a[@title='Alexandro BCVaxDa Costa']");
+	private By user_Costa_found1 = By.xpath(".//a[@title='Alexandro Corry BCVaxDa Costa']");
 
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;

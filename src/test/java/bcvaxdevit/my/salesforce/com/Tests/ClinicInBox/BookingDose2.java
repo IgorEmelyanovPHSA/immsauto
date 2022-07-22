@@ -31,10 +31,10 @@ public class BookingDose2 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Alexandro BCVaxDa Costa");
-		System.out.println("/*----Search for Alexandro BCVaxDa Costa is Successful ---*/");
+		inClinicExperiencePage.SearchForCitizen("Alexandro Corry BCVaxDa Costa");
+		System.out.println("/*----Search for Alexandro Corry BCVaxDa Costa is Successful ---*/");
 		if (!inClinicExperiencePage.userCostaFound()) {
-			System.out.println("/*----User --> Alexandro BCVaxDa Costa not found and return---*/");
+			System.out.println("/*----User --> Alexandro Corry BCVaxDa Costa not found and return---*/");
 		}
 		while (inClinicExperiencePage.userCostaFound()) {
 			System.out.println("/*----User found and Navigated to record page ---*/");
@@ -73,8 +73,8 @@ public class BookingDose2 extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Alexandro BCVaxDa Costa");
-			System.out.println("/*----Search for Alexandro BCVaxDa Costa is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Alexandro Corry BCVaxDa Costa");
+			System.out.println("/*----Search for Alexandro Corry BCVaxDa Costa is Successful ---*/");
 		}
 	}
 	
@@ -148,8 +148,11 @@ public class BookingDose2 extends BaseTest {
 		System.out.println("/*19----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(2000);
-		System.out.println("/*20----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		clinicInBox.clickOnReasonForVisit();
+		//System.out.println("/*20----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
+		//clinicInBox.clickOnReasonForVisit();
+		//Thread.sleep(2000);
+		System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
+		clinicInBox.selectEarlyBookingReason();
 		Thread.sleep(2000);
 		System.out.println("/*21----select 'Search clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
@@ -213,10 +216,10 @@ public class BookingDose2 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Alexandro BCVaxDa Costa");
-		System.out.println("/*----Search for Alexandro BCVaxDa Costa is Successful ---*/");
+		inClinicExperiencePage.SearchForCitizen("Alexandro Corry BCVaxDa Costa");
+		System.out.println("/*----Search for Alexandro Corry BCVaxDa Costa is Successful ---*/");
 		if (!inClinicExperiencePage.userCostaFound()) {
-			System.out.println("/*----User --> Alexandro BCVaxDa Costa not found and return---*/");
+			System.out.println("/*----User --> Alexandro Corry BCVaxDa Costa not found and return---*/");
 		}
 		while (inClinicExperiencePage.userCostaFound()) {
 			System.out.println("/*----User found and Navigated to record page ---*/");
@@ -255,8 +258,8 @@ public class BookingDose2 extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Alexandro BCVaxDa Costa");
-			System.out.println("/*----Search for Alexandro BCVaxDa Costa is Successful ---*/");
+			inClinicExperiencePage.SearchForCitizen("Alexandro Corry BCVaxDa Costa");
+			System.out.println("/*----Search for Alexandro Corry BCVaxDa Costa is Successful ---*/");
 		}
 	}
 	

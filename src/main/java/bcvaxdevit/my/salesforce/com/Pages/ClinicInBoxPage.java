@@ -216,7 +216,15 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
-	
+
+	@FindBy(xpath = ".//span[text() = 'Select One']")
+	private WebElement click_early_booking_reason;
+	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
+
+	@FindBy(xpath = ".//span[text() = 'Travel']")
+	private WebElement select_early_booking_reason;
+	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
+
 	@FindBy(xpath = ".//a[text()='Search by Clinic name']")
 	private WebElement search_by_clinic_name_tab;
 	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by Clinic name']");
@@ -662,6 +670,17 @@ public class ClinicInBoxPage extends BasePage {
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
 	}
+
+	public void selectEarlyBookingReason() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,80)");
+		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
+		Thread.sleep(2000);
+		click_early_booking_reason.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_early_booking_reason, 10);
+		Thread.sleep(2000);
+		select_early_booking_reason.click();
+	}
 	
 	public void clickOnMoreSearchTabs() throws InterruptedException {
 		Thread.sleep(2000);
@@ -670,7 +689,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
@@ -688,7 +707,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
