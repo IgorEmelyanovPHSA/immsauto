@@ -33,7 +33,7 @@ public class BookingDose2 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Gill BCVaxOrigan");
+		inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
 		log("/*----Search for Gill is Successful ---*/");
 		if (!inClinicExperiencePage.userGillFound()) {
 			log("/*----User --> User Gill not found and return---*/");
@@ -73,7 +73,7 @@ public class BookingDose2 extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Gill BCVaxOrigan");
+			inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
 			log("/*----Search for Gill is Successful ---*/");
 		}
 	}
@@ -214,7 +214,7 @@ public class BookingDose2 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Gill BCVaxOrigan");
+		inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
 		log("/*----Search for Gill is Successful ---*/");
 		if (!inClinicExperiencePage.userGillFound()) {
 			log("/*----User --> User Gill not found and return---*/");
@@ -256,7 +256,7 @@ public class BookingDose2 extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Gill BCVaxOrigan");
+			inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
 			log("/*----Search for Gill is Successful ---*/");
 		}
 	}

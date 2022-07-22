@@ -47,7 +47,7 @@ public class InClinicExperiencePage extends BasePage {
 	private By user_found1 = By.xpath(".//a[@title='Ludovika BCVaxLimeburn']");
 
 	private WebElement user_Gill_found;
-	private By user_Gill_found1 = By.xpath(".//a[@title='Gill BCVaxOrigan']");
+	private By user_Gill_found1 = By.xpath(".//a[@title='Gill Ashely BCVaxOrigan']");
 	
 	private WebElement user_Jodie_found;
 	private By user_Jodie_found1 = By.xpath(".//a[@title='Jodie Morten BCVaxCluff']");
