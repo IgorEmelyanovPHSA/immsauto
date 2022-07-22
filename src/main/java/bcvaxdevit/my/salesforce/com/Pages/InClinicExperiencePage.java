@@ -52,15 +52,15 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement user_Jodie_found;
 	private By user_Jodie_found1 = By.xpath(".//a[@title='Jodie Morten BCVaxCluff']");
 
-	@FindBy(xpath = ".//a[@title='Dacia Bcvaxdod']")
+	@FindBy(xpath = ".//a[@title='Dacia Edeline Bcvaxdod']")
 	private WebElement user_dacia_found;
-	private By user_dacia_found1 = By.xpath(".//a[@title='Dacia Bcvaxdod']");
+	private By user_dacia_found1 = By.xpath(".//a[@title='Dacia Edeline Bcvaxdod']");
 	
 	@FindBy(xpath = ".//a[@title='Hugues Fawn BCVaxLampard']")
 	private WebElement user_Hugues_found;
-  private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues Fawn BCVaxLampard']");
+  	private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues Fawn BCVaxLampard']");
 
-	@FindBy(xpath = ".//a[@title='Alexandro BCVaxDa Costa']")
+	@FindBy(xpath = ".//a[@title='Alexandro Corry BCVaxDa Costa']")
 	private WebElement user_Costa_found;
 	private By user_Costa_found1 = By.xpath(".//a[@title='Alexandro Corry BCVaxDa Costa']");
 
@@ -879,7 +879,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,80)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
 		click_early_booking_reason.click();
@@ -896,7 +896,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void SearchForClinic() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
@@ -1038,7 +1038,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectSearchByClinicNameTab () throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
@@ -1047,7 +1047,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 		
 	public void searchClinicName () throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();

@@ -32,7 +32,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+		inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 		log("/*----Search for Dacia is Successful ---*/");
 		if (!inClinicExperiencePage.userDaciaFound()) {
 			log("/*----User --> Dacia not found and return---*/");
@@ -74,7 +74,7 @@ public class Consumption extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+			inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 			log("/*----Search for Dacia is Successful ---*/");
 		}
 	}
@@ -314,7 +314,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+		inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 		log("/*----Search for Dacia is Successful ---*/");
 		if (!inClinicExperiencePage.userDaciaFound()) {
 			log("/*----User --> Dacia not found and return---*/");
@@ -356,7 +356,7 @@ public class Consumption extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+			inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 			log("/*----Search for Dacia is Successful ---*/");
 		}
 		
