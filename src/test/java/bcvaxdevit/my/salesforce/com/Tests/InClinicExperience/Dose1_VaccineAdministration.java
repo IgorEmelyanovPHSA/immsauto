@@ -17,6 +17,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {
@@ -247,6 +248,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {

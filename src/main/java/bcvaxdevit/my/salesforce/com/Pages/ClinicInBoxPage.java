@@ -17,7 +17,20 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = ".//span[@title='Clinic in a Box (IPM)']")
 	private WebElement clinicinbox_page_displayed;
-	
+
+	@FindBy(xpath = ".//span[@title='Clinic in a Box (IPM)']")
+	private WebElement cib_App_displayed;
+	private By cib_App_displayed1 = By.xpath(".//span[@title='Clinic in a Box (IPM)']");
+
+	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
+	private WebElement select_app_launcher;
+	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
+
+	@FindBy(xpath = "//p[text()='In-Clinic Experience']")
+	private WebElement click_cib_app;
+	private By click_cib_app1 = By.xpath("//p[text()='Clinic in a Box (IPM)']");
+
+
 	@FindBy(xpath = ".//span[text() = 'Register']")
 	private WebElement register_tab;
 	private By register_tab1 = By.xpath("(.//a[@title = 'Register'])");
@@ -293,6 +306,27 @@ public class ClinicInBoxPage extends BasePage {
 			}
 		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 	}
+
+	public boolean displayCIBApp() {
+		return isDisplayed(cib_App_displayed1);
+	}
+
+	public void selectCIBApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(select_app_launcher1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_cib_app1, 10);
+		Thread.sleep(2000);
+		WebElement element1 = driver.findElement(click_cib_app1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
 	
 	public void verifyIsClinicInBoxPageDisplayed() {
 		waitForElementToBeVisible(driver, clinicinbox_page_displayed, 10);
@@ -342,6 +376,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickRelatedTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_related_tab1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(click_related_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -757,6 +792,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public InClinicExperiencePage ClickGoToInClinicExperienceButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
+		Thread.sleep(2000);
 		click_navigate_to_ICE_btn.click();
 		Thread.sleep(2000);
 		return new InClinicExperiencePage(driver);

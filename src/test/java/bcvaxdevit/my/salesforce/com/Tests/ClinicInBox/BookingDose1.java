@@ -18,6 +18,7 @@ public class BookingDose1 extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {
@@ -84,8 +85,16 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		Thread.sleep(10000);
-		System.out.println("/*2.----Clinic In Box(IPM) page displayed --*/");
-		clinicInBox.verifyIsClinicInBoxPageDisplayed();
+		System.out.println("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
+		if (clinicInBox.displayCIBApp()) {
+			System.out.println("/*---- User already on CIB Page--*/");
+			Thread.sleep(2000);
+		} else {
+			System.out.println("/*---- Navigate to CIB App --*/");
+			clinicInBox.selectCIBApp();
+			Thread.sleep(2000);
+		}
+		//clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
@@ -201,6 +210,7 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
+		Thread.sleep(5000);
 	}
 	
 	@Test(priority = 3)
@@ -210,6 +220,7 @@ public class BookingDose1 extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {

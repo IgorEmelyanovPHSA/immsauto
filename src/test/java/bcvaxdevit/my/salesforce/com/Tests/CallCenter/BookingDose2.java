@@ -83,7 +83,7 @@ public class BookingDose2 extends BaseTest {
 		TestcaseID = "222323"; //C222323
 		log("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		log("/*2.----CallCenter Console page displayed --*/");
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		Thread.sleep(5000);

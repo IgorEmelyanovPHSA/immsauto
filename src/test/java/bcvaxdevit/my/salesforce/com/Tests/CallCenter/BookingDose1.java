@@ -83,7 +83,7 @@ public class BookingDose1 extends BaseTest {
 		TestcaseID = "153418"; //C153418
 		System.out.println("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		Thread.sleep(5000);
@@ -209,6 +209,7 @@ public class BookingDose1 extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {

@@ -1014,6 +1014,7 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean validateVaccineAdminPageOpen () throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
+			Thread.sleep(2000);
 			System.out.println("/*---Vaccine admin ICE page shown up");
 			return true;
 		} catch (NoSuchElementException e) {
