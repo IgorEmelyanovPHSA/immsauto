@@ -52,11 +52,11 @@ public class BaseTest {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result) throws Throwable {
 		log("This will execute after the Method");
-		if (result.getStatus() == ITestResult.SUCCESS) {
+/*		if (result.getStatus() == ITestResult.SUCCESS) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
 			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
-		}
+		}*/
 		driver.manage().deleteAllCookies();
 		driver.close();
 	}

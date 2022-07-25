@@ -32,7 +32,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+		inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 		log("/*----Search for Dacia is Successful ---*/");
 		if (!inClinicExperiencePage.userDaciaFound()) {
 			log("/*----User --> Dacia not found and return---*/");
@@ -74,7 +74,7 @@ public class Consumption extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+			inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 			log("/*----Search for Dacia is Successful ---*/");
 		}
 	}
@@ -84,7 +84,7 @@ public class Consumption extends BaseTest {
 		TestcaseID = "222359"; //C219969->C222359
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
 		if (inClinicExperiencePage.displaySupplyConsolePage()) {
@@ -301,6 +301,7 @@ public class Consumption extends BaseTest {
 		/*----Login as an Clinician In-Clinic Experience --*/
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			log("/*---- User already on ICE--*/");
 		} else {
@@ -314,7 +315,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+		inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 		log("/*----Search for Dacia is Successful ---*/");
 		if (!inClinicExperiencePage.userDaciaFound()) {
 			log("/*----User --> Dacia not found and return---*/");
@@ -356,7 +357,7 @@ public class Consumption extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Bcvaxdod");
+			inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
 			log("/*----Search for Dacia is Successful ---*/");
 		}
 		
