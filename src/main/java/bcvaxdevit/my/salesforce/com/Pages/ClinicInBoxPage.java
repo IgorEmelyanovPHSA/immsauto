@@ -302,18 +302,6 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
 	
-	@FindBy(xpath = ".//span[@title='Clinic in a Box (IPM)']")
-	private WebElement cib_App_displayed;
-	private By cib_App_displayed1 = By.xpath(".//span[@title='Clinic in a Box (IPM)']");
-	
-	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
-	private WebElement select_app_launcher;
-	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
-	
-	@FindBy(xpath = "//p[text()='ic in a Box (IPM)']")
-	private WebElement click_cib_app;
-	private By click_cib_app1 = By.xpath("//p[text()='ic in a Box (IPM)']");
-	
 	@FindBy(xpath = "//option[@label='COVID-19 mRNA']")
 	private WebElement select_agent;
 	private By select_agent1 = By.xpath("//option[@label='COVID-19 mRNA']");
