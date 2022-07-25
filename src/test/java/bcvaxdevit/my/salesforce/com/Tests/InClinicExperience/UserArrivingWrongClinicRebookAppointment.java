@@ -77,8 +77,6 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		}
 	}
 	
-	
-	
 	@Test(priority = 2)
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "219910"; //C219910
@@ -153,7 +151,10 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(5000);
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		log("/*-- 21.Navigate to Appointment Scheduling Tab --*/");
-		Thread.sleep(2000);//
+		Thread.sleep(2000);
+		log("/*21.----Select early booking reason  --*/");
+		inClinicExperiencePage.selectEarlyBookingReason();
+		Thread.sleep(2000);
 		log("/*--22.----select 'Search clinic name' tab --*/");
 		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
@@ -172,7 +173,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*--27.---Click Next Button to Schedule Appointment --*/");
 		inClinicExperiencePage.clickNextButtonApptSchedulingPage();
 		Thread.sleep(2000);
-		log("/*28.----click Verify Contact Info checkbox  --*/");
+		log("/*28.----Verify Contact Information  --*/");
 		inClinicExperiencePage.clickVerifyContactInformation();
 		Thread.sleep(2000);
 		log("/*-- 29.---Click Appointment Confirm Button --*/");
