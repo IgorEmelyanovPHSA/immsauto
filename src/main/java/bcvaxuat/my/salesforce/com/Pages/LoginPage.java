@@ -15,7 +15,7 @@ public class LoginPage extends BasePage {
 	private final String PPHIS_PW_BCVAXUAT = "Technology1990!!!!";
 	private final String CLINICIAN_CIB_BCVAXUAT = "auto_clinician_cib@phsa.ca.bcvaxuat";
 	private final String CLINICIAN_PW_CIB_BCVAXUAT = "Technology1990!!!!!!";
-	private final String CLINICIAN_Consumption_BCVAXUAT = "auto_clinician_consumption@phsa.ca.bcvaxdevit";
+	private final String CLINICIAN_Consumption_BCVAXUAT = "auto_clinician1_consumption@phsa.ca.bcvaxuat";
 	private final String CLINICIAN_PW_Consumption_BCVAXUAT = "Technology1990!!!!!!";
 	private final String DIWA_BCVAXUAT = "autoclinicianuat@bcvax.uat.bcvaxuat";
 	private final String DIWA_PW_BCVAXUAT = "Technology1990!!!!";

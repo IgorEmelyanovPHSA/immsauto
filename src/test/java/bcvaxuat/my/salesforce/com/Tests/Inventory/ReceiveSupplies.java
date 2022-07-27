@@ -43,10 +43,10 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 10. Navigate and Select Supply Locations --*/");
 		inClinicExperiencePage.selectSupplyLocationFromDropdown();
 		Thread.sleep(2000);
-		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
+		log("/*-- 11. Locate and click Age 12 and Above - Abbotsford - Abby Pharmacy location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 12. Click and select supply distribution SDST-0000001558 --*/");
+		log("/*-- 12. Click and select supply distribution Pharmanet Distribution - SDST-0000000348 --*/");
 		inClinicExperiencePage.clickSupplyDistribution();
 		Thread.sleep(2000);
 		String supplyName = inClinicExperiencePage.getSupplyDistributionName();

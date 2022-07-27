@@ -102,7 +102,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
 	
-	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Abbotsford - Abby Pharmacy']")
 	private WebElement select_desired_supply_loc;
 	
 	@FindBy(xpath = "//a[@title='AstraZeneca ChAdOx1-S - ABX3120']")
@@ -141,13 +141,13 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 	
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001558']")
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000000348']")
 	private WebElement get_supply_distribution_name;
-	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001558']");
+	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000000348']");
 	
-	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Automation Java']")
+	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Pharmanet Distribution']")
 	private WebElement get_supply_distribution_description;
-	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Automation Java']");
+	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Pharmanet Distribution']");
 	
 	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_remaining_Qty;
@@ -316,9 +316,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement validate_home_client_search_page_open;
 	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
 	
-	@FindBy(xpath = "(//a[text()='Automation Java - SDST-0000001558'])[1]")
+	@FindBy(xpath = "(//a[text()='Pharmanet Distribution - SDST-0000000348'])[1]")
 	private WebElement click_supply_distribution;
-	private By click_supply_distribution1 = By.xpath("(//a[text()='Automation Java - SDST-0000001558'])[1]");
+	private By click_supply_distribution1 = By.xpath("(//a[text()='Pharmanet Distribution - SDST-0000000348'])[1]");
 	
 	@FindBy(xpath = "//BUTTON[@class='slds-button slds-button_icon-border-filled']")
 	private WebElement select_drpdown_to_receive_supplies;
@@ -372,9 +372,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement supply_distribution_to;
 	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
 	
-	@FindBy(xpath = "//span[@title='Automation Java - SDST-0000001558']")
+	@FindBy(xpath = "//span[@title='Pharmanet Distribution - SDST-0000000348']")
 	private WebElement select_supply_distributor;
-	private By select_supply_distributor1 = By.xpath("//span[@title='Automation Java - SDST-0000001558']");
+	private By select_supply_distributor1 = By.xpath("//span[@title='Pharmanet Distribution - SDST-0000000348']");
 	
 	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
 	private WebElement click_reason;
