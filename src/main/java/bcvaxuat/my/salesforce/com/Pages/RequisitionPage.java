@@ -54,7 +54,7 @@ public class RequisitionPage extends BasePage {
 	@FindBy(xpath = "//tbody/tr[10]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
 	private WebElement checkBox;
 
-	@FindBy(xpath = "//div[@class=\"slds-form-element__control slds-grow\"]//input")
+	@FindBy(xpath = "(//div[@class=\"slds-form-element__control slds-grow\"]//input)[2]")
 	private WebElement requestedDose;
 
 	@FindBy(xpath = "//button[contains(text(),\"Save\")]")
@@ -215,7 +215,7 @@ public class RequisitionPage extends BasePage {
 	}
 
 	public void clickLineItemCheckBox() throws InterruptedException {
-		By check_box = By.xpath("//tbody/tr[3]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
+		By check_box = By.xpath("//tbody/tr[10]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
 		WebElement element = driver.findElement(check_box);
 		//Scroll to select the desired line item
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -278,6 +278,7 @@ public class RequisitionPage extends BasePage {
 	}
 
 	public void clickSaveApprovedRequisition() {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveApprovedRequisition);
 		this.saveApprovedRequisition.click();
 	}
 
