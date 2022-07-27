@@ -170,6 +170,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
 	private WebElement saveConsentButton;
+	private By saveConsentButton1 = By.xpath("//button[contains(text(),'Save Consent')]");
 	
 	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
 	private WebElement selectLotNumber;
@@ -601,7 +602,12 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickSaveConsent() throws InterruptedException {
-		saveConsentButton.click();
+		waitForElementToBeVisible(driver, saveConsentButton, 10);
+		WebElement search_input = driver.findElement(saveConsentButton1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", search_input);
+		this.search_input.click();
+		Thread.sleep(3000);
 	}
 	
 	public void clickEditBtn() throws InterruptedException {
@@ -635,7 +641,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void selectImmunizingAgentProvider() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizingAgentProvider);
-		waitForElementToBeVisible(driver, immunizingAgentProvider, 10);
+		waitForElementToBeVisible(driver, immunizingAgentProvider, 20);
 		this.immunizingAgentProvider.click();
 	}
 	

@@ -12,7 +12,7 @@ public class DIWA extends BaseTest {
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "221409"; //C221409
+		//TestcaseID = "221409"; //C221409
 		log("/*----1. Login as an Clinician to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
 		Thread.sleep(5000);
@@ -57,19 +57,19 @@ public class DIWA extends BaseTest {
 		log("/*---14. select date of Administration ---*/");
 		if (clinicInBoxPage.selectDateOfAdministration())
 			Thread.sleep(2000);
-		log("/*---15. Select Informed Consent Provider ---*/");
 		clinicInBoxPage.informedConsentProvider();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		clinicInBoxPage.selectProvider("JY Automation");
-		Thread.sleep(20000);
+		Thread.sleep(4000);
+		log("/*---15. Select Informed Consent Provider ---*/");
 		clinicInBoxPage.clickSaveConsent();
-		Thread.sleep(2000);
+		Thread.sleep(8000);
 		log("/*---16. Click on the Immunization provider field ---*/");
 		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
 		log("/*---17. Select Provider-->JY Automation ---*/");
 		clinicInBoxPage.selectProvider("JY Automation");
-		Thread.sleep(20000);
+		Thread.sleep(10000);
 		log("/*---18. Select Lot Number Field value set a Lot ---*/");
 		clinicInBoxPage.selectToSetLot();
 		Thread.sleep(2000);
