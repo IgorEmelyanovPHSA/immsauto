@@ -57,11 +57,11 @@ public class DIWA extends BaseTest {
 			Thread.sleep(2000);
 		log("/*---15. Select Informed Consent Provider ---*/");
 		clinicInBoxPage.informedConsentProvider();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		clinicInBoxPage.selectProvider("Clinician Automation");
 		Thread.sleep(20000);
 		clinicInBoxPage.clickSaveConsent();
-		Thread.sleep(2000);
+		Thread.sleep(8000);
 		log("/*---16. Click on the Immunization provider field ---*/");
 		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
