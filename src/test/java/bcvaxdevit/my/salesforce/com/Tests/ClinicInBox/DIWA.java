@@ -70,6 +70,9 @@ public class DIWA extends BaseTest {
 		log("/*---17. Select Provider-->JY Automation ---*/");
 		clinicInBoxPage.selectProvider("JY Automation");
 		Thread.sleep(10000);
+		log("/*---18. Click Show all lot numbers ---*/");
+		clinicInBoxPage.clickShowAllLotNumbers();
+		Thread.sleep(2000);
 		log("/*---18. Select Lot Number Field value set a Lot ---*/");
 		clinicInBoxPage.selectToSetLot();
 		Thread.sleep(2000);

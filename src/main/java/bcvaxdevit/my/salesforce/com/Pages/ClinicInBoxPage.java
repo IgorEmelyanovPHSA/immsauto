@@ -168,9 +168,12 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//input[@name='effectiveToDate']")
 	private WebElement consentEffectiveToDate;
 	
-	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
+	@FindBy(xpath = "//button[text() = 'Save Consent']")
 	private WebElement saveConsentButton;
-	private By saveConsentButton1 = By.xpath("//button[contains(text(),'Save Consent')]");
+	private By saveConsentButton1 = By.xpath("//button[text() = 'Save Consent']");
+
+	@FindBy(xpath = "/span[text()='Show all lot numbers.']")
+	private WebElement showAllLotNumbers;
 	
 	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
 	private WebElement selectLotNumber;
@@ -606,7 +609,7 @@ public class ClinicInBoxPage extends BasePage {
 		WebElement search_input = driver.findElement(saveConsentButton1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", search_input);
-		this.search_input.click();
+		this.saveConsentButton.click();
 		Thread.sleep(3000);
 	}
 	
@@ -667,6 +670,11 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void summaryConfirmAndSave() throws InterruptedException {
 		lastConfirmAndSave.click();
+	}
+
+	public void clickShowAllLotNumbers()throws InterruptedException{
+		waitForElementToBeVisible(driver, showAllLotNumbers, 10);
+		this.showAllLotNumbers.click();
 	}
 	
 	public void selectToSetLot() throws InterruptedException {
