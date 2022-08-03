@@ -831,6 +831,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void enterEmail(String enteremail) throws InterruptedException {
 		waitForElementToBeLocated(driver, email1, 10);
+		Thread.sleep(2000);
 		email.sendKeys(enteremail);
 	}
 	

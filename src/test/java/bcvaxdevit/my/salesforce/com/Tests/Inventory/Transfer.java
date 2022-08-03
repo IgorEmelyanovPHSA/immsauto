@@ -60,7 +60,6 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.enterTransferDosages("10");
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocation_2_To();
-		;
 		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
@@ -201,7 +200,6 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.enterTransferQuantity("10");
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocation_2_To();
-		;
 		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
