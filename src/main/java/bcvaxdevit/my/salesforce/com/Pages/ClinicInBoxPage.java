@@ -91,9 +91,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement next_button;
 	private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
 	
-	@FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
+	@FindBy(xpath = ".//a[@title='Maegan Tanya bcvaxvillage']")
 	private WebElement user_found;
-	private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
+	private By user_found1 = By.xpath(".//a[@title='Maegan Tanya bcvaxvillage']");
 	
 	@FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
 	private WebElement inputDiwaDate;
@@ -143,9 +143,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement register_confirmation_page_button;
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 	
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]")
+	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]")
 	private WebElement click_on_citizen;
-	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]");
+	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]");
 	
 	@FindBy(xpath = "//a[@id='relatedListsTab__item']")
 	private WebElement selectCitizenInTable; //
@@ -201,9 +201,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//span[@title='JY Automation']");
 	
-	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+	@FindBy(xpath = "//li[@title='TestHX Pediatric Trade001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
-	private By select_lot1 = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	private By select_lot1 = By.xpath("//li[@title='TestHX Pediatric Trade001 - Exp. 2022 December 31']");
 	
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
