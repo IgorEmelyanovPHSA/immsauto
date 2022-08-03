@@ -100,7 +100,7 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickSearchSupplyDistributions();
 		Thread.sleep(3000);
 		System.out.println("/*----28. Select Distribution--*/");
-		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001499");
+		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001623");
 		Thread.sleep(3000);
 		System.out.println("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();
