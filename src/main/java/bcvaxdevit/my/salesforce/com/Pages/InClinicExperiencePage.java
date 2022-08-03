@@ -720,7 +720,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
 		Thread.sleep(2000);
