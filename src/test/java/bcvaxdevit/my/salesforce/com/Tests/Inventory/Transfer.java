@@ -208,7 +208,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.clickBulkTransfersCloseButton();
 		Thread.sleep(5000);
 		System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_1_1();
+		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_1_1();
 		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_1_1();
