@@ -91,9 +91,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement next_button;
 	private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
 	
-	@FindBy(xpath = ".//a[@title='Maegan bcvaxvillage']")
+	@FindBy(xpath = ".//a[@title='Maegan Tanya bcvaxvillage']")
 	private WebElement user_found;
-	private By user_found1 = By.xpath(".//a[@title='Maegan bcvaxvillage']");
+	private By user_found1 = By.xpath(".//a[@title='Maegan Tanya bcvaxvillage']");
 	
 	@FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
 	private WebElement inputDiwaDate;
@@ -143,9 +143,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement register_confirmation_page_button;
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 	
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]")
+	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]")
 	private WebElement click_on_citizen;
-	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan bcvaxvillage')]");
+	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]");
 	
 	@FindBy(xpath = "//a[@id='relatedListsTab__item']")
 	private WebElement selectCitizenInTable; //
@@ -168,8 +168,12 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//input[@name='effectiveToDate']")
 	private WebElement consentEffectiveToDate;
 	
-	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
+	@FindBy(xpath = "//button[text() = 'Save Consent']")
 	private WebElement saveConsentButton;
+	private By saveConsentButton1 = By.xpath("//button[text() = 'Save Consent']");
+
+	@FindBy(xpath = "/span[text()='Show all lot numbers.']")
+	private WebElement showAllLotNumbers;
 	
 	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
 	private WebElement selectLotNumber;
@@ -197,9 +201,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//span[@title='JY Automation']");
 	
-	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+	@FindBy(xpath = "//li[@title='TestHX Pediatric Trade001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
-	private By select_lot1 = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	private By select_lot1 = By.xpath("//li[@title='TestHX Pediatric Trade001 - Exp. 2022 December 31']");
 	
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
@@ -601,7 +605,12 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickSaveConsent() throws InterruptedException {
-		saveConsentButton.click();
+		waitForElementToBeVisible(driver, saveConsentButton, 10);
+		WebElement search_input = driver.findElement(saveConsentButton1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", search_input);
+		this.saveConsentButton.click();
+		Thread.sleep(3000);
 	}
 	
 	public void clickEditBtn() throws InterruptedException {
@@ -635,7 +644,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void selectImmunizingAgentProvider() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizingAgentProvider);
-		waitForElementToBeVisible(driver, immunizingAgentProvider, 10);
+		waitForElementToBeVisible(driver, immunizingAgentProvider, 20);
 		this.immunizingAgentProvider.click();
 	}
 	
@@ -661,6 +670,11 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void summaryConfirmAndSave() throws InterruptedException {
 		lastConfirmAndSave.click();
+	}
+
+	public void clickShowAllLotNumbers()throws InterruptedException{
+		waitForElementToBeVisible(driver, showAllLotNumbers, 10);
+		this.showAllLotNumbers.click();
 	}
 	
 	public void selectToSetLot() throws InterruptedException {

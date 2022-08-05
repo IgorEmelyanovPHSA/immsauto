@@ -162,34 +162,34 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement search_incoming_supply_distributor_1_2;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 	
-	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000001484']")
+	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000001635']")
 	private WebElement select_incoming_supply_distributor;
-	private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000001484']");
+	private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000001635']");
 	
-	@FindBy(xpath = "//span[@title='Automation Supply Distribution_1_2 - SDST-0000001499']")
+	@FindBy(xpath = "//span[@title='Automation Supply Distribution_1_2 - SDST-0000001632']")
 	private WebElement select_same_clinic_supply_distributor_1_2;
-	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[@title='Automation Supply Distribution_1_2 - SDST-0000001499']");
+	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[@title='Automation Supply Distribution_1_2 - SDST-0000001632']");
 	
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
 	private WebElement confirm_incoming_transfers_modal_button;
 	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
 	
-	@FindBy(xpath = "(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]")
+	@FindBy(xpath = "(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[2]")
 	private WebElement click_container_dropdown_menu;
-	private By click_container_dropdown_menu1 = By.xpath("(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]");
+	private By click_container_dropdown_menu1 = By.xpath("(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[2]");
 	
 	@FindBy(xpath = ".//a/span[text() = 'Transfer']")
 	private WebElement select_Transfer_in_dropdown;
 	private By select_Transfer_in_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
 	
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses;
-	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container1_distribution_1_1;
-	private By get_remaining_doses_container1_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_container1_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container2_distribution_1_1;
@@ -199,21 +199,21 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses_container3_distribution_1_2;
 	private By get_remaining_doses_container3_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container4_distribution_1_2;
-	private By get_remaining_doses_container4_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_container4_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_distribution_1_2;
-	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 	
-	@FindBy(xpath = "(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty;
-	private By get_remaining_Qty_ = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container1_distribution_1_1;
-	private By get_remaining_Qty_container1_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_container1_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container2_distribution_1_;
@@ -223,15 +223,14 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_Qty_container3_distribution_1_2;
 	private By get_remaining_Qty_container3_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container4_distribution_1_2;
-	private By get_remaining_Qty_container4_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_container4_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_1_2;
-	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
-	
-	
+	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
 	@FindBy(xpath = ".//input[@name = 'HC_Product_Measure__c']")
 	private WebElement get_dose_conversation_factor;
 	private By get_dose_conversation_factor1 = By.xpath(".//input[@name = 'HC_Product_Measure__c']");
@@ -239,7 +238,7 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//input[@name = 'BCH_Product_Name__c']")
 	private WebElement get_trade_name;
 	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
-	
+
 	@FindBy(xpath = ".//a/span[text() = 'Confirm']")
 	private WebElement select_Confirm_in_dropdown;
 	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
@@ -254,7 +253,23 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Cancel')]")
 	private WebElement btnCancelTransfer;
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container1_lot_EK4241_distribution_1_1;
+	private By get_remaining_doses_container1_lot_EK4241_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container1_lot_EK4241_distribution_2_1;
+	private By get_remaining_doses_container1_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container1_lot_EK4241_distribution_2_1;
+	private By get_remaining_Qty_container1_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container1_lot_EK4241_distribution_1_1;
+	private By get_remaining_Qty_container1_lot_EK4241_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FindBy(xpath = "//a/span[text()='Wastage']")
@@ -746,6 +761,18 @@ public class SupplyConsolePage extends BasePage {
 		return (doses);
 	}
 
+	public Double getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_1_1() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container1_lot_EK4241_distribution_1_1_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container1_lot_EK4241_distribution_1_1_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
 	public Double getValueOfRemainingDoses_Container1_Distribution_1_1() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		Thread.sleep(2000);
@@ -790,11 +817,20 @@ public class SupplyConsolePage extends BasePage {
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-	
+
 	public Double getValueOfRemainingQty() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+	
+	public Double getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_1_1() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container1_lot_EK4241_distribution_1_1_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container1_lot_EK4241_distribution_1_1_);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
@@ -1004,7 +1040,7 @@ public class SupplyConsolePage extends BasePage {
 		String tradeName = getValue(get_trade_name);
 		return (tradeName);
 	}
-	
+
 	public double getDoseConversationFactor() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_dose_conversation_factor1, 10);
 		WebElement element = driver.findElement(get_dose_conversation_factor1);
@@ -1053,7 +1089,7 @@ public class SupplyConsolePage extends BasePage {
 		//#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
 		//#search_supply_location_To.sendKeys(Keys.ENTER);
 	}
-	
+
 	public Double getValueOfRemainingDosesDistribution_1_2() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_doses_distribution_1_2_, 10);
 		WebElement element = driver.findElement(get_remaining_doses_distribution_1_2_);
@@ -1063,11 +1099,51 @@ public class SupplyConsolePage extends BasePage {
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-	
-	
+
 	public Double getValueOfRemainingQtyDistribution_1_2() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_1_2_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_1_2_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+	
+	public Double getValueOfRemainingDoses_Container2_Lot_EK4241_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_doses_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_distribution_1_2_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+	public Double getValueOfRemainingQty_Container2_Lot_EK4241_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_1_2_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container1_lot_EK4241_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container1_lot_EK4241_distribution_2_1_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container1_lot_EK4241_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container1_lot_EK4241_distribution_2_1_);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
