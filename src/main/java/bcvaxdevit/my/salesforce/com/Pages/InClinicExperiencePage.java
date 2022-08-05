@@ -40,7 +40,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//input[@placeholder = 'Search...']")
 	private WebElement search_input;
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
-	
+
 	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
 	@FindBy(xpath = ".//a[@title='Ludovika BCVaxLimeburn']")
 	private WebElement user_found;
@@ -512,7 +512,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@title='Other']")
 	private WebElement select_reason;
 	private By select_reason1 = By.xpath("//span[@title='Other']");
-	
+
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement create_Immunization_Record;
 	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
@@ -564,6 +564,18 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(user_found1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		return true;
+	}
+
+	public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
+		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " "+legalMiddleName+" " + legalLastName + "']");
+		if (!isDisplayed(userFoundWithParameter)) {
+			return false;
+		}
+		WebElement userFoundWithParameterId = driver.findElement(userFoundWithParameter);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", userFoundWithParameterId);
 		Thread.sleep(5000);
 		return true;
 	}
