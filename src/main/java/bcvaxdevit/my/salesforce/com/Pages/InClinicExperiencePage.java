@@ -24,11 +24,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//button[@title = ' Create New Profile']")
 	private WebElement register_button;
 	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
-
+	
 	@FindBy(xpath = ".//button[text()='Save']")
 	private WebElement click_save_defaults_button;
 	private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
-
+	
 	@FindBy(xpath = ".//button[@class='slds-button slds-button_brand saveBtn']")
 	private WebElement click_save_modal_defaults_button;
 	private By click_save_modal_defaults_button_ = By.xpath(".//button[@class='slds-button slds-button_brand saveBtn']");
@@ -40,30 +40,30 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//input[@placeholder = 'Search...']")
 	private WebElement search_input;
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
-	
+
 	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
 	@FindBy(xpath = ".//a[@title='Ludovika BCVaxLimeburn']")
 	private WebElement user_found;
 	private By user_found1 = By.xpath(".//a[@title='Ludovika BCVaxLimeburn']");
-
+	
 	private WebElement user_Gill_found;
 	private By user_Gill_found1 = By.xpath(".//a[@title='Gill Ashely BCVaxOrigan']");
 	
 	private WebElement user_Jodie_found;
 	private By user_Jodie_found1 = By.xpath(".//a[@title='Jodie Morten BCVaxCluff']");
-
+	
 	@FindBy(xpath = ".//a[@title='Dacia Edeline Bcvaxdod']")
 	private WebElement user_dacia_found;
 	private By user_dacia_found1 = By.xpath(".//a[@title='Dacia Edeline Bcvaxdod']");
 	
 	@FindBy(xpath = ".//a[@title='Hugues Fawn BCVaxLampard']")
 	private WebElement user_Hugues_found;
-  	private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues Fawn BCVaxLampard']");
-
+	private By user_Hugues_found1 = By.xpath(".//a[@title='Hugues Fawn BCVaxLampard']");
+	
 	@FindBy(xpath = ".//a[@title='Alexandro Corry BCVaxDa Costa']")
 	private WebElement user_Costa_found;
 	private By user_Costa_found1 = By.xpath(".//a[@title='Alexandro Corry BCVaxDa Costa']");
-
+	
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
@@ -71,6 +71,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//th//lightning-primitive-cell-factory[@data-label='Immunization Record']//div[@class='slds-grid']//span[@force-lookup_lookup='']")
 	private WebElement select_Imms_record;
 	private By select_Imms_record1 = By.xpath(".//th//lightning-primitive-cell-factory[@data-label='Immunization Record']//div[@class='slds-grid']//span[@force-lookup_lookup='']");
+	
+	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]")
+	private WebElement click_on_citizen;
+	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]");
 	
 	@FindBy(xpath = ".//button[@class='slds-button slds-button_icon-border-filled']")
 	private WebElement imms_drop_down;
@@ -120,17 +124,18 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
 	private WebElement select_desired_supply_loc;
 	
-	@FindBy(xpath = "//a[@title='AstraZeneca ChAdOx1-S - ABX3120']")
+	@FindBy(xpath = "//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']")
 	private WebElement select_desired_supply_item;
-	private By select_desired_supply_item1 = By.xpath("//a[@title='AstraZeneca ChAdOx1-S - ABX3120']");
+	private By select_desired_supply_item1 = By.xpath("//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']");
 	
 	@FindBy(xpath = "(//button[@class='slds-combobox__input slds-input_faux'])[1]")
 	private WebElement click_agent_value;
 	private By click_agent_value1 = By.xpath("(//button[@class='slds-combobox__input slds-input_faux'])[1]");
-
+	
 	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
+
 
 	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203')]")
 	private WebElement select_desired_supply_container;
@@ -156,13 +161,13 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 	
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001558']")
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001634']")
 	private WebElement get_supply_distribution_name;
-	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001558']");
+	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001634']");
 	
-	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Automation Java']")
+	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Operational Freezer']")
 	private WebElement get_supply_distribution_description;
-	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Automation Java']");
+	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Operational Freezer']");
 	
 	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_remaining_Qty;
@@ -264,6 +269,18 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
 	
+	@FindBy(xpath = ".//h1[text() = 'Oops...']")
+	private WebElement vlidate_oops_message;
+	private By vlidate_oops_message1 = By.xpath(".//h1[text() = 'Oops...']");
+	
+	@FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
+	private WebElement show_all_lots_checkbox;
+	private By show_all_lots_checkbox1 = By.xpath("//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN");
+	
+	@FindBy(xpath = "//*[@class='slds-icon slds-icon_large']")
+	private WebElement close_button_diwa;
+	private By close_button_diwa1 = By.xpath("//*[@class='slds-icon slds-icon_large']");
+	
 	@FindBy(xpath = "(.//button[@title='Confirm & Save Identification'])")
 	private WebElement confirm_and_save_btn_home;
 	private By confirm_and_save_btn_home1 = By.xpath(".//button[@title='Confirm & Save Identification']");
@@ -272,10 +289,14 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement save_consent_btn;
 	private By save_consent_btn1 = By.xpath("//button[normalize-space()='Save Consent']");
 	
+	@FindBy(xpath = "(//button[normalize-space()='Continue Editing and Save'])")
+	private WebElement continue_editing_btn;
+	private By continue_editing_btn1 = By.xpath("//button[normalize-space()='Continue Editing and Save']");
+	
 	@FindBy(xpath = "(//button[@title='Confirm & Save Administration'])")
 	private WebElement confirm_save_adm_btn;
 	private By confirm_save_adm_btn1 = By.xpath("//button[@title='Confirm & Save Administration']");
-
+	
 	@FindBy(xpath = "//button[text()='Confirm & Save Administration']")
 	private WebElement confirm_save_adm_btn_modal_screen;
 	private By confirm_save_adm_btn_modal_screen_ = By.xpath("//button[text()='Confirm & Save Administration']");
@@ -290,11 +311,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
 	private WebElement click_reason_radiobutton;
 	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
-
+	
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
 	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
-
+	
 	@FindBy(xpath = ".//span[text() = 'Travel']")
 	private WebElement select_early_booking_reason;
 	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
@@ -339,9 +360,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_select_search_clinic;
 	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by Clinic name']");
 	
-	@FindBy(xpath = "(//a[text()='Automation Java - SDST-0000001558'])[1]")
+	@FindBy(xpath = "//a[text()='Operational Freezer - SDST-0000001634']")
 	private WebElement click_supply_distribution;
-	private By click_supply_distribution1 = By.xpath("(//a[text()='Automation Java - SDST-0000001558'])[1]");
+	private By click_supply_distribution1 = By.xpath("//a[text()='Operational Freezer - SDST-0000001634']");
 	
 	@FindBy(xpath = "//BUTTON[@class='slds-button slds-button_icon-border-filled']")
 	private WebElement select_drpdown_to_receive_supplies;
@@ -375,6 +396,92 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement save_button_receive_supplies;
 	private By save_button_receive_supplies1 = By.xpath("//button[contains(text(),'Save')]");
 	
+	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
+	private WebElement Create_Immunization_Record;
+	private By Create_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
+	
+	@FindBy(xpath = "//button[text() = 'Confirm']")
+	private WebElement confirm_button;
+	private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
+	
+	@FindBy(xpath = "//option[contains(text(),'Select an option')]")
+	private WebElement select_an_option;
+	private By select_an_option1 = By.xpath("//option[contains(text(),'Select an option')]");
+	
+	@FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
+	private WebElement covidmRna;
+	private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
+	
+	@FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]")
+	private WebElement inputDate;
+	private By inputDate1 = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]");
+	
+	@FindBy(xpath = "//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]")
+	private WebElement yes_button_save_on_popup_window;
+	private By yes_button_save_on_popup_window1 = By.xpath("//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]");
+	
+	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
+	private WebElement recordImmunizationBtn;
+	
+	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
+	private WebElement informedConsentProvider;
+	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
+	
+	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
+	private WebElement select_provider;
+	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
+	
+	@FindBy(xpath = "//input[@placeholder='Search People...']")
+	private WebElement immunizingAgentProvider;
+	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
+	
+	@FindBy(xpath = "//input[@name='effectiveToDate']")
+	private WebElement consentEffectiveToDate;
+	
+	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
+	private WebElement saveConsentButton;
+	
+	@FindBy(xpath = "(//input[@data-id = 'select-sobject-id'])[3]")
+	private WebElement selectLotNumber;
+	
+	@FindBy(xpath = "//button[@name='injectionSite']")
+	private WebElement selectSite;
+	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
+	
+	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+	private WebElement select_lot;
+	private By select_lot1 = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	
+	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
+	private WebElement select_injection_site_value;
+	private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
+	
+	
+	@FindBy(xpath = "//button[@name='dosePicklist']")
+	private WebElement select_dosage_field;
+	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
+	
+	@FindBy(xpath = "//span[@title='0.3']")
+	private WebElement select_dosage;
+	private By select_dosage1 = By.xpath("//span[@title='0.5']");
+	
+	@FindBy(xpath = "(//button[@type='submit'])[2]")
+	private WebElement saveAgain;
+	
+	@FindBy(xpath = "//button[@title='Confirm & Save Administration']")
+	private WebElement confirmAndSave;
+	
+	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
+	private WebElement lastConfirmAndSave;
+	
+	@FindBy(xpath = "//button[contains(text(),'Save')]")
+	private WebElement save_button_historical_dose;
+	private By save_button_historical_dose1 = By.xpath("//button[contains(text(),'Save')]");
+	
+	@FindBy(xpath = ".//input[@data-id = 'userinput']")
+	private WebElement search_clinic;
+	private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
+	
 	@FindBy(xpath = "(//span[contains(text(),'Cancel')])[2]")
 	private WebElement cancel_button_receive_supplies;
 	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
@@ -383,9 +490,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_to_select_supply_item;
 	private By click_to_select_supply_item1 = By.xpath("//input[@placeholder='Search Supply Items...']");
 	
-	@FindBy(xpath = "//span[contains(text(),'AstraZeneca ChAdOx1-S - ABX3120')]")
+	@FindBy(xpath = "//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]")
 	private WebElement choose_supply_item;
-	private By choose_supply_item1 = By.xpath("//span[contains(text(),'AstraZeneca ChAdOx1-S - ABX3120')]");
+	private By choose_supply_item1 = By.xpath("//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]");
 	
 	@FindBy(xpath = "(//input[@class='slds-input'])[2]")
 	private WebElement click_to_select_quantity;
@@ -395,9 +502,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement supply_distribution_to;
 	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
 	
-	@FindBy(xpath = "//span[@title='Automation Java - SDST-0000001558']")
+	@FindBy(xpath = "(//span[text()='Operational Freezer - SDST-0000001634'])[1]")
 	private WebElement select_supply_distributor;
-	private By select_supply_distributor1 = By.xpath("//span[@title='Automation Java - SDST-0000001558']");
+	private By select_supply_distributor1 = By.xpath("(//span[text()='Operational Freezer - SDST-0000001634'])[1]");
 	
 	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
 	private WebElement click_reason;
@@ -406,6 +513,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@title='Other']")
 	private WebElement select_reason;
 	private By select_reason1 = By.xpath("//span[@title='Other']");
+
+	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
+	private WebElement create_Immunization_Record;
+	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
 	
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
@@ -457,6 +568,18 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(5000);
 		return true;
 	}
+
+	public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
+		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " "+legalMiddleName+" " + legalLastName + "']");
+		if (!isDisplayed(userFoundWithParameter)) {
+			return false;
+		}
+		WebElement userFoundWithParameterId = driver.findElement(userFoundWithParameter);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", userFoundWithParameterId);
+		Thread.sleep(5000);
+		return true;
+	}
 	
 	public boolean userLampardFound() throws InterruptedException {
 		if (!isDisplayed(user_Hugues_found1)) {
@@ -481,7 +604,7 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(5000);
 		return true;
 	}
-
+	
 	public boolean userCostaFound() throws InterruptedException {
 		if (!isDisplayed(user_Costa_found1)) {
 			return false;
@@ -493,7 +616,7 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(5000);
 		return true;
 	}
-
+	
 	public boolean userGillFound() throws InterruptedException {
 		if (!isDisplayed(user_Gill_found1)) {
 			return false;
@@ -538,6 +661,15 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		return true;
+	}
+	
+	public void userClickCitizen() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_on_citizen, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(click_on_citizen1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
 	}
 	
 	public void deleteImmsRecord() throws InterruptedException {
@@ -699,10 +831,10 @@ public class InClinicExperiencePage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Doses = element.getText();
-		Double doses = Double.parseDouble(Doses.replaceAll(",",""));
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-
+	
 	public String getDoseConversionFactor() throws InterruptedException {
 		WebElement element = driver.findElement(get_dose_conversion_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -736,14 +868,14 @@ public class InClinicExperiencePage extends BasePage {
 		element.getText();
 		return (element.getText());
 	}
-
+	
 	public Double getValueOfRemainingQty() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty1, 10);
 		WebElement element = driver.findElement(get_remaining_Qty1);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
-		Double quantity = Double.parseDouble(Quantity.replaceAll(",",""));
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
 	}
 	
@@ -765,7 +897,7 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(register_button_1);
 		register_button.click();
 	}
-
+	
 	public void clickSaveDefaultsButton() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		Thread.sleep(2000);
@@ -773,7 +905,7 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(click_save_defaults_button_);
 		click_save_defaults_button.click();
 	}
-
+	
 	public void clickSaveModalDefaultsButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_save_modal_defaults_button, 10);
 		WebElement element = driver.findElement(click_save_modal_defaults_button_);
@@ -878,7 +1010,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
 		click_reason_radiobutton.click();
 	}
-
+	
 	public void selectEarlyBookingReason() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
@@ -895,7 +1027,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
 		click_more_search_tabs.click();
 	}
-
+	
 	public void SearchForClinic() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
@@ -913,6 +1045,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
 	}
+	
 	public void selectBookingAppointmentDay() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
@@ -961,6 +1094,11 @@ public class InClinicExperiencePage extends BasePage {
 		click_to_rebook_button.click();
 	}
 	
+	public void ContinueEditingButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, continue_editing_btn, 10);
+		continue_editing_btn.click();
+	}
+	
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1000)", "");
@@ -981,8 +1119,8 @@ public class InClinicExperiencePage extends BasePage {
 		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
-		
-	public void selectVaccineAgent () throws InterruptedException {
+	
+	public void selectVaccineAgent() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
@@ -991,28 +1129,28 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
 		select_vaccine_agent_dropdown.click();
 	}
-		
-	public void ClickSaveConsentButton () throws InterruptedException {
+	
+	public void ClickSaveConsentButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, save_consent_btn, 10);
 		save_consent_btn.click();
 	}
-		
-	public void ClickConfirmAndSaveAdministrationButton () throws InterruptedException {
+	
+	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1000)", "");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, confirm_save_adm_btn, 10);
 		confirm_save_adm_btn.click();
 	}
-
-	public void ClickModalConfirmAndSaveAdministrationButton () throws InterruptedException {
+	
+	public void ClickModalConfirmAndSaveAdministrationButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, confirm_save_adm_btn_modal_screen, 10);
 		Thread.sleep(2000);
 		confirm_save_adm_btn_modal_screen.click();
 	}
-
-
-	public boolean validateVaccineAdminPageOpen () throws InterruptedException {
+	
+	
+	public boolean validateVaccineAdminPageOpen() throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
 			Thread.sleep(2000);
@@ -1023,23 +1161,23 @@ public class InClinicExperiencePage extends BasePage {
 			return false;
 		}
 	}
-
-	public void successRegisteredMessageAppear () throws InterruptedException {
+	
+	public void successRegisteredMessageAppear() throws InterruptedException {
 		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
 		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
 		Thread.sleep(2000);
 		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
 	}
-		
-	public void clickOnPersonAccountRelatedTab () throws InterruptedException {
+	
+	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(person_account_Related_tab_1);
 		isDisplayed(person_account_Related_tab_1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-
-	public void selectSearchByClinicNameTab () throws InterruptedException {
+	
+	public void selectSearchByClinicNameTab() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
@@ -1047,8 +1185,8 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-		
-	public void searchClinicName () throws InterruptedException {
+	
+	public void searchClinicName() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
@@ -1057,43 +1195,43 @@ public class InClinicExperiencePage extends BasePage {
 		select_clinic.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
 		select_clinic.sendKeys(Keys.RETURN);
 	}
-		
-	public void clickOnFacilityOptionLocation () throws InterruptedException {
+	
+	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();
 	}
-		
-	public void refreshBrowser () throws InterruptedException {
+	
+	public void refreshBrowser() throws InterruptedException {
 		driver.navigate().refresh();
 	}
-		
-	public void clickUserDefaultsTab () throws InterruptedException {
+	
+	public void clickUserDefaultsTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, user_defaults_tab1, 10);
 		WebElement element = driver.findElement(user_defaults_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-		
-  public void inputCurrentDateUserDefaults () throws InterruptedException {
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DATE, 0);
-			Date today = calendar.getTime();
-			DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-			waitForElementToBeVisible(driver, input_current_date, 10);
-			String todayAsString = dateFormat.format(today);
-			input_current_date.click();
-			Thread.sleep(2000);
-			input_current_date.clear();
-			Thread.sleep(2000);
-			input_current_date.sendKeys(todayAsString);
-			Thread.sleep(2000);
-			input_current_date.sendKeys(Keys.ENTER);
-		}
 	
-	public void inputPreviousDateUserDefaults () throws InterruptedException {
+	public void inputCurrentDateUserDefaults() throws InterruptedException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 0);
+		Date today = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		waitForElementToBeVisible(driver, input_current_date, 10);
+		String todayAsString = dateFormat.format(today);
+		input_current_date.click();
+		Thread.sleep(2000);
+		input_current_date.clear();
+		Thread.sleep(2000);
+		input_current_date.sendKeys(todayAsString);
+		Thread.sleep(2000);
+		input_current_date.sendKeys(Keys.ENTER);
+	}
+	
+	public void inputPreviousDateUserDefaults() throws InterruptedException {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, -1);
 		Date previousDay = calendar.getTime();
@@ -1108,8 +1246,8 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		input_current_date.sendKeys(Keys.ENTER);
 	}
-		
-	public boolean validateHomePageShownUp () throws InterruptedException {
+	
+	public boolean validateHomePageShownUp() throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
 			System.out.println("/*---Home page-Client Search page shown up");
@@ -1119,8 +1257,8 @@ public class InClinicExperiencePage extends BasePage {
 			return false;
 		}
 	}
-		
-	public void ClickAgentValue () throws InterruptedException {
+	
+	public void ClickAgentValue() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_agent_value1, 10);
@@ -1129,114 +1267,114 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 	}
-
-	public void SelectAgentValue () throws InterruptedException {
+	
+	public void SelectAgentValue() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_agent_name, 10);
 		WebElement search_input = driver.findElement(select_agent_name1);
 		search_input.click();
 	}
-
-	public void clickSupplyDistribution () throws InterruptedException {
+	
+	public void clickSupplyDistribution() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_supply_distribution1, 10);
 		WebElement element = driver.findElement(click_supply_distribution1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-		
-	public void SelectDropDownToClickReceiveSuppliesButton () throws InterruptedException {
+	
+	public void SelectDropDownToClickReceiveSuppliesButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_drpdown_to_receive_supplies1, 10);
 		WebElement element = driver.findElement(select_drpdown_to_receive_supplies1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 	}
-		
-	public void ClickDropDownToClickReceiveSuppliesButton () throws InterruptedException {
+	
+	public void ClickDropDownToClickReceiveSuppliesButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_to_select_receive_supplies1, 10);
 		WebElement element1 = driver.findElement(click_to_select_receive_supplies1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 	}
-		
-	public String validateSupplyItemField () throws InterruptedException {
+	
+	public String validateSupplyItemField() throws InterruptedException {
 		WebElement element = driver.findElement(validate_supply_item_field1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
 	}
-		
-	public String validateQTYField () throws InterruptedException {
+	
+	public String validateQTYField() throws InterruptedException {
 		WebElement element = driver.findElement(validate_qty_field1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
 	}
-		
-	public String validateDCFField () throws InterruptedException {
+	
+	public String validateDCFField() throws InterruptedException {
 		WebElement element = driver.findElement(validate_dcf_field1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
 	}
-		
-	public String validateDosesField () throws InterruptedException {
+	
+	public String validateDosesField() throws InterruptedException {
 		WebElement element = driver.findElement(validate_doses_field1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
 	}
-		
-	public String validateSupplyDistributionToField () throws InterruptedException {
+	
+	public String validateSupplyDistributionToField() throws InterruptedException {
 		WebElement element = driver.findElement(supply_distribution_to_field1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
 	}
-		
-	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies () throws InterruptedException {
+	
+	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
 		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
 		save_button_receive_supplies.isDisplayed();
 	}
-		
-	public void ClickSaveButton () throws InterruptedException {
+	
+	public void ClickSaveButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
 		save_button_receive_supplies.click();
 	}
-
-	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies () throws InterruptedException {
+	
+	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
 		waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
 		cancel_button_receive_supplies.isDisplayed();
 	}
-		
-	public void clickSupplyItemTextBox () throws InterruptedException {
+	
+	public void clickSupplyItemTextBox() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_to_select_supply_item1, 10);
 		WebElement element1 = driver.findElement(click_to_select_supply_item1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 	}
-		
-	public void selectSupplyItem (String supplyItem) throws InterruptedException {
+	
+	public void selectSupplyItem(String supplyItem) throws InterruptedException {
 		WebElement element = driver.findElement(choose_supply_item1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		waitForElementToBeVisible(driver, choose_supply_item, 10);
 		WebElement search_input = driver.findElement(choose_supply_item1);
 		search_input.click();
 	}
-
-	public void enterQuantity () throws InterruptedException {
+	
+	public void enterQuantity() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_to_select_quantity1, 10);
 		WebElement element = driver.findElement(click_to_select_quantity1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		click(click_to_select_quantity1);
 		element.sendKeys("1");
 	}
-
-	public void selectIncomingSupplyDistribution () throws InterruptedException {
+	
+	public void selectIncomingSupplyDistribution() throws InterruptedException {
 		waitForElementToBeVisible(driver, supply_distribution_to, 10);
 		WebElement element = driver.findElement(supply_distribution_to1);
 		Thread.sleep(2000);
@@ -1248,8 +1386,8 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		select_supply_distributor.click();
 	}
-
-	public void selectReasonForReception () throws InterruptedException {
+	
+	public void selectReasonForReception() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_reason1, 10);
 		WebElement element = driver.findElement(click_reason1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -1260,6 +1398,207 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 	}
+	
+	public void clickCreatImmunizationRecord() throws InterruptedException {
+		create_Immunization_Record.click();
+	}
+	
+	public void ValidateCreateImmunizationRecordButtonIsDisplayed() throws InterruptedException {
+		waitForElementToBeLocated(driver, Create_Immunization_Record1, 10);
+		Create_Immunization_Record.isDisplayed();
+	}
+	
+	public void clickConfirmButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, confirm_button, 10);
+		this.confirm_button.click();
+	}
+	
+	public void clickSelectAnOptionDropdown() {
+		this.select_an_option.click();
+	}
+	
+	public void selectOption(String vaccine) throws InterruptedException {
+		//waitForElementToBeLocated(driver,clinicName,10);
+		waitForElementToBeVisible(driver, covidmRna, 10);
+		WebElement search_input = driver.findElement(covidmRna2);
+		search_input.click();
+	}
+	
+	public void searchClinicLocation(String clinic) throws InterruptedException {
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, search_clinic, 10);
+		Thread.sleep(2000);
+		search_clinic.sendKeys(clinic);
+		Thread.sleep(4000);
+		By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
+		driver.findElement(select_dropdown_option).click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickTimeBox() throws InterruptedException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 0);
+		Date today = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		waitForElementToBeVisible(driver, inputDate, 10);
+		String todayAsString = dateFormat.format(today);
+		waitForElementToBeVisible(driver, inputDate, 10);
+		this.inputDate.click();
+		Thread.sleep(2000);
+		this.inputDate.sendKeys(todayAsString);
+		Thread.sleep(2000);
+		this.inputDate.sendKeys(Keys.ENTER);
+	}
+	
+	public void clickRecordImmunization() throws InterruptedException {
+		waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
+		recordImmunizationBtn.click();
+	}
+	
+	public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
+		if (!isDisplayed(yes_button_save_on_popup_window1)) {
+			return false;
+		}
+		waitForElementToBeLocated(driver, yes_button_save_on_popup_window1, 10);
+		WebElement element = driver.findElement(yes_button_save_on_popup_window1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		return true;
+	}
+	
+	public void informedConsentProvider() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
+		waitForElementToBeVisible(driver, informedConsentProvider, 10);
+		this.informedConsentProvider.click();
+	}
+	
+	public boolean selectDateOfAdministration() throws InterruptedException {
+		if (!isDisplayed(inputDate1)) {
+			return false;
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1);
+		Date today = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 		
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", inputDate);
+		waitForElementToBeVisible(driver, inputDate, 10);
+		String todayAsString = dateFormat.format(today);
+		waitForElementToBeVisible(driver, inputDate, 10);
+		this.inputDate.click();
+		Thread.sleep(2000);
+		this.inputDate.sendKeys(todayAsString);
+		Thread.sleep(2000);
+		this.inputDate.sendKeys(Keys.ENTER);
+		return true;
+	}
+	
+	public void enterConsentEffectiveToDate() throws InterruptedException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, -1);
+		Date yesterday = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+		
+		String yesterdayAsString = dateFormat.format(yesterday);
+		this.consentEffectiveToDate.sendKeys(yesterdayAsString, Keys.ENTER);
+	}
+	
+	public void clickSaveConsent() throws InterruptedException {
+		saveConsentButton.click();
+	}
+	
+	public void selectProvider(String Provider) throws InterruptedException {
+		waitForElementToBeVisible(driver, select_provider, 10);
+		WebElement search_input = driver.findElement(select_provider1);
+		search_input.click();
+	}
+	
+	public void selectImmunizingAgentProvider() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizingAgentProvider);
+		waitForElementToBeVisible(driver, immunizingAgentProvider, 10);
+		this.immunizingAgentProvider.click();
+	}
+	
+	public void selectToSetLot() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", selectLotNumber);
+		waitForElementToBeVisible(driver, selectLotNumber, 10);
+		this.selectLotNumber.click();
+		Thread.sleep(2000);
+	}
+	
+	public void selectInjectionSite() throws InterruptedException {
+		waitForElementToBeLocated(driver, selectSite1, 10);
+		WebElement element = driver.findElement(selectSite1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_injection_site_value1, 10);
+		WebElement element1 = driver.findElement(select_injection_site_value1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+	
+	public void selectInjectionSiteValue(String Injection) throws InterruptedException {
+		waitForElementToBeVisible(driver, select_injection_site_value, 10);
+		WebElement search_input = driver.findElement(select_injection_site_value1);
+		search_input.click();
+	}
+	
+	public void selectLot(String Lot) throws InterruptedException {
+		waitForElementToBeVisible(driver, select_lot, 10);
+		WebElement search_input = driver.findElement(select_lot1);
+		search_input.click();
+	}
+	
+	public void selectDosage() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_dosage_field1, 10);
+		WebElement element = driver.findElement(select_dosage_field1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_dosage1, 10);
+		WebElement element1 = driver.findElement(select_dosage1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+	
+	public void saveImmunizationInformation() throws InterruptedException {
+		saveAgain.click();
+	}
+	
+	public void confirmAndSaveAdministration() throws InterruptedException {
+		confirmAndSave.click();
+	}
+	
+	public void summaryConfirmAndSave() throws InterruptedException {
+		lastConfirmAndSave.click();
+	}
+	
+	public void clickShowAllLotNumbers() throws InterruptedException {
+		waitForElementToBeVisible(driver, show_all_lots_checkbox, 10);
+		Thread.sleep(2000);
+		show_all_lots_checkbox.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickToClose() throws InterruptedException {
+		waitForElementToBeVisible(driver, close_button_diwa, 10);
+		Thread.sleep(2000);
+		close_button_diwa.click();
+		Thread.sleep(2000);
+	}
+	
+	public boolean validateoopsMessage() throws InterruptedException {
+		try {
+			waitForElementToBeVisible(driver, vlidate_oops_message, 10);
+			System.out.println("/*---'There are unsaved changes!' message shown up");
+			return true;
+		} catch (NoSuchElementException e) {
+			System.out.println("/*---the screen does not show up 'There are unsaved changes Message!'");
+			return false;
+		}
+	}
+	
 }
 

@@ -1074,4 +1074,5 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 	}
+	
 }
