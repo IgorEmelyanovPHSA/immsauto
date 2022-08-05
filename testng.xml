@@ -21,6 +21,9 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Drafts"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkDrafts"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.UserArrivingWrongClinicRebookAppointment"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.HistoricalImmunization"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.DIWA_ICE"/>
+
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

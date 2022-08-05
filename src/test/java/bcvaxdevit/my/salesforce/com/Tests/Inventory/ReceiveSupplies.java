@@ -88,7 +88,7 @@ public class ReceiveSupplies extends BaseTest {
 		inClinicExperiencePage.clickSupplyItemTextBox();
 		Thread.sleep(2000);
 		log("/*-- 22. Select AstraZeneca ChAdOx1-S - ABX3120 Supply Item --*/");
-		inClinicExperiencePage.selectSupplyItem("AstraZeneca ChAdOx1-S - ABX3120");
+		inClinicExperiencePage.selectSupplyItem("COMIRNATY (Pfizer) - 35035BD-CC01");
 		Thread.sleep(2000);
 		log("/*-- 23. Validate Quantity Filed Present on Layout --*/");
 		String qty = inClinicExperiencePage.validateQTYField();
