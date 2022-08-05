@@ -161,7 +161,7 @@ public class BookingDose2 extends BaseTest {
 		//clinicInBox.clickOnReasonForVisit();
 		//Thread.sleep(2000);
 		System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
-		clinicInBox.selectEarlyBookingReason();
+		//clinicInBox.selectEarlyBookingReason();
 		Thread.sleep(2000);
 		System.out.println("/*21----select 'Search clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
