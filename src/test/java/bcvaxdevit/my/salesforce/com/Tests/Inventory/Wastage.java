@@ -46,18 +46,18 @@ public class Wastage extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*7.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnContainerDropDownMenu();
+		supplyConsolePage.clickOnFirstContainerDropDownMenu();
 		Thread.sleep(2000);
 		
 		log("/*8.----select Wastage from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectWastageFromDropDown();
 		double remainingDosesBeforeWastage = supplyConsolePage.getActualRemainingDoses();
-		double doseConversionFactorRead = supplyConsolePage.getDoseConversionFactor();
+		double doseConversionFactorValue = supplyConsolePage.getDoseConversionFactor();
 		log("/*----Remaining Doses Before Wastage " + remainingDosesBeforeWastage + " --*/");
-		log("/*----Dose Conversion Factor " + doseConversionFactorRead + " --*/");
+		log("/*----Dose Conversion Factor " + doseConversionFactorValue + " --*/");
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 		
-		log("/*9.----set Wastage Doses amount --*/");
+		log("/*9.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
 		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
@@ -103,17 +103,24 @@ public class Wastage extends BaseTest {
 			double calculatedDosesAfterDeduction = calculated.get(0);
 			double calculatedRemainingQuantityAfterDeduction = calculated.get(1);
 			double doseConversionAfterDeduction = calculated.get(2);
-			
+
 			//Comparing results
+			log("Compering remaining doses after adjustment " + remainingDosesAfterDeduction + " vs calculated doses after adjustment " + calculatedDosesAfterDeduction);
 			assertTrue(Double.compare(remainingDosesAfterDeduction, calculatedDosesAfterDeduction) == 0, "Values are different!");
+
+			log("Compering remaining quantity after adjustment " + remainingQuantityAfterDeduction + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterDeduction);
 			assertTrue(Double.compare(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction) == 0, "Values are different!");
+
+			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeDeduction + " vs dose conversion factor after adjustment " + doseConversionAfterDeduction);
 			assertTrue(Double.compare(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction) == 0, "Values are different!");
-			assertTrue(Double.compare(doseConversionFactorRead, doseConversionAfterDeduction) == 0, "Values are different!"); //Actual read UI value
+
+			log("Compering dose conversion factor value " + doseConversionFactorValue + " vs dose conversion factor after adjustment " + doseConversionAfterDeduction);
+			assertTrue(Double.compare(doseConversionFactorValue, doseConversionAfterDeduction) == 0, "Values are different!");
 		}
 		
 		log("/*.----Extra steps to check the actual amount of doses wastage on Container - Wastage page --*/");
 		log("/*15.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnContainerDropDownMenu();
+		supplyConsolePage.clickOnFirstContainerDropDownMenu();
 		
 		log("/*16.----select Wastage from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectWastageFromDropDown();
