@@ -285,7 +285,7 @@ public class SupplyConsolePage extends BasePage {
 	private By get_remaining_Qty_container2_lot_EK4241_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
-	private WebElement get_remaining_Qty_container1_lot_MT0055_distribution_2_1;
+	private WebElement get_remaining_Qty_container1_lot_MT0055_distribution_1_1;
 	private By get_remaining_Qty_container1_lot_MT0055_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
@@ -295,6 +295,54 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container3_lot_SPIKEVAX6_5Test001_distribution_1_1;
 	private By get_remaining_Qty_container3_lot_SPIKEVAX6_5Test001_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container1_lot_MT0055_distribution_2_1;
+	private By get_remaining_doses_container1_lot_MT0055_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container1_lot_MT0055_distribution_2_1;
+	private By get_remaining_Qty_container1_lot_MT0055_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container2_lot_EK4241_distribution_2_1;
+	private By get_remaining_doses_container2_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container2_lot_EK4241_distribution_2_1;
+	private By get_remaining_Qty_container2_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container3_lot_SPIKEVAX6_5Test001_distribution_2_1;
+	private By get_remaining_doses_container3_lot_SPIKEVAX6_5Test001_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container3_lot_SPIKEVAX6_5Test001_distribution_2_1;
+	private By get_remaining_Qty_container3_lot_SPIKEVAX6_5Test001_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container4_lot_MT0055_distribution_1_2;
+	private By get_remaining_doses_container4_lot_MT0055_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container4_lot_MT0055_distribution_1_2;
+	private By get_remaining_Qty_container4_lot_MT0055_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container5_lot_EK4241_distribution_1_2;
+	private By get_remaining_doses_container5_lot_EK4241_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container5_lot_EK4241_distribution_1_2;
+	private By get_remaining_Qty_container5_lot_EK4241_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	private WebElement get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2;
+	private By get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	private WebElement get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2;
+	private By get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -1199,7 +1247,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, get_remaining_doses_container2_lot_EK4241_distribution_1_1_, 10);
 		WebElement element = driver.findElement(get_remaining_doses_container2_lot_EK4241_distribution_1_1_);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
@@ -1218,7 +1265,6 @@ public class SupplyConsolePage extends BasePage {
 	public Double getValueOfRemainingQty_Container2_Lot_EK4241_Distribution_1_1() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_container2_lot_EK4241_distribution_1_1_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_container2_lot_EK4241_distribution_1_1_);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
@@ -1244,6 +1290,124 @@ public class SupplyConsolePage extends BasePage {
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
 	}
-	
-	
+
+	public Double getValueOfRemainingDoses_Container1_Lot_MT0055_Distribution_2_1() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container1_lot_MT0055_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container1_lot_MT0055_distribution_2_1_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty_Container1_Lot_MT0055_Distribution_2_1() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container1_lot_MT0055_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container1_lot_MT0055_distribution_2_1_);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingDoses_Container2_Lot_EK4241_Distribution_2_1() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container2_lot_EK4241_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container2_lot_EK4241_distribution_2_1_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty_Container2_Lot_EK4241_Distribution_2_1() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container2_lot_EK4241_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container2_lot_EK4241_distribution_2_1_);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingDoses_Container3_Lot_SPIKEVAX6_5Test001_Distribution_2_1() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container3_lot_SPIKEVAX6_5Test001_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container3_lot_SPIKEVAX6_5Test001_distribution_2_1_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty_Container3_Lot_SPIKEVAX6_5Test001_Distribution_2_1() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container3_lot_SPIKEVAX6_5Test001_distribution_2_1_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container3_lot_SPIKEVAX6_5Test001_distribution_2_1_);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingDoses_Container4_Lot_MT0055_Distribution_1_2() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container4_lot_MT0055_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container4_lot_MT0055_distribution_1_2_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+	public Double getValueOfRemainingQty_Container4_Lot_MT0055_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container4_lot_MT0055_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container4_lot_MT0055_distribution_1_2_);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingDoses_Container5_Lot_EK4241_Distribution_1_2() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container5_lot_EK4241_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container5_lot_EK4241_distribution_1_2_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty_Container5_Lot_EK4241_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container5_lot_EK4241_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container5_lot_EK4241_distribution_1_2_);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingDoses_Container6_Lot_SPIKEVAX6_5Test001_Distribution_1_2() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty_Container6_Lot_SPIKEVAX6_5Test001_Distribution_1_2() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
 }
