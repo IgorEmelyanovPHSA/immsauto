@@ -18,6 +18,7 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Requisition"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Consumption"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Adjustments"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkAdjustments"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.Drafts"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkDrafts"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.UserArrivingWrongClinicRebookAppointment"/>
