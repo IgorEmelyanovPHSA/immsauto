@@ -35,12 +35,11 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 	private String phoneNumber = "6041234568";
 
 	@Test(priority = 1)
-	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
-		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
+	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
+		TestcaseID = "219865"; //C219865 //153419?
+		log("Searching and Removing Citizen Duplicates ");
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecoconditionWithParameters();
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {
@@ -138,6 +137,8 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 		log("/*8.---Get unique link using Sales Force query over API--*/");
 		String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
+	//	String uniqueLink = "https://bcvaxdevit-citizenportal.cs142.force.com/s/booking?Id=YOLADpTSwa9tebSoXRVEQblaR%2FOh3JaRTpnnITBU2NCYQ0UzIysQ1Gkl29%2BOntc2&status=false";
+
 		log("/*9.---Open book an appointment portal from unique link--*/");
 		BookAnAppointmentPage bookAnAppointmentPage = loginPage.openBookAnAppointmentPage(uniqueLink);
 		bookAnAppointmentPage.bookAnAppointmentPageDisplayed();
@@ -158,7 +159,7 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 		log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
 		bookAnAppointmentPage.selectOneOption(vaccineToSelect);
 
-		String clinicName = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
+		String clinicName = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 		log("/*13.---Go to tab search by clinic and select clinic " + clinicName + "--*/");
 		bookAnAppointmentPage.searchByClinicName(clinicName);
 
