@@ -62,7 +62,7 @@ public class Adjustments extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*7.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnContainerDropDownMenu();
+		supplyConsolePage.clickOnFirstContainerDropDownMenu();
 		Thread.sleep(2000);
 		
 		log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
