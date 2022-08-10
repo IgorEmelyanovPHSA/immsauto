@@ -175,7 +175,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
 		Thread.sleep(2000);
-		System.out.println("/*28----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
 		//System.out.println("/*29----click on 'More' search tab --*/");

@@ -174,12 +174,12 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		System.out.println("/*26.----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
 		Thread.sleep(2000);
-		//System.out.println("/*28----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		//inClinicExperience.clickReasonForVisit();
-		//Thread.sleep(2000);
-		System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
-		inClinicExperience.selectEarlyBookingReason();
+		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
+		//System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
+		//inClinicExperience.selectEarlyBookingReason();
+		//Thread.sleep(2000);
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
@@ -230,6 +230,9 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		Thread.sleep(3000);
 		System.out.println("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();
+		Thread.sleep(5000);
+		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
+		inClinicExperience.ClickSaveImmuneInfoSaveButton();
 		Thread.sleep(5000);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
