@@ -42,9 +42,9 @@ public class InClinicExperiencePage extends BasePage {
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
 
 	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
-	@FindBy(xpath = ".//a[@title='Ludovika BCVaxLimeburn']")
+	@FindBy(xpath = ".//a[@title='Ludovika BcvaxLimeburn']")
 	private WebElement user_found;
-	private By user_found1 = By.xpath(".//a[@title='Ludovika BCVaxLimeburn']");
+	private By user_found1 = By.xpath(".//a[@title='Ludovika BcvaxLimeburn']");
 	
 	private WebElement user_Gill_found;
 	private By user_Gill_found1 = By.xpath(".//a[@title='Gill Ashely BCVaxOrigan']");
@@ -307,9 +307,9 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
 	private WebElement ice_page_displayed;
 	
-	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
-	private WebElement click_reason_radiobutton;
-	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
+	@FindBy(xpath = ".//div[@class = 'slds-card__body']//span[text() = 'Covid-19 Vaccine']")
+	private WebElement click_on_covid19_vaccination_checkbox;
+	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-card__body']//span[text() = 'Covid-19 Vaccine']");
 	
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
@@ -329,7 +329,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = ".//a[text()='Search by Clinic name']")
 	private WebElement search_by_clinic_name_tab;
-	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by Clinic name']");
+	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
 	private WebElement validate_appointment_confirm_message;
@@ -529,13 +529,16 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void SearchForCitizen(String citizen) throws InterruptedException {
-		//waitForElementToBeLocated(driver,search_assistant1,10);
 		waitForElementToBeVisible(driver, search_assistant, 10);
+		Thread.sleep(2000);
 		WebElement search_navigator = driver.findElement(search_assistant1);
 		search_navigator.click();
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, search_input, 10);
+		Thread.sleep(2000);
 		WebElement search_input = driver.findElement(search_input1);
 		search_input.sendKeys(citizen);
+		Thread.sleep(2000);
 		search_input.sendKeys(Keys.RETURN);
 		Thread.sleep(5000);
 	}
@@ -650,7 +653,7 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean selectImmsRecord() throws InterruptedException {
 		//To scroll down the page to see Imms Record
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1300)", "");
+		js.executeScript("window.scrollBy(0,2000)", "");
 		Thread.sleep(5000);
 		if (!isDisplayed(select_Imms_record1)) {
 			return false;
@@ -1003,11 +1006,11 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void clickReasonForVisit() throws InterruptedException {
+	public void clickOnVaccinationCheckbox() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
-		click_reason_radiobutton.click();
+		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
+		click_on_covid19_vaccination_checkbox.click();
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
@@ -1177,7 +1180,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
