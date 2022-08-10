@@ -32,7 +32,7 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+		inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimebur");
 		System.out.println("/*----Search for Ludovika is Successful ---*/");
 		if (!inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User --> Ludovika not found and return---*/");
@@ -74,7 +74,7 @@ public class BookingDose1 extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+			inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimebur");
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
@@ -235,7 +235,7 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+		inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimebur");
 		System.out.println("/*----Search for Ludovika is Successful ---*/");
 		if (!inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User --> Ludovika not found and return---*/");
@@ -277,7 +277,7 @@ public class BookingDose1 extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+			inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimebur");
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
