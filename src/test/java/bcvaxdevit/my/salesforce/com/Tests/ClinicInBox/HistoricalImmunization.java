@@ -10,11 +10,10 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class HistoricalImmunization extends BaseTest {
-	
-	
-	@Test(testName = "CIB - Historical Immunization Records - PIR Submission Status")
-	public void Can_Create_Historical_Immunization_Record_as_Clinician_BCVAXDEVIT() throws InterruptedException {
-		TestcaseID = "219914"; //C219914
+
+	@Test(priority = 1)
+	public void Can_Create_Historical_Immunization_Record_via_RelatedTab_as_Clinician_BCVAXDEVIT() throws InterruptedException {
+		TestcaseID = "225627"; //C225627
 		log("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		log("/*2.----Close All previously opened Tab's --*/");
@@ -137,5 +136,11 @@ public class HistoricalImmunization extends BaseTest {
 		Thread.sleep(2000);
 		assertEquals(historicalAfter1, historicalDosesbefore1 + 1);
 	}
-	
+
+/*	@Test(priority = 2)
+	public void Can_Create_Historical_Immunization_Record_by_Vaccine_Administration_as_Clinician_BCVAXDEVIT() throws InterruptedException {
+		TestcaseID = "225761"; //C225761
+	}*/
+
+
 }
