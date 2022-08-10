@@ -230,6 +230,9 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();
 		Thread.sleep(5000);
+		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
+		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		Thread.sleep(5000);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);

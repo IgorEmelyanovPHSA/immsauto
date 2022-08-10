@@ -516,7 +516,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement create_Immunization_Record;
 	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
-	
+
+	@FindBy(xpath = ".//button[text() = 'Save']")
+	private WebElement save_immune_info_btn;
+	private By save_immune_info_btn_ = By.xpath(".//button[text() = 'Save']");
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -1601,6 +1605,14 @@ public class InClinicExperiencePage extends BasePage {
 			System.out.println("/*---the screen does not show up 'There are unsaved changes Message!'");
 			return false;
 		}
+	}
+
+	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, save_immune_info_btn, 10);
+		Thread.sleep(2000);
+		save_immune_info_btn.click();
 	}
 	
 }
