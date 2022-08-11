@@ -178,7 +178,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]")
 	private WebElement click_container_dropdown_menu;
 	private By click_container_dropdown_menu1 = By.xpath("(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]");
-	
+
+	@FindBy(xpath = "(//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[1]")
+	private WebElement dropDownMenuFirstContainer;
+
 	@FindBy(xpath = ".//a/span[text() = 'Transfer']")
 	private WebElement select_Transfer_in_dropdown;
 	private By select_Transfer_in_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
@@ -817,7 +820,11 @@ public class SupplyConsolePage extends BasePage {
 	public void clickAdjustmentButtonContainerAdjustmentPage() throws InterruptedException {
 		click(btnBulkAdjustmentContainerAdjustmentPage);
 	}
-	
+
+	public void clickOnFirstContainerDropDownMenu() throws InterruptedException {
+		click(dropDownMenuFirstContainer);
+	}
+
 	public HashMap countDosesAndQuantityMap(int numberOfRows) {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityMap = new HashMap<>();
 		int d = 3;
