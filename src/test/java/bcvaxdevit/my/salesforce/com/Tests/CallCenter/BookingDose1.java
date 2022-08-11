@@ -31,7 +31,7 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+		inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
 		System.out.println("/*----Search for Ludovika is Successful ---*/");
 		if (!inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User --> Ludovika not found and return---*/");
@@ -73,7 +73,7 @@ public class BookingDose1 extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+			inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
@@ -97,8 +97,8 @@ public class BookingDose1 extends BaseTest {
 		String firstName = "Ludovika";
 		callCenterConsole.enterFirstName(firstName);
 		Thread.sleep(2000);
-		System.out.println("/*6.----Enter Last Name BCVaxLimeburn--*/");
-		String lastName = "BCVaxLimeburn";
+		System.out.println("/*6.----Enter Last Name BcvaxLimeburn--*/");
+		String lastName = "BcvaxLimeburn";
 		callCenterConsole.enterLastName(lastName);
 		Thread.sleep(2000);
 		System.out.println("/*6.----Enter Date of birth--*/");
@@ -157,9 +157,9 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
 		Thread.sleep(2000);
-		//System.out.println("/*22----click on reason for Visit for visit 'Covid-19 Vaccine' radiobutton --*/");
-		//callCenterConsole.clickOnReasonForVisit();
-		//Thread.sleep(2000);
+		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		callCenterConsole.clickOnVaccinationCheckbox();
+		Thread.sleep(2000);
 		//System.out.println("/*23----click on reason Early Booking Reason --*/");
 		//callCenterConsole.selectEarlyBookingReason();
 		//Thread.sleep(2000);
@@ -223,7 +223,7 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+		inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
 		System.out.println("/*----Search for Ludovika is Successful ---*/");
 		if (!inClinicExperiencePage.userFound()) {
 			System.out.println("/*----User --> Ludovika not found and return---*/");
@@ -265,7 +265,7 @@ public class BookingDose1 extends BaseTest {
 			System.out.println("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+			inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
 			System.out.println("/*----Search for Ludovika is Successful ---*/");
 		}
 	}

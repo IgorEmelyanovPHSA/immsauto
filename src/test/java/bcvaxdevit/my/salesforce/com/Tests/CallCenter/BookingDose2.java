@@ -148,9 +148,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
 		Thread.sleep(2000);
-		//log("/*22----click on reason for Visit for visit 'Covid-19 Vaccine' radiobutton --*/");
-		//callCenterConsole.clickOnReasonForVisit();
-		//Thread.sleep(2000);
+		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		callCenterConsole.clickOnVaccinationCheckbox();
+		Thread.sleep(2000);
 		log("/*24----select 'Search clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
 		Thread.sleep(2000);

@@ -247,8 +247,8 @@ public class ClinicInBoxPage extends BasePage {
 	private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 	
 	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
-	private WebElement click_reason_radiobutton;
-	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
+	private WebElement click_on_covid19_vaccination_checkbox;
+	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
 	
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
@@ -829,12 +829,12 @@ public class ClinicInBoxPage extends BasePage {
 		waitForElementToBeVisible(driver, appointment_tab, 10);
 		appointment_tab.click();
 	}
-	
-	public void clickOnReasonForVisit() throws InterruptedException {
+
+	public void clickOnVaccinationCheckbox() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
-		click_reason_radiobutton.click();
+		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
+		click_on_covid19_vaccination_checkbox.click();
 	}
 
 	public void selectEarlyBookingReason() throws InterruptedException {

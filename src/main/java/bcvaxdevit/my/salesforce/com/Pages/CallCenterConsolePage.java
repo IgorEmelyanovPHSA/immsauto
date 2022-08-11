@@ -78,8 +78,8 @@ public class CallCenterConsolePage extends BasePage {
 	private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 	
 	@FindBy(xpath = ".//span[text() = 'Covid-19 Vaccine']")
-	private WebElement click_reason_radiobutton;
-	private By click_reason_radiobutton1 = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
+	private WebElement click_on_covid19_vaccination_checkbox;
+	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
 	
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
@@ -93,9 +93,9 @@ public class CallCenterConsolePage extends BasePage {
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 	
-	@FindBy(xpath = ".//a[text()='Search by Clinic name']")
+	@FindBy(xpath = ".//a[text()='Search by clinic name']")
 	private WebElement search_by_clinic_name_tab;
-	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by Clinic name']");
+	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement search_clinic_name;
@@ -302,11 +302,11 @@ public class CallCenterConsolePage extends BasePage {
 		appointment_tab.click();
 	}
 	
-	public void clickOnReasonForVisit() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+	public void clickOnVaccinationCheckbox() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_reason_radiobutton, 10);
-		click_reason_radiobutton.click();
+		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
+		click_on_covid19_vaccination_checkbox.click();
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
@@ -326,7 +326,8 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void selectSearchClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
