@@ -41,4 +41,14 @@ public class Utils {
 		config.load(new FileInputStream(PATH_TO_CONFIG));
 		return config.getProperty(targetProperty);
 	}
+
+	public static Boolean shoudIUpdateTestRail() throws Exception {
+		String yesORno = System.getProperty("test_rail");
+		if (yesORno == null){
+			yesORno = getConfigProperty("test_rail");
+			return yesORno.equalsIgnoreCase("yes");
+		} else
+			return yesORno.equalsIgnoreCase("yes");
+	}
+
 }

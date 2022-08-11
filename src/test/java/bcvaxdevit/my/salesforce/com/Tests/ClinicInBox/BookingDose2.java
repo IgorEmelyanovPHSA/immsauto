@@ -160,14 +160,19 @@ public class BookingDose2 extends BaseTest {
 		//System.out.println("/*20----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
 		//clinicInBox.clickOnReasonForVisit();
 		//Thread.sleep(2000);
-		System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
-		//clinicInBox.selectEarlyBookingReason();
-		Thread.sleep(2000);
+
+//		System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
+//		clinicInBox.selectEarlyBookingReason();
+//		Thread.sleep(2000);
+		String vaccineToSelect = "Covid19Vaccine";
+		log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
+		clinicInBox.selectOneOption(vaccineToSelect);
 		System.out.println("/*21----select 'Search clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
-		System.out.println("/*22----search the Clinic --*/");
-		clinicInBox.searchClinicName();
+		String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
+		System.out.println("/*22----search the Clinic " +clinicNameToSearch +" --*/");
+		clinicInBox.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		System.out.println("/*23----click on Option Facility location  --*/");
 		clinicInBox.clickOnFacilityOptionLocation();

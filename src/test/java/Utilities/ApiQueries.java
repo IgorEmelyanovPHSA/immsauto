@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.nio.file.Paths;
 
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,24 +21,44 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONTokener;
 import org.json.JSONException;
-import org.testng.annotations.Test;
+
 
 import static bcvaxdevit.my.salesforce.com.Tests.BaseTest.log;
 
 public class ApiQueries {
 
-    static final String USERNAME     = "auto_admin_portal@phsa.ca.bcvaxdevit";
-    static final String PASSWORD     = "Technology1990!!!!!!";
-    static final String LOGINURL     = "https://bcphsa--bcvaxdevit.my.salesforce.com";
-    static final String GRANTSERVICE = "/services/oauth2/token?grant_type=password";
-    static final String CLIENTID     = "3MVG9BM7anZT_gV7f1mkP5ctGzqO71H_vod4Ct5OFm19xb1h0.LcZTqN2X_JxKTZ1uEpGKI1GlcYAN4LsTnTz";
-    static final String CLIENTSECRET = "67E62860A550802946981D6420A031B706BCAB170F3F7E4C863DA5FCF2A67E86";
+//    static final String USERNAME     = "auto_admin_portal@phsa.ca.bcvaxdevit";
+//    static final String PASSWORD     = "Technology1990!!!!!!";
+//    static final String LOGINURL     = "https://bcphsa--bcvaxdevit.my.salesforce.com";
+//    static final String GRANTSERVICE = "/services/oauth2/token?grant_type=password";
+//    static final String CLIENTID     = "3MVG9BM7anZT_gV7f1mkP5ctGzqO71H_vod4Ct5OFm19xb1h0.LcZTqN2X_JxKTZ1uEpGKI1GlcYAN4LsTnTz";
+//    static final String CLIENTSECRET = "67E62860A550802946981D6420A031B706BCAB170F3F7E4C863DA5FCF2A67E86";
 
+    private static String USERNAME;
+    private static String PASSWORD;
+    private static String LOGINURL;
+    private static String CLIENTID;
+    private static String CLIENTSECRET;
+
+    static final String GRANTSERVICE = "/services/oauth2/token?grant_type=password";
     private static String REST_ENDPOINT = "/services/data" ;
     private static String API_VERSION = "/v50.0" ;
     private static String baseUri;
     private static Header oauthHeader;
     private static Header prettyPrintHeader = new BasicHeader("X-PrettyPrint", "1");
+
+    static {
+        try {
+            USERNAME     = Utils.getEnvConfigProperty("api_user");
+            PASSWORD     = Utils.getEnvConfigProperty("api_user_pw");
+            LOGINURL     = Utils.getEnvConfigProperty("url");
+            CLIENTID     = Utils.getEnvConfigProperty("api_clientId");
+            CLIENTSECRET = Utils.getEnvConfigProperty("api_clientSecret");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getOauthToken() {
         HttpClient httpclient = HttpClientBuilder.create().build();
@@ -101,7 +123,6 @@ public class ApiQueries {
     public static String queryToGetUniqueLink(String uniqueNumber) {
         String BCH_Unique_Link__c_value = null;
         String oauthToken = getOauthToken();
-
 
         String query ="/query?q=SELECT+BCH_Unique_Link__c+FROM+Account+WHERE+BCH_Registration_Confirmation_Number__c='"+uniqueNumber+"'";
        // String query ="/query?q=SELECT+BCH_Unique_Link__c+FROM+Account+WHERE+BCH_Registration_Confirmation_Number__c=+'RFK8QAN5I'";

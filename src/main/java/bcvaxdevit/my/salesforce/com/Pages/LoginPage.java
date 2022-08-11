@@ -174,6 +174,14 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
 	}
+
+	public InClinicExperiencePage loginAsPrecoconditionWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_Precondition"));
+		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_PreconditionPW"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 	public SupplyConsolePage loginAsPPHIS() {
 		this.enterPPHISUserName();

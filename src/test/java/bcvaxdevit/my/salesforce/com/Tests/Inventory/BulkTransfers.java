@@ -544,11 +544,11 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.clickBulkTransfersButton();
 		Thread.sleep(5000);
 		log("/*10.----Enter the Dosages values (1 Dose) for 3 row Transfers --*/");
-		int k = 2;
+		int k = 3;
 		while (k <= 7) {
 			supplyConsolePage.enterBulkTransferByDosages(k);
 			int n = k - 2;
-			log("/*---     dosages slot N%: " + n);
+			log("/*---     dose slot N%: " + n);
 			Thread.sleep(1000);
 			k = k + 2;
 		}
@@ -614,8 +614,8 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1);
 		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, ((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1) / 5));
 		log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX6-5Test001");
-		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 + 1);
-		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, ((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 + 1) / 10));
+		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - 1);
+		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, ((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - 1) / 10));
 		////////////Distribution_1_2 Validation "TO" after
 		log("/*----Validation for container#4 Distribution_1_2 - MT0055");
 		assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_2, remainingDoses_before_Lot_MT0055_Distribution_1_2 + 1);

@@ -34,7 +34,7 @@ public class BookAnAppointmentPage extends BasePage{
     @FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
     private WebElement checkBoxInfluenzaVaccine;
 
-    @FindBy(xpath = "//a[@data-label='Search by Clinic name']")
+    @FindBy(xpath = "//a[@data-label='Search by clinic name']")
     private WebElement tabSearchByClinicName;
 
     @FindBy(xpath = "//input[@name='clinicstag']")
@@ -106,6 +106,7 @@ public class BookAnAppointmentPage extends BasePage{
     }
 
     public void searchByClinicName(String clinicName) throws InterruptedException{
+        Thread.sleep(500);
         scrollTop(tabSearchByClinicName);
         click(tabSearchByClinicName);
         click(textBoxSearchByClinicName);

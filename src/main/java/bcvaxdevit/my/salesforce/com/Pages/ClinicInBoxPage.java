@@ -263,9 +263,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_early_booking_reason;
 	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
 
-	@FindBy(xpath = ".//a[text()='Search by Clinic name']")
+	@FindBy(xpath = ".//a[text()='Search by clinic name']")
 	private WebElement search_by_clinic_name_tab;
-	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by Clinic name']");
+	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement search_clinic_name;
@@ -350,7 +350,12 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "(//input[@placeholder='Input your search here'])[1]")
 	private WebElement searchByPhn;
 	private By searchByPhn1 = By.xpath("(//input[@placeholder='Input your search here'])[1]");
-	
+
+	@FindBy(xpath = "//span[text() = 'Covid-19 Vaccine']")
+	private WebElement checkBoxCovid19Vaccine;
+
+	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
+	private WebElement checkBoxInfluenzaVaccine;
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
 		super(driver);
@@ -744,7 +749,8 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickNonIndigenousRadioButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-		non_indigenous_radio_button.click();
+		scrollTop(non_indigenous_radio_button);
+		click(non_indigenous_radio_button);
 	}
 	
 	public void clickVerifyPHNButton() throws InterruptedException {
@@ -852,20 +858,21 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+		click(search_by_clinic_name_tab);
+//		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
+//		Thread.sleep(2000);
+//		WebElement element = driver.findElement(search_by_clinic_name_tab1);
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void searchClinicName() throws InterruptedException {
+	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		waitForElementToBeVisible(driver, search_clinic_name, 10);
 		search_clinic_name.click();
 		Thread.sleep(2000);
-		search_clinic_name.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
+		search_clinic_name.sendKeys(clinicNameToSearch);
 		search_clinic_name.sendKeys(Keys.RETURN);
 	}
 	
@@ -1077,5 +1084,19 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 	}
-	
+
+	public void selectOneOption(String vaccine) throws InterruptedException{
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
+			click(checkBoxCovid19Vaccine);
+		}
+		else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
+			click(checkBoxInfluenzaVaccine);
+		}
+		else{
+			click(checkBoxCovid19Vaccine);
+			click(checkBoxInfluenzaVaccine);
+		}
+	}
+
 }
