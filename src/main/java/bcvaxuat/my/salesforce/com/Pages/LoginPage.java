@@ -156,7 +156,15 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
 	}
-	
+
+	public InClinicExperiencePage loginAsClinicianICEWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxuat.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_ICE"));
+		clinician_pw_bcvaxuat.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_ICE"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
+
 	public InClinicExperiencePage loginasPrecocondition() {
 		this.Precondition_BCVAXUAT();
 		//setUsername(username);
@@ -174,7 +182,15 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new SupplyConsolePage(driver);
 	}
-	
+
+	public InClinicExperiencePage loginAsPrecoconditionWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxuat.sendKeys(Utils.getEnvConfigProperty("user_Precondition"));
+		clinician_pw_bcvaxuat.sendKeys(Utils.getEnvConfigProperty("user_PreconditionPW"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
+
 	public RequisitionPage loginAsPPHIS1() {
 		this.enterPPHISUserName();
 		//setUsername(username);
@@ -224,6 +240,14 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new CallCenterConsolePage(driver);
 	}
-	
-	
+
+	public RegisterToGetVaccinatedPage openRegisterToGetVaccinatedPage() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url_citizenportal"));
+		return new RegisterToGetVaccinatedPage(driver);
+	}
+
+	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
+		driver.navigate().to(uniqueLink);
+		return new BookAnAppointmentPage(driver);
+	}
 }

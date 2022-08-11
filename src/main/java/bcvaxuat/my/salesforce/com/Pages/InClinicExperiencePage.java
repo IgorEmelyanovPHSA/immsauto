@@ -571,7 +571,19 @@ public class InClinicExperiencePage extends BasePage {
 		executor1.executeScript("arguments[0].click();", element1);
 		Thread.sleep(2000);
 	}
-	
+
+	public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
+		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " "+legalMiddleName+" " + legalLastName + "']");
+		if (!isDisplayed(userFoundWithParameter)) {
+			return false;
+		}
+		WebElement userFoundWithParameterId = driver.findElement(userFoundWithParameter);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", userFoundWithParameterId);
+		Thread.sleep(5000);
+		return true;
+	}
+
 	public void selectIceApp() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_app_launcher1, 10);
 		WebElement element = driver.findElement(select_app_launcher1);
