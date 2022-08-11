@@ -186,7 +186,7 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 	
-	@FindBy(xpath = "//span[@title='0.3']")
+	@FindBy(xpath = "//span[@title='0.5']")
 	private WebElement select_dosage;
 	private By select_dosage1 = By.xpath("//span[@title='0.5']");
 	
@@ -201,9 +201,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//span[@title='JY Automation']");
 	
-	@FindBy(xpath = "//li[@title='TestHX Pediatric Trade001 - Exp. 2022 December 31']")
+	@FindBy(xpath = "//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
-	private By select_lot1 = By.xpath("//li[@title='TestHX Pediatric Trade001 - Exp. 2022 December 31']");
+	private By select_lot1 = By.xpath("//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']");
 	
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
@@ -229,6 +229,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
 	private WebElement lastConfirmAndSave;
+	private By lastConfirmAndSave1 = By.xpath( "//button[contains(text(),'Confirm and Save')]");
 	
 	@FindBy(xpath = "(.//a[text() = 'Related'])")
 	private WebElement person_account_Related_tab;
@@ -669,6 +670,8 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void summaryConfirmAndSave() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", lastConfirmAndSave);
+		waitForElementToBeLocated(driver, lastConfirmAndSave1, 10);
 		lastConfirmAndSave.click();
 	}
 
