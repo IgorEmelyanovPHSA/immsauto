@@ -2,6 +2,7 @@ package bcvaxuat.my.salesforce.com.Tests;
 
 import bcvaxuat.my.salesforce.com.Pages.LoginPage;
 import bcvaxuat.my.salesforce.com.Pages.TestRailManager;
+import bcvaxuat.my.salesforce.com.Pages.Utils;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,11 +53,24 @@ public class BaseTest {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result) throws Throwable {
 		log("This will execute after the Method");
-		if (result.getStatus() == ITestResult.SUCCESS) {
-			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
-		} else if (result.getStatus() == ITestResult.FAILURE) {
-			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
+		try {
+			if(Utils.shoudIUpdateTestRail()){
+				if (result.getStatus() == ITestResult.SUCCESS) {
+					TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
+				} else if (result.getStatus() == ITestResult.FAILURE) {
+					TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
+				}
+			} else {
+				log("Test Rail will not be updated.");
+			}
+		} catch (Exception e) {
+			log("Test Rail was not updated: "+e);
 		}
+//		if (result.getStatus() == ITestResult.SUCCESS) {
+//			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
+//		} else if (result.getStatus() == ITestResult.FAILURE) {
+//			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
+//		}
 		driver.manage().deleteAllCookies();
 		driver.close();
 	}
