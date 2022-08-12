@@ -128,6 +128,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*13.'Enter email address --*/");
 		String email = "test@qa.com";
 		callCenterConsole.enterEmail(email);
+		Thread.sleep(2000);
 		log("/*14.'Confirm email address --*/");
 		Thread.sleep(2000);
 		String email1 = "test@qa.com";
