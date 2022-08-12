@@ -11,13 +11,13 @@ import static org.testng.Assert.assertEquals;
 public class Drafts extends BaseTest {
 
     @Test()
-    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXUAT() throws InterruptedException {
         TestcaseID = "222371"; //C222371
         log("Test Case#1 save draft and transfer after");
         double amountOfDosesToAdjust = 10;
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+        log("/*1.----Login as an PPHIS_bcvaxuat to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
 
@@ -72,7 +72,7 @@ public class Drafts extends BaseTest {
         Thread.sleep(2000);
 
         log("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSameClinicSupplyDistributionNewMethod();
         Thread.sleep(2000);
 
         log("/*15.----click btn Save as Draft --*/");
@@ -237,13 +237,13 @@ public class Drafts extends BaseTest {
 //    }
 
     @Test()
-    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXUAT() throws InterruptedException {
         TestcaseID = "222371"; //C222371
         log("Test Case#3 Create draft and cancel it");
         double amountOfDosesToAdjust = 10;
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+        log("/*1.----Login as an PPHIS_bcvaxuat to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
 
@@ -298,7 +298,7 @@ public class Drafts extends BaseTest {
         Thread.sleep(2000);
 
         log("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSameClinicSupplyDistributionNewMethod();
         Thread.sleep(2000);
 
         log("/*15.----click btn Save as Draft --*/");

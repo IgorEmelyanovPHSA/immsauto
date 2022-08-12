@@ -165,12 +165,14 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000000338']")
 	private WebElement select_incoming_supply_distributor;
 	private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000000338']");
-	
+
+	@FindBy(xpath = "//span[contains(text(),'Automation Supply Distribution_1_2')]")
+	private WebElement selectSameClinicSupplyDistributor_1_2;
+
 	@FindBy(xpath = "//span[@title='Automation Supply Distribution_1_2 - SDST-0000000337']")
 	private WebElement select_same_clinic_supply_distributor_1_2;
 	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[@title='Automation Supply Distribution_1_2 - SDST-0000000337']");
-	
-	
+
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
 	private WebElement confirm_incoming_transfers_modal_button;
 	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
@@ -194,18 +196,18 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses;
 	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 	
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_distribution_1_2;
-	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
-	
-	
+	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+
 	@FindBy(xpath = "(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty;
 	private By get_remaining_Qty_ = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 	
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][3]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_1_2;
-	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 	
 	
 	@FindBy(xpath = ".//input[@name = 'HC_Product_Measure__c']")
@@ -775,8 +777,13 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void selectReasonForAdjustmentDropDown() throws InterruptedException {
 		click(reasonForAdjustmentFromDropDown);
+		clickUsingJS(reasonForAdjustmentFromDropDown);
+		//click(reasonForAdjustmentFromDropDown);
+		Thread.sleep(500);
 		reasonForAdjustmentFromDropDown.sendKeys("a"); //Administered Vaccine
 		reasonForAdjustmentFromDropDown.sendKeys(Keys.ENTER);
+		String getSelectedReasonFromDropDown = reasonForAdjustmentFromDropDown.getText();
+		log("Reason for adjustment is selected: " +getSelectedReasonFromDropDown);
 	}
 	
 	public void selectReasonForWastageDropDown() throws InterruptedException {
@@ -938,6 +945,13 @@ public class SupplyConsolePage extends BasePage {
 		select_same_clinic_supply_distributor_1_2.click();
 		//#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
 		//#search_supply_location_To.sendKeys(Keys.ENTER);
+	}
+
+	public void selectSameClinicSupplyDistributionNewMethod() throws InterruptedException {
+		waitForElementToBeVisible(driver, search_incoming_supply_distributor_1_2, 10);
+		clickUsingJS(search_incoming_supply_distributor_1_2);
+		Thread.sleep(500);
+		click(selectSameClinicSupplyDistributor_1_2);
 	}
 	
 	public Double getValueOfRemainingDosesDistribution_1_2() throws InterruptedException {
