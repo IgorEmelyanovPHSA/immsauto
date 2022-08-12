@@ -23,7 +23,7 @@ public class Adjustments extends BaseTest {
 	public static Object[][] primeNumbers() {
 		return new Object[][]{{"25"}, {"-30"}};
 	}
-	
+
 	@Test(dataProvider = "value")
 	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws InterruptedException {
 		TestcaseID = "222369"; //C222369

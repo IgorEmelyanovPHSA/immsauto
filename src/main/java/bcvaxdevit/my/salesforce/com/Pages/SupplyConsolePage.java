@@ -1011,9 +1011,13 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void selectReasonForAdjustmentDropDown() throws InterruptedException {
-		click(reasonForAdjustmentFromDropDown);
+		clickUsingJS(reasonForAdjustmentFromDropDown);
+		//click(reasonForAdjustmentFromDropDown);
+		Thread.sleep(500);
 		reasonForAdjustmentFromDropDown.sendKeys("a"); //Administered Vaccine
 		reasonForAdjustmentFromDropDown.sendKeys(Keys.ENTER);
+		String getSelectedReasonFromDropDown = reasonForAdjustmentFromDropDown.getText();
+		log("Reason for adjustment is selected: " +getSelectedReasonFromDropDown);
 	}
 	
 	public void selectReasonForWastageDropDown() throws InterruptedException {
