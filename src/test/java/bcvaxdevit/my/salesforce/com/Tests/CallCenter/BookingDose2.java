@@ -188,10 +188,10 @@ public class BookingDose2 extends BaseTest {
 		log("/*34----Navigate to Appointment record --*/");
 		callCenterConsole.selectAppointmentRecord();
 		Thread.sleep(2000);
-/*		Double dosage = callCenterConsole.getValueOfDosesNumber();
-		log("/*-- 49. remaining doses are: -->" + dosage);
-		Double expectedDosage = Double.valueOf("2");
-		assertEquals(dosage, expectedDosage);*/
+		//Double dosage = callCenterConsole.getValueOfDosesNumber();
+		//log("/*-- 49. remaining doses are: -->" + dosage);
+		//Double expectedDosage = Double.valueOf("2");
+		//assertEquals(dosage, expectedDosage);
 	}
 	
 	@Test(priority = 3)
