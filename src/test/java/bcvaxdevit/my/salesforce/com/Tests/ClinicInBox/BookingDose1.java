@@ -169,7 +169,6 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
 		clinicInBox.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
-		//Thread.sleep(2000);
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//clinicInBox.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);

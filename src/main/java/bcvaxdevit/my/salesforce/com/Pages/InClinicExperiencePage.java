@@ -135,10 +135,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
-	
-	@FindBy(xpath = "//a[contains(text(),'Pfizer mRNA BNT162b2 - EL0203')]")
+
+
+	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203')]")
 	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Pfizer mRNA BNT162b2 - EL0203')]");
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'COMIRNATY (Pfizer) - EL0203')]");
 	
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_console_App_displayed;
