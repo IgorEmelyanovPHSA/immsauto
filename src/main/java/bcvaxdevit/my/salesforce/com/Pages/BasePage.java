@@ -79,7 +79,13 @@ public abstract class BasePage<T> {
 		element.click();
 		return (T) this;
 	}
-	
+
+	public T clickUsingJS(WebElement element){
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		return (T) this;
+	}
+
 	public T typeIn(WebElement element, String text) {
 		waitForVisibility(element);
 		element.clear();
