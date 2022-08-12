@@ -18,8 +18,10 @@
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Requisition"/>
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Consumption"/>
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Adjustments"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.BulkAdjustments"/>
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Drafts"/>
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.BulkDrafts"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.Portal.Dose1_CitizenBookingAppointment"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
