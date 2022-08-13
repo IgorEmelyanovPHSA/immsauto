@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.nio.file.Paths;
 
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicHeader;
@@ -125,8 +125,6 @@ public class ApiQueries {
         String oauthToken = getOauthToken();
 
         String query ="/query?q=SELECT+BCH_Unique_Link__c+FROM+Account+WHERE+BCH_Registration_Confirmation_Number__c='"+uniqueNumber+"'";
-       // String query ="/query?q=SELECT+BCH_Unique_Link__c+FROM+Account+WHERE+BCH_Registration_Confirmation_Number__c=+'RFK8QAN5I'";
-       // String query2 ="/query?q=SELECT+BCH_Unique_Link__c+FROM+Account+Limit+5";
 
         baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
         oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
@@ -171,7 +169,6 @@ public class ApiQueries {
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
-        
         return BCH_Unique_Link__c_value;
     }
 
@@ -192,4 +189,206 @@ public class ApiQueries {
         }
         return result;
     }
+
+    public static String queryToGetAccountId(String PersonEmail, String LastName, String FirstName) {
+        log("/*---Query to get AccountId record--*/ ");
+        String AccountId = null;
+        String oauthToken = getOauthToken();
+
+        String query ="/query?q=SELECT+ID+FROM+Account+WHERE+PersonEmail='"+PersonEmail+"'+AND+LastName='"+LastName+"'+AND+FirstName='"+FirstName+"'+Limit+3";
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    System.out.println("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        AccountId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("AccountId: " + AccountId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                System.exit(-1);
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        return AccountId;
+    }
+
+    public static String queryToGetImmunizationRecordId(String AccountId) {
+        log("/*---Query to get immunization record--*/ ");
+        String ImmunizationRecordId = null;
+        String oauthToken = getOauthToken();
+
+        String query ="/query?q=SELECT+ID+FROM+Case+WHERE+AccountId='"+AccountId+"'";
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        ImmunizationRecordId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("ImmunizationRecordId: " + ImmunizationRecordId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                System.exit(-1);
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        return ImmunizationRecordId;
+    }
+
+    public static void deleteImmunizationRecord(String immunizationRecordId) {
+        log("/*---Delete immunization record " +immunizationRecordId +"--*/ ");
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + "/sobjects/Case/" + immunizationRecordId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpDelete httpDelete = new HttpDelete(uri);
+            httpDelete.addHeader(oauthHeader);
+            httpDelete.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpDelete);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                log("Delete the immunization record successful.");
+            } else {
+                log("Immunization record delete NOT successful. Status code is " + statusCode);
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+    }
+
+    public static void deleteAccount(String AccountId) {
+        log("/*---Delete participant account " +AccountId +"--*/ ");
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + "/sobjects/Account/" + AccountId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpDelete httpDelete = new HttpDelete(uri);
+            httpDelete.addHeader(oauthHeader);
+            httpDelete.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpDelete);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                log("Delete the account successful.");
+            } else {
+                log("Account delete NOT successful. Status code is " + statusCode);
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+    }
+
+    public static void apiCallToRemoveDuplicateCitizenParticipantAccount(String PersonEmail, String LastName, String FirstName){
+        String AccountId = queryToGetAccountId(PersonEmail,LastName,FirstName);
+        if(AccountId==null){
+            log("Duplicate account not found");
+        }
+        else {
+            String immunizationRecordId = queryToGetImmunizationRecordId(AccountId);
+             if (immunizationRecordId == null) {
+                log("Immunization record not found");
+                deleteAccount(AccountId);
+            } else {
+                deleteImmunizationRecord(immunizationRecordId);
+                deleteAccount(AccountId);
+            }
+        }
+    }
+
 }
