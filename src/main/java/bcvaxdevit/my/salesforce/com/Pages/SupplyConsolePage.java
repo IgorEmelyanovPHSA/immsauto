@@ -1021,9 +1021,16 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void selectReasonForWastageDropDown() throws InterruptedException {
-		click(reasonForWastageValueFromDropDown);
+		clickUsingJS(reasonForWastageValueFromDropDown);
+		Thread.sleep(500);
 		reasonForWastageValueFromDropDown.sendKeys("c"); //CCI: Equipment Malfunction
 		reasonForWastageValueFromDropDown.sendKeys(Keys.ENTER);
+		String getSelectedReasonFromDropDown = reasonForWastageValueFromDropDown.getText();
+		log("Reason for wastage is selected: " +getSelectedReasonFromDropDown);
+
+//		click(reasonForWastageValueFromDropDown);
+//		reasonForWastageValueFromDropDown.sendKeys("c"); //CCI: Equipment Malfunction
+//		reasonForWastageValueFromDropDown.sendKeys(Keys.ENTER);
 //		click(dropDownValueCCIHandlingError); // Working on local but have difficulty clicking on Jenkins
 	}
 	
@@ -1109,9 +1116,10 @@ public class SupplyConsolePage extends BasePage {
 			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
 			typeIn(dosesDynamicFiled, Double.toString(amount));
 			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			click(reasonDynamicDropDown);
+			clickUsingJS(reasonDynamicDropDown);
+			Thread.sleep(500);
 			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title='Administered Vaccine'])[" + (y + 1) + "]"));
-			click(selectReasonFromDynamicDropDown);
+			clickUsingJS(selectReasonFromDynamicDropDown);
 			k = k + 3;
 			y++;
 		}

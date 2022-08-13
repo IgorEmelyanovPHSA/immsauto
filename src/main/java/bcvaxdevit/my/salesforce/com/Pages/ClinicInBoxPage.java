@@ -941,6 +941,13 @@ public class ClinicInBoxPage extends BasePage {
 		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
+
+	public void clickVerifyContactInformationNew() throws InterruptedException {
+		Thread.sleep(1000);
+		scrollTop(verify_contact_information_checkbox);
+		Thread.sleep(1000);
+		clickUsingJS(verify_contact_information_checkbox);
+	}
 	
 	public boolean displayClinicInBoxApp() {
 		return isDisplayed(cib_App_displayed1);
