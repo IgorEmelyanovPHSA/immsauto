@@ -189,7 +189,7 @@ public class BookingDose2 extends BaseTest {
 		clinicInBox.clickOnNextButton();
 		Thread.sleep(2000);
 		log("/*27----click Verify Contact Information Checkbox  --*/");
-		clinicInBox.clickVerifyContactInformation();
+		clinicInBox.clickVerifyContactInformationNew();
 		Thread.sleep(2000);
 		log("/*28----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
