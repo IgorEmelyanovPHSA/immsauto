@@ -10,8 +10,16 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
-	
-	@Test(priority = 1)
+
+	private String legalFirstName = "Ludovika";
+	private String legalLastName = "BcvaxLimeburn";
+	private String dateOfBirth = "Sep 21, 1923";
+	private String postalCode = "V3L5L2";
+	private String personalHealthNumber = "9746170911";
+	//private boolean isIndigenous = false;
+	private String email = "accountToDelete@phsa.ca";
+
+	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
@@ -79,79 +87,74 @@ public class BookingDose1 extends BaseTest {
 		}
 	}
 	
-	@Test(priority = 2)
+	@Test
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "222364"; //C192878
-		System.out.println("/*1.----Login as an Clinician to CIB --*/");
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		log("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		Thread.sleep(10000);
-		System.out.println("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
+		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		if (clinicInBox.displayCIBApp()) {
-			System.out.println("/*---- User already on CIB Page--*/");
+			log("/*---- User already on CIB Page--*/");
 			Thread.sleep(2000);
 		} else {
-			System.out.println("/*---- Navigate to CIB App --*/");
+			log("/*---- Navigate to CIB App --*/");
 			clinicInBox.selectCIBApp();
 			Thread.sleep(2000);
 		}
 		//clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		Thread.sleep(5000);
-		System.out.println("/*3.----Close All previously opened Tab's --*/");
+		log("/*3.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		Thread.sleep(5000);
-		System.out.println("/*4.----click Register New Citizen -Ludovika --*/");
+		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();
 		Thread.sleep(2000);
-		System.out.println("/*5.----Enter First Name Ludovika--*/");
-		String firstName = "Ludovika";
-		clinicInBox.enterFirstName(firstName);
+		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
+		clinicInBox.enterFirstName(legalFirstName);
 		Thread.sleep(2000);
-		System.out.println("/*6.----Enter Last Name BcvaxLimeburn--*/");
-		String lastName = "BcvaxLimeburn";
-		clinicInBox.enterLastName(lastName);
+		log("/*6.----Enter Last Name: " +legalLastName +"--*/");
+		clinicInBox.enterLastName(legalLastName);
 		Thread.sleep(2000);
-		System.out.println("/*6.----Enter Date of birth--*/");
-		String dateOfBirth = "Sep 21, 1923";
+		log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
 		clinicInBox.enterDateOfBirth(dateOfBirth);
 		Thread.sleep(2000);
-		System.out.println("/*7.----Enter Postal code--*/");
-		String postalCode = "V3L5L2";
+		log("/*7.----Enter Postal code: " +postalCode +"--*/");
 		clinicInBox.enterPostalCode(postalCode);
 		Thread.sleep(2000);
-		System.out.println("/*8.----Enter PHN--*/");
-		String phnNumber = "9746170911";
-		clinicInBox.enterPNH(phnNumber);
+		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
+		clinicInBox.enterPNH(personalHealthNumber);
 		Thread.sleep(2000);
-		System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
+		log("/*9.----click on non-Indigenous person radiobutton --*/");
 		clinicInBox.clickNonIndigenousRadioButton();
 		Thread.sleep(2000);
-		System.out.println("/*10.----click Verify PHN button --*/");
+		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		Thread.sleep(2000);
-		System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
+		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
 		clinicInBox.successMessageAppear();
 		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		System.out.println("/*12.----click Next button --*/");
+		log("/*12.----click Next button --*/");
 		clinicInBox.clickNextButton();
 		Thread.sleep(2000);
-		System.out.println("/*13.'Enter email address --*/");
-		String email = "test@qa.com";
+		log("/*13.'Enter email address: " +email +"--*/");
 		clinicInBox.enterEmail(email);
-		System.out.println("/*14.'Confirm email address --*/");
+		log("/*14.'Confirm email address: " +email +"--*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
-		clinicInBox.confirmEmail(email1);
-		System.out.println("/*15.Click review details Button--*/");
+		clinicInBox.confirmEmail(email);
+		log("/*15.Click review details Button--*/");
 		Thread.sleep(2000);
 		clinicInBox.clickReviewDetails();
-		System.out.println("/*16.Click register Button on confirmation page--*/");
+		log("/*16.Click register Button on confirmation page--*/");
 		Thread.sleep(2000);
 		clinicInBox.clickRegisterButtonOnConfirmationPage();
 		Thread.sleep(2000);
-		System.out.println("/*17.--toast success message - 'Success' --*/");
+		log("/*17.--toast success message - 'Success' --*/");
 		clinicInBox.successRegisteredMessageAppear();
 		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		System.out.println("/*18.----click on person Account Related Tab --*/");
+		log("/*18.----click on person Account Related Tab --*/");
 		clinicInBox.clickOnPersonAccountRelatedTab();
 		Thread.sleep(2000);
 		//System.out.println("/*18.----click on Eligibility button --*/");
@@ -163,58 +166,58 @@ public class BookingDose1 extends BaseTest {
 		//System.out.println("/*20.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
 		//clinicInBox.successEligibilityMessageAppear();
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		System.out.println("/*21----Go to Appointment Tab --*/");
+		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(2000);
-		System.out.println("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
+		log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
 		clinicInBox.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//clinicInBox.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
-		System.out.println("/*24----select 'Search by Clinic name' tab --*/");
+		log("/*24----select 'Search by Clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
 		String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
-		System.out.println("/*25----search the Clinic " +clinicNameToSearch +" --*/");
+		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
 		clinicInBox.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
-		System.out.println("/*26----click on Option Facility location  --*/");
+		log("/*26----click on Option Facility location  --*/");
 		clinicInBox.clickOnFacilityOptionLocation();
 		Thread.sleep(2000);
-		System.out.println("/*27----select Active booking appointment day  --*/");
+		log("/*27----select Active booking appointment day  --*/");
 		clinicInBox.selectBookingAppointmentDay();
 		Thread.sleep(2000);
-		System.out.println("/*28----select the time slot  --*/");
+		log("/*28----select the time slot  --*/");
 		clinicInBox.selectTimeSlotAppointment();
 		Thread.sleep(2000);
-		System.out.println("/*29----click Next button  --*/");
+		log("/*29----click Next button  --*/");
 		clinicInBox.clickOnNextButton();
 		Thread.sleep(2000);
-		System.out.println("/*30----click Verify Contact Information Checkbox  --*/");
+		log("/*30----click Verify Contact Information Checkbox  --*/");
 		clinicInBox.clickVerifyContactInformation();
 		Thread.sleep(2000);
-		System.out.println("/*31----click Confirm Appointment button  --*/");
+		log("/*31----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
 		Thread.sleep(2000);
-		System.out.println("/*32----see 'Appointment confirmed!' screen --*/");
+		log("/*32----see 'Appointment confirmed!' screen --*/");
 		clinicInBox.validateAppointmentConfirmedScreen();
 		Thread.sleep(2000);
-		System.out.println("/*33----Refresh page --*/");
+		log("/*33----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		Thread.sleep(2000);
-		System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
+		log("/*34----Go to back to the Citizen Related Tab --*/");
 		clinicInBox.clickRelatedTab();
 		Thread.sleep(2000);
-		System.out.println("/*35----click on In-clinic Experience button --*/");
+		log("/*35----click on In-clinic Experience button --*/");
 		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		Thread.sleep(2000);
-		System.out.println("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
+		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
 	}
 	
-	@Test(priority = 3)
+	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
