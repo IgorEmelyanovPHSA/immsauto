@@ -1019,7 +1019,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
 		click_early_booking_reason.click();
