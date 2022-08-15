@@ -1,10 +1,13 @@
 package bcvaxuat.my.salesforce.com.Tests.Inventory;
 
+import Utilities.TestListener;
 import bcvaxuat.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners({TestListener.class})
 public class Consumption extends BaseTest {
 	
 	@Test(priority = 1)

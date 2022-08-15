@@ -1,10 +1,13 @@
 package bcvaxuat.my.salesforce.com.Tests.Inventory;
 
+import Utilities.TestListener;
 import bcvaxuat.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners({TestListener.class})
 public class ReceiveSupplies extends BaseTest {
 	@Test()
 	public void Validate_Receive_Supplies_as_an_PPHIS_BCVAXUAT() throws InterruptedException {

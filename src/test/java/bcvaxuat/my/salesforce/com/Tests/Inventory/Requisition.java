@@ -1,11 +1,14 @@
 package bcvaxuat.my.salesforce.com.Tests.Inventory;
 
 
+import Utilities.TestListener;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import bcvaxuat.my.salesforce.com.Pages.RequisitionPage;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 
+@Listeners({TestListener.class})
 public class Requisition extends BaseTest {
 
 	@Test
