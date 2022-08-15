@@ -86,7 +86,8 @@ public class RequisitionPage extends BasePage {
 	
 	@FindBy(xpath = "//button[contains(text(),\"Save\")]")
 	private WebElement saveApprovedRequisition;
-	
+	private By saveApprovedRequisition_ = By.xpath("//button[contains(text(),\"Save\")]");
+
 	@FindBy(xpath = "//button[contains(text(),'Ship Requisition')]")
 	private WebElement shipRequisition;
 	
@@ -274,8 +275,11 @@ public class RequisitionPage extends BasePage {
 		this.ApprovedDose.sendKeys(inputDose);
 	}
 	
-	public void clickSaveApprovedRequisition() {
+	public void clickSaveApprovedRequisition() throws InterruptedException {
+		waitForElementToBeVisible(driver, saveApprovedRequisition, 10);
+		Thread.sleep(2000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveApprovedRequisition);
+		Thread.sleep(2000);
 		this.saveApprovedRequisition.click();
 	}
 	
