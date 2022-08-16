@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
@@ -19,12 +20,13 @@ public class Wastage extends BaseTest {
 	
 	@Story("C222357: Inventory Management - Wastage(Java)")
 	@Test(groups = {"Smoke"})
-	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222357"; //222357
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(10000);
 		
 		log("/*2.----Supply Console Page displayed --*/");

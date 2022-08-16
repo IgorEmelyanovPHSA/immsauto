@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
@@ -25,8 +26,9 @@ public class BulkAdjustments extends BaseTest {
 	}
 	
 	@Test(dataProvider = "value")
-	public void Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws InterruptedException {
+	public void Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws Exception {
 		TestcaseID = "222370"; //C222370
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		double amountOfDosesToAdjust = Double.parseDouble(value);
 		boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
@@ -40,7 +42,7 @@ public class BulkAdjustments extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
 		
 		log("/*2.----Supply Console Page displayed --*/");
