@@ -22,7 +22,7 @@ public class BookingDose2 extends BaseTest {
 
 	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219918"; //C219918
+		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");

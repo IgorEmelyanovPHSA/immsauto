@@ -11,7 +11,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
 	
 	@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219918"; //C219918
+		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
