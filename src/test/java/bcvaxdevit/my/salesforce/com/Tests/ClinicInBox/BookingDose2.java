@@ -174,7 +174,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*21----select 'Search clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
-		String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
+		String clinicNameToSearch = "All Ages - Atlin Health Centre";
 		log("/*22----search the Clinic " +clinicNameToSearch +" --*/");
 		clinicInBox.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);

@@ -155,8 +155,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*24----select 'Search clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
 		Thread.sleep(2000);
-		log("/*25----search the Clinic --*/");
-		callCenterConsole.searchClinicName();
+		String clinicNameToSearch = "All Ages - Atlin Health Centre";
+		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
+		callCenterConsole.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		log("/*26----click on Option Facility location  --*/");
 		callCenterConsole.clickOnFacilityOptionLocation();

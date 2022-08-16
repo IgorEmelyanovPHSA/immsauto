@@ -1194,16 +1194,16 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void searchClinicName() throws InterruptedException {
+	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
 		Thread.sleep(2000);
-		select_clinic.sendKeys("Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center");
+		select_clinic.sendKeys(clinicNameToSearch);
 		select_clinic.sendKeys(Keys.RETURN);
 	}
-	
+
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
