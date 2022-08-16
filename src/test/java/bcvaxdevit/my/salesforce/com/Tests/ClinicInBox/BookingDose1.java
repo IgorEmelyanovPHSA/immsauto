@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.Listeners;
@@ -18,7 +19,6 @@ public class BookingDose1 extends BaseTest {
 	private String personalHealthNumber = "9746170911";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-
 	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
@@ -90,6 +90,7 @@ public class BookingDose1 extends BaseTest {
 	@Test
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222364"; //C192878
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*1.----Login as an Clinician to CIB --*/");
@@ -215,6 +216,8 @@ public class BookingDose1 extends BaseTest {
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
+		log("/*37.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 	
 	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022
