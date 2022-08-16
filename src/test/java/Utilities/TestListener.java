@@ -9,6 +9,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.ByteArrayOutputStream;
+
 public class TestListener extends BaseTest implements ITestListener {
 
     private static String getTestMethodName(ITestResult result){
@@ -31,6 +33,7 @@ public class TestListener extends BaseTest implements ITestListener {
         log("Test case '"+testCaseName+"' has failed.");
         Object testClass = iTestResult.getInstance();
         WebDriver driver = ((BaseTest) testClass).getDriver();
+        ByteArrayOutputStream output = ((BaseTest) testClass).getLogOutputSteps();
 
         try {
             saveScreenshotPNG(driver, testCaseName);
@@ -38,6 +41,8 @@ public class TestListener extends BaseTest implements ITestListener {
             log("Couldn't take screenshot.");
             log(e.getMessage());
         }
+        if (output != null)
+            saveTextLog(output.toString(), testCaseName);
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult var1){

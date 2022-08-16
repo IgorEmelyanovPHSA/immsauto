@@ -303,9 +303,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement click_Dose2_citizen;
 	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
 	
-	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
+	@FindBy(xpath = "//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']")
 	private WebElement verify_contact_information_checkbox;
-	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
+	private By verify_contact_information_checkbox1 = By.xpath("//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']");
 	
 	@FindBy(xpath = "//option[@label='COVID-19 mRNA']")
 	private WebElement select_agent;

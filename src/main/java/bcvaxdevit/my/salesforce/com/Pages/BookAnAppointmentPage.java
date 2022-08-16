@@ -1,9 +1,6 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class BookAnAppointmentPage extends BasePage{
@@ -125,7 +122,8 @@ public class BookAnAppointmentPage extends BasePage{
 
     public void clickCheckBoxVerifyContactInformationAndConfirmAppointment() throws InterruptedException{
         Thread.sleep(800);
-        scrollTop(checkBoxVerifyContactInformation);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+        //scrollTop(checkBoxVerifyContactInformation);
         click(checkBoxVerifyContactInformation);
         click(btnConfirmAppointment);
     }
