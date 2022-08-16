@@ -1,6 +1,5 @@
 package bcvaxdevit.my.salesforce.com.Tests.Portal;
 
-import Utilities.ApiQueries;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.BookAnAppointmentPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
@@ -42,7 +41,7 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 		TestcaseID = "219865"; //C219865 //153419?
 		log("Searching and Removing Citizen Duplicates ");
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecoconditionWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {

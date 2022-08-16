@@ -41,8 +41,8 @@ public class BaseTest {
 //	}
 	
 	@BeforeMethod(alwaysRun = true)
-	public void setUp() {
-		log("This will execute before the Method");
+	public void setUp() throws Exception {
+		log("Environment: "+Utils.getTargetEnvironment());
 		captureBothStreams();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -102,7 +102,11 @@ public class BaseTest {
 		PrintStream both = new PrintStream(bothStreams);
 		System.setOut(both);
 	}
-	
+
+	public ByteArrayOutputStream getLogOutputSteps() {
+		return logOutputSteps;
+	}
+
 	public static String getLogTime() {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return LOG_TIMESTAMP_FORMAT.format(timestamp);

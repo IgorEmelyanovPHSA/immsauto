@@ -11,10 +11,10 @@ public class DIWA extends BaseTest {
 	
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
-	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws InterruptedException {
+	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws Exception {
 		TestcaseID = "226268"; //C226268
-		log("/*----1. Login as an Clinician to CIB  --*/");
-		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWA();
+		log("/*----1. Login as an DIWA to CIB  --*/");
+		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWAWithParameters();
 		Thread.sleep(5000);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();

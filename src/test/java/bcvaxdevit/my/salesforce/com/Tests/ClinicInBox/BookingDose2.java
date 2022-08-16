@@ -89,12 +89,12 @@ public class BookingDose2 extends BaseTest {
 	}
 	
 	@Test
-	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws InterruptedException {
+	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222368";
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
 		Thread.sleep(10000);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		if (clinicInBox.displayCIBApp()) {
