@@ -913,6 +913,7 @@ public class SupplyConsolePage extends BasePage {
 			typeIn(dosesDynamicFiled, Double.toString(amount));
 			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
 			click(reasonDynamicDropDown);
+			Thread.sleep(500);
 			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title='Administered Vaccine'])[" + (y + 1) + "]"));
 			click(selectReasonFromDynamicDropDown);
 			k = k + 3;

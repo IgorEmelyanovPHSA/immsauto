@@ -262,9 +262,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement click_confirm_appointment_button;
 	private By click_confirm_appointment_button1 = By.xpath(".//button[text() = 'Confirm appointment']");
 	
-	@FindBy(xpath = ".//div[text() = 'Appointment Confirmed!']")
+	@FindBy(xpath = "//div[text() = 'Appointment confirmed!']")
 	private WebElement vlidate_appointment_confirm_message;
-	private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
+	private By vlidate_appointment_confirm_message1 = By.xpath("//div[text() = 'Appointment confirmed!']");
 	
 	@FindBy(xpath = "(.//button[@name='navigateToICE'])")
 	private WebElement click_navigate_to_ICE_btn;
@@ -274,9 +274,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement click_Dose2_citizen;
 	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
 
-	@FindBy(xpath = "//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]")
+	@FindBy(xpath = "//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']")
 	private WebElement verify_contact_information_checkbox;
-	private By verify_contact_information_checkbox1 = By.xpath("//lightning-input[@class='slds-p-left_xx-large slds-form-element']//span[@lightning-input_input=''][2]");
+	private By verify_contact_information_checkbox1 = By.xpath("//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']");
 	
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
