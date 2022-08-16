@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
@@ -25,8 +26,9 @@ public class Adjustments extends BaseTest {
 	}
 
 	@Test(dataProvider = "value")
-	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws InterruptedException {
+	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws Exception {
 		TestcaseID = "222369"; //C222369
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		double amountOfDosesToAdjust = Double.parseDouble(value);
 		boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
@@ -40,7 +42,7 @@ public class Adjustments extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default value, adjustment from first row only
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
 		
 		log("/*2.----Supply Console Page displayed --*/");
@@ -125,19 +127,23 @@ public class Adjustments extends BaseTest {
 			
 			//Comparing results
 			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
-			assertTrue(Double.compare(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment) == 0, "Values are different!");
-			
+			//assertTrue(Double.compare(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment) == 0, "Values are different!");
+			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
+
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertTrue(Double.compare(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment) == 0, "Values are different!");
-			
+		//	assertTrue(Double.compare(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment) == 0, "Values are different!");
+			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
+
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
-			assertTrue(Double.compare(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment) == 0, "Values are different!");
-			
+		//	assertTrue(Double.compare(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment) == 0, "Values are different!");
+			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
+
 			log("Compering dose conversion factor value from pop-up " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
-			assertTrue(Double.compare(doseConversionFactorRead, doseConversionAfterAdjustment) == 0, "Values are different!"); //Actual read UI value
+		//	assertTrue(Double.compare(doseConversionFactorRead, doseConversionAfterAdjustment) == 0, "Values are different!"); //Actual read UI value
+			assertEquals(doseConversionFactorRead, doseConversionAfterAdjustment);
 		}
 	}
-	
+
 	public static boolean isNegative(double d) {
 		return Double.compare(d, 0.0) < 0;
 	}

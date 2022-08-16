@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -91,6 +92,7 @@ public class BookingDose2 extends BaseTest {
 	@Test
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222368";
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
 		log("/*1.----Login as an Clinician to CIB --*/");
@@ -209,6 +211,8 @@ public class BookingDose2 extends BaseTest {
 		log("/*33----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
+		log("/*34.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
 	}
 
 	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022

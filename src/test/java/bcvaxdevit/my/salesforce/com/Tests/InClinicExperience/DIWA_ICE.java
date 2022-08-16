@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -14,10 +15,11 @@ public class DIWA_ICE extends BaseTest {
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments in ICE")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE_BCVAXDEVIT() throws
-			InterruptedException {
-		TestcaseID = "226269\n"; //C226269
+			Exception {
+		TestcaseID = "226269"; //C226269
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEWithParameters();
 		Thread.sleep(5000);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();

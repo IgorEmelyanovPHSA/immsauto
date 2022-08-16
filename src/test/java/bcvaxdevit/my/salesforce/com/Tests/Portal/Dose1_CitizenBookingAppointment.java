@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.BookAnAppointmentPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Pages.RegisterToGetVaccinatedPage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.junit.Assert;
 import org.testng.annotations.Listeners;
@@ -105,6 +106,8 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 	@Test
 	public void citizenPortalFlowDoseOne() throws Exception {
 		TestcaseID = "153419"; //C153419
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
@@ -173,6 +176,9 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 
 		log("/*16---Verify appointment conformation message is displayed--*/");
 		bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+
+		log("/*17.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		}
 	}
 		/*
