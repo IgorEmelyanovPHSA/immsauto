@@ -10,78 +10,19 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class Consumption extends BaseTest {
+	private String legalFirstName = "Dacia";
+	private String legalLastName = "Bcvaxdod";
+	private String dateOfBirth = "May 19, 1904";
+	private String postalCode = "V7N3K1";
+	private String personalHealthNumber = "9746172456";
+	//private boolean isIndigenous = false;
+	private String email = "test@qa.com";
 	
-	@Test(priority = 1)
-	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
-		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			log("/*---- User already on ICE--*/");
-		} else {
-			log("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
-		log("/*----Search for Dacia is Successful ---*/");
-		if (!inClinicExperiencePage.userDaciaFound()) {
-			log("/*----User --> Dacia not found and return---*/");
-		}
-		while (inClinicExperiencePage.userDaciaFound()) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				log("/*----No Imms Record found and return---*/");
-			} else {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				log("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
-			log("/*----Search for Dacia is Successful ---*/");
-		}
-	}
-	
-	@Test(priority = 2)
+	@Test
 	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "222359"; //C219969->C222359
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
 		Thread.sleep(10000);
@@ -110,10 +51,10 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 5. Close all open tabs --*/");
 		Thread.sleep(2000);
-		log("/*-- 6. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
+		log("/*-- 6. Locate and click All Ages - Atlin Health Centre --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 7. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203 (2022-06-29 04:07 p.m)' --*/");
+		log("/*-- 7. Click and navigate to the supply container --> '2022-08-07-COMIRNATY (Pfizer) - EL0203-1' --*/");
 		inClinicExperiencePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		double remainingDoses_before = inClinicExperiencePage.getValueOfRemainingDoses();
@@ -205,8 +146,9 @@ public class Consumption extends BaseTest {
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		inClinicExperiencePage.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
-		log("/*-- 35.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		inClinicExperiencePage.SearchForClinic();
+		String clinicNameToSearch = "All Ages - Atlin Health Centre";
+		log("/*35.----search the Clinic " +clinicNameToSearch +" --*/");
+		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		log("/*--36.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
@@ -290,76 +232,11 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");
+		Thread.sleep(2000);
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		
 	}
 	
-	@Test(priority = 3)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
-		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			log("/*---- User already on ICE--*/");
-		} else {
-			log("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
-		log("/*----Search for Dacia is Successful ---*/");
-		if (!inClinicExperiencePage.userDaciaFound()) {
-			log("/*----User --> Dacia not found and return---*/");
-		}
-		while (inClinicExperiencePage.userDaciaFound()) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				log("/*----No Imms Record found and return---*/");
-			} else {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				log("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Dacia Edeline Bcvaxdod");
-			log("/*----Search for Dacia is Successful ---*/");
-		}
-		
-	}
-	
+
 }
