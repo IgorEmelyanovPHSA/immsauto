@@ -1460,7 +1460,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void clickRecordImmunization() throws InterruptedException {
 		waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
-		recordImmunizationBtn.click();
+		click(recordImmunizationBtn);
 	}
 	
 	public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {

@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -10,17 +11,19 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BulkDrafts extends BaseTest {
 
     @Test
-    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
         TestcaseID = "222374"; //C222374
+        log("Target Environment: "+ Utils.getTargetEnvironment());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 9 need some refactoring in the future
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
         Thread.sleep(5000);
 
         log("/*2.----Supply Console Page displayed --*/");
@@ -209,13 +212,16 @@ public class BulkDrafts extends BaseTest {
 
             //Comparing results
             log("Compering remaining doses after transfer " + remainingDosesAfter + " vs calculated doses after transfer " + calculatedDosesAfterTransfer);
-            assertTrue(Double.compare(remainingDosesAfter, calculatedDosesAfterTransfer) == 0, "Values are different!");
+            assertEquals(remainingDosesAfter, calculatedDosesAfterTransfer);
+           //assertTrue(Double.compare(remainingDosesAfter, calculatedDosesAfterTransfer) == 0, "Values are different!");
 
             log("Compering remaining quantity after transfer " + remainingQuantityAfterTransfer + " vs calculated quantity after transfer " + calculatedRemainingQuantityAfterTransfer);
-            assertTrue(Double.compare(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer) == 0, "Values are different!");
+            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer);
+            //assertTrue(Double.compare(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer) == 0, "Values are different!");
 
             log("Compering dose conversion factor before transfer " + doseConversionFactorBeforeTransfer + " vs dose conversion factor after transfer " + doseConversionAfterTransfer);
-            assertTrue(Double.compare(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer) == 0, "Values are different!");
+            assertEquals(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer);
+            //assertTrue(Double.compare(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer) == 0, "Values are different!");
         }
     }
 

@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
@@ -11,6 +12,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
@@ -18,11 +20,12 @@ public class BulkWastages extends BaseTest {
 	
 	@Story("C222356: Inventory Management - Wastage Bulk (Java)")
 	@Test(groups = {"Smoke"})
-	public void Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222356"; //C222356
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int amountOfDosesToWaste = 1;
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
 		
 		log("/*2.----Supply Console Page displayed --*/");
@@ -110,9 +113,12 @@ public class BulkWastages extends BaseTest {
 			double doseConversionAfterDeduction = calculated.get(2);
 			
 			//Comparing results
-			assertTrue(Double.compare(remainingDosesAfterDeduction, calculatedDosesAfterDeduction) == 0, "Values are different!");
-			assertTrue(Double.compare(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction) == 0, "Values are different!");
-			assertTrue(Double.compare(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction) == 0, "Values are different!");
+			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction);
+			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
+//			assertTrue(Double.compare(remainingDosesAfterDeduction, calculatedDosesAfterDeduction) == 0, "Values are different!");
+//			assertTrue(Double.compare(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction) == 0, "Values are different!");
+//			assertTrue(Double.compare(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction) == 0, "Values are different!");
 		}
 	}
 }

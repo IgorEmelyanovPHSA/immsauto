@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -11,14 +12,15 @@ import static org.testng.Assert.assertEquals;
 public class Drafts extends BaseTest {
 
     @Test()
-    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXDEVIT() throws Exception {
         TestcaseID = "222371"; //C222371
+        log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
         double amountOfDosesToAdjust = 10;
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
         Thread.sleep(5000);
 
         log("/*2.----Supply Console Page displayed --*/");
@@ -68,7 +70,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
 
         log("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocation_1_To();;
+        supplyConsolePage.selectSupplyLocation_1_To();
         Thread.sleep(2000);
 
         log("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
@@ -237,14 +239,15 @@ public class Drafts extends BaseTest {
 //    }
 
     @Test()
-    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXDEVIT() throws Exception {
         TestcaseID = "222371"; //C222371
+        log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#3 Create draft and cancel it");
         double amountOfDosesToAdjust = 10;
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
         Thread.sleep(5000);
 
         log("/*2.----Supply Console Page displayed --*/");

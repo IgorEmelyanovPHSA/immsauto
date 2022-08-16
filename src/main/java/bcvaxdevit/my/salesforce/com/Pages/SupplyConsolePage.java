@@ -162,13 +162,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement search_incoming_supply_distributor_1_2;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 	
-	@FindBy(xpath = "//span[@title='Supply Distribution_2_1 - SDST-0000001635']")
+	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_2_1')]")
 	private WebElement select_incoming_supply_distributor;
-	private By select_incoming_supply_distributor_ = By.xpath("//span[@title='Supply Distribution_2_1 - SDST-0000001635']");
+	private By select_incoming_supply_distributor_ = By.xpath("//span[contains(text(),'Supply Distribution_2_1')]");
 	
-	@FindBy(xpath = "//span[@title='Automation Supply Distribution_1_2 - SDST-0000001632']")
+	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_1_2')]")
 	private WebElement select_same_clinic_supply_distributor_1_2;
-	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[@title='Automation Supply Distribution_1_2 - SDST-0000001632']");
+	private By select_same_clinic_supply_distributor_1_2_ = By.xpath("//span[contains(text(),'Supply Distribution_1_2')]");
 	
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
