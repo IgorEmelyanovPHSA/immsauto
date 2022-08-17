@@ -669,7 +669,7 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		return true;
 	}
-	
+
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
 		Thread.sleep(2000);
@@ -677,8 +677,13 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+
+	}	public void userClickCitizenNew(String name) {
+		WebElement fullNameWebElement = driver.findElement(By.xpath("//div[@aria-label = 'Profiles||List View']//a[contains(text(),'" + name + "')]"));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", fullNameWebElement);
 	}
-	
+
 	public void deleteImmsRecord() throws InterruptedException {
 		waitForElementToBeLocated(driver, imms_drop_down1, 10);
 		WebElement element = driver.findElement(imms_drop_down1);
