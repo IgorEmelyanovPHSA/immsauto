@@ -17,6 +17,7 @@ public class Consumption extends BaseTest {
 	private String personalHealthNumber = "9746172456";
 	//private boolean isIndigenous = false;
 	private String email = "test@qa.com";
+	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 	
 	@Test
 	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
@@ -51,10 +52,10 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 5. Close all open tabs --*/");
 		Thread.sleep(2000);
-		log("/*-- 6. Locate and click All Ages - Atlin Health Centre --*/");
+		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 7. Click and navigate to the supply container --> '2022-08-07-COMIRNATY (Pfizer) - EL0203-1' --*/");
+		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		inClinicExperiencePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		double remainingDoses_before = inClinicExperiencePage.getValueOfRemainingDoses();
@@ -146,7 +147,6 @@ public class Consumption extends BaseTest {
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		inClinicExperiencePage.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
-		String clinicNameToSearch = "All Ages - Atlin Health Centre";
 		log("/*35.----search the Clinic " +clinicNameToSearch +" --*/");
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
