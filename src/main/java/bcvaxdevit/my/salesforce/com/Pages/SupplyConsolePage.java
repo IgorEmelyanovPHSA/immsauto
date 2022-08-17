@@ -1102,6 +1102,7 @@ public class SupplyConsolePage extends BasePage {
 			typeIn(dosesDynamicFiled, String.valueOf(amount));
 			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
 			click(reasonForWastageDynamicDropDown);
+			Thread.sleep(500);
 			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title='CCI: Handling Error'])[" + (y + 1) + "]"));
 			click(reasonForWastageDynamicFiled);
 			k = k + 3;

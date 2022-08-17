@@ -14,10 +14,13 @@ public class DIWA_ICE extends BaseTest {
 	
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments in ICE")
-	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE_BCVAXDEVIT() throws
-			Exception {
+	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE_BCVAXDEVIT() throws Exception {
 		TestcaseID = "226269"; //C226269
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		String citizenName = "Benoite BCVaxD'Hooge";
+		String nameToSearch = "Benoite BCVaxD";
+		String clinicLocation = "All Ages - Atlin Health Centre";
+
 		log("/*1.----Login as an Clinician to ICE --*/");
 		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEWithParameters();
 		Thread.sleep(5000);
@@ -30,11 +33,11 @@ public class DIWA_ICE extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		Thread.sleep(5000);
-		log("/*----5. Search for Participant account Maegan BCVaxVillage ---*/");
-		inClinicExperience.SearchForCitizen("Maegan bcvaxvillage");
+		log("/*----5. Search for Participant account: " +citizenName +" ---*/");
+		inClinicExperience.SearchForCitizen(citizenName);
 		Thread.sleep(2000);
 		log("/*----6. select Citizen from search results --*/");
-		inClinicExperience.userClickCitizen();
+		inClinicExperience.userClickCitizenNew(nameToSearch);
 		Thread.sleep(4000);
 		inClinicExperience.clickRelatedTab();
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
@@ -54,8 +57,8 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
 		inClinicExperience.selectOption("COVID19-mRNA");
 		Thread.sleep(3000);
-		log("/*----13. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
-		inClinicExperience.searchClinicLocation("All Ages - Atlin Health Centre");
+		log("/*----13. Enter a Clinic Location: " +clinicLocation +"---*/");
+		inClinicExperience.searchClinicLocation(clinicLocation);
 		Thread.sleep(3000);
 		log("/*---14. Select a Date and Time of Administration ---*/");
 		inClinicExperience.clickTimeBox();
@@ -72,7 +75,7 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---17. Validate message on clicking close button on modal popup ---*/");
 		inClinicExperience.validateoopsMessage();
 		Thread.sleep(2000);
-		log("/*---18. click on continue editing button to continuw with the flow ---*/");
+		log("/*---18. click on continue editing button to continue with the flow ---*/");
 		inClinicExperience.ContinueEditingButton();
 		Thread.sleep(2000);
 		log("/*---19. select date of Administration ---*/");
