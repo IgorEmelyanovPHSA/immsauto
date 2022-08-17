@@ -192,19 +192,18 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_desired_supply_container;
 	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'Moderna mRNA-1273 - 300042698-CC03')]");
 	
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses;
-	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 	
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_distribution_1_2;
 	private By get_remaining_doses_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-
-	@FindBy(xpath = "(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty;
-	private By get_remaining_Qty_ = By.xpath("(.//lightning-primitive-cell-factory//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
-	
+	private By get_remaining_Qty_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_1_2;
 	private By get_remaining_Qty_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
@@ -897,6 +896,7 @@ public class SupplyConsolePage extends BasePage {
 			typeIn(dosesDynamicFiled, String.valueOf(amount));
 			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
 			click(reasonForWastageDynamicDropDown);
+			Thread.sleep(500);
 			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title='CCI: Handling Error'])[" + (y + 1) + "]"));
 			click(reasonForWastageDynamicFiled);
 			k = k + 3;

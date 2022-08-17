@@ -146,6 +146,8 @@ public class BookingDose2 extends BaseTest {
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
+		log("/*37.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 	
 }

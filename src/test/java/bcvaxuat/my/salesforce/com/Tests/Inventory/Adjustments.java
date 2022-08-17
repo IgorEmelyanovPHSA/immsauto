@@ -63,7 +63,7 @@ public class Adjustments extends BaseTest {
         HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu();
+        supplyConsolePage.clickOnFirstContainerDropDownMenu();
         Thread.sleep(2000);
 
         log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
@@ -126,16 +126,16 @@ public class Adjustments extends BaseTest {
 
             //Comparing results
             log("Compering remaining doses after adjustment " +remainingDosesAfterAdjustment + " vs calculated doses after adjustment " +calculatedDosesAfterAdjustment);
-            assertTrue(Double.compare(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment) == 0, "Values are different!");
+            assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
             log("Compering remaining quantity after adjustment " +remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " +calculatedRemainingQuantityAfterAdjustment);
-            assertTrue(Double.compare(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment) == 0, "Values are different!");
+            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
 
             log("Compering dose conversion factor before adjustment " +doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " +doseConversionAfterAdjustment);
-            assertTrue(Double.compare(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment) == 0, "Values are different!");
+            assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
 
             log("Compering dose conversion factor value from pop-up " +doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " +doseConversionAfterAdjustment);
-            assertTrue(Double.compare(doseConversionFactorRead, doseConversionAfterAdjustment) == 0, "Values are different!"); //Actual read UI value
+            assertEquals(doseConversionFactorRead, doseConversionAfterAdjustment);
         }
     }
     public static boolean isNegative(double d) {
