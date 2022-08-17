@@ -121,7 +121,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
 	
-	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='All Ages - Atlin Health Centre']")
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
 	private WebElement select_desired_supply_loc;
 	
 	@FindBy(xpath = "//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']")
@@ -135,11 +135,9 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
-	
-	
-	@FindBy(xpath = "//a[contains(text(),'2022-08-07-COMIRNATY (Pfizer) - EL0203-1')]")
+	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]")
 	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'2022-08-07-COMIRNATY (Pfizer) - EL0203-1')]");
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]");
 	
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_console_App_displayed;
@@ -1025,7 +1023,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
 		Thread.sleep(2000);

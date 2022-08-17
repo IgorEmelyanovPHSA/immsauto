@@ -9,8 +9,16 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
-	
-	@Test(priority = 1)
+	private String legalFirstName = "Ludovika";
+	private String legalLastName = "BcvaxLimeburn";
+	private String dateOfBirth = "Sep 21, 1923";
+	private String postalCode = "V3L5L2";
+	private String personalHealthNumber = "9746170911";
+	//private boolean isIndigenous = false;
+	private String email = "accountToDelete@phsa.ca";
+	String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
+
+	//@Test(priority = 1)
 	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
@@ -78,9 +86,11 @@ public class BookingDose1 extends BaseTest {
 		}
 	}
 	
-	@Test(priority = 2)
+	@Test
 	public void Can_Book_Dose1_Appointment_as_Call_Center_Agent_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "153418"; //C153418
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		System.out.println("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		Thread.sleep(10000);
@@ -126,11 +136,11 @@ public class BookingDose1 extends BaseTest {
 		callCenterConsole.clickNextButton();
 		Thread.sleep(2000);
 		System.out.println("/*13.'Enter email address --*/");
-		String email = "test@qa.com";
+		String email = "accountToDelete@phsa.ca";
 		callCenterConsole.enterEmail(email);
 		System.out.println("/*14.'Confirm email address --*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
+		String email1 = "accountToDelete@phsa.ca";
 		callCenterConsole.confirmEmail(email1);
 		System.out.println("/*15.Click review details Button--*/");
 		Thread.sleep(2000);
@@ -169,7 +179,6 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*24----select 'Search by Clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
 		Thread.sleep(2000);
-		String clinicNameToSearch = "All Ages - Atlin Health Centre";
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
 		callCenterConsole.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
@@ -202,8 +211,8 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(2000);
 		
 	}
-	
-	@Test(priority = 3)
+
+	//@Test(priority = 3)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");

@@ -110,9 +110,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement search_clinic;
 	private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
 	
-	@FindBy(xpath = "//li[@data-label='All Ages - Atlin Health Centre']")
+	@FindBy(xpath = "//li[@data-label='Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center']")
 	private WebElement finalClick;
-	@FindBy(xpath = "//span[contains(text(),'All Ages - Atlin Health Centre')]")
+	@FindBy(xpath = "//span[contains(text(),'Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center')]")
 	private WebElement finalClick1;
 	
 	@FindBy(xpath = "//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right']")
