@@ -16,7 +16,7 @@ public class Consumption extends BaseTest {
 	private String postalCode = "V7N3K1";
 	private String personalHealthNumber = "9746172456";
 	//private boolean isIndigenous = false;
-	private String email = "test@qa.com";
+	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 	
 	@Test
@@ -122,11 +122,11 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickNextButton();
 		Thread.sleep(5000);
 		log("/*-- 28.'Enter email address --*/");
-		String email = "test@qa.com";
+		String email = "accountToDelete@phsa.ca";
 		inClinicExperiencePage.enterEmail(email);
 		Thread.sleep(2000);
 		log("/*-- 29.'Confirm email address --*/");
-		String email1 = "test@qa.com";
+		String email1 = "accountToDelete@phsa.ca";
 		inClinicExperiencePage.confirmEmail(email1);
 		Thread.sleep(2000);
 		log("/*-- 30.Click review details Button --*/");

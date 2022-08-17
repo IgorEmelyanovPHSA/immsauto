@@ -15,7 +15,7 @@ public class BookingDose1 extends BaseTest {
 	private String postalCode = "V3L5L2";
 	private String personalHealthNumber = "9746170911";
 	//private boolean isIndigenous = false;
-	private String email = "test@qa.com";
+	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
 
 	//@Test(priority = 1)
@@ -136,11 +136,11 @@ public class BookingDose1 extends BaseTest {
 		callCenterConsole.clickNextButton();
 		Thread.sleep(2000);
 		System.out.println("/*13.'Enter email address --*/");
-		String email = "test@qa.com";
+		String email = "accountToDelete@phsa.ca";
 		callCenterConsole.enterEmail(email);
 		System.out.println("/*14.'Confirm email address --*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
+		String email1 = "accountToDelete@phsa.ca";
 		callCenterConsole.confirmEmail(email1);
 		System.out.println("/*15.Click review details Button--*/");
 		Thread.sleep(2000);
