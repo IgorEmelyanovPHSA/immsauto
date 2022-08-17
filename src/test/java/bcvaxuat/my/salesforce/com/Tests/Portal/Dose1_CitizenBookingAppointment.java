@@ -172,7 +172,11 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 
 		log("/*16---Verify appointment conformation message is displayed--*/");
 		bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+
+		log("/*17.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		}
+
 	}
 		/*
 		Go through the citizen flow as someone who does not have a PHN number
