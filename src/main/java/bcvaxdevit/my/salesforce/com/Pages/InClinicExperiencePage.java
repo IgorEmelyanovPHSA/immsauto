@@ -40,7 +40,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//input[@placeholder = 'Search...']")
 	private WebElement search_input;
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
-
+	
 	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
 	@FindBy(xpath = ".//a[@title='Ludovika BcvaxLimeburn']")
 	private WebElement user_found;
@@ -135,8 +135,8 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
-
-
+	
+	
 	@FindBy(xpath = "//a[contains(text(),'2022-08-07-COMIRNATY (Pfizer) - EL0203-1')]")
 	private WebElement select_desired_supply_container;
 	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'2022-08-07-COMIRNATY (Pfizer) - EL0203-1')]");
@@ -358,7 +358,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = ".//a[text()='Search clinic name']")
 	private WebElement click_select_search_clinic;
-	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by Clinic name']");
+	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = "//a[text()='Operational Freezer - SDST-0000001634']")
 	private WebElement click_supply_distribution;
@@ -465,7 +465,7 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_dosage;
 	private By select_dosage1 = By.xpath("//span[@title='0.5']");
 	
-	@FindBy(xpath = "(//button[@type='submit'])[2]")
+	@FindBy(xpath = ".//button[@type='submit']")
 	private WebElement saveAgain;
 	
 	@FindBy(xpath = "//button[@title='Confirm & Save Administration']")
@@ -513,15 +513,21 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@title='Other']")
 	private WebElement select_reason;
 	private By select_reason1 = By.xpath("//span[@title='Other']");
-
+	
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement create_Immunization_Record;
 	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
-
+	
 	@FindBy(xpath = ".//button[text() = 'Save']")
 	private WebElement save_immune_info_btn;
 	private By save_immune_info_btn_ = By.xpath(".//button[text() = 'Save']");
-
+	
+	@FindBy(xpath = "//span[text() = 'Covid-19 Vaccine']")
+	private WebElement checkBoxCovid19Vaccine;
+	
+	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
+	private WebElement checkBoxInfluenzaVaccine;
+	
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -575,9 +581,9 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(5000);
 		return true;
 	}
-
+	
 	public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
-		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " "+legalMiddleName+" " + legalLastName + "']");
+		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " " + legalMiddleName + " " + legalLastName + "']");
 		if (!isDisplayed(userFoundWithParameter)) {
 			return false;
 		}
@@ -669,7 +675,7 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 		return true;
 	}
-
+	
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
 		Thread.sleep(2000);
@@ -677,13 +683,15 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-
-	}	public void userClickCitizenNew(String name) {
+		
+	}
+	
+	public void userClickCitizenNew(String name) {
 		WebElement fullNameWebElement = driver.findElement(By.xpath("//div[@aria-label = 'Profiles||List View']//a[contains(text(),'" + name + "')]"));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", fullNameWebElement);
 	}
-
+	
 	public void deleteImmsRecord() throws InterruptedException {
 		waitForElementToBeLocated(driver, imms_drop_down1, 10);
 		WebElement element = driver.findElement(imms_drop_down1);
@@ -1209,7 +1217,7 @@ public class InClinicExperiencePage extends BasePage {
 		select_clinic.sendKeys(clinicNameToSearch);
 		select_clinic.sendKeys(Keys.RETURN);
 	}
-
+	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
@@ -1613,13 +1621,25 @@ public class InClinicExperiencePage extends BasePage {
 			return false;
 		}
 	}
-
+	
 	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_immune_info_btn, 10);
 		Thread.sleep(2000);
 		save_immune_info_btn.click();
+	}
+	
+	public void selectOneOption(String vaccine) throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
+			click(checkBoxCovid19Vaccine);
+		} else if (vaccine.equalsIgnoreCase("InfluenzaVaccine")) {
+			click(checkBoxInfluenzaVaccine);
+		} else {
+			click(checkBoxCovid19Vaccine);
+			click(checkBoxInfluenzaVaccine);
+		}
 	}
 	
 }
