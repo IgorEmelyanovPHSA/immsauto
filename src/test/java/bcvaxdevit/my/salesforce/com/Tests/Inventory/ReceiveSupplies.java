@@ -29,11 +29,13 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		inClinicExperiencePage.selectSupplyItemsFromDropdown();
 		Thread.sleep(2000);
-		log("/*-- 6. Click on 'AstraZeneca ChAdOx1-S - ABX3120' Supply Item--*/");
+		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		inClinicExperiencePage.selectSupplyItemName();
 		Thread.sleep(2000);
+		///Validation for Doses/Qty Before Receiving needs to be add.
+		log("/*-- . Wee neeed to see Dosegae and Qty Before Receiving here to Validate at the end---*/");
 		String doseConversionFactor = inClinicExperiencePage.getDoseConversionFactor();
-		log("/*-- 7. remaining doses are: -->" + doseConversionFactor);
+		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);
 		log("/*-- 8. Close all open tabs --*/");
 		inClinicExperiencePage.closeTabsHCA();
@@ -47,7 +49,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 12. Click and select supply distribution SDST-0000001558 --*/");
+		log("/*-- 12. Click on Supply Distribution with - Operational Freezer - SDST-0000001634--*/");
 		inClinicExperiencePage.clickSupplyDistribution();
 		Thread.sleep(2000);
 		String supplyName = inClinicExperiencePage.getSupplyDistributionName();
@@ -87,7 +89,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 21. click to select the Supply Item --*/");
 		inClinicExperiencePage.clickSupplyItemTextBox();
 		Thread.sleep(2000);
-		log("/*-- 22. Select AstraZeneca ChAdOx1-S - ABX3120 Supply Item --*/");
+		log("/*-- 22. Select Supply Item COMIRNATY (Pfizer) - 35035BD-CC01  --*/");
 		inClinicExperiencePage.selectSupplyItem("COMIRNATY (Pfizer) - 35035BD-CC01");
 		Thread.sleep(2000);
 		log("/*-- 23. Validate Quantity Filed Present on Layout --*/");
@@ -132,6 +134,8 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 32. Click Save Button --*/");
 		inClinicExperiencePage.ClickSaveButton();
 		Thread.sleep(2000);
+		///Validation for Doses/Qty Before and After Reciaving needs to be add.
+		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
 	}
 	
 }
