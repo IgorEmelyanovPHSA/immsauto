@@ -271,6 +271,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement appointment_status_confirm;
 	private By appointment_status_confirm1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
 	
+	@FindBy(xpath = "(//SPAN[@class='slds-page-header__title slds-truncate'][text()='Immunization Records (1)']/../../../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[2]")
+	private WebElement status_after_care;
+	private By status_after_care1 = By.xpath("(//SPAN[@class='slds-page-header__title slds-truncate'][text()='Immunization Records (1)']/../../../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[2]");
+	
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
@@ -1146,6 +1150,11 @@ public class InClinicExperiencePage extends BasePage {
 	public void ValidateAppointmentConfirmIsPresent() throws InterruptedException {
 		waitForElementToBeLocated(driver, appointment_status_confirm1, 10);
 		appointment_status_confirm.isDisplayed();
+	}
+	
+	public void ValidateStatusisInAftercare() throws InterruptedException {
+		waitForElementToBeLocated(driver, status_after_care1, 10);
+		status_after_care.isDisplayed();
 	}
 	
 	public String ValidateclinicNameAfterRebook() throws InterruptedException {

@@ -19,6 +19,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	private String postalCode = "V8W7P2";
 	private String personalHealthNumber = "9746172488";
 	private String email = "test@qa.com";
+	String clinicNameToSearch = "All Ages - Atlin Health Centre";
 	
 	@Test
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_BCVAXDEVIT() throws Exception {
@@ -97,8 +98,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*--24.----select 'Search clinic name' tab --*/");
 		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
-		log("/*-- 25.Search for and select clinic Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		inClinicExperiencePage.SearchForClinic();
+		log("/*25.----search the Clinic " +clinicNameToSearch +" --*/");
+		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		log("/*--26.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
@@ -179,14 +180,17 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickRelatedTab();
 		log("/*50.---- Navigated to Person Account related tab ---*/");
 		Thread.sleep(5000);
+		inClinicExperiencePage.ValidateStatusisInAftercare();
+		log("/*51.---- Immunization status is in After Care ---*/");
+		Thread.sleep(2000);
 		inClinicExperiencePage.NavigateToAppointmentsSection();
-		log("/*51.---- User Navigated to Appointment Section  ---*/");
+		log("/*52.---- User Navigated to Appointment Section  ---*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.ValidateAppointmentCancelledIsPresent();
-		log("/*52.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
+		log("/*53.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
-		log("/*53.---- An confirmed appointmrnt is found for the user  ---*/");
+		log("/*54.---- An confirmed appointmrnt is found for the user  ---*/");
 		Thread.sleep(2000);
 	}
 }
