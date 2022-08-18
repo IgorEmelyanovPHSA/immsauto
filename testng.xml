@@ -22,6 +22,7 @@
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.Drafts"/>
             <class name="bcvaxuat.my.salesforce.com.Tests.Inventory.BulkDrafts"/>
             <class name="bcvaxuat.my.salesforce.com.Tests.Portal.Dose1_CitizenBookingAppointment"/>
+            <class name="bcvaxuat.my.salesforce.com.Tests.InClinicExperience.UserArrivingWrongClinicRebookAppointment"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
