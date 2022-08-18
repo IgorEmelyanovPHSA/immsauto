@@ -463,7 +463,7 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_dosage;
 	private By select_dosage1 = By.xpath("//span[@title='0.5']");
 	
-	@FindBy(xpath = ".//button[@type='submit']")
+	@FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
 	private WebElement saveAgain;
 	
 	@FindBy(xpath = "//button[@title='Confirm & Save Administration']")
