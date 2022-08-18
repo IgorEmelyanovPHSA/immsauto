@@ -11,13 +11,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BulkWastages extends BaseTest {
 	
-	@Story("C222356: Inventory Management - Wastage Bulk (Java)")
-	@Test(groups = {"Smoke"})
+	@Story("C222356: Inventory Management - Wastage Bulk")
+	@Test()
 	public void Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS_BCVAXUAT() throws InterruptedException {
 		TestcaseID = "222356"; //C222356
 		int amountOfDosesToWaste = 1;
@@ -110,9 +111,9 @@ public class BulkWastages extends BaseTest {
 			double doseConversionAfterDeduction = calculated.get(2);
 			
 			//Comparing results
-			assertTrue(Double.compare(remainingDosesAfterDeduction, calculatedDosesAfterDeduction) == 0, "Values are different!");
-			assertTrue(Double.compare(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction) == 0, "Values are different!");
-			assertTrue(Double.compare(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction) == 0, "Values are different!");
+			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction);
+			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
 		}
 	}
 }

@@ -1,9 +1,13 @@
 package bcvaxuat.my.salesforce.com.Tests.InClinicExperience;
 
+
+import Utilities.TestListener;
 import bcvaxuat.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners({TestListener.class})
 public class Dose2_VaccineAdministration extends BaseTest {
 	
 	@Test(priority = 1)
