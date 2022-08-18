@@ -1071,16 +1071,6 @@ public class InClinicExperiencePage extends BasePage {
 		click_more_search_tabs.click();
 	}
 	
-	public void SearchForClinic() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_clinic, 10);
-		select_clinic.click();
-		Thread.sleep(2000);
-		select_clinic.sendKeys("All Ages - Atlin Health Centre");
-		select_clinic.sendKeys(Keys.RETURN);
-	}
-	
 	public void clickFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
