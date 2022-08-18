@@ -127,6 +127,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(5000);
 		log("/*-- 35.--- User can click Rebook Appointment button to book an appointment --*/");
 		inClinicExperiencePage.ClickRebookAppointment();
+		log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
+		log("/*--                                2. Rebook at Current Location button is disabled --*/");
 		Thread.sleep(5000);
 		log("/*-- 36---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
@@ -151,6 +153,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(3000);
 		log("/*-- 43---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
+		Thread.sleep(3000);
+		log("/*-- ---We need to add Validaton here for Cancelled and AfterCare statuses. step 3 in manual TC  --*/");
 		Thread.sleep(3000);
 		log("/*44.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
