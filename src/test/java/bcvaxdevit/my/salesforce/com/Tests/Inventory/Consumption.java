@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -18,14 +19,15 @@ public class Consumption extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
-	
-	@Test
-	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws InterruptedException {
+
+	@Test(priority = 1)
+	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222359"; //C219969->C222359
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
 		Thread.sleep(10000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
@@ -88,25 +90,21 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 17. Close any open Tabs --*/");
 		inClinicExperiencePage.clickRegisterButton();
-		log("/*-- 18. Register New User --> Dacia --*/");
-		String firstName = "Dacia";
-		inClinicExperiencePage.enterFirstName(firstName);
-		log("/*-- 19.----Enter First Name Dacia --*/");
+		log("/*-- 18. Register New User --*/");
+		inClinicExperiencePage.enterFirstName(legalFirstName);
+		log("/*-- 19.----Enter First Name " +legalFirstName +"--*/");
 		Thread.sleep(2000);
-		String lastName = "Bcvaxdod";
-		inClinicExperiencePage.enterLastName(lastName);
-		log("/*-- 20.----Enter Last Name Bcvaxdod --*/");
+		inClinicExperiencePage.enterLastName(legalLastName);
+		log("/*-- 20.----Enter Last Name " + legalLastName +"--*/");
 		Thread.sleep(2000);
-		String dateOfBirth = "May 19, 1904";//1904-05-19
 		inClinicExperiencePage.enterDateOfBirth(dateOfBirth);
-		log("/*-- 21.----Enter Date of birth --*/");
+		log("/*-- 21.----Enter Date of birth " +dateOfBirth + "--*/");
 		Thread.sleep(2000);
-		String postalCode = "V7N3K1";
 		inClinicExperiencePage.enterPostalCode(postalCode);
-		log("/*-- 22.----Enter Postal code --*/");
+		log("/*-- 22.----Enter Postal code " +postalCode  +"--*/");
 		Thread.sleep(2000);
-		String phnNumber = "9746172456";
-		inClinicExperiencePage.enterPNH(phnNumber);
+
+		inClinicExperiencePage.enterPNH(personalHealthNumber);
 		log("/*-- 23.----Enter PHN --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickNonIndigenousRadioButton();
@@ -121,13 +119,11 @@ public class Consumption extends BaseTest {
 		log("/*-- 27.'Click next button --*/");
 		inClinicExperiencePage.clickNextButton();
 		Thread.sleep(5000);
-		log("/*-- 28.'Enter email address --*/");
-		String email = "accountToDelete@phsa.ca";
+		log("/*-- 28.'Enter email address " +email +"--*/");
 		inClinicExperiencePage.enterEmail(email);
 		Thread.sleep(2000);
-		log("/*-- 29.'Confirm email address --*/");
-		String email1 = "accountToDelete@phsa.ca";
-		inClinicExperiencePage.confirmEmail(email1);
+		log("/*-- 29.'Confirm email address " +email +"--*/");
+		inClinicExperiencePage.confirmEmail(email);
 		Thread.sleep(2000);
 		log("/*-- 30.Click review details Button --*/");
 		inClinicExperiencePage.clickReviewDetails();
@@ -233,10 +229,12 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");
 		Thread.sleep(2000);
-		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		
 	}
-	
+
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+	}
 
 }

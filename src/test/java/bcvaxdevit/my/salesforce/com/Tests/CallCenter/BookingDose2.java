@@ -89,7 +89,9 @@ public class BookingDose2 extends BaseTest {
 	@Test
 	public void Can_Book_Dose2_Appointment_as_Call_Center_Agent_BCVAXDEVIT() throws InterruptedException {
 		TestcaseID = "222323"; //C222323
-		log("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		log("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		Thread.sleep(10000);
 		log("/*2.----CallCenter Console page displayed --*/");
@@ -157,6 +159,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
 		Thread.sleep(2000);
+		System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
+		callCenterConsole.selectEarlyBookingReason();
+		Thread.sleep(2000);
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		callCenterConsole.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
@@ -200,6 +205,8 @@ public class BookingDose2 extends BaseTest {
 		//log("/*-- 49. remaining doses are: -->" + dosage);
 		//Double expectedDosage = Double.valueOf("2");
 		//assertEquals(dosage, expectedDosage);
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 	
 	//@Test(priority = 3)

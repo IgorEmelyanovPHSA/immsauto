@@ -217,7 +217,14 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
 	}
-	
+
+	public InClinicExperiencePage loginWithClinicianConWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Consumption"));
+		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Consumption"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 	public void verifyAlertSuccess() {
 		this.alertSuccess.isDisplayed();
@@ -263,6 +270,14 @@ public class LoginPage extends BasePage {
 		this.enterCalCenterAgentCC_PW();
 		//return clickLoginButton();
 		this.login_button.click();
+		return new CallCenterConsolePage(driver);
+	}
+
+	public CallCenterConsolePage loginAsCalCenterAgentCCWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT_CC"));
+		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("password_CALLCENTERAGENT_PW_CC"));
+		click(login_button);
 		return new CallCenterConsolePage(driver);
 	}
 

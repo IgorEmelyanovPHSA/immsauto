@@ -134,6 +134,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(2000);
 		log("/*-- 36.--- User can click Rebook Appointment button to book an appointment --*/");
 		inClinicExperiencePage.ClickRebookAppointment();
+		log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
+		log("/*--                                2. Rebook at Current Location button is disabled --*/");
 		Thread.sleep(5000);
 		String afterBooking = inClinicExperiencePage.ValidateclinicNameAfterRebook();
 		String after = afterBooking;
