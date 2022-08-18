@@ -263,6 +263,14 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_to_rebook_button;
 	private By click_to_rebook_button1 = By.xpath(".//button[text() = 'Rebook at Current Location']");
 	
+	@FindBy(xpath = "//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']")
+	private WebElement appointment_status_cancel;
+	private By appointment_status_cance1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
+	
+	@FindBy(xpath = "//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']")
+	private WebElement appointment_status_confirm;
+	private By appointment_status_confirm1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
+	
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
@@ -374,6 +382,14 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement validate_supply_item_field;
 	private By validate_supply_item_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Item']");
 	
+	@FindBy(xpath = "//lightning-formatted-text[text()='All Ages - Atlin Health Centre']")
+	private WebElement validate_clinic_name_before_booking;
+	private By validate_clinic_name_before_booking1 = By.xpath("//lightning-formatted-text[text()='All Ages - Atlin Health Centre']");
+	
+	@FindBy(xpath = "//lightning-formatted-text[text()='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
+	private WebElement validate_clinic_name_after_booking;
+	private By validate_clinic_name_after_booking1 = By.xpath("//lightning-formatted-text[text()='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']");
+	
 	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']")
 	private WebElement validate_qty_field;
 	private By validate_qty_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']");
@@ -441,6 +457,9 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = "(//input[@data-id = 'select-sobject-id'])[3]")
 	private WebElement selectLotNumber;
+	
+	@FindBy(xpath = "//span[@title='Appointments']")
+	private WebElement appointmentSection;
 	
 	@FindBy(xpath = "//button[@name='injectionSite']")
 	private WebElement selectSite;
@@ -525,6 +544,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
 	private WebElement checkBoxInfluenzaVaccine;
+	
 	
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
@@ -1053,7 +1073,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
 		Thread.sleep(2000);
-		select_clinic.sendKeys("Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic");
+		select_clinic.sendKeys("All Ages - Atlin Health Centre");
 		select_clinic.sendKeys(Keys.RETURN);
 	}
 	
@@ -1112,6 +1132,38 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_to_rebook_button, 10);
 		click_to_rebook_button.click();
 	}
+	
+	public void ValidateClickRebookAppointmentButtonIsDisabled() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_rebook_button1, 10);
+		click_to_rebook_button.isDisplayed();
+	}
+	
+	public void ValidateAppointmentCancelledIsPresent() throws InterruptedException {
+		waitForElementToBeLocated(driver, appointment_status_cance1, 10);
+		appointment_status_cancel.isDisplayed();
+	}
+	
+	public void ValidateAppointmentConfirmIsPresent() throws InterruptedException {
+		waitForElementToBeLocated(driver, appointment_status_confirm1, 10);
+		appointment_status_confirm.isDisplayed();
+	}
+	
+	public String ValidateclinicNameAfterRebook() throws InterruptedException {
+		WebElement element = driver.findElement(validate_clinic_name_after_booking1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String ValidateclinicNameBeforeRebook() throws InterruptedException {
+		WebElement element = driver.findElement(validate_clinic_name_before_booking1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
 	
 	public void ContinueEditingButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, continue_editing_btn, 10);
@@ -1640,5 +1692,11 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 	
+	public void NavigateToAppointmentsSection() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,850)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, appointmentSection, 10);
+		Thread.sleep(2000);
+	}
 }
 
