@@ -209,6 +209,8 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
 		callCenterConsole.clickRelatedTab();
 		Thread.sleep(2000);
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		
 	}
 
