@@ -140,22 +140,22 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 39---Click Save Consent Button --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(5000);
-		log("/*-- 39--- Select Dosage --*/");
+		log("/*-- 40--- Select Dosage --*/");
 		inClinicExperiencePage.selectDosage();
 		Thread.sleep(5000);
-		log("/*---40. Save Immunization Information ---*/");
+		log("/*---41. Save Immunization Information ---*/");
 		inClinicExperiencePage.saveImmunizationInformation();
 		Thread.sleep(2000);
-		log("/*-- 41---Click Confirm and Save Administration Button --*/");
+		log("/*-- 42---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		log("/*42.---Click Modal screen Confirm&Save Administration Button --*/");
+		log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		log("/*-- 43---the Home - Client Search supposed to showing up  --*/");
+		log("/*-- 44---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		Thread.sleep(3000);
-		log("/*44.---API call to remove duplicate citizen participant account if found--*/");
+		log("/*45.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
 	}
 }
