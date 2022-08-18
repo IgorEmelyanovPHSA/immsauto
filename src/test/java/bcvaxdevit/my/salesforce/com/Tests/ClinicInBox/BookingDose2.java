@@ -22,7 +22,7 @@ public class BookingDose2 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	private String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
 
-	@Test
+	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222368";
 		log("Target Environment: "+ Utils.getTargetEnvironment());
@@ -143,7 +143,11 @@ public class BookingDose2 extends BaseTest {
 		log("/*33----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
-		log("/*34.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+	}
+
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 }

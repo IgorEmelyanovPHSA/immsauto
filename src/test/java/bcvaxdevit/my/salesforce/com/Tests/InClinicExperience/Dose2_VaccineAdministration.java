@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -16,14 +17,15 @@ public class Dose2_VaccineAdministration extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
-	
-	@Test
-	public void Can_do_Dose2_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws InterruptedException {
+
+	@Test(priority = 1)
+	public void Can_do_Dose2_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws Exception {
 		TestcaseID = "219918"; //C219918
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		System.out.println("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEWithParameters();
 		Thread.sleep(10000);
 		System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
@@ -52,25 +54,20 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		System.out.println("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
 		inClinicExperience.clickRegisterButton();
 		Thread.sleep(2000);
-		System.out.println("/*11.----Enter First Name Hugues--*/");
-		String firstName = "Hugues";
-		inClinicExperience.enterFirstName(firstName);
+		System.out.println("/*11.----Enter First Name " +legalFirstName  +"--*/");
+		inClinicExperience.enterFirstName(legalFirstName);
 		Thread.sleep(2000);
-		System.out.println("/*12.----Enter Last Name BCVaxLampard--*/");
-		String lastName = "BCVaxLampard";
-		inClinicExperience.enterLastName(lastName);
+		System.out.println("/*12.----Enter Last Name " +legalLastName  +"--*/");
+		inClinicExperience.enterLastName(legalLastName);
 		Thread.sleep(2000);
-		System.out.println("/*13.----Enter Date of birth--*/");
-		String dateOfBirth = "Mar 03, 1904";
+		System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
 		inClinicExperience.enterDateOfBirth(dateOfBirth);
 		Thread.sleep(2000);
-		System.out.println("/*14.----Enter Postal code--*/");
-		String postalCode = "V1N3Q3";
+		System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
 		inClinicExperience.enterPostalCode(postalCode);
 		Thread.sleep(2000);
-		System.out.println("/*15.----Enter PHN--*/");
-		String phnNumber = "9746171121";
-		inClinicExperience.enterPNH(phnNumber);
+		System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
+		inClinicExperience.enterPNH(personalHealthNumber);
 		Thread.sleep(2000);
 		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
 		inClinicExperience.clickNonIndigenousRadioButton();
@@ -84,13 +81,11 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		System.out.println("/*19.----click Next button --*/");
 		inClinicExperience.clickNextButton();
 		Thread.sleep(2000);
-		System.out.println("/*20.----'Enter email address --*/");
-		String email = "accountToDelete@phsa.ca";
+		System.out.println("/*20.----'Enter email address " +email +"--*/");
 		inClinicExperience.enterEmail(email);
-		System.out.println("/*21.----'Confirm email address --*/");
+		System.out.println("/*21.----'Confirm email address " +email +"--*/");
 		Thread.sleep(2000);
-		String email1 = "accountToDelete@phsa.ca";
-		inClinicExperience.confirmEmail(email1);
+		inClinicExperience.confirmEmail(email);
 		System.out.println("/*22.---Click review details Button--*/");
 		Thread.sleep(2000);
 		inClinicExperience.clickReviewDetails();
@@ -185,8 +180,11 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
-		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+	}
 }
