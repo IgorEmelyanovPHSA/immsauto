@@ -133,7 +133,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(5000);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
@@ -233,6 +233,7 @@ public class Consumption extends BaseTest {
 
 	@Test(priority = 2)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
