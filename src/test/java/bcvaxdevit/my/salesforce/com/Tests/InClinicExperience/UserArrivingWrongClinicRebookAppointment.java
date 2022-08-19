@@ -14,11 +14,10 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	private String legalFirstName = "Jodie";
 	private String legalLastName = "BCVaxCluff";
 	private String legalMiddleName = "Morten";
-	private String legalLastNameASCII = "BCVaxCluff";
 	private String dateOfBirth = "May 13, 2006";
 	private String postalCode = "V8W7P2";
 	private String personalHealthNumber = "9746172488";
-	private String email = "test@qa.com";
+	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "All Ages - Atlin Health Centre";
 	
 	@Test
@@ -26,9 +25,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		TestcaseID = "219910"; //C219910
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
 		Thread.sleep(5000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
@@ -194,5 +193,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
 		log("/*54.---- An confirmed appointmrnt is found for the user  ---*/");
 		Thread.sleep(2000);
+	}
+
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		TestcaseID = "219865"; //C219865
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 }
