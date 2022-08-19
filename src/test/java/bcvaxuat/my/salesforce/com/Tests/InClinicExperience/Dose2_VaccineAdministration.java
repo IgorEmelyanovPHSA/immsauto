@@ -3,305 +3,191 @@ package bcvaxuat.my.salesforce.com.Tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvaxuat.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxuat.my.salesforce.com.Pages.Utils;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class Dose2_VaccineAdministration extends BaseTest {
+	private String legalFirstName = "Hugues";
+	private String legalLastName = "BCVaxLampard";
+	private String dateOfBirth = "March 3, 1904";
+	private String postalCode = "V1N3Q3";
+	private String personalHealthNumber = "9746171121";
+	//private boolean isIndigenous = false;
+	private String email = "accountToDelete@phsa.ca";
+	String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
 	
 	@Test(priority = 1)
-	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
+	public void Can_do_Dose2_Vaccine_Administration_as_Clinician_ICE_BCVAXUAT() throws Exception {
 		TestcaseID = "219918"; //C219918
-		log("Searching and Removing Citizen Duplicates BCVAXUAT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		//log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		System.out.println("/*1.----Login as an Clinician to ICE --*/");
+		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEWithParameters();
 		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			log("/*---- User already on ICE--*/");
-		} else {
-			log("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-		log("/*----Search for Hugues BCVaxLampard is Successful ---*/");
-		if (!inClinicExperiencePage.userLampardFound()) {
-			log("/*----User --> Hugues BCVaxLampard not found and return---*/");
-		}
-		while (inClinicExperiencePage.userLampardFound()) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				log("/*----No Imms Record found and return---*/");
-			} else {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				log("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-			log("/*----Search for Hugues BCVaxLampard is Successful ---*/");
-		}
-	}
-	
-	@Test(priority = 2)
-	public void Can_do_Dose2_Vaccine_Administration_as_Clinician_ICE_BCVAXUAT() throws InterruptedException {
-		TestcaseID = "219918"; //C219918
-		log("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
-		Thread.sleep(2000);
-		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
+		System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
 		Thread.sleep(5000);
-		log("/*3.--- Navigate to In Clinic Experience App --*/");
+		System.out.println("/*3.--- Navigate to In Clinic Experience App --*/");
 		inClinicExperience.selectICEFromApp();
 		Thread.sleep(5000);
-		log("/*4.----Close All previously opened Tab's --*/");
+		System.out.println("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		Thread.sleep(5000);
-		log("/*5.----- Click on User Defaults Tab --*/");
+		System.out.println("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
 		Thread.sleep(2000);
-		log("/*6.----- Enter current date for UserDefaults --*/");
+		System.out.println("/*6.----- Enter current date for UserDefaults --*/");
 		inClinicExperience.inputCurrentDateUserDefaults();
 		Thread.sleep(2000);
-		log("/*7.----- Click on register Tab --*/");
+		System.out.println("/*7.----- Click on Save defaults button --*/");
+		inClinicExperience.clickSaveDefaultsButton();
 		Thread.sleep(2000);
+		System.out.println("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
-		log("/*8.----click Register button New Citizen -Hugues BCVaxLampard --*/");
+		Thread.sleep(2000);
+		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
+		//inClinicExperience.clickSaveModalDefaultsButton();
+		//Thread.sleep(2000);
+		System.out.println("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
 		inClinicExperience.clickRegisterButton();
 		Thread.sleep(2000);
-		log("/*9.----Enter First Name Hugues--*/");
-		String firstName = "Hugues";
-		inClinicExperience.enterFirstName(firstName);
+		System.out.println("/*11.----Enter First Name " +legalFirstName  +"--*/");
+		inClinicExperience.enterFirstName(legalFirstName);
 		Thread.sleep(2000);
-		log("/*10.----Enter Last Name BCVaxLampard--*/");
-		String lastName = "BCVaxLampard";
-		inClinicExperience.enterLastName(lastName);
+		System.out.println("/*12.----Enter Last Name " +legalLastName  +"--*/");
+		inClinicExperience.enterLastName(legalLastName);
 		Thread.sleep(2000);
-		log("/*11.----Enter Date of birth--*/");
-		String dateOfBirth = "Mar 03, 1904";
+		System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
 		inClinicExperience.enterDateOfBirth(dateOfBirth);
 		Thread.sleep(2000);
-		log("/*12.----Enter Postal code--*/");
-		String postalCode = "V1N3Q3";
+		System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
 		inClinicExperience.enterPostalCode(postalCode);
 		Thread.sleep(2000);
-		log("/*13.----Enter PHN--*/");
-		String phnNumber = "9746171121";
-		inClinicExperience.enterPNH(phnNumber);
+		System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
+		inClinicExperience.enterPNH(personalHealthNumber);
 		Thread.sleep(2000);
-		log("/*14.----click on non-Indigenous person radiobutton --*/");
+		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
 		inClinicExperience.clickNonIndigenousRadioButton();
 		Thread.sleep(2000);
-		log("/*15.----click Verify PHN button --*/");
+		System.out.println("/*17.----click Verify PHN button --*/");
 		inClinicExperience.clickVerifyPHNButton();
 		Thread.sleep(2000);
-		log("/*16.--Expecting to see the toast success message - 'PNH match successful' --*/");
+		System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
 		inClinicExperience.successMessage();
 		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		log("/*17.----click Next button --*/");
+		System.out.println("/*19.----click Next button --*/");
 		inClinicExperience.clickNextButton();
 		Thread.sleep(2000);
-		log("/*18.----'Enter email address --*/");
-		String email = "test@qa.com";
+		System.out.println("/*20.----'Enter email address " +email +"--*/");
 		inClinicExperience.enterEmail(email);
-		log("/*19.----'Confirm email address --*/");
+		System.out.println("/*21.----'Confirm email address " +email +"--*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
-		inClinicExperience.confirmEmail(email1);
-		log("/*20.---Click review details Button--*/");
+		inClinicExperience.confirmEmail(email);
+		System.out.println("/*22.---Click review details Button--*/");
 		Thread.sleep(2000);
 		inClinicExperience.clickReviewDetails();
-		log("/*21.----Click register Button on confirmation page--*/");
+		System.out.println("/*23.----Click register Button on confirmation page--*/");
 		Thread.sleep(2000);
 		inClinicExperience.clickRegisterButtonOnConfirmationPage();
 		Thread.sleep(2000);
-		log("/*22.--toast success message - 'Success' --*/");
+		System.out.println("/*24.--toast success message - 'Success' --*/");
 		inClinicExperience.successRegisteredMessageAppear();
 		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		log("/*23.----click on person Account Related Tab --*/");
+		System.out.println("/*25.----click on person Account Related Tab --*/");
 		inClinicExperience.clickOnPersonAccountRelatedTab();
 		Thread.sleep(2000);
-		//log("/*24.----click on Eligibility button --*/");
+		//System.out.println("/*24.----click on Eligibility button --*/");
 		//inClinicExperience.clickEligibilityButton();
 		//Thread.sleep(2000);
-		//log("/*25----select vaccination option -> COVID_19_Vaccination --*/");
+		//System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
 		//inClinicExperience.selectCovid19option();
 		//Thread.sleep(2000);
-		//log("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
+		//System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
 		//inClinicExperience.userIsEligibleSuccessMsg();
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		log("/*27----Go to Appointment Tab --*/");
+		System.out.println("/*26.----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
 		Thread.sleep(2000);
-		log("/*28----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		inClinicExperience.clickReasonForVisit();
-		Thread.sleep(2000);
-		log("/*28----click on reason Early Booking Reason - Travel --*/");
+		System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
 		inClinicExperience.selectEarlyBookingReason();
 		Thread.sleep(2000);
-		//log("/*29----click on 'More' search tab --*/");
+		System.out.println("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		inClinicExperience.clickOnVaccinationCheckbox();
+		Thread.sleep(2000);
+		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
-		log("/*30----select 'Search clinic name' tab --*/");
-		inClinicExperience.selectSearchClinicNameTab();
+		System.out.println("/*28.----select 'Search by Clinic name' tab --*/");
+		inClinicExperience.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
-		log("/*31----search the Clinic --*/");
-		inClinicExperience.searchClinicName();
+		log("/*29.----search the Clinic " +clinicNameToSearch +" --*/");
+		inClinicExperience.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
-		log("/*32----click on Option Facility location  --*/");
+		System.out.println("/*30.----click on Option Facility location  --*/");
 		inClinicExperience.clickOnFacilityOptionLocation();
 		Thread.sleep(2000);
-		log("/*33----select Active booking appointment day  --*/");
-		inClinicExperience.selectAppointment();
+		System.out.println("/*31.----select Active booking appointment day  --*/");
+		inClinicExperience.selectBookingAppointmentDay();
 		Thread.sleep(2000);
-		log("/*34----select the time slot  --*/");
+		System.out.println("/*32.----select the time slot  --*/");
 		inClinicExperience.selectTimeSlotForAppointment();
 		Thread.sleep(2000);
-		log("/*35----click Next button  --*/");
+		System.out.println("/*33.----click Next button  --*/");
 		inClinicExperience.clickNextButtonApptSchedulingPage();
 		Thread.sleep(2000);
-		log("/*36----click Confirm Appointment button  --*/");
+		System.out.println("/*34.----click Verify Contact Info checkbox  --*/");
 		inClinicExperience.clickVerifyContactInformation();
 		Thread.sleep(2000);
 		inClinicExperience.clickAppointmentConfirmButton();
 		Thread.sleep(2000);
-		log("/*37----see 'Appointment Confirmed!' screen --*/");
+		System.out.println("/*35.----see 'Appointment confirmed!' screen --*/");
 		inClinicExperience.AppointmentConfirmationMessage();
 		Thread.sleep(2000);
-		log("/*38----Refresh page --*/");
+		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
 		Thread.sleep(2000);
-		log("/*39----Go to back to the Citizen Related Tab --*/");
+		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
 		inClinicExperience.clickRelatedTab();
 		Thread.sleep(2000);
-		log("/*40----click on In-clinic Experience button --*/");
+		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		inClinicExperience.ClickGoToInClinicExperienceButton();
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		Thread.sleep(2000);
-		log("/*41----In-clinic Experience ->Vaccine Admin page appears up --*/");
+		System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
-		log("/*-- 42---Click confirm and Save Button --*/");
+		System.out.println("/*40.---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
-		log("/*-- 43---select Vaccine Agent  COVID-19 mRNA --*/");
+		System.out.println("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");
 		inClinicExperience.selectVaccineAgent();
 		Thread.sleep(3000);
-		log("/*-- 44---Click Save Consent Button --*/");
+		System.out.println("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();
 		Thread.sleep(5000);
-		log("/*-- 45---Click Confirm and Save Administration Button --*/");
+		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
+		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		Thread.sleep(5000);
+		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);
-		log("/*-- 46---the Home - Client Search showing up  --*/");
+		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
+		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		Thread.sleep(3000);
+		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 		Thread.sleep(3000);
 		
-		
 	}
-	
-	@Test(priority = 3)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
-		log("Searching and Removing Citizen Duplicates BCVAXUAT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			log("/*---- User already on ICE--*/");
-		} else {
-			log("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-		log("/*----Search for Hugues BCVaxLampard is Successful ---*/");
-		if (!inClinicExperiencePage.userLampardFound()) {
-			log("/*----User --> Hugues BCVaxLampard not found and return---*/");
-		}
-		while (inClinicExperiencePage.userLampardFound()) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				log("/*----No Imms Record found and return---*/");
-			} else {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				log("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Hugues BCVaxLampard");
-			log("/*----Search for Hugues BCVaxLampard is Successful ---*/");
-		}
+
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 	
 }

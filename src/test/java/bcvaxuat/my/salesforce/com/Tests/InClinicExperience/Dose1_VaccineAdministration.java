@@ -2,86 +2,30 @@ package bcvaxuat.my.salesforce.com.Tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvaxuat.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxuat.my.salesforce.com.Pages.Utils;
 import bcvaxuat.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class Dose1_VaccineAdministration extends BaseTest {
+	private String legalFirstName = "Ludovika";
+	private String legalLastName = "BcvaxLimeburn";
+	private String dateOfBirth = "Sep 21, 1923";
+	private String postalCode = "V3L5L2";
+	private String personalHealthNumber = "9746170911";
+	//private boolean isIndigenous = false;
+	private String email = "accountToDelete@phsa.ca";
+	String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
 	
 	@Test(priority = 1)
-	public void Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
-		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			System.out.println("/*---- User already on ICE--*/");
-		} else {
-			System.out.println("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		System.out.println("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
-		System.out.println("/*----Search for Ludovika is Successful ---*/");
-		if (!inClinicExperiencePage.userFound()) {
-			System.out.println("/*----User --> Ludovika not found and return---*/");
-		}
-		while (inClinicExperiencePage.userFound()) {
-			System.out.println("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			System.out.println("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				System.out.println("/*----No Imms Record found and return---*/");
-			} else {
-				System.out.println("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				System.out.println("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			System.out.println("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				System.out.println("/*----No RERN Record found and return---*/");
-			} else {
-				System.out.println("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				System.out.println("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			System.out.println("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			System.out.println("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			System.out.println("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
-			System.out.println("/*----Search for Ludovika is Successful ---*/");
-		}
-	}
-	
-	@Test(priority = 2)
-	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE_BCVAXUAT() throws InterruptedException {
+	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE_BCVAXUAT() throws Exception {
 		TestcaseID = "153420"; //C219955
+		//log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		System.out.println("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEWithParameters();
 		Thread.sleep(10000);
 		System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
@@ -107,28 +51,23 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
 		//inClinicExperience.clickSaveModalDefaultsButton();
 		//Thread.sleep(2000);
-		System.out.println("/*10.----click Register button New Citizen - Ludovika --*/");
+		System.out.println("/*10.----click Register button New Citizen --*/");
 		inClinicExperience.clickRegisterButton();
 		Thread.sleep(2000);
-		System.out.println("/*11.----Enter First Name Ludovika--*/");
-		String firstName = "Ludovika";
-		inClinicExperience.enterFirstName(firstName);
+		System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
+		inClinicExperience.enterFirstName(legalFirstName);
 		Thread.sleep(2000);
-		System.out.println("/*12.----Enter Last Name BcvaxLimeburn--*/");
-		String lastName = "BcvaxLimeburn";
-		inClinicExperience.enterLastName(lastName);
+		System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
+		inClinicExperience.enterLastName(legalLastName);
 		Thread.sleep(2000);
-		System.out.println("/*13.----Enter Date of birth--*/");
-		String dateOfBirth = "Sep 21, 1923";
+		System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
 		inClinicExperience.enterDateOfBirth(dateOfBirth);
 		Thread.sleep(2000);
-		System.out.println("/*14.----Enter Postal code--*/");
-		String postalCode = "V3L5L2";
+		System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
 		inClinicExperience.enterPostalCode(postalCode);
 		Thread.sleep(2000);
-		System.out.println("/*15.----Enter PHN--*/");
-		String phnNumber = "9746170911";
-		inClinicExperience.enterPNH(phnNumber);
+		System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
+		inClinicExperience.enterPNH(personalHealthNumber);
 		Thread.sleep(2000);
 		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
 		inClinicExperience.clickNonIndigenousRadioButton();
@@ -142,13 +81,11 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*19.----click Next button --*/");
 		inClinicExperience.clickNextButton();
 		Thread.sleep(2000);
-		System.out.println("/*20.----'Enter email address --*/");
-		String email = "test@qa.com";
+		System.out.println("/*20.----'Enter email address " +email +"--*/");
 		inClinicExperience.enterEmail(email);
-		System.out.println("/*21.----'Confirm email address --*/");
+		System.out.println("/*21.----'Confirm email address " +email +"--*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
-		inClinicExperience.confirmEmail(email1);
+		inClinicExperience.confirmEmail(email);
 		System.out.println("/*22.---Click review details Button--*/");
 		Thread.sleep(2000);
 		inClinicExperience.clickReviewDetails();
@@ -183,8 +120,8 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
 		inClinicExperience.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
-		System.out.println("/*28----search the Clinic Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center --*/");
-		inClinicExperience.searchClinicName();
+		log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
+		inClinicExperience.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		System.out.println("/*29----click on Option Facility location  --*/");
 		inClinicExperience.clickOnFacilityOptionLocation();
@@ -243,73 +180,10 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		Thread.sleep(3000);
 	}
 
-	@Test(priority = 3)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
-		TestcaseID = "219865"; //C219865
-		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			System.out.println("/*---- User already on ICE--*/");
-		} else {
-			System.out.println("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		System.out.println("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		System.out.println("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
-		System.out.println("/*----Search for Ludovika is Successful ---*/");
-		if (!inClinicExperiencePage.userFound()) {
-			System.out.println("/*----User --> Ludovika not found and return---*/");
-		}
-		while (inClinicExperiencePage.userFound()) {
-			System.out.println("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			System.out.println("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				System.out.println("/*----No Imms Record found and return---*/");
-			} else {
-				System.out.println("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				System.out.println("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			System.out.println("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				System.out.println("/*----No RERN Record found and return---*/");
-			} else {
-				System.out.println("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				System.out.println("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			System.out.println("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			System.out.println("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			System.out.println("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			System.out.println("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BcvaxLimeburn");
-			System.out.println("/*----Search for Ludovika is Successful ---*/");
-		}
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
-	
 	
 }
