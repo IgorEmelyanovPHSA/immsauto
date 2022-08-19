@@ -35,7 +35,7 @@ public class DIWA_ICE extends BaseTest {
 		Thread.sleep(5000);
 		log("/*----5. Search for Participant account: " +citizenName +" ---*/");
 		inClinicExperience.SearchForCitizen(citizenName);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		log("/*----6. select Citizen from search results --*/");
 		inClinicExperience.userClickCitizenNew(nameToSearch);
 		Thread.sleep(4000);
@@ -80,7 +80,7 @@ public class DIWA_ICE extends BaseTest {
 		Thread.sleep(2000);
 		log("/*---19. select date of Administration ---*/");
 		if (inClinicExperience.selectDateOfAdministration())
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 		log("/*---19.1. Select Informed Consent Provider ---*/");
 		inClinicExperience.informedConsentProvider();
 		Thread.sleep(2000);

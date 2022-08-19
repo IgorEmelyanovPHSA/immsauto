@@ -49,7 +49,31 @@ public abstract class BasePage<T> {
 			return false;
 		}
 	}
-	
+
+	public Boolean isClickable(WebElement element){
+		try{
+			wait.until(ExpectedConditions.elementToBeClickable(element));
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
+	}
+
+	public Boolean isInputActive(WebElement element){
+		//This method to be used ONLY when isClikable method is not successful
+		try{
+			scrollTop(element);
+			click(element);
+			element.sendKeys("T");
+			element.sendKeys(Keys.BACK_SPACE);
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
+	}
+
 	// explicit wait - to wait for the compose button to be click-able
 	public static WebElement waitForElementToBeVisible(WebDriver driver, WebElement webElement, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
