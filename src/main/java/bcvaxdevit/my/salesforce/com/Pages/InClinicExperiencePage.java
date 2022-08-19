@@ -1539,13 +1539,16 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void informedConsentProvider() throws InterruptedException {
+		//waitForElementToBeVisible(driver, informedConsentProvider, 10);
+		waitForElementToBeClickable(informedConsentProvider);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
-		waitForElementToBeVisible(driver, informedConsentProvider, 10);
-		this.informedConsentProvider.click();
+		//waitForElementToBeVisible(driver, informedConsentProvider, 10);
+		//this.informedConsentProvider.click();
+		click(informedConsentProvider);
 	}
-	
+
 	public boolean selectDateOfAdministration() throws InterruptedException {
-		if (!isDisplayed(inputDate1)) {
+		if (!isInputActive(inputDate)) {
 			return false;
 		}
 		Calendar calendar = Calendar.getInstance();
