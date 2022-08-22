@@ -20,7 +20,7 @@ public class BookingDose2 extends BaseTest {
 
 	@Test
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXUAT() throws InterruptedException {
-		TestcaseID = "222364"; //C192878
+		TestcaseID = "222368"; //C222368
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*1.----Login as an Clinician to CIB --*/");

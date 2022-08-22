@@ -97,8 +97,8 @@ public class BookingDose1 extends BaseTest {
 		String firstName = "Ludovika";
 		callCenterConsole.enterFirstName(firstName);
 		Thread.sleep(2000);
-		log("/*6.----Enter Last Name BCVaxLimeburn--*/");
-		String lastName = "BCVaxLimeburn";
+		log("/*6.----Enter Last Name BCvaxLimeburn--*/");
+		String lastName = "BCvaxLimeburn";
 		callCenterConsole.enterLastName(lastName);
 		Thread.sleep(2000);
 		log("/*6.----Enter Date of birth--*/");
@@ -126,11 +126,11 @@ public class BookingDose1 extends BaseTest {
 		callCenterConsole.clickNextButton();
 		Thread.sleep(2000);
 		log("/*13.'Enter email address --*/");
-		String email = "test@qa.com";
+		String email = "accountToDelete@phsa.ca";
 		callCenterConsole.enterEmail(email);
 		log("/*14.'Confirm email address --*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
+		String email1 = "accountToDelete@phsa.ca";
 		callCenterConsole.confirmEmail(email1);
 		log("/*15.Click review details Button--*/");
 		Thread.sleep(2000);
@@ -223,7 +223,7 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
 		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+		inClinicExperiencePage.SearchForCitizen("Ludovika BCvaxLimeburn");
 		log("/*----Search for Ludovika is Successful ---*/");
 		if (!inClinicExperiencePage.userFound()) {
 			log("/*----User --> Ludovika not found and return---*/");
@@ -265,7 +265,7 @@ public class BookingDose1 extends BaseTest {
 			log("/*---- Close the deleted Person Account ---*/");
 			Thread.sleep(2000);
 			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Ludovika BCVaxLimeburn");
+			inClinicExperiencePage.SearchForCitizen("Ludovika BCvaxLimeburn");
 			log("/*----Search for Ludovika is Successful ---*/");
 		}
 	}
