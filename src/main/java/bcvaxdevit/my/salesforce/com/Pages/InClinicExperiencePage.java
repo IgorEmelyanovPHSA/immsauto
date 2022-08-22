@@ -1695,7 +1695,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void NavigateToAppointmentsSection() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,850)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,950)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, appointmentSection, 10);
 		Thread.sleep(2000);

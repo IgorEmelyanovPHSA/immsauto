@@ -11,12 +11,13 @@ import org.testng.annotations.Test;
 @Listeners({TestListener.class})
 public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	
-	private String legalFirstName = "Jodie";
-	private String legalLastName = "BCVaxCluff";
-	private String legalMiddleName = "Morten";
-	private String dateOfBirth = "May 13, 2006";
-	private String postalCode = "V8W7P2";
-	private String personalHealthNumber = "9746172488";
+	private String legalFirstName = "Hugues";
+	private String legalLastName = "BCVaxLampard";
+	private String legalMiddleName = "Fawn";
+	private String dateOfBirth = "March 3, 1904";
+	private String postalCode = "V1N3Q3";
+	private String personalHealthNumber = "9746171121";
+	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "All Ages - Atlin Health Centre";
 	
@@ -91,13 +92,15 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
 		Thread.sleep(2000);
-		String vaccineToSelect = "Covid19Vaccine";
-		log("/*23.A---Select vaccination type: " + vaccineToSelect + "--*/");
+		System.out.println("/*23.----click on reason Early Booking Reason - Travel --*/");
+		inClinicExperiencePage.selectEarlyBookingReason();
+		Thread.sleep(2000);
+		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
-		log("/*--24.----select 'Search clinic name' tab --*/");
+		Thread.sleep(2000);
 		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
-		log("/*25.----search the Clinic " +clinicNameToSearch +" --*/");
+		log("/*25.----search the Clinic " + clinicNameToSearch + " --*/");
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		log("/*--26.----click on Option Facility location  --*/");
@@ -194,9 +197,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*54.---- An confirmed appointmrnt is found for the user  ---*/");
 		Thread.sleep(2000);
 	}
-
+	
 	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
