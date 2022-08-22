@@ -17,16 +17,6 @@ import static Utilities.ApiQueries.*;
 @Listeners({TestListener.class})
 public class Dose1_CitizenBookingAppointment extends BaseTest {
 
-	//Test data
-//		private String legalFirstName = "Ludovika";
-//		private String legalLastName = "BCVaxLimeburn";
-//		private String dateOfBirth = "Sep 21, 1923";
-//		private String postalCode = "V3L5L2";
-//		private String personalHealthNumber = "9746170911";
-//		private boolean isIndigenous = false;
-//		private String email = "test2@phsa.ca";
-//		private String phoneNumber = "6041234568";
-
 	private String legalFirstName = "Anne-marie";
 	private String legalLastName = "BCVaxJacketts";
 	private String legalMiddleName = "Elissa";
@@ -37,73 +27,7 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	private String phoneNumber = "6041234568";
 
-	//Not in use instead implemented API call to remove participant account, DO NOT DELETE for now August 13, 2022
-	public void NOT_IN_USE_Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865 //153419?
-		log("Searching and Removing Citizen Duplicates ");
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
-		if (inClinicExperiencePage.displayIceApp()) {
-			System.out.println("/*---- User already on ICE--*/");
-		} else {
-			System.out.println("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen(legalFirstName + " " + legalLastName);
-		log("/*----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
-		if (!inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
-			log("/*----User --> " + legalFirstName + " " + legalLastName + " not found and return---*/");
-		}
-		while (inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(7000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				log("/*----No Imms Record found and return---*/");
-			} else {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				System.out.println("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(5000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen(legalFirstName + " " + legalLastName);
-			log("/*----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
-		}
-	}
-
-	@Test
+	@Test(priority = 1)
 	public void citizenPortalFlowDoseOne() throws Exception {
 		TestcaseID = "153419"; //C153419
 		log("Target Environment: "+ Utils.getTargetEnvironment());
@@ -176,10 +100,15 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 
 		log("/*16---Verify appointment conformation message is displayed--*/");
 		bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+		}
 
-		log("/*17.---API call to remove duplicate citizen participant account if found--*/");
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		TestcaseID = "219865"; //C219865
+		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		}
+
 	}
 		/*
 		Go through the citizen flow as someone who does not have a PHN number
