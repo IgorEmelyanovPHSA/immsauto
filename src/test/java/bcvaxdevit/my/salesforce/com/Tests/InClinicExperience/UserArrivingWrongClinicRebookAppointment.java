@@ -93,7 +93,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(2000);
 		String vaccineToSelect = "Covid19Vaccine";
 		log("/*23.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		inClinicExperiencePage.selectOneOption(vaccineToSelect);
+		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		log("/*--24.----select 'Search clinic name' tab --*/");
 		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
