@@ -20,7 +20,7 @@ public class Dose2_VaccineAdministration extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Dose2_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws Exception {
-		TestcaseID = "219918"; //C219918
+		TestcaseID = "222811"; //C222811
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);

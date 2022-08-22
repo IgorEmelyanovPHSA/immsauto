@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -8,10 +9,11 @@ import org.testng.annotations.Test;
 
 public class ReceiveSupplies extends BaseTest {
 	@Test()
-	public void Validate_Receive_Supplies_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Validate_Receive_Supplies_as_an_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "111334"; //C111334
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*-- 1.Login as an PPHIS user to Supply Location on BCVAXDEVIT --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
 		Thread.sleep(5000);
 		if (inClinicExperiencePage.displaySupplyConsolePage()) {
 			log("/*-- 2. User already on Health Connect - Supply Console --*/");
@@ -33,7 +35,7 @@ public class ReceiveSupplies extends BaseTest {
 		inClinicExperiencePage.selectSupplyItemName();
 		Thread.sleep(2000);
 		///Validation for Doses/Qty Before Receiving needs to be add.
-		log("/*-- . Wee neeed to see Dosegae and Qty Before Receiving here to Validate at the end---*/");
+		log("/*-- . We need to see Dosegae and Qty Before Receiving here to Validate at the end---*/");
 		String doseConversionFactor = inClinicExperiencePage.getDoseConversionFactor();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);

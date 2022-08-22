@@ -818,16 +818,19 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void clickDropdownMenu() {
+	public void clickDropdownMenu() throws InterruptedException {
 		this.dropdownMenu.click();
+		Thread.sleep(2000);
 	}
 	
 	public void selectSupplyLocationFromDropdown() {
 		this.supplyLocationInDropdown.click();
 	}
 	
-	public void selectSupplyItemsFromDropdown() {
+	public void selectSupplyItemsFromDropdown() throws InterruptedException {
+		Thread.sleep(2000);
 		this.supplyItemsInDropdown.click();
+		Thread.sleep(2000);
 	}
 	
 	public void selectSupplyLocationName() throws InterruptedException {

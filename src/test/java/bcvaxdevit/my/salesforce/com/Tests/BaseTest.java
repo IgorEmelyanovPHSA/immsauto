@@ -24,21 +24,6 @@ public class BaseTest {
 	private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
 	protected LoginPage loginPage;
 
-//	@BeforeSuite
-//	public void beforeSuite() {
-//		//---This will execute before the Suite
-//		System.out.println("This will execute before the Suite");
-//	}
-//
-//	@BeforeClass
-//	public void setUp() {
-//		System.out.println("This will execute before the Class");
-//	}
-//
-//	@BeforeTest
-//	public void beforeTest() {
-//		System.out.println("This will execute before the Test");
-//	}
 	
 	@BeforeMethod(alwaysRun = true)
 	public void setUp() throws Exception {
@@ -67,29 +52,9 @@ public class BaseTest {
 		} catch (Exception e) {
 			log("Test Rail was not updated: "+e);
 		}
-//		if (result.getStatus() == ITestResult.SUCCESS) {
-//			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_PASSED_STATUS, "", logOutputSteps.toString());
-//		} else if (result.getStatus() == ITestResult.FAILURE) {
-//			TestRailManager.addResultsForTestCase(TestcaseID, TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable().toString(), logOutputSteps.toString());
-//		}
 		driver.manage().deleteAllCookies();
 		driver.close();
 	}
-
-//	@AfterTest
-//	public void afterTest() {
-//		System.out.println("This will execute after the Test");
-//	}
-//
-//	@AfterClass
-//	public void tearDown() {
-//		System.out.println("This will execute after the Class");
-//	}
-//
-//	@AfterSuite
-//	public void cleanUp() {
-//		System.out.println("This will execute after the Suite");
-//	}
 	
 	public WebDriver getDriver() {
 		return driver;
