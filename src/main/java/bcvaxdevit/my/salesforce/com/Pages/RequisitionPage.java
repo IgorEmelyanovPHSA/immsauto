@@ -218,6 +218,14 @@ public class RequisitionPage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		element.click();
 	}
+
+	public void clickLineItemCheckBoxNotInStock() throws InterruptedException {
+		By check_box = By.xpath("//tbody/tr[14]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
+		WebElement element = driver.findElement(check_box);
+		//Scroll to select the desired line item
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		element.click();
+	}
 	
 	public void inputRequestedDose(String inputDose) {
 		this.requestedDose.sendKeys(inputDose);

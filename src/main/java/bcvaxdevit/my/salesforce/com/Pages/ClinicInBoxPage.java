@@ -172,7 +172,7 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement saveConsentButton;
 	private By saveConsentButton1 = By.xpath("//button[text() = 'Save Consent']");
 
-	@FindBy(xpath = "/span[text()='Show all lot numbers.']")
+	@FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
 	private WebElement showAllLotNumbers;
 	
 	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
@@ -681,8 +681,10 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void clickShowAllLotNumbers()throws InterruptedException{
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, showAllLotNumbers, 10);
 		this.showAllLotNumbers.click();
+		Thread.sleep(2000);
 	}
 	
 	public void selectToSetLot() throws InterruptedException {
