@@ -35,7 +35,7 @@ public class ReceiveSupplies extends BaseTest {
 		inClinicExperiencePage.selectSupplyItemName();
 		Thread.sleep(2000);
 		///Validation for Doses/Qty Before Receiving needs to be add.
-		log("/*-- . Wee neeed to see Dosegae and Qty Before Receiving here to Validate at the end---*/");
+		log("/*-- . We need to see Dosegae and Qty Before Receiving here to Validate at the end---*/");
 		String doseConversionFactor = inClinicExperiencePage.getDoseConversionFactor();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);
