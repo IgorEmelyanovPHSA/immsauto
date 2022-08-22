@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -13,10 +14,11 @@ import static org.testng.Assert.assertEquals;
 public class Transfer extends BaseTest {
 	
 	@Test(priority = 1)
-	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220550"; //C220550
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(10000);
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
@@ -153,10 +155,11 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 2)
-	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220550"; //C220550
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(10000);
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
@@ -293,10 +296,11 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 3)
-	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220557";
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
 		//Assert.assertTrue(false);
 		System.out.println("/*2.----Supply Console Page displayed --*/");
@@ -386,10 +390,11 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 4)
-	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws InterruptedException {
+	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220557";
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
 		//Assert.assertTrue(false);
 		System.out.println("/*2.----Supply Console Page displayed --*/");

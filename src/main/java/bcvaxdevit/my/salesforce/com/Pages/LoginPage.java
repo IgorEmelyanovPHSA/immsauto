@@ -208,6 +208,14 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new RequisitionPage(driver);
 	}
+
+	public RequisitionPage loginAsPPHIS1WithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
+		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
+		click(login_button);
+		return new RequisitionPage(driver);
+	}
 	
 	public InClinicExperiencePage loginWithClinicianCon() {
 		this.enterClinicianConUserName();

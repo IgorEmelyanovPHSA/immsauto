@@ -2,6 +2,7 @@ package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
+import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -12,10 +13,11 @@ import static org.testng.Assert.assertEquals;
 public class HistoricalImmunization extends BaseTest {
 
 	@Test(priority = 1)
-	public void Can_Create_Historical_Immunization_Record_via_RelatedTab_as_Clinician_BCVAXDEVIT() throws InterruptedException {
+	public void Can_Create_Historical_Immunization_Record_via_RelatedTab_as_Clinician_BCVAXDEVIT() throws Exception {
 		TestcaseID = "225627"; //C225627
+		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
 		log("/*2.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		Thread.sleep(2000);
