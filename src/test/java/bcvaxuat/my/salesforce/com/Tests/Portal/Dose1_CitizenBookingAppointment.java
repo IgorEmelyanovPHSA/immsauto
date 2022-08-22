@@ -101,7 +101,7 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 		}
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void citizenPortalFlowDoseOne() throws Exception {
 		TestcaseID = "153419"; //C153419
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -172,10 +172,14 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 
 		log("/*16---Verify appointment conformation message is displayed--*/");
 		bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+	}
 
-		log("/*17.---API call to remove duplicate citizen participant account if found--*/");
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		TestcaseID = "219865"; //C219865
+		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		}
+	}
 
 	}
 		/*

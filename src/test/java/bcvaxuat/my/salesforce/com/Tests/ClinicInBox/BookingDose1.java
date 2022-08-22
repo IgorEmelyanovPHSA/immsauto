@@ -19,7 +19,7 @@ public class BookingDose1 extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 
-	@Test
+	@Test(priority = 1)
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXUAT() throws InterruptedException {
 		TestcaseID = "222364"; //C222364
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -147,7 +147,12 @@ public class BookingDose1 extends BaseTest {
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		InClinicExperience.validateVaccineAdminPageOpen();
 		Thread.sleep(5000);
-		log("/*37.---API call to remove duplicate citizen participant account if found--*/");
+	}
+
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		TestcaseID = "219865"; //C219865
+		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 }

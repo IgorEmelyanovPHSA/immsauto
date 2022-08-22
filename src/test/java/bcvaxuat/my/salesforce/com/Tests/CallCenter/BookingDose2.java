@@ -126,12 +126,11 @@ public class BookingDose2 extends BaseTest {
         callCenterConsole.clickNextButton();
         Thread.sleep(2000);
         log("/*13.'Enter email address --*/");
-        String email = "test@qa.com";
+        String email = "accountToDelete@phsa.ca";
         callCenterConsole.enterEmail(email);
         log("/*14.'Confirm email address --*/");
         Thread.sleep(2000);
-        String email1 = "test@qa.com";
-        callCenterConsole.confirmEmail(email1);
+        callCenterConsole.confirmEmail(email);
         log("/*15.Click review details Button--*/");
         Thread.sleep(2000);
         callCenterConsole.clickReviewDetails();
