@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 import bcvaxuat.my.salesforce.com.Pages.Utils;
 import org.apache.http.Header;
@@ -243,8 +244,9 @@ public class ApiQueries {
         return AccountId;
     }
 
-    public static String queryToGetImmunizationRecordId(String AccountId) {
+    public static ArrayList<String> queryToGetListOfImmunizationRecords(String AccountId) {
         log("/*---Query to get immunization record--*/ ");
+        ArrayList<String> ImmunizationRecordList = new ArrayList<String>();
         String ImmunizationRecordId = null;
         String oauthToken = getOauthToken();
 
@@ -278,6 +280,7 @@ public class ApiQueries {
                     for (int i = 0; i < j.length(); i++){
                         ImmunizationRecordId = json.getJSONArray("records").getJSONObject(i).getString("Id");
                         log("ImmunizationRecordId: " + ImmunizationRecordId);
+                        ImmunizationRecordList.add(ImmunizationRecordId);
                     }
                 } catch (JSONException je) {
                     je.printStackTrace();
@@ -293,7 +296,8 @@ public class ApiQueries {
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
-        return ImmunizationRecordId;
+        log("Found amount of immunization records: " + ImmunizationRecordList.size());
+        return ImmunizationRecordList;
     }
 
     public static void deleteImmunizationRecord(String immunizationRecordId) {
@@ -380,14 +384,17 @@ public class ApiQueries {
             log("Duplicate account not found");
         }
         else {
-            String immunizationRecordId = queryToGetImmunizationRecordId(AccountId);
-             if (immunizationRecordId == null) {
-                log("Immunization record not found");
-                deleteAccount(AccountId);
-            } else {
-                deleteImmunizationRecord(immunizationRecordId);
-                deleteAccount(AccountId);
+            ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(AccountId);
+             if (listOfImmunizationRecords.size() == 0) {
+                log("Immunization records not found");
+             } else {
+                 for(int i=0; i < listOfImmunizationRecords.size(); i++){
+                     String immunizationRecordId = listOfImmunizationRecords.get(i);
+                     log("Immunization record to delete " +immunizationRecordId);
+                     deleteImmunizationRecord(immunizationRecordId);
+                 }
             }
+            deleteAccount(AccountId);
         }
     }
 

@@ -12,18 +12,17 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	
 	private String legalFirstName = "Jodie";
 	private String legalLastName = "BCVaxCluff";
-	private String legalLastNameASCII = "BCVaxCluff";
 	private String dateOfBirth = "May 13, 2006";
 	private String postalCode = "V8W7P2";
 	private String personalHealthNumber = "9746172488";
-	private String email = "test@qa.com";
+	private String email = "accountToDelete@phsa.ca";
 	
-	@Test
+	@Test(priority = 1)
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_BCVAXDEVIT() throws Exception {
 		TestcaseID = "219910"; //C219910
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
 		Thread.sleep(5000);
@@ -155,8 +154,13 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 44---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		Thread.sleep(3000);
-		log("/*45.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+	}
+
+	@Test(priority = 2)
+	public void Post_conditions_step_Remove_Dups_Citizen_participant_account(){
+		TestcaseID = "219865"; //C219865
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
 }
 

@@ -170,12 +170,11 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickNextButton();
 		log("/*-- 23.'Click next button --*/");
 		Thread.sleep(5000);
-		String email = "test@qa.com";
+		String email = "accountToDelete@phsa.ca";
 		inClinicExperiencePage.enterEmail(email);
 		log("/*-- 24.'Enter email address --*/");
 		Thread.sleep(2000);
-		String email1 = "test@qa.com";
-		inClinicExperiencePage.confirmEmail(email1);
+		inClinicExperiencePage.confirmEmail(email);
 		log("/*-- 25.'Confirm email address --*/");
 		Thread.sleep(2000);
 		inClinicExperiencePage.clickReviewDetails();
