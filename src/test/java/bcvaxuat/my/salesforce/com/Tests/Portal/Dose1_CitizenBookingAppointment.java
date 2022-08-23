@@ -103,7 +103,7 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 
 	@Test(priority = 1)
 	public void citizenPortalFlowDoseOne() throws Exception {
-		TestcaseID = "153419"; //C153419
+		TestcaseID = "222521"; //C222521
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 

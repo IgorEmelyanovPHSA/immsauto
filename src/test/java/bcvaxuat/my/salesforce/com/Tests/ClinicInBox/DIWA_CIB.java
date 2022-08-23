@@ -7,7 +7,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class DIWA extends BaseTest {
+public class DIWA_CIB extends BaseTest {
 	
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")

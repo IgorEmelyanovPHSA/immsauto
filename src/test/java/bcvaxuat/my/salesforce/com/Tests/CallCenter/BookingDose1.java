@@ -80,7 +80,7 @@ public class BookingDose1 extends BaseTest {
 	
 	@Test(priority = 2)
 	public void Can_Book_Dose1_Appointment_as_Call_Center_Agent_BCVAXUAT() throws InterruptedException {
-		TestcaseID = "153418"; //C153418
+		TestcaseID = "222524"; //C222524
 		log("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		Thread.sleep(5000);

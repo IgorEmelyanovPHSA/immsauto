@@ -12,7 +12,7 @@ public class Drafts extends BaseTest {
 
     @Test()
     public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS_BCVAXUAT() throws InterruptedException {
-        TestcaseID = "222371"; //C222371
+        TestcaseID = "223358"; //C223358
         log("Test Case#1 save draft and transfer after");
         double amountOfDosesToAdjust = 10;
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");

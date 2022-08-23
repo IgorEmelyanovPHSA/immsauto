@@ -26,7 +26,7 @@ public class BulkAdjustments extends BaseTest {
 
     @Test(dataProvider = "value")
     public void Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS_BCVAXDEVIT(String value) throws InterruptedException {
-        TestcaseID = "222370"; //C222370
+        TestcaseID = "223360"; //C223360
         AllureLifecycle lifecycle = Allure.getLifecycle();
         double amountOfDosesToAdjust = Double.parseDouble(value);
         boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
