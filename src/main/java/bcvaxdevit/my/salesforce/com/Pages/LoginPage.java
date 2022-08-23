@@ -36,10 +36,14 @@ public class LoginPage extends BasePage {
 	@FindBy(id = "username")
 	private WebElement Consumption_bcvaxdevit;
 	
-	
 	@FindBy(id = "username")
 	private WebElement diwa_bcvaxdevit;
 	
+	@FindBy(id = "username")
+	private WebElement clinician_wrongclinic;
+	
+	@FindBy(id = "password")
+	private WebElement clinician_pw_wrongclinic;
 	@FindBy(id = "password")
 	private WebElement clinician_pw_bcvaxdevit;
 	@FindBy(id = "password")
@@ -157,7 +161,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
 	}
-
+	
 	public InClinicExperiencePage loginAsClinicianICEWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_ICE"));
@@ -165,7 +169,7 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}
-
+	
 	public InClinicExperiencePage loginasPrecocondition() {
 		this.Precondition_BCVAXDEVIT();
 		//setUsername(username);
@@ -174,7 +178,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
 	}
-
+	
 	public InClinicExperiencePage loginAsPreconditionWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_Precondition"));
@@ -191,7 +195,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new SupplyConsolePage(driver);
 	}
-
+	
 	public SupplyConsolePage loginAsPPHISWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
@@ -208,7 +212,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new RequisitionPage(driver);
 	}
-
+	
 	public RequisitionPage loginAsPPHIS1WithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
@@ -225,11 +229,19 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new InClinicExperiencePage(driver);
 	}
-
+	
 	public InClinicExperiencePage loginWithClinicianConWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Consumption"));
 		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Consumption"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
+	
+	public InClinicExperiencePage loginWithClinicianWrongClinicWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_wrongclinic.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_WrongClinic"));
+		clinician_pw_wrongclinic.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_WrongClinic"));
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}
@@ -246,7 +258,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
 	}
-
+	
 	public ClinicInBoxPage loginAsClinicianCIBWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CIB"));
@@ -263,7 +275,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new ClinicInBoxPage(driver);
 	}
-
+	
 	public ClinicInBoxPage loginAsDIWAWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_DIWA"));
@@ -280,7 +292,7 @@ public class LoginPage extends BasePage {
 		this.login_button.click();
 		return new CallCenterConsolePage(driver);
 	}
-
+	
 	public CallCenterConsolePage loginAsCalCenterAgentCCWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT_CC"));
@@ -288,12 +300,12 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		return new CallCenterConsolePage(driver);
 	}
-
+	
 	public RegisterToGetVaccinatedPage openRegisterToGetVaccinatedPage() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url_citizenportal"));
 		return new RegisterToGetVaccinatedPage(driver);
 	}
-
+	
 	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
 		driver.navigate().to(uniqueLink);
 		return new BookAnAppointmentPage(driver);

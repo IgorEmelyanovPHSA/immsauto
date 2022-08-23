@@ -1145,9 +1145,11 @@ public class InClinicExperiencePage extends BasePage {
 		appointment_status_confirm.isDisplayed();
 	}
 	
-	public void ValidateStatusisInAftercare() throws InterruptedException {
+	public String ValidateStatusisInAftercare() throws InterruptedException {
 		waitForElementToBeLocated(driver, status_after_care1, 10);
 		status_after_care.isDisplayed();
+		status_after_care.getText();
+		return status_after_care.getText();
 	}
 	
 	public String ValidateclinicNameAfterRebook() throws InterruptedException {
@@ -1698,7 +1700,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void NavigateToAppointmentsSection() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,950)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, appointmentSection, 10);
 		Thread.sleep(2000);

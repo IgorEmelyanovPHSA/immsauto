@@ -171,6 +171,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 46---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		Thread.sleep(3000);
+		inClinicExperiencePage.refreshBrowser();
+		Thread.sleep(5000);
 		inClinicExperiencePage.clickRegisterTab();
 		Thread.sleep(5000);
 		/*----Search for Participant account ---*/
