@@ -89,7 +89,7 @@ public class BookingDose1 extends BaseTest {
 	
 	@Test(priority = 1)
 	public void Can_Book_Dose1_Appointment_as_Call_Center_Agent_BCVAXDEVIT() throws Exception {
-		TestcaseID = "153418"; //C153418
+		TestcaseID = "222524"; //C222524
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
