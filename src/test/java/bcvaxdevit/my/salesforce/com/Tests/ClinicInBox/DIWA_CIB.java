@@ -8,12 +8,12 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class DIWA extends BaseTest {
+public class DIWA_CIB extends BaseTest {
 	
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws Exception {
-		TestcaseID = "226268"; //C226268
+		TestcaseID = "222289"; //C222289
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWAWithParameters();
