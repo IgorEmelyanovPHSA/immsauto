@@ -21,7 +21,7 @@ public class Wastage extends BaseTest {
 	@Story("C222357: Inventory Management - Wastage(Java)")
 	@Test(groups = {"Smoke"})
 	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "222357"; //222357
+		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;

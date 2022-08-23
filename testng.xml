@@ -5,7 +5,7 @@
         <classes>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose1"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose2"/>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.DIWA"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.DIWA_CIB"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose1_VaccineAdministration"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose2_VaccineAdministration"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.CallCenter.BookingDose1"/>

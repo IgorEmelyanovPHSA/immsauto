@@ -21,7 +21,7 @@ public class BulkWastages extends BaseTest {
 	@Story("C222356: Inventory Management - Wastage Bulk (Java)")
 	@Test(groups = {"Smoke"})
 	public void Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "222356"; //C222356
+		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int amountOfDosesToWaste = 1;
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
