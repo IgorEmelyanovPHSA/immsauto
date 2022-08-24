@@ -91,6 +91,10 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement next_button;
 	private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
 	
+	@FindBy(xpath = "//span[text() = 'Remediation Needed']")
+	private WebElement remediaation_needed;
+	private By remediaation_needed1 = By.xpath("//span[text() = 'Remediation Needed']");
+	
 	@FindBy(xpath = ".//a[@title='Maegan Tanya bcvaxvillage']")
 	private WebElement user_found;
 	private By user_found1 = By.xpath(".//a[@title='Maegan Tanya bcvaxvillage']");
@@ -219,6 +223,13 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement save_button_historical_dose;
 	private By save_button_historical_dose1 = By.xpath("//button[contains(text(),'Save')]");
 	
+	@FindBy(xpath = "//A[text()='06957433']/self::A")
+	private WebElement click_historical_immunization_record;
+	private By click_historical_immunization_record1 = By.xpath("//A[text()='06957433']/self::A");
+	
+	private By navigate_to_historical_immunization_records1 = By.xpath("//span[contains(text(),'Historical Immunization Records ')]");
+	
+	
 	@FindBy(xpath = "(//button[contains(text(),'Save')])[2]")
 	private WebElement save_button_historical_dose_vaccineAdmin;
 	private By save_button_historical_dose_vaccineAdmin1 = By.xpath("(//button[contains(text(),'Save')])[2]");
@@ -230,6 +241,18 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
 	private WebElement lastConfirmAndSave;
 	private By lastConfirmAndSave1 = By.xpath( "//button[contains(text(),'Confirm and Save')]");
+	
+	private By pir_submission_status_field = By.xpath("//span[@title='PIR Submission Status']");
+	
+	private By pir_immunization_id_field = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='PIR Immunization ID']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']");
+	
+	private By pir_submission_field_status = By.xpath("(//SPAN[@class='slds-truncate'][text()='PIR Submission Status']/../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[1]");
+	
+	private By pir_submission_status_field_value = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='PIR Submission Status']/../..//LIGHTNING-FORMATTED-TEXT");
+	
+	private By pir_submission_status_field_displayed = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='PIR Submission Status']");
+	
+	private By pathway_status_field_displayed = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Pathway Status']");
 	
 	@FindBy(xpath = "(.//a[text() = 'Related'])")
 	private WebElement person_account_Related_tab;
@@ -774,6 +797,16 @@ public class ClinicInBoxPage extends BasePage {
 		next_button.click();
 	}
 	
+	public boolean remidiationNeededCheckBox() throws InterruptedException {
+		if (!remediaation_needed.isSelected())
+			return true;
+		else
+		return false;
+	}
+	
+	//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='PIR Immunization ID']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']
+	
+	
 	public void enterEmail(String enteremail) throws InterruptedException {
 		waitForElementToBeLocated(driver, email1, 10);
 		email.sendKeys(enteremail);
@@ -989,6 +1022,17 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
+	public void ClickHistoricalImmunizationRecord() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-200)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_historical_immunization_record, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(click_historical_immunization_record1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+	}
+	
 	public void ClickSaveButtonOnVaccineAdministrationPage() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
 		Thread.sleep(2000);
@@ -1005,6 +1049,60 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		element.getText().replaceAll("[^0-9]", "");
 		return (element.getText()).replaceAll("[^0-9]", "");
+	}
+	
+	public void navigateToHistoricalImmunizationRecords() throws InterruptedException {
+		WebElement element = driver.findElement(navigate_to_historical_immunization_records1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+	}
+	
+	public String pirSubmissionStatusFieldIsDisplayed() throws InterruptedException {
+		WebElement element = driver.findElement(pir_submission_status_field);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String pirImmunizationId() throws InterruptedException {
+		WebElement element = driver.findElement(pir_immunization_id_field);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String pirSubmissionFieldStatus() throws InterruptedException {
+		WebElement element = driver.findElement(pir_submission_field_status);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String pirSubmissionStatusFieldValue() throws InterruptedException {
+		WebElement element = driver.findElement(pir_submission_status_field_value);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String validatePirubmissionStatusFieldIsDisplayed() throws InterruptedException {
+		WebElement element = driver.findElement(pir_submission_status_field_displayed);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+	
+	public String validatePathwayStatusFieldIsDisplayed() throws InterruptedException {
+		WebElement element = driver.findElement(pathway_status_field_displayed);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
 	}
 	
 	public void selectICEFromApp() throws InterruptedException {
@@ -1064,6 +1162,18 @@ public class ClinicInBoxPage extends BasePage {
 		search_input.sendKeys(citizen);
 		search_input.sendKeys(Keys.RETURN);
 		Thread.sleep(5000);
+	}
+	
+	public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
+		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " " + legalMiddleName + " " + legalLastName + "']");
+		if (!isDisplayed(userFoundWithParameter)) {
+			return false;
+		}
+		WebElement userFoundWithParameterId = driver.findElement(userFoundWithParameter);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", userFoundWithParameterId);
+		Thread.sleep(5000);
+		return true;
 	}
 	
 	public void userAdamsFound() throws InterruptedException {
