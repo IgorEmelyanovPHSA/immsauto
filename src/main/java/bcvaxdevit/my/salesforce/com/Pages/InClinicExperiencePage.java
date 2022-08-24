@@ -1551,7 +1551,7 @@ public class InClinicExperiencePage extends BasePage {
 		//this.informedConsentProvider.click();
 		click(informedConsentProvider);
 	}
-
+	
 	public boolean selectDateOfAdministration() throws InterruptedException {
 		if (!isInputActive(inputDate)) {
 			return false;
@@ -1700,10 +1700,12 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void NavigateToAppointmentsSection() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000");
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1000)", "");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, appointmentSection, 10);
 		Thread.sleep(2000);
 	}
+	
 }
 
