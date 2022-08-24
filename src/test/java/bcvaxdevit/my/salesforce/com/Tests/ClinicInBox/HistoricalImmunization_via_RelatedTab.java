@@ -10,11 +10,11 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
-public class HistoricalImmunization extends BaseTest {
+public class HistoricalImmunization_via_RelatedTab extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_Create_Historical_Immunization_Record_via_RelatedTab_as_Clinician_BCVAXDEVIT() throws Exception {
-		TestcaseID = "225627"; //C225627
+		//TestcaseID = "??????"; //C??????
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
