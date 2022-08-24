@@ -1136,12 +1136,16 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void ValidateAppointmentCancelledIsPresent() throws InterruptedException {
-		waitForElementToBeLocated(driver, appointment_status_cance1, 10);
+		WebElement element = driver.findElement(appointment_status_cance1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
 		appointment_status_cancel.isDisplayed();
 	}
 	
 	public void ValidateAppointmentConfirmIsPresent() throws InterruptedException {
-		waitForElementToBeLocated(driver, appointment_status_confirm1, 10);
+		WebElement element = driver.findElement(appointment_status_confirm1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
 		appointment_status_confirm.isDisplayed();
 	}
 	
@@ -1701,7 +1705,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void NavigateToAppointmentsSection() throws InterruptedException {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1000)", "");
+		js.executeScript("window.scrollBy(0,1100)", "");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, appointmentSection, 10);
 		Thread.sleep(2000);
