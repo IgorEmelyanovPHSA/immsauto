@@ -19,8 +19,8 @@ public class BookingDose2 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 
 	@Test(priority = 1)
-	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXUAT() throws InterruptedException {
-		TestcaseID = "222289"; //C222289
+	public void Can_Book_Dose2_Appointment_as_Clinician_CIB_BCVAXUAT() throws InterruptedException {
+		TestcaseID = "225653"; //C225653
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*1.----Login as an Clinician to CIB --*/");
