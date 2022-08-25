@@ -39,8 +39,8 @@ public class Consumption extends BaseTest {
 			Thread.sleep(2000);
 		}
 		Thread.sleep(2000);
-		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 3. Close all open tabs --*/");
+		inClinicExperiencePage.closeTabsHCA();
 		if (inClinicExperiencePage.supplyLocDisplayed()) {
 			log("/*-- 4. User is already on Supply loc--*/");
 		} else {
