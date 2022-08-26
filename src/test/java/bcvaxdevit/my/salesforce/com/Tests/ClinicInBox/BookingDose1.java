@@ -19,7 +19,7 @@ public class BookingDose1 extends BaseTest {
 	private String personalHealthNumber = "9746170911";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center";
+	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
 	@Test(priority = 1)
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
