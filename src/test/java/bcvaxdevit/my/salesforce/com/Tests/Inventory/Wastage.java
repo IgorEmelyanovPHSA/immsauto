@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
+import bcvaxdevit.my.salesforce.com.Pages.CommonMethods;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
@@ -19,7 +20,7 @@ import static org.testng.Assert.assertTrue;
 public class Wastage extends BaseTest {
 	
 	@Story("C222357: Inventory Management - Wastage(Java)")
-	@Test(groups = {"Smoke"})
+	@Test()
 	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
@@ -29,16 +30,20 @@ public class Wastage extends BaseTest {
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(10000);
 		
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		
-		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
-		Thread.sleep(2000);
-		
-		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		log("/*2.----Validate if Supply Console Page displayed --*/");
+//		supplyConsolePage.verifyIsSupplyPageDisplayed();
+
+		//This Method need to be tested August 25, 2022
+		CommonMethods common = new CommonMethods(getDriver());
+		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+
+//		Thread.sleep(5000);
+//		log("/*3.----Close All previously opened Tab's --*/");
+//		supplyConsolePage.closeAutomationLocationTab();
+//		Thread.sleep(2000);
+//
+//		log("/*4.----Go to Supply Locations Tab --*/");
+//		supplyConsolePage.clickSupplyLocationsTab();
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
@@ -128,7 +133,7 @@ public class Wastage extends BaseTest {
 		supplyConsolePage.selectWastageFromDropDown();
 		
 		double actualDosesAmount = supplyConsolePage.getActualRemainingDoses();
-		log("/*----Acutla Quantity Doses " + actualDosesAmount + " --*/");
+		log("/*----Actual Quantity Doses " + actualDosesAmount + " --*/");
 		assertEquals(actualDosesAmount, remainingDosesAfterWastage);
 	}
 }

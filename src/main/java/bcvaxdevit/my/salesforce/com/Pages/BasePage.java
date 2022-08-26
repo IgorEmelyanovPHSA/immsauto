@@ -50,6 +50,14 @@ public abstract class BasePage<T> {
 		}
 	}
 
+	public Boolean isDisplayed(WebElement element) {
+		try {
+			return element.isDisplayed();
+		} catch (NoSuchElementException exc) {
+			return false;
+		}
+	}
+
 	public Boolean isClickable(WebElement element){
 		try{
 			wait.until(ExpectedConditions.elementToBeClickable(element));

@@ -26,6 +26,8 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 	private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	private String phoneNumber = "6041234568";
+	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	private String vaccineToSelect = "Covid19Vaccine";
 
 	@Test(priority = 1)
 	public void citizenPortalFlowDoseOne() throws Exception {
@@ -84,13 +86,11 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 		log("/*11.---Schedule vaccination page is displayed--*/");
 		bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
 
-		String vaccineToSelect = "Covid19Vaccine";
 		log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
 		bookAnAppointmentPage.selectOneOption(vaccineToSelect);
 
-		String clinicName = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-		log("/*13.---Go to tab search by clinic and select clinic " + clinicName + "--*/");
-		bookAnAppointmentPage.searchByClinicName(clinicName);
+		log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
+		bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
 
 		log("/*14.---Select date and time for appointment and click btn Next--*/");
 		bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
