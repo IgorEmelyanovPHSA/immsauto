@@ -19,7 +19,7 @@ public class Scheduler extends BaseTest{
     private String personalHealthNumber = "9746172456";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
-    String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+    String clinicNameToSearch = "Age 12 and Above - Chilliwack - Sardis Pharmacy";
 
     @Test(priority = 1)
     public void Can_not_book_two_people_if_only_one_slot_available_as_ADMIN_CIB_BCVAXDEVIT() throws Exception {
