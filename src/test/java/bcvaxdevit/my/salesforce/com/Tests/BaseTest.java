@@ -21,7 +21,7 @@ public class BaseTest {
 	protected String TestcaseID;
 	public WebDriver driver;
 	private ByteArrayOutputStream logOutputSteps;
-	private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
+	//private final String BCVAXDEVIT_URL = "https://bcphsa--bcvaxdevit.my.salesforce.com/";
 	protected LoginPage loginPage;
 
 	
@@ -31,7 +31,7 @@ public class BaseTest {
 		captureBothStreams();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.get(BCVAXDEVIT_URL);
+		//driver.get(BCVAXDEVIT_URL);
 		loginPage = new LoginPage(getDriver());
 	}
 	
