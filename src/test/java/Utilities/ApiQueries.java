@@ -28,13 +28,6 @@ import static bcvaxdevit.my.salesforce.com.Tests.BaseTest.log;
 
 public class ApiQueries {
 
-//    static final String USERNAME     = "auto_admin_portal@phsa.ca.bcvaxdevit";
-//    static final String PASSWORD     = "Technology1990!!!!!!";
-//    static final String LOGINURL     = "https://bcphsa--bcvaxdevit.my.salesforce.com";
-//    static final String GRANTSERVICE = "/services/oauth2/token?grant_type=password";
-//    static final String CLIENTID     = "3MVG9BM7anZT_gV7f1mkP5ctGzqO71H_vod4Ct5OFm19xb1h0.LcZTqN2X_JxKTZ1uEpGKI1GlcYAN4LsTnTz";
-//    static final String CLIENTSECRET = "67E62860A550802946981D6420A031B706BCAB170F3F7E4C863DA5FCF2A67E86";
-
     private static String USERNAME;
     private static String PASSWORD;
     private static String LOGINURL;
@@ -61,7 +54,7 @@ public class ApiQueries {
         }
     }
 
-    public static String getOauthToken() {
+    public static String getOauthToken() throws Exception {
         HttpClient httpclient = HttpClientBuilder.create().build();
 
         // Assemble the login request URL
@@ -88,9 +81,9 @@ public class ApiQueries {
         // verify response is HTTP OK
         final int statusCode = response.getStatusLine().getStatusCode();
         if (statusCode != HttpStatus.SC_OK) {
-            System.out.println("Error authenticating to Force.com: "+statusCode);
+            log("Error authenticating to Force.com: "+statusCode);
             // Error is in EntityUtils.toString(response.getEntity())
-            System.exit(1);
+            throw new Exception("API request failed");
         }
 
         String getResult = null;
@@ -121,7 +114,7 @@ public class ApiQueries {
     }
 
     // Query to get unique link using REST HttpGet
-    public static String queryToGetUniqueLink(String uniqueNumber) {
+    public static String queryToGetUniqueLink(String uniqueNumber) throws Exception {
         String BCH_Unique_Link__c_value = null;
         String oauthToken = getOauthToken();
 
@@ -150,7 +143,7 @@ public class ApiQueries {
                 String response_string = EntityUtils.toString(response.getEntity());
                 try {
                     JSONObject json = new JSONObject(response_string);
-                    System.out.println("JSON result of Query:\n" + json.toString(1));
+                    log("JSON result of Query:\n" + json.toString(1));
                     JSONArray j = json.getJSONArray("records");
                     for (int i = 0; i < j.length(); i++){
                         BCH_Unique_Link__c_value = json.getJSONArray("records").getJSONObject(i).getString("BCH_Unique_Link__c");
@@ -163,12 +156,14 @@ public class ApiQueries {
                 log("Query was unsuccessful. Status code returned is " + statusCode);
                 log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
                 log(getBody(response.getEntity().getContent()));
-                System.exit(-1);
+                throw new Exception("API request failed");
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (NullPointerException npe) {
             npe.printStackTrace();
+        } catch (Exception e) { //reference to custom throws new Exception
+            e.printStackTrace();
         }
         return BCH_Unique_Link__c_value;
     }
@@ -191,7 +186,7 @@ public class ApiQueries {
         return result;
     }
 
-    public static String queryToGetAccountId(String PersonEmail, String LastName, String FirstName) {
+    public static String queryToGetAccountId(String PersonEmail, String LastName, String FirstName) throws Exception {
         log("/*---Query to get AccountId record--*/ ");
         String AccountId = null;
         String oauthToken = getOauthToken();
@@ -221,7 +216,7 @@ public class ApiQueries {
                 String response_string = EntityUtils.toString(response.getEntity());
                 try {
                     JSONObject json = new JSONObject(response_string);
-                    System.out.println("JSON result of Query:\n" + json.toString(1));
+                    log("JSON result of Query:\n" + json.toString(1));
                     JSONArray j = json.getJSONArray("records");
                     for (int i = 0; i < j.length(); i++){
                         AccountId = json.getJSONArray("records").getJSONObject(i).getString("Id");
@@ -234,17 +229,19 @@ public class ApiQueries {
                 log("Query was unsuccessful. Status code returned is " + statusCode);
                 log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
                 log(getBody(response.getEntity().getContent()));
-                System.exit(-1);
+                throw new Exception("API request failed");
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (NullPointerException npe) {
             npe.printStackTrace();
+        } catch (Exception e) {  //reference to custom throws new Exception
+            e.printStackTrace();
         }
         return AccountId;
     }
 
-    public static ArrayList<String> queryToGetListOfImmunizationRecords(String AccountId) {
+    public static ArrayList<String> queryToGetListOfImmunizationRecords(String AccountId) throws Exception {
         log("/*---Query to get immunization record--*/ ");
         ArrayList<String> ImmunizationRecordList = new ArrayList<String>();
         String ImmunizationRecordId = null;
@@ -289,7 +286,7 @@ public class ApiQueries {
                 log("Query was unsuccessful. Status code returned is " + statusCode);
                 log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
                 log(getBody(response.getEntity().getContent()));
-                System.exit(-1);
+                throw new Exception("API request failed");
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -300,7 +297,7 @@ public class ApiQueries {
         return ImmunizationRecordList;
     }
 
-    public static void deleteImmunizationRecord(String immunizationRecordId) {
+    public static void deleteImmunizationRecord(String immunizationRecordId) throws Exception {
         log("/*---Delete immunization record " +immunizationRecordId +"--*/ ");
         String oauthToken = getOauthToken();
         oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
@@ -339,7 +336,7 @@ public class ApiQueries {
         }
     }
 
-    public static void deleteAccount(String AccountId) {
+    public static void deleteAccount(String AccountId) throws Exception {
         log("/*---Delete participant account " +AccountId +"--*/ ");
         String oauthToken = getOauthToken();
         oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
@@ -378,7 +375,7 @@ public class ApiQueries {
         }
     }
 
-    public static void apiCallToRemoveDuplicateCitizenParticipantAccount(String PersonEmail, String LastName, String FirstName){
+    public static void apiCallToRemoveDuplicateCitizenParticipantAccount(String PersonEmail, String LastName, String FirstName) throws Exception {
         String AccountId = queryToGetAccountId(PersonEmail,LastName,FirstName);
         if(AccountId==null){
             log("Duplicate account not found");
