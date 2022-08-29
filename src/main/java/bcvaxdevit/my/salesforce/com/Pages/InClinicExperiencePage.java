@@ -794,6 +794,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectHealthConnectApp() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		Thread.sleep(5000);
 		WebElement element = driver.findElement(select_app_launcher1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -828,6 +829,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
+		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
 		Thread.sleep(2000);
 		this.supplyItemsInDropdown.click();
 		Thread.sleep(2000);
@@ -835,6 +837,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectSupplyLocationName() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_desired_supply_loc, 10);
+		Thread.sleep(2000);
 		this.select_desired_supply_loc.click();
 	}
 	

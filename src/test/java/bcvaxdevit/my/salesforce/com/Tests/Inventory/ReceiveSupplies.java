@@ -14,7 +14,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*-- 1.Login as an PPHIS user to Supply Location on BCVAXDEVIT --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		if (inClinicExperiencePage.displaySupplyConsolePage()) {
 			log("/*-- 2. User already on Health Connect - Supply Console --*/");
 		} else {
