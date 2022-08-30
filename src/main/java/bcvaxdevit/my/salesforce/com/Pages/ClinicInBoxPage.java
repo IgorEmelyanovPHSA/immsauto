@@ -201,9 +201,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement immunizingAgentProvider;
 	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
 	
-	@FindBy(xpath = "//span[@title='JY Automation']")
+	@FindBy(xpath = "//span[@title='Auto Clinician DIWA_CIB']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='JY Automation']");
+	private By select_provider1 = By.xpath("//span[@title='Auto Clinician DIWA_CIB']");
 	
 	@FindBy(xpath = "//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
@@ -618,9 +618,9 @@ public class ClinicInBoxPage extends BasePage {
 	public void informedConsentProvider() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
 		waitForElementToBeVisible(driver, informedConsentProvider, 10);
+		Thread.sleep(2000);
 		this.informedConsentProvider.click();
-		
-		
+		Thread.sleep(2000);
 	}
 	
 	public void enterConsentEffectiveToDate() throws InterruptedException {
