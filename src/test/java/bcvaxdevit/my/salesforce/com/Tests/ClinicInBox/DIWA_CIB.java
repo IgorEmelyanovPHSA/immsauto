@@ -78,8 +78,8 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---18. Select Lot Number Field value set a Lot ---*/");
 		clinicInBoxPage.selectToSetLot();
 		Thread.sleep(2000);
-		log("/*---19. Select Lot -->SPIKEVAX6-5Test001 ---*/");
-		clinicInBoxPage.selectLot("SPIKEVAX6-5Test001");
+		log("/*---19. Select Lot -->SPIKEVAX6-5Test001 - Exp. 2022 December 31 ---*/");
+		clinicInBoxPage.selectLot();
 		Thread.sleep(2000);
 		log("/*---20. Select Injection Site ---*/");
 		clinicInBoxPage.selectInjectionSite();

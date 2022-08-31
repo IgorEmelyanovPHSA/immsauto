@@ -680,7 +680,7 @@ public class ClinicInBoxPage extends BasePage {
 		search_input.click();
 	}
 	
-	public void selectLot(String Lot) throws InterruptedException {
+	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		WebElement search_input = driver.findElement(select_lot1);
 		search_input.click();

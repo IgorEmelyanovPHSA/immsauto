@@ -446,9 +446,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
 	
-	@FindBy(xpath = "//span[@title='Auto Clinician DIWA_CIB']")
+	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='Auto Clinician DIWA_CIB']");
+	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
 	
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
@@ -709,12 +709,14 @@ public class InClinicExperiencePage extends BasePage {
 		
 	}
 	
-	public void userClickCitizenNew(String name) {
+	public void userClickCitizenNew(String name) throws InterruptedException {
 		WebElement fullNameWebElement = driver.findElement(By.xpath("//div[@aria-label = 'Profiles||List View']//a[contains(text(),'" + name + "')]"));
+		waitForElementToBeVisible(driver, fullNameWebElement, 10);
+		Thread.sleep(5000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", fullNameWebElement);
 	}
-	
+
 	public void deleteImmsRecord() throws InterruptedException {
 		waitForElementToBeLocated(driver, imms_drop_down1, 10);
 		WebElement element = driver.findElement(imms_drop_down1);
@@ -1636,7 +1638,7 @@ public class InClinicExperiencePage extends BasePage {
 		search_input.click();
 	}
 	
-	public void selectLot(String Lot) throws InterruptedException {
+	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		WebElement search_input = driver.findElement(select_lot1);
 		search_input.click();
