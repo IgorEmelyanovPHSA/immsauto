@@ -190,9 +190,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 
-	@FindBy(xpath = "//span[@title='0.2']")
+	@FindBy(xpath = "//span[@title='0.25']")
 	private WebElement select_dosage;
-	private By select_dosage1 = By.xpath("//span[@title='0.2']");
+	private By select_dosage1 = By.xpath("//span[@title='0.25']");
 	
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
