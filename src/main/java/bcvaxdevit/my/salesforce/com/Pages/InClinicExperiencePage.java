@@ -1508,9 +1508,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void searchClinicLocation(String clinic) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, search_clinic, 10);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		search_clinic.sendKeys(clinic);
 		Thread.sleep(4000);
 		By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");

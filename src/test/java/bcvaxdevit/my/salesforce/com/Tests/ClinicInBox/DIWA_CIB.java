@@ -32,6 +32,7 @@ public class DIWA_CIB extends BaseTest {
 		Thread.sleep(4000);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		clinicInBoxPage.clickRelatedTab();
+		Thread.sleep(2000);
 		log("/*----7. Click Create Immunization Record ---*/");
 		clinicInBoxPage.clickCreatImmunizationRecord();
 		Thread.sleep(4000);
@@ -61,7 +62,7 @@ public class DIWA_CIB extends BaseTest {
 			Thread.sleep(3000);
 		clinicInBoxPage.informedConsentProvider();
 		Thread.sleep(5000);
-		clinicInBoxPage.selectProvider("JY Automation");
+		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(5000);
 		log("/*---15. Select Informed Consent Provider ---*/");
 		clinicInBoxPage.clickSaveConsent();
@@ -69,8 +70,8 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---16. Click on the Immunization provider field ---*/");
 		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
-		log("/*---17. Select Provider-->JY Automation ---*/");
-		clinicInBoxPage.selectProvider("JY Automation");
+		log("/*---17. Select Provider-->Auto Clinician DIWA_CIB ---*/");
+		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(6000);
 		log("/*---18. Click Show all lot numbers ---*/");
 		clinicInBoxPage.clickShowAllLotNumbers();
