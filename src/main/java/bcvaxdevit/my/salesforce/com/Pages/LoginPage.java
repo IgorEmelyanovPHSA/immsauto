@@ -32,10 +32,14 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_cib_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxdevit;
-	
 	@FindBy(id = "username")
 	private WebElement Consumption_bcvaxdevit;
-	
+	@FindBy(id = "username")
+	private WebElement clinician_userDefaults;	
+
+	@FindBy(id = "password")
+	private WebElement clinician_pw_userDefaults;	
+
 	@FindBy(id = "username")
 	private WebElement diwa_bcvaxdevit;
 	
@@ -291,8 +295,8 @@ public class LoginPage extends BasePage {
 		//return clickLoginButton();
 		this.login_button.click();
 		return new CallCenterConsolePage(driver);
-	}
-	
+	}	
+
 	public CallCenterConsolePage loginAsCalCenterAgentCCWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT_CC"));

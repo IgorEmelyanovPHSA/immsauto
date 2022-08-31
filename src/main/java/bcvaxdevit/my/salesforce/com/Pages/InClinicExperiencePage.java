@@ -135,6 +135,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
+
 	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]")
 	private WebElement select_desired_supply_container;
 	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]");
@@ -159,13 +160,13 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 	
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001634']")
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']")
 	private WebElement get_supply_distribution_name;
-	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='SDST-0000001634']");
+	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']");
 	
-	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Operational Freezer']")
+	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Supply Distribution_1']")
 	private WebElement get_supply_distribution_description;
-	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Operational Freezer']");
+	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Supply Distribution_1']");
 	
 	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_remaining_Qty;
@@ -370,9 +371,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_select_search_clinic;
 	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by clinic name']");
 	
-	@FindBy(xpath = "//a[text()='Operational Freezer - SDST-0000001634']")
+	@FindBy(xpath = "//a[contains(text(),'Supply Distribution_1 - SDST-000')]")
 	private WebElement click_supply_distribution;
-	private By click_supply_distribution1 = By.xpath("//a[text()='Operational Freezer - SDST-0000001634']");
+	private By click_supply_distribution1 = By.xpath("//a[contains(text(),'Supply Distribution_1 - SDST-000')]");
 	
 	@FindBy(xpath = "//BUTTON[@class='slds-button slds-button_icon-border-filled']")
 	private WebElement select_drpdown_to_receive_supplies;
@@ -445,9 +446,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
 	
-	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
+	@FindBy(xpath = "//span[@title='Auto Clinician DIWA_CIB']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
+	private By select_provider1 = By.xpath("//span[@title='Auto Clinician DIWA_CIB']");
 	
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
@@ -523,9 +524,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement supply_distribution_to;
 	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
 	
-	@FindBy(xpath = "(//span[text()='Operational Freezer - SDST-0000001634'])[1]")
+	@FindBy(xpath = "(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]")
 	private WebElement select_supply_distributor;
-	private By select_supply_distributor1 = By.xpath("(//span[text()='Operational Freezer - SDST-0000001634'])[1]");
+	private By select_supply_distributor1 = By.xpath("(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]");
 	
 	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
 	private WebElement click_reason;
@@ -1443,9 +1444,13 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectSupplyItem(String supplyItem) throws InterruptedException {
 		WebElement element = driver.findElement(choose_supply_item1);
+		Thread.sleep(2000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, choose_supply_item, 10);
+		Thread.sleep(2000);
 		WebElement search_input = driver.findElement(choose_supply_item1);
+		Thread.sleep(2000);
 		search_input.click();
 	}
 	

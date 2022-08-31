@@ -51,7 +51,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		inClinicExperiencePage.selectSupplyLocationName();
 		Thread.sleep(2000);
-		log("/*-- 12. Click on Supply Distribution with - Operational Freezer - SDST-0000001634--*/");
+		log("/*-- 12. Click on Supply Distribution with - Supply Distribution_1 --*/");
 		inClinicExperiencePage.clickSupplyDistribution();
 		Thread.sleep(2000);
 		String supplyName = inClinicExperiencePage.getSupplyDistributionName();
