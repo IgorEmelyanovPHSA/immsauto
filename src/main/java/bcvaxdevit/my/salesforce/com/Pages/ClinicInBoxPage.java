@@ -189,10 +189,10 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//button[@name='dosePicklist']")
 	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
-	
-	@FindBy(xpath = "//span[@title='0.5']")
+
+	@FindBy(xpath = "//span[@title='0.2']")
 	private WebElement select_dosage;
-	private By select_dosage1 = By.xpath("//span[@title='0.5']");
+	private By select_dosage1 = By.xpath("//span[@title='0.2']");
 	
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
@@ -433,15 +433,12 @@ public class ClinicInBoxPage extends BasePage {
 	public void SearchDIWACitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
 		Thread.sleep(2000);
-		//WebElement search_navigator = driver.findElement(search_assistant1);
 		search_assistant.click();
-		//search_navigator.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, search_input, 10);
 		Thread.sleep(2000);
 		search_input.click();
 		Thread.sleep(2000);
-		//WebElement search_input = driver.findElement(search_input1);
 		search_input.sendKeys(citizen);
 		Thread.sleep(2000);
 		search_input.sendKeys(Keys.RETURN);
@@ -450,9 +447,9 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		WebElement element = driver.findElement(click_on_citizen1);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
