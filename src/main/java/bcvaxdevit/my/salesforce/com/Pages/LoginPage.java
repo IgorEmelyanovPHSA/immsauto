@@ -32,10 +32,13 @@ public class LoginPage extends BasePage {
 	private WebElement clinician_cib_bcvaxdevit;
 	@FindBy(id = "username")
 	private WebElement Precondition_bcvaxdevit;
-	
 	@FindBy(id = "username")
 	private WebElement Consumption_bcvaxdevit;
+	@FindBy(id = "username")
+	private WebElement clinician_userDefaults;
 	
+	@FindBy(id = "password")
+	private WebElement clinician_pw_userDefaults;
 	
 	@FindBy(id = "username")
 	private WebElement diwa_bcvaxdevit;
@@ -226,5 +229,12 @@ public class LoginPage extends BasePage {
 		return new CallCenterConsolePage(driver);
 	}
 	
+	public InClinicExperiencePage loginWithClinicianWrongClinicWithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_userDefaults.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_UserDefaults"));
+		clinician_pw_userDefaults.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_UserDefaults"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 }
