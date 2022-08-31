@@ -189,10 +189,10 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//button[@name='dosePicklist']")
 	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
-	
-	@FindBy(xpath = "//span[@title='0.5']")
+
+	@FindBy(xpath = "//span[@title='0.25']")
 	private WebElement select_dosage;
-	private By select_dosage1 = By.xpath("//span[@title='0.5']");
+	private By select_dosage1 = By.xpath("//span[@title='0.25']");
 	
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
@@ -201,9 +201,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement immunizingAgentProvider;
 	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
 	
-	@FindBy(xpath = "//span[@title='JY Automation']")
+	@FindBy(xpath = "//span[@title='Auto Clinician DIWA_CIB']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='JY Automation']");
+	private By select_provider1 = By.xpath("//span[@title='Auto Clinician DIWA_CIB']");
 	
 	@FindBy(xpath = "//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
@@ -433,15 +433,12 @@ public class ClinicInBoxPage extends BasePage {
 	public void SearchDIWACitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
 		Thread.sleep(2000);
-		//WebElement search_navigator = driver.findElement(search_assistant1);
 		search_assistant.click();
-		//search_navigator.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, search_input, 10);
 		Thread.sleep(2000);
 		search_input.click();
 		Thread.sleep(2000);
-		//WebElement search_input = driver.findElement(search_input1);
 		search_input.sendKeys(citizen);
 		Thread.sleep(2000);
 		search_input.sendKeys(Keys.RETURN);
@@ -450,9 +447,9 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		WebElement element = driver.findElement(click_on_citizen1);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
@@ -618,9 +615,9 @@ public class ClinicInBoxPage extends BasePage {
 	public void informedConsentProvider() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
 		waitForElementToBeVisible(driver, informedConsentProvider, 10);
+		Thread.sleep(2000);
 		this.informedConsentProvider.click();
-		
-		
+		Thread.sleep(2000);
 	}
 	
 	public void enterConsentEffectiveToDate() throws InterruptedException {
@@ -683,7 +680,7 @@ public class ClinicInBoxPage extends BasePage {
 		search_input.click();
 	}
 	
-	public void selectLot(String Lot) throws InterruptedException {
+	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		WebElement search_input = driver.findElement(select_lot1);
 		search_input.click();
@@ -876,7 +873,8 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,80)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
 		click_early_booking_reason.click();

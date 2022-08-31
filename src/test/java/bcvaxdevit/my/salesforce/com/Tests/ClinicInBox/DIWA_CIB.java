@@ -61,7 +61,7 @@ public class DIWA_CIB extends BaseTest {
 			Thread.sleep(3000);
 		clinicInBoxPage.informedConsentProvider();
 		Thread.sleep(5000);
-		clinicInBoxPage.selectProvider("JY Automation");
+		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(5000);
 		log("/*---15. Select Informed Consent Provider ---*/");
 		clinicInBoxPage.clickSaveConsent();
@@ -69,8 +69,8 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---16. Click on the Immunization provider field ---*/");
 		clinicInBoxPage.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
-		log("/*---17. Select Provider-->JY Automation ---*/");
-		clinicInBoxPage.selectProvider("JY Automation");
+		log("/*---17. Select Provider-->Auto Clinician DIWA_CIB ---*/");
+		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(6000);
 		log("/*---18. Click Show all lot numbers ---*/");
 		clinicInBoxPage.clickShowAllLotNumbers();
@@ -78,8 +78,8 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---18. Select Lot Number Field value set a Lot ---*/");
 		clinicInBoxPage.selectToSetLot();
 		Thread.sleep(2000);
-		log("/*---19. Select Lot -->SPIKEVAX6-5Test001 ---*/");
-		clinicInBoxPage.selectLot("SPIKEVAX6-5Test001");
+		log("/*---19. Select Lot -->SPIKEVAX6-5Test001 - Exp. 2022 December 31 ---*/");
+		clinicInBoxPage.selectLot();
 		Thread.sleep(2000);
 		log("/*---20. Select Injection Site ---*/");
 		clinicInBoxPage.selectInjectionSite();
