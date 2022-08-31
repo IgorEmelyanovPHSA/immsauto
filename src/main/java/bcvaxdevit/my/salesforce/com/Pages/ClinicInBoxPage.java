@@ -193,7 +193,7 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//span[@title='0.25']")
 	private WebElement select_dosage;
 	private By select_dosage1 = By.xpath("//span[@title='0.25']");
-
+	
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
 	
@@ -680,7 +680,7 @@ public class ClinicInBoxPage extends BasePage {
 		search_input.click();
 	}
 	
-	public void selectLot(String Lot) throws InterruptedException {
+	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		WebElement search_input = driver.findElement(select_lot1);
 		search_input.click();

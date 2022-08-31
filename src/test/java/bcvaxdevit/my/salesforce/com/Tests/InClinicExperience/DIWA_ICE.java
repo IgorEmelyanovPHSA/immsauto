@@ -18,7 +18,7 @@ public class DIWA_ICE extends BaseTest {
 		TestcaseID = "223187"; //C223187
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		String citizenName = "Benoite BCVaxD'Hooge";
-		String nameToSearch = "Benoite BCVaxD";
+		String nameToSearch = "Benoite Denna BCVaxD";
 		String clinicLocation = "All Ages - Atlin Health Centre";
 
 		log("/*1.----Login as an Clinician to ICE --*/");
@@ -89,7 +89,7 @@ public class DIWA_ICE extends BaseTest {
 		Thread.sleep(2000);
 		log("/*---21. click Save Consent ---*/");
 		inClinicExperience.clickSaveConsent();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*---22. Click on the Immunization provider field ---*/");
 		inClinicExperience.selectImmunizingAgentProvider();
 		Thread.sleep(2000);
@@ -102,8 +102,8 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---25. Select Lot Number Field value set a Lot ---*/");
 		inClinicExperience.selectToSetLot();
 		Thread.sleep(2000);
-		log("/*---26. Select Lot -->045D21A ---*/");
-		inClinicExperience.selectLot("045D21A");
+		log("/*---26. Select Lot -->300042698 - Exp. 2021 June 18 ---*/");
+		inClinicExperience.selectLot();
 		Thread.sleep(2000);
 		log("/*---27. Select Injection Site ---*/");
 		inClinicExperience.selectInjectionSite();
