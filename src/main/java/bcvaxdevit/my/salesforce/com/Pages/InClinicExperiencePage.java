@@ -446,9 +446,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
 	
-	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
+	@FindBy(xpath = "//span[@title='Auto Clinician DIWA_CIB']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
+	private By select_provider1 = By.xpath("//span[@title='Auto Clinician DIWA_CIB']");
 	
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
