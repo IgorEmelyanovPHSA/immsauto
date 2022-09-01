@@ -223,10 +223,12 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement save_button_historical_dose;
 	private By save_button_historical_dose1 = By.xpath("//button[contains(text(),'Save')]");
 	
-	@FindBy(xpath = "//A[text()='06957433']/self::A")
+	//@FindBy(xpath = "//A[text()='06957433']/self::A")
+	@FindBy(xpath = "(//flexipage-component2[@data-component-id='bcHcHistoricalDosesCIB']//lightning-primitive-cell-factory[@data-label='Immunization Record']//a[@target='_self'])[1]")
 	private WebElement click_historical_immunization_record;
-	private By click_historical_immunization_record1 = By.xpath("//A[text()='06957433']/self::A");
-	
+	//private By click_historical_immunization_record1 = By.xpath("//A[text()='06957433']/self::A");
+	private By click_historical_immunization_record1 = By.xpath("(//flexipage-component2[@data-component-id='bcHcHistoricalDosesCIB']//lightning-primitive-cell-factory[@data-label='Immunization Record']//a[@target='_self'])[1]");
+
 	private By navigate_to_historical_immunization_records1 = By.xpath("//span[contains(text(),'Historical Immunization Records ')]");
 	
 	
@@ -873,7 +875,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
