@@ -56,8 +56,8 @@ public class Historical_Immunization extends BaseTest {
 		log("/*10---- Pir Submission Field status is: " + status + " --*/");
 		assertEquals(pirSubmissionField, status);
 		Thread.sleep(2000);
-		clinicInBox.ClickHistoricalImmunizationRecord();
 		log("/*11---- Click Historical Immunization record --*/");
+		clinicInBox.ClickHistoricalImmunizationRecord();
 		Thread.sleep(5000);
 		String pirSubmissionStatus = clinicInBox.validatePirubmissionStatusFieldIsDisplayed();
 		log("/*12---- Field " + pirSubmissionStatus + "is displayed --*/");
@@ -67,8 +67,8 @@ public class Historical_Immunization extends BaseTest {
 		log("/*13---- Field " + pathwayStatus + "is displayed --*/");
 		assertEquals(patwayStatusFieldValidation, pathwayStatus);
 		Thread.sleep(2000);
-		clinicInBox.remidiationNeededCheckBox();
 		log("/*14---- remediation needed checkbox is not checked --*/");
+		clinicInBox.remidiationNeededCheckBox();
 		Thread.sleep(2000);
 		String pirId = clinicInBox.pirImmunizationId();
 		log("/*15---- Pir ID is: " + pirId + "--*/");
