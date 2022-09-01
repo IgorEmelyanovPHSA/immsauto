@@ -21,8 +21,6 @@ public abstract class BasePage<T> {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		//wait = new WebDriverWait(driver, TIMEOUT, POLLING);
-		//PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
 	}
 	
 	protected void waitForElementToAppear(By locator) {
@@ -69,7 +67,7 @@ public abstract class BasePage<T> {
 	}
 
 	public Boolean isInputActive(WebElement element){
-		//This method to be used ONLY when isClikable method is not successful
+		//This method to be used ONLY when isClickable method is not successful
 		try{
 			scrollTop(element);
 			click(element);
