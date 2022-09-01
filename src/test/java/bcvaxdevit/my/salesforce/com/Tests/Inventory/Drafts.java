@@ -1,5 +1,6 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 import Utilities.TestListener;
+import bcvaxdevit.my.salesforce.com.Pages.CommonMethods;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
@@ -16,7 +17,9 @@ public class Drafts extends BaseTest {
         TestcaseID = "223358"; //C223358
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
+        CommonMethods com = new CommonMethods(getDriver());
         double amountOfDosesToAdjust = 10;
+        int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
@@ -38,23 +41,30 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnSupplyLocation_1();
         Thread.sleep(5000);
 
+        log("/*5.1.----Get a matching row for first row Lot number --*/");
+        int matchedRow = com.getMatchedRowToLotInRow1();
+
         log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses();
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = com.getValueOfRemainingDoses(firstRow);
+
+        double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty();
+        double remainingQty_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[1];
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*7.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDosesDistribution_1_2();
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = com.getValueOfRemainingDoses(matchedRow);
+
+        double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQtyDistribution_1_2();
+        double remainingQty_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[1];
         log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*8.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu();
+        supplyConsolePage.clickOnFirstContainerDropDownMenu();
         Thread.sleep(2000);
 
         log("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
@@ -62,8 +72,7 @@ public class Drafts extends BaseTest {
         Thread.sleep(2000);
 
         log("/*11.----Picked up the Dose Conversation Factor --*/");
-        //Double dose_conversation_factor = 5.0;
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = remDosesQtyConversionFactorBefore_Distribution_1_2[2];
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*12.----Entering Doses in the Container-Transfer Form --*/");
@@ -102,14 +111,19 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*21----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses();
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = com.getValueOfRemainingDoses(firstRow);
+
+        double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
-        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty();
-        log("/*-- . remaining Quantity  Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
+        double remainingQty_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[1];
+        log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
+
         log("/*22----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDosesDistribution_1_2();
+       double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = com.getValueOfRemainingDoses(matchedRow);
+
+        double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
-        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQtyDistribution_1_2();
+        double remainingQty_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[1];
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*23.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
