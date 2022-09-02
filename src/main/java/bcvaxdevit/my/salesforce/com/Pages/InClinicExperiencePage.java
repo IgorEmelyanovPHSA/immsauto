@@ -569,8 +569,9 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, search_assistant, 10);
 		Thread.sleep(2000);
 		WebElement search_navigator = driver.findElement(search_assistant1);
+		Thread.sleep(3000);
 		search_navigator.click();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, search_input, 10);
 		Thread.sleep(2000);
 		WebElement search_input = driver.findElement(search_input1);
