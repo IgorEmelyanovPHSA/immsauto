@@ -399,6 +399,42 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement choose_supply_item;
 	private By choose_supply_item1 = By.xpath("//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]");
 
+	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']")
+	private WebElement validate_qty_field;
+	private By validate_qty_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']");
+
+	@FindBy(xpath = "(//input[@class='slds-input'])[2]")
+	private WebElement click_to_select_quantity;
+	private By click_to_select_quantity1 = By.xpath("(//input[@class='slds-input'])[2]");
+
+	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Dose Conversion Factor']")
+	private WebElement validate_dcf_field;
+	private By validate_dcf_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Dose Conversion Factor']");
+
+	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Doses']")
+	private WebElement validate_doses_field;
+	private By validate_doses_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Doses']");
+
+	@FindBy(xpath = "//label[@class='slds-form-element__label'][text()='Supply Distribution To']")
+	private WebElement supply_distribution_to_field;
+	private By supply_distribution_to_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Distribution To']");
+
+	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
+	private WebElement click_reason;
+	private By click_reason1 = By.xpath("//button[@aria-label='Reason for Reception, --None--']");
+
+	@FindBy(xpath = "//span[@title='Other']")
+	private WebElement select_reason;
+	private By select_reason1 = By.xpath("//span[@title='Other']");
+
+	@FindBy(xpath = "//button[contains(text(),'Save')]")
+	private WebElement save_button_receive_supplies;
+	private By save_button_receive_supplies1 = By.xpath("//button[contains(text(),'Save')]");
+
+	@FindBy(xpath = "(//span[contains(text(),'Cancel')])[2]")
+	private WebElement cancel_button_receive_supplies;
+	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
+
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -1595,6 +1631,73 @@ public class SupplyConsolePage extends BasePage {
 		WebElement search_input = driver.findElement(choose_supply_item1);
 		Thread.sleep(2000);
 		search_input.click();
+	}
+
+	public String validateQTYField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_qty_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public void enterQuantity() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_quantity1, 10);
+		WebElement element = driver.findElement(click_to_select_quantity1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		click(click_to_select_quantity1);
+		element.sendKeys("1");
+	}
+
+	public String validateDCFField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_dcf_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public String validateDosesField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_doses_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public String validateSupplyDistributionToField() throws InterruptedException {
+		WebElement element = driver.findElement(supply_distribution_to_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public void selectReasonForReception() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_reason1, 10);
+		WebElement element = driver.findElement(click_reason1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_reason1, 10);
+		WebElement element1 = driver.findElement(select_reason1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+
+	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
+		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
+		save_button_receive_supplies.isDisplayed();
+	}
+
+	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
+		waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
+		cancel_button_receive_supplies.isDisplayed();
+	}
+
+	public void ClickSaveButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
+		save_button_receive_supplies.click();
 	}
 
 }
