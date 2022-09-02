@@ -889,7 +889,7 @@ public class InClinicExperiencePage extends BasePage {
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-	
+
 	public String getDoseConversionFactor() throws InterruptedException {
 		WebElement element = driver.findElement(get_dose_conversion_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -1068,7 +1068,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
 		click_early_booking_reason.click();
@@ -1078,7 +1079,7 @@ public class InClinicExperiencePage extends BasePage {
 			Thread.sleep(2000);
 			select_early_booking_reason.click();
 		}
-		else {
+		else {//it's never go here - it's the same xpath for devit and prodsuppqa
 			waitForElementToBeVisible(driver, select_early_booking_reason_for_prodsup, 10);
 			Thread.sleep(2000);
 			select_early_booking_reason_for_prodsup.click();

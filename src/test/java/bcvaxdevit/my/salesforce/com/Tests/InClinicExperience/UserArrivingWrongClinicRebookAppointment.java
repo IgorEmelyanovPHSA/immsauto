@@ -28,7 +28,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinicWithParameters();
 		Thread.sleep(5000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
@@ -183,20 +183,20 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);
 		log("/* 49.----User found and Navigated to record page ---*/");
 		Thread.sleep(2000);
-		inClinicExperiencePage.clickRelatedTab();
 		log("/*50.---- Navigated to Person Account related tab ---*/");
+		inClinicExperiencePage.clickRelatedTab();
 		Thread.sleep(5000);
-		inClinicExperiencePage.ValidateStatusisInAftercare();
 		log("/*51.---- Immunization status is in After Care ---*/");
+		inClinicExperiencePage.ValidateStatusisInAftercare();
 		Thread.sleep(2000);
-		inClinicExperiencePage.NavigateToAppointmentsSection();
 		log("/*52.---- User Navigated to Appointment Section  ---*/");
+		inClinicExperiencePage.NavigateToAppointmentsSection();
 		Thread.sleep(2000);
-		inClinicExperiencePage.ValidateAppointmentCancelledIsPresent();
 		log("/*53.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
+		inClinicExperiencePage.ValidateAppointmentCancelledIsPresent();
 		Thread.sleep(2000);
-		inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
 		log("/*54.---- An confirmed appointmrnt is found for the user  ---*/");
+		inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
 		Thread.sleep(2000);
 	}
 	
