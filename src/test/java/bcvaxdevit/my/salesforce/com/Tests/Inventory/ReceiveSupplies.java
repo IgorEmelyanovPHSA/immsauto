@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.Assert;
@@ -14,85 +15,86 @@ public class ReceiveSupplies extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*-- 1.Login as an PPHIS user to Supply Location on BCVAXDEVIT --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(10000);
-		if (inClinicExperiencePage.displaySupplyConsolePage()) {
+		if (supplyConsolePage.displaySupplyConsolePage()) {
 			log("/*-- 2. User already on Health Connect - Supply Console --*/");
 		} else {
 			log("/*-- 2.1. Navigate to Health Connect - Supply Console --*/");
-			inClinicExperiencePage.selectHealthConnectApp();
+			supplyConsolePage.selectHealthConnectApp();
 			Thread.sleep(2000);
 		}
 		log("/*-- 3. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*-- 4. Click Dropdown Menu --*/");
-		inClinicExperiencePage.clickDropdownMenu();
+		supplyConsolePage.clickDropdownMenu();
 		Thread.sleep(5000);
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
-		inClinicExperiencePage.selectSupplyItemsFromDropdown();
+		supplyConsolePage.selectSupplyItemsFromDropdown();
 		Thread.sleep(2000);
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-		inClinicExperiencePage.selectSupplyItemName();
+		supplyConsolePage.selectSupplyItemName();
 		Thread.sleep(2000);
 		///Validation for Doses/Qty Before Receiving needs to be add.
-		log("/*-- . We need to see Dosegae and Qty Before Receiving here to Validate at the end---*/");
-		String doseConversionFactor = inClinicExperiencePage.getDoseConversionFactor();
+		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
+		double doseConversionFactor = supplyConsolePage.getDoseConversionFactor();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);
 		log("/*-- 8. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*-- 9. Click Dropdown Menu --*/");
-		inClinicExperiencePage.clickDropdownMenu();
+		supplyConsolePage.clickDropdownMenu();
 		Thread.sleep(5000);
 		log("/*-- 10. Navigate and Select Supply Locations --*/");
 		inClinicExperiencePage.selectSupplyLocationFromDropdown();
 		Thread.sleep(2000);
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		inClinicExperiencePage.selectSupplyLocationName();
+		supplyConsolePage.selectSupplyLocationName();
 		Thread.sleep(2000);
 		log("/*-- 12. Click on Supply Distribution with - Supply Distribution_1 --*/");
-		inClinicExperiencePage.clickSupplyDistribution();
+		supplyConsolePage.clickSupplyDistribution();
 		Thread.sleep(2000);
-		String supplyName = inClinicExperiencePage.getSupplyDistributionName();
-		log("/*-- 13. Supply Destribution Name is: -->" + supplyName);
+		String supplyName = supplyConsolePage.getSupplyDistributionName();
+		log("/*-- 13. Supply Distribution Name is: -->" + supplyName);
 		Thread.sleep(2000);
-		String supplyDesc = inClinicExperiencePage.getSupplyDistributionDescription();
-		log("/*-- 14. Supply Destribution Description is: -->" + supplyDesc);
+		String supplyDesc = supplyConsolePage.getSupplyDistributionDescription();
+		log("/*-- 14. Supply Distribution Description is: -->" + supplyDesc);
 		Thread.sleep(2000);
 		log("/*-- 15. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
-		if (inClinicExperiencePage.supplyLocDisplayed()) {
+		if (supplyConsolePage.displaySupplyConsolePage()) {
 			log("/*-- 16. User is already on Supply loc--*/");
 		} else {
 			log("/*-- 16.1. Click Dropdown Menu --*/");
-			inClinicExperiencePage.clickDropdownMenu();
+			supplyConsolePage.clickDropdownMenu();
 			Thread.sleep(5000);
 			log("/*-- 16.2. Navigate and Select Supply Locations --*/");
-			inClinicExperiencePage.selectSupplyLocationFromDropdown();
+			supplyConsolePage.selectSupplyLocationFromDropdown();
 			Thread.sleep(2000);
 		}
 		log("/*-- 17. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		inClinicExperiencePage.selectSupplyLocationName();
+		supplyConsolePage.selectSupplyLocationName();
 		Thread.sleep(2000);
 		log("/*-- 18. Navigate and Select Dropdown to Receive Supplies Button --*/");
-		inClinicExperiencePage.SelectDropDownToClickReceiveSuppliesButton();
+		supplyConsolePage.SelectDropDownToClickReceiveSuppliesButton();
 		Thread.sleep(2000);
 		log("/*-- 19. Click to Receive Supplies Button --*/");
-		inClinicExperiencePage.ClickDropDownToClickReceiveSuppliesButton();
+		supplyConsolePage.ClickDropDownToClickReceiveSuppliesButton();
 		Thread.sleep(2000);
 		log("/*-- 20. Validate Supply Item Filed Present on Layout --*/");
-		String supplyItem = inClinicExperiencePage.validateSupplyItemField();
+		String supplyItem = supplyConsolePage.validateSupplyItemField();
 		String expectedSupplyItemLabel = "*Supply Item";
 		log("/*-- 20.1.: -->" + supplyItem + "Field is Present on Layout and is Mandatory");
 		Assert.assertEquals((supplyItem), (expectedSupplyItemLabel));
 		Thread.sleep(2000);
 		log("/*-- 21. click to select the Supply Item --*/");
-		inClinicExperiencePage.clickSupplyItemTextBox();
+		supplyConsolePage.clickSupplyItemTextBox();
 		Thread.sleep(2000);
 		log("/*-- 22. Select Supply Item COMIRNATY (Pfizer) - 35035BD-CC01  --*/");
-		inClinicExperiencePage.selectSupplyItem("COMIRNATY (Pfizer) - 35035BD-CC01");
+		supplyConsolePage.selectSupplyItem("COMIRNATY (Pfizer) - 35035BD-CC01");
 		Thread.sleep(2000);
 		log("/*-- 23. Validate Quantity Filed Present on Layout --*/");
 		String qty = inClinicExperiencePage.validateQTYField();

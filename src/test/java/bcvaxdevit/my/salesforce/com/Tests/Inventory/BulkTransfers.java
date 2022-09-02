@@ -25,7 +25,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -137,7 +137,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.clickOnOutgoingTransactions(kk);
 		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		log("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -237,7 +237,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + 1);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, ((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + 1) / 10));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(5000);
 	}
 
@@ -253,7 +253,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -365,7 +365,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.clickOnOutgoingTransactions(kk);
 		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		log("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -465,7 +465,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + 10);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, ((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + 10) / 10));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(5000);
 	}
 
@@ -480,7 +480,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		System.out.println("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -631,7 +631,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + 1);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, ((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + 1) / 10));
 		log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(5000);
 	}
 	

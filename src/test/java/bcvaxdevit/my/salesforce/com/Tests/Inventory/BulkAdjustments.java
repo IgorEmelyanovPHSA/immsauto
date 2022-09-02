@@ -51,7 +51,7 @@ public class BulkAdjustments extends BaseTest {
 		Thread.sleep(5000);
 		
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		
 		log("/*4.----Go to Supply Locations Tab --*/");

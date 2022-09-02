@@ -31,7 +31,7 @@ public class BulkDrafts extends BaseTest {
         Thread.sleep(5000);
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeAutomationLocationTab();
+        supplyConsolePage.closeTabsHCA();
         Thread.sleep(2000);
 
         log("/*4.----Go to Supply Locations Tab --*/");
@@ -116,7 +116,7 @@ public class BulkDrafts extends BaseTest {
         Thread.sleep(5000);
 
         log("/*16.----Close All Tab's --*/");
-        supplyConsolePage.closeAutomationLocationTab();
+        supplyConsolePage.closeTabsHCA();
         Thread.sleep(2000);
 
         log("/*17.----Go to Supply Locations Tab --*/");
@@ -170,7 +170,7 @@ public class BulkDrafts extends BaseTest {
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*26.----Close Automation_Supply_Location_2 Tab --*/");
-        supplyConsolePage.closeAutomationLocationTab();
+        supplyConsolePage.closeTabsHCA();
         Thread.sleep(2000);
 
         log("/*27.----Click on Automation Supply Location_1 --*/");

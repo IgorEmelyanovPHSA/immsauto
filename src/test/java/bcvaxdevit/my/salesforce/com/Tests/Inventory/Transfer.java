@@ -25,7 +25,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -96,7 +96,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.clickOnOutgoingTransactions(kk);
 		Thread.sleep(3000);
 		System.out.println("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -166,7 +166,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -237,7 +237,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.clickOnOutgoingTransactions(kk);
 		Thread.sleep(3000);
 		System.out.println("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -307,7 +307,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		System.out.println("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -401,7 +401,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeAutomationLocationTab();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		System.out.println("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();

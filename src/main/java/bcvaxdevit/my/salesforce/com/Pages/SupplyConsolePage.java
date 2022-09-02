@@ -101,7 +101,7 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_page_displayed;
-	
+
 	@FindBy(xpath = ".//input[@placeholder='Search Supply Locations...']")
 	private WebElement search_supply_location_2_To;
 	private By search_supply_location_2_To_ = By.xpath(".//input[@placeholder='Search Supply Locations...']");
@@ -126,7 +126,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement transactions_tab;
 	private By transactions_tab_1 = By.xpath("(.//a[text() = 'Transactions'])");
 	//private By transactions_tab_1 = By.xpath("(.//span[text() = 'Automation Supply Location_1'] and .//a[text() = 'Transactions'])");
-	
 	
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
 	private WebElement rows_outgoing_transactions_count_path;
@@ -344,6 +343,63 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2;
 	private By get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
+	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
+	private WebElement select_app_launcher;
+	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
+
+	@FindBy(xpath = "//p[text()='Health Connect - Supply Console']")
+	private WebElement click_healthconnect_app;
+	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
+
+	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
+	private WebElement dropdownMenu;
+
+	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
+	private WebElement supplyItemsInDropdown;
+
+	@FindBy(xpath = "//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']")
+	private WebElement select_desired_supply_item;
+	private By select_desired_supply_item1 = By.xpath("//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']");
+
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
+	private WebElement select_desired_supply_loc;
+
+	@FindBy(xpath = "//a[contains(text(),'Supply Distribution_1 - SDST-000')]")
+	private WebElement click_supply_distribution;
+	private By click_supply_distribution1 = By.xpath("//a[contains(text(),'Supply Distribution_1 - SDST-000')]");
+
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']")
+	private WebElement get_supply_distribution_name;
+	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']");
+
+	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Supply Distribution_1']")
+	private WebElement get_supply_distribution_description;
+	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Supply Distribution_1']");
+
+	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
+	private WebElement supplyLocationInDropdown;
+
+	@FindBy(xpath = "//BUTTON[@class='slds-button slds-button_icon-border-filled']")
+	private WebElement select_drpdown_to_receive_supplies;
+	private By select_drpdown_to_receive_supplies1 = By.xpath("//BUTTON[@class='slds-button slds-button_icon-border-filled']");
+
+	@FindBy(xpath = "//span[text()='Receive Supplies']")
+	private WebElement click_to_select_receive_supplies;
+	private By click_to_select_receive_supplies1 = By.xpath("//span[text()='Receive Supplies']");
+
+	@FindBy(xpath = "//label[@class='slds-form-element__label'][text()='Supply Item']")
+	private WebElement validate_supply_item_field;
+	private By validate_supply_item_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Item']");
+
+	@FindBy(xpath = "//input[@placeholder='Search Supply Items...']")
+	private WebElement click_to_select_supply_item;
+	private By click_to_select_supply_item1 = By.xpath("//input[@placeholder='Search Supply Items...']");
+
+	@FindBy(xpath = "//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]")
+	private WebElement choose_supply_item;
+	private By choose_supply_item1 = By.xpath("//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]");
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -549,6 +605,10 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, supply_page_displayed, 10);
 		this.supply_page_displayed.isDisplayed();
 	}
+
+	public boolean displaySupplyConsolePage() {
+		return isDisplayed(supply_page_displayed);
+	}
 	
 	public void enterBulkTransferByDosages(int k) throws InterruptedException {
 		//private By doses_1 = By.xpath("(.//input[@class = 'slds-input'])[2]");
@@ -679,7 +739,7 @@ public class SupplyConsolePage extends BasePage {
 		return (element.getText());
 	}
 	
-	public void closeAutomationLocationTab() throws InterruptedException {
+	public void closeTabsHCA() throws InterruptedException {
 		do {
 			try {
 				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
@@ -1423,6 +1483,118 @@ public class SupplyConsolePage extends BasePage {
 		String Quantity = element.getText();
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
+	}
+
+	public void selectHealthConnectApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		Thread.sleep(5000);
+		WebElement element = driver.findElement(select_app_launcher1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
+		WebElement element1 = driver.findElement(click_healthconnect_app1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+
+	public void clickDropdownMenu() throws InterruptedException {
+		this.dropdownMenu.click();
+		Thread.sleep(2000);
+	}
+
+	public void selectSupplyItemsFromDropdown() throws InterruptedException {
+		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
+		Thread.sleep(2000);
+		this.supplyItemsInDropdown.click();
+		Thread.sleep(2000);
+	}
+
+	public void selectSupplyItemName() throws InterruptedException {
+		waitForElementToBeVisible(driver, select_desired_supply_item, 10);
+		this.select_desired_supply_item.click();
+		waitForElementToBeLocated(driver, select_desired_supply_item1, 10);
+		WebElement element = driver.findElement(select_desired_supply_item1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void selectSupplyLocationName() throws InterruptedException {
+		waitForElementToBeVisible(driver, select_desired_supply_loc, 10);
+		Thread.sleep(2000);
+		this.select_desired_supply_loc.click();
+	}
+
+	public void clickSupplyDistribution() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_supply_distribution1, 10);
+		WebElement element = driver.findElement(click_supply_distribution1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public String getSupplyDistributionName() throws InterruptedException {
+		WebElement element = driver.findElement(get_supply_distribution_name1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public String getSupplyDistributionDescription() throws InterruptedException {
+		WebElement element = driver.findElement(get_supply_distribution_description1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public void selectSupplyLocationFromDropdown() {
+		this.supplyLocationInDropdown.click();
+	}
+
+	public void SelectDropDownToClickReceiveSuppliesButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_drpdown_to_receive_supplies1, 10);
+		WebElement element = driver.findElement(select_drpdown_to_receive_supplies1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+	}
+
+	public void ClickDropDownToClickReceiveSuppliesButton() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_receive_supplies1, 10);
+		Thread.sleep(2000);
+		WebElement element1 = driver.findElement(click_to_select_receive_supplies1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+
+	public String validateSupplyItemField() throws InterruptedException {
+		WebElement element = driver.findElement(validate_supply_item_field1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public void clickSupplyItemTextBox() throws InterruptedException {
+		waitForElementToBeLocated(driver, click_to_select_supply_item1, 10);
+		WebElement element1 = driver.findElement(click_to_select_supply_item1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+	}
+
+	public void selectSupplyItem(String supplyItem) throws InterruptedException {
+		WebElement element = driver.findElement(choose_supply_item1);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, choose_supply_item, 10);
+		Thread.sleep(2000);
+		WebElement search_input = driver.findElement(choose_supply_item1);
+		Thread.sleep(2000);
+		search_input.click();
 	}
 
 }
