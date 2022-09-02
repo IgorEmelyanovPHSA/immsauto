@@ -1388,7 +1388,9 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void ClickDropDownToClickReceiveSuppliesButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_to_select_receive_supplies1, 10);
+		Thread.sleep(2000);
 		WebElement element1 = driver.findElement(click_to_select_receive_supplies1);
+		Thread.sleep(2000);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 	}
