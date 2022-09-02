@@ -435,6 +435,18 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement cancel_button_receive_supplies;
 	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
 
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
+	private WebElement get_dose_conversion_factor;
+	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
+
+	@FindBy(xpath = "//button[@name='distributionBox']")
+	private WebElement supply_distribution_to;
+	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
+
+	@FindBy(xpath = "(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]")
+	private WebElement select_supply_distributor;
+	private By select_supply_distributor1 = By.xpath("(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]");
+
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Wastage Tab //
@@ -1698,6 +1710,27 @@ public class SupplyConsolePage extends BasePage {
 	public void ClickSaveButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
 		save_button_receive_supplies.click();
+	}
+
+	public String getDoseConversionFactorReceive() throws InterruptedException {
+		WebElement element = driver.findElement(get_dose_conversion_factor1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
+
+	public void selectIncomingSupplyDistributionReceive() throws InterruptedException {
+		waitForElementToBeVisible(driver, supply_distribution_to, 10);
+		WebElement element = driver.findElement(supply_distribution_to1);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		Thread.sleep(1000);
+		supply_distribution_to.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_supply_distributor, 10);
+		Thread.sleep(2000);
+		select_supply_distributor.click();
 	}
 
 }

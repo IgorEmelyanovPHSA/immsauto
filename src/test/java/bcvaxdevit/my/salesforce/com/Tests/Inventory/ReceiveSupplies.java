@@ -37,7 +37,7 @@ public class ReceiveSupplies extends BaseTest {
 		Thread.sleep(2000);
 		///Validation for Doses/Qty Before Receiving needs to be add.
 		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
-		double doseConversionFactor = supplyConsolePage.getDoseConversionFactor();
+		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);
 		log("/*-- 8. Close all open tabs --*/");
@@ -123,7 +123,7 @@ public class ReceiveSupplies extends BaseTest {
 		Assert.assertEquals((supplydistributionton), (expectedsupplydistributiontoLabel));
 		Thread.sleep(2000);
 		log("/*-- 28. Select a Supply Distribution --*/");
-		supplyConsolePage.selectIncomingSupplyDistribution();
+		supplyConsolePage.selectIncomingSupplyDistributionReceive();
 		Thread.sleep(2000);
 		log("/*-- 29. Select a Reason For Reception --*/");
 		supplyConsolePage.selectReasonForReception();
