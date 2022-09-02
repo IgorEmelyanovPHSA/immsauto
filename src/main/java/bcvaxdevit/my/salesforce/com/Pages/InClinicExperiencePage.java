@@ -327,9 +327,12 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_early_booking_reason;
 	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
 	
-	@FindBy(xpath = ".//span[text() = 'Travel']")
+	@FindBy(xpath = ".//span[text() = 'Travel']") //(.//span[text() = 'Travel'])[2]
 	private WebElement select_early_booking_reason;
 	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
+	
+	@FindBy(xpath = "(.//span[text() = 'Travel'])[2]")
+	private WebElement select_early_booking_reason_for_prodsup;
 	
 	@FindBy(xpath = "(.//a[text() = 'Related'])")
 	private WebElement person_account_Related_tab;
@@ -1067,9 +1070,16 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		click_early_booking_reason.click();
 		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-		Thread.sleep(2000);
-		select_early_booking_reason.click();
+		if (isDisplayed(select_early_booking_reason)) {
+			//waitForElementToBeVisible(driver, select_early_booking_reason, 10);
+			Thread.sleep(2000);
+			select_early_booking_reason.click();
+		}
+		else {
+			waitForElementToBeVisible(driver, select_early_booking_reason_for_prodsup, 10);
+			Thread.sleep(2000);
+			select_early_booking_reason_for_prodsup.click();
+		}
 	}
 	
 	public void clickOnMoreSearchTabs() throws InterruptedException {
