@@ -25,8 +25,56 @@ public class CommonMethods extends BasePage{
     @FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
     private WebElement supplyLocationInDropdown;
 
+    @FindBy(xpath = "//button[@aria-label = 'Search']")
+    private WebElement searchAssistant;
+
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement searchInput;
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
+    public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
+        By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " " + legalMiddleName + " " + legalLastName + "']");
+        if (!isDisplayed(userFoundWithParameter)) {
+            return false;
+        }
+        WebElement userFoundWithParameterId = driver.findElement(userFoundWithParameter);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", userFoundWithParameterId);
+        Thread.sleep(5000);
+        return true;
+    }
+
+    public void globalSearch(String textToSearch) throws InterruptedException {
+        waitForElementToBeVisible(driver, searchAssistant, 10);
+        click(searchAssistant);
+        waitForElementToBeVisible(driver, searchInput, 10);
+        typeIn(searchInput,textToSearch);
+        searchInput.sendKeys(Keys.RETURN);
+        Thread.sleep(5000);
+    }
+
+    public boolean isUserFoundValidation(String conformationNumberText, String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
+        boolean isUserFound = false;
+        for(int i = 1; i<=5; i++ ) {
+            if (!userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
+                log(i +"-try to find user: " + legalFirstName + " " + legalLastName + " not found, re-try!");
+                refreshBrowser();
+                Thread.sleep(5000);
+                globalSearch(conformationNumberText);
+            } else {
+                log("/*---User --> " + legalFirstName + " " + legalLastName + " present on the page--*/");
+                isUserFound = true;
+                break;
+            }
+        }
+        return isUserFound;
+    }
+
+    public void refreshBrowser() throws InterruptedException {
+        driver.navigate().refresh();
+    }
+
     public void closeAutomationLocationTab() throws InterruptedException {
         do {
             try {

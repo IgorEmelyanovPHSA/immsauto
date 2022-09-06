@@ -1,18 +1,13 @@
 package bcvaxdevit.my.salesforce.com.Tests.Portal;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.BookAnAppointmentPage;
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
-import bcvaxdevit.my.salesforce.com.Pages.RegisterToGetVaccinatedPage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
+import bcvaxdevit.my.salesforce.com.Pages.*;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
-
-import static Utilities.ApiQueries.*;
+import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
 public class Dose1_CitizenBookingAppointment extends BaseTest {
@@ -33,6 +28,7 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 	public void citizenPortalFlowDoseOne() throws Exception {
 		TestcaseID = "222521"; //C222521
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		CommonMethods com = new CommonMethods(getDriver());
 
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
@@ -57,14 +53,16 @@ public class Dose1_CitizenBookingAppointment extends BaseTest {
 		log("/*6.---Login as an Clinician to ICE--*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICEWithParameters();
 		Thread.sleep(5000);
+		inClinicExperiencePage.verifyIsICEpageDisplayed();
 
 		log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-		inClinicExperiencePage.SearchForCitizen(conformationNumberText);
+		//inClinicExperiencePage.SearchForCitizen(conformationNumberText);
+		com.globalSearch(conformationNumberText);
 
-		if (!inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
-			log("/*---User --> " + legalFirstName + " " + legalLastName + " not found!!!--*/");
-		} else {
-			log("/*---User --> " + legalFirstName + " " + legalLastName + " present on the page--*/");
+		log("/*7.1---Validation, isUserFound account validation --*/");
+		boolean isUserFound =  com.isUserFoundValidation(conformationNumberText, legalFirstName, legalMiddleName, legalLastName);
+		if (!isUserFound){
+			throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
 		}
 
 		log("/*8.---Get unique link using Sales Force query over API--*/");
