@@ -32,9 +32,9 @@ public class RequisitionSubmit extends BaseTest {
         requisitionPage.clickRequestSupplies();
         Thread.sleep(3000);
         System.out.println("/*----7. Choose Ship To Address --*/");
-        requisitionPage.inputShipAddress();
+        //requisitionPage.inputShipAddress();
         System.out.println("/*----8. Locate on Automation Supply Location_1 --*/");
-        requisitionPage.LocateAddress("Atlin Health Centre");
+        //requisitionPage.LocateAddress("Atlin Health Centre");
         System.out.println("/*----9. Choose Requested Delivery Date --*/");
         Thread.sleep(3000);
         requisitionPage.inputRequestDate();

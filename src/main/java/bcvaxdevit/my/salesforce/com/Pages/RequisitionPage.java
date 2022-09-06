@@ -35,12 +35,12 @@ public class RequisitionPage extends BasePage {
 	private WebElement request_supplies;
 	
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Locations...\"]")
-	private WebElement shipAddress;
-	private By shipAddress1 = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
+	private WebElement search_supply_location_from;
+	private By search_supply_location_from_ = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
 	
 	@FindBy(xpath = "//span[contains(text(),\"Atlin Health Centre\")]")
-	private WebElement clinicName;
-	private By clinicName2 = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
+	private WebElement select_supply_location_from;
+	private By select_supply_location_from_ = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
 	
 	@FindBy(xpath = "//input[@class=\"slds-input\"]")
 	private WebElement requestedDeliveryDate;
@@ -180,15 +180,25 @@ public class RequisitionPage extends BasePage {
 		this.request_supplies.click();
 	}
 	
-	public void inputShipAddress() {
-		this.shipAddress.click();
-	}
+	//public void inputShipAddress() {
+	//	this.shipAddress.click();
+	//}
 	
-	public void LocateAddress(String clinic) throws InterruptedException {
+	//public void LocateAddress(String clinic) throws InterruptedException {
 		//waitForElementToBeLocated(driver,clinicName,10);
-		waitForElementToBeVisible(driver, clinicName, 10);
-		WebElement search_input = driver.findElement(clinicName2);
-		search_input.click();
+	//	waitForElementToBeVisible(driver, clinicName, 10);
+		//WebElement search_input = driver.findElement(clinicName2);
+	//	search_input.click();
+	//}
+
+	public void selectShipped_From() throws InterruptedException {
+		waitForElementToBeVisible(driver, search_supply_location_from, 10);
+		search_supply_location_from.sendKeys("All Ages - Atlin Health Centre");
+		Thread.sleep(3000);
+		waitForElementToBeVisible(driver, select_supply_location_from, 10);
+		Thread.sleep(5000);
+		select_supply_location_from.click();
+		Thread.sleep(2000);
 	}
 	
 	public void clickRequestedDeliveryDate() throws InterruptedException {
@@ -205,9 +215,11 @@ public class RequisitionPage extends BasePage {
 		this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
 	}
 	
-	public void clickNextButton() {
+	public void clickNextButton() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", nextButton);
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, nextButton, 10);
+		Thread.sleep(2000);
 		this.nextButton.click();
 	}
 	

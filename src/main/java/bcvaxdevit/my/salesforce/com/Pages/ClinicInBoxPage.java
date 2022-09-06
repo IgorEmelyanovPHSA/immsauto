@@ -893,13 +893,13 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-		click(search_by_clinic_name_tab);
-//		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-//		Thread.sleep(2000);
-//		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-//		JavascriptExecutor executor = (JavascriptExecutor) driver;
-//		executor.executeScript("arguments[0].click();", element);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(search_by_clinic_name_tab1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
 	}
 	
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
