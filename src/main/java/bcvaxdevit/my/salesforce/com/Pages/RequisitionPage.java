@@ -38,9 +38,9 @@ public class RequisitionPage extends BasePage {
 	private WebElement search_supply_location_from;
 	private By search_supply_location_from_ = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
 	
-	@FindBy(xpath = "//span[contains(text(),\"Atlin Health Centre\")]")
+	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_supply_location_from;
-	private By select_supply_location_from_ = By.xpath("//span[contains(text(),\"Atlin Health Centre\")]");
+	private By select_supply_location_from_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
 	
 	@FindBy(xpath = "//input[@class=\"slds-input\"]")
 	private WebElement requestedDeliveryDate;
@@ -193,7 +193,7 @@ public class RequisitionPage extends BasePage {
 
 	public void selectShipped_From() throws InterruptedException {
 		waitForElementToBeVisible(driver, search_supply_location_from, 10);
-		search_supply_location_from.sendKeys("All Ages - Atlin Health Centre");
+		search_supply_location_from.sendKeys("Atlin Health Centre");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, select_supply_location_from, 10);
 		Thread.sleep(5000);
@@ -303,7 +303,8 @@ public class RequisitionPage extends BasePage {
 		this.saveApprovedRequisition.click();
 	}
 	
-	public void clickShipRequisition() {
+	public void clickShipRequisition() throws InterruptedException {
+		Thread.sleep(2000);
 		this.shipRequisition.click();
 	}
 	
