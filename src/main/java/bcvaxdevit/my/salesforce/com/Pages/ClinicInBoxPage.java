@@ -166,8 +166,8 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement recordImmunizationBtn;
 	
 	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
-	private WebElement informedConsentProvider;
-	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
+	private WebElement click_informed_consent_provider;
+	private By click_informed_consent_provider_ = By.xpath("//input[@placeholder = 'Search People...']");
 	
 	@FindBy(xpath = "//input[@name='effectiveToDate']")
 	private WebElement consentEffectiveToDate;
@@ -200,10 +200,6 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
 	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
-	
-	@FindBy(xpath = "//span[@title='Auto Clinician DIWA_CIB']")
-	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='Auto Clinician DIWA_CIB']");
 	
 	@FindBy(xpath = "//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
@@ -381,6 +377,16 @@ public class ClinicInBoxPage extends BasePage {
 
 	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
 	private WebElement checkBoxInfluenzaVaccine;
+
+	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
+	private WebElement search_provider_input;
+	private By search_provider_input_ = By.xpath("//input[@placeholder = 'Search People...']");
+
+	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
+	private WebElement select_provider;
+	private By select_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
+
+
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
 		super(driver);
@@ -614,11 +620,12 @@ public class ClinicInBoxPage extends BasePage {
 		return true;
 	}
 	
-	public void informedConsentProvider() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
-		waitForElementToBeVisible(driver, informedConsentProvider, 10);
+	public void clickInformedConsentProvider() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_informed_consent_provider);
 		Thread.sleep(2000);
-		this.informedConsentProvider.click();
+		waitForElementToBeVisible(driver, click_informed_consent_provider, 10);
+		Thread.sleep(2000);
+		this.click_informed_consent_provider.click();
 		Thread.sleep(2000);
 	}
 	
@@ -677,11 +684,18 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectProvider(String Provider) throws InterruptedException {
+		//waitForElementToBeVisible(driver, select_provider, 10);
+		//WebElement search_input = driver.findElement(select_provider1);
+		//search_input.click();
+		waitForElementToBeVisible(driver, search_provider_input, 10);
+		search_provider_input.sendKeys(Provider);
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_provider, 10);
-		WebElement search_input = driver.findElement(select_provider1);
-		search_input.click();
+		Thread.sleep(5000);
+		select_provider.click();
+		Thread.sleep(2000);
 	}
-	
+
 	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		WebElement search_input = driver.findElement(select_lot1);
