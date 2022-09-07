@@ -844,6 +844,7 @@ public class SupplyConsolePage extends BasePage {
 				(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small'])[" + offset + "]"));
 		click(draftTransactionElement);
 		click(btnEditOnTrasactionPage);
+		Thread.sleep(2000);
 		setDosesAmount(String.valueOf(amountOfDosesToAdjustInDraftEdit));
 		click(btnTransferDraftOnContainerTransferPage);
 		Thread.sleep(2000);
