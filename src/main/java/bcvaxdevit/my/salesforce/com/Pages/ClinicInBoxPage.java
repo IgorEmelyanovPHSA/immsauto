@@ -547,7 +547,7 @@ public class ClinicInBoxPage extends BasePage {
 			return false;
 		}
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -1);
+		calendar.add(Calendar.DATE, -2);
 		Date today = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 		
