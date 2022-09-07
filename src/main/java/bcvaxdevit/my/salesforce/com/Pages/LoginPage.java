@@ -282,8 +282,8 @@ public class LoginPage extends BasePage {
 	
 	public ClinicInBoxPage loginAsDIWAWithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_DIWA"));
-		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("password_DIWA_PW"));
+		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_DIWA_CIB"));
+		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("password_DIWA_CIB_PW"));
 		click(login_button);
 		return new ClinicInBoxPage(driver);
 	}
