@@ -16,7 +16,7 @@ public class DIWA_CIB extends BaseTest {
 		TestcaseID = "222289"; //C222289
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*----1. Login as an DIWA to CIB  --*/");
-		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsDIWAWithParameters();
+		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinician_DIWA_CIB_WithParameters();
 		Thread.sleep(5000);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();

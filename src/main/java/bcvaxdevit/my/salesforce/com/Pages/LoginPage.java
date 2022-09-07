@@ -173,6 +173,14 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}
+
+	public InClinicExperiencePage loginAsClinician_DIWA_ICE_WithParameters() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_DIWA_ICE"));
+		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("password_DIWA_ICE_PW"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 	public InClinicExperiencePage loginasPrecocondition() {
 		this.Precondition_BCVAXDEVIT();
@@ -280,7 +288,7 @@ public class LoginPage extends BasePage {
 		return new ClinicInBoxPage(driver);
 	}
 	
-	public ClinicInBoxPage loginAsDIWAWithParameters() throws Exception {
+	public ClinicInBoxPage loginAsClinician_DIWA_CIB_WithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		clinician_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("user_DIWA_CIB"));
 		clinician_pw_bcvaxdevit.sendKeys(Utils.getEnvConfigProperty("password_DIWA_CIB_PW"));
