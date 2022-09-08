@@ -547,7 +547,7 @@ public class ClinicInBoxPage extends BasePage {
 			return false;
 		}
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -2);
+		calendar.add(Calendar.DATE, -1);
 		Date today = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 		
@@ -882,8 +882,8 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
-		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
 		click_on_covid19_vaccination_checkbox.click();
 	}
