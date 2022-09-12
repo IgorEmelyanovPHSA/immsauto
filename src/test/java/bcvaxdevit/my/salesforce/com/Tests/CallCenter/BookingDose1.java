@@ -20,12 +20,12 @@ public class BookingDose1 extends BaseTest {
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
 	//@Test(priority = 1)
-	public void NOT_IN_USE_Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
+	public void NOT_IN_USE_Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
 		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
@@ -214,12 +214,12 @@ public class BookingDose1 extends BaseTest {
 	}
 
 	//@Test(priority = 3)
-	public void NOT_IN_USE_Post_conditions_step_Remove_Dups_Citizen_participant_account() throws InterruptedException {
+	public void NOT_IN_USE_Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginasPrecocondition();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
 		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");

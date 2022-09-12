@@ -9,10 +9,10 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 public class RequisitionSubmit extends BaseTest {
 
     @Test
-    public void Submit_Requisition_as_an_PPHIS_BCVAXDEVIT() throws InterruptedException {
+    public void Submit_Requisition_as_an_PPHIS_BCVAXDEVIT() throws Exception {
         //TestcaseID = "220561"; //C220561
         System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-        RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
+        RequisitionPage requisitionPage = loginPage.loginAsPPHIS1WithParameters();
         Thread.sleep(5000);
         System.out.println("/*----2. Locate Dropdown Menu --*/");
         requisitionPage.displaySupplyConsolePage();
