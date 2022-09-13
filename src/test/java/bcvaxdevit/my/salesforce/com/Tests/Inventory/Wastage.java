@@ -5,7 +5,6 @@ import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Pages.CommonMethods;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -14,19 +13,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class Wastage extends BaseTest {
-	
-	@Story("C222357: Inventory Management - Wastage(Java)")
+
 	@Test()
-	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS_BCVAXDEVIT() throws Exception {
+	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
-		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(10000);
 		
@@ -124,5 +121,66 @@ public class Wastage extends BaseTest {
 		double actualDosesAmount = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Actual Quantity Doses " + actualDosesAmount + " --*/");
 		assertEquals(actualDosesAmount, remainingDosesAfterWastage);
+	}
+
+	@Test()
+	public void Can_Do_Single_Wastage_ByQuantity_AS_PPHIS() throws Exception {
+		TestcaseID = "223356"; //C223356
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+		int firstRow = 1; //Default value for first row in the grid (Supply container)
+		double amountOfQuantityToWaste = 1;
+		log("/*1.----Login as an PPHIS to Supply Console --*/");
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		Thread.sleep(10000);
+
+		log("/*2.----Validate if Supply Console Page displayed --*/");
+		CommonMethods common = new CommonMethods(getDriver());
+		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+
+		log("/*3.----Click on Automation Supply Location_1 --*/");
+		supplyConsolePage.clickOnSupplyLocation_1();
+		Thread.sleep(5000);
+
+		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
+		double remainingDosesBefore = remDosesQtyConversionFactorBefore[0];
+		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesBefore);
+		double remainingQuantitiesBefore = remDosesQtyConversionFactorBefore[1];
+		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesBefore);
+		double remainingConversionFactor = remDosesQtyConversionFactorBefore[2];
+		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
+
+		log("/*5.----Click on Container's dropdown --*/");
+		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		Thread.sleep(2000);
+
+		log("/*6.----select Wastage from the DropDownMenu dropdown menu --*/");
+		supplyConsolePage.selectWastageFromDropDown();
+
+		log("/*7.----set Wastage Quantity amount: " +amountOfQuantityToWaste +"--*/");
+		supplyConsolePage.setQuantityAmount(Double.toString(amountOfQuantityToWaste));
+
+		log("/*8.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
+		supplyConsolePage.selectReasonForWastageDropDown();
+
+		log("/*9----Clicking on btn Wastage --*/");
+		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
+
+		log("/*10.----Quantity Remaining Doses/Remaining Quantity check After --*/");
+		double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
+		double remainingDosesAfter = remDosesQtyConversionFactorAfter[0];
+		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
+		double remainingQuantitiesAfter = remDosesQtyConversionFactorAfter[1];
+		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
+		double remainingConversionAfter = remDosesQtyConversionFactorAfter[2];
+		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
+
+		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
+		log("----Validation by Doses --");
+		assertEquals(((remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor), remainingDosesAfter);
+		log("----Validation by Quantities --");
+		assertEquals((remainingQuantitiesBefore - amountOfQuantityToWaste), remainingQuantitiesAfter);
+		log("----Validation Conversion factor --");
+		assertEquals(remainingConversionFactor,remainingConversionAfter);
 	}
 }

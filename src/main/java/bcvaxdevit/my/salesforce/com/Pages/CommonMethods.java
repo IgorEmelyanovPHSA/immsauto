@@ -188,7 +188,7 @@ public class CommonMethods extends BasePage{
         return matchingRowForFirstLotNumber;
     }
 
-    public double[] getValueOfRemainingDoses(int rowNumber) throws InterruptedException {
+    public double[] getRemainingDosesQtyAndConversionFactor(int rowNumber) throws InterruptedException {
         int d = 3; //For row 1 default values
         int q = 4; //For row 1 default values
 
