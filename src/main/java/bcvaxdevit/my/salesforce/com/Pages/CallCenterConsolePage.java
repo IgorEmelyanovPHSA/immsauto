@@ -310,6 +310,8 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
 		click_early_booking_reason.click();

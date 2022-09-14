@@ -1555,7 +1555,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
 		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		this.supplyItemsInDropdown.click();
 		Thread.sleep(2000);
 	}
