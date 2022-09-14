@@ -37,7 +37,7 @@ public class Drafts extends BaseTest {
         int matchedRow = common.getMatchedRowToLotInRow1();
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
@@ -46,7 +46,7 @@ public class Drafts extends BaseTest {
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
@@ -103,7 +103,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
@@ -111,7 +111,7 @@ public class Drafts extends BaseTest {
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*20----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
@@ -154,7 +154,7 @@ public class Drafts extends BaseTest {
         int matchedRow = common.getMatchedRowToLotInRow1();
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
             log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
@@ -163,7 +163,7 @@ public class Drafts extends BaseTest {
             log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
             log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
@@ -223,7 +223,7 @@ public class Drafts extends BaseTest {
         Thread.sleep(5000);
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
             log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
@@ -232,7 +232,7 @@ public class Drafts extends BaseTest {
             log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*20----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
             log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
@@ -282,7 +282,7 @@ public class Drafts extends BaseTest {
         int matchedRow = common.getMatchedRowToLotInRow1();
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
             log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
@@ -291,7 +291,7 @@ public class Drafts extends BaseTest {
             log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
             log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
@@ -348,7 +348,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*20----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
             log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
@@ -357,7 +357,7 @@ public class Drafts extends BaseTest {
             log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*21----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
             log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
@@ -399,7 +399,7 @@ public class Drafts extends BaseTest {
         int matchedRow = common.getMatchedRowToLotInRow1();
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
@@ -408,7 +408,7 @@ public class Drafts extends BaseTest {
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
@@ -465,7 +465,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getValueOfRemainingDoses(firstRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
         double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
@@ -473,7 +473,7 @@ public class Drafts extends BaseTest {
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*20----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getValueOfRemainingDoses(matchedRow);
+        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);

@@ -465,7 +465,10 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = "//label[(text()='Doses')]/..//input[@type='text']")
 	private WebElement dosesText;
-	
+
+	@FindBy(xpath = "//label[(text()='Quantity')]/..//input[@type='text']")
+	private WebElement quantityText;
+
 	@FindBy(xpath = "//button[@name='BCH_Reason_for_Adjustment__c']")
 	private WebElement reasonForAdjustmentFromDropDown;
 	
@@ -1113,6 +1116,10 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void setDosesAmount(String value) {
 		typeIn(dosesText, value);
+	}
+
+	public void setQuantityAmount(String quantity) {
+		typeIn(quantityText, quantity);
 	}
 	
 	public double getDoseConversionFactor() {
