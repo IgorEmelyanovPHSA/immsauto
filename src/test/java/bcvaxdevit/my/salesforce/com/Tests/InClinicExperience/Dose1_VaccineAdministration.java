@@ -173,7 +173,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 		Thread.sleep(5000);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);

@@ -164,7 +164,9 @@ public class RequisitionPage extends BasePage {
 //            Thread.sleep(5000);
 //        }
 	
-	public void clickSupplyLocationInDropdown() {
+	public void clickSupplyLocationInDropdown() throws InterruptedException {
+		waitForElementToBeVisible(driver, supplyLocationInDropdown, 10);
+		Thread.sleep(2000);
 		this.supplyLocationInDropdown.click();
 	}
 	
@@ -292,6 +294,9 @@ public class RequisitionPage extends BasePage {
 	
 	public void enterApprovedDose(String inputDose) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", ApprovedDose);
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, ApprovedDose, 10);
+		Thread.sleep(2000);
 		this.ApprovedDose.sendKeys(inputDose);
 	}
 	

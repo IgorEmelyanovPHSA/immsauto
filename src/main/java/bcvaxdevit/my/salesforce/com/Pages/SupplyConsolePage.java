@@ -1569,8 +1569,11 @@ public class SupplyConsolePage extends BasePage {
 
 	public void selectSupplyItemName() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_desired_supply_item, 10);
+		Thread.sleep(2000);
 		this.select_desired_supply_item.click();
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, select_desired_supply_item1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(select_desired_supply_item1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
