@@ -46,10 +46,12 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----10. Choose Urgency --*/");
 		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
-		System.out.println("/*----11. Add Requisition Line Items --*/");
+		log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
+		log("/*for prodsuppqa --COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial lot 016F21A-CC07--*/");
+		log("/*for bcvaxdevit --COVID-19 mRNA Moderna Red Cap 5mL multi-dose 10vials/box lot ????--*/");
 		requisitionPage.clickLineItemCheckBox();
 		Thread.sleep(3000);
-		System.out.println("/*----12. Select requested Trades --*/");
+		log("/*----12. click Next button --*/");
 		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
 		System.out.println("/*----13. Input Requested Quantity and Doses --*/");
