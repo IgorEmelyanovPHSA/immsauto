@@ -1161,7 +1161,7 @@ public class SupplyConsolePage extends BasePage {
 	public void clickBtnAdjustmentAtContainerAdjustmentPopUp() throws InterruptedException {
 		scrollTop(btnAdjustmentOnContainerWastagePopUp);
 		click(btnAdjustmentOnContainerWastagePopUp);
-		Thread.sleep(2000); //To handle success message
+		Thread.sleep(3000); //To handle success message
 	}
 	
 	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
