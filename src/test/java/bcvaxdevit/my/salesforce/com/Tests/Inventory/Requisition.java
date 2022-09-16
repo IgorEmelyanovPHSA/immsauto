@@ -28,7 +28,7 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----4. Navigate to Supply Locations --*/");
 		requisitionPage.clickSupplyLocationInDropdown();
 		Thread.sleep(6000);
-		System.out.println("/*----5. Locate on Automation Supply Location_1 --*/");
+		System.out.println("/*----5. Locate on Age 12 and Above - Abbotsford - Abby Pharmacy --*/");
 		requisitionPage.clickSupplyLocationName();
 		Thread.sleep(4000);
 		System.out.println("/*----6. Navigate to Request Supplies --*/");
@@ -47,8 +47,8 @@ public class Requisition extends BaseTest {
 		requisitionPage.clickNextButton();
 		Thread.sleep(3000);
 		log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
-		log("/*for prodsuppqa --COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial lot 016F21A-CC07--*/");
-		log("/*for bcvaxdevit --COVID-19 mRNA Moderna Red Cap 5mL multi-dose 10vials/box lot 3001176-CC04--*/");
+		log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
+		log("/*for bcvaxdevit --COVID-19 mRNA SPIKEVAX (Moderna) Red Cap 5mL multi-dose 10 vials/box Lot 3001176-CC04--*/");
 		requisitionPage.clickLineItemCheckBox();
 		Thread.sleep(3000);
 		log("/*----12. click Next button --*/");
@@ -102,11 +102,11 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----26. Receive Requisition--*/");
 		requisitionPage.clickReceiveRequestBtn();
 		Thread.sleep(3000);
-		System.out.println("/*----27. Search Distribution--*/");
-		requisitionPage.clickSearchSupplyDistributions();
+		System.out.println("/*----27. click On Search Distribution component--*/");
+		requisitionPage.clickOnSearchSupplyDistributions();
 		Thread.sleep(3000);
-		System.out.println("/*----28. Select Distribution--*/");
-		requisitionPage.SelectSupplyDistributionTo2("SDST-0000001623");
+		System.out.println("/*----28. Select Distribution -'SDST...'- --*/");
+		requisitionPage.SelectSupplyDistributionTo();
 		Thread.sleep(3000);
 		System.out.println("/*----29. click Save ReceiveRequisition--*/");
 		requisitionPage.clickSaveReceiveRequisition();

@@ -26,7 +26,7 @@ public class RequisitionPage extends BasePage {
 	private WebElement SupplyLocations;
 	
 	
-	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Automation Supply Location_1']")
+	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Abbotsford - Abby Pharmacy']")
 	
 	private WebElement supply_supply_location_1;
 	
@@ -98,31 +98,27 @@ public class RequisitionPage extends BasePage {
 	private WebElement distributionName;
 	private By distributionName2 = By.xpath("//input[@class ='default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup']");
 	
-	
 	@FindBy(xpath = "//input[@placeholder='Search Supply Distributions...']")
-	private WebElement SearchSupplyDistributions;
-	
-	
-	public void clickSearchSupplyDistributions() {
-		this.SearchSupplyDistributions.click();
-	}
-	
-	@FindBy(xpath = "//input[@placeholder=\"Search Supply Distributions...\"]")
-	private WebElement searchByName;
-	private By searchByName2 = By.xpath("//div[@class='primaryLabel slds-truncate slds-lookup__result-text']");
+	private WebElement click_on_search_supply_distributions_to_component;
+	private By click_on_search_supply_distributions_to_component_ = By.xpath("//input[@placeholder='Search Supply Distributions...']");
+
+	@FindBy(xpath = "(//div[@class='primaryLabel slds-truncate slds-lookup__result-text'])[1]")
+	private WebElement select_supply_distributions_to;
+	private By select_supply_distributions_to_ = By.xpath("(//div[@class='primaryLabel slds-truncate slds-lookup__result-text'])[1]");
 	
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
 	
-	public void SelectSupplyDistributionTo2(String DistributionName) throws InterruptedException {
-		//waitForElementToBeLocated(driver,distributionName,10);
-		waitForElementToBeVisible(driver, searchByName, 10);
-		WebElement search_input = driver.findElement(searchByName2);
-		this.searchByName.sendKeys(DistributionName);
-		search_input.click();
-		/*waitForElementToBeVisible(driver, clinicName, 10);
-		WebElement search_input = driver.findElement(clinicName2);
-		search_input.click();*/
+	public void SelectSupplyDistributionTo() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_on_search_supply_distributions_to_component, 10);
+		Thread.sleep(3000);
+		click_on_search_supply_distributions_to_component.click();
+		Thread.sleep(3000);
+		click_on_search_supply_distributions_to_component.sendKeys("SDST");
+		Thread.sleep(3000);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(3000);
+		select_supply_distributions_to.click();
 	}
 	
 	public RequisitionPage(WebDriver driver) {
@@ -228,8 +224,8 @@ public class RequisitionPage extends BasePage {
 	public void clickLineItemCheckBox() throws InterruptedException {
 		By check_box = By.xpath("//tbody/tr[7]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
 		WebElement element = driver.findElement(check_box);
-		//Scroll to select the desired line item
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
 		element.click();
 	}
 
@@ -345,4 +341,11 @@ public class RequisitionPage extends BasePage {
 		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 		
 	}
+
+	public void clickOnSearchSupplyDistributions() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_on_search_supply_distributions_to_component, 10);
+		Thread.sleep(2000);
+		this.click_on_search_supply_distributions_to_component.click();
+	}
+
 }
