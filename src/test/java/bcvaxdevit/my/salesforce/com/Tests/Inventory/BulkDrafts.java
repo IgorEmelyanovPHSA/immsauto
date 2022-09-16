@@ -24,7 +24,7 @@ public class BulkDrafts extends BaseTest {
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 9 need some refactoring in the future
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
 
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
