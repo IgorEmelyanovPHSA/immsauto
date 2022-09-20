@@ -10,6 +10,12 @@
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Default suites -->
+        <regressionTestsFile>${project.build.directory}/regressionTests.xml</regressionTestsFile>
+        <!-- Default suite files if not being specified from mvn command line -->
+        <defaultSuiteFiles>${regressionTestsFile}</defaultSuiteFiles>
+        <suiteFile>${defaultSuiteFiles}</suiteFile>
     </properties>
 
     <build>
@@ -26,7 +32,7 @@
                         </property>
                     </systemProperties>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine> -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
