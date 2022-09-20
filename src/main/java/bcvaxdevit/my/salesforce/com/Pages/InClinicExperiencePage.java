@@ -1285,7 +1285,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		select_clinic.click();
