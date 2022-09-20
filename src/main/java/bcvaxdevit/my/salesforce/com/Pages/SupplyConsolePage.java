@@ -1208,7 +1208,24 @@ public class SupplyConsolePage extends BasePage {
 		}
 		return remainingDosesAndQuantityMap;
 	}
-	
+
+	public void enterBulkWastageByQuantityWithReasonForWastage(int amount, int numberOfRows) throws InterruptedException {
+		//By quantity wastage
+		int y = 0;
+		int k = 3;
+		while (y < numberOfRows) {
+			WebElement quantityDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
+			typeIn(quantityDynamicFiled, String.valueOf(amount));
+			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
+			click(reasonForWastageDynamicDropDown);
+			Thread.sleep(500);
+			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title='CCI: Handling Error'])[" + (y + 1) + "]"));
+			click(reasonForWastageDynamicFiled);
+			k = k + 3;
+			y++;
+		}
+	}
+
 	public void enterBulkWastageByDosageWithReasonForWastage(int amount, int numberOfRows) throws InterruptedException {
 		//By dosage wastage
 		int y = 0;
