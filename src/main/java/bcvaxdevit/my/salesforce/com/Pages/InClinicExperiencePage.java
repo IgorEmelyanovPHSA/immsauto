@@ -307,6 +307,14 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//button[@title='Confirm & Save Administration'])")
 	private WebElement confirm_save_adm_btn;
 	private By confirm_save_adm_btn1 = By.xpath("//button[@title='Confirm & Save Administration']");
+
+	@FindBy(xpath = "(//button[@title='Save Administration & Record Another Vaccine'])")
+	private WebElement save_adm_record_another_vaccine_btn;
+	private By save_adm_record_another_vaccine_btn1 = By.xpath("(//button[@title='Save Administration & Record Another Vaccine'])");
+
+	@FindBy(xpath = "//button[@class='slds-button slds-button_brand'][contains(text(),'Confirm')]")
+	private WebElement confirm_save_adm_and_another_vaccine_btn;
+	private By confirm_save_adm_and_another_vaccine_btn1 = By.xpath("//button[@class='slds-button slds-button_brand'][contains(text(),'Confirm')]");
 	
 	@FindBy(xpath = "//button[text()='Confirm & Save Administration']")
 	private WebElement confirm_save_adm_btn_modal_screen;
@@ -448,10 +456,12 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
+
+
 	
-	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
+	@FindBy(xpath = "//input[@placeholder=\"Search People...\"]")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
+	private By select_provider1 = By.xpath("//input[@placeholder=\"Search People...\"]");
 	
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
@@ -1239,14 +1249,32 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, confirm_save_adm_btn, 10);
 		confirm_save_adm_btn.click();
 	}
+	public void ClickSaveAdministrationButtonAndRecordAnotherVaccine() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1000)", "");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, save_adm_record_another_vaccine_btn, 10);
+		save_adm_record_another_vaccine_btn.click();
+	}
+	public void ClickModalConfirmSaveAnotherVaccineButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, confirm_save_adm_and_another_vaccine_btn, 10);
+		Thread.sleep(2000);
+		confirm_save_adm_and_another_vaccine_btn.click();
+	}
+	public String validateVaccineAgentSelectionFieldIsDisplayed() throws InterruptedException{
+		WebElement element = driver.findElement(click_vaccine_agent_dropdown1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
 	
 	public void ClickModalConfirmAndSaveAdministrationButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, confirm_save_adm_btn_modal_screen, 10);
 		Thread.sleep(2000);
 		confirm_save_adm_btn_modal_screen.click();
 	}
-	
-	
+
 	public boolean validateVaccineAdminPageOpen() throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_vaccine_admin_page_open, 10);
@@ -1617,8 +1645,13 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectProvider(String Provider) throws InterruptedException {
 		waitForElementToBeVisible(driver, select_provider, 10);
+		select_provider.sendKeys("Clinician ICE Automation");
+		Thread.sleep(3000);
+		waitForElementToBeVisible(driver, select_provider, 10);
+		Thread.sleep(4000);
 		WebElement search_input = driver.findElement(select_provider1);
-		search_input.click();
+		select_provider.click();
+		Thread.sleep(2000);
 	}
 	
 	public void selectImmunizingAgentProvider() throws InterruptedException {
