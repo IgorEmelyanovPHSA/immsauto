@@ -1105,6 +1105,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public String validatePirubmissionStatusFieldIsDisplayed() throws InterruptedException {
 		WebElement element = driver.findElement(pir_submission_status_field_displayed);
+		Thread.sleep(2000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();

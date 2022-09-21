@@ -322,7 +322,12 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//div[@class = 'slds-card__body']//span[text() = 'Covid-19 Vaccine']")
 	private WebElement click_on_covid19_vaccination_checkbox;
 	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-card__body']//span[text() = 'Covid-19 Vaccine']");
-	
+
+	@FindBy(xpath = ".//div[@class = 'slds-card__body']//span[text() = 'Influenza Vaccine']")
+	private WebElement click_on_influenza_vaccination_checkbox;
+	private By click_on_influenza_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-card__body']//span[text() = 'Influenza Vaccine']");
+
+
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
 	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
@@ -1065,6 +1070,14 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
 		Thread.sleep(2000);
 		click_on_covid19_vaccination_checkbox.click();
+	}
+
+	public void clickOnVaccinationInfluenzaCheckbox() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(3000);
+		waitForElementToBeVisible(driver, click_on_influenza_vaccination_checkbox, 10);
+		Thread.sleep(2000);
+		click_on_influenza_vaccination_checkbox.click();
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
