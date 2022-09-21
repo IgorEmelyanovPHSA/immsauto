@@ -459,9 +459,9 @@ public class InClinicExperiencePage extends BasePage {
 
 
 	
-	@FindBy(xpath = "//input[@placeholder=\"Search People...\"]")
+	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//input[@placeholder=\"Search People...\"]");
+	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
 	
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
