@@ -25,7 +25,7 @@ public class ReceiveSupplies extends BaseTest {
 		}
 		log("/*-- 3. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*-- 4. Click Dropdown Menu --*/");
 		supplyConsolePage.clickDropdownMenu();
 		Thread.sleep(5000);
@@ -51,7 +51,7 @@ public class ReceiveSupplies extends BaseTest {
 		Thread.sleep(2000);
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		supplyConsolePage.selectSupplyLocationName();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*-- 12. Click on Supply Distribution with - Supply Distribution_1 --*/");
 		supplyConsolePage.clickSupplyDistribution();
 		Thread.sleep(2000);
@@ -82,7 +82,7 @@ public class ReceiveSupplies extends BaseTest {
 		Thread.sleep(2000);
 		log("/*-- 19. Click to Receive Supplies Button --*/");
 		supplyConsolePage.ClickDropDownToClickReceiveSuppliesButton();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		log("/*-- 20. Validate Supply Item Filed Present on Layout --*/");
 		String supplyItem = supplyConsolePage.validateSupplyItemField();
 		String expectedSupplyItemLabel = "*Supply Item";

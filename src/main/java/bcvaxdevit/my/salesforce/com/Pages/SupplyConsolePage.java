@@ -1573,8 +1573,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickDropdownMenu() throws InterruptedException {
-		this.dropdownMenu.click();
+		waitForElementToBeVisible(driver, dropdownMenu, 10);
 		Thread.sleep(2000);
+		this.dropdownMenu.click();
 	}
 
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
@@ -1611,6 +1612,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public String getSupplyDistributionName() throws InterruptedException {
 		WebElement element = driver.findElement(get_supply_distribution_name1);
+		Thread.sleep(2000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
@@ -1631,7 +1633,9 @@ public class SupplyConsolePage extends BasePage {
 
 	public void SelectDropDownToClickReceiveSuppliesButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_drpdown_to_receive_supplies1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(select_drpdown_to_receive_supplies1);
+		Thread.sleep(2000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
