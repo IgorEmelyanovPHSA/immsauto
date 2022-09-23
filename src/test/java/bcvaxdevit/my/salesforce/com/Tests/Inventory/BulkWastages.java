@@ -25,6 +25,7 @@ public class BulkWastages extends BaseTest {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int amountOfDosesToWaste = 1;
+		String reasonForWastage = "CCI: Handling Error";
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
@@ -53,8 +54,8 @@ public class BulkWastages extends BaseTest {
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
-		//Remaining Doses and Quantity count // 3 rows, ref BulkWastage step7 containers count
+		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
+		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
@@ -62,8 +63,8 @@ public class BulkWastages extends BaseTest {
 		supplyConsolePage.clickBulkWastageButton();
 		Thread.sleep(5000);
 		
-		log("/*8.----Enter the Dosages values for 3 row and reason for wastage --*/");
-		supplyConsolePage.enterBulkWastageByDosageWithReasonForWastage(amountOfDosesToWaste, numberOfRows);
+		log("/*8.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
+		supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToWaste, reasonForWastage, numberOfRows);
 		
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
@@ -118,6 +119,7 @@ public class BulkWastages extends BaseTest {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int amountOfQuantityToWaste = 1;
+		String reasonForWastage = "CCI: Handling Error";
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
 		Thread.sleep(5000);
@@ -146,8 +148,8 @@ public class BulkWastages extends BaseTest {
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
-		//Remaining Doses and Quantity count // 3 rows, ref BulkWastage step7 containers count
+		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
+		//Remaining Doses and Quantity count // 3 rows, ref BulkWastage step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
@@ -155,8 +157,8 @@ public class BulkWastages extends BaseTest {
 		supplyConsolePage.clickBulkWastageButton();
 		Thread.sleep(5000);
 
-		log("/*8.----Enter the Quantity values for 3 row and reason for wastage --*/");
-		supplyConsolePage.enterBulkWastageByQuantityWithReasonForWastage(amountOfQuantityToWaste, numberOfRows);
+		log("/*8.----Enter the Quantity values for 3 row and reason for wastage:" +reasonForWastage +"--*/");
+		supplyConsolePage.enterBulkByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage, numberOfRows);
 
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
