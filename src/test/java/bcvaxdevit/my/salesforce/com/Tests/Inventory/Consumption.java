@@ -7,6 +7,7 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
@@ -224,7 +225,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, (remainingDoses_before - 1)/5);
+		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/5), 2);
 		Thread.sleep(2000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");
