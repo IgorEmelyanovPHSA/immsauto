@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -1187,6 +1188,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public HashMap countDosesAndQuantityMap(int numberOfRows) {
+		DecimalFormat df = new DecimalFormat("0.00");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityMap = new HashMap<>();
 		int d = 3;
 		int q = 4;
@@ -1196,7 +1198,7 @@ public class SupplyConsolePage extends BasePage {
 			WebElement remainingQuantityWebElement = driver.findElement(By.xpath("(//lightning-formatted-number)[" + q + "]"));
 			Double remainingDoses = Double.parseDouble(getValue(remainingDosesWebElement));
 			Double remainingQuantity = Double.parseDouble(getValue(remainingQuantityWebElement));
-			Double doseConversionFactor = remainingDoses / remainingQuantity;
+			Double doseConversionFactor = Double.valueOf(df.format(remainingDoses / remainingQuantity));
 			value.add(remainingDoses);
 			value.add(remainingQuantity);
 			value.add(doseConversionFactor);
