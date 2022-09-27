@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 
+import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
 
@@ -616,7 +617,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1, ((remainingDoses_before_Lot_MT0055_Distribution_1_1 - 1) / 10));
 		log("/*----Validation for container#2 Distribution_1_1 - EK4241");
 		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1);
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, ((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1) / 5));
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1) / 5),2);
 		log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX6-5Test001");
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - 1);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, ((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - 1) / 10));
