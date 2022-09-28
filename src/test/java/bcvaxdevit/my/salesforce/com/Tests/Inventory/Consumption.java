@@ -135,9 +135,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		Thread.sleep(5000);
-		System.out.println("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		//System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");
 		//inClinicExperiencePage.selectEarlyBookingReason();
 		//Thread.sleep(2000);

@@ -912,7 +912,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
 		Thread.sleep(2000);
@@ -1059,6 +1059,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void navigateAppointmentSchedulingTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, appointment_scheduling_tab1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(appointment_scheduling_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -1211,9 +1212,10 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1000)", "");
-		Thread.sleep(2000);
+		js.executeScript("window.scrollBy(0,1500)", "");
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, confirm_and_save_btn_home, 10);
+		Thread.sleep(2000);
 		confirm_and_save_btn_home.click();
 	}
 	
@@ -1288,7 +1290,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		Thread.sleep(2000);
@@ -1301,6 +1303,7 @@ public class InClinicExperiencePage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
+		Thread.sleep(2000);
 		select_clinic.click();
 		Thread.sleep(2000);
 		select_clinic.sendKeys(clinicNameToSearch);
