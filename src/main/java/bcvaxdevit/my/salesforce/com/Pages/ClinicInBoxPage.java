@@ -885,6 +885,7 @@ public class ClinicInBoxPage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
+		Thread.sleep(2000);
 		click_on_covid19_vaccination_checkbox.click();
 	}
 

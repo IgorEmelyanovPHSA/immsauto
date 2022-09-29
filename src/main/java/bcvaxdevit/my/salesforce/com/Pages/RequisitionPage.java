@@ -246,7 +246,9 @@ public class RequisitionPage extends BasePage {
 		this.saveButton.click();
 	}
 	
-	public void clickSubmitRequisition() {
+	public void clickSubmitRequisition() throws InterruptedException {
+		waitForElementToBeVisible(driver, submitRequisition, 10);
+		Thread.sleep(2000);
 		this.submitRequisition.click();
 	}
 	

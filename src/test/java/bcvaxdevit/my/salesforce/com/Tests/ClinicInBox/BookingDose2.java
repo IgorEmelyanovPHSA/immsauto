@@ -94,9 +94,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*19----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(2000);
-		//System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
-		//clinicInBox.selectEarlyBookingReason();
-		//Thread.sleep(2000);
+		System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
+		clinicInBox.selectEarlyBookingReason();
+		Thread.sleep(2000);
 		String vaccineToSelect = "Covid19Vaccine";
 		log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		clinicInBox.selectOneOption(vaccineToSelect);
