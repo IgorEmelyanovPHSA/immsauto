@@ -23,7 +23,7 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.Inventory.BulkDrafts"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.UserArrivingWrongClinicRebookAppointment"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.DIWA_ICE"/>
-            <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose1_CitizenBookingAppointment"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose1CitizenBookingAppointmentInfluenzaOrCovid19"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose2_CitizenBookingAppointment"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.Historical_Immunization"/>
         </classes>
