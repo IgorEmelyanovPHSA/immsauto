@@ -717,7 +717,7 @@ public class SupplyConsolePage extends BasePage {
 	public void clickTransactionsTab() throws InterruptedException {
 		//scroll up
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, transactions_tab, 10);
 		//WebElement element = driver.findElement(transactions_tab_1);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);

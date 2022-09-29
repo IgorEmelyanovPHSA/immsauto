@@ -1,5 +1,6 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
+import com.gurock.testrail.APIException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
@@ -96,9 +97,12 @@ public class BookAnAppointmentPage extends BasePage{
         else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
             click(checkBoxInfluenzaVaccine);
         }
-        else{
+        else if(vaccine.equalsIgnoreCase("both")){
             click(checkBoxCovid19Vaccine);
             click(checkBoxInfluenzaVaccine);
+        }
+        else{
+            throw new RuntimeException("No vaccine selected");
         }
     }
 

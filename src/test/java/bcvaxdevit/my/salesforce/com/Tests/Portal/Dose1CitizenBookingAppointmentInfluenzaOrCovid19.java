@@ -3,14 +3,17 @@ package bcvaxdevit.my.salesforce.com.Tests.Portal;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.*;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureLifecycle;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
-public class Dose1_CitizenBookingAppointment_old extends BaseTest {
+public class Dose1CitizenBookingAppointmentInfluenzaOrCovid19 extends BaseTest {
 
 	private String legalFirstName = "Anne-marie";
 	private String legalLastName = "BCVaxJacketts";
@@ -22,11 +25,29 @@ public class Dose1_CitizenBookingAppointment_old extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	private String phoneNumber = "6041234568";
 	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-	private String vaccineToSelect = "Covid19Vaccine";
 
-//	@Test(priority = 1)
-	public void citizenPortalFlowDoseOne() throws Exception {
-		TestcaseID = "222521"; //C222521
+	@DataProvider(name = "vaccineSelection")
+	public static Object[][] vaccine() {
+		return new Object[][]{{"Covid19Vaccine"}, {"InfluenzaVaccine"}};
+	}
+
+	@Test(priority = 1, dataProvider = "vaccineSelection")
+	public void citizenPortalBookDoseOneCovidOrInfluenza(String vaccineToSelect) throws Exception {
+		log("Target Environment: " + Utils.getTargetEnvironment());
+		AllureLifecycle lifecycle = Allure.getLifecycle();
+
+		if (vaccineToSelect.equalsIgnoreCase("Covid19Vaccine")) {
+			log("Citizen will book an Appointment for : " +vaccineToSelect );
+			TestcaseID = "222521"; //C228855
+			lifecycle.updateTestCase(testResult -> testResult.setName("CitizenPortalBookDoseOneCovid19Vaccine"));
+		}
+
+		if (vaccineToSelect.equalsIgnoreCase("InfluenzaVaccine")) {
+			log("Citizen will book an Appointment for : " +vaccineToSelect );
+			TestcaseID = "228855"; //C228855
+			lifecycle.updateTestCase(testResult -> testResult.setName("CitizenPortalBookDoseOneInfluenzaVaccineFromCitizenPortal"));
+		}
+
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		CommonMethods com = new CommonMethods(getDriver());
 
@@ -56,7 +77,6 @@ public class Dose1_CitizenBookingAppointment_old extends BaseTest {
 		inClinicExperiencePage.verifyIsICEpageDisplayed();
 
 		log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-		//inClinicExperiencePage.SearchForCitizen(conformationNumberText);
 		com.globalSearch(conformationNumberText);
 
 		log("/*7.1---Validation, isUserFound account validation --*/");
@@ -100,7 +120,7 @@ public class Dose1_CitizenBookingAppointment_old extends BaseTest {
 		bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
 		}
 
-//	@Test(priority = 2)
+	@Test(priority = 2)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
@@ -108,11 +128,3 @@ public class Dose1_CitizenBookingAppointment_old extends BaseTest {
 		}
 
 	}
-		/*
-		Go through the citizen flow as someone who does not have a PHN number
-		Go through the citizen flow as someone who has a PHN number
-		Go through the citizen flow as someone who put a wrong date of birth by mistake/wrong name
-		Go through the citizen flow where Booking capacity is full on a particular clinic at a specific time slot
-		Go through the citizen flow where Booking capacity is one less than the capacity and two citizen booking at almost the same time
-		Go through the citizen flow where Booking capacity is full but one citizen cancelled so it became available for booking, then it gets booked and meets the capacity and should not be available anymore
-		*/

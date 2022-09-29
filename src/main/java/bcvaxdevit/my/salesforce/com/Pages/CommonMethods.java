@@ -56,7 +56,7 @@ public class CommonMethods extends BasePage{
 
     public boolean isUserFoundValidation(String conformationNumberText, String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
         boolean isUserFound = false;
-        for(int i = 1; i<=5; i++ ) {
+        for(int i = 1; i<=7; i++ ) {
             if (!userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
                 log(i +"-try to find user: " + legalFirstName + " " + legalLastName + " not found, re-try!");
                 refreshBrowser();
