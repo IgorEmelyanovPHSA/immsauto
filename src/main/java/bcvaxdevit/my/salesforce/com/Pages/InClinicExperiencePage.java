@@ -832,6 +832,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickDropdownMenu() throws InterruptedException {
+		waitForElementToBeVisible(driver, dropdownMenu, 10);
+		Thread.sleep(2000);
 		this.dropdownMenu.click();
 		Thread.sleep(2000);
 	}
@@ -1082,7 +1084,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
@@ -1300,7 +1302,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		Thread.sleep(2000);
