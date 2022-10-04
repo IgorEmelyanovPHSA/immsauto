@@ -22,7 +22,7 @@ public class Drafts extends BaseTest {
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+        log("/*1.----Login as an PPHIS to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
         Thread.sleep(5000);
 

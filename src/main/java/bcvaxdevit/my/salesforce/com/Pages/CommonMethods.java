@@ -3,6 +3,7 @@ package bcvaxdevit.my.salesforce.com.Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
@@ -189,6 +190,7 @@ public class CommonMethods extends BasePage{
     }
 
     public double[] getRemainingDosesQtyAndConversionFactor(int rowNumber) throws InterruptedException {
+        DecimalFormat df = new DecimalFormat("0.00");
         int d = 3; //For row 1 default values
         int q = 4; //For row 1 default values
 
@@ -200,9 +202,9 @@ public class CommonMethods extends BasePage{
         }
         WebElement remainingDosesWebElement = driver.findElement(By.xpath("(//lightning-formatted-number)[" + d + "]"));
         WebElement remainingQuantityWebElement = driver.findElement(By.xpath("(//lightning-formatted-number)[" + q + "]"));
-        Double remainingDoses = Double.parseDouble(getValue(remainingDosesWebElement));
-        Double remainingQuantity = Double.parseDouble(getValue(remainingQuantityWebElement));
-        Double doseConversionFactor = remainingDoses / remainingQuantity;
+        double remainingDoses = Double.parseDouble(getValue(remainingDosesWebElement));
+        double remainingQuantity = Double.parseDouble(getValue(remainingQuantityWebElement));
+        double doseConversionFactor = Double.valueOf(df.format(remainingDoses / remainingQuantity));
         double[] dosesQuantityConversionFactor = {remainingDoses, remainingQuantity, doseConversionFactor};
 
         return dosesQuantityConversionFactor;
