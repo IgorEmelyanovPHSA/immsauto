@@ -26,6 +26,7 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose1CitizenBookingAppointmentInfluenzaOrCovid19"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose2_CitizenBookingAppointment"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.Historical_Immunization"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose1_E2E_Influenza"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
