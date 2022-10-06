@@ -20,6 +20,7 @@ public class BookingDose1 extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	private String vaccineToSelect = "Covid19Vaccine";
 
 	@Test(priority = 1)
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
@@ -104,9 +105,11 @@ public class BookingDose1 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(2000);
-		log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		clinicInBox.clickOnVaccinationCheckbox();
-		Thread.sleep(2000);
+		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+		clinicInBox.selectOneOption(vaccineToSelect);
+//		log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
+//		clinicInBox.clickOnVaccinationCheckbox();
+		Thread.sleep(1000);
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//clinicInBox.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
