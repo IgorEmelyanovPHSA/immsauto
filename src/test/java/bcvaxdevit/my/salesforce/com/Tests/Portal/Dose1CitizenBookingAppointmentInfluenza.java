@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
-public class Dose1CitizenBookingAppointmentInfluenzaOrCovid19 extends BaseTest {
+public class Dose1CitizenBookingAppointmentInfluenza extends BaseTest {
 
 	private String legalFirstName = "Anne-marie";
 	private String legalLastName = "BCVaxJacketts";
@@ -25,30 +25,12 @@ public class Dose1CitizenBookingAppointmentInfluenzaOrCovid19 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	private String phoneNumber = "6041234568";
 	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	private String vaccineToSelect = "InfluenzaVaccine";
 
-	@DataProvider(name = "vaccineSelection")
-	public static Object[][] vaccine() {
-		return new Object[][]{{"Covid19Vaccine"}, {"InfluenzaVaccine"}};
-	}
-
-	@Test(priority = 1, dataProvider = "vaccineSelection")
-	public void citizenPortalBookDoseOneCovidOrInfluenza(String vaccineToSelect) throws Exception {
+	@Test(priority = 1)
+	public void citizenPortalBookDoseOneInfluenza() throws Exception {
+		TestcaseID = "228855"; //C228855
 		log("Target Environment: " + Utils.getTargetEnvironment());
-		AllureLifecycle lifecycle = Allure.getLifecycle();
-
-		if (vaccineToSelect.equalsIgnoreCase("Covid19Vaccine")) {
-			log("Citizen will book an Appointment for : " +vaccineToSelect );
-			TestcaseID = "222521"; //C228855
-			lifecycle.updateTestCase(testResult -> testResult.setName("CitizenPortalBookDoseOneCovid19Vaccine"));
-		}
-
-		if (vaccineToSelect.equalsIgnoreCase("InfluenzaVaccine")) {
-			log("Citizen will book an Appointment for : " +vaccineToSelect );
-			TestcaseID = "228855"; //C228855
-			lifecycle.updateTestCase(testResult -> testResult.setName("CitizenPortalBookDoseOneInfluenzaVaccineFromCitizenPortal"));
-		}
-
-		log("Target Environment: "+ Utils.getTargetEnvironment());
 		CommonMethods com = new CommonMethods(getDriver());
 
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");

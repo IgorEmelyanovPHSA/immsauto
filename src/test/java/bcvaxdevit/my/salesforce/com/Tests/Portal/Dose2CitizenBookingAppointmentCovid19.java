@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
-public class Dose2_CitizenBookingAppointment extends BaseTest {
+public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
     private String legalFirstName = "Alexandro";
     private String legalLastName = "BCVaxDa Costa";
