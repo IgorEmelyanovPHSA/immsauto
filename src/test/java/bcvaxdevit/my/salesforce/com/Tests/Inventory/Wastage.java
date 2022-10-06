@@ -177,7 +177,9 @@ public class Wastage extends BaseTest {
 
 		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
 		log("----Validation by Doses --");
-		assertEquals(((remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor), remainingDosesAfter);
+		double remainingDosesBeforeCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
+				(remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor));
+		assertEquals(remainingDosesBeforeCalculation, remainingDosesAfter);
 		log("----Validation by Quantities --");
 		assertEquals((remainingQuantitiesBefore - amountOfQuantityToWaste), remainingQuantitiesAfter);
 		log("----Validation Conversion factor --");

@@ -212,7 +212,9 @@ public class Adjustments extends BaseTest {
 
 		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
 		log("----Validation by Doses --");
-		assertEquals(remainingDosesAfter, ((remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
+		double remainingDosesCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
+				(remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
+		assertEquals(remainingDosesAfter, remainingDosesCalculation);
 		log("----Validation by Quantities --");
 		assertEquals(remainingQuantitiesAfter, (remainingQuantitiesBefore + amountOfQuantitiesToAdjust));
 		log("----Validation Conversion factor --");
