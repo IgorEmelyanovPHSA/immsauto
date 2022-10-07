@@ -130,7 +130,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 34.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
 		Thread.sleep(5000);
-		String beforeBooking = inClinicExperiencePage.ValidateclinicNameBeforeRebook();
+		log("/*-- 34.1---Validate the Clinic's name before click rebook button --*/");
+		String beforeBooking = inClinicExperiencePage.ValidateClinicNameBeforeRebook();
 		String before = beforeBooking;
 		log("/*-- 35.: --> Before Booking clinic Value is:" + beforeBooking + "");
 		Thread.sleep(2000);

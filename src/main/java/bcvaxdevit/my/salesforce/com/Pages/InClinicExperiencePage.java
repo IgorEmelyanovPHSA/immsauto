@@ -1156,6 +1156,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
+		Thread.sleep(2000);
 		click_navigate_to_ICE_btn.click();
 	}
 	
@@ -1198,9 +1199,11 @@ public class InClinicExperiencePage extends BasePage {
 		return (element.getText());
 	}
 	
-	public String ValidateclinicNameBeforeRebook() throws InterruptedException {
+	public String ValidateClinicNameBeforeRebook() throws InterruptedException {
+		waitForElementToBeVisible(driver, validate_clinic_name_before_booking, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(validate_clinic_name_before_booking1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
