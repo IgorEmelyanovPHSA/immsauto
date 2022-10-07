@@ -7,6 +7,7 @@ import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
 
@@ -77,8 +78,8 @@ public class Transfer extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10), remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10),2, remainingDoses_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		supplyConsolePage.clickTransactionsTab();
@@ -147,8 +148,8 @@ public class Transfer extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10, remainingDoses_after_Lot_EK4241_Distribution_2_1);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_2_1);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10),2, remainingDoses_after_Lot_EK4241_Distribution_2_1);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		
 		
@@ -218,8 +219,8 @@ public class Transfer extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1 );
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50), remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50),2, remainingDoses_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		supplyConsolePage.clickTransactionsTab();
@@ -288,8 +289,8 @@ public class Transfer extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 50, remainingDoses_after_Lot_EK4241_Distribution_2_1);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 50) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_2_1);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 50),2, remainingDoses_after_Lot_EK4241_Distribution_2_1);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 50) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 
 
@@ -379,12 +380,12 @@ public class Transfer extends BaseTest {
 		Thread.sleep(2000);
 		//////////Validation for Distribution_1_1(From) and Distribution_1_2(To)
 		System.out.println("/*19.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
-		assertEquals((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10), remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10),2, remainingDoses_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
-		assertEquals((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 10), remainingDoses_after_Lot_EK4241_Distribution_1_2);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 10) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_1_2);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_1_2 + 10),2, remainingDoses_after_Lot_EK4241_Distribution_1_2);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_1_2);
 		Thread.sleep(2000);
 		
 	}
@@ -473,12 +474,12 @@ public class Transfer extends BaseTest {
 		Thread.sleep(2000);
 		//////////Validation for Distribution_1_1(From) and Distribution_1_2(To)
 		System.out.println("/*19.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
-		assertEquals((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50), remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50),2, remainingDoses_after_Lot_EK4241_Distribution_1_1);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 50) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
-		assertEquals((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 50), remainingDoses_after_Lot_EK4241_Distribution_1_2);
-		assertEquals(((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 50) / dose_conversation_factor), remainingQty_after_Lot_EK4241_Distribution_1_2);
+		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_1_2 + 50),2, remainingDoses_after_Lot_EK4241_Distribution_1_2);
+		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 50) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_1_2);
 		Thread.sleep(2000);
 
 	}
