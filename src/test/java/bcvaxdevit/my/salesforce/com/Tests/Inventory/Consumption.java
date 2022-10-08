@@ -66,7 +66,7 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		double remainingQty_before = inClinicExperiencePage.getValueOfRemainingQty();
 		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 10. Close all open tabs --*/");
 		Thread.sleep(2000);
