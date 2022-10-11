@@ -29,7 +29,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinicWithParameters();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
 		inClinicExperiencePage.selectICEFromApp();

@@ -914,7 +914,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickToSearchClinic() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
 		Thread.sleep(2000);
@@ -1084,7 +1084,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
@@ -1305,7 +1305,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		Thread.sleep(2000);

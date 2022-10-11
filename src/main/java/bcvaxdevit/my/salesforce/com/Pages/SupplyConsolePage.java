@@ -1591,8 +1591,10 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickSupplyDistribution() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_supply_distribution1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(click_supply_distribution1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		Thread.sleep(2000);
 		executor.executeScript("arguments[0].click();", element);
 	}
 
