@@ -154,9 +154,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
 		Thread.sleep(2000);
-		System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
-		callCenterConsole.selectEarlyBookingReason();
-		Thread.sleep(2000);
+		//System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
+		//callCenterConsole.selectEarlyBookingReason();
+		//Thread.sleep(2000);
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		callCenterConsole.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);

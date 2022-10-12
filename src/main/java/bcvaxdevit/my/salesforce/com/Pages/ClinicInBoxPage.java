@@ -878,6 +878,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickAppointmentTab() throws InterruptedException {
 		waitForElementToBeVisible(driver, appointment_tab, 10);
+		Thread.sleep(2000);
 		appointment_tab.click();
 	}
 
@@ -1222,6 +1223,7 @@ public class ClinicInBoxPage extends BasePage {
 
 	public void selectOneOption(String vaccine) throws InterruptedException{
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(3000);
 		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
 			click(checkBoxCovid19Vaccine);
 		}
