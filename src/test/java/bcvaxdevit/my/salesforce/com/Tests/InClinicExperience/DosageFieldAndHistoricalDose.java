@@ -151,7 +151,7 @@ public class DosageFieldAndHistoricalDose extends BaseTest {
         Thread.sleep(3000);
         log("/*37----Save Consent --*/");
         InClinicExperience.ClickSaveConsentButton();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         log("/*38----Immunization Information with Lot number and Dosage--*/");
         InClinicExperience.selectToSetLot();
         Thread.sleep(2000);
@@ -166,6 +166,23 @@ public class DosageFieldAndHistoricalDose extends BaseTest {
         Thread.sleep(3000);
         InClinicExperience.saveImmunizationInformation();
         Thread.sleep(3000);
+        //InClinicExperience.clickEditAgentInformation();
+//        Thread.sleep(2000);
+//        log("/*42---- Edit Agent Information To Change Different Agent ---*/");
+//        InClinicExperience.selectToSetLot();
+//        Thread.sleep(2000);
+//        log("/*43---- Select Lot -->SPIKEVAX6-5Test001 ---*/");
+//        InClinicExperience.selectLot();
+//        Thread.sleep(2000);
+//        log("/*44---- Select Injection Site ---*/");
+//        InClinicExperience.selectInjectionSite();
+//        Thread.sleep(3000);
+//        log("/*45---- Select Dosage ---*/");
+//        InClinicExperience.selectNewDosage();
+//        Thread.sleep(3000);
+//        InClinicExperience.saveImmunizationInformation();
+//        Thread.sleep(3000);
+
 
     }
 

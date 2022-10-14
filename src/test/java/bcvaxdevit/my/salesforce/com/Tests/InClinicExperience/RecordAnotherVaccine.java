@@ -155,7 +155,7 @@ public class RecordAnotherVaccine extends BaseTest {
         Thread.sleep(5000);
         System.out.println("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         inClinicExperience.selectVaccineAgent();
-        Thread.sleep(3000);
+        Thread.sleep(9000);
         System.out.println("/*43.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
@@ -167,10 +167,8 @@ public class RecordAnotherVaccine extends BaseTest {
         Thread.sleep(3000);
         System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience.ClickModalConfirmSaveAnotherVaccineButton();
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         System.out.println("/*45.---the Home - Client Search showing up  --*/");
-        inClinicExperience.validateHomePageShownUp();
-        Thread.sleep(3000);
 
         String agentSelection = inClinicExperience.validateVaccineAgentSelectionFieldIsDisplayed();
         log("/*46.---" + agentSelection + "field is displayed --*/");

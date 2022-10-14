@@ -1228,7 +1228,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectVaccineAgent() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
@@ -1262,6 +1262,7 @@ public class InClinicExperiencePage extends BasePage {
 		confirm_save_adm_and_another_vaccine_btn.click();
 	}
 	public String validateVaccineAgentSelectionFieldIsDisplayed() throws InterruptedException{
+		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		WebElement element = driver.findElement(click_vaccine_agent_dropdown1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
