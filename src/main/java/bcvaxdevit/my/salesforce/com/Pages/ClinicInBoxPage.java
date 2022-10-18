@@ -1222,7 +1222,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void selectOneOption(String vaccine) throws InterruptedException{
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
 		Thread.sleep(3000);
 		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
 			click(checkBoxCovid19Vaccine);

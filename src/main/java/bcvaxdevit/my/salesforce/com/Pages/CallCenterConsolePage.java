@@ -303,7 +303,7 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
 		click_on_covid19_vaccination_checkbox.click();
