@@ -36,7 +36,7 @@ public class ApiQueries {
 
     static final String GRANTSERVICE = "/services/oauth2/token?grant_type=password";
     private static String REST_ENDPOINT = "/services/data" ;
-    private static String API_VERSION = "/v50.0" ;
+    private static String API_VERSION = "/v56.0" ;
     private static String baseUri;
     private static Header oauthHeader;
     private static Header prettyPrintHeader = new BasicHeader("X-PrettyPrint", "1");
