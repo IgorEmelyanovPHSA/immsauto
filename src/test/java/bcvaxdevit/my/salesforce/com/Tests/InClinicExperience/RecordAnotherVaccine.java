@@ -25,7 +25,7 @@ public class RecordAnotherVaccine extends BaseTest {
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test(priority = 1)
-    public void Can_Complete_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws Exception {
+    public void Can_Record_Another_Vaccine_and_Administration_as_Clinic_User_in_ICE_BCVAXDEVIT() throws Exception {
         TestcaseID = "C222505";
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

@@ -473,7 +473,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
 	private WebElement saveConsentButton;
 	
-	@FindBy(xpath = "(//input[@data-id = 'select-sobject-id'])[3]")
+	@FindBy(xpath = "//li[@title='EL0203 - Exp. 2021 April 30']")
 	private WebElement selectLotNumber;
 	
 	@FindBy(xpath = "//span[@title='Appointments']")
@@ -1662,7 +1662,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectToSetLot() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", selectLotNumber);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1000)", "");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, selectLotNumber, 10);
 		this.selectLotNumber.click();
 		Thread.sleep(2000);
