@@ -1,13 +1,12 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 
 public class InClinicExperiencePage extends BasePage {
@@ -358,7 +357,22 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//input[@name='BCH_Date__c']")
 	private WebElement input_current_date;
 	private By input_current_date1 = By.xpath("//input[@name='BCH_Date__c']");
-	
+
+	@FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
+	private WebElement clinicLocationUserDefaults;
+
+	@FindBy(xpath = "//div[contains(text(),'Advanced Settings')]")
+	private WebElement btnAdvancedSettingsUserDefaults;
+
+	@FindBy(xpath = "(//span[@title='Agent']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[1]")
+	private WebElement agentUserDefaults;
+
+	@FindBy(xpath = "//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class']")
+	private WebElement lotUserDefaults;
+
+	@FindBy(xpath = "(//span[@title='Trade Name']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[2]")
+	private WebElement tradeNameUserDefaults;
+
 	@FindBy(xpath = ".//span[text() = 'User Defaults']")
 	private WebElement user_defaults_tab;
 	private By user_defaults_tab1 = By.xpath(".//span[text() = 'User Defaults']");
@@ -1332,6 +1346,26 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(user_defaults_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void selectClinicUserDefaults() throws InterruptedException {
+		String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+		click(clinicLocationUserDefaults);
+		clinicLocationUserDefaults.sendKeys(clinicLocation);
+	}
+
+	public HashMap clickOnAdvancedSettingsBtnAndSaveData() throws InterruptedException {
+		HashMap<String, String> agentLotTradeNameMap = new HashMap<>();
+		click(btnAdvancedSettingsUserDefaults);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(1000);
+		String agent = agentUserDefaults.getText();
+		String lot = getValue(lotUserDefaults);
+		String tradeName = tradeNameUserDefaults.getText();
+		agentLotTradeNameMap.put("agent",agent);
+		agentLotTradeNameMap.put("lot",lot);
+		agentLotTradeNameMap.put("tradeName",tradeName);
+		return agentLotTradeNameMap;
 	}
 	
 	public void inputCurrentDateUserDefaults() throws InterruptedException {

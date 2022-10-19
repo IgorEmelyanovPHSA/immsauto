@@ -33,6 +33,14 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 
+	public InClinicExperiencePage loginAsClinicianICEUserDefaults() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_UserDefaults"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_UserDefaults"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
+
 	public InClinicExperiencePage loginAsClinician_DIWA_ICE_WithParameters() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_DIWA_ICE"));
