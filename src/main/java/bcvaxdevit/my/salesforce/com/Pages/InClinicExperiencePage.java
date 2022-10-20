@@ -960,7 +960,7 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(select_app_launcher1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		waitForElementToBeLocated(driver, click_ice_app1, 10);
 		WebElement element1 = driver.findElement(click_ice_app1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
@@ -1348,13 +1348,12 @@ public class InClinicExperiencePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 
-	public void selectClinicUserDefaults() throws InterruptedException {
-		String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	public void selectClinicUserDefaults(String clinicLocation) throws InterruptedException {
 		click(clinicLocationUserDefaults);
 		clinicLocationUserDefaults.sendKeys(clinicLocation);
 	}
 
-	public HashMap clickOnAdvancedSettingsBtnAndSaveData() throws InterruptedException {
+	public HashMap clickBtnAdvancedSettingsAndSaveData() throws InterruptedException {
 		HashMap<String, String> agentLotTradeNameMap = new HashMap<>();
 		click(btnAdvancedSettingsUserDefaults);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
