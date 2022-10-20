@@ -597,7 +597,13 @@ public class SupplyConsolePage extends BasePage {
 		//click(supply_locations_tab1);
 		this.supply_locations_tab.click();
 	}
-	
+
+	public void clickOnSupplyLocationCustom(String locationName) throws InterruptedException {
+		WebElement customLocation = driver.findElement(By.xpath("(//a[contains(text(),'" + locationName + "')])[1]"));
+		click(customLocation);
+		Thread.sleep(5000);
+	}
+
 	public void clickOnSupplyLocation_1() throws InterruptedException {
 		//waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
 		waitForElementToBeVisible(driver, supply_supply_location_1, 10);
@@ -1211,6 +1217,14 @@ public class SupplyConsolePage extends BasePage {
 		return remainingDosesAndQuantityMap;
 	}
 
+	public boolean validateLotUserDefaults(String lot) {
+		boolean flag = false;
+		List countOfFoundLot = driver.findElements(By.xpath("//lightning-base-formatted-text/..//*[contains(text(),'"+ lot +"')]"));
+			if(countOfFoundLot.size()>0){
+				flag = true;
+			}
+		return flag;
+	}
 
 	public void enterBulkByDosageWithReason(double amount, String reason, int numberOfRows) throws InterruptedException {
 		//By dosage
