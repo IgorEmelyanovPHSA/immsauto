@@ -457,8 +457,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
 
-
-	
 	@FindBy(xpath = "//input[@placeholder=\"Search People...\"]")
 	private WebElement select_provider;
 	private By select_provider1 = By.xpath("//input[@placeholder=\"Search People...\"]");
