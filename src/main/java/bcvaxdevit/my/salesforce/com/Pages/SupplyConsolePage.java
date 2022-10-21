@@ -260,13 +260,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses_container1_lot_EK4241_distribution_1_1;
 	private By get_remaining_doses_container1_lot_EK4241_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container1_lot_EK4241_distribution_2_1;
-	private By get_remaining_doses_container1_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_container1_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container1_lot_EK4241_distribution_2_1;
-	private By get_remaining_Qty_container1_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_container1_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container1_lot_EK4241_distribution_1_1;
@@ -304,13 +304,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_Qty_container1_lot_MT0055_distribution_2_1;
 	private By get_remaining_Qty_container1_lot_MT0055_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][1]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container2_lot_EK4241_distribution_2_1;
-	private By get_remaining_doses_container2_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_container2_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container2_lot_EK4241_distribution_2_1;
-	private By get_remaining_Qty_container2_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_container2_lot_EK4241_distribution_2_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][4]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container3_lot_SPIKEVAX6_5Test001_distribution_2_1;
