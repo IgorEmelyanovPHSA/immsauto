@@ -24,7 +24,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
 
         log("/*1.----Login as clinician ICE --*/");
         InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEUserDefaults();
-        Thread.sleep(10000);
+        Thread.sleep(15000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
         if (inClinicExperience.displayIceApp()) {
