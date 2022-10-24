@@ -1,11 +1,9 @@
 package bcvaxdevit.my.salesforce.com.Tests.ClinicInBox;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -28,7 +26,7 @@ public class Scheduler extends BaseTest{
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-        InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianConWithParameters();
+        InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
         Thread.sleep(10000);
         inClinicExperiencePage.closeTabsHCA();
         Thread.sleep(5000);

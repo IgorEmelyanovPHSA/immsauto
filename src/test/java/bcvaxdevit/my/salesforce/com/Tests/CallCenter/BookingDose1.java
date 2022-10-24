@@ -25,7 +25,7 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecondition();
 		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
@@ -94,7 +94,7 @@ public class BookingDose1 extends BaseTest {
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		System.out.println("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
-		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCCWithParameters();
+		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		Thread.sleep(10000);
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
@@ -219,7 +219,7 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		System.out.println("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecondition();
 		Thread.sleep(10000);
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");

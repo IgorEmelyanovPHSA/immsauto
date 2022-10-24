@@ -25,7 +25,7 @@ public class Drafts extends BaseTest {
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -148,7 +148,7 @@ public class Drafts extends BaseTest {
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -280,7 +280,7 @@ public class Drafts extends BaseTest {
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -403,7 +403,7 @@ public class Drafts extends BaseTest {
         log("/*----Amount Adjustment Quantity " + amountOfQuantityToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");

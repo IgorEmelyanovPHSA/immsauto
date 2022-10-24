@@ -1,6 +1,5 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
@@ -14,7 +13,7 @@ public class ReceiveSupplies extends BaseTest {
 		TestcaseID = "111334"; //C111334
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*-- 1.Login as an PPHIS user to Supply Location on BCVAXDEVIT --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 		if (supplyConsolePage.displaySupplyConsolePage()) {
 			log("/*-- 2. User already on Health Connect - Supply Console --*/");

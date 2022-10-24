@@ -22,7 +22,7 @@ public class Historical_Immunization extends BaseTest {
 		TestcaseID = "225704"; //C225704 -- CIB - Historical Immunization Records - PIR Submission Status
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		Thread.sleep(10000);
 		log("/*2.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
@@ -86,7 +86,7 @@ public class Historical_Immunization extends BaseTest {
 		//TestcaseID = "??????"; //C??????
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		log("/*2.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		Thread.sleep(2000);

@@ -19,7 +19,7 @@ public class BulkTransfers extends BaseTest {
 		TestcaseID = "222358";
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
@@ -247,7 +247,7 @@ public class BulkTransfers extends BaseTest {
 		TestcaseID = "222358";
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
@@ -475,7 +475,7 @@ public class BulkTransfers extends BaseTest {
 		TestcaseID = "222360";
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 		System.out.println("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();

@@ -26,7 +26,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEWithParameters();
+        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
         Thread.sleep(10000);
         System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
         inClinicExperience.verifyIsICEpageDisplayed();

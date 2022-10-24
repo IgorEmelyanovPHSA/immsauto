@@ -54,7 +54,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         String conformationNumberText = registerToGetVaccinatedPage.registrationSuccessfulPageDisplayed();
 
         log("/*6.---Login as an Clinician to ICE--*/");
-        InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICEWithParameters();
+        InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
         Thread.sleep(5000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
