@@ -4,7 +4,6 @@ import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -22,7 +21,7 @@ public class DIWA_ICE extends BaseTest {
 		String clinicLocation = "All Ages - Atlin Health Centre";
 
 		log("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinician_DIWA_ICE_WithParameters();
+		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinician_DIWA_ICE();
 		Thread.sleep(5000);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();

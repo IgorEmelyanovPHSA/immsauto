@@ -3,10 +3,7 @@ package bcvaxdevit.my.salesforce.com.Tests.Portal;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.*;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
-import io.qameta.allure.Allure;
-import io.qameta.allure.AllureLifecycle;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -54,7 +51,7 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		String conformationNumberText = registerToGetVaccinatedPage.registrationSuccessfulPageDisplayed();
 
 		log("/*6.---Login as an Clinician to ICE--*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICEWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
 		Thread.sleep(5000);
 		inClinicExperiencePage.verifyIsICEpageDisplayed();
 

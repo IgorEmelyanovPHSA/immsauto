@@ -15,7 +15,7 @@ public class Requisition extends BaseTest {
 		TestcaseID = "220561"; //C220561
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1WithParameters();
+		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
 		Thread.sleep(5000);
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		requisitionPage.displaySupplyConsolePage();

@@ -24,7 +24,7 @@ public class Wastage extends BaseTest {
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 		
 		log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -130,7 +130,7 @@ public class Wastage extends BaseTest {
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHISWithParameters();
+		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");

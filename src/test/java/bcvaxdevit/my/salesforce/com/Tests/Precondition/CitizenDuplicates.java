@@ -17,7 +17,7 @@ public class CitizenDuplicates extends BaseTest {
 		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
 		/*----Login as an Clinician In-Clinic Experience --*/
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecondition();
 		if (inClinicExperiencePage.displayIceApp()) {
 			log("/*---- User already on ICE--*/");
 		} else {
@@ -88,7 +88,7 @@ public class CitizenDuplicates extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("Searching and Removing Citizen Duplicates ");
 		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPreconditionWithParameters();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecondition();
 		if (inClinicExperiencePage.displayIceApp()) {
 			System.out.println("/*---- User already on ICE--*/");
 		} else {

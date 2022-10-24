@@ -30,7 +30,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		Thread.sleep(10000);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		if (clinicInBox.displayCIBApp()) {

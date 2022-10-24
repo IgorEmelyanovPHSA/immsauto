@@ -25,7 +25,7 @@ public class LoginPage extends BasePage {
 		super(driver);
 	}
 
-	public InClinicExperiencePage loginAsClinicianICEWithParameters() throws Exception {
+	public InClinicExperiencePage loginAsClinicianICE() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_ICE"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_ICE"));
@@ -41,7 +41,7 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 
-	public InClinicExperiencePage loginAsClinician_DIWA_ICE_WithParameters() throws Exception {
+	public InClinicExperiencePage loginAsClinician_DIWA_ICE() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_DIWA_ICE"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_DIWA_ICE_PW"));
@@ -49,7 +49,7 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
-	public InClinicExperiencePage loginAsPreconditionWithParameters() throws Exception {
+	public InClinicExperiencePage loginAsPrecondition() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_Precondition"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PreconditionPW"));
@@ -57,7 +57,7 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
-	public SupplyConsolePage loginAsPPHISWithParameters() throws Exception {
+	public SupplyConsolePage loginAsPPHIS() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
@@ -65,7 +65,7 @@ public class LoginPage extends BasePage {
 		return new SupplyConsolePage(driver);
 	}
 
-	public RequisitionPage loginAsPPHIS1WithParameters() throws Exception {
+	public RequisitionPage loginAsPPHIS1() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
@@ -73,7 +73,7 @@ public class LoginPage extends BasePage {
 		return new RequisitionPage(driver);
 	}
 	
-	public InClinicExperiencePage loginWithClinicianConWithParameters() throws Exception {
+	public InClinicExperiencePage loginWithClinicianCon() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Consumption"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Consumption"));
@@ -81,7 +81,7 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
-	public InClinicExperiencePage loginWithClinicianWrongClinicWithParameters() throws Exception {
+	public InClinicExperiencePage loginWithClinicianWrongClinic() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_WrongClinic"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_WrongClinic"));
@@ -89,7 +89,7 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 	
-	public ClinicInBoxPage loginAsClinicianCIBWithParameters() throws Exception {
+	public ClinicInBoxPage loginAsClinicianCIB() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CIB"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_CIB"));
@@ -97,7 +97,7 @@ public class LoginPage extends BasePage {
 		return new ClinicInBoxPage(driver);
 	}
 	
-	public ClinicInBoxPage loginAsClinician_DIWA_CIB_WithParameters() throws Exception {
+	public ClinicInBoxPage loginAsClinicianDIWACIB() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_DIWA_CIB"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_DIWA_CIB_PW"));
@@ -105,7 +105,7 @@ public class LoginPage extends BasePage {
 		return new ClinicInBoxPage(driver);
 	}
 
-	public CallCenterConsolePage loginAsCalCenterAgentCCWithParameters() throws Exception {
+	public CallCenterConsolePage loginAsCalCenterAgentCC() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT_CC"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CALLCENTERAGENT_PW_CC"));

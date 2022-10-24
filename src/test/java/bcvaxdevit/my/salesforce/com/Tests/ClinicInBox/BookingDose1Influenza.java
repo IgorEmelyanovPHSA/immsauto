@@ -29,7 +29,7 @@ public class BookingDose1Influenza extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIBWithParameters();
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
 		Thread.sleep(10000);
 
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
