@@ -336,13 +336,13 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_Qty_container5_lot_EK4241_distribution_1_2;
 	private By get_remaining_Qty_container5_lot_EK4241_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][5]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][7]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2;
-	private By get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][7]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
+	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][7]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2;
-	private By get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][6]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+	private By get_remaining_Qty_container6_lot_SPIKEVAX6_5Test001_distribution_1_2_ = By.xpath("(.//tr[@class='slds-hint-parent'][7]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
 
 	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
 	private WebElement select_app_launcher;

@@ -614,20 +614,20 @@ public class BulkTransfers extends BaseTest {
 		////////////Distribution_1_1 Validation "FROM" after
 		log("/*----Validation for container#1 Distribution_1_1 - MT0055");
 		assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1, remainingDoses_before_Lot_MT0055_Distribution_1_1 - 1);
-		assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1, round((remainingDoses_before_Lot_MT0055_Distribution_1_1 - 1) / 10),2);
+		assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1, round((remainingDoses_before_Lot_MT0055_Distribution_1_1 - 1) / 5),2);
 		log("/*----Validation for container#2 Distribution_1_1 - EK4241");
 		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1);
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1) / 5),2);
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, round((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 1) / 10),2);
 		log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX6-5Test001");
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - 1);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, round((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - 1) / 10),2);
 		////////////Distribution_1_2 Validation "TO" after
 		log("/*----Validation for container#4 Distribution_1_2 - MT0055");
 		assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_2, remainingDoses_before_Lot_MT0055_Distribution_1_2 + 1);
-		assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_2, round((remainingDoses_before_Lot_MT0055_Distribution_1_2 + 1) / 10),2);
+		assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_2, round((remainingDoses_before_Lot_MT0055_Distribution_1_2 + 1) / 5),2);
 		log("/*----Validation for container#5 Distribution_1_2 - EK4241");
 		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_2, remainingDoses_before_Lot_EK4241_Distribution_1_2 + 1);
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_2, round((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 1) / 5),2);
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_2, round((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 1) / 10),2);
 		log("/*----Validation for container#6 Distribution_1_2 - SPIKEVAX6-5Test001");
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + 1);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, round((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + 1) / 10),2);
