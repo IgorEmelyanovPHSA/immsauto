@@ -117,6 +117,14 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(Utils.getEnvConfigProperty("url_citizenportal"));
 		return new RegisterToGetVaccinatedPage(driver);
 	}
+
+	public ClinicInBoxPage loginAsClinicianPneumo() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Pneumo_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Pneumo_ICE"));
+		click(login_button);
+		return new ClinicInBoxPage(driver);
+	}
 	
 	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
 		driver.navigate().to(uniqueLink);
