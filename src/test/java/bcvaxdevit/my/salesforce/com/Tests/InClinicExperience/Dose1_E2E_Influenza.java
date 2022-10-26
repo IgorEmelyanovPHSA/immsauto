@@ -25,33 +25,41 @@ public class Dose1_E2E_Influenza extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianInfluenza();
         Thread.sleep(10000);
-        System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
-        inClinicExperience.verifyIsICEpageDisplayed();
-        Thread.sleep(5000);
-        System.out.println("/*3.--- Navigate to In Clinic Experience App --*/");
-        inClinicExperience.selectICEFromApp();
+
+        log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
+        if (inClinicExperience.displayIceApp()) {
+            log("/*-- User already on In-Clinic Experience page --*/");
+        } else {
+            log("/*-- Navigate to In-Clinic Experience page --*/");
+            inClinicExperience.selectICEFromApp();
+            Thread.sleep(5000);
+        }
+
         Thread.sleep(5000);
         System.out.println("/*4.----Close All previously opened Tab's --*/");
         inClinicExperience.closeTabsHCA();
         Thread.sleep(5000);
+
         System.out.println("/*5.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
         Thread.sleep(2000);
+
         System.out.println("/*6.----- Enter current date for UserDefaults --*/");
         inClinicExperience.inputCurrentDateUserDefaults();
         Thread.sleep(2000);
+
         System.out.println("/*7.----- Click on Save defaults button --*/");
         inClinicExperience.clickSaveDefaultsButton();
         Thread.sleep(2000);
+
         System.out.println("/*8.----- Click on register Tab --*/");
         inClinicExperience.clickRegisterTab();
         Thread.sleep(2000);
-        //System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
-        //inClinicExperience.clickSaveModalDefaultsButton();
-        //Thread.sleep(2000);
+
         System.out.println("/*10.----click Register button New Citizen --*/");
         inClinicExperience.clickRegisterButton();
         Thread.sleep(2000);
@@ -100,15 +108,7 @@ public class Dose1_E2E_Influenza extends BaseTest {
         System.out.println("/*25.----click on person Account Related Tab --*/");
         inClinicExperience.clickOnPersonAccountRelatedTab();
         Thread.sleep(2000);
-        //System.out.println("/*24.----click on Eligibility button --*/");
-        //inClinicExperience.clickEligibilityButton();
-        //Thread.sleep(2000);
-        //System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
-        //inClinicExperience.selectCovid19option();
-        //Thread.sleep(2000);
-        //System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-        //inClinicExperience.userIsEligibleSuccessMsg();
-        //Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+
         System.out.println("/*26----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
         Thread.sleep(2000);
@@ -161,8 +161,8 @@ public class Dose1_E2E_Influenza extends BaseTest {
         System.out.println("/*40.---Click confirm and Save Button --*/");
         inClinicExperience.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
-        System.out.println("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-        inClinicExperience.selectVaccineAgent();
+        System.out.println("/*41.---select Vaccine Agent picklist Value ->  Influenza-LAIV --*/");
+        inClinicExperience.selectVaccineAgentInfluenza();
         Thread.sleep(3000);
         System.out.println("/*42.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();

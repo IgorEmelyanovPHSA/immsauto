@@ -125,6 +125,14 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		return new ClinicInBoxPage(driver);
 	}
+
+	public InClinicExperiencePage loginAsClinicianInfluenza() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Influenza_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Influenza_ICE"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
 		driver.navigate().to(uniqueLink);
