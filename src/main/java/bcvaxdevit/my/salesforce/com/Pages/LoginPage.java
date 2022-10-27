@@ -126,10 +126,18 @@ public class LoginPage extends BasePage {
 		return new ClinicInBoxPage(driver);
 	}
 
-	public InClinicExperiencePage loginAsClinicianInfluenza() throws Exception {
+	public InClinicExperiencePage loginAsClinicianInfluenzaICE() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Influenza_ICE"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Influenza_ICE"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
+
+	public InClinicExperiencePage loginAsClinicianPneumoICE() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Pneumo_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Pneumo_ICE"));
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}

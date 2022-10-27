@@ -388,7 +388,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//span[text() = 'Influenza-LAIV']")
 	private WebElement select_vaccine_agent_influenza_dropdown;
 	private By select_vaccine_agent_influenza_dropdown1 = By.xpath(".//span[text() = 'Influenza-LAIV']");
-	
+
+	@FindBy(xpath = ".//span[text() = 'Pneumo-P-23']")
+	private WebElement select_vaccine_agent_pnemo_dropdown;
+	private By select_vaccine_agent_pnemo_dropdown1 = By.xpath(".//span[text() = 'Influenza-LAIV']");
+
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
 	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
@@ -961,12 +965,16 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectICEFromApp() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(select_app_launcher1);
+		Thread.sleep(2000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(500);
+		Thread.sleep(3000);
 		waitForElementToBeLocated(driver, click_ice_app1, 10);
+		Thread.sleep(2000);
 		WebElement element1 = driver.findElement(click_ice_app1);
+		Thread.sleep(2000);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 		Thread.sleep(2000);
@@ -1094,7 +1102,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnVaccinationInfluenzaCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, click_on_influenza_vaccination_checkbox, 10);
 		Thread.sleep(2000);
@@ -1273,6 +1281,16 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_vaccine_agent_influenza_dropdown, 10);
 		select_vaccine_agent_influenza_dropdown.click();
+	}
+
+	public void selectVaccineAgentPnemo() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
+		click_vaccine_agent_dropdown.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_vaccine_agent_pnemo_dropdown, 10);
+		select_vaccine_agent_pnemo_dropdown.click();
 	}
 	
 	public void ClickSaveConsentButton() throws InterruptedException {

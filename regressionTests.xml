@@ -30,6 +30,7 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.Historical_Immunization"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose1_E2E_Influenza"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.UserDefaults.UserDefaultsSettingsValidation"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose1_E2E_Pneumo"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

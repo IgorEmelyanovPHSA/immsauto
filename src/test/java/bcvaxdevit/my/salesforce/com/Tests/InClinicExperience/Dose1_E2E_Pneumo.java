@@ -21,31 +21,41 @@ public class Dose1_E2E_Pneumo extends BaseTest {
 
     @Test(priority = 1)
     public void Can_do_Dose1_Pneumo_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-        TestcaseID = "228859"; //C228859
+        TestcaseID = "229058"; //C229058
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianPneumoICE();
         Thread.sleep(10000);
-        System.out.println("/*2.----In Clinic Experience(ICE) page displayed --*/");
-        inClinicExperience.verifyIsICEpageDisplayed();
-        Thread.sleep(5000);
-        System.out.println("/*3.--- Navigate to In Clinic Experience App --*/");
-        inClinicExperience.selectICEFromApp();
+
+        log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
+        if (inClinicExperience.displayIceApp()) {
+            log("/*-- User already on In-Clinic Experience page --*/");
+        } else {
+            log("/*-- Navigate to In-Clinic Experience page --*/");
+            inClinicExperience.selectICEFromApp();
+            Thread.sleep(5000);
+        }
+
         Thread.sleep(5000);
         System.out.println("/*4.----Close All previously opened Tab's --*/");
         inClinicExperience.closeTabsHCA();
         Thread.sleep(5000);
+
         System.out.println("/*5.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
         Thread.sleep(2000);
+
         System.out.println("/*6.----- Enter current date for UserDefaults --*/");
         inClinicExperience.inputCurrentDateUserDefaults();
         Thread.sleep(2000);
+
         System.out.println("/*7.----- Click on Save defaults button --*/");
         inClinicExperience.clickSaveDefaultsButton();
         Thread.sleep(2000);
+
         System.out.println("/*8.----- Click on register Tab --*/");
         inClinicExperience.clickRegisterTab();
         Thread.sleep(2000);
@@ -161,8 +171,8 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*40.---Click confirm and Save Button --*/");
         inClinicExperience.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
-        System.out.println("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-        inClinicExperience.selectVaccineAgent();
+        System.out.println("/*41.---select Vaccine Agent picklist Value ->  Pneumo-P-23 --*/");
+        inClinicExperience.selectVaccineAgentPnemo();
         Thread.sleep(3000);
         System.out.println("/*42.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();
