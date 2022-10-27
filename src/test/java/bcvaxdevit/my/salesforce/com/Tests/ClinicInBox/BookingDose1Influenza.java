@@ -18,7 +18,7 @@ public class BookingDose1Influenza extends BaseTest {
 	private String personalHealthNumber = "9746173963";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	private String vaccineToSelect = "InfluenzaVaccine";
 
 	@Test(priority = 1)
