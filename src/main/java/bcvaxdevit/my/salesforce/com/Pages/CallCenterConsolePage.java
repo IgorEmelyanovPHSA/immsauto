@@ -80,7 +80,10 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = ".//span[text() = 'Covid-19 Vaccine']")
 	private WebElement click_on_covid19_vaccination_checkbox;
 	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
-	
+
+	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
+	private WebElement checkBoxInfluenzaVaccine;
+
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
 	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
@@ -434,6 +437,21 @@ public class CallCenterConsolePage extends BasePage {
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-	
+
+	public void selectOneOption(String vaccine) throws InterruptedException{
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
+		Thread.sleep(3000);
+		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
+			click(click_on_covid19_vaccination_checkbox);
+		}
+		else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
+			click(checkBoxInfluenzaVaccine);
+		}
+		else{
+			click(click_on_covid19_vaccination_checkbox);
+			click(checkBoxInfluenzaVaccine);
+		}
+	}
+
 }
 
