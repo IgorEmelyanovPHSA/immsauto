@@ -1264,7 +1264,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void selectVaccineAgent() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();

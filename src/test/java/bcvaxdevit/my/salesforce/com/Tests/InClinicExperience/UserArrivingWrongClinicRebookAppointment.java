@@ -89,12 +89,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
 		log("/*-- 21.Click register Button on confirmation page --*/");
 		Thread.sleep(5000);
-		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
-		Thread.sleep(2000);
-		System.out.println("/*23.----click on reason Early Booking Reason - Travel --*/");
-		inClinicExperiencePage.selectEarlyBookingReason();
-		Thread.sleep(2000);
+		inClinicExperiencePage.navigateAppointmentSchedulingTab();
+		Thread.sleep(15000);
+		//System.out.println("/*23.----click on reason Early Booking Reason - Travel --*/");
+		//inClinicExperiencePage.selectEarlyBookingReason();
+		//Thread.sleep(2000);
 		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);

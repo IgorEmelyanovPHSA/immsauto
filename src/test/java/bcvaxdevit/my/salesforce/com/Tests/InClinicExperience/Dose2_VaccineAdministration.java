@@ -110,10 +110,10 @@ public class Dose2_VaccineAdministration extends BaseTest {
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		System.out.println("/*26.----Go to Appointment Tab --*/");
 		inClinicExperience.navigateAppointmentSchedulingTab();
-		Thread.sleep(2000);
-		System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
-		inClinicExperience.selectEarlyBookingReason();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
+		//System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
+		//inClinicExperience.selectEarlyBookingReason();
+		//Thread.sleep(2000);
 		System.out.println("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);

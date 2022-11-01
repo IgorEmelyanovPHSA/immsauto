@@ -153,7 +153,7 @@ public class BookingDose2 extends BaseTest {
 		Thread.sleep(10000);//wait for refresh
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		//System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
 		//callCenterConsole.selectEarlyBookingReason();
 		//Thread.sleep(2000);
