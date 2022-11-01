@@ -391,7 +391,15 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = ".//span[text() = 'Pneumo-P-23']")
 	private WebElement select_vaccine_agent_pnemo_dropdown;
-	private By select_vaccine_agent_pnemo_dropdown1 = By.xpath(".//span[text() = 'Influenza-LAIV']");
+	private By select_vaccine_agent_pnemo_dropdown1 = By.xpath(".//span[text() = 'Pneumo-P-23']");
+
+	@FindBy(xpath = ".//button[@aria-label = 'Route, Select an Option']")
+	private WebElement click_route_dropdown;
+	private By click_route_dropdown1 = By.xpath(".//button[@aria-label = 'Route, Select an Option']");
+
+	@FindBy(xpath = ".//span[text() = 'Intranasal']")
+	private WebElement select_route_intranasal_dropdown;
+	private By select_route_intranasal_dropdown1 = By.xpath(".//span[text() = 'Intranasal']");
 
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
@@ -1284,7 +1292,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgentPnemo() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
@@ -1292,9 +1300,23 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, select_vaccine_agent_pnemo_dropdown, 10);
 		select_vaccine_agent_pnemo_dropdown.click();
 	}
+
+	public void selectRouteIntranasal() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_route_dropdown, 10);
+		Thread.sleep(2000);
+		click_route_dropdown.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_route_intranasal_dropdown, 10);
+		select_route_intranasal_dropdown.click();
+	}
 	
 	public void ClickSaveConsentButton() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_consent_btn, 10);
+		Thread.sleep(2000);
 		save_consent_btn.click();
 	}
 	

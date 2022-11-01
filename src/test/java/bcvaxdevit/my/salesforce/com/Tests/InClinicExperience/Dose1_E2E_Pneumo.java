@@ -177,7 +177,10 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*42.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
-        System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
+        System.out.println("/*42_.---Select Route from DropDown -> Intranasal --*/");
+        inClinicExperience.selectRouteIntranasal();
+        Thread.sleep(5000);
+        System.out.println("/*42__.---Click Save button for Immunisation Information --*/");
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
         System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
