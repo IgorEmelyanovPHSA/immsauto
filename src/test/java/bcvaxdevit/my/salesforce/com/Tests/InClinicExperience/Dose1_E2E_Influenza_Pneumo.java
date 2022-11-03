@@ -3,13 +3,12 @@ package bcvaxdevit.my.salesforce.com.Tests.InClinicExperience;
 import Utilities.TestListener;
 import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Listeners;
+import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
 import org.testng.annotations.Test;
 
-
 @Listeners({TestListener.class})
-public class Dose1_E2E_Pneumo extends BaseTest {
+public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
     private String dateOfBirth = "Sep 21, 1923";
@@ -20,14 +19,14 @@ public class Dose1_E2E_Pneumo extends BaseTest {
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test(priority = 1)
-    public void Can_do_Dose1_Pneumo_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-        TestcaseID = "229058"; //C229058
+    public void Can_do_Multiple_Dose1_Influenza_Pneumo_Vaccine_Administration_as_Clinician_ICE() throws Exception {
+        TestcaseID = "229061"; //C229061
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianPneumoICE();
+        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianInfluenzaICE();
         Thread.sleep(10000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
@@ -59,9 +58,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*8.----- Click on register Tab --*/");
         inClinicExperience.clickRegisterTab();
         Thread.sleep(2000);
-        //System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
-        //inClinicExperience.clickSaveModalDefaultsButton();
-        //Thread.sleep(2000);
+
         System.out.println("/*10.----click Register button New Citizen --*/");
         inClinicExperience.clickRegisterButton();
         Thread.sleep(2000);
@@ -110,15 +107,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*25.----click on person Account Related Tab --*/");
         inClinicExperience.clickOnPersonAccountRelatedTab();
         Thread.sleep(2000);
-        //System.out.println("/*24.----click on Eligibility button --*/");
-        //inClinicExperience.clickEligibilityButton();
-        //Thread.sleep(2000);
-        //System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
-        //inClinicExperience.selectCovid19option();
-        //Thread.sleep(2000);
-        //System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-        //inClinicExperience.userIsEligibleSuccessMsg();
-        //Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+
         System.out.println("/*26----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
         Thread.sleep(2000);
@@ -161,6 +150,9 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience.clickRelatedTab();
         Thread.sleep(2000);
+
+        // Administrate first Vaccine -> Influenza
+        System.out.println("/*-----Administrate another Vaccine -> Influenza --*/");
         System.out.println("/*38.----click on In-clinic Experience button --*/");
         inClinicExperience.ClickGoToInClinicExperienceButton();
         //InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
@@ -171,27 +163,54 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*40.---Click confirm and Save Button --*/");
         inClinicExperience.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
-        System.out.println("/*41.---select Vaccine Agent picklist Value ->  Pneumo-P-23 --*/");
-        inClinicExperience.selectVaccineAgentPneumo();
+        System.out.println("/*41.---select Vaccine Agent picklist Value ->  Influenza-LAIV --*/");
+        inClinicExperience.selectVaccineAgentInfluenza();
         Thread.sleep(3000);
         System.out.println("/*42.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
-        System.out.println("/*42_.---Select Route from DropDown -> Intranasal --*/");
-        inClinicExperience.selectRouteIntranasal();
-        Thread.sleep(5000);
-        System.out.println("/*42__.---Click Save button for Immunisation Information --*/");
+        System.out.println("/*43.---Click Save button for Immunisation Information --*/");
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
-        System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
-        inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+
+        // Administrate another Vaccine -> Pneumo
+        System.out.println("/*-----Administrate another Vaccine -> Pneumo --*/");
+        System.out.println("/*44.---Click Save Administration & Record Another Vaccine button --*/");
+        inClinicExperience.ClickSaveAdministratorAndRecordAnotherVaccineButton();
         Thread.sleep(5000);
-        System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+
+        //click - Confirm on "Do you want to administer another vaccine for this client?" modal screen
+        System.out.println("/*45.---Click Confirm Button - to administer another(Pneumo) vaccine --*/");
+        inClinicExperience.ClickConfirmAdminAnotherVaccineModalScreenButton();
+        Thread.sleep(10000);
+
+        //System.out.println("/*46.---Click Modal screen Confirm & Save Administration Button --*/");
+        //inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+        //Thread.sleep(3000);
+
+        System.out.println("/*46.---select Vaccine Agent picklist Value ->  Pneumo --*/");
+        inClinicExperience.selectVaccineAgentPneumo();
         Thread.sleep(3000);
-        System.out.println("/*45.---the Home - Client Search showing up  --*/");
-        inClinicExperience.validateHomePageShownUp();
-        Thread.sleep(3000);
+
+        System.out.println("/*47.---Click Save Consent Button --*/");
+        inClinicExperience.ClickSaveConsentButton();
+        Thread.sleep(5000);
+
+        System.out.println("/*48.---Select Route from DropDown -> Intranasal --*/");
+        inClinicExperience.selectRouteIntranasal();
+        Thread.sleep(5000);
+
+        System.out.println("/*49.---Click Save button for Immunisation Information --*/");
+        inClinicExperience.ClickSaveImmuneInfoSaveButton();
+        Thread.sleep(5000);
+
+
+
+
+
+        //System.out.println("/*50.---the Home - Client Search showing up  --*/");
+        //inClinicExperience.validateHomePageShownUp();
+        //Thread.sleep(3000);
     }
 
     @Test(priority = 2)
@@ -200,5 +219,4 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
     }
-
 }
