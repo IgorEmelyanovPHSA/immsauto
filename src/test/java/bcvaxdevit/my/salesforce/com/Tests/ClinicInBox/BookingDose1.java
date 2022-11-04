@@ -22,7 +22,7 @@ public class BookingDose1 extends BaseTest {
 	private String vaccineToSelect = "Covid19Vaccine";
 
 	@Test(priority = 1)
-	public void Can_Book_Dose1_Appointment_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
+	public void Can_Book_Dose1_Appointment_as_Clinician_CIB() throws Exception {
 		TestcaseID = "225652"; //C225652
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");

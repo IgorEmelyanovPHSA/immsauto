@@ -5,6 +5,7 @@
         <classes>
             <class name="bcvaxdevit.my.salesforce.com.Tests.CallCenter.BookingDose1"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.CallCenter.BookingDose2"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.CallCenter.BookingDose1Influenza"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose1"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose1Influenza"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.ClinicInBox.BookingDose1Pneumonia"/>

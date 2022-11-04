@@ -20,75 +20,9 @@ public class BookingDose2 extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-
-	//@Test(priority = 1)
-	public void NOT_IN_USE_Pre_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			log("/*---- User already on ICE--*/");
-		} else {
-			log("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
-		log("/*----Search for Gill is Successful ---*/");
-		if (!inClinicExperiencePage.userGillFound()) {
-			log("/*----User --> User Gill not found and return---*/");
-		}
-		while (inClinicExperiencePage.userGillFound()) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			while (inClinicExperiencePage.selectImmsRecord()) {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				log("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
-			log("/*----Search for Gill is Successful ---*/");
-		}
-	}
 	
 	@Test(priority = 1)
-	public void Can_Book_Dose2_Appointment_as_Call_Center_Agent_BCVAXDEVIT() throws Exception {
+	public void Can_Book_Dose2_Appointment_as_Call_Center_Agent() throws Exception {
 		TestcaseID = "222525"; //C222525
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -208,74 +142,5 @@ public class BookingDose2 extends BaseTest {
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 	}
-
-	//@Test(priority = 3)
-	public void NOT_IN_USE_Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("Searching and Removing Citizen Duplicates BCVAXDEVIT");
-		/*----Login as an Clinician In-Clinic Experience --*/
-		log("/*----Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsPrecondition();
-		Thread.sleep(10000);
-		if (inClinicExperiencePage.displayIceApp()) {
-			log("/*---- User already on ICE--*/");
-		} else {
-			log("/*---- Navigate to ICE APP --*/");
-			inClinicExperiencePage.selectIceApp();
-			Thread.sleep(2000);
-		}
-		/*----Go to Register Tab ---*/
-		log("/*----Go to Register Tab ---*/");
-		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(5000);
-		/*----Search for Participant account ---*/
-		log("/*----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
-		log("/*----Search for Gill is Successful ---*/");
-		if (!inClinicExperiencePage.userGillFound()) {
-			log("/*----User --> User Gill not found and return---*/");
-		}
-		while (inClinicExperiencePage.userGillFound()) {
-			log("/*----User found and Navigated to record page ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigated to Person Account related tab ---*/");
-			Thread.sleep(2000);
-			if (!inClinicExperiencePage.selectImmsRecord()) {
-				log("/*----No Imms Record found and return---*/");
-			} else {
-				log("/*---- User navigated to Imms record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteImmsRecord();
-				log("/*---- Imms record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			inClinicExperiencePage.clickRelatedTab();
-			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
-			Thread.sleep(5000);
-			if (!inClinicExperiencePage.selectRERNRecord()) {
-				log("/*----No RERN Record found and return---*/");
-			} else {
-				log("/*---- User navigated to RERN record ---*/");
-				Thread.sleep(2000);
-				inClinicExperiencePage.deleteRERNRecord();
-				log("/*---- RERN record deleted Successfully ---*/");
-				Thread.sleep(2000);
-			}
-			log("/*---- Navigated to Person Account related tab ---*/");
-			inClinicExperiencePage.deletePersonAccount();
-			log("/*---- Person Account deleted Successfully ---*/");
-			Thread.sleep(2000);
-			inClinicExperiencePage.clickRegisterTab();
-			Thread.sleep(5000);
-			inClinicExperiencePage.closeOpenTabs();
-			log("/*---- Close the deleted Person Account ---*/");
-			Thread.sleep(2000);
-			log("/*----Re Searching for the Participant account ---*/");
-			inClinicExperiencePage.SearchForCitizen("Gill Ashely BCVaxOrigan");
-			log("/*----Search for Gill is Successful ---*/");
-		}
-	}
-	
 	
 }
