@@ -409,6 +409,15 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_route_intranasal_dropdown;
 	private By select_route_intranasal_dropdown1 = By.xpath(".//span[text() = 'Intranasal']");
 
+	@FindBy(xpath = ".//button[@aria-label = 'Lot Number']")
+	private WebElement click_lot_number_dropdown;
+	private By click_lot_number_dropdown1 = By.xpath(".//button[@aria-label = 'Lot Number']");
+
+	@FindBy(xpath = ".//span[text() = 'T005729-CC07 - Exp. 2021 November 16']")
+	private WebElement select_pneumo_lot_number_dropdown;
+	private By select_pneumo_lot_number_dropdown1 = By.xpath(".//span[text() = 'T005729-CC07 - Exp. 2021 November 16']");
+
+
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
 	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
@@ -1318,6 +1327,17 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_route_intranasal_dropdown, 10);
 		select_route_intranasal_dropdown.click();
+	}
+
+	public void selectPneumoLotNumber() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_lot_number_dropdown, 10);
+		Thread.sleep(2000);
+		click_lot_number_dropdown.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_pneumo_lot_number_dropdown, 10);
+		select_pneumo_lot_number_dropdown.click();
 	}
 	
 	public void ClickSaveConsentButton() throws InterruptedException {

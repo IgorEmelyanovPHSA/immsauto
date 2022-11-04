@@ -17,6 +17,9 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String citizenName = "Ludovika BcvaxLimeburn";
+    String nameToSearch = "Ludovika BcvaxLimeburn";
+
 
     @Test(priority = 1)
     public void Can_do_Multiple_Dose1_Influenza_Pneumo_Vaccine_Administration_as_Clinician_ICE() throws Exception {
@@ -106,20 +109,24 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         System.out.println("/*25.----click on person Account Related Tab --*/");
         inClinicExperience.clickOnPersonAccountRelatedTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         System.out.println("/*26----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
+
         log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
         inClinicExperience.clickOnVaccinationInfluenzaCheckbox();
         Thread.sleep(2000);
+
         //System.out.println("/*29----click on 'More' search tab --*/");
         //inClinicExperience.clickOnMoreSearchTabs();
         //Thread.sleep(2000);
+
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
         inClinicExperience.selectSearchByClinicNameTab();
         Thread.sleep(2000);
+
         log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience.searchClinicName(clinicNameToSearch);
         Thread.sleep(2000);
@@ -196,7 +203,15 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
 
-        System.out.println("/*48.---Select Route from DropDown -> Intranasal --*/");
+        System.out.println("/*48.---Select Pneumo Lot Number -> T005729-CC07 --*/");
+        inClinicExperience.selectPneumoLotNumber();
+        Thread.sleep(5000);
+
+        System.out.println("/*48_.---Select Route from DropDown -> Intranasal --*/");
+        inClinicExperience.selectRouteIntranasal();
+        Thread.sleep(5000);
+
+        System.out.println("/*48__.---Select Site -> Arm - Right deltoid --*/");
         inClinicExperience.selectRouteIntranasal();
         Thread.sleep(5000);
 
@@ -204,13 +219,39 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
 
+        System.out.println("/*50.---Click Confirm and Save Administration Button --*/");
+        inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+        Thread.sleep(5000);
 
+        System.out.println("/*51.---Click Modal screen Confirm&Save Administration Button --*/");
+        inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+        Thread.sleep(3000);
 
+        System.out.println("/*52.---the Home - Client Search showing up  --*/");
+        inClinicExperience.validateHomePageShownUp();
+        Thread.sleep(3000);
 
+        //////Validation for both Influenza and Pneumo AfterCare status
+        log("/*----53. Search for Participant account: " +citizenName +" ---*/");
+        inClinicExperience.SearchForCitizen(citizenName);
+        Thread.sleep(3000);
 
-        //System.out.println("/*50.---the Home - Client Search showing up  --*/");
-        //inClinicExperience.validateHomePageShownUp();
-        //Thread.sleep(3000);
+        log("/*----54. select Citizen from search results --*/");
+        inClinicExperience.userClickCitizenNew(nameToSearch);
+        Thread.sleep(4000);
+
+        log("/*---- 55. Navigate to Person Account related tab ---*/");
+        inClinicExperience.clickRelatedTab();
+        Thread.sleep(2000);
+
+        log("/*-- 56. Validate Aftercare status for Influenza --*/");
+        //inClinicExperience.ValidateCreateImmunizationRecordButtonIsDisplayed();
+        //Thread.sleep(2000);
+
+        log("/*-- 57. Validate Aftercare status for Pneumo --*/");
+        //inClinicExperience.ValidateCreateImmunizationRecordButtonIsDisplayed();
+        //Thread.sleep(2000);
+
     }
 
     @Test(priority = 2)

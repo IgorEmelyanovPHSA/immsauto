@@ -38,8 +38,8 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----6. select Citizen from search results --*/");
 		inClinicExperience.userClickCitizenNew(nameToSearch);
 		Thread.sleep(4000);
-		inClinicExperience.clickRelatedTab();
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
+		inClinicExperience.clickRelatedTab();
 		Thread.sleep(2000);
 		log("/*-- 8. Create Immunization Record Button is Present on Layout --*/");
 		inClinicExperience.ValidateCreateImmunizationRecordButtonIsDisplayed();
