@@ -12,7 +12,7 @@ public class Requisition extends BaseTest {
 	
 	@Test
 	public void Create_Requisition_as_an_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "220561"; //C220561
+		TestcaseID = "222344"; //C222344
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();

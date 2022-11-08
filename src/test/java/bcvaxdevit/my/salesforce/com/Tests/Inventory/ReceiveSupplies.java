@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class ReceiveSupplies extends BaseTest {
 	@Test()
 	public void Validate_Receive_Supplies_as_an_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "111334"; //C111334
+		TestcaseID = "223642"; //C223642
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*-- 1.Login as an PPHIS user to Supply Location on BCVAXDEVIT --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
