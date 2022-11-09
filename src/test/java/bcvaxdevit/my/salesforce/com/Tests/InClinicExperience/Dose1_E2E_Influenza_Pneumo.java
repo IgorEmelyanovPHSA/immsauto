@@ -189,7 +189,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
         //click - Confirm on "Do you want to administer another vaccine for this client?" modal screen
         System.out.println("/*45.---Click Confirm Button - to administer another(Pneumo) vaccine --*/");
         inClinicExperience.ClickConfirmAdminAnotherVaccineModalScreenButton();
-        Thread.sleep(10000);
+        Thread.sleep(15000);
 
         //System.out.println("/*46.---Click Modal screen Confirm & Save Administration Button --*/");
         //inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
@@ -203,55 +203,61 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest{
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
 
-        System.out.println("/*48.---Select Pneumo Lot Number -> T005729-CC07 --*/");
+        System.out.println("/*50.---Select Pneumo Lot Number -> T005729-CC07 --*/");
         inClinicExperience.selectPneumoLotNumber();
         Thread.sleep(5000);
 
-        System.out.println("/*48_.---Select Route from DropDown -> Intranasal --*/");
+        System.out.println("/*48.---Select Route from DropDown -> Intranasal --*/");
         inClinicExperience.selectRouteIntranasal();
         Thread.sleep(5000);
 
-        System.out.println("/*48__.---Select Site -> Arm - Right deltoid --*/");
-        inClinicExperience.selectRouteIntranasal();
+        System.out.println("/*49.---Select Site -> Arm - Right deltoid --*/");
+        inClinicExperience.selectSiteLeftDeltoid();
         Thread.sleep(5000);
 
-        System.out.println("/*49.---Click Save button for Immunisation Information --*/");
+
+
+
+        System.out.println("/*51.---Click Save button for Immunisation Information --*/");
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
 
-        System.out.println("/*50.---Click Confirm and Save Administration Button --*/");
+        System.out.println("/*52.---Click Confirm and Save Administration Button --*/");
         inClinicExperience.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(5000);
 
-        System.out.println("/*51.---Click Modal screen Confirm&Save Administration Button --*/");
+        System.out.println("/*53.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
         Thread.sleep(3000);
 
-        System.out.println("/*52.---the Home - Client Search showing up  --*/");
+        System.out.println("/*54.---the Home - Client Search showing up  --*/");
         inClinicExperience.validateHomePageShownUp();
         Thread.sleep(3000);
 
         //////Validation for both Influenza and Pneumo AfterCare status
-        log("/*----53. Search for Participant account: " +citizenName +" ---*/");
+        log("/*----55. Search for Participant account: " +citizenName +" ---*/");
         inClinicExperience.SearchForCitizen(citizenName);
         Thread.sleep(3000);
 
-        log("/*----54. select Citizen from search results --*/");
+        log("/*----56. select Citizen from search results --*/");
         inClinicExperience.userClickCitizenNew(nameToSearch);
         Thread.sleep(4000);
 
-        log("/*---- 55. Navigate to Person Account related tab ---*/");
+        log("/*---- 57. Navigate to Person Account related tab ---*/");
         inClinicExperience.clickRelatedTab();
         Thread.sleep(2000);
 
-        log("/*-- 56. Validate Aftercare status for Influenza --*/");
-        //inClinicExperience.ValidateCreateImmunizationRecordButtonIsDisplayed();
-        //Thread.sleep(2000);
+        log("/*-- 58. Validate Aftercare status for Influenza --*/");
+        inClinicExperience.ValidateCreateImmunizationRecordInfluenzaDisplayed();
+        Thread.sleep(2000);
+        inClinicExperience.ValidateAfterCareStatusImmunizationRecordInfluenza();
+        Thread.sleep(2000);
 
-        log("/*-- 57. Validate Aftercare status for Pneumo --*/");
-        //inClinicExperience.ValidateCreateImmunizationRecordButtonIsDisplayed();
-        //Thread.sleep(2000);
-
+        log("/*-- 59. Validate Aftercare status for Pneumo --*/");
+        inClinicExperience.ValidateCreateImmunizationRecordPneumoDisplayed();
+        Thread.sleep(2000);
+        inClinicExperience.ValidateAfterCareStatusImmunizationRecordPneumo();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 2)

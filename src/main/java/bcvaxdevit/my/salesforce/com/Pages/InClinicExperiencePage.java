@@ -409,13 +409,21 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_route_intranasal_dropdown;
 	private By select_route_intranasal_dropdown1 = By.xpath(".//span[text() = 'Intranasal']");
 
-	@FindBy(xpath = ".//button[@aria-label = 'Lot Number']")
-	private WebElement click_lot_number_dropdown;
-	private By click_lot_number_dropdown1 = By.xpath(".//button[@aria-label = 'Lot Number']");
+	@FindBy(xpath = ".//button[@name = 'injectionSite']")
+	private WebElement click_site_dropdown;
+	private By click_site_dropdown1 = By.xpath(".//button[@name = 'injectionSite']");
 
-	@FindBy(xpath = ".//span[text() = 'T005729-CC07 - Exp. 2021 November 16']")
+	@FindBy(xpath = ".//span[text() = 'Arm - Left deltoid']")
+	private WebElement select_site_left_deltoid_from_dropdown;
+	private By select_site_left_deltoid_from_dropdown1 = By.xpath(".//span[text() = 'Arm - Left deltoid']");
+
+	@FindBy(xpath = ".//div[@class = 'slds-form-element']")
+	private WebElement click_lot_number_dropdown;
+	private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-form-element']");
+
+	@FindBy(xpath = ".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']")
 	private WebElement select_pneumo_lot_number_dropdown;
-	private By select_pneumo_lot_number_dropdown1 = By.xpath(".//span[text() = 'T005729-CC07 - Exp. 2021 November 16']");
+	private By select_pneumo_lot_number_dropdown1 = By.xpath(".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']");
 
 
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
@@ -604,8 +612,25 @@ public class InClinicExperiencePage extends BasePage {
 	
 	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
 	private WebElement checkBoxInfluenzaVaccine;
-	
-	
+
+	@FindBy(xpath = ".//lightning-base-formatted-text[text() = 'Influenza-LAIV']")
+	private WebElement validate_create_immunization_record_Influenza;
+	private By validate_create_immunization_record_Influenza_ = By.xpath(".//lightning-base-formatted-text[text() = 'Influenza-LAIV']");
+
+	@FindBy(xpath = "(.//lightning-base-formatted-text[text() = 'After Care'])[2]")
+	private WebElement validate_after_care_status_immunization_record_Influenza;
+	private By validate_after_care_status_immunization_record_Influenza_ = By.xpath("(.//lightning-base-formatted-text[text() = 'After Care'])[2]");
+
+	@FindBy(xpath = ".//lightning-base-formatted-text[text() = 'Pneumo-P-23']")
+	private WebElement validate_create_immunization_record_Pneumo;
+	private By validate_create_immunization_record_Pneumo_ = By.xpath(".//lightning-base-formatted-text[text() = 'Influenza-LAIV']");
+
+	@FindBy(xpath = "(.//lightning-base-formatted-text[text() = 'After Care'])[1]")
+	private WebElement validate_after_care_status_immunization_record_Pneumo;
+	private By validate_after_care_status_immunization_record_Pneumo_ = By.xpath("(.//lightning-base-formatted-text[text() = 'After Care'])[2]");
+
+
+
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
 		super(driver);
@@ -1295,53 +1320,69 @@ public class InClinicExperiencePage extends BasePage {
 		click_vaccine_agent_dropdown.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
+		Thread.sleep(2000);
 		select_vaccine_agent_dropdown.click();
 	}
 
 	public void selectVaccineAgentInfluenza() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,600)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_vaccine_agent_influenza_dropdown, 10);
+		Thread.sleep(2000);
 		select_vaccine_agent_influenza_dropdown.click();
 	}
 
 	public void selectVaccineAgentPneumo() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
-		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,600)");
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
+		Thread.sleep(5000);
 		click_vaccine_agent_dropdown.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_vaccine_agent_pneumo_dropdown, 10);
+		Thread.sleep(5000);
 		select_vaccine_agent_pneumo_dropdown.click();
 	}
 
 	public void selectRouteIntranasal() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		//Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_route_dropdown, 10);
 		Thread.sleep(2000);
 		click_route_dropdown.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_route_intranasal_dropdown, 10);
+		Thread.sleep(2000);
 		select_route_intranasal_dropdown.click();
 	}
 
 	public void selectPneumoLotNumber() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_lot_number_dropdown, 10);
 		Thread.sleep(2000);
 		click_lot_number_dropdown.click();
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_pneumo_lot_number_dropdown, 10);
+		Thread.sleep(2000);
 		select_pneumo_lot_number_dropdown.click();
+	}
+
+	public void selectSiteLeftDeltoid() throws InterruptedException {
+		waitForElementToBeVisible(driver, click_site_dropdown, 10);
+		Thread.sleep(2000);
+		click_site_dropdown.click();
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, select_site_left_deltoid_from_dropdown, 10);
+		Thread.sleep(2000);
+		select_site_left_deltoid_from_dropdown.click();
 	}
 	
 	public void ClickSaveConsentButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_consent_btn, 10);
 		Thread.sleep(2000);
@@ -1361,6 +1402,7 @@ public class InClinicExperiencePage extends BasePage {
 		js.executeScript("window.scrollBy(0,1000)", "");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_and_record_another_vaccine_btn, 10);
+		Thread.sleep(2000);
 		save_and_record_another_vaccine_btn.click();
 	}
 	
@@ -1656,10 +1698,34 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickCreatImmunizationRecord() throws InterruptedException {
 		create_Immunization_Record.click();
 	}
-	
+
 	public void ValidateCreateImmunizationRecordButtonIsDisplayed() throws InterruptedException {
 		waitForElementToBeLocated(driver, Create_Immunization_Record1, 10);
+		Thread.sleep(2000);
 		Create_Immunization_Record.isDisplayed();
+	}
+	
+	public void ValidateCreateImmunizationRecordInfluenzaDisplayed() throws InterruptedException {
+		waitForElementToBeLocated(driver, validate_create_immunization_record_Influenza_, 10);
+		Thread.sleep(2000);
+		validate_create_immunization_record_Influenza.isDisplayed();
+	}
+	public void ValidateAfterCareStatusImmunizationRecordInfluenza() throws InterruptedException {
+		waitForElementToBeLocated(driver, validate_after_care_status_immunization_record_Influenza_, 10);
+		Thread.sleep(2000);
+		validate_after_care_status_immunization_record_Influenza.isDisplayed();
+	}
+
+	public void ValidateCreateImmunizationRecordPneumoDisplayed() throws InterruptedException {
+		waitForElementToBeLocated(driver, validate_create_immunization_record_Influenza_, 10);
+		Thread.sleep(2000);
+		validate_create_immunization_record_Influenza.isDisplayed();
+	}
+
+	public void ValidateAfterCareStatusImmunizationRecordPneumo() throws InterruptedException {
+		waitForElementToBeLocated(driver, validate_after_care_status_immunization_record_Pneumo_, 10);
+		Thread.sleep(2000);
+		validate_after_care_status_immunization_record_Pneumo.isDisplayed();
 	}
 	
 	public void clickConfirmButton() throws InterruptedException {
@@ -1858,7 +1924,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_immune_info_btn, 10);
 		Thread.sleep(2000);
