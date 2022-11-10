@@ -32,7 +32,7 @@ public class DIWA_ICE extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		Thread.sleep(5000);
-		log("/*----5. Search for Participant account: " +citizenName +" ---*/");
+		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		//inClinicExperience.SearchForCitizen(citizenName);
 		inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
 		Thread.sleep(3000);

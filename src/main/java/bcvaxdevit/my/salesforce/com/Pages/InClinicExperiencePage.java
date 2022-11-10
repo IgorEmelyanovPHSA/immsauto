@@ -512,11 +512,15 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement informedConsentProvider;
 	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
-	
-	@FindBy(xpath = "//span[@title='Clinician ICE Automation']")
+
+	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
+	private WebElement search_provider_input;
+	private By search_provider_input_ = By.xpath("//input[@placeholder = 'Search People...']");
+
+	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_provider;
-	private By select_provider1 = By.xpath("//span[@title='Clinician ICE Automation']");
-	
+	private By select_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
+
 	@FindBy(xpath = "//input[@placeholder='Search People...']")
 	private WebElement immunizingAgentProvider;
 	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
@@ -1851,11 +1855,14 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickSaveConsent() throws InterruptedException {
 		saveConsentButton.click();
 	}
-	
 	public void selectProvider(String Provider) throws InterruptedException {
+		waitForElementToBeVisible(driver, search_provider_input, 10);
+		search_provider_input.sendKeys(Provider);
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_provider, 10);
-		WebElement search_input = driver.findElement(select_provider1);
-		search_input.click();
+		Thread.sleep(5000);
+		select_provider.click();
+		Thread.sleep(2000);
 	}
 	
 	public void selectImmunizingAgentProvider() throws InterruptedException {
