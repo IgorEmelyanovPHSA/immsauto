@@ -33,11 +33,12 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.closeTabsHCA();
 		Thread.sleep(5000);
 		log("/*----5. Search for Participant account: " +citizenName +" ---*/");
-		inClinicExperience.SearchForCitizen(citizenName);
+		//inClinicExperience.SearchForCitizen(citizenName);
+		inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
 		Thread.sleep(3000);
-		log("/*----6. select Citizen from search results --*/");
-		inClinicExperience.userClickCitizenNew(nameToSearch);
-		Thread.sleep(4000);
+		//log("/*----6. select Citizen from search results --*/");
+		//inClinicExperience.userClickCitizenNew(nameToSearch);
+		//Thread.sleep(4000);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		inClinicExperience.clickRelatedTab();
 		Thread.sleep(2000);

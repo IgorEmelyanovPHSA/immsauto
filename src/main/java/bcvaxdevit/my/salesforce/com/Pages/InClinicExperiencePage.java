@@ -39,7 +39,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//input[@placeholder = 'Search...']")
 	private WebElement search_input;
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
-	
+
+	@FindBy(xpath = "(.//span[@class = 'slds-text-body--regular slds-text-color--default slds-truncate slds-show'])[1]")
+	private WebElement profile_in_search_dropdown;
+	private By profile_in_search_dropdown_ = By.xpath("(.//span[@class = 'slds-text-body--regular slds-text-color--default slds-truncate slds-show'])[1]");
+
 	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
 	@FindBy(xpath = ".//a[@title='Ludovika BcvaxLimeburn']")
 	private WebElement user_found;
@@ -656,6 +660,23 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		search_input.sendKeys(Keys.RETURN);
 		Thread.sleep(5000);
+	}
+
+	public void SearchForCitizenAlternativeWay(String citizen) throws InterruptedException {
+		waitForElementToBeVisible(driver, search_assistant, 10);
+		Thread.sleep(2000);
+		WebElement search_navigator = driver.findElement(search_assistant1);
+		Thread.sleep(3000);
+		search_navigator.click();
+		Thread.sleep(3000);
+		waitForElementToBeVisible(driver, search_input, 10);
+		Thread.sleep(2000);
+		WebElement search_input = driver.findElement(search_input1);
+		search_input.sendKeys(citizen);
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, profile_in_search_dropdown, 10);
+		Thread.sleep(2000);
+		profile_in_search_dropdown.click();
 	}
 	
 	public void clickRegisterTab() throws InterruptedException {
