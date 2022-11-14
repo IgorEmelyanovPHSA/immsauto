@@ -81,46 +81,49 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---19. select date of Administration ---*/");
 		if (inClinicExperience.selectDateOfAdministration())
 			Thread.sleep(3000);
-		log("/*---19.1. Select Informed Consent Provider ---*/");
-		inClinicExperience.informedConsentProvider();
-		Thread.sleep(2000);
-		log("/*---20. Select Provider ---*/");
-		inClinicExperience.selectProvider("Clinician ICE Automation");
-		Thread.sleep(2000);
-		log("/*---21. click Save Consent ---*/");
+
+		log("/*---20. click on Informed Consent Provide(User) search component ---*/");
+		inClinicExperience.clickInformedConsentProvider();
+		Thread.sleep(5000);
+
+		log("/*---21. select the Auto Clinician DIWA_CIB Provider ---*/");
+		inClinicExperience.selectProvider("Auto Clinician DIWA_ICE");
+		Thread.sleep(5000);
+
+		log("/*---22. click Save Consent ---*/");
 		inClinicExperience.clickSaveConsent();
 		Thread.sleep(5000);
-		log("/*---22. Click on the Immunization provider field ---*/");
-		inClinicExperience.selectImmunizingAgentProvider();
+
+		log("/*---23. Click on the Immunization provider field ---*/");
+		inClinicExperience.selectProvider("Auto Clinician DIWA_ICE");;
 		Thread.sleep(2000);
-		log("/*---23. Select Provider--> Clinician ICE Automation ---*/");
-		inClinicExperience.selectProvider("Clinician ICE Automation");
-		Thread.sleep(2000);
-		log("/*---24. Click Show all lot numbers Checkbox---*/");
+
+		log("/*---25. Click Show all lot numbers Checkbox---*/");
 		inClinicExperience.clickShowAllLotNumbers();
 		Thread.sleep(2000);
-		log("/*---25. Select Lot Number Field value set a Lot ---*/");
+
+		log("/*---26. Select Lot Number Field value set a Lot ---*/");
 		inClinicExperience.selectToSetLot();
 		Thread.sleep(2000);
-		log("/*---26. Select Lot -->300042698 - Exp. 2021 June 18 ---*/");
+		log("/*---27. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
 		inClinicExperience.selectLot();
 		Thread.sleep(2000);
-		log("/*---27. Select Injection Site ---*/");
+		log("/*---28. Select Injection Site ---*/");
 		inClinicExperience.selectInjectionSite();
 		Thread.sleep(2000);
-		log("/*---28. Select Dosage---*/");
+		log("/*---29. Select Dosage---*/");
 		inClinicExperience.selectDosage();
 		Thread.sleep(2000);
-		log("/*---29. Save Immunization Information ---*/");
+		log("/*---30. Save Immunization Information ---*/");
 		inClinicExperience.saveImmunizationInformation();
 		Thread.sleep(2000);
-		log("/*---30. Confirm and Save Administration ---*/");
+		log("/*---31. Confirm and Save Administration ---*/");
 		inClinicExperience.confirmAndSaveAdministration();
 		Thread.sleep(2000);
-		log("/*---31. Vaccine Administration Summary Confirm and Save ---*/");
+		log("/*---32. Vaccine Administration Summary Confirm and Save ---*/");
 		inClinicExperience.summaryConfirmAndSave();
 		Thread.sleep(2000);
-		log("/*---32. Navigate to Related tab and Confirm new Imms Record is created ---*/");
+		log("/*---33. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		inClinicExperience.clickRelatedTab();
 	}
 	

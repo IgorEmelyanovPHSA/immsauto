@@ -33,6 +33,7 @@
             <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose1CitizenBookingAppointmentInfluenza"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.Portal.Dose2CitizenBookingAppointmentCovid19"/>
             <class name="bcvaxdevit.my.salesforce.com.Tests.UserDefaults.UserDefaultsSettingsValidation"/>
+            <class name="bcvaxdevit.my.salesforce.com.Tests.InClinicExperience.Dose1_E2E_Influenza_Pneumo"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

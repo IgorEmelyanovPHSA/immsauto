@@ -625,7 +625,7 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_informed_consent_provider, 10);
 		Thread.sleep(2000);
-		this.click_informed_consent_provider.click();
+		click_informed_consent_provider.click();
 		Thread.sleep(2000);
 	}
 	
@@ -698,7 +698,9 @@ public class ClinicInBoxPage extends BasePage {
 
 	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
+		Thread.sleep(2000);
 		WebElement search_input = driver.findElement(select_lot1);
+		Thread.sleep(2000);
 		search_input.click();
 	}
 	

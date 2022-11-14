@@ -59,12 +59,15 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---14. select date of Administration ---*/");
 		if (clinicInBoxPage.selectDateOfAdministration())
 			Thread.sleep(3000);
+
 		log("/*---15. click on Informed Consent Provide(User) search component ---*/");
 		clinicInBoxPage.clickInformedConsentProvider();
 		Thread.sleep(5000);
+
 		log("/*---16. select the Auto Clinician DIWA_CIB Provider ---*/");
 		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(5000);
+
 		log("/*---15. click Save Consent button ---*/");
 		clinicInBoxPage.clickSaveConsent();
 		Thread.sleep(5000);

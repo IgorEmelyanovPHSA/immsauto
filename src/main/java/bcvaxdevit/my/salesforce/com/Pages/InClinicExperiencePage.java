@@ -509,29 +509,25 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
 	private WebElement recordImmunizationBtn;
 	
-	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
-	private WebElement informedConsentProvider;
-	private By informedConsentProvider1 = By.xpath("//input[@placeholder = 'Search People...']");
+	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[2]")
+	private WebElement click_informed_consent_provider;
+	private By click_informed_consent_provider_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
 
-	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
+	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[2]")
 	private WebElement search_provider_input;
-	private By search_provider_input_ = By.xpath("//input[@placeholder = 'Search People...']");
+	private By search_provider_input_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
 
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_provider;
 	private By select_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
 
-	@FindBy(xpath = "//input[@placeholder='Search People...']")
-	private WebElement immunizingAgentProvider;
-	private By immunizingAgentProvider1 = By.xpath("//input[@placeholder='Search People...']");
-	
 	@FindBy(xpath = "//input[@name='effectiveToDate']")
 	private WebElement consentEffectiveToDate;
 	
 	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
 	private WebElement saveConsentButton;
 	
-	@FindBy(xpath = "(//input[@data-id = 'select-sobject-id'])[3]")
+	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
 	private WebElement selectLotNumber;
 	
 	@FindBy(xpath = "//span[@title='Appointments']")
@@ -541,10 +537,14 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement selectSite;
 	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
 	
+	//@FindBy(xpath = "(//li[@title='300042698 - Exp. 2021 June 18'])[2]")
+	//private WebElement select_lot;
+	//private By select_lot1 = By.xpath("(//li[@title='300042698 - Exp. 2021 June 18'])[2]");
+
 	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
 	private WebElement select_lot;
 	private By select_lot1 = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
-	
+
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
 	private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
@@ -1811,16 +1811,18 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		return true;
 	}
-	
-	public void informedConsentProvider() throws InterruptedException {
-		//waitForElementToBeVisible(driver, informedConsentProvider, 10);
-		waitForElementToBeClickable(informedConsentProvider);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informedConsentProvider);
-		//waitForElementToBeVisible(driver, informedConsentProvider, 10);
-		//this.informedConsentProvider.click();
-		click(informedConsentProvider);
+
+	public void clickInformedConsentProvider() throws InterruptedException {
+		//scrolling up
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_informed_consent_provider);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, click_informed_consent_provider, 10);
+		Thread.sleep(2000);
+		click_informed_consent_provider.click();
+		Thread.sleep(2000);
 	}
-	
+
 	public boolean selectDateOfAdministration() throws InterruptedException {
 		if (!isInputActive(inputDate)) {
 			return false;
@@ -1857,20 +1859,15 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	public void selectProvider(String Provider) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_provider_input, 10);
+		Thread.sleep(3000);
 		search_provider_input.sendKeys(Provider);
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, select_provider, 10);
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		select_provider.click();
 		Thread.sleep(2000);
 	}
-	
-	public void selectImmunizingAgentProvider() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizingAgentProvider);
-		waitForElementToBeVisible(driver, immunizingAgentProvider, 10);
-		this.immunizingAgentProvider.click();
-	}
-	
+
 	public void selectToSetLot() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", selectLotNumber);
 		waitForElementToBeVisible(driver, selectLotNumber, 10);
@@ -1898,7 +1895,9 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
+		Thread.sleep(2000);
 		WebElement search_input = driver.findElement(select_lot1);
+		Thread.sleep(2000);
 		search_input.click();
 	}
 	
