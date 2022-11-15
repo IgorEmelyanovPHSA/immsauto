@@ -60,48 +60,46 @@ public class DIWA_CIB extends BaseTest {
 		if (clinicInBoxPage.selectDateOfAdministration())
 			Thread.sleep(3000);
 
-		log("/*---15. click on Informed Consent Provide(User) search component ---*/");
-		clinicInBoxPage.clickInformedConsentProvider();
+		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
+		clinicInBoxPage.selectInformedConsentProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(5000);
 
-		log("/*---16. select the Auto Clinician DIWA_CIB Provider ---*/");
-		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
-		Thread.sleep(5000);
-
-		log("/*---15. click Save Consent button ---*/");
+		log("/*---16. click Save Consent button ---*/");
 		clinicInBoxPage.clickSaveConsent();
 		Thread.sleep(5000);
-		log("/*---16. Click on the Immunization provider field ---*/");
-		clinicInBoxPage.selectImmunizingAgentProvider();
-		Thread.sleep(2000);
-		log("/*---17. Select Provider-->Auto Clinician DIWA_CIB ---*/");
-		clinicInBoxPage.selectProvider("Auto Clinician DIWA_CIB");
+
+		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
+		clinicInBoxPage.selectImmunizingAgentProvider("Auto Clinician DIWA_CIB");
 		Thread.sleep(6000);
-		log("/*---18. Click Show all lot numbers ---*/");
-		clinicInBoxPage.clickShowAllLotNumbers();
+
+		log("/*---18. Click Show all lot numbers Checkbox ---*/");
+		clinicInBoxPage.clickShowAllLotNumbersCheckBox();
 		Thread.sleep(2000);
-		log("/*---18. Select Lot Number Field value set a Lot ---*/");
-		clinicInBoxPage.selectToSetLot();
+
+		log("/*---19. click Lot Number DropDown component ---*/");
+		clinicInBoxPage.clickLotNumberDropDown();
 		Thread.sleep(2000);
-		log("/*---19. Select Lot -->SPIKEVAX6-5Test001 - Exp. 2022 December 31 ---*/");
+
+		log("/*---20. Select Lot -->SPIKEVAX6-5Test001 - Exp. 2022 December 31 ---*/");
 		clinicInBoxPage.selectLot();
 		Thread.sleep(2000);
-		log("/*---20. Select Injection Site ---*/");
+
+		log("/*---21. Select Injection Site ---*/");
 		clinicInBoxPage.selectInjectionSite();
 		Thread.sleep(2000);
-		log("/*---21. Select Dosage---*/");
+		log("/*---22. Select Dosage---*/");
 		clinicInBoxPage.selectDosage();
 		Thread.sleep(2000);
-		log("/*---22. Save Immunization Information ---*/");
+		log("/*---23. Save Immunization Information ---*/");
 		clinicInBoxPage.saveImmunizationInformation();
 		Thread.sleep(2000);
-		log("/*---23. Confirm and Save Administration ---*/");
+		log("/*---24. Confirm and Save Administration ---*/");
 		clinicInBoxPage.confirmAndSaveAdministration();
 		Thread.sleep(2000);
-		log("/*---24. Vaccine Administration Summary Confirm and Save ---*/");
+		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
 		clinicInBoxPage.summaryConfirmAndSave();
 		Thread.sleep(2000);
-		log("/*---25. Navigate to Related tab and Confirm new Imms Record is created ---*/");
+		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		clinicInBoxPage.clickRelatedTab();
 		Thread.sleep(2000);
 	}
