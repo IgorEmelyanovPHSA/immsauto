@@ -421,9 +421,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_site_left_deltoid_from_dropdown;
 	private By select_site_left_deltoid_from_dropdown1 = By.xpath(".//span[text() = 'Arm - Left deltoid']");
 
-	@FindBy(xpath = "(.//div[@class = 'slds-form-element'])[2]")
+	@FindBy(xpath = ".//div[@class = 'slds-form-element']")
 	private WebElement click_lot_number_dropdown;
-	private By click_lot_number_dropdown1 = By.xpath("(.//div[@class = 'slds-form-element'])[2]");
+	private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-form-element']");
 
 	@FindBy(xpath = ".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']")
 	private WebElement select_pneumo_lot_number_dropdown;
@@ -539,10 +539,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement selectSite;
 	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
 	
-	//@FindBy(xpath = "(//li[@title='300042698 - Exp. 2021 June 18'])[2]")
-	//private WebElement select_lot;
-	//private By select_lot1 = By.xpath("(//li[@title='300042698 - Exp. 2021 June 18'])[2]");
-
 	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
 	private WebElement select_lot;
 	private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
