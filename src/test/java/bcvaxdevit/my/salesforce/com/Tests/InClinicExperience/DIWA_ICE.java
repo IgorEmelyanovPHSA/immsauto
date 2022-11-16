@@ -17,7 +17,24 @@ public class DIWA_ICE extends BaseTest {
 		TestcaseID = "223187"; //C223187
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		String citizenName = "Benoite BCVaxD'Hooge";
-		String nameToSearch = "Benoite Denna BCVaxD";
+		//String nameToSearch = "Benoite Denna BCVaxD";
+		//1.
+		//String citizenName = "BCVaxChan John";
+		//2.
+		//String citizenName = "BCVaxZhang Ping an";
+		//3.
+		//String citizenName = "BCVaxFlay Leontine";
+		//4.
+		//String citizenName = "BCVaxFuke Fawne";
+		//5.
+		//String citizenName = "BCVaxDrake Warren";
+		//6.
+		//String citizenName = "BCVaxPerrelli Coletta";
+
+		//7.
+		//String citizenName = "BCVaxKnightley Vasily";
+
+
 		String clinicLocation = "All Ages - Atlin Health Centre";
 
 		log("/*1.----Login as an Clinician to ICE --*/");

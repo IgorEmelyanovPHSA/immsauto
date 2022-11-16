@@ -40,9 +40,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement search_input;
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
 
-	@FindBy(xpath = "(.//span[@class = 'slds-text-body--regular slds-text-color--default slds-truncate slds-show'])[1]")
+	@FindBy(xpath = "(.//lightning-formatted-rich-text[@class = 'primary slds-truncate slds-rich-text-editor__output'])[1]")
 	private WebElement profile_in_search_dropdown;
-	private By profile_in_search_dropdown_ = By.xpath("(.//span[@class = 'slds-text-body--regular slds-text-color--default slds-truncate slds-show'])[1]");
+	private By profile_in_search_dropdown_ = By.xpath("(.//lightning-formatted-rich-text[@class = 'primary slds-truncate slds-rich-text-editor__output'])[1]");
 
 	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
 	@FindBy(xpath = ".//a[@title='Ludovika BcvaxLimeburn']")
@@ -421,9 +421,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_site_left_deltoid_from_dropdown;
 	private By select_site_left_deltoid_from_dropdown1 = By.xpath(".//span[text() = 'Arm - Left deltoid']");
 
-	@FindBy(xpath = ".//div[@class = 'slds-form-element']")
+	@FindBy(xpath = "(.//div[@class = 'slds-form-element'])[2]")
 	private WebElement click_lot_number_dropdown;
-	private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-form-element']");
+	private By click_lot_number_dropdown1 = By.xpath("(.//div[@class = 'slds-form-element'])[2]");
 
 	@FindBy(xpath = ".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']")
 	private WebElement select_pneumo_lot_number_dropdown;
@@ -783,6 +783,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void clickRelatedTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_related_tab1, 10);
+		Thread.sleep(2000);
 		WebElement element = driver.findElement(click_related_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -1906,9 +1907,6 @@ public class InClinicExperiencePage extends BasePage {
 	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		Thread.sleep(2000);
-		//WebElement search_input = driver.findElement(select_lot_);
-		//Thread.sleep(2000);
-		//search_input.click();
 		select_lot.click();
 	}
 	

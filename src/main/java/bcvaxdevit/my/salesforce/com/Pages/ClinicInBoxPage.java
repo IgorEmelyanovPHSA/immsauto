@@ -701,9 +701,6 @@ public class ClinicInBoxPage extends BasePage {
 	public void selectLot() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_lot, 10);
 		Thread.sleep(2000);
-		//WebElement search_input = driver.findElement(select_lot_);
-		//Thread.sleep(2000);
-		//search_input.click();
 		select_lot.click();
 	}
 
