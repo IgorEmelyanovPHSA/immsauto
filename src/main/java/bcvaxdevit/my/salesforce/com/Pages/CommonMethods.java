@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 
 public class CommonMethods extends BasePage{
 
@@ -18,6 +17,17 @@ public class CommonMethods extends BasePage{
     private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
     private By healthconnectApp1 = By.xpath("//p[text()='Health Connect - Supply Console']");
     private By supplyLocation = By.xpath("//a[@title='Supply Locations']");
+    private By callCenterPageId = By.xpath(".//span[@title='Call Center Console']");
+
+    @FindBy(xpath = "//div[@class='slds-icon-waffle']")
+    private WebElement appLauncher;
+
+    @FindBy(xpath = "//input[@class='slds-input' and @type='search']")
+    private WebElement searchAppsAndItems;
+
+    @FindBy(xpath = ".//span[@title='Call Center Console']")
+    private WebElement callCenterConsolePageID;
+
 
     @FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
     private WebElement dropdownMenu;
@@ -127,6 +137,21 @@ public class CommonMethods extends BasePage{
         closeAutomationLocationTab();
         log("/*-- Close all open tabs --*/");
         Thread.sleep(2000);
+    }
+
+    public void goToCallCenterConsolePageIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
+        closeAutomationLocationTab();
+        Thread.sleep(5000);
+        if (isDisplayed(callCenterPageId)) {
+            log("/*-- User already on Call Center Console Page --*/");
+        } else {
+            log("/*-- Navigate to Call Center Console Page --*/");
+            click(appLauncher);
+            Thread.sleep(5000);
+            typeIn(searchAppsAndItems, "Call Center Console");
+            //Needs more work
+        }
+
     }
 
     public int getMatchedRowToLotInRow1() throws Exception {
