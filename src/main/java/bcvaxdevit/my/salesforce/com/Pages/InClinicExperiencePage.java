@@ -421,9 +421,13 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_site_left_deltoid_from_dropdown;
 	private By select_site_left_deltoid_from_dropdown1 = By.xpath(".//span[text() = 'Arm - Left deltoid']");
 
-	@FindBy(xpath = "(.//div[@class = 'slds-form-element'])[2]")
+	//@FindBy(xpath = "(.//div[@class = 'slds-form-element'])[2]")
+	//private WebElement click_lot_number_dropdown;
+	//private By click_lot_number_dropdown1 = By.xpath("(.//div[@class = 'slds-form-element'])[2]");
+
+	@FindBy(xpath = "(.//input[@class = 'slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])")
 	private WebElement click_lot_number_dropdown;
-	private By click_lot_number_dropdown1 = By.xpath("(.//div[@class = 'slds-form-element'])[2]");
+	private By click_lot_number_dropdown1 = By.xpath("(.//input[@class = 'slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])");
 
 	@FindBy(xpath = ".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']")
 	private WebElement select_pneumo_lot_number_dropdown;

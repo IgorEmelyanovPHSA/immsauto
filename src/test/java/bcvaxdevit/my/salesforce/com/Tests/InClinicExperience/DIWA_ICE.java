@@ -30,9 +30,14 @@ public class DIWA_ICE extends BaseTest {
 		//String citizenName = "BCVaxDrake Warren";
 		//6.
 		//String citizenName = "BCVaxPerrelli Coletta";
-
 		//7.
 		//String citizenName = "BCVaxKnightley Vasily";
+		//8.
+		//String citizenName = "BCVaxGilbride Kania";
+		//9.
+		//String citizenName = "BCVaxJancik Tab";
+		//10.
+		//String citizenName = "BCVaxAleksandrev Nanete";
 
 
 		String clinicLocation = "All Ages - Atlin Health Centre";
