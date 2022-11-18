@@ -425,9 +425,9 @@ public class InClinicExperiencePage extends BasePage {
 	//private WebElement click_lot_number_dropdown;
 	//private By click_lot_number_dropdown1 = By.xpath("(.//div[@class = 'slds-form-element'])[2]");
 
-	@FindBy(xpath = "(.//input[@class = 'slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])")
+	@FindBy(xpath = ".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']")
 	private WebElement click_lot_number_dropdown;
-	private By click_lot_number_dropdown1 = By.xpath("(.//input[@class = 'slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])");
+	private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']");
 
 	@FindBy(xpath = ".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']")
 	private WebElement select_pneumo_lot_number_dropdown;
