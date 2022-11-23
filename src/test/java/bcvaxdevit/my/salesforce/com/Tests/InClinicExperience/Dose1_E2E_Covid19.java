@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 
 @Listeners({TestListener.class})
-public class Dose1_VaccineAdministration extends BaseTest {
+public class Dose1_E2E_Covid19 extends BaseTest {
 	private String legalFirstName = "Ludovika";
 	private String legalLastName = "BcvaxLimeburn";
 	private String dateOfBirth = "Sep 21, 1923";
@@ -21,7 +21,7 @@ public class Dose1_VaccineAdministration extends BaseTest {
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	
 	@Test(priority = 1)
-	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws Exception {
+	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws Exception {
 		TestcaseID = "222694"; //C222694
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
