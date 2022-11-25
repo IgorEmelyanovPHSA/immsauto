@@ -1161,7 +1161,7 @@ public class SupplyConsolePage extends BasePage {
 	public void clickBtnWastageAtContainerWastagePopUp() throws InterruptedException {
 		scrollTop(btnWastageOnContainerWastagePopUp);
 		click(btnWastageOnContainerWastagePopUp);
-		Thread.sleep(2000); //To handle success message
+		Thread.sleep(3000); //To handle success message
 		//Need to add validation for successful mess
 	}
 	
