@@ -146,5 +146,24 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(uniqueLink);
 		return new BookAnAppointmentPage(driver);
 	}
-	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Community Portal section //
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@FindBy(xpath = "//a[@class='inverseTextColor' and contains(text(),'Login here')]")
+	private WebElement btnLoginHere;
+
+	public CommunityPortalMainPage loginIntoCommunityPortalAsAdmin() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		click(btnLoginHere);
+		waitForElementToBeClickable(textUserName);
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_ADMIN_CP"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_ADMIN_CP_PW"));
+		click(login_button);
+		return new CommunityPortalMainPage(driver);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }
