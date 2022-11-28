@@ -49,7 +49,7 @@ public class Requisition extends BaseTest {
 		log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
 		log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
-		//log("/*for bcvaxdevit --COVID-19 mRNA SPIKEVAX (Moderna) Red Cap 5mL multi-dose 10 vials/box Lot 3001176-CC04--*/");
+		//log("/*for bcvaxdevit --COVID-19 mRNA SPIKEVAX (Moderna) 7mL multi-dose vial Lot 016F21A-CC07 --*/");
 		requisitionPage.clickLineItemCheckBox();
 		Thread.sleep(3000);
 		log("/*----12. click Next button --*/");

@@ -26,8 +26,9 @@ public class DIWA_ICE extends BaseTest {
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE(String citizenName) throws Exception {
 		TestcaseID = "223187"; //C223187
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-
+		//0.
 		//String nameToSearch = "Benoite Denna BCVaxD";
+
 		//1.
 		//String citizenName = "BCVaxChan John";
 		//2.
