@@ -158,7 +158,7 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.clickRelatedTab();
 	}
 
-	@Test()
+	//@Test()
 	public void Bulk_Create_From_CSV_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
 		String DEFAULT_FOLDER_PATH = Paths.get(System.getProperty("user.dir"), "resources", "upload").toString();
 		String[] csvCell;
