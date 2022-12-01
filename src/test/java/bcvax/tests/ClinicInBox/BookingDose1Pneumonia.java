@@ -39,6 +39,7 @@ public class BookingDose1Pneumonia extends BaseTest {
 			Thread.sleep(2000);
 		} else {
 			log("/*---- Navigate to CIB App --*/");
+			Thread.sleep(5000);
 			clinicInBox.selectCIBApp();
 			Thread.sleep(2000);
 		}
