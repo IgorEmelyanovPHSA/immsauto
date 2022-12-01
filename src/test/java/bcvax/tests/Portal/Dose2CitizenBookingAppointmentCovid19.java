@@ -1,11 +1,11 @@
 package bcvax.tests.Portal;
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
 import bcvax.pages.BookAnAppointmentPage;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.RegisterToGetVaccinatedPage;
 import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import org.junit.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

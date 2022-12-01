@@ -1,10 +1,10 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
 import bcvax.pages.CommonMethods;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
 import org.testng.annotations.DataProvider;

@@ -1,11 +1,11 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
 import bcvax.pages.CommonMethods;
 import bcvax.pages.CommunityPortalMainPage;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

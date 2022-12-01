@@ -1,11 +1,11 @@
 package bcvax.tests.Register;
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import bcvax.pages.InClinicExperiencePage;
+import bcvax.tests.BaseTest;
 
 @Listeners({TestListener.class})
 public class RegisterNewCitizen extends BaseTest {

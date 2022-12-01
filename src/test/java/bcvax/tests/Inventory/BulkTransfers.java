@@ -1,11 +1,11 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
+import bcvax.tests.BaseTest;
 
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;

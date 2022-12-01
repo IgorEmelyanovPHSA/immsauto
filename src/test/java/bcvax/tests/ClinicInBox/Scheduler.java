@@ -1,15 +1,15 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
+import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
-import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
 @Listeners({TestListener.class})
-public class Scheduler extends BaseTest{
+public class Scheduler extends BaseTest {
     private String legalFirstName = "Dacia";
     private String legalLastName = "Bcvaxdod";
     private String dateOfBirth = "May 19, 1904";
@@ -34,7 +34,6 @@ public class Scheduler extends BaseTest{
             log("/*-- 2. User already on Health Connect - Supply Console --*/");
         } else {
             log("/*-- 2.1. Navigate to Health Connect - Supply Console --*/");
-            Thread.sleep(5000);
             inClinicExperiencePage.selectHealthConnectApp();
             Thread.sleep(2000);
         }
