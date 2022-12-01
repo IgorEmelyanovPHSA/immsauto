@@ -1,6 +1,6 @@
 package Utilities;
 
-import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
+import bcvax.BaseTest;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

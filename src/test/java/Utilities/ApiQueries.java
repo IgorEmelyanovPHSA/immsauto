@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
+import bcvax.pages.Utils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,7 +24,7 @@ import org.json.JSONTokener;
 import org.json.JSONException;
 
 
-import static bcvaxdevit.my.salesforce.com.Tests.BaseTest.log;
+import static bcvax.BaseTest.log;
 
 public class ApiQueries {
 
