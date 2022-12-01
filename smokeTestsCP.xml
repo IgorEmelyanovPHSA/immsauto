@@ -3,7 +3,7 @@
 <suite name="Automation run">
     <test name="SmokeCP">
         <classes>
-            <class name="communityPortal.InventoryCP.WastageCP"/>
+            <class name="WastageCP"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

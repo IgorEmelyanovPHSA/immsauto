@@ -24,7 +24,7 @@ import org.json.JSONTokener;
 import org.json.JSONException;
 
 
-import static bcvax.BaseTest.log;
+import static bcvax.tests.BaseTest.log;
 
 public class ApiQueries {
 
