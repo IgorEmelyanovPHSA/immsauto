@@ -1,8 +1,8 @@
-package bcvax;
+package bcvax.tests;
 
-import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
-import bcvaxdevit.my.salesforce.com.Pages.TestRailManager;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
+import bcvax.pages.LoginPage;
+import bcvax.pages.TestRailManager;
+import bcvax.pages.Utils;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

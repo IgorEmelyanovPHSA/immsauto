@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Pages;
+package bcvax.pages;
 
 import com.gurock.testrail.APIClient;
 import com.gurock.testrail.APIException;

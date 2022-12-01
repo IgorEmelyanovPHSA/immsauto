@@ -1,9 +1,9 @@
-package bcvax.Inventory;
+package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.pages.InClinicExperiencePage;
+import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

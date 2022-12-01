@@ -1,8 +1,8 @@
-package bcvax.Inventory;
+package bcvax.tests.Inventory;
 
-import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.SupplyConsolePage;
+import bcvax.pages.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

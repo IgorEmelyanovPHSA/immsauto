@@ -1,6 +1,5 @@
-package bcvaxdevit.my.salesforce.com.Pages;
+package bcvax.pages;
 
-import com.gurock.testrail.APIException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 

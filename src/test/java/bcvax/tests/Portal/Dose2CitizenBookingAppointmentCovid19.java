@@ -1,11 +1,11 @@
-package bcvax.Portal;
+package bcvax.tests.Portal;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.BookAnAppointmentPage;
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
-import bcvaxdevit.my.salesforce.com.Pages.RegisterToGetVaccinatedPage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.pages.BookAnAppointmentPage;
+import bcvax.pages.InClinicExperiencePage;
+import bcvax.pages.RegisterToGetVaccinatedPage;
+import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import org.junit.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

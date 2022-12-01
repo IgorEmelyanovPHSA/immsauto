@@ -1,11 +1,11 @@
-package communityPortal.InventoryCP;
+package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.CommonMethods;
-import bcvaxdevit.my.salesforce.com.Pages.CommunityPortalMainPage;
-import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.pages.CommonMethods;
+import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.SupplyConsolePage;
+import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

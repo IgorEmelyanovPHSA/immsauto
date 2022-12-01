@@ -1,11 +1,11 @@
-package bcvax.Register;
+package bcvax.tests.Register;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
+import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
-import bcvax.BaseTest;
+import bcvax.pages.InClinicExperiencePage;
+import bcvax.tests.BaseTest;
 
 @Listeners({TestListener.class})
 public class RegisterNewCitizen extends BaseTest {

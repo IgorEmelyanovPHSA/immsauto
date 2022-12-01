@@ -1,8 +1,8 @@
-package bcvax.ClinicInBox;
+package bcvax.tests.ClinicInBox;
 
-import bcvaxdevit.my.salesforce.com.Pages.ClinicInBoxPage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.ClinicInBoxPage;
+import bcvax.pages.Utils;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

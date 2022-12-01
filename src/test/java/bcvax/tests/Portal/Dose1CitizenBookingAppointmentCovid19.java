@@ -1,8 +1,8 @@
-package bcvax.Portal;
+package bcvax.tests.Portal;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.*;
-import bcvax.BaseTest;
+import bcvax.pages.*;
+import bcvax.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

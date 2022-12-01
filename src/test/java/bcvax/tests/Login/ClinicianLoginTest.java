@@ -1,6 +1,6 @@
-package bcvax.Login;
+package bcvax.tests.Login;
 
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
 import org.testng.annotations.Test;
 
 public class ClinicianLoginTest extends BaseTest {

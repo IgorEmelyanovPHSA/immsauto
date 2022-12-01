@@ -1,9 +1,9 @@
-package bcvax.CallCenter;
+package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.CallCenterConsolePage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.CallCenterConsolePage;
+import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

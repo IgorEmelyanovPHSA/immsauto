@@ -1,10 +1,10 @@
-package bcvax.Inventory;
+package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvaxdevit.my.salesforce.com.Pages.CommonMethods;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.SupplyConsolePage;
+import bcvax.pages.Utils;
+import bcvax.pages.CommonMethods;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

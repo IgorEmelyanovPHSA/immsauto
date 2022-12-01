@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Pages;
+package bcvax.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;

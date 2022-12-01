@@ -1,9 +1,9 @@
-package bcvax.InClinicExperience;
+package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.InClinicExperiencePage;
+import bcvax.pages.Utils;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import org.testng.annotations.DataProvider;

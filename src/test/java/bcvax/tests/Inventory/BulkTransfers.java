@@ -1,11 +1,11 @@
-package bcvax.Inventory;
+package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
+import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
-import bcvax.BaseTest;
+import bcvax.pages.SupplyConsolePage;
+import bcvax.tests.BaseTest;
 
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;

@@ -1,11 +1,11 @@
-package bcvax.Precondition;
+package bcvax.tests.Precondition;
 
 import Utilities.TestListener;
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvaxdevit.my.salesforce.com.Pages.InClinicExperiencePage;
+import bcvax.pages.InClinicExperiencePage;
 
 @Listeners({TestListener.class})
 public class CitizenDuplicates extends BaseTest {

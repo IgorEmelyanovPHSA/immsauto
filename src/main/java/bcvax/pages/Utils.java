@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Pages;
+package bcvax.pages;
 
 import java.io.FileInputStream;
 import java.nio.file.Paths;

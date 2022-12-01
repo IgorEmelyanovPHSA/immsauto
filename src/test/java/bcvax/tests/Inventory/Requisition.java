@@ -1,11 +1,11 @@
-package bcvax.Inventory;
+package bcvax.tests.Inventory;
 
 
-import bcvaxdevit.my.salesforce.com.Pages.Utils;
-import bcvax.BaseTest;
+import bcvax.tests.BaseTest;
+import bcvax.pages.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import bcvaxdevit.my.salesforce.com.Pages.RequisitionPage;
+import bcvax.pages.RequisitionPage;
 
 
 public class Requisition extends BaseTest {

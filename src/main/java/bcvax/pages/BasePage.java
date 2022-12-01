@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Pages;
+package bcvax.pages;
 // All Pages are inheriting from this class
 
 import org.openqa.selenium.*;
