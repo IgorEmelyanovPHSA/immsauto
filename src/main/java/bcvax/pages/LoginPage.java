@@ -164,6 +164,17 @@ public class LoginPage extends BasePage {
 		return new CommunityPortalMainPage(driver);
 	}
 
+	public CommunityPortalMainPage loginIntoCommunityPortalAsPPHIS() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		click(btnLoginHere);
+		waitForElementToBeClickable(textUserName);
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
+		click(login_button);
+		return new CommunityPortalMainPage(driver);
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
