@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests.Inventory;
 
 import Utilities.TestListener;
+import bcvaxdevit.my.salesforce.com.Pages.CommunityPortalMainPage;
 import bcvaxdevit.my.salesforce.com.Pages.SupplyConsolePage;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import bcvaxdevit.my.salesforce.com.Tests.BaseTest;
@@ -8,6 +9,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -21,149 +24,276 @@ public class Transfer extends BaseTest {
 		TestcaseID = "220550"; //C220550
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
+		//CommunityPortalMainPage communityPortalMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		Thread.sleep(10000);
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		//communityPortalMainPage.verifyYouAreOnTheMainPageCP();
+		//supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");
+		//SupplyConsolePage supplyConsolePage = communityPortalMainPage.openMenu().navigateToSupplyConsolePage();
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*4.----Go to Supply Locations Tab --*/");
+
 		supplyConsolePage.clickSupplyLocationsTab();
-		////// Supply Location_1 -> Outcoming
-		log("/*5.----Click on Automation Supply Location_1 --*/");
+//		////// Supply Location_1 -> Outcoming
+//		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
+//		Thread.sleep(5000);
+//		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
 		//supplyConsolePage.selectSupplyContainer();
-		Thread.sleep(2000);
-		log("/*6.----Getting Remaining Doses/Remaining Quantity - Before --*/");
-		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
-		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
-		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Distribution_1_1();
-		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
-		log("/*7.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnContainerDropDownMenu();
-		Thread.sleep(2000);
-		log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectTransferFromDropDown();
-		Thread.sleep(2000);
-		log("/*9.----Picked up the Trade Vaccine Name --*/");
-		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
-		log("/*--  the Trade Name is:  " + tradeName);
-		Thread.sleep(2000);
-		log("/*10.----Picked up the Dose Conversation Factor --*/");
-		//Double dose_conversation_factor = 5.0;
-		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
-		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
-		Thread.sleep(2000);
-		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-		supplyConsolePage.enterTransferDosages("10");
-		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
-		Thread.sleep(2000);
-		System.out.println("/*12.----click Transfer dialog Modal button --*/");
-		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
-		System.out.println("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(5000);
-		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity - After --*/");
-		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container2_Distribution_1_1();
-		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
-		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container2_Distribution_1_1();
-		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
-		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 =
-				Double.parseDouble(new DecimalFormat("##.####").
-						format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10)));
-		assertEquals(remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1, remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 =
-				Double.parseDouble(new DecimalFormat("##.####").
-						format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor)));
-		assertEquals(remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1, remainingQty_after_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
-		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-		supplyConsolePage.clickTransactionsTab();
-		Thread.sleep(5000);
-		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
-		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
-		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-		int kk = countOutgoingTransactions;
-		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
-		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
-		supplyConsolePage.clickOnOutgoingTransactions(kk);
-		Thread.sleep(3000);
-		System.out.println("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(3000);
-		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
-		Thread.sleep(2000);
-		///////////////// Supply Location_2 -> Incoming //////////////////////////
-		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		supplyConsolePage.clickOnSupplyLocation_2();
-		Thread.sleep(2000);
-		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
-		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
-		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
-		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
-		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-		supplyConsolePage.clickTransactionsTab();
-		Thread.sleep(2000);
-		System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
-		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
-		Thread.sleep(2000);
-		System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
-		Thread.sleep(2000);
-		System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
-		int j = countIncomingTransactions;
-		supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
-		Thread.sleep(2000);
-		System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
-		supplyConsolePage.selectConfirmIncomingDropDown();
-		Thread.sleep(2000);
-		System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
-		supplyConsolePage.selectIncomingSupplyDistribution();
-		Thread.sleep(2000);
-		System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
-		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-		Thread.sleep(1000);
-		System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-		supplyConsolePage.successMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-		System.out.println("/*29.----click on Related Item Tab --*/");
-		supplyConsolePage.clickOnRelatedItemTab();
-		Thread.sleep(2000);
-		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
-		double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
-		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
-		double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
-		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
-		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10),2, remainingDoses_after_Lot_EK4241_Distribution_2_1);
-		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
+//		log("/*6.----Getting Remaining Doses/Remaining Quantity - Before --*/");
+//		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
+//		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
+//		Thread.sleep(2000);
+//		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Distribution_1_1();
+//		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
+//		Thread.sleep(2000);
+//		log("/*7.----Click on Container's dropdown --*/");
+//		//supplyConsolePage.clickOnContainerDropDownMenu();
+//		Thread.sleep(2000);
+//		log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
+//		supplyConsolePage.selectTransferFromDropDown();
+//		Thread.sleep(2000);
+//		log("/*9.----Picked up the Trade Vaccine Name --*/");
+//		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+//		log("/*--  the Trade Name is:  " + tradeName);
+//		Thread.sleep(2000);
+//		log("/*10.----Picked up the Dose Conversation Factor --*/");
+//		//Double dose_conversation_factor = 5.0;
+//		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+//		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
+//		Thread.sleep(2000);
+//		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
+//		supplyConsolePage.enterTransferDosages("10");
+//		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
+//		supplyConsolePage.selectSupplyLocation_2_To();
+//		Thread.sleep(2000);
+//		System.out.println("/*12.----click Transfer dialog Modal button --*/");
+//		supplyConsolePage.clickBulkTransfersModalButton();
+//		Thread.sleep(2000);
+//		System.out.println("/*13.----click Close Modal button --*/");
+//		supplyConsolePage.clickBulkTransfersCloseButton();
+//		Thread.sleep(5000);
+//		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity - After --*/");
+//		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container2_Distribution_1_1();
+//		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
+//		Thread.sleep(2000);
+//		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container2_Distribution_1_1();
+//		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
+//		double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 =
+//				Double.parseDouble(new DecimalFormat("##.####").
+//						format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10)));
+//		assertEquals(remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1, remainingDoses_after_Lot_EK4241_Distribution_1_1);
+//		double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 =
+//				Double.parseDouble(new DecimalFormat("##.####").
+//						format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor)));
+//		assertEquals(remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1, remainingQty_after_Lot_EK4241_Distribution_1_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
+//		supplyConsolePage.clickTransactionsTab();
+//		Thread.sleep(5000);
+//		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
+//		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
+//		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+//		Thread.sleep(5000);
+//		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
+//		int kk = countOutgoingTransactions;
+//		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
+//		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+//		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+//		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
+//		supplyConsolePage.clickOnOutgoingTransactions(kk);
+//		Thread.sleep(3000);
+//		System.out.println("/*18.----Close All Tab's --*/");
+//		supplyConsolePage.closeTabsHCA();
+//		Thread.sleep(3000);
+//		System.out.println("/*19.----Go to Supply Locations Tab --*/");
+//		supplyConsolePage.clickSupplyLocationsTab();
+//		Thread.sleep(2000);
+//		///////////////// Supply Location_2 -> Incoming //////////////////////////
+//		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+//		supplyConsolePage.clickOnSupplyLocation_2();
+//		Thread.sleep(2000);
+//		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+//		double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
+//		supplyConsolePage.clickTransactionsTab();
+//		Thread.sleep(2000);
+//		System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
+//		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+//		Thread.sleep(2000);
+//		System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
+//		Thread.sleep(2000);
+//		System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
+//		int j = countIncomingTransactions;
+//		supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
+//		Thread.sleep(2000);
+//		System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
+//		supplyConsolePage.selectConfirmIncomingDropDown();
+//		Thread.sleep(2000);
+//		System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
+//		supplyConsolePage.selectIncomingSupplyDistribution();
+//		Thread.sleep(2000);
+//		System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
+//		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+//		Thread.sleep(1000);
+//		System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
+//		supplyConsolePage.successMessageAppear();
+//		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+//		System.out.println("/*29.----click on Related Item Tab --*/");
+//		supplyConsolePage.clickOnRelatedItemTab();
+//		Thread.sleep(2000);
+//		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
+//		double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
+//		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10),2, remainingDoses_after_Lot_EK4241_Distribution_2_1);
+//		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
 		
 		
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT_Portal() throws Exception {
+		TestcaseID = "220550"; //C220550
+		log("Target Environment: " + Utils.getTargetEnvironment());
+
+		CommunityPortalMainPage communityPortalMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+
+		SupplyConsolePage supplyConsolePage = communityPortalMainPage.openMenu().navigateToSupplyConsolePage();
+
+
+		Map<String,String> searchCriteria = new HashMap<>();
+		searchCriteria.put("Sort by:\nSupply Container Name", "AstraZeneca ChAdOx1-S");
+		Thread.sleep(3000);
+
+		//Double doses = Double.parseDouble(communityPortalMainPage.getRemainingDoses(searchCriteria));
+
+//		Map<String,String> searchCriteria1 = new HashMap<>();
+//		searchCriteria1.put("Sort by:\nSupply Container Name", "FluMist-Quad - MJ3210B");
+
+		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = Double.parseDouble(communityPortalMainPage.getRemainingDoses(searchCriteria));
+		Double remainingQty_before_Lot_EK4241_Distribution_1_1 = Double.parseDouble(communityPortalMainPage.getRemainingQty(searchCriteria));
+		communityPortalMainPage.getActions(searchCriteria);
+
+		supplyConsolePage.selectTransferFromDropDown();
+
+		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+
+
+		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+
+		supplyConsolePage.enterTransferDosages("10").selectSupplyLocation_2_To().clickBulkTransfersModalButton();
+
+
+		supplyConsolePage.clickBulkTransfersCloseButton();
+
+		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = Double.parseDouble(communityPortalMainPage.getRemainingDoses(searchCriteria));
+
+		double remainingQty_after_Lot_EK4241_Distribution_1_1 = Double.parseDouble(communityPortalMainPage.getRemainingQty(searchCriteria));
+
+
+		double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 = remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10.0;
+		assertEquals(remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1, remainingDoses_after_Lot_EK4241_Distribution_1_1);
+
+		double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 = (remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor;
+//				Double.parseDouble(new DecimalFormat("##.####").
+//						format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor)));
+		assertEquals(remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1, remainingQty_after_Lot_EK4241_Distribution_1_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
+		supplyConsolePage.clickTransactionsTab();
+//		Thread.sleep(5000);
+//		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
+//		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
+		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+//		Map<String,String> searchCriteria1 = new HashMap<>();
+//		searchCriteria1.put("Sort by:\nSupply Container Name", "FluMist-Quad - MJ3210B");
+//		communityPortalMainPage.getRemainingQty(searchCriteria)
+//		Thread.sleep(5000);
+		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
+		int kk = countOutgoingTransactions;
+//		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
+		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
+		supplyConsolePage.clickOnOutgoingTransactions(kk);
+//		Thread.sleep(3000);
+//		System.out.println("/*18.----Close All Tab's --*/");
+//		supplyConsolePage.closeTabsHCA();
+//		Thread.sleep(3000);
+//		System.out.println("/*19.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+//		Thread.sleep(2000);
+//		///////////////// Supply Location_2 -> Incoming //////////////////////////
+//		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+//		supplyConsolePage.clickOnSupplyLocation_2();
+//		Thread.sleep(2000);
+//		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+//		double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
+//		supplyConsolePage.clickTransactionsTab();
+//		Thread.sleep(2000);
+//		System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
+//		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+//		Thread.sleep(2000);
+//		System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
+//		Thread.sleep(2000);
+//		System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
+//		int j = countIncomingTransactions;
+//		supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
+//		Thread.sleep(2000);
+//		System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
+//		supplyConsolePage.selectConfirmIncomingDropDown();
+//		Thread.sleep(2000);
+//		System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
+//		supplyConsolePage.selectIncomingSupplyDistribution();
+//		Thread.sleep(2000);
+//		System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
+//		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+//		Thread.sleep(1000);
+//		System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
+//		supplyConsolePage.successMessageAppear();
+//		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+//		System.out.println("/*29.----click on Related Item Tab --*/");
+//		supplyConsolePage.clickOnRelatedItemTab();
+//		Thread.sleep(2000);
+//		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
+//		double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
+//		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+//		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
+//		assertEquals(round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10),2, remainingDoses_after_Lot_EK4241_Distribution_2_1);
+//		assertEquals(round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor),2, remainingQty_after_Lot_EK4241_Distribution_2_1);
+//		Thread.sleep(2000);
+	}
+
+		@Test(priority = 2)
 	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220550"; //C220550
 		log("Target Environment: "+ Utils.getTargetEnvironment());

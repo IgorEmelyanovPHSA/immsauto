@@ -92,6 +92,10 @@ public abstract class BasePage<T> {
 		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
 		return element;
 	}
+	protected static void waitForElementNotToBeVisible(WebDriver driver, By xpath, int seconds) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(xpath));
+	}
 	
 	public static WebElement waitForElementToBeClickable(WebDriver driver, WebElement webElement, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));

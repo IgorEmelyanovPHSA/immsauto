@@ -154,6 +154,7 @@ public class LoginPage extends BasePage {
 	private WebElement btnLoginHere;
 
 	public CommunityPortalMainPage loginIntoCommunityPortalAsAdmin() throws Exception {
+		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
 		click(btnLoginHere);

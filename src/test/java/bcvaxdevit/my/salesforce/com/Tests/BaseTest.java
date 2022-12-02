@@ -50,7 +50,7 @@ public class BaseTest {
 			log("Test Rail was not updated: "+e);
 		}
 		driver.manage().deleteAllCookies();
-		driver.close();
+	//	driver.close();
 	}
 	
 	public WebDriver getDriver() {
