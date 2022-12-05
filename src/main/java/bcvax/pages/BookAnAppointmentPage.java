@@ -117,14 +117,14 @@ public class BookAnAppointmentPage extends BasePage{
 
     public void selectDateAndTimeForAppointmentAndClickBtnNext() throws InterruptedException{
         click(selectFirstAvailableDayInTheCalendarId);
-        Thread.sleep(500);
+        Thread.sleep(2000);
         scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
         click(selectFirstAvailableTimeSlotInTheCalendar);
         click(btnNext);
     }
 
     public void clickCheckBoxVerifyContactInformationAndConfirmAppointment() throws InterruptedException{
-        Thread.sleep(800);
+        Thread.sleep(2000);
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
         //scrollTop(checkBoxVerifyContactInformation);
         click(checkBoxVerifyContactInformation);

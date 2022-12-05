@@ -22,17 +22,26 @@ public class Transfer extends BaseTest {
 		TestcaseID = "220550"; //C220550
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		//SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		//CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsPPHIS();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
 		Thread.sleep(10000);
-		//Assert.assertTrue(false);
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+
+		log("/*2.----Navigate to Supply Console Page --*/");
+		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
 		Thread.sleep(2000);
-		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+
+		//log("/*2.----Supply Console Page displayed --*/");
+		//supplyConsolePage.verifyIsSupplyPageDisplayed();
+		//Thread.sleep(5000);
+
+		//log("/*3.----Close All previously opened Tab's --*/");
+		//supplyConsolePage.closeTabsHCA();
+		//Thread.sleep(2000);
+
+		//log("/*4.----Go to Supply Locations Tab --*/");
+		//supplyConsolePage.clickSupplyLocationsTab();
+
 		////// Supply Location_1 -> Outcoming
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
@@ -169,12 +178,18 @@ public class Transfer extends BaseTest {
 		//TestcaseID = "220550"; //C220550
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsPPHIS();
+		//CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsPPHIS();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
 		Thread.sleep(10000);
-		//Assert.assertTrue(false);
+
+		log("/*2.----Navigate to Supply Console Page --*/");
+		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+		Thread.sleep(2000);
+
 		log("/*2.----Supply Console Page displayed --*/");
-		//supplyConsolePage.verifyIsSupplyPageDisplayed();
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
+
 		log("/*3.----Close All previously opened Tab's --*/");
 		//supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
@@ -417,7 +432,7 @@ public class Transfer extends BaseTest {
 		
 	}
 
-	@Test(priority = 4)
+	//@Test(priority = 4)
 	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220557";
 		log("Target Environment: "+ Utils.getTargetEnvironment());
