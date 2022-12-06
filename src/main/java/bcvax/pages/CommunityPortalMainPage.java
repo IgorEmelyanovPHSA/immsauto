@@ -17,6 +17,9 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, '/provider/s/hc-supply-location')]")
     private WebElement supplyLocationNameAbby;
 
+    @FindBy(xpath = "//a[@title='Automation Supply Location_1' and contains(@href, '/provider/s/hc-supply-location')]")
+    private WebElement automationSupplyLocation_1;
+
     @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
     private WebElement tabRelatedItems;
 
@@ -29,7 +32,8 @@ public class CommunityPortalMainPage extends BasePage{
     waitForElementToBeClickable(tabSupplyLocation);
     click(tabSupplyLocation);
     waitForElementToBeClickable(tabSupplyLocation);
-    click(supplyLocationNameAbby);
+    //click(supplyLocationNameAbby);
+    click(automationSupplyLocation_1);
     waitForElementToBeClickable(tabSupplyLocation);
     click(tabRelatedItems);
     Thread.sleep(2000);

@@ -499,9 +499,30 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = "//h2[text() = 'Container - Adjustment']/../..//button[text() = 'Adjustment']")
 	private WebElement btnBulkAdjustmentContainerAdjustmentPage;
-	
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Community Portal Methods //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public void enterBulkByDosageWithReasonCP(double amount, String reason, int numberOfRows) throws InterruptedException {
+		//By dosage
+		int y = 0;
+		int k = 3;
+		while (y < numberOfRows) {
+			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
+			typeIn(dosesDynamicFiled, String.valueOf(amount));
+//			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
+//			click(reasonForWastageDynamicDropDown);
+//			Thread.sleep(500);
+//			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
+//			click(reasonForWastageDynamicFiled);
+			k = k + 3;
+			y++;
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*---------Constructor-------*/
 	public SupplyConsolePage(WebDriver driver) {
 		super(driver);
@@ -637,7 +658,8 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
-		By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='c_hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+		//By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='c_hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+		By container_checkbox_1_ = By.xpath("(//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
 		waitForElementToBeLocated(driver, container_checkbox_1_, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(container_checkbox_1_);
@@ -1259,7 +1281,7 @@ public class SupplyConsolePage extends BasePage {
 			y++;
 		}
 	}
-	
+
 	public String getVaccineName() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_trade_name1, 10);
 		WebElement element = driver.findElement(get_trade_name1);
