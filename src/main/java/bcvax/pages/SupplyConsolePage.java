@@ -801,6 +801,7 @@ public class SupplyConsolePage extends BasePage {
 		do {
 			try {
 				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+				Thread.sleep(2000);
 				closetab.click();
 				Thread.sleep(2000);
 			} catch (NoSuchElementException e) {

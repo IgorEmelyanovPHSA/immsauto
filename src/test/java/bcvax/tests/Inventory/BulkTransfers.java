@@ -632,7 +632,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + 1);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, round((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + 1) / 10),2);
 		log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(5000);
 	}
