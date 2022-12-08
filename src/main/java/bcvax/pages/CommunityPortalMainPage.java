@@ -23,6 +23,13 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
     private WebElement tabRelatedItems;
 
+    @FindBy(xpath = "//button[text() = 'More']")
+    private WebElement main_menu_btn_More;
+
+    @FindBy(xpath = "//a[@title = 'All Client']")
+    private WebElement sub_menu_AllClients;
+
+
 
     public void verifyYouAreOnTheMainPageCP(){
 
@@ -38,6 +45,20 @@ public class CommunityPortalMainPage extends BasePage{
     click(tabRelatedItems);
     Thread.sleep(2000);
     return new SupplyConsolePage(driver);
+    }
+
+    public ProfilesPage navigateToProfilesPage() throws InterruptedException {
+        waitForElementToBeClickable(main_menu_btn_More);
+        Thread.sleep(2000);
+        click(main_menu_btn_More);
+        Thread.sleep(2000);
+        waitForElementToBeClickable(sub_menu_AllClients);
+        Thread.sleep(2000);
+        click(sub_menu_AllClients);
+        //waitForElementToBeClickable(tabSupplyLocation);
+        //click(tabRelatedItems);
+        Thread.sleep(2000);
+        return new ProfilesPage(driver);
     }
 
 }
