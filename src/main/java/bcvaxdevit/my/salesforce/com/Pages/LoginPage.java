@@ -1,5 +1,6 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,6 +64,10 @@ public class LoginPage extends BasePage {
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
 		click(login_button);
 		return new SupplyConsolePage(driver);
+	}
+
+	public Tables getTables(){
+		return new Tables(driver);
 	}
 
 	public RequisitionPage loginAsPPHIS1() throws Exception {
@@ -153,6 +158,7 @@ public class LoginPage extends BasePage {
 	@FindBy(xpath = "//a[@class='inverseTextColor' and contains(text(),'Login here')]")
 	private WebElement btnLoginHere;
 
+	@Step
 	public CommunityPortalMainPage loginIntoCommunityPortalAsAdmin() throws Exception {
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));

@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Tests;
 
 import bcvaxdevit.my.salesforce.com.Pages.LoginPage;
+import bcvaxdevit.my.salesforce.com.Pages.Tables;
 import bcvaxdevit.my.salesforce.com.Pages.TestRailManager;
 import bcvaxdevit.my.salesforce.com.Pages.Utils;
 import org.apache.commons.io.output.TeeOutputStream;

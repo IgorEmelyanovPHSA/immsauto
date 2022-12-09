@@ -1,6 +1,7 @@
 package bcvaxdevit.my.salesforce.com.Pages;
 // All Pages are inheriting from this class
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.List;
 
 
 public abstract class BasePage<T> {
@@ -82,9 +84,23 @@ public abstract class BasePage<T> {
 
 	// explicit wait - to wait for the compose button to be click-able
 	public static WebElement waitForElementToBeVisible(WebDriver driver, WebElement webElement, int seconds) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-		WebElement element = wait.until(ExpectedConditions.visibilityOf(webElement));
+		WebDriverWait waiting = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		System.out.println(webElement.isDisplayed());
+		WebElement element = waiting.until(ExpectedConditions.visibilityOf(webElement));
+
+		System.out.println("is displayed");
 		return element;
+	}
+
+	public void waitForElementToBeVisible(WebElement webElement, int seconds) {
+		WebDriverWait waiting = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		System.out.println(webElement.isDisplayed());
+		waiting.until(ExpectedConditions.visibilityOf(webElement));
+		System.out.println("is displayed");
+	}
+	public void waitForElementsToBeVisible( List<WebElement> webElements, int seconds) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.visibilityOfAllElements(webElements));
 	}
 	
 	protected static WebElement waitForElementToBeLocated(WebDriver driver, By xpath, int seconds) {
@@ -173,7 +189,8 @@ public abstract class BasePage<T> {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return LOG_TIMESTAMP_FORMAT.format(timestamp);
 	}
-	
+
+	@Step
 	public static void log(String msg) {
 		System.out.println(getLogTime() + " " + msg);
 	}

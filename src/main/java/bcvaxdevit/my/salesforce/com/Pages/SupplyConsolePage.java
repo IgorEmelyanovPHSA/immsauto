@@ -713,10 +713,11 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 	@Step
-	public void clickBulkTransfersModalButton(){
+	public SupplyConsolePage clickBulkTransfersModalButton(){
 		log("/*12.----click Transfer dialog Modal button --*/");
 		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
 		click(bulk_transfers_dialog_button_1);
+		return this;
 	}
 	
 	public void clickBulkTransfersCloseButton() throws InterruptedException {
@@ -727,6 +728,7 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void clickTransactionsTab() throws InterruptedException {
 		//scroll up
+		System.out.println("/*---  go to transaction tab ------");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, transactions_tab, 10);
@@ -1097,7 +1099,7 @@ public class SupplyConsolePage extends BasePage {
 		
 	}
 
-	public void enterTransferQuantity(String quantity) throws InterruptedException {
+	public SupplyConsolePage enterTransferQuantity(String quantity) throws InterruptedException {
 		By Quantity = By.xpath("//lightning-input//label[text()='Quantity']//following-sibling::div/input[@class='slds-input']");
 		waitForElementToBeLocated(driver, Quantity, 10);
 		Thread.sleep(2000);
@@ -1109,6 +1111,7 @@ public class SupplyConsolePage extends BasePage {
 		element.clear();
 		Thread.sleep(2000);
 		element.sendKeys(quantity);
+		return this;
 	}
 	
 	public void selectAdjustmentFromDropDown() throws InterruptedException {
@@ -1773,6 +1776,23 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, select_supply_distributor, 10);
 		Thread.sleep(2000);
 		select_supply_distributor.click();
+	}
+	public void acceptIncomingTransfer() throws InterruptedException {
+		selectConfirmIncomingDropDown();
+		selectIncomingSupplyDistribution();
+		clickOnConfirmModalIncomingTransactionButton();
+		successMessageAppear();
+	}
+	public void transferDosesToSupplyLocation2() throws InterruptedException {
+		selectSupplyLocation_2_To().clickBulkTransfersModalButton()
+				.clickBulkTransfersCloseButton();
+	}
+
+	public void transferDosesToSupplyLocation1SameClinic() throws InterruptedException {
+		selectSupplyLocation_1_To();
+		selectSameClinicSupplyDistribution();
+		clickBulkTransfersModalButton();
+		clickBulkTransfersCloseButton();
 	}
 
 }

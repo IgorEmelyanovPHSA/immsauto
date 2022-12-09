@@ -13,68 +13,82 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 
-public class ConsoleTable{
+public class GenericTable {
     private final WebElement webElement;
 
-    public ConsoleTable(WebElement webElement) {
-         this.webElement = webElement;
+    public GenericTable(WebElement webElement) {
+        this.webElement = webElement;
     }
 
     public WebElement getWrappedElement() {
         return webElement;
     }
 
-    public void readRowsWithHeading(){
-        for(Map<String, WebElement> row : getRowsMappedToHeadings()){
+    /**
+     * Prints all rows with headings.
+     */
+    public void readRowsWithHeading() {
+        for (Map<String, WebElement> row : getRowsMappedToHeadings()) {
             row.forEach((k, v) -> System.out.println("Heading : " + k + System.lineSeparator() + "Value : " + v.getText()));
             System.out.println("next item");
         }
     }
-
-    public WebElement getCellElements(Map<String,String> searchCriteria) {
+    /**
+     * Returns a single cell WebElement
+     *
+     * @return WebElement
+     */
+    public WebElement getCellElement(Map<String, String> searchCriteria) {
         WebElement element = null;
         for (Map<String, WebElement> row : getRowsMappedToHeadings()) {
-            row.forEach((k, v) -> System.out.println("Dtring : " + k + System.lineSeparator() + "WebElement: " + v.getText()));
             for (String key : searchCriteria.keySet()) {
                 if (row.containsKey(key) && row.get(key).getText().contains(searchCriteria.get(key))) {
                     element = row.get(key);
                 }
             }
         }
-       // System.out.println("RET8R " + element);
         return element;
     }
+
     /**
      * Returns a single row with heading elements.
      *
      * @return List with table heading elements.
      */
-    public Map<String, WebElement> getMappedRow(Map<String,String> searchCriteria) {
-        Map<String, WebElement> map = new HashMap<>();
+    public Map<String, WebElement> getMappedRow(Map<String, String> searchCriteria) {
+        Map<String, WebElement> map1 = new HashMap<>();
         for (Map<String, WebElement> row : getRowsMappedToHeadings()) {
-            for (String key : searchCriteria.keySet()) {
-                if (row.containsKey(key) && row.get(key).getText().contains(searchCriteria.get(key))) {
-                    map.putAll(row);
+            //ToDo need to find a better way to validate map if its contains multiple entries, currently only capable of working with map of 2 entries
+            if (searchCriteria.keySet().size() > 1) {
+                if (validateRowContainsMapIndexes(row, searchCriteria, 0) && validateRowContainsMapIndexes(row, searchCriteria, 1)) {
+                    map1.putAll(row);
+                }
+            } else {
+                if (validateRowContainsMapIndexes(row, searchCriteria, 0)) {
+                    map1.putAll(row);
                 }
             }
         }
-        return map;
+        if (map1.isEmpty()) {
+            throw new AssertionError("Item with that name not found");
+        }
+        return map1;
     }
 
-    public void performRowActions(Map<String,String> searchCriteria) {
-        getMappedRow(searchCriteria).get("").click();
+    private boolean validateRowContainsMapIndexes(Map<String, WebElement> row, Map<String, String> searchCriteria, int index) {
+        List<String> stringsList = new ArrayList<>(searchCriteria.keySet());
+        return row.containsKey(stringsList.get(index)) && row.get(stringsList.get(index)).getText().contains(searchCriteria.get(stringsList.get(index)));
     }
 
     /**
      * Returns a list of table heading elements.
-     * <p>
      * Multiple rows of heading elements, rows  are flattened
      * i.e. the second row, will follow the first
      *
      * @return List with table heading elements.
      */
     public List<WebElement> getHeadings() {
-        return getWrappedElement().findElements(By.xpath("//*[contains(@class, 'slds-th__action')]"));// ..//thead//tr//th
+        return getWrappedElement().findElements(By.xpath(".//*[contains(@class, 'slds-th__action')]"));
     }
 
     /**
@@ -84,19 +98,17 @@ public class ConsoleTable{
      */
     public List<String> getHeadingsAsString() {
         List<String> list = new ArrayList<>();
-        for (WebElement el: getHeadings()){
-            list.add(el.getText());
-            if (el.getText().isEmpty()){
+        for (WebElement el : getHeadings()) {
+            if (el.getText().isEmpty()) {
                 list.add(el.getAttribute("title"));
+            } else if (el.getText().contains("Show actions")) {
+                //ignore
+            } else {
+                list.add(el.getText());
             }
 
         }
         return list;
-//        String title = "title";
-//        return getHeadings().stream()
-//                .map(WebElement::getText)
-//                .map(WebElement::getAttribute uf("title"))
-//                .collect(toList());
     }
 
     /**
@@ -105,16 +117,9 @@ public class ConsoleTable{
      * @return List where each item is a table row.
      */
     public List<List<WebElement>> getRows() {
-//        return getWrappedElement()
-//                .findElements(By.xpath(".//tr"))
-//                .stream()
-//                .map(rowElement -> rowElement.findElements(By.xpath(".//td")))
-//                .filter(row -> row.size() > 0) // ignore rows with no <td> tags
-//                .collect(toList());
         return getWrappedElement()
-                .findElements(By.xpath(".//tr"))//.//tbody/tr //*[contains(@role, 'gridcell')]
+                .findElements(By.xpath(".//tr"))
                 .stream()
-               // .map(rowElement -> rowElement.findElements(By.xpath(".//td | .//th")))
                 .map(rowElement -> rowElement.findElements(By.xpath(".//td | .//th")))
                 .filter(row -> row.size() > 0) // ignore rows with no <td> tags
                 .collect(toList());
@@ -200,7 +205,7 @@ public class ConsoleTable{
         List<String> headingsAsString = getHeadingsAsString();
         return getRows().stream()
                 .map(row -> row.stream()
-                        .collect(toMap(e -> headingsAsString.get(row.indexOf(e)), identity())))//, (v1, v2)-> v2
+                        .collect(toMap(e -> headingsAsString.get(row.indexOf(e)), identity(), (v1, v2) -> v2)))//, (v1, v2)-> v2
                 .collect(toList());
     }
 
