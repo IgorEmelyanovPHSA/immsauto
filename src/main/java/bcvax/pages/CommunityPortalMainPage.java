@@ -11,7 +11,7 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
     private WebElement btnScanUsingCamera;
 
-    @FindBy(xpath = "//a[text()='Supply Location']")
+    @FindBy(xpath = "//a[text()='Supply Locations']")
     private WebElement tabSupplyLocation;
 
     @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, '/provider/s/hc-supply-location')]")
