@@ -1,4 +1,4 @@
-package bcvaxdevit.my.salesforce.com.Pages;
+package bcvax.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -36,7 +36,6 @@ public class Tables extends BasePage {
 
     public GenericTable getSingleTransactionsTable(String table) {
         WebElement shippedTransactionsOutgoing = getSingleTableFromMultipleTables(table).findElement(By.xpath(".//div[@class='slds-table_header-fixed_container slds-scrollable_x']"));
-        //  waitForElementToBeVisible(driver, shippedTransactionsOutgoing, 20);
         return new GenericTable(shippedTransactionsOutgoing);
     }
 
@@ -45,7 +44,6 @@ public class Tables extends BasePage {
         return getTableRow(searchCriteria, getSingleTransactionsTable("Outgoing"));
     }
 
-    @Step
     public Map<String, WebElement> getTableRow(Map<String, String> searchCriteria, GenericTable table) {
         return table.getMappedRow(searchCriteria);
     }
@@ -54,7 +52,6 @@ public class Tables extends BasePage {
         return table.getCellElement(searchCriteria);
     }
 
-    @Step
     private void clickOnTableRow(Map<String, String> searchCriteria, GenericTable table) {
         WebElement element = getTableCell(searchCriteria, table).findElement(By.xpath(".//a"));
         clickUsingJS(element);
@@ -65,7 +62,6 @@ public class Tables extends BasePage {
         clickOnTableRow(searchCriteria, getSupplyLocationTable());
     }
 
-    @Step
     private WebElement getSingleTableFromMultipleTables(String dataTable) {
         WebElement singleTable = null;
         for (WebElement e : transactionTables) {

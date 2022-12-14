@@ -84,23 +84,9 @@ public abstract class BasePage<T> {
 
 	// explicit wait - to wait for the compose button to be click-able
 	public static WebElement waitForElementToBeVisible(WebDriver driver, WebElement webElement, int seconds) {
-		WebDriverWait waiting = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-		System.out.println(webElement.isDisplayed());
-		WebElement element = waiting.until(ExpectedConditions.visibilityOf(webElement));
-
-		System.out.println("is displayed");
-		return element;
-	}
-
-	public void waitForElementToBeVisible(WebElement webElement, int seconds) {
-		WebDriverWait waiting = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-		System.out.println(webElement.isDisplayed());
-		waiting.until(ExpectedConditions.visibilityOf(webElement));
-		System.out.println("is displayed");
-	}
-	public void waitForElementsToBeVisible( List<WebElement> webElements, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-		wait.until(ExpectedConditions.visibilityOfAllElements(webElements));
+		WebElement element = wait.until(ExpectedConditions.visibilityOf(webElement));
+		return element;
 	}
 	
 	protected static WebElement waitForElementToBeLocated(WebDriver driver, By xpath, int seconds) {
