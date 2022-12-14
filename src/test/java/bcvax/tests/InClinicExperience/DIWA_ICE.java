@@ -115,7 +115,7 @@ public class DIWA_ICE extends BaseTest {
 		if (inClinicExperience.selectDateOfAdministration())
 			Thread.sleep(3000);
 
-		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_CIB ---*/");
+		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
 		inClinicExperience.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
 		Thread.sleep(5000);
 
