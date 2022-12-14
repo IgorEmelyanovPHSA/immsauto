@@ -91,7 +91,9 @@ public class BookAnAppointmentPage extends BasePage{
 
     public void selectOneOption(String vaccine) throws InterruptedException{
         if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
+            Thread.sleep(5000);
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+            Thread.sleep(5000);
             click(checkBoxCovid19Vaccine);
         }
         else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
