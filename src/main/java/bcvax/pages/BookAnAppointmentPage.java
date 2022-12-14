@@ -97,6 +97,9 @@ public class BookAnAppointmentPage extends BasePage{
             click(checkBoxCovid19Vaccine);
         }
         else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
+            Thread.sleep(5000);
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+            Thread.sleep(5000);
             click(checkBoxInfluenzaVaccine);
         }
         else if(vaccine.equalsIgnoreCase("both")){
