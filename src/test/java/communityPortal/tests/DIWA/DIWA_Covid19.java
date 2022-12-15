@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class DIWA_Covid19 extends BaseTest {
 
     @Test
-    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_PRACTICE() throws Exception {
+    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_ComunityQA() throws Exception {
         TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         String nameToSearch = "Benoite Denna BCVaxD";
@@ -25,7 +25,10 @@ public class DIWA_Covid19 extends BaseTest {
         //InClinicExperiencePage inClinicExperience = loginPage.loginAsClinician_DIWA_ICE();
         Thread.sleep(10000);
 
-        log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
+        //log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
+        //ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
+        //Thread.sleep(10000);
+        log("/*2.----Navigate to Participants -> Clients Profiles Page --*/");
         ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
         Thread.sleep(10000);
 
@@ -42,45 +45,54 @@ public class DIWA_Covid19 extends BaseTest {
         //Thread.sleep(2000);
 
         log("/*----5. Click to Create Immunization Record Button ---*/");
-        //inClinicExperience.clickCreatImmunizationRecord();
         profilesPage.clickCreateImmunizationRecord();
         Thread.sleep(4000);
 
-        log("/*----10. Click confirm Button on the popup window---*/");
-        //inClinicExperience.clickConfirmButton();
+        log("/*----6. Click confirm Button on the popup window---*/");
+        profilesPage.clickConfirmButton();
         Thread.sleep(3000);
-        log("/*----11. Select an Option from the DropDown ---*/)");
-        //inClinicExperience.clickSelectAnOptionDropdown();
+
+        log("/*----7. Select an Option from the DropDown ---*/)");
+        profilesPage.clickSelectAnOptionDropdown();
         Thread.sleep(3000);
-        log("/*----12. Select COVID19-mRNA as an Option  ---*/");
-        //inClinicExperience.selectOption("COVID19-mRNA");
+
+        log("/*----8. Select COVID19-mRNA as an Option  ---*/");
+        profilesPage.selectOption("COVID19-mRNA");
         Thread.sleep(3000);
-        log("/*----13. Enter a Clinic Location: " +clinicLocation +"---*/");
-        //inClinicExperience.searchClinicLocation(clinicLocation);
+
+        log("/*----9. Enter a Clinic Location: " +clinicLocation +"---*/");
+        profilesPage.searchClinicLocation(clinicLocation);
         Thread.sleep(3000);
-        log("/*---14. Select a Date and Time of Administration ---*/");
-        //inClinicExperience.clickTimeBox();
+
+        log("/*---10. Select a Date and Time of Administration ---*/");
+        profilesPage.clickTimeBox();
         Thread.sleep(3000);
-        log("/*---15. Click Record Immunization ---*/");
-        //inClinicExperience.clickRecordImmunization();
+
+        log("/*---11. Click Record Immunization ---*/");
+        profilesPage.clickRecordImmunization();
         Thread.sleep(3000);
-        //if (inClinicExperience.clickPopupYesButtonIfDisplayed())
-            log("/*---15.1. Pop up window is displayed and clicked  ---*/");
+
+        if (profilesPage.clickPopupYesButtonIfDisplayed())
+            log("/*---11.1. Pop up window is displayed and clicked  ---*/");
         Thread.sleep(5000);
-        log("/*---16. Click X button on Diwa flow ---*/");
-        //inClinicExperience.clickToClose();
+
+        log("/*---12. Click X button on Diwa flow ---*/");
+        profilesPage.clickToClose();
         Thread.sleep(2000);
-        log("/*---17. Validate message on clicking close button on modal popup ---*/");
-        //inClinicExperience.validateoopsMessage();
+
+        log("/*---13. Validate message on clicking close button on modal popup ---*/");
+        profilesPage.validateoopsMessage();
         Thread.sleep(2000);
-        log("/*---18. click on continue editing button to continue with the flow ---*/");
-        //inClinicExperience.ContinueEditingButton();
+
+        log("/*---14. click on continue editing button to continue with the flow ---*/");
+        profilesPage.ContinueEditingButton();
         Thread.sleep(2000);
-        log("/*---19. select date of Administration ---*/");
-        //if (inClinicExperience.selectDateOfAdministration())
+
+        log("/*---15. select date of Administration ---*/");
+        if (profilesPage.selectDateOfAdministration())
             Thread.sleep(3000);
 
-        log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_CIB ---*/");
+        log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
         //inClinicExperience.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
         Thread.sleep(5000);
 

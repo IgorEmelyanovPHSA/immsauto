@@ -32,6 +32,9 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//a[@title = 'All Client']")
     private WebElement sub_menu_AllClients;
 
+    @FindBy(xpath = "//a[text() = 'Participants']")
+    private WebElement main_menu_btn_Participants;
+
 
 
     public void verifyYouAreOnTheMainPageCP(){
@@ -60,16 +63,22 @@ public class CommunityPortalMainPage extends BasePage{
         return this;
     }
 
+    //public ProfilesPage navigateToProfilesPage() throws InterruptedException {
+        //waitForElementToBeClickable(main_menu_btn_More);
+        //Thread.sleep(2000);
+        //click(main_menu_btn_More);
+        //Thread.sleep(2000);
+        //waitForElementToBeClickable(sub_menu_AllClients);
+        //Thread.sleep(2000);
+        //click(sub_menu_AllClients);
+        //Thread.sleep(2000);
+        //return new ProfilesPage(driver);
+    //}
+
     public ProfilesPage navigateToProfilesPage() throws InterruptedException {
-        waitForElementToBeClickable(main_menu_btn_More);
+        waitForElementToBeClickable(main_menu_btn_Participants);
         Thread.sleep(2000);
-        click(main_menu_btn_More);
-        Thread.sleep(2000);
-        waitForElementToBeClickable(sub_menu_AllClients);
-        Thread.sleep(2000);
-        click(sub_menu_AllClients);
-        //waitForElementToBeClickable(tabSupplyLocation);
-        //click(tabRelatedItems);
+        main_menu_btn_Participants.click();
         Thread.sleep(2000);
         return new ProfilesPage(driver);
     }
