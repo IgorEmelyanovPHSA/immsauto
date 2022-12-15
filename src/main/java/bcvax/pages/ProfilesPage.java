@@ -35,9 +35,9 @@ public class ProfilesPage extends BasePage{
     private WebElement search_clinic;
     private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
 
-    @FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]")
+    @FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]")
     private WebElement inputDate;
-    private By inputDate1 = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]");
+    private By inputDate1 = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]");
 
     @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
     private WebElement recordImmunizationBtn;

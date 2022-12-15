@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class DIWA_Covid19 extends BaseTest {
 
     @Test
-    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_PRACTICE() throws Exception {
+    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_ComunityQA() throws Exception {
         TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         String nameToSearch = "Benoite Denna BCVaxD";
@@ -22,10 +22,13 @@ public class DIWA_Covid19 extends BaseTest {
 
         log("/*1.----Login as an Clinician to ICE --*/");
         CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinician_DIWA_ICE();
+        //InClinicExperiencePage inClinicExperience = loginPage.loginAsClinician_DIWA_ICE();
         Thread.sleep(10000);
 
-        log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
+        //log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
+        //ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
+        //Thread.sleep(10000);
+        log("/*2.----Navigate to Participants -> Clients Profiles Page --*/");
         ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
         Thread.sleep(10000);
 
@@ -66,7 +69,7 @@ public class DIWA_Covid19 extends BaseTest {
         Thread.sleep(3000);
 
         log("/*---11. Click Record Immunization ---*/");
-        profilesPage.clickTimeBox();
+        profilesPage.clickRecordImmunization();
         Thread.sleep(3000);
 
         if (profilesPage.clickPopupYesButtonIfDisplayed())
