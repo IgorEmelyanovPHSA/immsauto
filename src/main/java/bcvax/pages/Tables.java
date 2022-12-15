@@ -99,7 +99,9 @@ public class Tables extends BasePage {
 
     @Step
     public void getSupplyLocationActions(Map<String, String> searchCriteria) {
-        getSupplyContainerRow(searchCriteria).get("").click();
+        WebElement element = getSupplyContainerRow(searchCriteria).get("");
+        scrollTop(element);
+        element.click();
     }
 
     @Step
@@ -112,7 +114,6 @@ public class Tables extends BasePage {
         getShippedTransactionsIncomingRow(searchCriteria).get("").click();
     }
 
-    @Step
     public Map<String, WebElement> getSupplyContainerRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getSupplyContainerTable());
     }

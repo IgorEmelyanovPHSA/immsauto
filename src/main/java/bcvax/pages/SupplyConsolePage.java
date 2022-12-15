@@ -1304,13 +1304,14 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public double getDoseConversationFactor() throws InterruptedException {
-		log("/*--  the Dose Conversation Factor is:  ");
+
 		waitForElementToBeLocated(driver, get_dose_conversation_factor1, 10);
 		WebElement element = driver.findElement(get_dose_conversation_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String conversationFactor = getValue(get_dose_conversation_factor);
 		Double Factor = Double.parseDouble(conversationFactor.replaceAll(",", ""));
+		log("/*--  the Dose Conversation Factor is:  " + Factor);
 		return (Factor);
 	}
 	
