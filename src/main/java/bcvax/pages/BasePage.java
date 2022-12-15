@@ -1,6 +1,7 @@
 package bcvax.pages;
 // All Pages are inheriting from this class
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.List;
 
 
 public abstract class BasePage<T> {
@@ -92,6 +94,10 @@ public abstract class BasePage<T> {
 		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
 		return element;
 	}
+	protected static void waitForElementNotToBeVisible(WebDriver driver, By xpath, int seconds) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(xpath));
+	}
 	
 	public static WebElement waitForElementToBeClickable(WebDriver driver, WebElement webElement, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
@@ -169,7 +175,8 @@ public abstract class BasePage<T> {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return LOG_TIMESTAMP_FORMAT.format(timestamp);
 	}
-	
+
+	@Step
 	public static void log(String msg) {
 		System.out.println(getLogTime() + " " + msg);
 	}

@@ -3,6 +3,9 @@ package bcvax.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import io.qameta.allure.Step;
+
+import java.util.Map;
 
 public class CommunityPortalMainPage extends BasePage{
 
@@ -38,16 +41,26 @@ public class CommunityPortalMainPage extends BasePage{
 
     }
 
+    @Step
     public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
-    waitForElementToBeClickable(tabSupplyLocation);
-    click(tabSupplyLocation);
-    waitForElementToBeClickable(tabSupplyLocation);
-    //click(supplyLocationNameAbby);
-    click(automationSupplyLocation_1);
-    waitForElementToBeClickable(tabSupplyLocation);
-    click(tabRelatedItems);
-    Thread.sleep(2000);
-    return new SupplyConsolePage(driver);
+        log("/*4.----Go to Supply Locations Tab --*/");
+        goToSupplyLocation();
+        click(supplyLocationNameAbby);
+        selectRelatedTab();
+        Thread.sleep(2000);
+        return new SupplyConsolePage(driver);
+    }
+
+    @Step
+    public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
+        click(tabSupplyLocation);
+        return new SupplyConsolePage(driver);
+    }
+
+    @Step
+    public CommunityPortalMainPage selectRelatedTab() throws InterruptedException {
+        click(tabRelatedItems);
+        return this;
     }
 
     //public ProfilesPage navigateToProfilesPage() throws InterruptedException {
