@@ -107,7 +107,67 @@ public class Transfer extends BaseTest {
 		assertEquals(round((remainingDoses_before_Distribution_2_1 + 10) / dose_conversation_factor),2, remainingQty_after_Distribution_2_1);
 
 	}
+	@Test()
+	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
+		TestcaseID = "220550"; //C220550
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+		String vaccine = "VAXZEVRIA";
+		String location = "Automation Supply Location_1";
+		String fromDistributionLocation = "Automation Supply Distribution_1_1";
+		String toDistributionLocation = "Automation Supply Distribution_1_2";
 
 
+		CommunityPortalMainPage communityPortalMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		SupplyConsolePage supplyConsolePage = communityPortalMainPage.goToSupplyLocation();
+		Tables tables = loginPage.getTables();
 
+		Map<String,String> supplyLocation_1 = new HashMap<>();
+		supplyLocation_1.put("Sort\nSupply Location Name", location);
+		Thread.sleep(5000);
+		tables.clickOnSupplyLocationTableRow(supplyLocation_1);
+
+		//navigate to related tab
+		communityPortalMainPage.selectRelatedTab();
+
+		Map<String, String> supplyContainerFromDistributionLocation = searchCriterias(vaccine, fromDistributionLocation);
+		Map<String, String> supplyContainerToDistributionLocation = searchCriterias(vaccine, toDistributionLocation);
+
+		Thread.sleep(3000);
+		double remainingDoses_before_Distribution_1_1 = tables.getRemainingDoses(supplyContainerFromDistributionLocation);
+		double remainingDoses_before_Distribution_1_2 = tables.getRemainingDoses(supplyContainerToDistributionLocation);
+
+		tables.getSupplyLocationActions(supplyContainerFromDistributionLocation);
+		supplyConsolePage.selectTransferFromDropDown();
+
+		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+
+		supplyConsolePage.enterTransferDosages("10").transferDosesToSupplyLocation1SameClinic();
+
+		Thread.sleep(2000);
+		double remainingDoses_after_Distribution_1_1 = tables.getRemainingDoses(supplyContainerFromDistributionLocation);
+		double remainingQty_after_Distribution_1_1 = tables.getRemainingQty(supplyContainerFromDistributionLocation);
+		double remainingDoses_after_Distribution_1_2 = tables.getRemainingDoses(supplyContainerToDistributionLocation);
+		double remainingQty_after_Distribution_1_2 = tables.getRemainingQty(supplyContainerToDistributionLocation);
+		double remainingDoses_after_Calculation_Distribution_1_1 = remainingDoses_before_Distribution_1_1 - 10;
+		double remainingDoses_after_Calculation_Distribution_1_2 = remainingDoses_before_Distribution_1_2 + 10;
+
+		assertEquals(remainingDoses_after_Calculation_Distribution_1_1, remainingDoses_after_Distribution_1_1);
+		assertEquals(remainingDoses_after_Calculation_Distribution_1_2, remainingDoses_after_Distribution_1_2);
+
+		double remainingQty_after_Calculation_Distribution_1_1 =
+				remainingDoses_after_Calculation_Distribution_1_1 / dose_conversation_factor;
+
+		double remainingQty_after_Calculation_Distribution_1_2 =
+				remainingDoses_after_Calculation_Distribution_1_2 / dose_conversation_factor;
+
+		assertEquals(remainingQty_after_Calculation_Distribution_1_1, remainingQty_after_Distribution_1_1);
+		assertEquals(remainingQty_after_Calculation_Distribution_1_2, remainingQty_after_Distribution_1_2);
+	}
+
+	private static Map<String, String> searchCriterias(String vaccine, String fromDistributionLocation) {
+		Map<String,String> supplyContainer = new HashMap<>();
+		supplyContainer.put("Sort by:\nSupply Container Name", vaccine);
+		supplyContainer.put("Sort by:\nSupply Distribution Description", fromDistributionLocation);
+		return supplyContainer;
+	}
 }
