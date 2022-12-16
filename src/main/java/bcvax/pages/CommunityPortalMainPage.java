@@ -17,10 +17,10 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//a[text()='Supply Locations']")
     private WebElement tabSupplyLocation;
 
-    @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, '/provider/s/hc-supply-location')]")
+    @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, 's/hc-supply-location')]")
     private WebElement supplyLocationNameAbby;
 
-    @FindBy(xpath = "//a[@title='Automation Supply Location_1' and contains(@href, '/provider/s/hc-supply-location')]")
+    @FindBy(xpath = "//a[@title='Automation Supply Location_1' and contains(@href, 's/hc-supply-location')]")
     private WebElement automationSupplyLocation_1;
 
     @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
