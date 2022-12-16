@@ -128,15 +128,19 @@ public class DIWA_Covid19 extends BaseTest {
         Thread.sleep(2000);
 
         log("/*---25. Confirm and Save Administration ---*/");
-        //profilesPage.saveImmunizationInformation();
+        profilesPage.confirmAndSaveAdministration();
         Thread.sleep(2000);
 
         log("/*---26. Vaccine Administration Summary Confirm and Save ---*/");
-        //profilesPage.summaryConfirmAndSave();
+        profilesPage.summaryConfirmAndSave();
         Thread.sleep(2000);
 
         log("/*---27. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-        //profilesPage.clickRelatedTab();
+        profilesPage.clickRelatedTab();
+        Thread.sleep(2000);
+
+        log("/*---28. We need to that Documented Without Appointment created - not validated yet  ---*/");
+
     }
 
 
