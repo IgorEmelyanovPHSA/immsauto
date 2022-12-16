@@ -1849,6 +1849,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickSaveConsent() throws InterruptedException {
 		saveConsentButton.click();
 	}
+
 	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
 		//scrolling up
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");

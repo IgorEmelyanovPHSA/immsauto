@@ -22,7 +22,6 @@ public class DIWA_Covid19 extends BaseTest {
 
         log("/*1.----Login as an Clinician to ICE --*/");
         CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
-        //InClinicExperiencePage inClinicExperience = loginPage.loginAsClinician_DIWA_ICE();
         Thread.sleep(10000);
 
         //log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
@@ -92,47 +91,52 @@ public class DIWA_Covid19 extends BaseTest {
         if (profilesPage.selectDateOfAdministration())
             Thread.sleep(3000);
 
-        log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-        //inClinicExperience.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
+        log("/*---16. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
+        profilesPage.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
         Thread.sleep(5000);
 
-        log("/*---21. click Save Consent ---*/");
-        //inClinicExperience.clickSaveConsent();
+        log("/*---17. click Save Consent ---*/");
+        profilesPage.clickSaveConsent();
         Thread.sleep(5000);
 
-        log("/*---22. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-        //inClinicExperience.selectImmunizingAgentProvider("Auto Clinician DIWA_ICE");
+        log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
+        profilesPage.selectImmunizingAgentProvider("Auto Clinician DIWA_ICE");
         Thread.sleep(6000);
 
-        log("/*---23. Click Show all lot numbers Checkbox---*/");
-        //inClinicExperience.clickShowAllLotNumbersCheckBox();
+        log("/*---19. Click Show all lot numbers Checkbox---*/");
+        profilesPage.clickShowAllLotNumbersCheckBox();
         Thread.sleep(2000);
 
-        log("/*---24. click Lot Number dropdown component ---*/");
-        //inClinicExperience.clickLotNumberDropDown();
+        log("/*---20. click Lot Number dropdown component ---*/");
+        profilesPage.clickLotNumberDropDown();
         Thread.sleep(2000);
 
-        log("/*---25. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
-        //inClinicExperience.selectLot();
+        log("/*---21. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
+        profilesPage.selectLot();
         Thread.sleep(2000);
 
-        log("/*---26. Select Injection Site ---*/");
-        //inClinicExperience.selectInjectionSite();
+        log("/*---22. Select Injection Site ---*/");
+        profilesPage.selectInjectionSite();
         Thread.sleep(2000);
-        log("/*---27. Select Dosage---*/");
-        //inClinicExperience.selectDosage();
+
+        log("/*---23. Select Dosage---*/");
+        profilesPage.selectDosage();
         Thread.sleep(2000);
-        log("/*---28. Save Immunization Information ---*/");
-        //inClinicExperience.saveImmunizationInformation();
+
+        log("/*---24. Save Immunization Information ---*/");
+        profilesPage.saveImmunizationInformation();
         Thread.sleep(2000);
-        log("/*---29. Confirm and Save Administration ---*/");
-        //inClinicExperience.confirmAndSaveAdministration();
+
+        log("/*---25. Confirm and Save Administration ---*/");
+        //profilesPage.saveImmunizationInformation();
         Thread.sleep(2000);
-        log("/*---30. Vaccine Administration Summary Confirm and Save ---*/");
-        //inClinicExperience.summaryConfirmAndSave();
+
+        log("/*---26. Vaccine Administration Summary Confirm and Save ---*/");
+        //profilesPage.summaryConfirmAndSave();
         Thread.sleep(2000);
-        log("/*---31. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-        //inClinicExperience.clickRelatedTab();
+
+        log("/*---27. Navigate to Related tab and Confirm new Imms Record is created ---*/");
+        //profilesPage.clickRelatedTab();
     }
 
 

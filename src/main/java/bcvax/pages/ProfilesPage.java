@@ -59,6 +59,64 @@ public class ProfilesPage extends BasePage{
     private WebElement continue_editing_btn;
     private By continue_editing_btn1 = By.xpath("//button[normalize-space()='Continue Editing and Save']");
 
+    @FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
+    private WebElement informed_consent_provider_dropdown;
+    private By informed_consent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[1]");
+
+    @FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
+    private WebElement select_inform_consent_provider;
+    private By select_inform_consent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
+
+    @FindBy(xpath = "//button[contains(text(),'Save Consent')]")
+    private WebElement saveConsentButton;
+
+    @FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
+    private WebElement immunizing_agent_provider_dropdown;
+    private By immunizing_agent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[1]");
+
+    @FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
+    private WebElement select_immunizing_agent_provider;
+    private By select_immunizing_agent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
+
+    @FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
+    private WebElement show_all_lot_numbers_checkbox;
+    private By show_all_lot_numbers_checkbox_ = By.xpath("//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN");
+
+    @FindBy(xpath = ".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']")
+    private WebElement click_lot_number_dropdown;
+    private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']");
+
+    @FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+    private WebElement select_lot;
+    private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+
+    @FindBy(xpath = "//button[@name='injectionSite']")
+    private WebElement selectSite;
+    private By selectSite1 = By.xpath("//button[@name='injectionSite']");
+
+    @FindBy(xpath = "//span[@title='Arm - Left deltoid']")
+    private WebElement select_injection_site_value;
+    private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
+
+    @FindBy(xpath = "//button[@name='dosePicklist']")
+    private WebElement select_dosage_field;
+    private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
+
+    @FindBy(xpath = "//span[@title='0.3']")
+    private WebElement select_dosage;
+    private By select_dosage1 = By.xpath("//span[@title='0.5']");
+
+    @FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
+    private WebElement saveAgain;
+    private By saveAgain1 = By.xpath("//label[contains(text(),'Site')]/../../../..//button[@type='submit']");
+
+    @FindBy(xpath = "//button[@title='Confirm & Save Administration']")
+    private WebElement confirmAndSave;
+    private By confirmAndSave1 = By.xpath("//button[@title='Confirm & Save Administration']");
+
+    @FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
+    private WebElement lastConfirmAndSave;
+    private By lastConfirmAndSave1 = By.xpath("//button[contains(text(),'Confirm and Save')]");
 
 
     /*---------Constructor-------*/
@@ -76,7 +134,6 @@ public class ProfilesPage extends BasePage{
     public void clickRelatedTab() throws InterruptedException {
         waitForElementToBeLocated(driver, click_related_tab1, 10);
         Thread.sleep(2000);
-        WebElement element = driver.findElement(click_related_tab1);
         click_related_tab.click();
         //JavascriptExecutor executor = (JavascriptExecutor) driver;
         //executor.executeScript("arguments[0].click();", element);
@@ -194,6 +251,111 @@ public class ProfilesPage extends BasePage{
         this.inputDate.sendKeys(Keys.ENTER);
         return true;
     }
+
+    public void selectInformedConsentProvider(String Provider) throws InterruptedException {
+        //scrolling up
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informed_consent_provider_dropdown);
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, informed_consent_provider_dropdown, 10);
+        Thread.sleep(2000);
+        informed_consent_provider_dropdown.click();
+        Thread.sleep(5000);
+        informed_consent_provider_dropdown.sendKeys(Provider);
+        Thread.sleep(5000);
+        waitForElementToBeVisible(driver, select_inform_consent_provider, 10);
+        Thread.sleep(5000);
+        select_inform_consent_provider.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickSaveConsent() throws InterruptedException {
+        waitForElementToBeVisible(driver, saveConsentButton, 10);
+        Thread.sleep(2000);
+        saveConsentButton.click();
+    }
+
+    public void selectImmunizingAgentProvider(String Provider) throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizing_agent_provider_dropdown);
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, immunizing_agent_provider_dropdown, 10);
+        Thread.sleep(2000);
+        immunizing_agent_provider_dropdown.click();
+        Thread.sleep(5000);
+        immunizing_agent_provider_dropdown.sendKeys(Provider);
+        Thread.sleep(5000);
+        waitForElementToBeVisible(driver, select_immunizing_agent_provider, 10);
+        Thread.sleep(5000);
+        select_immunizing_agent_provider.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickShowAllLotNumbersCheckBox() throws InterruptedException {
+        waitForElementToBeVisible(driver, show_all_lot_numbers_checkbox, 10);
+        Thread.sleep(2000);
+        show_all_lot_numbers_checkbox.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickLotNumberDropDown() throws InterruptedException {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_lot_number_dropdown);
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, click_lot_number_dropdown, 10);
+        Thread.sleep(2000);
+        click_lot_number_dropdown.click();
+        Thread.sleep(2000);
+    }
+
+    public void selectLot() throws InterruptedException {
+        waitForElementToBeVisible(driver, select_lot, 10);
+        Thread.sleep(2000);
+        select_lot.click();
+    }
+
+    public void selectInjectionSite() throws InterruptedException {
+        waitForElementToBeLocated(driver, selectSite1, 10);
+        WebElement element = driver.findElement(selectSite1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(2000);
+        waitForElementToBeLocated(driver, select_injection_site_value1, 10);
+        WebElement element1 = driver.findElement(select_injection_site_value1);
+        JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+        executor1.executeScript("arguments[0].click();", element1);
+    }
+
+    public void selectDosage() throws InterruptedException {
+        waitForElementToBeLocated(driver, select_dosage_field1, 10);
+        WebElement element = driver.findElement(select_dosage_field1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(2000);
+        waitForElementToBeLocated(driver, select_dosage1, 10);
+        WebElement element1 = driver.findElement(select_dosage1);
+        JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+        executor1.executeScript("arguments[0].click();", element1);
+    }
+
+    public void saveImmunizationInformation() throws InterruptedException {
+        waitForElementToBeLocated(driver, saveAgain1, 10);
+        Thread.sleep(2000);
+        saveAgain.click();
+    }
+
+    public void confirmAndSaveAdministration() throws InterruptedException {
+        waitForElementToBeLocated(driver, confirmAndSave1, 10);
+        Thread.sleep(2000);
+        confirmAndSave.click();
+    }
+
+    public void summaryConfirmAndSave() throws InterruptedException {
+        waitForElementToBeLocated(driver, lastConfirmAndSave1, 10);
+        Thread.sleep(2000);
+        lastConfirmAndSave.click();
+    }
+
+
+
 
 
 }
