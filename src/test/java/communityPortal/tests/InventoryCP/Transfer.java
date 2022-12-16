@@ -23,7 +23,7 @@ public class Transfer extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
-		TestcaseID = "220550"; //C220550
+		TestcaseID = "223184"; //C223184
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		String vaccine = "JANSSEN COVID-19 VACCINE";
 		String fromLocation = "Automation Supply Location_1";
@@ -107,9 +107,10 @@ public class Transfer extends BaseTest {
 		assertEquals(round((remainingDoses_before_Distribution_2_1 + 10) / dose_conversation_factor),2, remainingQty_after_Distribution_2_1);
 
 	}
-	@Test()
+
+	@Test(priority = 2)
 	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
-		TestcaseID = "220550"; //C220550
+		TestcaseID = "223185"; //C223185
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		String vaccine = "VAXZEVRIA";
 		String location = "Automation Supply Location_1";
