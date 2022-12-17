@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 
+import java.util.HashMap;
 import java.util.Map;
+import static Constansts.Header.SUPPLY_LOCATION_NAME;
 
 public class CommunityPortalMainPage extends BasePage{
 
@@ -81,6 +83,15 @@ public class CommunityPortalMainPage extends BasePage{
         main_menu_btn_Participants.click();
         Thread.sleep(2000);
         return new ProfilesPage(driver);
+    }
+
+    public void navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
+        goToSupplyLocation();
+        Map<String,String> toSupplyLocation = new HashMap<>();
+        toSupplyLocation.put(SUPPLY_LOCATION_NAME, location);
+        Thread.sleep(4000);
+        new Tables(driver).clickOnSupplyLocationTableRow(toSupplyLocation);
+        selectRelatedTab();
     }
 
 }

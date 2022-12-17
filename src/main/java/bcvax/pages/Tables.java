@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.Map;
 
+import static Constansts.Header.*;
+
 
 public class Tables extends BasePage {
 
@@ -75,24 +77,24 @@ public class Tables extends BasePage {
     @Step
     public String getSupplyTransactionName(Map<String, String> searchCriteria) {
         Map<String, WebElement> webElementMap = getShippedTransactionsOutgoingRow(searchCriteria);
-        String doses = webElementMap.get("Sort by:\nSupply Transaction Name").getText();
-        log("----Transactions name  " + doses + "--*/");
+        String doses = webElementMap.get(SUPPLY_TRANSACTION_NAME).getText();
+        log(" --Transactions name  " + doses + " -- ");
         return doses;
     }
 
     @Step
     public Double getRemainingDoses(Map<String, String> searchCriteria) {
         Map<String, WebElement> stringWebElementMap = getSupplyContainerRow(searchCriteria);
-        String doses = stringWebElementMap.get("Sort by:\nRemaining Doses").getText();
-        log("/*4.----Remaining Doses " + doses + "--*/");
+        String doses = stringWebElementMap.get(REMAINING_DOSES).getText();
+        log(" -- Remaining Doses " + doses + " -- ");
         return Double.parseDouble(doses.replace(",", ""));
     }
 
     @Step
     public Double getRemainingQty(Map<String, String> searchCriteria) {
         Map<String, WebElement> stringWebElementMap = getSupplyContainerRow(searchCriteria);
-        String qty = stringWebElementMap.get("Sort by:\nRemaining Quantity").getText();
-        log("/* ----Remaining Qty " + qty + "--*/");
+        String qty = stringWebElementMap.get(REMAINING_QUANTITY).getText();
+        log(" -- Remaining Qty " + qty + " -- ");
         return Double.parseDouble(qty.replace(",", ""));
 
     }

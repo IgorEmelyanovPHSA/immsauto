@@ -10,6 +10,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static Constansts.Domain.SUPPLY_LOCATION_1;
+import static Constansts.Domain.SUPPLY_LOCATION_2;
+
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
@@ -712,9 +715,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
-		log("/*11.----select 'To' Automation Supply Location_2  --*/");
+		log(" -- select 'To' Automation Supply Location_2  -");
 		waitForElementToBeVisible(driver, search_supply_location_2_To, 10);
-		search_supply_location_2_To.sendKeys("Automation Supply Location_2");
+		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, select_supply_location_2_To, 10);
 		Thread.sleep(5000);
@@ -727,7 +730,7 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void selectSupplyLocation_1_To() throws InterruptedException {
 		waitForElementToBeVisible(driver, search_supply_location_1_To, 10);
-		search_supply_location_1_To.sendKeys("Automation Supply Location_1");
+		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_supply_location_1_To, 10);
 		Thread.sleep(5000);
@@ -736,7 +739,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public SupplyConsolePage clickBulkTransfersModalButton(){
-		log("/*12.----click Transfer dialog Modal button --*/");
+		log("  -- click Transfer dialog Modal button -- ");
 		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
 		click(bulk_transfers_dialog_button_1);
 		return this;
@@ -749,13 +752,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void clickTransactionsTab() throws InterruptedException {
-		//scroll up
-		System.out.println("/*---  go to transaction tab ------");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, transactions_tab, 10);
-		//WebElement element = driver.findElement(transactions_tab_1);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		Thread.sleep(2000);
 		transactions_tab.click();
 	}
@@ -1310,8 +1309,8 @@ public class SupplyConsolePage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String conversationFactor = getValue(get_dose_conversation_factor);
-		Double Factor = Double.parseDouble(conversationFactor.replaceAll(",", ""));
-		log("/*--  the Dose Conversation Factor is:  " + Factor);
+		double Factor = Double.parseDouble(conversationFactor.replaceAll(",", ""));
+		log(" -- the Dose Conversation Factor is: " + Factor);
 		return (Factor);
 	}
 	
