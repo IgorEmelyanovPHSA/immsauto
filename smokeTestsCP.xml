@@ -5,6 +5,8 @@
         <classes>
             <class name="communityPortal.tests.InventoryCP.WastageCP"/>
             <class name="communityPortal.tests.DIWA.DIWA_Covid19"/>
+            <class name="communityPortal.tests.InventoryCP.Transfer"/>
+            <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
