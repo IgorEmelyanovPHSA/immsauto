@@ -739,18 +739,18 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public SupplyConsolePage clickBulkTransfersModalButton(){
-		log("  -- click Transfer dialog Modal button -- ");
 		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
 		click(bulk_transfers_dialog_button_1);
 		return this;
 	}
-	
+	@Step
 	public void clickBulkTransfersCloseButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_dialog_close_button_1, 10);
 		click(bulk_dialog_close_button_1);
 		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_1, 10);
 	}
-	
+
+	@Step
 	public void clickTransactionsTab() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
 		Thread.sleep(3000);
@@ -954,7 +954,7 @@ public class SupplyConsolePage extends BasePage {
 			waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success!']"), 10);
 			WebElement successMessage = driver.findElement(By.xpath(".//div[text() = 'Success!']"));
 			Thread.sleep(2000);
-			System.out.println("/* ----the toast success message has been Appears");
+			log(" -- Toast success message has been Appears");
 		} catch (NoSuchElementException e) {
 			System.out.println("/*---there are no success confirmation Message for Bulk Transfers to be Appears");
 			throw new RuntimeException("/*---there are no success confirmation Message to be Appears--*/");
@@ -1104,7 +1104,7 @@ public class SupplyConsolePage extends BasePage {
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
 	}
-
+	@Step
 	public SupplyConsolePage enterTransferDosages(String doses) throws InterruptedException {
 		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
 		waitForElementToBeLocated(driver, Doses, 10);
@@ -1801,17 +1801,21 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		select_supply_distributor.click();
 	}
+	@Step
 	public void acceptIncomingTransfer() throws InterruptedException {
 		selectConfirmIncomingDropDown();
 		selectIncomingSupplyDistribution();
 		clickOnConfirmModalIncomingTransactionButton();
 		successMessageAppear();
 	}
+
+	@Step
 	public void transferDosesToSupplyLocation2() throws InterruptedException {
 		selectSupplyLocation_2_To().clickBulkTransfersModalButton()
 				.clickBulkTransfersCloseButton();
 	}
 
+	@Step
 	public void transferDosesToSupplyLocation1SameClinic() throws InterruptedException {
 		selectSupplyLocation_1_To();
 		selectSameClinicSupplyDistribution();

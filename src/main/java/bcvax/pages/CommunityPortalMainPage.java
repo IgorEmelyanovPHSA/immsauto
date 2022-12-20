@@ -84,7 +84,7 @@ public class CommunityPortalMainPage extends BasePage{
         Thread.sleep(2000);
         return new ProfilesPage(driver);
     }
-
+    @Step
     public void navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
         goToSupplyLocation();
         Map<String,String> toSupplyLocation = new HashMap<>();
