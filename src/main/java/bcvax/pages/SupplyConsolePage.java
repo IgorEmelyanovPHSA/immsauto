@@ -10,6 +10,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static Constansts.Domain.SUPPLY_LOCATION_1;
+import static Constansts.Domain.SUPPLY_LOCATION_2;
+
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
@@ -712,9 +715,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
-		log("/*11.----select 'To' Automation Supply Location_2  --*/");
+		log(" -- select 'To' Automation Supply Location_2  -");
 		waitForElementToBeVisible(driver, search_supply_location_2_To, 10);
-		search_supply_location_2_To.sendKeys("Automation Supply Location_2");
+		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, select_supply_location_2_To, 10);
 		Thread.sleep(5000);
@@ -727,7 +730,7 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void selectSupplyLocation_1_To() throws InterruptedException {
 		waitForElementToBeVisible(driver, search_supply_location_1_To, 10);
-		search_supply_location_1_To.sendKeys("Automation Supply Location_1");
+		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_supply_location_1_To, 10);
 		Thread.sleep(5000);
@@ -736,26 +739,22 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public SupplyConsolePage clickBulkTransfersModalButton(){
-		log("/*12.----click Transfer dialog Modal button --*/");
 		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
 		click(bulk_transfers_dialog_button_1);
 		return this;
 	}
-	
+	@Step
 	public void clickBulkTransfersCloseButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_dialog_close_button_1, 10);
 		click(bulk_dialog_close_button_1);
 		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_1, 10);
 	}
-	
+
+	@Step
 	public void clickTransactionsTab() throws InterruptedException {
-		//scroll up
-		System.out.println("/*---  go to transaction tab ------");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, transactions_tab, 10);
-		//WebElement element = driver.findElement(transactions_tab_1);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		Thread.sleep(2000);
 		transactions_tab.click();
 	}
@@ -955,7 +954,7 @@ public class SupplyConsolePage extends BasePage {
 			waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success!']"), 10);
 			WebElement successMessage = driver.findElement(By.xpath(".//div[text() = 'Success!']"));
 			Thread.sleep(2000);
-			System.out.println("/* ----the toast success message has been Appears");
+			log(" -- Toast success message has been Appears");
 		} catch (NoSuchElementException e) {
 			System.out.println("/*---there are no success confirmation Message for Bulk Transfers to be Appears");
 			throw new RuntimeException("/*---there are no success confirmation Message to be Appears--*/");
@@ -1105,7 +1104,7 @@ public class SupplyConsolePage extends BasePage {
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
 	}
-
+	@Step
 	public SupplyConsolePage enterTransferDosages(String doses) throws InterruptedException {
 		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
 		waitForElementToBeLocated(driver, Doses, 10);
@@ -1310,8 +1309,8 @@ public class SupplyConsolePage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String conversationFactor = getValue(get_dose_conversation_factor);
-		Double Factor = Double.parseDouble(conversationFactor.replaceAll(",", ""));
-		log("/*--  the Dose Conversation Factor is:  " + Factor);
+		double Factor = Double.parseDouble(conversationFactor.replaceAll(",", ""));
+		log(" -- the Dose Conversation Factor is: " + Factor);
 		return (Factor);
 	}
 	
@@ -1802,17 +1801,21 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		select_supply_distributor.click();
 	}
+	@Step
 	public void acceptIncomingTransfer() throws InterruptedException {
 		selectConfirmIncomingDropDown();
 		selectIncomingSupplyDistribution();
 		clickOnConfirmModalIncomingTransactionButton();
 		successMessageAppear();
 	}
+
+	@Step
 	public void transferDosesToSupplyLocation2() throws InterruptedException {
 		selectSupplyLocation_2_To().clickBulkTransfersModalButton()
 				.clickBulkTransfersCloseButton();
 	}
 
+	@Step
 	public void transferDosesToSupplyLocation1SameClinic() throws InterruptedException {
 		selectSupplyLocation_1_To();
 		selectSameClinicSupplyDistribution();

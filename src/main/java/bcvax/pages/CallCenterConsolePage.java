@@ -222,11 +222,7 @@ public class CallCenterConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
 		driver.findElement(By.xpath(".//div[text() = 'Success']"));
 		Thread.sleep(2000);
-		System.out.println("/* ----the toast success message has been Appears");
-		// } catch (NoSuchElementException e) {
-		//System.out.println("/*---there are no success toast Message for Verify PHN to be Appears");
-		//throw new RuntimeException("/*---there are no success Message to be Appears--*/");
-		// }
+		log("  -- success message has been Appears - /");
 	}
 	
 	public void clickNextButton() throws InterruptedException {

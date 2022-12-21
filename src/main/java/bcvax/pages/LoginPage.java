@@ -160,7 +160,6 @@ public class LoginPage extends BasePage {
 
 	@Step
 	public CommunityPortalMainPage loginIntoCommunityPortalAsAdmin() throws Exception {
-		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
 		click(btnLoginHere);
@@ -168,6 +167,7 @@ public class LoginPage extends BasePage {
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_ADMIN_CP"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_ADMIN_CP_PW"));
 		click(login_button);
+		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_ADMIN_CP") +  " +--*/");
 		return new CommunityPortalMainPage(driver);
 	}
 
