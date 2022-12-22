@@ -31,10 +31,8 @@ public class BulkAdjustmentsCP extends BaseTest {
         return new Object[][]{{"3"},{"-2"}};
     }
 
-    //ShowStopper! Step 11, button adjustment is not working, user stuck on the screen
     //Login as an admin for now, needs to be updated to PPHIS
     //Needs to update TestcaseId for both test
-    //Reason for adjustment not working, step 10 in this env
 
     @Test(dataProvider = "dosesAmount")
     public void CP_Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String value) throws Exception {
@@ -62,30 +60,11 @@ public class BulkAdjustmentsCP extends BaseTest {
         log("/*2.----Navigate to Supply Console Page --*/");
         SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
 
-//        log("/*1.----Login as an PPHIS to Supply Console --*/");
-//        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-//        Thread.sleep(5000);
-
-//        log("/*2.----Supply Console Page displayed --*/");
-//        supplyConsolePage.verifyIsSupplyPageDisplayed();
-//        Thread.sleep(5000);
-//
-//        log("/*3.----Close All previously opened Tab's --*/");
-//        supplyConsolePage.closeTabsHCA();
-//        Thread.sleep(2000);
-//
-//        log("/*4.----Go to Supply Locations Tab --*/");
-//        supplyConsolePage.clickSupplyLocationsTab();
-//
-//        log("/*5.----Click on Automation Supply Location_1 --*/");
-//        supplyConsolePage.clickOnSupplyLocation_1();
-//        Thread.sleep(5000);
-
-        log("/*6.----Get Supply Containers count outcoming records --*/");
+        log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
         log("/*---     count:" + countSupplyContainers);
 
-        log("/*7.----Click on Container's records Checkboxes --*/");
+        log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
             int k = 1;
             while (k <= 3) {
@@ -99,25 +78,25 @@ public class BulkAdjustmentsCP extends BaseTest {
         }
         int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
         //Remaining Doses and Quantity count // 3 rows, ref step7 containers count
-        log("/*8.----Read Remaining Doses And Quantity Before Deduction --*/");
+        log("/*5.----Read Remaining Doses And Quantity Before Deduction --*/");
         HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
-        log("/*9.----Click on bulk Adjustment button on Supply page--*/");
+        log("/*6.----Click on bulk Adjustment button on Supply page--*/");
         supplyConsolePage.clickBulkAdjustmentButton();
         Thread.sleep(5000);
 
-        log("/*10.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
+        log("/*7.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
         //supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToAdjust,reasonForAdjustment, numberOfRows);
         supplyConsolePage.enterBulkByDosageWithReasonCP(amountOfDosesToAdjust, reasonForAdjustment, numberOfRows);
 
-        log("/*11.----Click button Adjustment on Container - Adjustment page --*/");
+        log("/*8.----Click button Adjustment on Container - Adjustment page --*/");
         supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
         Thread.sleep(3000);
 
-        log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
+        log("/*9.----Read Remaining Doses And Quantity After Adjustment --*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
-        log("/*13.----Calculating Remaining Doses And Quantity After Adjustment --*/");
+        log("/*10.----Calculating Remaining Doses And Quantity After Adjustment --*/");
         HashMap<Integer, ArrayList<Double>> calculatedRemainingDosesAndQuantityAfterAdjustment = new HashMap<>();
         for (int i = 0; i < remainingDosesAndQuantityBeforeAdjustment.size(); i++) {
             ArrayList<Double> writeToList = new ArrayList<>();
@@ -135,7 +114,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             calculatedRemainingDosesAndQuantityAfterAdjustment.put(i, writeToList);
         }
 
-        log("/*14.----Compering Remaining Doses and Quantity actual vs calculated--*/");
+        log("/*11.----Compering Remaining Doses and Quantity actual vs calculated--*/");
         //Comparing 2 objects actualRemainingDosesAndQuantityAfterAdjustment vs calculatedRemainingDosesAndQuantityAfterAdjustment
         for (int i = 0; i < actualRemainingDosesAndQuantityAfterAdjustment.size(); i++) {
             ArrayList<Double> afterDeduction = actualRemainingDosesAndQuantityAfterAdjustment.get(i);
@@ -177,23 +156,18 @@ public class BulkAdjustmentsCP extends BaseTest {
         }
         log("/*----Amount Adjustment Quantities " + amountOfQuantityToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-        Thread.sleep(5000);
+        log("/*1.----Login as an PPHIS--*/");
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        Thread.sleep(10000);
 
-        log("/*2.----Validate if Supply Console Page displayed --*/");
-        CommonMethods common = new CommonMethods(getDriver());
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+        log("/*2.----Navigate to Supply Console Page --*/");
+        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
 
-        log("/*3.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
-        Thread.sleep(5000);
-
-        log("/*4.----Get Supply Containers count outcoming records --*/");
+        log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
         log("/*---     count:" + countSupplyContainers);
 
-        log("/*5.----Click on Container's records Checkboxes --*/");
+        log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
             int k = 1;
             while (k <= 3) {
@@ -207,24 +181,24 @@ public class BulkAdjustmentsCP extends BaseTest {
         }
         int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
         //Remaining Doses and Quantity count // 3 rows, ref step5 containers count
-        log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
+        log("/*5.----Read Remaining Doses And Quantity Before Deduction --*/");
         HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
-        log("/*7.----Click on bulk Adjustment button on Supply page--*/");
+        log("/*6.----Click on bulk Adjustment button on Supply page--*/");
         supplyConsolePage.clickBulkAdjustmentButton();
         Thread.sleep(5000);
 
-        log("/*8.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
-        supplyConsolePage.enterBulkByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment, numberOfRows);
+        log("/*7.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
+        supplyConsolePage.enterBulkByQuantitiesWithReasonCP(amountOfQuantityToAdjust, reasonForAdjustment, numberOfRows);
 
-        log("/*9.----Click button Adjustment on Container - Adjustment page --*/");
+        log("/*8.----Click button Adjustment on Container - Adjustment page --*/");
         supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
         Thread.sleep(3000);
 
-        log("/*10.----Read Remaining Doses And Quantity After Adjustment --*/");
+        log("/*9.----Read Remaining Doses And Quantity After Adjustment --*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
-        log("/*11.----Calculating Remaining Doses And Quantity After Adjustment --*/");
+        log("/*10.----Calculating Remaining Doses And Quantity After Adjustment --*/");
         HashMap<Integer, ArrayList<Double>> calculatedRemainingDosesAndQuantityAfterAdjustment = new HashMap<>();
         for (int i = 0; i < remainingDosesAndQuantityBeforeAdjustment.size(); i++) {
             ArrayList<Double> writeToList = new ArrayList<>();
@@ -241,7 +215,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             calculatedRemainingDosesAndQuantityAfterAdjustment.put(i, writeToList);
         }
 
-        log("/*12.----Compering Remaining Doses and Quantity actual vs calculated--*/");
+        log("/*11.----Compering Remaining Doses and Quantity actual vs calculated--*/");
         //Comparing 2 objects actualRemainingDosesAndQuantityAfterAdjustment vs calculatedRemainingDosesAndQuantityAfterAdjustment
         for (int i = 0; i < actualRemainingDosesAndQuantityAfterAdjustment.size(); i++) {
             ArrayList<Double> afterDeduction = actualRemainingDosesAndQuantityAfterAdjustment.get(i);
