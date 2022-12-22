@@ -515,11 +515,28 @@ public class SupplyConsolePage extends BasePage {
 		while (y < numberOfRows) {
 			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
 			typeIn(dosesDynamicFiled, String.valueOf(amount));
-//			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-//			click(reasonForWastageDynamicDropDown);
-//			Thread.sleep(500);
-//			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-//			click(reasonForWastageDynamicFiled);
+			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
+			click(reasonForWastageDynamicDropDown);
+			Thread.sleep(500);
+			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
+			click(reasonForWastageDynamicFiled);
+			k = k + 3;
+			y++;
+		}
+	}
+
+	public void enterBulkByQuantitiesWithReasonCP(double amount,String reason, int numberOfRows) throws InterruptedException {
+		//By Quantities
+		int y = 0;
+		int k = 2;
+		while (y < numberOfRows) {
+			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
+			typeIn(dosesDynamicFiled, Double.toString(amount));
+			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
+			clickUsingJS(reasonDynamicDropDown);
+			Thread.sleep(500);
+			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
+			clickUsingJS(selectReasonFromDynamicDropDown);
 			k = k + 3;
 			y++;
 		}
