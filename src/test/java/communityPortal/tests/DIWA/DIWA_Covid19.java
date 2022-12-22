@@ -24,12 +24,12 @@ public class DIWA_Covid19 extends BaseTest {
         CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
         Thread.sleep(10000);
 
-        //log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
-        //ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
-        //Thread.sleep(10000);
-        log("/*2.----Navigate to Participants -> Clients Profiles Page --*/");
+        log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
         ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
         Thread.sleep(10000);
+        //log("/*2.----Navigate to Participants -> Clients Profiles Page --*/");
+        //ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
+        //Thread.sleep(10000);
 
         log("/*----3. select Citizen Participant acc from search results --*/");
         profilesPage.selectCitizenParticipantAcc(nameToSearch);
