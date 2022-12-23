@@ -42,8 +42,7 @@ public class Transfer extends BaseTest {
 		String doses = "10";
 
 		log("/----Count Remaining Supplies --*/");
-		Map<String,String> supplyContainer = new HashMap<>();
-		supplyContainer.put(SUPPLY_CONTAINER_NAME, vaccine);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine);
 		Thread.sleep(3000);
 		double remainingDoses_before_Distribution_1_1 = tables.getRemainingDoses(supplyContainer);
 
@@ -133,8 +132,7 @@ public class Transfer extends BaseTest {
 		String vaccine = "JANSSEN COVID-19 VACCINE";
 
 		log("/----Count Remaining Supplies --*/");
-		Map<String,String> supplyContainerName = new HashMap<>();
-		supplyContainerName.put(SUPPLY_CONTAINER_NAME, vaccine);
+		Map<String,String> supplyContainerName = ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine);
 		Thread.sleep(3000);
 		double remainingDoses_before_Distribution_1_1 = tables.getRemainingDoses(supplyContainerName);
 
@@ -215,6 +213,6 @@ public class Transfer extends BaseTest {
 	}
 
 	private static Map<String, String> searchCriterias(String vaccine, String fromDistributionLocation) {
-		return ImmutableMap.of(SUPPLY_CONTAINER_NAME, vaccine, SUPPLY_DISTRIBUTION_DESCRIPTION, fromDistributionLocation);
+		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine, SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
 	}
 }

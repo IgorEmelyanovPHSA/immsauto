@@ -88,7 +88,7 @@ public class GenericTable {
      * @return List with table heading elements.
      */
     public List<WebElement> getHeadings() {
-        return getWrappedElement().findElements(By.xpath(".//*[contains(@class, 'slds-th__action')]"));
+        return getWrappedElement().findElements(By.xpath(".//thead//th"));
     }
 
     /**
@@ -101,8 +101,6 @@ public class GenericTable {
         for (WebElement el : getHeadings()) {
             if (el.getText().isEmpty()) {
                 list.add(el.getAttribute("title"));
-            } else if (el.getText().contains("Show actions")) {
-                //ignore
             } else {
                 list.add(el.getText());
             }

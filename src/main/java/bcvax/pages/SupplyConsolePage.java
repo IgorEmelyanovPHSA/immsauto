@@ -1821,6 +1821,16 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public void acceptIncomingTransfer() throws InterruptedException {
 		selectConfirmIncomingDropDown();
+		acceptTransfer();
+	}
+	@Step
+	public void acceptBulkTransfer() throws InterruptedException {
+		clickBulkConfirmIncomingTransfersButton();
+		acceptTransfer();
+	}
+
+	@Step
+	public void acceptTransfer() throws InterruptedException {
 		selectIncomingSupplyDistribution();
 		clickOnConfirmModalIncomingTransactionButton();
 		successMessageAppear();

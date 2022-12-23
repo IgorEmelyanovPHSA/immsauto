@@ -1,13 +1,11 @@
 package bcvax.pages;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
-
-import java.util.HashMap;
-import java.util.Map;
-import static Constansts.Header.SUPPLY_LOCATION_NAME;
+import static Constansts.Header.SUPPLY_LOCATION_NAME_;
 
 public class CommunityPortalMainPage extends BasePage{
 
@@ -55,13 +53,13 @@ public class CommunityPortalMainPage extends BasePage{
         return new SupplyConsolePage(driver);
     }
 
-
+    @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
         click(tabSupplyLocation);
         return new SupplyConsolePage(driver);
     }
 
-
+    @Step
     public CommunityPortalMainPage selectRelatedTab() throws InterruptedException {
         click(tabRelatedItems);
         return this;
@@ -89,12 +87,11 @@ public class CommunityPortalMainPage extends BasePage{
        // return new ProfilesPage(driver);
     //}
 
+    @Step
     public void navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
         goToSupplyLocation();
-        Map<String,String> toSupplyLocation = new HashMap<>();
-        toSupplyLocation.put(SUPPLY_LOCATION_NAME, location);
-        Thread.sleep(4000);
-        new Tables(driver).clickOnSupplyLocationTableRow(toSupplyLocation);
+        Thread.sleep(2000);
+        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME_, location));
         selectRelatedTab();
     }
 
