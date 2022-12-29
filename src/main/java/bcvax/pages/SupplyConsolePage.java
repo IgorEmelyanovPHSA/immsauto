@@ -730,6 +730,18 @@ public class SupplyConsolePage extends BasePage {
 		click(qty_1_);
 		element.sendKeys("1");
 	}
+
+	@Step
+	public SupplyConsolePage selectSupplyLocation(String location) throws InterruptedException {
+		log(" -- select to location  -  " + location);
+		waitForElementToBeVisible(driver, search_supply_location_2_To, 10);
+		search_supply_location_2_To.sendKeys(location);
+		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[@title='" + location + "']");
+		waitForElementToBePresent(driver, locationTo, 20);
+		click(driver.findElement(locationTo));
+		waitForElementNotToBeVisible(driver, locationTo, 10);
+		return this;
+	}
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
@@ -961,8 +973,8 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, confirm_incoming_transfers_modal_button_1, 10);
-		WebElement element = driver.findElement(confirm_incoming_transfers_modal_button_1);
 		//this.bulk_confirm_incoming_transfers_button.click();
+		scrollTop(confirm_incoming_transfers_modal_button);
 		click(confirm_incoming_transfers_modal_button_1);
 	}
 	
@@ -1337,7 +1349,8 @@ public class SupplyConsolePage extends BasePage {
 		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
 		click(incoming_transaction_checkbox_1_);
 	}
-	
+
+	@Step
 	public void selectConfirmIncomingDropDown() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 10);
 		Thread.sleep(2000);
@@ -1819,35 +1832,54 @@ public class SupplyConsolePage extends BasePage {
 		select_supply_distributor.click();
 	}
 	@Step
-	public void acceptIncomingTransfer() throws InterruptedException {
+	public void acceptIncomingTransfer(String distribution) throws InterruptedException {
 		selectConfirmIncomingDropDown();
-		acceptTransfer();
+		acceptTransfer(distribution);
 	}
 	@Step
-	public void acceptBulkTransfer() throws InterruptedException {
+	public void acceptBulkTransferToDistribution(String distribution) throws InterruptedException {
 		clickBulkConfirmIncomingTransfersButton();
-		acceptTransfer();
+		acceptTransfer(distribution);
 	}
 
 	@Step
-	public void acceptTransfer() throws InterruptedException {
-		selectIncomingSupplyDistribution();
+	public void acceptTransfer(String distribution) throws InterruptedException {
+		transferToDistributionOnReceive(distribution);
 		clickOnConfirmModalIncomingTransactionButton();
 		successMessageAppear();
 	}
 
 	@Step
-	public void transferDosesToSupplyLocation2() throws InterruptedException {
-		selectSupplyLocation_2_To().clickBulkTransfersModalButton()
+	public void transferDosesToSupplyLocation(String location) throws InterruptedException {
+		selectSupplyLocation(location).clickBulkTransfersModalButton()
 				.clickBulkTransfersCloseButton();
 	}
 
 	@Step
-	public void transferDosesToSupplyLocation1SameClinic() throws InterruptedException {
-		selectSupplyLocation_1_To();
-		selectSameClinicSupplyDistribution();
+	public void transferToDistributionWithinSameClinic(String location, String distribution) throws InterruptedException {
+		selectSupplyLocation(location);
+		transferToDistributionOnSend(distribution);
 		clickBulkTransfersModalButton();
 		clickBulkTransfersCloseButton();
 	}
 
+	public void transferToDistributionOnSend(String distribution) throws InterruptedException {
+		selectTransferToDistribution(search_incoming_supply_distributor_1_2, distribution);
+	}
+
+	public void transferToDistributionOnReceive(String distribution) throws InterruptedException {
+		selectTransferToDistribution(search_incoming_supply_distributor, distribution);
+	}
+
+	@Step
+	private void selectTransferToDistribution(WebElement element, String distribution) throws InterruptedException {
+		log(" -- select to distribution  -  " + distribution);
+		waitForElementToBeVisible(driver, element, 20);
+		scrollTop(element);
+		click(element);
+		By locationTo = By.xpath("//*[contains(@title, '" + distribution + "')]");
+		waitForElementToBePresent(driver, locationTo, 20);
+		click(driver.findElement(locationTo));
+		waitForElementNotToBeVisible(driver, locationTo, 10);
+	}
 }

@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 
 public class BaseTest {
 	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
+	protected DecimalFormat df = new DecimalFormat("0.00");
 	protected String TestcaseID;
 	public WebDriver driver;
 	private ByteArrayOutputStream logOutputSteps;

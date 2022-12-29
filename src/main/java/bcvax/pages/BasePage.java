@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public abstract class BasePage<T> {
@@ -47,6 +47,13 @@ public abstract class BasePage<T> {
 			return find(locator).isDisplayed();
 		} catch (NoSuchElementException exc) {
 			return false;
+		}
+	}
+	public void hardWait(int sec) {
+		try {
+			Thread.sleep(TimeUnit.SECONDS.toMillis(sec));
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
 		}
 	}
 
@@ -87,6 +94,11 @@ public abstract class BasePage<T> {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 		WebElement element = wait.until(ExpectedConditions.visibilityOf(webElement));
 		return element;
+	}
+
+	public static void waitForElementToBePresent(WebDriver driver, By xpath, int seconds) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath));
 	}
 	
 	protected static WebElement waitForElementToBeLocated(WebDriver driver, By xpath, int seconds) {

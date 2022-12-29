@@ -7,6 +7,7 @@
             <class name="communityPortal.tests.DIWA.DIWA_Covid19"/>
             <class name="communityPortal.tests.InventoryCP.Transfer"/>
             <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkTransfers"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
