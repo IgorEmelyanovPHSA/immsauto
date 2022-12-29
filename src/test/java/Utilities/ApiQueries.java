@@ -45,7 +45,7 @@ public class ApiQueries {
         try {
             USERNAME     = Utils.getEnvConfigProperty("api_user");
             PASSWORD     = Utils.getEnvConfigProperty("api_user_pw");
-            LOGINURL     = Utils.getEnvConfigProperty("url");
+            LOGINURL     = Utils.getEnvConfigProperty("api_url");
             CLIENTID     = Utils.getEnvConfigProperty("api_clientId");
             CLIENTSECRET = Utils.getEnvConfigProperty("api_clientSecret");
 
