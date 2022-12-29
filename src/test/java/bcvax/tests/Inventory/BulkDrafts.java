@@ -18,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 public class BulkDrafts extends BaseTest {
 
     @Test
-    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
+    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS() throws Exception {
         TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 9 need some refactoring in the future

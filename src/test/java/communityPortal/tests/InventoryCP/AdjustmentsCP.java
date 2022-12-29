@@ -32,6 +32,8 @@ public class AdjustmentsCP extends BaseTest {
 		return new Object[][]{{"3"},{"-2"}};
 	}
 
+	//Login as an admin for now, needs to be updated to PPHIS
+	//Needs to update TestcaseId for both test
 	@Test(dataProvider = "dosesAmount")
 	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String dosesAmount) throws Exception {
 		TestcaseID = "223357"; //C223357
