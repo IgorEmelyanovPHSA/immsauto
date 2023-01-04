@@ -102,6 +102,12 @@ public class Tables extends BasePage {
     public void openShippedTransactionsIncomingActions(Map<String, String> searchCriteria) {
         getShippedTransactionsIncomingRow(searchCriteria).get("").click();
     }
+
+    @Step
+    public void openShippedTransactionsOutgoingActions(Map<String, String> searchCriteria) {
+        getShippedTransactionsOutgoingRow(searchCriteria).get("").click();
+    }
+
     @Step
     public void checkShippedTransactionsIncomingCheckbox(Map<String, String> searchCriteria) {
         WebElement element = getShippedTransactionsIncomingRow(searchCriteria).get("Select All");
