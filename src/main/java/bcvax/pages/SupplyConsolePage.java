@@ -177,6 +177,9 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
 	private WebElement confirm_incoming_transfers_modal_button;
+
+	@FindBy(xpath = ".//button[text() = 'Cancel Transaction']")
+	private WebElement btnCancelTransaction;
 	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
 	
 	@FindBy(xpath = "(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[2]")
@@ -249,7 +252,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//a/span[text() = 'Confirm']")
 	private WebElement select_Confirm_in_dropdown;
 	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
-	
+
+	@FindBy(xpath = ".//a/span[text() = 'Cancel Transfer']")
+	private WebElement drdCancel;
+
 	@FindBy(xpath = ".//a[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
 	private By click_on_related_item_tab_1 = By.xpath(".//a[text() = 'Related Items']");
@@ -977,6 +983,12 @@ public class SupplyConsolePage extends BasePage {
 		scrollTop(confirm_incoming_transfers_modal_button);
 		click(confirm_incoming_transfers_modal_button_1);
 	}
+
+	public void clickOnCancelModalTransactionButton() throws InterruptedException {
+		waitForElementToBeVisible(driver, btnCancelTransaction, 10);
+		scrollTop(btnCancelTransaction);
+		click(btnCancelTransaction);
+	}
 	
 	public void successMessageAppear() throws InterruptedException {
 		try {
@@ -1355,6 +1367,13 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 10);
 		Thread.sleep(2000);
 		select_Confirm_in_dropdown.click();
+	}
+	@Step
+	public void selectCancelInDropDown() throws InterruptedException {
+		waitForElementToBeVisible(driver, drdCancel, 10);
+		//Thread.sleep(2000);
+		click(drdCancel);
+		//drdCancel.click();
 	}
 	
 	public void clickOnRelatedItemTab() throws InterruptedException {
@@ -1836,6 +1855,12 @@ public class SupplyConsolePage extends BasePage {
 		selectConfirmIncomingDropDown();
 		acceptTransfer(distribution);
 	}
+
+	@Step
+	public void cancelIncomingTransfer() throws InterruptedException {
+		selectCancelInDropDown();
+		cancelTransfer();
+	}
 	@Step
 	public void acceptBulkTransferToDistribution(String distribution) throws InterruptedException {
 		clickBulkConfirmIncomingTransfersButton();
@@ -1846,6 +1871,11 @@ public class SupplyConsolePage extends BasePage {
 	public void acceptTransfer(String distribution) throws InterruptedException {
 		transferToDistributionOnReceive(distribution);
 		clickOnConfirmModalIncomingTransactionButton();
+		successMessageAppear();
+	}
+	@Step
+	public void cancelTransfer() throws InterruptedException {
+		clickOnCancelModalTransactionButton();
 		successMessageAppear();
 	}
 
