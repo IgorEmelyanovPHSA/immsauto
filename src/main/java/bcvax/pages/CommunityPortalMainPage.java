@@ -88,11 +88,12 @@ public class CommunityPortalMainPage extends BasePage{
     //}
 
     @Step
-    public void navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
-        goToSupplyLocation();
+    public SupplyConsolePage navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
+        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
         Thread.sleep(2000);
         new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME_, location));
         selectRelatedTab();
+        return supplyConsolePage;
     }
 
 }

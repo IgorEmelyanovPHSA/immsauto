@@ -118,6 +118,15 @@ public class Tables extends BasePage {
     }
 
     @Step
+    public void typeDosesIntoTransferRow(Map<String, String> searchCriteria, String data) throws InterruptedException {
+        WebElement element = getContainerTransferRow(searchCriteria).get("Doses");
+        scrollTop(element);
+        element.click();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).sendKeys(data).perform();
+    }
+
+    @Step
     public Double getConversionRateFromTransferRow(Map<String, String> searchCriteria) {
         String text = getContainerTransferRow(searchCriteria).get("Dose Conversion Factor").getText();
         log(" -- Conversation factor " + text + " -- " + " for search criteria" + searchCriteria.values());
