@@ -47,7 +47,7 @@ public class CommunityPortalMainPage extends BasePage{
     public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
         log("/*4.----Go to Supply Locations Tab --*/");
         goToSupplyLocation();
-        click(supplyLocationNameAbby);
+        click(automationSupplyLocation_1);
         selectRelatedTab();
         Thread.sleep(2000);
         return new SupplyConsolePage(driver);
