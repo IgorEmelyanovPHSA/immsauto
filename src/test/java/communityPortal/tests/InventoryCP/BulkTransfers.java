@@ -35,7 +35,7 @@ public class BulkTransfers extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void Can_doBulk_transfersBy_Dosages_form_one_Clinic_to_Another_as_PPHISBCVAXDEVIT() throws Exception {
+    public void Can_doBulk_transfersBy_Dosages_form_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
         TestcaseID = "223359";
         String vaccine1 = "COMIRNATY (Pfizer) - EK4241";
         String vaccine2 = "VAXZEVRIA";
@@ -149,7 +149,7 @@ public class BulkTransfers extends BaseTest {
     }
 
     @Test()
-    public void Can_doBulk_transfersBy_Quantity_form_one_Clinic_to_Another_as_PPHISBCVAXDEVIT() throws Exception {
+    public void Can_doBulk_transfersBy_Quantity_form_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
         TestcaseID = "223359";
         String vaccine1 = "COMIRNATY (Pfizer) - EK4241";
         String vaccine2 = "VAXZEVRIA";
@@ -355,7 +355,7 @@ public class BulkTransfers extends BaseTest {
     }
 
     @Test()
-    public void Can_doBulk_transfersBy_Dosages_within_the_same_Clinic_as_PPHIS_CommunityT() throws Exception {
+    public void Can_doBulk_transfersBy_Dosages_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
         TestcaseID = "223359";
         String vaccine1 = "COMIRNATY (Pfizer) - EK4241";
         String vaccine2 = "VAXZEVRIA";
