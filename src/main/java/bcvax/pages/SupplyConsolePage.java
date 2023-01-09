@@ -43,6 +43,9 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
+
+	@FindBy(xpath = ".//button[text() = 'Cancel Transfer']")
+	private WebElement bulk_cancel_button;
 	private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 	
 	@FindBy(xpath = "(//section[@role='dialog']//button[text() = 'Transfer'])")
@@ -180,6 +183,9 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//button[text() = 'Cancel Transaction']")
 	private WebElement btnCancelTransaction;
+
+	@FindBy(xpath = ".//button[text() = 'Cancel transactions']")
+	private WebElement btnCancelTransaction2;
 	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
 	
 	@FindBy(xpath = "(.//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[2]")
@@ -701,13 +707,15 @@ public class SupplyConsolePage extends BasePage {
 		return (rows.size());
 	}
 	
-	public void clickBulkTransfersButton() throws InterruptedException {
+	public void clickBulkTransfersButton() {
 		waitForElementToBeLocated(driver, bulk_transfers_button_1, 10);
-		WebElement element = driver.findElement(bulk_transfers_button_1);
 		this.bulk_transfers_button.click();
-		//click(bulk_transfers_button_1);
 	}
-	
+	public SupplyConsolePage clickBulkCancelButton() throws InterruptedException {
+		waitForElementToBePresent(driver, bulk_transfers_button_1, 10);
+		click(bulk_cancel_button);
+		return this;
+	}
 	public void verifyIsSupplyPageDisplayed() {
 		waitForElementToBeVisible(driver, supply_page_displayed, 10);
 		this.supply_page_displayed.isDisplayed();
@@ -984,10 +992,10 @@ public class SupplyConsolePage extends BasePage {
 		click(confirm_incoming_transfers_modal_button_1);
 	}
 
-	public void clickOnCancelModalTransactionButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, btnCancelTransaction, 10);
-		scrollTop(btnCancelTransaction);
-		click(btnCancelTransaction);
+	public void clickOnButtonInModalTransaction(WebElement element) throws InterruptedException {
+		waitForElementToBeVisible(driver, element, 10);
+		scrollTop(element);
+		click(element);
 	}
 	
 	public void successMessageAppear() throws InterruptedException {
@@ -1875,7 +1883,13 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public void cancelTransfer() throws InterruptedException {
-		clickOnCancelModalTransactionButton();
+		clickOnButtonInModalTransaction(btnCancelTransaction);
+		successMessageAppear();
+	}
+
+	@Step
+	public void cancelBulkTransfer() throws InterruptedException {
+		clickOnButtonInModalTransaction(btnCancelTransaction2);
 		successMessageAppear();
 	}
 

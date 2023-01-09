@@ -9,6 +9,7 @@
             <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
             <class name="communityPortal.tests.InventoryCP.BulkTransfers"/>
             <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
+            <class name="communityPortal.tests.InventoryCP.BulkTransfersCancellation"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

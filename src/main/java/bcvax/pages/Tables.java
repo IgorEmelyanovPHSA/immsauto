@@ -115,6 +115,12 @@ public class Tables extends BasePage {
         element.click();
     }
     @Step
+    public void checkShippedTransactionsOutgoingCheckbox(Map<String, String> searchCriteria) {
+        WebElement element = getShippedTransactionsOutgoingRow(searchCriteria).get("Select All");
+        scrollTop(element);
+        element.click();
+    }
+    @Step
     public void typeQtyIntoTransferRow(Map<String, String> searchCriteria, String data) throws InterruptedException {
         WebElement element = getContainerTransferRow(searchCriteria).get("Quantity");
         scrollTop(element);
