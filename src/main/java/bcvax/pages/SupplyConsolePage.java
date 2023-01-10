@@ -262,9 +262,9 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//a/span[text() = 'Cancel Transfer']")
 	private WebElement drdCancel;
 
-	@FindBy(xpath = ".//a[text() = 'Related Items']")
+	@FindBy(xpath = ".//*[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
-	private By click_on_related_item_tab_1 = By.xpath(".//a[text() = 'Related Items']");
+	private By click_on_related_item_tab_1 = By.xpath(".//*[text() = 'Related Items']");
 
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
 	private WebElement btnEditOnTrasactionPage;
@@ -928,7 +928,8 @@ public class SupplyConsolePage extends BasePage {
 		click(btnEditOnTrasactionPage);
 		Thread.sleep(2000);
 		setDosesAmount(String.valueOf(amountOfDosesToAdjustInDraftEdit));
-		click(btnTransferDraftOnContainerTransferPage);
+		clickUsingJS(btnTransferDraftOnContainerTransferPage);
+		//click(btnTransferDraftOnContainerTransferPage);
 		Thread.sleep(2000);
 		clickBulkTransfersCloseButton();
 		Thread.sleep(2000);
@@ -1913,6 +1914,14 @@ public class SupplyConsolePage extends BasePage {
 
 	public void transferToDistributionOnReceive(String distribution) throws InterruptedException {
 		selectTransferToDistribution(search_incoming_supply_distributor, distribution);
+	}
+
+	@Step
+	public void draftToDistributionWithinSameClinic(String location, String distribution) throws InterruptedException {
+		selectSupplyLocation(location);
+		transferToDistributionOnSend(distribution);
+		clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
+		clickBulkTransfersCloseButton();
 	}
 
 	@Step
