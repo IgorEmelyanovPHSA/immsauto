@@ -181,6 +181,7 @@ public class Transfer extends BaseTest {
 		assertEquals(df.format(remainingDosesAfterCalculation), df.format(remainingDoses_after_Distribution_2_1));
 		assertEquals(remainingQty_before_Distribution_2_1 + quantity, remainingQty_after_Distribution_2_1);
 	}
+
 	@Test()
 	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
 		TestcaseID = "220550"; //C220550
