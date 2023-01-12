@@ -1,9 +1,7 @@
-package communityPortal.tests.DIWA;
+package communityPortal.tests.DIWA_CP;
 
 import Utilities.TestListener;
 import bcvax.pages.CommunityPortalMainPage;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.ProfilesPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -11,7 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class DIWA_Covid19 extends BaseTest {
+public class DIWA_Covid19_CP extends BaseTest {
 
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_ComunityQA() throws Exception {
@@ -20,7 +18,7 @@ public class DIWA_Covid19 extends BaseTest {
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
-        log("/*1.----Login as an Clinician to ICE --*/");
+        log("/*1.----Login as an Clinician to Community Portal --*/");
         CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
         Thread.sleep(10000);
 
@@ -133,13 +131,13 @@ public class DIWA_Covid19 extends BaseTest {
 
         log("/*---26. Vaccine Administration Summary Confirm and Save ---*/");
         profilesPage.summaryConfirmAndSave();
-        Thread.sleep(2000);
+        Thread.sleep(10000);
 
         log("/*---27. Navigate to Related tab and Confirm new Imms Record is created ---*/");
         profilesPage.clickRelatedTab();
         Thread.sleep(2000);
-
-        log("/*---28. We need to that Documented Without Appointment created - not validated yet  ---*/");
+        log("We need to validate that Documented Without Appointment created - not validated yet  ---*/");
+        Thread.sleep(2000);
 
     }
 

@@ -1,8 +1,7 @@
-package communityPortal.tests.Historical_Immunisation;
+package communityPortal.tests.Historical_Immunisation_CP;
 
 import Utilities.TestListener;
 import bcvax.pages.CommunityPortalMainPage;
-import bcvax.pages.ProfilesPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
