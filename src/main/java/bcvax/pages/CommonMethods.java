@@ -65,6 +65,13 @@ public class CommonMethods extends BasePage{
         Thread.sleep(5000);
     }
 
+    public void globalSearchCP(String textToSearch) throws InterruptedException {
+        waitForElementToBeVisible(driver, searchInput, 10);
+        typeIn(searchInput,textToSearch);
+        searchInput.sendKeys(Keys.RETURN);
+        Thread.sleep(12000);
+    }
+
     public boolean isUserFoundValidation(String conformationNumberText, String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
         boolean isUserFound = false;
         for(int i = 1; i<=7; i++ ) {
@@ -72,7 +79,7 @@ public class CommonMethods extends BasePage{
                 log(i +"-try to find user: " + legalFirstName + " " + legalLastName + " not found, re-try!");
                 refreshBrowser();
                 Thread.sleep(5000);
-                globalSearch(conformationNumberText);
+                //globalSearch(conformationNumberText);
             } else {
                 log("/*---User --> " + legalFirstName + " " + legalLastName + " present on the page--*/");
                 isUserFound = true;

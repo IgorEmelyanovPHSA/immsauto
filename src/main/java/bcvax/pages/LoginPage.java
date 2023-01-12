@@ -158,6 +158,12 @@ public class LoginPage extends BasePage {
 	@FindBy(xpath = "//a[@class='inverseTextColor' and contains(text(),'Login here')]")
 	private WebElement btnLoginHere;
 
+	@FindBy(xpath = "//img[@src='/bchvaxportal/profilephoto/005/T']")
+	private WebElement btnProfile;
+
+	@FindBy(xpath = "//span[@title='Log Out']")
+	private WebElement logOut;
+
 	@Step
 	public CommunityPortalMainPage loginIntoCommunityPortalAsAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
@@ -180,6 +186,12 @@ public class LoginPage extends BasePage {
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
 		click(login_button);
 		return new CommunityPortalMainPage(driver);
+	}
+
+	public void logOutCommunityPortal() throws Exception {
+		click(btnProfile);
+		click(logOut);
+		Thread.sleep(1000);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
