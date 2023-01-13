@@ -22,7 +22,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
         Thread.sleep(10000);
 
-        log("/*2.----Navigate to More -> All Clients -> Profiles Page --*/");
+        log("/*2.----Navigate to More -> Participants -> Profiles Page --*/");
         ProfilesPage profilesPage = cpMainPage.navigateToProfilesPage();
         Thread.sleep(10000);
         //log("/*2.----Navigate to Participants -> Clients Profiles Page --*/");

@@ -350,9 +350,9 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//span[text() = 'Travel'])[2]")
 	private WebElement select_early_booking_reason_for_prodsup;
 	
-	@FindBy(xpath = "(.//a[text() = 'Related'])")
+	@FindBy(xpath = ".//span[text() = 'Related']")
 	private WebElement person_account_Related_tab;
-	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
+	private By person_account_Related_tab_1 = By.xpath("(.//span[text() = 'Related'])");
 	
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
