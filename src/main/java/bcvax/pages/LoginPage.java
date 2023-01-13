@@ -22,6 +22,15 @@ public class LoginPage extends BasePage {
 	@FindBy(xpath = "//div[contains(text(),'The form was successfully submitted!')]")
 	private WebElement alertSuccess;
 
+	@FindBy(xpath = "//input[@placeholder='Username']")
+	private WebElement input_username_CP;
+
+	@FindBy(xpath = "//input[@placeholder='Password']")
+	private WebElement input_password_CP;
+
+	@FindBy(xpath = "//button[@type = 'button']")
+	private WebElement login_button_CP;
+
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
@@ -177,22 +186,32 @@ public class LoginPage extends BasePage {
 		return new CommunityPortalMainPage(driver);
 	}
 
-	public CommunityPortalMainPage loginIntoCommunityPortalAsPPHIS() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		Thread.sleep(2000);
-		click(btnLoginHere);
-		waitForElementToBeClickable(textUserName);
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
-		click(login_button);
-		return new CommunityPortalMainPage(driver);
-	}
-
 	public void logOutCommunityPortal() throws Exception {
 		click(btnProfile);
 		click(logOut);
 		Thread.sleep(1000);
 	}
+
+	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClinician() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CP"));
+		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_CP"));
+		login_button_CP.click();
+		return new CommunityPortalMainPage_as_Clinician(driver);
+	}
+
+	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsPPHIS() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		click(btnLoginHere);
+		waitForElementToBeClickable(textUserName);
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS_CP"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW_CP"));
+		click(login_button);
+		return new CommunityPortalMainPage_as_Clinician(driver);
+	}
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
