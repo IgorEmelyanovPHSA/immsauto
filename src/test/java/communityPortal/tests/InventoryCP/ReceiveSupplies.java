@@ -5,16 +5,13 @@ import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Tables;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
-import com.google.common.collect.ImmutableMap;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.math.RoundingMode;
 import java.util.Map;
 
 import static Constansts.Domain.*;
-import static Constansts.Header.SUPPLY_ITEM_NAME;
 import static org.testng.Assert.assertEquals;
 
 
@@ -53,7 +50,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- Receive Items by Doses From Receive Menu --*/");
 		supplyConsolePage.selectReceiveFromDropdownMenu();
 
-		supplyConsolePage.selectSupplyItem1(vaccine).
+		supplyConsolePage.selectSupplyItemTo(vaccine).
 				enterTransferDosages(String.valueOf(doses)).
 				selectReasonForReception();
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
@@ -108,7 +105,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- Receive Items by Quantity From Receive Menu --*/");
 		supplyConsolePage.selectReceiveFromDropdownMenu();
 
-		supplyConsolePage.selectSupplyItem1(vaccine).
+		supplyConsolePage.selectSupplyItemTo(vaccine).
 				enterTransferQuantity(String.valueOf(qty)).
 				selectReasonForReception();
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();

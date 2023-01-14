@@ -376,12 +376,7 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
 	private WebElement dropdownMenu;
-	//private By dropdownMenu = By.xpath("//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']");
-
-//	@FindBy(xpath = "//*[@class='slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix']")
-//	private WebElement dropdownMenu1;
 	private By dropdownMenu1 = By.xpath("//*[@class='slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix']");
-
 
 	@FindBy(xpath = ".//*[@title='Receive Supplies']")
 	private WebElement receiveSupplies;
@@ -469,6 +464,7 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_dose_conversion_factor;
+	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
 	@FindBy(xpath = "//button[@name='distributionBox']")
@@ -758,18 +754,6 @@ public class SupplyConsolePage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 		click(qty_1_);
 		element.sendKeys("1");
-	}
-
-	@Step
-	public SupplyConsolePage selectSupplyLocation(String location) throws InterruptedException {
-		log(" -- select to location  -  " + location);
-		waitForElementToBeVisible(driver, search_supply_location_2_To, 10);
-		search_supply_location_2_To.sendKeys(location);
-		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[@title='" + location + "']");
-		waitForElementToBePresent(driver, locationTo, 20);
-		click(driver.findElement(locationTo));
-		waitForElementNotToBeVisible(driver, locationTo, 10);
-		return this;
 	}
 
 	@Step
@@ -1798,21 +1782,27 @@ public class SupplyConsolePage extends BasePage {
 		search_input.click();
 	}
 
-	public SupplyConsolePage selectSupplyItem1(String supplyItem) throws InterruptedException {
-
+	public SupplyConsolePage selectSupplyItemTo(String supplyItem) throws InterruptedException {
 		log(" -- select supply item  -  " + supplyItem);
-		waitForElementToBeVisible(driver, searchSupplyItems, 20);
-		scrollTop(searchSupplyItems);
-		searchSupplyItems.sendKeys(supplyItem);
-		//click(searchSupplyItems);
-		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supplyItem + "')]");
-		//hardWait(100);
+		selectSupplyTo(searchSupplyItems, supplyItem);
+		return this;
+	}
+
+	@Step
+	private void selectSupplyTo(WebElement element, String location) throws InterruptedException {
+		log(" -- select to location  -  " + location);
+		waitForElementToBeVisible(driver, element, 10);
+		element.sendKeys(location);
+		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[@title='" + location + "']");
 		waitForElementToBePresent(driver, locationTo, 20);
 		click(driver.findElement(locationTo));
 		waitForElementNotToBeVisible(driver, locationTo, 10);
+	}
+	@Step
+	public SupplyConsolePage selectSupplyLocation(String location) throws InterruptedException {
+		log(" -- select to location  -  " + location);
+		selectSupplyTo(search_supply_location_2_To, location);
 		return this;
-
-
 	}
 
 	public String validateQTYField() throws InterruptedException {
@@ -1887,13 +1877,12 @@ public class SupplyConsolePage extends BasePage {
 		WebElement element = driver.findElement(get_dose_conversion_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
-		System.out.println(driver.findElement(get_dose_conversion_factor1).getAttribute("value"));
 		element.getText();
 		return (element.getText());
 	}
 	public double getDoseConversionFactorOnReceive() {
-		waitForElementToBePresent(driver, get_dose_conversion_factor1, 10);
-		double value = Double.parseDouble(driver.findElement(get_dose_conversion_factor1).getAttribute("value"));
+		waitForElementToBePresent(driver, get_dose_conversion_factor2, 10);
+		double value = Double.parseDouble(driver.findElement(get_dose_conversion_factor2).getAttribute("value"));
 		log(" -- dose conversation factore  -  " + value);
 		return value;
 	}
