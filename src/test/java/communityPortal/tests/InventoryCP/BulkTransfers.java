@@ -453,8 +453,4 @@ public class BulkTransfers extends BaseTest {
                 df.format(remainingDosesAfterCalculationDistribution2_3));
     }
 
-    private static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
-        return ImmutableMap.of
-                (SUPPLY_CONTAINER_NAME_, vaccine, SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
-    }
 }

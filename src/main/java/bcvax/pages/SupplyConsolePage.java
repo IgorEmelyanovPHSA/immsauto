@@ -41,6 +41,9 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Transfer Transactions')]")
 	private WebElement btnTransferTransactionsDraftOnTransactionsPage;
 
+	@FindBy(xpath = "//label[contains(text(),'Comments')]")
+	private WebElement labelComments;
+
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
 
@@ -167,6 +170,9 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
+
+	@FindBy(xpath = "//input[contains(@placeholder,'Search Supply Items')]")
+	private WebElement searchSupplyItems;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 	
 	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_2_1')]")
@@ -370,6 +376,15 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
 	private WebElement dropdownMenu;
+	//private By dropdownMenu = By.xpath("//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']");
+
+//	@FindBy(xpath = "//*[@class='slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix']")
+//	private WebElement dropdownMenu1;
+	private By dropdownMenu1 = By.xpath("//*[@class='slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix']");
+
+
+	@FindBy(xpath = ".//*[@title='Receive Supplies']")
+	private WebElement receiveSupplies;
 
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
@@ -756,6 +771,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 		return this;
 	}
+
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
@@ -985,10 +1001,14 @@ public class SupplyConsolePage extends BasePage {
 		//#search_supply_location_To.sendKeys(Keys.ENTER);
 	}
 	
+	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, confirm_incoming_transfers_modal_button_1, 10);
-		//this.bulk_confirm_incoming_transfers_button.click();
 		scrollTop(confirm_incoming_transfers_modal_button);
+		//handle issue when popup not fully loaded and button is partially hidden
+		if (isElementPresent(labelComments)) {
+			click(labelComments);
+		}
 		click(confirm_incoming_transfers_modal_button_1);
 	}
 
@@ -997,10 +1017,10 @@ public class SupplyConsolePage extends BasePage {
 		scrollTop(element);
 		click(element);
 	}
-	
+	@Step
 	public void successMessageAppear() throws InterruptedException {
 		try {
-			waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success!']"), 10);
+			waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success!']"), 20);
 			WebElement successMessage = driver.findElement(By.xpath(".//div[text() = 'Success!']"));
 			Thread.sleep(2000);
 			log(" -- Toast success message has been Appears");
@@ -1153,6 +1173,7 @@ public class SupplyConsolePage extends BasePage {
 		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (quantity);
 	}
+
 	@Step
 	public SupplyConsolePage enterTransferDosages(String doses) throws InterruptedException {
 		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
@@ -1669,6 +1690,12 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		this.dropdownMenu.click();
 	}
+	public void selectReceiveFromDropdownMenu() throws InterruptedException {
+		waitForElementToBePresent(driver, dropdownMenu1, 10);
+		click(dropdownMenu1);
+		waitForElementToBeVisible(driver, receiveSupplies, 10);
+		click(receiveSupplies);
+	}
 
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
 		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
@@ -1771,6 +1798,23 @@ public class SupplyConsolePage extends BasePage {
 		search_input.click();
 	}
 
+	public SupplyConsolePage selectSupplyItem1(String supplyItem) throws InterruptedException {
+
+		log(" -- select supply item  -  " + supplyItem);
+		waitForElementToBeVisible(driver, searchSupplyItems, 20);
+		scrollTop(searchSupplyItems);
+		searchSupplyItems.sendKeys(supplyItem);
+		//click(searchSupplyItems);
+		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supplyItem + "')]");
+		//hardWait(100);
+		waitForElementToBePresent(driver, locationTo, 20);
+		click(driver.findElement(locationTo));
+		waitForElementNotToBeVisible(driver, locationTo, 10);
+		return this;
+
+
+	}
+
 	public String validateQTYField() throws InterruptedException {
 		WebElement element = driver.findElement(validate_qty_field1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
@@ -1811,7 +1855,7 @@ public class SupplyConsolePage extends BasePage {
 		return (element.getText());
 	}
 
-	public void selectReasonForReception() throws InterruptedException {
+	public SupplyConsolePage selectReasonForReception() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_reason1, 10);
 		WebElement element = driver.findElement(click_reason1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -1821,6 +1865,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement element1 = driver.findElement(select_reason1);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
+		return this;
 	}
 
 	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
@@ -1842,8 +1887,15 @@ public class SupplyConsolePage extends BasePage {
 		WebElement element = driver.findElement(get_dose_conversion_factor1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
+		System.out.println(driver.findElement(get_dose_conversion_factor1).getAttribute("value"));
 		element.getText();
 		return (element.getText());
+	}
+	public double getDoseConversionFactorOnReceive() {
+		waitForElementToBePresent(driver, get_dose_conversion_factor1, 10);
+		double value = Double.parseDouble(driver.findElement(get_dose_conversion_factor1).getAttribute("value"));
+		log(" -- dose conversation factore  -  " + value);
+		return value;
 	}
 
 	public void selectIncomingSupplyDistributionReceive() throws InterruptedException {
@@ -1907,8 +1959,9 @@ public class SupplyConsolePage extends BasePage {
 		clickBulkTransfersCloseButton();
 	}
 
-	public void transferToDistributionOnSend(String distribution) throws InterruptedException {
+	public SupplyConsolePage transferToDistributionOnSend(String distribution) throws InterruptedException {
 		selectTransferToDistribution(search_incoming_supply_distributor_1_2, distribution);
+		return this;
 	}
 
 	public void transferToDistributionOnReceive(String distribution) throws InterruptedException {

@@ -55,6 +55,7 @@ public class CommunityPortalMainPage extends BasePage{
 
     @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
+        waitForElementToBeVisible(driver, tabSupplyLocation, 30);
         click(tabSupplyLocation);
         return new SupplyConsolePage(driver);
     }

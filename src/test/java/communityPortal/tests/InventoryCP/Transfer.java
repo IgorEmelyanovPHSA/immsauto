@@ -222,9 +222,4 @@ public class Transfer extends BaseTest {
 				df.format(remainingDoses_after_Calculation_Distribution_1_2 / dose_conversation_factor),
 				df.format(remainingQty_after_Distribution_1_2));
 	}
-
-	private static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
-		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine,
-				SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
-	}
 }

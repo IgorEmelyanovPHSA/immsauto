@@ -120,6 +120,17 @@ public abstract class BasePage<T> {
 	public String getValue(WebElement element) {
 		return element.getAttribute("value");
 	}
+
+	public boolean isElementPresent(WebElement element){
+		boolean isPresent;
+		try {
+			element.getTagName();
+			isPresent = true;
+		}catch (NoSuchElementException | StaleElementReferenceException e){
+			isPresent = false;
+		}
+		return isPresent;
+	}
 	
 	public T click(WebElement element) throws InterruptedException {
 		waitForVisibility(element);
