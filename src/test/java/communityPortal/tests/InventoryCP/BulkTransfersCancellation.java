@@ -27,11 +27,6 @@ public class BulkTransfersCancellation extends BaseTest {
     public SupplyConsolePage supplyConsolePage;
     public Tables tables;
 
-    private static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
-        return ImmutableMap.of
-                (SUPPLY_CONTAINER_NAME_, vaccine, SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
-    }
-
     @BeforeMethod
     public void setUpClass() throws Exception {
         log("Target Environment: " + Utils.getTargetEnvironment());

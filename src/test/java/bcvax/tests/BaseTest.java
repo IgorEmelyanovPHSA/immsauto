@@ -3,6 +3,7 @@ package bcvax.tests;
 import bcvax.pages.LoginPage;
 import bcvax.pages.TestRailManager;
 import bcvax.pages.Utils;
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +15,10 @@ import java.io.PrintStream;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Map;
+
+import static Constansts.Header.SUPPLY_CONTAINER_NAME_;
+import static Constansts.Header.SUPPLY_DISTRIBUTION_DESCRIPTION_;
 
 
 public class BaseTest {
@@ -74,7 +79,12 @@ public class BaseTest {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return LOG_TIMESTAMP_FORMAT.format(timestamp);
 	}
-	
+
+	protected static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
+		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine,
+				SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
+	}
+
 	public static void log(String msg) {
 		System.out.println(getLogTime() + " " + msg);
 	}

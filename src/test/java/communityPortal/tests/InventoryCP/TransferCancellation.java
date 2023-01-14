@@ -163,9 +163,4 @@ public class TransferCancellation extends BaseTest {
 		assertEquals(remainingQtyBeforeDistribution2_1, remainingQtyAfterCancelDistribution2_1);
 	}
 
-
-	private static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
-		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine,
-				SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
-	}
 }
