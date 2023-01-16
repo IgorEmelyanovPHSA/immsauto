@@ -7,7 +7,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class E2E_Dose2_Covid19_CP extends BaseTest{
+public class E2E_Dose1_Covid19_CP extends BaseTest{
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
     private String dateOfBirth = "Sep 21, 1923";
