@@ -126,9 +126,11 @@ public class BookingDose2 extends BaseTest {
 		log("/*34----Go to back to the Citizen Related Tab --*/");
 		callCenterConsole.clickRelatedTab();
 		Thread.sleep(5000);
-		log("/*34----Navigate to Appointment record --*/");
-		callCenterConsole.selectAppointmentRecord();
-		Thread.sleep(2000);
+		//// ADD Validating Status
+		//log("/*34----Navigate to Appointment record  --*/");
+		//callCenterConsole.selectAppointmentRecord();
+		//Thread.sleep(2000);
+
 		//Double dosage = callCenterConsole.getValueOfDosesNumber();
 		//log("/*-- 49. remaining doses are: -->" + dosage);
 		//Double expectedDosage = Double.valueOf("2");
