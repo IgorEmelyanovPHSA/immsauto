@@ -234,7 +234,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//a[@data-label= 'Appointment Scheduling']")
 	private WebElement appointment_scheduling_tab;
 	private By appointment_scheduling_tab1 = By.xpath(".//a[@data-label= 'Appointment Scheduling']");
-	
+
+	@FindBy(xpath = ".//span[text() = 'Appointment Scheduling']")
+	private WebElement appointment_scheduling_tab_CP;
+	private By appointment_scheduling_tab1_CP = By.xpath(".//span[text() = 'Appointment Scheduling']");
+
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement select_clinic;
 	private By select_clinic1 = By.xpath("//input[@name='clinicstag']");
@@ -282,7 +286,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//SPAN[@lightning-input_input=''])[47]")
 	private WebElement verify_contact_information_checkbox;
 	private By verify_contact_information_checkbox1 = By.xpath("(//SPAN[@lightning-input_input=''])[47]");
-	
+
+	@FindBy(xpath = "(//span[@lightning-input_input=''])[2]")
+	private WebElement verify_contact_information_checkbox_CP;
+	private By verify_contact_information_checkbox1_CP = By.xpath("(//span[@lightning-input_input=''])[2]");
+
 	@FindBy(xpath = ".//h1[text() = 'Oops...']")
 	private WebElement vlidate_oops_message;
 	private By vlidate_oops_message1 = By.xpath(".//h1[text() = 'Oops...']");
@@ -353,7 +361,12 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//a[text() = 'Related']")
 	private WebElement person_account_Related_tab;
 	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-	
+
+	@FindBy(xpath = ".//span[text() = 'Related']")
+	private WebElement person_account_Related_tab_CP;
+	private By person_account_Related_tab_1_CP = By.xpath("(.//span[text() = 'Related'])");
+
+
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
@@ -1170,6 +1183,14 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+
+	public void navigateAppointmentSchedulingTab_CP() throws InterruptedException {
+		waitForElementToBeLocated(driver, appointment_scheduling_tab1_CP, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(appointment_scheduling_tab1_CP);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
 	
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
@@ -1340,6 +1361,19 @@ public class InClinicExperiencePage extends BasePage {
 		verify_contact_information_checkbox.click();
 		Thread.sleep(2000);
 	}
+
+	public void clickVerifyContactInformation_CP() throws InterruptedException {
+		//Scrolling to bottom of the page
+		//((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, verify_contact_information_checkbox_CP, 10);
+		Thread.sleep(2000);
+		verify_contact_information_checkbox_CP.click();
+		Thread.sleep(2000);
+	}
 	
 	public void selectVaccineAgent() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
@@ -1470,6 +1504,14 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(person_account_Related_tab_1);
 		isDisplayed(person_account_Related_tab_1);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void clickOnPersonAccountRelatedTab_CP() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(person_account_Related_tab_1_CP);
+		isDisplayed(person_account_Related_tab_1_CP);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}

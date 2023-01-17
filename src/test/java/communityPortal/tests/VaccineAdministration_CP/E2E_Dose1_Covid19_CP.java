@@ -95,13 +95,101 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.successRegisteredMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
-        Thread.sleep(15000); //wait for Related Tab accordion showing up
+        Thread.sleep(10000); //wait for Related Tab showing up
 
         log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        Thread.sleep(5000);//wait for accordion loading
+
+        log("/*23----Go to Appointment Tab --*/");
+        inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
+        Thread.sleep(5000);
+
+        log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+        inClinicExperience_CP.clickOnVaccinationCheckbox();
         Thread.sleep(2000);
 
+        System.out.println("/*25----select 'Search by Clinic name' tab --*/");
+        inClinicExperience_CP.selectSearchByClinicNameTab();
+        Thread.sleep(2000);
 
+        log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
+        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        Thread.sleep(2000);
+
+        log("/*27----click on Option Facility location  --*/");
+        inClinicExperience_CP.clickOnFacilityOptionLocation();
+        Thread.sleep(2000);
+
+        log("/*28----select Active booking appointment day  --*/");
+        inClinicExperience_CP.selectBookingAppointmentDay();
+        Thread.sleep(2000);
+
+        log("/*29----select the time slot  --*/");
+        inClinicExperience_CP.selectTimeSlotForAppointment();
+        Thread.sleep(2000);
+
+        log("/*30----click Next button  --*/");
+        inClinicExperience_CP.clickNextButtonApptSchedulingPage();
+        Thread.sleep(2000);
+
+        log("/*31----click Verify Contact Information Checkbox  --*/");
+        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        Thread.sleep(2000);
+
+        log("/*32----click Confirm Appointment button  --*/");
+        inClinicExperience_CP.clickAppointmentConfirmButton();
+        Thread.sleep(2000);
+
+        log("/*33. ----see 'Appointment confirmed!' screen --*/");
+        inClinicExperience_CP.AppointmentConfirmationMessage();
+        Thread.sleep(3000);
+
+        log("/*34.----Refresh page --*/");
+        inClinicExperience_CP.refreshBrowser();
+        Thread.sleep(5000);
+
+        Thread.sleep(10000); //wait for Related Tab
+
+        log("/*35.----Go to back to the Citizen Related Tab --*/");
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        Thread.sleep(7000);//wait for all accordion elements showing up
+
+        log("/*36.----click on In-clinic Experience button --*/");
+        inClinicExperience_CP.ClickGoToInClinicExperienceButton();
+        Thread.sleep(5000);
+
+        log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
+        //inClinicExperience_CP.validateVaccineAdminPageOpen();
+        Thread.sleep(5000);
+
+        log("/*38.---Click confirm and Save Button --*/");
+        //inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+        Thread.sleep(5000);
+
+        log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+        //inClinicExperience_CP.selectVaccineAgent();
+        Thread.sleep(3000);
+
+        log("/*40.---Click Save Consent Button --*/");
+        //inClinicExperience_CP.ClickSaveConsentButton();
+        Thread.sleep(5000);
+
+        log("/*41.---Click Save button for Immunisation Information --*/");
+        //inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
+        Thread.sleep(5000);
+
+        log("/*42.---Click Confirm and Save Administration Button --*/");
+        //inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        Thread.sleep(5000);
+
+        log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
+        //inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        Thread.sleep(3000);
+
+        log("/*44.---the Home - Client Search showing up  --*/");
+        //inClinicExperience_CP.validateHomePageShownUp();
+        Thread.sleep(3000);
 
     }
 
