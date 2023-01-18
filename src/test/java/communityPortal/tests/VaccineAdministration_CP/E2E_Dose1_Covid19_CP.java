@@ -145,50 +145,55 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.AppointmentConfirmationMessage();
         Thread.sleep(3000);
 
-        log("/*34.----Refresh page --*/");
-        inClinicExperience_CP.refreshBrowser();
-        Thread.sleep(5000);
-
-        Thread.sleep(10000); //wait for Related Tab
+        //log("/*34.----Refresh page --*/");
+        //inClinicExperience_CP.refreshBrowser();
+        //Thread.sleep(5000);
+        //Thread.sleep(10000); //wait for Related Tab
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
-        Thread.sleep(7000);//wait for all accordion elements showing up
+        Thread.sleep(5000);
+        //////
+        log("/*35_1.----Refresh page again - should not be like that again --*/");
+        inClinicExperience_CP.refreshBrowser();
+        Thread.sleep(5000);
+        Thread.sleep(10000); //wait for Related Tab accordion loading
+        ///////
 
         log("/*36.----click on In-clinic Experience button --*/");
         inClinicExperience_CP.ClickGoToInClinicExperienceButton();
         Thread.sleep(5000);
 
         log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-        //inClinicExperience_CP.validateVaccineAdminPageOpen();
+        inClinicExperience_CP.validateVaccineAdminPageOpen();
         Thread.sleep(5000);
 
         log("/*38.---Click confirm and Save Button --*/");
-        //inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+        inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
 
         log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-        //inClinicExperience_CP.selectVaccineAgent();
+        inClinicExperience_CP.selectVaccineAgent();
         Thread.sleep(3000);
 
         log("/*40.---Click Save Consent Button --*/");
-        //inClinicExperience_CP.ClickSaveConsentButton();
+        inClinicExperience_CP.ClickSaveConsentButton();
         Thread.sleep(5000);
 
         log("/*41.---Click Save button for Immunisation Information --*/");
-        //inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
+        inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
 
         log("/*42.---Click Confirm and Save Administration Button --*/");
-        //inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(5000);
 
         log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
-        //inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
         Thread.sleep(3000);
 
         log("/*44.---the Home - Client Search showing up  --*/");
-        //inClinicExperience_CP.validateHomePageShownUp();
+        inClinicExperience_CP.validateHomePageShownUp();
         Thread.sleep(3000);
 
     }
