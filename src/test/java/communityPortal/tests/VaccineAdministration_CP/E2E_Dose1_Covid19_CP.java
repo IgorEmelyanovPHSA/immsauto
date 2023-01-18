@@ -30,7 +30,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         Thread.sleep(10000);
 
         log("/*2.----Community Portal Home page displayed --*/");
-        cpMainPage.verifyIsCallCenterConsolePageDisplayed();
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         Thread.sleep(5000);
 
         log("/*3.----- Click on User Defaults Tab --*/");

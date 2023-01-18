@@ -194,7 +194,7 @@ public class LoginPage extends BasePage {
 
 	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClinician() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CP"));
 		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_CP"));
 		login_button_CP.click();

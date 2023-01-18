@@ -42,7 +42,7 @@ public class CommunityPortalMainPage_as_Clinician extends BasePage{
 
     /*-------------Methods--------------*/
 
-    public void verifyIsCallCenterConsolePageDisplayed() {
+    public void verifyIsCommunityPortalHomePageDisplayed() {
         waitForElementToBeVisible(driver, community_portal_home_page_displayed, 10);
         community_portal_home_page_displayed.isDisplayed();
     }

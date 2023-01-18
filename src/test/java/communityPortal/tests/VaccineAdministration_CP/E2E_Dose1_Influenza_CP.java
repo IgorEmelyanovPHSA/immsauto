@@ -1,17 +1,14 @@
-package communityPortal.tests.Appointment_Scheduling_CP;
+package communityPortal.tests.VaccineAdministration_CP;
 
 import Utilities.TestListener;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.CommunityPortalMainPage_as_Clinician;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
 @Listeners({TestListener.class})
-public class BookingDose1_COVID19 extends BaseTest {
+public class E2E_Dose1_Influenza_CP extends BaseTest{
+
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
     private String dateOfBirth = "Sep 21, 1923";
@@ -20,22 +17,35 @@ public class BookingDose1_COVID19 extends BaseTest {
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    private String vaccineToSelect = "Covid19Vaccine";
 
     @Test(priority = 1)
-    public void Can_Book_Dose1_Appointment_as_Clerk_ComunityQA() throws Exception {
-        TestcaseID = "225652"; //C225652
-
-        log("Target Environment: "+ Utils.getTargetEnvironment());
+    public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
+        TestcaseID = "228859"; //C228859
+        log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
-        log("/*1.----Login as a Clerk to Community Portal --*/");
-        CommunityPortalMainPage_as_Clinician cpMainPage = loginPage.loginIntoCommunityPortalAsClerk();
+        log("/*1.----Login as an Clinician to Community Portal --*/");
+        CommunityPortalMainPage_as_Clinician cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         Thread.sleep(10000);
 
-        log("/*2.----Navigate to More -> Register --*/");
+        log("/*2.----Community Portal Home page displayed --*/");
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
+        Thread.sleep(5000);
+
+        log("/*3.----- Click on User Defaults Tab --*/");
+        cpMainPage.clickUserDefaultsTab();
+        Thread.sleep(2000);
+
+        log("/*4.----- Enter current date for UserDefaults --*/");
+        cpMainPage.inputCurrentDateUserDefaults();
+
+        log("/*5.----- Click on Save defaults button --*/");
+        cpMainPage.clickSaveDefaultsButton();
+        Thread.sleep(2000);
+
+        log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
         Thread.sleep(2000);
 
@@ -96,8 +106,8 @@ public class BookingDose1_COVID19 extends BaseTest {
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
         Thread.sleep(5000);
 
-        log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationCheckbox();
+        log("/*24.----click on the Vaccine 'Influenza Vaccine' checkbox --*/");
+        inClinicExperience_CP.clickOnVaccinationInfluenzaCheckbox();
         Thread.sleep(2000);
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
@@ -146,11 +156,43 @@ public class BookingDose1_COVID19 extends BaseTest {
         Thread.sleep(10000); //wait for Related Tab accordion loading
         ///////
 
-        //Validation Steps
-        log("/ 36. --- We need Validation that Booking Record " +
-                "in New Status has created and In-Clinic Experience button is Visible, Active, Clickable");
-    }
+        log("/*36.----click on In-clinic Experience button --*/");
+        inClinicExperience_CP.ClickGoToInClinicExperienceButton();
+        Thread.sleep(5000);
 
+        log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
+        inClinicExperience_CP.validateVaccineAdminPageOpen();
+        Thread.sleep(5000);
+
+        log("/*38.---Click confirm and Save Button --*/");
+        inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+        Thread.sleep(5000);
+
+        log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+        inClinicExperience_CP.selectVaccineAgentInfluenza();
+        Thread.sleep(3000);
+
+        log("/*40.---Click Save Consent Button --*/");
+        inClinicExperience_CP.ClickSaveConsentButton();
+        Thread.sleep(5000);
+
+        log("/*41.---Click Save button for Immunisation Information --*/");
+        inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
+        Thread.sleep(5000);
+
+        log("/*42.---Click Confirm and Save Administration Button --*/");
+        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        Thread.sleep(5000);
+
+        log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
+        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        Thread.sleep(3000);
+
+        log("/*44.---the Home - Client Search showing up  --*/");
+        inClinicExperience_CP.validateHomePageShownUp();
+        Thread.sleep(3000);
+
+    }
 
     @Test(priority = 2)
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
@@ -158,6 +200,7 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
     }
+
 
 
 }

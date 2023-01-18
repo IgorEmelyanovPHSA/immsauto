@@ -6,10 +6,8 @@
             <class name="bcvax.tests.CallCenter.BookingDose1"/>
             <class name="bcvax.tests.CallCenter.BookingDose2"/>
             <class name="bcvax.tests.CallCenter.BookingDose1Influenza"/>
-            <class name="bcvax.tests.CallCenter.BookingDose1Pneumonia"/>
             <class name="bcvax.tests.ClinicInBox.BookingDose1"/>
             <class name="bcvax.tests.ClinicInBox.BookingDose1Influenza"/>
-            <class name="bcvax.tests.ClinicInBox.BookingDose1Pneumonia"/>
             <class name="bcvax.tests.ClinicInBox.BookingDose2"/>
             <class name="bcvax.tests.ClinicInBox.DIWA_CIB"/>
             <class name="bcvax.tests.ClinicInBox.Historical_Immunization"/>
