@@ -146,8 +146,8 @@ public class BookingDose1_COVID19 extends BaseTest {
         Thread.sleep(10000); //wait for Related Tab accordion loading
         ///////
 
-
-        log("We need Validation that Booking Record in New Status has created and In-Clinic Experience button is active");
+        //Validation Steps
+        log("/ 36. --- We need Validation that Booking Record in New Status has created and In-Clinic Experience button is active");
     }
 
 

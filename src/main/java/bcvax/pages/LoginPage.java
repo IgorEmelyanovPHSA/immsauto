@@ -205,7 +205,7 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
 		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLERK_Booking_CP"));
-		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW_CP"));
+		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW_Booking_CP"));
 		login_button_CP.click();
 		return new CommunityPortalMainPage_as_Clinician(driver);
 	}
