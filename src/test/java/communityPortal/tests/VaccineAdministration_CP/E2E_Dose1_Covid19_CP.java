@@ -17,7 +17,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
-    @Test
+    @Test(priority = 1)
     public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
         TestcaseID = "226778"; //C226778
         log("Target Environment: " + Utils.getTargetEnvironment());
@@ -144,11 +144,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience_CP.AppointmentConfirmationMessage();
         Thread.sleep(3000);
-
-        //log("/*34.----Refresh page --*/");
-        //inClinicExperience_CP.refreshBrowser();
-        //Thread.sleep(5000);
-        //Thread.sleep(10000); //wait for Related Tab
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();

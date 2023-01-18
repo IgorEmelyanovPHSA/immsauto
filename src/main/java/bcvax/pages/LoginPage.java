@@ -201,14 +201,12 @@ public class LoginPage extends BasePage {
 		return new CommunityPortalMainPage_as_Clinician(driver);
 	}
 
-	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsPPHIS() throws Exception {
+	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClerk() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
-		click(btnLoginHere);
-		waitForElementToBeClickable(textUserName);
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS_CP"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW_CP"));
-		click(login_button);
+		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLERK_Booking_CP"));
+		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW_CP"));
+		login_button_CP.click();
 		return new CommunityPortalMainPage_as_Clinician(driver);
 	}
 
