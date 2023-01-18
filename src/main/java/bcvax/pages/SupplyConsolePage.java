@@ -827,7 +827,8 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
-		By transactions_from_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions2']//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
+		//By transactions_from_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions2']//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
+		By transactions_from_1_ = By.xpath("(//span[contains(text(),'Shipped Transactions - Outgoing')]/../../../../..//a[@title='transactionFromName'])[" + kk + "]");
 		waitForElementToBeLocated(driver, transactions_from_1_, 10);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(transactions_from_1_);
@@ -946,7 +947,8 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
-		By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+		//By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+		By incoming_transaction_checkbox_1_ = By.xpath("(//span[contains(text(),'Shipped Transactions - Incoming')]/../../../../..//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
 		waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
 		//waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
 		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
