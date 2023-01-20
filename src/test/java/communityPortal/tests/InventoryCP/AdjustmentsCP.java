@@ -32,7 +32,6 @@ public class AdjustmentsCP extends BaseTest {
 		return new Object[][]{{"3"},{"-2"}};
 	}
 
-	//Login as an admin for now, needs to be updated to PPHIS
 	//Needs to update TestcaseId for both test
 	@Test(dataProvider = "dosesAmount")
 	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String dosesAmount) throws Exception {
@@ -52,7 +51,7 @@ public class AdjustmentsCP extends BaseTest {
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
