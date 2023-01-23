@@ -156,7 +156,7 @@ public class AdjustmentsCP extends BaseTest {
 		}
 
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");

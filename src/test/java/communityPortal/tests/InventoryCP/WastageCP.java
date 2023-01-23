@@ -18,7 +18,6 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class WastageCP extends BaseTest {
 
-	//Login as an admin for now, needs to be updated to PPHIS
 	//Needs to update TestcaseId for both test
 
 	@Test()
@@ -28,7 +27,7 @@ public class WastageCP extends BaseTest {
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
@@ -130,7 +129,7 @@ public class WastageCP extends BaseTest {
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
