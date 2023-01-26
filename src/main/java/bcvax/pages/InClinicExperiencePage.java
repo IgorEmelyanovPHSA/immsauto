@@ -1235,7 +1235,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void clickFacilityOptionLocation() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
 		option_loc_facility.click();

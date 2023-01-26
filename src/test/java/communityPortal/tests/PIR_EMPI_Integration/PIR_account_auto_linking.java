@@ -11,9 +11,11 @@ that's meaning that we lost PIR integration
 */
 
 /*
-If During the Registration new Citizen popup message like
-"Match Unsuccesful"
+1.If During the Registration new Citizen popup message like
+"Match Unsuccessful"
 PIR is down but EMPI might work.
+2. and I still can click on Forecast Update and
+3. Imms Records should goes to Panorama and back with Complited Status.
  */
 
 
