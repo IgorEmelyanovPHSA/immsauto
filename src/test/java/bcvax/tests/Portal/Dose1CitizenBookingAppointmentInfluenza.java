@@ -59,7 +59,7 @@ public class Dose1CitizenBookingAppointmentInfluenza extends BaseTest {
 		com.globalSearch(conformationNumberText);
 
 		log("/*7.1---Validation, isUserFound account validation --*/");
-		boolean isUserFound =  com.isUserFoundValidation(conformationNumberText, legalFirstName, legalMiddleName, legalLastName);
+		boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
 		if (!isUserFound){
 			throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
 		}
