@@ -108,26 +108,26 @@ public class Dose1_E2E_Influenza extends BaseTest {
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         System.out.println("/*25.----click on person Account Related Tab --*/");
         inClinicExperience.clickOnPersonAccountRelatedTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         System.out.println("/*26----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
         inClinicExperience.clickOnVaccinationInfluenzaCheckbox();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         //System.out.println("/*29----click on 'More' search tab --*/");
         //inClinicExperience.clickOnMoreSearchTabs();
         //Thread.sleep(2000);
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
         inClinicExperience.selectSearchByClinicNameTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience.searchClinicName(clinicNameToSearch);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         System.out.println("/*29----click on Option Facility location  --*/");
         inClinicExperience.clickOnFacilityOptionLocation();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         System.out.println("/*30----select Active booking appointment day  --*/");
         inClinicExperience.selectBookingAppointmentDay();
         Thread.sleep(2000);

@@ -28,7 +28,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
     //Login as an admin for now, needs to be updated to ICE
     //Needs to update TestcaseId
     @Test(priority = 1)
-    public void citizenPortalBookDoseOneCovid19() throws Exception {
+    public void CP_CitizenPortalBookDoseOneCovid19() throws Exception {
         TestcaseID = "222521"; //C222521
         log("Target Environment: " + Utils.getTargetEnvironment());
         CommonMethods com = new CommonMethods(getDriver());
@@ -61,7 +61,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         com.globalSearchCP(conformationNumberText);
 
         log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(conformationNumberText, legalFirstName, legalMiddleName, legalLastName);
+        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
         if (!isUserFound){
             throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
         }

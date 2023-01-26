@@ -1,10 +1,7 @@
 package bcvax.tests.Portal;
 
 import Utilities.TestListener;
-import bcvax.pages.BookAnAppointmentPage;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.RegisterToGetVaccinatedPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.junit.Assert;
 import org.testng.annotations.Listeners;
@@ -32,6 +29,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     public void citizenPortalFlowDoseTwo() throws Exception {
         TestcaseID = "222522"; //C222522
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
@@ -60,10 +58,10 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         inClinicExperiencePage.SearchForCitizen(conformationNumberText);
 
-        if (!inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
-            log("/*---User --> " + legalFirstName + " " + legalLastName + " not found!!!--*/");
-        } else {
-            log("/*---User --> " + legalFirstName + " " + legalLastName + " present on the page--*/");
+        log("/*7.1---Validation, isUserFound account validation --*/");
+        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+        if (!isUserFound){
+            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
         }
 
         log("/*8.---Get unique link using Sales Force query over API--*/");

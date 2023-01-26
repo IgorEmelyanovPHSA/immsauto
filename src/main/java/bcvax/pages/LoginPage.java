@@ -192,6 +192,15 @@ public class LoginPage extends BasePage {
 		Thread.sleep(1000);
 	}
 
+	public CommunityPortalMainPage loginIntoCommunityPortalAsClinicianInventory() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Inventory_CP"));
+		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_Inventory_CP"));
+		login_button_CP.click();
+		return new CommunityPortalMainPage(driver);
+	}
+
 	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClerk() throws Exception {
 		loginIntoCommunityPortalAs("user_CLERK_Booking_CP", "password_CLERK_PW_Booking_CP");
 		return new CommunityPortalMainPage_as_Clinician(driver);

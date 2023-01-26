@@ -31,7 +31,6 @@ public class BulkAdjustmentsCP extends BaseTest {
         return new Object[][]{{"3"},{"-2"}};
     }
 
-    //Login as an admin for now, needs to be updated to PPHIS
     //Needs to update TestcaseId for both test
 
     @Test(dataProvider = "dosesAmount")
@@ -54,7 +53,7 @@ public class BulkAdjustmentsCP extends BaseTest {
 
 
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -157,7 +156,7 @@ public class BulkAdjustmentsCP extends BaseTest {
         log("/*----Amount Adjustment Quantities " + amountOfQuantityToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");

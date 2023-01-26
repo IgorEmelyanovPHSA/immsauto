@@ -22,7 +22,6 @@ public class BulkDraftsCP extends BaseTest {
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
     private final String supplyLocationTo = SUPPLY_LOCATION_2;
 
-    //Login as an admin for now, needs to be updated to PPHIS
     //Needs to update TestcaseId for both test
     @Test
     public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS() throws Exception {
@@ -30,7 +29,7 @@ public class BulkDraftsCP extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");

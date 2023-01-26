@@ -7,7 +7,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class E2E_Dose1_Influenza_CP extends BaseTest{
+public class E2E_Dose1_Pneumo_CP extends BaseTest{
 
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
@@ -19,8 +19,8 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test(priority = 1)
-    public void Can_do_Dose1_Influenza_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "228859"; //C228859
+    public void Can_do_Dose1_Pneumo_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
+        TestcaseID = "229058"; //C229058
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -168,12 +168,16 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
 
-        log("/*39.---select Vaccine Agent picklist Value ->  Influenza-LAIV --*/");
-        inClinicExperience_CP.selectVaccineAgentInfluenza();
+        log("/*39.---select Vaccine Agent picklist Value ->  Pneumo-P-23 --*/");
+        inClinicExperience_CP.selectVaccineAgentPneumo();
         Thread.sleep(3000);
 
         log("/*40.---Click Save Consent Button --*/");
         inClinicExperience_CP.ClickSaveConsentButton();
+        Thread.sleep(5000);
+
+        System.out.println("/*40_.---Select Route from DropDown -> Intranasal --*/");
+        inClinicExperience_CP.selectRouteIntranasal();
         Thread.sleep(5000);
 
         log("/*41.---Click Save button for Immunisation Information --*/");
@@ -200,7 +204,5 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
     }
-
-
 
 }

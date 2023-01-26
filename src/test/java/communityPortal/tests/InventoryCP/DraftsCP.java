@@ -19,7 +19,6 @@ public class DraftsCP extends BaseTest {
 
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
 
-    //Login as an admin for now, needs to be updated to PPHIS
     //Needs to update TestcaseId for both test
     @Test()
     public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
@@ -32,7 +31,7 @@ public class DraftsCP extends BaseTest {
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -136,7 +135,7 @@ public class DraftsCP extends BaseTest {
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -264,7 +263,7 @@ public class DraftsCP extends BaseTest {
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -383,7 +382,7 @@ public class DraftsCP extends BaseTest {
         log("/*----Amount Adjustment Quantity " + amountOfQuantityToAdjust + " --*/");
 
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");

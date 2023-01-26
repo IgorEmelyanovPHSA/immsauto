@@ -18,7 +18,6 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class BulkWastagesCP extends BaseTest {
 
-	//Login as an admin for now, needs to be updated to PPHIS
 	//Needs to update TestcaseId for both CP tests
 	@Test()
 	public void CP_Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS() throws Exception {
@@ -28,7 +27,7 @@ public class BulkWastagesCP extends BaseTest {
 		String reasonForWastage = "CCI: Handling Error";
 
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
@@ -117,7 +116,7 @@ public class BulkWastagesCP extends BaseTest {
 		int amountOfQuantityToWaste = 1;
 		String reasonForWastage = "CCI: Handling Error";
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");

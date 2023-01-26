@@ -19,14 +19,14 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
     @Test(priority = 1)
     public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "226778"; //C226778
+        TestcaseID = "226778"; //C226778 needs to changed for CP e2E Manual Regresion
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an Clinician to Community Portal --*/");
-        CommunityPortalMainPage_as_Clinician cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         Thread.sleep(10000);
 
         log("/*2.----Community Portal Home page displayed --*/");
