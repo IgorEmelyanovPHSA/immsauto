@@ -12,8 +12,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static Constansts.Domain.SUPPLY_LOCATION_1;
-import static Constansts.Domain.SUPPLY_LOCATION_2;
+import static constansts.Domain.SUPPLY_LOCATION_1;
+import static constansts.Domain.SUPPLY_LOCATION_2;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})

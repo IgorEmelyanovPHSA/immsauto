@@ -192,22 +192,27 @@ public class LoginPage extends BasePage {
 		Thread.sleep(1000);
 	}
 
-	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClinician() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		Thread.sleep(5000);
-		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CP"));
-		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_CP"));
-		login_button_CP.click();
+	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClerk() throws Exception {
+		loginIntoCommunityPortalAs("user_CLERK_Booking_CP", "password_CLERK_PW_Booking_CP");
 		return new CommunityPortalMainPage_as_Clinician(driver);
 	}
 
-	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClerk() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		Thread.sleep(2000);
-		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLERK_Booking_CP"));
-		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW_Booking_CP"));
-		login_button_CP.click();
+	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClinician() throws Exception {
+		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
 		return new CommunityPortalMainPage_as_Clinician(driver);
+	}
+
+	public CommunityPortalMainPage loginIntoCommunityPortalAsInventoryClinician() throws Exception {
+		loginIntoCommunityPortalAs("user_inventory_CLINICIAN_CP", "password_inventory_CLINICIAN_PW_CP");
+		return new CommunityPortalMainPage(driver);
+	}
+
+	public void loginIntoCommunityPortalAs(String user, String pass) throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		waitForElementToBeVisible(driver, input_username_CP, 20);
+		input_username_CP.sendKeys(Utils.getEnvConfigProperty(user));
+		input_password_CP.sendKeys(Utils.getEnvConfigProperty(pass));
+		login_button_CP.click();
 	}
 
 

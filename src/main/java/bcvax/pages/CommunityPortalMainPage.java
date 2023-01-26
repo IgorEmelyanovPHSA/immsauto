@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
-import static Constansts.Header.SUPPLY_LOCATION_NAME_;
+import static constansts.Header.SUPPLY_LOCATION_NAME_FULL;
 
 public class CommunityPortalMainPage extends BasePage{
 
@@ -62,6 +62,8 @@ public class CommunityPortalMainPage extends BasePage{
 
     @Step
     public CommunityPortalMainPage selectRelatedTab() throws InterruptedException {
+        waitForElementToBeVisible(driver, tabRelatedItems, 10);
+        moveToElement(tabRelatedItems);
         click(tabRelatedItems);
         return this;
     }
@@ -80,20 +82,17 @@ public class CommunityPortalMainPage extends BasePage{
         return new ProfilesPage(driver);
     }
 
-    //public ProfilesPage navigateToProfilesPage() throws InterruptedException {
-       // waitForElementToBeClickable(main_menu_btn_Participants);
-       //Thread.sleep(2000);
-        //main_menu_btn_Participants.click();
-        //Thread.sleep(2000);
-       // return new ProfilesPage(driver);
-    //}
-
+    //This method is mostly used to navigate under admin role
     @Step
     public SupplyConsolePage navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
-        Thread.sleep(2000);
-        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME_, location));
+        SupplyConsolePage supplyConsolePage = navigateToSupplyLocation(location);
         selectRelatedTab();
+        return supplyConsolePage;
+    }
+    @Step
+    public SupplyConsolePage navigateToSupplyLocation( String location) throws InterruptedException {
+        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
+        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME_FULL, location));
         return supplyConsolePage;
     }
 

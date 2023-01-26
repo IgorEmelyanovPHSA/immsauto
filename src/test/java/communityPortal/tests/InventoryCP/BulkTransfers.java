@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static Constansts.Domain.*;
-import static Constansts.Header.*;
+import static constansts.Domain.*;
+import static constansts.Header.*;
 import static org.testng.Assert.assertEquals;
 
 
@@ -30,7 +30,7 @@ public class BulkTransfers extends BaseTest {
     @BeforeMethod
     public void setUpClass() throws Exception {
         log("Target Environment: " + Utils.getTargetEnvironment());
-        communityPortalMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
         tables = loginPage.getTables();
     }
 
@@ -38,18 +38,17 @@ public class BulkTransfers extends BaseTest {
     public void Can_doBulk_transfersBy_Dosages_form_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
         TestcaseID = "223359";
         String vaccine1 = "COMIRNATY (Pfizer) - EK4241";
-        String vaccine2 = "VAXZEVRIA";
+        String vaccine2 = "SPIKEVAX 6mo-5y";
         String vaccine3 = "JANSSEN COVID-19 VACCINE";
         double doses = 10;
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocationRelatedTab(supplyLocationFrom);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supplyLocationFrom);
 
         log("/----Count Remaining Supplies --*/");
         Map<String, String> supplyContainerFromLocation1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_1_1);
         Map<String, String> supplyContainerFromLocation2 = searchCriteria(vaccine2, SUPPLY_DISTRIBUTION_1_1);
         Map<String, String> supplyContainerFromLocation3 = searchCriteria(vaccine3, SUPPLY_DISTRIBUTION_1_1);
-        tables.hardWait(2);
         double remainingDosesBeforeDistribution1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingDosesBeforeDistribution1_2 = tables.getRemainingDoses(supplyContainerFromLocation2);
         double remainingDosesBeforeDistribution1_3 = tables.getRemainingDoses(supplyContainerFromLocation3);
@@ -67,7 +66,6 @@ public class BulkTransfers extends BaseTest {
                 (SUPPLY_CONTAINER_NAME, vaccine2, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_1);
         Map<String, String> vaccine3TransferRow = ImmutableMap.of
                 (SUPPLY_CONTAINER_NAME, vaccine3, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_1);
-        tables.hardWait(2);
         double conversationRate1 = tables.getConversionRateFromTransferRow(vaccine1TransferRow);
         double conversationRate2 = tables.getConversionRateFromTransferRow(vaccine2TransferRow);
         double conversationRate3 = tables.getConversionRateFromTransferRow(vaccine3TransferRow);
@@ -75,10 +73,11 @@ public class BulkTransfers extends BaseTest {
         tables.typeDosesIntoTransferRow(vaccine1TransferRow, String.valueOf(doses));
         tables.typeDosesIntoTransferRow(vaccine2TransferRow, String.valueOf(doses));
         tables.typeDosesIntoTransferRow(vaccine3TransferRow, String.valueOf(doses));
-        supplyConsolePage.selectSupplyLocation(supplyLocationTo).clickBulkTransfersModalButton().clickBulkTransfersCloseButton();
+        supplyConsolePage.selectSupplyLocation(supplyLocationTo).
+                clickBulkTransfersModalButton().clickBulkTransfersCloseButton();
 
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
-        tables.hardWait(2);
+        tables.hardWait(2);//needs couple seconds to refresh results
         double remainingDosesAfterDistribution1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingQuantityAfterDistribution1_1 = tables.getRemainingQty(supplyContainerFromLocation1);
         double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - doses;
@@ -101,13 +100,12 @@ public class BulkTransfers extends BaseTest {
                 df.format(remainingDosesAfterCalculationDistribution1_3 / conversationRate3));
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        communityPortalMainPage.navigateToSupplyLocationRelatedTab(supplyLocationTo);
+        communityPortalMainPage.navigateToSupplyLocation(supplyLocationTo);
 
         log("/----Count Remaining Supplies Before Transaction --*/");
         Map<String, String> supplyContainerToLocation1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToLocation2 = searchCriteria(vaccine2, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToLocation3 = searchCriteria(vaccine3, SUPPLY_DISTRIBUTION_2_1);
-        tables.hardWait(3);
         double remainingDosesBeforeLocationDistribution1_1 = tables.getRemainingDoses(supplyContainerToLocation1);
         double remainingDosesBeforeLocationDistribution1_2 = tables.getRemainingDoses(supplyContainerToLocation2);
         double remainingDosesBeforeLocationDistribution1_3 = tables.getRemainingDoses(supplyContainerToLocation3);
@@ -121,7 +119,6 @@ public class BulkTransfers extends BaseTest {
         supplyConsolePage.acceptBulkTransferToDistribution(SUPPLY_DISTRIBUTION_2_1);
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         communityPortalMainPage.selectRelatedTab();
-        tables.hardWait(2);
         double remainingDosesAfterLocationDistribution1_1 = tables.getRemainingDoses(supplyContainerToLocation1);
         double remainingQtyAfterLocationDistribution1_1 = tables.getRemainingQty(supplyContainerToLocation1);
         double remainingDosesAfterCalculationLocationDistribution1_1 = remainingDosesBeforeLocationDistribution1_1 + doses;
@@ -152,18 +149,17 @@ public class BulkTransfers extends BaseTest {
     public void Can_doBulk_transfersBy_Quantity_form_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
         TestcaseID = "223359";
         String vaccine1 = "COMIRNATY (Pfizer) - EK4241";
-        String vaccine2 = "VAXZEVRIA";
+        String vaccine2 = "SPIKEVAX 6mo-5y";
         String vaccine3 = "JANSSEN COVID-19 VACCINE";
         double quantity = 1;
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocationRelatedTab(supplyLocationFrom);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supplyLocationFrom);
 
         log("/----Count Remaining Supplies --*/");
         Map<String, String> supplyContainerFromLocation1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_1_1);
         Map<String, String> supplyContainerFromLocation2 = searchCriteria(vaccine2, SUPPLY_DISTRIBUTION_1_1);
         Map<String, String> supplyContainerFromLocation3 = searchCriteria(vaccine3, SUPPLY_DISTRIBUTION_1_1);
-        tables.hardWait(2);
         double remainingDosesBeforeDistribution_1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingQtyBeforeDistribution_1_1 = tables.getRemainingQty(supplyContainerFromLocation1);
 
@@ -186,7 +182,7 @@ public class BulkTransfers extends BaseTest {
                 (SUPPLY_CONTAINER_NAME, vaccine2, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_1);
         Map<String, String> vaccine3TransferRow = ImmutableMap.of
                 (SUPPLY_CONTAINER_NAME, vaccine3, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_1);
-        tables.hardWait(2);
+
         double conversationRate1 = tables.getConversionRateFromTransferRow(vaccine1TransferRow);
         double conversationRate2 = tables.getConversionRateFromTransferRow(vaccine2TransferRow);
         double conversationRate3 = tables.getConversionRateFromTransferRow(vaccine3TransferRow);
@@ -194,7 +190,8 @@ public class BulkTransfers extends BaseTest {
         tables.typeQtyIntoTransferRow(vaccine1TransferRow, String.valueOf(quantity));
         tables.typeQtyIntoTransferRow(vaccine2TransferRow, String.valueOf(quantity));
         tables.typeQtyIntoTransferRow(vaccine3TransferRow, String.valueOf(quantity));
-        supplyConsolePage.selectSupplyLocation(supplyLocationTo).clickBulkTransfersModalButton().clickBulkTransfersCloseButton();
+        supplyConsolePage.selectSupplyLocation(supplyLocationTo).
+                clickBulkTransfersModalButton().clickBulkTransfersCloseButton();
 
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
         tables.hardWait(2);
@@ -214,13 +211,12 @@ public class BulkTransfers extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyBeforeDistribution_1_3 - quantity);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        communityPortalMainPage.navigateToSupplyLocationRelatedTab(supplyLocationTo);
+        communityPortalMainPage.navigateToSupplyLocation(supplyLocationTo);
 
         log("/----Count Remaining Supplies Before Transaction --*/");
         Map<String, String> supplyContainerToLocation1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToLocation2 = searchCriteria(vaccine2, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToLocation3 = searchCriteria(vaccine3, SUPPLY_DISTRIBUTION_2_1);
-        tables.hardWait(2);
         double remainingDosesBeforeLocationDistribution1_1 = tables.getRemainingDoses(supplyContainerToLocation1);
         double remainingQtyBeforeLocationDistribution1_1 = tables.getRemainingQty(supplyContainerToLocation1);
 
@@ -232,7 +228,6 @@ public class BulkTransfers extends BaseTest {
 
         log("/----Go To Transaction Accept Incoming Transfer --*/");
         supplyConsolePage.clickTransactionsTab();
-        tables.hardWait(2);
         tables.checkShippedTransactionsIncomingCheckbox(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine1));
         tables.checkShippedTransactionsIncomingCheckbox(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine2));
         tables.checkShippedTransactionsIncomingCheckbox(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine3));
@@ -240,18 +235,15 @@ public class BulkTransfers extends BaseTest {
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         communityPortalMainPage.selectRelatedTab();
-        tables.hardWait(2);
         double remainingDosesAfterLocationDistribution1_1 = tables.getRemainingDoses(supplyContainerToLocation1);
         double remainingQtyAfterLocationDistribution1_1 = tables.getRemainingQty(supplyContainerToLocation1);
         assertEquals(remainingDosesAfterLocationDistribution1_1, remainingDosesBeforeLocationDistribution1_1 + conversationRate1);
         assertEquals(remainingQtyAfterLocationDistribution1_1, remainingQtyBeforeLocationDistribution1_1 + quantity);
 
-
         double remainingDosesAfterLocationDistribution1_2 = tables.getRemainingDoses(supplyContainerToLocation2);
         double remainingQtyAfterLocationDistribution1_2 = tables.getRemainingQty(supplyContainerToLocation2);
         assertEquals(remainingDosesAfterLocationDistribution1_2, remainingDosesBeforeLocationDistribution1_2 + conversationRate2);
         assertEquals(remainingQtyAfterLocationDistribution1_2, remainingQtyBeforeLocationDistribution1_2 + quantity);
-
 
         double remainingDosesAfterLocationDistribution1_3 = tables.getRemainingDoses(supplyContainerToLocation3);
         double remainingQtyAfterLocationDistribution1_3 = tables.getRemainingQty(supplyContainerToLocation3);
@@ -268,7 +260,7 @@ public class BulkTransfers extends BaseTest {
         double quantity = 1;
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocationRelatedTab(SUPPLY_LOCATION_2);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(SUPPLY_LOCATION_2);
 
         log("/----Count Remaining Supplies --*/");
         Map<String, String> supplyContainerFromLocation1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_1_2);
@@ -278,7 +270,7 @@ public class BulkTransfers extends BaseTest {
         Map<String, String> supplyContainerToDistribution1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToDistribution2 = searchCriteria(vaccine2, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToDistribution3 = searchCriteria(vaccine3, SUPPLY_DISTRIBUTION_2_1);
-        tables.hardWait(2);
+
         // First distribution data
         double remainingDosesBeforeDistribution_1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingQtyBeforeDistribution_1_1 = tables.getRemainingQty(supplyContainerFromLocation1);
@@ -304,7 +296,6 @@ public class BulkTransfers extends BaseTest {
                 (SUPPLY_CONTAINER_NAME, vaccine2, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_2);
         Map<String, String> vaccine3TransferRow = ImmutableMap.of
                 (SUPPLY_CONTAINER_NAME, vaccine3, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_2);
-        tables.hardWait(2);
 
         double conversationRate1 = tables.getConversionRateFromTransferRow(vaccine1TransferRow);
         double conversationRate2 = tables.getConversionRateFromTransferRow(vaccine2TransferRow);
@@ -316,7 +307,7 @@ public class BulkTransfers extends BaseTest {
         supplyConsolePage.transferToDistributionWithinSameClinic(supplyLocationTo, SUPPLY_DISTRIBUTION_2_1);
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        tables.hardWait(2);
+        tables.hardWait(2);//needs couple seconds to refresh results
         double remainingDosesAfterDistribution_1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingQtyAfterDistribution_1_1 = tables.getRemainingQty(supplyContainerFromLocation1);
         double remainingDosesAfterDistribution_1_2 = tables.getRemainingDoses(supplyContainerFromLocation2);
@@ -363,7 +354,7 @@ public class BulkTransfers extends BaseTest {
         double doses = 10;
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocationRelatedTab(SUPPLY_LOCATION_2);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(SUPPLY_LOCATION_2);
 
         log("/----Count Remaining Supplies --*/");
         Map<String, String> supplyContainerFromLocation1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_1_2);
@@ -373,7 +364,7 @@ public class BulkTransfers extends BaseTest {
         Map<String, String> supplyContainerToDistribution1 = searchCriteria(vaccine1, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToDistribution2 = searchCriteria(vaccine2, SUPPLY_DISTRIBUTION_2_1);
         Map<String, String> supplyContainerToDistribution3 = searchCriteria(vaccine3, SUPPLY_DISTRIBUTION_2_1);
-        tables.hardWait(2);
+
         // First distribution data
         double remainingDosesBeforeDistribution_1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingQtyBeforeDistribution_1_1 = tables.getRemainingQty(supplyContainerFromLocation1);
@@ -402,7 +393,6 @@ public class BulkTransfers extends BaseTest {
                 (SUPPLY_CONTAINER_NAME, vaccine2, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_2);
         Map<String, String> vaccine3TransferRow = ImmutableMap.of
                 (SUPPLY_CONTAINER_NAME, vaccine3, SUPPLY_DISTRIBUTION_DESCRIPTION, SUPPLY_DISTRIBUTION_1_2);
-        tables.hardWait(2);
 
         double conversationRate1 = tables.getConversionRateFromTransferRow(vaccine1TransferRow);
         double conversationRate2 = tables.getConversionRateFromTransferRow(vaccine2TransferRow);
@@ -414,7 +404,7 @@ public class BulkTransfers extends BaseTest {
         supplyConsolePage.transferToDistributionWithinSameClinic(supplyLocationTo, SUPPLY_DISTRIBUTION_2_1);
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        tables.hardWait(2);
+        tables.hardWait(2);//needs couple seconds to refresh results
         double remainingDosesAfterDistribution_1_1 = tables.getRemainingDoses(supplyContainerFromLocation1);
         double remainingQtyAfterDistribution_1_1 = tables.getRemainingQty(supplyContainerFromLocation1);
         double remainingDosesAfterDistribution_1_2 = tables.getRemainingDoses(supplyContainerFromLocation2);
@@ -435,7 +425,6 @@ public class BulkTransfers extends BaseTest {
         assertEquals(remainingDosesBeforeDistribution_2_2 + doses, remainingDosesAfterDistribution_2_2);
         assertEquals(remainingDosesBeforeDistribution_1_3 - doses, remainingDosesAfterDistribution_1_3);
         assertEquals(remainingDosesBeforeDistribution_2_3 + doses, remainingDosesAfterDistribution_2_3);
-
 
         double remainingDosesAfterCalculationDistribution2_1 = (remainingDosesBeforeDistribution_2_1 + doses) / conversationRate1;
         assertEquals(

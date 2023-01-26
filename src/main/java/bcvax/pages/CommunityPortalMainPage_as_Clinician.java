@@ -1,17 +1,13 @@
 package bcvax.pages;
 
-import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import io.qameta.allure.Step;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import static Constansts.Header.SUPPLY_LOCATION_NAME_;
 
 public class CommunityPortalMainPage_as_Clinician extends BasePage{
 

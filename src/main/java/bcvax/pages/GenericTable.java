@@ -70,7 +70,7 @@ public class GenericTable {
             }
         }
         if (map1.isEmpty()) {
-            throw new AssertionError("Item with that name not found");
+            throw new AssertionError("Item with that name not found - " + searchCriteria);
         }
         return map1;
     }

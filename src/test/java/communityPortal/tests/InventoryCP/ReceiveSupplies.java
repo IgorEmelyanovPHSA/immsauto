@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static Constansts.Domain.*;
+import static constansts.Domain.*;
 import static org.testng.Assert.assertEquals;
 
 
@@ -19,30 +19,25 @@ public class ReceiveSupplies extends BaseTest {
 	CommunityPortalMainPage communityPortalMainPage;
 	SupplyConsolePage supplyConsolePage;
 	Tables tables;
-	private final String supplyLocationFrom = SUPPLY_LOCATION_2;
-	private final String supplyLocationTo = SUPPLY_LOCATION_1;
-	private final String supplyDistribution = SUPPLY_LOCATION_1;
 
 	@BeforeMethod
 	public void setUpClass() throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
-		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
 		tables = loginPage.getTables();
 
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
-		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocationRelatedTab(supplyLocationFrom);
+		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(SUPPLY_LOCATION_2);
 	}
 
 
 	@Test()
 	public void Validate_Receive_Supplies_By_Doses_as_an_PPHIS_Community() throws Exception {
 		TestcaseID = "223642"; //C223642
-		//String vaccine = "COMIRNATY (Pfizer) - 35035BD-CC01";
 		String vaccine = "VAXZEVRIA (AstraZeneca) - MT0055";
 		double doses = 10;
 
 		log("/----Count Remaining Supplies --*/");
-		tables.hardWait(2);
 		Map<String, String> supplyContainerLocation = searchCriteria(vaccine, SUPPLY_DISTRIBUTION_2_1);
 		double remainingDosesBeforeReceiving = tables.getRemainingDoses(supplyContainerLocation);
 		double remainingQtyBeforeReceiving = tables.getRemainingQty(supplyContainerLocation);
@@ -76,12 +71,11 @@ public class ReceiveSupplies extends BaseTest {
 		String expectedSupplyDistributionToLabel = "*Supply Distribution To";
 		Assert.assertEquals(supplyDistribution, (expectedSupplyDistributionToLabel));
 
-		supplyConsolePage.transferToDistributionOnSend(SUPPLY_DISTRIBUTION_2_1).
-				clickSaveButton();
+		supplyConsolePage.transferToDistributionOnSend(SUPPLY_DISTRIBUTION_2_1).clickSaveButton();
 		supplyConsolePage.successMessageAppear();
 
 		log("/----Count Supplies After Receiving--*/");
-		tables.hardWait(2);
+		tables.hardWait(2);//needs couple seconds to refresh results
 		double remainingDosesAfterReceiving = tables.getRemainingDoses(supplyContainerLocation);
 		double remainingQtyAfterReceiving = tables.getRemainingQty(supplyContainerLocation);
 		double dosesToQty =Double.parseDouble(df.format(doses / doseConversionFactor));
@@ -97,7 +91,6 @@ public class ReceiveSupplies extends BaseTest {
 		double qty = 1;
 
 		log("/----Count Remaining Supplies --*/");
-		tables.hardWait(2);
 		Map<String, String> supplyContainerLocation = searchCriteria(vaccine, SUPPLY_DISTRIBUTION_2_1);
 		double dosesBeforeReceiving = tables.getRemainingDoses(supplyContainerLocation);
 		double qtyBeforeReceiving = tables.getRemainingQty(supplyContainerLocation);
@@ -106,22 +99,20 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.selectReceiveFromDropdownMenu();
 
 		supplyConsolePage.selectSupplyItemTo(vaccine).
-				enterTransferQuantity(String.valueOf(qty)).
-				selectReasonForReception();
+				selectReasonForReception().
+				enterTransferQuantity(String.valueOf(qty));
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 		supplyConsolePage.transferToDistributionOnSend(SUPPLY_DISTRIBUTION_2_1).
 				clickSaveButton();
 		supplyConsolePage.successMessageAppear();
 
 		log("/----Count Supplies After Receiving--*/");
-		tables.hardWait(2);
+		tables.hardWait(2);//needs couple seconds to refresh results
 		double dosesAfterReceiving = tables.getRemainingDoses(supplyContainerLocation);
 		double qtyAfterReceiving = tables.getRemainingQty(supplyContainerLocation);
 		double dosesToQty = qty * doseConversionFactor;
 
 		assertEquals(qtyAfterReceiving, qtyBeforeReceiving + qty);
 		assertEquals(dosesBeforeReceiving + dosesToQty, dosesAfterReceiving);
-
-
 	}
 }

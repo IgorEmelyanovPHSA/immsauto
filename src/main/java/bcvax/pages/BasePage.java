@@ -3,6 +3,8 @@ package bcvax.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -23,10 +26,6 @@ public abstract class BasePage<T> {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	}
-	
-	protected void waitForElementToAppear(By locator) {
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 	
 	protected WebElement find(By locator) {
@@ -100,6 +99,20 @@ public abstract class BasePage<T> {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath));
 	}
+
+	public static void waitForElementNotToBePresent(WebDriver driver, By xpath, int seconds) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath)));
+	}
+
+	public static void waitForTextToBePresent(WebDriver driver, WebElement e, int seconds, String text) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.textToBePresentInElement(e, text));
+	}
+	public static void waitForTextToBePresentInTable(WebDriver driver, List<WebElement> e, int seconds, String text) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(WaitConditions.textToBePresentInElements(e, text));
+	}
 	
 	protected static WebElement waitForElementToBeLocated(WebDriver driver, By xpath, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
@@ -110,7 +123,7 @@ public abstract class BasePage<T> {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(xpath));
 	}
-	
+
 	public static WebElement waitForElementToBeClickable(WebDriver driver, WebElement webElement, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(webElement));
@@ -177,6 +190,15 @@ public abstract class BasePage<T> {
 			wait.until(ExpectedConditions.visibilityOfAllElements(element));
 		}
 		return (T) this;
+	}
+	public void moveToElement(WebElement element){
+		Actions actions = new Actions(driver);
+		try {
+			actions.moveToElement(element).perform();
+		} catch (MoveTargetOutOfBoundsException e) {
+			//retry
+			actions.moveToElement(element).perform();
+		}
 	}
 	
 	public T scrollTop(WebElement element) {

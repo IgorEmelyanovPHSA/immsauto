@@ -10,8 +10,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static Constansts.Domain.SUPPLY_LOCATION_1;
-import static Constansts.Domain.SUPPLY_LOCATION_2;
+import static constansts.Domain.SUPPLY_LOCATION_1;
+import static constansts.Domain.SUPPLY_LOCATION_2;
+import static org.testng.Assert.assertTrue;
 
 
 public class SupplyConsolePage extends BasePage {
@@ -578,6 +579,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void clickSaveButton() {
+		moveToElement(saveButton);
 		this.saveButton.click();
 	}
 	
@@ -724,6 +726,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 	public SupplyConsolePage clickBulkCancelButton() throws InterruptedException {
 		waitForElementToBePresent(driver, bulk_transfers_button_1, 10);
+		moveToElement(bulk_cancel_button);
 		click(bulk_cancel_button);
 		return this;
 	}
@@ -783,6 +786,7 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage clickBulkTransfersModalButton(){
 		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
+		moveToElement(driver.findElement(bulk_transfers_dialog_button_1));
 		click(bulk_transfers_dialog_button_1);
 		return this;
 	}
@@ -790,12 +794,12 @@ public class SupplyConsolePage extends BasePage {
 	public void clickBulkTransfersCloseButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_dialog_close_button_1, 10);
 		click(bulk_dialog_close_button_1);
-		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_1, 10);
+		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_1, 20);
 	}
 
 	@Step
 	public void clickTransactionsTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-300)");
+		moveToElement(transactions_tab);
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, transactions_tab, 10);
 		Thread.sleep(2000);
@@ -958,18 +962,7 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
-		Thread.sleep(1000);
-		WebElement element = driver.findElement(bulk_confirm_incoming_transfers_button_1);
-		Thread.sleep(2000);
-		//scroll up
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-1500)");
-		Thread.sleep(1000);
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
-		//Thread.sleep(1000);
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
-		//Thread.sleep(1000);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		//Thread.sleep(1000);
+		moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
 		click(bulk_confirm_incoming_transfers_button_1);
 	}
 	
@@ -991,7 +984,7 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, confirm_incoming_transfers_modal_button_1, 10);
-		scrollTop(confirm_incoming_transfers_modal_button);
+		moveToElement(confirm_incoming_transfers_modal_button);
 		//handle issue when popup not fully loaded and button is partially hidden
 		if (isElementPresent(labelComments)) {
 			click(labelComments);
@@ -1005,16 +998,12 @@ public class SupplyConsolePage extends BasePage {
 		click(element);
 	}
 	@Step
-	public void successMessageAppear() throws InterruptedException {
-		try {
-			waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success!']"), 20);
-			WebElement successMessage = driver.findElement(By.xpath(".//div[text() = 'Success!']"));
-			Thread.sleep(2000);
-			log(" -- Toast success message has been Appears");
-		} catch (NoSuchElementException e) {
-			System.out.println("/*---there are no success confirmation Message for Bulk Transfers to be Appears");
-			throw new RuntimeException("/*---there are no success confirmation Message to be Appears--*/");
-		}
+	public void successMessageAppear() {
+		By successMessage = By.xpath("//*[contains(text(), 'Success!')]");
+		waitForElementToBePresent(driver, successMessage, 20);
+		assertTrue(isElementPresent(driver.findElement(successMessage)));
+		log(" -- Toast success message appears");
+		waitForElementNotToBePresent(driver, successMessage, 20);
 	}
 	
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
@@ -1164,32 +1153,20 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage enterTransferDosages(String doses) throws InterruptedException {
 		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
-		waitForElementToBeLocated(driver, Doses, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(Doses);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		Thread.sleep(2000);
+		waitForElementToBePresent(driver, Doses,10);
+		moveToElement(driver.findElement(Doses));
 		click(Doses);
-		Thread.sleep(2000);
-		element.clear();
-		Thread.sleep(2000);
-		element.sendKeys(doses);
+		type(doses, Doses);
 		return this;
 
 	}
 
 	public SupplyConsolePage enterTransferQuantity(String quantity) throws InterruptedException {
 		By Quantity = By.xpath("//lightning-input//label[text()='Quantity']//following-sibling::div/input[@class='slds-input']");
-		waitForElementToBeLocated(driver, Quantity, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(Quantity);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		Thread.sleep(2000);
+		waitForElementToBePresent(driver, Quantity,10);
+		moveToElement(driver.findElement(Quantity));
 		click(Quantity);
-		Thread.sleep(2000);
-		element.clear();
-		Thread.sleep(2000);
-		element.sendKeys(quantity);
+		type(quantity, Quantity);
 		return this;
 	}
 	
@@ -1388,6 +1365,7 @@ public class SupplyConsolePage extends BasePage {
 	public void selectCancelInDropDown() throws InterruptedException {
 		waitForElementToBeVisible(driver, drdCancel, 10);
 		//Thread.sleep(2000);
+		moveToElement(drdCancel);
 		click(drdCancel);
 		//drdCancel.click();
 	}
@@ -1793,11 +1771,11 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	private void selectSupplyTo(WebElement element, String location) throws InterruptedException {
-		log(" -- select to location  -  " + location);
+		log(" -- select to  -  " + location);
 		waitForElementToBeVisible(driver, element, 10);
 		element.sendKeys(location);
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[@title='" + location + "']");
-		waitForElementToBePresent(driver, locationTo, 20);
+		waitForElementToBePresent(driver, locationTo, 30);
 		click(driver.findElement(locationTo));
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
@@ -1972,11 +1950,12 @@ public class SupplyConsolePage extends BasePage {
 	private void selectTransferToDistribution(WebElement element, String distribution) throws InterruptedException {
 		log(" -- select to distribution  -  " + distribution);
 		waitForElementToBeVisible(driver, element, 20);
-		scrollTop(element);
+		moveToElement(element);
 		click(element);
 		By locationTo = By.xpath("//*[contains(@title, '" + distribution + "')]");
 		waitForElementToBePresent(driver, locationTo, 20);
-		click(driver.findElement(locationTo));
+		scrollTop(driver.findElement(locationTo));
+		driver.findElement(locationTo).click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 }

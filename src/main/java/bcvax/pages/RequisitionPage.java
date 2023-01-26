@@ -31,7 +31,7 @@ public class RequisitionPage extends BasePage {
 	private WebElement supply_supply_location_1;
 	
 	
-	@FindBy(xpath = "//button[contains(text(),\"Request Supplies\")]")
+	@FindBy(xpath = "//*[contains(text(),\"Request Supplies\")]")
 	private WebElement request_supplies;
 	
 	@FindBy(xpath = "//input[@placeholder=\"Search Supply Locations...\"]")
