@@ -206,9 +206,9 @@ public class LoginPage extends BasePage {
 		return new CommunityPortalMainPage_as_Clinician(driver);
 	}
 
-	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClinician() throws Exception {
+	public CommunityPortalMainPage loginIntoCommunityPortalAsClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
-		return new CommunityPortalMainPage_as_Clinician(driver);
+		return new CommunityPortalMainPage(driver);
 	}
 
 	public CommunityPortalMainPage loginIntoCommunityPortalAsInventoryClinician() throws Exception {
