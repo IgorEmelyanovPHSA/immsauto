@@ -143,7 +143,7 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.selectInjectionSite();
 		Thread.sleep(2000);
 		log("/*---27. Select Dosage---*/");
-		inClinicExperience.selectDosage();
+		inClinicExperience.selectDosageDIWA();
 		Thread.sleep(2000);
 		log("/*---28. Save Immunization Information ---*/");
 		inClinicExperience.saveImmunizationInformation();

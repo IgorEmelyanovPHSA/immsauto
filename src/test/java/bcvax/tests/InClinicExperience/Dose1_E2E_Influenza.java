@@ -168,16 +168,23 @@ public class Dose1_E2E_Influenza extends BaseTest {
         System.out.println("/*42.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
-        System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
+
+        System.out.println("/*43.---select Dosage ml from DropDown -> 0.67 --*/");
+        inClinicExperience.selectDosageVaccineAdmin();
+        Thread.sleep(5000);
+
+        System.out.println("/*44.---Click Save button for Immunisation Information --*/");
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
-        System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
+
+
+        System.out.println("/*45.---Click Confirm and Save Administration Button --*/");
         inClinicExperience.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(5000);
-        System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
+        System.out.println("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
         Thread.sleep(3000);
-        System.out.println("/*45.---the Home - Client Search showing up  --*/");
+        System.out.println("/*47.---the Home - Client Search showing up  --*/");
         inClinicExperience.validateHomePageShownUp();
         Thread.sleep(3000);
     }

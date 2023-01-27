@@ -84,6 +84,7 @@ public class Transfer extends BaseTest {
 				df.format(remainingQty_after_Distribution_2_1));
 	}
 
+
 	@Test()
 	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
 		TestcaseID = "223185"; //C223185
