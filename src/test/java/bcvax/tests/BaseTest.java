@@ -17,8 +17,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-import static Constansts.Header.SUPPLY_CONTAINER_NAME_;
-import static Constansts.Header.SUPPLY_DISTRIBUTION_DESCRIPTION_;
+import static constansts.Header.SUPPLY_CONTAINER_NAME_FULL;
+import static constansts.Header.SUPPLY_DISTRIBUTION_DESCRIPTION_FULL;
 
 
 public class BaseTest {
@@ -81,8 +81,8 @@ public class BaseTest {
 	}
 
 	protected static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
-		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_, vaccine,
-				SUPPLY_DISTRIBUTION_DESCRIPTION_, fromDistributionLocation);
+		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, vaccine,
+				SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, fromDistributionLocation);
 	}
 
 	public static void log(String msg) {

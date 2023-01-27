@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 
-import static Constansts.Domain.*;
+import static constansts.Domain.*;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})

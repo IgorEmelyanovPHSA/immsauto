@@ -10,7 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.Map;
 
-import static Constansts.Header.*;
+import static constansts.Domain.SELECT_ALL;
+import static constansts.Header.*;
 
 
 public class Tables extends BasePage {
@@ -21,7 +22,7 @@ public class Tables extends BasePage {
     private WebElement supplyContainerTable;
     @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered scrollClass']")
     private WebElement containerTransfer;
-    @FindBy(xpath = "//lightning-card")
+    @FindBy(xpath = ".//lightning-card")
     private List<WebElement> transactionTables;
 
     public Tables(WebDriver driver) {
@@ -30,17 +31,17 @@ public class Tables extends BasePage {
 
     // ------  TABLES -------
     public GenericTable getSupplyLocationTable() {
-        waitForElementToBeVisible(driver, supplyLocationsTable, 20);
+        waitForTextToBePresent(driver, supplyLocationsTable ,30, "Location");
         return new GenericTable(supplyLocationsTable);
     }
 
     public GenericTable getContainerTransferTable() {
-        waitForElementToBeVisible(driver, containerTransfer, 20);
+        waitForTextToBePresent(driver, containerTransfer ,30, "Distribution");
         return new GenericTable(containerTransfer);
     }
 
     public GenericTable getSupplyContainerTable() {
-        waitForElementToBeVisible(driver, supplyContainerTable, 20);
+        waitForTextToBePresent(driver, supplyContainerTable ,30, "Container");
         return new GenericTable(supplyContainerTable);
     }
 
@@ -85,8 +86,8 @@ public class Tables extends BasePage {
 
     @Step
     public Tables clickSupplyLocationCheckBox(Map<String, String> searchCriteria) {
-        WebElement element = getSupplyContainerRow(searchCriteria).get("Select All");
-        scrollTop(element);
+        WebElement element = getSupplyContainerRow(searchCriteria).get(SELECT_ALL);
+        moveToElement(element);
         element.click();
         return this;
     }
@@ -94,7 +95,7 @@ public class Tables extends BasePage {
     @Step
     public void getSupplyLocationActions(Map<String, String> searchCriteria) {
         WebElement element = getSupplyContainerRow(searchCriteria).get("");
-        scrollTop(element);
+        moveToElement(element);
         element.click();
     }
 
@@ -110,29 +111,29 @@ public class Tables extends BasePage {
 
     @Step
     public void checkShippedTransactionsIncomingCheckbox(Map<String, String> searchCriteria) {
-        WebElement element = getShippedTransactionsIncomingRow(searchCriteria).get("Select All");
+        WebElement element = getShippedTransactionsIncomingRow(searchCriteria).get(SELECT_ALL);
         scrollTop(element);
         element.click();
     }
     @Step
     public void checkShippedTransactionsOutgoingCheckbox(Map<String, String> searchCriteria) {
-        WebElement element = getShippedTransactionsOutgoingRow(searchCriteria).get("Select All");
+        WebElement element = getShippedTransactionsOutgoingRow(searchCriteria).get(SELECT_ALL);
         scrollTop(element);
         element.click();
     }
     @Step
-    public void typeQtyIntoTransferRow(Map<String, String> searchCriteria, String data) throws InterruptedException {
+    public void typeQtyIntoTransferRow(Map<String, String> searchCriteria, String data) {
         WebElement element = getContainerTransferRow(searchCriteria).get("Quantity");
-        scrollTop(element);
+        moveToElement(element);
         element.click();
         Actions actions = new Actions(driver);
         actions.moveToElement(element).sendKeys(data).perform();
     }
 
     @Step
-    public void typeDosesIntoTransferRow(Map<String, String> searchCriteria, String data) throws InterruptedException {
+    public void typeDosesIntoTransferRow(Map<String, String> searchCriteria, String data) {
         WebElement element = getContainerTransferRow(searchCriteria).get("Doses");
-        scrollTop(element);
+        moveToElement(element);
         element.click();
         Actions actions = new Actions(driver);
         actions.moveToElement(element).sendKeys(data).perform();
@@ -166,6 +167,7 @@ public class Tables extends BasePage {
 
     private WebElement getSingleTableFromMultipleTables(String dataTable) {
         WebElement singleTable = null;
+        waitForTextToBePresentInTable(driver, transactionTables ,20, "Transaction");
         for (WebElement e : transactionTables) {
             if (e.getText().contains(dataTable)) {
                 singleTable = e;
