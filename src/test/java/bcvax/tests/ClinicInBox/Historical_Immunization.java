@@ -60,7 +60,7 @@ public class Historical_Immunization extends BaseTest {
 		log("/*11---- Click Historical Immunization record --*/");
 		clinicInBox.ClickHistoricalImmunizationRecord();
 		Thread.sleep(5000);
-		String pirSubmissionStatus = clinicInBox.validatePirubmissionStatusFieldIsDisplayed();
+		String pirSubmissionStatus = clinicInBox.validatePirSubmissionStatusFieldIsDisplayed();
 		log("/*12---- Field " + pirSubmissionStatus + "is displayed --*/");
 		assertEquals(pirSubmissionStatusFieldValidation, pirSubmissionStatus);
 		Thread.sleep(2000);

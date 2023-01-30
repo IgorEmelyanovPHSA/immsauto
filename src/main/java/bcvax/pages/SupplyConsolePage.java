@@ -799,7 +799,8 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void clickTransactionsTab() throws InterruptedException {
-		moveToElement(transactions_tab);
+		//moveToElement(transactions_tab);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-500)");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, transactions_tab, 10);
 		Thread.sleep(2000);
@@ -962,6 +963,18 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
+		//Thread.sleep(1000);
+		//WebElement element = driver.findElement(bulk_confirm_incoming_transfers_button_1);
+		//Thread.sleep(2000);
+		//scroll up
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-1500)");
+		//Thread.sleep(1000);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
+		//Thread.sleep(1000);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
+		//Thread.sleep(1000);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		//Thread.sleep(1000);
 		moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
 		click(bulk_confirm_incoming_transfers_button_1);
 	}
@@ -1153,6 +1166,15 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage enterTransferDosages(String doses) throws InterruptedException {
 		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
+		//waitForElementToBeLocated(driver, Doses, 10);
+		//Thread.sleep(2000);
+		//WebElement element = driver.findElement(Doses);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		//Thread.sleep(2000);
+		//Thread.sleep(2000);
+		//element.clear();
+		//Thread.sleep(2000);
+		//element.sendKeys(doses);
 		waitForElementToBePresent(driver, Doses,10);
 		moveToElement(driver.findElement(Doses));
 		click(Doses);
@@ -1164,8 +1186,17 @@ public class SupplyConsolePage extends BasePage {
 	public SupplyConsolePage enterTransferQuantity(String quantity) throws InterruptedException {
 		By Quantity = By.xpath("//lightning-input//label[text()='Quantity']//following-sibling::div/input[@class='slds-input']");
 		waitForElementToBePresent(driver, Quantity,10);
+		//waitForElementToBeLocated(driver, Quantity, 10);
+		//Thread.sleep(2000);
+		//WebElement element = driver.findElement(Quantity);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+		//Thread.sleep(2000);
 		moveToElement(driver.findElement(Quantity));
 		click(Quantity);
+		//Thread.sleep(2000);
+		//element.clear();
+		//Thread.sleep(2000);
+		//element.sendKeys(quantity);
 		type(quantity, Quantity);
 		return this;
 	}
