@@ -169,7 +169,7 @@ public class Dose1_E2E_Influenza extends BaseTest {
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
 
-        System.out.println("/*43.---select Dosage ml from DropDown -> 0.67 --*/");
+        System.out.println("/*43.---select Dosage ml from DropDown -> 0.2 mL --*/");
         inClinicExperience.selectDosageVaccineAdmin();
         Thread.sleep(5000);
 

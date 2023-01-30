@@ -426,13 +426,19 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_route_intranasal_dropdown;
 	private By select_route_intranasal_dropdown1 = By.xpath(".//span[text() = 'Intranasal']");
 
-	@FindBy(xpath = ".//span[text() = 'Select an Option']")
+	//@FindBy(xpath = ".//span[text() = 'Select an Option']")
+	//private WebElement click_dosage_dropdown;
+	//private By click_dosage_dropdown1 = By.xpath(".//span[text() = 'Select an Option']");
+	@FindBy(xpath = ".//button[@name='dosePicklist']")
 	private WebElement click_dosage_dropdown;
-	private By click_dosage_dropdown1 = By.xpath(".//span[text() = 'Select an Option']");
+	private By click_dosage_dropdown1 = By.xpath(".//button[@name='dosePicklist']");
 
-	@FindBy(xpath = ".//button[@name='dosePicklist']/span")
+	//@FindBy(xpath = "(.//lightning-combobox[@data-id='dosage']//span[@class='slds-truncate'])[2]")
+	//private WebElement select_dosage_from_dropdown;
+	//private By select_dosage_from_dropdown1 = By.xpath("(.//lightning-combobox[@data-id='dosage']//span[@class='slds-truncate'])[2]");
+	@FindBy(xpath = ".//span[@title='0.2']")
 	private WebElement select_dosage_from_dropdown;
-	private By select_dosage_from_dropdown1 = By.xpath(".//button[@name='dosePicklist']/span");
+	private By select_dosage_from_dropdown1 = By.xpath(".//span[@title='0.2']");
 
 
 	@FindBy(xpath = ".//button[@name = 'injectionSite']")
@@ -1396,7 +1402,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgentInfluenza() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,600)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,700)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
@@ -1991,7 +1997,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectDosageVaccineAdmin() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, click_dosage_dropdown1, 10);
 		Thread.sleep(2000);
@@ -2042,7 +2048,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_immune_info_btn, 10);
 		Thread.sleep(2000);
