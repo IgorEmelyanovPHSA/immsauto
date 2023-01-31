@@ -24,7 +24,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
     //Login as an admin for now, needs to be updated to ICE
     //Needs to update TestcaseId
     @Test(priority = 1)
-    public void CP_CitizenPortalBookDoseOneCovid19() throws Exception {
+    public void CP_CitizenPortalBookDoseOneInfluenza() throws Exception {
         TestcaseID = "228855"; //C228855
         log("Target Environment: " + Utils.getTargetEnvironment());
         CommonMethods com = new CommonMethods(getDriver());

@@ -6,9 +6,11 @@
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Covid19_CP"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Influenza_CP"/>
             <class name="communityPortal.tests.CitizenPortalFace_Integration.E2E_Dose1_Self_Citizen_Booking_Covid19"/>
+            <class name="communityPortal.tests.CitizenPortalFace_Integration.E2E_Dose1_Self_Citizen_Booking_Influenza"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Pneumo_CP"/>
             <class name="communityPortal.tests.DIWA_CP.DIWA_Covid19_CP"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_COVID19"/>
+            <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_Influenza"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>
             <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
             <class name="communityPortal.tests.InventoryCP.BulkAdjustmentsCP"/>
@@ -16,6 +18,7 @@
             <class name="communityPortal.tests.InventoryCP.BulkTransfersCancellation"/>
             <class name="communityPortal.tests.InventoryCP.BulkWastagesCP"/>
             <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkDraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.ReceiveSupplies"/>
             <class name="communityPortal.tests.InventoryCP.Transfer"/>
             <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
