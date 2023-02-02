@@ -25,6 +25,6 @@ Up and Running with git and GitHub:
 	“New SSH key” paste you key into the “Key box” and click “Add SSH key”
 
 5.	Open GitBash as an admin, select folder for your automation project and clone it: 	
-git clone ssh://git@github.com:IgorEmelyanovPHSA/bcvax.git      
+git clone ssh://git@github.com:IgorEmelyanovPHSA/immsauto.git      
 OR:
-git clone git@github.com:IgorEmelyanovPHSA/bcvax.git
+git clone git@github.com:IgorEmelyanovPHSA/immsauto.git
