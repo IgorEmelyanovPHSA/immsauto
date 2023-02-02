@@ -222,9 +222,6 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         inClinicExperience.selectSiteLeftDeltoid();
         Thread.sleep(5000);
 
-
-
-
         System.out.println("/*52.---Click Save button for Immunisation Information --*/");
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);

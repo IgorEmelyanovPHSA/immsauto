@@ -1413,7 +1413,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgentPneumo() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,600)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,800)");
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		Thread.sleep(5000);
