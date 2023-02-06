@@ -18,7 +18,7 @@ public class Historical_Immunization extends BaseTest {
 	private String pirSubmissionStatusFieldValidation = "PIR Submission Status";
 	
 	@Test(priority = 1)
-	public void Validate_Historical_Immunization_PIR_Status_as_Clinician_CIB_BCVAXDEVIT() throws Exception {
+	public void Validate_Historical_Immunization_PIR_Status_as_Clinician_CIB() throws Exception {
 		TestcaseID = "225704"; //C225704 -- CIB - Historical Immunization Records - PIR Submission Status
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");

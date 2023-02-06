@@ -22,7 +22,7 @@ public class Consumption extends BaseTest {
 	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 
 	@Test(priority = 1)
-	public void Validate_Consumption_as_an_Clinician_BCVAXDEVIT() throws Exception {
+	public void Validate_Consumption_as_an_Clinician() throws Exception {
 		TestcaseID = "222359"; //C219969->C222359
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");

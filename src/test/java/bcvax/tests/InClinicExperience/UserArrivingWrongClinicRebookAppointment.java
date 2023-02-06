@@ -22,7 +22,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	String clinicNameToSearch = "All Ages - Atlin Health Centre";
 	
 	@Test
-	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_BCVAXDEVIT() throws Exception {
+	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician() throws Exception {
 		TestcaseID = "219910"; //C219910
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");

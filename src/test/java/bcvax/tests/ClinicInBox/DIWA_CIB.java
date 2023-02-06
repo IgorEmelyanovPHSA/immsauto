@@ -12,7 +12,7 @@ public class DIWA_CIB extends BaseTest {
 	
 	
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
-	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_BCVAXDEVIT() throws Exception {
+	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*----1. Login as an DIWA to CIB  --*/");

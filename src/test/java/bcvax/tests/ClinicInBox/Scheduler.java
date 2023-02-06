@@ -20,7 +20,7 @@ public class Scheduler extends BaseTest {
     String clinicNameToSearch = "Age 12 and Above - Chilliwack - Sardis Pharmacy";
 
     @Test(priority = 1)
-    public void Can_not_book_two_people_if_only_one_slot_available_as_ADMIN_CIB_BCVAXDEVIT() throws Exception {
+    public void Can_not_book_two_people_if_only_one_slot_available_as_ADMIN_CIB() throws Exception {
         TestcaseID = "225666"; //C225666 --Booking capacity - Full capacity & Cancel appointment
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

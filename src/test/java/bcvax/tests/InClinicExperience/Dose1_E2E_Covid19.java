@@ -21,7 +21,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	
 	@Test(priority = 1)
-	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE_BCVAXDEVIT() throws Exception {
+	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
 		TestcaseID = "222694"; //C222694
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");

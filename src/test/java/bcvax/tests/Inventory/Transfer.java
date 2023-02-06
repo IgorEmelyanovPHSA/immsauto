@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 public class Transfer extends BaseTest {
 	
 	@Test(priority = 1)
-	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS() throws Exception {
 		TestcaseID = "220550"; //C220550
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
