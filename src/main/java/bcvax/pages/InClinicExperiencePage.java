@@ -2059,14 +2059,12 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectOneOption(String vaccine) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(5000);
 		if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
-			Thread.sleep(5000);
 			click(checkBoxCovid19Vaccine);
 		} else if (vaccine.equalsIgnoreCase("InfluenzaVaccine")) {
-			Thread.sleep(5000);
 			click(checkBoxInfluenzaVaccine);
 		} else {
-			Thread.sleep(5000);
 			click(checkBoxCovid19Vaccine);
 			click(checkBoxInfluenzaVaccine);
 		}
