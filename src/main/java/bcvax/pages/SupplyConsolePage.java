@@ -157,7 +157,10 @@ public class SupplyConsolePage extends BasePage {
 	
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[1]")
 	private WebElement rows_incoming_transactions_count_path;
-	
+
+	@FindBy(xpath = "//span[contains(text(), 'Shipped Transactions - Incoming')]")
+	private WebElement transactions_table_header_path;
+
 	@FindBy(xpath = "//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux']")
 	private WebElement rows_draft_transactions_count_path;
 
@@ -583,77 +586,12 @@ public class SupplyConsolePage extends BasePage {
 		this.saveButton.click();
 	}
 	
-	public void inputShipAddress(String inputAddress) {
-		this.shipAddress.sendKeys(inputAddress);
-	}
-	
-	public void clickInput() {
-		WebElement products = driver.findElement(By.xpath(" //span[contains(text(),\"Atlin Health Centre\")]"));
-		products.click();
-	}
-	
-	public void clickInput1() {
-		WebElement products = driver.findElement(By.xpath("//a[contains(text(),\"Atlin Health Centre\")]"));
-		products.click();
-	}
-	
-	public void clickCheckBox() {
-		checkBox.click();
-	}
-	
-	public void inputRequestDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Date tomorrow = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		
-		String tomorrowAsString = dateFormat.format(tomorrow);
-		this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
-	}
-	
 	public void clickNextButton() {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", nextButton);
 		waitForElementToBeVisible(driver, nextButton, 10);
 		this.nextButton.click();
 	}
-	
-	public void clickSubmitRequisition() {
-		//waitForElementToBeVisible(driver, submitRequisition, 10);
-		//WebElement element = driver.findElement(submit_requisition);
-		this.submitRequisition.click();
-	}
 
-//    public void clickSaveSubmitRequisition() {
-//        waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
-//        WebElement element = driver.findElement(save_Submit_Requisition);
-//        this.saveSubmitRequisition.click();
-//    }
-//    public void clickExpectedDeliveryDateCalendar() {
-//        waitForElementToBeVisible(driver, expectedDeliveryDateCalendar, 10);
-//        WebElement element = driver.findElement(expected_delivery_date_calendar);
-//        this.expectedDeliveryDateCalendar.click();
-//    }
-	
-	
-	public void clickSaveSubmitRequisition() {
-		waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
-		WebElement element = driver.findElement(save_Submit_Requisition);
-		this.saveSubmitRequisition.click();
-	}
-	
-	public void clickExpectedDeliveryDateCalendar() {
-		waitForElementToBeVisible(driver, expectedDeliveryDateCalendar, 10);
-		WebElement element = driver.findElement(expected_delivery_date_calendar);
-		this.expectedDeliveryDateCalendar.click();
-	}
-	
-	public void SupplyLocations() throws InterruptedException {
-		waitForElementToBeLocated(driver, By.xpath("//span[contains(text(),\"Supply Locations\")]"), 10);
-		WebElement supplyLocationPath = driver.findElement(By.xpath("//span[contains(text(),\"Supply Locations\")]"));
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", supplyLocationPath);
-	}
-	
 	public void clickSupplyLocationsTab() throws InterruptedException {
 		//waitForElementToBeLocated(driver, supply_locations_tab1, 10);
 		waitForElementToBeVisible(driver, supply_locations_tab, 10);
@@ -683,24 +621,6 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, supply_supply_location_2, 10);
 		WebElement element = driver.findElement(supply_supply_location_2_);
 		this.supply_supply_location_2.click();
-	}
-	
-	public void clickRequestSupplies() throws InterruptedException {
-		waitForElementToBeLocated(driver, request_supplies_1, 10);
-		WebElement element = driver.findElement(request_supplies_1);
-		this.request_supplies.click();
-	}
-	
-	public void clickShipToAddress() throws InterruptedException {
-		waitForElementToBeLocated(driver, shipTo_address_, 10);
-		WebElement element = driver.findElement(shipTo_address_);
-		this.shipTo_address.click();
-	}
-	
-	public void clickRequestedDeliveryDate() throws InterruptedException {
-		waitForElementToBeLocated(driver, requested_delivery_date, 10);
-		WebElement element = driver.findElement(requested_delivery_date);
-		this.requestedDeliveryDate.click();
 	}
 	
 	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
@@ -799,12 +719,13 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void clickTransactionsTab() throws InterruptedException {
-		//moveToElement(transactions_tab);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-500)");
-		Thread.sleep(3000);
-		waitForElementToBeVisible(driver, transactions_tab, 10);
+		moveToElement(transactions_tab);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-500)");
+		//Thread.sleep(3000);
+		waitForElementToBeVisible(driver, transactions_tab, 30);
 		Thread.sleep(2000);
 		transactions_tab.click();
+		waitForElementToBeVisible(driver, transactions_table_header_path, 30);
 	}
 	
 	public int getRowsOutgoingTransactionsCount() throws InterruptedException {
@@ -1203,12 +1124,14 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void selectAdjustmentFromDropDown() throws InterruptedException {
 		click(selectAdjustmentFromDropDown);
-		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, reasonForAdjustmentFromDropDown, 30);
+		Thread.sleep(1000);
 	}
 	
 	public void selectWastageFromDropDown() throws InterruptedException {
 		click(selectWastageFromDropDown);
-		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, reasonForWastageValueFromDropDown, 30);
+		Thread.sleep(1000);
 	}
 	
 	public double getActualRemainingDoses() {
@@ -1861,12 +1784,13 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, click_reason1, 10);
 		WebElement element = driver.findElement(click_reason1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		executor.executeScript("arguments[0].parentNode.parentNode.click();", element);
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, select_reason1, 10);
 		WebElement element1 = driver.findElement(select_reason1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
+		//JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		//executor1.executeScript("arguments[0].click();", element1);
+		element1.click();
 		return this;
 	}
 

@@ -37,6 +37,9 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//a[@title = 'All Client']")
     private WebElement sub_menu_AllClients;
 
+    @FindBy(xpath = "//lst-breadcrumbs/div/div/span[text()='Supply Locations']")
+    private WebElement supply_locations_visible;
+
     @FindBy(xpath = "//a[@title = 'Participants']")
     private WebElement sub_menu_Participants;
 
@@ -69,6 +72,7 @@ public class CommunityPortalMainPage extends BasePage{
         log("/*4.----Go to Supply Locations Tab --*/");
         goToSupplyLocation();
         click(automationSupplyLocation_1);
+        Thread.sleep(2000);
         selectRelatedTab();
         Thread.sleep(2000);
         return new SupplyConsolePage(driver);
@@ -76,8 +80,10 @@ public class CommunityPortalMainPage extends BasePage{
 
     @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
-        waitForElementToBeVisible(driver, tabSupplyLocation, 30);
+        waitForElementToBeVisible(driver, tabSupplyLocation, 60);
         click(tabSupplyLocation);
+        waitForElementToBeVisible(driver, supply_locations_visible, 60);
+        Thread.sleep(1000);
         return new SupplyConsolePage(driver);
     }
 

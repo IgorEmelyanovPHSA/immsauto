@@ -1,13 +1,11 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.CommunityPortalMainPage;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -16,12 +14,18 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static constansts.Domain.SUPPLY_LOCATION_1;
+import static constansts.Domain.SUPPLY_LOCATION_2;
 import static org.testng.Assert.assertEquals;
 
 
 @Listeners({TestListener.class})
 public class AdjustmentsCP extends BaseTest {
-
+	private final String supplyLocationFrom = SUPPLY_LOCATION_1;
+	private final String supplyLocationTo = SUPPLY_LOCATION_2;
+	public CommunityPortalMainPage communityPortalMainPage;
+	public SupplyConsolePage supplyConsolePage;
+	public Tables tables;
 	@DataProvider(name = "dosesAmount")
 	public static Object[][] primeNumbers() {
 		return new Object[][]{{"25"}, {"-30"}};
@@ -30,6 +34,17 @@ public class AdjustmentsCP extends BaseTest {
 	@DataProvider(name = "quantitiesAmount")
 	public static Object[][] primeNumbers2() {
 		return new Object[][]{{"3"},{"-2"}};
+	}
+
+	@BeforeMethod
+	public void setUpClass() throws Exception {
+		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("/*1.----Login as an PPHIS--*/");
+		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+		tables = loginPage.getTables();
+
+		log("/*2.----Navigate to Supply Console Page --*/");
+		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supplyLocationFrom);
 	}
 
 	//Needs to update TestcaseId for both test
@@ -49,13 +64,6 @@ public class AdjustmentsCP extends BaseTest {
 		}
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
-
-		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
-
-		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
 
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -155,12 +163,6 @@ public class AdjustmentsCP extends BaseTest {
 			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByQuantities_Negative_Value_AS_PPHIS"));
 		}
 
-		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
-
-		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
 		CommonMethods common = new CommonMethods(getDriver());
 
 		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");

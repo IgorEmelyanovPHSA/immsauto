@@ -203,7 +203,7 @@ public abstract class BasePage<T> {
 	
 	public T scrollTop(WebElement element) {
 		try {
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
 		} catch (WebDriverException e) {
 			log("WebDriverException occurred while scrolling: " + e.getMessage());
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
