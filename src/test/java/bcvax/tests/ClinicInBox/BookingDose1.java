@@ -104,7 +104,7 @@ public class BookingDose1 extends BaseTest {
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		clinicInBox.selectOneOption(vaccineToSelect);
 //		log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");

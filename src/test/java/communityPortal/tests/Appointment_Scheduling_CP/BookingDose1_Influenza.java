@@ -90,11 +90,11 @@ public class BookingDose1_Influenza extends BaseTest {
 
         log("/*19.----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         inClinicExperience_CP.selectOneOption(vaccineToSelect);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         log("/*21.----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
@@ -113,12 +113,12 @@ public class BookingDose1_Influenza extends BaseTest {
         Thread.sleep(2000);
 
         log("/*25.----select the time slot  --*/");
-    //    inClinicExperience_CP.selectTimeSlotForAppointment();
+        inClinicExperience_CP.selectTimeSlotForAppointment();
         Thread.sleep(2000);
 
         log("/*26.----click Next button  --*/");
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         log("/*27.----click Verify Contact Information Checkbox  --*/");
         inClinicExperience_CP.clickVerifyContactInformation_CP();
