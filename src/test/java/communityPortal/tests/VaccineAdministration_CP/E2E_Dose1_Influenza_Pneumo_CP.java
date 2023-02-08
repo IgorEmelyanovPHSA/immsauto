@@ -3,6 +3,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -177,6 +178,9 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(5000);
 
         log("/*41.---Click Save button for Immunisation Information --*/");
+        log("/*--scroll down a bit to see Save button --*/");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+        Thread.sleep(2000);
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
 
@@ -192,7 +196,8 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(15000);
 
         System.out.println("/*44.---select Vaccine Agent picklist Value ->  Pneumo --*/");
-        inClinicExperience_CP.selectVaccineAgentPneumo();
+        //inClinicExperience_CP.selectVaccineAgentPneumo();
+        inClinicExperience_CP.selectVaccineAgentPneumo_after_Influenza_CP();
         Thread.sleep(3000);
 
         System.out.println("/*45.---Click Save Consent Button --*/");

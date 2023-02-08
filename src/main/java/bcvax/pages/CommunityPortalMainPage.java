@@ -37,7 +37,7 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//a[@title = 'All Client']")
     private WebElement sub_menu_AllClients;
 
-    @FindBy(xpath = "//a[@title = 'Participants']")
+    @FindBy(xpath = "//a[@title = 'Profiles']")
     private WebElement sub_menu_Participants;
 
     @FindBy(xpath = "//a[text() = 'Participants']")
