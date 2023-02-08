@@ -338,13 +338,13 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
 	private WebElement ice_page_displayed;
 	
-	@FindBy(xpath = ".//div[@class = 'slds-card__body']//span[text() = 'Covid-19 Vaccine']")
+	@FindBy(xpath = ".//div[@class = 'slds-form-element__control']//span[text() = 'Covid-19 Vaccine']")
 	private WebElement click_on_covid19_vaccination_checkbox;
-	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-card__body']//span[text() = 'Covid-19 Vaccine']");
+	private By click_on_covid19_vaccination_checkbox_ = By.xpath("..//div[@class = 'slds-form-element__control']//span[text() = 'Covid-19 Vaccine']");
 
-	@FindBy(xpath = ".//div[@class = 'slds-card__body']//span[text() = 'Influenza Vaccine']")
+	@FindBy(xpath = ".//div[@class = 'slds-form-element__control']//span[text() = 'Influenza Vaccine']")
 	private WebElement click_on_influenza_vaccination_checkbox;
-	private By click_on_influenza_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-card__body']//span[text() = 'Influenza Vaccine']");
+	private By click_on_influenza_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-form-element__control']//span[text() = 'Influenza Vaccine']");
 
 
 	@FindBy(xpath = ".//span[text() = 'Select One']")
@@ -405,7 +405,12 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//button[@aria-label = 'Agent, Select an option']")
 	private WebElement click_vaccine_agent_dropdown;
 	private By click_vaccine_agent_dropdown1 = By.xpath(".//button[@aria-label = 'Agent, Select an option']");
-	
+
+	@FindBy(xpath = ".//button[@data-value = 'Influenza-LAIV']")
+	private WebElement click_vaccine_agent_dropdown_cp;
+	private By click_vaccine_agent_dropdown1_cp = By.xpath(".//button[@data-value = 'Influenza-LAIV']");
+
+
 	@FindBy(xpath = ".//span[text() = 'COVID-19 mRNA']")
 	private WebElement select_vaccine_agent_dropdown;
 	private By select_vaccine_agent_dropdown1 = By.xpath(".//span[text() = 'COVID-19 mRNA']");
@@ -1420,6 +1425,18 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		Thread.sleep(5000);
 		click_vaccine_agent_dropdown.click();
+		Thread.sleep(5000);
+		waitForElementToBeVisible(driver, select_vaccine_agent_pneumo_dropdown, 10);
+		Thread.sleep(5000);
+		select_vaccine_agent_pneumo_dropdown.click();
+	}
+
+	public void selectVaccineAgentPneumo_after_Influenza_CP() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,700)");
+		Thread.sleep(5000);
+		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown_cp, 10);
+		Thread.sleep(5000);
+		click_vaccine_agent_dropdown_cp.click();
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_vaccine_agent_pneumo_dropdown, 10);
 		Thread.sleep(5000);
