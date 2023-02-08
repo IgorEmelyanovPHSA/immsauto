@@ -114,7 +114,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
 
         System.out.println("/*26----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
-        Thread.sleep(5000);
+        Thread.sleep(15000);
 
         log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
         inClinicExperience.clickOnVaccinationInfluenzaCheckbox();
@@ -142,7 +142,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*32----click Next button  --*/");
         inClinicExperience.clickNextButtonApptSchedulingPage();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
         inClinicExperience.clickVerifyContactInformation();
         Thread.sleep(2000);
@@ -151,13 +151,13 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience.AppointmentConfirmationMessage();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         System.out.println("/*36.----Refresh page --*/");
         inClinicExperience.refreshBrowser();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience.clickRelatedTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         // Administrate first Vaccine -> Influenza
         System.out.println("/*-----Administrate another Vaccine -> Influenza --*/");
@@ -170,7 +170,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(5000);
         System.out.println("/*40.---Click confirm and Save Button --*/");
         inClinicExperience.HomePageClickConfirmAndSaveButton();
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         System.out.println("/*41.---select Vaccine Agent picklist Value ->  Influenza-LAIV --*/");
         inClinicExperience.selectVaccineAgentInfluenza();
         Thread.sleep(3000);

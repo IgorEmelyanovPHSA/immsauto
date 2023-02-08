@@ -1217,9 +1217,9 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void clickOnVaccinationInfluenzaCheckbox() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_on_influenza_vaccination_checkbox, 10);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click_on_influenza_vaccination_checkbox.click();
 	}
 	
@@ -1365,6 +1365,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void clickVerifyContactInformation() throws InterruptedException {
+		Thread.sleep(5000);
 		//Scrolling to bottom of the page
 		//((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
@@ -1378,6 +1379,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickVerifyContactInformation_CP() throws InterruptedException {
+		Thread.sleep(5000);
 		//Scrolling to bottom of the page
 		//((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
@@ -1413,7 +1415,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgentPneumo() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,900)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,700)");
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		Thread.sleep(5000);
@@ -1449,7 +1451,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectPneumoLotNumber() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_lot_number_dropdown, 10);
 		Thread.sleep(2000);
@@ -2048,7 +2050,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, save_immune_info_btn, 10);
 		Thread.sleep(2000);
@@ -2057,6 +2059,7 @@ public class InClinicExperiencePage extends BasePage {
 	
 	public void selectOneOption(String vaccine) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+		Thread.sleep(5000);
 		if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
 			click(checkBoxCovid19Vaccine);
 		} else if (vaccine.equalsIgnoreCase("InfluenzaVaccine")) {
