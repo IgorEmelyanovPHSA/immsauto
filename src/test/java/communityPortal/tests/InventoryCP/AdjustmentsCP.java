@@ -44,7 +44,8 @@ public class AdjustmentsCP extends BaseTest {
 		tables = loginPage.getTables();
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supplyLocationFrom);
+		supplyConsolePage = communityPortalMainPage.navigateToSupplyConsolePage();
+		//supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supplyLocationFrom);
 	}
 
 	//Needs to update TestcaseId for both test

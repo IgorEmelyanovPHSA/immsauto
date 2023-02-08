@@ -36,9 +36,9 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*3.----Navigate to Supply Console Page --*/");
         SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
 
-        log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-        supplyConsolePage.selectSupplyLocationName();
-        Thread.sleep(2000);
+        //log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
+        //supplyConsolePage.selectSupplyLocationName();
+        //Thread.sleep(2000);
 
 
 
