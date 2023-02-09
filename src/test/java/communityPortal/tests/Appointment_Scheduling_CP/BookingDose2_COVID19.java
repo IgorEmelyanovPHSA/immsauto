@@ -7,15 +7,14 @@ import bcvax.tests.BaseTest;
 import org.testng.annotations.Test;
 
 public class BookingDose2_COVID19 extends BaseTest {
-
-    private String legalFirstName = "Alexandro";
-    private String legalLastName = "BCVaxDa Costa";
-    private String legalLastNameASCII = "BCVaxDa%20Costa";
-    private String dateOfBirth = "May 06, 1977";
-    private String postalCode = "V8W7P2";
-    private String personalHealthNumber = "9746172069";
+    private String legalFirstName = "Hugues";
+    private String legalLastName = "BCVaxLampard";
+    private String dateOfBirth = "March 3, 1904";
+    private String postalCode = "V1N3Q3";
+    private String personalHealthNumber = "9746171121";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
+
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
@@ -24,7 +23,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         TestcaseID = "225653";
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as a Clerk to Community Portal --*/");
         CommunityPortalMainPage_as_Clinician cpMainPage = loginPage.loginIntoCommunityPortalAsClerk();
@@ -138,6 +137,6 @@ public class BookingDose2_COVID19 extends BaseTest {
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
     }
 }
