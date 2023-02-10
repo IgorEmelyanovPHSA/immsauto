@@ -1432,11 +1432,13 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgentPneumo_after_Influenza_CP() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,700)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,900)");
 		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown_cp, 10);
+		//waitForElementToBeVisible(driver, click_vaccine_agent_dropdown_cp, 10);
+		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		Thread.sleep(5000);
-		click_vaccine_agent_dropdown_cp.click();
+		//click_vaccine_agent_dropdown_cp.click();
+		click_vaccine_agent_dropdown.click();
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_vaccine_agent_pneumo_dropdown, 10);
 		Thread.sleep(5000);
