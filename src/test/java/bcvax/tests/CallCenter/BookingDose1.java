@@ -24,7 +24,7 @@ public class BookingDose1 extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		System.out.println("/*1.----Login as an Cal Center Agent to the Call Center Console --*/");
+		System.out.println("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		Thread.sleep(10000);
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
