@@ -234,7 +234,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
 
         //////Validation for both Influenza and Pneumo AfterCare status
         log("/*----53. Search for Participant account: " +citizenName +" ---*/");
-        inClinicExperience_CP.SearchForCitizen(citizenName);
+        inClinicExperience_CP.SearchForCitizen_CP(citizenName);
         Thread.sleep(3000);
 
         log("/*----54. select Citizen from search results --*/");

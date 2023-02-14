@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -20,6 +21,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "All Ages - Atlin Health Centre";
+
+	String citizenName = "Hugues BCVaxLampard";
 	
 	@Test
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician() throws Exception {
@@ -101,6 +104,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickToSearchClinic();
 		Thread.sleep(2000);
 		log("/*25.----search the Clinic " + clinicNameToSearch + " --*/");
+		log("/*----scroll down a bit --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 		log("/*--26.----click on Option Facility location  --*/");
@@ -176,14 +182,19 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(5000);
 		inClinicExperiencePage.clickRegisterTab();
 		Thread.sleep(5000);
+
 		/*----Search for Participant account ---*/
-		log("/* 47.----Search for Participant account ---*/");
-		inClinicExperiencePage.SearchForCitizen(legalFirstName + " " + legalLastName);
-		log("/* 48.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
+		//log("/* 47.----Search for Participant account ---*/");
+		//log("/* 48.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
+		//inClinicExperiencePage.SearchForCitizen(legalFirstName + " " + legalLastName);
+		log("/*----47. Global Search for Participant account: " +citizenName +" ---*/");
+		inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
 		Thread.sleep(2000);
-		inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);
+
 		log("/* 49.----User found and Navigated to record page ---*/");
+		inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);
 		Thread.sleep(2000);
+
 		log("/*50.---- Navigated to Person Account related tab ---*/");
 		inClinicExperiencePage.clickRelatedTab();
 		Thread.sleep(5000);

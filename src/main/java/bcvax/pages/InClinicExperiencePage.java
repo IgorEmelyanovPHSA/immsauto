@@ -35,7 +35,7 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
 	private By search_assistant1 = By.xpath(".//button[@aria-label = 'Search']");
-	
+
 	@FindBy(xpath = ".//input[@placeholder = 'Search...']")
 	private WebElement search_input;
 	private By search_input1 = By.xpath(".//input[@placeholder = 'Search...']");
@@ -700,6 +700,23 @@ public class InClinicExperiencePage extends BasePage {
 		search_input.sendKeys(Keys.RETURN);
 		Thread.sleep(5000);
 	}
+
+	public void SearchForCitizen_CP(String citizen) throws InterruptedException {
+		//waitForElementToBeVisible(driver, search_assistant, 10);
+		//Thread.sleep(2000);
+		//WebElement search_navigator = driver.findElement(search_assistant);
+		//Thread.sleep(3000);
+		//search_navigator.click();
+		//Thread.sleep(3000);
+		waitForElementToBeVisible(driver, search_input, 10);
+		Thread.sleep(2000);
+		WebElement search_input = driver.findElement(search_input1);
+		search_input.sendKeys(citizen);
+		Thread.sleep(2000);
+		search_input.sendKeys(Keys.RETURN);
+		Thread.sleep(5000);
+	}
+
 
 	public void SearchForCitizenAlternativeWay(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
@@ -1575,7 +1592,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		Thread.sleep(2000);

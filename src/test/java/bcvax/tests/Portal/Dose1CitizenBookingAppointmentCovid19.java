@@ -50,10 +50,20 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		log("/*5.---Check for registration successful message and save conformation number--*/");
 		String conformationNumberText = registerToGetVaccinatedPage.registrationSuccessfulPageDisplayed();
 
-		log("/*6.---Login as an Clinician to ICE--*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
+		//log("/*6.---Login as an Clinician to ICE--*/");
+		//InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
+		//Thread.sleep(5000);
+		log("/*6.----Login as an Clinician to CIB --*/");
+		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
+		Thread.sleep(10000);
+
+		//inClinicExperiencePage.verifyIsICEpageDisplayed();
+		clinicInBox.verifyIsClinicInBoxPageDisplayed();
+		Thread.sleep(10000);
+
+		log("/*6.1.----Close All previously opened Tab's --*/");
+		clinicInBox.closeAllTabs();
 		Thread.sleep(5000);
-		inClinicExperiencePage.verifyIsICEpageDisplayed();
 
 		log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
 		com.globalSearch(conformationNumberText);

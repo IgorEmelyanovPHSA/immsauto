@@ -86,7 +86,7 @@ public class CommonMethods extends BasePage{
             if (!userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
                 log(i +"-try to find user: " + legalFirstName + " " + legalLastName + " not found, re-try!");
                 refreshBrowser();
-                Thread.sleep(5000);
+                Thread.sleep(15000);
             } else {
                 log("/*---User --> " + legalFirstName + " " + legalLastName + " present on the page--*/");
                 isUserFound = true;
