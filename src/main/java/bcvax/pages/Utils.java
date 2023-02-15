@@ -1,10 +1,14 @@
 package bcvax.pages;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.Properties;
+import org.yaml.snakeyaml.Yaml;
+import java.io.InputStream;
 
 public class Utils {
 	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
@@ -17,6 +21,17 @@ public class Utils {
 		if (env == null)
 			env = getConfigProperty("environment");
 		return env;
+	}
+
+	public static Boolean isCommunityPortal() throws Exception {
+		String is_new_ui = System.getProperty("is_new_ui");
+		if (is_new_ui == null)
+			is_new_ui = getConfigProperty("is_new_ui");
+		if(is_new_ui.equals("yes")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
     public static String getEnvConfigProperty(String propertyToGet) throws Exception {
@@ -46,4 +61,15 @@ public class Utils {
 			return yesORno.equalsIgnoreCase("yes");
 	}
 
+	public static Map<String, Map<String, String>> getTestData() throws Exception {
+		InputStream input = new FileInputStream("resources/test_data.yml");
+		Yaml yaml = new Yaml();
+		Map<String, Map<String, String>> testData = yaml.load(input);
+		return testData;
+	}
+
+	public static Map<String, String> getTestData(String env) throws Exception {
+		Map<String, Map<String, String>> testData = getTestData();
+		return testData.get(env);
+	}
 }
