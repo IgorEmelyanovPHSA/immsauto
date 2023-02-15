@@ -238,11 +238,11 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(3000);
 
         log("/*----54. select Citizen from search results --*/");
-        inClinicExperience_CP.userClickCitizenNew(nameToSearch);
+        inClinicExperience_CP.userClickCitizenNew_CP(nameToSearch);
         Thread.sleep(4000);
 
         log("/*---- 55. Navigate to Person Account related tab ---*/");
-        inClinicExperience_CP.clickRelatedTab();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
         Thread.sleep(2000);
 
         log("/*-- 56. Validate Aftercare status for Influenza --*/");
