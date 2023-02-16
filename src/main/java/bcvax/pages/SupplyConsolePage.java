@@ -1,5 +1,6 @@
 package bcvax.pages;
 
+import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.*;
@@ -12,6 +13,8 @@ import java.util.*;
 
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
+import static constansts.Header.*;
+import static constansts.Header.SUPPLY_TRANSACTION_NAME_FULL;
 import static org.testng.Assert.assertTrue;
 
 
@@ -528,6 +531,8 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//h2[text() = 'Container - Adjustment']/../..//button[text() = 'Adjustment']")
 	private WebElement btnBulkAdjustmentContainerAdjustmentPage;
 
+	Tables tables;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Community Portal Methods //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -570,7 +575,9 @@ public class SupplyConsolePage extends BasePage {
 
 	/*---------Constructor-------*/
 	public SupplyConsolePage(WebDriver driver) {
+
 		super(driver);
+		tables = new Tables(driver);
 	}
 	
 	/*-------------Methods--------------*/
@@ -684,7 +691,12 @@ public class SupplyConsolePage extends BasePage {
 		WebElement element = driver.findElement(supply_supply_location_2_);
 		this.supply_supply_location_2.click();
 	}
-	
+
+	public void clickOnSupplyLocation(String supply_location_name) throws InterruptedException {
+		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME_FULL, supply_location_name);
+		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME_FULL).findElement(By.tagName("a")).click();
+	}
+
 	public void clickRequestSupplies() throws InterruptedException {
 		waitForElementToBeLocated(driver, request_supplies_1, 10);
 		WebElement element = driver.findElement(request_supplies_1);
@@ -818,31 +830,14 @@ public class SupplyConsolePage extends BasePage {
 		//return(dataTableActualRowCount);
 		return (rows.size());
 	}
-	
+
 	public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
-		By outgoing_transactions_id = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions2']//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
-		waitForElementToBeLocated(driver, outgoing_transactions_id, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(outgoing_transactions_id);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		//element.getAttribute("value");
-		return (element.getText());
+		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME_FULL);
+		return (supplyTransactionId);
 	}
-	
+
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
-		//By transactions_from_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions2']//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)[" + kk + "]//a[@title='transactionFromName']");
-		By transactions_from_1_ = By.xpath("(//span[contains(text(),'Shipped Transactions - Outgoing')]/../../../../..//a[@title='transactionFromName'])[" + kk + "]");
-		waitForElementToBeLocated(driver, transactions_from_1_, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(transactions_from_1_);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		//waitForElementToBeLocated(driver, transactions_from_1_, 10);
-		Thread.sleep(2000);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME_FULL).click();
 	}
 	
 	public void clickSupplyTransactionRelatedTab() throws InterruptedException {
@@ -1026,6 +1021,11 @@ public class SupplyConsolePage extends BasePage {
 		click_container_dropdown_menu.click();
 	}
 
+	public void clickOnContainerDropDownMenu(String container, String distribution) throws InterruptedException {
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		tables.getSupplyLocationActions(supplyContainer);
+	}
+
 	public void clickOnFirstContainerDropDownMenu() throws InterruptedException {
 		click(dropDownMenuFirstContainer);
 	}
@@ -1103,6 +1103,18 @@ public class SupplyConsolePage extends BasePage {
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
+	}
+
+	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		double doses = tables.getRemainingDoses(supplyContainer);
+		return (doses);
+	}
+
+	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		double quontity = tables.getRemainingQty(supplyContainer);
+		return (quontity);
 	}
 
 	public Double getValueOfRemainingQty() throws InterruptedException {
@@ -1378,12 +1390,9 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- the Dose Conversation Factor is: " + Factor);
 		return (Factor);
 	}
-	
+
 	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
-		By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//button[@class = 'slds-button slds-button_icon-border slds-button_icon-x-small'])[" + j + "]");
-		waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
-		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
-		click(incoming_transaction_checkbox_1_);
+		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("").click();
 	}
 
 	@Step

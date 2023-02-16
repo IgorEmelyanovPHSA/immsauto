@@ -3,6 +3,7 @@ package constansts;
 public class Header {
     public static final String SUPPLY_LOCATION_NAME = "Supply Location Name";
     public static final String SUPPLY_CONTAINER_NAME = "Supply Container Name";
+    public static final String SUPPLY_TRANSACTION_NAME = "Supply Transaction Name";
     public static final String SUPPLY_DISTRIBUTION_DESCRIPTION = "Supply Distribution Description";
     private static final String SORT_BY = "Sort by:\n";
     private static final String SORT = "Sort\n";
@@ -15,6 +16,6 @@ public class Header {
     public static final String SUPPLY_ITEM_NAME = SORT_BY + "Supply Item Name" + SORT_NONE + SHOW_ACTION;
     private static final String COLUMN_ACTION = "\nColumn Actions";
     public static final String SUPPLY_LOCATION_NAME_FULL = SORT + SUPPLY_LOCATION_NAME + COLUMN_ACTION;
-
-
+    public static final String SUPPLY_TRANSACTION_NAME_FULL = SORT_BY + SUPPLY_TRANSACTION_NAME + SORT_NONE + SHOW_ACTION;
+    public static final String LOT_NUMBER = SORT_BY + "Lot Number" + SORT_NONE;
 }
