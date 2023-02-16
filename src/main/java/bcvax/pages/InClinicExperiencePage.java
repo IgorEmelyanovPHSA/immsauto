@@ -106,7 +106,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
 	private WebElement select_app_launcher;
 	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
-	
+
+	@FindBy(xpath = "//p[text()='Clinic in a Box (IPM)']")
+	private WebElement click_cib_app;
+	private By click_cib_app1 = By.xpath("//p[text()='Clinic in a Box (IPM)']");
+
 	@FindBy(xpath = "//p[text()='Health Connect - Supply Console']")
 	private WebElement click_healthconnect_app;
 	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
@@ -1110,6 +1114,23 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeLocated(driver, click_ice_app1, 10);
 		Thread.sleep(2000);
 		WebElement element1 = driver.findElement(click_ice_app1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(2000);
+	}
+
+	public void selectCIBApp() throws InterruptedException {
+		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(select_app_launcher1);
+		Thread.sleep(2000);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, click_cib_app1, 10);
+		Thread.sleep(2000);
+		WebElement element1 = driver.findElement(click_cib_app1);
 		Thread.sleep(2000);
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
