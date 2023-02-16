@@ -25,6 +25,7 @@
             <class name="communityPortal.tests.InventoryCP.Transfer"/>
             <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
             <class name="communityPortal.tests.InventoryCP.WastageCP"/>
+            <class name="communityPortal.tests.InventoryCP.E2E_Consumption_CP"/>
 
         </classes>
     </test> <!-- Test -->
