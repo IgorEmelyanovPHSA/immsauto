@@ -26,7 +26,7 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement select_app_launcher;
 	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
 
-	@FindBy(xpath = "//p[text()='In-Clinic Experience']")
+	@FindBy(xpath = "//p[text()='Clinic in a Box (IPM)']")
 	private WebElement click_cib_app;
 	private By click_cib_app1 = By.xpath("//p[text()='Clinic in a Box (IPM)']");
 

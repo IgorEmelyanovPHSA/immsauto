@@ -239,6 +239,10 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(3000);
 
         //////Validation for both Influenza and Pneumo AfterCare status
+        log("/*----56.0 Jump to CIB App from ICE, because Global search doesn't work from ICE --*/");
+        inClinicExperience.selectCIBApp();
+        Thread.sleep(4000);
+
         log("/*----56. Search for Participant account: " +citizenName +" ---*/");
         inClinicExperience.SearchForCitizen(citizenName);
         Thread.sleep(3000);
