@@ -22,7 +22,7 @@
             <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.BulkDraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.ReceiveSupplies"/>
-            <class name="communityPortal.tests.InventoryCP.Transfer"/>
+            <class name="bcvax.tests.Inventory.Transfer"/>
             <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
             <class name="communityPortal.tests.InventoryCP.WastageCP"/>
             <class name="communityPortal.tests.InventoryCP.E2E_Consumption_CP"/>
