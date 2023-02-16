@@ -24,13 +24,12 @@ public class Utils {
 	}
 
 	public static Boolean isCommunityPortal() throws Exception {
-		String is_new_ui = System.getProperty("is_new_ui");
-		if (is_new_ui == null)
-			is_new_ui = getConfigProperty("is_new_ui");
-		if(is_new_ui.equals("yes")) {
-			return true;
-		} else {
+		String env = getTargetEnvironment();
+		int ind = env.split("_").length - 1;
+		if(env.split("_")[ind].equals("org")) {
 			return false;
+		} else {
+			return true;
 		}
 	}
 
