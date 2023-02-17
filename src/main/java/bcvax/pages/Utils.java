@@ -60,15 +60,15 @@ public class Utils {
 			return yesORno.equalsIgnoreCase("yes");
 	}
 
-	public static Map<String, Map<String, String>> getTestData() throws Exception {
+	public static Map<String, Map<String, Object>> getTestData() throws Exception {
 		InputStream input = new FileInputStream("resources/test_data.yml");
 		Yaml yaml = new Yaml();
-		Map<String, Map<String, String>> testData = yaml.load(input);
+		Map<String, Map<String, Object>> testData = yaml.load(input);
 		return testData;
 	}
 
-	public static Map<String, String> getTestData(String env) throws Exception {
-		Map<String, Map<String, String>> testData = getTestData();
+	public static Map<String, Object> getTestData(String env) throws Exception {
+		Map<String, Map<String, Object>> testData = getTestData();
 		return testData.get(env);
 	}
 }

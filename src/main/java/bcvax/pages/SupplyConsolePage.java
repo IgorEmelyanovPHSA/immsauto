@@ -715,15 +715,24 @@ public class SupplyConsolePage extends BasePage {
 		this.requestedDeliveryDate.click();
 	}
 	
+//	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
+//		//By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='c_hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+//		By container_checkbox_1_ = By.xpath("(//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
+//		waitForElementToBeLocated(driver, container_checkbox_1_, 10);
+//		Thread.sleep(2000);
+//		WebElement element = driver.findElement(container_checkbox_1_);
+//		click(container_checkbox_1_);
+//	}
+
 	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
-		//By container_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='c_hcCrossObjectRelationRecordsList']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
-		By container_checkbox_1_ = By.xpath("(//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
-		waitForElementToBeLocated(driver, container_checkbox_1_, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(container_checkbox_1_);
-		click(container_checkbox_1_);
+		tables.getSupplyContainerTable().getRowsMappedToHeadings().get(k).get("Select All").click();
 	}
-	
+
+	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		tables.getSupplyContainerRow(supplyContainer).get("Select All").click();
+	}
+
 	public int getRowsSupplyContainersFromCount() throws InterruptedException {
 		//waitForElementToBeClickable(driver, container_checkbox_1, 10);
 		//waitForElementToBeLocated(driver, container_checkbox_1_, 10);
@@ -762,6 +771,13 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys("1");
 	}
 
+	public void enterBulkTransferByDosages(List<String> containers, int dose) {
+		for (String container : containers) {
+			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
+			tables.typeDosesIntoTransferRow(supplyContainer, Integer.toString(dose));
+		}
+	}
+
 	public void enterBulkTransferByQuantity(int k) throws InterruptedException {
 		By qty_1_ = By.xpath("(.//input[@class = 'slds-input'])[" + k + "]");
 		waitForElementToBeLocated(driver, qty_1_, 10);
@@ -771,6 +787,12 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys("1");
 	}
 
+	public void enterBulkTransferByQuantity(List<String> containers, int quantity) {
+		for (String container : containers) {
+			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
+			tables.typeQtyIntoTransferRow(supplyContainer, Integer.toString(quantity));
+		}
+	}
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
@@ -947,29 +969,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
-		//By incoming_transaction_checkbox_1_ = By.xpath("(.//flexipage-component2[@data-component-id='hcShippedSupplyTransactions']//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
-		By incoming_transaction_checkbox_1_ = By.xpath("(//span[contains(text(),'Shipped Transactions - Incoming')]/../../../../..//tbody//span[@class = 'slds-checkbox_faux'])[" + k + "]");
-		waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
-		//waitForElementToBeLocated(driver, incoming_transaction_checkbox_1_, 10);
-		WebElement element = driver.findElement(incoming_transaction_checkbox_1_);
-		//this.incoming_transaction_checkbox_1.click();
-		click(incoming_transaction_checkbox_1_);
+		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Select All").click();
 	}
-	
+
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
-		//Thread.sleep(1000);
-		//WebElement element = driver.findElement(bulk_confirm_incoming_transfers_button_1);
-		//Thread.sleep(2000);
-		//scroll up
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-1500)");
-		//Thread.sleep(1000);
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
-		//Thread.sleep(1000);
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-350)");
-		//Thread.sleep(1000);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		//Thread.sleep(1000);
 		moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
 		click(bulk_confirm_incoming_transfers_button_1);
 	}

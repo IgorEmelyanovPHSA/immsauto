@@ -17,7 +17,7 @@ import java.util.Map;
 public class Transfer extends BaseTest {
 	Boolean is_new_ui;
 	String env;
-	Map<String, String> testData;
+	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
 	CommunityPortalMainPage communityPortalMainPage;
 	String supply_location_from;
@@ -31,11 +31,11 @@ public class Transfer extends BaseTest {
 		env = Utils.getTargetEnvironment();
 		log("Target Environment: " + env);
 		testData = Utils.getTestData(env);
-		supply_location_from = testData.get("supplyLocationFrom");
-		supply_location_to = testData.get("supplyLocationTo");
-		distribution_from = testData.get("distributionFrom");
-		distribution_to = testData.get("distributionTo");
-		distribution_to_same_clinic = testData.get("distributionToSameClinic");
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+		supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+		distribution_from = String.valueOf(testData.get("distributionFrom"));
+		distribution_to = String.valueOf(testData.get("distributionTo"));
+		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
 
 		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 
@@ -72,8 +72,8 @@ public class Transfer extends BaseTest {
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS() throws Exception {
 		TestcaseID = "220550"; //C220550
-		String container_from = testData.get("containerFrom");
-		String container_to = testData.get("containerTo");
+		String container_from = String.valueOf(testData.get("containerFrom"));
+		String container_to = String.valueOf(testData.get("containerTo"));
 
 		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
 		//supplyConsolePage.selectSupplyContainer();
@@ -221,8 +221,8 @@ public class Transfer extends BaseTest {
 	@Test(priority = 2)
 	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220550"; //C220550
-		String container_from = testData.get("containerFrom");
-		String container_to = testData.get("containerTo");
+		String container_from = String.valueOf(testData.get("containerFrom"));
+		String container_to = String.valueOf(testData.get("containerTo"));
 		int quantity = 10;
 
 		////// Supply Location_1 -> Outcoming
@@ -362,8 +362,8 @@ public class Transfer extends BaseTest {
 	@Test(priority = 3)
 	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220557";
-		String container_from = testData.get("containerFrom");
-		String container_to_same_clinic = testData.get("containerToSameClinic");
+		String container_from = String.valueOf(testData.get("containerFrom"));
+		String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 
 		//System.out.println("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
 		//supplyConsolePage.selectSupplyContainer();
@@ -455,8 +455,8 @@ public class Transfer extends BaseTest {
 	@Test(priority = 4)
 	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
 		TestcaseID = "220557";
-		String container_from = testData.get("containerFrom");
-		String container_to_same_clinic = testData.get("containerToSameClinic");
+		String container_from = String.valueOf(testData.get("containerFrom"));
+		String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 		int quantity = 10;
 
 		//System.out.println("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");

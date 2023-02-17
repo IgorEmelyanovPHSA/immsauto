@@ -7,6 +7,18 @@ bcvaxdevit_org:
   containerFrom: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
   containerToSameClinic: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-02 03:11 p.m)"
+    - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-02 03:12 p.m)"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:23 a.m)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-03 23:28:41)"
+    - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
 bcvaxuat_org:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -16,15 +28,39 @@ bcvaxuat_org:
   containerFrom: "COMIRNATY (Pfizer) - EK4241"
   containerTo: "COMIRNATY (Pfizer) - EK4241"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-02 03:11 p.m)"
+    - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-02 03:12 p.m)"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:23 a.m)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-03 23:28:41)"
+    - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
 prodsuppqa_org:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
   distributionFrom: "Automation Supply Distribution_1_1"
   distributionTo: "Supply Distribution_2_1"
   distributionToSameClinic: "Supply Distribution_1_2"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241"
-  containerTo: "COMIRNATY (Pfizer) - EK4241"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241"
+  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
+  containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:07:47)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:08:45)"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:36:09)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:09:10)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:12:16)"
 comunityqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -34,6 +70,18 @@ comunityqa:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:07:47)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:08:45)"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:36:09)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-02-17 13:48:49)"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-02-10 12:18:29)"
 comunityqa_org:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -43,3 +91,15 @@ comunityqa_org:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:07:47)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:08:45)"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:36:09)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-02-17 13:48:49)"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-02-10 12:18:29)"
