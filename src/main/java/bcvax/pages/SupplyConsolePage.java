@@ -213,6 +213,11 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses;
 	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
 
+	@FindBy(xpath = "(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]")
+	private WebElement get_remaining_doses_cp;
+	private By get_remaining_doses_cp_ = By.xpath("(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]");
+
+
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container1_distribution_1_1;
 	private By get_remaining_doses_container1_distribution_1_1_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
@@ -236,6 +241,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty;
 	private By get_remaining_Qty_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]");
+
+	@FindBy(xpath = "(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[4]")
+	private WebElement get_remaining_Qty_cp;
+	private By get_remaining_Qty_cp_ = By.xpath("(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[4]");
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[4]")
 	private WebElement get_remaining_Qty_container1_distribution_1_1;
@@ -478,6 +487,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]")
 	private WebElement select_supply_distributor;
 	private By select_supply_distributor1 = By.xpath("(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]");
+
+	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]")
+	private WebElement select_desired_supply_container;
+	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]");
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1048,6 +1061,18 @@ public class SupplyConsolePage extends BasePage {
 		return (doses);
 	}
 
+	public Double getValueOfRemainingDoses_CP() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, get_remaining_doses_cp_, 10);
+		WebElement element = driver.findElement(get_remaining_doses_cp_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
 	public Double getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_1_1() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		Thread.sleep(2000);
@@ -1120,6 +1145,16 @@ public class SupplyConsolePage extends BasePage {
 	public Double getValueOfRemainingQty() throws InterruptedException {
 		waitForElementToBeLocated(driver, get_remaining_Qty_, 10);
 		WebElement element = driver.findElement(get_remaining_Qty_);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
+		return (quantity);
+	}
+
+	public Double getValueOfRemainingQty_CP() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_Qty_cp_, 10);
+		WebElement element = driver.findElement(get_remaining_Qty_cp_);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Quantity = element.getText();
@@ -1743,6 +1778,17 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		element.getText();
 		return (element.getText());
+	}
+
+	public void selectSupplyContainer() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,150)", "");
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, select_desired_supply_container1, 10);
+		WebElement element = driver.findElement(select_desired_supply_container1);
+		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+		executor1.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
 	}
 
 	public String getSupplyDistributionDescription() throws InterruptedException {
