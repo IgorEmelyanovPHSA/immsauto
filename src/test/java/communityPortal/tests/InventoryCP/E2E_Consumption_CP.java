@@ -35,44 +35,52 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*3.----Navigate to Supply Console Page --*/");
         SupplyConsolePage supplyConsolePage = cpMainPage.goToSupplyLocation();
+        Thread.sleep(5000);
 
-        //log("/*6.1.----Close All previously opened Tab's --*/");
-        //supplyConsolePage.closeAllTabs();
-        //Thread.sleep(5000);
-
-        log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
+        log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
         supplyConsolePage.selectSupplyLocationName();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
+        log("/*5. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
+        supplyConsolePage.selectSupplyContainer();
+        Thread.sleep(5000);
 
+        double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses_CP();
+        log("/*6. remaining doses Before: -->" + remainingDoses_before);
+        Thread.sleep(5000);
 
+        double remainingQty_before = supplyConsolePage.getValueOfRemainingQty_CP();
+        log("/*7. remaining Qty Before: -->" + remainingQty_before);
+        Thread.sleep(5000);
 
-
-        log("/*3.----- Click on User Defaults Tab --*/");
+        log("/*8.----- Click on User Defaults Tab --*/");
         cpMainPage.clickUserDefaultsTab();
         Thread.sleep(2000);
 
-        log("/*4.----- Enter current date for UserDefaults --*/");
+        log("/*9.----- Enter current date for UserDefaults --*/");
         cpMainPage.inputCurrentDateUserDefaults();
 
-        log("/*5.----- Click on Save defaults button --*/");
+        log("/*10.----- Click on Save defaults button --*/");
         cpMainPage.clickSaveDefaultsButton();
         Thread.sleep(2000);
 
-        log("/*6.----Navigate to More -> Register --*/");
+        log("/*11.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
         Thread.sleep(2000);
 
-        log("/*7.----click Register button New Citizen --*/");
+        log("/*12.----click Register button New Citizen --*/");
         inClinicExperience_CP.clickRegisterButton();
         Thread.sleep(2000);
-        log("/*8.----Enter First Name " +legalFirstName +"--*/");
+
+        log("/*13.----Enter First Name " +legalFirstName +"--*/");
         inClinicExperience_CP.enterFirstName(legalFirstName);
         Thread.sleep(2000);
-        log("/*9.----Enter Last Name " +legalLastName +"--*/");
+
+        log("/*14.----Enter Last Name " +legalLastName +"--*/");
         inClinicExperience_CP.enterLastName(legalLastName);
         Thread.sleep(2000);
-        log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
+
+        log("/*15.----Enter Date of birth " +dateOfBirth +"--*/");
         inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
         Thread.sleep(2000);
         log("/*11.----Enter Postal code " +postalCode +"--*/");
