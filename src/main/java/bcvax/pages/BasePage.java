@@ -164,7 +164,13 @@ public abstract class BasePage<T> {
 		element.sendKeys(text);
 		return (T) this;
 	}
-	
+
+	public T typeInWithoutClear(WebElement element, String text) {
+		waitForVisibility(element);
+		element.sendKeys(text);
+		return (T) this;
+	}
+
 	public T waitForElementToBeClickable(WebElement element) throws InterruptedException {
 		int tries = 0;
 		

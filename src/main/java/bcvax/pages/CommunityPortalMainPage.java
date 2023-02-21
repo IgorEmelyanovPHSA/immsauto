@@ -122,11 +122,12 @@ public class CommunityPortalMainPage extends BasePage{
         community_portal_home_page_displayed.isDisplayed();
     }
 
-    public void clickUserDefaultsTab() throws InterruptedException {
+    public UserDefaultsPage clickUserDefaultsTab() throws InterruptedException {
         waitForElementToBeLocated(driver, user_defaults_main_menu1, 10);
         WebElement element = driver.findElement(user_defaults_main_menu1);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+        return new UserDefaultsPage(driver);
     }
 
     public void inputCurrentDateUserDefaults() throws InterruptedException {
