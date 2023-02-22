@@ -186,6 +186,18 @@ public class LoginPage extends BasePage {
 		return new CommunityPortalMainPage(driver);
 	}
 
+	@Step public CommunityPortalMainPage loginIntoCommunityPortalAsSysAdmin() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		click(btnLoginHere);
+		waitForElementToBeClickable(textUserName);
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP_PW"));
+		click(login_button);
+		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_IMMS_BC_ADMIN_CP") +  " +--*/");
+		return new CommunityPortalMainPage(driver);
+	}
+
 	public void logOutCommunityPortal() throws Exception {
 		click(btnProfile);
 		click(logOut);
