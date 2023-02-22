@@ -19,7 +19,7 @@ public class DIWA_Covid19_CP_ImmsBCAdmin extends BaseTest {
         String clinicLocation = "All Ages - Atlin Health Centre";
 
         log("/*1.----Login as an Clinician to Community Portal --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Participants -> Profiles Page --*/");

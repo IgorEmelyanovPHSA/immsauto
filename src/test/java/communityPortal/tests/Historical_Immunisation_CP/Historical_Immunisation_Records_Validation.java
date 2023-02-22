@@ -25,7 +25,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
         log("/*1.----Login as an Clinician to Community Portal new UI --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
         Thread.sleep(10000);
 
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
