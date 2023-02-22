@@ -9,11 +9,11 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class DIWA_Covid19_CP extends BaseTest {
+public class DIWA_Covid19_CP_ImmsBCAdmin extends BaseTest {
 
     @Test
-    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "223187"; //C223187
+    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_ImmsBCAdmin_ComunityQA() throws Exception {
+        TestcaseID = "244854"; //C244854
         log("Target Environment: "+ Utils.getTargetEnvironment());
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
