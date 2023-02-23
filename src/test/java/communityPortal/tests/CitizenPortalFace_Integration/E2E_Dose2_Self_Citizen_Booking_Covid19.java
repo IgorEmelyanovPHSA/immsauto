@@ -2,7 +2,7 @@ package communityPortal.tests.CitizenPortalFace_Integration;
 
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Utilities.ApiQueries.queryToGetUniqueLink;
@@ -48,17 +48,20 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         String conformationNumberText = registerToGetVaccinatedPage.registrationSuccessfulPageDisplayed();
 
         log("/*6.---Login as an Clinician to ICE--*/");
-        InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
-        Thread.sleep(5000);
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        Thread.sleep(10000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        inClinicExperiencePage.SearchForCitizen(conformationNumberText);
+        com.globalSearchCP(conformationNumberText);
 
         log("/*7.1---Validation, isUserFound account validation --*/");
         boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
         if (!isUserFound){
             throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
         }
+
+        //Extra step to log out from CP
+        loginPage.logOutCommunityPortal();
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
@@ -88,10 +91,10 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         log("/*14.---Select date and time for appointment and click btn Next--*/");
         bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
 
-        log("/*15---Click verify contact information checkbox--*/");
+        log("/*15.---Click verify contact information checkbox--*/");
         bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
 
-        log("/*16---Verify appointment conformation message is displayed--*/");
+        log("/*16.---Verify appointment conformation message is displayed--*/");
         bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
     }
 
