@@ -58,6 +58,14 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}
+
+	public InClinicExperiencePage loginAsImmsBCAdmin_DIWA_ICE() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 	public InClinicExperiencePage loginAsPrecondition() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));

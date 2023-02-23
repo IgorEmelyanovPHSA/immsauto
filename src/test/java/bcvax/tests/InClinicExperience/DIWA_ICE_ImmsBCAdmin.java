@@ -1,29 +1,29 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import bcvax.tests.BaseTest;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import java.io.*;
-import java.nio.file.Paths;
-import java.util.*;
 
+import java.io.FileReader;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 
 @Listeners({TestListener.class})
-public class DIWA_ICE extends BaseTest {
+public class DIWA_ICE_ImmsBCAdmin extends BaseTest {
 
 	@DataProvider(name = "testData")
 	public static Object[][] names() {return new Object[][]{{"Benoite BCVaxD'Hooge"}};
 	}
 
 	@Test(dataProvider = "testData")
-	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE(String citizenName) throws Exception {
+	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_ImmsBCAdmin_in_ICE(String citizenName) throws Exception {
 		TestcaseID = "223187"; //C223187
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		//0.
@@ -54,7 +54,7 @@ public class DIWA_ICE extends BaseTest {
 		String clinicLocation = "All Ages - Atlin Health Centre";
 
 		log("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+		InClinicExperiencePage inClinicExperience = loginPage.loginAsImmsBCAdmin_DIWA_ICE();
 		Thread.sleep(5000);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
@@ -156,57 +156,6 @@ public class DIWA_ICE extends BaseTest {
 		Thread.sleep(2000);
 		log("/*---31. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		inClinicExperience.clickRelatedTab();
-	}
-
-	//@Test()
-	public void Bulk_Create_From_CSV_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
-		String DEFAULT_FOLDER_PATH = Paths.get(System.getProperty("user.dir"), "resources", "upload").toString();
-		String[] csvCell;
-		String csvFileName = "ListOfNames.csv";
-
-		CSVReader csvReader = new CSVReaderBuilder(new FileReader(DEFAULT_FOLDER_PATH + "/" + csvFileName)).withSkipLines(0).build();
-		ArrayList<String> namesListTotal = new ArrayList<String>();
-		ArrayList<String> namesListPass = new ArrayList<String>();
-		ArrayList<String> namesListFailed = new ArrayList<String>();
-
-		while ((csvCell = csvReader.readNext()) != null) {
-			String name = csvCell[0];
-			namesListTotal.add(name);
-		}
-
-		log("Total number of names to be processed in namesListTotal: " + namesListTotal.size());
-
-		int countFailed = 0;
-		int countPass = 0;
-		int totalCountArray = 0;
-
-		for (int i = 0; i < namesListTotal.size(); i++) {
-			totalCountArray += 1;
-			log("Name will be used in DIWA testCase = " + namesListTotal.get(i));
-			try {
-				Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE(namesListTotal.get(i));
-				countPass += 1;
-				namesListPass.add(namesListTotal.get(i));
-			} catch (Exception ex) {
-				countFailed += 1;
-				namesListFailed.add(namesListTotal.get(i));
-			}
-			//Close Chrome window after each test
-			driver.close();
-			//Restart a clean Chrome window
-			setUp();
-		}
-
-		log("Total number of names in TC: " + totalCountArray);
-		log("Number of pass TC: " + countPass);
-		log("Number of failed TC: " + countFailed);
-
-		if (namesListFailed.size() > 0) {
-			log("List of name's when TC failed: ");
-			for (int i = 0; i < namesListFailed.size(); i++) {
-				log("TC failed with name = " + namesListFailed.get(i));
-			}
-		}
 	}
 
 
