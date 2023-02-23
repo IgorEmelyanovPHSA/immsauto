@@ -48,7 +48,7 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         String conformationNumberText = registerToGetVaccinatedPage.registrationSuccessfulPageDisplayed();
 
         log("/*6.---Login as an Clinician to ICE--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsAdmin();
+        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsSysAdmin();
         Thread.sleep(10000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
