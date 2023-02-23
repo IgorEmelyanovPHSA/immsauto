@@ -8,6 +8,7 @@ import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -30,8 +31,6 @@ public class BulkAdjustmentsCP extends BaseTest {
     public static Object[][] primeNumbers2() {
         return new Object[][]{{"3"},{"-2"}};
     }
-
-    //Needs to update TestcaseId for both test
 
     @Test(dataProvider = "dosesAmount")
     public void CP_Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String value) throws Exception {
@@ -65,6 +64,7 @@ public class BulkAdjustmentsCP extends BaseTest {
 
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
             int k = 1;
             while (k <= 3) {
                 supplyConsolePage.clickOnSupplyContainerCheckbox(k);
@@ -168,6 +168,7 @@ public class BulkAdjustmentsCP extends BaseTest {
 
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
             int k = 1;
             while (k <= 3) {
                 supplyConsolePage.clickOnSupplyContainerCheckbox(k);
