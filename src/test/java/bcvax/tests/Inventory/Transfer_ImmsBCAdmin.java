@@ -73,7 +73,7 @@ public class Transfer_ImmsBCAdmin extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_ImmsBCAdmin() throws Exception {
-		TestcaseID = "220550"; //C220550
+		TestcaseID = "244845"; //C244845
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 
