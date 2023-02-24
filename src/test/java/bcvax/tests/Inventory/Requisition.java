@@ -1,118 +1,115 @@
 package bcvax.tests.Inventory;
 
 
+import bcvax.pages.CommunityPortalMainPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import bcvax.pages.RequisitionPage;
+import bcvax.pages.SupplyConsolePage;
+
+import java.util.Map;
 
 
 public class Requisition extends BaseTest {
-	
+	CommunityPortalMainPage communityPortalMainPage;
+	SupplyConsolePage supplyConsolePage;
+	Map<String, Object> testData;
+	String env;
 	@Test
 	public void Create_Requisition_as_an_PPHIS() throws Exception {
 		TestcaseID = "222344"; //C222344
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		//String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+		String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+		boolean is_new_ui = Utils.isCommunityPortal();
+		testData = Utils.getTestData(env);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-		RequisitionPage requisitionPage = loginPage.loginAsPPHIS1();
-		Thread.sleep(5000);
+		if(!is_new_ui) {
+			supplyConsolePage = loginPage.loginAsPPHIS();
+			Thread.sleep(10000);
+			supplyConsolePage.verifyIsSupplyPageDisplayed();
+			supplyConsolePage.closeTabsHCA();
+			supplyConsolePage.clickSupplyLocationsTab();
+			supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		} else {
+			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
+		}
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
-		requisitionPage.displaySupplyConsolePage();
-		Thread.sleep(4000);
+		//supplyConsolePage.verifyIsSupplyPageDisplayed();
+		//Thread.sleep(4000);
 		System.out.println("/*----3. Close Other Tabs --*/");
-		requisitionPage.closeTabs();
-		Thread.sleep(4000);
-		requisitionPage.clickDropdownMenu();
-		Thread.sleep(6000);
+		//supplyConsolePage.closeTabsHCA();
+		//Thread.sleep(4000);
 		System.out.println("/*----4. Navigate to Supply Locations --*/");
-		requisitionPage.clickSupplyLocationInDropdown();
-		Thread.sleep(6000);
+		//supplyConsolePage.clickSupplyLocationsTab();
+		//Thread.sleep(6000);
 		System.out.println("/*----5. Locate on Age 12 and Above - Abbotsford - Abby Pharmacy --*/");
-		requisitionPage.clickSupplyLocationName();
-		Thread.sleep(4000);
+		//supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		//Thread.sleep(4000);
 		System.out.println("/*----6. Navigate to Request Supplies --*/");
-		requisitionPage.clickRequestSupplies();
-		Thread.sleep(3000);
+		supplyConsolePage.clickRequestSupplies();
 		System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
-		requisitionPage.selectShipped_From();
-		Thread.sleep(3000);
+		supplyConsolePage.selectShipped_From();
 		//requisitionPage.inputShipAddress();
 		//System.out.println("/*----8. Locate on Automation Supply Location_1 --*/");
 		//requisitionPage.LocateAddress("Atlin Health Centre");
 		System.out.println("/*----9. Choose Requested Delivery Date --*/");
-		requisitionPage.inputRequestDate();
-		Thread.sleep(3000);
+		supplyConsolePage.inputRequestDate();
 		System.out.println("/*----10. Choose Urgency --*/");
-		requisitionPage.clickNextButton();
-		Thread.sleep(3000);
+		supplyConsolePage.clickNextButton();
 		log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
 		log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for bcvaxdevit --COVID-19 mRNA COMIRNATY Pediatric 10mcg (Pfizer) Orange Cap 2mL 10-dose vial - FK5618-CC03 (2022-12-13 16:07:54) Lot FK5618-CC0 --*/");
-		requisitionPage.clickLineItemCheckBox();
-		Thread.sleep(3000);
+		supplyConsolePage.clickLineItemCheckBox();
 		log("/*----12. click Next button --*/");
-		requisitionPage.clickNextButton();
-		Thread.sleep(3000);
+		supplyConsolePage.clickNextButton();
 		System.out.println("/*----13. Input Requested Quantity and Doses --*/");
-		requisitionPage.inputRequestedDose("1");
-		Thread.sleep(3000);
+		supplyConsolePage.inputRequestedDose("1");
 		System.out.println("/*----14. Save Quantity and Doses --*/");
-		requisitionPage.clickSaveButton();
-		Thread.sleep(3000);
+		supplyConsolePage.clickSaveButton();
 		System.out.println("/*----15. Submit Requisition --*/");
-		requisitionPage.clickSubmitRequisition();
-		Thread.sleep(5000);
+		supplyConsolePage.clickSubmitRequisition();
 		System.out.println("/*----16. Confirm and Save Requisition --*/");
-		requisitionPage.clickSaveSubmitRequisition();
-		Thread.sleep(5000);
+		supplyConsolePage.clickSaveSubmitRequisition();
 		System.out.println("/*----17. Click Edit Expected Delivery Date--*/");
-		requisitionPage.clickEditExpectedDeliveryDate();
-		Thread.sleep(3000);
-		System.out.println("/*----18. Click Calender of Expected Delivery Date--*/");
-		requisitionPage.clickExpectedDeliveryDateCalendar();
-		Thread.sleep(3000);
+		supplyConsolePage.clickEditExpectedDeliveryDate();
+		//System.out.println("/*----18. Click Calender of Expected Delivery Date--*/");
+		//supplyConsolePage.clickExpectedDeliveryDateCalendar();
+		//Thread.sleep(3000);
 		System.out.println("/*----19. Choose The Expected Delivery Date--*/");
-		requisitionPage.inputExpectedDate();
-		Thread.sleep(3000);
+		supplyConsolePage.inputExpectedDate();
 		System.out.println("/*----20. Save Chosen Expected Delivery Date--*/");
-		requisitionPage.clickSaveExpectedDeliveryDate();
-		Thread.sleep(3000);
+		supplyConsolePage.clickSaveExpectedDeliveryDate();
 		System.out.println("/*----21. Approve Requisition--*/");
-		requisitionPage.clickApproveRequisition();
-		Thread.sleep(5000);
-		requisitionPage.clickSaveApprovedRequisition();
-		Thread.sleep(3000);
+		supplyConsolePage.clickApproveRequisition();
+		supplyConsolePage.clickSaveApprovedRequisition();
 		System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
-		requisitionPage.enterApprovedDose("1");
-		Thread.sleep(5000);
+		supplyConsolePage.enterApprovedDose("1");
+		supplyConsolePage.enterApproverComments("test test");
 		System.out.println("/*----23. Save Approved Request Dose--*/");
-		requisitionPage.clickSaveApprovedRequisition();
-		Thread.sleep(4000);
+		supplyConsolePage.clickSaveApprovedRequisition();
 		System.out.println("/*----24. Ship Requisition--*/");
-		requisitionPage.clickShipRequisition();
-		Thread.sleep(7000);
-		
+		supplyConsolePage.clickShipRequisition();
+
 		String actual = "Ship Requisition";
-		Assert.assertEquals(requisitionPage.ShipRequisition(), actual);
-		
+		Assert.assertEquals(supplyConsolePage.ShipRequisition(), actual);
+
 		System.out.println("/*----25. Save Shipping Requisition--*/");
-		requisitionPage.clickSaveShipRequisition();
-		Thread.sleep(3000);
+		supplyConsolePage.clickSaveShipRequisition();
 		System.out.println("/*----26. Receive Requisition--*/");
-		requisitionPage.clickReceiveRequestBtn();
-		Thread.sleep(3000);
+		supplyConsolePage.clickReceiveRequestBtn();
 		System.out.println("/*----27. click On Search Distribution component--*/");
-		requisitionPage.clickOnSearchSupplyDistributions();
-		Thread.sleep(3000);
+		supplyConsolePage.clickOnSearchSupplyDistributions();
 		System.out.println("/*----28. Select Distribution -'SDST...'- --*/");
-		requisitionPage.SelectSupplyDistributionTo();
-		Thread.sleep(3000);
+		supplyConsolePage.SelectSupplyDistributionTo();
 		System.out.println("/*----29. click Save ReceiveRequisition--*/");
-		requisitionPage.clickSaveReceiveRequisition();
+		supplyConsolePage.clickSaveReceiveRequisition();
 		Thread.sleep(5000);
-		
 	}
 	
 }
