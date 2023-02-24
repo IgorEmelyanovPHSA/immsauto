@@ -15,19 +15,18 @@
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose2_COVID19"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_Influenza"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>
-            <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
-            <class name="communityPortal.tests.InventoryCP.BulkAdjustmentsCP"/>
-            <class name="communityPortal.tests.InventoryCP.BulkTransfers"/>
+            <class name="bcvax.tests.Inventory.Transfer"/>
+            <class name="bcvax.tests.Inventory.BulkTransfers"/>
+            <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
             <class name="communityPortal.tests.InventoryCP.BulkTransfersCancellation"/>
-            <class name="communityPortal.tests.InventoryCP.BulkWastagesCP"/>
+            <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
+            <class name="communityPortal.tests.InventoryCP.WastageCP"/>
             <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkAdjustmentsCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkWastagesCP"/>
             <class name="communityPortal.tests.InventoryCP.BulkDraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.ReceiveSupplies"/>
-            <class name="bcvax.tests.Inventory.Transfer"/>
-            <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
-            <class name="communityPortal.tests.InventoryCP.WastageCP"/>
             <class name="communityPortal.tests.InventoryCP.E2E_Consumption_CP"/>
-
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -13,11 +13,13 @@ public class CommonMethods extends BasePage{
         super(driver);
     }
 
-    private By supplyConsoleApp = By.xpath(".//span[@title='Health Connect - Supply Console']");
-    private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
-    private By healthconnectApp1 = By.xpath("//p[text()='Health Connect - Supply Console']");
+    private By supplyConsoleTitle = By.xpath(".//span[@title='Health Connect - Supply Console']");
+    private By inClinicExperienceTitle = By.xpath("//span[@title='In-Clinic Experience']");
+    private By callCenterPageTitle = By.xpath(".//span[@title='Call Center Console']");
+    private By appsLauncher = By.xpath("//div[@class='slds-icon-waffle']");
+    private By appsSupplyLocation = By.xpath("//p[text()='Health Connect - Supply Console']");
+    private By appsInClinicExperience = By.xpath("//p[text()='In-Clinic Experience']");
     private By supplyLocation = By.xpath("//a[@title='Supply Locations']");
-    private By callCenterPageId = By.xpath(".//span[@title='Call Center Console']");
 
     @FindBy(xpath = "//div[@class='slds-icon-waffle']")
     private WebElement appLauncher;
@@ -35,6 +37,9 @@ public class CommonMethods extends BasePage{
     //WHAT KIND OF XPATH IS THIS?
     @FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
     private WebElement supplyLocationInDropdown;
+
+    @FindBy(xpath = "//p[text()='In-Clinic Experience']")
+    private WebElement inClinicExperienceDropdown;
 
     @FindBy(xpath = "//button[@aria-label = 'Search']")
     private WebElement searchAssistant;
@@ -113,13 +118,13 @@ public class CommonMethods extends BasePage{
     }
 
     public void selectHealthConnectApp() throws InterruptedException {
-        waitForElementToBeLocated(driver, select_app_launcher1, 10);
-        WebElement element = driver.findElement(select_app_launcher1);
+        waitForElementToBeLocated(driver, appsLauncher, 10);
+        WebElement element = driver.findElement(appsLauncher);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
         Thread.sleep(5000);
-        waitForElementToBeLocated(driver, healthconnectApp1, 10);
-        WebElement element1 = driver.findElement(healthconnectApp1);
+        waitForElementToBeLocated(driver, appsSupplyLocation, 10);
+        WebElement element1 = driver.findElement(appsSupplyLocation);
         JavascriptExecutor executor1 = (JavascriptExecutor) driver;
         executor1.executeScript("arguments[0].click();", element1);
         Thread.sleep(2000);
@@ -128,7 +133,7 @@ public class CommonMethods extends BasePage{
     public void goToSupplyPageIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
         closeAutomationLocationTab();
         Thread.sleep(5000);
-        if (isDisplayed(supplyConsoleApp)) {
+        if (isDisplayed(supplyConsoleTitle)) {
             log("/*-- User already on Health Connect - Supply Console --*/");
         } else {
             log("/*-- Navigate to Health Connect - Supply Console --*/");
@@ -153,10 +158,26 @@ public class CommonMethods extends BasePage{
         Thread.sleep(2000);
     }
 
+    public void goToUserDefaultsIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
+        closeAutomationLocationTab();
+        Thread.sleep(5000);
+        if (isDisplayed(inClinicExperienceTitle)) {
+            log("/*-- User already on In-Clinic Experience Page --*/");
+        } else {
+            log("/*-- Navigate to In-Clinic Experience Page --*/");
+            click(appsLauncher);
+            Thread.sleep(2000);
+            click(appsInClinicExperience);
+            Thread.sleep(5000);
+            closeAutomationLocationTab();
+            Thread.sleep(5000);
+        }
+    }
+
     public void goToCallCenterConsolePageIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
         closeAutomationLocationTab();
         Thread.sleep(5000);
-        if (isDisplayed(callCenterPageId)) {
+        if (isDisplayed(callCenterPageTitle)) {
             log("/*-- User already on Call Center Console Page --*/");
         } else {
             log("/*-- Navigate to Call Center Console Page --*/");

@@ -58,6 +58,14 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}
+
+	public InClinicExperiencePage loginAsImmsBCAdmin_DIWA_ICE() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
 	
 	public InClinicExperiencePage loginAsPrecondition() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
@@ -174,15 +182,27 @@ public class LoginPage extends BasePage {
 	private WebElement logOut;
 
 	@Step
-	public CommunityPortalMainPage loginIntoCommunityPortalAsAdmin() throws Exception {
+	public CommunityPortalMainPage loginIntoCommunityPortalAsImmsBCAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
 		click(btnLoginHere);
 		waitForElementToBeClickable(textUserName);
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_ADMIN_CP"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_ADMIN_CP_PW"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP_PW"));
 		click(login_button);
-		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_ADMIN_CP") +  " +--*/");
+		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_IMMS_BC_ADMIN_CP") +  " +--*/");
+		return new CommunityPortalMainPage(driver);
+	}
+
+	@Step public CommunityPortalMainPage loginIntoCommunityPortalAsSysAdmin() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(2000);
+		click(btnLoginHere);
+		waitForElementToBeClickable(textUserName);
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP_PW"));
+		click(login_button);
+		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_IMMS_BC_ADMIN_CP") +  " +--*/");
 		return new CommunityPortalMainPage(driver);
 	}
 
