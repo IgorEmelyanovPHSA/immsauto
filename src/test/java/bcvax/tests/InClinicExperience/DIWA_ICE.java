@@ -6,6 +6,7 @@ import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -114,6 +115,10 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---19. select date of Administration ---*/");
 		if (inClinicExperience.selectDateOfAdministration())
 			Thread.sleep(3000);
+
+		//scrolling up a bit - it does not works here for some reason?
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
+		//Thread.sleep(5000);
 
 		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
 		inClinicExperience.selectInformedConsentProvider("Auto Clinician DIWA_ICE");

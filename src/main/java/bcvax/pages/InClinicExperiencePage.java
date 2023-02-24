@@ -550,11 +550,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
 	private WebElement recordImmunizationBtn;
 	
-	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[2]")
+	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
 	private WebElement informed_consent_provider_dropdown;
 	private By informed_consent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
 
-	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[2]")
+	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
 	private WebElement immunizing_agent_provider_dropdown;
 	private By immunizing_agent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
 
@@ -1987,8 +1987,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
-		//scrolling up
+		//scrolling up - it does not works here for some reason?
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
+		//Thread.sleep(5000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informed_consent_provider_dropdown);
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, informed_consent_provider_dropdown, 10);

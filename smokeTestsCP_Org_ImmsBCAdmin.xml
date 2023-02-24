@@ -4,6 +4,7 @@
     <test name="SmokeCP">
         <classes>
             <class name="bcvax.tests.InClinicExperience.DIWA_ICE_ImmsBCAdmin"/>
+            <class name="bcvax.tests.InClinicExperience.DIWA_ICE_ImmsBCAdmin"/>
 
 
         </classes>
