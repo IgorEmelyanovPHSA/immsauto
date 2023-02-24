@@ -34,7 +34,7 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 1)
-	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_Clinician_Community() throws Exception {
 		TestcaseID = "223184";
 		String vaccine = "JANSSEN COVID-19 VACCINE";
 		double doses = 10;
@@ -86,7 +86,7 @@ public class Transfer extends BaseTest {
 
 
 	@Test()
-	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
+	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_Clinician_Community() throws Exception {
 		TestcaseID = "223185"; //C223185
 		String vaccine = "SPIKEVAX 6mo-5y";
 		double doses = 10;
@@ -125,7 +125,7 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test()
-	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_PPHIS_Community() throws Exception {
+	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_Clinician_Community() throws Exception {
 		TestcaseID = "220550"; //C220550
 		String vaccine = "JANSSEN COVID-19 VACCINE";
 		double quantity = 1;
@@ -177,7 +177,7 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test()
-	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_Community() throws Exception {
+	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_Clinician_Community() throws Exception {
 		TestcaseID = "220550"; //C220550
 		String vaccine = "VAXZEVRIA";
 		double quantity = 1;
