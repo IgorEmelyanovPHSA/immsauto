@@ -881,15 +881,13 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
-		waitForElementToBeVisible(driver, search_supply_location_2_To, 10);
+		waitForElementToBeVisible(driver, search_supply_location_2_To, 60);
 		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
 		Thread.sleep(3000);
-		waitForElementToBeVisible(driver, select_supply_location_2_To, 10);
+		waitForElementToBeVisible(driver, select_supply_location_2_To, 60);
 		Thread.sleep(5000);
 		select_supply_location_2_To.click();
 		Thread.sleep(2000);
-		//#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
-		//#search_supply_location_To.sendKeys(Keys.ENTER);
 		return this;
 	}
 	
@@ -978,11 +976,17 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void closeTabsHCA() throws InterruptedException {
+		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
 		Thread.sleep(5000);
 		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
 		for(WebElement closeTabBtn : closeButtons) {
-			closeTabBtn.click();
+			try {
+				closeTabBtn.click();
+				Thread.sleep(2000);
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
+			}
 		}
 //		do {
 //			try {
@@ -1062,6 +1066,10 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
 		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Select All").click();
+	}
+
+	public void clickOnOutgoingTransactionsCheckbox(int k) throws InterruptedException {
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(k).get("Select All").click();
 	}
 
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
@@ -1511,6 +1519,10 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
 		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("").click();
+	}
+
+	public void clickOnOutgoingTransactionsDropDownMenu(int j) throws InterruptedException {
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("").click();
 	}
 
 	@Step
