@@ -20,6 +20,7 @@ public class CommonMethods extends BasePage{
     private By appsSupplyLocation = By.xpath("//p[text()='Health Connect - Supply Console']");
     private By appsInClinicExperience = By.xpath("//p[text()='In-Clinic Experience']");
     private By supplyLocation = By.xpath("//a[@title='Supply Locations']");
+    private By recentlyViewedId = By.xpath("//span[contains(text(),'Recently Viewed')]");
 
     @FindBy(xpath = "//div[@class='slds-icon-waffle']")
     private WebElement appLauncher;
@@ -158,9 +159,30 @@ public class CommonMethods extends BasePage{
         Thread.sleep(2000);
     }
 
-    public void goToUserDefaultsIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
+    public void goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew() throws InterruptedException {
+        String title = "Age 12 and Above - Abbotsford - Abby Pharmacy";
         closeAutomationLocationTab();
         Thread.sleep(5000);
+        if (isDisplayed(supplyConsoleTitle)) {
+            log("/*-- User already on Supply Location Page --*/");
+        } else {
+            log("/*-- Navigate to Supply Location Page --*/");
+            click(appsLauncher);
+            Thread.sleep(3000);
+            click(appsSupplyLocation);
+            Thread.sleep(5000);
+        }
+        if (isDisplayed(recentlyViewedId)) {
+            WebElement location = driver.findElement(By.xpath("//a[@title='" + title + "']"));
+            click(location);
+            Thread.sleep(5000);
+        }
+
+    }
+
+    public void goToUserDefaultsIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
+      //  closeAutomationLocationTab();
+      //  Thread.sleep(5000);
         if (isDisplayed(inClinicExperienceTitle)) {
             log("/*-- User already on In-Clinic Experience Page --*/");
         } else {
