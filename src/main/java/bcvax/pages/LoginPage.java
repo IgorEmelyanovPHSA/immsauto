@@ -43,6 +43,14 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 
+	public InClinicExperiencePage loginAsImmsBCAdminICE() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
+		click(login_button);
+		return new InClinicExperiencePage(driver);
+	}
+
 	public InClinicExperiencePage loginAsClinicianICEUserDefaults() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_UserDefaults"));
@@ -79,6 +87,14 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
+		click(login_button);
+		return new SupplyConsolePage(driver);
+	}
+
+	public SupplyConsolePage loginAsImmsBCAdmin() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
 		click(login_button);
 		return new SupplyConsolePage(driver);
 	}

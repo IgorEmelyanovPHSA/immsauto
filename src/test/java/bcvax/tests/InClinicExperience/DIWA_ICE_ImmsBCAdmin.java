@@ -24,7 +24,7 @@ public class DIWA_ICE_ImmsBCAdmin extends BaseTest {
 
 	@Test(dataProvider = "testData")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_ImmsBCAdmin_in_ICE(String citizenName) throws Exception {
-		TestcaseID = "223187"; //C223187
+		TestcaseID = "244854"; //C244854
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		//0.
 		//String nameToSearch = "Benoite Denna BCVaxD";

@@ -3,6 +3,7 @@
 <suite name="Automation run">
     <test name="SmokeCP">
         <classes>
+            <class name="bcvax.tests.InClinicExperience.Dose1_E2E_Covid19_ImmsBCAdmin"/>
             <class name="bcvax.tests.InClinicExperience.DIWA_ICE_ImmsBCAdmin"/>
 
 
