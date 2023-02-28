@@ -61,6 +61,12 @@ public class CommunityPortalMainPage extends BasePage{
     @FindBy(xpath = "//a[@title = 'Register']")
     private WebElement sub_menu_Register;
 
+    @FindBy(xpath = "//a[@title = 'Submit Requisition']")
+    private WebElement submitRequisitionButton;
+    private By submit_requisition_button = By.xpath("//a[@title = 'Submit Requisition']");
+    @FindBy(xpath = "//a[@title = 'Request Supplies']")
+    private WebElement request_supplies;
+    private By request_supplies_1 = By.xpath("//a[@title = 'Request Supplies']");
     public void verifyYouAreOnTheMainPageCP(){
 
     }
@@ -166,5 +172,18 @@ public class CommunityPortalMainPage extends BasePage{
         return new InClinicExperiencePage(driver);
     }
 
+    public void clickRequestSupplies() throws InterruptedException {
+        waitForElementToBeLocated(driver, request_supplies_1, 10);
+        WebElement element = driver.findElement(request_supplies_1);
+        request_supplies.click();
+    }
 
+    public void clickSubmitRequisition() throws InterruptedException {
+        waitForElementToBeLocated(driver, submit_requisition_button, 10);
+        submitRequisitionButton.click();
+    }
+
+    public void refreshBrowser() throws InterruptedException {
+        driver.navigate().refresh();
+    }
 }
