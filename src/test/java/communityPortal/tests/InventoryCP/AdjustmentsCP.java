@@ -34,7 +34,7 @@ public class AdjustmentsCP extends BaseTest {
 
 	//Needs to update TestcaseId for both test
 	@Test(dataProvider = "dosesAmount")
-	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String dosesAmount) throws Exception {
+	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_Clinician(String dosesAmount) throws Exception {
 		TestcaseID = "223357"; //C223357
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();

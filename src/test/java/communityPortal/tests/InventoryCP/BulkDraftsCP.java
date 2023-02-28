@@ -5,6 +5,7 @@ import bcvax.pages.CommunityPortalMainPage;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,7 @@ public class BulkDraftsCP extends BaseTest {
 
     //Needs to update TestcaseId for both test
     @Test
-    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS() throws Exception {
+    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_Clinician() throws Exception {
         TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
@@ -40,6 +41,7 @@ public class BulkDraftsCP extends BaseTest {
         log("/*---     count:" + countSupplyContainers);
 
         log("/*4.----Click on Container's records Checkboxes --*/");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
         if (countSupplyContainers >= 3) {
             int k = 1;
             while (k <= 3) {

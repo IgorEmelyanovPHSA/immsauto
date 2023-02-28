@@ -33,7 +33,7 @@ public class BulkAdjustmentsCP extends BaseTest {
     }
 
     @Test(dataProvider = "dosesAmount")
-    public void CP_Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String value) throws Exception {
+    public void CP_Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_Clinician(String value) throws Exception {
         TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
         AllureLifecycle lifecycle = Allure.getLifecycle();
@@ -138,7 +138,7 @@ public class BulkAdjustmentsCP extends BaseTest {
     }
 
     @Test(dataProvider = "quantitiesAmount")
-    public void Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_PPHIS(String quantity) throws Exception {
+    public void Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_Clinician(String quantity) throws Exception {
         TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
         AllureLifecycle lifecycle = Allure.getLifecycle();

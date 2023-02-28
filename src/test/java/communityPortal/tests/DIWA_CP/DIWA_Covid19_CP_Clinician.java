@@ -89,16 +89,16 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         if (profilesPage.selectDateOfAdministration())
             Thread.sleep(3000);
 
-        log("/*---16. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-        profilesPage.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
+        log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
+        profilesPage.selectInformedConsentProvider("Auto Clinician_DIWA_CP");
         Thread.sleep(5000);
 
         log("/*---17. click Save Consent ---*/");
         profilesPage.clickSaveConsent();
         Thread.sleep(5000);
 
-        log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-        profilesPage.selectImmunizingAgentProvider("Auto Clinician DIWA_ICE");
+        log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician_DIWA_CP ---*/");
+        profilesPage.selectImmunizingAgentProvider("Auto Clinician_DIWA_CP");
         Thread.sleep(6000);
 
         log("/*---19. Click Show all lot numbers Checkbox---*/");
