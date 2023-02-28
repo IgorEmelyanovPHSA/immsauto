@@ -24,7 +24,8 @@ public class Tables extends BasePage {
     private WebElement containerTransfer;
     @FindBy(xpath = ".//lightning-card")
     private List<WebElement> transactionTables;
-
+    @FindBy(xpath = ".//table[@class='slds-table forceRecordLayout slds-table--header-fixed slds-table--edit slds-table--bordered resizable-cols slds-table--resizable-cols uiVirtualDataTable']")
+    private List<WebElement> requisitionTables;
     public Tables(WebDriver driver) {
         super(driver);
     }
@@ -182,5 +183,15 @@ public class Tables extends BasePage {
         return singleTable;
     }
 
-
+    public GenericTable getSingleRequisitionTable(String dataTable) {
+        WebElement singleTable = null;
+        waitForTextToBePresentInTable(driver, requisitionTables ,20, "Transaction");
+        for (WebElement e : requisitionTables) {
+            if (e.getText().contains(dataTable)) {
+                singleTable = e;
+                break;
+            }
+        }
+        return new GenericTable(singleTable);
+    }
 }

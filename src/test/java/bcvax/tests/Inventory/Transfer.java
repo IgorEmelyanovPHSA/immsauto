@@ -74,17 +74,12 @@ public class Transfer extends BaseTest {
 		TestcaseID = "220550"; //C220550
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
-
-		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
-		//supplyConsolePage.selectSupplyContainer();
 		Thread.sleep(2000);
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - Before --*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
-		//double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Distribution_1_1();
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);;
-		//double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Distribution_1_1();
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		log("/*7.----Click on Container's dropdown --*/");
@@ -116,11 +111,9 @@ public class Transfer extends BaseTest {
 		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity - After --*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 
-		//double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses_Container2_Distribution_1_1();
 		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
-		//double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty_Container2_Distribution_1_1();
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
@@ -166,12 +159,10 @@ public class Transfer extends BaseTest {
 
 		Thread.sleep(2000);
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		//double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
 		double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
-		double remainingQty_before_Lot_EK4241_Distribution_2_1 =supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
-		//double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
+		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
@@ -203,11 +194,9 @@ public class Transfer extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
-		//double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses_Container1_Lot_EK4241_Distribution_2_1();
 		System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
-		//double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty_Container1_Lot_EK4241_Distribution_2_1();
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
