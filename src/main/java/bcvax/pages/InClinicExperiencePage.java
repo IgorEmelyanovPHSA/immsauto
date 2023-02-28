@@ -550,13 +550,13 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
 	private WebElement recordImmunizationBtn;
 	
-	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[2]")
+	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement informed_consent_provider_dropdown;
-	private By informed_consent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
+	private By informed_consent_provider_dropdown_ = By.xpath("//input[@placeholder = 'Search People...']");
 
-	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[2]")
+	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement immunizing_agent_provider_dropdown;
-	private By immunizing_agent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
+	private By immunizing_agent_provider_dropdown_ = By.xpath("//input[@placeholder = 'Search People...']");
 
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_inform_consent_provider;
@@ -580,9 +580,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement selectSite;
 	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
 	
-	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
+	@FindBy(xpath = "//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']")
 	private WebElement select_lot;
-	private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	private By select_lot_ = By.xpath("//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']");
 
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
@@ -593,9 +593,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 	
-	@FindBy(xpath = "//span[@title='0.3']")
+	@FindBy(xpath = "//span[@title='0.25']")
 	private WebElement select_dosage;
-	private By select_dosage1 = By.xpath("//span[@title='0.5']");
+	private By select_dosage1 = By.xpath("//span[@title='0.25']");
 	
 	@FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
 	private WebElement saveAgain;
@@ -2086,6 +2086,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void summaryConfirmAndSave() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", lastConfirmAndSave);
 		lastConfirmAndSave.click();
 	}
 	
