@@ -37,9 +37,9 @@ public class Transfer extends BaseTest {
 		distribution_to = String.valueOf(testData.get("distributionTo"));
 		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
 
-		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-
+		log("/*1.----Login  --*/");
 		if(!Utils.isCommunityPortal()) {
+			log("/*----Login to ORG (oldUI) --*/");
 			supplyConsolePage = loginPage.loginAsPPHIS();
 			Thread.sleep(10000);
 			//Assert.assertTrue(false);
@@ -63,6 +63,7 @@ public class Transfer extends BaseTest {
 			Thread.sleep(5000);
 		}
 		else  {
+			log("/*----Login to CP (newUI) --*/");
 			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
 			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
 		}
@@ -70,8 +71,8 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 1)
-	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_PPHIS() throws Exception {
-		TestcaseID = "220550"; //C220550
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another() throws Exception {
+		TestcaseID = "223184"; //C223184
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		Thread.sleep(2000);
@@ -208,8 +209,8 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 2)
-	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "220550"; //C220550
+	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another() throws Exception {
+		TestcaseID = "223184"; //C223184
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		int quantity = 10;
@@ -349,8 +350,8 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 3)
-	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "220557";
+	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic() throws Exception {
+		TestcaseID = "223185"; //C223185
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 
@@ -442,8 +443,8 @@ public class Transfer extends BaseTest {
 	}
 
 	@Test(priority = 4)
-	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "220557";
+	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic() throws Exception {
+		TestcaseID = "223185"; //C223185
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 		int quantity = 10;
