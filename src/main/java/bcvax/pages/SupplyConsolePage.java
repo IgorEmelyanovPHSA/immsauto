@@ -644,11 +644,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	/*-------------Methods--------------*/
-	public void inputRequestedDose(String inputDose) throws InterruptedException {
+	public void inputRequestedQuantity(String inputQuantity) throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement dosesInput = driver.findElement(By.xpath("//div[@class='slds-form-element__control slds-grow']/input"));
+		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[4]//input"));
 		dosesInput.clear();
-		dosesInput.sendKeys(inputDose);
+		dosesInput.sendKeys(inputQuantity);
 	}
 	
 	public void clickSaveButton() {
@@ -764,8 +764,8 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnSupplyLocation(String supply_location_name) throws InterruptedException {
-		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME_FULL, supply_location_name);
-		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME_FULL).findElement(By.tagName("a")).click();
+		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME, supply_location_name);
+		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME).findElement(By.tagName("a")).click();
 	}
 
 	public void clickRequestSupplies() throws InterruptedException {
@@ -814,7 +814,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		tables.getSupplyContainerRow(supplyContainer).get("Select All").click();
 	}
 
@@ -883,9 +883,7 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- select 'To' Automation Supply Location_2  -");
 		waitForElementToBeVisible(driver, search_supply_location_2_To, 60);
 		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
-		Thread.sleep(3000);
-		waitForElementToBeVisible(driver, select_supply_location_2_To, 60);
-		Thread.sleep(5000);
+		waitForElementToBeVisible(driver, select_supply_location_2_To, 120);
 		select_supply_location_2_To.click();
 		Thread.sleep(2000);
 		return this;
@@ -938,12 +936,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
-		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME_FULL);
+		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
 		return (supplyTransactionId);
 	}
 
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
-		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME_FULL).click();
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME).click();
 	}
 	
 	public void clickSupplyTransactionRelatedTab() throws InterruptedException {
@@ -1126,7 +1124,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnContainerDropDownMenu(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		tables.getSupplyLocationActions(supplyContainer);
 	}
 
@@ -1222,13 +1220,13 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		double doses = tables.getRemainingDoses(supplyContainer);
 		return (doses);
 	}
 
 	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		double quontity = tables.getRemainingQty(supplyContainer);
 		return (quontity);
 	}
@@ -1518,11 +1516,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("").click();
+		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("Actions").click();
 	}
 
 	public void clickOnOutgoingTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("").click();
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("Actions").click();
 	}
 
 	@Step
@@ -2206,7 +2204,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, driver.findElement(By.xpath("//label[text() = 'Trade']")), 30);
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
 		String tradeValue = trade.getAttribute("value");
-		WebElement approveDoseField = driver.findElement(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input"));
+		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input")).get(0);
 		approveDoseField.sendKeys(inputDose);
 	}
 

@@ -69,7 +69,7 @@ public class Requisition extends BaseTest {
 		log("/*----12. click Next button --*/");
 		supplyConsolePage.clickNextButton();
 		System.out.println("/*----13. Input Requested Quantity and Doses --*/");
-		supplyConsolePage.inputRequestedDose("1");
+		supplyConsolePage.inputRequestedQuantity("1");
 		System.out.println("/*----14. Save Quantity and Doses --*/");
 		supplyConsolePage.clickSaveButton();
 		System.out.println("/*----15. Submit Requisition --*/");
@@ -97,7 +97,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePage.clickShipRequisition();
 
 		String actual = "Ship Requisition";
-		Assert.assertEquals(supplyConsolePage.ShipRequisition(), actual);
+		Assert.assertEquals(actual, supplyConsolePage.ShipRequisition());
 
 		System.out.println("/*----25. Save Shipping Requisition--*/");
 		supplyConsolePage.clickSaveShipRequisition();

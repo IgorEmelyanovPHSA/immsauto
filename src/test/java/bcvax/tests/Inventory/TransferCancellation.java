@@ -116,10 +116,10 @@ public class TransferCancellation extends BaseTest {
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
         double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - doses;
-        assertEquals(remainingDosesAfterCalculationDistribution1_1, remainingDosesAfterDistribution1_1);
+        assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
         double remainingQtyAfterCalculationDistribution1_1 =
                 remainingDosesAfterCalculationDistribution1_1 / dose_conversation_factor;
-        assertEquals(remainingQtyAfterCalculationDistribution1_1, remainingQtyAfterDistribution1_1);
+        assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         if(!is_new_ui) {
@@ -168,8 +168,8 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
         double remainingQtyAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution1_1);
-        assertEquals(remainingDosesBeforeDistribution1_1, remainingDosesAfterCancelDistribution1_1);
-        assertEquals(remainingQtyBeforeDistribution1_1, remainingQtyAfterCancelDistribution1_1);
+        assertEquals(remainingDosesAfterCancelDistribution1_1, remainingDosesBeforeDistribution1_1);
+        assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         if(!is_new_ui) {
@@ -185,8 +185,8 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
         double remainingQtyAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution2_1);
-        assertEquals(remainingDosesBeforeDistribution2_1, remainingDosesAfterCancelDistribution2_1);
-        assertEquals(remainingQtyBeforeDistribution2_1, remainingQtyAfterCancelDistribution2_1);
+        assertEquals(remainingDosesAfterCancelDistribution2_1, remainingDosesBeforeDistribution2_1);
+        assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
     @Test()
@@ -236,9 +236,9 @@ public class TransferCancellation extends BaseTest {
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
         double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - quantity * dose_conversation_factor ;
-        assertEquals(remainingDosesAfterCalculationDistribution1_1, remainingDosesAfterDistribution1_1);
+        assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
         double remainingQtyAfterCalculationDistribution1_1 = remainingQtyBeforeDistribution1_1 - quantity;
-        assertEquals(remainingQtyAfterCalculationDistribution1_1, remainingQtyAfterDistribution1_1);
+        assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         if(!is_new_ui) {
             supplyConsolePage.clickSupplyLocationsTab();
@@ -287,8 +287,8 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
         double remainingQtyAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution1_1);
-        assertEquals(remainingDosesBeforeDistribution1_1, remainingDosesAfterCancelDistribution1_1);
-        assertEquals(remainingQtyBeforeDistribution1_1, remainingQtyAfterCancelDistribution1_1);
+        assertEquals(remainingDosesAfterCancelDistribution1_1, remainingDosesBeforeDistribution1_1);
+        assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         if(!is_new_ui) {
@@ -304,8 +304,8 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
         double remainingQtyAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution2_1);
-        assertEquals(remainingDosesBeforeDistribution2_1, remainingDosesAfterCancelDistribution2_1);
-        assertEquals(remainingQtyBeforeDistribution2_1, remainingQtyAfterCancelDistribution2_1);
+        assertEquals(remainingDosesAfterCancelDistribution2_1, remainingDosesBeforeDistribution2_1);
+        assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
 }

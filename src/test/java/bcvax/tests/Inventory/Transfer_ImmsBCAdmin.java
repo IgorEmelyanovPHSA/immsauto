@@ -65,7 +65,7 @@ public class Transfer_ImmsBCAdmin extends BaseTest {
 			Thread.sleep(5000);
 		}
 		else  {
-			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
 		}
 

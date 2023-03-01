@@ -100,7 +100,7 @@ public class Tables extends BasePage {
 
     @Step
     public void getSupplyLocationActions(Map<String, String> searchCriteria) {
-        WebElement element = getSupplyContainerRow(searchCriteria).get("");
+        WebElement element = getSupplyContainerRow(searchCriteria).get("Actions");
         moveToElement(element);
         element.click();
     }

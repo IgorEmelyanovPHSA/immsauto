@@ -194,9 +194,9 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingDosesAfterLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
         double remainingDosesAfterLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 
-        assertEquals(remainingDosesBeforeDistribution1_1, remainingDosesAfterLocationDistribution1_1);
+        assertEquals(remainingDosesAfterLocationDistribution1_1, remainingDosesBeforeDistribution1_1);
         assertEquals(remainingDosesAfterLocationDistribution1_2, remainingDosesBeforeDistribution1_2);
-        assertEquals(remainingDosesBeforeDistribution1_3, remainingDosesAfterLocationDistribution1_3);
+        assertEquals(remainingDosesAfterLocationDistribution1_3, remainingDosesBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         if(!is_new_ui) {
@@ -215,7 +215,7 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingDosesAfterLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
         double remainingDosesAfterLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
 
-        assertEquals(remainingDosesBeforeLocationDistribution2_1, remainingDosesAfterLocationDistribution2_1);
+        assertEquals(remainingDosesAfterLocationDistribution2_1, remainingDosesBeforeLocationDistribution2_1);
         assertEquals(remainingDosesAfterLocationDistribution2_2, remainingDosesAfterLocationDistribution2_2);
         assertEquals(remainingDosesAfterLocationDistribution2_3, remainingDosesBeforeLocationDistribution2_3);
     }
@@ -331,9 +331,9 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyAfterCancelLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
         double remainingQtyAfterCancelLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 
-        assertEquals(remainingQtyBeforeDistribution1_1, remainingQtyAfterCancelLocationDistribution1_1);
-        assertEquals(remainingQtyBeforeDistribution1_2, remainingQtyAfterCancelLocationDistribution1_2);
-        assertEquals(remainingQtyBeforeDistribution1_3, remainingQtyAfterCancelLocationDistribution1_3);
+        assertEquals(remainingQtyAfterCancelLocationDistribution1_1, remainingQtyBeforeDistribution1_1);
+        assertEquals(remainingQtyAfterCancelLocationDistribution1_2, remainingQtyBeforeDistribution1_2);
+        assertEquals(remainingQtyAfterCancelLocationDistribution1_3, remainingQtyBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         if(!is_new_ui) {
@@ -353,9 +353,9 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyAfterCancelLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
         double remainingQtyAfterCancelLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
-        assertEquals(remainingQtyBeforeLocationDistribution2_1, remainingQtyAfterCancelLocationDistribution2_1);
-        assertEquals(remainingQtyBeforeLocationDistribution2_2, remainingQtyAfterCancelLocationDistribution2_2);
-        assertEquals(remainingQtyBeforeLocationDistribution2_3, remainingQtyAfterCancelLocationDistribution2_3);
+        assertEquals(remainingQtyAfterCancelLocationDistribution2_1, remainingQtyBeforeLocationDistribution2_1);
+        assertEquals(remainingQtyAfterCancelLocationDistribution2_2, remainingQtyBeforeLocationDistribution2_2);
+        assertEquals(remainingQtyAfterCancelLocationDistribution2_3, remainingQtyBeforeLocationDistribution2_3);
 
     }
 }
