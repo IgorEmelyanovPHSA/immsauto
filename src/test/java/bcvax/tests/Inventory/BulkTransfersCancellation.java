@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import org.testng.SkipException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +85,7 @@ public class BulkTransfersCancellation extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void Can_doBulk_transfersBy_Doses_form_one_Clinic_to_Another_And_Cancel() throws Exception {
+    public void Can_doBulk_transfers_Cancellation_By_Doses_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = "223359";
         int doses = 10;
 
@@ -223,7 +223,7 @@ public class BulkTransfersCancellation extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void Can_doBulk_transfersBy_Quantity_form_one_Clinic_to_Another_and_Cancel() throws Exception {
+    public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = "223359";
         int quantity = 1;
 

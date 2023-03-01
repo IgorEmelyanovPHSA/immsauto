@@ -5,6 +5,7 @@ import bcvax.pages.CommunityPortalMainPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
 
@@ -24,6 +25,9 @@ public class Requisition extends BaseTest {
 		//String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
 		String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 		boolean is_new_ui = Utils.isCommunityPortal();
+//		if(is_new_ui) {
+//			throw new SkipException("Temporarily Ignore test in CP");
+//		}
 		testData = Utils.getTestData(env);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");

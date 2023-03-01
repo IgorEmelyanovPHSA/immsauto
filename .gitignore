@@ -215,3 +215,4 @@ buildNumber.properties
 # Allure Selenium Report
 .allure
 allure-results/
+/inventory_unified_tests.xml
