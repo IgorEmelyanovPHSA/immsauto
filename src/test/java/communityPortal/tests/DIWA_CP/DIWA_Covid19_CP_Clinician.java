@@ -18,8 +18,18 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
-        log("/*1.----Login as an Clinician to Community Portal --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
+
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                loginPage.loginIntoCommunityPortalAsSysAdmin();
+                log("Login AS comunityqa_immsbc_admin");
+                break;
+            default:
+                loginPage.loginIntoCommunityPortalAsClinician();
+                log("Login AS default user");
+        }
         Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Participants -> Profiles Page --*/");
@@ -140,6 +150,5 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         Thread.sleep(2000);
 
     }
-
 
 }

@@ -53,9 +53,24 @@ public class DIWA_ICE_ImmsBCAdmin extends BaseTest {
 
 		String clinicLocation = "All Ages - Atlin Health Centre";
 
-		log("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				log("Login AS comunityqa_org_immsbc_admin");
+				break;
+			default:
+				loginPage.loginAsClinicianICE();
+				log("Login AS default user (Clinician to ICE)");
+		}
 		Thread.sleep(5000);
+
+
+//		log("/*1.----Login as an Clinician to ICE --*/");
+//		InClinicExperiencePage inClinicExperience = loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+//		Thread.sleep(5000);
+
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
 		Thread.sleep(5000);
