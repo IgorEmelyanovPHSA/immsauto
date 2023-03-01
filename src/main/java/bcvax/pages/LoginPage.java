@@ -218,7 +218,7 @@ public class LoginPage extends BasePage {
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP_PW"));
 		click(login_button);
-		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_IMMS_BC_ADMIN_CP") +  " +--*/");
+		log("  -- Login AS " + Utils.getEnvConfigProperty("user_SYS_ADMIN_CP") +  " +--*/");
 		return new CommunityPortalMainPage(driver);
 	}
 
