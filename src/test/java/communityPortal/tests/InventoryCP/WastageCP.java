@@ -21,7 +21,7 @@ public class WastageCP extends BaseTest {
 	//Needs to update TestcaseId for both test
 
 	@Test()
-	public void CP_Can_Do_Single_Wastage_ByDosages_AS_PPHIS() throws Exception {
+	public void CP_Can_Do_Single_Wastage_ByDosages_AS_Clinician() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int numberOfRows = 1; //Default value, wasting from first row only
@@ -122,7 +122,7 @@ public class WastageCP extends BaseTest {
 	}
 
 	@Test()
-	public void CP_Can_Do_Single_Wastage_ByQuantity_AS_PPHIS() throws Exception {
+	public void CP_Can_Do_Single_Wastage_ByQuantity_AS_Clinician() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		CommonMethods common = new CommonMethods(getDriver());

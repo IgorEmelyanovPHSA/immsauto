@@ -21,7 +21,7 @@ public class DraftsCP extends BaseTest {
 
     //Needs to update TestcaseId for both test
     @Test()
-    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
+    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic_AS_Clinician() throws Exception {
         TestcaseID = "223358"; //C223358
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
@@ -124,7 +124,7 @@ public class DraftsCP extends BaseTest {
 
   
     @Test()
-    public void Can_Do_Single_Draft_Edit_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
+    public void Can_Do_Single_Draft_Edit_ByDosages_Within_The_Same_Clinic_AS_Clinician() throws Exception {
         TestcaseID = "223358"; //C223358
         log("Test Case#2 Edit draft and transfer");
         int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -252,7 +252,7 @@ public class DraftsCP extends BaseTest {
     }
 
     @Test()
-    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
+    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_Clinic_AS_Clinician() throws Exception {
         TestcaseID = "223358"; //C223358
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#3 Create draft and cancel it");
@@ -372,7 +372,7 @@ public class DraftsCP extends BaseTest {
     }
 
     @Test()
-    public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_ClinicAS_PPHIS() throws Exception {
+    public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic_AS_Clinician() throws Exception {
         TestcaseID = "223358"; //C223358
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");

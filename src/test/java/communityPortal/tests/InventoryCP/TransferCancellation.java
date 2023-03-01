@@ -36,7 +36,7 @@ public class TransferCancellation extends BaseTest {
 	}
 
 	@Test(priority = 1)
-	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_And_Cancel_as_PPHIS_Community() throws Exception {
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_And_Cancel_as_Clinician_Community() throws Exception {
 		TestcaseID = "223184";
 		String vaccine = "JANSSEN COVID-19 VACCINE";
 		double doses = 5;
@@ -98,7 +98,7 @@ public class TransferCancellation extends BaseTest {
 	}
 
 	@Test()
-	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_And_Cancel_as_PPHIS_Community() throws Exception {
+	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_And_Cancel_as_Clinician_Community() throws Exception {
 		TestcaseID = "223184"; //C220550
 		String vaccine = "JANSSEN COVID-19 VACCINE";
 		double quantity = 1;

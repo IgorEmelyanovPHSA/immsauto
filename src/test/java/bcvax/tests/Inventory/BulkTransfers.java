@@ -50,9 +50,10 @@ public class BulkTransfers extends BaseTest {
 		containers_from = (ArrayList)testData.get("bulkContainersFrom");
 		containers_to = (ArrayList)testData.get("bulkContainersTo");
 		containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
-		log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 
+		log("/*1.----Login --*/");
 		if(!is_new_ui) {
+			log("/----Login to ORG (oldUI) --*/");
 			supplyConsolePage = loginPage.loginAsPPHIS();
 			Thread.sleep(10000);
 			//Assert.assertTrue(false);
@@ -76,6 +77,7 @@ public class BulkTransfers extends BaseTest {
 			Thread.sleep(5000);
 		}
 		else  {
+			log("/*----Login to CP (newUI) --*/");
 			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
 			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
 		}
@@ -83,8 +85,8 @@ public class BulkTransfers extends BaseTest {
 	}
 
 	@Test(priority = 1)
-	public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another_as_PPHIS() throws Exception {
-		TestcaseID = "222358";
+	public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
+		TestcaseID = "223359";
 		testData.get("bulkContainersFrom");
 
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
@@ -296,8 +298,8 @@ public class BulkTransfers extends BaseTest {
 	}
 
 	@Test(priority = 2)
-	public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another_as_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "222358";
+	public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
+		TestcaseID = "223359";
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -499,8 +501,8 @@ public class BulkTransfers extends BaseTest {
 	}
 
 	@Test(priority = 3)
-	public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic_as_PPHIS_BCVAXDEVIT() throws Exception {
-		TestcaseID = "222360";
+	public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic() throws Exception {
+		TestcaseID = "223363";
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
 		//// Supply Distribution_1_1 - containers#1 and #2, #3

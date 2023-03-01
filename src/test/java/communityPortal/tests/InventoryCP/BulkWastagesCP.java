@@ -20,7 +20,7 @@ public class BulkWastagesCP extends BaseTest {
 
 	//Needs to update TestcaseId for both CP tests
 	@Test()
-	public void CP_Can_Do_Bulk_Wastage_By_Dosages_As_PPHIS() throws Exception {
+	public void CP_Can_Do_Bulk_Wastage_By_Dosages_As_Clinician() throws Exception {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int amountOfDosesToWaste = 1;
@@ -110,7 +110,7 @@ public class BulkWastagesCP extends BaseTest {
 	}
 
 	@Test()
-	public void Can_Do_Bulk_Wastage_ByQuantity_As_PPHIS() throws Exception {
+	public void Can_Do_Bulk_Wastage_ByQuantity_As_Clinician() throws Exception {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int amountOfQuantityToWaste = 1;

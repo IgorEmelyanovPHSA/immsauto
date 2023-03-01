@@ -22,12 +22,14 @@
             <class name="bcvax.tests.Inventory.BulkAdjustments"/>
             <class name="bcvax.tests.Inventory.BulkDrafts"/>
             <class name="bcvax.tests.Inventory.BulkTransfers"/>
+            <class name="bcvax.tests.Inventory.BulkTransfersCancellation"/>
             <class name="bcvax.tests.Inventory.BulkWastages"/>
             <class name="bcvax.tests.Inventory.Consumption"/>
             <class name="bcvax.tests.Inventory.Drafts"/>
             <class name="bcvax.tests.Inventory.ReceiveSupplies"/>
             <class name="bcvax.tests.Inventory.Requisition"/>
             <class name="bcvax.tests.Inventory.Transfer"/>
+            <class name="bcvax.tests.Inventory.TransferCancellation"/>
             <class name="bcvax.tests.Inventory.Wastage"/>
             <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointmentCovid19"/>
             <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointmentInfluenza"/>

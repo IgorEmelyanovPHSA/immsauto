@@ -1,26 +1,25 @@
 package bcvax.tests.UserDefaults;
 
 import Utilities.TestListener;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-
 @Listeners({TestListener.class})
 public class UserDefaultsSettingsValidation extends BaseTest {
+
+    private final String[] lots = {"35035BD", "T005729-CC07"};
+    private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test()
     public void UserDefaultsSettingsValidationTest() throws Exception {
         TestcaseID = "222176"; //C222176
-        // Needs more work, after requirements are clarified. Only Lot validation is implemented
         log("Target Environment: " + Utils.getTargetEnvironment());
-        String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+        UserDefaultsPage userDefaultsPage = new UserDefaultsPage(getDriver());
+        CommonMethods common = new CommonMethods(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*1.----Login as clinician ICE --*/");
         InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEUserDefaults();
@@ -45,31 +44,43 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         Thread.sleep(2000);
 
         log("/*5.----- Enter current date for UserDefaults --*/");
-        inClinicExperience.inputCurrentDateUserDefaults();
+        userDefaultsPage.inputCurrentDateUserDefaults();
         Thread.sleep(2000);
 
         log("/*6.----- Enter clinic for UserDefaults: " + clinicLocation + "--*/");
-        inClinicExperience.selectClinicUserDefaults(clinicLocation);
+       // userDefaultsPage.selectClinicUserDefaults(clinicLocation);
 
-        log("/*7.----- Open Advanced Settings and get details--*/");
-        HashMap<String, String> agentLotTradeNameMap = inClinicExperience.clickBtnAdvancedSettingsAndSaveData();
-        String lot = agentLotTradeNameMap.get("lot");
+        log("/*7.----- Open Advanced Settings--*/");
+        userDefaultsPage.clickOnAdvancedSettings();
 
-        log("/*8.----- Click on Save defaults button --*/");
-        inClinicExperience.clickSaveDefaultsButton();
-        Thread.sleep(2000);
+        log("/*8.----- Delete lots if any present and save--*/");
+        Boolean isAnyLotsPresent = userDefaultsPage.isAnyLotsPresent();
+        if(isAnyLotsPresent==true){
+            userDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously();
+            log("All lots are deleted");
+            userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+        }
 
         log("/*9.---- Navigate to Supply Console Page --*/");
-        CommonMethods common = new CommonMethods(getDriver());
-        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew();
 
         Thread.sleep(2000);
-        log("/*10.---- Click on Automation Supply Location --*/");
-        supplyConsolePage.clickOnSupplyLocationCustom(clinicLocation);
+        log("/*10.---- Validating results, given lot numbers should match --*/");
+        for(int i = 0; i < lots.length; i++) {
+            Assert.assertTrue(supplyConsolePage.validateLotUserDefaults(lots[i]));
+        }
 
-        log("/*11.---- Validating results, lot number should match --*/");
-        Assert.assertTrue(supplyConsolePage.validateLotUserDefaults(lot));
+        log("/*12.---- Navigate User Defaults Page --*/");
+        common.goToUserDefaultsIfNeededAndConfirmPageIsDisplayed();
+
+        log("/*13.----- Open Advanced Settings --*/");
+        userDefaultsPage.clickOnAdvancedSettings();
+
+        log("/*14.----- Populate Lots and Sites --*/");
+        userDefaultsPage.populateLotsAndSite(lots);
+
+        log("/*15.----- Click btn Save and validate success msg --*/");
+        userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
     }
 }
 

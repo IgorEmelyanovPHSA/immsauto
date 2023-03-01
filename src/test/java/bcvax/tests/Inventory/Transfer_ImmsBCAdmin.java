@@ -39,9 +39,9 @@ public class Transfer_ImmsBCAdmin extends BaseTest {
 		distribution_to = String.valueOf(testData.get("distributionTo"));
 		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
 
-		log("/*1.----Login as ImmsBCAdmin to Supply Console --*/");
-
+		log("/*1.----Login --*/");
 		if(!Utils.isCommunityPortal()) {
+			log("/*----Login to ORG (oldUI) --*/");
 			supplyConsolePage = loginPage.loginAsImmsBCAdmin();
 			Thread.sleep(10000);
 			//Assert.assertTrue(false);
@@ -65,7 +65,8 @@ public class Transfer_ImmsBCAdmin extends BaseTest {
 			Thread.sleep(5000);
 		}
 		else  {
-			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+			log("/*----Login to CP (newUI) --*/");
+			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
 			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
 		}
 
@@ -73,7 +74,7 @@ public class Transfer_ImmsBCAdmin extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_as_ImmsBCAdmin() throws Exception {
-		TestcaseID = "244845"; //C244845
+		TestcaseID = "223184"; //C223184
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 

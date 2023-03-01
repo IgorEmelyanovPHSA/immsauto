@@ -32,7 +32,7 @@ public class ReceiveSupplies extends BaseTest {
 
 
 	@Test()
-	public void Validate_Receive_Supplies_By_Doses_as_an_PPHIS_Community() throws Exception {
+	public void Validate_Receive_Supplies_By_Doses_as_Clinician_Community() throws Exception {
 		TestcaseID = "223642"; //C223642
 		String vaccine = "VAXZEVRIA (AstraZeneca) - MT0055";
 		double doses = 10;

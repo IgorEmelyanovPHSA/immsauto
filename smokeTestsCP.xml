@@ -17,8 +17,8 @@
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>
             <class name="bcvax.tests.Inventory.Transfer"/>
             <class name="bcvax.tests.Inventory.BulkTransfers"/>
-            <class name="communityPortal.tests.InventoryCP.TransferCancellation"/>
-            <class name="communityPortal.tests.InventoryCP.BulkTransfersCancellation"/>
+            <class name="bcvax.tests.Inventory.TransferCancellation"/>
+            <class name="bcvax.tests.Inventory.BulkTransfersCancellation"/>
             <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
             <class name="communityPortal.tests.InventoryCP.WastageCP"/>
             <class name="communityPortal.tests.InventoryCP.DraftsCP"/>

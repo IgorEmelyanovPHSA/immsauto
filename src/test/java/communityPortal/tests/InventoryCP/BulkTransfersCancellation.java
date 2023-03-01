@@ -38,7 +38,7 @@ public class BulkTransfersCancellation extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void Can_doBulk_transfersBy_Doses_form_one_Clinic_to_Another_And_Cancel_as_PPHIS_Community() throws Exception {
+    public void Can_doBulk_transfersBy_Doses_form_one_Clinic_to_Another_And_Cancel_as_Clinician_Community() throws Exception {
         TestcaseID = "223359";
         String vaccine1 = "COMIRNATY (Pfizer) - EK4241";
         String vaccine2 = "SPIKEVAX 6mo-5y";

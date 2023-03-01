@@ -51,9 +51,10 @@ public class BulkTransfersCancellation extends BaseTest {
         containers_from = (ArrayList)testData.get("bulkContainersFrom");
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
-        log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
 
+        log("/*1.----Login ----*/");
         if (!is_new_ui) {
+            log("/----Login to ORG (oldUI) --*/");
             supplyConsolePage = loginPage.loginAsPPHIS();
             Thread.sleep(10000);
             //Assert.assertTrue(false);
@@ -76,6 +77,7 @@ public class BulkTransfersCancellation extends BaseTest {
             //////////////////////////////////////////////////
             Thread.sleep(5000);
         } else {
+            log("/*----Login to CP (newUI) --*/");
             communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
             supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
         }
@@ -83,7 +85,7 @@ public class BulkTransfersCancellation extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void Can_doBulk_transfersBy_Doses_form_one_Clinic_to_Another_And_Cancel_as_PPHIS_Community() throws Exception {
+    public void Can_doBulk_transfersBy_Doses_form_one_Clinic_to_Another_And_Cancel() throws Exception {
         TestcaseID = "223359";
         int doses = 10;
 
@@ -221,7 +223,7 @@ public class BulkTransfersCancellation extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void Can_doBulk_transfersBy_Quantity_form_one_Clinic_to_Another_and_Cancel_as_PPHIS_Community() throws Exception {
+    public void Can_doBulk_transfersBy_Quantity_form_one_Clinic_to_Another_and_Cancel() throws Exception {
         TestcaseID = "223359";
         int quantity = 1;
 

@@ -18,8 +18,18 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
-        log("/*1.----Login as an Clinician to Community Portal --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
+
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                loginPage.loginIntoCommunityPortalAsSysAdmin();
+                log("Login AS comunityqa_immsbc_admin");
+                break;
+            default:
+                loginPage.loginIntoCommunityPortalAsClinician();
+                log("Login AS default user");
+        }
         Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Participants -> Profiles Page --*/");
@@ -89,16 +99,16 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         if (profilesPage.selectDateOfAdministration())
             Thread.sleep(3000);
 
-        log("/*---16. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-        profilesPage.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
+        log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
+        profilesPage.selectInformedConsentProvider("Auto Clinician_DIWA_CP");
         Thread.sleep(5000);
 
         log("/*---17. click Save Consent ---*/");
         profilesPage.clickSaveConsent();
         Thread.sleep(5000);
 
-        log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-        profilesPage.selectImmunizingAgentProvider("Auto Clinician DIWA_ICE");
+        log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician_DIWA_CP ---*/");
+        profilesPage.selectImmunizingAgentProvider("Auto Clinician_DIWA_CP");
         Thread.sleep(6000);
 
         log("/*---19. Click Show all lot numbers Checkbox---*/");
@@ -140,6 +150,5 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         Thread.sleep(2000);
 
     }
-
 
 }
