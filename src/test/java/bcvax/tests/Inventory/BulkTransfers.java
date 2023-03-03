@@ -2,6 +2,7 @@ package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -19,7 +20,6 @@ import java.util.List;
 @Listeners({TestListener.class})
 public class BulkTransfers extends BaseTest {
 	private static final DecimalFormat df = new DecimalFormat("#.##");
-	Boolean is_new_ui;
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
@@ -36,7 +36,6 @@ public class BulkTransfers extends BaseTest {
 	int quantity;
 	@BeforeMethod
 	public void setUpClass() throws Exception {
-		is_new_ui = Utils.isCommunityPortal();
 		env = Utils.getTargetEnvironment();
 		doses = 1;
 		quantity = 1;
@@ -51,37 +50,36 @@ public class BulkTransfers extends BaseTest {
 		containers_to = (ArrayList)testData.get("bulkContainersTo");
 		containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
 
-		log("/*1.----Login --*/");
-		if(!is_new_ui) {
-			log("/----Login to ORG (oldUI) --*/");
+		log("/*1.----Login to ORG (oldUI) --*/");
+		if(env.contains("immsbc_admin")) {
+			supplyConsolePage = loginPage.loginAsImmsBCAdmin();
+		} else {
 			supplyConsolePage = loginPage.loginAsPPHIS();
-			Thread.sleep(10000);
-			//Assert.assertTrue(false);
-			log("/*2.----Supply Console Page displayed --*/");
-			supplyConsolePage.verifyIsSupplyPageDisplayed();
-			Thread.sleep(5000);
-			log("/*3.----Close All previously opened Tab's --*/");
-			supplyConsolePage.closeTabsHCA();
-			Thread.sleep(2000);
-			log("/*4.----Go to Supply Locations Tab --*/");
-			supplyConsolePage.clickSupplyLocationsTab();
-
-			////// Supply Location_1 -> Outcoming
-			log("/*5.----Click on Automation Supply Location_1 --*/");
-
-			/////////////////////////////////////////////////
-			//Try generic method
-			/////////////////////////////////////////////////
-			supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-			//////////////////////////////////////////////////
-			Thread.sleep(5000);
 		}
-		else  {
-			log("/*----Login to CP (newUI) --*/");
-			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
-			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
+		Thread.sleep(10000);
+		String currentApp = supplyConsolePage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
+		//Assert.assertTrue(false);
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		Thread.sleep(5000);
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
+		Thread.sleep(2000);
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
 
+		////// Supply Location_1 -> Outcoming
+		log("/*5.----Click on Automation Supply Location_1 --*/");
+
+		/////////////////////////////////////////////////
+		//Try generic method
+		/////////////////////////////////////////////////
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		//////////////////////////////////////////////////
+		Thread.sleep(5000);
 	}
 
 	@Test(priority = 1)
@@ -186,27 +184,23 @@ public class BulkTransfers extends BaseTest {
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
 		Thread.sleep(5000);
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-		int nn = 1;
-		int kk = countOutgoingTransactions;
-		log("/*17.2---Get Outgoing Transaction id 'from' --*/");
-		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-		log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-		log("/*17.3----Click on the latest created Outgoing Transactions --*/");
-		supplyConsolePage.clickOnOutgoingTransactions(kk);
-		log("/*--transactions record number --*/:" + kk);
+//		int nn = 1;
+//		int kk = countOutgoingTransactions;
+//		log("/*17.2---Get Outgoing Transaction id 'from' --*/");
+//		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+//		log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+//		log("/*17.3----Click on the latest created Outgoing Transactions --*/");
+//		supplyConsolePage.clickOnOutgoingTransactions(kk);
+//		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		log("/*19.----Go to Supply Locations Tab --*/");
-		if(!is_new_ui) {
-			supplyConsolePage.clickSupplyLocationsTab();
-			System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-			supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-			//supplyConsolePage.clickOnSupplyLocation_2();
-		} else {
-			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
-			Thread.sleep(2000);
-		}
+		supplyConsolePage.clickSupplyLocationsTab();
+		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+		supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+		//supplyConsolePage.clickOnSupplyLocation_2();
+
 		///////////////////// Doses/Qty BEFORE Automation Location_2//////////////////////////////////
 		log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -392,27 +386,22 @@ public class BulkTransfers extends BaseTest {
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
 		Thread.sleep(5000);
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-		int nn = 1;
-		int kk = countOutgoingTransactions;
-		log("/*17.2---Get Outgoing Transaction id 'from' --*/");
-		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-		log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-		log("/*17.3----Click on the latest created Outgoing Transactions --*/");
-		supplyConsolePage.clickOnOutgoingTransactions(kk);
-		log("/*--transactions record number --*/:" + kk);
+//		int nn = 1;
+//		int kk = countOutgoingTransactions;
+//		log("/*17.2---Get Outgoing Transaction id 'from' --*/");
+//		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+//		log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+//		log("/*17.3----Click on the latest created Outgoing Transactions --*/");
+//		supplyConsolePage.clickOnOutgoingTransactions(kk);
+//		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		log("/*19.----Go to Supply Locations Tab --*/");
-		if(!is_new_ui) {
-			supplyConsolePage.clickSupplyLocationsTab();
-			System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-			supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-			//supplyConsolePage.clickOnSupplyLocation_2();
-		} else {
-			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
-			Thread.sleep(2000);
-		}
+		supplyConsolePage.clickSupplyLocationsTab();
+		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+		supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+
 		/////////////////////Doses/Qty BEFORE Automation Location_2//////////////////////////////////
 		log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");

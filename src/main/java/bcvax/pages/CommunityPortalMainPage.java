@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
-import static constansts.Header.SUPPLY_LOCATION_NAME_FULL;
+import static constansts.Header.SUPPLY_LOCATION_NAME;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -119,7 +119,7 @@ public class CommunityPortalMainPage extends BasePage{
     @Step
     public SupplyConsolePage navigateToSupplyLocation( String location) throws InterruptedException {
         SupplyConsolePage supplyConsolePage = goToSupplyLocation();
-        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME_FULL, location));
+        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
         return supplyConsolePage;
     }
 

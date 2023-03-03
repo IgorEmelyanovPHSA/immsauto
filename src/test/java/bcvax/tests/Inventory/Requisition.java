@@ -4,7 +4,9 @@ package bcvax.tests.Inventory;
 import bcvax.pages.CommunityPortalMainPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
 
@@ -24,20 +26,27 @@ public class Requisition extends BaseTest {
 		//String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
 		String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 		boolean is_new_ui = Utils.isCommunityPortal();
+//		if(is_new_ui) {
+//			throw new SkipException("Temporarily Ignore test in CP");
+//		}
 		testData = Utils.getTestData(env);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-		if(!is_new_ui) {
-			supplyConsolePage = loginPage.loginAsPPHIS();
-			Thread.sleep(10000);
-			supplyConsolePage.verifyIsSupplyPageDisplayed();
-			supplyConsolePage.closeTabsHCA();
-			supplyConsolePage.clickSupplyLocationsTab();
-			supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+
+		if(env.contains("immsbc_admin")) {
+			supplyConsolePage = loginPage.loginAsImmsBCAdmin();
 		} else {
-			communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
-			supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
+			supplyConsolePage = loginPage.loginAsPPHIS();
 		}
+		Thread.sleep(10000);
+		String currentApp = supplyConsolePage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		supplyConsolePage.closeTabsHCA();
+		supplyConsolePage.clickSupplyLocationsTab();
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		//supplyConsolePage.verifyIsSupplyPageDisplayed();
 		//Thread.sleep(4000);
@@ -65,11 +74,12 @@ public class Requisition extends BaseTest {
 		log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for bcvaxdevit --COVID-19 mRNA COMIRNATY Pediatric 10mcg (Pfizer) Orange Cap 2mL 10-dose vial - FK5618-CC03 (2022-12-13 16:07:54) Lot FK5618-CC0 --*/");
-		supplyConsolePage.clickLineItemCheckBox();
+		int itemNum = 7;
+		supplyConsolePage.clickLineItemCheckBox(itemNum);
 		log("/*----12. click Next button --*/");
 		supplyConsolePage.clickNextButton();
 		System.out.println("/*----13. Input Requested Quantity and Doses --*/");
-		supplyConsolePage.inputRequestedDose("1");
+		supplyConsolePage.inputRequestedQuantity("1");
 		System.out.println("/*----14. Save Quantity and Doses --*/");
 		supplyConsolePage.clickSaveButton();
 		System.out.println("/*----15. Submit Requisition --*/");
@@ -97,7 +107,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePage.clickShipRequisition();
 
 		String actual = "Ship Requisition";
-		Assert.assertEquals(supplyConsolePage.ShipRequisition(), actual);
+		Assert.assertEquals(actual, supplyConsolePage.ShipRequisition());
 
 		System.out.println("/*----25. Save Shipping Requisition--*/");
 		supplyConsolePage.clickSaveShipRequisition();

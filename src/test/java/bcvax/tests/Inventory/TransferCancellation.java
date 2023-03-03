@@ -5,6 +5,7 @@ import bcvax.pages.CommunityPortalMainPage;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,7 +18,6 @@ import static java.lang.Math.round;
 public class TransferCancellation extends BaseTest {
     CommunityPortalMainPage communityPortalMainPage;
     SupplyConsolePage supplyConsolePage;
-    Boolean is_new_ui;
     String env;
     Map<String, Object> testData;
     String supply_location_from;
@@ -28,7 +28,6 @@ public class TransferCancellation extends BaseTest {
 
     @BeforeMethod
     public void setUpClass() throws Exception {
-        is_new_ui = Utils.isCommunityPortal();
         env = Utils.getTargetEnvironment();
         log("Target Environment: " + env);
         testData = Utils.getTestData(env);
@@ -38,40 +37,40 @@ public class TransferCancellation extends BaseTest {
         distribution_to = String.valueOf(testData.get("distributionTo"));
         distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
 
-        log("/*1.----Login--*/");
-        if (!is_new_ui) {
-            log("/*----Login to ORG (oldUI) --*/");
-            supplyConsolePage = loginPage.loginAsPPHIS();
-            Thread.sleep(10000);
-            //Assert.assertTrue(false);
-            log("/*2.----Supply Console Page displayed --*/");
-            supplyConsolePage.verifyIsSupplyPageDisplayed();
-            Thread.sleep(5000);
-            log("/*3.----Close All previously opened Tab's --*/");
-            supplyConsolePage.closeTabsHCA();
-            Thread.sleep(2000);
-            log("/*4.----Go to Supply Locations Tab --*/");
-            supplyConsolePage.clickSupplyLocationsTab();
-
-            ////// Supply Location_1 -> Outcoming
-            log("/*5.----Click on Automation Supply Location_1 --*/");
-
-            /////////////////////////////////////////////////
-            //Try generic method
-            /////////////////////////////////////////////////
-            supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-            //////////////////////////////////////////////////
-            Thread.sleep(5000);
+        log("/*1.----Login to ORG (oldUI) --*/");
+        if(env.contains("immsbc_admin")) {
+            supplyConsolePage = loginPage.loginAsImmsBCAdmin();
         } else {
-            log("/*----Login to CP (newUI) --*/");
-            communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
+            supplyConsolePage = loginPage.loginAsPPHIS();
         }
+        Thread.sleep(10000);
+        String currentApp = supplyConsolePage.currentApp();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
+        //Assert.assertTrue(false);
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
+        Thread.sleep(5000);
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+        Thread.sleep(2000);
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
 
+        ////// Supply Location_1 -> Outcoming
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+
+        /////////////////////////////////////////////////
+        //Try generic method
+        /////////////////////////////////////////////////
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        //////////////////////////////////////////////////
+        Thread.sleep(5000);
     }
 
     @Test(priority = 1)
-    public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_And_Cancel() throws Exception {
+    public void Can_do_Transfer_Cancellation_by_Dosages_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = "223184"; //C223184
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
@@ -117,19 +116,15 @@ public class TransferCancellation extends BaseTest {
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
         double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - doses;
-        assertEquals(remainingDosesAfterCalculationDistribution1_1, remainingDosesAfterDistribution1_1);
+        assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
         double remainingQtyAfterCalculationDistribution1_1 =
                 remainingDosesAfterCalculationDistribution1_1 / dose_conversation_factor;
-        assertEquals(remainingQtyAfterCalculationDistribution1_1, remainingQtyAfterDistribution1_1);
+        assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
-        if(!is_new_ui) {
-            supplyConsolePage.clickSupplyLocationsTab();
-            System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-            supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        } else {
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
-        }
+        supplyConsolePage.clickSupplyLocationsTab();
+        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -139,12 +134,9 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
         log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-        if(!is_new_ui) {
-            supplyConsolePage.clickSupplyLocationsTab();
-            supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-        } else {
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
-        }
+        supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         supplyConsolePage.clickTransactionsTab();
@@ -169,16 +161,13 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
         double remainingQtyAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution1_1);
-        assertEquals(remainingDosesBeforeDistribution1_1, remainingDosesAfterCancelDistribution1_1);
-        assertEquals(remainingQtyBeforeDistribution1_1, remainingQtyAfterCancelDistribution1_1);
+        assertEquals(remainingDosesAfterCancelDistribution1_1, remainingDosesBeforeDistribution1_1);
+        assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        if(!is_new_ui) {
-            supplyConsolePage.clickSupplyLocationsTab();
-            supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        } else {
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
-        }
+        supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -186,12 +175,12 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
         double remainingQtyAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution2_1);
-        assertEquals(remainingDosesBeforeDistribution2_1, remainingDosesAfterCancelDistribution2_1);
-        assertEquals(remainingQtyBeforeDistribution2_1, remainingQtyAfterCancelDistribution2_1);
+        assertEquals(remainingDosesAfterCancelDistribution2_1, remainingDosesBeforeDistribution2_1);
+        assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
-    @Test()
-    public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_And_Cancel() throws Exception {
+    @Test(priority = 2)
+    public void Can_do_Transfer_Cancellation_by_Quantity_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = "223184"; //C223184
         String container_from = String.valueOf(testData.get("containerFrom"));
         String container_to = String.valueOf(testData.get("containerTo"));
@@ -237,17 +226,14 @@ public class TransferCancellation extends BaseTest {
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
         double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - quantity * dose_conversation_factor ;
-        assertEquals(remainingDosesAfterCalculationDistribution1_1, remainingDosesAfterDistribution1_1);
+        assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
         double remainingQtyAfterCalculationDistribution1_1 = remainingQtyBeforeDistribution1_1 - quantity;
-        assertEquals(remainingQtyAfterCalculationDistribution1_1, remainingQtyAfterDistribution1_1);
+        assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
-        if(!is_new_ui) {
-            supplyConsolePage.clickSupplyLocationsTab();
-            System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-            supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        } else {
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
-        }
+        supplyConsolePage.clickSupplyLocationsTab();
+        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -257,12 +243,9 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
         log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-        if(!is_new_ui) {
-            supplyConsolePage.clickSupplyLocationsTab();
-            supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-        } else {
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
-        }
+        supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         supplyConsolePage.clickTransactionsTab();
@@ -288,16 +271,13 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
         double remainingQtyAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution1_1);
-        assertEquals(remainingDosesBeforeDistribution1_1, remainingDosesAfterCancelDistribution1_1);
-        assertEquals(remainingQtyBeforeDistribution1_1, remainingQtyAfterCancelDistribution1_1);
+        assertEquals(remainingDosesAfterCancelDistribution1_1, remainingDosesBeforeDistribution1_1);
+        assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        if(!is_new_ui) {
-            supplyConsolePage.clickSupplyLocationsTab();
-            supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        } else {
-            supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
-        }
+        supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -305,8 +285,8 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
         double remainingQtyAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution2_1);
-        assertEquals(remainingDosesBeforeDistribution2_1, remainingDosesAfterCancelDistribution2_1);
-        assertEquals(remainingQtyBeforeDistribution2_1, remainingQtyAfterCancelDistribution2_1);
+        assertEquals(remainingDosesAfterCancelDistribution2_1, remainingDosesBeforeDistribution2_1);
+        assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
 }

@@ -96,19 +96,33 @@ public class GenericTable {
      *
      * @return List with text values of table heading elements.
      */
+//    public List<String> getHeadingsAsString() {
+//        List<String> list = new ArrayList<>();
+//        for (WebElement el : getHeadings()) {
+//            if (el.getText().isEmpty()) {
+//                list.add(el.getAttribute("title"));
+//            } else {
+//                list.add(el.getText());
+//            }
+//
+//        }
+//        return list;
+//    }
+
     public List<String> getHeadingsAsString() {
         List<String> list = new ArrayList<>();
         for (WebElement el : getHeadings()) {
-            if (el.getText().isEmpty()) {
-                list.add(el.getAttribute("title"));
-            } else {
-                list.add(el.getText());
+            String columnName = el.getAttribute("title");
+            if(columnName == null || columnName.equals("")) {
+                columnName = el.getAttribute("aria-label");
             }
-
+            if(columnName == null) {
+                columnName = el.getText();
+            }
+            list.add(columnName);
         }
         return list;
     }
-
     /**
      * Returns table cell elements ({@code <td>}), grouped by rows.
      *

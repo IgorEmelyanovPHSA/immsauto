@@ -14,12 +14,16 @@ import java.util.*;
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
+import static constansts.Apps.*;
 import static constansts.Header.SUPPLY_TRANSACTION_NAME_FULL;
 import static org.testng.Assert.assertTrue;
 
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
+	@FindBy(xpath = "//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span")
+	private WebElement currentApp;
+
 	@FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
 	private WebElement supply_locations_tab;
 	private By supply_locations_tab1 = By.xpath("(.//span[@class = 'slds-truncate'])[2]");
@@ -540,6 +544,8 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//h2[text() = 'Container - Adjustment']/../..//button[text() = 'Adjustment']")
 	private WebElement btnBulkAdjustmentContainerAdjustmentPage;
 
+	@FindBy(xpath = "//h3[text()='Apps']")
+	private WebElement appsLauncherHeader;
 	///////////////////////////////////////////////////////////////////////////////
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
@@ -644,13 +650,29 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	/*-------------Methods--------------*/
-	public void inputRequestedDose(String inputDose) throws InterruptedException {
+	public void inputRequestedQuantity(String inputQuantity) throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement dosesInput = driver.findElement(By.xpath("//div[@class='slds-form-element__control slds-grow']/input"));
+		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[4]//input"));
 		dosesInput.clear();
-		dosesInput.sendKeys(inputDose);
+		dosesInput.sendKeys(inputQuantity);
 	}
-	
+
+	public String currentApp() {
+		waitForElementToBeVisible(driver, currentApp, 30);
+		return currentApp.getText();
+	}
+
+	public void switchApp(String app) throws InterruptedException {
+		driver.findElement(By.xpath("//span[text()='App Launcher']/..")).click();
+		waitForElementToBeVisible(driver, appsLauncherHeader, 30);
+		Thread.sleep(2000);
+		List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
+		for(WebElement appElement : apps) {
+			if(appElement.getAttribute("data-label").equals(app)) {
+				appElement.findElement(By.xpath("./..")).click();
+			}
+		}
+	}
 	public void clickSaveButton() {
 		moveToElement(saveButton);
 		saveButton.click();
@@ -764,18 +786,26 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnSupplyLocation(String supply_location_name) throws InterruptedException {
-		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME_FULL, supply_location_name);
-		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME_FULL).findElement(By.tagName("a")).click();
+		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME, supply_location_name);
+		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME).findElement(By.tagName("a")).click();
 	}
 
 	public void clickRequestSupplies() throws InterruptedException {
 		Thread.sleep(2000);
 		List<WebElement> request_supplies_btn = null;
 		int num = 0;
+		//Timeout in seconds
+		int timeout = 10;
+		long currentTimeStart = System.currentTimeMillis() / 1000;
+
 		while(request_supplies_btn == null || num == 0) {
 			request_supplies_btn = driver.findElements(By.xpath("//button[text() = 'Request Supplies'] | //a[@title = 'Request Supplies']"));
 			num = request_supplies_btn.size();
 			Thread.sleep(500);
+			long currentTime = System.currentTimeMillis() / 1000;
+			if(currentTime - currentTimeStart > timeout) {
+				throw new NoSuchElementException("Request Supplies Button not found");
+			}
 		}
 		System.out.println(request_supplies_btn.size());
 		Thread.sleep(1000);
@@ -814,7 +844,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		tables.getSupplyContainerRow(supplyContainer).get("Select All").click();
 	}
 
@@ -881,21 +911,21 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
+		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, search_supply_location_2_To, 60);
 		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
-		Thread.sleep(3000);
-		waitForElementToBeVisible(driver, select_supply_location_2_To, 60);
-		Thread.sleep(5000);
+		Thread.sleep(1000);
+		waitForElementToBeVisible(driver, select_supply_location_2_To, 120);
 		select_supply_location_2_To.click();
 		Thread.sleep(2000);
 		return this;
 	}
 	
 	public void selectSupplyLocation_1_To() throws InterruptedException {
-		waitForElementToBeVisible(driver, search_supply_location_1_To, 10);
+		waitForElementToBeVisible(driver, search_supply_location_1_To, 30);
 		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
 		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_supply_location_1_To, 10);
+		waitForElementToBeVisible(driver, select_supply_location_1_To, 30);
 		Thread.sleep(5000);
 		select_supply_location_1_To.click();
 		Thread.sleep(2000);
@@ -938,12 +968,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
-		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME_FULL);
+		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
 		return (supplyTransactionId);
 	}
 
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
-		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME_FULL).click();
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME).click();
 	}
 	
 	public void clickSupplyTransactionRelatedTab() throws InterruptedException {
@@ -1074,8 +1104,9 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
-		moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
-		click(bulk_confirm_incoming_transfers_button_1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false)", bulk_confirm_incoming_transfers_button);
+		//moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
+		click(bulk_confirm_incoming_transfers_button);
 	}
 	
 	public void selectIncomingSupplyDistribution() throws InterruptedException {
@@ -1126,7 +1157,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnContainerDropDownMenu(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		tables.getSupplyLocationActions(supplyContainer);
 	}
 
@@ -1222,13 +1253,13 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		double doses = tables.getRemainingDoses(supplyContainer);
 		return (doses);
 	}
 
 	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, container, SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, distribution);
+		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		double quontity = tables.getRemainingQty(supplyContainer);
 		return (quontity);
 	}
@@ -1518,16 +1549,16 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("").click();
+		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("Actions").click();
 	}
 
 	public void clickOnOutgoingTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("").click();
+		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("Actions").click();
 	}
 
 	@Step
 	public void selectConfirmIncomingDropDown() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 10);
+		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 30);
 		Thread.sleep(2000);
 		select_Confirm_in_dropdown.click();
 	}
@@ -2147,10 +2178,11 @@ public class SupplyConsolePage extends BasePage {
 		select_supply_location_from.click();
 	}
 
-	public void clickLineItemCheckBox() throws InterruptedException {
-		By check_box = By.xpath("//tbody/tr[7]/td[1]/lightning-input/div/span/label/span[@part='indicator']");
-		waitForElementToBeLocated(driver, check_box, 30);
-		WebElement element = driver.findElement(check_box);
+	public void clickLineItemCheckBox(int itemNum) throws InterruptedException {
+		WebElement element = tables.getRequisitionLineItemsTable().getRowsMappedToHeadings().get(itemNum).get("").findElement(By.xpath(".//span[@part='indicator']"));
+		//By check_box = By.xpath("//tbody/tr[7]/td[1]/lightning-input/div/span/label/span[@part='indicator']");
+		//waitForElementToBeLocated(driver, check_box, 30);
+		//WebElement element = driver.findElement(check_box);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(500);
 		element.click();
@@ -2206,7 +2238,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, driver.findElement(By.xpath("//label[text() = 'Trade']")), 30);
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
 		String tradeValue = trade.getAttribute("value");
-		WebElement approveDoseField = driver.findElement(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input"));
+		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input")).get(0);
 		approveDoseField.sendKeys(inputDose);
 	}
 
