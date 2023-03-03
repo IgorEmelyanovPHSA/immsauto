@@ -4,6 +4,7 @@
     <test name="SmokeCP">
         <classes>
             <class name="communityPortal.tests.DIWA_CP.DIWA_Covid19_CP_ImmsBCAdmin"/>
+            <class name="communityPortal.tests.InventoryCP.WastageCP"/>
 
 
         </classes>
