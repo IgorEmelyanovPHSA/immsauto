@@ -1,28 +1,23 @@
-package bcvax.tests.Inventory;
+package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
 import bcvax.pages.CommunityPortalMainPage;
 import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Tables;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
-import com.google.common.collect.ImmutableMap;
-import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.testng.SkipException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static constansts.Domain.*;
-import static constansts.Header.*;
 import static org.testng.Assert.assertEquals;
 
 
 @Listeners({TestListener.class})
-public class BulkTransfersCancellation extends BaseTest {
+public class BulkTransfersCancellationCP extends BaseTest {
 
     CommunityPortalMainPage communityPortalMainPage;
     SupplyConsolePage supplyConsolePage;
@@ -51,38 +46,9 @@ public class BulkTransfersCancellation extends BaseTest {
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
 
-        log("/*1.----Login ----*/");
-
-        log("/----Login to ORG (oldUI) --*/");
-        if(env.contains("immsbc_admin")) {
-            supplyConsolePage = loginPage.loginAsImmsBCAdmin();
-        } else {
-            supplyConsolePage = loginPage.loginAsPPHIS();
-        }
-        Thread.sleep(10000);
-        String currentApp = supplyConsolePage.currentApp();
-        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
-        }
-        //Assert.assertTrue(false);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
-        Thread.sleep(5000);
-        log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
-        Thread.sleep(2000);
-        log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-
-        ////// Supply Location_1 -> Outcoming
-        log("/*5.----Click on Automation Supply Location_1 --*/");
-
-        /////////////////////////////////////////////////
-        //Try generic method
-        /////////////////////////////////////////////////
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-        //////////////////////////////////////////////////
-        Thread.sleep(5000);
+        log("/*1.----Login to CP (newUI) --*/");
+        communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
     }
 
     @Test(priority = 1)
@@ -144,11 +110,8 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        Thread.sleep(2000);
-
         log("/----Count Remaining Supplies Before Transaction --*/");
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
@@ -158,9 +121,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
-        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
         Thread.sleep(2000);
 
         supplyConsolePage.refreshBrowser();
@@ -195,10 +156,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
-        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        Thread.sleep(2000);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
 
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
@@ -267,9 +225,7 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
         Thread.sleep(2000);
 
         log("/----Count Remaining Supplies Before Transaction --*/");
@@ -283,9 +239,7 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
         Thread.sleep(2000);
 
         supplyConsolePage.refreshBrowser();
@@ -319,11 +273,8 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelLocationDistribution1_3, remainingQtyBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
         Thread.sleep(2000);
-
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
 

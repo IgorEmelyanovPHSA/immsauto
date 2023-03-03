@@ -15,10 +15,11 @@
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose2_COVID19"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_Influenza"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>
-            <class name="bcvax.tests.Inventory.Transfer"/>
-            <class name="bcvax.tests.Inventory.BulkTransfers"/>
-            <class name="bcvax.tests.Inventory.TransferCancellation"/>
-            <class name="bcvax.tests.Inventory.BulkTransfersCancellation"/>
+            <class name="communityPortal.tests.InventoryCP.TransferCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkTransfersCP"/>
+            <class name="communityPortal.tests.InventoryCP.TransferCancellationCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkTransfersCancellationCP"/>
+            <class name="communityPortal.tests.InventoryCP.RequisitionCP"/>
             <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
             <class name="communityPortal.tests.InventoryCP.WastageCP"/>
             <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
