@@ -9,10 +9,10 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class DIWA_Covid19_CP_Clinician extends BaseTest {
+public class DIWA_Covid19_CP extends BaseTest {
 
     @Test
-    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_ComunityQA() throws Exception {
+    public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         String nameToSearch = "Benoite Denna BCVaxD";
@@ -23,12 +23,15 @@ public class DIWA_Covid19_CP_Clinician extends BaseTest {
         log("/*1.----Login --*/");
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin":
-                loginPage.loginIntoCommunityPortalAsSysAdmin();
-                log("Login AS comunityqa_immsbc_admin");
+                log("Login as ImmsBCAdmin");
+                TestcaseID = "245099"; //C245099
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
+                log("Login as DIWA Clinician user");
+                TestcaseID = "223187"; //C223187
                 loginPage.loginIntoCommunityPortalAsClinician();
-                log("Login AS default user");
+
         }
         Thread.sleep(10000);
 
