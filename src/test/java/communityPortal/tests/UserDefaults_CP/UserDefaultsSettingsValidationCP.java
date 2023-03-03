@@ -7,9 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 @Listeners({TestListener.class})
 public class UserDefaultsSettingsValidationCP extends BaseTest {
 
@@ -22,7 +19,7 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*1.----Login --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----- Navigate to User Defaults Tab --*/");

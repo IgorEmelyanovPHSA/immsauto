@@ -27,7 +27,7 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an Clinician to Community Portal --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         Thread.sleep(10000);
 
         log("/*2.----Community Portal Home page displayed --*/");

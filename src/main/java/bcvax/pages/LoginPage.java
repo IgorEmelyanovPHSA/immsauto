@@ -198,7 +198,7 @@ public class LoginPage extends BasePage {
 	private WebElement logOut;
 
 	@Step
-	public CommunityPortalMainPage loginIntoCommunityPortalAsImmsBCAdmin() throws Exception {
+	public MainPageCP loginIntoCommunityPortalAsImmsBCAdmin() throws Exception {
 		//To be able to login as Admin into community portal (new UI) we have to use old UI url and select portal in menu
 		CommonMethods common = new CommonMethods(driver);
 		driver.navigate().to(Utils.getEnvConfigProperty("url_old_ui"));
@@ -207,10 +207,10 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		Thread.sleep(15000);
 		common.goToVaccinationPortalIfNeededAndConfirmPageIsDisplayed();
-		return new CommunityPortalMainPage(driver);
+		return new MainPageCP(driver);
 	}
 
-	@Step public CommunityPortalMainPage loginIntoCommunityPortalAsSysAdmin() throws Exception {
+	@Step public MainPageCP loginIntoCommunityPortalAsSysAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
 		click(btnLoginHere);
@@ -219,7 +219,7 @@ public class LoginPage extends BasePage {
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP_PW"));
 		click(login_button);
 		log("  -- Login AS " + Utils.getEnvConfigProperty("user_SYS_ADMIN_CP") +  " +--*/");
-		return new CommunityPortalMainPage(driver);
+		return new MainPageCP(driver);
 	}
 
 	public void logOutCommunityPortal() throws Exception {
@@ -228,13 +228,13 @@ public class LoginPage extends BasePage {
 		Thread.sleep(1000);
 	}
 
-	public CommunityPortalMainPage loginIntoCommunityPortalAsClinicianInventory() throws Exception {
+	public MainPageCP loginIntoCommunityPortalAsClinicianInventory() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
 		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Inventory_CP"));
 		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_Inventory_CP"));
 		login_button_CP.click();
-		return new CommunityPortalMainPage(driver);
+		return new MainPageCP(driver);
 	}
 
 	public CommunityPortalMainPage_as_Clinician loginIntoCommunityPortalAsClerk() throws Exception {
@@ -242,14 +242,14 @@ public class LoginPage extends BasePage {
 		return new CommunityPortalMainPage_as_Clinician(driver);
 	}
 
-	public CommunityPortalMainPage loginIntoCommunityPortalAsClinician() throws Exception {
+	public MainPageCP loginIntoCommunityPortalAsClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
-		return new CommunityPortalMainPage(driver);
+		return new MainPageCP(driver);
 	}
 
-	public CommunityPortalMainPage loginIntoCommunityPortalAsInventoryClinician() throws Exception {
+	public MainPageCP loginIntoCommunityPortalAsInventoryClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_inventory_CLINICIAN_CP", "password_inventory_CLINICIAN_PW_CP");
-		return new CommunityPortalMainPage(driver);
+		return new MainPageCP(driver);
 	}
 
 	public void loginIntoCommunityPortalAs(String user, String pass) throws Exception {

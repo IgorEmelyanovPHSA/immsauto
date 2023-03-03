@@ -1,6 +1,6 @@
 package communityPortal.tests.InventoryCP;
 
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Tables;
 import bcvax.pages.Utils;
@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 
 
 public class ReceiveSupplies extends BaseTest {
-	CommunityPortalMainPage communityPortalMainPage;
+	MainPageCP communityPortalMainPage;
 	SupplyConsolePage supplyConsolePage;
 	Tables tables;
 

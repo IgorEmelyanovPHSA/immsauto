@@ -1,7 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class BulkTransfersCancellationCP extends BaseTest {
 
-    CommunityPortalMainPage communityPortalMainPage;
+    MainPageCP communityPortalMainPage;
     SupplyConsolePage supplyConsolePage;
     String env;
     Map<String, Object> testData;

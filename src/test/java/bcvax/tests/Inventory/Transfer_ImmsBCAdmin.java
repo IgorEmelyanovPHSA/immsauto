@@ -1,7 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -22,7 +22,7 @@ public class Transfer_ImmsBCAdmin extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
-	CommunityPortalMainPage communityPortalMainPage;
+	MainPageCP communityPortalMainPage;
 	String supply_location_from;
 	String supply_location_to;
 	String distribution_from;

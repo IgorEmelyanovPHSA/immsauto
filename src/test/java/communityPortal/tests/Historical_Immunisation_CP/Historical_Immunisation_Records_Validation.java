@@ -1,7 +1,7 @@
 package communityPortal.tests.Historical_Immunisation_CP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
@@ -25,7 +25,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
         log("/*1.----Login as an Clinician to Community Portal new UI --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
         Thread.sleep(10000);
 
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
