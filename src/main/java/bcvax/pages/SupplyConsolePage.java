@@ -14,12 +14,16 @@ import java.util.*;
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
+import static constansts.Apps.*;
 import static constansts.Header.SUPPLY_TRANSACTION_NAME_FULL;
 import static org.testng.Assert.assertTrue;
 
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
+	@FindBy(xpath = "//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span")
+	private WebElement currentApp;
+
 	@FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
 	private WebElement supply_locations_tab;
 	private By supply_locations_tab1 = By.xpath("(.//span[@class = 'slds-truncate'])[2]");
@@ -540,6 +544,8 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//h2[text() = 'Container - Adjustment']/../..//button[text() = 'Adjustment']")
 	private WebElement btnBulkAdjustmentContainerAdjustmentPage;
 
+	@FindBy(xpath = "//h3[text()='Apps']")
+	private WebElement appsLauncherHeader;
 	///////////////////////////////////////////////////////////////////////////////
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
@@ -650,7 +656,23 @@ public class SupplyConsolePage extends BasePage {
 		dosesInput.clear();
 		dosesInput.sendKeys(inputQuantity);
 	}
-	
+
+	public String currentApp() {
+		waitForElementToBeVisible(driver, currentApp, 30);
+		return currentApp.getText();
+	}
+
+	public void switchApp(String app) throws InterruptedException {
+		driver.findElement(By.xpath("//span[text()='App Launcher']/..")).click();
+		waitForElementToBeVisible(driver, appsLauncherHeader, 30);
+		Thread.sleep(2000);
+		List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
+		for(WebElement appElement : apps) {
+			if(appElement.getAttribute("data-label").equals(app)) {
+				appElement.findElement(By.xpath("./..")).click();
+			}
+		}
+	}
 	public void clickSaveButton() {
 		moveToElement(saveButton);
 		saveButton.click();
@@ -772,10 +794,18 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		List<WebElement> request_supplies_btn = null;
 		int num = 0;
+		//Timeout in seconds
+		int timeout = 10;
+		long currentTimeStart = System.currentTimeMillis() / 1000;
+
 		while(request_supplies_btn == null || num == 0) {
 			request_supplies_btn = driver.findElements(By.xpath("//button[text() = 'Request Supplies'] | //a[@title = 'Request Supplies']"));
 			num = request_supplies_btn.size();
 			Thread.sleep(500);
+			long currentTime = System.currentTimeMillis() / 1000;
+			if(currentTime - currentTimeStart > timeout) {
+				throw new NoSuchElementException("Request Supplies Button not found");
+			}
 		}
 		System.out.println(request_supplies_btn.size());
 		Thread.sleep(1000);
@@ -881,8 +911,10 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
+		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, search_supply_location_2_To, 60);
 		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
+		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, select_supply_location_2_To, 120);
 		select_supply_location_2_To.click();
 		Thread.sleep(2000);
@@ -890,10 +922,10 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void selectSupplyLocation_1_To() throws InterruptedException {
-		waitForElementToBeVisible(driver, search_supply_location_1_To, 10);
+		waitForElementToBeVisible(driver, search_supply_location_1_To, 30);
 		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
 		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_supply_location_1_To, 10);
+		waitForElementToBeVisible(driver, select_supply_location_1_To, 30);
 		Thread.sleep(5000);
 		select_supply_location_1_To.click();
 		Thread.sleep(2000);
@@ -1072,8 +1104,9 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
 		waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
-		moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
-		click(bulk_confirm_incoming_transfers_button_1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false)", bulk_confirm_incoming_transfers_button);
+		//moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
+		click(bulk_confirm_incoming_transfers_button);
 	}
 	
 	public void selectIncomingSupplyDistribution() throws InterruptedException {
@@ -1525,7 +1558,7 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void selectConfirmIncomingDropDown() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 10);
+		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 30);
 		Thread.sleep(2000);
 		select_Confirm_in_dropdown.click();
 	}
@@ -2145,10 +2178,11 @@ public class SupplyConsolePage extends BasePage {
 		select_supply_location_from.click();
 	}
 
-	public void clickLineItemCheckBox() throws InterruptedException {
-		By check_box = By.xpath("//tbody/tr[7]/td[1]/lightning-input/div/span/label/span[@part='indicator']");
-		waitForElementToBeLocated(driver, check_box, 30);
-		WebElement element = driver.findElement(check_box);
+	public void clickLineItemCheckBox(int itemNum) throws InterruptedException {
+		WebElement element = tables.getRequisitionLineItemsTable().getRowsMappedToHeadings().get(itemNum).get("").findElement(By.xpath(".//span[@part='indicator']"));
+		//By check_box = By.xpath("//tbody/tr[7]/td[1]/lightning-input/div/span/label/span[@part='indicator']");
+		//waitForElementToBeLocated(driver, check_box, 30);
+		//WebElement element = driver.findElement(check_box);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(500);
 		element.click();

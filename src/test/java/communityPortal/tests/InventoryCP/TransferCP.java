@@ -1,10 +1,9 @@
-package bcvax.tests.Inventory;
+package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
-import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -15,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 import java.util.Map;
 
 @Listeners({TestListener.class})
-public class Transfer extends BaseTest {
+public class TransferCP extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
@@ -36,37 +35,9 @@ public class Transfer extends BaseTest {
 		distribution_to = String.valueOf(testData.get("distributionTo"));
 		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
 
-		log("/*----Login to ORG (oldUI) --*/");
-		if(env.contains("immsbc_admin")) {
-			supplyConsolePage = loginPage.loginAsImmsBCAdmin();
-		} else {
-			supplyConsolePage = loginPage.loginAsPPHIS();
-		}
-
-		Thread.sleep(10000);
-		String currentApp = supplyConsolePage.currentApp();
-		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
-		}
-		//Assert.assertTrue(false);
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
-		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
-
-		////// Supply Location_1 -> Outcoming
-		log("/*5.----Click on Automation Supply Location_1 --*/");
-
-		/////////////////////////////////////////////////
-		//Try generic method
-		/////////////////////////////////////////////////
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-		//////////////////////////////////////////////////
-		Thread.sleep(5000);
+		log("/*----Login to CP (newUI) --*/");
+		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
 	}
 
 	@Test(priority = 1)
@@ -129,11 +100,11 @@ public class Transfer extends BaseTest {
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		supplyConsolePage.clickTransactionsTab();
 		Thread.sleep(5000);
-		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
-		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
-		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
+//		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
+//		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
+//		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+//		Thread.sleep(5000);
+//		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 //		int kk = countOutgoingTransactions;
 //		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
 //		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
@@ -145,10 +116,10 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
-		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-		//supplyConsolePage.clickOnSupplyLocation_2();
+		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
+		Thread.sleep(2000);
+
+
 		///////////////// Supply Location_2 -> Incoming //////////////////////////
 
 		Thread.sleep(2000);
@@ -265,11 +236,11 @@ public class Transfer extends BaseTest {
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		supplyConsolePage.clickTransactionsTab();
 		Thread.sleep(5000);
-		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
-		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
-		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
+//		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
+//		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
+//		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+//		Thread.sleep(5000);
+//		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 //		int kk = countOutgoingTransactions;
 //		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
 //		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
@@ -281,11 +252,7 @@ public class Transfer extends BaseTest {
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(3000);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-
-		supplyConsolePage.clickSupplyLocationsTab();
-		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-		//supplyConsolePage.clickOnSupplyLocation_2();
+		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
 		Thread.sleep(2000);
 
 		///////////////// Supply Location_2 -> Incoming //////////////////////////

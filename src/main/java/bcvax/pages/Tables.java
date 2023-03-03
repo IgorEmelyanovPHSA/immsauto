@@ -24,8 +24,12 @@ public class Tables extends BasePage {
     private WebElement containerTransfer;
     @FindBy(xpath = ".//lightning-card")
     private List<WebElement> transactionTables;
-    @FindBy(xpath = ".//table[@class='slds-table forceRecordLayout slds-table--header-fixed slds-table--edit slds-table--bordered resizable-cols slds-table--resizable-cols uiVirtualDataTable']")
+    @FindBy(xpath = ".//table[@class='slds-table slds-table_header-fixed slds-table_bordered slds-table_edit resizable-cols slds-table_resizable-cols']")
     private List<WebElement> requisitionTables;
+
+    @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered scrollClass']")
+    private WebElement requisitionLineItemsTable;
+
     public Tables(WebDriver driver) {
         super(driver);
     }
@@ -44,6 +48,11 @@ public class Tables extends BasePage {
     public GenericTable getSupplyContainerTable() {
         waitForTextToBePresent(driver, supplyContainerTable ,30, "Container");
         return new GenericTable(supplyContainerTable);
+    }
+
+    public GenericTable getRequisitionLineItemsTable() {
+        waitForTextToBePresent(driver, requisitionLineItemsTable ,30, "Dose Conversion Factor");
+        return new GenericTable(requisitionLineItemsTable);
     }
 
     public GenericTable getSingleTransactionsTable(String table) {
@@ -185,7 +194,7 @@ public class Tables extends BasePage {
 
     public GenericTable getSingleRequisitionTable(String dataTable) {
         WebElement singleTable = null;
-        waitForTextToBePresentInTable(driver, requisitionTables ,20, "Transaction");
+        waitForTextToBePresentInTable(driver, requisitionTables ,20, "Requisition");
         for (WebElement e : requisitionTables) {
             if (e.getText().contains(dataTable)) {
                 singleTable = e;
