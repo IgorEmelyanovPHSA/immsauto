@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
+
 public class CommonMethods extends BasePage{
 
     public CommonMethods(WebDriver driver) {
@@ -19,6 +21,7 @@ public class CommonMethods extends BasePage{
     private By appsLauncher = By.xpath("//div[@class='slds-icon-waffle']");
     private By appsSupplyLocation = By.xpath("//p[text()='Health Connect - Supply Console']");
     private By appsInClinicExperience = By.xpath("//p[text()='In-Clinic Experience']");
+    private By appsBCHVaccinationPortal = By.xpath("//p[text()='BCH Vaccination Portal']");
     private By supplyLocation = By.xpath("//a[@title='Supply Locations']");
     private By recentlyViewedId = By.xpath("//span[contains(text(),'Recently Viewed')]");
 
@@ -47,6 +50,10 @@ public class CommonMethods extends BasePage{
 
     @FindBy(xpath = "//input[@placeholder = 'Search...']")
     private WebElement searchInput;
+
+    @FindBy(xpath = "//button[contains(text(),'Go to User Defaults')]")
+    private WebElement btnGoToUserDefaultsCP;
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -130,7 +137,7 @@ public class CommonMethods extends BasePage{
         executor1.executeScript("arguments[0].click();", element1);
         Thread.sleep(2000);
     }
-    
+
     public void goToSupplyPageIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
         closeAutomationLocationTab();
         Thread.sleep(5000);
@@ -179,6 +186,31 @@ public class CommonMethods extends BasePage{
         }
 
     }
+
+    public void goToVaccinationPortalIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
+        log("/*-- Navigate to BCH Vaccination Portal --*/");
+        //Store the ID of the original window
+        String originalWindow = driver.getWindowHandle();
+        click(appsLauncher);
+        Thread.sleep(3500);
+        click(appsBCHVaccinationPortal);
+        Thread.sleep(10000);
+
+        //Wait for the new window or tab
+        wait.until(numberOfWindowsToBe(2));
+        //Loop through until we find a new window handle
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+
+        //Work around the issue with this message, will be deleted
+        click(btnGoToUserDefaultsCP);
+        Thread.sleep(3000);
+    }
+
 
     public void goToUserDefaultsIfNeededAndConfirmPageIsDisplayed() throws InterruptedException {
       //  closeAutomationLocationTab();
