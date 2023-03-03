@@ -24,7 +24,7 @@ public class DIWA_ICE_ImmsBCAdmin extends BaseTest {
 
 	@Test(dataProvider = "testData")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_ImmsBCAdmin_in_ICE(String citizenName) throws Exception {
-		TestcaseID = "244854"; //C244854
+		//TestcaseID = "244854"; //C244854
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		//0.
 		//String nameToSearch = "Benoite Denna BCVaxD";
@@ -54,15 +54,19 @@ public class DIWA_ICE_ImmsBCAdmin extends BaseTest {
 		String clinicLocation = "All Ages - Atlin Health Centre";
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
+		Thread.sleep(5000);
+
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
 				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
 				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244854"; //C244854
 				break;
 			default:
 				loginPage.loginAsClinicianICE();
 				log("Login AS default user (Clinician to ICE)");
+				TestcaseID = "223187"; //C223187
 		}
 		Thread.sleep(5000);
 

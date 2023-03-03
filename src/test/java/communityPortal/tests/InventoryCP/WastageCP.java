@@ -18,20 +18,29 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class WastageCP extends BaseTest {
 
-	//Needs to update TestcaseId for both test
-
 	@Test()
-	public void CP_Can_Do_Single_Wastage_ByDosages_AS_Clinician() throws Exception {
+	public void Can_Do_Single_Wastage_ByDosagesCP() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
-		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+		CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
 
-		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin":
+				log("Login AS comunityqa_immsbc_admin");
+				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+				break;
+			default:
+				log("Login AS default user (ClinicianInventory)");
+				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				Thread.sleep(10000);
+		}
+
+		log("/2.----Navigate to Supply Console Page --*/");
+		cpMainPage.navigateToSupplyConsolePage();
 
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -56,7 +65,7 @@ public class WastageCP extends BaseTest {
 		log("/*7.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
 		supplyConsolePage.selectReasonForWastageDropDown();
 
-		log("/*8----Clicking on btn Wastage --*/");
+		log("/*8.----Clicking on btn Wastage --*/");
 		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
 
 		//Verification values in Container - Wastage pop-up
@@ -122,18 +131,29 @@ public class WastageCP extends BaseTest {
 	}
 
 	@Test()
-	public void CP_Can_Do_Single_Wastage_ByQuantity_AS_Clinician() throws Exception {
+	public void Can_Do_Single_Wastage_ByQuantityCP() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		CommonMethods common = new CommonMethods(getDriver());
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
-		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+		CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
+		CommonMethods common = new CommonMethods(getDriver());
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin":
+				log("Login AS comunityqa_immsbc_admin");
+				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+				break;
+			default:
+				log("Login AS default user (ClinicianInventory)");
+				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				Thread.sleep(10000);
+		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.navigateToSupplyConsolePage();
 
 		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
@@ -157,7 +177,7 @@ public class WastageCP extends BaseTest {
 		log("/*7.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
 		supplyConsolePage.selectReasonForWastageDropDown();
 
-		log("/*8----Clicking on btn Wastage --*/");
+		log("/*8.----Clicking on btn Wastage --*/");
 		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
 
 		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");

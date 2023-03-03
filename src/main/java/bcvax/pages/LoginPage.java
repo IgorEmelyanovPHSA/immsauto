@@ -199,14 +199,14 @@ public class LoginPage extends BasePage {
 
 	@Step
 	public CommunityPortalMainPage loginIntoCommunityPortalAsImmsBCAdmin() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		Thread.sleep(2000);
-		click(btnLoginHere);
-		waitForElementToBeClickable(textUserName);
+		//To be able to login as Admin into community portal (new UI) we have to use old UI url and select portal in menu
+		CommonMethods common = new CommonMethods(driver);
+		driver.navigate().to(Utils.getEnvConfigProperty("url_old_ui"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP_PW"));
 		click(login_button);
-		log("  -- Login as user to Supply Console + " + Utils.getEnvConfigProperty("user_IMMS_BC_ADMIN_CP") +  " +--*/");
+		Thread.sleep(15000);
+		common.goToVaccinationPortalIfNeededAndConfirmPageIsDisplayed();
 		return new CommunityPortalMainPage(driver);
 	}
 

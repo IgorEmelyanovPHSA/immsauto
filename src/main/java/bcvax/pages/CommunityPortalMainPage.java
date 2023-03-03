@@ -72,7 +72,7 @@ public class CommunityPortalMainPage extends BasePage{
     }
 
     public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
-        log("/*4.----Go to Supply Locations Tab --*/");
+        log("/----Go to Supply Locations Tab --*/");
         goToSupplyLocation();
         click(automationSupplyLocation_1);
         selectRelatedTab();
