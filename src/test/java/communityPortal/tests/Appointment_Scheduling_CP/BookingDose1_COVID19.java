@@ -1,10 +1,7 @@
 package communityPortal.tests.Appointment_Scheduling_CP;
 
 import Utilities.TestListener;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.CommunityPortalMainPage_as_Clinician;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -32,7 +29,7 @@ public class BookingDose1_COVID19 extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as a Clerk to Community Portal --*/");
-        CommunityPortalMainPage_as_Clinician cpMainPage = loginPage.loginIntoCommunityPortalAsClerk();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClerk();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Register --*/");
