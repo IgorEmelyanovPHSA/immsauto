@@ -1,7 +1,7 @@
 package communityPortal.tests.DIWA_CP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.ProfilesPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -18,7 +18,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
-        CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
 
         log("/*1.----Login --*/");
         switch (Utils.getTargetEnvironment()) {

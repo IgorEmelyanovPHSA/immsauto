@@ -2,7 +2,7 @@ package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
 import bcvax.pages.CommonMethods;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -51,7 +51,7 @@ public class AdjustmentsCP extends BaseTest {
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+		MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
@@ -156,7 +156,7 @@ public class AdjustmentsCP extends BaseTest {
 		}
 
 		log("/*1.----Login as an PPHIS--*/");
-		CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+		MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 		Thread.sleep(10000);
 
 		log("/*2.----Navigate to Supply Console Page --*/");

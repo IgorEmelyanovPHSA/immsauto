@@ -1,12 +1,11 @@
 package bcvax.tests.Inventory;
 
 
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 
 
 public class Requisition extends BaseTest {
-	CommunityPortalMainPage communityPortalMainPage;
+	MainPageCP communityPortalMainPage;
 	SupplyConsolePage supplyConsolePage;
 	Map<String, Object> testData;
 	String env;

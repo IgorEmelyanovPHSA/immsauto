@@ -1,7 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -11,12 +11,11 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import java.util.Map;
 import static org.testng.Assert.assertEquals;
-import java.text.DecimalFormat;
 import static java.lang.Math.round;
 
 @Listeners({TestListener.class})
 public class TransferCancellation extends BaseTest {
-    CommunityPortalMainPage communityPortalMainPage;
+    MainPageCP communityPortalMainPage;
     SupplyConsolePage supplyConsolePage;
     String env;
     Map<String, Object> testData;

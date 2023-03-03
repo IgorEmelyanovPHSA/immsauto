@@ -26,7 +26,7 @@ public class E2E_Consumption_CP extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an Inventory Clinician to Community Portal --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Community Portal Home page displayed --*/");

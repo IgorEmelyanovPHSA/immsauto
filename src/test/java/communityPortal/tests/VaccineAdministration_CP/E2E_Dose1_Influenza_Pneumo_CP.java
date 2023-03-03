@@ -1,10 +1,8 @@
 package communityPortal.tests.VaccineAdministration_CP;
 
-import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
@@ -28,7 +26,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an Clinician to Community Portal --*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         Thread.sleep(10000);
 
         log("/*2.----Community Portal Home page displayed --*/");

@@ -1,30 +1,26 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Tables;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
-import com.google.common.collect.ImmutableMap;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.testng.SkipException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static constansts.Domain.*;
-import static constansts.Header.*;
 import static org.testng.Assert.assertEquals;
 
 
 @Listeners({TestListener.class})
 public class BulkTransfersCancellation extends BaseTest {
 
-    CommunityPortalMainPage communityPortalMainPage;
+    MainPageCP communityPortalMainPage;
     SupplyConsolePage supplyConsolePage;
     String env;
     Map<String, Object> testData;

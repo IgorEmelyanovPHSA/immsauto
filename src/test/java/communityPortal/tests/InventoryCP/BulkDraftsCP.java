@@ -1,7 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -30,7 +30,7 @@ public class BulkDraftsCP extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
         log("/*1.----Login as an PPHIS--*/");
-        CommunityPortalMainPage cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to Supply Console Page --*/");

@@ -2,7 +2,7 @@ package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
 import bcvax.pages.CommonMethods;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -24,7 +24,7 @@ public class WastageCP extends BaseTest {
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
+		MainPageCP cpMainPage = new MainPageCP(getDriver());
 
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
@@ -138,7 +138,7 @@ public class WastageCP extends BaseTest {
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		CommunityPortalMainPage cpMainPage = new CommunityPortalMainPage(getDriver());
+		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		CommonMethods common = new CommonMethods(getDriver());
 
 		log("/*1.----Login --*/");

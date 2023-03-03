@@ -12,9 +12,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class CommunityPortalMainPage extends BasePage{
+public class MainPageCP extends BasePage{
 
-    public CommunityPortalMainPage(WebDriver driver) { super(driver);}
+    public MainPageCP(WebDriver driver) { super(driver);}
 
     @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
     private WebElement btnScanUsingCamera;
@@ -88,7 +88,7 @@ public class CommunityPortalMainPage extends BasePage{
     }
 
     @Step
-    public CommunityPortalMainPage selectRelatedTab() throws InterruptedException {
+    public MainPageCP selectRelatedTab() throws InterruptedException {
         waitForElementToBeVisible(driver, tabRelatedItems, 10);
         moveToElement(tabRelatedItems);
         click(tabRelatedItems);

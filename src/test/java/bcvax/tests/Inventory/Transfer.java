@@ -8,7 +8,7 @@ import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.CommunityPortalMainPage;
+import bcvax.pages.MainPageCP;
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -19,7 +19,7 @@ public class Transfer extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
-	CommunityPortalMainPage communityPortalMainPage;
+	MainPageCP communityPortalMainPage;
 	String supply_location_from;
 	String supply_location_to;
 	String distribution_from;
