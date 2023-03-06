@@ -34,7 +34,6 @@ public class AdjustmentsCP extends BaseTest {
 
 	@Test(dataProvider = "dosesAmount")
 	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value(String dosesAmount) throws Exception {
-		TestcaseID = "223357"; //C223357
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -55,10 +54,12 @@ public class AdjustmentsCP extends BaseTest {
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin":
 				log("Login AS comunityqa_immsbc_admin");
+				TestcaseID = "245091"; //C245091
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
+				TestcaseID = "223357"; //C223357
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
@@ -149,7 +150,6 @@ public class AdjustmentsCP extends BaseTest {
 
 	@Test(dataProvider = "quantitiesAmount")
 	public void CP_Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
-		TestcaseID = "223357"; //C223357
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -171,10 +171,12 @@ public class AdjustmentsCP extends BaseTest {
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin":
 				log("Login AS comunityqa_immsbc_admin");
+				TestcaseID = "245091"; //C245091
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
+				TestcaseID = "223357"; //C223357
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
