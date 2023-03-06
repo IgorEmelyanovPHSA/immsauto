@@ -19,10 +19,8 @@ public class DraftsCP extends BaseTest {
 
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
 
-    //Needs to update TestcaseId for both test
     @Test()
-    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic_AS_Clinician() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void CP_Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
         CommonMethods common = new CommonMethods(getDriver());
@@ -36,10 +34,12 @@ public class DraftsCP extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin":
                 log("Login AS comunityqa_immsbc_admin");
+                TestcaseID = "245092"; //C245092
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "223358"; //C223358
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -134,8 +134,7 @@ public class DraftsCP extends BaseTest {
 
   
     @Test()
-    public void Can_Do_Single_Draft_Edit_ByDosages_Within_The_Same_Clinic_AS_Clinician() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void CP_Can_Do_Single_Draft_Edit_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Test Case#2 Edit draft and transfer");
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
@@ -150,10 +149,12 @@ public class DraftsCP extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin":
                 log("Login AS comunityqa_immsbc_admin");
+                TestcaseID = "245092"; //C245092
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "223358"; //C223358
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -272,8 +273,7 @@ public class DraftsCP extends BaseTest {
     }
 
     @Test()
-    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_Clinic_AS_Clinician() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void CP_Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#3 Create draft and cancel it");
         int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -287,10 +287,12 @@ public class DraftsCP extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin":
                 log("Login AS comunityqa_immsbc_admin");
+                TestcaseID = "245092"; //C245092
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "223358"; //C223358
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -401,8 +403,7 @@ public class DraftsCP extends BaseTest {
     }
 
     @Test()
-    public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic_AS_Clinician() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void CP_Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");
         CommonMethods common = new CommonMethods(getDriver());
@@ -416,10 +417,12 @@ public class DraftsCP extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin":
                 log("Login AS comunityqa_immsbc_admin");
+                TestcaseID = "245092"; //C245092
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "223358"; //C223358
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
