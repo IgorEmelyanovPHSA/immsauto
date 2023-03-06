@@ -26,16 +26,26 @@ public class DraftsCP extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
         CommonMethods common = new CommonMethods(getDriver());
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToAdjust = 10;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get a matching row for first row Lot number --*/");
         int matchedRow = common.getMatchedRowToLotInRow1();
@@ -131,15 +141,25 @@ public class DraftsCP extends BaseTest {
         double amountOfDosesToAdjust = 10;
         double amountOfDosesToAdjustInDraftEdit = 5;
         CommonMethods common = new CommonMethods(getDriver());
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get a matching row for first row Lot number --*/");
         int matchedRow = common.getMatchedRowToLotInRow1();
@@ -259,15 +279,24 @@ public class DraftsCP extends BaseTest {
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
         CommonMethods common = new CommonMethods(getDriver());
-
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get a matching row for first row Lot number --*/");
         int matchedRow = common.getMatchedRowToLotInRow1();
@@ -377,16 +406,26 @@ public class DraftsCP extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");
         CommonMethods common = new CommonMethods(getDriver());
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfQuantityToAdjust = 1;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Quantity " + amountOfQuantityToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get a matching row for first row Lot number --*/");
         int matchedRow = common.getMatchedRowToLotInRow1();
