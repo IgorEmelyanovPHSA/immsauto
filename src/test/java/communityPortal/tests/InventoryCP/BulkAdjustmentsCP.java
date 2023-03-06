@@ -1,6 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -36,6 +37,8 @@ public class BulkAdjustmentsCP extends BaseTest {
         TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
         AllureLifecycle lifecycle = Allure.getLifecycle();
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToAdjust = Double.parseDouble(value);
         boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
         String reasonForAdjustment = "Administered Vaccine";
@@ -49,13 +52,20 @@ public class BulkAdjustmentsCP extends BaseTest {
         }
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -137,10 +147,12 @@ public class BulkAdjustmentsCP extends BaseTest {
     }
 
     @Test(dataProvider = "quantitiesAmount")
-    public void Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_Clinician(String quantity) throws Exception {
+    public void CP_Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantity) throws Exception {
         TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
         AllureLifecycle lifecycle = Allure.getLifecycle();
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfQuantityToAdjust = Double.parseDouble(quantity);
         boolean isNegativeFlag = isNegative(amountOfQuantityToAdjust);
         String reasonForAdjustment = "Administered Vaccine";
@@ -154,12 +166,20 @@ public class BulkAdjustmentsCP extends BaseTest {
         }
         log("/*----Amount Adjustment Quantities " + amountOfQuantityToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();

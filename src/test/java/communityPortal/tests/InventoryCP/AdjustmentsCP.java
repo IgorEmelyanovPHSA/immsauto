@@ -32,12 +32,13 @@ public class AdjustmentsCP extends BaseTest {
 		return new Object[][]{{"3"},{"-2"}};
 	}
 
-	//Needs to update TestcaseId for both test
 	@Test(dataProvider = "dosesAmount")
-	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_Clinician(String dosesAmount) throws Exception {
+	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value(String dosesAmount) throws Exception {
 		TestcaseID = "223357"; //C223357
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
+		MainPageCP cpMainPage = new MainPageCP(getDriver());
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		double amountOfDosesToAdjust = Double.parseDouble(dosesAmount);
 		boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
 		if (isNegativeFlag == false) {
@@ -50,12 +51,20 @@ public class AdjustmentsCP extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 
-		log("/*1.----Login as an PPHIS--*/");
-		MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin":
+				log("Login AS comunityqa_immsbc_admin");
+				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+				break;
+			default:
+				log("Login AS default user (ClinicianInventory)");
+				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				Thread.sleep(10000);
+		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.navigateToSupplyConsolePage();
 
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -139,10 +148,13 @@ public class AdjustmentsCP extends BaseTest {
 
 
 	@Test(dataProvider = "quantitiesAmount")
-	public void CP_Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_PPHIS(String quantitiesAmount) throws Exception {
+	public void CP_Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
 		TestcaseID = "223357"; //C223357
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
+		MainPageCP cpMainPage = new MainPageCP(getDriver());
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+		CommonMethods common = new CommonMethods(getDriver());
 		double amountOfQuantitiesToAdjust = Double.parseDouble(quantitiesAmount);
 		boolean isNegativeFlag = isNegative(amountOfQuantitiesToAdjust);
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -155,13 +167,20 @@ public class AdjustmentsCP extends BaseTest {
 			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByQuantities_Negative_Value_AS_PPHIS"));
 		}
 
-		log("/*1.----Login as an PPHIS--*/");
-		MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin":
+				log("Login AS comunityqa_immsbc_admin");
+				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+				break;
+			default:
+				log("Login AS default user (ClinicianInventory)");
+				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				Thread.sleep(10000);
+		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
-		CommonMethods common = new CommonMethods(getDriver());
+		cpMainPage.navigateToSupplyConsolePage();
 
 		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);

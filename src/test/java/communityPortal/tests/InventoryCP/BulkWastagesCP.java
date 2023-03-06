@@ -1,6 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -17,20 +18,29 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class BulkWastagesCP extends BaseTest {
 
-	//Needs to update TestcaseId for both CP tests
 	@Test()
-	public void CP_Can_Do_Bulk_Wastage_By_Dosages_As_Clinician() throws Exception {
+	public void CP_Can_Do_Bulk_Wastage_By_Dosages() throws Exception {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		MainPageCP cpMainPage = new MainPageCP(getDriver());
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		int amountOfDosesToWaste = 1;
 		String reasonForWastage = "CCI: Handling Error";
 
-		log("/*1.----Login as an PPHIS--*/");
-		MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin":
+				log("Login AS comunityqa_immsbc_admin");
+				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+				break;
+			default:
+				log("Login AS default user (ClinicianInventory)");
+				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				Thread.sleep(10000);
+		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.navigateToSupplyConsolePage();
 		
 		log("/*3.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -109,17 +119,28 @@ public class BulkWastagesCP extends BaseTest {
 	}
 
 	@Test()
-	public void Can_Do_Bulk_Wastage_ByQuantity_As_Clinician() throws Exception {
+	public void CP_Can_Do_Bulk_Wastage_ByQuantity() throws Exception {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		MainPageCP cpMainPage = new MainPageCP(getDriver());
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		int amountOfQuantityToWaste = 1;
 		String reasonForWastage = "CCI: Handling Error";
-		log("/*1.----Login as an PPHIS--*/");
-		MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-		Thread.sleep(10000);
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin":
+				log("Login AS comunityqa_immsbc_admin");
+				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+				break;
+			default:
+				log("Login AS default user (ClinicianInventory)");
+				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				Thread.sleep(10000);
+		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.navigateToSupplyConsolePage();
 
 		log("/*3.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
