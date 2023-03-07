@@ -212,7 +212,7 @@ public abstract class BasePage<T> {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		} catch (WebDriverException e) {
 			log("WebDriverException occurred while scrolling: " + e.getMessage());
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
 		}
 		try {
 			Thread.sleep(500);

@@ -91,6 +91,14 @@ public class LoginPage extends BasePage {
 		return new SupplyConsolePage(driver);
 	}
 
+	public MainPageOrg orgLoginAsPPHIS() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
+		click(login_button);
+		return new MainPageOrg(driver);
+	}
+
 	public SupplyConsolePage loginAsImmsBCAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
@@ -99,6 +107,21 @@ public class LoginPage extends BasePage {
 		return new SupplyConsolePage(driver);
 	}
 
+	public MainPageOrg orgLoginAsImmsBCAdmin() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
+		click(login_button);
+		return new MainPageOrg(driver);
+	}
+
+	public MainPageOrg orgLoginAsImmsBCAdminCP() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("api_url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP_PW"));
+		click(login_button);
+		return new MainPageOrg(driver);
+	}
 	public Tables getTables(){
 		return new Tables(driver);
 	}
