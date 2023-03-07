@@ -18,17 +18,28 @@ import static org.testng.Assert.assertEquals;
 public class Wastage extends BaseTest {
 
 	@Test()
-	public void Can_Do_Single_Wastage_ByDosages_AS_PPHIS() throws Exception {
-		TestcaseID = "223356"; //C223356
+	public void Can_Do_Single_Wastage_ByDosages() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+		CommonMethods common = new CommonMethods(getDriver());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
-		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244844"; //C244844
+				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				break;
+			default:
+				log("Login AS default user (PPHIS)");
+				TestcaseID = "223356"; //C223356
+				loginPage.loginAsPPHIS();
+		}
 		Thread.sleep(10000);
 		
 		log("/*2.----Validate if Supply Console Page displayed --*/");
-		CommonMethods common = new CommonMethods(getDriver());
 		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
 		
 		log("/*3.----Click on Automation Supply Location_1 --*/");
@@ -124,17 +135,28 @@ public class Wastage extends BaseTest {
 	}
 
 	@Test()
-	public void Can_Do_Single_Wastage_ByQuantity_AS_PPHIS() throws Exception {
-		TestcaseID = "223356"; //C223356
+	public void Can_Do_Single_Wastage_ByQuantity() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+		CommonMethods common = new CommonMethods(getDriver());
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
-		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(10000);
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244844"; //C244844
+				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				break;
+			default:
+				log("Login AS default user (PPHIS)");
+				TestcaseID = "223356"; //C223356
+				loginPage.loginAsPPHIS();
+		}
+		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");
-		CommonMethods common = new CommonMethods(getDriver());
 		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
 
 		log("/*3.----Click on Automation Supply Location_1 --*/");

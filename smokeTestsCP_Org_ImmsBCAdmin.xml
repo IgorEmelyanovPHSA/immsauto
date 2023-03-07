@@ -3,6 +3,10 @@
 <suite name="Automation run">
     <test name="SmokeCP">
         <classes>
+            <class name="communityPortal.tests.InventoryCP.WastageCP"/>
+            <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
+            <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
+
             <class name="bcvax.tests.InClinicExperience.Dose1_E2E_Covid19_ImmsBCAdmin"/>
             <class name="bcvax.tests.InClinicExperience.DIWA_ICE_ImmsBCAdmin"/>
             <class name="bcvax.tests.Inventory.Transfer"/>

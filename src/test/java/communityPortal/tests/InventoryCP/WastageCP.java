@@ -133,7 +133,6 @@ public class WastageCP extends BaseTest {
 
 	@Test()
 	public void Can_Do_Single_Wastage_ByQuantityCP() throws Exception {
-		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
@@ -145,10 +144,12 @@ public class WastageCP extends BaseTest {
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin":
 				log("Login AS comunityqa_immsbc_admin");
+				TestcaseID = "245090"; //C245090
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
+				TestcaseID = "223356"; //C223356
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
