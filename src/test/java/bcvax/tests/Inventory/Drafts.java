@@ -15,17 +15,27 @@ import static org.testng.Assert.assertEquals;
 public class Drafts extends BaseTest {
 
     @Test()
-    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         CommonMethods common = new CommonMethods(getDriver());
         double amountOfDosesToAdjust = 10;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin_org":
+                log("Login AS comunityqa_org_immsbc_admin");
+                TestcaseID = "244847"; //C244847
+                loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+                break;
+            default:
+                log("Login AS default user (PPHIS)");
+                TestcaseID = "223358"; //C223358
+                loginPage.loginAsPPHIS();
+        }
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -137,18 +147,27 @@ public class Drafts extends BaseTest {
 
   
     @Test()
-    public void Can_Do_Single_Draft_Edit_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void Can_Do_Single_Draft_Edit_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Test Case#2 Edit draft and transfer");
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+        CommonMethods common = new CommonMethods(getDriver());
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
         double amountOfDosesToAdjustInDraftEdit = 5;
-        CommonMethods common = new CommonMethods(getDriver());
-
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin_org":
+                log("Login AS comunityqa_org_immsbc_admin");
+                TestcaseID = "244847"; //C244847
+                loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+                break;
+            default:
+                log("Login AS default user (PPHIS)");
+                TestcaseID = "223358"; //C223358
+                loginPage.loginAsPPHIS();
+        }
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -269,18 +288,27 @@ public class Drafts extends BaseTest {
     }
 
     @Test()
-    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_ClinicAS_PPHIS() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#3 Create draft and cancel it");
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+        CommonMethods common = new CommonMethods(getDriver());
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
-        CommonMethods common = new CommonMethods(getDriver());
-
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin_org":
+                log("Login AS comunityqa_org_immsbc_admin");
+                TestcaseID = "244847"; //C244847
+                loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+                break;
+            default:
+                log("Login AS default user (PPHIS)");
+                TestcaseID = "223358"; //C223358
+                loginPage.loginAsPPHIS();
+        }
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");
@@ -393,17 +421,27 @@ public class Drafts extends BaseTest {
     }
 
     @Test()
-    public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_ClinicAS_PPHIS() throws Exception {
-        TestcaseID = "223358"; //C223358
+    public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         CommonMethods common = new CommonMethods(getDriver());
         double amountOfQuantityToAdjust = 1;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Quantity " + amountOfQuantityToAdjust + " --*/");
 
-        log("/*1.----Login as an PPHIS to Supply Console --*/");
-        SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin_org":
+                log("Login AS comunityqa_org_immsbc_admin");
+                TestcaseID = "244847"; //C244847
+                loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+                break;
+            default:
+                log("Login AS default user (PPHIS)");
+                TestcaseID = "223358"; //C223358
+                loginPage.loginAsPPHIS();
+        }
         Thread.sleep(5000);
 
         log("/*2.----Validate if Supply Console Page displayed --*/");

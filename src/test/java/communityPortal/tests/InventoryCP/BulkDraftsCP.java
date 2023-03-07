@@ -1,6 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -23,18 +24,28 @@ public class BulkDraftsCP extends BaseTest {
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
     private final String supplyLocationTo = SUPPLY_LOCATION_2;
 
-    //Needs to update TestcaseId for both test
     @Test
-    public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_Clinician() throws Exception {
+    public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
-        log("/*1.----Login as an PPHIS--*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
+
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login AS comunityqa_immsbc_admin");
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login AS default user (ClinicianInventory)");
+                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                Thread.sleep(10000);
+        }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.navigateToSupplyConsolePage();
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
