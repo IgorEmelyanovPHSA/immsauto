@@ -32,10 +32,10 @@ public class Adjustments extends BaseTest {
 	}
 
 	@Test(dataProvider = "dosesAmount")
-	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value_AS_PPHIS(String dosesAmount) throws Exception {
-		TestcaseID = "223357"; //C223357
+	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value(String dosesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		double amountOfDosesToAdjust = Double.parseDouble(dosesAmount);
 		boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
 		if (isNegativeFlag == false) {
@@ -47,8 +47,19 @@ public class Adjustments extends BaseTest {
 		}
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
-		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244846"; //C244846
+				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				break;
+			default:
+				log("Login AS default user (PPHIS)");
+				TestcaseID = "223357"; //C223357
+				loginPage.loginAsPPHIS();
+		}
 		Thread.sleep(5000);
 
 		log("/*2.----Supply Console Page displayed --*/");
@@ -148,10 +159,10 @@ public class Adjustments extends BaseTest {
 
 
 	@Test(dataProvider = "quantitiesAmount")
-	public void Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_PPHIS(String quantitiesAmount) throws Exception {
-		TestcaseID = "223357"; //C223357
+	public void Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		double amountOfQuantitiesToAdjust = Double.parseDouble(quantitiesAmount);
 		boolean isNegativeFlag = isNegative(amountOfQuantitiesToAdjust);
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -164,8 +175,18 @@ public class Adjustments extends BaseTest {
 			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByQuantities_Negative_Value_AS_PPHIS"));
 		}
 
-		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244846"; //C244846
+				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				break;
+			default:
+				log("Login AS default user (PPHIS)");
+				TestcaseID = "223357"; //C223357
+				loginPage.loginAsPPHIS();
+		}
 		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");
