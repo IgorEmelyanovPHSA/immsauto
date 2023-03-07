@@ -1,8 +1,10 @@
 package communityPortal.tests.InventoryCP;
 
 import bcvax.pages.MainPageCP;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
@@ -11,7 +13,8 @@ import java.util.Map;
 
 
 public class RequisitionCP extends BaseTest {
-    MainPageCP communityPortalMainPage;
+    MainPageCP cpMainPage;
+    MainPageOrg orgMainPage;
     SupplyConsolePage supplyConsolePage;
     Map<String, Object> testData;
     String env;
@@ -25,7 +28,19 @@ public class RequisitionCP extends BaseTest {
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
         System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-        communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
+        log("/*----Login to CP (newUI) --*/");
+        if(env.contains("immsbc_admin")) {
+            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
+            Thread.sleep(1000);
+            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
+            Thread.sleep(1000);
+            cpMainPage = new MainPageCP(driver);
+            //cpMainPage.clickGoToUserDefaultsButton();
+        } else {
+            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+        }
+        Thread.sleep(5000);
+        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
         System.out.println("/*----2. Locate Dropdown Menu --*/");
         //supplyConsolePage.verifyIsSupplyPageDisplayed();
         //Thread.sleep(4000);

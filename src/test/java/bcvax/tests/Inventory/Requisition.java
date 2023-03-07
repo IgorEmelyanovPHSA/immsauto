@@ -1,7 +1,7 @@
 package bcvax.tests.Inventory;
 
 
-import bcvax.pages.MainPageCP;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import constansts.Apps;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 public class Requisition extends BaseTest {
-	MainPageCP communityPortalMainPage;
+	MainPageOrg orgMainPage;
 	SupplyConsolePage supplyConsolePage;
 	Map<String, Object> testData;
 	String env;
@@ -31,17 +31,14 @@ public class Requisition extends BaseTest {
 		testData = Utils.getTestData(env);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-
-		if(env.contains("immsbc_admin")) {
-			supplyConsolePage = loginPage.loginAsImmsBCAdmin();
-		} else {
-			supplyConsolePage = loginPage.loginAsPPHIS();
-		}
+		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
 		Thread.sleep(10000);
-		String currentApp = supplyConsolePage.currentApp();
+		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		supplyConsolePage.closeTabsHCA();
 		supplyConsolePage.clickSupplyLocationsTab();

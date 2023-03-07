@@ -21,8 +21,6 @@ import static org.testng.Assert.assertTrue;
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
-	@FindBy(xpath = "//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span")
-	private WebElement currentApp;
 
 	@FindBy(xpath = "(.//span[@class = 'slds-truncate'])[2]")
 	private WebElement supply_locations_tab;
@@ -544,8 +542,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//h2[text() = 'Container - Adjustment']/../..//button[text() = 'Adjustment']")
 	private WebElement btnBulkAdjustmentContainerAdjustmentPage;
 
-	@FindBy(xpath = "//h3[text()='Apps']")
-	private WebElement appsLauncherHeader;
 	///////////////////////////////////////////////////////////////////////////////
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
@@ -657,22 +653,6 @@ public class SupplyConsolePage extends BasePage {
 		dosesInput.sendKeys(inputQuantity);
 	}
 
-	public String currentApp() {
-		waitForElementToBeVisible(driver, currentApp, 30);
-		return currentApp.getText();
-	}
-
-	public void switchApp(String app) throws InterruptedException {
-		driver.findElement(By.xpath("//span[text()='App Launcher']/..")).click();
-		waitForElementToBeVisible(driver, appsLauncherHeader, 30);
-		Thread.sleep(2000);
-		List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
-		for(WebElement appElement : apps) {
-			if(appElement.getAttribute("data-label").equals(app)) {
-				appElement.findElement(By.xpath("./..")).click();
-			}
-		}
-	}
 	public void clickSaveButton() {
 		moveToElement(saveButton);
 		saveButton.click();
@@ -846,6 +826,7 @@ public class SupplyConsolePage extends BasePage {
 	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		tables.getSupplyContainerRow(supplyContainer).get("Select All").click();
+		Thread.sleep(1000);
 	}
 
 	public int getRowsSupplyContainersFromCount() throws InterruptedException {
@@ -1095,11 +1076,17 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
-		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Select All").click();
+		WebElement checkbox = tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Select All");
+		scrollTop(checkbox);
+		checkbox.click();
+		Thread.sleep(1000);
 	}
 
 	public void clickOnOutgoingTransactionsCheckbox(int k) throws InterruptedException {
-		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(k).get("Select All").click();
+		WebElement checkbox = tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(k).get("Select All");
+		scrollTop(checkbox);
+		checkbox.click();
+		Thread.sleep(1000);
 	}
 
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
