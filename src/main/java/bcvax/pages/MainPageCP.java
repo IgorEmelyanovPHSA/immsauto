@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MainPageCP extends BasePage{
 
@@ -66,6 +68,9 @@ public class MainPageCP extends BasePage{
     private By submit_requisition_button = By.xpath("//a[@title = 'Submit Requisition']");
     @FindBy(xpath = "//a[@title = 'Request Supplies']")
     private WebElement request_supplies;
+
+    @FindBy(xpath = "//button[text() = 'Go to User Defaults']")
+    private WebElement go_to_user_defaults_btn;
     private By request_supplies_1 = By.xpath("//a[@title = 'Request Supplies']");
     public void verifyYouAreOnTheMainPageCP(){
 
@@ -160,6 +165,13 @@ public class MainPageCP extends BasePage{
         click_save_defaults_button.click();
     }
 
+    public void clickGoToUserDefaultsButton() throws InterruptedException {
+        List<String> windows = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(windows.get(1));
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, go_to_user_defaults_btn, 10);
+        go_to_user_defaults_btn.click();
+    }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
         waitForElementToBeClickable(main_menu_btn_More);
         Thread.sleep(2000);

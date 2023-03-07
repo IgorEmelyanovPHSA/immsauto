@@ -1,7 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageCP;
+import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -20,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class BulkTransfersCancellation extends BaseTest {
 
-    MainPageCP communityPortalMainPage;
+    MainPageOrg orgMainPage;
     SupplyConsolePage supplyConsolePage;
     String env;
     Map<String, Object> testData;
@@ -50,16 +50,14 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*1.----Login ----*/");
 
         log("/----Login to ORG (oldUI) --*/");
-        if(env.contains("immsbc_admin")) {
-            supplyConsolePage = loginPage.loginAsImmsBCAdmin();
-        } else {
-            supplyConsolePage = loginPage.loginAsPPHIS();
-        }
+        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
         Thread.sleep(10000);
-        String currentApp = supplyConsolePage.currentApp();
+        String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
+        supplyConsolePage = new SupplyConsolePage(driver);
+
         //Assert.assertTrue(false);
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();

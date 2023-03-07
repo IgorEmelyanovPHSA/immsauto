@@ -2,12 +2,14 @@ package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.MainPageCP;
+import bcvax.pages.MainPageOrg;
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -22,7 +24,8 @@ public class BulkTransfersCP extends BaseTest {
     String env;
     Map<String, Object> testData;
     SupplyConsolePage supplyConsolePage;
-    MainPageCP communityPortalMainPage;
+    MainPageCP cpMainPage;
+    MainPageOrg orgMainPage;
     String supply_location_from;
     String supply_location_to;
     String distribution_from;
@@ -50,8 +53,18 @@ public class BulkTransfersCP extends BaseTest {
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
 
         log("/*1.----Login to CP (newUI) --*/");
-        communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_from);
+        if(env.contains("immsbc_admin")) {
+            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
+            Thread.sleep(1000);
+            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
+            Thread.sleep(1000);
+            cpMainPage = new MainPageCP(driver);
+            //cpMainPage.clickGoToUserDefaultsButton();
+        } else {
+            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+        }
+        Thread.sleep(5000);
+        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
     }
 
     @Test(priority = 1)
@@ -168,7 +181,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.closeTabsHCA();
         Thread.sleep(3000);
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
 
         ///////////////////// Doses/Qty BEFORE Automation Location_2//////////////////////////////////
         log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
@@ -367,7 +380,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.closeTabsHCA();
         Thread.sleep(3000);
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
         Thread.sleep(2000);
 
         /////////////////////Doses/Qty BEFORE Automation Location_2//////////////////////////////////

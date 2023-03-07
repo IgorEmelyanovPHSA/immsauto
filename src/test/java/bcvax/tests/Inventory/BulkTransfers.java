@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.MainPageCP;
+import bcvax.pages.MainPageOrg;
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -23,7 +24,7 @@ public class BulkTransfers extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
-	MainPageCP communityPortalMainPage;
+	MainPageOrg orgMainPage;
 	String supply_location_from;
 	String supply_location_to;
 	String distribution_from;
@@ -51,16 +52,14 @@ public class BulkTransfers extends BaseTest {
 		containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
 
 		log("/*1.----Login to ORG (oldUI) --*/");
-		if(env.contains("immsbc_admin")) {
-			supplyConsolePage = loginPage.loginAsImmsBCAdmin();
-		} else {
-			supplyConsolePage = loginPage.loginAsPPHIS();
-		}
+		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
 		Thread.sleep(10000);
-		String currentApp = supplyConsolePage.currentApp();
+		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			supplyConsolePage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
