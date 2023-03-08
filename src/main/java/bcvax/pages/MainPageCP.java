@@ -175,12 +175,12 @@ public class MainPageCP extends BasePage{
         driver.switchTo().window(windows.get(1));
         Thread.sleep(2000);
         try {
-            waitForElementToBeVisible(driver, modal_dialog, 60);
+            waitForElementToBeVisible(driver, modal_dialog, 20);
             //driver.findElement(By.xpath("//div[@aria-modal='true']")).isDisplayed();
             waitForElementToBeVisible(driver, go_to_user_defaults_btn, 10);
             go_to_user_defaults_btn.click();
             Thread.sleep(2000);
-        } catch(NoSuchElementException ex) {
+        } catch(Exception ex) {
             System.out.println("The Modal Dialog not thrown");
             Thread.sleep(2000);
         }
