@@ -825,8 +825,21 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
+		String tabindex_before_check =  tables.getSupplyContainerRow(supplyContainer).get("Select All").getAttribute("tabindex");
+		System.out.println("DEBUG: Tabindex attribute before check:" + tabindex_before_check);
 		tables.getSupplyContainerRow(supplyContainer).get("Select All").click();
 		Thread.sleep(1000);
+		String tabindex_after_check =  tables.getSupplyContainerRow(supplyContainer).get("Select All").getAttribute("tabindex");
+		System.out.println("DEBUG: Tabindex attribute after check:" + tabindex_after_check);
+		if(tabindex_before_check.equals(tabindex_after_check)) {
+			System.out.println("DEBUG: !!!!!!!!!!!!!!------------------------------------");
+			System.out.println("DEBUG: !!!!!!!!!!!!!!Container Checkbox is not checked!!!!!!!!!!!!!");
+			System.out.println("DEBUG: !!!!!!!!!!!!!!------------------------------------");
+		} else {
+			System.out.println("DEBUG: ------------------------------------");
+			System.out.println("DEBUG: Container Checkbox is checked");
+			System.out.println("DEBUG: ------------------------------------");
+		}
 	}
 
 	public int getRowsSupplyContainersFromCount() throws InterruptedException {
@@ -868,6 +881,14 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void enterBulkTransferByDosages(List<String> containers, int dose) {
+		//////DEBUG//////
+		List<List<WebElement>> rows = tables.getContainerTransferTable().getRows();
+		for(List<WebElement> row : rows) {
+			System.out.println("DEBUG: ---------------------");
+			System.out.println("DEBUG: " + row.get(1).getText());
+			System.out.println("DEBUG: ---------------------");
+		}
+		/////////////////
 		for (String container : containers) {
 			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
 			tables.typeDosesIntoTransferRow(supplyContainer, Integer.toString(dose));
@@ -884,6 +905,14 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void enterBulkTransferByQuantity(List<String> containers, int quantity) {
+		//////DEBUG//////
+		List<List<WebElement>> rows = tables.getContainerTransferTable().getRows();
+		for(List<WebElement> row : rows) {
+			System.out.println("DEBUG: ---------------------");
+			System.out.println("DEBUG: " + row.get(1).getText());
+			System.out.println("DEBUG: ---------------------");
+		}
+		/////////////////
 		for (String container : containers) {
 			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
 			tables.typeQtyIntoTransferRow(supplyContainer, Integer.toString(quantity));
