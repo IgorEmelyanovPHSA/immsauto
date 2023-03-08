@@ -827,7 +827,10 @@ public class SupplyConsolePage extends BasePage {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		String tabindex_before_check =  tables.getSupplyContainerRow(supplyContainer).get("Select All").getAttribute("tabindex");
 		System.out.println("DEBUG: Tabindex attribute before check:" + tabindex_before_check);
-		tables.getSupplyContainerRow(supplyContainer).get("Select All").click();
+		WebElement myCheckbox = tables.getSupplyContainerRow(supplyContainer).get("Select All");
+		scrollTop(myCheckbox);
+		Thread.sleep(1000);
+		myCheckbox.click();
 		Thread.sleep(1000);
 		String tabindex_after_check =  tables.getSupplyContainerRow(supplyContainer).get("Select All").getAttribute("tabindex");
 		System.out.println("DEBUG: Tabindex attribute after check:" + tabindex_after_check);
