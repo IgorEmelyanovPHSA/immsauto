@@ -38,18 +38,19 @@ public class TransferCP extends BaseTest {
 		distribution_to = String.valueOf(testData.get("distributionTo"));
 		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
 
-		log("/*----Login to CP (newUI) --*/");
 		if(env.contains("immsbc_admin")) {
+			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
 			orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
 			Thread.sleep(1000);
 			orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			cpMainPage = new MainPageCP(driver);
-			//cpMainPage.clickGoToUserDefaultsButton();
+			cpMainPage.clickGoToUserDefaultsButton();
 		} else {
+			log("/*1.----Login to CP (newUI) as Clinician --*/");
 			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
 		}
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
 
 	}

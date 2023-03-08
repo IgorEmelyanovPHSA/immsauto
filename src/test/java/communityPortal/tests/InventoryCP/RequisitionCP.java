@@ -27,16 +27,17 @@ public class RequisitionCP extends BaseTest {
         String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
-        log("/*----Login to CP (newUI) --*/");
+
         if(env.contains("immsbc_admin")) {
+            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
             orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
             Thread.sleep(1000);
             orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
             Thread.sleep(1000);
             cpMainPage = new MainPageCP(driver);
-            //cpMainPage.clickGoToUserDefaultsButton();
+            cpMainPage.clickGoToUserDefaultsButton();
         } else {
+            log("/*1.----Login to CP (newUI) as Clinician --*/");
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
         Thread.sleep(5000);
