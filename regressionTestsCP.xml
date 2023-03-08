@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation run">
-    <test name="SmokeCP">
+    <test name="RegressionCP">
         <classes>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Covid19_CP"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Influenza_CP"/>
