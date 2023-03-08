@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 @Listeners({TestListener.class})
 public class UserDefaultsSettingsValidation extends BaseTest {
 
-    private final String[] lots = {"35035BD", "T005729-CC07"};
+    private final String[] lots = {"016F21A-CC07", "0649AA"};
     private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test()
@@ -64,7 +64,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("/*9.---- Navigate to Supply Console Page --*/");
         common.goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew();
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         log("/*10.---- Validating results, given lot numbers should match --*/");
         for(int i = 0; i < lots.length; i++) {
             Assert.assertTrue(supplyConsolePage.validateLotUserDefaults(lots[i]));
