@@ -52,15 +52,16 @@ public class BulkTransfersCP extends BaseTest {
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
 
-        log("/*1.----Login to CP (newUI) --*/");
         if(env.contains("immsbc_admin")) {
+            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
             orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
             Thread.sleep(1000);
             orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(1000);
+            Thread.sleep(3000);
             cpMainPage = new MainPageCP(driver);
-            //cpMainPage.clickGoToUserDefaultsButton();
+            cpMainPage.clickGoToUserDefaultsButton();
         } else {
+            log("/*1.----Login to CP (newUI) as Clinician --*/");
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
         Thread.sleep(5000);

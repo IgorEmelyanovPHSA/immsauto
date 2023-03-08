@@ -26,11 +26,13 @@ public class MainPageOrg extends BasePage {
 
     public void switchApp(String app) throws InterruptedException {
         waitForElementToBeVisible(driver, appsLauncher, 60);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         driver.findElement(By.xpath("//span[text()='App Launcher']/..")).click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         waitForElementToBeVisible(driver, appsLauncherHeader, 30);
-        Thread.sleep(1000);
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//input[@placeholder='Search apps and items...']")).sendKeys(app);
+        Thread.sleep(3000);
         List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
         for(WebElement appElement : apps) {
             if(appElement.getAttribute("data-label").equals(app)) {

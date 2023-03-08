@@ -72,6 +72,10 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//button[text() = 'Go to User Defaults']")
     private WebElement go_to_user_defaults_btn;
     private By request_supplies_1 = By.xpath("//a[@title = 'Request Supplies']");
+
+    @FindBy(xpath = "//div[@aria-modal='true']")
+    private WebElement modal_dialog;
+
     public void verifyYouAreOnTheMainPageCP(){
 
     }
@@ -88,7 +92,8 @@ public class MainPageCP extends BasePage{
     @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
         waitForElementToBeVisible(driver, tabSupplyLocation, 30);
-        click(tabSupplyLocation);
+        Thread.sleep(2000);
+        tabSupplyLocation.click();
         return new SupplyConsolePage(driver);
     }
 
@@ -169,8 +174,16 @@ public class MainPageCP extends BasePage{
         List<String> windows = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(windows.get(1));
         Thread.sleep(2000);
-        waitForElementToBeVisible(driver, go_to_user_defaults_btn, 10);
-        go_to_user_defaults_btn.click();
+        try {
+            waitForElementToBeVisible(driver, modal_dialog, 60);
+            //driver.findElement(By.xpath("//div[@aria-modal='true']")).isDisplayed();
+            waitForElementToBeVisible(driver, go_to_user_defaults_btn, 10);
+            go_to_user_defaults_btn.click();
+            Thread.sleep(2000);
+        } catch(NoSuchElementException ex) {
+            System.out.println("The Modal Dialog not thrown");
+            Thread.sleep(2000);
+        }
     }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
         waitForElementToBeClickable(main_menu_btn_More);
