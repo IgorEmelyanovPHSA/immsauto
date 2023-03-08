@@ -730,6 +730,11 @@ public class SupplyConsolePage extends BasePage {
 	
 	public void clickSupplyLocationsTab() throws InterruptedException {
 		waitForElementToBeVisible(driver, supply_locations_tab, 10);
+		if(!supply_locations_tab.getText().equals("Supply Locations")) {
+			driver.findElement(By.xpath("//button[@title='Show Navigation Menu']"));
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//span[@class='menuLabel slds-listbox__option-text slds-listbox__option-text_entity' and text() = 'Supply Locations']")).click();
+		}
 		WebElement element = driver.findElement(supply_locations_tab1);
 		this.supply_locations_tab.click();
 		boolean loaded = false;
