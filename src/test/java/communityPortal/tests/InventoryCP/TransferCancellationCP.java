@@ -41,8 +41,10 @@ public class TransferCancellationCP extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_And_Cancel() throws Exception {
-		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
+		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
+		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
 		precondition();
+
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		double doses = 5;
@@ -149,8 +151,10 @@ public class TransferCancellationCP extends BaseTest {
 
 	@Test()
 	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_And_Cancel() throws Exception {
-		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
+		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
+		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
 		precondition();
+
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		double quantity = 1;

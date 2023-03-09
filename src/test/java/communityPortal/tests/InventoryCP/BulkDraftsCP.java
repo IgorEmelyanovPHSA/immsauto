@@ -26,7 +26,7 @@ public class BulkDraftsCP extends BaseTest {
 
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = "222374"; //C222374
+        //TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
@@ -40,6 +40,7 @@ public class BulkDraftsCP extends BaseTest {
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "245220"; //C245220
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }

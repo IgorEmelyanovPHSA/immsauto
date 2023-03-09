@@ -39,7 +39,7 @@ public class DraftsCP extends BaseTest {
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
-                TestcaseID = "223358"; //C223358
+                TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -154,7 +154,7 @@ public class DraftsCP extends BaseTest {
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
-                TestcaseID = "223358"; //C223358
+                TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -292,7 +292,7 @@ public class DraftsCP extends BaseTest {
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
-                TestcaseID = "223358"; //C223358
+                TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -422,7 +422,7 @@ public class DraftsCP extends BaseTest {
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
-                TestcaseID = "223358"; //C223358
+                TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }

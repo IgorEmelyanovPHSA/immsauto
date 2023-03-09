@@ -55,7 +55,8 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 1)
     public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
+        //TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
         precondition();
         testData.get("bulkContainersFrom");
 
@@ -262,7 +263,8 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 2)
     public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
+        //TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
         precondition();
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
         log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
@@ -460,7 +462,8 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 3)
     public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "245097" : "223363";
+        //TestcaseID = (env.contains("immsbc_admin")) ? "245097" : "223363";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245097" : "243112";
         precondition();
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
         log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
