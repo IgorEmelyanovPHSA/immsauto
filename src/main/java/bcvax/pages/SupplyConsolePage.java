@@ -940,11 +940,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 	
 	public void selectSupplyLocation_1_To() throws InterruptedException {
+		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, search_supply_location_1_To, 30);
 		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_supply_location_1_To, 30);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		select_supply_location_1_To.click();
 		Thread.sleep(2000);
 	}
