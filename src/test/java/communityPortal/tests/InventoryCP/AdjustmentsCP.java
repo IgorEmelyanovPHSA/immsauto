@@ -59,7 +59,7 @@ public class AdjustmentsCP extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
-				TestcaseID = "223357"; //C223357
+				TestcaseID = "243177"; //C243177
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
@@ -176,7 +176,7 @@ public class AdjustmentsCP extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
-				TestcaseID = "223357"; //C223357
+				TestcaseID = "243177"; //C243177
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}

@@ -25,7 +25,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
     //Needs to update TestcaseId
     @Test(priority = 1)
     public void CP_CitizenPortalBookDoseOneInfluenza() throws Exception {
-        TestcaseID = "228855"; //C228855
+        TestcaseID = "245219"; //C245219
         log("Target Environment: " + Utils.getTargetEnvironment());
         CommonMethods com = new CommonMethods(getDriver());
 

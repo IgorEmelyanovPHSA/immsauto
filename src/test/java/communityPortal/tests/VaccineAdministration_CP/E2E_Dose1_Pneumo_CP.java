@@ -20,7 +20,7 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
 
     @Test(priority = 1)
     public void Can_do_Dose1_Pneumo_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "229058"; //C229058
+        TestcaseID = "243211"; //C243211
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

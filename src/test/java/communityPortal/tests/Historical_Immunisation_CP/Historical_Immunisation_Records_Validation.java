@@ -21,7 +21,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
 
     @Test
     public void Validate_Historical_Immunization_PIR_Status_as_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "225704"; //C225704 -- CIB - Historical Immunization Records - PIR Submission Status
+        TestcaseID = "243177"; //C243177 -- CIB - Historical Immunization Records - PIR Submission Status
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
         log("/*1.----Login as an Clinician to Community Portal new UI --*/");
