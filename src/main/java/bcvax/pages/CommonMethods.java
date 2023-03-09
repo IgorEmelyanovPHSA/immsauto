@@ -207,8 +207,8 @@ public class CommonMethods extends BasePage{
         }
 
         //Work around the issue with this message, will be deleted
-        click(btnGoToUserDefaultsCP);
-        Thread.sleep(3000);
+//        click(btnGoToUserDefaultsCP);
+//        Thread.sleep(3000);
     }
 
 

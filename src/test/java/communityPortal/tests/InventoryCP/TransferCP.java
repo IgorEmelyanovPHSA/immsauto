@@ -57,7 +57,7 @@ public class TransferCP extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another() throws Exception {
-		TestcaseID = "223184"; //C223184
+		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		Thread.sleep(2000);
@@ -189,7 +189,7 @@ public class TransferCP extends BaseTest {
 
 	@Test(priority = 2)
 	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another() throws Exception {
-		TestcaseID = "223184"; //C223184
+		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		int quantity = 10;
@@ -323,7 +323,7 @@ public class TransferCP extends BaseTest {
 
 	@Test(priority = 3)
 	public void Can_do_Transfer_by_Dosages_within_the_same_Clinic() throws Exception {
-		TestcaseID = "223185"; //C223185
+		TestcaseID = (env.contains("immsbc_admin")) ? "245094" : "223185"; //C223185
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 
@@ -418,7 +418,7 @@ public class TransferCP extends BaseTest {
 
 	@Test(priority = 4)
 	public void Can_do_Transfer_by_Quantity_within_the_same_Clinic() throws Exception {
-		TestcaseID = "223185"; //C223185
+		TestcaseID = (env.contains("immsbc_admin")) ? "245094" : "223185"; //C223185
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 		int quantity = 10;
