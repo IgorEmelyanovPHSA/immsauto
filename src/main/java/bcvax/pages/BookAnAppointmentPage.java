@@ -113,7 +113,9 @@ public class BookAnAppointmentPage extends BasePage{
 
     public void searchByClinicName(String clinicName) throws InterruptedException{
         Thread.sleep(500);
-        scrollTop(tabSearchByClinicName);
+        //scrollTop(tabSearchByClinicName);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        Thread.sleep(500);
         click(tabSearchByClinicName);
         click(textBoxSearchByClinicName);
         typeIn(textBoxSearchByClinicName, clinicName);
@@ -124,7 +126,9 @@ public class BookAnAppointmentPage extends BasePage{
     public void selectDateAndTimeForAppointmentAndClickBtnNext() throws InterruptedException{
         click(selectFirstAvailableDayInTheCalendarId);
         Thread.sleep(2000);
-        scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
+        //scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        Thread.sleep(500);
         click(selectFirstAvailableTimeSlotInTheCalendar);
         click(btnNext);
     }
