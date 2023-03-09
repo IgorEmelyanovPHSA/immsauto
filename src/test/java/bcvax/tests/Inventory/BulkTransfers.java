@@ -83,7 +83,7 @@ public class BulkTransfers extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
-		TestcaseID = "223359";
+		TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
 		testData.get("bulkContainersFrom");
 
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
@@ -292,7 +292,7 @@ public class BulkTransfers extends BaseTest {
 
 	@Test(priority = 2)
 	public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
-		TestcaseID = "223359";
+		TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");

@@ -92,6 +92,7 @@ public class LoginPage extends BasePage {
 	}
 
 	public MainPageOrg orgLoginAsPPHIS() throws Exception {
+		log("/*----Login to ORG (oldUI) As PPHIS--*/");
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
@@ -108,6 +109,7 @@ public class LoginPage extends BasePage {
 	}
 
 	public MainPageOrg orgLoginAsImmsBCAdmin() throws Exception {
+		log("/*----Login to ORG (oldUI) as Imms BC Admin --*/");
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
