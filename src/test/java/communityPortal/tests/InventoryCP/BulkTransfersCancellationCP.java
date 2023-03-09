@@ -67,7 +67,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
     @Test(priority = 1)
     public void Can_doBulk_transfers_Cancellation_By_Doses_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = "223359";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         int doses = 10;
 
         log("/----Count Remaining Supplies --*/");
@@ -186,7 +186,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
     @Test(priority = 2)
     public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = "223359";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         int quantity = 1;
 
         log("/----Count Remaining Supplies --*/");

@@ -70,7 +70,7 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 1)
     public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = "223359";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         testData.get("bulkContainersFrom");
 
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
@@ -276,7 +276,7 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 2)
     public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
-        TestcaseID = "223359";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
         log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
         log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -473,7 +473,7 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 3)
     public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic() throws Exception {
-        TestcaseID = "223363";
+        TestcaseID = (env.contains("immsbc_admin")) ? "245097" : "223363";
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
         log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
         //// Supply Distribution_1_1 - containers#1 and #2, #3

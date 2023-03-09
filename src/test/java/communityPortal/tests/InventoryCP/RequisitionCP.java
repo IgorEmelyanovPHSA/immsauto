@@ -20,8 +20,8 @@ public class RequisitionCP extends BaseTest {
     String env;
     @Test
     public void Create_Requisition_as_an_PPHIS() throws Exception {
-        TestcaseID = "222344"; //C222344
         env = Utils.getTargetEnvironment();
+        TestcaseID = (env.contains("immsbc_admin")) ? "245095" : "222344"; //C222344
         testData = Utils.getTestData(env);
         //String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
         String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
