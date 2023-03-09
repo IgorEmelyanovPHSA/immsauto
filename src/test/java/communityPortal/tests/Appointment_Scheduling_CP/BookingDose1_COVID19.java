@@ -21,7 +21,7 @@ public class BookingDose1_COVID19 extends BaseTest {
 
     @Test(priority = 1)
     public void Can_Book_Dose1_Appointment_as_Clerk_ComunityQA() throws Exception {
-        TestcaseID = "225652"; //C225652
+        TestcaseID = "243154"; //C243154
 
         log("Target Environment: "+ Utils.getTargetEnvironment());
 

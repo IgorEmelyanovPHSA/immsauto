@@ -13,7 +13,7 @@ public class DIWA_Covid19_CP extends BaseTest {
 
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
-        TestcaseID = "223187"; //C223187
+        //TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
@@ -29,7 +29,7 @@ public class DIWA_Covid19_CP extends BaseTest {
                 break;
             default:
                 log("Login as DIWA Clinician user");
-                TestcaseID = "223187"; //C223187
+                TestcaseID = "243108"; //C223187
                 loginPage.loginIntoCommunityPortalAsClinician();
 
         }

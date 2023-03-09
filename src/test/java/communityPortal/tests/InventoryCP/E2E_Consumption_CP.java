@@ -19,7 +19,7 @@ public class E2E_Consumption_CP extends BaseTest {
 
     @Test(priority = 1)
     public void Validate_Consumption_as_an_Inventory_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "222359"; //C219969->C222359
+        TestcaseID = "243115"; //C243115
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

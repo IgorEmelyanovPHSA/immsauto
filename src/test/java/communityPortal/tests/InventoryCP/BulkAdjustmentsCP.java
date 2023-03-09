@@ -34,7 +34,7 @@ public class BulkAdjustmentsCP extends BaseTest {
 
     @Test(dataProvider = "dosesAmount")
     public void CP_Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_Clinician(String value) throws Exception {
-        TestcaseID = "223360"; //C223360
+        //TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
         AllureLifecycle lifecycle = Allure.getLifecycle();
         MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -56,10 +56,12 @@ public class BulkAdjustmentsCP extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin":
                 log("Login AS comunityqa_immsbc_admin");
+                //TestcaseID = "223360"; //C22336
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "243120"; //C243120
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }
@@ -148,7 +150,7 @@ public class BulkAdjustmentsCP extends BaseTest {
 
     @Test(dataProvider = "quantitiesAmount")
     public void CP_Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantity) throws Exception {
-        TestcaseID = "223360"; //C223360
+        //TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
         AllureLifecycle lifecycle = Allure.getLifecycle();
         MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -174,6 +176,7 @@ public class BulkAdjustmentsCP extends BaseTest {
                 break;
             default:
                 log("Login AS default user (ClinicianInventory)");
+                TestcaseID = "243120"; //C243120
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
                 Thread.sleep(10000);
         }

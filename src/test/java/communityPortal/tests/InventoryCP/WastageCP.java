@@ -35,7 +35,7 @@ public class WastageCP extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
-				TestcaseID = "223356"; //C223356
+				TestcaseID = "243116"; //C243116
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
@@ -149,7 +149,7 @@ public class WastageCP extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
-				TestcaseID = "223356"; //C223356
+				TestcaseID = "243116"; //C243116
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}

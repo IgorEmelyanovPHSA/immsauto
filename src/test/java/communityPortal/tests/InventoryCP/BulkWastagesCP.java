@@ -20,7 +20,7 @@ public class BulkWastagesCP extends BaseTest {
 
 	@Test()
 	public void CP_Can_Do_Bulk_Wastage_By_Dosages() throws Exception {
-		TestcaseID = "223361"; //C223361
+		//TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
@@ -35,6 +35,7 @@ public class BulkWastagesCP extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
+				TestcaseID = "243121"; //C243121
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
@@ -120,7 +121,7 @@ public class BulkWastagesCP extends BaseTest {
 
 	@Test()
 	public void CP_Can_Do_Bulk_Wastage_ByQuantity() throws Exception {
-		TestcaseID = "223361"; //C223361
+		//TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
@@ -135,6 +136,7 @@ public class BulkWastagesCP extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (ClinicianInventory)");
+				TestcaseID = "243121"; //C243121
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
