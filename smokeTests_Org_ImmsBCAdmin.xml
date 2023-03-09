@@ -3,9 +3,9 @@
 <suite name="Automation run">
     <test name="SmokeCP">
         <classes>
-            <class name="communityPortal.tests.InventoryCP.WastageCP"/>
-            <class name="communityPortal.tests.InventoryCP.AdjustmentsCP"/>
-            <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
+            <class name="bcvax.tests.Inventory.Wastage"/>
+            <class name="bcvax.tests.Inventory.Adjustments"/>
+            <class name="bcvax.tests.Inventory.Drafts"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
