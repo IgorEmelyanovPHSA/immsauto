@@ -48,26 +48,12 @@ public class BulkTransfersCancellationCP extends BaseTest {
         containers_from = (ArrayList)testData.get("bulkContainersFrom");
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
-
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
-        }
-        Thread.sleep(5000);
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
     }
 
     @Test(priority = 1)
     public void Can_doBulk_transfers_Cancellation_By_Doses_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
+        precondition();
         int doses = 10;
 
         log("/----Count Remaining Supplies --*/");
@@ -187,6 +173,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
     @Test(priority = 2)
     public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
+        precondition();
         int quantity = 1;
 
         log("/----Count Remaining Supplies --*/");
@@ -301,5 +288,36 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingQtyAfterCancelLocationDistribution2_2, remainingQtyBeforeLocationDistribution2_2);
         assertEquals(remainingQtyAfterCancelLocationDistribution2_3, remainingQtyBeforeLocationDistribution2_3);
 
+    }
+
+    public void precondition() throws Exception {
+        log("/*1.----Login to ORG (oldUI) --*/");
+        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
+        Thread.sleep(10000);
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
+        supplyConsolePage = new SupplyConsolePage(driver);
+
+        //Assert.assertTrue(false);
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
+        Thread.sleep(5000);
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+        Thread.sleep(2000);
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+
+        ////// Supply Location_1 -> Outcoming
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+
+        /////////////////////////////////////////////////
+        //Try generic method
+        /////////////////////////////////////////////////
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        //////////////////////////////////////////////////
+        Thread.sleep(5000);
     }
 }

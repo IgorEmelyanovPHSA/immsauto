@@ -50,40 +50,12 @@ public class BulkTransfers extends BaseTest {
 		containers_from = (ArrayList)testData.get("bulkContainersFrom");
 		containers_to = (ArrayList)testData.get("bulkContainersTo");
 		containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
-
-		log("/*1.----Login to ORG (oldUI) --*/");
-		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-		Thread.sleep(10000);
-		String currentApp = orgMainPage.currentApp();
-		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
-		}
-		supplyConsolePage = new SupplyConsolePage(driver);
-
-		//Assert.assertTrue(false);
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
-		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
-
-		////// Supply Location_1 -> Outcoming
-		log("/*5.----Click on Automation Supply Location_1 --*/");
-
-		/////////////////////////////////////////////////
-		//Try generic method
-		/////////////////////////////////////////////////
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-		//////////////////////////////////////////////////
-		Thread.sleep(5000);
 	}
 
 	@Test(priority = 1)
 	public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
 		TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
+		precondition();
 		testData.get("bulkContainersFrom");
 
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
@@ -293,6 +265,7 @@ public class BulkTransfers extends BaseTest {
 	@Test(priority = 2)
 	public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
 		TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
+		precondition();
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -490,7 +463,8 @@ public class BulkTransfers extends BaseTest {
 
 	@Test(priority = 3)
 	public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic() throws Exception {
-		TestcaseID = "223363";
+		TestcaseID = (env.contains("immsbc_admin")) ? "244852" : "223363";
+		precondition();
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
 		//// Supply Distribution_1_1 - containers#1 and #2, #3
@@ -642,4 +616,34 @@ public class BulkTransfers extends BaseTest {
 		Thread.sleep(5000);
 	}
 
+	public void precondition() throws Exception {
+		log("/*1.----Login to ORG (oldUI) --*/");
+		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
+		Thread.sleep(10000);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+
+		//Assert.assertTrue(false);
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		Thread.sleep(5000);
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
+		Thread.sleep(2000);
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+
+		////// Supply Location_1 -> Outcoming
+		log("/*5.----Click on Automation Supply Location_1 --*/");
+
+		/////////////////////////////////////////////////
+		//Try generic method
+		/////////////////////////////////////////////////
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		//////////////////////////////////////////////////
+		Thread.sleep(5000);
+	}
 }
