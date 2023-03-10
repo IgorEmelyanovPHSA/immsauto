@@ -51,26 +51,13 @@ public class BulkTransfersCP extends BaseTest {
         containers_from = (ArrayList)testData.get("bulkContainersFrom");
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
-
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
-        }
-        Thread.sleep(5000);
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
     }
 
     @Test(priority = 1)
     public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
+        //TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
+        precondition();
         testData.get("bulkContainersFrom");
 
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
@@ -276,7 +263,9 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 2)
     public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
+        //TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
+        precondition();
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
         log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
         log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -473,7 +462,9 @@ public class BulkTransfersCP extends BaseTest {
 
     @Test(priority = 3)
     public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic() throws Exception {
+        //TestcaseID = (env.contains("immsbc_admin")) ? "245097" : "223363";
         TestcaseID = (env.contains("immsbc_admin")) ? "245097" : "243112";
+        precondition();
         /////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
         log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
         //// Supply Distribution_1_1 - containers#1 and #2, #3
@@ -625,4 +616,20 @@ public class BulkTransfersCP extends BaseTest {
         Thread.sleep(5000);
     }
 
+    public void precondition() throws Exception {
+        if(env.contains("immsbc_admin")) {
+            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
+            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
+            Thread.sleep(1000);
+            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
+            Thread.sleep(3000);
+            cpMainPage = new MainPageCP(driver);
+            cpMainPage.clickGoToUserDefaultsButton();
+        } else {
+            log("/*1.----Login to CP (newUI) as Clinician --*/");
+            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+        }
+        Thread.sleep(5000);
+        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+    }
 }

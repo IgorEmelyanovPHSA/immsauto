@@ -35,40 +35,12 @@ public class TransferCancellation extends BaseTest {
         distribution_from = String.valueOf(testData.get("distributionFrom"));
         distribution_to = String.valueOf(testData.get("distributionTo"));
         distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
-
-        log("/*1.----Login to ORG (oldUI) --*/");
-        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-        Thread.sleep(10000);
-        String currentApp = orgMainPage.currentApp();
-        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
-        }
-        supplyConsolePage = new SupplyConsolePage(driver);
-
-        //Assert.assertTrue(false);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
-        Thread.sleep(5000);
-        log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
-        Thread.sleep(2000);
-        log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-
-        ////// Supply Location_1 -> Outcoming
-        log("/*5.----Click on Automation Supply Location_1 --*/");
-
-        /////////////////////////////////////////////////
-        //Try generic method
-        /////////////////////////////////////////////////
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-        //////////////////////////////////////////////////
-        Thread.sleep(5000);
     }
 
     @Test(priority = 1)
     public void Can_do_Transfer_Cancellation_by_Dosages_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184
+        precondition();
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
         double doses = 5;
@@ -179,6 +151,7 @@ public class TransferCancellation extends BaseTest {
     @Test(priority = 2)
     public void Can_do_Transfer_Cancellation_by_Quantity_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184
+        precondition();
         String container_from = String.valueOf(testData.get("containerFrom"));
         String container_to = String.valueOf(testData.get("containerTo"));
         double quantity = 1;
@@ -286,4 +259,34 @@ public class TransferCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
+    public void precondition() throws Exception {
+        log("/*1.----Login to ORG (oldUI) --*/");
+        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
+        Thread.sleep(10000);
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
+        supplyConsolePage = new SupplyConsolePage(driver);
+
+        //Assert.assertTrue(false);
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
+        Thread.sleep(5000);
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+        Thread.sleep(2000);
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+
+        ////// Supply Location_1 -> Outcoming
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+
+        /////////////////////////////////////////////////
+        //Try generic method
+        /////////////////////////////////////////////////
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        //////////////////////////////////////////////////
+        Thread.sleep(5000);
+    }
 }

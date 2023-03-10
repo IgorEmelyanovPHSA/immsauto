@@ -37,26 +37,14 @@ public class TransferCancellationCP extends BaseTest {
 		distribution_from = String.valueOf(testData.get("distributionFrom"));
 		distribution_to = String.valueOf(testData.get("distributionTo"));
 		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
-
-		if(env.contains("immsbc_admin")) {
-			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-			orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-			Thread.sleep(1000);
-			orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-			Thread.sleep(3000);
-			cpMainPage = new MainPageCP(driver);
-			cpMainPage.clickGoToUserDefaultsButton();
-		} else {
-			log("/*1.----Login to CP (newUI) as Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
-		}
-		Thread.sleep(5000);
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
 	}
 
 	@Test(priority = 1)
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_And_Cancel() throws Exception {
+		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
+		precondition();
+
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		double doses = 5;
@@ -163,7 +151,10 @@ public class TransferCancellationCP extends BaseTest {
 
 	@Test()
 	public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another_And_Cancel() throws Exception {
+		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
+		precondition();
+
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		double quantity = 1;
@@ -267,4 +258,20 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
 	}
 
+	public void precondition() throws Exception {
+		if(env.contains("immsbc_admin")) {
+			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
+			orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
+			Thread.sleep(1000);
+			orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
+			Thread.sleep(3000);
+			cpMainPage = new MainPageCP(driver);
+			cpMainPage.clickGoToUserDefaultsButton();
+		} else {
+			log("/*1.----Login to CP (newUI) as Clinician --*/");
+			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+		}
+		Thread.sleep(5000);
+		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+	}
 }
