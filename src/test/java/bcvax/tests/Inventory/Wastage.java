@@ -30,7 +30,7 @@ public class Wastage extends BaseTest {
 			case "comunityqa_immsbc_admin_org":
 				log("Login AS comunityqa_org_immsbc_admin");
 				TestcaseID = "244844"; //C244844
-				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				loginPage.loginAsImmsBCAdminICE();
 				break;
 			default:
 				log("Login AS default user (PPHIS)");
@@ -147,7 +147,7 @@ public class Wastage extends BaseTest {
 			case "comunityqa_immsbc_admin_org":
 				log("Login AS comunityqa_org_immsbc_admin");
 				TestcaseID = "244844"; //C244844
-				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+				loginPage.loginAsImmsBCAdminICE();
 				break;
 			default:
 				log("Login AS default user (PPHIS)");

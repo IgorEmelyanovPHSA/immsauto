@@ -22,13 +22,25 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	
 	@Test(priority = 1)
 	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-		TestcaseID = "222694"; //C222694
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		log("/*1.----Login as an Clinician to ICE --*/");
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				loginPage.loginAsImmsBCAdmin();
+				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244843"; //244843
+				break;
+			default:
+				loginPage.loginAsClinicianICE();
+				log("Login AS default user (Clinician to ICE)");
+				TestcaseID = "222694"; //C222694
+		}
 		Thread.sleep(10000);
+
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
 		Thread.sleep(5000);
