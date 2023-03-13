@@ -29,7 +29,7 @@ public class Drafts extends BaseTest {
             case "comunityqa_immsbc_admin_org":
                 log("Login AS comunityqa_org_immsbc_admin");
                 TestcaseID = "244847"; //C244847
-                loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+                loginPage.loginAsImmsBCAdminICE();
                 break;
             default:
                 log("Login AS default user (PPHIS)");
@@ -161,7 +161,7 @@ public class Drafts extends BaseTest {
             case "comunityqa_immsbc_admin_org":
                 log("Login AS comunityqa_org_immsbc_admin");
                 TestcaseID = "244847"; //C244847
-                loginPage.loginAsImmsBCAdmin_DIWA_ICE();
+                loginPage.loginAsImmsBCAdminICE();
                 break;
             default:
                 log("Login AS default user (PPHIS)");

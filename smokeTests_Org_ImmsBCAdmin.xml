@@ -3,9 +3,18 @@
 <suite name="Automation run">
     <test name="SmokeCP">
         <classes>
+            <class name="bcvax.tests.InClinicExperience.DIWA_ICE"/>
             <class name="bcvax.tests.Inventory.Wastage"/>
             <class name="bcvax.tests.Inventory.Adjustments"/>
             <class name="bcvax.tests.Inventory.Drafts"/>
+            <class name="bcvax.tests.Inventory.Transfer"/>
+            <class name="bcvax.tests.Inventory.BulkTransfers"/>
+            <class name="bcvax.tests.Inventory.ReceiveSupplies"/>
+            <class name="bcvax.tests.ClinicInBox.BookingDose1"/>
+            <class name="bcvax.tests.ClinicInBox.BookingDose2"/>
+            <class name="bcvax.tests.InClinicExperience.Dose1_E2E_Covid19"/>
+            <class name="bcvax.tests.Inventory.Consumption"/>
+            <class name="bcvax.tests.Inventory.Requisition"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

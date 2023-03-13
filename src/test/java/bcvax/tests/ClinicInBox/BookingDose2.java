@@ -25,13 +25,25 @@ public class BookingDose2 extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB() throws Exception {
-		TestcaseID = "225653";
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
-		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
+		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
+
+		log("/*1.----Login --*/");
+		switch (Utils.getTargetEnvironment()) {
+			case "comunityqa_immsbc_admin_org":
+				loginPage.loginAsImmsBCAdmin();
+				log("Login AS comunityqa_org_immsbc_admin");
+				TestcaseID = "244875"; //C244875
+				break;
+			default:
+				loginPage.loginAsClinicianICE();
+				log("Login AS default user (Clinician to ICE)");
+				TestcaseID = "225653"; //C225653
+		}
 		Thread.sleep(10000);
+
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		if (clinicInBox.displayCIBApp()) {
 			log("/*---- User already on CIB Page--*/");
