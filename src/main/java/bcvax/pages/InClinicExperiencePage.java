@@ -1563,6 +1563,12 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	
 	public void ClickModalConfirmAndSaveAdministrationButton() throws InterruptedException {
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		//Thread.sleep(5000);
+		WebElement element = driver.findElement(confirm_save_adm_btn_modal_screen_);
+		Thread.sleep(5000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, confirm_save_adm_btn_modal_screen, 10);
 		Thread.sleep(2000);
 		confirm_save_adm_btn_modal_screen.click();
