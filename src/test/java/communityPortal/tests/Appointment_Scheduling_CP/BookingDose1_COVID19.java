@@ -20,7 +20,7 @@ public class BookingDose1_COVID19 extends BaseTest {
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test(priority = 1)
-    public void Can_Book_Dose1_Appointment_as_Clerk_ComunityQA() throws Exception {
+    public void Can_Book_Dose1_Appointment_as_Clerk_CP() throws Exception {
         TestcaseID = "243154"; //C243154
 
         log("Target Environment: "+ Utils.getTargetEnvironment());

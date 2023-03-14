@@ -20,12 +20,25 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
     private String pirSubmissionStatusFieldValidation = "PIR Submission Status";
 
     @Test
-    public void Validate_Historical_Immunization_PIR_Status_as_Clinician_ComunityQA() throws Exception {
-        TestcaseID = "243177"; //C243177 -- CIB - Historical Immunization Records - PIR Submission Status
+    public void Validate_Historical_Immunization_PIR_Status_as_Clinician_CP() throws Exception {
+        //TestcaseID = "243177"; //C243177 -- CIB - Historical Immunization Records - PIR Submission Status
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
-        log("/*1.----Login as an Clinician to Community Portal new UI --*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+        MainPageCP cpMainPage = new MainPageCP(getDriver());
+
+        log("/*1.----Login --*/");
+        switch (Utils.getTargetEnvironment()) {
+            case "comunityqa_immsbc_admin":
+                log("Login as ImmsBCAdmin");
+                TestcaseID = "243177"; //C243177
+                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+                break;
+            default:
+                log("Login as Clinician user");
+                TestcaseID = "243177"; //C243177
+                loginPage.loginIntoCommunityPortalAsClinician();
+
+        }
         Thread.sleep(10000);
 
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
