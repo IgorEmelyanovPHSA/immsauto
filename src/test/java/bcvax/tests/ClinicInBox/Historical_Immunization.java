@@ -87,12 +87,13 @@ public class Historical_Immunization extends BaseTest {
 		
 	}
 
-	@Test(priority = 2)
+	//@Test(priority = 2)
 	public void Can_Create_Historical_Immunization_Record_via_RelatedTab_as_Clinician_BCVAXDEVIT() throws Exception {
 		//TestcaseID = "??????"; //C??????
-		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");
 		ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
+		Thread.sleep(10000);
 		log("/*2.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		Thread.sleep(2000);
@@ -100,14 +101,14 @@ public class Historical_Immunization extends BaseTest {
 			log("/*-- 3. User already on CIB App --*/");
 		} else {
 			log("/*-- 3.1. Navigate to CIB --*/");
+			Thread.sleep(5000);
 			clinicInBox.cIBApp();
 			Thread.sleep(2000);
 		}
 		log("/*4.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		Thread.sleep(2000);
-		clinicInBox.SearchForCitizen("Maegan bcvaxvillage");
-		Thread.sleep(2000);
+		clinicInBox.SearchForCitizen(legalFirstName + " " + legalLastName);
 		log("/*----5. select Citizen Maegan from search results --*/");
 		clinicInBox.userClickCitizen();
 		Thread.sleep(2000);

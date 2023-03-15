@@ -308,9 +308,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement ClickUserHomePage;
 	private By ClickUserHomePage1 = By.xpath("//button[text()='View']");
 	
-	@FindBy(xpath = ".//a[@title='Adams BCVaxKenna']")
+	@FindBy(xpath = ".//a[@title='Adams Innis BCVAXKENNA']")
 	private WebElement useradms;
-	private By useradms1 = By.xpath(".//a[@title='Adams BCVaxKenna']");
+	private By useradms1 = By.xpath(".//a[@title='Adams Innis BCVAXKENNA']");
 	
 	@FindBy(xpath = "(//input[@placeholder='Input your search here'])[1]")
 	private WebElement searchByPhn;
@@ -933,10 +933,8 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void ClickSearchButtonHomePage() throws InterruptedException {
-		waitForElementToBeLocated(driver, homePageSearchBtn1, 10);
-		WebElement element = driver.findElement(homePageSearchBtn1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		waitForElementToBeVisible(driver, homePageSearchBtn, 10);
+		homePageSearchBtn.click();;
 		Thread.sleep(2000);
 	}
 	
