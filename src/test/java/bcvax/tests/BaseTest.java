@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -34,7 +35,9 @@ public class BaseTest {
 	public void setUp() throws Exception {
 		log("Environment: "+Utils.getTargetEnvironment());
 		captureBothStreams();
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(getDriver());
 	}

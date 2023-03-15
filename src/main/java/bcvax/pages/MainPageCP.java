@@ -24,6 +24,9 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//a[text()='Supply Locations']")
     private WebElement tabSupplyLocation;
 
+    @FindBy(xpath = "//a[text()='Profiles']")
+    private WebElement tabProfiles;
+
     @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, 's/hc-supply-location')]")
     private WebElement supplyLocationNameAbby;
 
@@ -40,7 +43,7 @@ public class MainPageCP extends BasePage{
     private WebElement sub_menu_AllClients;
 
     @FindBy(xpath = "//a[@title = 'Profiles']")
-    private WebElement sub_menu_Participants;
+    private WebElement sub_menu_profiles;
 
     @FindBy(xpath = "//a[text() = 'Participants']")
     private WebElement main_menu_btn_Participants;
@@ -76,6 +79,9 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//div[@aria-modal='true']")
     private WebElement modal_dialog;
 
+    @FindBy(xpath = "//input[@class='search-input search-input--left']")
+    private WebElement search_field;
+
     public void verifyYouAreOnTheMainPageCP(){
 
     }
@@ -106,16 +112,17 @@ public class MainPageCP extends BasePage{
     }
 
     public ProfilesPage navigateToProfilesPage() throws InterruptedException {
-        waitForElementToBeClickable(main_menu_btn_More);
         Thread.sleep(2000);
-        click(main_menu_btn_More);
-        Thread.sleep(2000);
-        //waitForElementToBeClickable(sub_menu_AllClients);
-        waitForElementToBeClickable(sub_menu_Participants);
-        Thread.sleep(2000);
-        //click(sub_menu_AllClients);
-        click(sub_menu_Participants);
-        Thread.sleep(2000);
+        if (tabProfiles.isDisplayed()) {
+            tabProfiles.click();
+        } else {
+            waitForElementToBeClickable(main_menu_btn_More);
+            Thread.sleep(2000);
+            click(main_menu_btn_More);
+            Thread.sleep(2000);
+            sub_menu_profiles.click();
+            Thread.sleep(2000);
+        }
         return new ProfilesPage(driver);
     }
 
@@ -208,6 +215,10 @@ public class MainPageCP extends BasePage{
         submitRequisitionButton.click();
     }
 
+    public void search(String criteria) {
+        search_field.sendKeys(criteria);
+        search_field.sendKeys(Keys.ENTER);
+    }
     public void refreshBrowser() throws InterruptedException {
         driver.navigate().refresh();
     }
