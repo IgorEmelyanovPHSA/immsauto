@@ -31,13 +31,13 @@ public class BookingDose1 extends BaseTest {
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin();
 				log("Login AS comunityqa_org_immsbc_admin");
+				loginPage.loginAsImmsBCAdmin();
 				TestcaseID = "244842"; //C244842
 				break;
 			default:
-				loginPage.loginAsClinicianICE();
-				log("Login AS default user (Clinician to ICE)");
+				log("Login AS default user in CIB");
+				loginPage.loginAsClinicianCIB();
 				TestcaseID = "225652"; //C225652
 		}
 		Thread.sleep(10000);

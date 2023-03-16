@@ -38,8 +38,8 @@ public class BookingDose2 extends BaseTest {
 				TestcaseID = "244875"; //C244875
 				break;
 			default:
-				loginPage.loginAsClinicianICE();
-				log("Login AS default user (Clinician to ICE)");
+				log("Login AS default user in CIB");
+				loginPage.loginAsClinicianCIB();
 				TestcaseID = "225653"; //C225653
 		}
 		Thread.sleep(10000);
