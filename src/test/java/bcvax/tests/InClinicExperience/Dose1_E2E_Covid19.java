@@ -30,13 +30,13 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin();
 				log("Login AS comunityqa_org_immsbc_admin");
+				loginPage.loginAsImmsBCAdmin();
 				TestcaseID = "244843"; //244843
 				break;
 			default:
-				loginPage.loginAsClinicianICE();
 				log("Login AS default user (Clinician to ICE)");
+				loginPage.loginAsClinicianICE();
 				TestcaseID = "222694"; //C222694
 		}
 		Thread.sleep(10000);

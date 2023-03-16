@@ -257,7 +257,9 @@ public class CallCenterConsolePage extends BasePage {
 	
 	public void clickRefreshForecastButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, refresh_forecast_button, 10);
+		Thread.sleep(3000);
 		WebElement element = driver.findElement(refresh_forecast_button1);
+		Thread.sleep(3000);
 		refresh_forecast_button.click();
 	}
 	
