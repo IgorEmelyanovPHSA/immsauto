@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.IntStream;
@@ -414,18 +416,16 @@ public class ProfilesPage extends BasePage{
     }
 
     public String pirSubmissionStatusFieldIsDisplayed() throws InterruptedException {
-        WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(1).get("PIR Submission Status");
-        //WebElement element = driver.findElement(pir_submission_status_field);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");
+        scrollTop(element);
         Thread.sleep(2000);
         element.getText();
         return (element.getText());
     }
 
-    public String pirSubmissionFieldStatus() throws InterruptedException {
-        WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(1).get("PIR Submission Status");
-        //WebElement element = driver.findElement(pir_submission_field_status);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+    public String pirSubmissionFieldStatus(int index) throws InterruptedException {
+        WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(index).get("PIR Submission Status");
+        scrollTop(element);
         Thread.sleep(2000);
         element.getText();
         return (element.getText());
@@ -554,8 +554,21 @@ public class ProfilesPage extends BasePage{
 
     public void openProfile(String clientName) throws InterruptedException {
         Thread.sleep(5000);
-        WebElement profile = driver.findElement(By.xpath("//a[@title = '" + clientName + "']"));
-        waitForElementToBeVisible(driver, profile, 10);
+        WebElement profile = null;
+        long timeout = 15000;
+        Instant start = Instant.now();
+        Instant end = Instant.now();
+        Duration timeElapsed = Duration.between(start, end);
+        while(timeElapsed.toMillis() < timeout) {
+            try {
+                profile = driver.findElement(By.xpath("//a[@title = '" + clientName + "']"));
+                break;
+            } catch (Exception ex) {
+                end = Instant.now();
+                timeElapsed = Duration.between(start, end);
+                Thread.sleep(1000);
+            }
+        }
         profile.click();
     }
 }

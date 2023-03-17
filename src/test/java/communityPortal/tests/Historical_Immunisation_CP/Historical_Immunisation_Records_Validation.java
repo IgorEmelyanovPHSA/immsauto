@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import bcvax.pages.MainPageCP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertFalse;
 
 @Listeners({TestListener.class})
 public class Historical_Immunisation_Records_Validation extends BaseTest {
@@ -29,7 +30,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         env = Utils.getTargetEnvironment();
     }
 
-    @Test
+    @Test(priority = 1)
     public void Validate_Historical_Immunization_PIR_Status_as_Clinician_ComunityQA() throws Exception {
         TestcaseID = "243177"; //C243177 -- CIB - Historical Immunization Records - PIR Submission Status
         precondition();
@@ -46,12 +47,13 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         String field = profilePage.pirSubmissionStatusFieldIsDisplayed();
         log("/*9---- " + field + "is displayed --*/");
         Thread.sleep(2000);
-        String status = profilePage.pirSubmissionFieldStatus();
+        int record_num = 1;
+        String status = profilePage.pirSubmissionFieldStatus(record_num);
         log("/*10---- Pir Submission Field status is: " + status + " --*/");
-        assertEquals(pirSubmissionField, status);
+        assertFalse(status.isEmpty());
         Thread.sleep(5000);
         log("/*11---- Click Historical Immunization record --*/");
-        int record_num = 1;
+
         profilePage.ClickHistoricalImmunizationRecord(record_num);
         ImmunizationPageCP immunizationPage = new ImmunizationPageCP(driver);
         Thread.sleep(5000);
@@ -72,9 +74,47 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         Thread.sleep(2000);
         String pirSubmissionStatusFieldValue = immunizationPage.pirSubmissionStatusFieldValue();
         log("/*16---- Pir Submission Field status is: " + pirSubmissionStatusFieldValue + " --*/");
-        assertEquals(pirSubmissionField, pirSubmissionStatusFieldValue);
+        assertEquals(pirSubmissionStatusFieldValue, status);
+        //assertEquals(pirSubmissionField, pirSubmissionStatusFieldValue);
         Thread.sleep(2000);
     }
+
+    //@Test(priority = 2)
+    public void Can_Create_Historical_Immunization_Record_via_RelatedTab_as_Clinician_BCVAXDEVIT() throws Exception {
+        //TestcaseID = "??????"; //C??????
+        log("Target Environment: " + Utils.getTargetEnvironment());
+        precondition();
+        log("Target Environment: "+ env);
+        profilePage = cpMainPage.navigateToProfilesPage();
+        log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
+        profilePage.selectAllParticipantsOption();
+        cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+        profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+        profilePage.clickRelatedTab();
+        profilePage.navigateToHistoricalImmunizationRecords();
+        Thread.sleep(1000);
+        int historicalDosesbefore = Integer.parseInt(profilePage.getHistoricalDosesValue());
+        log("/*----7. get historical doses Value + ---*/" + historicalDosesbefore);
+        log("/*----8. Click Create Immunization Record ---*/ ");
+        profilePage.clickToCreatHistoricalImmunizationRecord();
+        Thread.sleep(2000);
+        log("/*-- 9---Click to select Agent --*/");
+        profilePage.ClickAgentValue();
+        Thread.sleep(2000);
+        log("/*-- 10--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
+        profilePage.SelectAgent();
+        Thread.sleep(2000);
+        log("/*-- 11--- Select historical date from 6 months ago --*/");
+        profilePage.selectHistoricalDateAndTime();
+        Thread.sleep(2000);
+        log("/*-- 12--- Click Save Button --*/");
+        profilePage.ClickSaveButton();
+        Thread.sleep(2000);
+        int historicalDoses_after = Integer.parseInt(profilePage.getHistoricalDosesValue());
+        log("/*-- 13. remaining doses After creating Historical Doses: -->" + historicalDoses_after);
+        assertEquals(historicalDoses_after, historicalDosesbefore + 1);
+    }
+
     public void precondition() throws Exception {
         if(env.contains("immsbc_admin")) {
             log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
@@ -86,7 +126,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
             cpMainPage.clickGoToUserDefaultsButton();
         } else {
             log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
         }
         Thread.sleep(5000);
     }

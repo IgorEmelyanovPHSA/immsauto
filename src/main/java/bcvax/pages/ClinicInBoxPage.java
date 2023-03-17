@@ -308,9 +308,9 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement ClickUserHomePage;
 	private By ClickUserHomePage1 = By.xpath("//button[text()='View']");
 	
-	@FindBy(xpath = ".//a[@title='Adams Innis BCVAXKENNA']")
+	@FindBy(xpath = ".//a[@title='Adams Innis BCVaxKenna']")
 	private WebElement useradms;
-	private By useradms1 = By.xpath(".//a[@title='Adams Innis BCVAXKENNA']");
+	private By useradms1 = By.xpath(".//a[@title='Adams Innis BCVaxKenna']");
 	
 	@FindBy(xpath = "(//input[@placeholder='Input your search here'])[1]")
 	private WebElement searchByPhn;
@@ -959,10 +959,10 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void SearchForCitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
-		WebElement search_navigator = driver.findElement(search_assistant1);
-		search_navigator.click();
+		//WebElement search_navigator = driver.findElement(search_assistant1);
+		search_assistant.click();
 		waitForElementToBeVisible(driver, search_input, 10);
-		WebElement search_input = driver.findElement(search_input1);
+		//WebElement search_input = driver.findElement(search_input1);
 		search_input.sendKeys(citizen);
 		search_input.sendKeys(Keys.RETURN);
 		Thread.sleep(5000);
@@ -972,9 +972,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void userAdamsFound() throws InterruptedException {
 		waitForElementToBeLocated(driver, useradms1, 10);
-		WebElement element = driver.findElement(useradms1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		useradms.click();
 		Thread.sleep(2000);
 	}
 	
