@@ -19,7 +19,7 @@ public class BookingDose1_Influenza extends BaseTest {
     private String vaccineToSelect = "InfluenzaVaccine";
 
     @Test(priority = 1)
-    public void Can_Book_Dose1_Influenza_Appointment_as_Clerk_ComunityQA() throws Exception {
+    public void Can_Book_Dose1_Influenza_Appointment_as_Clerk_CP() throws Exception {
         TestcaseID = "243206"; //C243206
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

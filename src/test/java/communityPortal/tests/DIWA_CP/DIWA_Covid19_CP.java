@@ -28,9 +28,10 @@ public class DIWA_Covid19_CP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login as DIWA Clinician user");
+                log("Login as Clinician user");
                 TestcaseID = "243108"; //C223187
-                loginPage.loginIntoCommunityPortalAsClinician();
+                //loginPage.loginIntoCommunityPortalAsClinician();
+                loginPage.loginIntoCommunityPortalAsDIWAClinician();
 
         }
         Thread.sleep(10000);

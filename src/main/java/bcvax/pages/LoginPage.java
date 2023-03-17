@@ -272,6 +272,11 @@ public class LoginPage extends BasePage {
 		return new MainPageCP(driver);
 	}
 
+	public MainPageCP loginIntoCommunityPortalAsDIWAClinician() throws Exception {
+		loginIntoCommunityPortalAs("user_CLINICIAN_diwa_CP", "password_CLINICIAN_PW_diwa_CP");
+		return new MainPageCP(driver);
+	}
+
 	public MainPageCP loginIntoCommunityPortalAsInventoryClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_inventory_CLINICIAN_CP", "password_inventory_CLINICIAN_PW_CP");
 		return new MainPageCP(driver);
