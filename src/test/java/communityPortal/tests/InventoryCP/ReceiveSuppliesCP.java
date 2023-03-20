@@ -15,7 +15,7 @@ import static constansts.Domain.*;
 import static org.testng.Assert.assertEquals;
 
 
-public class ReceiveSupplies extends BaseTest {
+public class ReceiveSuppliesCP extends BaseTest {
 	MainPageCP communityPortalMainPage;
 	SupplyConsolePage supplyConsolePage;
 	Tables tables;
@@ -38,12 +38,13 @@ public class ReceiveSupplies extends BaseTest {
 		double doses = 10;
 
 		log("/----Count Remaining Supplies --*/");
-		Map<String, String> supplyContainerLocation = searchCriteria(vaccine, SUPPLY_DISTRIBUTION_2_1);
-		double remainingDosesBeforeReceiving = tables.getRemainingDoses(supplyContainerLocation);
-		double remainingQtyBeforeReceiving = tables.getRemainingQty(supplyContainerLocation);
+		double remainingDosesBeforeReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . remaining doses are: -->" + remainingDosesBeforeReceiving);
+		double remainingQtyBeforeReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
-		log("/*-- Receive Items by Doses From Receive Menu --*/");
-		supplyConsolePage.selectReceiveFromDropdownMenu();
+		log("/*-- Receive Supplies --*/");
+		supplyConsolePage.clickBtnReceiveSuppliesCP();
 
 		supplyConsolePage.selectSupplyItemTo(vaccine).
 				enterTransferDosages(String.valueOf(doses)).
@@ -76,8 +77,12 @@ public class ReceiveSupplies extends BaseTest {
 
 		log("/----Count Supplies After Receiving--*/");
 		tables.hardWait(2);//needs couple seconds to refresh results
-		double remainingDosesAfterReceiving = tables.getRemainingDoses(supplyContainerLocation);
-		double remainingQtyAfterReceiving = tables.getRemainingQty(supplyContainerLocation);
+
+		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
+		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . after qty are: -->" + remainingQtyAfterReceiving);
+
 		double dosesToQty =Double.parseDouble(df.format(doses / doseConversionFactor));
 
 		assertEquals(remainingDosesAfterReceiving, remainingDosesBeforeReceiving + doses);
@@ -85,18 +90,19 @@ public class ReceiveSupplies extends BaseTest {
 	}
 
 	@Test()
-	public void Validate_Receive_Supplies_By_Qty_as_an_PPHIS_Community() throws Exception {
+	public void Validate_Receive_Supplies_By_Qty_as_Clinician_Community() throws Exception {
 		TestcaseID = "243133"; //C243133
-		String vaccine = "COMIRNATY (Pfizer) - 35035BD-CC01";
+		String vaccine = "VAXZEVRIA (AstraZeneca) - MT0055";
 		double qty = 1;
 
 		log("/----Count Remaining Supplies --*/");
-		Map<String, String> supplyContainerLocation = searchCriteria(vaccine, SUPPLY_DISTRIBUTION_2_1);
-		double dosesBeforeReceiving = tables.getRemainingDoses(supplyContainerLocation);
-		double qtyBeforeReceiving = tables.getRemainingQty(supplyContainerLocation);
+		double remainingDosesBeforeReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . remaining doses are: -->" + remainingDosesBeforeReceiving);
+		double remainingQtyBeforeReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
-		log("/*-- Receive Items by Quantity From Receive Menu --*/");
-		supplyConsolePage.selectReceiveFromDropdownMenu();
+		log("/*-- Receive Supplies --*/");
+		supplyConsolePage.clickBtnReceiveSuppliesCP();
 
 		supplyConsolePage.selectSupplyItemTo(vaccine).
 				selectReasonForReception().
@@ -108,11 +114,14 @@ public class ReceiveSupplies extends BaseTest {
 
 		log("/----Count Supplies After Receiving--*/");
 		tables.hardWait(2);//needs couple seconds to refresh results
-		double dosesAfterReceiving = tables.getRemainingDoses(supplyContainerLocation);
-		double qtyAfterReceiving = tables.getRemainingQty(supplyContainerLocation);
+		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
+		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, SUPPLY_DISTRIBUTION_2_1);
+		log("/*-- . after qty are: -->" + remainingQtyAfterReceiving);
+
 		double dosesToQty = qty * doseConversionFactor;
 
-		assertEquals(qtyAfterReceiving, qtyBeforeReceiving + qty);
-		assertEquals(dosesBeforeReceiving + dosesToQty, dosesAfterReceiving);
+		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + qty);
+		assertEquals(remainingDosesBeforeReceiving + dosesToQty, remainingDosesAfterReceiving);
 	}
 }
