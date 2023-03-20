@@ -30,6 +30,13 @@ public class Tables extends BasePage {
     @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered scrollClass']")
     private WebElement requisitionLineItemsTable;
 
+    @FindBy(xpath = "//c-bc-hc-client-immunization-records")
+    private WebElement immunizationRecordsTable;
+    @FindBy(xpath = "//c-bc-hc-historical-doses-c-i-b")
+    private WebElement historicalImmunizationRecordsTable;
+    @FindBy(xpath = "//c-patient-immunization-records")
+    private WebElement relevantImmunizationHistoryTable;
+
     public Tables(WebDriver driver) {
         super(driver);
     }
@@ -202,5 +209,15 @@ public class Tables extends BasePage {
             }
         }
         return new GenericTable(singleTable);
+    }
+
+    public GenericTable getImmunizationRecordsTable() {
+        return new GenericTable(immunizationRecordsTable);
+    }
+    public GenericTable getHistoricalImmunizationRecordsTable() {
+        return new GenericTable(historicalImmunizationRecordsTable);
+    }
+    public GenericTable getRelevantImmunizationHistoryTable() {
+        return new GenericTable(relevantImmunizationHistoryTable);
     }
 }
