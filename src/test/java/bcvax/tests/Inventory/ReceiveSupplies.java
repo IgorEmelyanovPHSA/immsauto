@@ -46,9 +46,11 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		supplyConsolePage.selectSupplyItemName();
 		Thread.sleep(2000);
+
 		///Validation for Doses/Qty Before Receiving needs to be add.
-		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
+		log("/*--6_1 . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
 		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
+
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);
 		log("/*-- 8. Close all open tabs --*/");
@@ -148,8 +150,9 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 32. Click Save Button --*/");
 		supplyConsolePage.ClickSaveButton();
 		Thread.sleep(2000);
+
 		///Validation for Doses/Qty Before and After Reciaving needs to be add.
-		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
+		log("/*-- 33. Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
 	}
 	
 }
