@@ -9,7 +9,7 @@
             <class name="communityPortal.tests.InventoryCP.DraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.TransferCP"/>
             <class name="communityPortal.tests.InventoryCP.BulkTransfersCP"/>
-            <class name="communityPortal.tests.InventoryCP.ReceiveSupplies"/>
+            <class name="communityPortal.tests.InventoryCP.ReceiveSuppliesCP"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_COVID19"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose2_COVID19"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Covid19_CP"/>
