@@ -76,6 +76,13 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//div[@aria-modal='true']")
     private WebElement modal_dialog;
 
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement searchAssistant;
+
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement searchInput;
+
+
     public void verifyYouAreOnTheMainPageCP(){
 
     }
@@ -116,6 +123,16 @@ public class MainPageCP extends BasePage{
         //click(sub_menu_AllClients);
         click(sub_menu_Participants);
         Thread.sleep(2000);
+        return new ProfilesPage(driver);
+    }
+
+    public ProfilesPage globalSearch_CP(String textToSearch) throws InterruptedException {
+        waitForElementToBeVisible(driver, searchAssistant, 10);
+        click(searchAssistant);
+        waitForElementToBeVisible(driver, searchInput, 10);
+        typeIn(searchInput,textToSearch);
+        searchInput.sendKeys(Keys.RETURN);
+        Thread.sleep(5000);
         return new ProfilesPage(driver);
     }
 
