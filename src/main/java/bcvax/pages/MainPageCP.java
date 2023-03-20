@@ -82,6 +82,13 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//input[@class='search-input search-input--left']")
     private WebElement search_field;
 
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement searchAssistant;
+
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement searchInput;
+
+
     public void verifyYouAreOnTheMainPageCP(){
 
     }
@@ -123,6 +130,16 @@ public class MainPageCP extends BasePage{
             sub_menu_profiles.click();
             Thread.sleep(2000);
         }
+        return new ProfilesPage(driver);
+    }
+
+    public ProfilesPage globalSearch_CP(String textToSearch) throws InterruptedException {
+        waitForElementToBeVisible(driver, searchAssistant, 10);
+        click(searchAssistant);
+        waitForElementToBeVisible(driver, searchInput, 10);
+        typeIn(searchInput,textToSearch);
+        searchInput.sendKeys(Keys.RETURN);
+        Thread.sleep(5000);
         return new ProfilesPage(driver);
     }
 
