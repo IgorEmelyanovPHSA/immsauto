@@ -21,6 +21,7 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
     public void can_start_vaccine_administration_process_for_citizen_without_appointment() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "242265";
         precondition();
+        System.out.println("Here");
     }
     public void precondition() throws Exception {
         if(env.contains("immsbc_admin")) {
@@ -33,7 +34,7 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
             cpMainPage.clickGoToUserDefaultsButton();
         } else {
             log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();;
         }
         Thread.sleep(5000);
     }
