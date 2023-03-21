@@ -35,10 +35,11 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         TestcaseID = "243177"; //C243177 -- CIB - Historical Immunization Records - PIR Submission Status
         precondition();
         log("Target Environment: "+ env);
-        profilePage = cpMainPage.navigateToProfilesPage();
+        //profilePage = cpMainPage.navigateToProfilesPage();
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
-        profilePage.selectAllParticipantsOption();
+        //profilePage.selectAllParticipantsOption();
         cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+        profilePage = new ProfilesPage(driver);
         profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
@@ -85,11 +86,12 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         log("Target Environment: " + Utils.getTargetEnvironment());
         precondition();
         log("Target Environment: "+ env);
-        profilePage = cpMainPage.navigateToProfilesPage();
+        //profilePage = cpMainPage.navigateToProfilesPage();
 
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
-        profilePage.selectAllParticipantsOption();
+        //profilePage.selectAllParticipantsOption();
         cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+        profilePage = new ProfilesPage(driver);
         profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
