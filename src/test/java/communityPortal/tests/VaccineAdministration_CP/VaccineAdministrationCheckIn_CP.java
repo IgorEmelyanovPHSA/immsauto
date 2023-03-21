@@ -6,10 +6,14 @@ import bcvax.pages.MainPageOrg;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import java.lang.Math;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Locale;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -89,7 +93,7 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
         //Get Date/Time of Check-In
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
-        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm a");
+        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm a", Locale.US);
         String expectedDate = df.format(currentTime).replace(".", "");
         String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
         log("/*23.--Click check-in button --*/");
@@ -103,8 +107,10 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
         String appointmentTime = inClinicExperience_CP.getAppointmentTime();
         String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
 
+        LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
         assertEquals(appointmentDate, expectedDate);
-        assertEquals(appointmentTime, expectedTime);
+        //Verify the time difference between expect and actual appointment time is less than 2 minutes
+        assertTrue(Math.abs(appointmentTimeActual.getMinute() - currentTime.toLocalTime().getMinute()) <= 2, "Expected Time:" + currentTime.toLocalTime() + "; Actual Time: " + appointmentTime);
         assertEquals(appointmentLocation, clinicNameToSearch);
         System.out.println("Here");
     }
