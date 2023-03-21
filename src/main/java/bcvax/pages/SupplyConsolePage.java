@@ -1897,6 +1897,11 @@ public class SupplyConsolePage extends BasePage {
 		click(receiveSupplies);
 	}
 
+	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
+		waitForElementToBeVisible(driver, receiveSupplies, 10);
+		click(receiveSupplies);
+	}
+
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
 		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
 		Thread.sleep(5000);
