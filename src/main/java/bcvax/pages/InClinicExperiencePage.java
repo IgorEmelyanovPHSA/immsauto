@@ -2175,10 +2175,12 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String getAppointmentDate() {
+		waitForElementToBeVisible(driver, appointmentDate, 30);
 		return appointmentDate.getText();
 	}
 
 	public String getAppointmentTime() {
+		waitForElementToBeVisible(driver, appointmentTime, 30);
 		return appointmentTime.getText();
 	}
 

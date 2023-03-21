@@ -84,19 +84,25 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        log("/*22.--Check if check-in button available --*/");
         assertTrue(inClinicExperience_CP.checkInButtonAvailable());
+        //Get Date/Time of Check-In
         LocalDateTime currentTime = LocalDateTime.now();
-        inClinicExperience_CP.clickCheckInButton();
-        Thread.sleep(5000);
-        String currentTab = inClinicExperience_CP.getCurrentTab();
-        assertEquals(currentTab, "Identification");
-        String appointmentDate = inClinicExperience_CP.getAppointmentDate();
-        String appointmentTime = inClinicExperience_CP.getAppointmentTime();
-        String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
         DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm a");
         String expectedDate = df.format(currentTime).replace(".", "");
         String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
+        log("/*23.--Click check-in button --*/");
+        inClinicExperience_CP.clickCheckInButton();
+        Thread.sleep(5000);
+        log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
+        String currentTab = inClinicExperience_CP.getCurrentTab();
+        assertEquals(currentTab, "Identification");
+        log("/*25.--Get new appointment location, date and time --*/");
+        String appointmentDate = inClinicExperience_CP.getAppointmentDate();
+        String appointmentTime = inClinicExperience_CP.getAppointmentTime();
+        String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
+
         assertEquals(appointmentDate, expectedDate);
         assertEquals(appointmentTime, expectedTime);
         assertEquals(appointmentLocation, clinicNameToSearch);
