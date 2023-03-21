@@ -676,6 +676,17 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement validate_after_care_status_immunization_record_Pneumo;
 	private By validate_after_care_status_immunization_record_Pneumo_ = By.xpath("(.//lightning-base-formatted-text[text() = 'After Care'])[2]");
 
+	@FindBy(xpath = "//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']")
+	private WebElement check_in_button;
+
+	@FindBy(xpath = "//label[text() = 'Date']/../../../lightning-formatted-text")
+	private WebElement appointmentDate;
+
+	@FindBy(xpath = "//label[text() = 'Appointment Time']/../../../lightning-formatted-text")
+	private WebElement appointmentTime;
+
+	@FindBy(xpath = "//label[text() = 'Clinic Name']/../../../lightning-formatted-text")
+	private WebElement appointmentLocation;
 
 
 	/*---------Constructor-------*/
@@ -2149,6 +2160,30 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, appointmentSection, 10);
 		Thread.sleep(2000);
 	}
-	
+
+	public boolean checkInButtonAvailable() {
+		return check_in_button.isDisplayed();
+	}
+
+	public void clickCheckInButton() {
+		check_in_button.click();
+	}
+
+	public String getCurrentTab() {
+		WebElement currentTab = driver.findElement(By.xpath("//div[@class='slds-col slds-size_1-of-3 slds-align_absolute-center step first-step current-step']"));
+		return currentTab.getText();
+	}
+
+	public String getAppointmentDate() {
+		return appointmentDate.getText();
+	}
+
+	public String getAppointmentTime() {
+		return appointmentTime.getText();
+	}
+
+	public String getAppointmentLocation() {
+		return appointmentLocation.getText();
+	}
 }
 

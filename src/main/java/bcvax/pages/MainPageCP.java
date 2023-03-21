@@ -212,7 +212,7 @@ public class MainPageCP extends BasePage{
         }
     }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
-        waitForElementToBeClickable(main_menu_btn_More);
+        waitForElementToBeClickable(driver, main_menu_btn_More, 30);
         Thread.sleep(2000);
         if(driver.findElement(By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']")).isDisplayed()) {
             driver.findElement(By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']")).click();
