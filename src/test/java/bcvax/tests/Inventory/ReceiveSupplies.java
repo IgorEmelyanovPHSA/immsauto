@@ -43,16 +43,20 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		Thread.sleep(2000);
+
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		supplyConsolePage.selectSupplyItemName();
 		Thread.sleep(2000);
 
 		///Validation for Doses/Qty Before Receiving needs to be add.
-		log("/*--6_1 . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
-		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
+		//log("/*--6_1 . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
+		//double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
+		//Thread.sleep(2000);
 
+		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 		Thread.sleep(2000);
+
 		log("/*-- 8. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
