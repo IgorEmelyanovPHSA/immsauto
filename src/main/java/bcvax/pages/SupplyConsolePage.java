@@ -215,6 +215,10 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_remaining_doses_cp;
 	private By get_remaining_doses_cp_ = By.xpath("(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]");
 
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
+	private WebElement get_remaining_doses_containers_screen;
+	private By get_remaining_doses_containers_screen1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
+
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
 	private WebElement get_remaining_doses_container1_distribution_1_1;
@@ -1211,6 +1215,16 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, get_remaining_doses_, 10);
 		WebElement element = driver.findElement(get_remaining_doses_);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Doses = element.getText();
+		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		return (doses);
+	}
+
+	public Double getValueOfRemainingDoses_Containers_Screen() throws InterruptedException {
+		waitForElementToBeLocated(driver, get_remaining_doses_containers_screen1, 10);
+		WebElement element = driver.findElement(get_remaining_doses_containers_screen1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
 		Thread.sleep(2000);
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));

@@ -49,9 +49,10 @@ public class ReceiveSupplies extends BaseTest {
 		Thread.sleep(2000);
 
 		///Validation for Doses/Qty Before Receiving needs to be add.
-		//log("/*--6_1 . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
-		//double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
-		//Thread.sleep(2000);
+		log("/*--6_1 . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
+		//dosages before
+		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses_Containers_Screen();
+		Thread.sleep(2000);
 
 		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
