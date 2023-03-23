@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -123,9 +124,14 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*26----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
         Thread.sleep(2000);
-        log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
-        inClinicExperience.clickOnVaccinationInfluenzaCheckbox();
+
+        log("/*27.----click on the Vaccine 'COVID-19' checkbox --*/");
+        log("/*----scroll down a bit --*/");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+        Thread.sleep(3000);
+        inClinicExperience.clickOnVaccinationCheckbox();
         Thread.sleep(2000);
+
         //System.out.println("/*29----click on 'More' search tab --*/");
         //inClinicExperience.clickOnMoreSearchTabs();
         //Thread.sleep(2000);
@@ -152,10 +158,12 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         Thread.sleep(2000);
         System.out.println("/*34----click Confirm Appointment button  --*/");
         inClinicExperience.clickAppointmentConfirmButton();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
+
         System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience.AppointmentConfirmationMessage();
         Thread.sleep(2000);
+
         System.out.println("/*36.----Refresh page --*/");
         inClinicExperience.refreshBrowser();
         Thread.sleep(2000);

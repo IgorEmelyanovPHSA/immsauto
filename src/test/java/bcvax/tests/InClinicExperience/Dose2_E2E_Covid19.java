@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -114,9 +115,14 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		//System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
 		//inClinicExperience.selectEarlyBookingReason();
 		//Thread.sleep(2000);
+
 		System.out.println("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		log("/*----scroll down a bit --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		Thread.sleep(3000);
 		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
+
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);

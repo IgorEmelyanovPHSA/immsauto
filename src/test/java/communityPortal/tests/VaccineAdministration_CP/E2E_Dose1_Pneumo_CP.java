@@ -106,8 +106,8 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
         Thread.sleep(5000);
 
-        log("/*24.----click on the Vaccine 'Influenza Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationInfluenzaCheckbox();
+        log("/*24.----click on the Vaccine 'COVID-19 Vaccine' checkbox --*/");
+        inClinicExperience_CP.clickOnVaccinationCheckbox();
         Thread.sleep(2000);
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");

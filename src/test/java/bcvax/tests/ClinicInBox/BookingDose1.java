@@ -5,6 +5,7 @@ import bcvax.tests.BaseTest;
 import bcvax.pages.ClinicInBoxPage;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -118,11 +119,18 @@ public class BookingDose1 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		Thread.sleep(10000);
+
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+		log("/*----scroll down a bit --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		Thread.sleep(3000);
 		clinicInBox.selectOneOption(vaccineToSelect);
-//		log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-//		clinicInBox.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
+
+		//log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
+		//clinicInBox.clickOnVaccinationCheckbox();
+		//Thread.sleep(2000);
+
 		//System.out.println("/*23----click on 'More' search tab --*/");
 		//clinicInBox.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
