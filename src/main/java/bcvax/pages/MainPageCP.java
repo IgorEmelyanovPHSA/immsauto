@@ -88,6 +88,8 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//input[@placeholder = 'Search...']")
     private WebElement searchInput;
 
+    @FindBy(xpath = "//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']")
+    private WebElement participantsTable;
 
     public void verifyYouAreOnTheMainPageCP(){
 
@@ -118,20 +120,20 @@ public class MainPageCP extends BasePage{
         return this;
     }
 
-    public ProfilesPage navigateToProfilesPage() throws InterruptedException {
-        Thread.sleep(2000);
-        if (tabProfiles.isDisplayed()) {
-            tabProfiles.click();
-        } else {
-            waitForElementToBeClickable(main_menu_btn_More);
-            Thread.sleep(2000);
-            click(main_menu_btn_More);
-            Thread.sleep(2000);
-            sub_menu_profiles.click();
-            Thread.sleep(2000);
-        }
-        return new ProfilesPage(driver);
-    }
+//    public ProfilesPage navigateToProfilesPage() throws InterruptedException {
+//        Thread.sleep(2000);
+//        if (tabProfiles.isDisplayed()) {
+//            tabProfiles.click();
+//        } else {
+//            waitForElementToBeClickable(main_menu_btn_More);
+//            Thread.sleep(2000);
+//            click(main_menu_btn_More);
+//            Thread.sleep(2000);
+//            sub_menu_profiles.click();
+//            Thread.sleep(2000);
+//        }
+//        return new ProfilesPage(driver);
+//    }
 
     public ProfilesPage globalSearch_CP(String textToSearch) throws InterruptedException {
         waitForElementToBeVisible(driver, searchAssistant, 10);
@@ -210,13 +212,17 @@ public class MainPageCP extends BasePage{
         }
     }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
-        waitForElementToBeClickable(main_menu_btn_More);
+        waitForElementToBeClickable(driver, main_menu_btn_More, 30);
         Thread.sleep(2000);
-        click(main_menu_btn_More);
-        Thread.sleep(2000);
-        waitForElementToBeClickable(sub_menu_Register);
-        Thread.sleep(2000);
-        click(sub_menu_Register);
+        if(driver.findElement(By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']")).isDisplayed()) {
+            driver.findElement(By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']")).click();
+        } else {
+            click(main_menu_btn_More);
+            Thread.sleep(2000);
+            waitForElementToBeClickable(sub_menu_Register);
+            Thread.sleep(2000);
+            click(sub_menu_Register);
+        }
         Thread.sleep(2000);
         return new InClinicExperiencePage(driver);
     }
@@ -233,8 +239,11 @@ public class MainPageCP extends BasePage{
     }
 
     public void search(String criteria) {
+        waitForElementToBeVisible(driver, search_field, 30);
         search_field.sendKeys(criteria);
         search_field.sendKeys(Keys.ENTER);
+
+        waitForElementToBePresent(driver, By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']"), 30);
     }
     public void refreshBrowser() throws InterruptedException {
         driver.navigate().refresh();
