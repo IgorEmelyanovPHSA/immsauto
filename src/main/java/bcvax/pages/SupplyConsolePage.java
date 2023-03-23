@@ -91,7 +91,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//tbody/tr[1]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
 	private WebElement checkBox;
 	private By check_box = By.xpath("//tbody/tr[1]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
-	
+
+	@FindBy(xpath = "//button[@title='Select a List View']")
+	private WebElement select_list_view_btn;
+
 	@FindBy(xpath = "//input[@name='BCH_Requested_Delivery_Date__c']")
 	private WebElement inputDate;
 	private By input_data = By.xpath("//input[@name='BCH_Requested_Delivery_Date__c']");
@@ -592,6 +595,9 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
+
+	@FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
+	private WebElement search_location_field;
 
 	@FindBy(xpath = "//label[text()='Approver Comment']/..//input")
 	private WebElement approverComment;
@@ -1927,6 +1933,19 @@ public class SupplyConsolePage extends BasePage {
 		this.select_desired_supply_loc.click();
 	}
 
+	public void selectSupplyLocationName(String location) throws InterruptedException {
+		waitForElementToBeVisible(driver, select_list_view_btn, 10);
+		select_list_view_btn.click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
+		Thread.sleep(2000);
+		search_location_field.sendKeys(location);
+		search_location_field.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+
+		tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
+	}
+
 	public void clickSupplyDistribution() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_supply_distribution1, 10);
 		Thread.sleep(2000);
@@ -1935,6 +1954,11 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		executor.executeScript("arguments[0].click();", element);
 	}
+
+	public void clickSupplyDistribution(String container) throws InterruptedException {
+		tables.clickOnSupplyContainerTableRow(ImmutableMap.of(SUPPLY_CONTAINER_NAME, container));
+	}
+
 
 	public String getSupplyDistributionName() throws InterruptedException {
 		WebElement element = driver.findElement(get_supply_distribution_name1);

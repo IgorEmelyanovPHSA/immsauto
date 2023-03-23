@@ -188,6 +188,16 @@ public class MainPageCP extends BasePage{
         input_current_date.sendKeys(Keys.ENTER);
     }
 
+    public void selectUserDefaultLocation(String location) throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
+        Thread.sleep(1000);
+    }
+
     public void clickSaveDefaultsButton() throws InterruptedException {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
         Thread.sleep(2000);
