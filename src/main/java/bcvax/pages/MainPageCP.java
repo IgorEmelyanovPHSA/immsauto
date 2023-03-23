@@ -106,6 +106,7 @@ public class MainPageCP extends BasePage{
 
     @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
+        Thread.sleep(2000);
         waitForElementToBeVisible(driver, tabSupplyLocation, 30);
         Thread.sleep(2000);
         tabSupplyLocation.click();
