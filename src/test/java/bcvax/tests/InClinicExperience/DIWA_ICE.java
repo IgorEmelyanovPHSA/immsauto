@@ -61,7 +61,7 @@ public class DIWA_ICE extends BaseTest {
 				TestcaseID = "244854"; //C244854
 				break;
 			default:
-				loginPage.loginAsClinicianICE();
+				loginPage.loginAsClinician_DIWA_ICE();
 				log("Login AS default user (Clinician to ICE)");
 				TestcaseID = "223187"; //C223187
 		}
