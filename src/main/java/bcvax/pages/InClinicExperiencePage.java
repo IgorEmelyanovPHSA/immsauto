@@ -1324,6 +1324,13 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, booking_app_active_day, 10);
 		booking_app_active_day.click();
 	}
+
+	public void selectBookingAppointmentDay(int day) throws InterruptedException {
+		Thread.sleep(2000);
+		List<WebElement> myDays = driver.findElements(By.xpath("(.//button[@class = 'slds-day active-day'])"));
+		myDays.get(day).click();
+	}
+
 	
 	public void selectTimeSlotForAppointment() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
@@ -1453,7 +1460,17 @@ public class InClinicExperiencePage extends BasePage {
 		verify_contact_information_checkbox_CP.click();
 		Thread.sleep(2000);
 	}
-	
+
+	public void clickTodayAppointments() {
+		WebElement todayAppointments = driver.findElement(By.xpath("//h2[text() = \"Today's Appointments\"]"));
+		todayAppointments.click();
+	}
+
+	public void clickTodayAppointmentCaseViewButton() {
+		WebElement todayAppointment = driver.findElement(By.xpath("//button[@title = 'View Case']"));
+		todayAppointment.click();
+	}
+
 	public void selectVaccineAgent() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
 		Thread.sleep(2000);
@@ -2080,6 +2097,16 @@ public class InClinicExperiencePage extends BasePage {
 		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
 		executor1.executeScript("arguments[0].click();", element1);
 	}
+
+	public void selectConsumptionDosage(String dose) throws InterruptedException {
+		waitForElementToBeLocated(driver, select_dosage_field1, 10);
+		WebElement element = driver.findElement(select_dosage_field1);
+		element.click();
+		Thread.sleep(2000);
+		WebElement doseOption = driver.findElement(By.xpath("//span[@title='" + dose + "']"));
+		doseOption.click();
+	}
+
 
 	public void selectDosageVaccineAdmin() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");

@@ -173,6 +173,11 @@ public class Tables extends BasePage {
         clickOnTableRow(searchCriteria, getSupplyLocationTable());
     }
 
+    @Step
+    public void clickOnSupplyContainerTableRow(Map<String, String> searchCriteria) {
+        clickOnTableRow(searchCriteria, getSupplyContainerTable());
+    }
+
     // ------  PRIVATE -------
     private Map<String, WebElement> getTableRow(Map<String, String> searchCriteria, GenericTable table) {
         return table.getMappedRow(searchCriteria);

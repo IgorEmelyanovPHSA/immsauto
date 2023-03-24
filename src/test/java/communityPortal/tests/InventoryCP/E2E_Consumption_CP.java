@@ -6,8 +6,11 @@ import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class E2E_Consumption_CP extends BaseTest {
+    String env;
     private String legalFirstName = "Dacia";
     private String legalLastName = "Bcvaxdod";
     private String dateOfBirth = "May 19, 1904";
@@ -15,13 +18,21 @@ public class E2E_Consumption_CP extends BaseTest {
     private String personalHealthNumber = "9746172456";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
+    Map<String, Object> testData;
+    //String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+    String supplyContainer = "2023-03-23-COMIRNATY (Pfizer) - EL0140-6";
+    String supplyDistribution = "Supply Distribution_1";
+    String dose;
 
     @Test(priority = 1)
     public void Validate_Consumption_as_an_Inventory_Clinician_ComunityQA() throws Exception {
         TestcaseID = "243115"; //C243115
+        env = Utils.getTargetEnvironment();
         log("Target Environment: " + Utils.getTargetEnvironment());
-
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+        dose = String.valueOf(testData.get("consumptionDose"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
@@ -38,19 +49,20 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(5000);
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-        supplyConsolePage.selectSupplyLocationName();
+        supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
         Thread.sleep(5000);
 
-        log("/*5. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
-        supplyConsolePage.selectSupplyContainer();
+        //log("/*5. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
+        //supplyConsolePage.selectSupplyContainer();
+        //Thread.sleep(5000);
+
+        //double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
+        //supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        //log("/*6. remaining doses Before: -->" + remainingDoses_before);
         Thread.sleep(5000);
 
-        double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses_CP();
-        log("/*6. remaining doses Before: -->" + remainingDoses_before);
-        Thread.sleep(5000);
-
-        double remainingQty_before = supplyConsolePage.getValueOfRemainingQty_CP();
-        log("/*7. remaining Qty Before: -->" + remainingQty_before);
+        //double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
+        //log("/*7. remaining Qty Before: -->" + remainingQty_before);
         Thread.sleep(5000);
 
         log("/*8.----- Click on User Defaults Tab --*/");
@@ -59,10 +71,10 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*9.----- Enter current date for UserDefaults --*/");
         cpMainPage.inputCurrentDateUserDefaults();
-
+        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
         cpMainPage.clickSaveDefaultsButton();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         log("/*11.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -190,27 +202,42 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
 
-        log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-        inClinicExperience_CP.selectVaccineAgent();
-        Thread.sleep(3000);
+        try {
+            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            inClinicExperience_CP.selectVaccineAgent();
+            Thread.sleep(3000);
+        } catch(Exception ex) {
+            log("/*39.---Open Today's appointments from Home page --*/");
 
-        log("/*40.---Click Save Consent Button --*/");
+            inClinicExperience_CP.clickTodayAppointments();
+            Thread.sleep(3000);
+            log("/*40.---Open Today appointment Details --*/");
+            inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
+            Thread.sleep(5000);
+            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            inClinicExperience_CP.selectVaccineAgent();
+            Thread.sleep(3000);
+        }
+
+        log("/*42.---Click Save Consent Button --*/");
         inClinicExperience_CP.ClickSaveConsentButton();
         Thread.sleep(5000);
-
-        log("/*41.---Click Save button for Immunisation Information --*/");
+        log("/*43.---select Dosage ->  -.5 --*/");
+        inClinicExperience_CP.selectConsumptionDosage(dose);
+        Thread.sleep(2000);
+        log("/*44.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
 
-        log("/*42.---Click Confirm and Save Administration Button --*/");
+        log("/*45.---Click Confirm and Save Administration Button --*/");
         inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(5000);
 
-        log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
+        log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
         Thread.sleep(3000);
 
-        log("/*44.---the Home - Client Search showing up  --*/");
+        log("/*47.---the Home - Client Search showing up  --*/");
         inClinicExperience_CP.validateHomePageShownUp();
         Thread.sleep(3000);
 
