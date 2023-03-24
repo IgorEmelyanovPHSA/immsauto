@@ -106,6 +106,7 @@ public class MainPageCP extends BasePage{
 
     @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
+        Thread.sleep(2000);
         waitForElementToBeVisible(driver, tabSupplyLocation, 30);
         Thread.sleep(2000);
         tabSupplyLocation.click();
@@ -186,6 +187,16 @@ public class MainPageCP extends BasePage{
         input_current_date.sendKeys(todayAsString);
         Thread.sleep(2000);
         input_current_date.sendKeys(Keys.ENTER);
+    }
+
+    public void selectUserDefaultLocation(String location) throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
+        Thread.sleep(1000);
     }
 
     public void clickSaveDefaultsButton() throws InterruptedException {
