@@ -53,7 +53,7 @@ public class Consumption extends BaseTest {
 		consumptionLot = String.valueOf(testData.get("lotConsumption"));
 		consumptionDose = String.valueOf(testData.get("doseConsumption"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
+		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
 		Thread.sleep(10000);
 		inClinicExperiencePage.closeTabsHCA();
@@ -167,7 +167,7 @@ public class Consumption extends BaseTest {
 
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(3000);
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		Thread.sleep(5000);
@@ -178,9 +178,14 @@ public class Consumption extends BaseTest {
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		inClinicExperiencePage.selectSearchByClinicNameTab();
 		Thread.sleep(2000);
+
 		log("/*35.----search the Clinic " +clinicNameToSearch +" --*/");
+		log("/*----scroll down a bit --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
+
 		log("/*--36.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		Thread.sleep(2000);
