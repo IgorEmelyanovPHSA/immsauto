@@ -144,6 +144,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
 		log("/*----scroll down a bit --*/");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		Thread.sleep(2000);
 		inClinicExperience.searchClinicName(clinicNameToSearch);
 		Thread.sleep(2000);
 
