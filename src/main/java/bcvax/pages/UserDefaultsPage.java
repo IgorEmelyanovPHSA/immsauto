@@ -160,4 +160,23 @@ public class UserDefaultsPage extends BasePage{
         validateSuccessfullyUpdatedMsg();
     }
 
+    public void selectUserDefaultLocation(String location) throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
+        Thread.sleep(1000);
+    }
+
+    public void inputUserDefaultsCurrentDate() throws InterruptedException {
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+        waitForElementToBeVisible(driver, input_current_date, 10);
+        String todayAsString = dateFormat.format(today);
+        click(input_current_date);
+        typeIn(input_current_date,todayAsString);
+    }
 }

@@ -20,7 +20,7 @@ public class E2E_Consumption_CP extends BaseTest {
     private String email = "accountToDelete@phsa.ca";
     Map<String, Object> testData;
     //String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+    String clinicNameToSearch;
     String supplyContainer = "2023-03-23-COMIRNATY (Pfizer) - EL0140-6";
     String supplyDistribution = "Supply Distribution_1";
     String dose;
