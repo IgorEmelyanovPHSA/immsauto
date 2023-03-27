@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.tests.BaseTest;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -93,9 +94,14 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.clickAppointmentTab();
 		Thread.sleep(2000);
+
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+		log("/*----scroll down a bit --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		Thread.sleep(3000);
 		callCenterConsole.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
+
 		//System.out.println("/*23----click on reason Early Booking Reason --*/");
 		//callCenterConsole.selectEarlyBookingReason();
 		//Thread.sleep(2000);
