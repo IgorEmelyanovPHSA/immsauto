@@ -67,12 +67,14 @@ public class DIWA_ICE extends BaseTest {
 		}
 		Thread.sleep(5000);
 
-		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		inClinicExperience.verifyIsICEpageDisplayed();
-		Thread.sleep(5000);
-		log("/*3.--- Navigate to In Clinic Experience App --*/");
+		log("/*2.--- Navigate to In Clinic Experience App --*/");
 		inClinicExperience.selectICEFromApp();
 		Thread.sleep(5000);
+
+		log("/*3.----In Clinic Experience(ICE) page displayed --*/");
+		inClinicExperience.verifyIsICEpageDisplayed();
+		Thread.sleep(5000);
+
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		Thread.sleep(5000);
