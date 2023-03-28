@@ -135,9 +135,14 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         //System.out.println("/*29----click on 'More' search tab --*/");
         //inClinicExperience.clickOnMoreSearchTabs();
         //Thread.sleep(2000);
+
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
+        log("/*----scroll down a bit --*/");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+        Thread.sleep(3000);
         inClinicExperience.selectSearchByClinicNameTab();
         Thread.sleep(2000);
+
         log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience.searchClinicName(clinicNameToSearch);
         Thread.sleep(2000);
