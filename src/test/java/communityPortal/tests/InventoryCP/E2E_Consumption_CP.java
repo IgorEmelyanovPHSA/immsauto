@@ -8,6 +8,9 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
+import static java.lang.Math.round;
+import static org.testng.Assert.assertEquals;
+
 @Listeners({TestListener.class})
 public class E2E_Consumption_CP extends BaseTest {
     String env;
@@ -19,10 +22,9 @@ public class E2E_Consumption_CP extends BaseTest {
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     Map<String, Object> testData;
-    //String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
-    String supplyContainer = "2023-03-23-COMIRNATY (Pfizer) - EL0140-6";
-    String supplyDistribution = "Supply Distribution_1";
+    String clinicNameToSearch;
+    String supplyContainer;
+    String supplyDistribution;
     String dose;
 
     @Test(priority = 1)
@@ -32,6 +34,8 @@ public class E2E_Consumption_CP extends BaseTest {
         log("Target Environment: " + Utils.getTargetEnvironment());
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+        supplyDistribution = String.valueOf(testData.get("distributionConsumption"));
+        supplyContainer = String.valueOf(testData.get("containerConsumption"));
         dose = String.valueOf(testData.get("consumptionDose"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
@@ -56,13 +60,12 @@ public class E2E_Consumption_CP extends BaseTest {
         //supplyConsolePage.selectSupplyContainer();
         //Thread.sleep(5000);
 
-        //double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
-        //supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
-        //log("/*6. remaining doses Before: -->" + remainingDoses_before);
+        double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
+        log("/*6. remaining doses Before: -->" + remainingDoses_before);
         Thread.sleep(5000);
 
-        //double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
-        //log("/*7. remaining Qty Before: -->" + remainingQty_before);
+        double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
+        log("/*7. remaining Qty Before: -->" + remainingQty_before);
         Thread.sleep(5000);
 
         log("/*8.----- Click on User Defaults Tab --*/");
@@ -197,7 +200,8 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
         inClinicExperience_CP.validateVaccineAdminPageOpen();
         Thread.sleep(5000);
-
+        inClinicExperience_CP.clickCloseAlert();
+        Thread.sleep(2000);
         log("/*38.---Click confirm and Save Button --*/");
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
@@ -241,6 +245,38 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.validateHomePageShownUp();
         Thread.sleep(3000);
 
+        supplyConsolePage = new SupplyConsolePage(driver);
+//		if (inClinicExperiencePage.supplyLocDisplayed()) {
+//			log("/*-- 52.1 User is already on Supply loc --*/");
+//		} else {
+//			log("/*-- 52.1. Click Dropdown Menu --*/");
+//			inClinicExperiencePage.clickDropdownMenu();
+//			Thread.sleep(5000);
+//			log("/*-- 52.2. Navigate and Select Supply Locations --*/");
+//			inClinicExperiencePage.selectSupplyLocationFromDropdown();
+//			Thread.sleep(2000);
+//		}
+
+        supplyConsolePage = cpMainPage.goToSupplyLocation();
+        log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
+        supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
+        Thread.sleep(2000);
+//		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
+//		inClinicExperiencePage.selectSupplyContainer();
+//		Thread.sleep(2000);
+        //////////Validation for Dosages and Qty After Consumption
+        System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
+        double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
+        log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
+        assertEquals(remainingDoses_after, remainingDoses_before - 1);
+        Thread.sleep(2000);
+        double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
+        log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
+        assertEquals(remainingQty_after, round((remainingDoses_before - 1)/5), 2);
+        Thread.sleep(2000);
+        supplyConsolePage.closeTabsHCA();
+        log("/*-- 58. Close all open tabs --*/");
+        Thread.sleep(2000);
     }
 
     @Test(priority = 2)

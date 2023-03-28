@@ -2,17 +2,22 @@ package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
 import bcvax.pages.InClinicExperiencePage;
+import bcvax.pages.SupplyConsolePage;
+import bcvax.pages.UserDefaultsPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class Consumption extends BaseTest {
+	String env;
 	private String legalFirstName = "Dacia";
 	private String legalLastName = "Bcvaxdod";
 	private String dateOfBirth = "May 19, 1904";
@@ -20,13 +25,33 @@ public class Consumption extends BaseTest {
 	private String personalHealthNumber = "9746172456";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+	String clinicNameToSearch;
+	Map<String, Object> testData;
+	String distribution;
+	String container;
+	String consumptionAgent;
+	String consumptionProvider;
+	String consumptionRoute;
+	String consumptionSite;
+	String consumptionLot;
+	String consumptionDose;
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
 		TestcaseID = "222359"; //C219969->C222359
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+		distribution = String.valueOf(testData.get("distributionConsumption"));
+		container = String.valueOf(testData.get("containerConsumption"));
+		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+		consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+		consumptionSite = String.valueOf(testData.get("siteConsumption"));
+		consumptionLot = String.valueOf(testData.get("lotConsumption"));
+		consumptionDose = String.valueOf(testData.get("doseConsumption"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
@@ -58,32 +83,33 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		inClinicExperiencePage.selectSupplyLocationName();
+		inClinicExperiencePage.selectSupplyLocationName(clinicNameToSearch);
 		Thread.sleep(2000);
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
-		inClinicExperiencePage.selectSupplyContainer();
-		Thread.sleep(2000);
-		double remainingDoses_before = inClinicExperiencePage.getValueOfRemainingDoses();
+		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
 		Thread.sleep(2000);
-		double remainingQty_before = inClinicExperiencePage.getValueOfRemainingQty();
+		double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
 		Thread.sleep(3000);
 		log("/*-- 10. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
 		inClinicExperiencePage.selectICEFromApp();
 		Thread.sleep(2000);
-		log("/*-- 12. Click on User Defaults Tab  --*/");
-		inClinicExperiencePage.clickUserDefaultsTab();
-		Thread.sleep(2000);
-		log("/*-- 13. Enter current date for UserDefaults --*/");
-		inClinicExperiencePage.inputCurrentDateUserDefaults();
-		Thread.sleep(2000);
-		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
-		inClinicExperiencePage.clickSaveDefaultsButton();
-		Thread.sleep(2000);
+		//log("/*-- 12. Click on User Defaults Tab  --*/");
+		//inClinicExperiencePage.clickUserDefaultsTab();
+		//Thread.sleep(2000);
+		//UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
+		//log("/*-- 13. Enter current date for UserDefaults --*/");
+		//userDefaultsPage.inputUserDefaultsCurrentDate();
+		//Thread.sleep(2000);
+		//userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		//System.out.println("/*-- 14.----- Click on Save defaults button --*/");
+		//inClinicExperiencePage.clickSaveDefaultsButton();
+		//Thread.sleep(2000);
 		log("/*-- 15. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
 		Thread.sleep(2000);
@@ -191,12 +217,60 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		Thread.sleep(5000);
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		inClinicExperiencePage.selectVaccineAgent();
+		try {
+			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperiencePage.selectVaccineAgent();
+			Thread.sleep(3000);
+		} catch(Exception ex) {
+			log("/*46.---Open Today's appointments from Home page --*/");
+
+			inClinicExperiencePage.clickTodayAppointments();
+			Thread.sleep(3000);
+			log("/*47.---Open Today appointment Details --*/");
+			inClinicExperiencePage.clickTodayAppointmentCaseViewButton();
+			Thread.sleep(5000);
+			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperiencePage.selectVaccineAgent();
+			Thread.sleep(3000);
+		}
 		Thread.sleep(2000);
 		log("/*-- 48---Click Save Consent Button --*/");
+		if(!inClinicExperiencePage.consentProviderSelected()) {
+			inClinicExperiencePage.selectConsentProvider();
+		}
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(5000);
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
+		if(!inClinicExperiencePage.consentProviderSelected()) {
+			inClinicExperiencePage.selectConsentProvider();
+		}
+
+		String agent = inClinicExperiencePage.getVaccineAgent();
+		String provider =  inClinicExperiencePage.getProvider();
+		String route = inClinicExperiencePage.getRoute();
+		String site = inClinicExperiencePage.getSite();
+		String lot = inClinicExperiencePage.getLotNumber();
+
+		if(agent.equals("")) {
+			inClinicExperiencePage.setVaccineAgent(consumptionAgent);
+		}
+		if(provider.equals("")) {
+			inClinicExperiencePage.setProvider(consumptionProvider);
+		}
+		if(route.equals("")) {
+			inClinicExperiencePage.setRoute(consumptionRoute);
+		}
+		if(site.equals("")) {
+			inClinicExperiencePage.setSite(consumptionSite);
+		}
+		if(lot.equals("")) {
+			inClinicExperiencePage.setLotNumber(consumptionLot);
+		}
+		Thread.sleep(1000);
+		String dose = inClinicExperiencePage.getDosage();
+		if(dose.equals("")) {
+			inClinicExperiencePage.setDosage(consumptionDose);
+		}
 		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
 		Thread.sleep(5000);
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
@@ -211,36 +285,37 @@ public class Consumption extends BaseTest {
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
 		inClinicExperiencePage.selectHealthConnectApp();
 		Thread.sleep(2000);
+		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
-		if (inClinicExperiencePage.supplyLocDisplayed()) {
-			log("/*-- 52.1 User is already on Supply loc --*/");
-		} else {
-			log("/*-- 52.1. Click Dropdown Menu --*/");
-			inClinicExperiencePage.clickDropdownMenu();
-			Thread.sleep(5000);
-			log("/*-- 52.2. Navigate and Select Supply Locations --*/");
-			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-			Thread.sleep(2000);
-		}
+//		if (inClinicExperiencePage.supplyLocDisplayed()) {
+//			log("/*-- 52.1 User is already on Supply loc --*/");
+//		} else {
+//			log("/*-- 52.1. Click Dropdown Menu --*/");
+//			inClinicExperiencePage.clickDropdownMenu();
+//			Thread.sleep(5000);
+//			log("/*-- 52.2. Navigate and Select Supply Locations --*/");
+//			inClinicExperiencePage.selectSupplyLocationFromDropdown();
+//			Thread.sleep(2000);
+//		}
 		log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		inClinicExperiencePage.selectSupplyLocationName();
+		supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
 		Thread.sleep(2000);
-		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
-		inClinicExperiencePage.selectSupplyContainer();
-		Thread.sleep(2000);
+//		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
+//		inClinicExperiencePage.selectSupplyContainer();
+//		Thread.sleep(2000);
 		//////////Validation for Dosages and Qty After Consumption
 		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
-		double remainingDoses_after = inClinicExperiencePage.getValueOfRemainingDoses();
+		double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
 		assertEquals(remainingDoses_after, remainingDoses_before - 1);
 		Thread.sleep(2000);
-		double remainingQty_after = inClinicExperiencePage.getValueOfRemainingQty();
+		double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
 		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/5), 2);
 		Thread.sleep(2000);
-		inClinicExperiencePage.closeTabsHCA();
+		supplyConsolePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");
 		Thread.sleep(2000);
 	}
