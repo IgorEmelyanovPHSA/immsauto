@@ -1514,7 +1514,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectVaccineAgent() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
+		scrollTop(click_vaccine_agent_dropdown);
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
@@ -2275,7 +2276,9 @@ public class InClinicExperiencePage extends BasePage {
 		return driver.findElement(By.xpath("//label[text() = 'Site']/..//button")).getAttribute("data-value");
 	}
 
-	public String getLotNumber() {
+	public String getLotNumber() throws InterruptedException {
+		driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input")).click();
+		Thread.sleep(1000);
 		return driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input")).getAttribute("title");
 	}
 
@@ -2316,5 +2319,9 @@ public class InClinicExperiencePage extends BasePage {
 		driver.findElement(By.xpath("//label[text() = 'Dosage']/..//button")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//span[@title = '" + dose + "']")).click();
+	}
+
+	public void clickCloseAlert() {
+		driver.findElement(By.xpath("//button[@title='Close']")).click();
 	}
 }
