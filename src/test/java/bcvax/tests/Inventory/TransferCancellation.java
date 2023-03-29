@@ -264,6 +264,7 @@ public class TransferCancellation extends BaseTest {
         orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
         Thread.sleep(10000);
         String currentApp = orgMainPage.currentApp();
+        log("/*1.1.----Current App " + currentApp + "--*/");
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
