@@ -191,10 +191,14 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
 	private WebElement editImmunizationInformation;
 	
-	@FindBy(xpath = "//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']")
+	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
 	private WebElement select_lot;
-	private By select_lot_ = By.xpath("//li[@title='SPIKEVAX6-5Test001 - Exp. 2022 December 31']");
-	
+	private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
+	//@FindBy(xpath = "//li[@data-value ='300042698']")
+	//private WebElement select_lot;
+	//private By select_lot_ = By.xpath("//li[@data-value='300042698']");
+
+
 	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
 	private WebElement select_injection_site_value;
 	private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");

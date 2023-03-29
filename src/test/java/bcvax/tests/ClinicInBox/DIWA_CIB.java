@@ -80,7 +80,7 @@ public class DIWA_CIB extends BaseTest {
 		clinicInBoxPage.clickLotNumberDropDown();
 		Thread.sleep(2000);
 
-		log("/*---20. Select Lot -->SPIKEVAX6-5Test001 - Exp. 2022 December 31 ---*/");
+		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> 300042698 - Exp. 2021 June 18 ---*/");
 		clinicInBoxPage.selectLot();
 		Thread.sleep(2000);
 
