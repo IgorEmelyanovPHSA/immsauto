@@ -10,7 +10,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+import org.testng.asserts.SoftAssert;
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
@@ -83,7 +83,10 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),\"Save\")]")
 	private WebElement saveButton;
 	private By save_button = By.xpath("//button[contains(text(),\"Save\")]");
-	
+
+	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
+	private WebElement successMessage;
+
 	@FindBy(xpath = "//input[@class=\"slds-combobox__input slds-input\"]")
 	private WebElement shipAddress;
 	private By ship_address = By.xpath("//input[@class=\"slds-combobox__input slds-input\"]");
@@ -1185,12 +1188,11 @@ public class SupplyConsolePage extends BasePage {
 		click(element);
 	}
 	@Step
-	public void successMessageAppear() {
-		By successMessage = By.xpath("//*[contains(text(), 'Success!')]");
-		waitForElementToBePresent(driver, successMessage, 20);
-		assertTrue(isElementPresent(driver.findElement(successMessage)));
+	public void successMessageAppear() throws InterruptedException {
+		waitForElementToBeVisible(driver, successMessage, 20);
+		assertTrue(isElementPresent(successMessage));
 		log(" -- Toast success message appears");
-		waitForElementNotToBePresent(driver, successMessage, 20);
+		Thread.sleep(5000);
 	}
 	
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
