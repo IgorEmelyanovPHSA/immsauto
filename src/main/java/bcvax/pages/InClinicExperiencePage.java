@@ -1450,10 +1450,16 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1500)", "");
+		try {
+			confirm_and_save_btn_home.isDisplayed();
+		} catch(NoSuchElementException ex) {
+			System.out.println(ex.getMessage());
+			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
+			driver.findElement(By.xpath("//button[text() ='Rebook at Current Location']")).click();
+		}
 		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, confirm_and_save_btn_home, 10);
+		scrollTop(confirm_and_save_btn_home);
 		Thread.sleep(2000);
 		confirm_and_save_btn_home.click();
 	}
