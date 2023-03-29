@@ -70,7 +70,8 @@ public class Requisition extends BaseTest {
 		log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for bcvaxdevit --COVID-19 mRNA COMIRNATY Pediatric 10mcg (Pfizer) Orange Cap 2mL 10-dose vial - FK5618-CC03 (2022-12-13 16:07:54) Lot FK5618-CC0 --*/");
-		int itemNum = 7;
+		int itemNum = 1;
+		supplyConsolePage.checkShowInStockCheckbox();
 		supplyConsolePage.clickLineItemCheckBox(itemNum);
 		log("/*----12. click Next button --*/");
 		supplyConsolePage.clickNextButton();
@@ -101,7 +102,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePage.clickSaveApprovedRequisition();
 		System.out.println("/*----24. Ship Requisition--*/");
 		supplyConsolePage.clickShipRequisition();
-
+		Thread.sleep(2000);
 		String actual = "Ship Requisition";
 		Assert.assertEquals(actual, supplyConsolePage.ShipRequisition());
 
