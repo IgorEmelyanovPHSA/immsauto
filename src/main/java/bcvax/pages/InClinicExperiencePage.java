@@ -1452,7 +1452,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
 		try {
 			confirm_and_save_btn_home.isDisplayed();
-		} catch(Exception ex) {
+		} catch(NoSuchElementException ex) {
 			System.out.println(ex.getMessage());
 			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
 			driver.findElement(By.xpath("//button[text() ='Rebook at Current Location']")).click();
