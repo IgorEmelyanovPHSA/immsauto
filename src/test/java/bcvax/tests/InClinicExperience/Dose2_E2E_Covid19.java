@@ -118,7 +118,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		System.out.println("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(3000);
 		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
