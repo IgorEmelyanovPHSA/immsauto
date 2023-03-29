@@ -704,7 +704,12 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, nextButton, 10);
 		this.nextButton.click();
 	}
-	
+
+	public void checkShowInStockCheckbox() throws InterruptedException {
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']")).click();
+	}
+
 	public void clickSubmitRequisition() throws InterruptedException {
 		waitForElementToBeVisible(driver, submitRequisition, 10);
 		submitRequisition.click();
@@ -2316,6 +2321,7 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, driver.findElement(By.xpath("//label[text() = 'Trade']")), 30);
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
+		scrollTop(trade);
 		String tradeValue = trade.getAttribute("value");
 		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input")).get(0);
 		approveDoseField.sendKeys(inputDose);
