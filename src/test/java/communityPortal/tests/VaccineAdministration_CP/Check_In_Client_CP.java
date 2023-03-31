@@ -17,7 +17,7 @@ import java.util.Locale;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class VaccineAdministrationCheckIn_CP extends BaseTest {
+public class Check_In_Client_CP extends BaseTest {
     MainPageCP cpMainPage;
     MainPageOrg orgMainPage;
     String env;
@@ -35,8 +35,8 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
         log("Target Environment: " + env);
     }
     @Test(priority = 1)
-    public void can_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "242265";
+    public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
+        TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
         precondition();
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();

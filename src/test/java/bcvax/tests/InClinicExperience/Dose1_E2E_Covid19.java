@@ -38,7 +38,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			default:
 				log("Login AS default user (Clinician to ICE)");
 				loginPage.loginAsClinicianICE();
-				TestcaseID = "222694"; //C222694
+				TestcaseID = "226778"; //C226778
 		}
 		Thread.sleep(10000);
 
