@@ -35,7 +35,7 @@ public class VaccineAdministrationCheckIn_CP extends BaseTest {
         log("Target Environment: " + env);
     }
     @Test(priority = 1)
-    public void can_start_vaccine_administration_process_for_citizen_without_appointment() throws Exception {
+    public void can_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "242265";
         precondition();
         log("/*6.----Navigate to More -> Register --*/");

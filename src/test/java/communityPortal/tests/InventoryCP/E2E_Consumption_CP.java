@@ -28,7 +28,7 @@ public class E2E_Consumption_CP extends BaseTest {
     String dose;
 
     @Test(priority = 1)
-    public void Validate_Consumption_as_an_Inventory_Clinician_ComunityQA() throws Exception {
+    public void Validate_Consumption_as_an_Inventory_Clinician_CP() throws Exception {
         TestcaseID = "243115"; //C243115
         env = Utils.getTargetEnvironment();
         log("Target Environment: " + Utils.getTargetEnvironment());
