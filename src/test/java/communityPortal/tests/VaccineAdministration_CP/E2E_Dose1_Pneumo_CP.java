@@ -19,7 +19,7 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test(priority = 1)
-    public void Can_do_Dose1_Pneumo_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
+    public void Can_do_Dose1_Pneumo_Vaccine_Administration_as_Clinician_CP() throws Exception {
         TestcaseID = "243211"; //C243211
         log("Target Environment: " + Utils.getTargetEnvironment());
 

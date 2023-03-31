@@ -31,7 +31,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void Validate_Historical_Immunization_PIR_Status_as_Clinician_ComunityQA() throws Exception {
+    public void Validate_Historical_Immunization_PIR_Status_as_Clinician_CP() throws Exception {
         TestcaseID = "243177"; //C243177 -- CIB - Historical Immunization Records - PIR Submission Status
         precondition();
         log("Target Environment: "+ env);

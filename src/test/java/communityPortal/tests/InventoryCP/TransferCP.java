@@ -40,7 +40,7 @@ public class TransferCP extends BaseTest {
 	}
 
 	@Test(priority = 1)
-	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another() throws Exception {
+	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_CP() throws Exception {
 		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
 		precondition();

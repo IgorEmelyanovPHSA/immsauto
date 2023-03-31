@@ -19,7 +19,7 @@ public class RequisitionCP extends BaseTest {
     Map<String, Object> testData;
     String env;
     @Test
-    public void Create_Requisition_as_an_PPHIS() throws Exception {
+    public void Create_Requisition_as_an_Clinician_CP() throws Exception {
         env = Utils.getTargetEnvironment();
         TestcaseID = (env.contains("immsbc_admin")) ? "245095" : "243087"; //C243087
         testData = Utils.getTestData(env);

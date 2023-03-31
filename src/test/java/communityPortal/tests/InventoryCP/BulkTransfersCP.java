@@ -54,7 +54,7 @@ public class BulkTransfersCP extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
+    public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another_CP() throws Exception {
         //TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
         precondition();

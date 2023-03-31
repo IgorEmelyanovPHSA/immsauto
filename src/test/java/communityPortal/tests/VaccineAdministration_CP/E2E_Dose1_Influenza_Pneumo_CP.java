@@ -18,7 +18,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
     String nameToSearch = "Ludovika BcvaxLimeburn";
 
     @Test(priority = 1)
-    public void Can_do_Dose1_Influenza_Pneumo_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
+    public void Can_do_Dose1_Influenza_Pneumo_Vaccine_Administration_as_Clinician_CP() throws Exception {
         TestcaseID = "243214"; //C243214
         log("Target Environment: " + Utils.getTargetEnvironment());
 
