@@ -1,10 +1,13 @@
 package communityPortal.tests.VaccineAdministration_CP;
 
+import Utilities.ApiQueries;
 import Utilities.TestListener;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.MainPageCP;
+import bcvax.pages.ProfilesPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -20,7 +23,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "All Ages - Atlin Health Centre";
-    String citizenName = "Hugues BCVaxLampard";
+    String citizenName = "Hugues Fawn BCVaxLampard";
 
     @Test
     public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_CP() throws Exception {
@@ -28,7 +31,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         // TestCase update for CP 245216??
         log("Target Environment: " + Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianWrongClinic();
@@ -77,7 +80,6 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*15.---Click review details Button--*/");
         inClinicExperience_CP.clickReviewDetails();
-        //  Thread.sleep(1000);
 
         log("/*16.----Click register Button on confirmation page--*/");
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
@@ -139,8 +141,99 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
         Thread.sleep(2000);
 
-// Blocked by GO TO in clinic Experience btn is broken
+        log("/*31.----Refresh page - need to be fixed by dev's --*/");
+        inClinicExperience_CP.refreshBrowser();
+        Thread.sleep(5000);
 
+        log("/*32.---Click Go To In clinic experience button --*/");
+        //Create classic object of inClinicExperiencePage
+        InClinicExperiencePage inClinicExperiencePageClassic = new InClinicExperiencePage(getDriver());
+        inClinicExperiencePageClassic.ClickGoToInClinicExperienceButton();
+        Thread.sleep(5000);
+
+        String originalBooking = inClinicExperiencePageClassic.ValidateClinicNameBeforeRebook();
+        log("/*--- Before Booking clinic Value is:" + originalBooking + "");
+
+        //Assert originalBooking are match to actual booking (clinicNameToSearch)
+        Assert.assertTrue(clinicNameToSearch.equalsIgnoreCase(originalBooking));
+
+        log("/*33.--- User can click Rebook Appointment button to book an appointment --*/");
+        inClinicExperiencePageClassic.ClickRebookAppointment();
+        log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
+        log("/*--                                2. Rebook at Current Location button is disabled --*/");
+        Thread.sleep(5000);
+
+        String afterRebooking = inClinicExperiencePageClassic.ValidateclinicNameAfterRebook();
+        log("/*--- After Booking clinic value is:" + afterRebooking + "");
+
+        //Assert false clinic originalBooking is not equals to afterRebooking
+        Assert.assertFalse(originalBooking.equalsIgnoreCase(afterRebooking));
+
+        log("/*34.---'Rebook at Current Location button is disabled after user books appointment --*/");
+        inClinicExperiencePageClassic.ValidateClickRebookAppointmentButtonIsDisabled();
+        Thread.sleep(2000);
+
+        log("/*35.---Click confirm and Save Button on Home Page --*/");
+        inClinicExperiencePageClassic.HomePageClickConfirmAndSaveButton();
+        Thread.sleep(5000);
+
+        log("/*36.---Click to select Agent --*/");
+        inClinicExperiencePageClassic.ClickAgentValue();
+        Thread.sleep(2000);
+
+        log("/*37.--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
+        inClinicExperiencePageClassic.SelectAgentValue();
+        Thread.sleep(2000);
+
+        log("/*38.---Click Save Consent Button --*/");
+        inClinicExperiencePageClassic.ClickSaveConsentButton();
+        Thread.sleep(5000);
+
+        log("/*39.---Save Immunization Information ---*/");
+        inClinicExperiencePageClassic.saveImmunizationInformation();
+        Thread.sleep(2000);
+
+        log("/*40.---Click Confirm and Save Administration Button --*/");
+        inClinicExperiencePageClassic.ClickConfirmAndSaveAdministrationButton();
+        Thread.sleep(3000);
+
+        log("/*41.---Click Modal screen Confirm&Save Administration Button --*/");
+        inClinicExperiencePageClassic.ClickModalConfirmAndSaveAdministrationButton();
+        Thread.sleep(3000);
+
+        log("/*42.---the Home - Client Search supposed to showing up  --*/");
+        inClinicExperiencePageClassic.validateHomePageShownUp();
+        Thread.sleep(3000);
+        inClinicExperiencePageClassic.refreshBrowser();
+        Thread.sleep(5000);
+
+        log("/*43.---Search for Participant account --*/");
+        ProfilesPage profilesPage = cpMainPage.globalSearch_CP(citizenName);
+        Thread.sleep(10000);
+
+        log("/*44.---select Citizen Participant acc from search results --*/");
+        profilesPage.selectCitizenParticipant(citizenName);
+        Thread.sleep(5000);
+
+        log("/*45.---Navigate to Person Account related tab ---*/");
+        profilesPage.clickRelatedTab();
+        Thread.sleep(5000);
+
+        log("/*46.---Immunization status is in After Care ---*/");
+        inClinicExperiencePageClassic.ValidateStatusisInAftercare();
+        Thread.sleep(2000);
+
+        log("/*47.---User Navigated to Appointment Section  ---*/");
+        inClinicExperiencePageClassic.NavigateToAppointmentsSection();
+        Thread.sleep(2000);
+
+        log("/*48.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
+        inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresent();
+        Thread.sleep(2000);
+
+        log("/*49.---- An confirmed appointmrnt is found for the user  ---*/");
+        inClinicExperiencePageClassic.ValidateAppointmentConfirmIsPresent();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 2)
