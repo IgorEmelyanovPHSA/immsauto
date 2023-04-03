@@ -22,8 +22,10 @@ public class ReceiveSupplies extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (PPHIS)");
-				TestcaseID = "223642"; //C223642
-				loginPage.loginAsPPHIS();
+				//TestcaseID = "223642"; //C223642 pphis
+				TestcaseID = "244853"; //C244853 immsbc
+				//loginPage.loginAsPPHIS();
+				loginPage.orgLoginAsImmsBCAdminCP();
 		}
 		Thread.sleep(10000);
 
@@ -43,21 +45,21 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		Thread.sleep(2000);
-
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		supplyConsolePage.selectSupplyItemName();
 		Thread.sleep(2000);
-
-		///Validation for Doses/Qty Before Receiving needs to be add.
-		log("/*--6_1 . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
-		//dosages before
-		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses_Containers_Screen();
+		///Validation for Doses/Qty Before Receiving needs to be add from supply container
+		///log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
+		double remainingQty_before = supplyConsolePage.getValueOfRemainingQuantity();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_before);
 		Thread.sleep(2000);
-
+		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
+		log("/*-- . remaining Doses are: -->" + remainingDoses_before);
+		Thread.sleep(2000);
 		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
-		Thread.sleep(2000);
 
+		Thread.sleep(2000);
 		log("/*-- 8. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		Thread.sleep(2000);
@@ -156,8 +158,37 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.ClickSaveButton();
 		Thread.sleep(2000);
 
+
+		log("/*-- 33. Navigate to Health Connect - Supply Console --*/");
+		supplyConsolePage.selectHealthConnectApp();
+		Thread.sleep(2000);
+		log("/*-- 34. Close all open tabs --*/");
+			supplyConsolePage.closeTabsHCA();
+			Thread.sleep(5000);
+		log("/*-- 35. Click Dropdown Menu --*/");
+			supplyConsolePage.clickDropdownMenu();
+			Thread.sleep(5000);
+		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
+			supplyConsolePage.selectSupplyItemsFromDropdown();
+			Thread.sleep(2000);
+		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
+			supplyConsolePage.selectSupplyItemName();
+			Thread.sleep(2000);
+
 		///Validation for Doses/Qty Before and After Reciaving needs to be add.
-		log("/*-- 33. Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
+		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
+		double remainingQty_after = supplyConsolePage.getValueOfRemainingQuantity();
+		log("/*-- . remaining Quantity are: -->" + remainingQty_after);
+		Thread.sleep(2000);
+		double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses();
+		log("/*-- . remaining Doses are: -->" + remainingDoses_after);
+		Thread.sleep(2000);
+
+		Assert.assertEquals((remainingQty_after), (remainingQty_before)+1);
+		Assert.assertEquals((remainingDoses_after), (remainingDoses_before)+Integer.valueOf(doseConversionFactor));
+
+
+
 	}
 	
 }

@@ -10,7 +10,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import org.testng.asserts.SoftAssert;
+
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
@@ -83,10 +83,7 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),\"Save\")]")
 	private WebElement saveButton;
 	private By save_button = By.xpath("//button[contains(text(),\"Save\")]");
-
-	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
-	private WebElement successMessage;
-
+	
 	@FindBy(xpath = "//input[@class=\"slds-combobox__input slds-input\"]")
 	private WebElement shipAddress;
 	private By ship_address = By.xpath("//input[@class=\"slds-combobox__input slds-input\"]");
@@ -94,10 +91,7 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//tbody/tr[1]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]")
 	private WebElement checkBox;
 	private By check_box = By.xpath("//tbody/tr[1]/td[1]/lightning-input[1]/div[1]/span[1]/label[1]/span[1]");
-
-	@FindBy(xpath = "//button[@title='Select a List View']")
-	private WebElement select_list_view_btn;
-
+	
 	@FindBy(xpath = "//input[@name='BCH_Requested_Delivery_Date__c']")
 	private WebElement inputDate;
 	private By input_data = By.xpath("//input[@name='BCH_Requested_Delivery_Date__c']");
@@ -220,10 +214,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]")
 	private WebElement get_remaining_doses_cp;
 	private By get_remaining_doses_cp_ = By.xpath("(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]");
-
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
-	private WebElement get_remaining_doses_containers_screen;
-	private By get_remaining_doses_containers_screen1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
 
 	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
@@ -487,10 +477,14 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
-
+    ////                                                           *[@id="sectionContent-427"]/div/slot/records-record-layout-row[5]/slot/records-record-layout-item[2]/div/div/div[2]/span/slot[1]/records-formula-output/slot/lightning-formatted-number
 	@FindBy(xpath = "//button[@name='distributionBox']")
 	private WebElement supply_distribution_to;
 	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
+
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
+	private WebElement get_remaining_quantity;
+	private By get_remaining_quantity1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
 	@FindBy(xpath = "(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]")
 	private WebElement select_supply_distributor;
@@ -603,9 +597,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
 
-	@FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
-	private WebElement search_location_field;
-
 	@FindBy(xpath = "//label[text()='Approver Comment']/..//input")
 	private WebElement approverComment;
 	//////////////////////////////////////////////////////////////////////////////////
@@ -704,12 +695,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, nextButton, 10);
 		this.nextButton.click();
 	}
-
-	public void checkShowInStockCheckbox() throws InterruptedException {
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']")).click();
-	}
-
+	
 	public void clickSubmitRequisition() throws InterruptedException {
 		waitForElementToBeVisible(driver, submitRequisition, 10);
 		submitRequisition.click();
@@ -749,7 +735,7 @@ public class SupplyConsolePage extends BasePage {
 	public void clickSupplyLocationsTab() throws InterruptedException {
 		waitForElementToBeVisible(driver, supply_locations_tab, 10);
 		if(!supply_locations_tab.getText().equals("Supply Locations")) {
-			driver.findElement(By.xpath("//button[@title='Show Navigation Menu']")).click();
+			driver.findElement(By.xpath("//button[@title='Show Navigation Menu']"));
 			Thread.sleep(1000);
 			driver.findElement(By.xpath("//span[@class='menuLabel slds-listbox__option-text slds-listbox__option-text_entity' and text() = 'Supply Locations']")).click();
 		}
@@ -1193,11 +1179,12 @@ public class SupplyConsolePage extends BasePage {
 		click(element);
 	}
 	@Step
-	public void successMessageAppear() throws InterruptedException {
-		waitForElementToBeVisible(driver, successMessage, 20);
-		assertTrue(isElementPresent(successMessage));
+	public void successMessageAppear() {
+		By successMessage = By.xpath("//*[contains(text(), 'Success!')]");
+		waitForElementToBePresent(driver, successMessage, 20);
+		assertTrue(isElementPresent(driver.findElement(successMessage)));
 		log(" -- Toast success message appears");
-		Thread.sleep(5000);
+		waitForElementNotToBePresent(driver, successMessage, 20);
 	}
 	
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
@@ -1233,16 +1220,19 @@ public class SupplyConsolePage extends BasePage {
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
 	}
-
-	public Double getValueOfRemainingDoses_Containers_Screen() throws InterruptedException {
-		waitForElementToBeLocated(driver, get_remaining_doses_containers_screen1, 10);
-		WebElement element = driver.findElement(get_remaining_doses_containers_screen1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+	public Double getValueOfRemainingQuantity() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		Thread.sleep(2000);
-		String Doses = element.getText();
-		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
+		waitForElementToBeLocated(driver, get_remaining_quantity1, 10);
+		WebElement element = driver.findElement(get_remaining_quantity1);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		String Quantity = element.getText();
+		Double doses = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (doses);
 	}
+
+
 
 	public Double getValueOfRemainingDoses_CP() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
@@ -1924,11 +1914,6 @@ public class SupplyConsolePage extends BasePage {
 		click(receiveSupplies);
 	}
 
-	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
-		waitForElementToBeVisible(driver, receiveSupplies, 10);
-		click(receiveSupplies);
-	}
-
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
 		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
 		Thread.sleep(5000);
@@ -1954,19 +1939,6 @@ public class SupplyConsolePage extends BasePage {
 		this.select_desired_supply_loc.click();
 	}
 
-	public void selectSupplyLocationName(String location) throws InterruptedException {
-		waitForElementToBeVisible(driver, select_list_view_btn, 10);
-		select_list_view_btn.click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
-		Thread.sleep(2000);
-		search_location_field.sendKeys(location);
-		search_location_field.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
-
-		tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
-	}
-
 	public void clickSupplyDistribution() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_supply_distribution1, 10);
 		Thread.sleep(2000);
@@ -1975,11 +1947,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		executor.executeScript("arguments[0].click();", element);
 	}
-
-	public void clickSupplyDistribution(String container) throws InterruptedException {
-		tables.clickOnSupplyContainerTableRow(ImmutableMap.of(SUPPLY_CONTAINER_NAME, container));
-	}
-
 
 	public String getSupplyDistributionName() throws InterruptedException {
 		WebElement element = driver.findElement(get_supply_distribution_name1);
@@ -2157,6 +2124,13 @@ public class SupplyConsolePage extends BasePage {
 		element.getText();
 		return (element.getText());
 	}
+	public String getRemainingQuantity() throws InterruptedException {
+		WebElement element = driver.findElement(get_dose_conversion_factor1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(2000);
+		element.getText();
+		return (element.getText());
+	}
 	public double getDoseConversionFactorOnReceive() {
 		waitForElementToBePresent(driver, get_dose_conversion_factor2, 10);
 		double value = Double.parseDouble(driver.findElement(get_dose_conversion_factor2).getAttribute("value"));
@@ -2321,7 +2295,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, driver.findElement(By.xpath("//label[text() = 'Trade']")), 30);
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
-		scrollTop(trade);
 		String tradeValue = trade.getAttribute("value");
 		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input")).get(0);
 		approveDoseField.sendKeys(inputDose);
