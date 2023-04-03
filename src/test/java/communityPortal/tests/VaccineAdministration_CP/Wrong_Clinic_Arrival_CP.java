@@ -215,23 +215,23 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         profilesPage.selectCitizenParticipant(citizenName);
         Thread.sleep(5000);
 
-        log("/*46.---Navigate to Person Account related tab ---*/");
+        log("/*45.---Navigate to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
         Thread.sleep(5000);
 
-        log("/*48.---Immunization status is in After Care ---*/");
+        log("/*46.---Immunization status is in After Care ---*/");
         inClinicExperiencePageClassic.ValidateStatusisInAftercare();
         Thread.sleep(2000);
 
-        log("/*49.---User Navigated to Appointment Section  ---*/");
+        log("/*47.---User Navigated to Appointment Section  ---*/");
         inClinicExperiencePageClassic.NavigateToAppointmentsSection();
         Thread.sleep(2000);
 
-        log("/*51.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
+        log("/*48.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
         inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresent();
         Thread.sleep(2000);
 
-        log("/*52.---- An confirmed appointmrnt is found for the user  ---*/");
+        log("/*49.---- An confirmed appointmrnt is found for the user  ---*/");
         inClinicExperiencePageClassic.ValidateAppointmentConfirmIsPresent();
         Thread.sleep(2000);
     }
