@@ -44,7 +44,9 @@ public class Check_In_Client_ICE extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
+        //InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
+        loginPage.loginAsPPHIS();
+        InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         Thread.sleep(10000);
         inClinicExperiencePage.closeTabsHCA();
         Thread.sleep(5000);
