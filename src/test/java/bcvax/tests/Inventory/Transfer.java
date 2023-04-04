@@ -87,11 +87,11 @@ public class Transfer extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
 		double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 =
-				Double.parseDouble(new DecimalFormat("##.####").
+				Double.parseDouble(new DecimalFormat("##.##").
 						format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10)));
 		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1);
 		double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 =
-				Double.parseDouble(new DecimalFormat("##.####").
+				Double.parseDouble(new DecimalFormat("##.##").
 						format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor)));
 		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
