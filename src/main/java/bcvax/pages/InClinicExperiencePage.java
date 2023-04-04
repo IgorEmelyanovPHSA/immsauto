@@ -70,9 +70,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement user_Costa_found;
 	private By user_Costa_found1 = By.xpath(".//a[@title='Alexandro Corry BCVaxDa Costa']");
 
-	@FindBy(xpath = "(//a[@data-label='Related'])")
+	@FindBy(xpath = "(//a[@data-label='Related' or @title = 'Related'])")
 	private WebElement click_related_tab;
-	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
+	private By click_related_tab1 = By.xpath("//a[@data-label='Related' or @title = 'Related']");
 
 	@FindBy(xpath = ".//th//lightning-primitive-cell-factory[@data-label='Immunization Record']//div[@class='slds-grid']//span[@force-lookup_lookup='']")
 	private WebElement select_Imms_record;
@@ -697,6 +697,10 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
 	private WebElement search_location_field;
 
+	@FindBy(xpath = "//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']")
+	private WebElement newDeferralBtn;
+
+
 	Tables tables;
 
 	/*---------Constructor-------*/
@@ -868,6 +872,39 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement element = driver.findElement(click_related_tab1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+	}
+
+	public void newDeferral() throws InterruptedException {
+		Thread.sleep(2000);
+		boolean referralNewButtonFound = false;
+		WebElement newReferralBtn = null;
+		while (!referralNewButtonFound) {
+			try {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.scrollBy(0, 200)");
+				newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
+				referralNewButtonFound = true;
+			} catch(Exception ex) {
+				Thread.sleep(2000);
+			}
+		}
+		newReferralBtn.click();
+	}
+
+	public void scrollToDeferrals() throws InterruptedException {
+		Thread.sleep(2000);
+		boolean referralNewButtonFound = false;
+		WebElement newReferralBtn = null;
+		while (!referralNewButtonFound) {
+			try {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.scrollBy(0, 200)");
+				newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
+				referralNewButtonFound = true;
+			} catch(Exception ex) {
+				Thread.sleep(2000);
+			}
+		}
 	}
 
 	public boolean selectImmsRecord() throws InterruptedException {
@@ -2329,5 +2366,10 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void clickCloseAlert() {
 		driver.findElement(By.xpath("//button[@title='Close']")).click();
+	}
+
+	public int getDeferralsCount() {
+		int count = tables.getDeferralsTable().getRows().size();
+		return count;
 	}
 }
