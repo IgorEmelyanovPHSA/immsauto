@@ -2239,6 +2239,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public boolean checkInButtonAvailable() {
+		waitForElementToBeVisible(driver, check_in_button, 10);
 		return check_in_button.isDisplayed();
 	}
 
