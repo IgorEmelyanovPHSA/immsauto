@@ -1333,7 +1333,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(3000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
 		Thread.sleep(2000);
@@ -2276,6 +2276,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public boolean checkInButtonAvailable() {
+		waitForElementToBeVisible(driver, check_in_button, 10);
 		return check_in_button.isDisplayed();
 	}
 

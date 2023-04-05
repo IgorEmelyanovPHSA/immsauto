@@ -21,7 +21,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-		TestcaseID = "222811"; //C222811
+		TestcaseID = "225656"; //C225656
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
@@ -118,7 +118,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		System.out.println("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(3000);
 		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);

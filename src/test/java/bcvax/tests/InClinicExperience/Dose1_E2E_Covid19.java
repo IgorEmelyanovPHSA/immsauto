@@ -38,7 +38,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			default:
 				log("Login AS default user (Clinician to ICE)");
 				loginPage.loginAsClinicianICE();
-				TestcaseID = "222694"; //C222694
+				TestcaseID = "226778"; //C226778
 		}
 		Thread.sleep(10000);
 
@@ -129,7 +129,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(3000);
 		inClinicExperience.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);

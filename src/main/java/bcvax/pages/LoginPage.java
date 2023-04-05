@@ -262,6 +262,11 @@ public class LoginPage extends BasePage {
 		return new MainPageCP(driver);
 	}
 
+	public MainPageCP loginIntoCommunityPortalAsClinicianWrongClinic() throws Exception {
+		loginIntoCommunityPortalAs("user_CLINICIAN_WrongClinic_CP", "user_CLINICIAN_PW_WrongClinic_CP");
+		return new MainPageCP(driver);
+	}
+
 	public MainPageCP loginIntoCommunityPortalAsClerk() throws Exception {
 		loginIntoCommunityPortalAs("user_CLERK_Booking_CP", "password_CLERK_PW_Booking_CP");
 		return new MainPageCP(driver);

@@ -28,7 +28,7 @@ public class E2E_Consumption_CP extends BaseTest {
     String dose;
 
     @Test(priority = 1)
-    public void Validate_Consumption_as_an_Inventory_Clinician_ComunityQA() throws Exception {
+    public void Validate_Consumption_as_an_Inventory_Clinician_CP() throws Exception {
         TestcaseID = "243115"; //C243115
         env = Utils.getTargetEnvironment();
         log("Target Environment: " + Utils.getTargetEnvironment());
@@ -67,7 +67,7 @@ public class E2E_Consumption_CP extends BaseTest {
         double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
         log("/*7. remaining Qty Before: -->" + remainingQty_before);
         Thread.sleep(5000);
-
+        long conversionFactor = round(remainingDoses_before / remainingQty_before);
         log("/*8.----- Click on User Defaults Tab --*/");
         cpMainPage.clickUserDefaultsTab();
         Thread.sleep(2000);
@@ -272,7 +272,7 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(2000);
         double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
         log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-        assertEquals(remainingQty_after, round((remainingDoses_before - 1)/5), 2);
+        assertEquals(remainingQty_after, round((remainingDoses_before - 1)/conversionFactor), 2);
         Thread.sleep(2000);
         supplyConsolePage.closeTabsHCA();
         log("/*-- 58. Close all open tabs --*/");

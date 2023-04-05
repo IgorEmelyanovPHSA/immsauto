@@ -18,7 +18,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test(priority = 1)
-    public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ComunityQA() throws Exception {
+    public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
         TestcaseID = "243203"; //C243203 needs to changed for CP e2E Manual Regresion
         log("Target Environment: " + Utils.getTargetEnvironment());
 

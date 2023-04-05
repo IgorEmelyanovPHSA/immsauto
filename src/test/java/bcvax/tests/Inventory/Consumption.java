@@ -38,7 +38,7 @@ public class Consumption extends BaseTest {
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
-		TestcaseID = "222359"; //C219969->C222359
+		TestcaseID = "223355"; //C223355
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
@@ -99,17 +99,17 @@ public class Consumption extends BaseTest {
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
 		inClinicExperiencePage.selectICEFromApp();
 		Thread.sleep(2000);
-		//log("/*-- 12. Click on User Defaults Tab  --*/");
-		//inClinicExperiencePage.clickUserDefaultsTab();
-		//Thread.sleep(2000);
-		//UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
-		//log("/*-- 13. Enter current date for UserDefaults --*/");
-		//userDefaultsPage.inputUserDefaultsCurrentDate();
-		//Thread.sleep(2000);
-		//userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
-		//System.out.println("/*-- 14.----- Click on Save defaults button --*/");
-		//inClinicExperiencePage.clickSaveDefaultsButton();
-		//Thread.sleep(2000);
+		log("/*-- 12. Click on User Defaults Tab  --*/");
+		inClinicExperiencePage.clickUserDefaultsTab();
+		Thread.sleep(2000);
+		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
+		log("/*-- 13. Enter current date for UserDefaults --*/");
+		userDefaultsPage.inputUserDefaultsCurrentDate();
+		Thread.sleep(2000);
+		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
+		inClinicExperiencePage.clickSaveDefaultsButton();
+		Thread.sleep(2000);
 		log("/*-- 15. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
 		Thread.sleep(2000);
