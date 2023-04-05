@@ -33,7 +33,7 @@ public class MainPageOrg extends BasePage {
             } catch (NotFoundException ex) {
                 end = Instant.now();
                 if(Duration.between(start, end).toMillis() > timeout) {
-                    break;
+                    throw new NotFoundException("Current APP tab not found");
                 }
                 Thread.sleep(200);
             }
