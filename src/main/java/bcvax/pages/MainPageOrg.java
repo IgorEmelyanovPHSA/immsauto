@@ -5,6 +5,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.Duration;
+import java.time.Instant;
+
 
 public class MainPageOrg extends BasePage {
     @FindBy(xpath = "//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span")
@@ -19,8 +22,22 @@ public class MainPageOrg extends BasePage {
     public MainPageOrg(WebDriver driver) {
         super(driver);
     }
-    public String currentApp() {
-        waitForElementToBeVisible(driver, currentApp, 30);
+    public String currentApp() throws InterruptedException {
+        int timeout = 30000;
+        boolean found = false;
+        Instant start = Instant.now();
+        Instant end = Instant.now();
+        while(!found) {
+            try {
+                found = currentApp.isDisplayed();
+            } catch (NotFoundException ex) {
+                end = Instant.now();
+                if(Duration.between(start, end).toMillis() > timeout) {
+                    break;
+                }
+                Thread.sleep(200);
+            }
+        }
         return currentApp.getText();
     }
 
