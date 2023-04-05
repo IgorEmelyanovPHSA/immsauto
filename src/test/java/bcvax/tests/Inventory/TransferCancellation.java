@@ -9,6 +9,8 @@ import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.text.DecimalFormat;
 import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static java.lang.Math.round;
@@ -84,10 +86,11 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
-        double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - doses;
+        double remainingDosesAfterCalculationDistribution1_1 = Double.parseDouble(new DecimalFormat("##.##").
+                format((remainingDosesBeforeDistribution1_1 - doses)));
         assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
-        double remainingQtyAfterCalculationDistribution1_1 =
-                remainingDosesAfterCalculationDistribution1_1 / dose_conversation_factor;
+        double remainingQtyAfterCalculationDistribution1_1 = Double.parseDouble(new DecimalFormat("##.##").
+                format((remainingDosesAfterCalculationDistribution1_1 / dose_conversation_factor)));
         assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
@@ -195,7 +198,9 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
-        double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - quantity * dose_conversation_factor ;
+        double remainingDosesAfterCalculationDistribution1_1 = Double.parseDouble(new DecimalFormat("##.##").
+                format((remainingDosesBeforeDistribution1_1 - quantity * dose_conversation_factor)));
+
         assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
         double remainingQtyAfterCalculationDistribution1_1 = remainingQtyBeforeDistribution1_1 - quantity;
         assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
