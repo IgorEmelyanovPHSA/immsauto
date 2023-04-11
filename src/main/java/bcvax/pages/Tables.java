@@ -36,7 +36,8 @@ public class Tables extends BasePage {
     private WebElement historicalImmunizationRecordsTable;
     @FindBy(xpath = "//c-patient-immunization-records")
     private WebElement relevantImmunizationHistoryTable;
-
+    @FindBy(xpath = "//table[@aria-label = 'Deferrals']")
+    private WebElement deferralsTable;
     public Tables(WebDriver driver) {
         super(driver);
     }
@@ -62,8 +63,12 @@ public class Tables extends BasePage {
         return new GenericTable(requisitionLineItemsTable);
     }
 
+    public GenericTable getDeferralsTable() {
+        return new GenericTable(deferralsTable);
+    }
+
     public GenericTable getSingleTransactionsTable(String table) {
-       WebElement shippedTransactionsOutgoing = getSingleTableFromMultipleTables(table).findElement(By.xpath(".//div[@class='slds-table_header-fixed_container slds-scrollable_x']"));
+        WebElement shippedTransactionsOutgoing = getSingleTableFromMultipleTables(table).findElement(By.xpath(".//div[@class='slds-table_header-fixed_container slds-scrollable_x']"));
         return new GenericTable(shippedTransactionsOutgoing);
     }
 

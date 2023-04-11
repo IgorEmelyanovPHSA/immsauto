@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import org.testng.asserts.SoftAssert;
 import static constansts.Domain.SUPPLY_LOCATION_1;
@@ -213,9 +215,14 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Transfer_in_dropdown;
 	private By select_Transfer_in_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+//	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+//	private WebElement get_remaining_doses;
+//	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_remaining_doses;
-	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_ = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
+
 
 	@FindBy(xpath = "(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]")
 	private WebElement get_remaining_doses_cp;
@@ -794,6 +801,9 @@ public class SupplyConsolePage extends BasePage {
 	public void clickOnSupplyLocation(String supply_location_name) throws InterruptedException {
 		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME, supply_location_name);
 		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME).findElement(By.tagName("a")).click();
+		Thread.sleep(500);
+		By supply_loc_header = By.xpath("//h1/div[text() = 'Supply Location']");
+		waitForElement(supply_loc_header, 10);
 	}
 
 	public void clickRequestSupplies() throws InterruptedException {
@@ -889,9 +899,26 @@ public class SupplyConsolePage extends BasePage {
 		click(bulk_cancel_button);
 		return this;
 	}
-	public void verifyIsSupplyPageDisplayed() {
-		waitForElementToBeVisible(driver, supply_page_displayed, 10);
-		this.supply_page_displayed.isDisplayed();
+
+	public boolean verifyIsSupplyPageDisplayed() throws InterruptedException {
+		int timeout = 30000;
+		boolean found = false;
+		Instant start = Instant.now();
+		Instant end = Instant.now();
+		while(!found) {
+			try {
+				found = driver.findElement(By.xpath(".//span[@title='Health Connect - Supply Console']")).isDisplayed();
+				System.out.println("Health Connect found");
+				System.out.println(end.toString());
+			} catch (NotFoundException ex) {
+				end = Instant.now();
+				if(Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Current APP tab not found");
+				}
+				Thread.sleep(200);
+			}
+		}
+		return found;
 	}
 
 	public boolean displaySupplyConsolePage() {
