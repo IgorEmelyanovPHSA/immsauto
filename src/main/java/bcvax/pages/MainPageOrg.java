@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
 import java.time.Instant;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 
 public class MainPageOrg extends BasePage {
@@ -51,7 +52,7 @@ public class MainPageOrg extends BasePage {
         Thread.sleep(1000);
         List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
         for(WebElement appElement : apps) {
-            if(appElement.getAttribute("data-label").equals(app)) {
+            if(StringEscapeUtils.unescapeHtml4(appElement.getAttribute("data-label")).equals(app)) {
                 WebElement myApp = appElement.findElement(By.xpath("./.."));
                 myApp.click();
                 String currentApp = currentApp();
@@ -66,5 +67,20 @@ public class MainPageOrg extends BasePage {
             driver.switchTo().window(windows.get(1));
         }
 
+    }
+
+    public void closeAllTabs() throws InterruptedException {
+        Thread.sleep(2000);
+        waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+        Thread.sleep(5000);
+        List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+        for(WebElement closeTabBtn : closeButtons) {
+            try {
+                closeTabBtn.click();
+                Thread.sleep(2000);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }

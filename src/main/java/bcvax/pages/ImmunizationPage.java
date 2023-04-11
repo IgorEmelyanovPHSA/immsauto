@@ -21,8 +21,8 @@ public class ImmunizationPage extends BasePage{
         super(driver);
     }
     public String validatePirSubmissionStatusFieldIsDisplayed() throws InterruptedException {
+        waitForElementToBeLocated(driver, pir_submission_status_field_displayed, 10);
         WebElement element = driver.findElement(pir_submission_status_field_displayed);
-        Thread.sleep(2000);
         element.getText();
         return (element.getText());
     }
