@@ -23,6 +23,9 @@ bcvaxdevit_org:
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
   consumptionDose: "0.5"
+  useDefaultSettingsLots:
+    - "016F21A-CC07"
+    - "0649AA"
 bcvaxuat_org:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -73,6 +76,9 @@ prodsuppqa_org:
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:12:16)"
   consumptionDose: "0.5"
+  useDefaultSettingsLots:
+    - "016F21A-CC07"
+    - "T005729-CC07"
 comunityqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -129,6 +135,9 @@ comunityqa_org:
     - "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-02-10 12:18:29)"
   consumptionDose: "0.5"
+  useDefaultSettingsLots:
+    - "016F21A-CC07"
+    - "0649AA"
 comunityqa_immsbc_admin:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
