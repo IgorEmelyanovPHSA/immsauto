@@ -26,8 +26,9 @@ public class Dose1_E2E_Influenza extends BaseTest {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
-        System.out.println("/*1.----Login as an Clinician to ICE --*/");
+        log("/*1.----Login as an Clinician to ICE --*/");
         InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
+       // InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianInfluenzaICE();
         Thread.sleep(10000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
@@ -41,150 +42,174 @@ public class Dose1_E2E_Influenza extends BaseTest {
         }
 
         Thread.sleep(5000);
-        System.out.println("/*4.----Close All previously opened Tab's --*/");
+        log("/*4.----Close All previously opened Tab's --*/");
         inClinicExperience.closeTabsHCA();
         Thread.sleep(5000);
 
-        System.out.println("/*5.----- Click on User Defaults Tab --*/");
+        log("/*5.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
         Thread.sleep(2000);
 
-        System.out.println("/*6.----- Enter current date for UserDefaults --*/");
+        log("/*6.----- Enter current date for UserDefaults --*/");
         inClinicExperience.inputCurrentDateUserDefaults();
         Thread.sleep(2000);
 
-        System.out.println("/*7.----- Click on Save defaults button --*/");
-        inClinicExperience.clickSaveDefaultsButton();
+        log("/*7.----- Click on Save defaults button --*/");
+
         Thread.sleep(2000);
 
-        System.out.println("/*8.----- Click on register Tab --*/");
+        log("/*inClinicExperience.clickSaveDefaultsButton();8.----- Click on register Tab --*/");
         inClinicExperience.clickRegisterTab();
         Thread.sleep(2000);
 
-        System.out.println("/*10.----click Register button New Citizen --*/");
+        log("/*9.----click Register button New Citizen --*/");
         inClinicExperience.clickRegisterButton();
         Thread.sleep(2000);
-        System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
+
+        log("/*10.----Enter First Name " +legalFirstName +"--*/");
         inClinicExperience.enterFirstName(legalFirstName);
-        Thread.sleep(2000);
-        System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
+
+        log("/*11.----Enter Last Name " +legalLastName +"--*/");
         inClinicExperience.enterLastName(legalLastName);
-        Thread.sleep(2000);
-        System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
+
+        log("/*12.----Enter Date of birth " +dateOfBirth +"--*/");
         inClinicExperience.enterDateOfBirth(dateOfBirth);
-        Thread.sleep(2000);
-        System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
+
+        log("/*13.----Enter Postal code " +postalCode +"--*/");
         inClinicExperience.enterPostalCode(postalCode);
-        Thread.sleep(2000);
-        System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
+
+        log("/*14.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperience.enterPNH(personalHealthNumber);
-        Thread.sleep(2000);
-        System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
+
+        log("/*15.----click on non-Indigenous person radiobutton --*/");
         inClinicExperience.clickNonIndigenousRadioButton();
-        Thread.sleep(2000);
-        System.out.println("/*17.----click Verify PHN button --*/");
+
+        log("/*16.----click Verify PHN button --*/");
         inClinicExperience.clickVerifyPHNButton();
         Thread.sleep(2000);
-        System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
+
+        log("/*17.--Expecting to see the toast success message - 'PNH match successful' --*/");
         inClinicExperience.successMessage();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-        System.out.println("/*19.----click Next button --*/");
+
+        log("/*18.----click Next button --*/");
         inClinicExperience.clickNextButton();
         Thread.sleep(2000);
-        System.out.println("/*20.----'Enter email address " +email +"--*/");
+
+        log("/*19.----'Enter email address " +email +"--*/");
         inClinicExperience.enterEmail(email);
-        System.out.println("/*21.----'Confirm email address " +email +"--*/");
-        Thread.sleep(2000);
+
+        log("/*20.----'Confirm email address " +email +"--*/");
         inClinicExperience.confirmEmail(email);
-        System.out.println("/*22.---Click review details Button--*/");
-        Thread.sleep(2000);
+
+        log("/*21.---Click review details Button--*/");
         inClinicExperience.clickReviewDetails();
-        System.out.println("/*23.----Click register Button on confirmation page--*/");
         Thread.sleep(2000);
+
+        log("/*22.----Click register Button on confirmation page--*/");
         inClinicExperience.clickRegisterButtonOnConfirmationPage();
         Thread.sleep(2000);
-        System.out.println("/*24.--toast success message - 'Success' --*/");
+
+        log("/*23.--toast success message - 'Success' --*/");
         inClinicExperience.successRegisteredMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-        System.out.println("/*25.----click on person Account Related Tab --*/");
+
+        log("/*24.----click on person Account Related Tab --*/");
         inClinicExperience.clickOnPersonAccountRelatedTab();
         Thread.sleep(5000);
 
-        System.out.println("/*26----Go to Appointment Tab --*/");
+        log("/*25.----Go to Appointment Tab --*/");
         inClinicExperience.navigateAppointmentSchedulingTab();
         Thread.sleep(5000);
-        log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
+
+        log("/*26.----click on the Vaccine 'Influenza' checkbox --*/");
         inClinicExperience.clickOnVaccinationInfluenzaCheckbox();
         Thread.sleep(5000);
         //System.out.println("/*29----click on 'More' search tab --*/");
         //inClinicExperience.clickOnMoreSearchTabs();
         //Thread.sleep(2000);
-        System.out.println("/*27----select 'Search by Clinic name' tab --*/");
+        log("/*27.----select 'Search by Clinic name' tab --*/");
         inClinicExperience.selectSearchByClinicNameTab();
         Thread.sleep(5000);
+
         log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience.searchClinicName(clinicNameToSearch);
         Thread.sleep(5000);
-        System.out.println("/*29----click on Option Facility location  --*/");
+
+        log("/*29.----click on Option Facility location  --*/");
         inClinicExperience.clickOnFacilityOptionLocation();
         Thread.sleep(5000);
-        System.out.println("/*30----select Active booking appointment day  --*/");
+
+        log("/*30.----select Active booking appointment day  --*/");
         inClinicExperience.selectBookingAppointmentDay();
         Thread.sleep(2000);
-        System.out.println("/*31----select the time slot  --*/");
+
+        log("/*31.----select the time slot  --*/");
         inClinicExperience.selectTimeSlotForAppointment();
         Thread.sleep(2000);
-        System.out.println("/*32----click Next button  --*/");
+
+        log("/*32.----click Next button  --*/");
         inClinicExperience.clickNextButtonApptSchedulingPage();
         Thread.sleep(2000);
-        System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
+
+        log("/*33.----click Verify Contact Information Checkbox  --*/");
         inClinicExperience.clickVerifyContactInformation();
         Thread.sleep(2000);
-        System.out.println("/*34----click Confirm Appointment button  --*/");
+
+        log("/*34.----click Confirm Appointment button  --*/");
         inClinicExperience.clickAppointmentConfirmButton();
         Thread.sleep(2000);
-        System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
+
+        log("/*35. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience.AppointmentConfirmationMessage();
         Thread.sleep(2000);
-        System.out.println("/*36.----Refresh page --*/");
+
+        log("/*36.----Refresh page --*/");
         inClinicExperience.refreshBrowser();
         Thread.sleep(2000);
-        System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
+
+        log("/*37.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience.clickRelatedTab();
         Thread.sleep(2000);
-        System.out.println("/*38.----click on In-clinic Experience button --*/");
+
+        log("/*38.----click on In-clinic Experience button --*/");
         inClinicExperience.ClickGoToInClinicExperienceButton();
         //InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
         Thread.sleep(2000);
-        System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
+
+        log("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
         inClinicExperience.validateVaccineAdminPageOpen();
         Thread.sleep(5000);
-        System.out.println("/*40.---Click confirm and Save Button --*/");
+
+        log("/*40.---Click confirm and Save Button --*/");
         inClinicExperience.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
-        System.out.println("/*41.---select Vaccine Agent picklist Value ->  Influenza-LAIV --*/");
+
+        log("/*41.---select Vaccine Agent picklist Value ->  Influenza-LAIV --*/");
         inClinicExperience.selectVaccineAgentInfluenza();
-        Thread.sleep(3000);
-        System.out.println("/*42.---Click Save Consent Button --*/");
+
+
+        log("/*42.---Click Save Consent Button --*/");
         inClinicExperience.ClickSaveConsentButton();
         Thread.sleep(5000);
 
-        System.out.println("/*43.---select Dosage ml from DropDown -> 0.2 mL --*/");
+        log("/*43.---select Dosage ml from DropDown -> 0.2 mL --*/");
         inClinicExperience.selectDosageVaccineAdmin();
         Thread.sleep(5000);
 
-        System.out.println("/*44.---Click Save button for Immunisation Information --*/");
+        log("/*44.---Click Save button for Immunisation Information --*/");
         inClinicExperience.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(5000);
 
-
-        System.out.println("/*45.---Click Confirm and Save Administration Button --*/");
+        log("/*45.---Click Confirm and Save Administration Button --*/");
         inClinicExperience.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(5000);
-        System.out.println("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
+
+        log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
         Thread.sleep(3000);
-        System.out.println("/*47.---the Home - Client Search showing up  --*/");
+
+        log("/*47.---the Home - Client Search showing up  --*/");
         inClinicExperience.validateHomePageShownUp();
         Thread.sleep(3000);
     }
