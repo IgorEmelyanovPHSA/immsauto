@@ -50,15 +50,18 @@ public class Check_In_Client_ICE extends BaseTest {
         testData = Utils.getTestData(env);
         log("/*6.----Navigate to More -> Register --*/");
         //InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
-        loginPage.loginAsPPHIS();
+        orgMainPage = loginPage.orgLoginAsPPHIS();
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+        }
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         inClinicExperiencePage.closeTabsHCA();
         log("/*-- 11. Navigate to In Clinic Experience App --*/");
         Thread.sleep(2000);
-        inClinicExperiencePage.selectICEFromApp();
-        inClinicExperiencePage = new InClinicExperiencePage(driver);
         log("/*-- 12. Click on User Defaults Tab  --*/");
         inClinicExperiencePage.clickUserDefaultsTab();
+        Thread.sleep(2000);
         UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
         log("/*-- 13. Enter current date for UserDefaults --*/");
         userDefaultsPage.inputUserDefaultsCurrentDate();
@@ -110,7 +113,7 @@ public class Check_In_Client_ICE extends BaseTest {
         String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
         log("/*23.--Click check-in button --*/");
         inClinicExperiencePage.clickCheckInButton();
-        Thread.sleep(2000);
+        Thread.sleep(500);
         log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
         String currentTab = inClinicExperiencePage.getCurrentTab();
         assertEquals(currentTab, "Identification");

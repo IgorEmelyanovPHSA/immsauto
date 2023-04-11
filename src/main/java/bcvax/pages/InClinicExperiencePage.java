@@ -2288,7 +2288,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String getCurrentTab() {
-		WebElement currentTab = driver.findElement(By.xpath("//div[@class='slds-col slds-size_1-of-3 slds-align_absolute-center step first-step current-step']"));
+		By myXpath = By.xpath("//div[@class='slds-col slds-size_1-of-3 slds-align_absolute-center step first-step current-step']");
+		waitForElementToBeLocated(driver, myXpath, 10);
+		WebElement currentTab = driver.findElement(myXpath);
 		return currentTab.getText();
 	}
 
@@ -2349,11 +2351,17 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void setSite(String site) throws InterruptedException {
-		driver.findElement(By.xpath("//label[text() = 'Site']/..//button")).click();
+		WebElement siteBtn = driver.findElement(By.xpath("//label[text() = 'Site']/..//button"));
+		scrollTop(siteBtn);
+		siteBtn.click();
 		Thread.sleep(2000);
 		WebElement mySite = driver.findElement(By.xpath("//span[@title = '" + site + "']"));
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(false);", mySite );
 		mySite.click();
+	}
+
+	public void checkShowDepletedLots() throws InterruptedException {
+		driver.findElement(By.xpath("//span[text() = 'Show depleted lot numbers']/../..")).click();
 	}
 
 	public void setLotNumber(String lot) throws InterruptedException {

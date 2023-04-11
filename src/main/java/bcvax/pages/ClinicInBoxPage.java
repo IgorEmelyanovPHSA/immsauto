@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class ClinicInBoxPage extends BasePage {
@@ -348,16 +349,28 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void closeAllTabs() throws InterruptedException {
-		do {
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+		Thread.sleep(5000);
+		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+		for(WebElement closeTabBtn : closeButtons) {
 			try {
-				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-				Thread.sleep(1000);
-				closetab.click();
-				Thread.sleep(1000);
-			} catch (NoSuchElementException e) {
-				System.out.println("/*---there are no Tab's to close anymore");
+				closeTabBtn.click();
+				Thread.sleep(2000);
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
 			}
-		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
+		}
+//		do {
+//			try {
+//				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+//				Thread.sleep(1000);
+//				closetab.click();
+//				Thread.sleep(1000);
+//			} catch (NoSuchElementException e) {
+//				System.out.println("/*---there are no Tab's to close anymore");
+//			}
+//		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 	}
 
 	public boolean displayCIBApp() {
