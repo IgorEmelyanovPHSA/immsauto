@@ -2351,11 +2351,17 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void setSite(String site) throws InterruptedException {
-		driver.findElement(By.xpath("//label[text() = 'Site']/..//button")).click();
+		WebElement siteBtn = driver.findElement(By.xpath("//label[text() = 'Site']/..//button"));
+		scrollTop(siteBtn);
+		siteBtn.click();
 		Thread.sleep(2000);
 		WebElement mySite = driver.findElement(By.xpath("//span[@title = '" + site + "']"));
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(false);", mySite );
 		mySite.click();
+	}
+
+	public void checkShowDepletedLots() throws InterruptedException {
+		driver.findElement(By.xpath("//span[text() = 'Show depleted lot numbers']/../..")).click();
 	}
 
 	public void setLotNumber(String lot) throws InterruptedException {
