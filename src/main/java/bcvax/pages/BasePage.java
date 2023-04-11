@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -103,6 +104,26 @@ public abstract class BasePage<T> {
 	public static void waitForElementNotToBePresent(WebDriver driver, By xpath, int seconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 		wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath)));
+	}
+
+	public void waitForElement(By xpath, int seconds) throws InterruptedException {
+		int timeout = seconds * 1000;
+		boolean found = false;
+		Instant start = Instant.now();
+		Instant end = Instant.now();
+		while(!found) {
+			try {
+				found = driver.findElement(xpath).isEnabled();
+				System.out.println("Element found");
+				System.out.println(end.toString());
+			} catch (NotFoundException ex) {
+				end = Instant.now();
+				if(Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Element not found after " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			}
+		}
 	}
 
 	public static void waitForTextToBePresent(WebDriver driver, WebElement e, int seconds, String text) {

@@ -25,15 +25,12 @@ public class Historical_Immunization extends BaseTest {
 		log("/*1.----Login as an Clinician to CIB --*/");
 		loginPage.orgLoginAsPPHIS();
 		clinicInBox = new ClinicInBoxPage(driver);
-		Thread.sleep(10000);
 		log("/*2.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
-		Thread.sleep(2000);
 		if (clinicInBox.displayClinicInBoxApp()) {
 			log("/*-- 3. User already on CIB App --*/");
 		} else {
 			log("/*-- 3.1. Navigate to CIB --*/");
-			Thread.sleep(5000);
 			clinicInBox.cIBApp();
 			Thread.sleep(2000);
 		}
@@ -41,52 +38,44 @@ public class Historical_Immunization extends BaseTest {
 		clinicInBox.closeAllTabs();
 		Thread.sleep(2000);
 		clinicInBox.SearchForCitizen(legalFirstName + " " + legalLastName);
+		Thread.sleep(2000);
 		ProfilesPage profilePage = new ProfilesPage(driver);
 		log("/* 5.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
-		Thread.sleep(2000);
 		profilePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);
 		log("/* 6.----User found and Navigated to record page ---*/");
-		Thread.sleep(2000);
 		log("/*7----Go to back to the Citizen Related Tab --*/");
-		profilePage.clickRelatedTab();
 		Thread.sleep(2000);
+		profilePage.clickRelatedTab();
 		log("/*8----Navigate to Historical Immunization Records --*/");
 		profilePage.navigateToHistoricalImmunizationRecords();
-		Thread.sleep(2000);
 		String field = profilePage.pirSubmissionStatusFieldIsDisplayed();
 		log("/*9---- " + field + "is displayed --*/");
-		Thread.sleep(2000);
 		int record_num = 1;
 		String status = profilePage.pirSubmissionFieldStatus(record_num);
 		log("/*10---- Pir Submission Field status is: " + status + " --*/");
 		assertFalse(status.isEmpty());
-		Thread.sleep(5000);
 		log("/*11---- Click Historical Immunization record --*/");
 
 		profilePage.ClickHistoricalImmunizationRecord(record_num);
+		Thread.sleep(2000);
 		ImmunizationPage immunizationPage = new ImmunizationPage(driver);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		String pirSubmissionStatus = immunizationPage.validatePirSubmissionStatusFieldIsDisplayed();
 		log("/*12---- Field " + pirSubmissionStatus + "is displayed --*/");
 		assertEquals(pirSubmissionStatusFieldValidation, pirSubmissionStatus);
-		Thread.sleep(2000);
 		String pathwayStatus = immunizationPage.validatePathwayStatusFieldIsDisplayed();
 		log("/*13---- Field " + pathwayStatus + "is displayed --*/");
 		assertEquals(patwayStatusFieldValidation, pathwayStatus);
-		Thread.sleep(2000);
 		log("/*14---- remediation needed checkbox is not checked --*/");
 		immunizationPage.remidiationNeededCheckBox();
-		Thread.sleep(2000);
 		String pirId = immunizationPage.pirImmunizationId();
 		log("/*15---- Pir ID is: " + pirId + "--*/");
 		assertNotNull(pirId);
-		Thread.sleep(2000);
 		String pirSubmissionStatusFieldValue = immunizationPage.pirSubmissionStatusFieldValue();
 		log("/*16---- Pir Submission Field status is: " + pirSubmissionStatusFieldValue + " --*/");
 		//assertEquals(pirSubmissionField, pirSubmissionStatusFieldValue);
 		assertEquals(status, pirSubmissionStatusFieldValue);
-		Thread.sleep(2000);
-		
+
 	}
 
 	//@Test(priority = 2)
@@ -96,46 +85,34 @@ public class Historical_Immunization extends BaseTest {
 		log("/*1.----Login as an Clinician to CIB --*/");
 		loginPage.orgLoginAsPPHIS();
 		clinicInBox = new ClinicInBoxPage(driver);
-		Thread.sleep(10000);
 		log("/*2.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
-		Thread.sleep(2000);
 		if (clinicInBox.displayClinicInBoxApp()) {
 			log("/*-- 3. User already on CIB App --*/");
 		} else {
 			log("/*-- 3.1. Navigate to CIB --*/");
-			Thread.sleep(5000);
 			clinicInBox.cIBApp();
-			Thread.sleep(2000);
 		}
 		log("/*4.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
-		Thread.sleep(2000);
 		clinicInBox.SearchForCitizen(legalFirstName + " " + legalLastName);
 		log("/*----5. select Citizen Maegan from search results --*/");
 		clinicInBox.userClickCitizen();
-		Thread.sleep(2000);
 		ProfilesPage profilePage = new ProfilesPage(driver);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		profilePage.clickRelatedTab();
 		int historicalDosesbefore = Integer.parseInt(profilePage.getHistoricalDosesValue());
 		log("/*----7. get historical doses Value + ---*/" + historicalDosesbefore);
-		Thread.sleep(2000);
 		log("/*----8. Click Create Immunization Record ---*/ ");
 		profilePage.clickToCreatHistoricalImmunizationRecord();
-		Thread.sleep(2000);
 		log("/*-- 9---Click to select Agent --*/");
 		profilePage.ClickAgentValue();
-		Thread.sleep(2000);
 		log("/*-- 10--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
 		profilePage.SelectAgent();
-		Thread.sleep(2000);
 		log("/*-- 11--- Select historical date from 6 months ago --*/");
 		profilePage.selectHistoricalDateAndTime();
-		Thread.sleep(2000);
 		log("/*-- 12--- Click Save Button --*/");
 		profilePage.ClickSaveButton();
-		Thread.sleep(2000);
 		int historicalDoses_after = Integer.parseInt(profilePage.getHistoricalDosesValue());
 		log("/*-- 13. remaining doses After creating Historical Doses: -->" + historicalDoses_after);
 		assertEquals(historicalDoses_after, historicalDosesbefore + 1);
