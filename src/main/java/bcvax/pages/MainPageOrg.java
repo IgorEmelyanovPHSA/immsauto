@@ -30,6 +30,8 @@ public class MainPageOrg extends BasePage {
         while(!found) {
             try {
                 found = currentApp.isDisplayed();
+                System.out.println("Current App found");
+                System.out.println(end.toString());
             } catch (NotFoundException ex) {
                 end = Instant.now();
                 if(Duration.between(start, end).toMillis() > timeout) {
@@ -43,18 +45,20 @@ public class MainPageOrg extends BasePage {
 
     public void switchApp(String app) throws InterruptedException {
         waitForElementToBeVisible(driver, appsLauncher, 60);
-        Thread.sleep(5000);
         driver.findElement(By.xpath("//span[text()='App Launcher']/..")).click();
-        Thread.sleep(3000);
         waitForElementToBeVisible(driver, appsLauncherHeader, 30);
-        Thread.sleep(3000);
         driver.findElement(By.xpath("//input[@placeholder='Search apps and items...']")).sendKeys(app);
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
         for(WebElement appElement : apps) {
             if(appElement.getAttribute("data-label").equals(app)) {
                 WebElement myApp = appElement.findElement(By.xpath("./.."));
                 myApp.click();
+                String currentApp = currentApp();
+                while(!currentApp.equals(app)) {
+                    currentApp = currentApp();
+                    Thread.sleep(200);
+                }
             }
         }
         List<String> windows = new ArrayList<String>(driver.getWindowHandles());

@@ -22,10 +22,10 @@ public class ReceiveSupplies extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (PPHIS)");
-				//TestcaseID = "223642"; //C223642 pphis
-				TestcaseID = "244853"; //C244853 immsbc
-				//loginPage.loginAsPPHIS();
-				loginPage.orgLoginAsImmsBCAdminCP();
+				TestcaseID = "223642"; //C223642 pphis
+				//TestcaseID = "244853"; //C244853 immsbc
+				loginPage.loginAsPPHIS();
+				//loginPage.orgLoginAsImmsBCAdminCP();
 		}
 		Thread.sleep(10000);
 

@@ -63,7 +63,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
 
 		double lot_MT0055_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_MT0055_Distribution_1_1 / remainingQty_before_Lot_MT0055_Distribution_1_1));
@@ -71,7 +70,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
 
 		double lot_EK4241_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_EK4241_Distribution_1_1 / remainingQty_before_Lot_EK4241_Distribution_1_1));
@@ -79,7 +77,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 
 		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
@@ -92,45 +89,37 @@ public class BulkTransfers extends BaseTest {
 			for(String container : containers_from) {
 				supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
 				log("/*---     containers: " + container);
-				Thread.sleep(1000);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 		log("/*9.----Click on bulk Transfer button --*/");
 		supplyConsolePage.clickBulkTransfersButton();
-		Thread.sleep(5000);
 		log("/*10.----Enter the Dosages values (1 dose) for 3 row Transfers --*/");
 
 		supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 
 		log("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocation_2_To();
-		Thread.sleep(2000);
 		log("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		log("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(5000);
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_1_1);
 		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
 		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		log("/*15.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
@@ -146,14 +135,11 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
-		Thread.sleep(2000);
 		log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		supplyConsolePage.clickTransactionsTab();
-		Thread.sleep(5000);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 //		int nn = 1;
 //		int kk = countOutgoingTransactions;
@@ -165,7 +151,6 @@ public class BulkTransfers extends BaseTest {
 //		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(3000);
 		log("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
@@ -177,29 +162,23 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_before_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(0), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_MT0055_Distribution_2_1);
 		log("/*- container#2 - Supply Distribution_2_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
 		log("/*- container#3 - Supply Distribution_2_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
 		log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
 		supplyConsolePage.clickTransactionsTab();
-		Thread.sleep(2000);
 		log("/*23----Get how many Incoming Transactions 'To' count records --*/");
 		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
-		Thread.sleep(2000);
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
-		Thread.sleep(2000);
 		log("/*24.----Click on Checkboxes Incoming Transactions --*/");
 		if (countIncomingTransactions >= 3) {
 			for (int i = 0; i < containers_from.size(); i++) {
@@ -210,37 +189,29 @@ public class BulkTransfers extends BaseTest {
 		}
 		log("/*25----click Confirm Incoming button Transfer --*/");
 		supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
-		Thread.sleep(2000);
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
 		supplyConsolePage.selectIncomingSupplyDistribution();
-		Thread.sleep(2000);
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-		Thread.sleep(1000);
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
 		supplyConsolePage.successMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*29.----Click on Related Tab--*/");
 		supplyConsolePage.clickOnRelatedItemTab();
-		Thread.sleep(3000);
 		///////////////////// Doses/Qty AFTER Automation Location_2//////////////////////////////////
 		log("/*30.----Getting Remaining Doses/Remaining Quantity - AFTER - Automation Location_2 --*/");
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_after_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(0), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_2_1);
 		log("/*- container#2 - Supply Distribution_2_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		log("/*- container#3 - Supply Distribution_2_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
 		log("/*31.----Go to Transactions Tab of Automation Supply Location_2 --*/");
@@ -259,7 +230,6 @@ public class BulkTransfers extends BaseTest {
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(5000);
 	}
 
 	@Test(priority = 2)
@@ -271,7 +241,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
 
 		double lot_MT0055_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_MT0055_Distribution_1_1 / remainingQty_before_Lot_MT0055_Distribution_1_1));
@@ -279,7 +248,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
 
 		double lot_EK4241_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_EK4241_Distribution_1_1 / remainingQty_before_Lot_EK4241_Distribution_1_1));
@@ -287,7 +255,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 
 		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
@@ -300,43 +267,35 @@ public class BulkTransfers extends BaseTest {
 			for(String container : containers_from) {
 				supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
 				log("/*---     containers: " + container);
-				Thread.sleep(1000);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 		log("/*9.----Click on bulk Transfer button --*/");
 		supplyConsolePage.clickBulkTransfersButton();
-		Thread.sleep(5000);
 		log("/*10.----Enter the Quantity values for 3 row Transfers --*/");
 		supplyConsolePage.enterBulkTransferByQuantity(containers_from, doses);
 		log("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocation_2_To();
-		Thread.sleep(2000);
 		log("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		log("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(5000);
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_1_1);
 		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
 		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		log("/*15.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
@@ -349,14 +308,11 @@ public class BulkTransfers extends BaseTest {
 		log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001");
 		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity * lot_SPIKEVAX6_5Test001_conversion_factor);
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity);
-		Thread.sleep(2000);
 		log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		supplyConsolePage.clickTransactionsTab();
-		Thread.sleep(5000);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 //		int nn = 1;
 //		int kk = countOutgoingTransactions;
@@ -368,7 +324,6 @@ public class BulkTransfers extends BaseTest {
 //		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(3000);
 		log("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
@@ -379,29 +334,23 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_before_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(0), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_MT0055_Distribution_2_1);
 		log("/*- container#2 - Supply Distribution_2_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
 		log("/*- container#3 - Supply Distribution_2_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
 		log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
 		supplyConsolePage.clickTransactionsTab();
-		Thread.sleep(2000);
 		log("/*23----Get how many Incoming Transactions 'To' count records --*/");
 		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
-		Thread.sleep(2000);
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
-		Thread.sleep(2000);
 		log("/*24.----Click on Checkboxes Incoming Transactions --*/");
 		if (countIncomingTransactions >= 3) {
 			for (int i = 0; i < containers_from.size(); i++) {
@@ -412,37 +361,29 @@ public class BulkTransfers extends BaseTest {
 		}
 		log("/*25----click Confirm Incoming button Transfer --*/");
 		supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
-		Thread.sleep(2000);
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
 		supplyConsolePage.selectIncomingSupplyDistribution();
-		Thread.sleep(2000);
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-		Thread.sleep(1000);
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
 		supplyConsolePage.successMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*29.----Click on Related Tab--*/");
 		supplyConsolePage.clickOnRelatedItemTab();
-		Thread.sleep(3000);
 		///////////////////// Doses/Qty AFTER Automation Location_2//////////////////////////////////
 		log("/*30.----Getting Remaining Doses/Remaining Quantity - AFTER - Automation Location_2 --*/");
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_after_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_MT0055_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(0), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_2_1);
 		log("/*- container#2 - Supply Distribution_2_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		log("/*- container#3 - Supply Distribution_2_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
 		log("/*31.----Go to Transactions Tab of Automation Supply Location_2 --*/");
@@ -458,7 +399,6 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity);
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(5000);
 	}
 
 	@Test(priority = 3)
@@ -471,13 +411,11 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_MT0055_Distribution_1_1);
 		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
 
 		double lot_MT0055_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_MT0055_Distribution_1_1 / remainingQty_before_Lot_MT0055_Distribution_1_1));
@@ -485,7 +423,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 
 		double lot_EK4241_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_EK4241_Distribution_1_1 / remainingQty_before_Lot_EK4241_Distribution_1_1));
@@ -494,7 +431,6 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#4 -Automation Supply Distribution_1_2 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_before_Lot_MT0055_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to_same_clinic.get(0), distribution_to_same_clinic);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_1_2);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_MT0055_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(containers_to_same_clinic.get(0), distribution_to_same_clinic);
 
 		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
@@ -502,13 +438,11 @@ public class BulkTransfers extends BaseTest {
 		log("/*- container#5 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_before_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to_same_clinic.get(1), distribution_to_same_clinic);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_2);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(containers_to_same_clinic.get(1), distribution_to_same_clinic);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_2);
 		log("/*- container#6 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to_same_clinic.get(2), distribution_to_same_clinic);
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
-		Thread.sleep(2000);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(containers_to_same_clinic.get(2), distribution_to_same_clinic);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
 		/////////Do Transfer from Distribution_1_1 to Distribution_1_2 for the same Clinic/////////
@@ -520,66 +454,54 @@ public class BulkTransfers extends BaseTest {
 			for(String container : containers_from) {
 				supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
 				log("/*---     containers: " + container);
-				Thread.sleep(1000);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 		log("/*9.----Click on bulk Transfer button --*/");
 		supplyConsolePage.clickBulkTransfersButton();
-		Thread.sleep(5000);
 		log("/*10.----Enter the Dosages values (1 Dose) for 3 row Transfers --*/");
 		supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 		log("/*11.----select 'To' Automation Supply Location_1  --*/");
 		supplyConsolePage.selectSupplyLocation_1_To();
-		Thread.sleep(2000);
 		log("/*12.----select 'To' Distribution_1_2 for the same Clinic  --*/");
 		supplyConsolePage.selectSameClinicSupplyDistribution();
-		Thread.sleep(2000);
 		log("/*13.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		log("/*14.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(5000);
 		///////////////////// Doses&Qty AFTER for the same Automation Location_1///////////////////////////////////
 		log("/*15.----Getting Remaining Doses/Remaining Quantity - AFTER - for the same Clinic --*/");
 		//// Supply Distribution_1_1 - containers#1 and #2, #3
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_1_1);
 		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
 		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		//// for the same Clinic, but - Supply Distribution_1_2 - containers#4 and #5, #6
 		log("/*- container#4 -Automation Supply Distribution_1_2 & VAXZEVRIA (AstraZeneca) - MT0055*/");
 		double remainingDoses_after_Lot_MT0055_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to_same_clinic.get(0), distribution_to_same_clinic);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_1_2);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_MT0055_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(containers_to_same_clinic.get(0), distribution_to_same_clinic);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_1_2);
 		log("/*- container#5 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to_same_clinic.get(1), distribution_to_same_clinic);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_2);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(containers_to_same_clinic.get(1), distribution_to_same_clinic);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_2);
 		log("/*- container#6 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
 		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to_same_clinic.get(2), distribution_to_same_clinic);
 		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
-		Thread.sleep(2000);
 		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(containers_to_same_clinic.get(2), distribution_to_same_clinic);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
 		//////////Validation for Distribution_1_1(From) and Distribution_1_2(To)
@@ -611,15 +533,12 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-		Thread.sleep(5000);
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(5000);
 	}
 
 	public void precondition() throws Exception {
 		log("/*1.----Login to ORG (oldUI) --*/");
 		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-		Thread.sleep(10000);
 		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
@@ -629,10 +548,8 @@ public class BulkTransfers extends BaseTest {
 		//Assert.assertTrue(false);
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 
@@ -644,6 +561,5 @@ public class BulkTransfers extends BaseTest {
 		/////////////////////////////////////////////////
 		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		//////////////////////////////////////////////////
-		Thread.sleep(5000);
 	}
 }

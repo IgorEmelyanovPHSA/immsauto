@@ -1222,6 +1222,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_save_defaults_button, 10);
 		WebElement element = driver.findElement(click_save_defaults_button_);
 		click_save_defaults_button.click();
+		Thread.sleep(2000);
 	}
 
 	public void clickSaveModalDefaultsButton() throws InterruptedException {
@@ -1333,9 +1334,10 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-		Thread.sleep(3000);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+		//Thread.sleep(3000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
+		scrollTop(click_on_covid19_vaccination_checkbox, true);
 		Thread.sleep(2000);
 		click_on_covid19_vaccination_checkbox.click();
 	}
@@ -1429,6 +1431,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
 		Thread.sleep(2000);
 		click_navigate_to_ICE_btn.click();
+		Thread.sleep(2000);
 	}
 
 	public void ClickRebookAppointment() throws InterruptedException {

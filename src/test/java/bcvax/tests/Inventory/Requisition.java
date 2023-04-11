@@ -66,6 +66,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePage.inputRequestDate();
 		System.out.println("/*----10. Choose Urgency --*/");
 		supplyConsolePage.clickNextButton();
+		Thread.sleep(2000);
 		log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
 		log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 		//log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
