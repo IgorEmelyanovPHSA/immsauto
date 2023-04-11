@@ -185,7 +185,7 @@ public class ReceiveSupplies extends BaseTest {
 		Thread.sleep(2000);
 
 		Assert.assertEquals((remainingQty_after), (remainingQty_before)+1);
-		Assert.assertEquals((remainingDoses_after), (remainingDoses_before)+Integer.valueOf(doseConversionFactor));
+		Assert.assertEquals((remainingDoses_after), (remainingDoses_before) + Double.valueOf(doseConversionFactor));
 
 
 

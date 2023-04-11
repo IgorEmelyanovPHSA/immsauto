@@ -215,9 +215,14 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Transfer_in_dropdown;
 	private By select_Transfer_in_dropdown1 = By.xpath(".//a/span[text() = 'Transfer']");
 
-	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+//	@FindBy(xpath = "(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]")
+//	private WebElement get_remaining_doses;
+//	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+
+	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_remaining_doses;
-	private By get_remaining_doses_ = By.xpath("(.//tr[@class='slds-hint-parent'][2]//td//div//lightning-formatted-number[@lightning-formattednumber_formattednumber-host=''])[3]");
+	private By get_remaining_doses_ = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
+
 
 	@FindBy(xpath = "(.//div[@class='test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView'][3]//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']//span[text()])[3]")
 	private WebElement get_remaining_doses_cp;
