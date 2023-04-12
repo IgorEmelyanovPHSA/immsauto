@@ -7,16 +7,24 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class UserDefaultsSettingsValidation extends BaseTest {
-
-    private final String[] lots = {"016F21A-CC07", "0649AA"};
+    String env;
+    //private final String[] lots = {"016F21A-CC07", "0649AA"};
+    //private final String[] lots = {"016F21A-CC07", "T005729-CC07"};
     private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    Map<String, Object> testData;
 
     @Test()
     public void UserDefaultsSettingsValidationTest() throws Exception {
         TestcaseID = "222176"; //C222176
-        log("Target Environment: " + Utils.getTargetEnvironment());
+        env = Utils.getTargetEnvironment();
+        log("Target Environment: " + env);
+        testData = Utils.getTestData(env);
+        String[] lots = ((ArrayList<String>)testData.get("useDefaultSettingsLots")).toArray(new String[0]);
         UserDefaultsPage userDefaultsPage = new UserDefaultsPage(getDriver());
         CommonMethods common = new CommonMethods(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());

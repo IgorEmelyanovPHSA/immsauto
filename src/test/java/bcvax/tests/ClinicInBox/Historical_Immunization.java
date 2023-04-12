@@ -2,6 +2,7 @@ package bcvax.tests.ClinicInBox;
 
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -17,26 +18,23 @@ public class Historical_Immunization extends BaseTest {
 	private String patwayStatusFieldValidation = "Pathway Status";
 	private String pirSubmissionStatusFieldValidation = "PIR Submission Status";
 	private ClinicInBoxPage clinicInBox;
+	MainPageOrg orgMainPage;
 	
 	@Test(priority = 1)
 	public void Validate_Historical_Immunization_PIR_Status_as_Clinician_CIB() throws Exception {
 		TestcaseID = "225704"; //C225704 -- CIB - Historical Immunization Records - PIR Submission Status
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to CIB --*/");
-		loginPage.orgLoginAsPPHIS();
+		orgMainPage = loginPage.orgLoginAsPPHIS();
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+		}
+		orgMainPage.closeAllTabs();
+		Thread.sleep(2000);
 		clinicInBox = new ClinicInBoxPage(driver);
 		log("/*2.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
-		if (clinicInBox.displayClinicInBoxApp()) {
-			log("/*-- 3. User already on CIB App --*/");
-		} else {
-			log("/*-- 3.1. Navigate to CIB --*/");
-			clinicInBox.cIBApp();
-			Thread.sleep(2000);
-		}
-		log("/*4.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
-		Thread.sleep(2000);
+
 		clinicInBox.SearchForCitizen(legalFirstName + " " + legalLastName);
 		Thread.sleep(2000);
 		ProfilesPage profilePage = new ProfilesPage(driver);
@@ -46,6 +44,7 @@ public class Historical_Immunization extends BaseTest {
 		log("/*7----Go to back to the Citizen Related Tab --*/");
 		Thread.sleep(2000);
 		profilePage.clickRelatedTab();
+		Thread.sleep(2000);
 		log("/*8----Navigate to Historical Immunization Records --*/");
 		profilePage.navigateToHistoricalImmunizationRecords();
 		String field = profilePage.pirSubmissionStatusFieldIsDisplayed();
