@@ -100,6 +100,15 @@ public class LoginPage extends BasePage {
 		return new MainPageOrg(driver);
 	}
 
+	public MainPageOrg orgLoginAsClinicianICE() throws Exception {
+		log("/*----Login to ORG (oldUI) As Clinician ICE--*/");
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_ICE"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_ICE"));
+		click(login_button);
+		return new MainPageOrg(driver);
+	}
+
 	public SupplyConsolePage loginAsImmsBCAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
