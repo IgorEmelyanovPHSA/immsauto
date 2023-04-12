@@ -50,7 +50,8 @@ public class Check_In_Client_ICE extends BaseTest {
         testData = Utils.getTestData(env);
         log("/*6.----Navigate to More -> Register --*/");
         //InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
-        orgMainPage = loginPage.orgLoginAsPPHIS();
+        //orgMainPage = loginPage.orgLoginAsPPHIS();
+        orgMainPage = loginPage.orgLoginAsClinicianICE();
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
             orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
