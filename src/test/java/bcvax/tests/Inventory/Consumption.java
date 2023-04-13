@@ -129,6 +129,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickReviewDetails();
 		log("/*-- 31.Click register Button on confirmation page --*/");
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
+		Thread.sleep(2000);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 

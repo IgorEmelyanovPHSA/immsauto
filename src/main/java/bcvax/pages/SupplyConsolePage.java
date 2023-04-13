@@ -123,9 +123,9 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_page_displayed;
 
-	@FindBy(xpath = ".//input[@placeholder='Search Supply Locations...']")
+	@FindBy(xpath = "//input[@placeholder='Search Supply Locations...']")
 	private WebElement search_supply_location_2_To;
-	private By search_supply_location_2_To_ = By.xpath(".//input[@placeholder='Search Supply Locations...']");
+	private By search_supply_location_2_To_ = By.xpath("//input[@placeholder='Search Supply Locations...']");
 
 	@FindBy(xpath = "//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']")
 	private WebElement select_supply_location_2_To;
@@ -984,6 +984,7 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- Start typing into Search Combobox  -");
 		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, select_supply_location_2_To, 120);
+		scrollTop(select_supply_location_2_To, true);
 		log(" -- Drop down with supply required Supply location appeared  -");
 		select_supply_location_2_To.click();
 		log(" -- Selected Supply location successfully  -");
