@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -100,7 +100,9 @@ public class Tables extends BasePage {
         Map<String, WebElement> stringWebElementMap = getSupplyContainerRow(searchCriteria);
         String doses = stringWebElementMap.get(REMAINING_DOSES).getText();
         log(" -- Remaining Doses " + doses + " -- ");
-        return Double.parseDouble(doses.replace(",", ""));
+        DecimalFormat df = new DecimalFormat("####0.00");
+        double dosesValue = Double.parseDouble(doses.replace(",", ""));
+        return Double.parseDouble(df.format(dosesValue));
     }
 
     @Step
@@ -108,7 +110,9 @@ public class Tables extends BasePage {
         Map<String, WebElement> stringWebElementMap = getSupplyContainerRow(searchCriteria);
         String qty = stringWebElementMap.get(REMAINING_QUANTITY).getText();
         log(" -- Remaining Qty " + qty + " -- ");
-        return Double.parseDouble(qty.replace(",", ""));
+        DecimalFormat df = new DecimalFormat("####0.00");
+        double qtyValue = Double.parseDouble(qty.replace(",", ""));
+        return Double.parseDouble(df.format(qtyValue));
     }
 
     @Step
