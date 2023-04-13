@@ -19,7 +19,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class Check_In_Client_ICE extends BaseTest {
-    MainPageCP cpMainPage;
     MainPageOrg orgMainPage;
     String env;
     private String legalFirstName = "Dacia";

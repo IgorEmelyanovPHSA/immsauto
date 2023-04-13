@@ -1539,7 +1539,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickTodayAppointmentCaseViewButton() {
-		WebElement todayAppointment = driver.findElement(By.xpath("//button[@title = 'View Case']"));
+		WebElement todayAppointment = driver.findElements(By.xpath("//button[@title = 'View Case']")).get(0);
 		todayAppointment.click();
 	}
 
@@ -2339,9 +2339,22 @@ public class InClinicExperiencePage extends BasePage {
 		driver.findElement(By.xpath("//label[text()='Agent']/..//button")).getAttribute("data-value");
 	}
 
-	public void setProvider(String provider) {
-		driver.findElement(By.xpath("//label[text() = 'Provider']/..//input")).getAttribute("data-value");
+	public void setProvider(String provider) throws InterruptedException {
+		By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
+		WebElement providerField =  driver.findElement(providerFieldPath);
+		scrollTop(providerField);
+		providerField.sendKeys(provider);
+		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
+		waitForElementToBeLocated(driver, providerItemPath, 10);
+		driver.findElement(providerItemPath).click();
 
+	}
+
+	public void setInformedConsentProvider  (String provider) throws InterruptedException{
+		driver.findElement(By.xpath("//label[text() = 'Informed Consent Provider (User)']/..//input")).sendKeys(provider);
+		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
+		waitForElementToBeLocated(driver, providerItemPath, 10);
+		driver.findElement(providerItemPath).click();
 	}
 
 	public void setRoute(String route) throws InterruptedException {
