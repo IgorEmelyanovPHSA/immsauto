@@ -98,9 +98,11 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.clickTimeBox();
 		log("/*---15. Click Record Immunization ---*/");
 		inClinicExperience.clickRecordImmunization();
+		Thread.sleep(2000);
 		if (inClinicExperience.clickPopupYesButtonIfDisplayed())
 			log("/*---15.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---16. Click X button on Diwa flow ---*/");
+		Thread.sleep(2000);
 		inClinicExperience.clickToClose();
 		log("/*---17. Validate message on clicking close button on modal popup ---*/");
 		inClinicExperience.validateoopsMessage();
@@ -114,13 +116,13 @@ public class DIWA_ICE extends BaseTest {
 		//Thread.sleep(5000);
 
 		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-		inClinicExperience.selectInformedConsentProvider("Auto Clinician DIWA_ICE");
+		inClinicExperience.setInformedConsentProvider("Auto Clinician DIWA_ICE");
 
 		log("/*---21. click Save Consent ---*/");
 		inClinicExperience.clickSaveConsent();
-
+		Thread.sleep(2000);
 		log("/*---22. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-		inClinicExperience.selectImmunizingAgentProvider("Auto Clinician DIWA_ICE");
+		inClinicExperience.setProvider("Auto Clinician DIWA_ICE");
 
 		log("/*---23. Click Show all lot numbers Checkbox---*/");
 		inClinicExperience.clickShowAllLotNumbersCheckBox();
@@ -139,8 +141,10 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.saveImmunizationInformation();
 		log("/*---29. Confirm and Save Administration ---*/");
 		inClinicExperience.confirmAndSaveAdministration();
+		Thread.sleep(2000);
 		log("/*---30. Vaccine Administration Summary Confirm and Save ---*/");
 		inClinicExperience.summaryConfirmAndSave();
+		Thread.sleep(2000);
 		log("/*---31. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		inClinicExperience.clickRelatedTab();
 	}
