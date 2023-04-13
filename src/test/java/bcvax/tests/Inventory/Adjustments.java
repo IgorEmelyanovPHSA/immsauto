@@ -60,29 +60,24 @@ public class Adjustments extends BaseTest {
 				TestcaseID = "223357"; //C223357
 				loginPage.loginAsPPHIS();
 		}
-		Thread.sleep(5000);
 
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
 
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
 
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*7.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
 
 		log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectAdjustmentFromDropDown();
@@ -187,7 +182,6 @@ public class Adjustments extends BaseTest {
 				TestcaseID = "223357"; //C223357
 				loginPage.loginAsPPHIS();
 		}
-		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");
 		CommonMethods common = new CommonMethods(getDriver());
@@ -195,7 +189,6 @@ public class Adjustments extends BaseTest {
 
 		log("/*3.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
 
 		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
@@ -208,7 +201,6 @@ public class Adjustments extends BaseTest {
 
 		log("/*5.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
 
 		log("/*6.----Select Adjustment from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectAdjustmentFromDropDown();

@@ -51,23 +51,19 @@ public class BulkAdjustments extends BaseTest {
 		
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
-		
+
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		
+
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
-		
+
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-		
+
 		log("/*6.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
 		log("/*---     count:" + countSupplyContainers);
@@ -91,15 +87,13 @@ public class BulkAdjustments extends BaseTest {
 		
 		log("/*9.----Click on bulk Adjustment button on Supply page--*/");
 		supplyConsolePage.clickBulkAdjustmentButton();
-		Thread.sleep(5000);
-		
+
 		log("/*10.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
 		supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToAdjust,reasonForAdjustment, numberOfRows);
 		
 		log("/*11.----Click button Adjustment on Container - Adjustment page --*/");
 		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(3000);
-		
+
 		log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
@@ -165,7 +159,6 @@ public class BulkAdjustments extends BaseTest {
 
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");
 		CommonMethods common = new CommonMethods(getDriver());
@@ -173,7 +166,6 @@ public class BulkAdjustments extends BaseTest {
 
 		log("/*3.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -198,14 +190,12 @@ public class BulkAdjustments extends BaseTest {
 
 		log("/*7.----Click on bulk Adjustment button on Supply page--*/");
 		supplyConsolePage.clickBulkAdjustmentButton();
-		Thread.sleep(5000);
 
 		log("/*8.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
 		supplyConsolePage.enterBulkByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment, numberOfRows);
 
 		log("/*9.----Click button Adjustment on Container - Adjustment page --*/");
 		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(3000);
 
 		log("/*10.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
