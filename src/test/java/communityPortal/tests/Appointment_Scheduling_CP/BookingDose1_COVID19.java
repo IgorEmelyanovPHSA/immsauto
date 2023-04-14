@@ -39,27 +39,29 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/*7.----click Register button New Citizen --*/");
         inClinicExperience_CP.clickRegisterButton();
         Thread.sleep(2000);
+
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         inClinicExperience_CP.enterFirstName(legalFirstName);
-        Thread.sleep(2000);
+
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
         inClinicExperience_CP.enterLastName(legalLastName);
-        Thread.sleep(2000);
+
         log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
         inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
-        Thread.sleep(2000);
+
         log("/*11.----Enter Postal code " +postalCode +"--*/");
         inClinicExperience_CP.enterPostalCode(postalCode);
-        Thread.sleep(2000);
+
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperience_CP.enterPNH(personalHealthNumber);
-        Thread.sleep(2000);
+
         log("/*13.----click on non-Indigenous person radiobutton --*/");
         inClinicExperience_CP.clickNonIndigenousRadioButton();
-        Thread.sleep(2000);
+
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
         Thread.sleep(2000);
+
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
         inClinicExperience_CP.successMessage();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
@@ -67,18 +69,21 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/*16.----click Next button --*/");
         inClinicExperience_CP.clickNextButton();
         Thread.sleep(2000);
+
         log("/*17.----'Enter email address " +email +"--*/");
         inClinicExperience_CP.enterEmail(email);
+
         log("/*18.----'Confirm email address " +email +"--*/");
-        Thread.sleep(2000);
         inClinicExperience_CP.confirmEmail(email);
+
         log("/*19.---Click review details Button--*/");
-        Thread.sleep(2000);
         inClinicExperience_CP.clickReviewDetails();
-        log("/*20.----Click register Button on confirmation page--*/");
         Thread.sleep(2000);
+
+        log("/*20.----Click register Button on confirmation page--*/");
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
         Thread.sleep(2000);
+
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
@@ -97,7 +102,7 @@ public class BookingDose1_COVID19 extends BaseTest {
         inClinicExperience_CP.clickOnVaccinationCheckbox();
         Thread.sleep(2000);
 
-        System.out.println("/*25----select 'Search by Clinic name' tab --*/");
+        log("/*25----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
         Thread.sleep(2000);
 
