@@ -69,6 +69,6 @@ public class Utils {
 
 	public static Map<String, Object> getTestData(String env) throws Exception {
 		Map<String, Map<String, Object>> testData = getTestData();
-		return testData.get(env);
+		return testData.get(env.replace("_org", ""));
 	}
 }
