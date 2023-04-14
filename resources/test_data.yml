@@ -1,4 +1,4 @@
-bcvaxdevit_org:
+bcvaxdevit:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
@@ -51,7 +51,7 @@ bcvaxuat_org:
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
   consumptionDose: "0.5"
-prodsuppqa_org:
+prodsuppqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
