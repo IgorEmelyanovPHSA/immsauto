@@ -395,4 +395,12 @@ public class ApiQueries {
         }
     }
 
+    public static void apiCallToRemovePatientAccount(String PersonEmail, String LastName, String FirstName) throws Exception {
+        String AccountId = queryToGetAccountId(PersonEmail,LastName,FirstName);
+        if(AccountId==null){
+            log("Duplicate account not found");
+        }
+            deleteAccount(AccountId);
+        }
+
 }
