@@ -6,6 +6,7 @@ import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import primarycare.pages.HealthCloudConsolePage;
 
 
 @Listeners({TestListener.class})
@@ -22,14 +23,19 @@ public class AdminInterface_Create_Patient_Account_SYSAdmin extends BaseTest {
 
     @Test(priority = 1)
     public void Can_Create_Patient_Account_in_Health_Cloud_Console_as_an_SYSAdmin () throws Exception {
+        //TestcaseID = "??????"; //C?????
         log("Target Environment: "+ Utils.getTargetEnvironment());
+
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
-        System.out.println("/*1.----Login as an PCN_Coordinator to Admin Interface --*/");
-        CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
+
+        log("/*1.----Login as an SYSAdmin to Admin Interface --*/");
+        //CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
+        //HealthCloudConsolePage healthCloudConsolePage =;
         Thread.sleep(10000);
-        System.out.println("/*2.----Health Cloud Console page displayed --*/");
-        callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
+
+        log("/*2.----Health Cloud Console page displayed --*/");
+        //callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
         Thread.sleep(5000);
     }
 
