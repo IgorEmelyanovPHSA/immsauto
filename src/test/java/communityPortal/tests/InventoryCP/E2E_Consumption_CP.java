@@ -114,7 +114,7 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
-
+        Thread.sleep(2000);
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 
@@ -233,7 +233,7 @@ public class E2E_Consumption_CP extends BaseTest {
 //			inClinicExperiencePage.selectSupplyLocationFromDropdown();
 //			Thread.sleep(2000);
 //		}
-
+        Thread.sleep(2000);
         supplyConsolePage = cpMainPage.goToSupplyLocation();
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
         supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
