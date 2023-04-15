@@ -17,6 +17,7 @@ import java.util.Map;
 
 @Listeners({TestListener.class})
 public class TransferCP extends BaseTest {
+	private static final DecimalFormat df = new DecimalFormat("#.##");
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;

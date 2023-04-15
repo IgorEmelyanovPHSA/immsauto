@@ -52,7 +52,7 @@ public class BulkTransfersCancellation extends BaseTest {
     public void Can_doBulk_transfers_Cancellation_By_Doses_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
         precondition();
-        int doses = 10;
+        double doses = 10;
 
         log("/----Count Remaining Supplies --*/");
         double remainingDosesBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
@@ -169,7 +169,7 @@ public class BulkTransfersCancellation extends BaseTest {
     public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
         precondition();
-        int quantity = 1;
+        double quantity = 1;
 
         log("/----Count Remaining Supplies --*/");
         double remainingQtyBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);

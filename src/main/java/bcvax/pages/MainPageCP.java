@@ -88,6 +88,12 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//input[@placeholder = 'Search...']")
     private WebElement searchInput;
 
+    @FindBy(xpath = "//button[@title='Select a List View']")
+    private WebElement select_list_view_btn;
+
+    @FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
+    private WebElement search_location_field;
+
     @FindBy(xpath = "//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']")
     private WebElement participantsTable;
 
@@ -160,6 +166,21 @@ public class MainPageCP extends BasePage{
         return supplyConsolePage;
     }
 
+    public SupplyConsolePage selectSupplyLocationName(String supplyLocation) throws InterruptedException {
+        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
+        waitForElementToBeVisible(driver, select_list_view_btn, 10);
+        select_list_view_btn.click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
+        Thread.sleep(2000);
+        search_location_field.sendKeys(supplyLocation);
+        search_location_field.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+
+        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
+        return supplyConsolePage;
+    }
+
     public void verifyIsCommunityPortalHomePageDisplayed() {
         waitForElementToBeVisible(driver, community_portal_home_page_displayed, 10);
         community_portal_home_page_displayed.isDisplayed();
@@ -225,8 +246,14 @@ public class MainPageCP extends BasePage{
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
         waitForElementToBeClickable(driver, main_menu_btn_More, 30);
         Thread.sleep(2000);
-        if(driver.findElement(By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']")).isDisplayed()) {
-            driver.findElement(By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']")).click();
+        By registerBtnPath = By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']");
+        if(driver.findElement(registerBtnPath).isDisplayed()) {
+            try {
+                driver.findElement(registerBtnPath).click();
+            } catch(ElementClickInterceptedException ex) {
+                Thread.sleep(3000);
+                driver.findElement(registerBtnPath).click();
+            }
         } else {
             click(main_menu_btn_More);
             Thread.sleep(2000);

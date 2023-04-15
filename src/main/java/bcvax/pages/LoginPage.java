@@ -265,6 +265,7 @@ public class LoginPage extends BasePage {
 	public MainPageCP loginIntoCommunityPortalAsClinicianInventory() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, input_username_CP, 10);
 		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Inventory_CP"));
 		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_Inventory_CP"));
 		login_button_CP.click();

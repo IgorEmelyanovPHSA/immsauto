@@ -25,7 +25,8 @@ public class E2E_Consumption_CP extends BaseTest {
     String clinicNameToSearch;
     String supplyContainer;
     String supplyDistribution;
-    String dose;
+    String consumptionLot;
+    String consumptionDose;
 
     @Test(priority = 1)
     public void Validate_Consumption_as_an_Inventory_Clinician_CP() throws Exception {
@@ -36,214 +37,190 @@ public class E2E_Consumption_CP extends BaseTest {
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         supplyDistribution = String.valueOf(testData.get("distributionConsumption"));
         supplyContainer = String.valueOf(testData.get("containerConsumption"));
-        dose = String.valueOf(testData.get("consumptionDose"));
+        consumptionDose = String.valueOf(testData.get("consumptionDose"));
+        consumptionLot = String.valueOf(testData.get("consumptionLot"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an Inventory Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
-        Thread.sleep(10000);
 
         log("/*2.----Community Portal Home page displayed --*/");
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        Thread.sleep(5000);
 
         log("/*3.----Navigate to Supply Console Page --*/");
         SupplyConsolePage supplyConsolePage = cpMainPage.goToSupplyLocation();
-        Thread.sleep(5000);
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
         supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
-        Thread.sleep(5000);
-
-        //log("/*5. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
-        //supplyConsolePage.selectSupplyContainer();
-        //Thread.sleep(5000);
 
         double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
         log("/*6. remaining doses Before: -->" + remainingDoses_before);
-        Thread.sleep(5000);
 
         double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
         log("/*7. remaining Qty Before: -->" + remainingQty_before);
-        Thread.sleep(5000);
         long conversionFactor = round(remainingDoses_before / remainingQty_before);
         log("/*8.----- Click on User Defaults Tab --*/");
         cpMainPage.clickUserDefaultsTab();
         Thread.sleep(2000);
-
         log("/*9.----- Enter current date for UserDefaults --*/");
         cpMainPage.inputCurrentDateUserDefaults();
         cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
         cpMainPage.clickSaveDefaultsButton();
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         log("/*11.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-        Thread.sleep(2000);
 
         log("/*12.----click Register button New Citizen --*/");
         inClinicExperience_CP.clickRegisterButton();
-        Thread.sleep(2000);
 
         log("/*13.----Enter First Name " +legalFirstName +"--*/");
         inClinicExperience_CP.enterFirstName(legalFirstName);
-        Thread.sleep(2000);
 
         log("/*14.----Enter Last Name " +legalLastName +"--*/");
         inClinicExperience_CP.enterLastName(legalLastName);
-        Thread.sleep(2000);
 
         log("/*15.----Enter Date of birth " +dateOfBirth +"--*/");
         inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
-        Thread.sleep(2000);
         log("/*11.----Enter Postal code " +postalCode +"--*/");
         inClinicExperience_CP.enterPostalCode(postalCode);
-        Thread.sleep(2000);
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperience_CP.enterPNH(personalHealthNumber);
-        Thread.sleep(2000);
         log("/*13.----click on non-Indigenous person radiobutton --*/");
         inClinicExperience_CP.clickNonIndigenousRadioButton();
         Thread.sleep(2000);
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
-        Thread.sleep(2000);
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
         inClinicExperience_CP.successMessage();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*16.----click Next button --*/");
         inClinicExperience_CP.clickNextButton();
-        Thread.sleep(2000);
         log("/*17.----'Enter email address " +email +"--*/");
         inClinicExperience_CP.enterEmail(email);
         log("/*18.----'Confirm email address " +email +"--*/");
-        Thread.sleep(2000);
         inClinicExperience_CP.confirmEmail(email);
         log("/*19.---Click review details Button--*/");
-        Thread.sleep(2000);
         inClinicExperience_CP.clickReviewDetails();
         log("/*20.----Click register Button on confirmation page--*/");
         Thread.sleep(2000);
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
-        Thread.sleep(2000);
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
-
-        Thread.sleep(10000); //wait for Related Tab showing up
-
+        Thread.sleep(2000);
         log("/*22.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
-        Thread.sleep(5000);//wait for accordion loading
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
-        Thread.sleep(5000);
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
-        Thread.sleep(2000);
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
-        Thread.sleep(2000);
 
         log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience_CP.searchClinicName(clinicNameToSearch);
-        Thread.sleep(2000);
 
         log("/*27----click on Option Facility location  --*/");
         inClinicExperience_CP.clickOnFacilityOptionLocation();
-        Thread.sleep(2000);
 
         log("/*28----select Active booking appointment day  --*/");
         inClinicExperience_CP.selectBookingAppointmentDay();
-        Thread.sleep(2000);
 
         log("/*29----select the time slot  --*/");
         inClinicExperience_CP.selectTimeSlotForAppointment();
-        Thread.sleep(2000);
 
         log("/*30----click Next button  --*/");
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
-        Thread.sleep(2000);
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
         inClinicExperience_CP.clickVerifyContactInformation_CP();
-        Thread.sleep(2000);
 
         log("/*32----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();
-        Thread.sleep(2000);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience_CP.AppointmentConfirmationMessage();
-        Thread.sleep(3000);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
-        Thread.sleep(5000);
-        //////
+
         log("/*35_1.----Refresh page again - should not be like that again --*/");
         inClinicExperience_CP.refreshBrowser();
-        Thread.sleep(5000);
-        Thread.sleep(10000); //wait for Related Tab accordion loading
-        ///////
-
+        Thread.sleep(2000);
         log("/*36.----click on In-clinic Experience button --*/");
         inClinicExperience_CP.ClickGoToInClinicExperienceButton();
-        Thread.sleep(5000);
 
         log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
         inClinicExperience_CP.validateVaccineAdminPageOpen();
-        Thread.sleep(5000);
-        inClinicExperience_CP.clickCloseAlert();
         Thread.sleep(2000);
+        inClinicExperience_CP.clickCloseAlert();
         log("/*38.---Click confirm and Save Button --*/");
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         try {
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
             inClinicExperience_CP.selectVaccineAgent();
-            Thread.sleep(3000);
         } catch(Exception ex) {
             log("/*39.---Open Today's appointments from Home page --*/");
-
+            System.out.println(ex.getMessage());
             inClinicExperience_CP.clickTodayAppointments();
-            Thread.sleep(3000);
             log("/*40.---Open Today appointment Details --*/");
             inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
-            Thread.sleep(5000);
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
             inClinicExperience_CP.selectVaccineAgent();
-            Thread.sleep(3000);
         }
 
-        log("/*42.---Click Save Consent Button --*/");
-        inClinicExperience_CP.ClickSaveConsentButton();
-        Thread.sleep(5000);
-        log("/*43.---select Dosage ->  -.5 --*/");
-        inClinicExperience_CP.selectConsumptionDosage(dose);
+        String consentProvider = inClinicExperience_CP.consentProviderSelected();
         Thread.sleep(2000);
+        if(consentProvider.equals("")) {
+            consentProvider = inClinicExperience_CP.selectConsentProvider();
+        }
+        inClinicExperience_CP.ClickSaveConsentButton();
+        System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
+        if(consentProvider.equals("")) {
+            consentProvider = inClinicExperience_CP.selectConsentProvider();
+        }
+        Thread.sleep(2000);
+        String agent = inClinicExperience_CP.getVaccineAgent();
+        Thread.sleep(2000);
+        String provider =  inClinicExperience_CP.getProvider();
+        String route = inClinicExperience_CP.getRoute();
+        String site = inClinicExperience_CP.getSite();
+
+        String lot = inClinicExperience_CP.getLotNumber();
+
+        log("/*42.---Click Save Consent Button --*/");
+
+        if(!provider.equals(consentProvider)) {
+            inClinicExperience_CP.setProvider(consentProvider);
+        }
+
+        log("/*43.---select Dosage ->  -.5 --*/");
+        if(!lot.equals(consumptionLot)) {
+            inClinicExperience_CP.setLotNumber(consumptionLot);
+        }
+        Thread.sleep(2000);
+        String dose = inClinicExperience_CP.getDosage();
+
+        if(!dose.equals(consumptionDose)) {
+            inClinicExperience_CP.setDosage(consumptionDose);
+        }
+
         log("/*44.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
-        Thread.sleep(5000);
 
         log("/*45.---Click Confirm and Save Administration Button --*/");
         inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
-        Thread.sleep(3000);
 
         log("/*47.---the Home - Client Search showing up  --*/");
         inClinicExperience_CP.validateHomePageShownUp();
-        Thread.sleep(3000);
 
         supplyConsolePage = new SupplyConsolePage(driver);
 //		if (inClinicExperiencePage.supplyLocDisplayed()) {
@@ -260,7 +237,6 @@ public class E2E_Consumption_CP extends BaseTest {
         supplyConsolePage = cpMainPage.goToSupplyLocation();
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
         supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
-        Thread.sleep(2000);
 //		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
 //		inClinicExperiencePage.selectSupplyContainer();
 //		Thread.sleep(2000);
@@ -269,14 +245,11 @@ public class E2E_Consumption_CP extends BaseTest {
         double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
         log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
         assertEquals(remainingDoses_after, remainingDoses_before - 1);
-        Thread.sleep(2000);
         double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
         log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
         assertEquals(remainingQty_after, round((remainingDoses_before - 1)/conversionFactor), 2);
-        Thread.sleep(2000);
         supplyConsolePage.closeTabsHCA();
         log("/*-- 58. Close all open tabs --*/");
-        Thread.sleep(2000);
     }
 
     @Test(priority = 2)
