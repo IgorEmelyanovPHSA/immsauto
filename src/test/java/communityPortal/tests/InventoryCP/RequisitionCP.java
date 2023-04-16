@@ -41,7 +41,7 @@ public class RequisitionCP extends BaseTest {
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
         Thread.sleep(5000);
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         System.out.println("/*----2. Locate Dropdown Menu --*/");
         //supplyConsolePage.verifyIsSupplyPageDisplayed();
         //Thread.sleep(4000);

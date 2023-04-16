@@ -165,7 +165,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			Thread.sleep(2000);
 			inClinicExperience.selectVaccineAgent();
 		}
-		if(!inClinicExperience.consentProviderSelected()) {
+		if(inClinicExperience.consentProviderSelected().equals("")) {
 			inClinicExperience.selectConsentProvider();
 		}
 

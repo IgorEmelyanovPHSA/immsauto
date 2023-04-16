@@ -33,8 +33,8 @@ public class BulkTransfers extends BaseTest {
 	List<String> containers_from;
 	List<String> containers_to;
 	List<String> containers_to_same_clinic;
-	int doses;
-	int quantity;
+	double doses;
+	double quantity;
 	@BeforeMethod
 	public void setUpClass() throws Exception {
 		env = Utils.getTargetEnvironment();

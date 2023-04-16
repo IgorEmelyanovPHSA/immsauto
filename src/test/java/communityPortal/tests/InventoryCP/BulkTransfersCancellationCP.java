@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class BulkTransfersCancellationCP extends BaseTest {
-
+    private static final DecimalFormat df = new DecimalFormat("#.##");
     MainPageCP cpMainPage;
     MainPageOrg orgMainPage;
     SupplyConsolePage supplyConsolePage;
@@ -54,7 +55,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
     public void Can_doBulk_transfers_Cancellation_By_Doses_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
         precondition();
-        int doses = 10;
+        double doses = 10;
 
         log("/----Count Remaining Supplies --*/");
         double remainingDosesBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
@@ -174,7 +175,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
     public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
         precondition();
-        int quantity = 1;
+        double quantity = 1;
 
         log("/----Count Remaining Supplies --*/");
         double remainingQtyBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
@@ -214,15 +215,15 @@ public class BulkTransfersCancellationCP extends BaseTest {
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-        double remainingQtyAfterCalculationDistribution1_1 = remainingQtyBeforeDistribution1_1 - quantity;
+        double remainingQtyAfterCalculationDistribution1_1 = Double.parseDouble(df.format(remainingQtyBeforeDistribution1_1 - quantity));
         assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
         double remainingQtyAfterDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-        double remainingQtyAfterCalculationDistribution1_2 = remainingQtyBeforeDistribution1_2 - quantity;
+        double remainingQtyAfterCalculationDistribution1_2 = Double.parseDouble(df.format(remainingQtyBeforeDistribution1_2 - quantity));
         assertEquals(remainingQtyAfterDistribution1_2, remainingQtyAfterCalculationDistribution1_2);
 
         double remainingQtyAfterDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-        double remainingQtyAfterCalculationDistribution1_3 = remainingQtyBeforeDistribution1_3 - quantity;
+        double remainingQtyAfterCalculationDistribution1_3 = Double.parseDouble(df.format(remainingQtyBeforeDistribution1_3 - quantity));
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");

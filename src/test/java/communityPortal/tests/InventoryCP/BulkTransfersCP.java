@@ -34,8 +34,8 @@ public class BulkTransfersCP extends BaseTest {
     List<String> containers_from;
     List<String> containers_to;
     List<String> containers_to_same_clinic;
-    int doses;
-    int quantity;
+    double doses;
+    double quantity;
     @BeforeMethod
     public void setUpClass() throws Exception {
         env = Utils.getTargetEnvironment();
@@ -137,6 +137,7 @@ public class BulkTransfersCP extends BaseTest {
         log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
         log("/*15.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
         log("/*----Validation for container#1 Distribution_1_1 - VAXZEVRIA (AstraZeneca) - MT0055");
+
         assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1, remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses);
         assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses) / lot_MT0055_conversion_factor)));
@@ -245,15 +246,18 @@ public class BulkTransfersCP extends BaseTest {
         log("/*31.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         log("/*32.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
         log("/*----Validation for container#1 Distribution_2_1 - MT0055");
-        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_2_1, remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses);
+        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_2_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses)));
         assertEquals(remainingQty_after_Lot_MT0055_Distribution_2_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses) / lot_MT0055_conversion_factor)));
         log("/*----Validation for container#2 Distribution_2_1 - EK4241");
-        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1, remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses);
+        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses)));
         assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses) / lot_EK4241_conversion_factor)));
         log("/*----Validation for container#3 Distribution_2_1 - SPIKEVAX6-5Test001");
-        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses);
+        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses)));
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
         log("/*33----Close Automation_Supply_Location_2 Tab --*/");
@@ -341,14 +345,20 @@ public class BulkTransfersCP extends BaseTest {
         log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
         log("/*15.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
         log("/*----Validation for container#1 Distribution_1_1 - VAXZEVRIA (AstraZeneca) - MT0055");
-        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1, remainingDoses_before_Lot_MT0055_Distribution_1_1 - lot_MT0055_conversion_factor);
-        assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1, remainingQty_before_Lot_MT0055_Distribution_1_1 - quantity);
+        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_1_1 - lot_MT0055_conversion_factor)));
+        assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1,
+                Double.parseDouble(df.format(remainingQty_before_Lot_MT0055_Distribution_1_1 - quantity)));
         log("/*----Validation for container#2 Distribution_1_1 - Pfizer mRNA BNT162b2 - EK4241");
-        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_before_Lot_EK4241_Distribution_1_1 - quantity * lot_EK4241_conversion_factor);
-        assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, remainingQty_before_Lot_EK4241_Distribution_1_1 - quantity);
+        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_1_1 - quantity * lot_EK4241_conversion_factor)));
+        assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1,
+                Double.parseDouble(df.format(remainingQty_before_Lot_EK4241_Distribution_1_1 - quantity)));
         log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001");
-        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity * lot_SPIKEVAX6_5Test001_conversion_factor);
-        assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity);
+        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity * lot_SPIKEVAX6_5Test001_conversion_factor)));
+        assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
+                Double.parseDouble(df.format(remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity)));
         Thread.sleep(2000);
         log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -447,14 +457,20 @@ public class BulkTransfersCP extends BaseTest {
         log("/*31.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         log("/*32.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
         log("/*----Validation for container#1 Distribution_2_1 - MT0055");
-        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_2_1, remainingDoses_before_Lot_MT0055_Distribution_2_1 + quantity * lot_MT0055_conversion_factor);
-        assertEquals(remainingQty_after_Lot_MT0055_Distribution_2_1, remainingQty_before_Lot_MT0055_Distribution_2_1 + quantity);
+        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_2_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_2_1 + quantity * lot_MT0055_conversion_factor)));
+        assertEquals(remainingQty_after_Lot_MT0055_Distribution_2_1,
+                Double.parseDouble(df.format(remainingQty_before_Lot_MT0055_Distribution_2_1 + quantity)));
         log("/*----Validation for container#2 Distribution_2_1 - EK4241");
-        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1, remainingDoses_before_Lot_EK4241_Distribution_2_1 + quantity * lot_EK4241_conversion_factor);
-        assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1, remainingQty_before_Lot_EK4241_Distribution_2_1 + quantity);
+        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_2_1 + quantity * lot_EK4241_conversion_factor)));
+        assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1,
+                Double.parseDouble(df.format(remainingQty_before_Lot_EK4241_Distribution_2_1 + quantity)));
         log("/*----Validation for container#3 Distribution_2_1 - SPIKEVAX6-5Test001");
-        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity * lot_SPIKEVAX6_5Test001_conversion_factor);
-        assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1, remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity);
+        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity * lot_SPIKEVAX6_5Test001_conversion_factor)));
+        assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
+                Double.parseDouble(df.format(remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity)));
         log("/*33----Close Automation_Supply_Location_2 Tab --*/");
         supplyConsolePage.closeTabsHCA();
         Thread.sleep(5000);
@@ -586,28 +602,34 @@ public class BulkTransfersCP extends BaseTest {
         log("/*16.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
         ////////////Distribution_1_1 Validation "FROM" after
         log("/*----Validation for container#1 Distribution_1_1 - MT0055");
-        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1, remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses);
+        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses)));
         assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses) / lot_MT0055_conversion_factor)));
         log("/*----Validation for container#2 Distribution_1_1 - EK4241");
-        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses);
+        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses)));
         assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses) / lot_EK4241_conversion_factor)));
         log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX6-5Test001");
-        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses);
+        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses)));
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
         ////////////Distribution_1_2 Validation "TO" after
         log("/*----Validation for container#4 Distribution_1_2 - MT0055");
-        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_2, remainingDoses_before_Lot_MT0055_Distribution_1_2 + doses);
+        assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_2,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_1_2 + doses)));
         assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_2,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_1_2 + doses) / lot_MT0055_conversion_factor)));
         log("/*----Validation for container#5 Distribution_1_2 - EK4241");
-        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_2, remainingDoses_before_Lot_EK4241_Distribution_1_2 + doses);
+        assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_2,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_1_2 + doses)));
         assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_2,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_EK4241_Distribution_1_2 + doses) / lot_EK4241_conversion_factor)));
         log("/*----Validation for container#6 Distribution_1_2 - SPIKEVAX6-5Test001");
-        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2, remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses);
+        assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
+                Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses)));
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
         log("/*37----Close Automation_Supply_Location_1 Tab --*/");
