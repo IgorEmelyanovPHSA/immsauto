@@ -50,8 +50,8 @@ public class Consumption extends BaseTest {
 		consumptionProvider = String.valueOf(testData.get("providerConsumption"));
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
-		consumptionLot = String.valueOf(testData.get("lotConsumption"));
-		consumptionDose = String.valueOf(testData.get("doseConsumption"));
+		consumptionLot = String.valueOf(testData.get("consumptionLot"));
+		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
@@ -185,13 +185,13 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.selectVaccineAgent();
 		}
 		log("/*-- 48---Click Save Consent Button --*/");
-		if(!inClinicExperiencePage.consentProviderSelected()) {
+		if(inClinicExperiencePage.consentProviderSelected().equals("")) {
 			inClinicExperiencePage.selectConsentProvider();
 		}
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(2000);
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
-		if(!inClinicExperiencePage.consentProviderSelected()) {
+		if(inClinicExperiencePage.consentProviderSelected().equals("")) {
 			inClinicExperiencePage.selectConsentProvider();
 		}
 
@@ -214,11 +214,11 @@ public class Consumption extends BaseTest {
 		if(site.equals("")) {
 			inClinicExperiencePage.setSite(consumptionSite);
 		}
-		if(lot.equals("")) {
+		if(!lot.equals(consumptionLot)) {
 			inClinicExperiencePage.setLotNumber(consumptionLot);
 		}
 		String dose = inClinicExperiencePage.getDosage();
-		if(dose.equals("")) {
+		if(!dose.equals(consumptionDose)) {
 			inClinicExperiencePage.setDosage(consumptionDose);
 		}
 		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();

@@ -17,6 +17,7 @@ import java.util.Map;
 
 @Listeners({TestListener.class})
 public class TransferCP extends BaseTest {
+	private static final DecimalFormat df = new DecimalFormat("#.##");
 	String env;
 	Map<String, Object> testData;
 	SupplyConsolePage supplyConsolePage;
@@ -44,7 +45,7 @@ public class TransferCP extends BaseTest {
 		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
 		precondition();
-
+		int doses = 10;
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
 		Thread.sleep(2000);
@@ -92,11 +93,11 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
 		double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 =
 				Double.parseDouble(new DecimalFormat("##.####").
-						format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10)));
+						format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses)));
 		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1);
 		double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 =
 				Double.parseDouble(new DecimalFormat("##.####").
-						format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - 10) / dose_conversation_factor)));
+						format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses) / dose_conversation_factor)));
 		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
 		Thread.sleep(2000);
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
@@ -167,8 +168,10 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1, round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10),2);
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1, round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor),2);
+		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1, Double.parseDouble(new DecimalFormat("##.####").
+				format(remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses)));
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1, Double.parseDouble(new DecimalFormat("##.####").
+				format((remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses) / dose_conversation_factor)));
 		Thread.sleep(2000);
 
 
@@ -182,7 +185,7 @@ public class TransferCP extends BaseTest {
 
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));
-		int quantity = 10;
+		int quantity = 1;
 
 		////// Supply Location_1 -> Outcoming
 		//log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
@@ -304,8 +307,10 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_2_1);
 		Thread.sleep(2000);
 		System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1, round(remainingDoses_before_Lot_EK4241_Distribution_2_1 + quantity * dose_conversation_factor));
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1,remainingQty_before_Lot_EK4241_Distribution_2_1 + quantity);
+		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1, Double.parseDouble(new DecimalFormat("##.####").
+				format(remainingDoses_before_Lot_EK4241_Distribution_2_1 + quantity * dose_conversation_factor)));
+		assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1,Double.parseDouble(new DecimalFormat("##.####").
+				format(remainingQty_before_Lot_EK4241_Distribution_2_1 + quantity)));
 		Thread.sleep(2000);
 
 

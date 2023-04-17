@@ -23,6 +23,7 @@ public class BulkDraftsCP extends BaseTest {
 
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
     private final String supplyLocationTo = SUPPLY_LOCATION_2;
+    private static final DecimalFormat df = new DecimalFormat("#.##");
 
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {

@@ -1334,10 +1334,10 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		//Thread.sleep(3000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
-		//scrollTop(click_on_covid19_vaccination_checkbox, true);
+		scrollTop(click_on_covid19_vaccination_checkbox, true);
 		Thread.sleep(2000);
 		click_on_covid19_vaccination_checkbox.click();
 	}
@@ -1543,20 +1543,24 @@ public class InClinicExperiencePage extends BasePage {
 		todayAppointment.click();
 	}
 
-	public boolean consentProviderSelected() {
-		if (driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value").equals("")) {
-			return false;
-		} else {
-			return true;
-		}
-
+	public String consentProviderSelected() {
+		By providerFieldPath = By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]");
+		waitForElementToBeLocated(driver, providerFieldPath, 10);
+		return driver.findElement(providerFieldPath).getAttribute("data-value");
 	}
 
-	public void selectConsentProvider() throws InterruptedException {
+	public String selectConsentProvider() throws InterruptedException {
 		driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
+		try {
+			driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
+		} catch(Exception ex) {
+			driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
+		}
 		Thread.sleep(2000);
+		return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
 	}
 
 	public void selectVaccineAgent() throws InterruptedException {
@@ -2378,9 +2382,18 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void setLotNumber(String lot) throws InterruptedException {
-		driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//li[contains(@title, '" + lot + "')]")).click();
+		By lotItemPath = By.xpath("//li[contains(@title, '" + lot + "')]");
+		By lotField = By.xpath("//span[text() = 'Lot Number']/..//input");
+		WebElement lotSearchInputField = driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input[@class = 'slds-input search-input-class']"));
+		if(!lotSearchInputField.isDisplayed()) {
+			driver.findElement(lotField).click();
+		}
+		Thread.sleep(1000);
+		lotSearchInputField.sendKeys(lot);
+		Thread.sleep(1000);
+
+		waitForElementToBePresent(driver, lotItemPath, 10);
+		driver.findElement(lotItemPath).click();
 	}
 
 	public void setDosage(String dose) throws InterruptedException {

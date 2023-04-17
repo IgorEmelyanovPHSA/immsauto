@@ -23,6 +23,7 @@ bcvaxdevit:
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
   consumptionDose: "0.5"
+  consumptionLot: "EL0203"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "0649AA"
@@ -60,7 +61,8 @@ prodsuppqa:
   distributionToSameClinic: "Supply Distribution_1_2"
   distributionConsumption: "Supply Distribution_1"
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+  #containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+  containerTo: "2023-02-08-COMIRNATY (Pfizer) - EK4241-1"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
   containerConsumption: "COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)"
   bulkContainersFrom:
@@ -69,13 +71,15 @@ prodsuppqa:
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:08:45)"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+#    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "2023-02-08-COMIRNATY (Pfizer) - EK4241-1"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:36:09)"
   bulkContainersToSameClinic:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:09:10)"
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:12:16)"
-  consumptionDose: "0.5"
+  consumptionDose: "0.3"
+  consumptionLot: "EL0203"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "T005729-CC07"

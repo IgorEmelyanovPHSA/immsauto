@@ -10,12 +10,15 @@ import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.text.DecimalFormat;
 import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static java.lang.Math.round;
 
 @Listeners({TestListener.class})
 public class TransferCancellationCP extends BaseTest {
+	private static final DecimalFormat df = new DecimalFormat("#.##");
 	MainPageCP cpMainPage;
 	MainPageOrg orgMainPage;
 	SupplyConsolePage supplyConsolePage;

@@ -936,7 +936,7 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys("1");
 	}
 
-	public void enterBulkTransferByDosages(List<String> containers, int dose) {
+	public void enterBulkTransferByDosages(List<String> containers, double dose) {
 		//////DEBUG//////
 		List<List<WebElement>> rows = tables.getContainerTransferTable().getRows();
 		for(List<WebElement> row : rows) {
@@ -947,7 +947,7 @@ public class SupplyConsolePage extends BasePage {
 		/////////////////
 		for (String container : containers) {
 			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
-			tables.typeDosesIntoTransferRow(supplyContainer, Integer.toString(dose));
+			tables.typeDosesIntoTransferRow(supplyContainer, Double.toString(dose));
 		}
 	}
 
@@ -960,7 +960,7 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys("1");
 	}
 
-	public void enterBulkTransferByQuantity(List<String> containers, int quantity) {
+	public void enterBulkTransferByQuantity(List<String> containers, double quantity) {
 		//////DEBUG//////
 		List<List<WebElement>> rows = tables.getContainerTransferTable().getRows();
 		for(List<WebElement> row : rows) {
@@ -971,7 +971,7 @@ public class SupplyConsolePage extends BasePage {
 		/////////////////
 		for (String container : containers) {
 			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
-			tables.typeQtyIntoTransferRow(supplyContainer, Integer.toString(quantity));
+			tables.typeQtyIntoTransferRow(supplyContainer, Double.toString(quantity));
 		}
 	}
 	@Step
@@ -1364,8 +1364,8 @@ public class SupplyConsolePage extends BasePage {
 
 	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double quontity = tables.getRemainingQty(supplyContainer);
-		return (quontity);
+		double quantity = tables.getRemainingQty(supplyContainer);
+		return (quantity);
 	}
 
 	public Double getValueOfRemainingQty() throws InterruptedException {
@@ -1670,7 +1670,8 @@ public class SupplyConsolePage extends BasePage {
 	public void selectCancelInDropDown() throws InterruptedException {
 		waitForElementToBeVisible(driver, drdCancel, 10);
 		//Thread.sleep(2000);
-		moveToElement(drdCancel);
+		//moveToElement(drdCancel);
+		scrollTop(drdCancel);
 		click(drdCancel);
 		//drdCancel.click();
 	}

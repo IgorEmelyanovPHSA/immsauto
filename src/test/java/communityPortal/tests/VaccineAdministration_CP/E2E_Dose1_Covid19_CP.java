@@ -167,9 +167,23 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(5000);
 
-        log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-        inClinicExperience_CP.selectVaccineAgent();
-        Thread.sleep(3000);
+        try {
+            log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            inClinicExperience_CP.selectVaccineAgent();
+        } catch(Exception ex) {
+            log("/*39.---Open Today's appointments from Home page --*/");
+
+            inClinicExperience_CP.clickTodayAppointments();
+            Thread.sleep(2000);
+            log("/*39.---Open Today appointment Details --*/");
+            inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
+            log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            Thread.sleep(2000);
+            inClinicExperience_CP.selectVaccineAgent();
+        }
+        if(inClinicExperience_CP.consentProviderSelected().equals("")) {
+            inClinicExperience_CP.selectConsentProvider();
+        }
 
         log("/*40.---Click Save Consent Button --*/");
         inClinicExperience_CP.ClickSaveConsentButton();
