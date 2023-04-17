@@ -1,9 +1,6 @@
 package communityPortal.tests.VaccineAdministration_CP;
 
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import java.lang.Math;
@@ -37,12 +34,23 @@ public class Check_In_Client_CP extends BaseTest {
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
-        precondition();
+        log("/*1.----Login as an Inventory Clinician to Community Portal --*/");
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+
+        log("/*2.----Community Portal Home page displayed --*/");
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
+        cpMainPage.clickUserDefaultsTab();
+        Thread.sleep(2000);
+        log("/*9.----- Enter current date for UserDefaults --*/");
+        cpMainPage.inputCurrentDateUserDefaults();
+        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        log("/*10.----- Click on Save defaults button --*/");
+        cpMainPage.clickSaveDefaultsButton();
+        Thread.sleep(2000);
+        log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
         Thread.sleep(2000);
-
-        log("/*7.----click Register button New Citizen --*/");
         inClinicExperience_CP.clickRegisterButton();
         Thread.sleep(2000);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
@@ -120,23 +128,5 @@ public class Check_In_Client_CP extends BaseTest {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-    }
-
-    public void precondition() throws Exception {
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();;
-        }
-        Thread.sleep(5000);
     }
 }
