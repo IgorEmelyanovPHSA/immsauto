@@ -161,6 +161,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         if(consentProvider.equals("")) {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
         }
+        Thread.sleep(2000);
         String agent = inClinicExperience_CP.getVaccineAgent();
         Thread.sleep(2000);
         String provider =  inClinicExperience_CP.getProvider();
