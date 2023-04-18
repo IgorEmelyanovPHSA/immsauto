@@ -17,7 +17,7 @@ public class LoginPage extends BasePage{
 
     /*-------------Methods--------------*/
     public PortalHealthConnectRegistryPage openPortalHealthConnectRegistryPage() throws Exception {
-        driver.navigate().to(Utils.getEnvConfigProperty("url_citizenportal"));
+        driver.navigate().to(Utils.getEnvConfigProperty("url_patient_registration_portal"));
         return new PortalHealthConnectRegistryPage(driver);
     }
 }

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage<T>  {
 
-    protected WebDriver driver;
+    protected static WebDriver driver;
     public WebDriverWait wait;
 
     public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");

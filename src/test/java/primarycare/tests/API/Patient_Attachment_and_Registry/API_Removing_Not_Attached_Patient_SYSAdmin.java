@@ -18,8 +18,8 @@ public class API_Removing_Not_Attached_Patient_SYSAdmin extends BaseTest {
 
 
     @Test(priority = 1)
-    public void Can_Remove_Patient_from_SF_as_an_SYSAdmin() throws Exception {
-        TestcaseID = "251434"; //C251434
+    public void API_Can_Remove_Patient_from_SF_as_an_SYSAdmin() throws Exception {
+        TestcaseID = "251774"; //C251774
         log("/---API call to remove duplicate citizen participant account if found--*/");
         //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
