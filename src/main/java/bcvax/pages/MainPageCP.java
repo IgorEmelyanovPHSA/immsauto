@@ -181,7 +181,8 @@ public class MainPageCP extends BasePage{
         return supplyConsolePage;
     }
 
-    public void verifyIsCommunityPortalHomePageDisplayed() {
+    public void verifyIsCommunityPortalHomePageDisplayed() throws InterruptedException{
+        Thread.sleep(2000);
         waitForElementToBeVisible(driver, community_portal_home_page_displayed, 10);
         community_portal_home_page_displayed.isDisplayed();
     }
@@ -226,6 +227,7 @@ public class MainPageCP extends BasePage{
         waitForElementToBeVisible(driver, click_save_defaults_button, 10);
         WebElement element = driver.findElement(click_save_defaults_button_);
         click_save_defaults_button.click();
+        Thread.sleep(2000);
     }
 
     public void clickGoToUserDefaultsButton() throws InterruptedException {
