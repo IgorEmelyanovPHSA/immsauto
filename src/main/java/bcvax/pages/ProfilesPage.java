@@ -174,9 +174,9 @@ public class ProfilesPage extends BasePage{
 
     /*-------------Methods--------------*/
     public void selectCitizenParticipantAcc(String name) throws InterruptedException {
-        WebElement citizen_participant_acc = driver.findElement(By.xpath("//a[contains(text(),'Benoite Denna BCVaxD')]"));
-        waitForElementToBeVisible(driver, citizen_participant_acc, 10);
-        Thread.sleep(5000);
+        By citizen_path = By.xpath("//a[contains(text(),'"+ name + "')]");
+        waitForElementToBePresent(driver, citizen_path, 30);
+        WebElement citizen_participant_acc = driver.findElement(citizen_path);
         citizen_participant_acc.click();
     }
 
@@ -256,6 +256,7 @@ public class ProfilesPage extends BasePage{
     }
 
     public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
+        Thread.sleep(1000);
         if (!isDisplayed(yes_button_save_on_popup_window1)) {
             return false;
         }
@@ -268,10 +269,9 @@ public class ProfilesPage extends BasePage{
     }
 
     public void clickToClose() throws InterruptedException {
+        Thread.sleep(500);
         waitForElementToBeVisible(driver, close_button_diwa, 10);
-        Thread.sleep(2000);
         close_button_diwa.click();
-        Thread.sleep(2000);
     }
 
     public boolean validateoopsMessage() throws InterruptedException {
@@ -327,25 +327,56 @@ public class ProfilesPage extends BasePage{
         Thread.sleep(2000);
     }
 
+    public String consentProviderSelected() {
+        By providerFieldPath = By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]");
+        waitForElementToBeLocated(driver, providerFieldPath, 10);
+        return driver.findElement(providerFieldPath).getAttribute("data-value");
+    }
+
+    public String selectConsentProvider() throws InterruptedException {
+        WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
+        scrollTop(consentProviderField);
+        consentProviderField.click();
+        Thread.sleep(2000);
+        try {
+            driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
+        } catch(Exception ex) {
+            driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
+        }
+        Thread.sleep(2000);
+        return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
+    }
+
     public void clickSaveConsent() throws InterruptedException {
         waitForElementToBeVisible(driver, saveConsentButton, 10);
-        Thread.sleep(2000);
+        scrollTop(saveConsentButton);
         saveConsentButton.click();
     }
 
-    public void selectImmunizingAgentProvider(String Provider) throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizing_agent_provider_dropdown);
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, immunizing_agent_provider_dropdown, 10);
-        Thread.sleep(2000);
-        immunizing_agent_provider_dropdown.click();
-        Thread.sleep(5000);
-        immunizing_agent_provider_dropdown.sendKeys(Provider);
-        Thread.sleep(5000);
-        waitForElementToBeVisible(driver, select_immunizing_agent_provider, 10);
-        Thread.sleep(5000);
-        select_immunizing_agent_provider.click();
-        Thread.sleep(2000);
+    public void selectImmunizingAgentProvider(String provider) throws InterruptedException {
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizing_agent_provider_dropdown);
+//        Thread.sleep(2000);
+//        waitForElementToBeVisible(driver, immunizing_agent_provider_dropdown, 10);
+//        Thread.sleep(2000);
+//        immunizing_agent_provider_dropdown.click();
+//        Thread.sleep(5000);
+//        immunizing_agent_provider_dropdown.sendKeys(Provider);
+//        Thread.sleep(5000);
+//        waitForElementToBeVisible(driver, select_immunizing_agent_provider, 10);
+//        Thread.sleep(5000);
+//        select_immunizing_agent_provider.click();
+        Thread.sleep(1000);
+        By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
+        WebElement providerField =  driver.findElement(providerFieldPath);
+        scrollTop(providerField);
+        providerField.sendKeys(provider);
+        Thread.sleep(1000);
+        By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
+        waitForElementToBeLocated(driver, providerItemPath, 10);
+        driver.findElement(providerItemPath).click();
+
     }
 
     public void clickShowAllLotNumbersCheckBox() throws InterruptedException {

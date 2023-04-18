@@ -1550,7 +1550,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String selectConsentProvider() throws InterruptedException {
-		driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
+		WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
+		scrollTop(consentProviderField);
+		consentProviderField.click();
 		Thread.sleep(2000);
 		try {
 			driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
