@@ -49,6 +49,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
         cpMainPage.clickSaveDefaultsButton();
+        Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -84,6 +85,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
+        Thread.sleep(2000);
 
         log("/*22.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
