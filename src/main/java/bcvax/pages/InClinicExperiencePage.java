@@ -1338,7 +1338,9 @@ public class InClinicExperiencePage extends BasePage {
 		//Thread.sleep(3000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
 		scrollTop(click_on_covid19_vaccination_checkbox, false);
-		Thread.sleep(2000);
+		Thread.sleep(500);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(500);
 		click_on_covid19_vaccination_checkbox.click();
 	}
 
