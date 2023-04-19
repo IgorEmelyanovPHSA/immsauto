@@ -12,9 +12,12 @@ import primarycare.pages.PortalHealthConnectRegistryPage;
 public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
     private String legalFirstName = "Sandy";
     private String legalLastName = "Prior";
-    private String dateOfBirth = "March 1, 1975";
-    private String postalCode = "V3L5L1";
     private String personalHealthNumber = "9873010063";
+    private String dateOfBirth_MM = "03";//March
+    private String dateOfBirth_DD = "01";
+    private String dateOfBirth_YYYY = "1975";
+    private String postalCode = "V3L5L1";
+
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
 
@@ -30,23 +33,49 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
         log("/*1.---Open Patient Registry Portal (Health Connect Registry site)--*/");
         PortalHealthConnectRegistryPage portalHealthConnectRegistryPage= loginPage.openPortalHealthConnectRegistryPage();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
         log("/*2.---- Validate that the Register to get doctor page has displayed --*/");
         PortalHealthConnectRegistryPage.validateRegisterToGetDoctorPageDisplayed();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
         log("/*3.---Click Next button--*/");
         portalHealthConnectRegistryPage.clickNextButton();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
         log("/*4.---- Validate that the Who is Registering page has displayed --*/");
         PortalHealthConnectRegistryPage.validateWhoIsRegisteringPageDisplayed();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
         log("/*5.---Click Register my household button--*/");
-        //portalHealthConnectRegistryPage.clickNextButton();
-        Thread.sleep(5000);
+        portalHealthConnectRegistryPage.clickRegisterMyHouseholdButton();
+        Thread.sleep(1000);
+
+        log("/*6.----Enter First Name " +legalFirstName +"--*/");
+        portalHealthConnectRegistryPage.enterFirstName(legalFirstName);
+        Thread.sleep(1000);
+
+        log("/*7.----Enter Last Name " +legalLastName +"--*/");
+        portalHealthConnectRegistryPage.enterLastName(legalLastName);
+        Thread.sleep(1000);
+
+        log("/*8.----Enter PHN " +personalHealthNumber +"--*/");
+        portalHealthConnectRegistryPage.enterPHN(personalHealthNumber);
+        Thread.sleep(1000);
+
+        log("/*9.----Enter Date of Birth - Month" +dateOfBirth_MM +"--*/");
+        portalHealthConnectRegistryPage.enterMonth(dateOfBirth_MM);
+        Thread.sleep(1000);
+
+        log("/*10.----Enter Date of Birth - Day" +dateOfBirth_DD +"--*/");
+        portalHealthConnectRegistryPage.enterDay(dateOfBirth_DD);
+        Thread.sleep(1000);
+
+        log("/*11.----Enter Date of Birth - Year" +dateOfBirth_YYYY +"--*/");
+        portalHealthConnectRegistryPage.enterYear(dateOfBirth_YYYY);
+        Thread.sleep(1000);
+
+
 
     }
 
