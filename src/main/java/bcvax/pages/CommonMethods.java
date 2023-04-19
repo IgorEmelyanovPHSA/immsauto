@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
@@ -323,6 +324,13 @@ public class CommonMethods extends BasePage{
 
         return dosesQuantityConversionFactor;
     }
-
+    public void expiredVaxHandler() throws InterruptedException {
+        List<WebElement> listOfElements = driver.findElements(By.xpath("//h1[contains(text(),'Confirm')]"));
+        if(listOfElements.size()>=1){
+            WebElement btnOk = driver.findElement(By.xpath("//button[@data-ok-button]"));
+            click(btnOk);
+            Thread.sleep(2000);
+        }
+    }
 
 }
