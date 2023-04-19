@@ -209,6 +209,8 @@ public class MainPageCP extends BasePage{
         input_current_date.sendKeys(todayAsString);
         Thread.sleep(2000);
         input_current_date.sendKeys(Keys.ENTER);
+        Thread.sleep(500);
+        closeSuccessDialog();
     }
 
     public void selectUserDefaultLocation(String location) throws InterruptedException {
@@ -227,9 +229,25 @@ public class MainPageCP extends BasePage{
         waitForElementToBeVisible(driver, click_save_defaults_button, 10);
         WebElement element = driver.findElement(click_save_defaults_button_);
         click_save_defaults_button.click();
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        closeSuccessDialog();
     }
 
+    public void closeSuccessDialog() throws InterruptedException {
+        try {
+            WebElement alertCloseBtn = driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']"));
+            alertCloseBtn.click();
+            System.out.println("Alert dialog found and Closed.");
+        } catch(Exception ex) {
+            System.out.println("Alert Dialog not found, try again");
+            System.out.println("Exception: " + ex.getMessage());
+            Thread.sleep(500);
+            driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']")).click();
+            System.out.println("Alert dialog found and Closed.");
+        } finally {
+            System.out.println("Continue ....");
+        }
+    }
     public void clickGoToUserDefaultsButton() throws InterruptedException {
         List<String> windows = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(windows.get(1));
