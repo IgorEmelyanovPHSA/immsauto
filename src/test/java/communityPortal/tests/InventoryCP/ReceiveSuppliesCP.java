@@ -72,7 +72,9 @@ public class ReceiveSuppliesCP extends BaseTest {
 		String expectedSupplyDistributionToLabel = "*Supply Distribution To";
 		Assert.assertEquals(supplyDistribution, (expectedSupplyDistributionToLabel));
 
-		supplyConsolePage.transferToDistributionOnSend(SUPPLY_DISTRIBUTION_2_1).clickSaveButton();
+		supplyConsolePage.transferToDistributionOnSend(SUPPLY_DISTRIBUTION_2_1);
+		Thread.sleep(2000);
+		supplyConsolePage.clickSaveButton();
 		supplyConsolePage.successMessageAppear();
 
 		log("/----Count Supplies After Receiving--*/");
