@@ -1337,8 +1337,10 @@ public class InClinicExperiencePage extends BasePage {
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		//Thread.sleep(3000);
 		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
-		scrollTop(click_on_covid19_vaccination_checkbox, true);
-		Thread.sleep(2000);
+		scrollTop(click_on_covid19_vaccination_checkbox, false);
+		Thread.sleep(500);
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
+		Thread.sleep(500);
 		click_on_covid19_vaccination_checkbox.click();
 	}
 
@@ -1550,7 +1552,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String selectConsentProvider() throws InterruptedException {
-		driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
+		WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
+		scrollTop(consentProviderField);
+		consentProviderField.click();
 		Thread.sleep(2000);
 		try {
 			driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
