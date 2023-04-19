@@ -286,6 +286,9 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement appointment_status_confirm;
 	private By appointment_status_confirm1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
 
+	private By appointment_status_cancel_CP = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//span[text()='Cancelled']");
+	private By appointment_status_confirm_CP = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//span[text()='Confirmed']");
+
 	@FindBy(xpath = "(//SPAN[@class='slds-page-header__title slds-truncate'][text()='Immunization Records (1)']/../../../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[2]")
 	private WebElement status_after_care;
 	private By status_after_care1 = By.xpath("(//SPAN[@class='slds-page-header__title slds-truncate'][text()='Immunization Records (1)']/../../../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[2]");
@@ -1444,6 +1447,20 @@ public class InClinicExperiencePage extends BasePage {
 	public void ValidateClickRebookAppointmentButtonIsDisabled() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_to_rebook_button1, 10);
 		click_to_rebook_button.isDisplayed();
+	}
+
+	public void ValidateAppointmentCancelledIsPresentCP() throws InterruptedException {
+		WebElement element = driver.findElement(appointment_status_cancel_CP);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(1000);
+		element.isDisplayed();
+	}
+
+	public void ValidateAppointmentConfirmIsPresentCP() throws InterruptedException {
+		WebElement element = driver.findElement(appointment_status_confirm_CP);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+		Thread.sleep(1000);
+		element.isDisplayed();
 	}
 
 	public void ValidateAppointmentCancelledIsPresent() throws InterruptedException {
