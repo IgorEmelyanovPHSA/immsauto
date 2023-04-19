@@ -1,6 +1,7 @@
 package communityPortal.tests.DIWA_CP;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.ProfilesPage;
 import bcvax.pages.Utils;
@@ -15,6 +16,7 @@ public class DIWA_Covid19_CP extends BaseTest {
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         //TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        CommonMethods commonMethods = new CommonMethods(getDriver());
         String nameToSearch = "Benoite Denna BCVaxD";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
@@ -34,6 +36,7 @@ public class DIWA_Covid19_CP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsDIWAClinician();
 
         }
+        log("TestRail test case ID: C" +TestcaseID);
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.---Search for Participant account --*/");
@@ -113,6 +116,9 @@ public class DIWA_Covid19_CP extends BaseTest {
 
         log("/*---24. Save Immunization Information ---*/");
         profilesPage.saveImmunizationInformation();
+
+        //Expired vax handler
+        commonMethods.expiredVaxHandler();
 
         log("/*---25. Confirm and Save Administration ---*/");
         profilesPage.confirmAndSaveAdministration();
