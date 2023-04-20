@@ -144,9 +144,12 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         } catch(Exception ex) {
             log("/*39.---Open Today's appointments from Home page --*/");
             System.out.println(ex.getMessage());
+            Thread.sleep(2000);
             inClinicExperience_CP.clickTodayAppointments();
+            Thread.sleep(2000);
             log("/*40.---Open Today appointment Details --*/");
             inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
+            Thread.sleep(2000);
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
             inClinicExperience_CP.selectVaccineAgent();
         }

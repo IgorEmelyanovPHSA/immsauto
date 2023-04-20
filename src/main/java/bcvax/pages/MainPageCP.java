@@ -210,7 +210,7 @@ public class MainPageCP extends BasePage{
         Thread.sleep(2000);
         input_current_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        closeSuccessDialog();
+        //closeSuccessDialog();
     }
 
     public void selectUserDefaultLocation(String location) throws InterruptedException {

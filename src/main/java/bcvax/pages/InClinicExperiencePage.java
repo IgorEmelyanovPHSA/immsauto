@@ -1558,8 +1558,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickTodayAppointmentCaseViewButton() {
-		WebElement todayAppointment = driver.findElements(By.xpath("//button[@title = 'View Case']")).get(0);
-		todayAppointment.click();
+		List<WebElement> todayAppointments = driver.findElements(By.xpath("//button[@title = 'View Case']"));
+		WebElement myAppointment = todayAppointments.get(todayAppointments.size() - 1);
+		myAppointment.click();
 	}
 
 	public String consentProviderSelected() {

@@ -22,7 +22,7 @@ bcvaxdevit:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-03 23:28:41)"
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
-  consumptionDose: "0.5"
+  consumptionDose: "0.3"
   consumptionLot: "EL0203"
   useDefaultSettingsLots:
     - "016F21A-CC07"
@@ -71,8 +71,8 @@ prodsuppqa:
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:08:45)"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
-#    - "2023-02-08-COMIRNATY (Pfizer) - EK4241-1"
+#    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
+    - "2023-02-08-COMIRNATY (Pfizer) - EK4241-1"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:36:09)"
   bulkContainersToSameClinic:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:09:10)"
@@ -84,31 +84,6 @@ prodsuppqa:
     - "016F21A-CC07"
     - "T005729-CC07"
 comunityqa:
-  supplyLocationFrom: "Automation Supply Location_1"
-  supplyLocationTo: "Automation Supply Location_2"
-  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  distributionFrom: "Automation Supply Distribution_1_1"
-  distributionTo: "Supply Distribution_2_1"
-  distributionToSameClinic: "Supply Distribution_1_2"
-  distributionConsumption: "Supply Distribution_1"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
-  containerConsumption: "SPIKEVAX (Moderna) - 016F21A-CC07 (2023-03-23 09:56:35)"
-  bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:07:47)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:08:15)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:08:45)"
-  bulkContainersTo:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-04 05:20:05)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:36:09)"
-  bulkContainersToSameClinic:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-02-17 13:48:49)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-02-10 12:18:29)"
-  consumptionDose: "0.5"
-comunityqa_org:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
@@ -247,7 +222,7 @@ comuat_org:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:48:00)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:45:47)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:47:07)"
-ssotdev_org:
+ssotdev:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
