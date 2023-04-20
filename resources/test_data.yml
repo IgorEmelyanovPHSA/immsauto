@@ -22,7 +22,7 @@ bcvaxdevit:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-03 23:28:41)"
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
-  consumptionDose: "0.5"
+  consumptionDose: "0.3"
   consumptionLot: "EL0203"
   useDefaultSettingsLots:
     - "016F21A-CC07"

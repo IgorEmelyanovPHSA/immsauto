@@ -43,7 +43,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         String field = profilePage.pirSubmissionStatusFieldIsDisplayed();
         log("/*9---- " + field + "is displayed --*/");

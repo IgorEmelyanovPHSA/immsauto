@@ -161,6 +161,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         }
         Thread.sleep(2000);
         inClinicExperience_CP.ClickSaveConsentButton();
+        Thread.sleep(2000);
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
         if(consentProvider.equals("")) {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
