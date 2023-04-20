@@ -183,7 +183,14 @@ public class MainPageCP extends BasePage{
 
     public void verifyIsCommunityPortalHomePageDisplayed() throws InterruptedException{
         Thread.sleep(2000);
-        waitForElementToBeVisible(driver, community_portal_home_page_displayed, 30);
+        try {
+            waitForElementToBeVisible(driver, community_portal_home_page_displayed, 30);
+        }
+        catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            driver.navigate().refresh();
+            waitForElementToBeVisible(driver, community_portal_home_page_displayed, 30);
+        }
         community_portal_home_page_displayed.isDisplayed();
     }
 
