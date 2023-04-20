@@ -27,14 +27,15 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
     @Test
     public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_CP() throws Exception {
-        TestcaseID = "219910"; //C219910
-        // TestCase update for CP 245216??
+        TestcaseID = "245216"; //C245216
         log("Target Environment: " + Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        log("TestRail test case ID: C" +TestcaseID);
 
         log("/*1.----Login to Community Portal --*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianWrongClinic();
+       // MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianWrongClinic();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Register --*/");
@@ -195,11 +196,11 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*40.---Click Confirm and Save Administration Button --*/");
         inClinicExperiencePageClassic.ClickConfirmAndSaveAdministrationButton();
-        Thread.sleep(3000);
+        Thread.sleep(4000);
 
         log("/*41.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperiencePageClassic.ClickModalConfirmAndSaveAdministrationButton();
-        Thread.sleep(3000);
+        Thread.sleep(4000);
 
         log("/*42.---the Home - Client Search supposed to showing up  --*/");
         inClinicExperiencePageClassic.validateHomePageShownUp();
@@ -228,11 +229,11 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         Thread.sleep(2000);
 
         log("/*48.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
-        inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresent();
+        inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresentCP();
         Thread.sleep(2000);
 
         log("/*49.---- An confirmed appointmrnt is found for the user  ---*/");
-        inClinicExperiencePageClassic.ValidateAppointmentConfirmIsPresent();
+        inClinicExperiencePageClassic.ValidateAppointmentConfirmIsPresentCP();
         Thread.sleep(2000);
     }
 

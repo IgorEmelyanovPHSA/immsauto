@@ -34,6 +34,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 	@Test()
 	public void Validate_Receive_Supplies_By_Doses_as_Clinician_CP() throws Exception {
 		TestcaseID = "243133"; //C243133
+		log("TestRail test case ID: C" +TestcaseID);
 		String vaccine = "VAXZEVRIA (AstraZeneca) - MT0055";
 		double doses = 10;
 
