@@ -217,6 +217,10 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*44.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(2000);
+        // If expired vaccine click OK in confirmation dialogue
+        inClinicExperience_CP.clickOkForExpiredLot();
+        Thread.sleep(2000);
+
         log("/*45.---Click Confirm and Save Administration Button --*/");
         inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(2000);
