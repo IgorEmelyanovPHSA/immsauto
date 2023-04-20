@@ -1558,8 +1558,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickTodayAppointmentCaseViewButton() {
-		WebElement todayAppointment = driver.findElements(By.xpath("//button[@title = 'View Case']")).get(0);
-		todayAppointment.click();
+		List<WebElement> todayAppointments = driver.findElements(By.xpath("//button[@title = 'View Case']"));
+		WebElement myAppointment = todayAppointments.get(todayAppointments.size() - 1);
+		myAppointment.click();
 	}
 
 	public String consentProviderSelected() {
@@ -2282,6 +2283,19 @@ public class InClinicExperiencePage extends BasePage {
 		save_immune_info_btn.click();
 	}
 
+	public void clickOkForExpiredLot() throws InterruptedException {
+		Thread.sleep(1000);
+		System.out.println("Check if the expired lot message appears. If yes click OK");
+		try {
+			WebElement modalBox = driver.findElement(By.xpath("//div[@class = 'slds-modal__container']"));
+			modalBox.findElement(By.xpath("//button[text() = 'OK']")).click();
+			Thread.sleep(2000);
+		}
+		catch(Exception ex) {
+				System.out.println("No expired lots");
+		}
+
+	}
 	public void selectOneOption(String vaccine) throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
 		Thread.sleep(5000);

@@ -145,10 +145,13 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         } catch(Exception ex) {
             log("/*39.---Open Today's appointments from Home page --*/");
             System.out.println(ex.getMessage());
+            Thread.sleep(2000);
             inClinicExperience_CP.clickTodayAppointments();
+            Thread.sleep(2000);
             log("/*40.---Open Today appointment Details --*/");
             inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            Thread.sleep(2000);
             inClinicExperience_CP.selectVaccineAgent();
         }
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
@@ -158,6 +161,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         }
         Thread.sleep(2000);
         inClinicExperience_CP.ClickSaveConsentButton();
+        Thread.sleep(2000);
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
         if(consentProvider.equals("")) {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
@@ -189,7 +193,9 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*41.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
-
+        Thread.sleep(2000);
+        inClinicExperience_CP.clickOkForExpiredLot();
+        Thread.sleep(2000);
         log("/*42.---Click Confirm and Save Administration Button --*/");
         inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(2000);

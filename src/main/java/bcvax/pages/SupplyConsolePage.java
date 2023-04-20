@@ -979,35 +979,28 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
-		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, search_supply_location_2_To, 60);
 		log(" -- Combobox Supply Location To is found  -");
 		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
 		log(" -- Start typing into Search Combobox  -");
-		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, select_supply_location_2_To, 120);
 		scrollTop(select_supply_location_2_To, true);
 		log(" -- Drop down with supply required Supply location appeared  -");
 		select_supply_location_2_To.click();
 		log(" -- Selected Supply location successfully  -");
-		Thread.sleep(2000);
 		return this;
 	}
 
 	public void selectSupplyLocation_1_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
-		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, search_supply_location_1_To, 30);
 		log(" -- Combobox Supply Location To is found  -");
 		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
 		log(" -- Start typing into Search Combobox  -");
-		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, select_supply_location_1_To, 30);
 		log(" -- Drop down with supply required Supply location appeared  -");
-		Thread.sleep(5000);
 		select_supply_location_1_To.click();
 		log(" -- Selected Supply location successfully  -");
-		Thread.sleep(2000);
 	}
 	@Step
 	public SupplyConsolePage clickBulkTransfersModalButton(){

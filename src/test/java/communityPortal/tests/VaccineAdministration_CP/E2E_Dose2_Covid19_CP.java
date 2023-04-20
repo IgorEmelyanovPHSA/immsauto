@@ -144,9 +144,12 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         } catch(Exception ex) {
             log("/*39.---Open Today's appointments from Home page --*/");
             System.out.println(ex.getMessage());
+            Thread.sleep(2000);
             inClinicExperience_CP.clickTodayAppointments();
+            Thread.sleep(2000);
             log("/*40.---Open Today appointment Details --*/");
             inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
+            Thread.sleep(2000);
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
             inClinicExperience_CP.selectVaccineAgent();
         }
@@ -189,7 +192,9 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*41.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
-
+        Thread.sleep(2000);
+        inClinicExperience_CP.clickOkForExpiredLot();
+        Thread.sleep(2000);
         log("/*42.---Click Confirm and Save Administration Button --*/");
         inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(2000);

@@ -183,7 +183,7 @@ public class MainPageCP extends BasePage{
 
     public void verifyIsCommunityPortalHomePageDisplayed() throws InterruptedException{
         Thread.sleep(2000);
-        waitForElementToBeVisible(driver, community_portal_home_page_displayed, 10);
+        waitForElementToBeVisible(driver, community_portal_home_page_displayed, 30);
         community_portal_home_page_displayed.isDisplayed();
     }
 
@@ -210,7 +210,7 @@ public class MainPageCP extends BasePage{
         Thread.sleep(2000);
         input_current_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        closeSuccessDialog();
+        //closeSuccessDialog();
     }
 
     public void selectUserDefaultLocation(String location) throws InterruptedException {
