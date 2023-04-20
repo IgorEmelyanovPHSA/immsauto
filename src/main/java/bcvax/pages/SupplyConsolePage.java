@@ -409,6 +409,8 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//*[@title='Receive Supplies']")
 	private WebElement receiveSupplies;
 
+	private By btnShowMoreAction = By.xpath("//a[@title='Show one more action']");
+
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
 
@@ -1969,7 +1971,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
-		waitForElementToBeVisible(driver, receiveSupplies, 10);
+		List<WebElement> listOfElements = driver.findElements(btnShowMoreAction);
+		if(listOfElements.size()>=1){
+			click(btnShowMoreAction);
+		}
+//		waitForElementToBeVisible(driver, receiveSupplies, 5);
 		click(receiveSupplies);
 	}
 
@@ -2104,6 +2110,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public SupplyConsolePage selectSupplyItemTo(String supplyItem) throws InterruptedException {
+		Thread.sleep(2000);
 		log(" -- select supply item  -  " + supplyItem);
 		selectSupplyTo(searchSupplyItems, supplyItem);
 		return this;
