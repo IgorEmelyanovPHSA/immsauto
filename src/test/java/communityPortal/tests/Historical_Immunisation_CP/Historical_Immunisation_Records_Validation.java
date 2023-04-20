@@ -145,6 +145,9 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
             log("/*1.----Login to CP (newUI) as Clinician --*/");
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
         }
+        log("/*2.----Community Portal Home page displayed --*/");
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
+
         Thread.sleep(5000);
     }
 }

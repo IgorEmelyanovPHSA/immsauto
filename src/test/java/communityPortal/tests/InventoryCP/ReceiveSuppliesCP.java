@@ -93,7 +93,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 	}
 
 	@Test()
-	public void Validate_Receive_Supplies_By_Qty_as_Clinician_Community() throws Exception {
+	public void Validate_Receive_Supplies_By_Qty_as_Clinician_CP() throws Exception {
 		TestcaseID = "243133"; //C243133
 		String vaccine = "VAXZEVRIA (AstraZeneca) - MT0055";
 		double qty = 1;

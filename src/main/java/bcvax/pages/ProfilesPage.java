@@ -464,6 +464,7 @@ public class ProfilesPage extends BasePage{
     }
 
     public String pirSubmissionFieldStatus(int index) throws InterruptedException {
+
         WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(index).get("PIR Submission Status");
         scrollTop(element);
         Thread.sleep(2000);
@@ -583,13 +584,25 @@ public class ProfilesPage extends BasePage{
     }
 
     public void navigateToHistoricalImmunizationRecords() throws InterruptedException {
-        Thread.sleep(5000);
-        //WebElement element = driver.findElement(By.xpath("//span[contains(text(),'Historical Immunization Records ')]"));
-        //GenericTable myTable = tables.getHistoricalImmunizationRecordsTable();
-        //myTable.getRowsMappedToHeadings();
-        WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false)", element);
         Thread.sleep(2000);
+        By historical_records_title = By.xpath("//span[@title and contains(text(), 'Historical Immunization Records')]");
+        waitForElementToBePresent(driver, historical_records_title, 10);
+        WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");
+
+        for(int i = 0; i < 100; i++) {
+            try {
+                scrollTop(element);
+                Thread.sleep(1000);
+                tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(1);
+                break;
+            } catch (Exception ex) {
+                System.out.println("Try " + i + "; Table is still empty");
+                driver.navigate().refresh();
+                waitForElementToBePresent(driver, historical_records_title, 10);
+                Thread.sleep(1000);
+                element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");
+            }
+        }
     }
 
     public void openProfile(String clientName) throws InterruptedException {
