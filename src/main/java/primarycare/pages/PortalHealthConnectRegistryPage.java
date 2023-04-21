@@ -1,6 +1,7 @@
 package primarycare.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class PortalHealthConnectRegistryPage extends BasePage{
@@ -59,6 +60,35 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']")
     private WebElement postal_code;
     private By postal_code_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']");
+
+    @FindBy(xpath = "(.//input[@role='combobox'])[1]")
+    private WebElement sex_dropdown;
+    private By sex_dropdown_1 = By.xpath("(.//input[@role='combobox'])[2]");
+
+    @FindBy(xpath = "(.//span[text() = 'Female'])[1]")
+    private WebElement select_sex;
+    private By select_sex_1 = By.xpath("(.//span[text() = 'Female'])[1]");
+
+    @FindBy(xpath = "(.//input[@type='email'])[2]")
+    private WebElement enter_email_address;
+    private By enter_email_address_1 = By.xpath("(.//input[@type='email'])[2]");
+
+    @FindBy(xpath = "(.//input[@type='email'])[4]")
+    private WebElement re_enter_email_address;
+    private By re_enter_email_address_1 = By.xpath("(.//input[@type='email'])[4]");
+
+    @FindBy(xpath = "(.//input[@type='tel'])[1]")
+    private WebElement mobile_phone;
+    private By mobile_phone_1 = By.xpath("(.//input[@type='tel'])[1]");
+
+    @FindBy(xpath = "(.//input[@role='combobox'])[2]")
+    private WebElement communication_preference_dropdown;
+    private By communication_preference_dropdown_1 = By.xpath("(.//input[@role='combobox'])[2]");
+
+    @FindBy(xpath = "(.//span[text() = 'Email'])[1]")
+    private WebElement select_communication_preference;
+    private By select_communication_preference_1 = By.xpath("(.//span[text() = 'Email'])[1]");
+
 
 
     /*---------Constructor-------*/
@@ -151,10 +181,50 @@ public class PortalHealthConnectRegistryPage extends BasePage{
 
     public void enterPostalCode(String postalCode) throws InterruptedException {
         waitForElementToBeLocated(driver, postal_code_1, 10);
-        //WebElement postal_code =  driver.findElement(By.xpath(".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value  = 'Y6Y 1A3';", postal_code);
-        Thread.sleep(1000);
+        postal_code.click();
+        //JavascriptExecutor js = (JavascriptExecutor) driver;
+        //js.executeScript("arguments[0].value  = 'V6Y 1A3';", postal_code);
         //postal_code.sendKeys(postalCode);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(postalCode).build().perform();
+        //actions.sendKeys(Keys.ENTER).build().perform();
+        //Thread.sleep(1000);
     }
+
+    public void selectSex() throws InterruptedException {
+        waitForElementToBeLocated(driver, sex_dropdown_1, 10);
+        sex_dropdown.click();
+        waitForElementToBeVisible(driver, select_sex, 10);
+        select_sex.click();
+        Thread.sleep(1000);
+    }
+
+    public void enterEmailAddress(String email) throws InterruptedException {
+        waitForElementToBeLocated(driver, enter_email_address_1, 10);
+        enter_email_address.sendKeys(email);
+    }
+    public void re_enterEmailAddress(String email) throws InterruptedException {
+        waitForElementToBeLocated(driver, re_enter_email_address_1, 10);
+        re_enter_email_address.sendKeys(email);
+    }
+
+    public void enterMobilePhoneNumber(String mobile) throws InterruptedException {
+        waitForElementToBeLocated(driver, mobile_phone_1, 10);
+        mobile_phone.click();
+        //mobile_phone.sendKeys(mobile);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(mobile).build().perform();
+        //Thread.sleep(1000);
+    }
+
+    public void selectCommunicationPreference() throws InterruptedException {
+        waitForElementToBeLocated(driver, communication_preference_dropdown_1, 10);
+        communication_preference_dropdown.click();
+        waitForElementToBeVisible(driver, select_communication_preference, 10);
+        select_communication_preference.click();
+        Thread.sleep(1000);
+    }
+
+
+
 }

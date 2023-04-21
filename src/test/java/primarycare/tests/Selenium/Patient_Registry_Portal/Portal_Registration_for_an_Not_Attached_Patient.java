@@ -18,10 +18,12 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
     private String dateOfBirth_YYYY = "1975";
     private String streetAddress = "307-7631 Francis Rd";
     private String City = "Richmond";
-    private String postalCode = "Y6Y 1A3";
-
-    //private boolean isIndigenous = false;
+    private String postalCode = "V6Y 1A3";
     private String email = "accountToDelete@phsa.ca";
+    private String mobilePhone = "7788797898";
+    private String communicationPreference = "Email";
+
+
 
     @Test(priority = 1)
     public void Can_do_Registration_for_an_Not_Attached_Patient_in_Portal () throws Exception {
@@ -91,8 +93,35 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
         log("/*15.---Enter Postal Code" +postalCode +"----*/");
         portalHealthConnectRegistryPage.enterPostalCode(postalCode);
+        //Thread.sleep(1000);
+
+        log("/*16.---Click Continue--*/");
+        portalHealthConnectRegistryPage.clickContinueButton();
         Thread.sleep(1000);
 
+        log("/*17.---Select Sex female----*/");
+        portalHealthConnectRegistryPage.selectSex();
+        //Thread.sleep(1000);
+
+        log("/*17.---Enter email" +email +"----*/");
+        portalHealthConnectRegistryPage.enterEmailAddress(email);
+        //Thread.sleep(1000);
+
+        log("/*18.---Enter email" +email +"----*/");
+        portalHealthConnectRegistryPage.re_enterEmailAddress(email);
+        Thread.sleep(1000);
+
+        log("/*19.---Enter mobile" +mobilePhone +"----*/");
+        portalHealthConnectRegistryPage.enterMobilePhoneNumber(mobilePhone);
+        Thread.sleep(1000);
+
+        log("/*20.---Select Communication Preference - Email----*/");
+        portalHealthConnectRegistryPage.selectCommunicationPreference();
+        Thread.sleep(1000);
+
+        log("/*21.---Click Continue--*/");
+        portalHealthConnectRegistryPage.clickContinueButton();
+        Thread.sleep(1000);
 
     }
 
