@@ -1,9 +1,6 @@
 package primarycare.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class PortalHealthConnectRegistryPage extends BasePage{
@@ -46,6 +43,22 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='Year']//input")
     private WebElement date_of_birth_YY;
     private By date_of_birth_YY1 = By.xpath("//omnistudio-omniscript-text[@data-omni-key='Year']//input");
+
+    @FindBy(xpath = "(.//button[@aria-label='Continue'])[1]")
+    private WebElement continue_button;
+    private By continue_button_1 = By.xpath("(.//button[@aria-label='Continue'])[1]");
+
+    @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='streetAddress']//input[@class='vlocity-input slds-input']")
+    private WebElement street_address;
+    private By street_address_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='streetAddress']//input[@class='vlocity-input slds-input']");
+
+    @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']")
+    private WebElement city;
+    private By city_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']");
+
+    @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']")
+    private WebElement postal_code;
+    private By postal_code_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']");
 
 
     /*---------Constructor-------*/
@@ -118,5 +131,30 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     public void enterYear(String year) throws InterruptedException {
         waitForElementToBeLocated(driver, date_of_birth_YY1, 10);
         date_of_birth_YY.sendKeys(year);
+    }
+
+    public void clickContinueButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, continue_button, 10);
+        WebElement element = driver.findElement(continue_button_1);
+        continue_button.click();
+    }
+
+    public void enterStreetAddress(String streetAddress) throws InterruptedException {
+        waitForElementToBeLocated(driver, street_address_1, 10);
+        street_address.sendKeys(streetAddress);
+    }
+
+    public void enterCity(String City) throws InterruptedException {
+        waitForElementToBeLocated(driver, city_1, 10);
+        city.sendKeys(City);
+    }
+
+    public void enterPostalCode(String postalCode) throws InterruptedException {
+        waitForElementToBeLocated(driver, postal_code_1, 10);
+        //WebElement postal_code =  driver.findElement(By.xpath(".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value  = 'Y6Y 1A3';", postal_code);
+        Thread.sleep(1000);
+        //postal_code.sendKeys(postalCode);
     }
 }
