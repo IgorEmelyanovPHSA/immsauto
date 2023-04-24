@@ -1969,6 +1969,7 @@ public class SupplyConsolePage extends BasePage {
 			click(btnShowMoreAction);
 		}
 //		waitForElementToBeVisible(driver, receiveSupplies, 5);
+		Thread.sleep(1000);
 		click(receiveSupplies);
 	}
 
@@ -2114,6 +2115,7 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- select to  -  " + location);
 		waitForElementToBeVisible(driver, element, 10);
 		element.sendKeys(location);
+		Thread.sleep(5000);
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[@title='" + location + "']");
 		waitForElementToBePresent(driver, locationTo, 30);
 		click(driver.findElement(locationTo));
