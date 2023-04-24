@@ -46,7 +46,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 
 		log("/*-- Receive Supplies --*/");
 		supplyConsolePage.clickBtnReceiveSuppliesCP();
-
+		Thread.sleep(2000);
 		supplyConsolePage.selectSupplyItemTo(vaccine).
 				enterTransferDosages(String.valueOf(doses)).
 				selectReasonForReception();

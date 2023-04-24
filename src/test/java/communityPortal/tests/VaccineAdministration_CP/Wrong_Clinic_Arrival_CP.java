@@ -36,7 +36,6 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         log("/*1.----Login to Community Portal --*/");
        // MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianWrongClinic();
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -64,11 +63,9 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*10.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
-        Thread.sleep(2000);
 
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
         inClinicExperience_CP.successMessage();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*12.----click Next button --*/");
         inClinicExperience_CP.clickNextButton();
@@ -84,73 +81,56 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*16.----Click register Button on confirmation page--*/");
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
-        Thread.sleep(2000);
 
         log("/*17.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*18.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
-        Thread.sleep(5000);//wait for accordion loading
 
         log("/*19----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
-        Thread.sleep(5000);
 
         log("/*20.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
-        Thread.sleep(2000);
 
         log("/*21----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
-        Thread.sleep(2000);
 
         log("/*22.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience_CP.searchClinicName(clinicNameToSearch);
-        Thread.sleep(2000);
 
         log("/*23----click on Option Facility location  --*/");
         inClinicExperience_CP.clickOnFacilityOptionLocation();
-        Thread.sleep(2000);
 
         log("/*24----select Active booking appointment day  --*/");
         inClinicExperience_CP.selectBookingAppointmentDay();
-        Thread.sleep(2000);
 
         log("/*25----select the time slot  --*/");
         inClinicExperience_CP.selectTimeSlotForAppointment();
-        Thread.sleep(2000);
 
         log("/*26----click Next button  --*/");
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
-        Thread.sleep(2000);
 
         log("/*27----click Verify Contact Information Checkbox  --*/");
         inClinicExperience_CP.clickVerifyContactInformation_CP();
-        Thread.sleep(2000);
 
         log("/*28----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();
-        Thread.sleep(2000);
 
         log("/*29. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience_CP.AppointmentConfirmationMessage();
-        Thread.sleep(3000);
 
         log("/*30.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
-        Thread.sleep(2000);
 
         log("/*31.----Refresh page - need to be fixed by dev's --*/");
         inClinicExperience_CP.refreshBrowser();
-        Thread.sleep(5000);
 
         log("/*32.---Click Go To In clinic experience button --*/");
         //Create classic object of inClinicExperiencePage
         InClinicExperiencePage inClinicExperiencePageClassic = new InClinicExperiencePage(getDriver());
         inClinicExperiencePageClassic.ClickGoToInClinicExperienceButton();
-        Thread.sleep(5000);
 
         String originalBooking = inClinicExperiencePageClassic.ValidateClinicNameBeforeRebook();
         log("/*--- Before Booking clinic Value is:" + originalBooking + "");
@@ -160,9 +140,14 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*33.--- User can click Rebook Appointment button to book an appointment --*/");
         inClinicExperiencePageClassic.ClickRebookAppointment();
+        Thread.sleep(1000);
+        try {
+            inClinicExperiencePageClassic.clickCloseAlert();
+        } catch(Exception ex) {
+            System.out.println("Alert not found. Proceed...");
+        }
         log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
         log("/*--                                2. Rebook at Current Location button is disabled --*/");
-        Thread.sleep(5000);
 
         String afterRebooking = inClinicExperiencePageClassic.ValidateclinicNameAfterRebook();
         log("/*--- After Booking clinic value is:" + afterRebooking + "");
@@ -173,68 +158,69 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         log("/*34.---'Rebook at Current Location button is disabled after user books appointment --*/");
         inClinicExperiencePageClassic.ValidateClickRebookAppointmentButtonIsDisabled();
         Thread.sleep(2000);
-
         log("/*35.---Click confirm and Save Button on Home Page --*/");
         inClinicExperiencePageClassic.HomePageClickConfirmAndSaveButton();
-        Thread.sleep(5000);
 
         log("/*36.---Click to select Agent --*/");
-        inClinicExperiencePageClassic.ClickAgentValue();
-        Thread.sleep(2000);
-
-        log("/*37.--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
-        inClinicExperiencePageClassic.SelectAgentValue();
-        Thread.sleep(2000);
+        try {
+            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            inClinicExperience_CP.selectVaccineAgent();
+        } catch(Exception ex) {
+            log("/*39.---Open Today's appointments from Home page --*/");
+            System.out.println(ex.getMessage());
+            Thread.sleep(2000);
+            inClinicExperience_CP.clickTodayAppointments();
+            Thread.sleep(2000);
+            log("/*40.---Open Today appointment Details --*/");
+            inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
+            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            Thread.sleep(2000);
+            inClinicExperience_CP.selectVaccineAgent();
+        }
 
         log("/*38.---Click Save Consent Button --*/");
         inClinicExperiencePageClassic.ClickSaveConsentButton();
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         log("/*39.---Save Immunization Information ---*/");
         inClinicExperiencePageClassic.saveImmunizationInformation();
-        Thread.sleep(2000);
+
+        //If expired lop click Ok
+        Thread.sleep(1000);
+        inClinicExperience_CP.clickOkForExpiredLot();
+        /////////
 
         log("/*40.---Click Confirm and Save Administration Button --*/");
         inClinicExperiencePageClassic.ClickConfirmAndSaveAdministrationButton();
-        Thread.sleep(4000);
-
+        Thread.sleep(2000);
         log("/*41.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperiencePageClassic.ClickModalConfirmAndSaveAdministrationButton();
-        Thread.sleep(4000);
 
         log("/*42.---the Home - Client Search supposed to showing up  --*/");
         inClinicExperiencePageClassic.validateHomePageShownUp();
-        Thread.sleep(3000);
         inClinicExperiencePageClassic.refreshBrowser();
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         log("/*43.---Search for Participant account --*/");
-        ProfilesPage profilesPage = cpMainPage.globalSearch_CP(citizenName);
-        Thread.sleep(10000);
-
+        //ProfilesPage profilesPage = cpMainPage.globalSearch_CP(citizenName);
+        cpMainPage.search(legalFirstName + " " + legalLastName);
+        Thread.sleep(2000);
         log("/*44.---select Citizen Participant acc from search results --*/");
-        profilesPage.selectCitizenParticipant(citizenName);
-        Thread.sleep(5000);
+        ProfilesPage profilesPage = new ProfilesPage(driver);
+        profilesPage.selectCitizenParticipant(legalFirstName + " " + legalLastName);
 
         log("/*45.---Navigate to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
-        Thread.sleep(5000);
 
         log("/*46.---Immunization status is in After Care ---*/");
         inClinicExperiencePageClassic.ValidateStatusisInAftercare();
-        Thread.sleep(2000);
 
         log("/*47.---User Navigated to Appointment Section  ---*/");
         inClinicExperiencePageClassic.NavigateToAppointmentsSection();
-        Thread.sleep(2000);
 
         log("/*48.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
         inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresentCP();
-        Thread.sleep(2000);
 
         log("/*49.---- An confirmed appointmrnt is found for the user  ---*/");
         inClinicExperiencePageClassic.ValidateAppointmentConfirmIsPresentCP();
-        Thread.sleep(2000);
     }
 
     @Test(priority = 2)

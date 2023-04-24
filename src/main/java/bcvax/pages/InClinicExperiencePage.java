@@ -1485,11 +1485,13 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String ValidateclinicNameAfterRebook() throws InterruptedException {
-		WebElement element = driver.findElement(validate_clinic_name_after_booking1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
+//		WebElement element = driver.findElement(validate_clinic_name_after_booking1);
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+//		Thread.sleep(2000);
+//		element.getText();
+//		return (element.getText());
+		WebElement element = driver.findElement(By.xpath("//p[@c-bchcheader_bchcheader and text() = 'Clinic Location']/..//lightning-icon[@title = 'Account']/.."));
+		return element.getText();
 	}
 
 	public String ValidateClinicNameBeforeRebook() throws InterruptedException {
@@ -1709,11 +1711,8 @@ public class InClinicExperiencePage extends BasePage {
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		//Thread.sleep(5000);
 		WebElement element = driver.findElement(confirm_save_adm_btn_modal_screen_);
-		Thread.sleep(5000);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, confirm_save_adm_btn_modal_screen, 10);
-		Thread.sleep(2000);
 		confirm_save_adm_btn_modal_screen.click();
 	}
 
