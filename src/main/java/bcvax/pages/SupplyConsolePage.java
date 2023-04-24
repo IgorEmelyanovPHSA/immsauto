@@ -1964,13 +1964,26 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
-		List<WebElement> listOfElements = driver.findElements(btnShowMoreAction);
-		if(listOfElements.size()>=1){
-			click(btnShowMoreAction);
+		try {
+			click(receiveSupplies);
+		} catch(Exception ex) {
+			List<WebElement> listOfElements = driver.findElements(btnShowMoreAction);
+			System.out.println("--- FOR DEBUG: Trying to Click More Actions button---");
+			System.out.println("--- Found " + listOfElements.size() + " More button elements");
+			if (listOfElements.size() >= 1) {
+				click(btnShowMoreAction);
+				System.out.println("--- FOR DEBUG: Clicked More Actions button---");
+			} else {
+				System.out.println("--- FOR DEBUG: Didn't find More Actions button---");
+				System.out.println("--- FOR DEBUG: Try again find More Actions button after 2 seconds---");
+				Thread.sleep(2000);
+				listOfElements = driver.findElements(btnShowMoreAction);
+				System.out.println("--- After Second attempt Found " + listOfElements.size() + " More button elements");
+				click(btnShowMoreAction);
+			}
+			Thread.sleep(1000);
+			click(receiveSupplies);
 		}
-//		waitForElementToBeVisible(driver, receiveSupplies, 5);
-		Thread.sleep(1000);
-		click(receiveSupplies);
 	}
 
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
