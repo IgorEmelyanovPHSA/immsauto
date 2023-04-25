@@ -1759,17 +1759,22 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
-		Thread.sleep(2000);
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
+		//Thread.sleep(2000);
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		//JavascriptExecutor executor = (JavascriptExecutor) driver;
+		//executor.executeScript("arguments[0].click();", element);
+		scrollTop(element);
+		Thread.sleep(1000);
+		int footerSize = driver.findElement(By.xpath("//div[@class = 'bch-scheduler-footer']")).getSize().getHeight();
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + footerSize + ")");
+		element.click();
 	}
 
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, select_clinic, 10);
 		Thread.sleep(2000);
