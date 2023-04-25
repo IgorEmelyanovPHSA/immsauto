@@ -1558,6 +1558,8 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public HashMap countDosesAndQuantityMap(int numberOfRows) {
+		By supplyContainerTablePath = By.xpath("//article[@class = 'slds-card']/div/header/div[@class = 'slds-media__body']//span[contains(text(), 'Supply Container')]");
+		waitForElementToBePresent(driver, supplyContainerTablePath, 10);
 		DecimalFormat df = new DecimalFormat("0.00");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityMap = new HashMap<>();
 		int d = 3;

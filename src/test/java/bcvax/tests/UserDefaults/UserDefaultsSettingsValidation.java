@@ -88,7 +88,12 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         userDefaultsPage.populateLotsAndSite(lots);
 
         log("/*15.----- Click btn Save and validate success msg --*/");
-        userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+        //userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+        userDefaultsPage.clickBtnSave();
+        Thread.sleep(1000);
+        userDefaultsPage.clickOkForExpiredLot();
+        Thread.sleep(1000);
+        userDefaultsPage.validateSuccessfullyUpdatedMsg();
     }
 }
 
