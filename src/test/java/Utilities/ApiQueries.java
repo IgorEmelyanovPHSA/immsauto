@@ -382,25 +382,231 @@ public class ApiQueries {
         }
         else {
             ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(AccountId);
-             if (listOfImmunizationRecords.size() == 0) {
+            if (listOfImmunizationRecords.size() == 0) {
                 log("Immunization records not found");
-             } else {
-                 for(int i=0; i < listOfImmunizationRecords.size(); i++){
-                     String immunizationRecordId = listOfImmunizationRecords.get(i);
-                     log("Immunization record to delete " +immunizationRecordId);
-                     deleteImmunizationRecord(immunizationRecordId);
-                 }
+            } else {
+                for(int i=0; i < listOfImmunizationRecords.size(); i++){
+                    String immunizationRecordId = listOfImmunizationRecords.get(i);
+                    log("Immunization record to delete " +immunizationRecordId);
+                    deleteImmunizationRecord(immunizationRecordId);
+                }
             }
             deleteAccount(AccountId);
         }
     }
 
+
+
+    ///////PrimaryCare///////
     public static void apiCallToRemovePatientAccount(String PersonEmail, String LastName, String FirstName) throws Exception {
         String AccountId = queryToGetAccountId(PersonEmail,LastName,FirstName);
         if(AccountId==null){
-            log("Duplicate account not found");
+            log("Duplicate Patient account not found");
         }
-            deleteAccount(AccountId);
+        else {
+            String ContactId = queryToGetContactId(PersonEmail,LastName,FirstName);
+            ArrayList<String> listOfCaseRecords = queryToGetListOfCasesRecords(ContactId);
+            if (listOfCaseRecords.size() == 0) {
+                log("Patient Case records not found");
+            } else {
+                for(int i=0; i < listOfCaseRecords.size(); i++){
+                    String caseRecordId = listOfCaseRecords.get(i);
+                    log("Patient Case to delete " +caseRecordId);
+                    deleteCaseRecord(caseRecordId);
+                }
+            }
+            deletePatientAccount(AccountId);
         }
+    }
+
+    public static String queryToGetContactId(String PersonEmail, String LastName, String FirstName) throws Exception {
+        log("/*---Query to get ContactID record from Contact table--*/ ");
+        String ContactId = null;
+        String oauthToken = getOauthToken();
+
+        String query ="/query?q=SELECT+Id+FROM+Contact+WHERE+Email='"+PersonEmail+"'+AND+LastName='"+LastName+"'+AND+FirstName='"+FirstName+"'+Limit+3";
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        ContactId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("ContactId: " + ContactId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occurred. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        } catch (Exception e) {  //reference to custom throws new Exception
+            e.printStackTrace();
+        }
+        return ContactId;
+    }
+
+    public static ArrayList<String> queryToGetListOfCasesRecords(String ContactId) throws Exception {
+        log("/*---Query to get case record--*/ ");
+        ArrayList<String> CaseRecordList = new ArrayList<String>();
+        String CaseRecordId = null;
+        String oauthToken = getOauthToken();
+
+        String query ="/query?q=SELECT+ID+FROM+Case+WHERE+ContactId='"+ContactId+"'";
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        CaseRecordId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("CaseRecordId: " + CaseRecordId);
+                        CaseRecordList.add(CaseRecordId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        log("Found amount of Case records: " + CaseRecordList.size());
+        return CaseRecordList;
+    }
+
+    public static void deleteCaseRecord(String caseRecordId) throws Exception {
+        log("/*---Delete Patient Case record " +caseRecordId +"--*/ ");
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + "/sobjects/Case/" + caseRecordId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpDelete httpDelete = new HttpDelete(uri);
+            httpDelete.addHeader(oauthHeader);
+            httpDelete.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpDelete);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                log("Delete the Patient Case record successful.");
+            } else {
+                log("Patient Case record delete NOT successful. Status code is " + statusCode);
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+    }
+
+    public static void deletePatientAccount(String AccountId) throws Exception {
+        log("/*---Delete Patient account " +AccountId +"--*/ ");
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + "/sobjects/Account/" + AccountId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpDelete httpDelete = new HttpDelete(uri);
+            httpDelete.addHeader(oauthHeader);
+            httpDelete.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpDelete);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                log("Delete the Patient account successful.");
+            } else {
+                log("Patient account delete NOT successful. Status code is " + statusCode);
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+    }
+
 
 }

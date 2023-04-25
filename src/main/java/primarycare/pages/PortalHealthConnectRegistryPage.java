@@ -89,7 +89,20 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     private WebElement select_communication_preference;
     private By select_communication_preference_1 = By.xpath("(.//span[text() = 'Email'])[1]");
 
+    @FindBy(xpath = "(.//span[text() = 'No'])[1]")
+    private WebElement no_family_doctor_radio;
+    private By no_family_doctor_radio_1 = By.xpath("(.//span[text() = 'No'])[1]");
 
+    @FindBy(xpath = "(.//span[text() = 'No'])[2]")
+    private WebElement no_need_translator_radio;
+    private By no_need_translator_radio_1 = By.xpath("(.//span[text() = 'No'])[2]");
+
+    @FindBy(xpath = "(.//button[@aria-label = 'Submit registration'])[1]")
+    private WebElement submit_registration_button;
+    private By submit_registration_button_1 = By.xpath("(.//button[@aria-label = 'Submit registration'])[1]");
+
+    @FindBy(xpath = ".//strong[text() = 'Registration successful!']")
+    private static WebElement registration_successful_page_validation;
 
     /*---------Constructor-------*/
     public PortalHealthConnectRegistryPage(WebDriver driver) {
@@ -223,6 +236,35 @@ public class PortalHealthConnectRegistryPage extends BasePage{
         waitForElementToBeVisible(driver, select_communication_preference, 10);
         select_communication_preference.click();
         Thread.sleep(1000);
+    }
+
+    public void clickNoFamilyDoctorRadiobutton() throws InterruptedException {
+        waitForElementToBeVisible(driver, no_family_doctor_radio, 10);
+        WebElement element = driver.findElement(no_family_doctor_radio_1);
+        no_family_doctor_radio.click();
+    }
+
+    public void clickNoNeedTranslatorRadiobutton() throws InterruptedException {
+        waitForElementToBeVisible(driver, no_need_translator_radio, 10);
+        WebElement element = driver.findElement(no_need_translator_radio_1);
+        no_need_translator_radio.click();
+    }
+
+    public void clickSubmitRegistrationButton() throws InterruptedException {
+        waitForElementToBeVisible(driver, submit_registration_button, 10);
+        WebElement element = driver.findElement(submit_registration_button_1);
+        submit_registration_button.click();
+    }
+
+    public static boolean validateRegisterSuccessfulPageDisplayed() throws InterruptedException {
+        try {
+            waitForElementToBeVisible(driver, registration_successful_page_validation, 10);
+            System.out.println("/*---Registration successful page - shown up");
+        } catch (NoSuchElementException e) {
+            System.out.println("/*---Registration successful page page has NOT show up");
+            throw e;
+        }
+        return false;
     }
 
 

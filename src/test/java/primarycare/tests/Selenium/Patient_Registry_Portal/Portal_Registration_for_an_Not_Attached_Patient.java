@@ -33,7 +33,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
         //CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---Pre-conditioning API call to remove duplicate Patient account if found--*/");
-       //Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
 
         log("/*1.---Open Patient Registry Portal (Health Connect Registry site)--*/");
         PortalHealthConnectRegistryPage portalHealthConnectRegistryPage= loginPage.openPortalHealthConnectRegistryPage();
@@ -97,7 +97,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
         log("/*16.---Click Continue--*/");
         portalHealthConnectRegistryPage.clickContinueButton();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
 
         log("/*17.---Select Sex female----*/");
         portalHealthConnectRegistryPage.selectSex();
@@ -109,19 +109,42 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
         log("/*18.---Enter email" +email +"----*/");
         portalHealthConnectRegistryPage.re_enterEmailAddress(email);
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
 
         log("/*19.---Enter mobile" +mobilePhone +"----*/");
         portalHealthConnectRegistryPage.enterMobilePhoneNumber(mobilePhone);
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
 
         log("/*20.---Select Communication Preference - Email----*/");
         portalHealthConnectRegistryPage.selectCommunicationPreference();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
 
         log("/*21.---Click Continue--*/");
         portalHealthConnectRegistryPage.clickContinueButton();
+        //Thread.sleep(1000);
+
+        log("/*22.---Click 'No' currently having family doctor--*/");
+        portalHealthConnectRegistryPage.clickNoFamilyDoctorRadiobutton();
+        //Thread.sleep(1000);
+
+        log("/*23.---Click 'No' need a translator--*/");
+        portalHealthConnectRegistryPage.clickNoNeedTranslatorRadiobutton();
+        //Thread.sleep(1000);
+
+        log("/*24.---Click Continue--*/");
+        portalHealthConnectRegistryPage.clickContinueButton();
+        //Thread.sleep(1000);
+
+        log("/*25.---Click Submit registration --*/");
+        portalHealthConnectRegistryPage.clickSubmitRegistrationButton();
+        //Thread.sleep(5000);
+
+        log("/*26.--- Validate that Register successful displayed. --*/");
+        PortalHealthConnectRegistryPage.validateRegisterSuccessfulPageDisplayed();
         Thread.sleep(1000);
+
+        log("/*27.--- Login as an Admin to Health Cloud Console of SF Admin side --*/");
+
 
     }
 
@@ -129,9 +152,8 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
     //@Test(priority = 2)
     public void Post_conditions_step_Remove_Dups_Patient_account() throws Exception {
-        //TestcaseID = "251434"; //C251434
+        TestcaseID = "251774"; //C251774
         log("/---API call to remove duplicate Patient's account if found--*/");
-        //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
     }
 }
