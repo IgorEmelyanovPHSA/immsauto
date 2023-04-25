@@ -2137,6 +2137,8 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickSaveConsent() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveConsentButton);
+		Thread.sleep(2000);
 		saveConsentButton.click();
 	}
 
