@@ -93,6 +93,12 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---23. Save Immunization Information ---*/");
 		clinicInBoxPage.saveImmunizationInformation();
 		Thread.sleep(2000);
+
+		//Click Ok if the lot is expired
+		clinicInBoxPage.clickOkForExpiredLot();
+		Thread.sleep(2000);
+		///////
+
 		log("/*---24. Confirm and Save Administration ---*/");
 		clinicInBoxPage.confirmAndSaveAdministration();
 		Thread.sleep(2000);

@@ -111,10 +111,6 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---19. select date of Administration ---*/");
 		if (inClinicExperience.selectDateOfAdministration())
 
-		//scrolling up a bit - it does not works here for some reason?
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
-		//Thread.sleep(5000);
-
 		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
 		inClinicExperience.setInformedConsentProvider("Auto Clinician DIWA_ICE");
 
@@ -139,6 +135,13 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.selectDosageDIWA();
 		log("/*---28. Save Immunization Information ---*/");
 		inClinicExperience.saveImmunizationInformation();
+		Thread.sleep(2000);
+
+		//Click Ok if the lot is expired
+		inClinicExperience.clickOkForExpiredLot();
+		Thread.sleep(2000);
+		///////
+
 		log("/*---29. Confirm and Save Administration ---*/");
 		inClinicExperience.confirmAndSaveAdministration();
 		Thread.sleep(2000);

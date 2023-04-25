@@ -10,27 +10,35 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
 
 
 @Listeners({TestListener.class})
 public class Dose1_E2E_Covid19 extends BaseTest {
+	String env;
 	private String legalFirstName = "Ludovika";
 	private String legalLastName = "BcvaxLimeburn";
 	private String dateOfBirth = "Sep 21, 1923";
 	private String postalCode = "V3L5L2";
+	Map<String, Object> testData;
 	private String personalHealthNumber = "9746170911";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	String clinicNameToSearch;
 	MainPageOrg orgMainPage;
-	String consumptionLot = "EL0140";
+	String consumptionLot;
+	String consumptionDose;
 	
 	@Test(priority = 1)
 	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+		consumptionDose = String.valueOf(testData.get("consumptionDose"));
+		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
@@ -176,6 +184,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.setLotNumber(consumptionLot);
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		Thread.sleep(2000);
+		inClinicExperience.clickOkForExpiredLot();
+		Thread.sleep(2000);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(2000);
