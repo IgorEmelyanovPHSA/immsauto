@@ -1,6 +1,9 @@
 package primarycare.tests.Selenium.Patient_Registry_Portal;
 
 
+
+import primarycare.pages.CommonMethods;
+import primarycare.pages.HealthCloudConsolePage;
 import primarycare.tests.Utilities.TestListener;
 import bcvax.pages.Utils;
 import primarycare.tests.BaseTest;
@@ -141,9 +144,19 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
         log("/*26.--- Validate that Register successful displayed. --*/");
         PortalHealthConnectRegistryPage.validateRegisterSuccessfulPageDisplayed();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
 
-        log("/*27.--- Login as an Admin to Health Cloud Console of SF Admin side --*/");
+        log("/*27.--- Login as an SysAdmin to Health Cloud Console of SF Admin side --*/");
+        HealthCloudConsolePage healthCloudConsolePage = loginPage.loginAsSysAdmin();
+        Thread.sleep(10000);// wait for sf loading
+
+        log("/*28.----Validate if Health Cloud Console Page displayed --*/");
+        CommonMethods common = new CommonMethods(getDriver());
+        common.goToHealthCloudConsolePageIfNeededAndConfirmPageIsDisplayed();
+
+        log("/*29.----Close All previously opened Tab's --*/");
+        common.closeAllHealthCloudConsoleTabs();
+        Thread.sleep(5000);
 
 
     }
