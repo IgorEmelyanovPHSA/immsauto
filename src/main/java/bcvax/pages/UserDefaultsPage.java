@@ -52,7 +52,7 @@ public class UserDefaultsPage extends BasePage{
         return this;
     }
 
-    private void clickBtnSave() throws InterruptedException {
+    public void clickBtnSave() throws InterruptedException {
         click(btnSave);
        Thread.sleep(1000); //Save function
     }
@@ -61,6 +61,20 @@ public class UserDefaultsPage extends BasePage{
         clickBtnSave();
         validateSuccessfullyUpdatedMsg();
         return this;
+    }
+
+    public void clickOkForExpiredLot() throws InterruptedException {
+        Thread.sleep(1000);
+        System.out.println("Check if the expired lot message appears. If yes click OK");
+        try {
+            WebElement modalBox = driver.findElement(By.xpath("//div[@class = 'slds-modal__container']"));
+            modalBox.findElement(By.xpath("//button[text() = 'OK']")).click();
+            Thread.sleep(2000);
+        }
+        catch(Exception ex) {
+            System.out.println("No expired lots");
+        }
+
     }
 
     public UserDefaultsPage deleteAllLotsIfAnyHasBeenSavedPreviously() throws InterruptedException {
@@ -122,7 +136,7 @@ public class UserDefaultsPage extends BasePage{
         return flag;
     }
 
-    private void validateSuccessfullyUpdatedMsg() throws InterruptedException {
+    public void validateSuccessfullyUpdatedMsg() throws InterruptedException {
         if (isToastMessageDisplayed() == false) {
             throw new RuntimeException("NOT DISPLAYED: User Defaults Successfully Updated");
         }
