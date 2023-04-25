@@ -223,6 +223,10 @@ public class Consumption extends BaseTest {
 		}
 		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
 		Thread.sleep(2000);
+		//If expired lop click Ok
+		Thread.sleep(1000);
+		inClinicExperiencePage.clickOkForExpiredLot();
+		/////////
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(2000);

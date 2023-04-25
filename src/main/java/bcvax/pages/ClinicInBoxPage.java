@@ -632,7 +632,20 @@ public class ClinicInBoxPage extends BasePage {
 	public void confirmAndSaveAdministration() throws InterruptedException {
 		confirmAndSave.click();
 	}
-	
+
+	public void clickOkForExpiredLot() throws InterruptedException {
+		Thread.sleep(1000);
+		System.out.println("Check if the expired lot message appears. If yes click OK");
+		try {
+			WebElement modalBox = driver.findElement(By.xpath("//div[@class = 'slds-modal__container']"));
+			modalBox.findElement(By.xpath("//button[text() = 'OK']")).click();
+			Thread.sleep(2000);
+		}
+		catch(Exception ex) {
+			System.out.println("No expired lots");
+		}
+
+	}
 	public void summaryConfirmAndSave() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", lastConfirmAndSave);
 		waitForElementToBeLocated(driver, lastConfirmAndSave1, 10);
