@@ -160,7 +160,8 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         Thread.sleep(2000);
         log("/*35.---Click confirm and Save Button on Home Page --*/");
         inClinicExperiencePageClassic.HomePageClickConfirmAndSaveButton();
-
+        Thread.sleep(2000);
+        
         log("/*36.---Click to select Agent --*/");
         try {
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
