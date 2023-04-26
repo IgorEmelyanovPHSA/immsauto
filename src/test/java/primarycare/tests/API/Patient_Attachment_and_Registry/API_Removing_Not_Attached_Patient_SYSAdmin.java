@@ -2,7 +2,7 @@ package primarycare.tests.API.Patient_Attachment_and_Registry;
 
 
 import Utilities.TestListener;
-import bcvax.tests.BaseTest;
+import primarycare.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

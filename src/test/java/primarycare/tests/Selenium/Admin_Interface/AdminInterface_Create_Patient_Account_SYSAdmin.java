@@ -3,7 +3,7 @@ package primarycare.tests.Selenium.Admin_Interface;
 import Utilities.TestListener;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
-import bcvax.tests.BaseTest;
+import primarycare.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import primarycare.pages.HealthCloudConsolePage;
