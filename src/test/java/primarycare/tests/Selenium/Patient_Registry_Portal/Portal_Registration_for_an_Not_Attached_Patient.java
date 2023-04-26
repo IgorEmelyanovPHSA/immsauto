@@ -11,6 +11,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import primarycare.pages.PortalHealthConnectRegistryPage;
 
+import static org.testng.Assert.assertEquals;
+
 @Listeners({TestListener.class})
 public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
     private String legalFirstName = "Sandy";
@@ -25,6 +27,8 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
     private String email = "accountToDelete@phsa.ca";
     private String mobilePhone = "7788797898";
     private String communicationPreference = "Email";
+
+    private String caseOriginExpectedValue = "Web";
 
 
 
@@ -153,10 +157,49 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
         log("/*28.----Validate if Health Cloud Console Page displayed --*/");
         CommonMethods common = new CommonMethods(getDriver());
         common.goToHealthCloudConsolePageIfNeededAndConfirmPageIsDisplayed();
+        Thread.sleep(5000);
 
         log("/*29.----Close All previously opened Tab's --*/");
         common.closeAllHealthCloudConsoleTabs();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+
+        log("/*30.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
+        common.globalSearch(personalHealthNumber);
+        Thread.sleep(2000);
+
+        log("/*31.---Click on founded Patient--*/");
+        common.clickOnFondedPatient(legalFirstName, legalLastName);
+        Thread.sleep(2000);
+
+        log("/*32.---Go to Related Tab--*/");
+        healthCloudConsolePage.clickOnRelatedTab();
+        Thread.sleep(2000);
+
+        log("/*33.---Click on Case record link--*/");
+        healthCloudConsolePage.clickOnCaseRecord();
+        Thread.sleep(2000);
+
+        log("/*34.---- Validate field Case origin - 'Web'  ---*/");
+        String caseOriginActualValue = healthCloudConsolePage.getCaseOriginActualForValidation();
+        log("/*---- Case Origin actual value is: " + caseOriginActualValue + " --*/");
+        assertEquals(caseOriginExpectedValue, caseOriginActualValue);
+        Thread.sleep(2000);
+
+        log("/*35.---- Validate Priority  - 'Medium'  ---*/");
+        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        Thread.sleep(2000);
+
+        log("/*36.---- Validate Status - 'Active'  ---*/");
+        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        Thread.sleep(2000);
+
+        log("/*37.---- Validate Account - '3113 Broadmoor'  ---*/");
+        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        Thread.sleep(2000);
+
+        log("/*38.---- Validate Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
+        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        Thread.sleep(2000);
 
 
     }

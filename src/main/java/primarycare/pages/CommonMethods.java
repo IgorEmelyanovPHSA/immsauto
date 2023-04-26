@@ -2,17 +2,23 @@ package primarycare.pages;
 
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
 
 public class CommonMethods extends BasePage {
     /*---------Properties-------*/
-    //@FindBy(xpath = ".//button[text() = 'Register New Citizen']")
-    //private WebElement register_button;
-    //private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
-
     private By appsLauncher = By.xpath("//div[@class='slds-icon-waffle']");
     private By healthCloudConsoleTitle = By.xpath(".//span[@title='Health Cloud Console']");
     private By appsHealthCloudConsole = By.xpath("//p[text()='Health Cloud Console']");
 
+    @FindBy(xpath = "//button[@aria-label = 'Search']")
+    private WebElement searchAssistant;
+
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    private WebElement searchInput;
+
+    @FindBy(xpath = "(//a[@title='Sandy Prior'])[2]")
+    private WebElement patient_founded;
+    private By patient_founded_1 = By.xpath("(//a[@title='Sandy Prior'])[2]");
 
 
     /*---------Constructor-------*/
@@ -74,6 +80,21 @@ public class CommonMethods extends BasePage {
         JavascriptExecutor executor1 = (JavascriptExecutor) driver;
         executor1.executeScript("arguments[0].click();", element1);
         Thread.sleep(2000);
+    }
+
+    public void globalSearch(String textToSearch) throws InterruptedException {
+        waitForElementToBeVisible(driver, searchAssistant, 10);
+        click(searchAssistant);
+        waitForElementToBeVisible(driver, searchInput, 10);
+        typeIn(searchInput,textToSearch);
+        searchInput.sendKeys(Keys.RETURN);
+        Thread.sleep(2000);
+    }
+
+    public void clickOnFondedPatient(String legalFirstName, String legalLastName) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_founded_1, 10);
+        Thread.sleep(2000);
+        patient_founded.click();
     }
 
 
