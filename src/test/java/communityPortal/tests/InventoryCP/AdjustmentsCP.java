@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class AdjustmentsCP extends BaseTest {
-
+	String supplyLocation = "Automation Supply Location_1";
 	@DataProvider(name = "dosesAmount")
 	public static Object[][] primeNumbers() {
 		return new Object[][]{{"25"}, {"-30"}};
@@ -65,7 +65,7 @@ public class AdjustmentsCP extends BaseTest {
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.navigateToSupplyLocation(supplyLocation);
 
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -182,15 +182,18 @@ public class AdjustmentsCP extends BaseTest {
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyConsolePage();
+		//cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.navigateToSupplyLocation(supplyLocation);
 
+		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
+		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesBefore = remDosesQtyConversionFactorBefore[0];
+		//double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
+		double remainingDosesBefore = remainingDosesAndQuantityBeforeAdjustment.get(0).get(0);
 		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesBefore);
-		double remainingQuantitiesBefore = remDosesQtyConversionFactorBefore[1];
+		double remainingQuantitiesBefore = remainingDosesAndQuantityBeforeAdjustment.get(0).get(1);
 		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesBefore);
-		double remainingConversionFactor = remDosesQtyConversionFactorBefore[2];
+		double remainingConversionFactor = remainingDosesAndQuantityBeforeAdjustment.get(0).get(2);
 		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
 
 		log("/*4.----Click on Container's dropdown --*/");
@@ -210,12 +213,13 @@ public class AdjustmentsCP extends BaseTest {
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
 
 		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesAfter = remDosesQtyConversionFactorAfter[0];
+		//double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
+		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
+		double remainingDosesAfter = remainingDosesAndQuantityAfterAdjustment.get(0).get(0);
 		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
-		double remainingQuantitiesAfter = remDosesQtyConversionFactorAfter[1];
+		double remainingQuantitiesAfter = remainingDosesAndQuantityAfterAdjustment.get(0).get(1);
 		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
-		double remainingConversionAfter = remDosesQtyConversionFactorAfter[2];
+		double remainingConversionAfter = remainingDosesAndQuantityAfterAdjustment.get(0).get(2);
 		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
 
 		log("/*10.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
