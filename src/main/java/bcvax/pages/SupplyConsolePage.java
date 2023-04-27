@@ -991,6 +991,22 @@ public class SupplyConsolePage extends BasePage {
 		return this;
 	}
 
+	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
+		log(" -- select 'To' " + supplyLocation + "  -");
+		WebElement searchSupplyLocationCombobox = driver.findElement(By.xpath("//input[@placeholder='Search Supply Locations...']"));
+		waitForElementToBeVisible(driver, searchSupplyLocationCombobox, 10);
+		log(" -- Combobox Supply Location To is found  -");
+		searchSupplyLocationCombobox.sendKeys(supplyLocation);
+		log(" -- Start typing into Search Combobox  -");
+		By supplyLocationItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title='" + supplyLocation + "']");
+		waitForElementToBeLocated(driver, supplyLocationItemPath, 10);
+		WebElement supplyLocationItem = driver.findElement(supplyLocationItemPath);
+		scrollTop(supplyLocationItem, true);
+		log(" -- Drop down with supply required Supply location appeared  -");
+		supplyLocationItem.click();
+		log(" -- Selected Supply location successfully  -");
+	}
+
 	public void selectSupplyLocation_1_To() throws InterruptedException {
 		log(" -- select 'To' Automation Supply Location_2  -");
 		waitForElementToBeVisible(driver, search_supply_location_1_To, 30);
@@ -1697,6 +1713,19 @@ public class SupplyConsolePage extends BasePage {
 		select_same_clinic_supply_distributor_1_2.click();
 		//#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
 		//#search_supply_location_To.sendKeys(Keys.ENTER);
+	}
+
+	public void selectSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
+		By searchSupplyDistributionPath = By.xpath(".//span[contains(text(),'Select an Option')]");
+		waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);
+		WebElement searchDistributionField = driver.findElement(searchSupplyDistributionPath);
+		scrollTop(searchDistributionField);
+		searchDistributionField.click();
+		Thread.sleep(2000);
+		By supplyDistributor = By.xpath("//span[contains(text(),'" + supplyDistribution + "')]");
+		waitForElementToBePresent(driver, supplyDistributor, 10);
+		WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
+		supplyDistributorItem.click();
 	}
 
 	public Double getValueOfRemainingDosesDistribution_1_2() throws InterruptedException {
