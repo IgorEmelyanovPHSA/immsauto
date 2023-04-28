@@ -144,11 +144,11 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
 
         log("/*25.---Click Submit registration --*/");
         portalHealthConnectRegistryPage.clickSubmitRegistrationButton();
-        //Thread.sleep(5000);
+        Thread.sleep(5000);
 
         log("/*26.--- Validate that Register successful displayed. --*/");
         PortalHealthConnectRegistryPage.validateRegisterSuccessfulPageDisplayed();
-        //Thread.sleep(1000);
+        Thread.sleep(5000);
 
         log("/*27.--- Login as an SysAdmin to Health Cloud Console of SF Admin side --*/");
         HealthCloudConsolePage healthCloudConsolePage = loginPage.loginAsSysAdmin();
