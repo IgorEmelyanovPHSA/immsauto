@@ -177,6 +177,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*---43. Save Immunization Information ---*/");
 		inClinicExperiencePage.saveImmunizationInformation();
 		Thread.sleep(2000);
+		inClinicExperiencePage.clickOkForExpiredLot();
+		Thread.sleep(2000);
 		log("/*-- 44---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(3000);

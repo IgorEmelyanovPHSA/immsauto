@@ -35,7 +35,7 @@ public class Adjustments extends BaseTest {
 	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value(String dosesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+
 		double amountOfDosesToAdjust = Double.parseDouble(dosesAmount);
 		boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
 		if (isNegativeFlag == false) {
@@ -61,7 +61,7 @@ public class Adjustments extends BaseTest {
 				loginPage.loginAsPPHIS();
 		}
 		Thread.sleep(5000);
-
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		Thread.sleep(5000);
@@ -162,7 +162,7 @@ public class Adjustments extends BaseTest {
 	public void Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+
 		double amountOfQuantitiesToAdjust = Double.parseDouble(quantitiesAmount);
 		boolean isNegativeFlag = isNegative(amountOfQuantitiesToAdjust);
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -192,7 +192,7 @@ public class Adjustments extends BaseTest {
 		log("/*2.----Validate if Supply Console Page displayed --*/");
 		CommonMethods common = new CommonMethods(getDriver());
 		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
-
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*3.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
 		Thread.sleep(5000);

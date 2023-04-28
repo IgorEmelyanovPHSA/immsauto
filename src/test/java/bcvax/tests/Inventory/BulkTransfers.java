@@ -100,7 +100,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 
 		log("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		log("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
 		log("/*13.----click Close Modal button --*/");
@@ -276,7 +276,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*10.----Enter the Quantity values for 3 row Transfers --*/");
 		supplyConsolePage.enterBulkTransferByQuantity(containers_from, doses);
 		log("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		log("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
 		log("/*13.----click Close Modal button --*/");
@@ -463,9 +463,9 @@ public class BulkTransfers extends BaseTest {
 		log("/*10.----Enter the Dosages values (1 Dose) for 3 row Transfers --*/");
 		supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 		log("/*11.----select 'To' Automation Supply Location_1  --*/");
-		supplyConsolePage.selectSupplyLocation_1_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 		log("/*12.----select 'To' Distribution_1_2 for the same Clinic  --*/");
-		supplyConsolePage.selectSameClinicSupplyDistribution();
+		supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 		log("/*13.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
 		log("/*14.----click Close Modal button --*/");
