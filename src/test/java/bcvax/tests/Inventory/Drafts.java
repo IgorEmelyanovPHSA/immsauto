@@ -1,9 +1,11 @@
 package bcvax.tests.Inventory;
 import Utilities.TestListener;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.CommonMethods;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -13,13 +15,13 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class Drafts extends BaseTest {
+    MainPageOrg orgMainPage;
+    SupplyConsolePage supplyConsolePage;
 
     @Test()
     public void Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
-        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-        CommonMethods common = new CommonMethods(getDriver());
         double amountOfDosesToAdjust = 10;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
@@ -36,15 +38,19 @@ public class Drafts extends BaseTest {
                 TestcaseID = "223358"; //C223358
                 loginPage.loginAsPPHIS();
         }
-        Thread.sleep(5000);
 
-        log("/*2.----Validate if Supply Console Page displayed --*/");
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
-
+        orgMainPage = new MainPageOrg(driver);
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
+        supplyConsolePage = new SupplyConsolePage(driver);
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
         log("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.clickOnSupplyLocation_1();
         Thread.sleep(5000);
-
+        CommonMethods common = new CommonMethods(driver);
         log("/*4.----Get a matching row for first row Lot number --*/");
         int matchedRow = common.getMatchedRowToLotInRow1();
 
@@ -168,10 +174,15 @@ public class Drafts extends BaseTest {
                 TestcaseID = "223358"; //C223358
                 loginPage.loginAsPPHIS();
         }
-        Thread.sleep(5000);
 
-        log("/*2.----Validate if Supply Console Page displayed --*/");
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+        orgMainPage = new MainPageOrg(driver);
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
+        supplyConsolePage = new SupplyConsolePage(driver);
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
         
         log("/*3.----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.clickOnSupplyLocation_1();

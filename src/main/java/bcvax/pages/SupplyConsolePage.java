@@ -1239,7 +1239,6 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, successMessage, 20);
 		assertTrue(isElementPresent(successMessage));
 		log(" -- Toast success message appears");
-		Thread.sleep(5000);
 	}
 
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
@@ -1717,6 +1716,19 @@ public class SupplyConsolePage extends BasePage {
 
 	public void selectSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
 		By searchSupplyDistributionPath = By.xpath(".//span[contains(text(),'Select an Option')]");
+		waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);
+		WebElement searchDistributionField = driver.findElement(searchSupplyDistributionPath);
+		scrollTop(searchDistributionField);
+		searchDistributionField.click();
+		Thread.sleep(2000);
+		By supplyDistributor = By.xpath("//span[contains(text(),'" + supplyDistribution + "')]");
+		waitForElementToBePresent(driver, supplyDistributor, 10);
+		WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
+		supplyDistributorItem.click();
+	}
+
+	public void selectTransferSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
+		By searchSupplyDistributionPath = By.xpath("//span[text() = 'Select Supply Distributor']");
 		waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);
 		WebElement searchDistributionField = driver.findElement(searchSupplyDistributionPath);
 		scrollTop(searchDistributionField);
@@ -2348,6 +2360,7 @@ public class SupplyConsolePage extends BasePage {
 	public void selectShipped_From() throws InterruptedException {
 		waitForElementToBeVisible(driver, search_supply_location_from, 60);
 		search_supply_location_from.sendKeys("Atlin Health Centre");
+		Thread.sleep(1000);
 		waitForElementToBeVisible(driver, select_supply_location_from, 60);
 		select_supply_location_from.click();
 	}
@@ -2408,8 +2421,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void enterApprovedDose(String inputDose) throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, driver.findElement(By.xpath("//label[text() = 'Trade']")), 30);
+		Thread.sleep(1000);
+		By tradeLabelPath = By.xpath("//label[text() = 'Trade']");
+		waitForElementToBePresent(driver, tradeLabelPath, 30);
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
 		scrollTop(trade);
 		String tradeValue = trade.getAttribute("value");

@@ -1,10 +1,12 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.pages.CommonMethods;
+import constansts.Apps;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -16,12 +18,13 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class Wastage extends BaseTest {
-
+	MainPageOrg orgMainPage;
+	SupplyConsolePage supplyConsolePage;
 	@Test()
 	public void Can_Do_Single_Wastage_ByDosages() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		CommonMethods common = new CommonMethods(getDriver());
+		//CommonMethods common = new CommonMethods(getDriver());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 
@@ -37,10 +40,14 @@ public class Wastage extends BaseTest {
 				TestcaseID = "223356"; //C223356
 				loginPage.loginAsPPHIS();
 		}
-		Thread.sleep(10000);
-		
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		
 		log("/*3.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation_1();
