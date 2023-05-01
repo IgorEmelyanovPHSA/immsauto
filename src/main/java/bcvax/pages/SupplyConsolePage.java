@@ -997,6 +997,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, searchSupplyLocationCombobox, 10);
 		log(" -- Combobox Supply Location To is found  -");
 		searchSupplyLocationCombobox.sendKeys(supplyLocation);
+		Thread.sleep(2000);
 		log(" -- Start typing into Search Combobox  -");
 		By supplyLocationItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title='" + supplyLocation + "']");
 		waitForElementToBeLocated(driver, supplyLocationItemPath, 10);
