@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import primarycare.tests.BaseTest;
+import primarycare.tests.BaseTest_PrimaryCare;
 
 import java.io.ByteArrayOutputStream;
 
-public class TestListener extends BaseTest implements ITestListener {
+public class TestListener extends BaseTest_PrimaryCare implements ITestListener {
 
     private static String getTestMethodName(ITestResult result){
         return result.getMethod().getConstructorOrMethod().getName();
@@ -32,8 +32,8 @@ public class TestListener extends BaseTest implements ITestListener {
         String testCaseName = getTestMethodName(iTestResult);
         log("Test case '"+testCaseName+"' has failed.");
         Object testClass = iTestResult.getInstance();
-        WebDriver driver = ((primarycare.tests.BaseTest) testClass).getDriver();
-        ByteArrayOutputStream output = ((primarycare.tests.BaseTest) testClass).getLogOutputSteps();
+        WebDriver driver = ((primarycare.tests.BaseTest_PrimaryCare) testClass).getDriver();
+        ByteArrayOutputStream output = ((primarycare.tests.BaseTest_PrimaryCare) testClass).getLogOutputSteps();
 
         try {
             saveScreenshotPNG(driver, testCaseName);

@@ -6,7 +6,7 @@ import primarycare.pages.CommonMethods;
 import primarycare.pages.HealthCloudConsolePage;
 import primarycare.tests.Utilities.TestListener;
 import bcvax.pages.Utils;
-import primarycare.tests.BaseTest;
+import primarycare.tests.BaseTest_PrimaryCare;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import primarycare.pages.PortalHealthConnectRegistryPage;
@@ -14,7 +14,7 @@ import primarycare.pages.PortalHealthConnectRegistryPage;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
-public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest {
+public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_PrimaryCare {
     private String legalFirstName = "Sandy";
     private String legalLastName = "Prior";
     private String personalHealthNumber = "9873010063";

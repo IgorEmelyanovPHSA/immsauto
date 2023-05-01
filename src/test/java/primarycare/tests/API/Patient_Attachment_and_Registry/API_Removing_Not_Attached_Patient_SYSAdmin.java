@@ -2,12 +2,12 @@ package primarycare.tests.API.Patient_Attachment_and_Registry;
 
 
 import Utilities.TestListener;
-import primarycare.tests.BaseTest;
+import primarycare.tests.BaseTest_PrimaryCare;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-public class API_Removing_Not_Attached_Patient_SYSAdmin extends BaseTest {
+public class API_Removing_Not_Attached_Patient_SYSAdmin extends BaseTest_PrimaryCare {
     private String legalFirstName = "Sandy";
     private String legalLastName = "Prior";
     private String dateOfBirth = "March 1, 1975";

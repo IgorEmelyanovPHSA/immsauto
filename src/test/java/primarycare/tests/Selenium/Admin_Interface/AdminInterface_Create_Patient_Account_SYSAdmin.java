@@ -3,14 +3,14 @@ package primarycare.tests.Selenium.Admin_Interface;
 import Utilities.TestListener;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
-import primarycare.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import primarycare.pages.HealthCloudConsolePage;
+import primarycare.tests.BaseTest_PrimaryCare;
 
 
 @Listeners({TestListener.class})
-public class AdminInterface_Create_Patient_Account_SYSAdmin extends BaseTest {
+public class AdminInterface_Create_Patient_Account_SYSAdmin extends BaseTest_PrimaryCare {
     private String legalFirstName = "Sandy";
     private String legalLastName = "Prior";
     private String dateOfBirth = "March 1, 1975";

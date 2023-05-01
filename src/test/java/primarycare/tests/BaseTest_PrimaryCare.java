@@ -22,7 +22,7 @@ import java.util.Map;
 import static constansts.Header.SUPPLY_CONTAINER_NAME_FULL;
 import static constansts.Header.SUPPLY_DISTRIBUTION_DESCRIPTION_FULL;
 
-public class BaseTest {
+public class BaseTest_PrimaryCare {
     public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
     protected DecimalFormat df = new DecimalFormat("0.00");
     protected String TestcaseID;
