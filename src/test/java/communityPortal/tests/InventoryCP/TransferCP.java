@@ -74,7 +74,7 @@ public class TransferCP extends BaseTest {
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferDosages("10");
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
@@ -216,7 +216,7 @@ public class TransferCP extends BaseTest {
 		log("/*10.----Entering 10 Quantity in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferQuantity(Integer.toString(quantity));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
@@ -362,10 +362,10 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*12.----Entering 10 Doses in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferDosages("10");
 		System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
-		supplyConsolePage.selectSupplyLocation_1_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 		Thread.sleep(2000);
 		System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
-		supplyConsolePage.selectSameClinicSupplyDistribution();
+		supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 		Thread.sleep(2000);
 		System.out.println("/*15.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
@@ -461,10 +461,10 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*12.----Entering 10 Quantity in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferQuantity(Integer.toString(quantity));
 		System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
-		supplyConsolePage.selectSupplyLocation_1_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 		Thread.sleep(2000);
 		System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
-		supplyConsolePage.selectSameClinicSupplyDistribution();
+		supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 		Thread.sleep(2000);
 		System.out.println("/*15.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();

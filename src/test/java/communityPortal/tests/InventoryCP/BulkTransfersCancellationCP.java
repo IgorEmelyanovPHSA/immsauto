@@ -87,7 +87,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 
         log("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         Thread.sleep(2000);
         log("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
@@ -203,7 +203,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         supplyConsolePage.enterBulkTransferByQuantity(containers_from, quantity);
         log("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         Thread.sleep(2000);
         log("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();

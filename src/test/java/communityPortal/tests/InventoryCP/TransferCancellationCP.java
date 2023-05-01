@@ -78,7 +78,7 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferDosages(Double.toString(doses));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
@@ -188,7 +188,7 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferQuantity(Double.toString(quantity));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocation_2_To();
+		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
