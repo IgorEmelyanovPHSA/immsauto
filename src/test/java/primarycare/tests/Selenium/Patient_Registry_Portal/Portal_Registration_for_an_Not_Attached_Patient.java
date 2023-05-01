@@ -66,6 +66,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         portalHealthConnectRegistryPage.enterFirstName(legalFirstName);
         //Thread.sleep(1000);
 
+
         log("/*7.---Enter Last Name " +legalLastName +"--*/");
         portalHealthConnectRegistryPage.enterLastName(legalLastName);
         //Thread.sleep(1000);
