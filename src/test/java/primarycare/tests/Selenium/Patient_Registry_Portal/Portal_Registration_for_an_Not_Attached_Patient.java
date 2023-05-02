@@ -4,6 +4,7 @@ package primarycare.tests.Selenium.Patient_Registry_Portal;
 
 import primarycare.pages.CommonMethods;
 import primarycare.pages.HealthCloudConsolePage;
+import primarycare.tests.Utilities.ApiQueries;
 import primarycare.tests.Utilities.TestListener;
 import bcvax.pages.Utils;
 import primarycare.tests.BaseTest_PrimaryCare;
@@ -43,7 +44,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         //CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---Pre-conditioning API call to remove duplicate Patient account if found--*/");
-        Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
+        ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
 
         log("/*1.---Open Patient Registry Portal (Health Connect Registry site)--*/");
         PortalHealthConnectRegistryPage portalHealthConnectRegistryPage= loginPage.openPortalHealthConnectRegistryPage();
@@ -213,7 +214,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
 
         log("/*38.---- Validate Case Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
         String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
-        log("/*---- Status actual is: " + statusActual + " --*/");
+        log("/*---Case Reason actual is: " + caseReasonActual + " --*/");
         assertEquals(caseReasonExpected, caseReasonActual);
         Thread.sleep(2000);
 
@@ -225,6 +226,6 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
     public void Post_conditions_step_Remove_Dups_Patient_account() throws Exception {
         TestcaseID = "251774"; //C251774
         log("/---API call to remove duplicate Patient's account if found--*/");
-        Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
+        ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
     }
 }

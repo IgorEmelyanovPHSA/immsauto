@@ -1,12 +1,13 @@
 package primarycare.tests.Selenium.Admin_Interface;
 
-import Utilities.TestListener;
+import primarycare.tests.Utilities.TestListener;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import primarycare.pages.HealthCloudConsolePage;
 import primarycare.tests.BaseTest_PrimaryCare;
+import primarycare.tests.Utilities.ApiQueries;
 
 
 @Listeners({TestListener.class})
@@ -27,7 +28,7 @@ public class AdminInterface_Create_Patient_Account_SYSAdmin extends BaseTest_Pri
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
+        ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an SYSAdmin to Admin Interface --*/");
         //CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
@@ -46,7 +47,7 @@ public class AdminInterface_Create_Patient_Account_SYSAdmin extends BaseTest_Pri
         TestcaseID = "251434"; //C251434
         log("/---API call to remove duplicate Patient's account if found--*/");
         //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-        Utilities.ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
+        ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
     }
 
 
