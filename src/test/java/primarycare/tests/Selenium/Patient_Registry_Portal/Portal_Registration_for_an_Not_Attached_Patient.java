@@ -23,14 +23,17 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
     private String dateOfBirth_YYYY = "1975";
     private String streetAddress = "307-7631 Francis Rd";
     private String City = "Richmond";
+    private String province = "BC";
     private String postalCode = "V6Y 1A3";
     private String email = "accountToDelete@phsa.ca";
     private String mobilePhone = "7788797898";
     private String communicationPreference = "Email";
 
     private String caseOriginExpectedValue = "Web";
-
-
+    private String priorityExpectedValue = "Medium";
+    private String statusExpected = "Active";
+    private String accountNameExpected = "3113 Broadmoor";
+    private String caseReasonExpected = "Unattached - Requires attachment to family doctor or nurse practitioner";
 
     @Test(priority = 1)
     public void Can_do_Registration_for_an_Not_Attached_Patient_in_Portal () throws Exception {
@@ -98,6 +101,10 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         log("/*14.---Enter City " +City +"----*/");
         portalHealthConnectRegistryPage.enterCity(City);
        // Thread.sleep(1000);
+
+        log("/*14_1.---Select Province option from dropdown" +province +"----*/");
+        portalHealthConnectRegistryPage.enterProvince(province);
+        //Thread.sleep(1000);
 
         log("/*15.---Enter Postal Code" +postalCode +"----*/");
         portalHealthConnectRegistryPage.enterPostalCode(postalCode);
@@ -187,21 +194,28 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         Thread.sleep(2000);
 
         log("/*35.---- Validate Priority  - 'Medium'  ---*/");
-        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        String priorityActualValue = healthCloudConsolePage.getPriorityActualForValidation();
+        log("/*---- Priority actual value is: " + caseOriginActualValue + " --*/");
+        assertEquals(priorityExpectedValue, priorityActualValue);
         Thread.sleep(2000);
 
         log("/*36.---- Validate Status - 'Active'  ---*/");
-        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        String statusActual = healthCloudConsolePage.getStatusActualForValidation();
+        log("/*---- Status actual is: " + statusActual + " --*/");
+        assertEquals(statusExpected, statusActual);
         Thread.sleep(2000);
 
         log("/*37.---- Validate Account - '3113 Broadmoor'  ---*/");
-        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        String accountNameActual = healthCloudConsolePage.getAccountNameActualForValidation();
+        log("/*---- Status actual is: " + statusActual + " --*/");
+        assertEquals(accountNameExpected, accountNameActual);
         Thread.sleep(2000);
 
-        log("/*38.---- Validate Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
-        //inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
+        log("/*38.---- Validate Case Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
+        String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
+        log("/*---- Status actual is: " + statusActual + " --*/");
+        assertEquals(caseReasonExpected, caseReasonActual);
         Thread.sleep(2000);
-
 
     }
 

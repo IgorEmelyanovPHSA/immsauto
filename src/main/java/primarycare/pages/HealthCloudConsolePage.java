@@ -22,6 +22,23 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement case_origin_actual_field_value;
     private By case_origin_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordOriginField']//slot[1]//slot[1]/lightning-formatted-text");
 
+    @FindBy(xpath = ".//flexipage-field[@data-field-id='RecordPriorityField']//slot[1]//slot[1]/lightning-formatted-text")
+    private WebElement priority_actual_field_value;
+    private By priority_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordPriorityField']//slot[1]//slot[1]/lightning-formatted-text");
+
+    @FindBy(xpath = ".//flexipage-field[@data-field-id='RecordStatusField']//slot[1]//slot[1]/lightning-formatted-text")
+    private WebElement status_actual_field_value;
+    private By status_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordStatusField']//slot[1]//slot[1]/lightning-formatted-text");
+
+    @FindBy(xpath = ".//flexipage-field[@data-field-id='RecordAccountIdField']//slot[1]//slot[1]//slot[1]//span[text()]")
+    private WebElement account_name_actual_field_value;
+    private By account_name_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordAccountIdField']//slot[1]//slot[1]//slot[1]//span[text()]");
+
+    @FindBy(xpath = ".//flexipage-field[@data-field-id='RecordReasonField']//slot[1]//slot[1]/lightning-formatted-text")
+    private WebElement caase_reason_actual_field_value;
+    private By case_reason_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordReasonField']//slot[1]//slot[1]/lightning-formatted-text");
+
+
 
 
     /*---------Constructor-------*/
@@ -52,5 +69,35 @@ public class HealthCloudConsolePage extends BasePage {
         case_origin_actual_field_value.isDisplayed();
         return (case_origin_actual_field_value.getText());
     }
+
+    public String getPriorityActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, priority_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        priority_actual_field_value.isDisplayed();
+        return (priority_actual_field_value.getText());
+    }
+
+    public String getStatusActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, status_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        priority_actual_field_value.isDisplayed();
+        return (status_actual_field_value.getText());
+    }
+
+    public String getAccountNameActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, account_name_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        account_name_actual_field_value.isDisplayed();
+        return (account_name_actual_field_value.getText());
+    }
+
+    public String getCaseReasonActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, case_reason_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        priority_actual_field_value.isDisplayed();
+        return (caase_reason_actual_field_value.getText());
+    }
+
+
 
 }

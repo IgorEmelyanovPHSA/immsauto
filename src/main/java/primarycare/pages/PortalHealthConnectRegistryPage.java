@@ -49,13 +49,22 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     private WebElement continue_button;
     private By continue_button_1 = By.xpath("(.//button[@aria-label='Continue'])[1]");
 
-    @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='streetAddress']//input[@class='vlocity-input slds-input']")
+    @FindBy(xpath = ".//omnistudio-omniscript-places-typeahead[@data-omni-key='StreetAddress']//input[@class='slds-input']")
     private WebElement street_address;
-    private By street_address_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='streetAddress']//input[@class='vlocity-input slds-input']");
+    private By street_address_1 = By.xpath(".//omnistudio-omniscript-places-typeahead[@data-omni-key='StreetAddress']//input[@class='slds-input']");
 
     @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']")
     private WebElement city;
     private By city_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']");
+
+    @FindBy(xpath = ".//omnistudio-omniscript-select[@data-omni-key='province']//input")
+    private WebElement province_dropdown_component;
+    private By province_dropdown_component_1 = By.xpath(".//omnistudio-omniscript-select[@data-omni-key='province']//input");
+
+    @FindBy(xpath = ".//span[text()='BC']")
+    private WebElement province_optin_selection;
+    private By province_option_selection_1 = By.xpath(".//span[text()='BC']");
+
 
     @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']")
     private WebElement postal_code;
@@ -189,7 +198,21 @@ public class PortalHealthConnectRegistryPage extends BasePage{
 
     public void enterCity(String City) throws InterruptedException {
         waitForElementToBeLocated(driver, city_1, 10);
-        city.sendKeys(City);
+        //city.sendKeys(City);
+        city.click();
+        Thread.sleep(1000);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(City).build().perform();
+        Thread.sleep(1000);
+    }
+
+    public void enterProvince(String Province) throws InterruptedException {
+        waitForElementToBeLocated(driver, province_dropdown_component_1, 10);
+        Thread.sleep(1000);
+        province_dropdown_component.click();
+        Thread.sleep(1000);
+        province_optin_selection.click();
+        Thread.sleep(1000);
     }
 
     public void enterPostalCode(String postalCode) throws InterruptedException {
