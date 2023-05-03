@@ -28,70 +28,87 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician() throws Exception {
 		TestcaseID = "219910"; //C219910
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("TestRail test case ID: C" +TestcaseID);
+
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
 		Thread.sleep(10000);
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(5000);
-		inClinicExperiencePage.selectICEFromApp();
+
 		log("/*-- 2. Navigate to In Clinic Experience App --*/");
+		inClinicExperiencePage.selectICEFromApp();
 		Thread.sleep(2000);
-		inClinicExperiencePage.clickUserDefaultsTab();
+
 		log("/*-- 3. Click on User Defaults Tab  --*/");
+		inClinicExperiencePage.clickUserDefaultsTab();
 		Thread.sleep(2000);
+
 		log("/*-- 4. Enter current date for UserDefaults --*/");
 		inClinicExperiencePage.inputPreviousDateUserDefaults();
 		Thread.sleep(2000);
+
 		log("/*-- 5.----- Click on Save defaults button --*/");
 		inClinicExperiencePage.clickSaveDefaultsButton();
 		Thread.sleep(2000);
+
 		log("/*-- 6. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
-		Thread.sleep(2000);//
-		inClinicExperiencePage.closeTabsHCA();
+		Thread.sleep(2000);
+
 		log("/*-- 7. Close any open Tabs --*/");
-		inClinicExperiencePage.clickRegisterButton();
+		inClinicExperiencePage.closeTabsHCA();
+		Thread.sleep(2000);
+
 		log("/*-- 8. Register New User -->" + legalFirstName + legalLastName + "--*/");
-		inClinicExperiencePage.enterFirstName(legalFirstName);
+		inClinicExperiencePage.clickRegisterButton();
+
 		log("/*-- 9.----Enter First Name " + legalFirstName + " --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.enterLastName(legalLastName);
+		inClinicExperiencePage.enterFirstName(legalFirstName);
+
 		log("/*-- 10.----Enter Last Name " + legalLastName + " --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.enterDateOfBirth(dateOfBirth);
+		inClinicExperiencePage.enterLastName(legalLastName);
+
 		log("/*-- 11.----Enter Date of birth " + dateOfBirth + "--*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.enterPostalCode(postalCode);
+		inClinicExperiencePage.enterDateOfBirth(dateOfBirth);
+
 		log("/*-- 12.----Enter Postal code" + postalCode + " --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.enterPNH(personalHealthNumber);
+		inClinicExperiencePage.enterPostalCode(postalCode);
+
 		log("/*-- 13.----Enter PHN " + personalHealthNumber + "--*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.clickNonIndigenousRadioButton();
+		inClinicExperiencePage.enterPNH(personalHealthNumber);
+
 		log("/*-- 14.----click on non-Indigenous person radiobutton --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.clickVerifyPHNButton();
+		inClinicExperiencePage.clickNonIndigenousRadioButton();
+
 		log("/*-- 15.----click Verify PHN button --*/");
+		inClinicExperiencePage.clickVerifyPHNButton();
 		Thread.sleep(2000);
-		inClinicExperiencePage.successMessage();
+
 		log("/*-- 16.'PNH match successful' --*/");
-		inClinicExperiencePage.clickNextButton();
+		inClinicExperiencePage.successMessage();
+
 		log("/*-- 17.'Click next button --*/");
+		inClinicExperiencePage.clickNextButton();
 		Thread.sleep(5000);
-		inClinicExperiencePage.enterEmail(email);
+
 		log("/*-- 18.'Enter email address" + email + " --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.confirmEmail(email);
+		inClinicExperiencePage.enterEmail(email);
+
 		log("/*-- 19.'Confirm email address" + email + " --*/");
-		Thread.sleep(2000);
-		inClinicExperiencePage.clickReviewDetails();
+		inClinicExperiencePage.confirmEmail(email);
+
 		log("/*-- 20.Click review details Button --*/");
+		inClinicExperiencePage.clickReviewDetails();
 		Thread.sleep(2000);
-		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
+
 		log("/*-- 21.Click register Button on confirmation page --*/");
+		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
 		Thread.sleep(5000);
+
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
 		Thread.sleep(5000);
@@ -102,7 +119,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(3000);
+		Thread.sleep(500);
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		Thread.sleep(2000);
 
