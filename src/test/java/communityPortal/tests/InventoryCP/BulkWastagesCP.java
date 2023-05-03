@@ -6,6 +6,7 @@ import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -39,6 +40,7 @@ public class BulkWastagesCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
 				Thread.sleep(10000);
 		}
+		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		cpMainPage.navigateToSupplyConsolePage();
@@ -48,6 +50,7 @@ public class BulkWastagesCP extends BaseTest {
 		log("/*---     count:" + countSupplyContainers);
 		
 		log("/*4.----Click on Container's records Checkboxes --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		if (countSupplyContainers >= 3) {
 			int k = 1;
 			while (k <= 3) {
