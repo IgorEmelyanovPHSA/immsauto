@@ -206,9 +206,9 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         assertEquals(statusExpected, statusActual);
         Thread.sleep(2000);
 
-        log("/*37.---- Validate Account - '3113 Broadmoor'  ---*/");
+        log("/*37.---- Validate Account name - '3113 Broadmoor'  ---*/");
         String accountNameActual = healthCloudConsolePage.getAccountNameActualForValidation();
-        log("/*---- Status actual is: " + statusActual + " --*/");
+        log("/*---- Account Name actual is: " + accountNameActual + " --*/");
         assertEquals(accountNameExpected, accountNameActual);
         Thread.sleep(2000);
 
