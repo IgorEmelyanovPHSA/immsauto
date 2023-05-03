@@ -216,6 +216,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*47.---User Navigated to Appointment Section  ---*/");
         inClinicExperiencePageClassic.NavigateToAppointmentsSection();
+        Thread.sleep(2000);
 
         log("/*48.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
         inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresentCP();
