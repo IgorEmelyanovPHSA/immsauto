@@ -6,17 +6,36 @@ import bcvax.pages.CommonMethods;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import constansts.Apps;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class Drafts extends BaseTest {
+    String env;
+    Map<String, Object> testData;
+    String supply_location_from;
+    String supply_location_to;
+    String distribution_from;
+    String distribution_to;
     MainPageOrg orgMainPage;
     SupplyConsolePage supplyConsolePage;
+
+    @BeforeMethod
+    public void setUpClass() throws Exception {
+        env = Utils.getTargetEnvironment();
+        log("Target Environment: " + env);
+        testData = Utils.getTestData(env);
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+        distribution_from = String.valueOf(testData.get("distributionFrom"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
+    }
 
     @Test()
     public void Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic() throws Exception {
@@ -47,8 +66,14 @@ public class Drafts extends BaseTest {
         supplyConsolePage = new SupplyConsolePage(driver);
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
-        log("/*3.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
         Thread.sleep(5000);
         CommonMethods common = new CommonMethods(driver);
         log("/*4.----Get a matching row for first row Lot number --*/");
@@ -183,9 +208,15 @@ public class Drafts extends BaseTest {
         supplyConsolePage = new SupplyConsolePage(driver);
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
-        
-        log("/*3.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
+
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
         Thread.sleep(5000);
 
         log("/*4.----Get a matching row for first row Lot number --*/");
@@ -302,7 +333,7 @@ public class Drafts extends BaseTest {
     public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#3 Create draft and cancel it");
-        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+
         CommonMethods common = new CommonMethods(getDriver());
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
@@ -322,11 +353,19 @@ public class Drafts extends BaseTest {
         }
         Thread.sleep(5000);
 
-        log("/*2.----Validate if Supply Console Page displayed --*/");
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
-        log("/*3.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
         Thread.sleep(5000);
 
         log("/*4.----Get a matching row for first row Lot number --*/");
@@ -435,7 +474,6 @@ public class Drafts extends BaseTest {
     public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");
-        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         CommonMethods common = new CommonMethods(getDriver());
         double amountOfQuantityToAdjust = 1;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -455,11 +493,18 @@ public class Drafts extends BaseTest {
         }
         Thread.sleep(5000);
 
-        log("/*2.----Validate if Supply Console Page displayed --*/");
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+        SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+        log("/*2.----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
 
-        log("/*3.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
+        log("/*3.----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+
+        log("/*4.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+
+        log("/*5.----Click on Automation Supply Location_1 --*/");
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
         Thread.sleep(5000);
 
         log("/*4.----Get a matching row for first row Lot number --*/");

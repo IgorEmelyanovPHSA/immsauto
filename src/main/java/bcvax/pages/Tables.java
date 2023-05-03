@@ -76,6 +76,7 @@ public class Tables extends BasePage {
     public Map<String, WebElement> getSupplyContainerRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getSupplyContainerTable());
     }
+
     @Step
     public Map<String, WebElement> getShippedTransactionsIncomingRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getSingleTransactionsTable("Incoming"));

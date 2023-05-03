@@ -7,6 +7,10 @@ import bcvax.pages.UserDefaultsPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -132,10 +136,10 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
-
+		log("/*-- 33.Select Early Booking Reason --*/");
+		inClinicExperiencePage.selectEarlyBookingReason();
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 
 		//System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");

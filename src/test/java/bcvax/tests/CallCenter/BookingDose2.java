@@ -5,6 +5,8 @@ import bcvax.tests.BaseTest;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -20,7 +22,13 @@ public class BookingDose2 extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-	
+
+	@AfterMethod
+	public void afterMethod() throws Exception {
+		log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
+		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+	}
+
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Call_Center_Agent() throws Exception {
 		TestcaseID = "222525"; //C222525
@@ -143,7 +151,7 @@ public class BookingDose2 extends BaseTest {
 		//assertEquals(dosage, expectedDosage);
 	}
 
-	@Test(priority = 2)
+	//@Test(priority = 2)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");

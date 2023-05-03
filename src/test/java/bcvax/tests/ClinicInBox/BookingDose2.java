@@ -1,10 +1,15 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
+import bcvax.pages.LoginPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.ClinicInBoxPage;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -22,6 +27,7 @@ public class BookingDose2 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	private String vaccineToSelect = "Covid19Vaccine";
+
 
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB() throws Exception {
