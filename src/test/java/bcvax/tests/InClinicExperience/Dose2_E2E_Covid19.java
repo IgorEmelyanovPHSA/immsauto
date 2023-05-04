@@ -21,7 +21,8 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 	@Test(priority = 1)
 	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-		TestcaseID = "225656"; //C225656
+		TestcaseID = "222811"; //C222811
+		log("TestRail test case ID: C" +TestcaseID);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
@@ -207,6 +208,9 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();
 		Thread.sleep(5000);
+
+		//Click Ok if the lot is expired
+		inClinicExperience.clickOkForExpiredLot();
 
 		log("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();

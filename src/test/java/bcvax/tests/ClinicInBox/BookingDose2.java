@@ -43,6 +43,7 @@ public class BookingDose2 extends BaseTest {
 				TestcaseID = "225653"; //C225653
 		}
 		Thread.sleep(10000);
+		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		if (clinicInBox.displayCIBApp()) {
