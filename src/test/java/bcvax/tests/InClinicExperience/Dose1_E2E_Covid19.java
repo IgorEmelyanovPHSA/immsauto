@@ -50,8 +50,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 				log("Login AS default user (Clinician to ICE)");
 				orgMainPage = loginPage.orgLoginAsClinicianICE();
 				//orgMainPage = loginPage.orgLoginAsPPHIS();
-				TestcaseID = "226778"; //C226778
+				TestcaseID = "222694"; //
 		}
+		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		String currentApp = orgMainPage.currentApp();
