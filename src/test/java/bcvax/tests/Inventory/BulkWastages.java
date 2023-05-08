@@ -148,7 +148,7 @@ public class BulkWastages extends BaseTest {
 		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
 
 		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		Thread.sleep(5000);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");

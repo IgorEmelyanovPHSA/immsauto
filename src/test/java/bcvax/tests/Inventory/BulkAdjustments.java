@@ -138,9 +138,9 @@ public class BulkAdjustments extends BaseTest {
 			double remainingQuantityAfterAdjustment = afterDeduction.get(1);
 			double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double calculatedDosesAfterAdjustment = calculated.get(0);
-			double calculatedRemainingQuantityAfterAdjustment = calculated.get(1);
-			double doseConversionAfterAdjustment = calculated.get(2);
+			double calculatedDosesAfterAdjustment = Double.valueOf(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterAdjustment = Double.valueOf(df.format(calculated.get(1)));
+			double doseConversionAfterAdjustment = Double.valueOf(df.format(calculated.get(2)));
 			
 			//Comparing results
 			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
@@ -244,9 +244,9 @@ public class BulkAdjustments extends BaseTest {
 			double remainingQuantityAfterAdjustment = afterDeduction.get(1);
 			double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double calculatedDosesAfterAdjustment = calculated.get(0);
-			double calculatedRemainingQuantityAfterAdjustment = calculated.get(1);
-			double doseConversionAfterAdjustment = calculated.get(2);
+			double calculatedDosesAfterAdjustment = Double.valueOf(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterAdjustment = Double.valueOf(df.format(calculated.get(1)));
+			double doseConversionAfterAdjustment = Double.valueOf(df.format(calculated.get(2)));
 
 			//Comparing results
 			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
