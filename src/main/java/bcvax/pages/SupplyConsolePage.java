@@ -758,21 +758,21 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(5000);
 	}
 
-	public void clickOnSupplyLocation_1() throws InterruptedException {
-		//waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
-		waitForElementToBeVisible(driver, supply_supply_location_1, 10);
-		WebElement element = driver.findElement(supply_supply_location_1_);
-		this.supply_supply_location_1.click();
-	}
-
-	public void clickOnSupplyLocation_2() throws InterruptedException {
-		//waitForElementToBeLocated(driver, supply_supply_location_1_, 10);
-		waitForElementToBeVisible(driver, supply_supply_location_2, 10);
-		WebElement element = driver.findElement(supply_supply_location_2_);
-		this.supply_supply_location_2.click();
-	}
-
 	public void clickOnSupplyLocation(String supply_location_name) throws InterruptedException {
+		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
+		waitForElementToBeLocated(driver, search_field_path, 10);
+		WebElement search_location_field = driver.findElement(search_field_path);
+		try {
+			WebElement clear_btn = driver.findElement(By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']/..//button[@data-element-id = 'searchClear']"));
+			clear_btn.click();
+			Thread.sleep(2000);
+		} catch(Exception ex) {
+			System.out.println("Search field is empty. Continue...");
+		}
+		search_location_field.sendKeys(supply_location_name);
+		Thread.sleep(1000);
+		search_location_field.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
 		Map<String,String> supplyLocation = ImmutableMap.of(SUPPLY_LOCATION_NAME, supply_location_name);
 		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME).findElement(By.tagName("a")).click();
 		Thread.sleep(500);
