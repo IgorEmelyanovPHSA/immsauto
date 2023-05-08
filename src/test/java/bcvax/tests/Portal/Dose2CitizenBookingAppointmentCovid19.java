@@ -4,6 +4,8 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.junit.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -25,14 +27,26 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+    }
+
+    @AfterMethod
+    public void afterMethod() throws Exception {
+        log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+    }
+
     @Test(priority = 1)
     public void citizenPortalFlowDoseTwo() throws Exception {
         TestcaseID = "222522"; //C222522
         log("Target Environment: "+ Utils.getTargetEnvironment());
         CommonMethods com = new CommonMethods(getDriver());
 
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        //log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -110,7 +124,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");

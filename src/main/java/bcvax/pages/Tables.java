@@ -76,6 +76,7 @@ public class Tables extends BasePage {
     public Map<String, WebElement> getSupplyContainerRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getSupplyContainerTable());
     }
+
     @Step
     public Map<String, WebElement> getShippedTransactionsIncomingRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getSingleTransactionsTable("Incoming"));
@@ -178,12 +179,12 @@ public class Tables extends BasePage {
     }
 
     @Step
-    public void clickOnSupplyLocationTableRow(Map<String, String> searchCriteria) {
+    public void clickOnSupplyLocationTableRow(Map<String, String> searchCriteria) throws InterruptedException {
         clickOnTableRow(searchCriteria, getSupplyLocationTable());
     }
 
     @Step
-    public void clickOnSupplyContainerTableRow(Map<String, String> searchCriteria) {
+    public void clickOnSupplyContainerTableRow(Map<String, String> searchCriteria) throws InterruptedException {
         clickOnTableRow(searchCriteria, getSupplyContainerTable());
     }
 
@@ -196,9 +197,20 @@ public class Tables extends BasePage {
         return table.getCellElement(searchCriteria);
     }
 
-    private void clickOnTableRow(Map<String, String> searchCriteria, GenericTable table) {
-        WebElement element = getTableCell(searchCriteria, table).findElement(By.xpath(".//a"));
-        clickUsingJS(element);
+    private void clickOnTableRow(Map<String, String> searchCriteria, GenericTable table) throws InterruptedException {
+        Thread.sleep(500);
+        int count = 0;
+        while(count < 10) {
+            try {
+                WebElement myCell = getTableCell(searchCriteria, table);
+                WebElement element = myCell.findElement(By.xpath(".//a"));
+                element.click();
+                break;
+            } catch(Exception ex) {
+                System.out.println("Cell not found. Try again...");
+                count = count + 1;
+            }
+        }
     }
 
     private WebElement getSingleTableFromMultipleTables(String dataTable) {

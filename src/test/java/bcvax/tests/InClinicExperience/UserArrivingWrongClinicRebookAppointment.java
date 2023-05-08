@@ -1,11 +1,16 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
+import bcvax.pages.LoginPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -23,7 +28,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	String clinicNameToSearch = "All Ages - Atlin Health Centre";
 
 	String citizenName = "Hugues BCVaxLampard";
-	
+
 	@Test
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician() throws Exception {
 		TestcaseID = "219910"; //C219910
@@ -238,7 +243,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.ValidateAppointmentConfirmIsPresent();
 		Thread.sleep(2000);
 	}
-	
+
 	@Test(priority = 2)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865

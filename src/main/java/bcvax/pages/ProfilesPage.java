@@ -290,9 +290,11 @@ public class ProfilesPage extends BasePage{
     }
 
     public boolean selectDateOfAdministration() throws InterruptedException {
-        if (!isInputActive(inputDate)) {
-            return false;
-        }
+        By inputDateFieldPath = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]");
+        waitForElementToBePresent(driver, inputDateFieldPath, 10);
+//        if (!isInputActive(inputDate)) {
+//            return false;
+//        }
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
         Date today = calendar.getTime();
@@ -355,31 +357,25 @@ public class ProfilesPage extends BasePage{
     }
 
     public void selectImmunizingAgentProvider(String provider) throws InterruptedException {
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizing_agent_provider_dropdown);
-//        Thread.sleep(2000);
-//        waitForElementToBeVisible(driver, immunizing_agent_provider_dropdown, 10);
-//        Thread.sleep(2000);
-//        immunizing_agent_provider_dropdown.click();
-//        Thread.sleep(5000);
-//        immunizing_agent_provider_dropdown.sendKeys(Provider);
-//        Thread.sleep(5000);
-//        waitForElementToBeVisible(driver, select_immunizing_agent_provider, 10);
-//        Thread.sleep(5000);
-//        select_immunizing_agent_provider.click();
         Thread.sleep(1000);
         By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
+        waitForElementToBePresent(driver, providerFieldPath, 30);
         WebElement providerField =  driver.findElement(providerFieldPath);
         scrollTop(providerField);
         providerField.sendKeys(provider);
         Thread.sleep(1000);
         By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
         waitForElementToBeLocated(driver, providerItemPath, 10);
-        driver.findElement(providerItemPath).click();
+        WebElement providerItem = driver.findElement(providerItemPath);
+        scrollTop(providerItem);
+        Thread.sleep(500);
+        providerItem.click();
 
     }
 
     public void clickShowAllLotNumbersCheckBox() throws InterruptedException {
         waitForElementToBeVisible(driver, show_all_lot_numbers_checkbox, 10);
+        scrollTop(show_all_lot_numbers_checkbox);
         Thread.sleep(2000);
         show_all_lot_numbers_checkbox.click();
         Thread.sleep(2000);

@@ -1,27 +1,50 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.pages.CommonMethods;
+import constansts.Apps;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class Wastage extends BaseTest {
+	String env;
+	Map<String, Object> testData;
+	String supply_location_from;
+	String supply_location_to;
+	String distribution_from;
+	String distribution_to;
+	MainPageOrg orgMainPage;
+	SupplyConsolePage supplyConsolePage;
+
+	@BeforeMethod
+	public void setUpClass() throws Exception {
+		env = Utils.getTargetEnvironment();
+		log("Target Environment: " + env);
+		testData = Utils.getTestData(env);
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+		supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+		distribution_from = String.valueOf(testData.get("distributionFrom"));
+		distribution_to = String.valueOf(testData.get("distributionTo"));
+	}
 
 	@Test()
 	public void Can_Do_Single_Wastage_ByDosages() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		CommonMethods common = new CommonMethods(getDriver());
+		//CommonMethods common = new CommonMethods(getDriver());
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 
@@ -37,13 +60,23 @@ public class Wastage extends BaseTest {
 				TestcaseID = "223356"; //C223356
 				loginPage.loginAsPPHIS();
 		}
-		Thread.sleep(10000);
-		
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
-		
-		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
+
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+
+		log("/*5.----Click on Automation Supply Location_1 --*/");
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		Thread.sleep(5000);
 		
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
@@ -156,11 +189,17 @@ public class Wastage extends BaseTest {
 		}
 		Thread.sleep(5000);
 
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
-		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
+
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+
+		log("/*5.----Click on Automation Supply Location_1 --*/");
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		Thread.sleep(5000);
 
 		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");

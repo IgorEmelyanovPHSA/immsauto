@@ -212,7 +212,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
         Thread.sleep(2000);
         log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectTransferSupplyDistributionFromDropdown(distribution_to);
         Thread.sleep(2000);
         log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
@@ -423,7 +423,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
         Thread.sleep(2000);
         log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectTransferSupplyDistributionFromDropdown(distribution_to);
         Thread.sleep(2000);
         log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();

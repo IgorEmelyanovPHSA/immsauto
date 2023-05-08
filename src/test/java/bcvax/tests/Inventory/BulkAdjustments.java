@@ -7,6 +7,7 @@ import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -14,12 +15,24 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BulkAdjustments extends BaseTest {
+	String supply_location_from;
+	String env;
+	Map<String, Object> testData;
+
+	@BeforeMethod
+	public void setUpClass() throws Exception {
+		env = Utils.getTargetEnvironment();
+		log("Target Environment: " + env);
+		testData = Utils.getTestData(env);
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+	}
 
 	@DataProvider(name = "dosesAmount")
 	public static Object[][] primeNumbers() {
@@ -51,23 +64,19 @@ public class BulkAdjustments extends BaseTest {
 		
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
-		
+
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		
+
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
-		
+
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-		
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+
 		log("/*6.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
 		log("/*---     count:" + countSupplyContainers);
@@ -168,13 +177,13 @@ public class BulkAdjustments extends BaseTest {
 		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");
-		CommonMethods common = new CommonMethods(getDriver());
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
-		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
 		log("/*---     count:" + countSupplyContainers);

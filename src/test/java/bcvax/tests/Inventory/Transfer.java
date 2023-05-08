@@ -173,6 +173,7 @@ public class Transfer extends BaseTest {
         log("/*10.----Entering 10 Quantity in the Container-Transfer Form --*/");
         supplyConsolePage.enterTransferQuantity(Integer.toString(quantity));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
+        Thread.sleep(1000);
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
