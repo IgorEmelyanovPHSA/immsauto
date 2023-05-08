@@ -6,7 +6,7 @@ import primarycare.pages.APIDelete;
 import static primarycare.tests.BaseTest_PrimaryCare.log;
 
 public class API_Delete_Account_SysAdmin {
-    public String accId = "0015900000Y2dfvAAB";//IgorAPI_Account_902
+    public String accId = "0018N00000F9mQTQAZ";//IgorAPI_Account_902
 
     @Test
     public void API_Can_Delete_Account_in_Salesforce_as_SysAdmin(){
