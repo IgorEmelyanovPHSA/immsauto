@@ -28,7 +28,6 @@ public class BookingDose2 extends BaseTest {
 	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	private String vaccineToSelect = "Covid19Vaccine";
 
-
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
@@ -48,6 +47,7 @@ public class BookingDose2 extends BaseTest {
 				loginPage.loginAsClinicianCIB();
 				TestcaseID = "225653"; //C225653
 		}
+		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		if (clinicInBox.displayCIBApp()) {
