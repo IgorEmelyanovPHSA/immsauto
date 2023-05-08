@@ -1,9 +1,9 @@
 package primarycare.tests.API.Patient_Attachment_and_Registry;
 
 import org.testng.annotations.Test;
-import static primarycare.tests.BaseTest_PrimaryCare.log;
 import primarycare.pages.APIEstablishSFConnection;
 import primarycare.tests.BaseTest_PrimaryCare;
+
 
 public class API_Establish_Salesforce_Connection_SysAdmin extends BaseTest_PrimaryCare {
 

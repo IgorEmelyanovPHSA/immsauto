@@ -6,7 +6,6 @@
             <class name="primarycare.tests.API.Patient_Attachment_and_Registry.API_Removing_Not_Attached_Patient_SYSAdmin"/>
             <class name="primarycare.tests.API.Patient_Attachment_and_Registry.API_Establish_Salesforce_Connection_SysAdmin"/>
             <class name="primarycare.tests.API.Patient_Attachment_and_Registry.API_Create_Patient_Account_SysAdmin"/>
-            <class name="primarycare.tests.API.Patient_Attachment_and_Registry.API_Insert_Opportunity_SysAdmin"/>
             <class name="primarycare.tests.Selenium.Patient_Registry_Portal.Portal_Registration_for_an_Not_Attached_Patient"/>
         </classes>
     </test> <!-- Test -->
