@@ -694,12 +694,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//label[text() = 'Clinic Name']/../../../lightning-formatted-text")
 	private WebElement appointmentLocation;
 
-	@FindBy(xpath = "//button[@title='Select a List View']")
-	private WebElement select_list_view_btn;
-
-	@FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
-	private WebElement search_location_field;
-
 	@FindBy(xpath = "//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']")
 	private WebElement newDeferralBtn;
 
@@ -1081,11 +1075,19 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectSupplyLocationName(String supplyLocation) throws InterruptedException {
-		waitForElementToBeVisible(driver, select_list_view_btn, 10);
+		Thread.sleep(500);
+		By select_list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
+		waitForElementToBeLocated(driver, select_list_view_btn_path, 10);
+		WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
 		select_list_view_btn.click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
-		Thread.sleep(2000);
+		Thread.sleep(500);
+		By active_supply_location_path = By.xpath("//a/span[text() = 'Active Supply Locations']");
+		waitForElementToBeLocated(driver, active_supply_location_path, 10);
+		driver.findElement(active_supply_location_path).click();
+		Thread.sleep(500);
+		By search_location_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
+		waitForElementToBeLocated(driver, search_location_field_path, 10);
+		WebElement search_location_field = driver.findElement(search_location_field_path);
 		search_location_field.sendKeys(supplyLocation);
 		search_location_field.sendKeys(Keys.ENTER);
 		Thread.sleep(2000);

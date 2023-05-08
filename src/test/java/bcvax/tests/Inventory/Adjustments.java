@@ -28,7 +28,7 @@ public class Adjustments extends BaseTest {
 	String supply_location_to;
 	String distribution_from;
 	String distribution_to;
-
+	String container_from;
 	@BeforeMethod
 	public void setUpClass() throws Exception {
 		env = Utils.getTargetEnvironment();
@@ -38,6 +38,7 @@ public class Adjustments extends BaseTest {
 		supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
 		distribution_from = String.valueOf(testData.get("distributionFrom"));
 		distribution_to = String.valueOf(testData.get("distributionTo"));
+		container_from = String.valueOf(testData.get("containerFrom"));
 	}
 
 	@DataProvider(name = "dosesAmount")
@@ -204,7 +205,10 @@ public class Adjustments extends BaseTest {
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		log("/*3.----Click on Automation Supply Location_1 --*/");
+
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
+
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 
@@ -212,16 +216,16 @@ public class Adjustments extends BaseTest {
 		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 
 		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesBefore = remDosesQtyConversionFactorBefore[0];
+		//double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
+		double remainingDosesBefore = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesBefore);
-		double remainingQuantitiesBefore = remDosesQtyConversionFactorBefore[1];
+		double remainingQuantitiesBefore = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
 		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesBefore);
-		double remainingConversionFactor = remDosesQtyConversionFactorBefore[2];
+		double remainingConversionFactor = Double.valueOf(df.format(remainingDosesBefore / remainingQuantitiesBefore));
 		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
 
 		log("/*5.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
 		Thread.sleep(2000);
 
 		log("/*6.----Select Adjustment from the DropDownMenu dropdown menu --*/");
@@ -237,12 +241,12 @@ public class Adjustments extends BaseTest {
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
 
 		log("/*10.----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesAfter = remDosesQtyConversionFactorAfter[0];
+		//double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
+		double remainingDosesAfter = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
-		double remainingQuantitiesAfter = remDosesQtyConversionFactorAfter[1];
+		double remainingQuantitiesAfter = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
 		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
-		double remainingConversionAfter = remDosesQtyConversionFactorAfter[2];
+		double remainingConversionAfter = Double.valueOf(df.format(remainingDosesAfter / remainingQuantitiesAfter));
 		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
 
 		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
