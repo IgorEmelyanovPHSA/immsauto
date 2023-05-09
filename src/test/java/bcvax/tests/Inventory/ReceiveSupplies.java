@@ -1,8 +1,10 @@
 package bcvax.tests.Inventory;
 
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,7 +16,10 @@ public class ReceiveSupplies extends BaseTest {
 	String env;
 	String supply_location = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 	String distribution = "Supply Distribution_1";
+	String supply_container = "COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)";
 	Map<String, Object> testData;
+	MainPageOrg orgMainPage;
+	String supply_item = "COMIRNATY (Pfizer) - 35035BD-CC01";
 
 	@BeforeMethod
 	public void setUpClass() throws Exception {
@@ -26,7 +31,6 @@ public class ReceiveSupplies extends BaseTest {
 	@Test()
 	public void Validate_Receive_Supplies_as_an_PPHIS() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
@@ -39,16 +43,17 @@ public class ReceiveSupplies extends BaseTest {
 				log("Login AS default user (PPHIS)");
 				TestcaseID = "223642"; //C223642 pphis
 				//TestcaseID = "244853"; //C244853 immsbc
-				loginPage.loginAsPPHIS();
+				orgMainPage = loginPage.orgLoginAsPPHIS();
 				//loginPage.orgLoginAsImmsBCAdminCP();
 		}
 
-		if (supplyConsolePage.displaySupplyConsolePage()) {
-			log("/*-- 2. User already on Health Connect - Supply Console --*/");
-		} else {
-			log("/*-- 2.1. Navigate to Health Connect - Supply Console --*/");
-			supplyConsolePage.selectHealthConnectApp();
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*-- 3. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 4. Click Dropdown Menu --*/");
@@ -56,43 +61,27 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-		supplyConsolePage.selectSupplyItemName();
-		///Validation for Doses/Qty Before Receiving needs to be add from supply container
-		///log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
+		supplyConsolePage.clickSupplyItemName(supply_item);
+		//Validation for Doses/Qty Before Receiving needs to be add from supply container
+		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
 		double remainingQty_before = supplyConsolePage.getValueOfRemainingQuantity();
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before);
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before);
-		String doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
+		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 
 		log("/*-- 8. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 9. Click Dropdown Menu --*/");
 		supplyConsolePage.clickDropdownMenu();
+
 		log("/*-- 10. Navigate and Select Supply Locations --*/");
 		supplyConsolePage.selectSupplyLocationFromDropdown();
-		Thread.sleep(2000);
+
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		supplyConsolePage.selectSupplyLocationName(supply_location);
-		log("/*-- 12. Click on Supply Distribution with - Supply Distribution_1 --*/");
-		supplyConsolePage.clickSupplyDistribution(distribution);
-		String supplyName = supplyConsolePage.getSupplyDistributionName();
-		log("/*-- 13. Supply Distribution Name is: -->" + supplyName);
-		String supplyDesc = supplyConsolePage.getSupplyDistributionDescription();
-		log("/*-- 14. Supply Distribution Description is: -->" + supplyDesc);
-		log("/*-- 15. Close all open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
-		if (supplyConsolePage.displaySupplyConsolePage()) {
-			log("/*-- 16. User is already on Supply loc--*/");
-		} else {
-			log("/*-- 16.1. Click Dropdown Menu --*/");
-			supplyConsolePage.clickDropdownMenu();
-			log("/*-- 16.2. Navigate and Select Supply Locations --*/");
-			supplyConsolePage.selectSupplyLocationFromDropdown();
-		}
-		log("/*-- 17. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location);
+
 		log("/*-- 18. Navigate and Select Dropdown to Receive Supplies Button --*/");
 		supplyConsolePage.SelectDropDownToClickReceiveSuppliesButton();
 		log("/*-- 19. Click to Receive Supplies Button --*/");
@@ -106,6 +95,7 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.clickSupplyItemTextBox();
 		log("/*-- 22. Select Supply Item COMIRNATY (Pfizer) - 35035BD-CC01  --*/");
 		supplyConsolePage.selectSupplyItem("COMIRNATY (Pfizer) - 35035BD-CC01");
+		Thread.sleep(2000);
 		log("/*-- 23. Validate Quantity Filed Present on Layout --*/");
 		String qty = supplyConsolePage.validateQTYField();
 		String expectedqtyLabel = "Quantity";
@@ -138,18 +128,13 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.ValidateCancelButtonIsDisplayedOnReceiveSupplies();
 		log("/*-- 32. Click Save Button --*/");
 		supplyConsolePage.ClickSaveButton();
-
-
-		log("/*-- 33. Navigate to Health Connect - Supply Console --*/");
-		supplyConsolePage.selectHealthConnectApp();
-		log("/*-- 34. Close all open tabs --*/");
-			supplyConsolePage.closeTabsHCA();
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*-- 35. Click Dropdown Menu --*/");
-			supplyConsolePage.clickDropdownMenu();
+		supplyConsolePage.clickDropdownMenu();
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
-			supplyConsolePage.selectSupplyItemsFromDropdown();
+		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-			supplyConsolePage.selectSupplyItemName();
+		supplyConsolePage.clickSupplyItemName(supply_item);
 
 		///Validation for Doses/Qty Before and After Reciaving needs to be add.
 		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
@@ -158,8 +143,8 @@ public class ReceiveSupplies extends BaseTest {
 		double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses();
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after);
 
-		Assert.assertEquals((remainingQty_after), (remainingQty_before)+1);
-		Assert.assertEquals((remainingDoses_after), (remainingDoses_before) + Double.valueOf(doseConversionFactor));
+		Assert.assertEquals(remainingQty_after, remainingQty_before + 1);
+		Assert.assertEquals(remainingDoses_after, remainingDoses_before + doseConversionFactor);
 	}
 	
 }

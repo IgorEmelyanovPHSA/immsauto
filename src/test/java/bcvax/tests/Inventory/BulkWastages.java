@@ -80,14 +80,14 @@ public class BulkWastages extends BaseTest {
 		
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
 		supplyConsolePage.clickBulkWastageButton();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		
 		log("/*8.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToWaste, reasonForWastage, numberOfRows);
 		
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(3);
@@ -141,15 +141,15 @@ public class BulkWastages extends BaseTest {
 		String reasonForWastage = "CCI: Handling Error";
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");
-		CommonMethods common = new CommonMethods(getDriver());
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
-
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		log("/*-- 3. Close all open tabs --*/");
+		supplyConsolePage.closeTabsHCA();
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
 		log("/*3.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-		Thread.sleep(5000);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -174,15 +174,13 @@ public class BulkWastages extends BaseTest {
 
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
 		supplyConsolePage.clickBulkWastageButton();
-		Thread.sleep(5000);
-
+		Thread.sleep(2000);
 		log("/*8.----Enter the Quantity values for 3 row and reason for wastage:" +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage, numberOfRows);
 
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
-		Thread.sleep(3000);
-
+		Thread.sleep(2000);
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(3);
 
@@ -215,9 +213,9 @@ public class BulkWastages extends BaseTest {
 			double remainingQuantityAfterDeduction = afterDeduction.get(1);
 			double doseConversionFactorBeforeDeduction = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterDeduction.get(i);
-			double calculatedDosesAfterDeduction = calculated.get(0);
-			double calculatedRemainingQuantityAfterDeduction = calculated.get(1);
-			double doseConversionAfterDeduction = calculated.get(2);
+			double calculatedDosesAfterDeduction = Double.valueOf(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterDeduction = Double.valueOf(df.format(calculated.get(1)));
+			double doseConversionAfterDeduction = Double.valueOf(df.format(calculated.get(2)));
 
 			//Comparing results
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
