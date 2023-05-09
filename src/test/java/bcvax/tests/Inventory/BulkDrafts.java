@@ -221,9 +221,9 @@ public class BulkDrafts extends BaseTest {
             double remainingQuantityAfterTransfer = afterDeduction.get(1);
             double doseConversionFactorBeforeTransfer = afterDeduction.get(2);
             ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfter.get(i);
-            double calculatedDosesAfterTransfer = calculated.get(0);
-            double calculatedRemainingQuantityAfterTransfer = calculated.get(1);
-            double doseConversionAfterTransfer = calculated.get(2);
+            double calculatedDosesAfterTransfer = Double.valueOf(df.format(calculated.get(0)));
+            double calculatedRemainingQuantityAfterTransfer = Double.valueOf(df.format(calculated.get(1)));
+            double doseConversionAfterTransfer = Double.valueOf(df.format(calculated.get(2)));
 
             //Comparing results
             log("Compering remaining doses after transfer " + remainingDosesAfter + " vs calculated doses after transfer " + calculatedDosesAfterTransfer);

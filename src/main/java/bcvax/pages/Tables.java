@@ -22,6 +22,8 @@ public class Tables extends BasePage {
     private WebElement supplyContainerTable;
     @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered scrollClass']")
     private WebElement containerTransfer;
+    @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered']")
+    private WebElement containerWastage;
     @FindBy(xpath = ".//lightning-card")
     private List<WebElement> transactionTables;
     @FindBy(xpath = ".//table[@class='slds-table slds-table_header-fixed slds-table_bordered slds-table_edit resizable-cols slds-table_resizable-cols']")
@@ -51,6 +53,11 @@ public class Tables extends BasePage {
     public GenericTable getContainerTransferTable() {
         waitForTextToBePresent(driver, containerTransfer ,30, "Distribution");
         return new GenericTable(containerTransfer);
+    }
+
+    public GenericTable getContainerWastageTable() {
+        waitForTextToBePresent(driver, containerWastage,30, "Distribution");
+        return new GenericTable(containerWastage);
     }
 
     public GenericTable getSupplyContainerTable() {
@@ -203,7 +210,7 @@ public class Tables extends BasePage {
         while(count < 10) {
             try {
                 WebElement myCell = getTableCell(searchCriteria, table);
-                WebElement element = myCell.findElement(By.xpath(".//a"));
+                WebElement element = myCell.findElement(By.xpath(".//a/../.."));
                 element.click();
                 break;
             } catch(Exception ex) {

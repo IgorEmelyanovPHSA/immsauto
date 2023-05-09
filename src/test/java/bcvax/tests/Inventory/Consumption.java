@@ -78,9 +78,13 @@ public class Consumption extends BaseTest {
 		}
 		log("/*-- 5. Close all open tabs --*/");
 		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		inClinicExperiencePage.selectSupplyLocationName(clinicNameToSearch);
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(driver);
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+
+		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
+		supplyConsolePage.clickOnSupplyLocation(clinicNameToSearch);
+		Thread.sleep(2000);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);

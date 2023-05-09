@@ -1,11 +1,9 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
-import bcvax.pages.LoginPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
+import constansts.Apps;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
@@ -27,13 +25,13 @@ public class BookingDose2 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	private String vaccineToSelect = "Covid19Vaccine";
+	MainPageOrg orgMainPage;
 
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Clinician_CIB() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
-		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
 
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
@@ -48,15 +46,15 @@ public class BookingDose2 extends BaseTest {
 				TestcaseID = "225653"; //C225653
 		}
 		log("TestRail test case ID: C" +TestcaseID);
-
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
-		if (clinicInBox.displayCIBApp()) {
-			log("/*---- User already on CIB Page--*/");
-		} else {
-			log("/*---- Navigate to CIB App --*/");
-			clinicInBox.selectCIBApp();
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
-		//clinicInBox.verifyIsClinicInBoxPageDisplayed();
+
+		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
+		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		log("/*4.----click Register New Citizen --*/");
