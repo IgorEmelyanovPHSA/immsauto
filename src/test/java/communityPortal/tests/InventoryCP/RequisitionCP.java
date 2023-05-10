@@ -40,35 +40,20 @@ public class RequisitionCP extends BaseTest {
             log("/*1.----Login to CP (newUI) as Clinician --*/");
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
-        Thread.sleep(5000);
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
-        System.out.println("/*----2. Locate Dropdown Menu --*/");
-        //supplyConsolePage.verifyIsSupplyPageDisplayed();
-        //Thread.sleep(4000);
-        System.out.println("/*----3. Close Other Tabs --*/");
-        //supplyConsolePage.closeTabsHCA();
-        //Thread.sleep(4000);
-        System.out.println("/*----4. Navigate to Supply Locations --*/");
-        //supplyConsolePage.clickSupplyLocationsTab();
-        //Thread.sleep(6000);
-        System.out.println("/*----5. Locate on Age 12 and Above - Abbotsford - Abby Pharmacy --*/");
-        //supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-        //Thread.sleep(4000);
+
         System.out.println("/*----6. Navigate to Request Supplies --*/");
         supplyConsolePage.clickRequestSupplies();
         System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
         supplyConsolePage.selectShipped_From();
-        //requisitionPage.inputShipAddress();
-        //System.out.println("/*----8. Locate on Automation Supply Location_1 --*/");
-        //requisitionPage.LocateAddress("Atlin Health Centre");
         System.out.println("/*----9. Choose Requested Delivery Date --*/");
         supplyConsolePage.inputRequestDate();
         System.out.println("/*----10. Choose Urgency --*/");
         supplyConsolePage.clickNextButton();
         log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
         log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
-        //log("/*for prodsuppqa --SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
-        //log("/*for bcvaxdevit --COVID-19 mRNA COMIRNATY Pediatric 10mcg (Pfizer) Orange Cap 2mL 10-dose vial - FK5618-CC03 (2022-12-13 16:07:54) Lot FK5618-CC0 --*/");
+
         int itemNum = 7;
         supplyConsolePage.clickLineItemCheckBox(itemNum);
         log("/*----12. click Next button --*/");
@@ -83,9 +68,7 @@ public class RequisitionCP extends BaseTest {
         supplyConsolePage.clickSaveSubmitRequisition();
         System.out.println("/*----17. Click Edit Expected Delivery Date--*/");
         supplyConsolePage.clickEditExpectedDeliveryDate();
-        //System.out.println("/*----18. Click Calender of Expected Delivery Date--*/");
-        //supplyConsolePage.clickExpectedDeliveryDateCalendar();
-        //Thread.sleep(3000);
+
         System.out.println("/*----19. Choose The Expected Delivery Date--*/");
         supplyConsolePage.inputExpectedDate();
         System.out.println("/*----20. Save Chosen Expected Delivery Date--*/");
