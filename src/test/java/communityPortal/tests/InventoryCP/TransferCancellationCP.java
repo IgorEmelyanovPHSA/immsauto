@@ -98,7 +98,7 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
@@ -109,7 +109,7 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
@@ -139,7 +139,7 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
@@ -206,7 +206,7 @@ public class TransferCancellationCP extends BaseTest {
 		double remainingQtyAfterCalculationDistribution1_1 = remainingQtyBeforeDistribution1_1 - quantity;
 		assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
@@ -217,7 +217,7 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
@@ -248,7 +248,7 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
@@ -275,6 +275,6 @@ public class TransferCancellationCP extends BaseTest {
 			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
 		}
 		Thread.sleep(5000);
-		supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 	}
 }

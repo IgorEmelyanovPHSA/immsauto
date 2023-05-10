@@ -168,8 +168,10 @@ public class MainPageCP extends BasePage{
 
     public SupplyConsolePage selectSupplyLocationName(String supplyLocation) throws InterruptedException {
         SupplyConsolePage supplyConsolePage = goToSupplyLocation();
-        waitForElementToBeVisible(driver, select_list_view_btn, 10);
-        select_list_view_btn.click();
+        By list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
+        waitForElementToBeLocated(driver, list_view_btn_path, 10);
+        WebElement list_view_btn = driver.findElement(list_view_btn_path);
+        list_view_btn.click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
         Thread.sleep(2000);
@@ -203,6 +205,7 @@ public class MainPageCP extends BasePage{
     }
 
     public void inputCurrentDateUserDefaults() throws InterruptedException {
+        Thread.sleep(500);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();

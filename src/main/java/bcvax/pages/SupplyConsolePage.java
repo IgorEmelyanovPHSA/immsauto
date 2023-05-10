@@ -143,11 +143,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement bulk_dialog_close_button;
 	private By bulk_dialog_close_button_1 = By.xpath("//section[@role='dialog']//button[text()='Close']");
 
-	@FindBy(xpath = "(//a[text() = 'Transactions'])")
-	private WebElement transactions_tab;
-	private By transactions_tab_1 = By.xpath("(//a[text() = 'Transactions'])");
-	//private By transactions_tab_1 = By.xpath("(.//span[text() = 'Automation Supply Location_1'] and .//a[text() = 'Transactions'])");
-
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
 	private WebElement rows_outgoing_transactions_count_path;
 	//private By rows_outgoing_transactions_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
@@ -999,8 +994,9 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public void clickTransactionsTab() throws InterruptedException {
 		Thread.sleep(500);
-		By transactions_tab_path = By.xpath("(//a[text() = 'Transactions'])");
+		By transactions_tab_path = By.xpath("//a[text() = 'Transactions' or @title = 'Transactions']");
 		waitForElementToBeLocated(driver, transactions_tab_path, 10);
+		WebElement transactions_tab = driver.findElement(transactions_tab_path);
 		scrollTop(transactions_tab);
 		transactions_tab.click();
 	}

@@ -111,7 +111,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         log("/----Count Remaining Supplies Before Transaction --*/");
         supplyConsolePage.refreshBrowser();
@@ -122,7 +122,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
 
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
 
         supplyConsolePage.refreshBrowser();
@@ -157,7 +157,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
@@ -227,7 +227,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
         Thread.sleep(2000);
 
         log("/----Count Remaining Supplies Before Transaction --*/");
@@ -241,7 +241,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
 
         supplyConsolePage.refreshBrowser();
@@ -276,7 +276,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingQtyAfterCancelLocationDistribution1_3, remainingQtyBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
         Thread.sleep(2000);
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
@@ -306,6 +306,6 @@ public class BulkTransfersCancellationCP extends BaseTest {
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
         Thread.sleep(5000);
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
     }
 }
