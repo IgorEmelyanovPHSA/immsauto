@@ -153,24 +153,24 @@ public class BulkTransfersCP extends BaseTest {
         log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
         Thread.sleep(5000);
-//        log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
-//        log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-//        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-//        Thread.sleep(5000);
-//        log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-//        int nn = 1;
-//        int kk = countOutgoingTransactions;
-//        log("/*17.2---Get Outgoing Transaction id 'from' --*/");
-//        String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-//        log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-//        log("/*17.3----Click on the latest created Outgoing Transactions --*/");
-//        supplyConsolePage.clickOnOutgoingTransactions(kk);
-//        log("/*--transactions record number --*/:" + kk);
+        log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
+        log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
+        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        Thread.sleep(5000);
+        log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
+        int nn = 1;
+        int kk = countOutgoingTransactions;
+        log("/*17.2---Get Outgoing Transaction id 'from' --*/");
+        String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+        log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+        log("/*17.3----Click on the latest created Outgoing Transactions --*/");
+        supplyConsolePage.clickOnOutgoingTransactions(kk);
+        log("/*--transactions record number --*/:" + kk);
         log("/*18.----Close All Tab's --*/");
         supplyConsolePage.closeTabsHCA();
         Thread.sleep(3000);
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
         ///////////////////// Doses/Qty BEFORE Automation Location_2//////////////////////////////////
         log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
@@ -368,19 +368,19 @@ public class BulkTransfersCP extends BaseTest {
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
         Thread.sleep(5000);
         log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-//        int nn = 1;
-//        int kk = countOutgoingTransactions;
-//        log("/*17.2---Get Outgoing Transaction id 'from' --*/");
-//        String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-//        log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-//        log("/*17.3----Click on the latest created Outgoing Transactions --*/");
-//        supplyConsolePage.clickOnOutgoingTransactions(kk);
-//        log("/*--transactions record number --*/:" + kk);
+        int nn = 1;
+        int kk = countOutgoingTransactions;
+        log("/*17.2---Get Outgoing Transaction id 'from' --*/");
+        String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+        log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+        log("/*17.3----Click on the latest created Outgoing Transactions --*/");
+        supplyConsolePage.clickOnOutgoingTransactions(kk);
+        log("/*--transactions record number --*/:" + kk);
         log("/*18.----Close All Tab's --*/");
         supplyConsolePage.closeTabsHCA();
         Thread.sleep(3000);
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_to);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
         Thread.sleep(2000);
 
         /////////////////////Doses/Qty BEFORE Automation Location_2//////////////////////////////////
@@ -652,6 +652,6 @@ public class BulkTransfersCP extends BaseTest {
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
         Thread.sleep(5000);
-        supplyConsolePage = cpMainPage.navigateToSupplyLocation(supply_location_from);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
     }
 }

@@ -65,7 +65,7 @@ public class AdjustmentsCP extends BaseTest {
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyLocation(supplyLocation);
+		cpMainPage.selectSupplyLocationName(supplyLocation);
 
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -183,7 +183,7 @@ public class AdjustmentsCP extends BaseTest {
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		//cpMainPage.navigateToSupplyConsolePage();
-		cpMainPage.navigateToSupplyLocation(supplyLocation);
+		cpMainPage.selectSupplyLocationName(supplyLocation);
 
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
