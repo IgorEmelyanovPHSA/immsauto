@@ -123,26 +123,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
 	private WebElement supply_page_displayed;
 
-	@FindBy(xpath = "//input[@placeholder='Search Supply Locations...']")
-	private WebElement search_supply_location_2_To;
-	private By search_supply_location_2_To_ = By.xpath("//input[@placeholder='Search Supply Locations...']");
-
-	@FindBy(xpath = "//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']")
-	private WebElement select_supply_location_2_To;
-	private By select_supply_location_2_To_ = By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_2']");
-
-	@FindBy(xpath = ".//input[@placeholder='Search Supply Locations...']")
-	private WebElement search_supply_location_1_To;
-	private By search_supply_location_1_To_ = By.xpath(".//input[@placeholder='Search Supply Locations...']");
-
-	@FindBy(xpath = "//lightning-base-combobox-formatted-text[@title='Automation Supply Location_1']")
-	private WebElement select_supply_location_1_To;
-	private By select_supply_location_1_To_ = By.xpath("//lightning-base-combobox-formatted-text[@title='Automation Supply Location_1']");
-
-	@FindBy(xpath = "//section[@role='dialog']//button[text()='Close']")
-	private WebElement bulk_dialog_close_button;
-	private By bulk_dialog_close_button_1 = By.xpath("//section[@role='dialog']//button[text()='Close']");
-
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
 	private WebElement rows_outgoing_transactions_count_path;
 	//private By rows_outgoing_transactions_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody/tr)");
@@ -781,7 +761,7 @@ public class SupplyConsolePage extends BasePage {
 		long currentTimeStart = System.currentTimeMillis() / 1000;
 
 		while(request_supplies_btn == null || num == 0) {
-			request_supplies_btn = driver.findElements(By.xpath("//button[text() = 'Request Supplies'] | //a[@title = 'Request Supplies'] | //button[text() = 'Create Requisition']"));
+			request_supplies_btn = driver.findElements(By.xpath("//button[text() = 'Request Supplies'] | //a[@title = 'Request Supplies'] | //button[text() = 'Create Requisition'] | //a[@title = 'Create Requisition']"));
 			num = request_supplies_btn.size();
 			Thread.sleep(500);
 			long currentTime = System.currentTimeMillis() / 1000;
@@ -933,20 +913,6 @@ public class SupplyConsolePage extends BasePage {
 			tables.typeQtyIntoTransferRow(supplyContainer, Double.toString(quantity));
 		}
 	}
-	@Step
-	public SupplyConsolePage selectSupplyLocation_2_To() throws InterruptedException {
-		log(" -- select 'To' Automation Supply Location_2  -");
-		waitForElementToBeVisible(driver, search_supply_location_2_To, 60);
-		log(" -- Combobox Supply Location To is found  -");
-		search_supply_location_2_To.sendKeys(SUPPLY_LOCATION_2);
-		log(" -- Start typing into Search Combobox  -");
-		waitForElementToBeVisible(driver, select_supply_location_2_To, 120);
-		scrollTop(select_supply_location_2_To, true);
-		log(" -- Drop down with supply required Supply location appeared  -");
-		select_supply_location_2_To.click();
-		log(" -- Selected Supply location successfully  -");
-		return this;
-	}
 
 	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
 		log(" -- select 'To' " + supplyLocation + "  -");
@@ -965,17 +931,6 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- Selected Supply location successfully  -");
 	}
 
-	public void selectSupplyLocation_1_To() throws InterruptedException {
-		log(" -- select 'To' Automation Supply Location_2  -");
-		waitForElementToBeVisible(driver, search_supply_location_1_To, 30);
-		log(" -- Combobox Supply Location To is found  -");
-		search_supply_location_1_To.sendKeys(SUPPLY_LOCATION_1);
-		log(" -- Start typing into Search Combobox  -");
-		waitForElementToBeVisible(driver, select_supply_location_1_To, 30);
-		log(" -- Drop down with supply required Supply location appeared  -");
-		select_supply_location_1_To.click();
-		log(" -- Selected Supply location successfully  -");
-	}
 	@Step
 	public SupplyConsolePage clickBulkTransfersModalButton(){
 		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
@@ -985,10 +940,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public void clickBulkTransfersCloseButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, bulk_dialog_close_button_1, 10);
-		Thread.sleep(1000);
-		click(bulk_dialog_close_button_1);
-		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_1, 20);
+		By bulk_dialog_close_button_path = By.xpath("//section[@role='dialog']//button[text()='Close']");
+		waitForElementToBeLocated(driver, bulk_dialog_close_button_path, 10);
+		WebElement bulk_dialog_close_button = driver.findElement(bulk_dialog_close_button_path);
+		bulk_dialog_close_button.click();
+		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_path, 10);
 	}
 
 	@Step
@@ -1116,6 +1072,16 @@ public class SupplyConsolePage extends BasePage {
 		scrollTop(btnTransferDraftOnTransactionsPage);
 		click(btnTransferDraftOnTransactionsPage);
 		click(btnTransferTransactionsDraftOnTransactionsPage);
+		Thread.sleep(500);
+		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
+		try {
+			Thread.sleep(500);
+			waitForElementToBeLocated(driver, close_modal_box_path, 10);
+			driver.findElement(close_modal_box_path).click();
+			System.out.println("Success message appered and closed...");
+		} catch(Exception ex) {
+			System.out.println("No modal box. Continue...");
+		}
 	}
 
 	public void clickDropDownLatestDraftTransactionsAndConfirmTransfer(int countDraftTransactions, double amountOfDosesToAdjustInDraftEdit) throws InterruptedException {
@@ -1203,6 +1169,15 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, successMessage, 20);
 		assertTrue(isElementPresent(successMessage));
 		log(" -- Toast success message appears");
+		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
+		try {
+			Thread.sleep(500);
+			waitForElementToBeLocated(driver, close_modal_box_path, 10);
+			driver.findElement(close_modal_box_path).click();
+			System.out.println("Success message appered and closed...");
+		} catch(Exception ex) {
+			System.out.println("No modal box. Continue...");
+		}
 	}
 
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
@@ -1802,7 +1777,10 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public SupplyConsolePage selectSupplyLocation(String location) throws InterruptedException {
 		log(" -- select to location  -  " + location);
-		selectSupplyTo(search_supply_location_2_To, location);
+		By search_supply_location_field_path = By.xpath("//input[@placeholder='Search Supply Locations...']");
+		waitForElementToBeLocated(driver, search_supply_location_field_path, 10);
+		WebElement search_supply_location_field = driver.findElement(search_supply_location_field_path);
+		selectSupplyTo(search_supply_location_field, location);
 		return this;
 	}
 

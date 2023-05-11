@@ -93,7 +93,7 @@ public class BulkDrafts extends BaseTest {
         }
 
         log("/*10.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         Thread.sleep(1000);
 
         log("/*11.----click Save as draft dialog Modal button --*/");

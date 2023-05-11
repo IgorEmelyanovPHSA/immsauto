@@ -27,7 +27,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		tables = loginPage.getTables();
 
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
-		supplyConsolePage = communityPortalMainPage.navigateToSupplyLocation(SUPPLY_LOCATION_2);
+		supplyConsolePage = communityPortalMainPage.selectSupplyLocationName(SUPPLY_LOCATION_2);
 	}
 
 
