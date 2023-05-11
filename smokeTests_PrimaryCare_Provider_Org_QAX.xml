@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation run">
+    <test name="Smoke">
+        <classes>
+            <class name="primarycare.tests.API.Provider_and_Rostering.API_Establish_Salesforce_Connection_SysAdmin"/>
+
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
