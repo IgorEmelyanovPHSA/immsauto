@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.*;
 
 public class APICreatePatientAccount {
 
-    public String insertAccount (String firstname,String lastname,String phn,String gender,
+    public String insertAccount (String recordTypeId, String firstname,String lastname,String phn,String gender,
                                  String birthdate,String preferredCommunicationChannel,
                                  String mobile, String email, String street,String city,String postalcode,String isActive){
         APIEstablishSFConnection sfConnection = new APIEstablishSFConnection();
@@ -16,6 +16,7 @@ public class APICreatePatientAccount {
         System.out.println("access_token is:" +acc_token);
 
         Map<String, Object> mapper =  new HashMap<String,Object>();
+        mapper.put("RecordTypeId", recordTypeId);
         mapper.put("FirstName", firstname);
         mapper.put("LastName", lastname);
         mapper.put("PHN__c", phn);

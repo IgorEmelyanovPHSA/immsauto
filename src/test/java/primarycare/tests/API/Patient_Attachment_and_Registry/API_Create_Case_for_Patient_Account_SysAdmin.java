@@ -3,13 +3,12 @@ package primarycare.tests.API.Patient_Attachment_and_Registry;
 import org.testng.annotations.Test;
 import primarycare.pages.APICreatePatientAccount;
 import primarycare.pages.APIDelete;
-import primarycare.tests.BaseTest_PrimaryCare;
-import java.util.Random;
 
-public class API_Create_Patient_Account_SysAdmin extends BaseTest_PrimaryCare {
-    //public String lastname = "IgorAPI_Account_" + new Random().nextInt(1000);
-    public String firstName = "Kenton2";
-    public String lastName = "Troup2";
+import static primarycare.tests.BaseTest_PrimaryCare.*;
+
+public class API_Create_Case_for_Patient_Account_SysAdmin {
+    public String firstName = "Kenton3";
+    public String lastName = "Troup3";
     public String recordTypeId = "0125f0000003ekBAAQ ";
     public String phn = "9873010088";
     public String gender = "Male";
@@ -25,22 +24,34 @@ public class API_Create_Patient_Account_SysAdmin extends BaseTest_PrimaryCare {
     public String accId;
 
     @Test(priority = 1)
-    public void API_Can_Create_Patient_Account_in_Salesforce_as_SysAdmin(){
-        TestcaseID = "252626"; //C252626
+    public void API_Can_Create_Case_for_Patient_Account_in_Salesforce_as_SysAdmin(){
         APICreatePatientAccount apiinsertAccount = new APICreatePatientAccount();
         log("Create Patient account record.");
         String accountID = apiinsertAccount.insertAccount(recordTypeId, firstName,lastName,phn,gender,
                 birthdate,preferredCommunicationChannel, mobile,email,street,city,postalcode,isActive);
         log("Created Patient's id is: " +accountID);
         accId=accountID;
+
+        //TestcaseID = "252626"; //C252626
+        //APICreateCase apiinsertAccount = new APICreatePatientAccount();
+        log("Create CASE account record.");
+    }
+
+    //@Test(priority = 3)
+    public void API_Removing_Case_for_Patient_Account_in_Salesforce_as_SysAdmin(){
+        //TestcaseID = "252628"; //C252628
+        APIDelete apidelete = new APIDelete();
+        log("Delete account from Account.");
+        String apiResponse = apidelete.deleteAccount(accId);
+        log("Deleted Account from Account is: " +accId);
+        log(apiResponse);
+        //Assert.assertEquals(accountNameReturned, name);
     }
 
 
-
-
-    @Test(priority = 2)
-    public void API_Remove_Patient_Account_in_Salesforce_as_SysAdmin(){
-        TestcaseID = "252628"; //C252628
+    //@Test(priority = 4)
+    public void API_Removing_Patient_Account_in_Salesforce_as_SysAdmin(){
+        //TestcaseID = "252628"; //C252628
         APIDelete apidelete = new APIDelete();
         log("Delete account from Account.");
         String apiResponse = apidelete.deleteAccount(accId);
@@ -49,4 +60,3 @@ public class API_Create_Patient_Account_SysAdmin extends BaseTest_PrimaryCare {
         //Assert.assertEquals(accountNameReturned, name);
     }
 }
-
