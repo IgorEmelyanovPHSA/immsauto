@@ -23,7 +23,6 @@ public class BulkDraftsCP extends BaseTest {
 
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
     private final String supplyLocationTo = SUPPLY_LOCATION_2;
-    private static final DecimalFormat df = new DecimalFormat("#.##");
 
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
@@ -43,7 +42,6 @@ public class BulkDraftsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "245220"; //C245220
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -74,7 +72,6 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*6.----Click on bulk Transfer button --*/");
         supplyConsolePage.clickBulkTransfersButton();
-        Thread.sleep(5000);
 
         log("/*7.----Enter the Dosages values for 3 row Transfers --*/");
         int k = 2;
@@ -89,15 +86,12 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*9.----click Save as draft dialog Modal button --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-        Thread.sleep(2000);
 
         log("/*10.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-        Thread.sleep(2000);
 
         log("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(5000);
 
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
         for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
@@ -107,7 +101,6 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*12----Selecting the latest draft transactions and confirm transfer --*/");
         supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, numberOfRows);
-        Thread.sleep(3000);
 
         log("/*13----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -119,21 +112,17 @@ public class BulkDraftsCP extends BaseTest {
         log("/*14----Click on the latest created Outgoing Transactions --*/");
         supplyConsolePage.clickOnOutgoingTransactions(countOutgoingTransactions);
         log("/*--transactions record number --*/:" + countOutgoingTransactions);
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         log("/*15.----Go to Supply Locations Tab --*/");
-        cpMainPage.navigateToSupplyLocationRelatedTab(supplyLocationTo);
+        cpMainPage.selectSupplyLocationName(supplyLocationTo);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(2000);
 
         log("/*17.----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
-        Thread.sleep(2000);
 
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
-        Thread.sleep(2000);
 
         log("/*18.----Click on Checkboxes Incoming Transactions --*/");
         if (countIncomingTransactions >= 3) {
@@ -152,23 +141,18 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*19----click Confirm Incoming button Transfer --*/");
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
-        Thread.sleep(2000);
 
         log("/*20.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
         supplyConsolePage.selectIncomingSupplyDistribution();
-        Thread.sleep(2000);
 
         log("/*21.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-        Thread.sleep(1000);
 
         log("/*22.----Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
         supplyConsolePage.successMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*23.----Click on Automation Supply Location_1 --*/");
-        Thread.sleep(5000);
-        cpMainPage.navigateToSupplyLocationRelatedTab(SUPPLY_LOCATION_1);
+        cpMainPage.selectSupplyLocationName(supplyLocationFrom);
 
         log("/*24.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterTransfer = supplyConsolePage.countDosesAndQuantityMap(3);

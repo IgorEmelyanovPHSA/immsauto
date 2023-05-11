@@ -1072,6 +1072,16 @@ public class SupplyConsolePage extends BasePage {
 		scrollTop(btnTransferDraftOnTransactionsPage);
 		click(btnTransferDraftOnTransactionsPage);
 		click(btnTransferTransactionsDraftOnTransactionsPage);
+		Thread.sleep(500);
+		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
+		try {
+			Thread.sleep(500);
+			waitForElementToBeLocated(driver, close_modal_box_path, 10);
+			driver.findElement(close_modal_box_path).click();
+			System.out.println("Success message appered and closed...");
+		} catch(Exception ex) {
+			System.out.println("No modal box. Continue...");
+		}
 	}
 
 	public void clickDropDownLatestDraftTransactionsAndConfirmTransfer(int countDraftTransactions, double amountOfDosesToAdjustInDraftEdit) throws InterruptedException {
@@ -1159,6 +1169,15 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeVisible(driver, successMessage, 20);
 		assertTrue(isElementPresent(successMessage));
 		log(" -- Toast success message appears");
+		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
+		try {
+			Thread.sleep(500);
+			waitForElementToBeLocated(driver, close_modal_box_path, 10);
+			driver.findElement(close_modal_box_path).click();
+			System.out.println("Success message appered and closed...");
+		} catch(Exception ex) {
+			System.out.println("No modal box. Continue...");
+		}
 	}
 
 	public void clickOnContainerDropDownMenu() throws InterruptedException {
