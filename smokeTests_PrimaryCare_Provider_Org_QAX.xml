@@ -5,7 +5,7 @@
         <classes>
             <class name="primarycare.tests.API.Provider_and_Rostering.API_Establish_Salesforce_Connection_SysAdmin"/>
             <class name="primarycare.tests.API.Provider_and_Rostering.API_Create_Practitioner_MOA_Account_NO_Associated_SysAdmin"/>
-
+            <class name="primarycare.tests.Selenium.Provider_Portal.Portal_Clinics_Associated_Details_Verification"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
