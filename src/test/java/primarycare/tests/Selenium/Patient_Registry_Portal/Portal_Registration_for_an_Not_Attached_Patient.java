@@ -1,7 +1,5 @@
 package primarycare.tests.Selenium.Patient_Registry_Portal;
 
-
-
 import primarycare.pages.CommonMethods;
 import primarycare.pages.HealthCloudConsolePage;
 import primarycare.tests.Utilities.ApiQueries;
