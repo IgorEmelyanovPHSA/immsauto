@@ -4,6 +4,7 @@
     <test name="Smoke">
         <classes>
             <class name="primarycare.tests.API.Provider_and_Rostering.API_Establish_Salesforce_Connection_SysAdmin"/>
+            <class name="primarycare.tests.API.Provider_and_Rostering.API_Create_Practitioner_MOA_Account_NO_Associated_SysAdmin"/>
 
         </classes>
     </test> <!-- Test -->
