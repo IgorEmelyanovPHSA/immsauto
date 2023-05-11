@@ -4,18 +4,33 @@ import Utilities.TestListener;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BulkDrafts extends BaseTest {
+    String supply_location_from;
+    String env;
+    Map<String, Object> testData;
+    String supply_location_to;
+
+    @BeforeMethod
+    public void setUpClass() throws Exception {
+        env = Utils.getTargetEnvironment();
+        log("Target Environment: " + env);
+        testData = Utils.getTestData(env);
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+    }
 
     @Test
     public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS() throws Exception {
@@ -38,7 +53,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
         Thread.sleep(3000);
 
         log("/*6.----Get Supply Containers count outcoming records --*/");
@@ -78,7 +93,7 @@ public class BulkDrafts extends BaseTest {
         }
 
         log("/*10.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         Thread.sleep(1000);
 
         log("/*11.----click Save as draft dialog Modal button --*/");
@@ -124,7 +139,7 @@ public class BulkDrafts extends BaseTest {
         Thread.sleep(2000);
 
         log("/*18.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation_2();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
         Thread.sleep(2000);
 
         log("/*19.----Go to Transactions Tab of Automation Supply Location_2 --*/");
@@ -174,7 +189,7 @@ public class BulkDrafts extends BaseTest {
         Thread.sleep(2000);
 
         log("/*27.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation_1();
+        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
         Thread.sleep(3000);
 
         log("/*28.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
@@ -206,9 +221,9 @@ public class BulkDrafts extends BaseTest {
             double remainingQuantityAfterTransfer = afterDeduction.get(1);
             double doseConversionFactorBeforeTransfer = afterDeduction.get(2);
             ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfter.get(i);
-            double calculatedDosesAfterTransfer = calculated.get(0);
-            double calculatedRemainingQuantityAfterTransfer = calculated.get(1);
-            double doseConversionAfterTransfer = calculated.get(2);
+            double calculatedDosesAfterTransfer = Double.valueOf(df.format(calculated.get(0)));
+            double calculatedRemainingQuantityAfterTransfer = Double.valueOf(df.format(calculated.get(1)));
+            double doseConversionAfterTransfer = Double.valueOf(df.format(calculated.get(2)));
 
             //Comparing results
             log("Compering remaining doses after transfer " + remainingDosesAfter + " vs calculated doses after transfer " + calculatedDosesAfterTransfer);

@@ -6,6 +6,10 @@ import bcvax.pages.ClinicInBoxPage;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -25,7 +29,7 @@ public class BookingDose1 extends BaseTest {
 	@Test(priority = 1)
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
 

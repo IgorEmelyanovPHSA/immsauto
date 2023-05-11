@@ -7,6 +7,10 @@ import bcvax.pages.UserDefaultsPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -74,9 +78,13 @@ public class Consumption extends BaseTest {
 		}
 		log("/*-- 5. Close all open tabs --*/");
 		inClinicExperiencePage.closeTabsHCA();
-		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		inClinicExperiencePage.selectSupplyLocationName(clinicNameToSearch);
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(driver);
+		log("/*4.----Go to Supply Locations Tab --*/");
+		supplyConsolePage.clickSupplyLocationsTab();
+
+		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
+		supplyConsolePage.clickOnSupplyLocation(clinicNameToSearch);
+		Thread.sleep(2000);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
@@ -132,10 +140,10 @@ public class Consumption extends BaseTest {
 		Thread.sleep(2000);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateAppointmentSchedulingTab();
-
+		log("/*-- 33.Select Early Booking Reason --*/");
+		inClinicExperiencePage.selectEarlyBookingReason();
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 
 		//System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");

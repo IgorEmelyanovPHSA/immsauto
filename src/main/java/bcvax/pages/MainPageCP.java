@@ -21,9 +21,6 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
     private WebElement btnScanUsingCamera;
 
-    @FindBy(xpath = "//a[text()='Supply Locations']")
-    private WebElement tabSupplyLocation;
-
     @FindBy(xpath = "//a[text()='Profiles']")
     private WebElement tabProfiles;
 
@@ -112,10 +109,12 @@ public class MainPageCP extends BasePage{
 
     @Step
     public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, tabSupplyLocation, 30);
-        Thread.sleep(2000);
-        tabSupplyLocation.click();
+        Thread.sleep(500);
+        By tab_supply_location_path = By.xpath("//a[text()='Supply Locations']");
+        System.out.println("/*----Locate Dropdown Menu --*/");
+        waitForElementToBeLocated(driver, tab_supply_location_path, 10);
+        WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
+        tab_supply_location.click();
         return new SupplyConsolePage(driver);
     }
 
@@ -168,15 +167,20 @@ public class MainPageCP extends BasePage{
 
     public SupplyConsolePage selectSupplyLocationName(String supplyLocation) throws InterruptedException {
         SupplyConsolePage supplyConsolePage = goToSupplyLocation();
-        waitForElementToBeVisible(driver, select_list_view_btn, 10);
-        select_list_view_btn.click();
+        System.out.println("/*-- Choose List View --*/");
+        By list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
+        waitForElementToBeLocated(driver, list_view_btn_path, 10);
+        WebElement list_view_btn = driver.findElement(list_view_btn_path);
+        list_view_btn.click();
         Thread.sleep(2000);
+        System.out.println("/*---- Select Active Supply Locations --*/");
         driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
         Thread.sleep(2000);
+        System.out.println("/*---- Locate " + supplyLocation + " --*/");
         search_location_field.sendKeys(supplyLocation);
         search_location_field.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
-
+        System.out.println("/*---- Go to " + supplyLocation + " --*/");
         new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
         return supplyConsolePage;
     }
@@ -203,6 +207,7 @@ public class MainPageCP extends BasePage{
     }
 
     public void inputCurrentDateUserDefaults() throws InterruptedException {
+        Thread.sleep(500);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();

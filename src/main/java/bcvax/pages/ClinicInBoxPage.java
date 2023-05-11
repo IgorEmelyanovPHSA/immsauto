@@ -394,7 +394,8 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void verifyIsClinicInBoxPageDisplayed() {
+	public void verifyIsClinicInBoxPageDisplayed() throws InterruptedException {
+		Thread.sleep(500);
 		waitForElementToBeVisible(driver, clinicinbox_page_displayed, 10);
 		this.clinicinbox_page_displayed.isDisplayed();
 	}

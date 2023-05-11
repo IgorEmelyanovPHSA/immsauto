@@ -6,6 +6,9 @@ import bcvax.pages.MainPageOrg;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import bcvax.pages.UserDefaultsPage;
@@ -35,11 +38,7 @@ public class Check_In_Client_ICE extends BaseTest {
     Map<String, Object> testData;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    @BeforeMethod
-    public void setUpClass() throws Exception {
-        env = Utils.getTargetEnvironment();
-        log("Target Environment: " + env);
-    }
+
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment() throws Exception {
         //TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";

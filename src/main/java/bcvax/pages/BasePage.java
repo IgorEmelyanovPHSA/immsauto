@@ -85,6 +85,8 @@ public abstract class BasePage<T> {
 			return true;
 		}
 		catch (Exception e){
+			System.out.println("Consent Date is not Active.....");
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}

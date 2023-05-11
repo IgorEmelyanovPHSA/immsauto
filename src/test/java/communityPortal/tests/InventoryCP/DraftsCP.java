@@ -6,25 +6,44 @@ import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 
 import static constansts.Domain.*;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class DraftsCP extends BaseTest {
-
-    private final String supplyLocationFrom = SUPPLY_LOCATION_1;
-
+    String env;
+    String supply_location_from;
+    String supply_location_to;
+    Map<String, Object> testData;
+    String distribution_from;
+    String distribution_to;
+    String distribution_to_same_clinic;
+    MainPageCP cpMainPage;
+    @BeforeMethod
+    public void setUpClass() throws Exception {
+        env = Utils.getTargetEnvironment();
+        log("Target Environment: " + env);
+        testData = Utils.getTestData(env);
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+        distribution_from = String.valueOf(testData.get("distributionFrom"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
+        distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
+    }
     @Test()
     public void CP_Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
-        CommonMethods common = new CommonMethods(getDriver());
         MainPageCP cpMainPage = new MainPageCP(getDriver());
+        String container_from = String.valueOf(testData.get("containerFrom"));
+        String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToAdjust = 10;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -41,53 +60,38 @@ public class DraftsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
-
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
-        log("/*3.----Get a matching row for first row Lot number --*/");
-        int matchedRow = common.getMatchedRowToLotInRow1();
-
-        log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-
-        double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
+        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[1];
+        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
-        log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
-
-        double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
+        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[1];
+        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
-
+        log("/*8.----Picked up the Dose Conversation Factor --*/");
+        double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
+        log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-        Thread.sleep(2000);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
-        Thread.sleep(2000);
-
-        log("/*8.----Picked up the Dose Conversation Factor --*/");
-        double dose_conversation_factor = remDosesQtyConversionFactorBefore_Distribution_1_2[2];
-        log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses amount, select supply location and Save as Draft -*/");
         supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust)).
-                draftToDistributionWithinSameClinic(supplyLocationFrom, SUPPLY_DISTRIBUTION_1_2);
+                draftToDistributionWithinSameClinic(supply_location_from, SUPPLY_DISTRIBUTION_1_2);
 
         log("/*10.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(5000);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -96,25 +100,22 @@ public class DraftsCP extends BaseTest {
 
         log("/*12.----Selecting the latest draft transactions and confirm transfer --*/");
         supplyConsolePage.clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions);
-        Thread.sleep(3000);
 
         log("/*13.----Navigate to Related Item tab --*/");
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*14.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
+        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
-        double remainingQty_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[1];
+        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*15.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
+        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
-        double remainingQty_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[1];
+        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*16.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
@@ -139,9 +140,10 @@ public class DraftsCP extends BaseTest {
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
         double amountOfDosesToAdjustInDraftEdit = 5;
-        CommonMethods common = new CommonMethods(getDriver());
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+        String container_from = String.valueOf(testData.get("containerFrom"));
+        String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
 
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
@@ -156,68 +158,55 @@ public class DraftsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.navigateToSupplyConsolePage();
 
-        log("/*3.----Get a matching row for first row Lot number --*/");
-        int matchedRow = common.getMatchedRowToLotInRow1();
-
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
+        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
             log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[1];
+        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
             log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
+        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
             log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[1];
+        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
             log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-        Thread.sleep(2000);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
-        Thread.sleep(2000);
 
         log("/*8.----Picked up the Dose Conversation Factor --*/");
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses in the Container-Transfer Form --*/");
         supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocation_1_To();
-        Thread.sleep(2000);
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
         supplyConsolePage.selectSameClinicSupplyDistribution();
-        Thread.sleep(2000);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-        Thread.sleep(2000);
 
         log("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-        Thread.sleep(5000);
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(5000);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -231,26 +220,23 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*18.----Refresh Page to get doses/quantities updated--*/");
-        common.refreshBrowser();
-        Thread.sleep(9000);
-
+        supplyConsolePage.refreshBrowser();
+        Thread.sleep(2000);
         log("/*19.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
-            log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
+        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
 
-        double remainingQty_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[1];
-            log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
+        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*20.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
-            log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
+        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
 
-        double remainingQty_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[1];
-            log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
+        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*21.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
         log("Distribution_1_1 Compering before transfer doses " +remainingDoses_before_Distribution_1_1 + " amount to adjust upon edit "
@@ -278,7 +264,8 @@ public class DraftsCP extends BaseTest {
         log("Test Case#3 Create draft and cancel it");
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         double amountOfDosesToAdjust = 10;
-        CommonMethods common = new CommonMethods(getDriver());
+        String container_from = String.valueOf(testData.get("containerFrom"));
+        String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
@@ -294,69 +281,56 @@ public class DraftsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.navigateToSupplyConsolePage();
 
-        log("/*3.----Get a matching row for first row Lot number --*/");
-        int matchedRow = common.getMatchedRowToLotInRow1();
-
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
-            log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
+        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[1];
-            log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
+        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
-            log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
+        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[1];
-            log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
+        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-        Thread.sleep(2000);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
-        Thread.sleep(2000);
 
         log("/*8.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses in the Container-Transfer Form --*/");
         supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocation_1_To();;
-        Thread.sleep(2000);
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
         supplyConsolePage.selectSameClinicSupplyDistribution();
-        Thread.sleep(2000);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-        Thread.sleep(2000);
 
         log("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-        Thread.sleep(5000);
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(5000);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -370,22 +344,20 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*18----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
-            log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
+        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
 
-        double remainingQty_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[1];
-            log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
+        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
-            log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
+        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
 
-        double remainingQty_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[1];
-            log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
+        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
         assertEquals(remainingDoses_before_Distribution_1_1, remainingDoses_after_Distribution_1_1);
@@ -406,8 +378,9 @@ public class DraftsCP extends BaseTest {
     public void CP_Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");
-        CommonMethods common = new CommonMethods(getDriver());
         MainPageCP cpMainPage = new MainPageCP(getDriver());
+        String container_from = String.valueOf(testData.get("containerFrom"));
+        String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfQuantityToAdjust = 1;
         int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -424,68 +397,55 @@ public class DraftsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "243118"; //C243118
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.navigateToSupplyConsolePage();
 
-        log("/*3.----Get a matching row for first row Lot number --*/");
-        int matchedRow = common.getMatchedRowToLotInRow1();
-
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[0];
+        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = remDosesQtyConversionFactorBefore_Distribution_1_1[1];
+        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[0];
+        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = remDosesQtyConversionFactorBefore_Distribution_1_2[1];
+        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-        Thread.sleep(2000);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
-        Thread.sleep(2000);
 
         log("/*8.----Picked up the Dose Conversation Factor --*/");
-        double dose_conversation_factor = remDosesQtyConversionFactorBefore_Distribution_1_2[2];
+        double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering quantity in the Container-Transfer Form --*/");
         supplyConsolePage.enterTransferQuantity(String.valueOf(amountOfQuantityToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocation_1_To();
-        Thread.sleep(2000);
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
         supplyConsolePage.selectSameClinicSupplyDistribution();
-        Thread.sleep(2000);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-        Thread.sleep(2000);
 
         log("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-        Thread.sleep(5000);
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(5000);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -494,25 +454,22 @@ public class DraftsCP extends BaseTest {
 
         log("/*16----Selecting the latest draft transactions and confirm transfer --*/");
         supplyConsolePage.clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions);
-        Thread.sleep(3000);
 
         log("/*17----Navigate to Related Item tab --*/");
         supplyConsolePage.clickOnRelatedItemTab();
-
+        Thread.sleep(2000);
         log("/*18----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
-        double remainingDoses_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[0];
+        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
-        double remainingQty_after_Distribution_1_1 = remDosesQtyConversionFactorAfter_Distribution_1_1[1];
+        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double[] remDosesQtyConversionFactorAfter_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
-        double remainingDoses_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[0];
+        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
-        double remainingQty_after_Distribution_1_2 = remDosesQtyConversionFactorAfter_Distribution_1_2[1];
+        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
