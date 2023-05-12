@@ -52,10 +52,6 @@ public class MainPageCP extends BasePage{
     private WebElement user_defaults_main_menu;
     private By user_defaults_main_menu1 = By.xpath(".//a[text()='User Defaults']");
 
-    @FindBy(xpath = "//input[@name='BCH_Date__c']")
-    private WebElement input_current_date;
-    private By input_current_date1 = By.xpath("//input[@name='BCH_Date__c']");
-
     @FindBy(xpath = ".//button[text()='Save']")
     private WebElement click_save_defaults_button;
     private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
@@ -112,8 +108,9 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         By tab_supply_location_path = By.xpath("//a[text()='Supply Locations']");
         System.out.println("/*----Locate Dropdown Menu --*/");
-        waitForElementToBeLocated(driver, tab_supply_location_path, 10);
+        waitForElementToBeEnabled(driver, tab_supply_location_path, 10);
         WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
+        scrollTop(tab_supply_location);
         tab_supply_location.click();
         return new SupplyConsolePage(driver);
     }
@@ -212,17 +209,20 @@ public class MainPageCP extends BasePage{
         calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        waitForElementToBeVisible(driver, input_current_date, 10);
+        By input_current_date_path = By.xpath("//input[@name='BCH_Date__c']");
+        waitForElementToBeEnabled(driver, input_current_date_path, 10);
         String todayAsString = dateFormat.format(today);
+        WebElement input_current_date = driver.findElement(input_current_date_path);
         input_current_date.click();
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        waitForElementToBeEnabled(driver, input_current_date_path, 10);
+        input_current_date = driver.findElement(input_current_date_path);
         input_current_date.clear();
-        Thread.sleep(2000);
+        Thread.sleep(500);
         input_current_date.sendKeys(todayAsString);
-        Thread.sleep(2000);
+        Thread.sleep(500);
         input_current_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        //closeSuccessDialog();
     }
 
     public void selectUserDefaultLocation(String location) throws InterruptedException {

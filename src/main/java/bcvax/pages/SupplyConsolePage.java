@@ -40,14 +40,8 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement rows_supply_containers_from_count_path;
 	private By rows_supply_containers_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)");
 
-	@FindBy(xpath = "//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']")
-	private WebElement btnTransferDraftOnTransactionsPage;
-
 	@FindBy(xpath = "//h2[@class='slds-text-heading_medium slds-hyphenate']/../..//button[text() = 'Transfer']")
 	private WebElement btnTransferDraftOnContainerTransferPage;
-
-	@FindBy(xpath = "//button[contains(text(),'Transfer Transactions')]")
-	private WebElement btnTransferTransactionsDraftOnTransactionsPage;
 
 	@FindBy(xpath = "//label[contains(text(),'Comments')]")
 	private WebElement labelComments;
@@ -749,7 +743,7 @@ public class SupplyConsolePage extends BasePage {
 		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME).findElement(By.tagName("a")).click();
 		Thread.sleep(500);
 		By supply_loc_header = By.xpath("//h1/div[text() = 'Supply Location']");
-		waitForElement(supply_loc_header, 10);
+		waitForElementToBeEnabled(driver, supply_loc_header, 10);
 	}
 
 	public void clickRequestSupplies() throws InterruptedException {
@@ -1057,21 +1051,48 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(int value) throws InterruptedException {
-		WebElement draftTransactionElement = driver.findElement(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + value + "]"));
-		click(draftTransactionElement);
-		click(btnTransferDraftOnTransactionsPage);
-		click(btnTransferTransactionsDraftOnTransactionsPage);
+		Thread.sleep(200);
+		By draft_transaction_element_path = By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + value + "]");
+		waitForElementToBeEnabled(driver, draft_transaction_element_path, 10);
+		WebElement draft_transaction_element = driver.findElement(draft_transaction_element_path);
+		scrollTop(draft_transaction_element);
+		draft_transaction_element.click();
+		Thread.sleep(200);
+		By transfer_draft_btn_path = By.xpath("//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']");
+		waitForElementToBeEnabled(driver, transfer_draft_btn_path, 10);
+		WebElement transfer_draft_btn = driver.findElement(transfer_draft_btn_path);
+		scrollTop(transfer_draft_btn);
+		transfer_draft_btn.click();
+		Thread.sleep(200);
+		By transfer_transaction_btn_path = By.xpath("//button[contains(text(),'Transfer Transactions')]");
+		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
+		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
+		scrollTop(transfer_transaction_btn);
+		transfer_transaction_btn.click();
 	}
 
 	public void clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(int countDraftTransactions, int numberOfRows) throws InterruptedException {
 
 		for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
-			WebElement draftTransactionElement = driver.findElement(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + i + "]"));
-			click(draftTransactionElement);
+			Thread.sleep(200);
+			By draft_transaction_element_path = By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + Integer.toString(i) + "]");
+			waitForElementToBeEnabled(driver, draft_transaction_element_path, 10);
+			WebElement draft_transaction_element = driver.findElement(draft_transaction_element_path);
+			draft_transaction_element.click();
 		}
-		scrollTop(btnTransferDraftOnTransactionsPage);
-		click(btnTransferDraftOnTransactionsPage);
-		click(btnTransferTransactionsDraftOnTransactionsPage);
+
+		Thread.sleep(200);
+		By transfer_draft_btn_path = By.xpath("//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']");
+		waitForElementToBeEnabled(driver, transfer_draft_btn_path, 10);
+		WebElement transfer_draft_btn = driver.findElement(transfer_draft_btn_path);
+		scrollTop(transfer_draft_btn);
+		click(transfer_draft_btn);
+
+		Thread.sleep(200);
+		By transfer_transaction_btn_path = By.xpath("//button[contains(text(),'Transfer Transactions')]");
+		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
+		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
+		transfer_transaction_btn.click();
 		Thread.sleep(500);
 		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
 		try {

@@ -85,7 +85,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*18.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
         Thread.sleep(2000);
 
         log("/*19.----Go to Appointment Tab --*/");
