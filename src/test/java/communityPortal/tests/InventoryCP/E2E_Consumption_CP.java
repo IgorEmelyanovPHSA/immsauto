@@ -110,11 +110,17 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.successRegisteredMessageAppear();
         Thread.sleep(2000);
         log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
         Thread.sleep(2000);
+        try {
+            inClinicExperience_CP.selectEarlyBookingReason();
+            Thread.sleep(2000);
+        } catch(Exception ex) {
+            System.out.println("Early Booking reason option is not found. Continue...");
+        }
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 
@@ -146,7 +152,7 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.AppointmentConfirmationMessage();
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*35_1.----Refresh page again - should not be like that again --*/");
         inClinicExperience_CP.refreshBrowser();
@@ -226,7 +232,6 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(2000);
         log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
-
         log("/*47.---the Home - Client Search showing up  --*/");
         inClinicExperience_CP.validateHomePageShownUp();
 
