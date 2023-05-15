@@ -78,6 +78,10 @@ public class HealthCloudConsolePage extends BasePage {
     }
 
     public String getStatusActualForValidation() throws InterruptedException {
+        //scroll down to control element
+        WebElement element = driver.findElement(status_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
         waitForElementToBeLocated(driver, status_actual_field_value_1, 10);
         Thread.sleep(2000);
         priority_actual_field_value.isDisplayed();

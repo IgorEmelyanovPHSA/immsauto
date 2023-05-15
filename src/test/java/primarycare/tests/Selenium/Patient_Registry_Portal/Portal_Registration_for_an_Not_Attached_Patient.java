@@ -169,7 +169,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
 
         log("/*29.----Close All previously opened Tab's --*/");
         common.closeAllHealthCloudConsoleTabs();
-        Thread.sleep(10000);
+        Thread.sleep(2000);
 
         log("/*30.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
         common.globalSearch(personalHealthNumber);
@@ -212,9 +212,9 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         Thread.sleep(2000);
 
         log("/*38.---- Validate Status - 'Active'  ---*/");
-        log("/*----scroll down a bit --*/");
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-        Thread.sleep(2000);
+        //log("/*----scroll down a bit --*/");
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+        //Thread.sleep(2000);
         String statusActual = healthCloudConsolePage.getStatusActualForValidation();
         log("/*---- Status actual is: " + statusActual + " --*/");
         assertEquals(statusExpected, statusActual);
