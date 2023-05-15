@@ -13,7 +13,7 @@ public class CommonMethods extends BasePage {
     @FindBy(xpath = "//button[@aria-label = 'Search']")
     private WebElement searchAssistant;
 
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    @FindBy(xpath = "//input[@placeholder = 'Search Accounts and more...']")
     private WebElement searchInput;
 
     @FindBy(xpath = "(//a[@title='Sandy Prior'])[2]")
