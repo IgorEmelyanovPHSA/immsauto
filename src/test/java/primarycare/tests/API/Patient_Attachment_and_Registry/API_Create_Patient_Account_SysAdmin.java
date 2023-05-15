@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class API_Create_Patient_Account_SysAdmin extends BaseTest_PrimaryCare {
     //public String lastname = "IgorAPI_Account_" + new Random().nextInt(1000);
-    public String firstName = "Kenton2";
+    public String firstName = "Kenton2_Patient_NO_Case";
     public String lastName = "Troup2";
     public String recordTypeId = "0125f0000003ekBAAQ ";
     public String phn = "9873010088";
@@ -42,9 +42,9 @@ public class API_Create_Patient_Account_SysAdmin extends BaseTest_PrimaryCare {
     public void API_Remove_Patient_Account_in_Salesforce_as_SysAdmin(){
         TestcaseID = "252628"; //C252628
         APIDelete apidelete = new APIDelete();
-        log("Delete account from Account.");
+        log("Delete Patient account from Account.");
         String apiResponse = apidelete.deleteAccount(accId);
-        log("Deleted Account from Account is: " +accId);
+        log("Deleted Patient Account from Account is: " +accId);
         log(apiResponse);
         //Assert.assertEquals(accountNameReturned, name);
     }

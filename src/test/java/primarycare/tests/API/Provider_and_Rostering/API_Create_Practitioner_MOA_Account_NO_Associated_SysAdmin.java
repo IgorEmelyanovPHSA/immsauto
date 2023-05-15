@@ -1,47 +1,43 @@
 package primarycare.tests.API.Provider_and_Rostering;
 
 import org.testng.annotations.Test;
-import primarycare.pages.APICreatePatientAccount;
+import primarycare.pages.APICreatePractitionerAccount;
 import primarycare.pages.APIDelete;
 import primarycare.tests.BaseTest_PrimaryCare;
 
 public class API_Create_Practitioner_MOA_Account_NO_Associated_SysAdmin extends BaseTest_PrimaryCare {
     //public String lastname = "IgorAPI_Account_" + new Random().nextInt(1000);
-    public String firstName = "Kenton3";
-    public String lastName = "Troup3";
-    public String recordTypeId = "0125f0000003ekBAAQ ";
-    public String phn = "9873010088";
-    public String gender = "Male";
-    public String birthdate = "1959-12-05";
-    public String preferredCommunicationChannel = "Email";
-    public String mobile = "7788793897";
+    //public String salutation = "Ms.";
+    public String firstName = "Tanya222_Provider";
+    public String lastName = "Drysdale";
+    public String birthdate = "1983-07-11";
+    public String gender = "Women";
     public String email = "accountToDelete@phsa.ca";
-    public String street = "307-7631 Francis Rd";
-    public String city = "Richmond";
-    public String postalcode = "V6Y 1A3";
+    public String phone = "2502946960";
     public String isActive = "true";
+    public String recordTypeId = "0125f000000qtflAAA";
 
     public String accId;
 
     @Test(priority = 1)
     public void API_Can_Create_Practitioner_MOA_Account_No_Associated_in_Salesforce_as_SysAdmin(){
         TestcaseID = "252884"; //C252884
-        APICreatePatientAccount apiinsertAccount = new APICreatePatientAccount();
-        log("Create Patient account record.");
-        String accountID = apiinsertAccount.insertAccount(recordTypeId, firstName,lastName,phn,gender,
-                birthdate,preferredCommunicationChannel, mobile,email,street,city,postalcode,isActive);
-        log("Created Patient's id is: " +accountID);
+        APICreatePractitionerAccount apiCreatePractitionerAccount = new APICreatePractitionerAccount();
+        log("Create Practitioner MOA account record.");
+        String accountID = apiCreatePractitionerAccount.insertPractitionerAccount(recordTypeId, firstName,lastName,gender,
+                birthdate,phone,email,isActive);
+        log("Created MOA Practitioner's id is: " +accountID);
         accId=accountID;
     }
 
 
     @Test(priority = 2)
-    public void API_Remove_Create_Practitioner_MOA_Account_No_Associated_in_Salesforce_as_SysAdmin(){
+    public void API_Remove_Practitioner_MOA_Account_No_Associated_in_Salesforce_as_SysAdmin(){
         TestcaseID = "252885"; //C252885
         APIDelete apidelete = new APIDelete();
-        log("Delete account from Account.");
+        log("Delete Practitioner account from Account.");
         String apiResponse = apidelete.deleteAccount(accId);
-        log("Deleted Account from Account is: " +accId);
+        log("Deleted Practitioner Account from Account is: " +accId);
         log(apiResponse);
         //Assert.assertEquals(accountNameReturned, name);
     }

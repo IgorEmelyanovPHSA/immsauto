@@ -7,7 +7,7 @@ import primarycare.pages.APIDelete;
 import static primarycare.tests.BaseTest_PrimaryCare.*;
 
 public class API_Create_Case_for_Patient_Account_SysAdmin {
-    public String firstName = "Kenton3";
+    public String firstName = "Kenton3_Patient_With_Case";
     public String lastName = "Troup3";
     public String recordTypeId = "0125f0000003ekBAAQ ";
     public String phn = "9873010088";
@@ -41,9 +41,9 @@ public class API_Create_Case_for_Patient_Account_SysAdmin {
     public void API_Removing_Case_for_Patient_Account_in_Salesforce_as_SysAdmin(){
         //TestcaseID = "252628"; //C252628
         APIDelete apidelete = new APIDelete();
-        log("Delete account from Account.");
+        log("Delete Patient Case from Cases .");
         String apiResponse = apidelete.deleteAccount(accId);
-        log("Deleted Account from Account is: " +accId);
+        log("Deleted Patient Case from Cases is: " +accId);
         log(apiResponse);
         //Assert.assertEquals(accountNameReturned, name);
     }

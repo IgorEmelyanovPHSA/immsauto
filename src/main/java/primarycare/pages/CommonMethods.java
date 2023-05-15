@@ -85,6 +85,7 @@ public class CommonMethods extends BasePage {
     public void globalSearch(String textToSearch) throws InterruptedException {
         waitForElementToBeVisible(driver, searchAssistant, 10);
         click(searchAssistant);
+        Thread.sleep(2000);
         waitForElementToBeVisible(driver, searchInput, 10);
         typeIn(searchInput,textToSearch);
         searchInput.sendKeys(Keys.RETURN);

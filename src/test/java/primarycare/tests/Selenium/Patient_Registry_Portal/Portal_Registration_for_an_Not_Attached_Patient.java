@@ -1,5 +1,6 @@
 package primarycare.tests.Selenium.Patient_Registry_Portal;
 
+import org.openqa.selenium.JavascriptExecutor;
 import primarycare.pages.CommonMethods;
 import primarycare.pages.HealthCloudConsolePage;
 import primarycare.tests.Utilities.ApiQueries;
@@ -168,7 +169,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
 
         log("/*29.----Close All previously opened Tab's --*/");
         common.closeAllHealthCloudConsoleTabs();
-        Thread.sleep(2000);
+        Thread.sleep(10000);
 
         log("/*30.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
         common.globalSearch(personalHealthNumber);
@@ -198,22 +199,25 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         assertEquals(priorityExpectedValue, priorityActualValue);
         Thread.sleep(2000);
 
-        log("/*36.---- Validate Status - 'Active'  ---*/");
-        String statusActual = healthCloudConsolePage.getStatusActualForValidation();
-        log("/*---- Status actual is: " + statusActual + " --*/");
-        assertEquals(statusExpected, statusActual);
-        Thread.sleep(2000);
-
-        log("/*37.---- Validate Account name - '3113 Broadmoor'  ---*/");
+        log("/*36.---- Validate Account name - '3113 Broadmoor'  ---*/");
         String accountNameActual = healthCloudConsolePage.getAccountNameActualForValidation();
         log("/*---- Account Name actual is: " + accountNameActual + " --*/");
         assertEquals(accountNameExpected, accountNameActual);
         Thread.sleep(2000);
 
-        log("/*38.---- Validate Case Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
+        log("/*37.---- Validate Case Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
         String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
         log("/*---Case Reason actual is: " + caseReasonActual + " --*/");
         assertEquals(caseReasonExpected, caseReasonActual);
+        Thread.sleep(2000);
+
+        log("/*38.---- Validate Status - 'Active'  ---*/");
+        log("/*----scroll down a bit --*/");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+        Thread.sleep(2000);
+        String statusActual = healthCloudConsolePage.getStatusActualForValidation();
+        log("/*---- Status actual is: " + statusActual + " --*/");
+        assertEquals(statusExpected, statusActual);
         Thread.sleep(2000);
 
     }

@@ -49,9 +49,9 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     private WebElement continue_button;
     private By continue_button_1 = By.xpath("(.//button[@aria-label='Continue'])[1]");
 
-    @FindBy(xpath = ".//omnistudio-omniscript-places-typeahead[@data-omni-key='StreetAddress']//input[@class='slds-input']")
+    @FindBy(xpath = ".//c-patient-reg-type-ahead[@data-omni-key='StreetAddress']//input[@class='slds-input']")
     private WebElement street_address;
-    private By street_address_1 = By.xpath(".//omnistudio-omniscript-places-typeahead[@data-omni-key='StreetAddress']//input[@class='slds-input']");
+    private By street_address_1 = By.xpath(".//c-patient-reg-type-ahead[@data-omni-key='StreetAddress']//input[@class='slds-input']");
 
     @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']")
     private WebElement city;
