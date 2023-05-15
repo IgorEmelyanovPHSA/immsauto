@@ -93,7 +93,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience_CP.successMessage();
+        inClinicExperience_CP.successMessageAppear();
 
         log("/*16.----click Next button --*/");
         inClinicExperience_CP.clickNextButton();

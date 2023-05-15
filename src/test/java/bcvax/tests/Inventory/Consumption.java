@@ -126,7 +126,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 25.----click Verify PHN button --*/");
 		inClinicExperiencePage.clickVerifyPHNButton();
 		log("/*-- 26.'PNH match successful' --*/");
-		inClinicExperiencePage.successMessage();
+		inClinicExperiencePage.successMessageAppear();
 		log("/*-- 27.'Click next button --*/");
 		inClinicExperiencePage.clickNextButton();
 		log("/*-- 28.'Enter email address " +email +"--*/");

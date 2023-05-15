@@ -87,9 +87,10 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         log("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
+        Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-
+        Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
@@ -105,9 +106,9 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        //supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
@@ -150,9 +151,9 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
+        //supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -199,9 +200,10 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         log("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
+        Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
-
+        Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
@@ -217,9 +219,8 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
@@ -229,9 +230,9 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        //supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
         supplyConsolePage.clickTransactionsTab();
