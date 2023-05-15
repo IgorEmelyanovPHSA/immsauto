@@ -86,7 +86,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.successRegisteredMessageAppear();
 
         log("/*18.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*19----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
@@ -122,7 +122,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.AppointmentConfirmationMessage();
 
         log("/*30.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*31.----Refresh page - need to be fixed by dev's --*/");
         inClinicExperience_CP.refreshBrowser();

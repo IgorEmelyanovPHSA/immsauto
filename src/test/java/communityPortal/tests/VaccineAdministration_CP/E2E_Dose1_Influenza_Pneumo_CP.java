@@ -98,7 +98,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(10000); //wait for Related Tab showing up
 
         log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
         Thread.sleep(5000);//wait for accordion loading
 
         log("/*23----Go to Appointment Tab --*/");
@@ -146,7 +146,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(3000);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
         Thread.sleep(5000);
         //////
         log("/*35_1.----Refresh page again - should not be like that again --*/");
@@ -240,7 +240,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(4000);
 
         log("/*---- 55. Navigate to Person Account related tab ---*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab_CP();
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
         Thread.sleep(2000);
 
         log("/*-- 56. Validate Aftercare status for Influenza --*/");

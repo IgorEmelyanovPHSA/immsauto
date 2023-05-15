@@ -108,7 +108,7 @@ public abstract class BasePage<T> {
 		wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath)));
 	}
 
-	public void waitForElement(By xpath, int seconds) throws InterruptedException {
+	public void waitForElementToBeEnabled(WebDriver driver, By xpath, int seconds) throws InterruptedException {
 		int timeout = seconds * 1000;
 		boolean found = false;
 		Instant start = Instant.now();

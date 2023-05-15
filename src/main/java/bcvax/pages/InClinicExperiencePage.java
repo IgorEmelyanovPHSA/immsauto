@@ -348,10 +348,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
 	private WebElement ice_page_displayed;
 
-	@FindBy(xpath = ".//div[@class = 'slds-form-element__control']//span[text() = 'Covid-19 Vaccine']")
-	private WebElement click_on_covid19_vaccination_checkbox;
-	private By click_on_covid19_vaccination_checkbox_ = By.xpath("..//div[@class = 'slds-form-element__control']//span[text() = 'Covid-19 Vaccine']");
-
 	@FindBy(xpath = ".//div[@class = 'slds-form-element__control']//span[text() = 'Influenza Vaccine']")
 	private WebElement click_on_influenza_vaccination_checkbox;
 	private By click_on_influenza_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-form-element__control']//span[text() = 'Influenza Vaccine']");
@@ -367,15 +363,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "(.//span[text() = 'Travel'])[2]")
 	private WebElement select_early_booking_reason_for_prodsup;
-
-	@FindBy(xpath = ".//a[text() = 'Related']")
-	private WebElement person_account_Related_tab;
-	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-
-	@FindBy(xpath = ".//span[text() = 'Related']")
-	private WebElement person_account_Related_tab_CP;
-	private By person_account_Related_tab_1_CP = By.xpath("(.//span[text() = 'Related'])");
-
 
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
@@ -1340,12 +1327,14 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
 		Thread.sleep(500);
-		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
-		scrollTop(click_on_covid19_vaccination_checkbox, false);
+		By covid19_vaccination_checkbox_path = By.xpath("//div[@class = 'slds-form-element__control']//span[text() = 'Covid-19 Vaccine']");
+		waitForElementToBeEnabled(driver, covid19_vaccination_checkbox_path, 10);
+		WebElement covid19_vaccination_checkbox = driver.findElement(covid19_vaccination_checkbox_path);
+		scrollTop(covid19_vaccination_checkbox, false);
 		Thread.sleep(500);
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(500);
-		click_on_covid19_vaccination_checkbox.click();
+		covid19_vaccination_checkbox.click();
 	}
 
 	public void clickOnVaccinationInfluenzaCheckbox() throws InterruptedException {
@@ -1750,19 +1739,11 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(person_account_Related_tab_1);
-		isDisplayed(person_account_Related_tab_1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-
-	public void clickOnPersonAccountRelatedTab_CP() throws InterruptedException {
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(person_account_Related_tab_1_CP);
-		isDisplayed(person_account_Related_tab_1_CP);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+		By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
+		waitForElementToBePresent(driver, related_tab_path, 10);
+		WebElement element = driver.findElement(related_tab_path);
+		element.click();
 	}
 
 	public void selectSearchByClinicNameTab() throws InterruptedException {
