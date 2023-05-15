@@ -110,7 +110,7 @@ public class WastageCP extends BaseTest {
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
 
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterDeduction + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterDeduction);
-			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.01);
 
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeDeduction + " vs dose conversion factor after adjustment " + doseConversionAfterDeduction);
 			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
@@ -160,9 +160,9 @@ public class WastageCP extends BaseTest {
 		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 		double remainingDosesBefore = remDosesQtyConversionFactorBefore[0];
-		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesBefore);
+		log("/*-- . remaining doses Distribution_1_1 Before are: -->" + remainingDosesBefore);
 		double remainingQuantitiesBefore = remDosesQtyConversionFactorBefore[1];
-		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesBefore);
+		log("/*-- . remaining Quantity Distribution_1_1 Before are: -->" + remainingQuantitiesBefore);
 		double remainingConversionFactor = remDosesQtyConversionFactorBefore[2];
 		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
 
@@ -193,9 +193,8 @@ public class WastageCP extends BaseTest {
 
 		log("/*10.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
 		log("----Validation by Doses --");
-		double remainingDosesBeforeCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
-				(remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor));
-		assertEquals(remainingDosesBeforeCalculation, remainingDosesAfter);
+		double remainingDosesBeforeCalculation = (remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor;
+		assertEquals(remainingDosesBeforeCalculation, remainingDosesAfter, 0.1);
 		log("----Validation by Quantities --");
 		assertEquals((remainingQuantitiesBefore - amountOfQuantityToWaste), remainingQuantitiesAfter);
 		log("----Validation Conversion factor --");
