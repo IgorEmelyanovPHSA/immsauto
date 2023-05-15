@@ -210,7 +210,7 @@ public class Tables extends BasePage {
         while(count < 10) {
             try {
                 WebElement myCell = getTableCell(searchCriteria, table);
-                WebElement element = myCell.findElement(By.xpath(".//a/../.."));
+                WebElement element = myCell.findElement(By.xpath(".//a"));
                 element.click();
                 break;
             } catch(Exception ex) {
