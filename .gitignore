@@ -217,3 +217,5 @@ buildNumber.properties
 allure-results/
 /inventory_unified_tests.xml
 /inventory_unified_tests_cp.xml
+.chromedriver.exe
+
