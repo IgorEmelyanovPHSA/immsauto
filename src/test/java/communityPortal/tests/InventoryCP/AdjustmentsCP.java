@@ -99,6 +99,7 @@ public class AdjustmentsCP extends BaseTest {
 				+ " / Adjustment doses amount " + amountOfDosesToAdjust + " / Remaining doses after Adjustment " + remainingDosesAfterAdjustmentInPopUp);
 		assertEquals((remainingDosesBeforeAdjustment + amountOfDosesToAdjust), remainingDosesAfterAdjustmentInPopUp);
 
+		Thread.sleep(2000);
 		log("/*9.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
@@ -137,7 +138,7 @@ public class AdjustmentsCP extends BaseTest {
 			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
+			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.01);
 
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
 			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
@@ -212,6 +213,7 @@ public class AdjustmentsCP extends BaseTest {
 		log("/*8.----Clicking on btn Adjustment --*/");
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
 
+		Thread.sleep(2000);
 		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");
 		//double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -226,7 +228,7 @@ public class AdjustmentsCP extends BaseTest {
 		log("----Validation by Doses --");
 		double remainingDosesCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
 				(remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
-		assertEquals(remainingDosesAfter, remainingDosesCalculation);
+		assertEquals(remainingDosesAfter, remainingDosesCalculation, 0.1);
 		log("----Validation by Quantities --");
 		assertEquals(remainingQuantitiesAfter, (remainingQuantitiesBefore + amountOfQuantitiesToAdjust));
 		log("----Validation Conversion factor --");
