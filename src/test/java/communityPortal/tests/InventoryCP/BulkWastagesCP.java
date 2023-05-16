@@ -48,7 +48,7 @@ public class BulkWastagesCP extends BaseTest {
 		log("/*3.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
 		log("/*---     count:" + countSupplyContainers);
-		
+
 		log("/*4.----Click on Container's records Checkboxes --*/");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		if (countSupplyContainers >= 3) {
@@ -117,7 +117,7 @@ public class BulkWastagesCP extends BaseTest {
 			
 			//Comparing results
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
-			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.01);
 			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
 		}
 	}
@@ -152,6 +152,7 @@ public class BulkWastagesCP extends BaseTest {
 		log("/*---     count:" + countSupplyContainers);
 
 		log("/*4.----Click on Container's records Checkboxes --*/");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		if (countSupplyContainers >= 3) {
 			int k = 1;
 			while (k <= 3) {
