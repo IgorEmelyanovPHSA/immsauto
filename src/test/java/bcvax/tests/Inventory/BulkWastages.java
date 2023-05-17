@@ -88,7 +88,8 @@ public class BulkWastages extends BaseTest {
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
 		Thread.sleep(2000);
-		
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(3);
 		
@@ -102,7 +103,7 @@ public class BulkWastages extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterDeductionDoses = remainingDoses - amountOfDosesToWaste;
-			double afterDeductionQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterDeductionQuantity = Double.parseDouble(df.format(
 					remainingQuantity - (amountOfDosesToWaste / doseConversionFactor)));
 //            log("Row number " + i + " / Remaining Doses = " + remainingDoses + " / Remaining Quantity = " + remainingQuantity
 //                    + " / Dose Conversion Factor = " + doseConversionFactor);
@@ -180,6 +181,8 @@ public class BulkWastages extends BaseTest {
 
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
+		Thread.sleep(2000);
+		driver.navigate().refresh();
 		Thread.sleep(2000);
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(3);

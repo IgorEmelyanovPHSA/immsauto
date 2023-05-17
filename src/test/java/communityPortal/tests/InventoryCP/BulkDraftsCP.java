@@ -167,7 +167,7 @@ public class BulkDraftsCP extends BaseTest {
             double doseConversionFactor = readFromList.get(2);
             //Actual calculation
             double afterAdjustmentDoses = remainingDoses - amountOfDosesToTransfer;
-            double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+            double afterAdjustmentQuantity = Double.parseDouble(df.format(
                     remainingQuantity - (amountOfDosesToTransfer / doseConversionFactor)));
             writeToList.add(afterAdjustmentDoses);
             writeToList.add(afterAdjustmentQuantity);
@@ -183,8 +183,8 @@ public class BulkDraftsCP extends BaseTest {
             double remainingQuantityAfterTransfer = afterDeduction.get(1);
             double doseConversionFactorBeforeTransfer = afterDeduction.get(2);
             ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfter.get(i);
-            double calculatedDosesAfterTransfer = calculated.get(0);
-            double calculatedRemainingQuantityAfterTransfer = calculated.get(1);
+            double calculatedDosesAfterTransfer = Double.parseDouble(df.format(calculated.get(0)));
+            double calculatedRemainingQuantityAfterTransfer = Double.parseDouble(df.format(calculated.get(1)));
             double doseConversionAfterTransfer = calculated.get(2);
 
             //Comparing results

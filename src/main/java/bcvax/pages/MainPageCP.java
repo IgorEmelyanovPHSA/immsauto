@@ -108,7 +108,7 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         By tab_supply_location_path = By.xpath("//a[text()='Supply Locations']");
         System.out.println("/*----Locate Dropdown Menu --*/");
-        waitForElementToBeEnabled(driver, tab_supply_location_path, 10);
+        waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
         WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
         scrollTop(tab_supply_location);
         tab_supply_location.click();

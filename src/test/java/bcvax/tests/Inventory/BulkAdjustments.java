@@ -122,7 +122,7 @@ public class BulkAdjustments extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-			double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterAdjustmentQuantity = Double.parseDouble(df.format(
 					remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
 			writeToList.add(afterAdjustmentDoses);
 			writeToList.add(afterAdjustmentQuantity);

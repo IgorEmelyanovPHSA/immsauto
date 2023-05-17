@@ -121,7 +121,7 @@ public class Wastage extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterDeductionDoses = remainingDoses - amountOfDosesToWaste;
-			double afterDeductionQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterDeductionQuantity = Double.parseDouble(df.format(
 					remainingQuantity - (amountOfDosesToWaste / doseConversionFactor)));
 			writeToList.add(afterDeductionDoses);
 			writeToList.add(afterDeductionQuantity);
@@ -238,7 +238,7 @@ public class Wastage extends BaseTest {
 
 		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
 		log("----Validation by Doses --");
-		double remainingDosesBeforeCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
+		double remainingDosesBeforeCalculation = Double.parseDouble(df.format(
 				(remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor));
 		assertEquals(remainingDosesBeforeCalculation, remainingDosesAfter);
 		log("----Validation by Quantities --");

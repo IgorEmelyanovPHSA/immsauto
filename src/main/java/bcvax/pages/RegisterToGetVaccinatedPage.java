@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class RegisterToGetVaccinatedPage extends BasePage{
 
@@ -99,14 +100,18 @@ public class RegisterToGetVaccinatedPage extends BasePage{
 
         if (isIndigenous==false){
             click(radioBtnNoIndigenous);
-        }
-        else{
+        } else {
             click(radioBtnYesIndigenous);
         }
-            click(btnContinueRegistration);
+        click(btnContinueRegistration);
+        By success_error_msg_path = By.xpath("//div[@class='toastTitle slds-text-heading--small' and text()='Error']");
+        waitForElementToBeLocated(driver, success_error_msg_path, 5);
+        WebElement success_error_msg = driver.findElement(success_error_msg_path);
+        Assert.assertFalse(success_error_msg.getText().equals("Error"), "Registration not Successful...");
     }
 
     public void fillMandatoryFieldsOnContactInformationSection(String email, String phoneNumber) throws InterruptedException {
+        Thread.sleep(500);
         typeIn(textEmail, email);
         typeIn(textEmailConfirm, email);
         typeIn(textPhoneNumber, phoneNumber);

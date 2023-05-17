@@ -221,6 +221,7 @@ public class TransferCancellationCP extends BaseTest {
 
 		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
+		Thread.sleep(2000);
 		supplyConsolePage.clickTransactionsTab();
 
 		System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");

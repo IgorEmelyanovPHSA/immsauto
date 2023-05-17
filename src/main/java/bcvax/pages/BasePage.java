@@ -116,11 +116,18 @@ public abstract class BasePage<T> {
 		while(!found) {
 			try {
 				found = driver.findElement(xpath).isEnabled();
-				System.out.println("Element found");
+				System.out.println("Element found, Status is: " + String.valueOf(found));
 				System.out.println(end.toString());
+				if(!found) {
+					end = Instant.now();
+					if(Duration.between(start, end).toMillis() > timeout) {
+						throw new NotFoundException("Element is Found but not Enabled after " + seconds + " seconds");
+					}
+					Thread.sleep(200);
+				}
 			} catch (NotFoundException ex) {
 				end = Instant.now();
-				if(Duration.between(start, end).toMillis() > timeout) {
+				if (Duration.between(start, end).toMillis() > timeout) {
 					throw new NotFoundException("Element not found after " + seconds + " seconds");
 				}
 				Thread.sleep(200);

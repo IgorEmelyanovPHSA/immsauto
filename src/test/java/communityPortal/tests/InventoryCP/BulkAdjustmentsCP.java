@@ -101,8 +101,9 @@ public class BulkAdjustmentsCP extends BaseTest {
 
         log("/*8.----Click button Adjustment on Container - Adjustment page --*/");
         supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-        Thread.sleep(3000);
-
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         log("/*9.----Read Remaining Doses And Quantity After Adjustment --*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
@@ -116,7 +117,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             double doseConversionFactor = readFromList.get(2);
             //Actual calculation
             double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-            double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+            double afterAdjustmentQuantity = Double.parseDouble(df.format(
                     remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
             writeToList.add(afterAdjustmentDoses);
             writeToList.add(afterAdjustmentQuantity);
@@ -132,8 +133,8 @@ public class BulkAdjustmentsCP extends BaseTest {
             double remainingQuantityAfterAdjustment = afterDeduction.get(1);
             double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
             ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-            double calculatedDosesAfterAdjustment = calculated.get(0);
-            double calculatedRemainingQuantityAfterAdjustment = calculated.get(1);
+            double calculatedDosesAfterAdjustment = Double.parseDouble(df.format(calculated.get(0)));
+            double calculatedRemainingQuantityAfterAdjustment = Double.parseDouble(df.format(calculated.get(1)));
             double doseConversionAfterAdjustment = calculated.get(2);
 
             //Comparing results
@@ -215,8 +216,9 @@ public class BulkAdjustmentsCP extends BaseTest {
 
         log("/*8.----Click button Adjustment on Container - Adjustment page --*/");
         supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-        Thread.sleep(3000);
-
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         log("/*9.----Read Remaining Doses And Quantity After Adjustment --*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
@@ -245,8 +247,8 @@ public class BulkAdjustmentsCP extends BaseTest {
             double remainingQuantityAfterAdjustment = afterDeduction.get(1);
             double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
             ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-            double calculatedDosesAfterAdjustment = calculated.get(0);
-            double calculatedRemainingQuantityAfterAdjustment = calculated.get(1);
+            double calculatedDosesAfterAdjustment = Double.parseDouble(df.format(calculated.get(0)));
+            double calculatedRemainingQuantityAfterAdjustment = Double.parseDouble(df.format(calculated.get(1)));
             double doseConversionAfterAdjustment = calculated.get(2);
 
             //Comparing results

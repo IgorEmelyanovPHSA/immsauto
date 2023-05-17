@@ -91,7 +91,7 @@ public class BulkWastagesCP extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterDeductionDoses = remainingDoses - amountOfDosesToWaste;
-			double afterDeductionQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterDeductionQuantity = Double.parseDouble(df.format(
 					remainingQuantity - (amountOfDosesToWaste / doseConversionFactor)));
 //            log("Row number " + i + " / Remaining Doses = " + remainingDoses + " / Remaining Quantity = " + remainingQuantity
 //                    + " / Dose Conversion Factor = " + doseConversionFactor);
@@ -111,8 +111,8 @@ public class BulkWastagesCP extends BaseTest {
 			double remainingQuantityAfterDeduction = afterDeduction.get(1);
 			double doseConversionFactorBeforeDeduction = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterDeduction.get(i);
-			double calculatedDosesAfterDeduction = calculated.get(0);
-			double calculatedRemainingQuantityAfterDeduction = calculated.get(1);
+			double calculatedDosesAfterDeduction = Double.parseDouble(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterDeduction = Double.parseDouble(df.format(calculated.get(1)));
 			double doseConversionAfterDeduction = calculated.get(2);
 			
 			//Comparing results
@@ -211,8 +211,8 @@ public class BulkWastagesCP extends BaseTest {
 			double remainingQuantityAfterDeduction = afterDeduction.get(1);
 			double doseConversionFactorBeforeDeduction = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterDeduction.get(i);
-			double calculatedDosesAfterDeduction = calculated.get(0);
-			double calculatedRemainingQuantityAfterDeduction = calculated.get(1);
+			double calculatedDosesAfterDeduction = Double.parseDouble(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterDeduction = Double.parseDouble(df.format(calculated.get(1)));
 			double doseConversionAfterDeduction = calculated.get(2);
 
 			//Comparing results

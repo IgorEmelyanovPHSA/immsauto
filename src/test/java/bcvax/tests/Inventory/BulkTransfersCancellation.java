@@ -106,7 +106,7 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        //supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         supplyConsolePage.selectSupplyLocationName(supply_location_to);
         supplyConsolePage.refreshBrowser();
@@ -151,7 +151,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        //supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         supplyConsolePage.selectSupplyLocationName(supply_location_to);
         supplyConsolePage.refreshBrowser();
@@ -219,6 +219,7 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         supplyConsolePage.selectSupplyLocationName(supply_location_to);
         supplyConsolePage.refreshBrowser();
@@ -230,7 +231,7 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        //supplyConsolePage.clickSupplyLocationsTab();
+        supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         supplyConsolePage.selectSupplyLocationName(supply_location_from);
         supplyConsolePage.refreshBrowser();

@@ -72,7 +72,6 @@ public class AdjustmentsCP extends BaseTest {
 
 		log("/*4.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
 
 		log("/*5.----select Adjustment from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectAdjustmentFromDropDown();
@@ -113,7 +112,7 @@ public class AdjustmentsCP extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-			double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterAdjustmentQuantity = Double.parseDouble(df.format(
 					remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
 			writeToList.add(afterAdjustmentDoses);
 			writeToList.add(afterAdjustmentQuantity);
@@ -199,7 +198,6 @@ public class AdjustmentsCP extends BaseTest {
 
 		log("/*4.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
 
 		log("/*5.----Select Adjustment from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectAdjustmentFromDropDown();
@@ -226,7 +224,7 @@ public class AdjustmentsCP extends BaseTest {
 
 		log("/*10.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
 		log("----Validation by Doses --");
-		double remainingDosesCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
+		double remainingDosesCalculation = Double.parseDouble(df.format(
 				(remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
 		assertEquals(remainingDosesAfter, remainingDosesCalculation, 0.1);
 		log("----Validation by Quantities --");
