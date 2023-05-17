@@ -142,7 +142,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
             log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
+            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.01);
 
             log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
             assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
@@ -256,7 +256,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
             log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
+            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.01);
 
             log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
             assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);

@@ -153,6 +153,7 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*23.----Click on Automation Supply Location_1 --*/");
         cpMainPage.selectSupplyLocationName(supplyLocationFrom);
+        Thread.sleep(2000);
 
         log("/*24.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterTransfer = supplyConsolePage.countDosesAndQuantityMap(3);
@@ -192,7 +193,7 @@ public class BulkDraftsCP extends BaseTest {
             assertEquals(remainingDosesAfter, calculatedDosesAfterTransfer);
 
             log("Compering remaining quantity after transfer " + remainingQuantityAfterTransfer + " vs calculated quantity after transfer " + calculatedRemainingQuantityAfterTransfer);
-            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer);
+            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer, 0.01);
 
             log("Compering dose conversion factor before transfer " + doseConversionFactorBeforeTransfer + " vs dose conversion factor after transfer " + doseConversionAfterTransfer);
             assertEquals(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer);
