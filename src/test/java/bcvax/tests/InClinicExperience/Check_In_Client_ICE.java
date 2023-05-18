@@ -85,7 +85,7 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*14.----click Verify PHN button --*/");
         inClinicExperiencePage.clickVerifyPHNButton();
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperiencePage.successMessage();
+        inClinicExperiencePage.successMessageAppear();
 
         log("/*16.----click Next button --*/");
         inClinicExperiencePage.clickNextButton();

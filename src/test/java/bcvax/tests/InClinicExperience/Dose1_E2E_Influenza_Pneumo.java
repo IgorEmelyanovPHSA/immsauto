@@ -88,7 +88,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         inClinicExperience.clickVerifyPHNButton();
         Thread.sleep(2000);
         System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience.successMessage();
+        inClinicExperience.successMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         System.out.println("/*19.----click Next button --*/");
         inClinicExperience.clickNextButton();

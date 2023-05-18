@@ -94,7 +94,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(2000);
 
 		log("/*-- 16.'PNH match successful' --*/");
-		inClinicExperiencePage.successMessage();
+		inClinicExperiencePage.successMessageAppear();
 
 		log("/*-- 17.'Click next button --*/");
 		inClinicExperiencePage.clickNextButton();

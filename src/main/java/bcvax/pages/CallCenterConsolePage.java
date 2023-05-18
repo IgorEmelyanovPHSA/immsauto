@@ -2,6 +2,7 @@ package bcvax.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class CallCenterConsolePage extends BasePage {
 	
@@ -218,10 +219,10 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void successMessageAppear() throws InterruptedException {
-		//try {
-		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
-		driver.findElement(By.xpath(".//div[text() = 'Success']"));
-		Thread.sleep(2000);
+		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
+		waitForElementToBeEnabled(driver, message_path, 10);
+		WebElement message = driver.findElement(message_path);
+		Assert.assertEquals(message.getText(), "Success", "Expected PHN Match Success but found " + message.getText());
 		log("  -- success message has been Appears - /");
 	}
 	

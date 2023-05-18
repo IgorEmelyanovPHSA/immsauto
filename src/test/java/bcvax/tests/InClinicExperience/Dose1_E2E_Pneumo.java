@@ -74,7 +74,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*17.----click Verify PHN button --*/");
         inClinicExperience.clickVerifyPHNButton();
         System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience.successMessage();
+        inClinicExperience.successMessageAppear();
         System.out.println("/*19.----click Next button --*/");
         inClinicExperience.clickNextButton();
         System.out.println("/*20.----'Enter email address " +email +"--*/");

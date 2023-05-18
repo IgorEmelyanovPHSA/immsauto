@@ -85,7 +85,7 @@ public class WastageCP extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterDeductionDoses = remainingDoses - amountOfDosesToWaste;
-			double afterDeductionQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterDeductionQuantity = Double.parseDouble(df.format(
 					remainingQuantity - (amountOfDosesToWaste / doseConversionFactor)));
 			writeToList.add(afterDeductionDoses);
 			writeToList.add(afterDeductionQuantity);

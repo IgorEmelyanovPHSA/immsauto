@@ -89,7 +89,7 @@ public class Dose1_E2E_Influenza extends BaseTest {
         Thread.sleep(2000);
 
         log("/*17.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience.successMessage();
+        inClinicExperience.successMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*18.----click Next button --*/");
