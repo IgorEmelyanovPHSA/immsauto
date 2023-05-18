@@ -7,9 +7,6 @@ import org.testng.Assert;
 public class CallCenterConsolePage extends BasePage {
 	
 	/*---------Properties-------*/
-	@FindBy(xpath = ".//span[@title='Call Center Console']")
-	private WebElement callcenter_page_displayed;
-	
 	@FindBy(xpath = ".//button[text() = 'Register New Citizen']")
 	private WebElement register_button;
 	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
@@ -132,11 +129,7 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = "(//a[@data-label='Related'])")
 	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
-	
-	@FindBy(xpath = "//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]")
-	private WebElement verify_contact_information_checkbox;
-	private By verify_contact_information_checkbox1 = By.xpath("(//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]");
-	
+
 	@FindBy(xpath = "(//button[@title='Primary action'])[1]")
 	private WebElement refresh_forecast_button;
 	private By refresh_forecast_button1 = By.xpath("(//button[@title='Primary action'])[1]");
@@ -156,9 +149,12 @@ public class CallCenterConsolePage extends BasePage {
 	
 	
 	/*-------------Methods--------------*/
-	public void verifyIsCallCenterConsolePageDisplayed() {
-		waitForElementToBeVisible(driver, callcenter_page_displayed, 10);
-		callcenter_page_displayed.isDisplayed();
+	public void verifyIsCallCenterConsolePageDisplayed() throws InterruptedException {
+		Thread.sleep(500);
+		By callcenter_page_title_path = By.xpath(".//span[@title='Call Center Console']");
+		waitForElementToBeLocated(driver, callcenter_page_title_path, 10);
+		WebElement callcenter_page_title = driver.findElement(callcenter_page_title_path);
+		callcenter_page_title.isDisplayed();
 	}
 	
 	public void closeAllTabs() throws InterruptedException {
@@ -408,12 +404,15 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickVerifyContactInformation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
-		Thread.sleep(2000);
+		Thread.sleep(500);
+		By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]");
+		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
+		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
+		Thread.sleep(1000);
+		scrollTop(verify_contact_information_checkbox, true);
+		Thread.sleep(1000);
 		verify_contact_information_checkbox.click();
-		Thread.sleep(2000);
+		Thread.sleep(500);
 	}
 	
 	public void selectAppointmentRecord() throws InterruptedException {

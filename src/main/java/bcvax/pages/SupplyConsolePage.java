@@ -432,14 +432,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_reason;
 	private By select_reason1 = By.xpath("//span[@title='Other']");
 
-	@FindBy(xpath = "//button[contains(text(),'Save')]")
-	private WebElement save_button_receive_supplies;
-	private By save_button_receive_supplies1 = By.xpath("//button[contains(text(),'Save')]");
-
-	@FindBy(xpath = "(//span[contains(text(),'Cancel')])[2]")
-	private WebElement cancel_button_receive_supplies;
-	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
-
 	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
@@ -1569,7 +1561,7 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	public void clickDropdownMenu() throws InterruptedException {
+	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, dropdownMenu, 10);
 		this.dropdownMenu.click();
@@ -1839,18 +1831,36 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
-		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
-		save_button_receive_supplies.isDisplayed();
+		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
+		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
+		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
+		save_receive_supplies_btn.isDisplayed();
 	}
 
 	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
-		waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
-		cancel_button_receive_supplies.isDisplayed();
+		By cancel_receive_supplies_btn_path = By.xpath("(//span[contains(text(),'Cancel')])[2]");
+		waitForElementToBeEnabled(driver, cancel_receive_supplies_btn_path, 10);
+		WebElement cancel_receive_supplies_btn = driver.findElement(cancel_receive_supplies_btn_path);
+		cancel_receive_supplies_btn.isDisplayed();
 	}
 
 	public void ClickSaveButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
-		save_button_receive_supplies.click();
+		Thread.sleep(500);
+		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
+		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
+		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
+		save_receive_supplies_btn.click();
+		Thread.sleep(500);
+		//Try to find and close the Success Dialogue
+		By success_message_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
+		try {
+			waitForElementToBeEnabled(driver, success_message_close_btn_path, 5);
+			WebElement close_success_dialog = driver.findElement(success_message_close_btn_path);
+			close_success_dialog.click();
+			Thread.sleep(500);
+		} catch(Exception ex) {
+			System.out.println("*** Warning *** No Receive Supplies success message Appeared. Continue...");
+		}
 	}
 
 	public double getDoseConversionFactorReceive() throws InterruptedException {
