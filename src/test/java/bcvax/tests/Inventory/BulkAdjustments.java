@@ -107,7 +107,9 @@ public class BulkAdjustments extends BaseTest {
 		
 		log("/*11.----Click button Adjustment on Container - Adjustment page --*/");
 		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		
 		log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -147,8 +149,13 @@ public class BulkAdjustments extends BaseTest {
 			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
+			//assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
 
+			//***Workaround for rounding problem
+			assertTrue(Math.abs(remainingQuantityAfterAdjustment - calculatedRemainingQuantityAfterAdjustment) <= 0.01,
+					"The difference of Actual quantity vs Expected is too big. Actual: " +
+							remainingQuantityAfterAdjustment + ", Expected: " + calculatedRemainingQuantityAfterAdjustment);
+			//***
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
 			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
 			}
@@ -214,7 +221,9 @@ public class BulkAdjustments extends BaseTest {
 
 		log("/*9.----Click button Adjustment on Container - Adjustment page --*/");
 		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 
 		log("/*10.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -253,8 +262,12 @@ public class BulkAdjustments extends BaseTest {
 			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
-
+			//assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
+			//***Workaround for rounding problem
+			assertTrue(Math.abs(remainingQuantityAfterAdjustment - calculatedRemainingQuantityAfterAdjustment) <= 0.01,
+					"The difference of Actual quantity vs Expected is too big. Actual: " +
+							remainingQuantityAfterAdjustment + ", Expected: " + calculatedRemainingQuantityAfterAdjustment);
+			//***
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
 			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
 		}

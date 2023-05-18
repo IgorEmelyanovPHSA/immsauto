@@ -84,7 +84,6 @@ public class Wastage extends BaseTest {
 		
 		log("/*5.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
 		
 		log("/*6.----select Wastage from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectWastageFromDropDown();

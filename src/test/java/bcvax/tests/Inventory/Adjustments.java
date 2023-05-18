@@ -116,7 +116,9 @@ public class Adjustments extends BaseTest {
 
 		log("/*11----Clicking on btn Adjustment --*/");
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		//Validation values in Container - Adjustment pop-up
 		log("Validation values in Adjustment pop-up / Remaining doses before adjustment " + remainingDosesBeforeAdjustment
 				+ " / Adjustment doses amount " + amountOfDosesToAdjust + " / Remaining doses after Adjustment " + remainingDosesAfterAdjustmentInPopUp);
@@ -239,7 +241,9 @@ public class Adjustments extends BaseTest {
 
 		log("/*9.----Clicking on btn Adjustment --*/");
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*10.----Quantity Remaining Doses/Remaining Quantity check After --*/");
 		//double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 		double remainingDosesAfter = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);

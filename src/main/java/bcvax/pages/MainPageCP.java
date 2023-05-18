@@ -169,9 +169,11 @@ public class MainPageCP extends BasePage{
         waitForElementToBeLocated(driver, list_view_btn_path, 10);
         WebElement list_view_btn = driver.findElement(list_view_btn_path);
         list_view_btn.click();
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        By active_supply_pocation_item_path = By.xpath("//a/span[text() = 'Active Supply Locations']");
+        waitForElementToBeEnabled(driver, active_supply_pocation_item_path, 10);
         System.out.println("/*---- Select Active Supply Locations --*/");
-        driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
+        driver.findElement(active_supply_pocation_item_path).click();
         Thread.sleep(2000);
         System.out.println("/*---- Locate " + supplyLocation + " --*/");
         search_location_field.sendKeys(supplyLocation);

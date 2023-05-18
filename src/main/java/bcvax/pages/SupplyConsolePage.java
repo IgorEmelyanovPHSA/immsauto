@@ -1499,11 +1499,8 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
 		waitForElementToBeVisible(driver, drdCancel, 10);
-		//Thread.sleep(2000);
-		//moveToElement(drdCancel);
 		scrollTop(drdCancel);
 		click(drdCancel);
-		//drdCancel.click();
 	}
 
 	public void clickOnRelatedItemTab() throws InterruptedException {
