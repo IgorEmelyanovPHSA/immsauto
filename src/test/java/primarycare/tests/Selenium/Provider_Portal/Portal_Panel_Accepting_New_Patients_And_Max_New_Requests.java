@@ -13,7 +13,7 @@ import java.util.Random;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
-public class Portal_Accepting_New_Patients_And_Max_New_Requests extends BaseTest_PrimaryCare {
+public class Portal_Panel_Accepting_New_Patients_And_Max_New_Requests extends BaseTest_PrimaryCare {
     private String clinicName_1 = "CASTLEGAR MEDICAL CLINIC ASSOCIATES";
     private String physicalAddress_Street_1 = "1008 COLUMBIA AVE,";
     private String physicalAddress_City_PostCode_1 = "Castlegar, BC, V1N 1H2";
@@ -25,14 +25,14 @@ public class Portal_Accepting_New_Patients_And_Max_New_Requests extends BaseTest
 
     //private String desiredPanelSize = "77777";
     private int desiredPanelSize = ((1 + new Random().nextInt(2)) * 10000) + new Random().nextInt(10000);
-    private String isAcceptingNewPatients = "Yes";
+    private String isAcceptingNewPatients = "YesExpect";
     //private String maxNewRequests = "88888";
-    int maxNew = new Random().nextInt(100000);
-    String maxNewRequest = String.format("%05d", maxNew);
+    int maxNew = new Random().nextInt(100000) + 10000;
+    String maxNewRequests = String.format("%05d", maxNew);
 
 
     @Test(priority = 1)
-    public void Can_View_Edit_fields_Accepting_New_Patients_And_Max_New_Requests_as_an_DIRECTOR_in_Portal () throws Exception {
+    public void Can_View_Edit_fields_Panel_Size_Accepting_New_Patients_And_Max_New_Requests_as_an_DIRECTOR_in_Portal () throws Exception {
         TestcaseID = "254213"; //C254213
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
@@ -59,12 +59,12 @@ public class Portal_Accepting_New_Patients_And_Max_New_Requests extends BaseTest
         providerPortalHomePage.enterDesiredPanelSize(desiredPanelSize);
         Thread.sleep(1000);
 
-        log("/*6.----Accepting new Patients: " + isAcceptingNewPatients + "--*/");
+        log("/*6.----Select Accepting new Patients: " + isAcceptingNewPatients + "--*/");
         providerPortalHomePage.selectAcceptingNewPatientsOption(isAcceptingNewPatients);
         Thread.sleep(1000);
 
-        log("/*7.----Enter random Max New Requests: " + maxNewRequest + "--*/");
-        providerPortalHomePage.enterMaxNewRequests(maxNewRequest);
+        log("/*7.----Enter random Max New Requests: " + maxNewRequests + "--*/");
+        providerPortalHomePage.enterMaxNewRequests(maxNewRequests);
         Thread.sleep(1000);
 
         log("/*8.----Click Save --*/");
@@ -72,14 +72,25 @@ public class Portal_Accepting_New_Patients_And_Max_New_Requests extends BaseTest
         Thread.sleep(1000);
 
         log("/*9.---- Validate Desired Panel Size  ---*/");
-        //String desiredPanelSizeExpected = String.format("%,.2f", desiredPanelSize);
-        //String desiredPanelSizeExpected = Double.parseDouble(new DecimalFormat("##,##").format(desiredPanelSize));
-        //double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_2 =
-                //Double.parseDouble(new DecimalFormat("##.##").
-                        //format((remainingDoses_before_Lot_EK4241_Distribution_1_2 + 10)));
-        String desiredPanelSizeActual = providerPortalHomePage.getDesiredPanelSizeActualForValidation();
+        String desiredPanelSizeExpected = new DecimalFormat("##,###").format(desiredPanelSize);
+        String desiredPanelSizeActual = providerPortalHomePage.getActualDesiredPanelSizeForValidation();
         log("/*---Desired Panel Size actual is: " + desiredPanelSizeActual + " --*/");
-        //assertEquals(desiredPanelSizeExpected, desiredPanelSizeActual);
+        assertEquals(desiredPanelSizeActual, desiredPanelSizeExpected);
+        Thread.sleep(2000);
+
+        log("/*10.---- Validate isAccepting new Patients  ---*/");
+        String acceptingNewPatientsActual = providerPortalHomePage.getActualIsAcceptingNewPatientsForValidation();
+        log("/*---Accepting new Patients actual is: " + acceptingNewPatientsActual + " --*/");
+        assertEquals(acceptingNewPatientsActual, isAcceptingNewPatients);
+        Thread.sleep(2000);
+
+        log("/*11.---- Validate Max New Requests  ---*/");
+        double maxNewRequests_To_Double = Double.parseDouble(maxNewRequests);
+        DecimalFormat formatter = new DecimalFormat("##,###");
+        String maxNewRequestsExpected = formatter.format(maxNewRequests_To_Double);
+        String maxNewRequestsActual = providerPortalHomePage.getActualMaxNewRequestsForValidation();
+        log("/*---Max New Requests actual is: " + maxNewRequestsActual + " --*/");
+        assertEquals(maxNewRequestsActual, maxNewRequestsExpected);
         Thread.sleep(2000);
 
     }

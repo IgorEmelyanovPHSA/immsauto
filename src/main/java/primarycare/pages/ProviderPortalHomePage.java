@@ -46,6 +46,15 @@ public class ProviderPortalHomePage extends BasePage{
     private WebElement desired_panel_size_actual_field_value;
     private By desired_panel_size_actual_field_value_1 = By.xpath("(//span[@class='uiOutputNumber'])[1]");
 
+    @FindBy(xpath = "(//span[@class='uiOutputNumber'])[2]")
+    private WebElement max_new_requests_actual_field_value;
+    private By max_new_requests_actual_field_value_1 = By.xpath("(//span[@class='uiOutputNumber'])[2]");
+
+    @FindBy(xpath = "(//div[@class='slds-form-element__static slds-truncate']//span[@data-aura-rendered-by])[3]")
+    private WebElement isAccepting_actual_field_value;
+    private By isAccepting_actual_field_value_1 = By.xpath("(//div[@class='slds-form-element__static slds-truncate']//span[@data-aura-rendered-by])[3]");
+
+
 
     /*---------Constructor-------*/
     public ProviderPortalHomePage(WebDriver driver) {
@@ -126,11 +135,28 @@ public class ProviderPortalHomePage extends BasePage{
         save_button.click();
     }
 
-    public String getDesiredPanelSizeActualForValidation() throws InterruptedException {
+    public String getActualDesiredPanelSizeForValidation() throws InterruptedException {
         waitForElementToBeLocated(driver, desired_panel_size_actual_field_value_1, 10);
         Thread.sleep(2000);
         desired_panel_size_actual_field_value.isDisplayed();
         return (desired_panel_size_actual_field_value.getText());
     }
+
+    public String getActualMaxNewRequestsForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, max_new_requests_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        max_new_requests_actual_field_value.isDisplayed();
+        return (max_new_requests_actual_field_value.getText());
+    }
+
+    public String getActualIsAcceptingNewPatientsForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, isAccepting_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        isAccepting_actual_field_value.isDisplayed();
+        return (isAccepting_actual_field_value.getText());
+    }
+
+
+
 
 }

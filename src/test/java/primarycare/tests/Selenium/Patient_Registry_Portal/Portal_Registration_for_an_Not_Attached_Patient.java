@@ -190,25 +190,25 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         log("/*34.---- Validate field Case origin - 'Web'  ---*/");
         String caseOriginActualValue = healthCloudConsolePage.getCaseOriginActualForValidation();
         log("/*---- Case Origin actual value is: " + caseOriginActualValue + " --*/");
-        assertEquals(caseOriginExpectedValue, caseOriginActualValue);
+        assertEquals(caseOriginActualValue, caseOriginExpectedValue);
         Thread.sleep(2000);
 
         log("/*35.---- Validate Priority  - 'Medium'  ---*/");
         String priorityActualValue = healthCloudConsolePage.getPriorityActualForValidation();
         log("/*---- Priority actual value is: " + caseOriginActualValue + " --*/");
-        assertEquals(priorityExpectedValue, priorityActualValue);
+        assertEquals(priorityActualValue, priorityExpectedValue);
         Thread.sleep(2000);
 
         log("/*36.---- Validate Account name - '3113 Broadmoor'  ---*/");
         String accountNameActual = healthCloudConsolePage.getAccountNameActualForValidation();
         log("/*---- Account Name actual is: " + accountNameActual + " --*/");
-        assertEquals(accountNameExpected, accountNameActual);
+        assertEquals(accountNameActual, accountNameExpected);
         Thread.sleep(2000);
 
         log("/*37.---- Validate Case Reason - 'Unattached - Requires attachment to family doctor or nurse practitioner'  ---*/");
         String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
         log("/*---Case Reason actual is: " + caseReasonActual + " --*/");
-        assertEquals(caseReasonExpected, caseReasonActual);
+        assertEquals(caseReasonActual, caseReasonExpected);
         Thread.sleep(2000);
 
         log("/*38.---- Validate Status - 'Active'  ---*/");
@@ -217,7 +217,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         //Thread.sleep(2000);
         String statusActual = healthCloudConsolePage.getStatusActualForValidation();
         log("/*---- Status actual is: " + statusActual + " --*/");
-        assertEquals(statusExpected, statusActual);
+        assertEquals(statusActual, statusExpected);
         Thread.sleep(2000);
 
     }
