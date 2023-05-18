@@ -13,6 +13,7 @@ public class APISelect {
         APIEstablishSFConnection sfConnection = new APIEstablishSFConnection();
         String acc_token = sfConnection.establishConnection();
         System.out.println("access_token is:" +acc_token);
+        System.out.println("Connection for SF Establish with Status code 200");
         System.out.println("SQL request is:" +sql_request);
 
         List<Map<String, Object>> recordsArray =

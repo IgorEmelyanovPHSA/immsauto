@@ -6,6 +6,7 @@ public class APIDelete {
     public String deleteAccount(String accId){
         APIEstablishSFConnection sfConnection = new APIEstablishSFConnection();
         String acc_token = sfConnection.establishConnection();
+        System.out.println("Connection for SF Establish with Status code 200");
         System.out.println("access_token is:" +acc_token);
 
         //return
