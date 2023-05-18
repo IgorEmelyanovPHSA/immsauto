@@ -116,7 +116,9 @@ public class Adjustments extends BaseTest {
 
 		log("/*11----Clicking on btn Adjustment --*/");
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
-
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		//Validation values in Container - Adjustment pop-up
 		log("Validation values in Adjustment pop-up / Remaining doses before adjustment " + remainingDosesBeforeAdjustment
 				+ " / Adjustment doses amount " + amountOfDosesToAdjust + " / Remaining doses after Adjustment " + remainingDosesAfterAdjustmentInPopUp);
@@ -135,7 +137,7 @@ public class Adjustments extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-			double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterAdjustmentQuantity = Double.parseDouble(df.format(
 					remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
 			writeToList.add(afterAdjustmentDoses);
 			writeToList.add(afterAdjustmentQuantity);
@@ -239,7 +241,9 @@ public class Adjustments extends BaseTest {
 
 		log("/*9.----Clicking on btn Adjustment --*/");
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
-
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*10.----Quantity Remaining Doses/Remaining Quantity check After --*/");
 		//double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 		double remainingDosesAfter = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -251,7 +255,7 @@ public class Adjustments extends BaseTest {
 
 		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
 		log("----Validation by Doses --");
-		double remainingDosesCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
+		double remainingDosesCalculation = Double.parseDouble(df.format(
 				(remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
 		assertEquals(remainingDosesAfter, remainingDosesCalculation);
 		log("----Validation by Quantities --");

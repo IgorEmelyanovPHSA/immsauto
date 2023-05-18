@@ -121,14 +121,14 @@ public class DraftsCP extends BaseTest {
         log("/*16.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
         assertEquals((remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjust), remainingDoses_after_Distribution_1_1);
 
-        double remainingQuantityCalculationDist1 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingQuantityCalculationDist1 = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjust)/ dose_conversation_factor));
         assertEquals(remainingQuantityCalculationDist1, remainingQty_after_Distribution_1_1);
 
         log("/*17.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
         assertEquals((remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjust), remainingDoses_after_Distribution_1_2);
 
-        double remainingQuantityCalculationDist2 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingQuantityCalculationDist2 = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjust)/ dose_conversation_factor));
         assertEquals(remainingQuantityCalculationDist2, remainingQty_after_Distribution_1_2);
     }
@@ -246,14 +246,14 @@ public class DraftsCP extends BaseTest {
 
 
         log("Distribution_1_1 Compering before transfer quantities vs actual quantities after adjustment " +remainingDoses_after_Distribution_1_1);
-        double remainingQuantitiesBeforeDist1 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingQuantitiesBeforeDist1 = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjustInDraftEdit) / dose_conversation_factor));
         assertEquals(remainingQuantitiesBeforeDist1, remainingQty_after_Distribution_1_1);
 
         log("/*22.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
         assertEquals((remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjustInDraftEdit), remainingDoses_after_Distribution_1_2);
 
-        double remainingQuantitiesBeforeDist2 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingQuantitiesBeforeDist2 = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjustInDraftEdit) / dose_conversation_factor));
         assertEquals(remainingQuantitiesBeforeDist2, remainingQty_after_Distribution_1_2);
     }
@@ -362,14 +362,14 @@ public class DraftsCP extends BaseTest {
         log("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
         assertEquals(remainingDoses_before_Distribution_1_1, remainingDoses_after_Distribution_1_1);
 
-        double remainingQuantitiesBeforeDist1 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingQuantitiesBeforeDist1 = Double.parseDouble(df.format(
                 remainingDoses_before_Distribution_1_1 / dose_conversation_factor));
         assertEquals(remainingQuantitiesBeforeDist1, remainingQty_after_Distribution_1_1);
 
         log("/*21.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
         assertEquals(remainingDoses_before_Distribution_1_2, remainingDoses_after_Distribution_1_2);
 
-        double remainingQuantitiesBeforeDist2 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingQuantitiesBeforeDist2 = Double.parseDouble(df.format(
                 remainingDoses_before_Distribution_1_2 / dose_conversation_factor));
         assertEquals(remainingQuantitiesBeforeDist2, remainingQty_after_Distribution_1_2);
     }
@@ -476,7 +476,7 @@ public class DraftsCP extends BaseTest {
         log("----Validation by Quantities --");
         assertEquals((remainingQty_before_Distribution_1_1 - amountOfQuantityToAdjust), remainingQty_after_Distribution_1_1);
         log("----Validation by Doses --");
-        double remainingDosesCalculationDist1 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingDosesCalculationDist1 = Double.parseDouble(df.format(
                         (remainingQty_before_Distribution_1_1 - amountOfQuantityToAdjust) * dose_conversation_factor));
         assertEquals(remainingDosesCalculationDist1, remainingDoses_after_Distribution_1_1);
 
@@ -484,7 +484,7 @@ public class DraftsCP extends BaseTest {
         log("----Validation by Quantities --");
         assertEquals((remainingQty_before_Distribution_1_2 + amountOfQuantityToAdjust), remainingQty_after_Distribution_1_2);
         log("----Validation by Doses --");
-        double remainingDosesCalculationDist2 = Double.parseDouble(new DecimalFormat("##.####").format(
+        double remainingDosesCalculationDist2 = Double.parseDouble(df.format(
                 (remainingQty_before_Distribution_1_2 + amountOfQuantityToAdjust) * dose_conversation_factor));
         assertEquals(remainingDosesCalculationDist2, remainingDoses_after_Distribution_1_2);
     }

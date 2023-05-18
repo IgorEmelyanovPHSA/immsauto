@@ -65,7 +65,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.clickVerifyPHNButton();
 
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience_CP.successMessage();
+        inClinicExperience_CP.successMessageAppear();
 
         log("/*12.----click Next button --*/");
         inClinicExperience_CP.clickNextButton();

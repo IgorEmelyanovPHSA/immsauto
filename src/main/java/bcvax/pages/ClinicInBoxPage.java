@@ -2,6 +2,7 @@ package bcvax.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -735,13 +736,13 @@ public class ClinicInBoxPage extends BasePage {
 		waitForElementToBeVisible(driver, verify_phn_button, 10);
 		verify_phn_button.click();
 	}
-	
+
 	public void successMessageAppear() throws InterruptedException {
-		//try {
-		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Success']"), 20);
-		driver.findElement(By.xpath(".//div[text() = 'Success']"));
-		Thread.sleep(2000);
-		System.out.println("/* ----the toast success message has been Appears");
+		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
+		waitForElementToBeEnabled(driver, message_path, 10);
+		WebElement message = driver.findElement(message_path);
+		Assert.assertEquals(message.getText(), "Success", "Expected PHN Match Success but found " + message.getText());
+		log("  -- success message has been Appears - /");
 	}
 	
 	public void clickNextButton() throws InterruptedException {
