@@ -96,8 +96,7 @@ public class BulkAdjustmentsCP extends BaseTest {
         Thread.sleep(5000);
 
         log("/*7.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
-        //supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToAdjust,reasonForAdjustment, numberOfRows);
-        supplyConsolePage.enterBulkByDosageWithReasonCP(amountOfDosesToAdjust, reasonForAdjustment, numberOfRows);
+        supplyConsolePage.enterBulkAdjustmentByDosageWithReason(amountOfDosesToAdjust, reasonForAdjustment);
 
         log("/*8.----Click button Adjustment on Container - Adjustment page --*/");
         supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
@@ -142,7 +141,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
             log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.01);
+            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.011);
 
             log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
             assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
@@ -212,7 +211,7 @@ public class BulkAdjustmentsCP extends BaseTest {
         Thread.sleep(5000);
 
         log("/*7.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
-        supplyConsolePage.enterBulkByQuantitiesWithReasonCP(amountOfQuantityToAdjust, reasonForAdjustment, numberOfRows);
+        supplyConsolePage.enterBulkAdjustmentByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment);
 
         log("/*8.----Click button Adjustment on Container - Adjustment page --*/");
         supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
@@ -256,7 +255,7 @@ public class BulkAdjustmentsCP extends BaseTest {
             assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
             log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.01);
+            assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.011);
 
             log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
             assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);

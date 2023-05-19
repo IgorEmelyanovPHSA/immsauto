@@ -537,40 +537,6 @@ public class SupplyConsolePage extends BasePage {
 	// Community Portal Methods //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void enterBulkByDosageWithReasonCP(double amount, String reason, int numberOfRows) throws InterruptedException {
-		//By dosage
-		int y = 0;
-		int k = 3;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, String.valueOf(amount));
-			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			click(reasonForWastageDynamicDropDown);
-			Thread.sleep(500);
-			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			click(reasonForWastageDynamicFiled);
-			k = k + 3;
-			y++;
-		}
-	}
-
-	public void enterBulkByQuantitiesWithReasonCP(double amount,String reason, int numberOfRows) throws InterruptedException {
-		//By Quantities
-		int y = 0;
-		int k = 2;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, Double.toString(amount));
-			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			clickUsingJS(reasonDynamicDropDown);
-			Thread.sleep(500);
-			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			clickUsingJS(selectReasonFromDynamicDropDown);
-			k = k + 3;
-			y++;
-		}
-	}
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*---------Constructor-------*/
@@ -1413,41 +1379,37 @@ public class SupplyConsolePage extends BasePage {
 		return flag;
 	}
 
-	public void enterBulkByDosageWithReason(double amount, String reason, int numberOfRows) throws InterruptedException {
-		//By dosage
-		int y = 0;
-		int k = 4;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, String.valueOf(amount));
-			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			click(reasonForWastageDynamicDropDown);
-			Thread.sleep(500);
-			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			click(reasonForWastageDynamicFiled);
-			k = k + 3;
-			y++;
-		}
+	public void enterBulkWastageByDosageWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Doses", amount, "Reason For Wastage", reason);
 	}
 
-	public void enterBulkByQuantitiesWithReason(double amount,String reason, int numberOfRows) throws InterruptedException {
+	public void enterBulkWastageByQuantitiesWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Quantity", amount, "Reason For Wastage", reason);
+	}
+
+	public void enterBulkAdjustmentByDosageWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Doses", amount, "Reason For Adjustment\n" +
+				"Help", reason);
+	}
+
+	public void enterBulkAdjustmentByQuantitiesWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Quantity", amount, "Reason For Adjustment\n" +
+				"Help", reason);
+	}
+
+	public void enterBulkValuesWithReason(String dose_qty_column, double amount, String reason_column, String reason) throws InterruptedException {
 		Thread.sleep(500);
-		//By Quantities
-		int y = 0;
-		int k = 3;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, Double.toString(amount));
-			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			clickUsingJS(reasonDynamicDropDown);
-			Thread.sleep(500);
-			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			clickUsingJS(selectReasonFromDynamicDropDown);
-			k = k + 3;
-			y++;
+		List<Map<String, WebElement>> wastage_table = tables.getContainerAdjustmentWastageTable().getRowsMappedToHeadings();
+		for(Map<String, WebElement> row : wastage_table) {
+			if(row.get(dose_qty_column).getText().equals(dose_qty_column)) {
+				continue;
+			}
+			row.get(dose_qty_column).findElement(By.xpath(".//input")).sendKeys(Double.toString(amount));
+			row.get(reason_column).findElement(By.xpath(".//button")).click();
+			Thread.sleep(1000);
+			row.get(reason_column).findElement(By.xpath(".//span[@title='" + reason + "']")).click();
 		}
 	}
-
 	@Step
 	public String getVaccineName() throws InterruptedException {
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
