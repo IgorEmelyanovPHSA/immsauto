@@ -483,9 +483,6 @@ public class SupplyConsolePage extends BasePage {
 	///////////////////////////////////////////////////////////////////////////////
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
-	@FindBy(xpath = "//input[@placeholder=\"Search Supply Locations...\"]")
-	private WebElement search_supply_location_from;
-	private By search_supply_location_from_ = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
 
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_supply_location_from;
@@ -1967,12 +1964,17 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 
-	public void selectShipped_From() throws InterruptedException {
-		waitForElementToBeVisible(driver, search_supply_location_from, 60);
-		search_supply_location_from.sendKeys("Atlin Health Centre");
-		Thread.sleep(1000);
-		waitForElementToBeVisible(driver, select_supply_location_from, 60);
-		select_supply_location_from.click();
+	public void selectShipped_From(String supply_location) throws InterruptedException {
+		Thread.sleep(500);
+		By search_supply_location_from_path = By.xpath("//label[text()='Shipped From']/..//input[@class='slds-combobox__input slds-input']");
+		waitForElementToBeEnabled(driver, search_supply_location_from_path, 60);
+		WebElement search_supply_location_from = driver.findElement(search_supply_location_from_path);
+		search_supply_location_from.sendKeys(supply_location);
+		Thread.sleep(500);
+		By my_location_item_path = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supply_location + "')]/../..");
+		waitForElementToBeEnabled(driver, my_location_item_path, 10);
+		WebElement my_location_item = driver.findElement(my_location_item_path);
+		my_location_item.click();
 	}
 
 	public void clickLineItemCheckBox(int itemNum) throws InterruptedException {
