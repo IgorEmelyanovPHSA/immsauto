@@ -5,10 +5,10 @@ import primarycare.pages.APICreatePractitionerAccount;
 import primarycare.pages.APIDelete;
 import primarycare.tests.API_BaseTest_PrimaryCare;
 
-public class API_Create_Practitioner_MOA_Account_NO_Associated_SysAdmin extends API_BaseTest_PrimaryCare {
+public class API_Create_Practitioner_Account_NO_Associated_SysAdmin extends API_BaseTest_PrimaryCare {
     //public String lastname = "IgorAPI_Account_" + new Random().nextInt(1000);
     //public String salutation = "Ms.";
-    public String firstName = "Tanya222_Provider";
+    public String firstName = "Tanya222_Practitioner";
     public String lastName = "Drysdale";
     public String birthdate = "1983-07-11";
     public String gender = "Women";
@@ -20,7 +20,7 @@ public class API_Create_Practitioner_MOA_Account_NO_Associated_SysAdmin extends 
     public String accId;
 
     @Test(priority = 1)
-    public void API_Can_Create_Practitioner_MOA_Account_No_Associated_in_Salesforce_Status_Code_204_as_SysAdmin(){
+    public void API_Can_Create_Practitioner_Account_No_Associated_in_Salesforce_Status_Code_204_as_SysAdmin(){
         TestcaseID = "252884"; //C252884
         APICreatePractitionerAccount apiCreatePractitionerAccount = new APICreatePractitionerAccount();
         log("Create Practitioner MOA account record.");

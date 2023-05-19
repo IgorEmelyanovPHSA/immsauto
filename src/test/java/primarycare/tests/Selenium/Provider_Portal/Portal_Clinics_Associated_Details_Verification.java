@@ -25,7 +25,7 @@ public class Portal_Clinics_Associated_Details_Verification extends BaseTest_Pri
 
 
     @Test(priority = 1)
-    public void Can_Verify_Provider_as_an_DIRECTOR_Clinics_Associated_Details_in_Portal () throws Exception {
+    public void Can_Verify_DIRECTORs_Clinics_Associated_Details_in_Portal () throws Exception {
         TestcaseID = "252239"; //C252239
         log("Target Environment: "+ Utils.getTargetEnvironment());
 

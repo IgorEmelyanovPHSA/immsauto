@@ -32,7 +32,7 @@ public class Portal_Panel_Accepting_New_Patients_And_Max_New_Requests extends Ba
 
 
     @Test(priority = 1)
-    public void Can_View_Edit_fields_Panel_Size_Accepting_New_Patients_And_Max_New_Requests_as_an_DIRECTOR_in_Portal () throws Exception {
+    public void Can_View_Edit_DIRECTORs_fields_Panel_Size_Accepting_New_Patients_And_Max_New_Requests_in_Portal () throws Exception {
         TestcaseID = "254213"; //C254213
         log("Target Environment: "+ Utils.getTargetEnvironment());
 

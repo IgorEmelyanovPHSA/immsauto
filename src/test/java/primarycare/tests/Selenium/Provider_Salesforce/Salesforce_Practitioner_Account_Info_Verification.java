@@ -24,7 +24,7 @@ public class Salesforce_Practitioner_Account_Info_Verification extends BaseTest_
     //private String clinic_Name_2 = "CASTLEGAR MEDICAL CLINIC11111";
 
     @Test(priority = 1)
-    public void Can_Verify_DIRECTOR_Practitioner_Account_Info_in_SF () throws Exception {
+    public void Can_Verify_DIRECTORs_Practitioner_Account_Info_in_SF () throws Exception {
         TestcaseID = "252896"; //C252896
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
