@@ -4,7 +4,8 @@
     <test name="Smoke">
         <classes>
             <class name="primarycare.tests.API.Provider_and_Rostering.API_Establish_Salesforce_Connection_SysAdmin"/>
-            <class name="primarycare.tests.API.Provider_and_Rostering.API_Create_Practitioner_MOA_Account_NO_Associated_SysAdmin"/>
+            <class name="primarycare.tests.API.Provider_and_Rostering.API_Create_Practitioner_Account_NO_Associated_SysAdmin"/>
+            <class name="primarycare.tests.API.Provider_and_Rostering.API_Create_Practitioner_Facility_Associated_SysAdmin"/>
             <class name="primarycare.tests.Selenium.Provider_Portal.Portal_Clinics_Associated_Details_Verification"/>
             <class name="primarycare.tests.Selenium.Provider_Portal.Portal_Panel_Accepting_New_Patients_And_Max_New_Requests"/>
             <class name="primarycare.tests.Selenium.Provider_Salesforce.Salesforce_Practitioner_Account_Info_Verification"/>
