@@ -40,7 +40,6 @@ public class BulkWastages extends BaseTest {
 		String reasonForWastage = "CCI: Handling Error";
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
 
 		log("/*2.----Validate if Supply Console Page displayed --*/");log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
@@ -55,8 +54,7 @@ public class BulkWastages extends BaseTest {
 		/////////////////////////////////////////////////
 		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		//////////////////////////////////////////////////
-		Thread.sleep(5000);
-		
+
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
 		log("/*---     count:" + countSupplyContainers);
@@ -80,10 +78,9 @@ public class BulkWastages extends BaseTest {
 		
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
 		supplyConsolePage.clickBulkWastageButton();
-		Thread.sleep(2000);
-		
+
 		log("/*8.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
-		supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToWaste, reasonForWastage, numberOfRows);
+		supplyConsolePage.enterBulkWastageByDosageWithReason(amountOfDosesToWaste, reasonForWastage);
 		
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
@@ -177,7 +174,7 @@ public class BulkWastages extends BaseTest {
 		supplyConsolePage.clickBulkWastageButton();
 		Thread.sleep(2000);
 		log("/*8.----Enter the Quantity values for 3 row and reason for wastage:" +reasonForWastage +"--*/");
-		supplyConsolePage.enterBulkByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage, numberOfRows);
+		supplyConsolePage.enterBulkWastageByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage);
 
 		log("/*9.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();

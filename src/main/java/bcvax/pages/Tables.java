@@ -23,7 +23,7 @@ public class Tables extends BasePage {
     @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered scrollClass']")
     private WebElement containerTransfer;
     @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered']")
-    private WebElement containerWastage;
+    private WebElement containerAdjustmentWastage;
     @FindBy(xpath = ".//lightning-card")
     private List<WebElement> transactionTables;
     @FindBy(xpath = ".//table[@class='slds-table slds-table_header-fixed slds-table_bordered slds-table_edit resizable-cols slds-table_resizable-cols']")
@@ -55,9 +55,9 @@ public class Tables extends BasePage {
         return new GenericTable(containerTransfer);
     }
 
-    public GenericTable getContainerWastageTable() {
-        waitForTextToBePresent(driver, containerWastage,30, "Distribution");
-        return new GenericTable(containerWastage);
+    public GenericTable getContainerAdjustmentWastageTable() {
+        waitForTextToBePresent(driver, containerAdjustmentWastage,30, "Distribution");
+        return new GenericTable(containerAdjustmentWastage);
     }
 
     public GenericTable getSupplyContainerTable() {

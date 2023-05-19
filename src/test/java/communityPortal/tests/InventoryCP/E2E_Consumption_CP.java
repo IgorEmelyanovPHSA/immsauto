@@ -236,16 +236,6 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.validateHomePageShownUp();
 
         supplyConsolePage = new SupplyConsolePage(driver);
-//		if (inClinicExperiencePage.supplyLocDisplayed()) {
-//			log("/*-- 52.1 User is already on Supply loc --*/");
-//		} else {
-//			log("/*-- 52.1. Click Dropdown Menu --*/");
-//			inClinicExperiencePage.clickDropdownMenu();
-//			Thread.sleep(5000);
-//			log("/*-- 52.2. Navigate and Select Supply Locations --*/");
-//			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-//			Thread.sleep(2000);
-//		}
         Thread.sleep(2000);
         supplyConsolePage = cpMainPage.goToSupplyLocation();
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
