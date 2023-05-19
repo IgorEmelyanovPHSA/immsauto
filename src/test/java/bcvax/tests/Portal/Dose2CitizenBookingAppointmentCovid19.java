@@ -70,14 +70,11 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         //Thread.sleep(5000);
         log("/*6.----Login as an Clinician to CIB --*/");
         ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
-        Thread.sleep(10000);
 
         clinicInBox.verifyIsClinicInBoxPageDisplayed();
-        Thread.sleep(10000);
 
         log("/*6.1.----Close All previously opened Tab's --*/");
         clinicInBox.closeAllTabs();
-        Thread.sleep(5000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         //inClinicExperiencePage.SearchForCitizen(conformationNumberText);
