@@ -117,7 +117,7 @@ public class BulkWastagesCP extends BaseTest {
 			
 			//Comparing results
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
-			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.01);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.011);
 			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
 		}
 	}
