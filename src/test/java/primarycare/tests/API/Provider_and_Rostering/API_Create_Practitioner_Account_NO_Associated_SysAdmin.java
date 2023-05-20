@@ -20,13 +20,14 @@ public class API_Create_Practitioner_Account_NO_Associated_SysAdmin extends API_
     public String accId;
 
     @Test(priority = 1)
-    public void API_Can_Create_Practitioner_Account_No_Associated_in_Salesforce_Status_Code_204_as_SysAdmin(){
+    public void API_Can_Create_Practitioner_Account_No_Associated_in_Salesforce_Status_Code_201_as_SysAdmin(){
         TestcaseID = "252884"; //C252884
         APICreatePractitionerAccount apiCreatePractitionerAccount = new APICreatePractitionerAccount();
         log("Create Practitioner MOA account record.");
         String accountID = apiCreatePractitionerAccount.insertPractitionerAccount(recordTypeId, firstName,lastName,gender,
                 birthdate,phone,email,isActive);
         log("Created MOA Practitioner's id is: " +accountID);
+        log("Status Code 201- created success");
         accId=accountID;
     }
 

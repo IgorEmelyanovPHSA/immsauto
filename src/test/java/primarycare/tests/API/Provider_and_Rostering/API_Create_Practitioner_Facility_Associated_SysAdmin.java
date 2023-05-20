@@ -20,13 +20,14 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     public String accId;
 
     @Test(priority = 1)
-    public void API_Can_Create_Practitioner_DIRECTORs_Facility_Associated_in_Salesforce_Status_Code_204_as_SysAdmin(){
+    public void API_Can_Create_Practitioner_DIRECTORs_Facility_Associated_in_Salesforce_Status_Code_201_as_SysAdmin(){
         TestcaseID = "252895"; //252895
         APICreatePractitionerAccount apiCreateDirectorAccount = new APICreatePractitionerAccount();
         log("Create Practitioner DIRECTOR's Associated account record.");
         String accountID = apiCreateDirectorAccount.insertDirectorAssociatedAccount(practitionerFacilityName,
                 accountId,practitionerId, acceptingNewPatients, maxNewRequests, role,isActive,recordTypeId);
-        log("Created MOA Practitioner's id is: " +accountID);
+        log("Created Director Practitioner id is: " +accountID);
+        log("Status Code 201- created success");
         accId=accountID;
     }
 
