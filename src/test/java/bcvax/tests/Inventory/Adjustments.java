@@ -7,6 +7,7 @@ import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -98,7 +99,13 @@ public class Adjustments extends BaseTest {
 		log("/*7.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
 		log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectAdjustmentFromDropDown();
+		try {
+			supplyConsolePage.selectAdjustmentFromDropDown();
+		} catch (ElementNotInteractableException ex) {
+			System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+			supplyConsolePage.clickOnFirstContainerDropDownMenu();
+			supplyConsolePage.selectAdjustmentFromDropDown();
+		}
 		double remainingDosesBeforeAdjustment = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorRead = supplyConsolePage.getDoseConversionFactor();
 		log("/*----Remaining Doses Before Adjustment " + remainingDosesBeforeAdjustment + " --*/");
@@ -231,7 +238,13 @@ public class Adjustments extends BaseTest {
 		Thread.sleep(2000);
 
 		log("/*6.----Select Adjustment from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectAdjustmentFromDropDown();
+		try {
+			supplyConsolePage.selectAdjustmentFromDropDown();
+		} catch (ElementNotInteractableException ex) {
+			System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+			supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+			supplyConsolePage.selectAdjustmentFromDropDown();
+		}
 
 		log("/*7.----Set Adjustment Quantities amount: " + amountOfQuantitiesToAdjust + "--*/");
 		supplyConsolePage.setQuantityAmount(Double.toString(amountOfQuantitiesToAdjust));

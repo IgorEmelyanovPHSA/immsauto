@@ -24,7 +24,8 @@ public class RequisitionCP extends BaseTest {
         TestcaseID = (env.contains("immsbc_admin")) ? "245095" : "243087"; //C243087
         testData = Utils.getTestData(env);
         //String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
-        String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+        String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+        String supply_location_from = "Atlin Health Centre";
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
@@ -41,12 +42,12 @@ public class RequisitionCP extends BaseTest {
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
 
         System.out.println("/*----6. Navigate to Request Supplies --*/");
         supplyConsolePage.clickRequestSupplies();
         System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
-        supplyConsolePage.selectShipped_From();
+        supplyConsolePage.selectShipped_From(supply_location_from);
         System.out.println("/*----9. Choose Requested Delivery Date --*/");
         supplyConsolePage.inputRequestDate();
         System.out.println("/*----10. Choose Urgency --*/");

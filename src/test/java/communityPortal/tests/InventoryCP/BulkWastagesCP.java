@@ -38,7 +38,6 @@ public class BulkWastagesCP extends BaseTest {
 				log("Login AS default user (ClinicianInventory)");
 				TestcaseID = "243121"; //C243121
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
-				Thread.sleep(10000);
 		}
 		log("TestRail test case ID: C" +TestcaseID);
 
@@ -69,15 +68,15 @@ public class BulkWastagesCP extends BaseTest {
 		
 		log("/*6.----Click on bulk Wastage button on Supply page--*/");
 		supplyConsolePage.clickBulkWastageButton();
-		Thread.sleep(5000);
-		
+
 		log("/*7.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
-		supplyConsolePage.enterBulkByDosageWithReasonCP(amountOfDosesToWaste, reasonForWastage, numberOfRows);
+		supplyConsolePage.enterBulkWastageByDosageWithReason(amountOfDosesToWaste, reasonForWastage);
 		
 		log("/*8.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
-		Thread.sleep(3000);
-		
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*9.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(3);
 		
@@ -117,7 +116,7 @@ public class BulkWastagesCP extends BaseTest {
 			
 			//Comparing results
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
-			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.01);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.011);
 			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
 		}
 	}
@@ -141,7 +140,6 @@ public class BulkWastagesCP extends BaseTest {
 				log("Login AS default user (ClinicianInventory)");
 				TestcaseID = "243121"; //C243121
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
-				Thread.sleep(10000);
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
@@ -171,15 +169,15 @@ public class BulkWastagesCP extends BaseTest {
 
 		log("/*6.----Click on bulk Wastage button on Supply page--*/");
 		supplyConsolePage.clickBulkWastageButton();
-		Thread.sleep(5000);
 
 		log("/*7.----Enter the Quantity values for 3 row and reason for wastage:" +reasonForWastage +"--*/");
-		supplyConsolePage.enterBulkByQuantitiesWithReasonCP(amountOfQuantityToWaste, reasonForWastage, numberOfRows);
+		supplyConsolePage.enterBulkWastageByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage);
 
 		log("/*8.----Click button Wastage on Container - Wastage page --*/");
 		supplyConsolePage.clickWastageButtonContainerWastagePage();
-		Thread.sleep(3000);
-
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*9.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(3);
 

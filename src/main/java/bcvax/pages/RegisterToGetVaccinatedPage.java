@@ -105,9 +105,14 @@ public class RegisterToGetVaccinatedPage extends BasePage{
         }
         click(btnContinueRegistration);
         By success_error_msg_path = By.xpath("//div[@class='toastTitle slds-text-heading--small' and text()='Error']");
-        waitForElementToBeLocated(driver, success_error_msg_path, 5);
-        WebElement success_error_msg = driver.findElement(success_error_msg_path);
-        Assert.assertFalse(success_error_msg.getText().equals("Error"), "Registration not Successful...");
+        try {
+            waitForElementToBeLocated(driver, success_error_msg_path, 2);
+            WebElement success_error_msg = driver.findElement(success_error_msg_path);
+            Assert.assertFalse(success_error_msg.getText().equals("Error"), "Registration not Successful...");
+        } catch(Exception ex) {
+            System.out.println("No Registration Errors. Continue...");
+        }
+
     }
 
     public void fillMandatoryFieldsOnContactInformationSection(String email, String phoneNumber) throws InterruptedException {

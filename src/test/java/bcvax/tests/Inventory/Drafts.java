@@ -6,6 +6,7 @@ import bcvax.pages.CommonMethods;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import constansts.Apps;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -109,7 +110,13 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
 
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        try {
+            supplyConsolePage.selectTransferFromDropDown();
+        } catch (ElementNotInteractableException ex) {
+            System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            supplyConsolePage.selectTransferFromDropDown();
+        }
 
         log("/*9.----Picked up the Dose Conversation Factor --*/");
         double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
@@ -236,7 +243,13 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
 
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        try {
+            supplyConsolePage.selectTransferFromDropDown();
+        } catch (ElementNotInteractableException ex) {
+            System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            supplyConsolePage.selectTransferFromDropDown();
+        }
 
         log("/*9.----Picked up the Dose Conversation Factor --*/");
         double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
@@ -363,7 +376,13 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
 
         log("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        try {
+            supplyConsolePage.selectTransferFromDropDown();
+        } catch (ElementNotInteractableException ex) {
+            System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            supplyConsolePage.selectTransferFromDropDown();
+        }
 
         log("/*10.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;
@@ -481,7 +500,13 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
 
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        try {
+            supplyConsolePage.selectTransferFromDropDown();
+        } catch (ElementNotInteractableException ex) {
+            System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            supplyConsolePage.selectTransferFromDropDown();
+        }
 
         log("/*9.----Picked up the Dose Conversation Factor --*/");
         double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));

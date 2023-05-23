@@ -372,6 +372,7 @@ public class TransferCP extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		System.out.println("/*16.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersCloseButton();
+		supplyConsolePage.refreshBrowser();
 		/////////////////////Doses and Quantity AFTER///////////////////////////////////
 		System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);

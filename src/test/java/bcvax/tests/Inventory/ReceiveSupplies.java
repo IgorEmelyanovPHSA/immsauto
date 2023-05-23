@@ -56,8 +56,8 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*-- 3. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
-		log("/*-- 4. Click Dropdown Menu --*/");
-		supplyConsolePage.clickDropdownMenu();
+		log("/*-- 4. Click Supply Console App Navigation Menu --*/");
+		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
@@ -73,8 +73,8 @@ public class ReceiveSupplies extends BaseTest {
 
 		log("/*-- 8. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
-		log("/*-- 9. Click Dropdown Menu --*/");
-		supplyConsolePage.clickDropdownMenu();
+		log("/*-- 9. Click Supply Console App Navigation Menu --*/");
+		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
 
 		log("/*-- 10. Navigate and Select Supply Locations --*/");
 		supplyConsolePage.selectSupplyLocationFromDropdown();
@@ -129,8 +129,8 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 32. Click Save Button --*/");
 		supplyConsolePage.ClickSaveButton();
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		log("/*-- 35. Click Dropdown Menu --*/");
-		supplyConsolePage.clickDropdownMenu();
+		log("/*-- 35. Click Supply Console App Navigation Menu --*/");
+		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");

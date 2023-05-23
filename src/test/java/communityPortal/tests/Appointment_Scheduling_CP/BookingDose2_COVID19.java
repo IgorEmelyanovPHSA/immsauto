@@ -27,11 +27,9 @@ public class BookingDose2_COVID19 extends BaseTest {
 
         log("/*1.----Login as a Clerk to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClerk();
-        Thread.sleep(10000);
 
         log("/*2.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-        Thread.sleep(2000);
 
         log("/*3.----click Register button New Citizen --*/");
         inClinicExperience_CP.clickRegisterButton();
@@ -56,15 +54,12 @@ public class BookingDose2_COVID19 extends BaseTest {
 
         log("/*10.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
-        Thread.sleep(2000);
 
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
         inClinicExperience_CP.successMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*12.----click Next button --*/");
         inClinicExperience_CP.clickNextButton();
-        Thread.sleep(2000);
 
         log("/*13.'Enter email address: " +email +"--*/");
         inClinicExperience_CP.enterEmail(email);
@@ -74,63 +69,48 @@ public class BookingDose2_COVID19 extends BaseTest {
 
         log("/*15.Click review details Button--*/");
         inClinicExperience_CP.clickReviewDetails();
-        Thread.sleep(2000);
 
         log("/*16.Click register Button on confirmation page--*/");
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
-        Thread.sleep(2000);
 
         log("/*17.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*18.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-        Thread.sleep(2000);
 
         log("/*19.----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
-        Thread.sleep(5000);
 
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         inClinicExperience_CP.selectOneOption(vaccineToSelect);
-        Thread.sleep(2000);
 
         log("/*21.----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
-        Thread.sleep(2000);
 
         log("/*22.----search the Clinic " +clinicNameToSearch +" --*/");
         inClinicExperience_CP.searchClinicName(clinicNameToSearch);
-        Thread.sleep(2000);
 
         log("/*23.----click on Option Facility location  --*/");
         inClinicExperience_CP.clickOnFacilityOptionLocation();
-        Thread.sleep(2000);
 
         log("/*24.----select Active booking appointment day  --*/");
         inClinicExperience_CP.selectBookingAppointmentDay();
-        Thread.sleep(2000);
 
         log("/*25.----select the time slot  --*/");
         inClinicExperience_CP.selectTimeSlotForAppointment();
-        Thread.sleep(2000);
 
         log("/*26.----click Next button  --*/");
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
-        Thread.sleep(5000);
 
         log("/*27.----click Verify Contact Information Checkbox  --*/");
         inClinicExperience_CP.clickVerifyContactInformation_CP();
-        Thread.sleep(2000);
 
         log("/*28.----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();
-        Thread.sleep(2000);
 
         log("/*29.----see 'Appointment confirmed!' screen --*/");
         inClinicExperience_CP.AppointmentConfirmationMessage();
-        Thread.sleep(2000);
     }
 
     @Test(priority = 2)

@@ -432,14 +432,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_reason;
 	private By select_reason1 = By.xpath("//span[@title='Other']");
 
-	@FindBy(xpath = "//button[contains(text(),'Save')]")
-	private WebElement save_button_receive_supplies;
-	private By save_button_receive_supplies1 = By.xpath("//button[contains(text(),'Save')]");
-
-	@FindBy(xpath = "(//span[contains(text(),'Cancel')])[2]")
-	private WebElement cancel_button_receive_supplies;
-	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
-
 	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
 	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
@@ -491,9 +483,6 @@ public class SupplyConsolePage extends BasePage {
 	///////////////////////////////////////////////////////////////////////////////
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
-	@FindBy(xpath = "//input[@placeholder=\"Search Supply Locations...\"]")
-	private WebElement search_supply_location_from;
-	private By search_supply_location_from_ = By.xpath("//input[@placeholder=\"Search Supply Locations...\"]");
 
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_supply_location_from;
@@ -547,40 +536,6 @@ public class SupplyConsolePage extends BasePage {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Community Portal Methods //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public void enterBulkByDosageWithReasonCP(double amount, String reason, int numberOfRows) throws InterruptedException {
-		//By dosage
-		int y = 0;
-		int k = 3;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, String.valueOf(amount));
-			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			click(reasonForWastageDynamicDropDown);
-			Thread.sleep(500);
-			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			click(reasonForWastageDynamicFiled);
-			k = k + 3;
-			y++;
-		}
-	}
-
-	public void enterBulkByQuantitiesWithReasonCP(double amount,String reason, int numberOfRows) throws InterruptedException {
-		//By Quantities
-		int y = 0;
-		int k = 2;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, Double.toString(amount));
-			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			clickUsingJS(reasonDynamicDropDown);
-			Thread.sleep(500);
-			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			clickUsingJS(selectReasonFromDynamicDropDown);
-			k = k + 3;
-			y++;
-		}
-	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1424,41 +1379,37 @@ public class SupplyConsolePage extends BasePage {
 		return flag;
 	}
 
-	public void enterBulkByDosageWithReason(double amount, String reason, int numberOfRows) throws InterruptedException {
-		//By dosage
-		int y = 0;
-		int k = 4;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, String.valueOf(amount));
-			WebElement reasonForWastageDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			click(reasonForWastageDynamicDropDown);
-			Thread.sleep(500);
-			WebElement reasonForWastageDynamicFiled = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			click(reasonForWastageDynamicFiled);
-			k = k + 3;
-			y++;
-		}
+	public void enterBulkWastageByDosageWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Doses", amount, "Reason For Wastage", reason);
 	}
 
-	public void enterBulkByQuantitiesWithReason(double amount,String reason, int numberOfRows) throws InterruptedException {
+	public void enterBulkWastageByQuantitiesWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Quantity", amount, "Reason For Wastage", reason);
+	}
+
+	public void enterBulkAdjustmentByDosageWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Doses", amount, "Reason For Adjustment\n" +
+				"Help", reason);
+	}
+
+	public void enterBulkAdjustmentByQuantitiesWithReason(double amount, String reason) throws InterruptedException {
+		enterBulkValuesWithReason("Quantity", amount, "Reason For Adjustment\n" +
+				"Help", reason);
+	}
+
+	public void enterBulkValuesWithReason(String dose_qty_column, double amount, String reason_column, String reason) throws InterruptedException {
 		Thread.sleep(500);
-		//By Quantities
-		int y = 0;
-		int k = 3;
-		while (y < numberOfRows) {
-			WebElement dosesDynamicFiled = driver.findElement(By.xpath("(//input[@class = 'slds-input'])[" + k + "]"));
-			typeIn(dosesDynamicFiled, Double.toString(amount));
-			WebElement reasonDynamicDropDown = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux']"));
-			clickUsingJS(reasonDynamicDropDown);
-			Thread.sleep(500);
-			WebElement selectReasonFromDynamicDropDown = driver.findElement(By.xpath("(//span[@title= '"+ reason +"'])[" + (y + 1) + "]"));
-			clickUsingJS(selectReasonFromDynamicDropDown);
-			k = k + 3;
-			y++;
+		List<Map<String, WebElement>> wastage_table = tables.getContainerAdjustmentWastageTable().getRowsMappedToHeadings();
+		for(Map<String, WebElement> row : wastage_table) {
+			if(row.get(dose_qty_column).getText().equals(dose_qty_column)) {
+				continue;
+			}
+			row.get(dose_qty_column).findElement(By.xpath(".//input")).sendKeys(Double.toString(amount));
+			row.get(reason_column).findElement(By.xpath(".//button")).click();
+			Thread.sleep(1000);
+			row.get(reason_column).findElement(By.xpath(".//span[@title='" + reason + "']")).click();
 		}
 	}
-
 	@Step
 	public String getVaccineName() throws InterruptedException {
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
@@ -1569,7 +1520,7 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	public void clickDropdownMenu() throws InterruptedException {
+	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, dropdownMenu, 10);
 		this.dropdownMenu.click();
@@ -1839,18 +1790,36 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
-		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
-		save_button_receive_supplies.isDisplayed();
+		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
+		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
+		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
+		save_receive_supplies_btn.isDisplayed();
 	}
 
 	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
-		waitForElementToBeLocated(driver, cancel_button_receive_supplies1, 10);
-		cancel_button_receive_supplies.isDisplayed();
+		By cancel_receive_supplies_btn_path = By.xpath("(//span[contains(text(),'Cancel')])[2]");
+		waitForElementToBeEnabled(driver, cancel_receive_supplies_btn_path, 10);
+		WebElement cancel_receive_supplies_btn = driver.findElement(cancel_receive_supplies_btn_path);
+		cancel_receive_supplies_btn.isDisplayed();
 	}
 
 	public void ClickSaveButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, save_button_receive_supplies1, 10);
-		save_button_receive_supplies.click();
+		Thread.sleep(500);
+		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
+		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
+		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
+		save_receive_supplies_btn.click();
+		Thread.sleep(500);
+		//Try to find and close the Success Dialogue
+		By success_message_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
+		try {
+			waitForElementToBeEnabled(driver, success_message_close_btn_path, 5);
+			WebElement close_success_dialog = driver.findElement(success_message_close_btn_path);
+			close_success_dialog.click();
+			Thread.sleep(500);
+		} catch(Exception ex) {
+			System.out.println("*** Warning *** No Receive Supplies success message Appeared. Continue...");
+		}
 	}
 
 	public double getDoseConversionFactorReceive() throws InterruptedException {
@@ -1957,12 +1926,17 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 
-	public void selectShipped_From() throws InterruptedException {
-		waitForElementToBeVisible(driver, search_supply_location_from, 60);
-		search_supply_location_from.sendKeys("Atlin Health Centre");
-		Thread.sleep(1000);
-		waitForElementToBeVisible(driver, select_supply_location_from, 60);
-		select_supply_location_from.click();
+	public void selectShipped_From(String supply_location) throws InterruptedException {
+		Thread.sleep(500);
+		By search_supply_location_from_path = By.xpath("//label[text()='Shipped From']/..//input[@class='slds-combobox__input slds-input']");
+		waitForElementToBeEnabled(driver, search_supply_location_from_path, 60);
+		WebElement search_supply_location_from = driver.findElement(search_supply_location_from_path);
+		search_supply_location_from.sendKeys(supply_location);
+		Thread.sleep(500);
+		By my_location_item_path = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supply_location + "')]/../..");
+		waitForElementToBeEnabled(driver, my_location_item_path, 10);
+		WebElement my_location_item = driver.findElement(my_location_item_path);
+		my_location_item.click();
 	}
 
 	public void clickLineItemCheckBox(int itemNum) throws InterruptedException {

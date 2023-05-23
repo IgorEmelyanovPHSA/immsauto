@@ -23,7 +23,8 @@ public class Requisition extends BaseTest {
 		TestcaseID = (env.contains("immsbc_admin")) ? "244848" : "222344";
 		testData = Utils.getTestData(env);
 		//String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
-		String supply_location_from = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+		String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+		String supply_location_from = "Atlin Health Centre";
 		boolean is_new_ui = Utils.isCommunityPortal();
 //		if(is_new_ui) {
 //			throw new SkipException("Temporarily Ignore test in CP");
@@ -42,7 +43,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		supplyConsolePage.closeTabsHCA();
 		supplyConsolePage.clickSupplyLocationsTab();
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		supplyConsolePage.clickOnSupplyLocation(supply_location);
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		//supplyConsolePage.verifyIsSupplyPageDisplayed();
 		//Thread.sleep(4000);
@@ -58,7 +59,7 @@ public class Requisition extends BaseTest {
 		System.out.println("/*----6. Navigate to Request Supplies --*/");
 		supplyConsolePage.clickRequestSupplies();
 		System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
-		supplyConsolePage.selectShipped_From();
+		supplyConsolePage.selectShipped_From(supply_location_from);
 		//requisitionPage.inputShipAddress();
 		//System.out.println("/*----8. Locate on Automation Supply Location_1 --*/");
 		//requisitionPage.LocateAddress("Atlin Health Centre");
