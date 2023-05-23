@@ -437,14 +437,6 @@ public class SupplyConsolePage extends BasePage {
 	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
-	@FindBy(xpath = "//button[@name='distributionBox']")
-	private WebElement supply_distribution_to;
-	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
-
-	@FindBy(xpath = "(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]")
-	private WebElement select_supply_distributor;
-	private By select_supply_distributor1 = By.xpath("(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]");
-
 	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]")
 	private WebElement select_desired_supply_container;
 	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]");
@@ -1569,6 +1561,40 @@ public class SupplyConsolePage extends BasePage {
 		my_supply_item.click();
 	}
 
+	public void selectSupplyItemName(String item) throws InterruptedException {
+		By select_list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Items']");
+		Thread.sleep(500);
+		waitForElementToBeEnabled(driver, select_list_view_btn_path, 10);
+		WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
+		select_list_view_btn.click();
+		Thread.sleep(500);
+		By all_supply_items_path = By.xpath("//a[@role='option']/span[text() = 'All']");
+		waitForElementToBeEnabled(driver, all_supply_items_path, 10);
+		WebElement all_supply_items =  driver.findElement(all_supply_items_path);
+		all_supply_items.click();
+		Thread.sleep(2000);
+		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']");
+		waitForElementToBeEnabled(driver, search_field_path, 10);
+		WebElement search_location_field = driver.findElement(search_field_path);
+		try {
+			WebElement clear_btn = driver.findElement(By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']/..//button[@data-element-id = 'searchClear']"));
+			clear_btn.click();
+			Thread.sleep(2000);
+		} catch(Exception ex) {
+			System.out.println("Search field is empty. Continue...");
+		}
+		search_location_field.sendKeys(item);
+		Thread.sleep(1000);
+		search_location_field.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		try {
+			tables.clickOnSupplyItemTableRow(ImmutableMap.of("Supply Item Name", item));
+		} catch (NullPointerException ex) {
+			Thread.sleep(2000);
+			tables.clickOnSupplyItemTableRow(ImmutableMap.of("Supply Item Name", item));
+		}
+	}
+
 	public void selectSupplyLocationName() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_desired_supply_loc, 10);
 		Thread.sleep(2000);
@@ -1808,6 +1834,8 @@ public class SupplyConsolePage extends BasePage {
 		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
 		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
 		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
+		scrollTop(save_receive_supplies_btn);
+		Thread.sleep(500);
 		save_receive_supplies_btn.click();
 		Thread.sleep(500);
 		//Try to find and close the Success Dialogue
@@ -1836,16 +1864,16 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void selectIncomingSupplyDistributionReceive() throws InterruptedException {
-		waitForElementToBeVisible(driver, supply_distribution_to, 10);
-		WebElement element = driver.findElement(supply_distribution_to1);
-		Thread.sleep(2000);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		Thread.sleep(1000);
-		supply_distribution_to.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_supply_distributor, 10);
-		Thread.sleep(2000);
-		select_supply_distributor.click();
+		By supply_distribution_to_path = By.xpath("//button[@name='distributionBox']");
+		waitForElementToBeEnabled(driver, supply_distribution_to_path, 10);
+		WebElement element = driver.findElement(supply_distribution_to_path);
+		scrollTop(element);
+		element.click();
+		Thread.sleep(500);
+		By supply_distributor_path = By.xpath("(//span[contains(text(),'- SDST-000')])[1]");
+		waitForElementToBeEnabled(driver, supply_distributor_path, 10);
+		WebElement myDistributor = driver.findElement(supply_distributor_path);
+		myDistributor.click();
 	}
 	@Step
 	public void acceptIncomingTransfer(String distribution) throws InterruptedException {

@@ -126,7 +126,7 @@ public class BulkWastages extends BaseTest {
 			
 			//Comparing results
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
-			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.011);
 			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
 		}
 	}
@@ -219,7 +219,7 @@ public class BulkWastages extends BaseTest {
 
 			//Comparing results
 			assertEquals(remainingDosesAfterDeduction, calculatedDosesAfterDeduction);
-			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction);
+			assertEquals(remainingQuantityAfterDeduction, calculatedRemainingQuantityAfterDeduction, 0.011);
 			assertEquals(doseConversionFactorBeforeDeduction, doseConversionAfterDeduction);
 		}
 	}

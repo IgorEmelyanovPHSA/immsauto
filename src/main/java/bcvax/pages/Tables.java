@@ -18,6 +18,8 @@ public class Tables extends BasePage {
 
     @FindBy(xpath = "//div[@class='listViewContent slds-table--header-fixed_container']")
     private WebElement supplyLocationsTable;
+    @FindBy(xpath = "//div[@class='listViewContent slds-table--header-fixed_container']")
+    private WebElement supplyItemsTable;
     @FindBy(xpath = ".//div[@class='slds-table_header-fixed_container slds-scrollable_x']")
     private WebElement supplyContainerTable;
     @FindBy(xpath = ".//table[@class='slds-table slds-table_cell-buffer slds-table_bordered scrollClass']")
@@ -48,6 +50,11 @@ public class Tables extends BasePage {
     public GenericTable getSupplyLocationTable() {
         waitForTextToBePresent(driver, supplyLocationsTable ,30, "Location");
         return new GenericTable(supplyLocationsTable);
+    }
+
+    public GenericTable getSupplyItemTable() {
+        waitForTextToBePresent(driver, supplyItemsTable ,30, "Item");
+        return new GenericTable(supplyItemsTable);
     }
 
     public GenericTable getContainerTransferTable() {
@@ -188,6 +195,10 @@ public class Tables extends BasePage {
     @Step
     public void clickOnSupplyLocationTableRow(Map<String, String> searchCriteria) throws InterruptedException {
         clickOnTableRow(searchCriteria, getSupplyLocationTable());
+    }
+
+    public void clickOnSupplyItemTableRow(Map<String, String> searchCriteria) throws InterruptedException {
+        clickOnTableRow(searchCriteria, getSupplyItemTable());
     }
 
     @Step

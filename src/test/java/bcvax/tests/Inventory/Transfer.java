@@ -72,6 +72,9 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersCloseButton();
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         System.out.println("/*14----Getting Remaining Doses/Remaining Quantity - After --*/");
         double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 
