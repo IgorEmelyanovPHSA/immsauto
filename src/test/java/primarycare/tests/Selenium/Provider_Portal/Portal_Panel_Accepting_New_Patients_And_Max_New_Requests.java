@@ -27,7 +27,7 @@ public class Portal_Panel_Accepting_New_Patients_And_Max_New_Requests extends Ba
     private int desiredPanelSize = ((1 + new Random().nextInt(2)) * 10000) + new Random().nextInt(10000);
     private String isAcceptingNewPatients = "Yes";
     //private String maxNewRequests = "88888";
-    int maxNew = new Random().nextInt(100000) + 10000;
+    int maxNew = new Random().nextInt(10000) + 10000;
     String maxNewRequests = String.format("%05d", maxNew);
 
 

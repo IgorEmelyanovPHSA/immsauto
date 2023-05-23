@@ -2,7 +2,7 @@ package primarycare.tests.API.Patient_Attachment_and_Registry;
 
 import primarycare.tests.Utilities.ApiQueries;
 import primarycare.tests.Utilities.TestListener;
-import primarycare.tests.BaseTest_PrimaryCare;
+import primarycare.tests.API_BaseTest_PrimaryCare;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -10,7 +10,7 @@ import javax.swing.text.Utilities;
 
 
 @Listeners({TestListener.class})
-public class API_Removing_Not_Attached_Patient_SYSAdmin extends BaseTest_PrimaryCare {
+public class API_Removing_Not_Attached_Patient_SYSAdmin extends API_BaseTest_PrimaryCare {
     private String legalFirstName = "Sandy";
     private String legalLastName = "Prior";
     private String dateOfBirth = "March 1, 1975";
