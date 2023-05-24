@@ -187,12 +187,12 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 
 		inClinicExperience.ClickSaveConsentButton();
 		Thread.sleep(2000);
-		inClinicExperience.setLotNumber(consumptionLot);
+		//inClinicExperience.setLotNumber(consumptionLot);
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();
 		Thread.sleep(2000);
-		inClinicExperience.clickOkForExpiredLot();
-		Thread.sleep(2000);
+		//inClinicExperience.clickOkForExpiredLot();
+		//Thread.sleep(2000);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		Thread.sleep(2000);

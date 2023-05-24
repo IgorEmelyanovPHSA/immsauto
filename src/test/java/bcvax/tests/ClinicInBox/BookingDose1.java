@@ -125,9 +125,9 @@ public class BookingDose1 extends BaseTest {
 		Thread.sleep(10000);
 
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(3000);
+		//log("/*----scroll down a bit --*/");
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		//Thread.sleep(3000);
 		clinicInBox.selectOneOption(vaccineToSelect);
 		Thread.sleep(2000);
 
