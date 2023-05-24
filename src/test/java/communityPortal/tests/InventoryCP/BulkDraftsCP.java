@@ -88,7 +88,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*10.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();

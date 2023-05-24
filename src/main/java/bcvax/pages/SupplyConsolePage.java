@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.beans.ExceptionListener;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -40,9 +41,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement bulk_cancel_button;
 	private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 
-	@FindBy(xpath = "(//section[@role='dialog']//button[text() = 'Transfer'])")
-	private WebElement bulk_transfers_dialog_button;
-	private By bulk_transfers_dialog_button_1 = By.xpath("(//section[@role='dialog']//button[text() = 'Transfer'])");
 
 	@FindBy(xpath = ".//input[@class='slds-combobox__input slds-input']")
 	private WebElement SupplyLocations;
@@ -602,6 +600,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickSupplyLocationsTab() throws InterruptedException {
+		Thread.sleep(500);
 		By supply_location_tab_path = By.xpath("(//span[@class = 'slds-truncate'])[2]/..");
 		waitForElementToBeEnabled(driver, supply_location_tab_path, 10);
 		WebElement supply_locations_tab = driver.findElement(supply_location_tab_path);
@@ -830,22 +829,36 @@ public class SupplyConsolePage extends BasePage {
 		scrollTop(supplyLocationItem, true);
 		log(" -- Drop down with supply required Supply location appeared  -");
 		supplyLocationItem.click();
+		//Probable delay when select supply location causing teh javascript error
+		Thread.sleep(2000);
 		log(" -- Selected Supply location successfully  -");
 	}
 
 	@Step
-	public SupplyConsolePage clickBulkTransfersModalButton(){
-		waitForElementToBeLocated(driver, bulk_transfers_dialog_button_1, 10);
-		moveToElement(driver.findElement(bulk_transfers_dialog_button_1));
-		click(bulk_transfers_dialog_button_1);
+	public SupplyConsolePage clickBulkTransfersModalButton() throws InterruptedException {
+		Thread.sleep(500);
+		By transfer_btn_path = By.xpath("(//section[@role='dialog']//button[text() = 'Transfer'])");
+		waitForElementToBeEnabled(driver, transfer_btn_path, 10);
+		WebElement transfer_btn = driver.findElement(transfer_btn_path);
+		scrollTop(transfer_btn);
+		click(transfer_btn);
 		return this;
 	}
 	@Step
-	public void clickBulkTransfersCloseButton() throws InterruptedException {
+	public void clickBulkTransfersDialogCloseButton() throws InterruptedException {
+		Thread.sleep(2000);
 		By bulk_dialog_close_button_path = By.xpath("//section[@role='dialog']//button[text()='Close']");
-		waitForElementToBeLocated(driver, bulk_dialog_close_button_path, 10);
+		waitForElementToBeEnabled(driver, bulk_dialog_close_button_path, 10);
 		WebElement bulk_dialog_close_button = driver.findElement(bulk_dialog_close_button_path);
 		bulk_dialog_close_button.click();
+		try {
+			Thread.sleep(500);
+			WebElement javascript_error_close_button = driver.findElement(By.xpath("//button[@title='Close this window']"));
+			javascript_error_close_button.click();
+			System.out.println("***WARNING. Probable Javascript performance ***");
+		} catch(Exception ex) {
+			;
+		}
 		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_path, 10);
 	}
 
@@ -1024,7 +1037,7 @@ public class SupplyConsolePage extends BasePage {
 		clickUsingJS(btnTransferDraftOnContainerTransferPage);
 		//click(btnTransferDraftOnContainerTransferPage);
 		Thread.sleep(2000);
-		clickBulkTransfersCloseButton();
+		clickBulkTransfersDialogCloseButton();
 		Thread.sleep(2000);
 	}
 
@@ -1913,7 +1926,7 @@ public class SupplyConsolePage extends BasePage {
 	@Step
 	public void transferDosesToSupplyLocation(String location) throws InterruptedException {
 		selectSupplyLocation(location).clickBulkTransfersModalButton()
-				.clickBulkTransfersCloseButton();
+				.clickBulkTransfersDialogCloseButton();
 	}
 
 	@Step
@@ -1921,7 +1934,7 @@ public class SupplyConsolePage extends BasePage {
 		selectSupplyLocation(location);
 		transferToDistributionOnSend(distribution);
 		clickBulkTransfersModalButton();
-		clickBulkTransfersCloseButton();
+		clickBulkTransfersDialogCloseButton();
 	}
 
 	public SupplyConsolePage transferToDistributionOnSend(String distribution) throws InterruptedException {
@@ -1938,7 +1951,7 @@ public class SupplyConsolePage extends BasePage {
 		selectSupplyLocation(location);
 		transferToDistributionOnSend(distribution);
 		clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-		clickBulkTransfersCloseButton();
+		clickBulkTransfersDialogCloseButton();
 	}
 
 	@Step

@@ -89,7 +89,7 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.clickBulkTransfersModalButton();
         Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
@@ -202,7 +202,7 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.clickBulkTransfersModalButton();
         Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");

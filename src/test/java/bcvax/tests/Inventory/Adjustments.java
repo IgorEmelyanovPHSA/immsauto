@@ -92,7 +92,7 @@ public class Adjustments extends BaseTest {
 		supplyConsolePage.clickSupplyLocationsTab();
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		supplyConsolePage.selectSupplyLocationName(supply_location_from);
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
@@ -222,7 +222,7 @@ public class Adjustments extends BaseTest {
 		supplyConsolePage.clickSupplyLocationsTab();
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
 		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		//double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);

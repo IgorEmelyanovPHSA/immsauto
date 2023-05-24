@@ -313,11 +313,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//*[@class='slds-icon slds-icon_large']")
 	private WebElement close_button_diwa;
 	private By close_button_diwa1 = By.xpath("//*[@class='slds-icon slds-icon_large']");
-
-	@FindBy(xpath = "(.//button[@title='Confirm & Save Identification'])")
-	private WebElement confirm_and_save_btn_home;
-	private By confirm_and_save_btn_home1 = By.xpath(".//button[@title='Confirm & Save Identification']");
-
 	@FindBy(xpath = "(//button[normalize-space()='Save Consent'])")
 	private WebElement save_consent_btn;
 	private By save_consent_btn1 = By.xpath("//button[normalize-space()='Save Consent']");
@@ -329,10 +324,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//button[@title='Confirm & Save Administration'])")
 	private WebElement confirm_save_adm_btn;
 	private By confirm_save_adm_btn1 = By.xpath("//button[@title='Confirm & Save Administration']");
-
-	@FindBy(xpath = "//button[text()='Confirm & Save Administration']")
-	private WebElement confirm_save_adm_btn_modal_screen;
-	private By confirm_save_adm_btn_modal_screen_ = By.xpath("//button[text()='Confirm & Save Administration']");
 
 	@FindBy(xpath = "//button[text()='Confirm']")
 	private WebElement confirm_admin_another_vaccine_modal_screen_btn;
@@ -400,27 +391,10 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement user_defaults_tab;
 	private By user_defaults_tab1 = By.xpath(".//span[text() = 'User Defaults']");
 
-	@FindBy(xpath = ".//button[@aria-label = 'Agent, Select an option']")
-	private WebElement click_vaccine_agent_dropdown;
 	private By click_vaccine_agent_dropdown1 = By.xpath(".//button[@aria-label = 'Agent, Select an option']");
 
 	@FindBy(xpath = ".//button[@data-value = 'Influenza-LAIV']")
 	private WebElement click_vaccine_agent_dropdown_cp;
-	private By click_vaccine_agent_dropdown1_cp = By.xpath(".//button[@data-value = 'Influenza-LAIV']");
-
-
-	@FindBy(xpath = ".//span[text() = 'COVID-19 mRNA']")
-	private WebElement select_vaccine_agent_dropdown;
-	private By select_vaccine_agent_dropdown1 = By.xpath(".//span[text() = 'COVID-19 mRNA']");
-
-	@FindBy(xpath = ".//span[text() = 'Influenza-LAIV']")
-	private WebElement select_vaccine_agent_influenza_dropdown;
-	private By select_vaccine_agent_influenza_dropdown1 = By.xpath(".//span[text() = 'Influenza-LAIV']");
-
-	@FindBy(xpath = ".//span[text() = 'Pneumo-P-23']")
-	private WebElement select_vaccine_agent_pneumo_dropdown;
-	private By select_vaccine_agent_pneumo_dropdown1 = By.xpath(".//span[text() = 'Pneumo-P-23']");
-
 	@FindBy(xpath = ".//button[@aria-label = 'Route, Select an Option']")
 	private WebElement click_route_dropdown;
 	private By click_route_dropdown1 = By.xpath(".//button[@aria-label = 'Route, Select an Option']");
@@ -1504,18 +1478,17 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
+		By confirm_and_save_btn_path = By.xpath("(//button[@title='Confirm & Save Identification'])");
 		try {
-			confirm_and_save_btn_home.isDisplayed();
+			waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 5);
 		} catch(NoSuchElementException ex) {
 			System.out.println(ex.getMessage());
 			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
 			driver.findElement(By.xpath("//button[text() ='Rebook at Current Location']")).click();
 		}
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, confirm_and_save_btn_home, 10);
-		scrollTop(confirm_and_save_btn_home);
-		Thread.sleep(2000);
-		confirm_and_save_btn_home.click();
+		WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
+		scrollTop(confirm_and_save_btn);
+		confirm_and_save_btn.click();
 	}
 
 	public void clickVerifyContactInformation() throws InterruptedException {
@@ -1565,68 +1538,53 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String selectConsentProvider() throws InterruptedException {
-		WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
+		Thread.sleep(500);
+		By consent_provider_field_path = By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]");
+		waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
+		WebElement consentProviderField = driver.findElement(consent_provider_field_path);
 		scrollTop(consentProviderField);
 		consentProviderField.click();
 		Thread.sleep(2000);
 		try {
 			driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
 		} catch(Exception ex) {
-			driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
+			waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
+			driver.findElement(consent_provider_field_path).click();
+			Thread.sleep(500);
+			By consent_provider_item_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
+			driver.findElement(consent_provider_item_path).click();
 		}
 		Thread.sleep(2000);
 		return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
 	}
 
-	public void selectVaccineAgent() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,550)");
+	public void selectVaccineAgent(String agent) throws InterruptedException {
+		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option']");
+		waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 10);
+		WebElement click_vaccine_agent_dropdown = driver.findElement(vaccine_agent_dropdown_path);
 		scrollTop(click_vaccine_agent_dropdown);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
 		click_vaccine_agent_dropdown.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_vaccine_agent_dropdown, 10);
-		Thread.sleep(2000);
-		select_vaccine_agent_dropdown.click();
+		Thread.sleep(500);
+		By my_vaccine_path = By.xpath("//span[text() = '" + agent + "']");
+		waitForElementToBeEnabled(driver, my_vaccine_path, 10);
+		WebElement my_vaccine = driver.findElement(my_vaccine_path);
+		my_vaccine.click();
+	}
+
+	public void selectVaccineAgent() throws InterruptedException {
+		selectVaccineAgent("COVID-19 mRNA");
 	}
 
 	public void selectVaccineAgentInfluenza() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,700)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
-		click_vaccine_agent_dropdown.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_vaccine_agent_influenza_dropdown, 10);
-		Thread.sleep(2000);
-		select_vaccine_agent_influenza_dropdown.click();
+		selectVaccineAgent("Influenza-LAIV");
 	}
 
 	public void selectVaccineAgentPneumo() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,700)");
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
-		Thread.sleep(5000);
-		click_vaccine_agent_dropdown.click();
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_vaccine_agent_pneumo_dropdown, 10);
-		Thread.sleep(5000);
-		select_vaccine_agent_pneumo_dropdown.click();
+		selectVaccineAgent("Pneumo-P-23");
 	}
 
 	public void selectVaccineAgentPneumo_after_Influenza_CP() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,900)");
-		Thread.sleep(5000);
-		//waitForElementToBeVisible(driver, click_vaccine_agent_dropdown_cp, 10);
-		waitForElementToBeVisible(driver, click_vaccine_agent_dropdown, 10);
-		Thread.sleep(5000);
-		//click_vaccine_agent_dropdown_cp.click();
-		click_vaccine_agent_dropdown.click();
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_vaccine_agent_pneumo_dropdown, 10);
-		Thread.sleep(5000);
-		select_vaccine_agent_pneumo_dropdown.click();
+		selectVaccineAgent("Pneumo-P-23");
 	}
 
 	public void selectRouteIntranasal() throws InterruptedException {
@@ -1701,10 +1659,12 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void ClickModalConfirmAndSaveAdministrationButton() throws InterruptedException {
-		WebElement element = driver.findElement(confirm_save_adm_btn_modal_screen_);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		waitForElementToBeVisible(driver, confirm_save_adm_btn_modal_screen, 10);
-		confirm_save_adm_btn_modal_screen.click();
+		By confirm_save_btn_path = By.xpath("//button[text()='Confirm & Save Administration']");
+		waitForElementToBeEnabled(driver, confirm_save_btn_path, 10);
+		WebElement confirm_save_btn = driver.findElement(confirm_save_btn_path);
+		scrollTop(confirm_save_btn);
+		Thread.sleep(500);
+		confirm_save_btn.click();
 	}
 
 	public void ClickConfirmAdminAnotherVaccineModalScreenButton() throws InterruptedException {

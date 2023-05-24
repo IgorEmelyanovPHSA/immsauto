@@ -71,7 +71,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -181,7 +181,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
         double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
@@ -293,7 +293,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*15.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*16.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         supplyConsolePage.refreshBrowser();
         /////////////////////Doses and Quantity AFTER///////////////////////////////////
         System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
@@ -369,7 +369,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*15.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*16.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         supplyConsolePage.refreshBrowser();
         /////////////////////Doses and Quantity AFTER///////////////////////////////////
         System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");

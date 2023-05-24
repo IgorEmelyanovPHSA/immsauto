@@ -225,6 +225,7 @@ public class Tables extends BasePage {
                 element.click();
                 break;
             } catch(Exception ex) {
+                System.out.println(ex.getMessage());
                 System.out.println("Cell not found. Try again...");
                 count = count + 1;
             }
