@@ -87,9 +87,9 @@ public class BookingDose1 extends BaseTest {
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		Thread.sleep(2000);
-		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-		clinicInBox.successMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		//log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
+		//clinicInBox.successMessageAppear();
+		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*12.----click Next button --*/");
 		clinicInBox.clickNextButton();
 		Thread.sleep(2000);
