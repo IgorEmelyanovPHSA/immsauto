@@ -48,10 +48,6 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//div/h1[text()='Client Search']")
     private WebElement community_portal_home_page_displayed;
 
-    @FindBy(xpath = ".//a[text()='User Defaults']")
-    private WebElement user_defaults_main_menu;
-    private By user_defaults_main_menu1 = By.xpath(".//a[text()='User Defaults']");
-
     @FindBy(xpath = ".//button[text()='Save']")
     private WebElement click_save_defaults_button;
     private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
@@ -198,10 +194,12 @@ public class MainPageCP extends BasePage{
     }
 
     public UserDefaultsPage clickUserDefaultsTab() throws InterruptedException {
-        waitForElementToBeLocated(driver, user_defaults_main_menu1, 10);
-        WebElement element = driver.findElement(user_defaults_main_menu1);
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
+        Thread.sleep(500);
+        By user_default_tab_path = By.xpath("//a[text()='User Defaults']");
+        waitForElementToBeEnabled(driver, user_default_tab_path, 10);
+        WebElement element = driver.findElement(user_default_tab_path);
+        element.click();
+        Thread.sleep(500);
         return new UserDefaultsPage(driver);
     }
 
