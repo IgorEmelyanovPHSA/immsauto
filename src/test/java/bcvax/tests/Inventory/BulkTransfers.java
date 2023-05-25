@@ -103,10 +103,8 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		log("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		log("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(2000);
+		supplyConsolePage.clickBulkTransfersDialogCloseButton();
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -281,10 +279,8 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		log("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		log("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(2000);
+		supplyConsolePage.clickBulkTransfersDialogCloseButton();
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -472,10 +468,8 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 		log("/*13.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		log("/*14.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersCloseButton();
-		Thread.sleep(2000);
+		supplyConsolePage.clickBulkTransfersDialogCloseButton();
 		///////////////////// Doses&Qty AFTER for the same Automation Location_1///////////////////////////////////
 		log("/*15.----Getting Remaining Doses/Remaining Quantity - AFTER - for the same Clinic --*/");
 		//// Supply Distribution_1_1 - containers#1 and #2, #3

@@ -108,13 +108,14 @@ public class Drafts extends BaseTest {
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-
+        Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
             supplyConsolePage.selectTransferFromDropDown();
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
             supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            Thread.sleep(500);
             supplyConsolePage.selectTransferFromDropDown();
         }
 
@@ -135,7 +136,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*14.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -241,13 +242,14 @@ public class Drafts extends BaseTest {
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-
+        Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
             supplyConsolePage.selectTransferFromDropDown();
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
             supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            Thread.sleep(500);
             supplyConsolePage.selectTransferFromDropDown();
         }
 
@@ -268,7 +270,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*14.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -374,13 +376,14 @@ public class Drafts extends BaseTest {
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*8.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-
+        Thread.sleep(500);
         log("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
             supplyConsolePage.selectTransferFromDropDown();
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
             supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            Thread.sleep(500);
             supplyConsolePage.selectTransferFromDropDown();
         }
 
@@ -402,7 +405,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*15.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -498,13 +501,14 @@ public class Drafts extends BaseTest {
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
         supplyConsolePage.clickOnFirstContainerDropDownMenu();
-
+        Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
             supplyConsolePage.selectTransferFromDropDown();
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
             supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            Thread.sleep(500);
             supplyConsolePage.selectTransferFromDropDown();
         }
 
@@ -525,7 +529,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*14.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();

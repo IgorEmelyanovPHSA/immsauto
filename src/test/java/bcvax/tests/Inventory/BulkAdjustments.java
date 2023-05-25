@@ -75,7 +75,7 @@ public class BulkAdjustments extends BaseTest {
 		supplyConsolePage.clickSupplyLocationsTab();
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
 		log("/*6.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();

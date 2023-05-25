@@ -61,7 +61,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-		supplyConsolePage.clickSupplyItemName(supply_item);
+		supplyConsolePage.selectSupplyItemName(supply_item);
 		//Validation for Doses/Qty Before Receiving needs to be add from supply container
 		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
 		double remainingQty_before = supplyConsolePage.getValueOfRemainingQuantity();

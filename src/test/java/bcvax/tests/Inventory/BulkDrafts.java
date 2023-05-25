@@ -91,8 +91,10 @@ public class BulkDrafts extends BaseTest {
         log("/*11.----click Save as draft dialog Modal button --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
+        //Need some wait time otherwise the java script error will be thrown
+        Thread.sleep(2000);
         log("/*12.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*13.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();

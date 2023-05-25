@@ -203,7 +203,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -327,7 +327,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -442,7 +442,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();

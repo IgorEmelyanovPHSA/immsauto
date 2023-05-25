@@ -73,7 +73,7 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
@@ -174,7 +174,7 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);

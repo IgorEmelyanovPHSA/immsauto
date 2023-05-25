@@ -84,7 +84,7 @@ public class TransferCancellationCP extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		Thread.sleep(2000);
 		System.out.println("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersCloseButton();
+		supplyConsolePage.clickBulkTransfersDialogCloseButton();
 		Thread.sleep(5000);
 		log("/---- Count and Validate Remaining Supplies After Transfer --*/");
 		double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -194,7 +194,7 @@ public class TransferCancellationCP extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		Thread.sleep(2000);
 		System.out.println("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersCloseButton();
+		supplyConsolePage.clickBulkTransfersDialogCloseButton();
 		Thread.sleep(5000);
 		log("/---- Count and Validate Remaining Supplies After Transfer --*/");
 		double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
