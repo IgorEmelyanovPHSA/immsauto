@@ -45,11 +45,12 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     public String practitionerId; //"0038N00000D9NPoQAN";//Lori-Ann May Bus
     public String acceptingNewPatients = "Yes";
     public String maxNewRequests = "77777";
-    //public String role = "Director";
-    public String role = "Provider";
+    public String role = "Director";
+    //public String role = "Provider";
     //public String role = "Medical Office Assistant";
     public String isActive_associated = "true";
     public String recordTypeId_associated = "0128N000001Fy9XQAS";
+    public String MSP = "12345";
 
 
     @Test(priority = 1)
@@ -58,7 +59,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
         APICreatePractitionerAccount apiCreatePractitionerAccount = new APICreatePractitionerAccount();
         log("Create Practitioner account record.");
         String accountID = apiCreatePractitionerAccount.insertPractitionerAccount(recordTypeId, firstName,lastName,gender,
-                birthdate,phone,email,isActive);
+                birthdate,phone,email,isActive,MSP);
         log("Created Practitioner's id is: " +accountID);
         log("Status Code 201- created success");
         accId = accountID;

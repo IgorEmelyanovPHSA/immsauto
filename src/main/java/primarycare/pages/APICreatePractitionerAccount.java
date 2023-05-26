@@ -10,9 +10,9 @@ import static io.restassured.RestAssured.given;
 
 public class APICreatePractitionerAccount {
 
-    public String insertPractitionerAccount (String recordTypeId, String firstname,String lastname,String gender,
-                                 String birthdate,
-                                 String phone, String email, String isActive){
+    public String insertPractitionerAccount (String recordTypeId, String firstname,String lastname,
+                                             String gender, String birthdate, String phone,
+                                             String email, String isActive, String MSP){
         APIEstablishSFConnection sfConnection = new APIEstablishSFConnection();
         String acc_token = sfConnection.establishConnection();
         System.out.println("Connection for SF Establish with Status code 200");
@@ -30,6 +30,7 @@ public class APICreatePractitionerAccount {
         mapper.put("EMPI_Verified__pc", "Verified");
         mapper.put("HealthCloudGA__SourceSystem__c", "Health1-00D8N0000008hbe");
         mapper.put("HealthCloudGA__SourceSystem__pc", "Health1-00D8N0000008hbe");
+        mapper.put("MSP_Number__pc", MSP);
 
 
         JSONObject requester = new JSONObject(mapper);

@@ -16,6 +16,7 @@ public class API_Create_Practitioner_Account_NO_Associated_SysAdmin extends API_
     public String phone = "2502946960";
     public String isActive = "true";
     public String recordTypeId = "0125f000000qtflAAA";
+    public String MSP = "54321";
 
     public String accId;
 
@@ -25,7 +26,7 @@ public class API_Create_Practitioner_Account_NO_Associated_SysAdmin extends API_
         APICreatePractitionerAccount apiCreatePractitionerAccount = new APICreatePractitionerAccount();
         log("Create Practitioner account record.");
         String accountID = apiCreatePractitionerAccount.insertPractitionerAccount(recordTypeId, firstName,lastName,gender,
-                birthdate,phone,email,isActive);
+                birthdate,phone,email,isActive,MSP);
         log("Created Practitioner's id is: " +accountID);
         log("Status Code 201- created success");
         accId=accountID;
