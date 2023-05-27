@@ -12,7 +12,7 @@ import static primarycare.tests.BaseTest_PrimaryCare.log;
 
 public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_BaseTest_PrimaryCare{
     //1.for Practitioner account
-    public String firstName = "API_Practitioner_111";//Tanya
+    public String firstName = "API_Practitioner_222";//Tanya
     public String lastName = "Director";//Drysdale
     public String birthdate = "1983-07-11";
     public String gender = "Women";
@@ -26,7 +26,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
 
 
     //2. for Clinic Facility creation
-    public String accountClinicName = "API_111 CRATED CLINIC ASSOCIATED";
+    public String accountClinicName = "API_222 CRATED CLINIC ASSOCIATED";
     public String recordClinicTypeId = "0125f000000qtffAAA";
     public String sourceSystemClinic = "Health1-00D8N0000008hbe";
     public String businessClinicEmail = "accountToDelete@phsa.ca";
@@ -40,7 +40,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
 
 
     ///3.for Practitioner Facility Associated creation
-    public String practitionerFacilityName = "API_Practitioner_111 Director | API_111 CRATED CLINIC ASSOCIATED";
+    public String practitionerFacilityName = "API_Practitioner_222 Director | API_222 CRATED CLINIC ASSOCIATED";
     public String clinicAccountId;// = "0018N00000F9StyQAF"; //CASTLEGAR MEDICAL ASSOCIATES
     public String practitionerId; //"0038N00000D9NPoQAN";//Lori-Ann May Bus
     public String acceptingNewPatients = "Yes";
@@ -50,7 +50,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     //public String role = "Medical Office Assistant";
     public String isActive_associated = "true";
     public String recordTypeId_associated = "0128N000001Fy9XQAS";
-    public String MSP = "12345";
+    public String MSP = "09876";
 
 
     @Test(priority = 1)
