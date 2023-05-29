@@ -49,7 +49,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     //public String role = "Provider";
     //public String role = "Medical Office Assistant";
     public String isActive_associated = "true";
-    public String recordTypeId_associated = "0128N000001Fy9XQAS";
+    public String recordTypeId_associated; // = "0128G000001VwFaQAK";
     public String MSP = "09876";
 
 
