@@ -22,15 +22,6 @@ public class BookAnAppointmentPage extends BasePage{
     // Schedule appointment section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @FindBy(xpath = "//h1[contains(text(),'vaccination appointment')]")
-    private WebElement pageValidationHeader;
-
-    @FindBy(xpath = "//span[text() = 'Covid-19 Vaccine']")
-    private WebElement checkBoxCovid19Vaccine;
-
-    @FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
-    private WebElement checkBoxInfluenzaVaccine;
-
     @FindBy(xpath = "//a[@data-label='Search by clinic name']")
     private WebElement tabSearchByClinicName;
 
@@ -90,25 +81,26 @@ public class BookAnAppointmentPage extends BasePage{
     }
 
     public void selectOneOption(String vaccine) throws InterruptedException{
-        if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
-            Thread.sleep(5000);
-            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-            Thread.sleep(5000);
-            click(checkBoxCovid19Vaccine);
-        }
-        else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
-            Thread.sleep(5000);
-            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-            Thread.sleep(5000);
-            click(checkBoxInfluenzaVaccine);
-        }
-        else if(vaccine.equalsIgnoreCase("both")){
-            click(checkBoxCovid19Vaccine);
-            click(checkBoxInfluenzaVaccine);
-        }
-        else{
-            throw new RuntimeException("No vaccine selected");
-        }
+        PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
+//        if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
+//            Thread.sleep(5000);
+//            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+//            Thread.sleep(5000);
+//            click(checkBoxCovid19Vaccine);
+//        }
+//        else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
+//            Thread.sleep(5000);
+//            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
+//            Thread.sleep(5000);
+//            click(checkBoxInfluenzaVaccine);
+//        }
+//        else if(vaccine.equalsIgnoreCase("both")){
+//            click(checkBoxCovid19Vaccine);
+//            click(checkBoxInfluenzaVaccine);
+//        }
+//        else{
+//            throw new RuntimeException("No vaccine selected");
+//        }
     }
 
     public void searchByClinicName(String clinicName) throws InterruptedException{

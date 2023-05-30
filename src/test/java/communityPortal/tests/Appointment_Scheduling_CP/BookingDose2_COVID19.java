@@ -80,7 +80,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*19.----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
+        inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         inClinicExperience_CP.selectOneOption(vaccineToSelect);

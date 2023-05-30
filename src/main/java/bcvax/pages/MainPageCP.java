@@ -45,9 +45,6 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//a[text() = 'Participants']")
     private WebElement main_menu_btn_Participants;
 
-    @FindBy(xpath = "//div/h1[text()='Client Search']")
-    private WebElement community_portal_home_page_displayed;
-
     @FindBy(xpath = ".//button[text()='Save']")
     private WebElement click_save_defaults_button;
     private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
@@ -104,7 +101,15 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         By tab_supply_location_path = By.xpath("//a[text()='Supply Locations']");
         System.out.println("/*----Locate Dropdown Menu --*/");
-        waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
+        try {
+            waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("--- Try again... ---");
+            driver.navigate().refresh();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
+        }
         WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
         scrollTop(tab_supply_location);
         tab_supply_location.click();
@@ -181,16 +186,18 @@ public class MainPageCP extends BasePage{
     }
 
     public void verifyIsCommunityPortalHomePageDisplayed() throws InterruptedException{
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        By client_search_label_path = By.xpath("//div/h1[text()='Client Search']");
         try {
-            waitForElementToBeVisible(driver, community_portal_home_page_displayed, 30);
+            waitForElementToBeLocated(driver, client_search_label_path, 30);
         }
         catch(Exception ex) {
             System.out.println(ex.getMessage());
             driver.navigate().refresh();
-            waitForElementToBeVisible(driver, community_portal_home_page_displayed, 30);
+            waitForElementToBeLocated(driver, client_search_label_path, 30);
         }
-        community_portal_home_page_displayed.isDisplayed();
+        WebElement client_search_label = driver.findElement(client_search_label_path);
+        client_search_label.isDisplayed();
     }
 
     public UserDefaultsPage clickUserDefaultsTab() throws InterruptedException {
@@ -217,11 +224,22 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         waitForElementToBeEnabled(driver, input_current_date_path, 10);
         input_current_date = driver.findElement(input_current_date_path);
+        try {
+            input_current_date.isEnabled();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(500);
+            driver.navigate().refresh();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, input_current_date_path, 10);
+            input_current_date = driver.findElement(input_current_date_path);
+        }
         input_current_date.clear();
         Thread.sleep(500);
         input_current_date.sendKeys(todayAsString);
         Thread.sleep(500);
         input_current_date.sendKeys(Keys.ENTER);
+        Thread.sleep(500);
+        closeSuccessDialog();
         Thread.sleep(500);
     }
 

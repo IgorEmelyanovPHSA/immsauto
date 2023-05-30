@@ -234,10 +234,6 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement appointment_tab;
 	private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 	
-	@FindBy(xpath = "(.//span[text() = 'Covid-19 Vaccine'])")
-	private WebElement click_on_covid19_vaccination_checkbox;
-	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
-	
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
 	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
@@ -321,9 +317,6 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "(//input[@placeholder='Input your search here'])[1]")
 	private WebElement searchByPhn;
 	private By searchByPhn1 = By.xpath("(//input[@placeholder='Input your search here'])[1]");
-
-	@FindBy(xpath = "//span[text() = 'Covid-19 Vaccine']")
-	private WebElement checkBoxCovid19Vaccine;
 
 	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
 	private WebElement checkBoxInfluenzaVaccine;
@@ -740,8 +733,10 @@ public class ClinicInBoxPage extends BasePage {
 	public void successMessageAppear() throws InterruptedException {
 		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
 		waitForElementToBeEnabled(driver, message_path, 10);
+		Thread.sleep(500);
 		WebElement message = driver.findElement(message_path);
-		Assert.assertEquals(message.getText(), "Success", "Expected PHN Match Success but found " + message.getText());
+		String messageText = message.getText();
+		Assert.assertEquals(messageText, "Success", "Expected PHN Match Success but found " + messageText);
 		log("  -- success message has been Appears - /");
 	}
 	
@@ -817,11 +812,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
-		Thread.sleep(2000);
-		click_on_covid19_vaccination_checkbox.click();
+		PersonAccountPage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 	}
 
 	public void selectEarlyBookingReason() throws InterruptedException {
@@ -1020,19 +1011,8 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 
-	public void selectOneOption(String vaccine) throws InterruptedException{
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
-		Thread.sleep(3000);
-		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
-			click(checkBoxCovid19Vaccine);
-		}
-		else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
-			click(checkBoxInfluenzaVaccine);
-		}
-		else{
-			click(checkBoxCovid19Vaccine);
-			click(checkBoxInfluenzaVaccine);
-		}
+	public void selectOneOption(String vaccine) throws InterruptedException {
+		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
 	}
 
 }

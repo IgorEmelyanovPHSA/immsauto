@@ -1,11 +1,9 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.UserDefaultsPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,6 +37,8 @@ public class Consumption extends BaseTest {
 	String consumptionSite;
 	String consumptionLot;
 	String consumptionDose;
+	SupplyConsolePage supplyConsolePage;
+	MainPageOrg orgMainPage;
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
@@ -58,27 +58,19 @@ public class Consumption extends BaseTest {
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
-		inClinicExperiencePage.closeTabsHCA();
-		if (inClinicExperiencePage.displaySupplyConsolePage()) {
-			log("/*-- 2. User already on Health Connect - Supply Console --*/");
-		} else {
-			log("/*-- 2.1. Navigate to Health Connect - Supply Console --*/");
-			inClinicExperiencePage.selectHealthConnectApp();
+		loginPage.loginWithClinicianCon();
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+
 		log("/*-- 3. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
-		if (inClinicExperiencePage.supplyLocDisplayed()) {
-			log("/*-- 4. User is already on Supply loc--*/");
-		} else {
-			log("/*-- 4.1. Click Dropdown Menu --*/");
-			inClinicExperiencePage.clickDropdownMenu();
-			log("/*-- 4.2. Navigate and Select Supply Locations --*/");
-			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-		}
-		log("/*-- 5. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(driver);
+		log("/*2.----Supply Console Page displayed --*/");
+		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		log("/*3.----Close All previously opened Tab's --*/");
+		supplyConsolePage.closeTabsHCA();
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 
@@ -93,8 +85,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 10. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
-		inClinicExperiencePage.selectICEFromApp();
+		orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
 		log("/*-- 12. Click on User Defaults Tab  --*/");
+		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
 		inClinicExperiencePage.clickUserDefaultsTab();
 		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*-- 13. Enter current date for UserDefaults --*/");
@@ -139,7 +132,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
 		Thread.sleep(2000);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
-		inClinicExperiencePage.navigateAppointmentSchedulingTab();
+		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 		log("/*-- 33.Select Early Booking Reason --*/");
 		inClinicExperiencePage.selectEarlyBookingReason();
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
@@ -192,14 +185,15 @@ public class Consumption extends BaseTest {
 			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 			inClinicExperiencePage.selectVaccineAgent();
 		}
+		String consentProvider = inClinicExperiencePage.consentProviderSelected();
 		log("/*-- 48---Click Save Consent Button --*/");
-		if(inClinicExperiencePage.consentProviderSelected().equals("")) {
+		if(consentProvider.equals("")) {
 			inClinicExperiencePage.selectConsentProvider();
 		}
 		inClinicExperiencePage.ClickSaveConsentButton();
 		Thread.sleep(2000);
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
-		if(inClinicExperiencePage.consentProviderSelected().equals("")) {
+		if(consentProvider.equals("")) {
 			inClinicExperiencePage.selectConsentProvider();
 		}
 
@@ -214,7 +208,7 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.setVaccineAgent(consumptionAgent);
 		}
 		if(provider.equals("")) {
-			inClinicExperiencePage.setProvider(consumptionProvider);
+			inClinicExperiencePage.setProvider(consentProvider);
 		}
 		if(route.equals("")) {
 			inClinicExperiencePage.setRoute(consumptionRoute);

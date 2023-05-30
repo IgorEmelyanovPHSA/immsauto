@@ -131,7 +131,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		//inClinicExperience.userIsEligibleSuccessMsg();
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*26.----Go to Appointment Tab --*/");
-		inClinicExperience.navigateAppointmentSchedulingTab();
+		inClinicExperience.navigateToVaccineSchedulingTab();
 		Thread.sleep(5000);
 		//System.out.println("/*27.----click on reason Early Booking Reason - Travel --*/");
 		//inClinicExperience.selectEarlyBookingReason();

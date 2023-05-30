@@ -648,7 +648,7 @@ public class SupplyConsolePage extends BasePage {
 		tables.getSupplyLocationRow(supplyLocation).get(SUPPLY_LOCATION_NAME).findElement(By.tagName("a")).click();
 		Thread.sleep(500);
 		By supply_loc_header = By.xpath("//h1/div[text() = 'Supply Location']");
-		waitForElementToBeEnabled(driver, supply_loc_header, 10);
+		waitForElementToBeLocated(driver, supply_loc_header, 10);
 	}
 
 	public void clickRequestSupplies() throws InterruptedException {
@@ -937,16 +937,6 @@ public class SupplyConsolePage extends BasePage {
 				System.out.println(ex.getMessage());
 			}
 		}
-//		do {
-//			try {
-//				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-//				Thread.sleep(2000);
-//				closetab.click();
-//				Thread.sleep(2000);
-//			} catch (NoSuchElementException e) {
-//				System.out.println("/*---there are no Tab's to close anymore");
-//			}
-//		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 	}
 
 	public int getRowsIncomingTransactionsCount() throws InterruptedException {

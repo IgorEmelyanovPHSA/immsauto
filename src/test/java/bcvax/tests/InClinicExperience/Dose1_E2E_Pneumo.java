@@ -100,7 +100,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         //inClinicExperience.userIsEligibleSuccessMsg();
         //Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         System.out.println("/*26----Go to Appointment Tab --*/");
-        inClinicExperience.navigateAppointmentSchedulingTab();
+        inClinicExperience.navigateToVaccineSchedulingTab();
 
         log("/*27.----click on the Vaccine 'COVID-19' checkbox --*/");
         log("/*----scroll down a bit --*/");

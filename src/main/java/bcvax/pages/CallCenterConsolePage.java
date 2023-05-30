@@ -4,6 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.util.List;
+
 public class CallCenterConsolePage extends BasePage {
 	
 	/*---------Properties-------*/
@@ -70,14 +72,6 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
 	private WebElement covid_eligibility_option;
 	private By covid_eligibility_option1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
-	
-	@FindBy(xpath = ".//a[@id = 'customTab__item']")
-	private WebElement appointment_tab;
-	private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
-	
-	@FindBy(xpath = ".//span[text() = 'Covid-19 Vaccine']")
-	private WebElement click_on_covid19_vaccination_checkbox;
-	private By click_on_covid19_vaccination_checkbox_ = By.xpath(".//span[text() = 'Covid-19 Vaccine']");
 
 	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
 	private WebElement checkBoxInfluenzaVaccine;
@@ -152,22 +146,34 @@ public class CallCenterConsolePage extends BasePage {
 	public void verifyIsCallCenterConsolePageDisplayed() throws InterruptedException {
 		Thread.sleep(500);
 		By callcenter_page_title_path = By.xpath(".//span[@title='Call Center Console']");
-		waitForElementToBeLocated(driver, callcenter_page_title_path, 10);
+		waitForElementToBeLocated(driver, callcenter_page_title_path, 30);
 		WebElement callcenter_page_title = driver.findElement(callcenter_page_title_path);
 		callcenter_page_title.isDisplayed();
 	}
 	
 	public void closeAllTabs() throws InterruptedException {
-		do {
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+		Thread.sleep(5000);
+		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+		for(WebElement closeTabBtn : closeButtons) {
 			try {
-				WebElement close_tab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-				Thread.sleep(1000);
-				close_tab.click();
-				Thread.sleep(1000);
-			} catch (NoSuchElementException e) {
-				System.out.println("/*---there are no Tab's to close anymore");
+				closeTabBtn.click();
+				Thread.sleep(2000);
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
 			}
-		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
+		}
+//		do {
+//			try {
+//				WebElement close_tab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
+//				Thread.sleep(1000);
+//				close_tab.click();
+//				Thread.sleep(1000);
+//			} catch (NoSuchElementException e) {
+//				System.out.println("/*---there are no Tab's to close anymore");
+//			}
+//		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 	}
 	
 	public void clickRegisterButton() throws InterruptedException {
@@ -215,6 +221,7 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void successMessageAppear() throws InterruptedException {
+		Thread.sleep(500);
 		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
 		waitForElementToBeEnabled(driver, message_path, 10);
 		WebElement message = driver.findElement(message_path);
@@ -253,11 +260,7 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickRefreshForecastButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, refresh_forecast_button, 10);
-		Thread.sleep(3000);
-		WebElement element = driver.findElement(refresh_forecast_button1);
-		Thread.sleep(3000);
-		refresh_forecast_button.click();
+		PersonAccountPage.clickRefreshForecastButton(driver);
 	}
 	
 	public void successRegisteredMessageAppear() throws InterruptedException {
@@ -295,16 +298,11 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickAppointmentTab() throws InterruptedException {
-		waitForElementToBeVisible(driver, appointment_tab, 10);
-		Thread.sleep(2000);
-		appointment_tab.click();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 	}
 	
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_on_covid19_vaccination_checkbox, 10);
-		click_on_covid19_vaccination_checkbox.click();
+		PersonAccountPage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 	}
 	
 	public void selectEarlyBookingReason() throws InterruptedException {
@@ -437,18 +435,19 @@ public class CallCenterConsolePage extends BasePage {
 	}
 
 	public void selectOneOption(String vaccine) throws InterruptedException{
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
-		Thread.sleep(3000);
-		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
-			click(click_on_covid19_vaccination_checkbox);
-		}
-		else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
-			click(checkBoxInfluenzaVaccine);
-		}
-		else{
-			click(click_on_covid19_vaccination_checkbox);
-			click(checkBoxInfluenzaVaccine);
-		}
+//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
+//		Thread.sleep(3000);
+//		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
+//			click(click_on_covid19_vaccination_checkbox);
+//		}
+//		else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
+//			click(checkBoxInfluenzaVaccine);
+//		}
+//		else{
+//			click(click_on_covid19_vaccination_checkbox);
+//			click(checkBoxInfluenzaVaccine);
+//		}
+		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
 	}
 
 }

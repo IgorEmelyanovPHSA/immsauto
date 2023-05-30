@@ -108,7 +108,7 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
+        inClinicExperience_CP.navigateToVaccineSchedulingTab();
         try {
             inClinicExperience_CP.selectEarlyBookingReason();
         } catch(Exception ex) {

@@ -113,7 +113,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(5000);
 
         System.out.println("/*26----Go to Appointment Tab --*/");
-        inClinicExperience.navigateAppointmentSchedulingTab();
+        inClinicExperience.navigateToVaccineSchedulingTab();
         Thread.sleep(15000);
 
         log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
