@@ -55,7 +55,8 @@ public class RequisitionCP extends BaseTest {
         log("/*----11. Select requested Trades from Add Requisition Line Items  --*/");
         log("/*--SPIKEVAX (Moderna) COVID-19 mRNA Moderna mRNA-1273 7mL 14-dose vial Lot 016F21A-CC07--*/");
 
-        int itemNum = 7;
+        int itemNum = 1;
+        supplyConsolePage.checkShowInStockCheckbox();
         supplyConsolePage.clickLineItemCheckBox(itemNum);
         log("/*----12. click Next button --*/");
         supplyConsolePage.clickNextButton();
