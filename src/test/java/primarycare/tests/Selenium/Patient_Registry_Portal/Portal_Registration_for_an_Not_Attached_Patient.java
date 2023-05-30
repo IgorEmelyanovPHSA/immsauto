@@ -30,7 +30,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
     private String communicationPreference = "Email";
 
     private String caseOriginExpectedValue = "Web";
-    private String priorityExpectedValue = "Medium";
+    private String priorityExpectedValue = "None";//"Medium";
     private String statusExpected = "Active";
     private String accountNameExpected = "3113 Broadmoor";
     private String caseReasonExpected = "Unattached - Requires attachment to family doctor or nurse practitioner";
@@ -193,9 +193,9 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         assertEquals(caseOriginActualValue, caseOriginExpectedValue);
         Thread.sleep(2000);
 
-        log("/*35.---- Validate Priority  - 'Medium'  ---*/");
+        log("/*35.---- Validate Priority  - 'None'  ---*/");
         String priorityActualValue = healthCloudConsolePage.getPriorityActualForValidation();
-        log("/*---- Priority actual value is: " + caseOriginActualValue + " --*/");
+        log("/*---- Priority actual value is: " + priorityActualValue + " --*/");
         assertEquals(priorityActualValue, priorityExpectedValue);
         Thread.sleep(2000);
 

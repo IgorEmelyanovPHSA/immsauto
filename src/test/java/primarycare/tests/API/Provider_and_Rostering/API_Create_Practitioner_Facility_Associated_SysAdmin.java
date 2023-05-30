@@ -52,6 +52,9 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     public String recordTypeId_associated; // = "0128G000001VwFaQAK";
     public String MSP = "09876";
 
+    //5 for delete
+    public String practitionerFacility_accId;
+
 
     @Test(priority = 1)
     public void API_Can_Create_Practitioner_Account_No_Associated_in_Salesforce_Status_Code_201_as_SysAdmin(){
@@ -99,17 +102,17 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
                 clinicAccountId,personContactId, acceptingNewPatients, maxNewRequests, role,isActive_associated,recordTypeId_associated);
         log("Created Director Practitioner id is: " +accountID);
         log("Status Code 201- created success");
-        //accId=accountID;
+        practitionerFacility_accId = accountID;
     }
 
 
-    //@Test(priority = 5)
+    @Test(priority = 5)
     public void API_Remove_Practitioner_DIRECTORs_Facility_Associated_in_Salesforce_as_SysAdmin(){
-        TestcaseID = "252885"; //C252885
-        APIDelete apidelete = new APIDelete();
-        log("Delete Practitioner account from Account.");
-        String apiResponse = apidelete.deleteAccount(accId);
-        log("Deleted Practitioner Account from Account is: " +accId);
+        //TestcaseID = "252885"; //C252885
+        APIDelete apidelete_practitionerFacility = new APIDelete();
+        log("Delete PractitionerFacility from HealthcarePractitionerFacility.");
+        String apiResponse = apidelete_practitionerFacility.deletePractitionerFacility(practitionerFacility_accId);
+        log("Deleted PractitionerFacility from HealthcarePractitionerFacility is: " +practitionerFacility_accId);
         log(apiResponse);
         //Assert.assertEquals(accountNameReturned, name);
     }

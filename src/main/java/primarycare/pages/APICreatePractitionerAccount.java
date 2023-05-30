@@ -79,7 +79,7 @@ public class APICreatePractitionerAccount {
         JSONObject requester = new JSONObject(mapper);
         System.out.println("Account JSON is:" +requester.toString());
 
-        //return
+        return
                 given().
                         contentType(ContentType.JSON).
                         accept(ContentType.JSON).
@@ -88,9 +88,9 @@ public class APICreatePractitionerAccount {
                         body(requester.toString()).
                         when().
                         post("https://healthbc--hlthbcqax.sandbox.my.salesforce.com/services/data/v57.0/sobjects/HealthcarePractitionerFacility").
-                        //then().statusCode(201).log().body().extract().path("id");
-        then().log().body();
-        return null;
+                        then().statusCode(201).log().body().extract().path("id");
+        //then().log().body();
+        //return null;
     }
 
 }
