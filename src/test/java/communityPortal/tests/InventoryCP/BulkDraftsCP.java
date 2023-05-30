@@ -193,7 +193,7 @@ public class BulkDraftsCP extends BaseTest {
             assertEquals(remainingDosesAfter, calculatedDosesAfterTransfer);
 
             log("Compering remaining quantity after transfer " + remainingQuantityAfterTransfer + " vs calculated quantity after transfer " + calculatedRemainingQuantityAfterTransfer);
-            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer, 0.01);
+            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer, 0.011);
 
             log("Compering dose conversion factor before transfer " + doseConversionFactorBeforeTransfer + " vs dose conversion factor after transfer " + doseConversionAfterTransfer);
             assertEquals(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer);

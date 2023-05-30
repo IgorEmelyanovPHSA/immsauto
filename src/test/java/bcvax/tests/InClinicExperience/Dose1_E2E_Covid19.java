@@ -110,17 +110,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.successRegisteredMessageAppear();
 		System.out.println("/*25.----click on person Account Related Tab --*/");
 		inClinicExperience.clickOnPersonAccountRelatedTab();
-		//System.out.println("/*24.----click on Eligibility button --*/");
-		//inClinicExperience.clickEligibilityButton();
-		//Thread.sleep(2000);
-		//System.out.println("/*25----select vaccination option -> COVID_19_Vaccination --*/");
-		//inClinicExperience.selectCovid19option();
-		//Thread.sleep(2000);
-		//System.out.println("/*26.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-		//inClinicExperience.userIsEligibleSuccessMsg();
-		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		System.out.println("/*26----Go to Appointment Tab --*/");
-		inClinicExperience.navigateAppointmentSchedulingTab();
+		inClinicExperience.navigateToVaccineSchedulingTab();
 
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
@@ -134,8 +125,6 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.selectSearchByClinicNameTab();
 
 		log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		inClinicExperience.searchClinicName(clinicNameToSearch);
 
 		System.out.println("/*29----click on Option Facility location  --*/");

@@ -108,7 +108,7 @@ public abstract class BasePage<T> {
 		wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath)));
 	}
 
-	public void waitForElementToBeEnabled(WebDriver driver, By xpath, int seconds) throws InterruptedException {
+	public static void waitForElementToBeEnabled(WebDriver driver, By xpath, int seconds) throws InterruptedException {
 		int timeout = seconds * 1000;
 		boolean found = false;
 		Instant start = Instant.now();
@@ -129,6 +129,12 @@ public abstract class BasePage<T> {
 				end = Instant.now();
 				if (Duration.between(start, end).toMillis() > timeout) {
 					throw new NotFoundException("Element not found after " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			} catch (StaleElementReferenceException ex) {
+				end = Instant.now();
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Stale Element " + seconds + " seconds");
 				}
 				Thread.sleep(200);
 			}
@@ -265,6 +271,20 @@ public abstract class BasePage<T> {
 			log(e.toString());
 		}
 		return (T) this;
+	}
+
+	public static void scrollTop(WebDriver driver, WebElement element, boolean allignTop) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(" + Boolean.toString(allignTop) + ");", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
 	}
 	
 	public static String getLogTime() {

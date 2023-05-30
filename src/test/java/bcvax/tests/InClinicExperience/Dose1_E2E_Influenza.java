@@ -119,7 +119,7 @@ public class Dose1_E2E_Influenza extends BaseTest {
         Thread.sleep(5000);
 
         log("/*25.----Go to Appointment Tab --*/");
-        inClinicExperience.navigateAppointmentSchedulingTab();
+        inClinicExperience.navigateToVaccineSchedulingTab();
         Thread.sleep(5000);
 
         log("/*26.----click on the Vaccine 'Influenza' checkbox --*/");

@@ -115,7 +115,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Thread.sleep(5000);
 
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
-		inClinicExperiencePage.navigateAppointmentSchedulingTab();
+		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 		Thread.sleep(5000);
 		//System.out.println("/*23.----click on reason Early Booking Reason - Travel --*/");
 		//inClinicExperiencePage.selectEarlyBookingReason();

@@ -89,7 +89,7 @@ public class BookingDose1_Influenza extends BaseTest {
         Thread.sleep(2000);
 
         log("/*19.----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
+        inClinicExperience_CP.navigateToVaccineSchedulingTab();
         Thread.sleep(5000);
 
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");

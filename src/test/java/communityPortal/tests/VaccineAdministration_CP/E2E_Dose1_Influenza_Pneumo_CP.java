@@ -102,7 +102,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(5000);//wait for accordion loading
 
         log("/*23----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
+        inClinicExperience_CP.navigateToVaccineSchedulingTab();
         Thread.sleep(5000);
 
         log("/*24.----click on the Vaccine 'Influenza Vaccine' checkbox --*/");

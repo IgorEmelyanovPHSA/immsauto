@@ -89,7 +89,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*19----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateAppointmentSchedulingTab_CP();
+        inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         log("/*20.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
