@@ -108,7 +108,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
         //supplyConsolePage.clickOnSupplyLocation_2();
         ///////////////// Supply Location_2 -> Incoming //////////////////////////
 
@@ -214,7 +214,7 @@ public class Transfer extends BaseTest {
 
         supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
         //supplyConsolePage.clickOnSupplyLocation_2();
 
         ///////////////// Supply Location_2 -> Incoming //////////////////////////
@@ -425,7 +425,7 @@ public class Transfer extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
         //////////////////////////////////////////////////
     }
 }

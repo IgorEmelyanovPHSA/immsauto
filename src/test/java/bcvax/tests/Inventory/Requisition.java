@@ -43,7 +43,7 @@ public class Requisition extends BaseTest {
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		supplyConsolePage.closeTabsHCA();
 		supplyConsolePage.clickSupplyLocationsTab();
-		supplyConsolePage.clickOnSupplyLocation(supply_location);
+		supplyConsolePage.selectSupplyLocationName(supply_location);
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		//supplyConsolePage.verifyIsSupplyPageDisplayed();
 		//Thread.sleep(4000);

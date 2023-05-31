@@ -75,8 +75,7 @@ public class Consumption extends BaseTest {
 		supplyConsolePage.clickSupplyLocationsTab();
 
 		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		supplyConsolePage.clickOnSupplyLocation(clinicNameToSearch);
-		Thread.sleep(2000);
+		supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
@@ -130,7 +129,6 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickReviewDetails();
 		log("/*-- 31.Click register Button on confirmation page --*/");
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
-		Thread.sleep(2000);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 		log("/*-- 33.Select Early Booking Reason --*/");
@@ -139,9 +137,6 @@ public class Consumption extends BaseTest {
 		log("/*----scroll down a bit --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 
-		//System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");
-		//inClinicExperiencePage.selectEarlyBookingReason();
-		//Thread.sleep(2000);
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		inClinicExperiencePage.selectSearchByClinicNameTab();
 
@@ -168,10 +163,8 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickRelatedTab();
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
-		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
-		Thread.sleep(2000);
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		try {
 			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
@@ -191,14 +184,12 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.selectConsentProvider();
 		}
 		inClinicExperiencePage.ClickSaveConsentButton();
-		Thread.sleep(2000);
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
 		if(consentProvider.equals("")) {
 			inClinicExperiencePage.selectConsentProvider();
 		}
 
 		String agent = inClinicExperiencePage.getVaccineAgent();
-		Thread.sleep(2000);
 		String provider =  inClinicExperiencePage.getProvider();
 		String route = inClinicExperiencePage.getRoute();
 		String site = inClinicExperiencePage.getSite();
@@ -224,17 +215,11 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.setDosage(consumptionDose);
 		}
 		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
-		Thread.sleep(2000);
-		//If expired lop click Ok
-		Thread.sleep(1000);
 		inClinicExperiencePage.clickOkForExpiredLot();
-		/////////
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
-		Thread.sleep(2000);
 		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
-		Thread.sleep(2000);
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");

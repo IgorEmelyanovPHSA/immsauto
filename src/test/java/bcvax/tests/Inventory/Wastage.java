@@ -76,7 +76,7 @@ public class Wastage extends BaseTest {
 		supplyConsolePage.clickSupplyLocationsTab();
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		supplyConsolePage.selectSupplyLocationName(supply_location_from);
 		Thread.sleep(5000);
 		
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
@@ -198,7 +198,7 @@ public class Wastage extends BaseTest {
 		supplyConsolePage.clickSupplyLocationsTab();
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+		supplyConsolePage.selectSupplyLocationName(supply_location_from);
 		Thread.sleep(5000);
 
 		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");

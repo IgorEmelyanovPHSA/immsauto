@@ -82,7 +82,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
         //CommonMethods common = new CommonMethods(driver);
         log("/*4.----Get a matching row for first row Lot number --*/");
         //int matchedRow = common.getMatchedRowToLotInRow1();
@@ -222,7 +222,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(5000);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
@@ -357,7 +357,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -482,7 +482,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);

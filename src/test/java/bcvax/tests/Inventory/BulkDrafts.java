@@ -50,7 +50,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*6.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -126,7 +126,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickSupplyLocationsTab();
 
         log("/*18.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
 
         log("/*19.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -166,7 +166,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.closeTabsHCA();
 
         log("/*27.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*28.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterTransfer = supplyConsolePage.countDosesAndQuantityMap(3);
