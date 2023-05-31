@@ -20,6 +20,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch;
     Map<String, Object> testData;
+    String vaccineAgent;
     String consumptionLot;
     String consumptionDose;
 
@@ -33,8 +34,10 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+        vaccineAgent = String.valueOf(testData.get("vaccineAgent"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
+
         log("/*1.----Login as an Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
@@ -139,8 +142,8 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(2000);
         try {
-            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-            inClinicExperience_CP.selectVaccineAgent();
+            log("/---select Vaccine Agent picklist Value: " +vaccineAgent);
+            inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
         } catch(Exception ex) {
             log("/*39.---Open Today's appointments from Home page --*/");
             System.out.println(ex.getMessage());
@@ -151,7 +154,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
             inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
             Thread.sleep(2000);
-            inClinicExperience_CP.selectVaccineAgent();
+            inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
         }
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
         Thread.sleep(2000);
@@ -161,7 +164,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         Thread.sleep(2000);
         inClinicExperience_CP.ClickSaveConsentButton();
         Thread.sleep(2000);
-        System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
+        log("/*---Click Save button for Immunisation Information --*/");
         if(consentProvider.equals("")) {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
         }
