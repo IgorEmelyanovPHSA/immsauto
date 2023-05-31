@@ -20,6 +20,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch;
     Map<String, Object> testData;
+    String vaccineAgent;
     String consumptionLot;
     String consumptionDose;
 
@@ -33,6 +34,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+        vaccineAgent = String.valueOf(testData.get("vaccineAgent"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         log("/*1.----Login as an Clinician to Community Portal --*/");
@@ -137,20 +139,21 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         log("/*38.---Click confirm and Save Button --*/");
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(2000);
-        log("/*39.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+
+        log("/*39.---select Vaccine Agent picklist Value");
         try {
-            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-            inClinicExperience_CP.selectVaccineAgent();
+            log("/---select Vaccine Agent picklist Value: " +vaccineAgent);
+            inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
         } catch(Exception ex) {
-            log("/*39.---Open Today's appointments from Home page --*/");
+            log("/*40.---Open Today's appointments from Home page --*/");
             System.out.println(ex.getMessage());
             Thread.sleep(2000);
             inClinicExperience_CP.clickTodayAppointments();
             Thread.sleep(2000);
-            log("/*40.---Open Today appointment Details --*/");
+            log("/*41.---Open Today appointment Details --*/");
             inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
             Thread.sleep(2000);
-            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+            log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
             inClinicExperience_CP.selectVaccineAgent();
         }
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
@@ -159,7 +162,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
         }
         Thread.sleep(2000);
-        log("/*40.---Click Save Consent Button --*/");
+        log("/*43.---Click Save Consent Button --*/");
         inClinicExperience_CP.ClickSaveConsentButton();
         if(consentProvider.equals("")) {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
@@ -173,13 +176,13 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         String lot = inClinicExperience_CP.getLotNumber();
 
-        log("/*42.---Click Save Consent Button --*/");
+        log("/*44.---Click Save Consent Button --*/");
 
         if(!provider.equals(consentProvider)) {
             inClinicExperience_CP.setProvider(consentProvider);
         }
 
-        log("/*43.---select Dosage ->  -.5 --*/");
+        log("/*45.---select Dosage ->  -.5 --*/");
         if(!lot.equals(consumptionLot)) {
             inClinicExperience_CP.setLotNumber(consumptionLot);
         }
@@ -190,18 +193,18 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
             inClinicExperience_CP.setDosage(consumptionDose);
         }
 
-        log("/*41.---Click Save button for Immunisation Information --*/");
+        log("/*46.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
         Thread.sleep(2000);
         inClinicExperience_CP.clickOkForExpiredLot();
         Thread.sleep(2000);
-        log("/*42.---Click Confirm and Save Administration Button --*/");
+        log("/*47.---Click Confirm and Save Administration Button --*/");
         inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         Thread.sleep(2000);
-        log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
+        log("/*48.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
 
-        log("/*44.---the Home - Client Search showing up  --*/");
+        log("/*49.---the Home - Client Search showing up  --*/");
         inClinicExperience_CP.validateHomePageShownUp();
     }
 

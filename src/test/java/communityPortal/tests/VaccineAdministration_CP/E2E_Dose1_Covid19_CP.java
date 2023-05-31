@@ -31,6 +31,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        CommonMethods commn = new CommonMethods(getDriver());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -94,6 +95,13 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
+
+        try {
+            System.out.println("---click on reason Early Booking Reason - Travel --*/");
+            commn.selectEarlyBookingReason();
+        } catch(Exception ex) {
+            System.out.println("There is not Early Booking Option");
+        }
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
