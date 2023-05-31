@@ -22,6 +22,7 @@ bcvaxdevit:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-03 23:28:41)"
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
+  vaccineAgent: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EL0203"
   useDefaultSettingsLots:
@@ -53,6 +54,7 @@ prodsuppqa:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-31 18:09:10)"
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:12:16)"
+  vaccineAgent: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EL0203"
   useDefaultSettingsLots:
@@ -88,6 +90,7 @@ comunityqa:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-02-17 13:48:49)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-01-06 15:53:13)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-02-10 12:18:29)"
+  vaccineAgent: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EL1404"
   useDefaultSettingsLots:
@@ -168,6 +171,7 @@ comuat:
     - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:45:47)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:47:07)"
   consumptionDose: "0.3"
+  vaccineAgent: "COVID-19 mRNA"
 comuat_org:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -252,8 +256,9 @@ regression:
     - "TestZD Pediatric Trade - TestZDPfizerPed006 (2023-05-29 21:38:52)"
     - "COMIRNATY (Pfizer) - FF5109 (2023-05-29 21:37:55)"
     - "SPIKEVAX (Moderna) - 3001530 (2023-05-29 21:38:23)"
-  consumptionDose: "0.3"
-  consumptionLot: "EL0203"
+  vaccineAgent: "COVID-19 Non-replicating Viral Vector"
+  consumptionDose: "0.5"
+  consumptionLot: "ABZ5320-CC01"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "0649AA"
