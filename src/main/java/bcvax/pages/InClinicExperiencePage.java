@@ -722,7 +722,7 @@ public class InClinicExperiencePage extends BasePage {
 		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
 		waitForElementToBeEnabled(driver, message_path, 10);
 		String message = driver.findElement(message_path).getText();
-		//Assert.assertTrue(message.equals("Success") | message.equals(""), "Expected PHN Match Success but found '" + message + "'");
+//		Assert.assertEquals(message, "Success", "Expected PHN Match Success but found '" + message + "'");
 		log("  -- success message has been Appears. Closing... - /");
 		try {
 			clickCloseAlert();
@@ -1463,6 +1463,10 @@ public class InClinicExperiencePage extends BasePage {
 			my_vaccine = driver.findElement(my_vaccine_path);
 			my_vaccine.click();
 		}
+	}
+
+	public void selectVaccineAgentValue(String vaccineAgent) throws InterruptedException {
+		selectVaccineAgent(vaccineAgent);
 	}
 
 	public void selectVaccineAgent() throws InterruptedException {
