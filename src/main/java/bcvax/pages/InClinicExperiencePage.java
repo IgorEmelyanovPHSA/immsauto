@@ -2353,7 +2353,14 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
 		System.out.println("***Debug-- Alert Close Button is found");
 		WebElement alert_close_btn = driver.findElement(alert_close_btn_path);
-		alert_close_btn.click();
+		try {
+			alert_close_btn.click();
+		} catch(ElementClickInterceptedException ex) {
+			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
+			Thread.sleep(1000);
+			alert_close_btn = driver.findElement(alert_close_btn_path);
+			alert_close_btn.click();
+		}
 	}
 
 	public int getDeferralsCount() {
