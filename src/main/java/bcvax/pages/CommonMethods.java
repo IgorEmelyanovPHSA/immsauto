@@ -55,6 +55,11 @@ public class CommonMethods extends BasePage{
     @FindBy(xpath = "//button[contains(text(),'Go to User Defaults')]")
     private WebElement btnGoToUserDefaultsCP;
 
+    @FindBy(xpath = ".//span[text() = 'Select One']")
+    private WebElement selectOneDrpDown;
+
+    @FindBy(xpath = ".//span[text() = 'Travel']")
+    private WebElement earlyBookingReasonTravel;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -332,5 +337,10 @@ public class CommonMethods extends BasePage{
             Thread.sleep(2000);
         }
     }
-
+    public void selectEarlyBookingReason() throws InterruptedException {
+        waitForElementToBeVisible(driver, selectOneDrpDown, 10);
+        selectOneDrpDown.click();
+        waitForElementToBeVisible(driver, earlyBookingReasonTravel, 10);
+        earlyBookingReasonTravel.click();
+    }
 }
