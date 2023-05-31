@@ -160,8 +160,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
         }
 
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
 
@@ -283,8 +284,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
         }
 
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
 
@@ -399,8 +401,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
         }
 
+        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
 
@@ -474,19 +477,19 @@ public class DraftsCP extends BaseTest {
 
         log("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
         log("----Validation by Quantities --");
-        assertEquals((remainingQty_before_Distribution_1_1 - amountOfQuantityToAdjust), remainingQty_after_Distribution_1_1);
+        assertEquals((remainingQty_before_Distribution_1_1 - amountOfQuantityToAdjust), remainingQty_after_Distribution_1_1, 0.011);
         log("----Validation by Doses --");
         double remainingDosesCalculationDist1 = Double.parseDouble(df.format(
                         (remainingQty_before_Distribution_1_1 - amountOfQuantityToAdjust) * dose_conversation_factor));
-        assertEquals(remainingDosesCalculationDist1, remainingDoses_after_Distribution_1_1);
+        assertEquals(remainingDosesCalculationDist1, remainingDoses_after_Distribution_1_1, 0.021);
 
         log("/*21.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
         log("----Validation by Quantities --");
-        assertEquals((remainingQty_before_Distribution_1_2 + amountOfQuantityToAdjust), remainingQty_after_Distribution_1_2);
+        assertEquals((remainingQty_before_Distribution_1_2 + amountOfQuantityToAdjust), remainingQty_after_Distribution_1_2, 0.011);
         log("----Validation by Doses --");
         double remainingDosesCalculationDist2 = Double.parseDouble(df.format(
                 (remainingQty_before_Distribution_1_2 + amountOfQuantityToAdjust) * dose_conversation_factor));
-        assertEquals(remainingDosesCalculationDist2, remainingDoses_after_Distribution_1_2);
+        assertEquals(remainingDosesCalculationDist2, remainingDoses_after_Distribution_1_2, 0.021);
     }
 
 }

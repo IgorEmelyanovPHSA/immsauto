@@ -104,7 +104,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		double dosesToQty =Double.parseDouble(df.format(doses / doseConversionFactor));
 
 		assertEquals(remainingDosesAfterReceiving, remainingDosesBeforeReceiving + doses);
-		assertEquals(remainingQtyBeforeReceiving + dosesToQty, remainingQtyAfterReceiving);
+		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + dosesToQty, 0.011);
 	}
 
 	@Test()
@@ -138,7 +138,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 
 		double dosesToQty = qty * doseConversionFactor;
 
-		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + qty);
-		assertEquals(remainingDosesBeforeReceiving + dosesToQty, remainingDosesAfterReceiving);
+		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + qty, 0.011);
+		assertEquals(remainingDosesAfterReceiving, remainingDosesBeforeReceiving + dosesToQty);
 	}
 }

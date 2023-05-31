@@ -1632,9 +1632,11 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 		try {
 			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
+			Thread.sleep(2000);
 		} catch (NullPointerException ex) {
 			Thread.sleep(2000);
 			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
+			Thread.sleep(2000);
 		}
 	}
 
