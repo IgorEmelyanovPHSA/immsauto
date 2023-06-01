@@ -3,6 +3,7 @@ package bcvax.tests.UserDefaults;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
     //private final String[] lots = {"016F21A-CC07", "T005729-CC07"};
     private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     Map<String, Object> testData;
+    MainPageOrg orgMainPage;
 
     @Test()
     public void UserDefaultsSettingsValidationTest() throws Exception {
@@ -70,7 +72,21 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         }
 
         log("/*9.---- Navigate to Supply Console Page --*/");
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew();
+        orgMainPage = new MainPageOrg(getDriver());
+        String currentApp = orgMainPage.currentApp();
+        if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
+        log("/*9.1----Supply Console Page displayed --*/");
+        supplyConsolePage.verifyIsSupplyPageDisplayed();
+        log("/*9.2----Close All previously opened Tab's --*/");
+        supplyConsolePage.closeTabsHCA();
+        log("/*9.3----Go to Supply Locations Tab --*/");
+        supplyConsolePage.clickSupplyLocationsTab();
+        log("/*9.4----Click on Automation Supply Location_1 --*/");
+        supplyConsolePage.clickOnSupplyLocation(clinicLocation);
+
+        //common.goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew();
 
         Thread.sleep(3000);
         log("/*10.---- Validating results, given lot numbers should match --*/");

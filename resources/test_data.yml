@@ -260,5 +260,5 @@ regression:
   consumptionDose: "0.5"
   consumptionLot: "ABZ5320-CC01"
   useDefaultSettingsLots:
-    - "016F21A-CC07"
-    - "0649AA"
+    - "ABZ5320"
+    - "FF5109"
