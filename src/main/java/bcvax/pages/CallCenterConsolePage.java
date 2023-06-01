@@ -39,11 +39,9 @@ public class CallCenterConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
 	private WebElement verify_phn_button;
-	private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
 	
 	@FindBy(xpath = "(.//button[@title = 'Next'])")
 	private WebElement next_button;
-	private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
 	
 	@FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
 	private WebElement email;
@@ -55,87 +53,45 @@ public class CallCenterConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//button[text()= 'Review Details']")
 	private WebElement review_details;
-	private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
-	
-	@FindBy(xpath = ".//button[text() = 'Register']")
-	private WebElement register_confirmation_page_button;
-	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
-	
-	@FindBy(xpath = "(.//a[text() = 'Related'])")
-	private WebElement person_account_Related_tab;
-	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-	
-	@FindBy(xpath = "//button[@title='Check Eligibility']")
-	private WebElement click_eligibility_button;
-	private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
-	
-	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
-	private WebElement covid_eligibility_option;
-	private By covid_eligibility_option1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
 
-	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
-	private WebElement checkBoxInfluenzaVaccine;
+	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
+
+	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
 
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
-	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
 	
 	@FindBy(xpath = ".//span[text() = 'Travel']")
 	private WebElement select_early_booking_reason;
-	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
 	
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
-	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
-	
-	@FindBy(xpath = ".//a[text()='Search by clinic name']")
-	private WebElement search_by_clinic_name_tab;
+
 	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement search_clinic_name;
-	private By select_clinic_name1 = By.xpath("//input[@name='clinicstag']");
 	
 	@FindBy(xpath = "(.//button[@name = 'facility'])[1]")
 	private WebElement option_loc_facility;
-	private By select_option_loc_facility1 = By.xpath("(.//button[@name = 'facility'])[1]");
 	
 	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'])[1]")
 	private WebElement booking_app_active_day;
-	private By booking_app_active_day1 = By.xpath("(.//button[@class = 'slds-day active-day'])[1]");
 	
 	@FindBy(xpath = "(.//button[@name='timeslot'])[1]")
 	private WebElement time_slot_appointment;
-	private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'])[1]");
 	
 	@FindBy(xpath = ".//button[text() = 'Next']")
 	private WebElement click_next_button;
-	private By click_next_button1 = By.xpath(".//button[text() = 'Next']");
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm appointment']")
 	private WebElement click_confirm_appointment_button;
-	private By click_confirm_appointment_button1 = By.xpath(".//button[text() = 'Confirm appointment']");
 	
 	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
 	private WebElement vlidate_appointment_confirm_message;
-	private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment confirmed!']");
-	
-	@FindBy(xpath = "(//a[@data-label='Related'])")
-	private WebElement click_related_tab;
+
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
-	@FindBy(xpath = "(//button[@title='Primary action'])[1]")
-	private WebElement refresh_forecast_button;
-	private By refresh_forecast_button1 = By.xpath("(//button[@title='Primary action'])[1]");
-	
-	@FindBy(xpath = "")
-	private WebElement selectAppointment;
-	private By selectAppointment1 = By.xpath("/html/body/div[4]/div[1]/section/div[1]/div/div[2]/div[2]/section/div/div/section/div/div[2]/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-h-c_-participant_-record_-page22___-account___-v-i-e-w/forcegenerated-flexipage_hc_participant_record_page22_account__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[2]/div[1]/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/flexipage-tab2[2]/slot/flexipage-component2[3]/slot/lst-related-list-container/div/div[1]/lst-related-list-single-container/laf-progressive-container/slot/lst-related-list-single-app-builder-mapper/article/lst-related-list-view-manager/lst-common-list-internal/div/div/lst-primary-display-manager/div/lst-primary-display/lst-primary-display-grid/lst-customized-datatable/div[2]/div/div/table/tbody/tr/th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/force-lookup/div/records-hoverable-link/div");
-	
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose #']/../..//LIGHTNING-FORMATTED-NUMBER[@data-output-element-id='output-field']")
-	private WebElement getDoseNumber;
-	private By getDoseNumber1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose #']/../..//LIGHTNING-FORMATTED-NUMBER[@data-output-element-id='output-field']");
-	
 	/*---------Constructor-------*/
 	public CallCenterConsolePage(WebDriver driver) {
 		super(driver);
@@ -164,16 +120,6 @@ public class CallCenterConsolePage extends BasePage {
 				System.out.println(ex.getMessage());
 			}
 		}
-//		do {
-//			try {
-//				WebElement close_tab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-//				Thread.sleep(1000);
-//				close_tab.click();
-//				Thread.sleep(1000);
-//			} catch (NoSuchElementException e) {
-//				System.out.println("/*---there are no Tab's to close anymore");
-//			}
-//		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 	}
 	
 	public void clickRegisterButton() throws InterruptedException {
@@ -276,25 +222,6 @@ public class CallCenterConsolePage extends BasePage {
 		isDisplayed(person_account_Related_tab_1);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-	}
-	
-	public void clickOnEligibilityButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_eligibility_button1, 10);
-		WebElement element = driver.findElement(click_eligibility_button1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
-	public void selectEligibilityOption() throws InterruptedException {
-		waitForElementToBeVisible(driver, covid_eligibility_option, 10);
-		covid_eligibility_option.click();
-	}
-	
-	public void successEligibilityMessageAppear() throws InterruptedException {
-		waitForElementToBeLocated(driver, By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"), 20);
-		driver.findElement(By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"));
-		Thread.sleep(2000);
-		System.out.println("/* ----the toast Eligibility success message has been Appears");
 	}
 	
 	public void clickAppointmentTab() throws InterruptedException {
@@ -412,41 +339,8 @@ public class CallCenterConsolePage extends BasePage {
 		verify_contact_information_checkbox.click();
 		Thread.sleep(500);
 	}
-	
-	public void selectAppointmentRecord() throws InterruptedException {
-		//To scroll down the page to see RERN Record
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,500)", "");
-		waitForElementToBeLocated(driver, selectAppointment1, 10);
-		WebElement element = driver.findElement(selectAppointment1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-	}
-	
-	public Double getValueOfDosesNumber() throws InterruptedException {
-		waitForElementToBeLocated(driver, getDoseNumber1, 10);
-		WebElement element = driver.findElement(getDoseNumber1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		String Doses = element.getText();
-		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
-		return (doses);
-	}
 
-	public void selectOneOption(String vaccine) throws InterruptedException{
-//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
-//		Thread.sleep(3000);
-//		if(vaccine.equalsIgnoreCase("Covid19Vaccine")){
-//			click(click_on_covid19_vaccination_checkbox);
-//		}
-//		else if(vaccine.equalsIgnoreCase("InfluenzaVaccine")){
-//			click(checkBoxInfluenzaVaccine);
-//		}
-//		else{
-//			click(click_on_covid19_vaccination_checkbox);
-//			click(checkBoxInfluenzaVaccine);
-//		}
+	public void selectOneOption(String vaccine) throws InterruptedException {
 		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
 	}
 

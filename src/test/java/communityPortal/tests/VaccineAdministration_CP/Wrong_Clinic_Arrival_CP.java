@@ -11,9 +11,12 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class Wrong_Clinic_Arrival_CP extends BaseTest {
-
+    String env;
+    Map<String, Object> testData;
     private String legalFirstName = "Hugues";
     private String legalLastName = "BCVaxLampard";
     private String legalMiddleName = "Fawn";
@@ -24,11 +27,25 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "All Ages - Atlin Health Centre";
     String citizenName = "Hugues Fawn BCVaxLampard";
+    String consumptionLot;
+    String consumptionDose;
+    String consumptionAgent;
+    String consumptionProvider;
+    String consumptionRoute;
+    String consumptionSite;
 
     @Test
     public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician_CP() throws Exception {
         TestcaseID = "245216"; //C245216
+        env = Utils.getTargetEnvironment();
         log("Target Environment: " + Utils.getTargetEnvironment());
+        testData = Utils.getTestData(env);
+        consumptionDose = String.valueOf(testData.get("consumptionDose"));
+        consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+        consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+        consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+        consumptionSite = String.valueOf(testData.get("siteConsumption"));
+        consumptionLot = String.valueOf(testData.get("consumptionLot"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         log("TestRail test case ID: C" +TestcaseID);
@@ -128,40 +145,37 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.refreshBrowser();
 
         log("/*32.---Click Go To In clinic experience button --*/");
-        //Create classic object of inClinicExperiencePage
-        InClinicExperiencePage inClinicExperiencePageClassic = new InClinicExperiencePage(getDriver());
-        inClinicExperiencePageClassic.ClickGoToInClinicExperienceButton();
 
-        String originalBooking = inClinicExperiencePageClassic.ValidateClinicNameBeforeRebook();
+        inClinicExperience_CP.ClickGoToInClinicExperienceButton();
+
+        String originalBooking = inClinicExperience_CP.ValidateClinicNameBeforeRebook();
         log("/*--- Before Booking clinic Value is:" + originalBooking + "");
 
         //Assert originalBooking are match to actual booking (clinicNameToSearch)
         Assert.assertTrue(clinicNameToSearch.equalsIgnoreCase(originalBooking));
 
         log("/*33.--- User can click Rebook Appointment button to book an appointment --*/");
-        inClinicExperiencePageClassic.ClickRebookAppointment();
+        inClinicExperience_CP.ClickRebookAppointment();
         Thread.sleep(1000);
         try {
-            inClinicExperiencePageClassic.clickCloseAlert();
+            inClinicExperience_CP.clickCloseAlert();
         } catch(Exception ex) {
             System.out.println("Alert not found. Proceed...");
         }
         log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
         log("/*--                                2. Rebook at Current Location button is disabled --*/");
 
-        String afterRebooking = inClinicExperiencePageClassic.ValidateclinicNameAfterRebook();
+        String afterRebooking = inClinicExperience_CP.ValidateclinicNameAfterRebook();
         log("/*--- After Booking clinic value is:" + afterRebooking + "");
 
         //Assert false clinic originalBooking is not equals to afterRebooking
         Assert.assertFalse(originalBooking.equalsIgnoreCase(afterRebooking));
 
         log("/*34.---'Rebook at Current Location button is disabled after user books appointment --*/");
-        inClinicExperiencePageClassic.ValidateClickRebookAppointmentButtonIsDisabled();
-        Thread.sleep(2000);
+        inClinicExperience_CP.ValidateClickRebookAppointmentButtonIsDisabled();
         log("/*35.---Click confirm and Save Button on Home Page --*/");
-        inClinicExperiencePageClassic.HomePageClickConfirmAndSaveButton();
-        Thread.sleep(2000);
-        
+        inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+
         log("/*36.---Click to select Agent --*/");
         try {
             log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
@@ -179,31 +193,62 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
             inClinicExperience_CP.selectVaccineAgent();
         }
 
-        log("/*38.---Click Save Consent Button --*/");
-        inClinicExperiencePageClassic.ClickSaveConsentButton();
-        Thread.sleep(2000);
+        String consentProvider = inClinicExperience_CP.consentProviderSelected();
+
+        inClinicExperience_CP.ClickSaveConsentButton();
+        System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
+        String agent = inClinicExperience_CP.getVaccineAgent();
+        System.out.println("Current Agent: " + agent);
+        String provider =  inClinicExperience_CP.getProvider();
+        System.out.println("Current Provider: " + provider);
+        String route = inClinicExperience_CP.getRoute();
+        System.out.println("Current Route: " + route);
+        String site = inClinicExperience_CP.getSite();
+        System.out.println("Current Site: " + site);
+        String lot = inClinicExperience_CP.getLotNumber();
+        System.out.println("Current Lot: " + lot);
+        log("/*42.---Click Save Consent Button --*/");
+
+        if(!provider.equals(consentProvider)) {
+            inClinicExperience_CP.setProvider(consentProvider);
+        }
+
+        log("/*43.---select Dosage ->  -.5 --*/");
+        if(!lot.equals(consumptionLot)) {
+            inClinicExperience_CP.setLotNumber(consumptionLot);
+        }
+        String dose = inClinicExperience_CP.getDosage();
+
+        if(!dose.equals(consumptionDose)) {
+            inClinicExperience_CP.setDosage(consumptionDose);
+        }
+        if(route.equals("")) {
+            inClinicExperience_CP.setRoute(consumptionRoute);
+        }
+        if(site.equals("")) {
+            inClinicExperience_CP.setSite(consumptionSite);
+        }
+//No save consent button?
+//        log("/*38.---Click Save Consent Button --*/");
+//        inClinicExperience_CP.ClickSaveConsentButton();
         log("/*39.---Save Immunization Information ---*/");
-        inClinicExperiencePageClassic.saveImmunizationInformation();
+        inClinicExperience_CP.saveImmunizationInformation();
 
         //If expired lop click Ok
-        Thread.sleep(1000);
         inClinicExperience_CP.clickOkForExpiredLot();
         /////////
 
         log("/*40.---Click Confirm and Save Administration Button --*/");
-        inClinicExperiencePageClassic.ClickConfirmAndSaveAdministrationButton();
-        Thread.sleep(2000);
+        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
         log("/*41.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperiencePageClassic.ClickModalConfirmAndSaveAdministrationButton();
+        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
 
         log("/*42.---the Home - Client Search supposed to showing up  --*/");
-        inClinicExperiencePageClassic.validateHomePageShownUp();
-        inClinicExperiencePageClassic.refreshBrowser();
-        Thread.sleep(2000);
+        inClinicExperience_CP.validateHomePageShownUp();
+        inClinicExperience_CP.refreshBrowser();
         log("/*43.---Search for Participant account --*/");
         //ProfilesPage profilesPage = cpMainPage.globalSearch_CP(citizenName);
         cpMainPage.search(legalFirstName + " " + legalLastName);
-        Thread.sleep(2000);
         log("/*44.---select Citizen Participant acc from search results --*/");
         ProfilesPage profilesPage = new ProfilesPage(driver);
         profilesPage.selectCitizenParticipant(legalFirstName + " " + legalLastName);
@@ -212,17 +257,16 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         profilesPage.clickRelatedTab();
 
         log("/*46.---Immunization status is in After Care ---*/");
-        inClinicExperiencePageClassic.ValidateStatusisInAftercare();
+        inClinicExperience_CP.ValidateStatusisInAftercare();
 
         log("/*47.---User Navigated to Appointment Section  ---*/");
-        inClinicExperiencePageClassic.NavigateToAppointmentsSection();
-        Thread.sleep(2000);
+        inClinicExperience_CP.NavigateToAppointmentsSection();
 
         log("/*48.---- An previous appointment for the user has been cancelled with reebooking of an appointment ---*/");
-        inClinicExperiencePageClassic.ValidateAppointmentCancelledIsPresentCP();
+        inClinicExperience_CP.ValidateAppointmentCancelledIsPresentCP();
 
         log("/*49.---- An confirmed appointmrnt is found for the user  ---*/");
-        inClinicExperiencePageClassic.ValidateAppointmentConfirmIsPresentCP();
+        inClinicExperience_CP.ValidateAppointmentConfirmIsPresentCP();
     }
 
     @Test(priority = 2)

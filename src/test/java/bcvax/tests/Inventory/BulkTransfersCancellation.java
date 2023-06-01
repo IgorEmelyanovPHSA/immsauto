@@ -121,7 +121,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         supplyConsolePage.refreshBrowser();
         supplyConsolePage.clickTransactionsTab();
@@ -263,7 +263,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        supplyConsolePage.selectSupplyLocationName(supply_location_to);
 
         supplyConsolePage.refreshBrowser();
         Thread.sleep(2000);
@@ -304,7 +304,7 @@ public class BulkTransfersCancellation extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
         //////////////////////////////////////////////////
     }
 }

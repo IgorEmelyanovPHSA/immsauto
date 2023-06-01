@@ -185,18 +185,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement confirm_email;
 	private By confirm_email1 = By.xpath("(.//input[@name = 'ConfirmEmail'])");
 
-	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
-	private WebElement verify_phn_button;
-	private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
-
-	@FindBy(xpath = ".//button[@title='Next']")
-	private WebElement click_next_button;
-	private By click_next_button1 = By.xpath(".//button[@title='Next']");
-
-	@FindBy(xpath = "(.//input[@name = 'BCH_Indigenous'])[2]")
-	private WebElement non_indigenous_radio_button;
-	private By non_indigenous_radio_button1 = By.xpath("(.//input[@name = 'BCH_Indigenous'])[2]");
-
 	@FindBy(xpath = ".//button[text()= 'Review Details']")
 	private WebElement review_details;
 	private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
@@ -1126,21 +1114,27 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickNonIndigenousRadioButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-		WebElement element = driver.findElement(non_indigenous_radio_button1);
+		Thread.sleep(500);
+		By non_indigenous_radio_button_path = By.xpath("(//input[@name = 'BCH_Indigenous'])[2]");
+		waitForElementToBeEnabled(driver, non_indigenous_radio_button_path, 10);
+		WebElement non_indigenous_radio_button = driver.findElement(non_indigenous_radio_button_path);
 		non_indigenous_radio_button.click();
 	}
 
 	public void clickVerifyPHNButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, verify_phn_button, 10);
-		WebElement element = driver.findElement(verify_phn_button1);
+		Thread.sleep(500);
+		By verify_phn_button_path = By.xpath("//button[@title = 'Verify Personal Health Number']");
+		waitForElementToBeEnabled(driver, verify_phn_button_path, 10);
+		WebElement verify_phn_button = driver.findElement(verify_phn_button_path);
 		verify_phn_button.click();
 	}
 
 	public void clickNextButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_next_button, 10);
-		WebElement element = driver.findElement(click_next_button1);
-		click_next_button.click();
+		Thread.sleep(500);
+		By next_btn_path = By.xpath("//button[@title='Next']");
+		waitForElementToBeEnabled(driver, next_btn_path, 10);
+		WebElement next_btn = driver.findElement(next_btn_path);
+		next_btn.click();
 	}
 
 	public void enterEmail(String enteremail) throws InterruptedException {

@@ -20,42 +20,23 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = ".//span[@title='Clinic in a Box (IPM)']")
 	private WebElement clinicinbox_page_displayed;
 
-	@FindBy(xpath = ".//span[@title='Clinic in a Box (IPM)']")
-	private WebElement cib_App_displayed;
 	private By cib_App_displayed1 = By.xpath(".//span[@title='Clinic in a Box (IPM)']");
-
-	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
-	private WebElement select_app_launcher;
 	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
-
-	@FindBy(xpath = "//p[text()='Clinic in a Box (IPM)']")
-	private WebElement click_cib_app;
 	private By click_cib_app1 = By.xpath("//p[text()='Clinic in a Box (IPM)']");
-
-
-	@FindBy(xpath = ".//span[text() = 'Register']")
-	private WebElement register_tab;
 	private By register_tab1 = By.xpath("(.//a[@title = 'Register'])");
 	
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
-	private By search_assistant1 = By.xpath(".//button[@aria-label = 'Search']");
-
 	@FindBy(xpath = ".//lightning-input[@class = 'saInput slds-grow slds-form-element']")
 	private WebElement search_input;
-	private By search_input1 = By.xpath(".//lightning-input[@class = 'saInput slds-grow slds-form-element']");
 
-	@FindBy(xpath = "(//a[@data-label='Related'])")
-	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 	
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement create_Immunization_Record;
-	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
 	
 	@FindBy(xpath = "//option[contains(text(),'Select an option')]")
 	private WebElement select_an_option;
-	private By select_an_option1 = By.xpath("//option[contains(text(),'Select an option')]");
 	
 	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
 	private WebElement first_name;
@@ -79,41 +60,19 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "(.//input[@name = 'BCH_Indigenous'])[2]")
 	private WebElement non_indigenous_radio_button;
-	private By non_indigenous_radio_button1 = By.xpath("(.//input[@name = 'BCH_Indigenous'])[2]");
 	
 	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
 	private WebElement verify_phn_button;
-	private By verify_phn_button1 = By.xpath("(.//button[@title = 'Verify Personal Health Number'])");
 	
 	@FindBy(xpath = "(.//button[@title = 'Next'])")
 	private WebElement next_button;
-	private By next_button1 = By.xpath("(.//button[@title = 'Next'])");
 
-	private By remediaation_needed1 = By.xpath("//span[text() = 'Remediation Needed']");
-	
-	@FindBy(xpath = ".//a[@title='Maegan Tanya bcvaxvillage']")
-	private WebElement user_found;
-	private By user_found1 = By.xpath(".//a[@title='Maegan Tanya bcvaxvillage']");
-	
-	@FindBy(xpath = "//input[@name=\"BCH_Requested_Delivery_Date__c\"]")
-	private WebElement inputDiwaDate;
-	
 	@FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
 	private WebElement covidmRna;
 	private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
 	
-	@FindBy(xpath = ".//button[@title = 'icon']")
-	private WebElement search_location;
-	private By search_location1 = By.xpath(".//button[@title = 'icon']");
-	
 	@FindBy(xpath = ".//input[@data-id = 'userinput']")
 	private WebElement search_clinic;
-	private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
-	
-	@FindBy(xpath = "//li[@data-label='Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center']")
-	private WebElement finalClick;
-	@FindBy(xpath = "//span[contains(text(),'Age 5-11 Only - Indigenous Clinic - Victoria Native Friendship Center')]")
-	private WebElement finalClick1;
 	
 	@FindBy(xpath = "//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right']")
 	private WebElement inputDate;
@@ -129,29 +88,16 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = ".//button[text()= 'Review Details']")
 	private WebElement review_details;
-	private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
-	
-	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
-	private WebElement select_covid19_option_from_dropdown;
-	private By select_covid19_option_from_dropdown1 = By.xpath("(.//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination'])");
-	
-	@FindBy(xpath = ".//button[text() = 'Register']")
-	private WebElement register_confirmation_page_button;
+
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 	
 	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]")
 	private WebElement click_on_citizen;
 	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]");
 	
-	@FindBy(xpath = "//a[@id='relatedListsTab__item']")
-	private WebElement selectCitizenInTable; //
-	
 	@FindBy(xpath = "//button[text() = 'Confirm']")
 	private WebElement confirm_button;
-	private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
-	
-	@FindBy(xpath = "//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]")
-	private WebElement yes_button_save_on_popup_window;
+
 	private By yes_button_save_on_popup_window1 = By.xpath("//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]");
 	
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
@@ -159,15 +105,10 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement informed_consent_provider_dropdown;
-	private By informed_consent_provider_dropdown_ = By.xpath("//input[@placeholder = 'Search People...']");
 
 	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
 	private WebElement immunizing_agent_provider_dropdown;
-	private By immunizing_agent_provider_dropdown_ = By.xpath("//input[@placeholder = 'Search People...']");
 
-	@FindBy(xpath = "//input[@name='effectiveToDate']")
-	private WebElement consentEffectiveToDate;
-	
 	@FindBy(xpath = "//button[text() = 'Save Consent']")
 	private WebElement saveConsentButton;
 	private By saveConsentButton1 = By.xpath("//button[text() = 'Save Consent']");
@@ -177,32 +118,15 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
 	private WebElement click_lot_number_dropdown;
-	
-	@FindBy(xpath = "//button[@name='injectionSite']")
-	private WebElement selectSite;
+
 	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
-	
-	@FindBy(xpath = "//button[@name='dosePicklist']")
-	private WebElement select_dosage_field;
+
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 
-	@FindBy(xpath = "//span[@title='0.25']")
-	private WebElement select_dosage;
 	private By select_dosage1 = By.xpath("//span[@title='0.25']");
-	
-	@FindBy(xpath = "//div[1]/div[1]/div[2]/lightning-button[1]/button[1]")
-	private WebElement editImmunizationInformation;
 	
 	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
 	private WebElement select_lot;
-	private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
-	//@FindBy(xpath = "//li[@data-value ='300042698']")
-	//private WebElement select_lot;
-	//private By select_lot_ = By.xpath("//li[@data-value='300042698']");
-
-
-	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
-	private WebElement select_injection_site_value;
 	private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
 	
 	@FindBy(xpath = "(//button[@type='submit'])[1]")
@@ -217,118 +141,57 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
 	private WebElement lastConfirmAndSave;
 	private By lastConfirmAndSave1 = By.xpath( "//button[contains(text(),'Confirm and Save')]");
-	
-	@FindBy(xpath = "(.//a[text() = 'Related'])")
-	private WebElement person_account_Related_tab;
+
 	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-	
-	@FindBy(xpath = "//button[@title='Check Eligibility']")
-	private WebElement click_eligibility_button;
-	private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
-	
-	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
-	private WebElement covid_eligibility_option;
-	private By covid_eligibility_option1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
 	
 	@FindBy(xpath = ".//a[@id = 'customTab__item']")
 	private WebElement appointment_tab;
-	private By appointment_tab1 = By.xpath(".//a[@id = 'customTab__item']");
 	
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
-	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
-	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
 
 	@FindBy(xpath = ".//span[text() = 'Travel']")
 	private WebElement select_early_booking_reason;
-	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
 
-	@FindBy(xpath = ".//a[text()='Search by clinic name']")
-	private WebElement search_by_clinic_name_tab;
 	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement search_clinic_name;
-	private By select_clinic_name1 = By.xpath("//input[@name='clinicstag']");
 	
 	@FindBy(xpath = "(.//button[@name = 'facility'])[1]")
 	private WebElement option_loc_facility;
-	private By select_option_loc_facility1 = By.xpath("(.//button[@name = 'facility'])[1]");
 	
 	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'])[1]")
 	private WebElement booking_app_active_day;
-	private By booking_app_active_day1 = By.xpath("(.//button[@class = 'slds-day active-day'])[1]");
 	
 	@FindBy(xpath = "(.//button[@name='timeslot'])[1]")
 	private WebElement time_slot_appointment;
-	private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'])[1]");
 	
 	@FindBy(xpath = ".//button[text() = 'Next']")
 	private WebElement click_next_button;
-	private By click_next_button1 = By.xpath(".//button[text() = 'Next']");
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm appointment']")
 	private WebElement click_confirm_appointment_button;
-	private By click_confirm_appointment_button1 = By.xpath(".//button[text() = 'Confirm appointment']");
 	
 	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
 	private WebElement vlidate_appointment_confirm_message;
-	private By vlidate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment Confirmed!']");
 	
 	@FindBy(xpath = "(.//button[@name='navigateToICE'])")
 	private WebElement click_navigate_to_ICE_btn;
-	private By click_navigate_to_ICE_btn1 = By.xpath(".//button[@name='navigateToICE']");
-	
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]")
-	private WebElement click_Dose2_citizen;
-	private By click_Dose2_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Hugues BCVaxLampard')]");
-	
 	@FindBy(xpath = "//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']")
 	private WebElement verify_contact_information_checkbox;
-	private By verify_contact_information_checkbox1 = By.xpath("//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']");
-	
-	@FindBy(xpath = "//p[text()='In-Clinic Experience']")
-	private WebElement click_ice_app;
+
 	private By click_ice_app1 = By.xpath("//p[text()='In-Clinic Experience']");
-	
-	@FindBy(xpath = ".//span[text() = 'Home']")
-	private WebElement navigateHomePage;
-	private By navigateHomePage1 = By.xpath(".//span[text() = 'Home']");
-	
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
-	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
-	
-	@FindBy(xpath = ".//button[text()='Search']")
-	private WebElement homePageSearchBtn;
-	private By homePageSearchBtn1 = By.xpath(".//button[text()='Search']");
-	
-	@FindBy(xpath = "//button[text()='View']")
-	private WebElement ClickUserHomePage;
-	private By ClickUserHomePage1 = By.xpath("//button[text()='View']");
-	
-	@FindBy(xpath = ".//a[@title='Adams Innis BCVaxKenna']")
-	private WebElement useradms;
-	private By useradms1 = By.xpath(".//a[@title='Adams Innis BCVaxKenna']");
-	
-	@FindBy(xpath = "(//input[@placeholder='Input your search here'])[1]")
-	private WebElement searchByPhn;
-	private By searchByPhn1 = By.xpath("(//input[@placeholder='Input your search here'])[1]");
-
-	@FindBy(xpath = "//span[text() = 'Influenza Vaccine']")
-	private WebElement checkBoxInfluenzaVaccine;
-
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_inform_consent_provider;
-	private By select_inform_consent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
 
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_immunizing_agent_provider;
-	private By select_immunizing_agent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
-
 
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
@@ -355,16 +218,6 @@ public class ClinicInBoxPage extends BasePage {
 				System.out.println(ex.getMessage());
 			}
 		}
-//		do {
-//			try {
-//				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-//				Thread.sleep(1000);
-//				closetab.click();
-//				Thread.sleep(1000);
-//			} catch (NoSuchElementException e) {
-//				System.out.println("/*---there are no Tab's to close anymore");
-//			}
-//		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
 	}
 
 	public boolean displayCIBApp() {
@@ -423,15 +276,6 @@ public class ClinicInBoxPage extends BasePage {
 		this.confirm_button.click();
 	}
 	
-	public boolean userFound() throws InterruptedException {
-		waitForElementToBeLocated(driver, user_found1, 10);
-		WebElement element = driver.findElement(user_found1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
-		return true;
-	}
-	
 	public void clickRelatedTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_related_tab1, 10);
 		Thread.sleep(2000);
@@ -446,13 +290,6 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickSelectAnOptionDropdown() {
 		this.select_an_option.click();
-	}
-	
-	public void clickHomePage() throws InterruptedException {
-		waitForElementToBeLocated(driver, navigateHomePage1, 10);
-		WebElement element = driver.findElement(navigateHomePage1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
 	}
 	
 	public void selectOption(String vaccine) throws InterruptedException {
@@ -509,16 +346,6 @@ public class ClinicInBoxPage extends BasePage {
 		return true;
 	}
 	
-	public void selectDateAndTime() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Date today = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		
-		String todayAsString = dateFormat.format(today);
-		this.inputDate.sendKeys(todayAsString, Keys.ENTER);
-	}
-	
 	public void clickRecordImmunization() throws InterruptedException {
 		waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
 		recordImmunizationBtn.click();
@@ -536,16 +363,6 @@ public class ClinicInBoxPage extends BasePage {
 		return true;
 	}
 	
-	public void enterConsentEffectiveToDate() throws InterruptedException {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, -1);
-		Date yesterday = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-
-		String yesterdayAsString = dateFormat.format(yesterday);
-		this.consentEffectiveToDate.sendKeys(yesterdayAsString, Keys.ENTER);
-	}
-	
 	public void clickSaveConsent() throws InterruptedException {
 		waitForElementToBeVisible(driver, saveConsentButton, 10);
 		WebElement search_input = driver.findElement(saveConsentButton1);
@@ -553,35 +370,6 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", search_input);
 		this.saveConsentButton.click();
 		Thread.sleep(3000);
-	}
-	
-	public void clickEditBtn() throws InterruptedException {
-		editImmunizationInformation.click();
-	}
-	
-	public void SearchDose2Citizen(String citizen) throws InterruptedException {
-		waitForElementToBeVisible(driver, search_assistant, 10);
-		Thread.sleep(2000);
-		search_assistant.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, search_input, 10);
-		Thread.sleep(2000);
-		search_input.click();
-		Thread.sleep(2000);
-		search_input.sendKeys(citizen);
-		Thread.sleep(2000);
-		search_input.sendKeys(Keys.RETURN);
-		Thread.sleep(2000);
-	}
-	
-	public void clickDose2Citizen() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_Dose2_citizen, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(click_Dose2_citizen1);
-		Thread.sleep(2000);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		//click_Dose2_citizen.click();
 	}
 
 	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
@@ -676,12 +464,6 @@ public class ClinicInBoxPage extends BasePage {
 		executor1.executeScript("arguments[0].click();", element1);
 	}
 	
-	public void selectInjectionSiteValue(String Injection) throws InterruptedException {
-		waitForElementToBeVisible(driver, select_injection_site_value, 10);
-		WebElement search_input = driver.findElement(select_injection_site_value1);
-		search_input.click();
-	}
-	
 	public void selectDosage() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_dosage_field1, 10);
 		WebElement element = driver.findElement(select_dosage_field1);
@@ -745,10 +527,7 @@ public class ClinicInBoxPage extends BasePage {
 		waitForElementToBeVisible(driver, next_button, 10);
 		next_button.click();
 	}
-	
-	//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='PIR Immunization ID']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']
-	
-	
+
 	public void enterEmail(String enteremail) throws InterruptedException {
 		waitForElementToBeLocated(driver, email1, 10);
 		email.sendKeys(enteremail);
@@ -785,26 +564,7 @@ public class ClinicInBoxPage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
-	public void clickOnEligibilityButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_eligibility_button1, 10);
-		WebElement element = driver.findElement(click_eligibility_button1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
-	public void selectEligibilityOption() throws InterruptedException {
-		waitForElementToBeVisible(driver, covid_eligibility_option, 10);
-		covid_eligibility_option.click();
-	}
-	
-	public void successEligibilityMessageAppear() throws InterruptedException {
-		waitForElementToBeLocated(driver, By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"), 20);
-		driver.findElement(By.xpath(".//span[text() = 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.']"));
-		Thread.sleep(2000);
-		System.out.println("/* ----the toast Eligibility success message has been Appears");
-	}
-	
+
 	public void clickAppointmentTab() throws InterruptedException {
 		waitForElementToBeVisible(driver, appointment_tab, 10);
 		Thread.sleep(2000);
@@ -955,12 +715,6 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 	}
 	
-	public void ClickSearchButtonHomePage() throws InterruptedException {
-		waitForElementToBeVisible(driver, homePageSearchBtn, 10);
-		homePageSearchBtn.click();;
-		Thread.sleep(2000);
-	}
-	
 	public boolean validateHomePageShownUp() throws InterruptedException {
 		try {
 			waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
@@ -972,14 +726,6 @@ public class ClinicInBoxPage extends BasePage {
 		}
 	}
 	
-	public void ClickUserOnHomePage() throws InterruptedException {
-		waitForElementToBeLocated(driver, ClickUserHomePage1, 10);
-		WebElement element = driver.findElement(ClickUserHomePage1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-	}
-	
 	public void SearchForCitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
 		//WebElement search_navigator = driver.findElement(search_assistant1);
@@ -989,19 +735,6 @@ public class ClinicInBoxPage extends BasePage {
 		search_input.sendKeys(citizen);
 		search_input.sendKeys(Keys.RETURN);
 		Thread.sleep(5000);
-	}
-	
-
-	
-	public void userAdamsFound() throws InterruptedException {
-		waitForElementToBeLocated(driver, useradms1, 10);
-		useradms.click();
-		Thread.sleep(2000);
-	}
-	
-	public void enterPNHToSearch(String phn_number) throws InterruptedException {
-		waitForElementToBeLocated(driver, searchByPhn1, 10);
-		searchByPhn.sendKeys(phn_number);
 	}
 	
 	public void clickRegisterTab() throws InterruptedException {
