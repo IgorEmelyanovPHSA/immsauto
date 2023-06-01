@@ -42,7 +42,7 @@ public class Consumption extends BaseTest {
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
-		TestcaseID = "223355"; //C223355
+		TestcaseID = "222359"; //C222359
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
