@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.LoginPage;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -39,6 +36,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		CommonMethods commn = new CommonMethods(getDriver());
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -112,6 +110,13 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateToVaccineSchedulingTab();
+
+		try {
+			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+			commn.selectEarlyBookingReason();
+		} catch(Exception ex) {
+			System.out.println("There is not Early Booking Option");
+		}
 
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
