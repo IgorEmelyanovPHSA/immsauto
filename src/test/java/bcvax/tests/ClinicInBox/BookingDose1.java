@@ -121,7 +121,7 @@ public class BookingDose1 extends BaseTest {
 		//clinicInBox.successEligibilityMessageAppear();
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*21----Go to Appointment Tab --*/");
-		clinicInBox.clickAppointmentTab();
+		clinicInBox.navigateToVaccineSchedulingTab();
 		Thread.sleep(10000);
 
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");

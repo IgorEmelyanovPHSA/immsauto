@@ -74,7 +74,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
 		callCenterConsole.clickRefreshForecastButton();
 		log("/*21----Go to Appointment Tab --*/");
-		callCenterConsole.clickAppointmentTab();
+		callCenterConsole.navigateToVaccineSchedulingTab();
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");

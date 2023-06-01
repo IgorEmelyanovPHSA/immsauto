@@ -223,9 +223,23 @@ public class CallCenterConsolePage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
+
+	public void navigateToVaccineSchedulingTab() throws InterruptedException {
+		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch(NotFoundException ex) {
+			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
+			PersonAccountPage.goToAppointmentScheduleTab(driver);
+		}
+	}
+
 	public void clickAppointmentTab() throws InterruptedException {
-		PersonAccountPage.goToVaccineScheduleTab(driver);
+		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch(NotFoundException ex) {
+			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
+			PersonAccountPage.goToAppointmentScheduleTab(driver);
+		}
 	}
 	
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
