@@ -227,8 +227,7 @@ public class MainPageCP extends BasePage{
         try {
             input_current_date.isEnabled();
         } catch(StaleElementReferenceException ex) {
-            Thread.sleep(500);
-            driver.navigate().refresh();
+            System.out.println("***DEBUG*** Stale element exception ***");
             Thread.sleep(500);
             waitForElementToBeEnabled(driver, input_current_date_path, 10);
             input_current_date = driver.findElement(input_current_date_path);

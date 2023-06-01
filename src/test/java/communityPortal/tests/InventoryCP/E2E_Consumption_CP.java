@@ -27,6 +27,10 @@ public class E2E_Consumption_CP extends BaseTest {
     String supplyDistribution;
     String consumptionLot;
     String consumptionDose;
+    String consumptionAgent;
+    String consumptionProvider;
+    String consumptionRoute;
+    String consumptionSite;
 
     @Test(priority = 1)
     public void Validate_Consumption_as_an_Inventory_Clinician_CP() throws Exception {
@@ -38,6 +42,10 @@ public class E2E_Consumption_CP extends BaseTest {
         supplyDistribution = String.valueOf(testData.get("distributionConsumption"));
         supplyContainer = String.valueOf(testData.get("containerConsumption"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
+        consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+        consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+        consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+        consumptionSite = String.valueOf(testData.get("siteConsumption"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
@@ -204,7 +212,12 @@ public class E2E_Consumption_CP extends BaseTest {
         if(!dose.equals(consumptionDose)) {
             inClinicExperience_CP.setDosage(consumptionDose);
         }
-
+        if(route.equals("")) {
+            inClinicExperience_CP.setRoute(consumptionRoute);
+        }
+        if(site.equals("")) {
+            inClinicExperience_CP.setSite(consumptionSite);
+        }
         log("/*44.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
         // If expired vaccine click OK in confirmation dialogue
