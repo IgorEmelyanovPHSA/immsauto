@@ -1,6 +1,7 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
 import bcvax.tests.BaseTest;
 import bcvax.pages.ClinicInBoxPage;
 import bcvax.pages.InClinicExperiencePage;
@@ -32,6 +33,7 @@ public class BookingDose1 extends BaseTest {
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
+		CommonMethods commn = new CommonMethods(getDriver());
 
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
@@ -123,6 +125,13 @@ public class BookingDose1 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.navigateToVaccineSchedulingTab();
 		Thread.sleep(10000);
+
+		try {
+			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+			commn.selectEarlyBookingReason();
+		} catch(Exception ex) {
+			System.out.println("There is not Early Booking Option");
+		}
 
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		log("/*----scroll down a bit --*/");

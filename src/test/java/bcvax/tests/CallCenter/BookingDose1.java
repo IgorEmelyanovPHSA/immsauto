@@ -1,6 +1,7 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
 import bcvax.tests.BaseTest;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
@@ -29,6 +30,7 @@ public class BookingDose1 extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		CommonMethods commn = new CommonMethods(getDriver());
 		System.out.println("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
@@ -76,7 +78,14 @@ public class BookingDose1 extends BaseTest {
 
 		System.out.println("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.navigateToVaccineSchedulingTab();
-		callCenterConsole.selectEarlyBookingReason();
+
+		try {
+			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+			commn.selectEarlyBookingReason();
+		} catch(Exception ex) {
+			System.out.println("There is not Early Booking Option");
+		}
+
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
