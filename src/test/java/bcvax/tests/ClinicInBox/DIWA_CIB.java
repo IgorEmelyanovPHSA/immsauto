@@ -1,6 +1,8 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
+import bcvax.pages.CommonMethods;
+import bcvax.pages.ProfilesPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.ClinicInBoxPage;
 import bcvax.pages.Utils;
@@ -17,97 +19,85 @@ public class DIWA_CIB extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinicianDIWACIB();
-		Thread.sleep(5000);
+		CommonMethods commonMethods = new CommonMethods(getDriver());
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
-		Thread.sleep(5000);
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
-		Thread.sleep(2000);
 		log("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
 		clinicInBoxPage.SearchDIWACitizen("Maegan Tanya bcvaxvillage");
-		Thread.sleep(2000);
 		log("/*----5. select Citizen from search results --*/");
 		clinicInBoxPage.userClickCitizen();
-		Thread.sleep(4000);
+		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*----6. Navigated to Person Account related tab ---*/");
-		clinicInBoxPage.clickRelatedTab();
+		profilesPage.clickRelatedTab();
 		log("/*----7. Click Create Immunization Record ---*/");
-		clinicInBoxPage.clickCreatImmunizationRecord();
-		Thread.sleep(4000);
+		profilesPage.clickCreateImmunizationRecord();
 		log("/*----8. Click confirm Button on the popup window---*/");
-		clinicInBoxPage.clickConfirmButton();
-		Thread.sleep(3000);
+		profilesPage.clickConfirmButton();
 		log("/*----9. Select an Option ---*/)");
-		clinicInBoxPage.clickSelectAnOptionDropdown();
-		Thread.sleep(3000);
+		profilesPage.clickSelectAnOptionDropdown();
 		log("/*----10. Select COVID19-mRNA as an Option  ---*/");
-		clinicInBoxPage.selectOption("COVID19-mRNA");
-		Thread.sleep(3000);
+		profilesPage.selectOption("COVID19-mRNA");
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
-		clinicInBoxPage.searchClinicLocation("All Ages - Atlin Health Centre");
-		Thread.sleep(3000);
+		profilesPage.searchClinicLocation("All Ages - Atlin Health Centre");
 		log("/*---12. Select a Date and Time of Administration ---*/");
-		clinicInBoxPage.clickTimeBox();
-		Thread.sleep(3000);
+		profilesPage.clickTimeBox();
 		log("/*---13. Click Record Immunization ---*/");
-		clinicInBoxPage.clickRecordImmunization();
-		Thread.sleep(3000);
-		if (clinicInBoxPage.clickPopupYesButtonIfDisplayed())
+		profilesPage.clickRecordImmunization();
+		if (profilesPage.clickPopupYesButtonIfDisplayed())
 			log("/*---13.1. Pop up window is displayed and clicked  ---*/");
-		Thread.sleep(5000);
-		log("/*---14. select date of Administration ---*/");
-		if (clinicInBoxPage.selectDateOfAdministration())
-			Thread.sleep(3000);
-
+		log("/*---12. Click X button on Diwa flow ---*/");
+		profilesPage.clickToClose();
+		log("/*---13. Validate message on clicking close button on modal popup ---*/");
+		profilesPage.validateoopsMessage();
+		log("/*---14. click on continue editing button to continue with the flow ---*/");
+		profilesPage.ContinueEditingButton();
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
-		clinicInBoxPage.selectInformedConsentProvider("Auto Clinician DIWA_CIB");
-		Thread.sleep(5000);
-
+		String consentProvider = profilesPage.consentProviderSelected();
+		Thread.sleep(2000);
+		String myConsentProvider = "Auto Clinician DIWA_CIB";
+		if(consentProvider.equals("")) {
+			consentProvider = profilesPage.selectConsentProvider(myConsentProvider);
+			try {
+				profilesPage.confirmConsentProvider(myConsentProvider);
+			} catch(Exception ex) {
+				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
+			}
+		}
+		profilesPage.selectConsentEffectiveToDate();
 		log("/*---16. click Save Consent button ---*/");
-		clinicInBoxPage.clickSaveConsent();
-		Thread.sleep(5000);
+		profilesPage.clickSaveConsent();
 
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-		clinicInBoxPage.selectImmunizingAgentProvider("Auto Clinician DIWA_CIB");
-		Thread.sleep(6000);
+		profilesPage.selectImmunizingAgentProvider(consentProvider);
 
 		log("/*---18. Click Show all lot numbers Checkbox ---*/");
-		clinicInBoxPage.clickShowAllLotNumbersCheckBox();
-		Thread.sleep(2000);
+		profilesPage.clickShowAllLotNumbersCheckBox();
 
 		log("/*---19. click Lot Number DropDown component ---*/");
-		clinicInBoxPage.clickLotNumberDropDown();
-		Thread.sleep(2000);
+		profilesPage.clickLotNumberDropDown();
 
 		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> 300042698 - Exp. 2021 June 18 ---*/");
-		clinicInBoxPage.selectLot();
-		Thread.sleep(2000);
+		profilesPage.selectLot();
 
 		log("/*---21. Select Injection Site ---*/");
-		clinicInBoxPage.selectInjectionSite();
-		Thread.sleep(2000);
+		profilesPage.selectInjectionSite();
 		log("/*---22. Select Dosage---*/");
-		clinicInBoxPage.selectDosage();
-		Thread.sleep(2000);
+		profilesPage.selectDosage();
 		log("/*---23. Save Immunization Information ---*/");
-		clinicInBoxPage.saveImmunizationInformation();
-		Thread.sleep(2000);
+		profilesPage.saveImmunizationInformation();
 
 		//Click Ok if the lot is expired
-		clinicInBoxPage.clickOkForExpiredLot();
-		Thread.sleep(2000);
+		commonMethods.expiredVaxHandler();
 		///////
 
 		log("/*---24. Confirm and Save Administration ---*/");
-		clinicInBoxPage.confirmAndSaveAdministration();
-		Thread.sleep(2000);
+		profilesPage.confirmAndSaveAdministration();
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
-		clinicInBoxPage.summaryConfirmAndSave();
-		Thread.sleep(2000);
+		profilesPage.summaryConfirmAndSave();
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-		clinicInBoxPage.clickRelatedTab();
-		Thread.sleep(2000);
+		profilesPage.clickRelatedTab();
 	}
 	
 }

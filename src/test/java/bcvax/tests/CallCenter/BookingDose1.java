@@ -76,7 +76,7 @@ public class BookingDose1 extends BaseTest {
 
 		System.out.println("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.navigateToVaccineSchedulingTab();
-
+		callCenterConsole.selectEarlyBookingReason();
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");

@@ -249,17 +249,11 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void SearchDIWACitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
-		Thread.sleep(2000);
 		search_assistant.click();
-		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, search_input, 10);
-		Thread.sleep(2000);
 		search_input.click();
-		Thread.sleep(2000);
 		search_input.sendKeys(citizen);
-		Thread.sleep(2000);
 		search_input.sendKeys(Keys.RETURN);
-		Thread.sleep(2000);
 	}
 	
 	public void userClickCitizen() throws InterruptedException {
@@ -352,6 +346,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
+		Thread.sleep(1000);
 		if (!isDisplayed(yes_button_save_on_popup_window1)) {
 			return false;
 		}
@@ -370,6 +365,14 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", search_input);
 		this.saveConsentButton.click();
 		Thread.sleep(3000);
+	}
+
+	public void clickToClose() throws InterruptedException {
+		Thread.sleep(500);
+		By close_button_diwa_path = By.xpath("//*[@class='slds-icon slds-icon_large']");
+		waitForElementToBeEnabled(driver, close_button_diwa_path, 10);
+		WebElement close_button_diwa = driver.findElement(close_button_diwa_path);
+		close_button_diwa.click();
 	}
 
 	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
