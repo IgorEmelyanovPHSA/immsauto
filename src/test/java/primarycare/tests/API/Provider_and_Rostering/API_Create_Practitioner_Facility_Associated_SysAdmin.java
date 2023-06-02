@@ -64,7 +64,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
         String accountID = apiCreatePractitionerAccount.insertPractitionerAccount(recordTypeId, firstName,lastName,gender,
                 birthdate,phone,email,isActive,MSP);
         log("Created Practitioner's id is: " +accountID);
-        log("Status Code 201- created success");
+        log("Status Code 201- Practitioner Account has Created - successfully");
         accId = accountID;
     }
 
@@ -77,18 +77,19 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
         log("Selected PersonAccountID from Account is: " +personContactID);
         //Assert.assertEquals(accountNameReturned, name);
         personContactId=personContactID;
+        log("Status Code 200 - Person Contact Id SELECTED request - successfully");
     }
 
     @Test(priority = 3)
     public void API_Can_Create_Clinic_Account_in_Salesforce_Status_Code_201_as_SysAdmin(){
         TestcaseID = "255149"; //C255149
         APICreateClinicAccount apiCreateClinic = new APICreateClinicAccount();
-        log("Create a Clinic account account record.");
+        log("Create a Clinic account record.");
         String accountClinicID = apiCreateClinic.insertClinicAccount(accountClinicName,recordClinicTypeId,
                 sourceSystemClinic, businessClinicEmail,phoneClinic,mailingStreetClinic,mailingCityClinic,
                 mailingProvinceClinic,mailingPostalCodeClinic,mailingCountryClinic,isActive_Clinic);
         log("Created a Clinic Facility id is: " +accountClinicID);
-        log("Status Code 201- created success");
+        log("Status Code 201- Clinic Account has Created - successfully");
         clinicAccountId = accountClinicID;
     }
 
@@ -101,24 +102,46 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
         String accountID = apiCreateDirectorAccount.insertDirectorAssociatedAccount(practitionerFacilityName,
                 clinicAccountId,personContactId, acceptingNewPatients, maxNewRequests, role,isActive_associated,recordTypeId_associated);
         log("Created Director Practitioner id is: " +accountID);
-        log("Status Code 201- created success");
+        log("Status Code 201 - Director's Associated Health Practitioner Facility has Created  - successfully");
         practitionerFacility_accId = accountID;
     }
 
 
     @Test(priority = 5)
-    public void API_Remove_Practitioner_DIRECTORs_Facility_Associated_in_Salesforce_as_SysAdmin(){
-        //TestcaseID = "252885"; //C252885
+    public void API_Delete_Practitioner_DIRECTORs_Facility_Associated_in_Salesforce_as_SysAdmin(){
+        TestcaseID = "255857"; //C255857
         APIDelete apidelete_practitionerFacility = new APIDelete();
         log("Delete PractitionerFacility from HealthcarePractitionerFacility.");
         String apiResponse = apidelete_practitionerFacility.deletePractitionerFacility(practitionerFacility_accId);
         log("Deleted PractitionerFacility from HealthcarePractitionerFacility is: " +practitionerFacility_accId);
         log(apiResponse);
-        //Assert.assertEquals(accountNameReturned, name);
+        log("Status Code 204 - Director's Associated HealthPractitionerFacility  Deleted - successfully");
     }
 
-    //@Test  remove Practitioner
+    @Test(priority = 6)
+    public void API_Delete_the_Clinic_Account_in_Salesforce_as_SysAdmin(){
+        TestcaseID = "255859"; //C255859
+        APIDelete apidelete_Clinic = new APIDelete();
+        log("Delete Clinic from Account");
+        String apiResponse = apidelete_Clinic.deleteAccount(clinicAccountId);
+        log("Deleted Clinic from Account is: " +clinicAccountId);
+        log(apiResponse);
+        log("Status Code 204 -  Clinic from Account  Deleted - successfully");
+    }
 
-    //@Test  remove Clinic
+    @Test(priority = 7)
+    public void API_Delete_the_Practitioner_Account_in_Salesforce_as_SysAdmin(){
+        TestcaseID = "252885"; //C252885
+        APIDelete apidelete_Practitioner = new APIDelete();
+        log("Delete Practitioner from Account");
+        String apiResponse = apidelete_Practitioner.deleteAccount(accId);
+        log("Deleted Practitioner from Account is: " +accId);
+        log(apiResponse);
+        log("Status Code 204 -  Practitioner from Account  Deleted - successfully");
+    }
+
+
+
+
 
 }
