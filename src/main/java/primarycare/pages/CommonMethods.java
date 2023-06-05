@@ -13,8 +13,11 @@ public class CommonMethods extends BasePage {
     @FindBy(xpath = "//button[@aria-label = 'Search']")
     private WebElement searchAssistant;
 
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
+    //@FindBy(xpath = "//input[@placeholder = 'Search...']")
+    //private WebElement searchInput;
+    @FindBy(xpath = "//input[@placeholder = 'Search Accounts and more...']")
     private WebElement searchInput;
+
 
     @FindBy(xpath = "(//a[@title='Sandy Prior'])[2]")
     private WebElement patient_founded;
@@ -84,10 +87,14 @@ public class CommonMethods extends BasePage {
 
     public void globalSearch(String textToSearch) throws InterruptedException {
         waitForElementToBeVisible(driver, searchAssistant, 10);
-        click(searchAssistant);
-        Thread.sleep(2000);
+        searchAssistant.click();
+        Thread.sleep(3000);
         waitForElementToBeVisible(driver, searchInput, 10);
-        typeIn(searchInput,textToSearch);
+        Thread.sleep(3000);
+        searchInput.clear();
+        Thread.sleep(3000);
+        searchInput.sendKeys(textToSearch);
+        Thread.sleep(2000);
         searchInput.sendKeys(Keys.RETURN);
         Thread.sleep(2000);
     }
