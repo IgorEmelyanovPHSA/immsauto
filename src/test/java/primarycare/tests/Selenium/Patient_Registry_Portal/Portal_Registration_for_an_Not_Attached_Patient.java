@@ -171,8 +171,8 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         common.closeAllHealthCloudConsoleTabs();
         Thread.sleep(2000);
 
-        log("/*29_1.----Select Accounts from Navigation Menu Dropdown --*/");
-        common.selectAccountsFromNavigationMenuDropdown();
+        log("/*29_1.----Select Home from Navigation Menu Dropdown --*/");
+        common.selectHomeFromNavigationMenuDropdown();
         Thread.sleep(2000);
 
 

@@ -14,17 +14,17 @@ public class CommonMethods extends BasePage {
     private WebElement navigator_menu_dropdown;
     private By navigator_menu_dropdown_1 = By.xpath("//button[@title = 'Show Navigation Menu']");
 
-    @FindBy(xpath = "//span/span[text() = 'Accounts']")
-    private WebElement select_Accounts_from_dropdown;
-    private By select_Accounts_from_dropdown_1 = By.xpath("//span/span[text() = 'Accounts']");
+    @FindBy(xpath = "//span/span[text() = 'Home']")
+    private WebElement select_Home_from_dropdown;
+    private By select_Home_from_dropdown_1 = By.xpath("//span/span[text() = 'Home']");
 
 
     @FindBy(xpath = "//button[@aria-label = 'Search']")
     private WebElement searchAssistant;
 
-    //@FindBy(xpath = "//input[@placeholder = 'Search...']")
+    //@FindBy(xpath = "//input[@placeholder = 'Search Accounts and more...']")
     //private WebElement searchInput;
-    @FindBy(xpath = "//input[@placeholder = 'Search Accounts and more...']")
+    @FindBy(xpath = "//input[@placeholder = 'Search...']")
     private WebElement searchInput;
 
 
@@ -81,13 +81,13 @@ public class CommonMethods extends BasePage {
         } while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
     }
 
-    public void selectAccountsFromNavigationMenuDropdown() throws InterruptedException {
+    public void selectHomeFromNavigationMenuDropdown() throws InterruptedException {
         waitForElementToBeVisible(driver, navigator_menu_dropdown, 10);
         navigator_menu_dropdown.click();
         Thread.sleep(2000);
-        waitForElementToBeVisible(driver, select_Accounts_from_dropdown, 10);
+        waitForElementToBeVisible(driver, select_Home_from_dropdown, 10);
         Thread.sleep(2000);
-        select_Accounts_from_dropdown.click();
+        select_Home_from_dropdown.click();
         Thread.sleep(2000);
     }
 
