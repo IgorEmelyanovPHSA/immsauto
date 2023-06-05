@@ -171,6 +171,11 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         common.closeAllHealthCloudConsoleTabs();
         Thread.sleep(2000);
 
+        log("/*29_1.----Select Accounts from Navigation Menu Dropdown --*/");
+        common.selectAccountsFromNavigationMenuDropdown();
+        Thread.sleep(2000);
+
+
         log("/*30.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
         common.globalSearch(personalHealthNumber);
         Thread.sleep(2000);

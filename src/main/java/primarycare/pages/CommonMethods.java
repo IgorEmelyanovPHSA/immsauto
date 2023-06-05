@@ -10,6 +10,15 @@ public class CommonMethods extends BasePage {
     private By healthCloudConsoleTitle = By.xpath(".//span[@title='Health Cloud Console']");
     private By appsHealthCloudConsole = By.xpath("//p[text()='Health Cloud Console']");
 
+    @FindBy(xpath = "//button[@title = 'Show Navigation Menu']")
+    private WebElement navigator_menu_dropdown;
+    private By navigator_menu_dropdown_1 = By.xpath("//button[@title = 'Show Navigation Menu']");
+
+    @FindBy(xpath = "//span/span[text() = 'Accounts']")
+    private WebElement select_Accounts_from_dropdown;
+    private By select_Accounts_from_dropdown_1 = By.xpath("//span/span[text() = 'Accounts']");
+
+
     @FindBy(xpath = "//button[@aria-label = 'Search']")
     private WebElement searchAssistant;
 
@@ -42,14 +51,14 @@ public class CommonMethods extends BasePage {
             selectHealthCloudConsoleApp();
             Thread.sleep(2000);
         }
-       // Thread.sleep(2000);
-       // log("/*-- Close all open tabs --*/");
-       // closeAllHealthCloudConsoleTabs();
+        // Thread.sleep(2000);
+        // log("/*-- Close all open tabs --*/");
+        // closeAllHealthCloudConsoleTabs();
         //if (isDisplayed(supplyLocation)) {
         //    log("/*-- User is already on Supply loc--*/");
-       // } else {
+        // } else {
         //    log("/*-- Click Dropdown Menu --*/");
-         //   click(dropdownMenu);
+        //   click(dropdownMenu);
         //    Thread.sleep(5000);
         //    log("/*-- Navigate and Select Supply Locations --*/");
         //    click(supplyLocationInDropdown);
@@ -71,6 +80,17 @@ public class CommonMethods extends BasePage {
             }
         } while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
     }
+
+    public void selectAccountsFromNavigationMenuDropdown() throws InterruptedException {
+        waitForElementToBeVisible(driver, navigator_menu_dropdown, 10);
+        navigator_menu_dropdown.click();
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, select_Accounts_from_dropdown, 10);
+        Thread.sleep(2000);
+        select_Accounts_from_dropdown.click();
+        Thread.sleep(2000);
+    }
+
 
     public void selectHealthCloudConsoleApp() throws InterruptedException {
         waitForElementToBeLocated(driver, appsLauncher, 10);
