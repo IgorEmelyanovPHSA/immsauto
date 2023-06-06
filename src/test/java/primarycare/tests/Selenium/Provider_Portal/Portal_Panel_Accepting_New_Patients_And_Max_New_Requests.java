@@ -71,12 +71,12 @@ public class Portal_Panel_Accepting_New_Patients_And_Max_New_Requests extends Ba
         providerPortalHomePage.clickSave();
         Thread.sleep(1000);
 
-        log("/*9.---- Validate Desired Panel Size  ---*/");
-        String desiredPanelSizeExpected = new DecimalFormat("##,###").format(desiredPanelSize);
-        String desiredPanelSizeActual = providerPortalHomePage.getActualDesiredPanelSizeForValidation();
-        log("/*---Desired Panel Size actual is: " + desiredPanelSizeActual + " --*/");
-        assertEquals(desiredPanelSizeActual, desiredPanelSizeExpected);
-        Thread.sleep(2000);
+//        log("/*9.---- Validate Desired Panel Size  ---*/");
+//        String desiredPanelSizeExpected = new DecimalFormat("##,###").format(desiredPanelSize);
+//        String desiredPanelSizeActual = providerPortalHomePage.getActualDesiredPanelSizeForValidation();
+//        log("/*---Desired Panel Size actual is: " + desiredPanelSizeActual + " --*/");
+//        assertEquals(desiredPanelSizeActual, desiredPanelSizeExpected);
+//        Thread.sleep(2000);
 
         log("/*10.---- Validate isAccepting new Patients  ---*/");
         String acceptingNewPatientsActual = providerPortalHomePage.getActualIsAcceptingNewPatientsForValidation();

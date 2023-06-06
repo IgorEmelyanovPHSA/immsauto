@@ -46,13 +46,13 @@ public class ProviderPortalHomePage extends BasePage{
     private WebElement desired_panel_size_actual_field_value;
     private By desired_panel_size_actual_field_value_1 = By.xpath("(//span[@class='uiOutputNumber'])[1]");
 
-    @FindBy(xpath = "(//span[@class='uiOutputNumber'])[2]")
+    @FindBy(xpath = "(//span[@class='uiOutputNumber'])[1]")
     private WebElement max_new_requests_actual_field_value;
-    private By max_new_requests_actual_field_value_1 = By.xpath("(//span[@class='uiOutputNumber'])[2]");
+    private By max_new_requests_actual_field_value_1 = By.xpath("(//span[@class='uiOutputNumber'])[1]");
 
-    @FindBy(xpath = "(//div[@class='slds-form-element__static slds-truncate']//span[@data-aura-rendered-by])[3]")
+    @FindBy(xpath = "(//div[@class='slds-form-element__static slds-truncate']//span[@data-aura-rendered-by])[2]")
     private WebElement isAccepting_actual_field_value;
-    private By isAccepting_actual_field_value_1 = By.xpath("(//div[@class='slds-form-element__static slds-truncate']//span[@data-aura-rendered-by])[3]");
+    private By isAccepting_actual_field_value_1 = By.xpath("(//div[@class='slds-form-element__static slds-truncate']//span[@data-aura-rendered-by])[2]");
 
 
 

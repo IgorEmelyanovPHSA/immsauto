@@ -30,7 +30,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
     private String communicationPreference = "Email";
 
     private String caseOriginExpectedValue = "Web";
-    private String priorityExpectedValue = "None";//"Medium";
+    private String priorityExpectedValue = "None";//"Medium" for UAT;
     private String statusExpected = "Active";
     private String accountNameExpected = "3113 Broadmoor";
     private String caseReasonExpected = "Unattached - Requires attachment to family doctor or nurse practitioner";
@@ -43,7 +43,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         //CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---Pre-conditioning API call to remove duplicate Patient account if found--*/");
-        ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
+        //ApiQueries.apiCallToRemovePatientAccount(email, legalLastName, legalFirstName);
 
         log("/*1.---Open Patient Registry Portal (Health Connect Registry site)--*/");
         PortalHealthConnectRegistryPage portalHealthConnectRegistryPage= loginPage.openPortalHealthConnectRegistryPage();
