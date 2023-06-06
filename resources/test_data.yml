@@ -261,8 +261,8 @@ regression:
   providerConsumption: "BCHComClinician Auto"
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
-  consumptionDose: "0.3"
-  consumptionLot: "35035BD-CC01"
+  consumptionDose: "0.5"
+  consumptionLot: "ABZ5320-CC01"
   useDefaultSettingsLots:
-    - "35035BD-CC01"
-    - "3001530-CC03"
+    - "ABZ5320"
+    - "FF5109"
