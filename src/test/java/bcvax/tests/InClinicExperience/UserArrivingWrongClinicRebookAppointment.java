@@ -6,6 +6,7 @@ import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	String env;
 	Map<String, Object> testData;
+	MainPageOrg orgMainPage;
 	private String legalFirstName = "Hugues";
 	private String legalLastName = "BCVaxLampard";
 	private String legalMiddleName = "Fawn";
@@ -59,9 +61,13 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
 		inClinicExperiencePage.closeTabsHCA();
+		orgMainPage = new MainPageOrg(driver);
 
 		log("/*-- 2. Navigate to In Clinic Experience App --*/");
-		inClinicExperiencePage.selectICEFromApp();
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		}
 
 		log("/*-- 3. Click on User Defaults Tab  --*/");
 		inClinicExperiencePage.clickUserDefaultsTab();
@@ -119,7 +125,6 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 
 		log("/*-- 21.Click register Button on confirmation page --*/");
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
-		Thread.sleep(5000);
 
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();

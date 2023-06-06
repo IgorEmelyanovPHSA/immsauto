@@ -21,6 +21,7 @@ public class MainPageOrg extends BasePage {
         super(driver);
     }
     public String currentApp() throws InterruptedException {
+        Thread.sleep(500);
         By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
         waitForElementToBeEnabled(driver, current_app_path, 30);
         WebElement current_app = driver.findElement(current_app_path);
