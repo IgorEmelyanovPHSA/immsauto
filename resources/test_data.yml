@@ -262,7 +262,7 @@ regression:
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.5"
-  consumptionLot: "3001530-CC03"
+  consumptionLot: "ABZ5320-CC01"
   useDefaultSettingsLots:
-    - "35035BD-CC01"
-    - "3001530-CC03"
+    - "ABZ5320"
+    - "FF5109"
