@@ -18,6 +18,9 @@ public class CommonMethods extends BasePage {
     private WebElement select_Home_from_dropdown;
     private By select_Home_from_dropdown_1 = By.xpath("//span/span[text() = 'Home']");
 
+    @FindBy(xpath = "//span/span[text() = 'Create New Registration']")
+    private WebElement select_CreateNewRgistration_from_dropdown;
+    private By select_CreateNewRgistration_from_dropdown_1 = By.xpath("//span/span[text() = 'Create New Registration']");
 
     @FindBy(xpath = "//button[@aria-label = 'Search']")
     private WebElement searchAssistant;
@@ -91,6 +94,15 @@ public class CommonMethods extends BasePage {
         Thread.sleep(2000);
     }
 
+    public void selectCreateNewRegistrationFromNavigationMenuDropdown() throws InterruptedException {
+        waitForElementToBeVisible(driver, navigator_menu_dropdown, 10);
+        navigator_menu_dropdown.click();
+        Thread.sleep(2000);
+        waitForElementToBeVisible(driver, select_CreateNewRgistration_from_dropdown, 10);
+        Thread.sleep(2000);
+        select_CreateNewRgistration_from_dropdown.click();
+        Thread.sleep(2000);
+    }
 
     public void selectHealthCloudConsoleApp() throws InterruptedException {
         waitForElementToBeLocated(driver, appsLauncher, 10);
@@ -124,6 +136,7 @@ public class CommonMethods extends BasePage {
         Thread.sleep(2000);
         patient_founded.click();
     }
+
 
 
 
