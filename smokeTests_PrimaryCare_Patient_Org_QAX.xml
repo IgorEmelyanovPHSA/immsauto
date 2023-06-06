@@ -7,6 +7,7 @@
             <class name="primarycare.tests.API.Patient_Attachment_and_Registry.API_Establish_Salesforce_Connection_SysAdmin"/>
             <class name="primarycare.tests.API.Patient_Attachment_and_Registry.API_Create_Patient_Account_SysAdmin"/>
             <class name="primarycare.tests.Selenium.Patient_Registry_Portal.Portal_Registration_for_an_Not_Attached_Patient"/>
+            <class name="primarycare.tests.Selenium.Patient_SF_Admin_Interface.AdminInterface_Register_Person_In_Care_Attached_SYSAdmin"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
