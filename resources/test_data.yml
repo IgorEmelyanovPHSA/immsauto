@@ -9,7 +9,7 @@ bcvaxdevit:
   containerFrom: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
   containerToSameClinic: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
-  containerConsumption: "COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)"
+  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2022-08-05 08:49 a.m)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-02 03:11 p.m)"
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
@@ -23,8 +23,8 @@ bcvaxdevit:
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
   vaccineAgent: "COVID-19 mRNA"
-  consumptionDose: "0.3"
-  consumptionLot: "EL0203"
+  consumptionDose: "0.25"
+  consumptionLot: "3001530"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "0649AA"
@@ -261,8 +261,8 @@ regression:
   providerConsumption: "BCHComClinician Auto"
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
-  consumptionDose: "0.3"
-  consumptionLot: "35035BD-CC01"
+  consumptionDose: "0.5"
+  consumptionLot: "3001530-CC03"
   useDefaultSettingsLots:
     - "35035BD-CC01"
     - "3001530-CC03"

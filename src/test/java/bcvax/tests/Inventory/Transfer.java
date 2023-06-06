@@ -96,13 +96,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
         System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-//		int kk = countOutgoingTransactions;
-//		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
-//		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-//		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-//		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
-//		supplyConsolePage.clickOnOutgoingTransactions(kk);
-//		Thread.sleep(3000);
+
         System.out.println("/*18.----Close All Tab's --*/");
         supplyConsolePage.closeTabsHCA();
         System.out.println("/*19.----Go to Supply Locations Tab --*/");

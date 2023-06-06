@@ -11,9 +11,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 
 public class MainPageOrg extends BasePage {
-    @FindBy(xpath = "//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span")
-    private WebElement currentApp;
-
     @FindBy(xpath = "//h3[text()='Apps']")
     private WebElement appsLauncherHeader;
 
@@ -24,13 +21,16 @@ public class MainPageOrg extends BasePage {
         super(driver);
     }
     public String currentApp() throws InterruptedException {
+        By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
+        waitForElementToBeEnabled(driver, current_app_path, 30);
+        WebElement current_app = driver.findElement(current_app_path);
         int timeout = 30000;
         boolean found = false;
         Instant start = Instant.now();
         Instant end = Instant.now();
         while(!found) {
             try {
-                found = currentApp.isDisplayed();
+                found = current_app.isDisplayed();
                 System.out.println("Current App found");
                 System.out.println(end.toString());
             } catch (NotFoundException ex) {
@@ -40,8 +40,17 @@ public class MainPageOrg extends BasePage {
                 }
                 Thread.sleep(200);
             }
+            catch (StaleElementReferenceException ex) {
+                end = Instant.now();
+                current_app = driver.findElement(current_app_path);
+                found = current_app.isDisplayed();
+                if(Duration.between(start, end).toMillis() > timeout) {
+                    throw new NotFoundException("Current APP tab not found");
+                }
+                Thread.sleep(200);
+            }
         }
-        return currentApp.getText();
+        return current_app.getText();
     }
 
     public void switchApp(String app) throws InterruptedException {
@@ -83,5 +92,19 @@ public class MainPageOrg extends BasePage {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    public void globalSearch(String search_value) throws InterruptedException {
+        Thread.sleep(500);
+        By search_btn_path = By.xpath("//button[@aria-label = 'Search']");
+        waitForElementToBeEnabled(driver, search_btn_path, 10);
+        WebElement search_btn = driver.findElement(search_btn_path);
+        search_btn.click();
+        Thread.sleep(500);
+        By search_field_path = By.xpath("//input[@lightning-input_input and @type='search']");
+        waitForElementToBeEnabled(driver, search_field_path, 10);
+        WebElement search_input = driver.findElement(search_field_path);
+        search_input.sendKeys(search_value);
+        search_input.sendKeys(Keys.RETURN);
     }
 }

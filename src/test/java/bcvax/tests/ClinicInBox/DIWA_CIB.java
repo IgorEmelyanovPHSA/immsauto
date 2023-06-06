@@ -1,11 +1,8 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.ProfilesPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -20,12 +17,14 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinicianDIWACIB();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
+		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
 		log("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
-		clinicInBoxPage.SearchDIWACitizen("Maegan Tanya bcvaxvillage");
+		mainPageOrg.globalSearch("Maegan Tanya bcvaxvillage");
+		//clinicInBoxPage.searchForCitizen("Maegan Tanya bcvaxvillage");
 		log("/*----5. select Citizen from search results --*/");
 		clinicInBoxPage.userClickCitizen();
 		ProfilesPage profilesPage = new ProfilesPage(driver);

@@ -325,7 +325,7 @@ public class CallCenterConsolePage extends BasePage {
 			waitForElementToBeVisible(driver, vlidate_appointment_confirm_message, 10);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
-		} catch (NoSuchElementException e) {
+		} catch (Exception e) {
 			System.out.println("/*---the screen does not show up 'Appointment confirmed!'");
 			return false;
 		}

@@ -35,7 +35,7 @@ public class Historical_Immunization extends BaseTest {
 		clinicInBox = new ClinicInBoxPage(driver);
 		log("/*2.----Close All previously opened Tab's --*/");
 
-		clinicInBox.SearchForCitizen(legalFirstName + " " + legalLastName);
+		clinicInBox.searchForCitizen(legalFirstName + " " + legalLastName);
 		Thread.sleep(2000);
 		ProfilesPage profilePage = new ProfilesPage(driver);
 		log("/* 5.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
@@ -94,7 +94,7 @@ public class Historical_Immunization extends BaseTest {
 		}
 		log("/*4.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
-		clinicInBox.SearchForCitizen(legalFirstName + " " + legalLastName);
+		clinicInBox.searchForCitizen(legalFirstName + " " + legalLastName);
 		log("/*----5. select Citizen Maegan from search results --*/");
 		clinicInBox.userClickCitizen();
 		ProfilesPage profilePage = new ProfilesPage(driver);

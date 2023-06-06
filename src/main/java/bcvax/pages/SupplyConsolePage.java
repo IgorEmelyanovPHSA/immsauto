@@ -383,6 +383,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public int getRowsSupplyContainersFromCount() throws InterruptedException {
+		Thread.sleep(500);
 		waitForElementToBePresent(driver, rows_supply_containers_from_count_path_1, 10);
 		List<WebElement> rows = driver.findElements(rows_supply_containers_from_count_path_1);
 		return (rows.size());
@@ -910,7 +911,8 @@ public class SupplyConsolePage extends BasePage {
 		click(btnBulkAdjustmentContainerAdjustmentPage);
 	}
 
-	public HashMap countDosesAndQuantityMap(int numberOfRows) {
+	public HashMap countDosesAndQuantityMap(int numberOfRows) throws InterruptedException {
+		Thread.sleep(500);
 		By supplyContainerTablePath = By.xpath("//article[@class = 'slds-card']/div/header/div[@class = 'slds-media__body']//span[contains(text(), 'Supply Container')]");
 		waitForElementToBePresent(driver, supplyContainerTablePath, 10);
 		DecimalFormat df = new DecimalFormat("0.00");

@@ -2,6 +2,7 @@ package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvax.pages.LoginPage;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
@@ -14,9 +15,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
-	
+	String env;
+	Map<String, Object> testData;
 	private String legalFirstName = "Hugues";
 	private String legalLastName = "BCVaxLampard";
 	private String legalMiddleName = "Fawn";
@@ -28,11 +32,25 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	String clinicNameToSearch = "All Ages - Atlin Health Centre";
 
 	String citizenName = "Hugues BCVaxLampard";
+	String consumptionLot;
+	String consumptionDose;
+	String consumptionAgent;
+	String consumptionProvider;
+	String consumptionRoute;
+	String consumptionSite;
 
 	@Test
 	public void Can_Rebook_Walk_In_Appointment_Arrive_At_Wrong_Clinic_as_Clinician() throws Exception {
 		TestcaseID = "219910"; //C219910
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		consumptionDose = String.valueOf(testData.get("consumptionDose"));
+		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+		consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+		consumptionSite = String.valueOf(testData.get("siteConsumption"));
+		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -107,16 +125,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 
 		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 
 		log("/*25.----search the Clinic " + clinicNameToSearch + " --*/");
 		inClinicExperiencePage.clickToSearchClinic();
 
 		log("/*25__.----search the Clinic " +clinicNameToSearch +" --*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 
 		log("/*--26.----click on Option Facility location  --*/");
@@ -157,8 +171,41 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.ClickAgentValue();
 		log("/*-- 41--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
 		inClinicExperiencePage.SelectAgentValue();
+		String consentProvider = inClinicExperiencePage.consentProviderSelected();
+		if(consentProvider.equals("")) {
+			consentProvider = inClinicExperiencePage.selectConsentProvider();
+		}
 		log("/*-- 42---Click Save Consent Button --*/");
 		inClinicExperiencePage.ClickSaveConsentButton();
+
+		String agent = inClinicExperiencePage.getVaccineAgent();
+		String provider =  inClinicExperiencePage.getProvider();
+		String route = inClinicExperiencePage.getRoute();
+		String site = inClinicExperiencePage.getSite();
+
+		String lot = inClinicExperiencePage.getLotNumber();
+
+		log("/*42.---Click Save Consent Button --*/");
+
+		if(!provider.equals(consentProvider)) {
+			inClinicExperiencePage.setProvider(consentProvider);
+		}
+
+		log("/*43.---select Dosage ->  -.5 --*/");
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperiencePage.setLotNumber(consumptionLot);
+		}
+		String dose = inClinicExperiencePage.getDosage();
+
+		if(!dose.equals(consumptionDose)) {
+			inClinicExperiencePage.setDosage(consumptionDose);
+		}
+		if(route.equals("")) {
+			inClinicExperiencePage.setRoute(consumptionRoute);
+		}
+		if(site.equals("")) {
+			inClinicExperiencePage.setSite(consumptionSite);
+		}
 		log("/*---43. Save Immunization Information ---*/");
 		inClinicExperiencePage.saveImmunizationInformation();
 		inClinicExperiencePage.clickOkForExpiredLot();
@@ -172,7 +219,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickRegisterTab();
 
 		log("/*----47. Global Search for Participant account: " +citizenName +" ---*/");
-		inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
+		MainPageOrg mainPageOrg = new MainPageOrg(driver);
+		mainPageOrg.globalSearch(citizenName);
+		//inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
 
 		log("/* 49.----User found and Navigated to record page ---*/");
 		inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);

@@ -33,29 +33,23 @@ public class UserDefaultsSettingsValidation extends BaseTest {
 
         log("/*1.----Login as clinician ICE --*/");
         InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEUserDefaults();
-        Thread.sleep(15000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
         if (inClinicExperience.displayIceApp()) {
             log("/*-- User already on In-Clinic Experience page --*/");
         } else {
             log("/*-- Navigate to In-Clinic Experience page --*/");
-            Thread.sleep(5000);
             inClinicExperience.selectICEFromApp();
-            Thread.sleep(5000);
         }
 
         log("/*3.----Close All previously opened Tab's --*/");
         inClinicExperience.closeTabsHCA();
-        Thread.sleep(5000);
 
         log("/*4.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
-        Thread.sleep(2000);
 
         log("/*5.----- Enter current date for UserDefaults --*/");
         userDefaultsPage.inputCurrentDateUserDefaults();
-        Thread.sleep(2000);
 
         log("/*6.----- Enter clinic for UserDefaults: " + clinicLocation + "--*/");
        // userDefaultsPage.selectClinicUserDefaults(clinicLocation);
@@ -86,9 +80,6 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("/*9.4----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.selectSupplyLocationName(clinicLocation);
 
-        //common.goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew();
-
-        Thread.sleep(3000);
         log("/*10.---- Validating results, given lot numbers should match --*/");
         for(int i = 0; i < lots.length; i++) {
             Assert.assertTrue(supplyConsolePage.validateLotUserDefaults(lots[i]));
@@ -106,9 +97,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("/*15.----- Click btn Save and validate success msg --*/");
         //userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
         userDefaultsPage.clickBtnSave();
-        Thread.sleep(1000);
         userDefaultsPage.clickOkForExpiredLot();
-        Thread.sleep(1000);
         userDefaultsPage.validateSuccessfullyUpdatedMsg();
     }
 }

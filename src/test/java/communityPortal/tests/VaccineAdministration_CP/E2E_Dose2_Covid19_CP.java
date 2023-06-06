@@ -102,6 +102,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+        inClinicExperience_CP.selectEarlyBookingReason();
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");

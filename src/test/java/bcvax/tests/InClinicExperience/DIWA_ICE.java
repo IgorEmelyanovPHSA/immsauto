@@ -1,11 +1,13 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
+import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -18,9 +20,8 @@ import java.util.*;
 
 @Listeners({TestListener.class})
 public class DIWA_ICE extends BaseTest {
-
 	@DataProvider(name = "testData")
-	public static Object[][] names() {return new Object[][]{{"Benoite BCVaxD'Hooge"}};
+	public static Object[][] names() {return new Object[][]{{"Benoite Denna BCVaxD'Hooge"}};
 	}
 
 	@Test(dataProvider = "testData")
@@ -65,9 +66,12 @@ public class DIWA_ICE extends BaseTest {
 				log("Login AS default user (Clinician to ICE)");
 				TestcaseID = "223187"; //C223187
 		}
-
+		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*2.--- Navigate to In Clinic Experience App --*/");
-		inClinicExperience.selectICEFromApp();
+		String currentApp = mainPageOrg.currentApp();
+		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+			mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		}
 
 		log("/*3.----In Clinic Experience(ICE) page displayed --*/");
 		inClinicExperience.verifyIsICEpageDisplayed();
@@ -75,10 +79,10 @@ public class DIWA_ICE extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
-		//inClinicExperience.SearchForCitizen(citizenName);
-		inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
-		//log("/*----6. select Citizen from search results --*/");
-		//inClinicExperience.userClickCitizenNew(nameToSearch);
+		mainPageOrg.globalSearch(citizenName);
+		//inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
+		log("/*----6. select Citizen from search results --*/");
+		inClinicExperience.userClickCitizen(citizenName);
 		//Thread.sleep(4000);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		inClinicExperience.clickRelatedTab();
@@ -202,6 +206,4 @@ public class DIWA_ICE extends BaseTest {
 			}
 		}
 	}
-
-
 }
