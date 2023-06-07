@@ -9,20 +9,31 @@ import org.testng.annotations.Test;
 import primarycare.tests.BaseTest_PrimaryCare;
 import primarycare.tests.Utilities.ApiQueries;
 
+import static org.testng.Assert.assertEquals;
+
 
 @Listeners({TestListener.class})
 public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends BaseTest_PrimaryCare {
-    private String legalFirstName = "Kenton";
-    private String legalLastName = "Troup";
-    private String dateOfBirth = "December 5, 1959";
-    private String postalCode = "V3L5L2";
-    private String personalHealthNumber = "9873010088";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
-
     private String callersRelationships = "Social worker";
     private String callerName = "SELENIUM Social Worker behalf Caller";
 
+    private String legalFirstName = "Kenton";
+    private String legalLastName = "Troup";
+    //private String dateOfBirth = "December 5, 1959";
+    private String dateOfBirth_MM = "12";//December
+    private String dateOfBirth_DD = "05";
+    private String dateOfBirth_YYYY = "1959";
+    private String personalHealthNumber = "9873010088";
+
+    private String empiStatusExpected = "EMPI Verified";
+
+    private String streetAddress = "307-7631 Francis Rd";
+    private String City = "Richmond";
+    private String province = "BC";
+    private String postalCode = "V6Y 1A3";
+    private String email = "accountToDelete@phsa.ca";
+    private String mobilePhone = "7788797899";
+    private String communicationPreference = "Email";
 
 
     @Test(priority = 1)
@@ -52,21 +63,67 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         common.selectCreateNewRegistrationFromNavigationMenuDropdown();
         Thread.sleep(2000);
 
-        log("/*5.----Click registration type radiobutton -> 'A person in care' --*/");
-        healthCloudConsolePage.selectRegistrationTypePersonInCare();
+        log("/*5.----Click registration type radiobutton -> 'A person in my care' --*/");
+        healthCloudConsolePage.selectRegistrationType();
         Thread.sleep(2000);
 
-        log("/*6.----Click 'Next' button' --*/");
-        healthCloudConsolePage.clickNext();
+        log("/*6.----Check 'caller has obtained consent' checkbox --*/");
+        healthCloudConsolePage.clickObtainedConsent();
+        Thread.sleep(2000);
+
+        log("/*7.----Click 'Continue' button' --*/");
+        healthCloudConsolePage.clickContinue();
         Thread.sleep(5000);
 
-        log("/*6.----Select the Caller Identity checkbox' --*/");
+        log("/*8.----Select the Caller Identity checkbox' --*/");
         healthCloudConsolePage.selectCallerOnThePatientBehalf();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
 
-        log("/*6.----Select the Caller's relationship with Patient -> Social worker' --*/");
+        log("/*9.----Select the Caller's relationship with Patient -> Social worker' --*/");
         healthCloudConsolePage.selectCallerRelationshipWithPatient(callersRelationships);
         Thread.sleep(2000);
+
+        log("/*10.----Enter the Caller Name -> 'SELENIUM Social Worker behalf Caller' --*/");
+        healthCloudConsolePage.enterNameOfCaller(callerName);
+        Thread.sleep(2000);
+
+        log("/*11.----Enter Patient First Name " +legalFirstName +" --*/");
+        healthCloudConsolePage.enterPatientFirstName(legalFirstName);
+        Thread.sleep(2000);
+
+        log("/*12.---Enter Patient Last Name " +legalLastName +"--*/");
+        healthCloudConsolePage.enterPatientLastName(legalLastName);
+        Thread.sleep(1000);
+
+        log("/*13.---Enter PHN " +personalHealthNumber +"--*/");
+        healthCloudConsolePage.enterPatientPHN(personalHealthNumber);
+        //Thread.sleep(1000);
+
+        log("/*14.---Enter Date of Birth - Month" +dateOfBirth_MM +"--*/");
+        healthCloudConsolePage.enterMonth(dateOfBirth_MM);
+        //Thread.sleep(1000);
+
+        log("/*15.---Enter Date of Birth - Day" +dateOfBirth_DD +"--*/");
+        healthCloudConsolePage.enterDay(dateOfBirth_DD);
+        //Thread.sleep(1000);
+
+        log("/*16.---Enter Date of Birth - Year" +dateOfBirth_YYYY +"--*/");
+        healthCloudConsolePage.enterYear(dateOfBirth_YYYY);
+        //Thread.sleep(1000);
+
+        log("/*17.---Click 'Verify PHN' button--*/");
+        healthCloudConsolePage.clickVerifyPHN();
+        //Thread.sleep(1000);
+
+        log("/*18. Validate EMPI Verification status --*/");
+        //healthCloudConsolePage.isDisplayed();
+        //Thread.sleep(1000);
+        String empiStatusActual = healthCloudConsolePage.getEMPIStatusActualForValidation();
+        log("/*---- Actual EMPI verification status is: " + empiStatusActual + " --*/");
+        assertEquals(empiStatusActual, empiStatusExpected);
+        Thread.sleep(2000);
+
+
 
     }
 

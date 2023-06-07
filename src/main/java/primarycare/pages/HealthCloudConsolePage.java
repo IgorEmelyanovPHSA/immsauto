@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import primarycare.pages.BasePage;
 
@@ -35,16 +36,16 @@ public class HealthCloudConsolePage extends BasePage {
     private By account_name_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordAccountIdField']//slot[1]//slot[1]//slot[1]//span[text()]");
 
     @FindBy(xpath = ".//flexipage-field[@data-field-id='RecordReasonField']//slot[1]//slot[1]/lightning-formatted-text")
-    private WebElement caase_reason_actual_field_value;
+    private WebElement case_reason_actual_field_value;
     private By case_reason_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordReasonField']//slot[1]//slot[1]/lightning-formatted-text");
 
-    @FindBy(xpath = "//span[text() ='A person in care registration']")
-    private WebElement person_in_care_radiobutton;
-    private By person_in_care_radiobutton_1 = By.xpath("//span[text() ='A person in care registration']");
+    @FindBy(xpath = "//span[text() ='A person in my care']")
+    private WebElement person_in_my_care_radiobutton;
+    private By person_in_my_care_radiobutton_1 = By.xpath("//span[text() ='A person in my care']");
 
-    @FindBy(xpath = "(//span[text()='Next'])[1]")
-    private WebElement next_button;
-    private By next_button_1 = By.xpath("(//span[text()='Next'])[1]");
+    @FindBy(xpath = "(//span[text()='Continue'])[1]")
+    private WebElement continue_button;
+    private By continue_button_1 = By.xpath("(//span[text()='Continue'])[1]");
 
     @FindBy(xpath = "//span[contains(text(),'The caller is registering on the patient')]")
     private WebElement caller_registering_patients_behalf_checkbox;
@@ -58,9 +59,45 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement select_caller_relationship;
     private By select_caller_relationship_1 = By.xpath("//span[text() ='Social worker']");
 
+    @FindBy(xpath = "(//span[@class = 'slds-checkbox_faux'])[1]")
+    private WebElement caller_obtained_consent_checkbox;
+    private By caller_obtained_consent_checkbox_1 = By.xpath("(//span[@class = 'slds-checkbox_faux'])[1]");
 
+    @FindBy(xpath = "//input[@placeholder = 'First and Last Name']")
+    private WebElement caller_name;
+    private By caller_name_1 = By.xpath("//input[@placeholder = 'First and Last Name']");
 
+    @FindBy(xpath = "(//input[@placeholder = 'Must match provincial health records'])[1]")
+    private WebElement patient_first_name;
+    private By patient_first_name_1 = By.xpath("(//input[@placeholder = 'Must match provincial health records'])[1]");
 
+    @FindBy(xpath = "(//input[@placeholder = 'Must match provincial health records'])[2]")
+    private WebElement patient_last_name;
+    private By patient_last_name_1 = By.xpath("(//input[@placeholder = 'Must match provincial health records'])[2]");
+
+    @FindBy(xpath = "(//input[@omnistudio-maskedinput_maskedinput_slds])[1]")
+    private WebElement patient_phn;
+    private By patient_phn_1 = By.xpath("(//input[@omnistudio-maskedinput_maskedinput_slds])[1]");
+
+    @FindBy(xpath = "//input[@placeholder = 'MM']")
+    private WebElement patient_date_of_birth_MM;
+    private By patient_date_of_birth_MM_1 = By.xpath("//input[@placeholder = 'MM']");
+
+    @FindBy(xpath = "//input[@placeholder = 'DD']")
+    private WebElement patient_date_of_birth_DD;
+    private By patient_date_of_birth_DD_1 = By.xpath("//input[@placeholder = 'DD']");
+
+    @FindBy(xpath = "//input[@placeholder = 'YYYY']")
+    private WebElement patient_date_of_birth_YYYY;
+    private By patient_date_of_birth_YYYY_1 = By.xpath("//input[@placeholder = 'YYYY']");
+
+    @FindBy(xpath = "//span[text() ='Verify EMPI']")
+    private WebElement verify_EMPI_button;
+    private By verify_EMPI_button_1 = By.xpath("//span[text() ='Verify EMPI']");
+
+    @FindBy(xpath = "(//omnistudio-omniscript-messaging//p[text()])[2]")
+    private WebElement empi_actual_verification_status;
+    private By empi_actual_verification_status_1 = By.xpath("(//omnistudio-omniscript-messaging//p[text()])[2]");
 
     /*---------Constructor-------*/
     public HealthCloudConsolePage(WebDriver driver) {
@@ -127,25 +164,36 @@ public class HealthCloudConsolePage extends BasePage {
     public String getCaseReasonActualForValidation() throws InterruptedException {
         waitForElementToBeLocated(driver, case_reason_actual_field_value_1, 10);
         Thread.sleep(2000);
-        priority_actual_field_value.isDisplayed();
-        return (caase_reason_actual_field_value.getText());
+        case_reason_actual_field_value.isDisplayed();
+        return (case_reason_actual_field_value.getText());
     }
 
-    public void selectRegistrationTypePersonInCare() throws InterruptedException {
-        waitForElementToBeLocated(driver, person_in_care_radiobutton_1, 10);
+    public void selectRegistrationType() throws InterruptedException {
+        waitForElementToBeLocated(driver, person_in_my_care_radiobutton_1, 10);
         Thread.sleep(2000);
         log("/*----scroll down a bit --*/");
         //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
-        WebElement element = driver.findElement(person_in_care_radiobutton_1);
+        WebElement element = driver.findElement(person_in_my_care_radiobutton_1);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
         Thread.sleep(2000);
-        person_in_care_radiobutton.click();
+        person_in_my_care_radiobutton.click();
     }
 
-    public void clickNext() throws InterruptedException {
-        waitForElementToBeLocated(driver, next_button_1, 10);
+    public void clickObtainedConsent() throws InterruptedException {
+        waitForElementToBeLocated(driver, caller_obtained_consent_checkbox_1, 10);
         Thread.sleep(1000);
-        next_button.click();
+        log("/*----scroll down --*/");
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        WebElement element = driver.findElement(caller_obtained_consent_checkbox_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
+        caller_obtained_consent_checkbox.click();
+    }
+
+    public void clickContinue() throws InterruptedException {
+        waitForElementToBeLocated(driver, continue_button_1, 10);
+        Thread.sleep(1000);
+        continue_button.click();
     }
 
     public void selectCallerOnThePatientBehalf() throws InterruptedException {
@@ -172,7 +220,61 @@ public class HealthCloudConsolePage extends BasePage {
         Thread.sleep(1000);
     }
 
+    public void enterNameOfCaller(String nameOfCaller) throws InterruptedException {
+        waitForElementToBeLocated(driver, caller_name_1, 10);
+        Thread.sleep(1000);
+        caller_name.sendKeys(nameOfCaller);
+    }
+    public void enterPatientFirstName(String patientFirstName) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_first_name_1, 10);
+        Thread.sleep(1000);
+        patient_first_name.sendKeys(patientFirstName);
+    }
 
+    public void enterPatientLastName(String patientLastName) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_last_name_1, 10);
+        Thread.sleep(1000);
+        patient_last_name.sendKeys(patientLastName);
+    }
 
+    public void enterPatientPHN(String patientPHN) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_phn_1, 10);
+        Thread.sleep(1000);
+        patient_phn.click();
+        Thread.sleep(1000);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(patientPHN).build().perform();
+        //patient_phn.sendKeys(patientPHN);
+        Thread.sleep(1000);
+    }
+
+    public void enterMonth(String dateOfBirth_mm) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_date_of_birth_MM_1, 10);
+        Thread.sleep(1000);
+        patient_date_of_birth_MM.sendKeys(dateOfBirth_mm);
+    }
+    public void enterDay(String dateOfBirth_dd) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_date_of_birth_DD_1, 10);
+        Thread.sleep(1000);
+        patient_date_of_birth_DD.sendKeys(dateOfBirth_dd);
+    }
+    public void enterYear(String dateOfBirth_yy) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_date_of_birth_YYYY_1, 10);
+        Thread.sleep(1000);
+        patient_date_of_birth_YYYY.sendKeys(dateOfBirth_yy);
+    }
+
+    public void clickVerifyPHN() throws InterruptedException {
+        waitForElementToBeLocated(driver, verify_EMPI_button_1, 10);
+        Thread.sleep(1000);
+        verify_EMPI_button.click();
+    }
+
+    public String getEMPIStatusActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, empi_actual_verification_status_1, 10);
+        Thread.sleep(2000);
+        empi_actual_verification_status.isDisplayed();
+        return (empi_actual_verification_status.getText());
+    }
 
 }
