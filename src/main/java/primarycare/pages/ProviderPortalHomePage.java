@@ -17,6 +17,10 @@ public class ProviderPortalHomePage extends BasePage{
     private WebElement view_link;
     private By view_link_1 = By.xpath("(//span[text()='View'])[2]");
 
+    @FindBy(xpath = "(//span[text()='My Panel'])[2]")
+    private WebElement my_panel_link;
+    private By my_panel_link_1 = By.xpath("(//span[text()='My Panel'])[2]");
+
     @FindBy(xpath = "//div[@title='Edit']")
     private WebElement edit_button;
     private By edit_button_1 = By.xpath("//div[@title='Edit']");
@@ -88,6 +92,12 @@ public class ProviderPortalHomePage extends BasePage{
         view_link.click();
     }
 
+    public void clickMyPanel() throws InterruptedException {
+        waitForElementToBeVisible(driver, my_panel_link, 10);
+        Thread.sleep(1000);
+        my_panel_link.click();
+    }
+
     public void clickEdit() throws InterruptedException {
         waitForElementToBeVisible(driver, edit_button, 10);
         Thread.sleep(1000);
@@ -113,9 +123,9 @@ public class ProviderPortalHomePage extends BasePage{
         accepting_new_patient_dropdown.click();
         Thread.sleep(1000);
         waitForElementToBeLocated(driver, select_yes_from_accepting_new_patient_options_1, 10);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         select_yes_from_accepting_new_patient_options.click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
     }
 
     public void enterMaxNewRequests(String maxNewRequests) throws InterruptedException {

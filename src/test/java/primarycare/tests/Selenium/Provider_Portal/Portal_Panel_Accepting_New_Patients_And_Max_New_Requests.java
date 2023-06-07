@@ -47,8 +47,12 @@ public class Portal_Panel_Accepting_New_Patients_And_Max_New_Requests extends Ba
         providerPortalHomePage.clickHomeLink();
         Thread.sleep(1000);
 
-        log("/*3.----Click View in CASTLEGAR Medical Associated Facility Panel --*/");
-        providerPortalHomePage.clickView();
+        //log("/*3.----Click 'View' in CASTLEGAR Medical Associated Facility Panel --*/");
+        //providerPortalHomePage.clickView();
+        //Thread.sleep(1000);
+
+        log("/*3.----Click 'My Panel' for Directors 2-nd Associated Facility --*/");
+        providerPortalHomePage.clickMyPanel();
         Thread.sleep(1000);
 
         log("/*4.----Click Edit --*/");
