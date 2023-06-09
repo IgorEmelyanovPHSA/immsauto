@@ -104,7 +104,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
 
         log("/*27.----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
 
         log("/*28.----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();

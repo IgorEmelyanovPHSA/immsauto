@@ -134,7 +134,7 @@ public class E2E_Dose1_Influenza_Pneumo_CP extends BaseTest {
         Thread.sleep(2000);
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
         Thread.sleep(2000);
 
         log("/*32----click Confirm Appointment button  --*/");

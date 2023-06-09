@@ -1285,26 +1285,9 @@ public class InClinicExperiencePage extends BasePage {
 		By verify_contact_information_checkbox_path = By.xpath("//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../span[@class='slds-checkbox_faux']");
 		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
 		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
-		scrollTop(verify_contact_information_checkbox, false);
-		Thread.sleep(500);
-		//The element is still covered by footer. Scroll more
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(500);
+		scrollIfNeeded(driver, verify_contact_information_checkbox);
+		Thread.sleep(2000);
 		verify_contact_information_checkbox.click();
-	}
-
-	public void clickVerifyContactInformation_CP() throws InterruptedException {
-		Thread.sleep(5000);
-		//Scrolling to bottom of the page
-		//((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
-		Thread.sleep(2000);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, verify_contact_information_checkbox_CP, 10);
-		Thread.sleep(2000);
-		verify_contact_information_checkbox_CP.click();
-		Thread.sleep(2000);
 	}
 
 	public void clickTodayAppointments() throws InterruptedException {

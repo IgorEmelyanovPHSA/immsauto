@@ -121,7 +121,7 @@ public class BookingDose1_Influenza extends BaseTest {
         Thread.sleep(5000);
 
         log("/*27.----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
         Thread.sleep(2000);
 
         log("/*28.----click Confirm Appointment button  --*/");

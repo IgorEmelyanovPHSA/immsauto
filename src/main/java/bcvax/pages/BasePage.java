@@ -116,19 +116,19 @@ public abstract class BasePage<T> {
 		while(!found) {
 			try {
 				found = driver.findElement(xpath).isEnabled();
-				System.out.println("Element found, Status is: " + String.valueOf(found));
+				System.out.println("***DEBUG*** Element found, Enabled Status is: " + String.valueOf(found));
 				System.out.println(end.toString());
 				if(!found) {
 					end = Instant.now();
 					if(Duration.between(start, end).toMillis() > timeout) {
-						throw new NotFoundException("Element is Found but not Enabled after " + seconds + " seconds");
+						throw new NotFoundException("***DEBUG*** Element is Found but not Enabled after " + seconds + " seconds");
 					}
 					Thread.sleep(200);
 				}
 			} catch (NotFoundException ex) {
 				end = Instant.now();
 				if (Duration.between(start, end).toMillis() > timeout) {
-					throw new NotFoundException("Element not found after " + seconds + " seconds");
+					throw new NotFoundException("***DEBUG*** Element not found after " + seconds + " seconds");
 				}
 				Thread.sleep(200);
 			} catch (StaleElementReferenceException ex) {
@@ -280,6 +280,15 @@ public abstract class BasePage<T> {
 			log("WebDriverException occurred while scrolling: " + e.getMessage());
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
 		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+	}
+
+	public static void scrollIfNeeded(WebDriver driver, WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoViewIfNeeded();", element);
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {
