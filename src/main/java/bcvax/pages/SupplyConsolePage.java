@@ -789,7 +789,14 @@ public class SupplyConsolePage extends BasePage {
 
 	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double doses = tables.getRemainingDoses(supplyContainer);
+		double doses;
+		try {
+			doses = tables.getRemainingDoses(supplyContainer);
+		} catch(Exception ex) {
+			driver.navigate().refresh();
+			Thread.sleep(2000);
+			doses = tables.getRemainingDoses(supplyContainer);
+		}
 		return (doses);
 	}
 

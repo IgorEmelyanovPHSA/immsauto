@@ -20,7 +20,6 @@ import static java.lang.Math.round;
 public class TransferCancellationCP extends BaseTest {
 	private static final DecimalFormat df = new DecimalFormat("#.##");
 	MainPageCP cpMainPage;
-	MainPageOrg orgMainPage;
 	SupplyConsolePage supplyConsolePage;
 	String env;
 	Map<String, Object> testData;
@@ -61,31 +60,24 @@ public class TransferCancellationCP extends BaseTest {
 		log("/---- Perform doses transfer to  location " + supply_location_to + "--*/");
 		log("/*7.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
-		Thread.sleep(2000);
 		log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectTransferFromDropDown();
-		Thread.sleep(2000);
 
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
 		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
 		log("/*--  the Trade Name is:  " + tradeName);
-		Thread.sleep(2000);
 		log("/*10.----Picked up the Dose Conversation Factor --*/");
 		//Double dose_conversation_factor = 5.0;
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
-		Thread.sleep(2000);
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferDosages(Double.toString(doses));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
-		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		System.out.println("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
-		Thread.sleep(5000);
 		log("/---- Count and Validate Remaining Supplies After Transfer --*/");
 		double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
@@ -102,7 +94,6 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -113,13 +104,11 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 
-		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
 		supplyConsolePage.clickTransactionsTab();
 		System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		System.out.println("/*23.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
 		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		int kk = countOutgoingTransactions;
 		System.out.println("/*23.2---Get Outgoing Transaction id 'from' --*/");
@@ -143,7 +132,6 @@ public class TransferCancellationCP extends BaseTest {
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
 		double remainingDosesAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -173,31 +161,24 @@ public class TransferCancellationCP extends BaseTest {
 		log("/---- Perform Quantity transfer to another location --*/");
 		log("/*7.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
-		Thread.sleep(2000);
 		log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
 		supplyConsolePage.selectTransferFromDropDown();
-		Thread.sleep(2000);
 
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
 		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
 		log("/*--  the Trade Name is:  " + tradeName);
-		Thread.sleep(2000);
 		log("/*10.----Picked up the Dose Conversation Factor --*/");
 		//Double dose_conversation_factor = 5.0;
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
-		Thread.sleep(2000);
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
 		supplyConsolePage.enterTransferQuantity(Double.toString(quantity));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
-		Thread.sleep(2000);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
 		supplyConsolePage.clickBulkTransfersModalButton();
-		Thread.sleep(2000);
 		System.out.println("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
-		Thread.sleep(5000);
 		log("/---- Count and Validate Remaining Supplies After Transfer --*/");
 		double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
@@ -212,7 +193,6 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -223,15 +203,12 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 
-		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
-		Thread.sleep(2000);
 		supplyConsolePage.clickTransactionsTab();
 
 		System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		System.out.println("/*23.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-		Thread.sleep(5000);
 		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		int kk = countOutgoingTransactions;
 		System.out.println("/*23.2---Get Outgoing Transaction id 'from' --*/");
@@ -255,7 +232,6 @@ public class TransferCancellationCP extends BaseTest {
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
 		double remainingDosesAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -269,17 +245,14 @@ public class TransferCancellationCP extends BaseTest {
 	public void precondition() throws Exception {
 		if(env.contains("immsbc_admin")) {
 			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-			orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-			Thread.sleep(1000);
-			orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-			Thread.sleep(3000);
+			loginPage.orgLoginAsImmsBCAdminCP();
+
 			cpMainPage = new MainPageCP(driver);
 			cpMainPage.clickGoToUserDefaultsButton();
 		} else {
 			log("/*1.----Login to CP (newUI) as Clinician --*/");
 			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
 		}
-		Thread.sleep(5000);
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 	}
 }

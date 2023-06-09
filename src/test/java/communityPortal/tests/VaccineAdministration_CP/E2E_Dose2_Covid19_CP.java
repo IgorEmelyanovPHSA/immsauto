@@ -3,6 +3,8 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -102,7 +104,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        inClinicExperience_CP.selectEarlyBookingReason();
+        try {
+            inClinicExperience_CP.selectEarlyBookingReason();
+        } catch(TimeoutException ex) {
+            System.out.println("DEBUG No need to select Early Booking Reason. Continue...");
+        }
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");

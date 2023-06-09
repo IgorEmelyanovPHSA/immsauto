@@ -23,6 +23,7 @@ bcvaxdevit:
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
   vaccineAgent: "COVID-19 mRNA"
+  agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "35035BD-CC01"
   useDefaultSettingsLots:
