@@ -248,7 +248,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(3000);
 
         log("/*----57. select Citizen from search results --*/");
-        inClinicExperience.userClickCitizenNew(nameToSearch);
+        inClinicExperience.userClickCitizen(nameToSearch);
         Thread.sleep(4000);
 
         log("/*---- 58. Navigate to Person Account related tab ---*/");

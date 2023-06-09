@@ -82,6 +82,7 @@ public class Consumption extends BaseTest {
 		double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
 		log("/*-- 10. Close all open tabs --*/");
+		double doseConversionFactor = Double.parseDouble(df.format(remainingDoses_before / remainingQty_before));
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
 		orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
@@ -96,9 +97,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickSaveDefaultsButton();
 		log("/*-- 15. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
-		//System.out.println("/*-- 16.----- Click on Save changes defaults button Modal window --*/");
-		//inClinicExperiencePage.clickSaveModalDefaultsButton();
-		//Thread.sleep(2000);
+
 		log("/*-- 17. Close any open Tabs --*/");
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 18. Register New User --*/");
@@ -238,7 +237,7 @@ public class Consumption extends BaseTest {
 		assertEquals(remainingDoses_after, remainingDoses_before - 1);
 		double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/5), 2);
+		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/doseConversionFactor), 2);
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 58. Close all open tabs --*/");
 	}

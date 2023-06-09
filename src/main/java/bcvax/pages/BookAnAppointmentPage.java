@@ -22,15 +22,6 @@ public class BookAnAppointmentPage extends BasePage{
     // Schedule appointment section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @FindBy(xpath = "//a[@data-label='Search by clinic name']")
-    private WebElement tabSearchByClinicName;
-
-    @FindBy(xpath = "//input[@name='clinicstag']")
-    private WebElement textBoxSearchByClinicName;
-
-    @FindBy(xpath = "//p[@class='bch-scheduler-facility-title']")
-    private WebElement boxWithSelectedClinic;
-
     @FindBy(xpath = "(//button[@class = 'slds-day active-day'])[1]")
     private WebElement selectFirstAvailableDayInTheCalendarId;
 
@@ -105,14 +96,24 @@ public class BookAnAppointmentPage extends BasePage{
 
     public void searchByClinicName(String clinicName) throws InterruptedException{
         Thread.sleep(500);
-        //scrollTop(tabSearchByClinicName);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        By tabSearchByClinicNamePath = By.xpath("//a[@data-label='Search by clinic name']");
+        waitForElementToBeEnabled(driver, tabSearchByClinicNamePath, 10);
+        WebElement tabSearchByClinicName = driver.findElement(tabSearchByClinicNamePath);
+        scrollTop(tabSearchByClinicName, true);
         Thread.sleep(500);
-        click(tabSearchByClinicName);
-        click(textBoxSearchByClinicName);
+        tabSearchByClinicName.click();
+        Thread.sleep(500);
+        By textBoxSearchByClinicNamePath = By.xpath("//input[@name='clinicstag']");
+        waitForElementToBeEnabled(driver, textBoxSearchByClinicNamePath, 10);
+        WebElement textBoxSearchByClinicName = driver.findElement(textBoxSearchByClinicNamePath);
+        textBoxSearchByClinicName.click();
         typeIn(textBoxSearchByClinicName, clinicName);
         textBoxSearchByClinicName.sendKeys(Keys.RETURN);
-        click(boxWithSelectedClinic);
+        Thread.sleep(500);
+        By boxWithSelectedClinicPath = By.xpath("//p[@class='bch-scheduler-facility-title']");
+        waitForElementToBeEnabled(driver, boxWithSelectedClinicPath, 10);
+        WebElement boxWithSelectedClinic = driver.findElement(boxWithSelectedClinicPath);
+        boxWithSelectedClinic.click();
     }
 
     public void selectDateAndTimeForAppointmentAndClickBtnNext() throws InterruptedException{

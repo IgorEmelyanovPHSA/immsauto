@@ -6,6 +6,8 @@ import org.testng.Assert;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -219,49 +221,34 @@ public class ClinicInBoxPage extends BasePage {
 			}
 		}
 	}
+	
+//	public void verifyIsClinicInBoxPageDisplayed() throws InterruptedException {
+//		Thread.sleep(500);
+//		waitForElementToBeVisible(driver, clinicinbox_page_displayed, 10);
+//		this.clinicinbox_page_displayed.isDisplayed();
+//	}
 
-	public boolean displayCIBApp() {
-		return isDisplayed(cib_App_displayed1);
+	public boolean verifyIsClinicInBoxPageDisplayed() throws InterruptedException {
+		int timeout = 30000;
+		boolean found = false;
+		Instant start = Instant.now();
+		Instant end = Instant.now();
+		while(!found) {
+			try {
+				found = driver.findElement(By.xpath("//span[@title='Clinic in a Box (IPM)']")).isDisplayed();
+				System.out.println("Clinic in a Box");
+				System.out.println(end.toString());
+			} catch (NotFoundException ex) {
+				end = Instant.now();
+				if(Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Current APP tab not found");
+				}
+				Thread.sleep(200);
+			}
+		}
+		return found;
 	}
 
-	public void selectCIBApp() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(select_app_launcher1);
-		Thread.sleep(2000);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, click_cib_app1, 10);
-		Thread.sleep(2000);
-		WebElement element1 = driver.findElement(click_cib_app1);
-		Thread.sleep(2000);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-		Thread.sleep(2000);
-	}
-	
-	public void verifyIsClinicInBoxPageDisplayed() throws InterruptedException {
-		Thread.sleep(500);
-		waitForElementToBeVisible(driver, clinicinbox_page_displayed, 10);
-		this.clinicinbox_page_displayed.isDisplayed();
-	}
-	
-	public void SearchDIWACitizen(String citizen) throws InterruptedException {
-		waitForElementToBeVisible(driver, search_assistant, 10);
-		Thread.sleep(2000);
-		search_assistant.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, search_input, 10);
-		Thread.sleep(2000);
-		search_input.click();
-		Thread.sleep(2000);
-		search_input.sendKeys(citizen);
-		Thread.sleep(2000);
-		search_input.sendKeys(Keys.RETURN);
-		Thread.sleep(2000);
-	}
-	
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
 		Thread.sleep(5000);
@@ -352,6 +339,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
+		Thread.sleep(1000);
 		if (!isDisplayed(yes_button_save_on_popup_window1)) {
 			return false;
 		}
@@ -370,6 +358,14 @@ public class ClinicInBoxPage extends BasePage {
 		executor.executeScript("arguments[0].click();", search_input);
 		this.saveConsentButton.click();
 		Thread.sleep(3000);
+	}
+
+	public void clickToClose() throws InterruptedException {
+		Thread.sleep(500);
+		By close_button_diwa_path = By.xpath("//*[@class='slds-icon slds-icon_large']");
+		waitForElementToBeEnabled(driver, close_button_diwa_path, 10);
+		WebElement close_button_diwa = driver.findElement(close_button_diwa_path);
+		close_button_diwa.click();
 	}
 
 	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
@@ -680,21 +676,17 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(2000);
 		return new InClinicExperiencePage(driver);
 	}
-	
-	public void clickVerifyContactInformation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, verify_contact_information_checkbox, 10);
-		Thread.sleep(2000);
-		verify_contact_information_checkbox.click();
-		Thread.sleep(2000);
-	}
 
-	public void clickVerifyContactInformationNew() throws InterruptedException {
+	public void clickVerifyContactInformation() throws InterruptedException {
+		Thread.sleep(500);
+		By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]");
+		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
+		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
 		Thread.sleep(1000);
-		scrollTop(verify_contact_information_checkbox);
+		scrollTop(verify_contact_information_checkbox, true);
 		Thread.sleep(1000);
-		clickUsingJS(verify_contact_information_checkbox);
+		verify_contact_information_checkbox.click();
+		Thread.sleep(500);
 	}
 	
 	public boolean displayClinicInBoxApp() {
@@ -738,17 +730,15 @@ public class ClinicInBoxPage extends BasePage {
 		}
 	}
 	
-	public void SearchForCitizen(String citizen) throws InterruptedException {
+	public void searchForCitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
-		//WebElement search_navigator = driver.findElement(search_assistant1);
 		search_assistant.click();
 		waitForElementToBeVisible(driver, search_input, 10);
-		//WebElement search_input = driver.findElement(search_input1);
+		search_input.click();
 		search_input.sendKeys(citizen);
 		search_input.sendKeys(Keys.RETURN);
-		Thread.sleep(5000);
 	}
-	
+
 	public void clickRegisterTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, register_tab1, 10);
 		WebElement element = driver.findElement(register_tab1);

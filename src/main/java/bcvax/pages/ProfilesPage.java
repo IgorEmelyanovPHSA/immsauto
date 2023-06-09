@@ -15,10 +15,6 @@ import java.util.stream.IntStream;
 
 public class ProfilesPage extends BasePage{
     /*---------Properties-------*/
-    @FindBy(xpath = "//a[text() = 'Related'] | //a[@title = 'Related']")
-    private WebElement click_related_tab;
-    private By click_related_tab1 = By.xpath("//a[text() = 'Related'] | //a[@title = 'Related']");
-
     @FindBy(xpath = "//button[@title='Select a List View']")
     private WebElement selectListViewBtn;
 
@@ -189,11 +185,10 @@ public class ProfilesPage extends BasePage{
 
 
     public void clickRelatedTab() throws InterruptedException {
-        waitForElementToBeLocated(driver, click_related_tab1, 10);
-        Thread.sleep(2000);
-        click_related_tab.click();
-        //JavascriptExecutor executor = (JavascriptExecutor) driver;
-        //executor.executeScript("arguments[0].click();", element);
+        By related_tab_path = By.xpath("//a[text() = 'Related'] | //a[@title = 'Related']");
+        waitForElementToBeEnabled(driver, related_tab_path, 10);
+        WebElement related_tab = driver.findElement(related_tab_path);
+        related_tab.click();
     }
 
     public void clickCreateImmunizationRecord() throws InterruptedException {
@@ -312,8 +307,6 @@ public class ProfilesPage extends BasePage{
     }
 
     public void selectInformedConsentProvider(String Provider) throws InterruptedException {
-        //scrolling up
-        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informed_consent_provider_dropdown);
         Thread.sleep(2000);
         waitForElementToBeVisible(driver, informed_consent_provider_dropdown, 10);
@@ -348,6 +341,28 @@ public class ProfilesPage extends BasePage{
         }
         Thread.sleep(2000);
         return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
+    }
+
+    public String selectConsentProvider(String consentProvider) throws InterruptedException {
+        WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
+        scrollTop(consentProviderField);
+        consentProviderField.click();
+        Thread.sleep(1000);
+        consentProviderField.sendKeys(consentProvider);
+        Thread.sleep(500);
+        By consent_provider_value_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
+        waitForElementToBeEnabled(driver, consent_provider_value_path, 10);
+        WebElement consent_provider_value = driver.findElement(consent_provider_value_path);
+        consent_provider_value.click();
+        Thread.sleep(2000);
+        return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
+    }
+
+    public void confirmConsentProvider(String consentPorvider) throws InterruptedException {
+        By consent_provider_link_path = By.xpath("//a[text()='" + consentPorvider + "']");
+        waitForElementToBeEnabled(driver, consent_provider_link_path, 10);
+        WebElement consent_provider_link = driver.findElement(consent_provider_link_path);
+        consent_provider_link.click();
     }
 
     public void clickSaveConsent() throws InterruptedException {
@@ -519,6 +534,25 @@ public class ProfilesPage extends BasePage{
         this.inputDate.sendKeys(historicalDateasString);
         Thread.sleep(2000);
         this.inputDate.sendKeys(Keys.ENTER);
+    }
+
+    public void selectConsentEffectiveToDate() throws InterruptedException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        Date effectiveToDate = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+
+        String historicalDateasString = dateFormat.format(effectiveToDate);
+        By efective_to_date_field_path = By.xpath("//input[@name='effectiveToDate']");
+        waitForElementToBeEnabled(driver, efective_to_date_field_path, 10);
+        WebElement efective_to_date_field = driver.findElement(efective_to_date_field_path);
+        scrollTop(efective_to_date_field);
+        Thread.sleep(500);
+        efective_to_date_field.click();
+        Thread.sleep(2000);
+        efective_to_date_field.sendKeys(historicalDateasString);
+        Thread.sleep(2000);
+        efective_to_date_field.sendKeys(Keys.ENTER);
     }
 
     public void ClickSaveButton() throws InterruptedException {

@@ -23,7 +23,6 @@ import static org.testng.Assert.assertEquals;
 public class BulkTransfersCancellationCP extends BaseTest {
     private static final DecimalFormat df = new DecimalFormat("#.##");
     MainPageCP cpMainPage;
-    MainPageOrg orgMainPage;
     SupplyConsolePage supplyConsolePage;
     String env;
     Map<String, Object> testData;
@@ -295,17 +294,14 @@ public class BulkTransfersCancellationCP extends BaseTest {
     public void precondition() throws Exception {
         if(env.contains("immsbc_admin")) {
             log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
+            loginPage.orgLoginAsImmsBCAdminCP();
             Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
             cpMainPage = new MainPageCP(driver);
             cpMainPage.clickGoToUserDefaultsButton();
         } else {
             log("/*1.----Login to CP (newUI) as Clinician --*/");
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
-        Thread.sleep(5000);
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
     }
 }

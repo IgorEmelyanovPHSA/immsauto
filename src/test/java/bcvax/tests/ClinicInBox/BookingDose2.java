@@ -112,7 +112,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*26----click Next button  --*/");
 		clinicInBox.clickOnNextButton();
 		log("/*27----click Verify Contact Information Checkbox  --*/");
-		clinicInBox.clickVerifyContactInformationNew();
+		clinicInBox.clickVerifyContactInformation();
 		log("/*28----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
 		log("/*29----see 'Appointment Confirmed!' screen --*/");

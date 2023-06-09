@@ -144,7 +144,7 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
 
         log("/*32----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();
@@ -234,9 +234,7 @@ public class E2E_Consumption_CP extends BaseTest {
         supplyConsolePage = cpMainPage.goToSupplyLocation();
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
         supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
-//		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
-//		inClinicExperiencePage.selectSupplyContainer();
-//		Thread.sleep(2000);
+
         //////////Validation for Dosages and Qty After Consumption
         System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
         double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);

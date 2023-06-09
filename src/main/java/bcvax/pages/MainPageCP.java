@@ -166,6 +166,7 @@ public class MainPageCP extends BasePage{
     public SupplyConsolePage selectSupplyLocationName(String supplyLocation) throws InterruptedException {
         SupplyConsolePage supplyConsolePage = goToSupplyLocation();
         System.out.println("/*-- Choose List View --*/");
+        Thread.sleep(2000);
         By list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
         waitForElementToBeLocated(driver, list_view_btn_path, 10);
         WebElement list_view_btn = driver.findElement(list_view_btn_path);
@@ -220,11 +221,12 @@ public class MainPageCP extends BasePage{
         waitForElementToBeEnabled(driver, input_current_date_path, 10);
         String todayAsString = dateFormat.format(today);
         WebElement input_current_date = driver.findElement(input_current_date_path);
-        input_current_date.click();
-        Thread.sleep(500);
-        waitForElementToBeEnabled(driver, input_current_date_path, 10);
-        input_current_date = driver.findElement(input_current_date_path);
+
         try {
+            input_current_date.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, input_current_date_path, 10);
+            input_current_date = driver.findElement(input_current_date_path);
             input_current_date.isEnabled();
         } catch(StaleElementReferenceException ex) {
             System.out.println("***DEBUG*** Stale element exception ***");
@@ -233,7 +235,8 @@ public class MainPageCP extends BasePage{
             input_current_date = driver.findElement(input_current_date_path);
         }
         input_current_date.clear();
-        Thread.sleep(500);
+        input_current_date.click();
+        Thread.sleep(2000);
         input_current_date.sendKeys(todayAsString);
         Thread.sleep(500);
         input_current_date.sendKeys(Keys.ENTER);

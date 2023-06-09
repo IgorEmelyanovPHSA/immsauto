@@ -30,6 +30,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	MainPageOrg orgMainPage;
 	String consumptionLot;
 	String consumptionDose;
+	String consumptionRoute;
+	String consumptionSite;
 
 	@Test(priority = 1)
 	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
@@ -42,6 +44,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
+		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
@@ -157,7 +161,6 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.validateVaccineAdminPageOpen();
 		System.out.println("/*40.---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
-		Thread.sleep(2000);
 		System.out.println("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		try {
 			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
@@ -166,30 +169,52 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			log("/*46.---Open Today's appointments from Home page --*/");
 
 			inClinicExperience.clickTodayAppointments();
-			Thread.sleep(2000);
 			log("/*47.---Open Today appointment Details --*/");
 			inClinicExperience.clickTodayAppointmentCaseViewButton();
 			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			Thread.sleep(2000);
 			inClinicExperience.selectVaccineAgent();
 		}
-		if(inClinicExperience.consentProviderSelected().equals("")) {
-			inClinicExperience.selectConsentProvider();
+		String consentProvider = inClinicExperience.consentProviderSelected();
+		if(consentProvider.equals("")) {
+			consentProvider = inClinicExperience.selectConsentProvider();
 		}
 
 		System.out.println("/*42.---Click Save Consent Button --*/");
 
 		inClinicExperience.ClickSaveConsentButton();
-		Thread.sleep(2000);
-		inClinicExperience.setLotNumber(consumptionLot);
+		String agent = inClinicExperience.getVaccineAgent();
+		String provider =  inClinicExperience.getProvider();
+		String route = inClinicExperience.getRoute();
+		String site = inClinicExperience.getSite();
+
+		String lot = inClinicExperience.getLotNumber();
+
+		log("/*42.---Click Save Consent Button --*/");
+
+		if(!provider.equals(consentProvider)) {
+			inClinicExperience.setProvider(consentProvider);
+		}
+
+		log("/*43.---select Dosage ->  -.5 --*/");
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperience.setLotNumber(consumptionLot);
+		}
+		String dose = inClinicExperience.getDosage();
+
+		if(!dose.equals(consumptionDose)) {
+			inClinicExperience.setDosage(consumptionDose);
+		}
+		if(route.equals("")) {
+			inClinicExperience.setRoute(consumptionRoute);
+		}
+		if(site.equals("")) {
+			inClinicExperience.setSite(consumptionSite);
+		}
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();
-		Thread.sleep(2000);
 		inClinicExperience.clickOkForExpiredLot();
-		Thread.sleep(2000);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
-		Thread.sleep(2000);
 		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
