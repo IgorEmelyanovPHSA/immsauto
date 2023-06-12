@@ -99,6 +99,53 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement empi_actual_verification_status;
     private By empi_actual_verification_status_1 = By.xpath("(//omnistudio-omniscript-messaging//p[text()])[2]");
 
+    @FindBy(xpath = "(//span[text() ='Male'])[1]")
+    private WebElement sex_male_button;
+    private By sex_male_button_1 = By.xpath("(//span[text() ='Male'])[1]");
+
+    @FindBy(xpath = ".//c-patient-reg-type-ahead[@data-omni-key='streetAddress']//input[@class='slds-input']")
+    private WebElement street_address;
+    private By street_address_1 = By.xpath(".//c-patient-reg-type-ahead[@data-omni-key='streetAddress']//input[@class='slds-input']");
+
+    @FindBy(xpath = "//button[@class = 'vlocity-btn slds-button slds-button_icon']")
+    private WebElement info_icon;
+    private By info_icon_1 = By.xpath("//button[@class = 'vlocity-btn slds-button slds-button_icon']");
+
+
+    @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']")
+    private WebElement city;
+    private By city_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='city']//input[@class='vlocity-input slds-input']");
+
+    @FindBy(xpath = ".//omnistudio-omniscript-select[@data-omni-key='province']//input")
+    private WebElement province_dropdown_component;
+    private By province_dropdown_component_1 = By.xpath(".//omnistudio-omniscript-select[@data-omni-key='province']//input");
+
+    @FindBy(xpath = ".//span[text()='BC']")
+    private WebElement province_optin_selection;
+    private By province_option_selection_1 = By.xpath(".//span[text()='BC']");
+
+    @FindBy(xpath = ".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']")
+    private WebElement postal_code;
+    private By postal_code_1 = By.xpath(".//omnistudio-omniscript-text[@data-omni-key='postalCodeForPatient']//input[@class='vlocity-input slds-input']");
+
+    @FindBy(xpath = "//input[@placeholder = 'Enter first and last name']")
+    private WebElement primary_contact_name;
+    private By primary_contact_name_1 = By.xpath("//input[@placeholder = 'Enter first and last name']");
+
+    @FindBy(xpath = "(.//input[@type='email'])[1]")
+    private WebElement enter_email_address;
+    private By enter_email_address_1 = By.xpath("(.//input[@type='email'])[1]");
+
+    @FindBy(xpath = "(.//input[@type='email'])[2]")
+    private WebElement enter_confirm_email_address;
+    private By enter_confirm_email_address_1 = By.xpath("(.//input[@type='email'])[2]");
+
+    @FindBy(xpath = "(.//input[@type='tel'])[1]")
+    private WebElement mobile_phone;
+    private By mobile_phone_1 = By.xpath("(.//input[@type='tel'])[1]");
+
+
+
     /*---------Constructor-------*/
     public HealthCloudConsolePage(WebDriver driver) {
         super(driver);
@@ -275,6 +322,82 @@ public class HealthCloudConsolePage extends BasePage {
         Thread.sleep(2000);
         empi_actual_verification_status.isDisplayed();
         return (empi_actual_verification_status.getText());
+    }
+
+    public void clickSexMale() throws InterruptedException {
+        waitForElementToBeLocated(driver, sex_male_button_1, 10);
+        Thread.sleep(1000);
+        log("/*----scroll down --*/");
+        WebElement element = driver.findElement(sex_male_button_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
+        sex_male_button.click();
+    }
+
+    public void enterStreetAddress(String streetAddress) throws InterruptedException {
+        waitForElementToBeLocated(driver, street_address_1, 10);
+        street_address.sendKeys(streetAddress);
+        Thread.sleep(2000);
+    }
+
+    public void clickOnInfoIcon() throws InterruptedException {
+        waitForElementToBeLocated(driver, info_icon_1, 10);
+        info_icon.click();
+        Thread.sleep(2000);
+    }
+
+    public void enterCity(String City) throws InterruptedException {
+        waitForElementToBeLocated(driver, city_1, 10);
+        city.click();
+        Thread.sleep(1000);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(City).build().perform();
+        Thread.sleep(1000);
+    }
+
+    public void enterProvince(String Province) throws InterruptedException {
+        waitForElementToBeLocated(driver, province_dropdown_component_1, 10);
+        Thread.sleep(1000);
+        province_dropdown_component.click();
+        Thread.sleep(1000);
+        province_optin_selection.click();
+        Thread.sleep(1000);
+    }
+
+    public void enterPostalCode(String postalCode) throws InterruptedException {
+        waitForElementToBeLocated(driver, postal_code_1, 10);
+        postal_code.click();
+        //JavascriptExecutor js = (JavascriptExecutor) driver;
+        //js.executeScript("arguments[0].value  = 'V6Y 1A3';", postal_code);
+        //postal_code.sendKeys(postalCode);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(postalCode).build().perform();
+        //actions.sendKeys(Keys.ENTER).build().perform();
+        //Thread.sleep(1000);
+    }
+
+    public void enterPrimaryContactName(String primaryContactName) throws InterruptedException {
+        waitForElementToBeLocated(driver, primary_contact_name_1, 10);
+        primary_contact_name.sendKeys(primaryContactName);
+    }
+
+    public void enterEmailAddress(String email) throws InterruptedException {
+        waitForElementToBeLocated(driver, enter_email_address_1, 10);
+        enter_email_address.sendKeys(email);
+    }
+
+    public void enterConfirmEmailAddress(String email) throws InterruptedException {
+        waitForElementToBeLocated(driver, enter_confirm_email_address_1, 10);
+        enter_confirm_email_address.sendKeys(email);
+    }
+
+    public void enterMobilePhoneNumber(String mobile) throws InterruptedException {
+        waitForElementToBeLocated(driver, mobile_phone_1, 10);
+        mobile_phone.click();
+        //mobile_phone.sendKeys(mobile);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(mobile).build().perform();
+        //Thread.sleep(1000);
     }
 
 }

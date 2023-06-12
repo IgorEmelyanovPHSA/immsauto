@@ -27,13 +27,16 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
     private String empiStatusExpected = "EMPI Verified";
 
-    private String streetAddress = "307-7631 Francis Rd";
+    private String streetAddress = "309-7631 Francis Rd";
     private String City = "Richmond";
     private String province = "BC";
     private String postalCode = "V6Y 1A3";
+
+    private String primaryContactName = "Igor PrimaryContactName";
+
     private String email = "accountToDelete@phsa.ca";
     private String mobilePhone = "7788797899";
-    private String communicationPreference = "Email";
+
 
 
     @Test(priority = 1)
@@ -116,12 +119,54 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         //Thread.sleep(1000);
 
         log("/*18. Validate EMPI Verification status --*/");
-        //healthCloudConsolePage.isDisplayed();
-        //Thread.sleep(1000);
         String empiStatusActual = healthCloudConsolePage.getEMPIStatusActualForValidation();
         log("/*---- Actual EMPI verification status is: " + empiStatusActual + " --*/");
         assertEquals(empiStatusActual, empiStatusExpected);
         Thread.sleep(2000);
+
+        log("/*19.---Click sex 'Male' button--*/");
+        healthCloudConsolePage.clickSexMale();
+        Thread.sleep(1000);
+
+        log("/*20.---Enter Street address " +streetAddress +"----*/");
+        healthCloudConsolePage.enterStreetAddress(streetAddress);
+        Thread.sleep(1000);
+
+        log("/*20.---click info icon button----*/");
+        healthCloudConsolePage.clickOnInfoIcon();
+        Thread.sleep(1000);
+
+        log("/*21.---Enter City " +City +"----*/");
+        healthCloudConsolePage.enterCity(City);
+        Thread.sleep(1000);
+
+        log("/*22.---Select Province option from dropdown" +province +"----*/");
+        healthCloudConsolePage.enterProvince(province);
+        Thread.sleep(1000);
+
+        log("/*23.---Enter Postal Code" +postalCode +"----*/");
+        healthCloudConsolePage.enterPostalCode(postalCode);
+        Thread.sleep(1000);
+
+        log("/*24.---Enter Primary contact name" +primaryContactName +"----*/");
+        healthCloudConsolePage.enterPrimaryContactName(primaryContactName);
+        Thread.sleep(1000);
+
+        log("/*25.---Enter email" +email +"----*/");
+        healthCloudConsolePage.enterEmailAddress(email);
+        Thread.sleep(1000);
+
+        log("/*26.---Confirm email" +email +"----*/");
+        healthCloudConsolePage.enterConfirmEmailAddress(email);
+        Thread.sleep(1000);
+
+        log("/*27.---Enter mobile" +mobilePhone +"----*/");
+        healthCloudConsolePage.enterMobilePhoneNumber(mobilePhone);
+        //Thread.sleep(1000);
+
+        log("/*28.---Select Communication Preference - Email----*/");
+        //healthCloudConsolePage.selectCommunicationPreference();
+        //Thread.sleep(1000);
 
 
 
