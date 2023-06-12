@@ -53,15 +53,15 @@ public class Portal_Panel_Accepting_New_Patients_And_Max_New_Requests extends Ba
 
         log("/*3.----Click 'My Panel' for Directors 2-nd Associated Facility --*/");
         providerPortalHomePage.clickMyPanel();
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         log("/*4.----Click Edit --*/");
         providerPortalHomePage.clickEdit();
         Thread.sleep(1000);
 
-        log("/*5.----Enter random Desired Panel Size: " + desiredPanelSize + "--*/");
-        providerPortalHomePage.enterDesiredPanelSize(desiredPanelSize);
-        Thread.sleep(1000);
+        //log("/*5.----Enter random Desired Panel Size: " + desiredPanelSize + "--*/");
+        //providerPortalHomePage.enterDesiredPanelSize(desiredPanelSize);
+        //Thread.sleep(1000);
 
         log("/*6.----Select Accepting new Patients: " + isAcceptingNewPatients + "--*/");
         providerPortalHomePage.selectAcceptingNewPatientsOption(isAcceptingNewPatients);

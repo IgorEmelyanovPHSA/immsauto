@@ -38,9 +38,9 @@ public class ProviderPortalHomePage extends BasePage{
     private By select_yes_from_accepting_new_patient_options_1 = By.xpath("//a[@aria-disabled][@title='Yes']");
 
 
-    @FindBy(xpath = "(//input[@data-interactive-lib-uid])[2]")
+    @FindBy(xpath = "(//input[@data-interactive-lib-uid])[1]")
     private WebElement max_new_requests_component;
-    private By max_new_requests_component_1 = By.xpath("(//input[@data-interactive-lib-uid])[2]");
+    private By max_new_requests_component_1 = By.xpath("(//input[@data-interactive-lib-uid])[1]");
 
     @FindBy(xpath = "//div[@class='modal-footer slds-modal__footer']//span[text()='Save']")
     private WebElement save_button;
