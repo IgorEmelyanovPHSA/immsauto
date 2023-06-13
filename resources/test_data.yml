@@ -25,7 +25,7 @@ bcvaxdevit:
   vaccineAgent: "COVID-19 mRNA"
   agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
-  consumptionLot: "35035BD-CC01"
+  consumptionLot: "EL1404"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "0649AA"

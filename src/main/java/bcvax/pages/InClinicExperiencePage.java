@@ -217,14 +217,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement time_slot_appointment;
 	private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'][1])");
 
-	@FindBy(xpath = "(.//button[text()='Next'])")
-	private WebElement click_Next_button_appt;
-	private By click_Next_button_appt1 = By.xpath("(.//button[text()='Next'])");
-
-	@FindBy(xpath = "(.//button[text() = 'Confirm appointment'])")
-	private WebElement appt_confirm_btn;
-	private By appt_confirm_btn1 = By.xpath(".//button[text() = 'Confirm appointment']");
-
 	@FindBy(xpath = ".//button[text() = 'Rebook at Current Location']")
 	private WebElement click_to_rebook_button;
 	private By click_to_rebook_button1 = By.xpath(".//button[text() = 'Rebook at Current Location']");
@@ -309,10 +301,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//a[text()='Search by Clinic name']")
 	private WebElement search_by_clinic_name_tab;
 	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
-
-	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
-	private WebElement validate_appointment_confirm_message;
-	private By validate_appointment_confirm_message1 = By.xpath(".//div[text() = 'Appointment confirmed!']");
 
 	@FindBy(xpath = "//input[@name='BCH_Date__c']")
 	private WebElement input_current_date;
@@ -688,14 +676,26 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
-		By userFoundWithParameter = By.xpath("//a[@title='" + legalFirstName + " " + legalMiddleName + " " + legalLastName + "']");
-		if (!isDisplayed(userFoundWithParameter)) {
+		Thread.sleep(500);
+		By user_link_path = By.xpath("//a[@title='" + legalFirstName + " " + legalMiddleName + " " + legalLastName + "']");
+		waitForElementToBeEnabled(driver, user_link_path, 10);
+		WebElement user_link = driver.findElement(user_link_path);
+		if (!isDisplayed(user_link_path)) {
 			return false;
 		}
-		WebElement userFoundWithParameterId = driver.findElement(userFoundWithParameter);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", userFoundWithParameterId);
-		Thread.sleep(5000);
+		user_link.click();
+		return true;
+	}
+
+	public boolean userFoundWithParameters(String legalFullName) throws InterruptedException {
+		Thread.sleep(500);
+		By user_link_path = By.xpath("//a[@title='" + legalFullName + "']");
+		waitForElementToBeEnabled(driver, user_link_path, 10);
+		WebElement user_link = driver.findElement(user_link_path);
+		if (!isDisplayed(user_link_path)) {
+			return false;
+		}
+		user_link.click();
 		return true;
 	}
 
@@ -1168,19 +1168,31 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickNextButtonApptSchedulingPage() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_Next_button_appt, 10);
-		click_Next_button_appt.click();
-	}
+		Thread.sleep(500);
+		By next_btn_path = By.xpath("//button[text()='Next']");
+		waitForElementToBeEnabled(driver, next_btn_path, 10);
+		WebElement next_btn = driver.findElement(next_btn_path);
+		next_btn.click();
+		//Wait for Confirm button to appear
+		Thread.sleep(500);
+		By appt_confirm_btn_path = By.xpath("//button[text() = 'Confirm appointment']");
+		waitForElementToBeEnabled(driver, appt_confirm_btn_path, 10);
+	};
 
 
 	public void clickAppointmentConfirmButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, appt_confirm_btn, 10);
+		Thread.sleep(500);
+		By appt_confirm_btn_path = By.xpath("//button[text() = 'Confirm appointment']");
+		waitForElementToBeEnabled(driver, appt_confirm_btn_path, 10);
+		WebElement appt_confirm_btn = driver.findElement(appt_confirm_btn_path);
 		appt_confirm_btn.click();
 	}
 
 	public boolean AppointmentConfirmationMessage() throws InterruptedException {
+		Thread.sleep(500);
 		try {
-			waitForElementToBeVisible(driver, validate_appointment_confirm_message, 10);
+			By appointment_confirm_message_path = By.xpath("//div[@role = 'heading' and text() = 'Appointment confirmed!']");
+			waitForElementToBeLocated(driver, appointment_confirm_message_path, 10);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
 		} catch (NoSuchElementException e) {
@@ -1286,7 +1298,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
 		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
 		scrollIfNeeded(driver, verify_contact_information_checkbox);
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		verify_contact_information_checkbox.click();
 	}
 

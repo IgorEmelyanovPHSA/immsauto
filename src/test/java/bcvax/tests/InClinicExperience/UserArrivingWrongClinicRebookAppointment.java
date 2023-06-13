@@ -229,7 +229,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		//inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
 
 		log("/* 49.----User found and Navigated to record page ---*/");
-		inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);
+		inClinicExperiencePage.userFoundWithParameters(citizenName);
 
 		log("/*50.---- Navigated to Person Account related tab ---*/");
 		inClinicExperiencePage.clickRelatedTab();
