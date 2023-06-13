@@ -9,7 +9,7 @@ bcvaxdevit:
   containerFrom: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
   containerToSameClinic: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
-  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2022-08-05 08:49 a.m)"
+  containerConsumption: "COMIRNATY (Pfizer) - EL1404 (2023-06-12 14:46:11)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-02 03:11 p.m)"
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
