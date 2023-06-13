@@ -1277,13 +1277,17 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
+		Thread.sleep(500);
 		By confirm_and_save_btn_path = By.xpath("(//button[@title='Confirm & Save Identification'])");
 		try {
 			waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
 		} catch(NotFoundException ex) {
 			System.out.println(ex.getMessage());
 			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
-			driver.findElement(By.xpath("//button[text() ='Rebook at Current Location']")).click();
+			By rebook_btn_path = By.xpath("//button[text() ='Rebook at Current Location']");
+			waitForElementToBeEnabled(driver, rebook_btn_path, 10);
+			WebElement rebook_btn = driver.findElement(rebook_btn_path);
+			rebook_btn.click();
 			Thread.sleep(500);
 		}
 		waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
