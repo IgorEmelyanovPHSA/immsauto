@@ -39,6 +39,14 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement case_reason_actual_field_value;
     private By case_reason_actual_field_value_1 = By.xpath(".//flexipage-field[@data-field-id='RecordReasonField']//slot[1]//slot[1]/lightning-formatted-text");
 
+    @FindBy(xpath = "(//span[text() ='Sandy Prior'])[3]")
+    private WebElement contact_name_actual_field_value;
+    private By contact_name_actual_field_value_1 = By.xpath("(//span[text() ='Sandy Prior'])[3]");
+
+    @FindBy(xpath = "//span[text() ='Richmond - West']")
+    private WebElement primary_care_network_actual_field_value;
+    private By primary_care_network_actual_field_value_1 = By.xpath("//span[text() ='Richmond - West']");
+
     @FindBy(xpath = "//span[text() ='A person in my care']")
     private WebElement person_in_my_care_radiobutton;
     private By person_in_my_care_radiobutton_1 = By.xpath("//span[text() ='A person in my care']");
@@ -183,20 +191,22 @@ public class HealthCloudConsolePage extends BasePage {
     }
 
     public String getStatusActualForValidation() throws InterruptedException {
-        //scroll down to control element
-        //WebElement element = driver.findElement(status_actual_field_value_1);
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-        Thread.sleep(2000);
-        case_origin_actual_field_value.click();//let's change the focused on actual Case Detail window frame
-        Thread.sleep(2000);
-        //log("/*----scroll down a bit --*/");
-        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+        //case_origin_actual_field_value.click();//let's change the focused on actual Case Detail window frame
         //Thread.sleep(2000);
-        WebElement element = driver.findElement(status_actual_field_value_1);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-        Thread.sleep(2000);
+        log("/*----scroll down to Status field --*/");
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+        //Thread.sleep(2000);
+        WebElement element1 = driver.findElement(primary_care_network_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element1);
+        Thread.sleep(1000);
+        WebElement element2 = driver.findElement(contact_name_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element2);
+        Thread.sleep(1000);
+        WebElement element3 = driver.findElement(status_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element3);
+        Thread.sleep(1000);
         waitForElementToBeLocated(driver, status_actual_field_value_1, 10);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         priority_actual_field_value.isDisplayed();
         return (status_actual_field_value.getText());
     }

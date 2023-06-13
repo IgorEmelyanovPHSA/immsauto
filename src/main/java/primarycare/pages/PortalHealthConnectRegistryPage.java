@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class PortalHealthConnectRegistryPage extends BasePage{
 
     /*---------Properties-------*/
-    @FindBy(xpath = ".//strong[text() = 'Register to get a doctor or nurse practitioner']")
+    @FindBy(xpath = ".//strong[text() = 'Register to get a family doctor or nurse practitioner']")
     private static WebElement register_to_get_doctor_page_validation;
 
     @FindBy(xpath = ".//span[text() = 'Next']")
