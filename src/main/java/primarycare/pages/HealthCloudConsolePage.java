@@ -429,6 +429,10 @@ public class HealthCloudConsolePage extends BasePage {
     public void selectCommunicationPreference() throws InterruptedException {
         waitForElementToBeLocated(driver, communicarion_preference_Email_button_1, 10);
         Thread.sleep(1000);
+        log("/*----jump to component --*/");
+        WebElement element = driver.findElement(communicarion_preference_Email_button_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
         communicarion_preference_Email_button.click();
     }
 
