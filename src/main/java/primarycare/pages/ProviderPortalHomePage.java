@@ -95,6 +95,10 @@ public class ProviderPortalHomePage extends BasePage{
     public void clickMyPanel() throws InterruptedException {
         waitForElementToBeVisible(driver, my_panel_link, 10);
         Thread.sleep(1000);
+        log("/*----jump to component --*/");
+        WebElement element = driver.findElement(my_panel_link_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
         my_panel_link.click();
     }
 
