@@ -28,7 +28,7 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     //2. for Clinic Facility creation
     public String accountClinicName = "API_222 CRATED CLINIC ASSOCIATED";
     public String recordClinicTypeId = "0125f000000qtffAAA";
-    public String sourceSystemClinic = "Health1-00D8N0000008hbe";
+    public String sourceSystemClinic = "Health1-00D8G0000004adM";
     public String businessClinicEmail = "accountToDelete@phsa.ca";
     public String phoneClinic = "2503652161";
     public String mailingStreetClinic = "1008 COLUMBIA AVE";
@@ -36,6 +36,11 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
     public String mailingProvinceClinic = "BC";
     public String mailingPostalCodeClinic = "V1N 1H2";
     public String mailingCountryClinic = "Canada";
+    public String mailingLocationStreetClinic = "1008 COLUMBIA AVE";
+    public String mailingLocationCityClinic = "Castlegar";
+    public String mailingLocationProvinceClinic = "BC";
+    public String mailingLocationPostalCodeClinic = "V1N 1H2";
+    public String mailingLocationContryClinic = "Canada";
     public String isActive_Clinic = "true";
 
 
@@ -87,7 +92,10 @@ public class API_Create_Practitioner_Facility_Associated_SysAdmin extends API_Ba
         log("Create a Clinic account record.");
         String accountClinicID = apiCreateClinic.insertClinicAccount(accountClinicName,recordClinicTypeId,
                 sourceSystemClinic, businessClinicEmail,phoneClinic,mailingStreetClinic,mailingCityClinic,
-                mailingProvinceClinic,mailingPostalCodeClinic,mailingCountryClinic,isActive_Clinic);
+                mailingProvinceClinic,mailingPostalCodeClinic,mailingCountryClinic,
+                mailingLocationStreetClinic,mailingLocationCityClinic,
+                mailingLocationProvinceClinic,mailingLocationPostalCodeClinic,
+                mailingLocationContryClinic,isActive_Clinic);
         log("Created a Clinic Facility id is: " +accountClinicID);
         log("Status Code 201- Clinic Account has Created - successfully");
         clinicAccountId = accountClinicID;

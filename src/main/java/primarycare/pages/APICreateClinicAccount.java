@@ -13,7 +13,10 @@ public class APICreateClinicAccount {
     public String insertClinicAccount (String accountClinicName,String recordClinicTypeId,String sourceSystemClinic,
                                        String businessClinicEmail,String phoneClinic,String mailingStreetClinic,
                                        String mailingCityClinic,String mailingProvinceClinic,String mailingPostalCodeClinic,
-                                       String mailingCountryClinic,String isActive_Clinic){
+                                       String mailingCountryClinic,
+                                       String mailingLocationStreetClinic,String mailingLocationCityClinic,
+                                       String mailingLocationProvinceClinic,String mailingLocationPostalCodeClinic,
+                                       String mailingLocationContryClinic,String isActive_Clinic){
         APIEstablishSFConnection sfConnection = new APIEstablishSFConnection();
         String acc_token = sfConnection.establishConnection();
         System.out.println("Connection for SF Establish with Status code 200");
@@ -30,6 +33,13 @@ public class APICreateClinicAccount {
         mapper.put("BillingState", mailingProvinceClinic);
         mapper.put("BillingPostalCode", mailingPostalCodeClinic);
         mapper.put("BillingCountry", mailingCountryClinic);
+
+        mapper.put("ShippingStreet", mailingLocationStreetClinic);
+        mapper.put("ShippingCity", mailingLocationCityClinic);
+        mapper.put("ShippingState", mailingLocationProvinceClinic);
+        mapper.put("ShippingPostalCode", mailingLocationPostalCodeClinic);
+        mapper.put("ShippingCountry", mailingLocationContryClinic);
+
         mapper.put("IsActive", isActive_Clinic);
 
         JSONObject requester = new JSONObject(mapper);

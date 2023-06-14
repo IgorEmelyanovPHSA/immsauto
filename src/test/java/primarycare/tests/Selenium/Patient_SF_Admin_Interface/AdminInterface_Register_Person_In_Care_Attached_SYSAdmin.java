@@ -36,6 +36,8 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
     private String email = "accountToDelete@phsa.ca";
     private String mobilePhone = "7788797899";
+    private String recentFamilyDoctor = "Lori-Ann May Bus";
+    private String whenLastSeenFamilyDoctor = "5 week ago";
 
 
 
@@ -162,12 +164,23 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
         log("/*27.---Enter mobile" +mobilePhone +"----*/");
         healthCloudConsolePage.enterMobilePhoneNumber(mobilePhone);
-        //Thread.sleep(1000);
+        Thread.sleep(1000);
 
-        log("/*28.---Select Communication Preference - Email----*/");
-        //healthCloudConsolePage.selectCommunicationPreference();
-        //Thread.sleep(1000);
+        log("/*28.---Select Communication Preference -> 'Email'----*/");
+        healthCloudConsolePage.selectCommunicationPreference();
+        Thread.sleep(1000);
 
+        log("/*29.---Select 'No' for Patient currently have a family doctor?----*/");
+        healthCloudConsolePage.selectNoFamilyDoctor();
+        Thread.sleep(1000);
+
+        log("/*30.---Enter 'most recent Family doctor'" + recentFamilyDoctor +"----*/");
+        healthCloudConsolePage.enterMostResentFamilyDoctor(recentFamilyDoctor);
+        Thread.sleep(1000);
+
+        log("/*31.---Enter 'When last see a doctor'" + whenLastSeenFamilyDoctor +"----*/");
+        healthCloudConsolePage.enterWhenLastSeenFamilyDoctor(whenLastSeenFamilyDoctor);
+        Thread.sleep(1000);
 
 
     }

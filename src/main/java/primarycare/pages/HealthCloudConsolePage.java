@@ -152,6 +152,22 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement mobile_phone;
     private By mobile_phone_1 = By.xpath("(.//input[@type='tel'])[1]");
 
+    @FindBy(xpath = "//span[text() ='Email']")
+    private WebElement communicarion_preference_Email_button;
+    private By communicarion_preference_Email_button_1 = By.xpath("//span[text() ='Email']");
+
+    @FindBy(xpath = "(//span[text() ='No'])[1]")
+    private WebElement currently_No_family_doctor_button;
+    private By currently_No_family_doctor_button_1 = By.xpath("(//span[text() ='No'])[1]");
+
+    @FindBy(xpath = "//omnistudio-omniscript-typeahead[@data-omni-key = 'mostRecentPractitionerDoSearch']")
+    private WebElement most_recent_family_doctor;
+    private By most_recent_family_doctor_1 = By.xpath("//omnistudio-omniscript-typeahead[@data-omni-key = 'mostRecentPractitionerDoSearch']");
+
+    @FindBy(xpath = "//omnistudio-omniscript-text[@data-omni-key = 'lastPractitionerVisit']")
+    private WebElement when_last_seen_family_doctor;
+    private By when_last_seen_family_doctor_1 = By.xpath("//omnistudio-omniscript-text[@data-omni-key = 'lastPractitionerVisit']");
+
 
 
     /*---------Constructor-------*/
@@ -409,5 +425,36 @@ public class HealthCloudConsolePage extends BasePage {
         actions.sendKeys(mobile).build().perform();
         //Thread.sleep(1000);
     }
+
+    public void selectCommunicationPreference() throws InterruptedException {
+        waitForElementToBeLocated(driver, communicarion_preference_Email_button_1, 10);
+        Thread.sleep(1000);
+        communicarion_preference_Email_button.click();
+    }
+
+    public void selectNoFamilyDoctor() throws InterruptedException {
+        waitForElementToBeLocated(driver, currently_No_family_doctor_button_1, 10);
+        Thread.sleep(1000);
+        log("/*----scroll down --*/");
+        WebElement element = driver.findElement(currently_No_family_doctor_button_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
+        currently_No_family_doctor_button.click();
+    }
+
+    public void enterMostResentFamilyDoctor(String mostRecentPractitioner) throws InterruptedException {
+        waitForElementToBeLocated(driver, most_recent_family_doctor_1, 10);
+        Thread.sleep(1000);
+        most_recent_family_doctor.sendKeys(mostRecentPractitioner);
+    }
+
+    public void enterWhenLastSeenFamilyDoctor(String lastPractitionerVisit) throws InterruptedException {
+        waitForElementToBeLocated(driver, when_last_seen_family_doctor_1, 10);
+        Thread.sleep(1000);
+        when_last_seen_family_doctor.sendKeys(lastPractitionerVisit);
+    }
+
+
+
 
 }

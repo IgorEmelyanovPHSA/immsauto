@@ -154,7 +154,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         portalHealthConnectRegistryPage.clickSubmitRegistrationButton();
         Thread.sleep(10000);
 
-        log("/*26.--- Validate that Register successful displayed. --*/");
+        log("/*26.--- Validate is 'Registration successful!' page displayed? --*/");
         PortalHealthConnectRegistryPage.validateRegisterSuccessfulPageDisplayed();
         Thread.sleep(5000);
 
