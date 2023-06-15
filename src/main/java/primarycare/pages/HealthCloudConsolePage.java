@@ -164,9 +164,33 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement most_recent_family_doctor;
     private By most_recent_family_doctor_1 = By.xpath("//omnistudio-omniscript-typeahead[@data-omni-key = 'mostRecentPractitionerDoSearch']");
 
+    @FindBy(xpath = "//span[text() ='Lori-Ann May Bus']")
+    private WebElement select_from_recent_fmily_dropdown_list;
+    private By select_from_recent_fmily_dropdown_list_1 = By.xpath("//span[text() ='Lori-Ann May Bus']");
+
     @FindBy(xpath = "//omnistudio-omniscript-text[@data-omni-key = 'lastPractitionerVisit']")
     private WebElement when_last_seen_family_doctor;
     private By when_last_seen_family_doctor_1 = By.xpath("//omnistudio-omniscript-text[@data-omni-key = 'lastPractitionerVisit']");
+
+    @FindBy(xpath = "//span[text() ='Less than 5 km']")
+    private WebElement less_than_5km_radiobutton;
+    private By less_than_5km_radiobutton_1 = By.xpath("//span[text() ='Less than 5 km']");
+
+    @FindBy(xpath = "(//span[text() ='Female'])[2]")
+    private WebElement gender_of_family_doctor_button;
+    private By gender_of_family_doctor_button_1 = By.xpath("(//span[text() ='Female'])[2]");
+
+    @FindBy(xpath = "(//span[text() ='Yes'])[2]")
+    private WebElement need_translator_button;
+    private By need_translator_button_1 = By.xpath("(//span[text() ='Yes'])[2]");
+
+    @FindBy(xpath = "(//div[@class = 'slds-combobox_container']//input[@class = 'slds-input'])[5]")
+    private WebElement language_dropdown_component;
+    private By language_dropdown_component_1 = By.xpath("(//div[@class = 'slds-combobox_container']//input[@class = 'slds-input'])[5]");
+
+    @FindBy(xpath = "(//span[text() ='Finish registration'])[1]")
+    private WebElement finish_registration_button;
+    private By finish_registration_button_1 = By.xpath("(//span[text() ='Finish registration'])[1]");
 
 
 
@@ -426,7 +450,7 @@ public class HealthCloudConsolePage extends BasePage {
         //Thread.sleep(1000);
     }
 
-    public void selectCommunicationPreference() throws InterruptedException {
+    public void clickEmailCommunicationPreference() throws InterruptedException {
         waitForElementToBeLocated(driver, communicarion_preference_Email_button_1, 10);
         Thread.sleep(1000);
         log("/*----jump to component --*/");
@@ -436,7 +460,7 @@ public class HealthCloudConsolePage extends BasePage {
         communicarion_preference_Email_button.click();
     }
 
-    public void selectNoFamilyDoctor() throws InterruptedException {
+    public void clickNoFamilyDoctor() throws InterruptedException {
         waitForElementToBeLocated(driver, currently_No_family_doctor_button_1, 10);
         Thread.sleep(1000);
         log("/*----scroll down --*/");
@@ -446,10 +470,13 @@ public class HealthCloudConsolePage extends BasePage {
         currently_No_family_doctor_button.click();
     }
 
-    public void enterMostResentFamilyDoctor(String mostRecentPractitioner) throws InterruptedException {
+    public void selectMostResentFamilyDoctor(String mostRecentPractitioner) throws InterruptedException {
         waitForElementToBeLocated(driver, most_recent_family_doctor_1, 10);
         Thread.sleep(1000);
         most_recent_family_doctor.sendKeys(mostRecentPractitioner);
+        Thread.sleep(5000);
+        select_from_recent_fmily_dropdown_list.click();
+        Thread.sleep(1000);
     }
 
     public void enterWhenLastSeenFamilyDoctor(String lastPractitionerVisit) throws InterruptedException {
@@ -458,7 +485,46 @@ public class HealthCloudConsolePage extends BasePage {
         when_last_seen_family_doctor.sendKeys(lastPractitionerVisit);
     }
 
+    public void choseHowFarDoctorFromTheirHome() throws InterruptedException {
+        waitForElementToBeLocated(driver, less_than_5km_radiobutton_1, 10);
+        Thread.sleep(1000);
+        log("/*----jump to component --*/");
+        WebElement element = driver.findElement(less_than_5km_radiobutton_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
+        less_than_5km_radiobutton.click();
+    }
 
+    public void clickWhatGenderOfFamilyDoctor() throws InterruptedException {
+        waitForElementToBeLocated(driver, gender_of_family_doctor_button_1, 10);
+        Thread.sleep(1000);
+        gender_of_family_doctor_button.click();
+    }
+
+    public void clickYesNeedTranslator() throws InterruptedException {
+        waitForElementToBeLocated(driver, need_translator_button_1, 10);
+        Thread.sleep(1000);
+        need_translator_button.click();
+    }
+
+    public void enterLanguage(String Language) throws InterruptedException {
+        waitForElementToBeLocated(driver, language_dropdown_component_1, 10);
+        language_dropdown_component.click();
+        Thread.sleep(1000);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Language).build().perform();
+        Thread.sleep(1000);
+    }
+
+    public void clickFinishRegistration() throws InterruptedException {
+        waitForElementToBeLocated(driver, finish_registration_button_1, 10);
+        Thread.sleep(1000);
+        log("/*----jump to component --*/");
+        WebElement element = driver.findElement(finish_registration_button_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
+        finish_registration_button.click();
+    }
 
 
 }

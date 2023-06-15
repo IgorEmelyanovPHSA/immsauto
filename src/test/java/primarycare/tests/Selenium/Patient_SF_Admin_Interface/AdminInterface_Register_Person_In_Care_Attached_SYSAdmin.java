@@ -38,6 +38,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
     private String mobilePhone = "7788797899";
     private String recentFamilyDoctor = "Lori-Ann May Bus";
     private String whenLastSeenFamilyDoctor = "5 week ago";
+    private String language = "French";
 
 
 
@@ -166,22 +167,41 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         healthCloudConsolePage.enterMobilePhoneNumber(mobilePhone);
         Thread.sleep(1000);
 
-        log("/*28.---Select Communication Preference -> 'Email'----*/");
-        healthCloudConsolePage.selectCommunicationPreference();
+        log("/*28.---Click button Communication Preference -> 'Email'----*/");
+        healthCloudConsolePage.clickEmailCommunicationPreference();
         Thread.sleep(1000);
 
-        log("/*29.---Select 'No' for Patient currently have a family doctor?----*/");
-        healthCloudConsolePage.selectNoFamilyDoctor();
+        log("/*29.---Click button 'No' for Patient currently have a family doctor?----*/");
+        healthCloudConsolePage.clickNoFamilyDoctor();
         Thread.sleep(1000);
 
-        log("/*30.---Enter 'most recent Family doctor'" + recentFamilyDoctor +"----*/");
-        healthCloudConsolePage.enterMostResentFamilyDoctor(recentFamilyDoctor);
+        log("/*30.---Select 'most recent Family doctor'" + recentFamilyDoctor +"----*/");
+        healthCloudConsolePage.selectMostResentFamilyDoctor(recentFamilyDoctor);
         Thread.sleep(1000);
 
         log("/*31.---Enter 'When last see a doctor'" + whenLastSeenFamilyDoctor +"----*/");
         healthCloudConsolePage.enterWhenLastSeenFamilyDoctor(whenLastSeenFamilyDoctor);
         Thread.sleep(1000);
 
+        log("/*32.---chose radiobutton 'How far Doctor from their home?'----*/");
+        healthCloudConsolePage.choseHowFarDoctorFromTheirHome();
+        Thread.sleep(1000);
+
+        log("/*33.---click button 'What gender of family doctor?'----*/");
+        healthCloudConsolePage.clickWhatGenderOfFamilyDoctor();
+        Thread.sleep(1000);
+
+        log("/*34.---click button 'Does the patient need a translator?'----*/");
+        healthCloudConsolePage.clickYesNeedTranslator();
+        Thread.sleep(1000);
+
+        log("/*35.---select language 'What language?' dropdown" + language +"----*/");
+        healthCloudConsolePage.enterLanguage(language);
+        Thread.sleep(1000);
+
+        log("/*36.---click button 'Finish registration'----*/");
+        healthCloudConsolePage.clickFinishRegistration();
+        Thread.sleep(1000);
 
     }
 
