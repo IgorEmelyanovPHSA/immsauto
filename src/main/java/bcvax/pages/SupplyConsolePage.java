@@ -93,7 +93,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//button[text() = 'Cancel transactions']")
 	private WebElement btnCancelTransaction2;
-	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
 
 	private By get_remaining_doses_ = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
@@ -695,13 +694,16 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, confirm_incoming_transfers_modal_button_1, 10);
+		Thread.sleep(500);
+		By confirm_incoming_transfers_modal_button_path = By.xpath("//button[text() = 'Confirm Transaction']");
+		waitForElementToBeEnabled(driver, confirm_incoming_transfers_modal_button_path, 10);
+		WebElement confirm_incoming_transfers_modal_button = driver.findElement(confirm_incoming_transfers_modal_button_path);
 		moveToElement(confirm_incoming_transfers_modal_button);
 		//handle issue when popup not fully loaded and button is partially hidden
 		if (isElementPresent(labelComments)) {
 			click(labelComments);
 		}
-		click(confirm_incoming_transfers_modal_button_1);
+		click(confirm_incoming_transfers_modal_button);
 	}
 
 	public void clickOnButtonInModalTransaction(WebElement element) throws InterruptedException {
@@ -886,14 +888,15 @@ public class SupplyConsolePage extends BasePage {
 		WebElement btnWastageOnContainerWastagePopUp = driver.findElement(wastage_btn_path);
 		scrollTop(btnWastageOnContainerWastagePopUp);
 		click(btnWastageOnContainerWastagePopUp);
-		Thread.sleep(3000); //To handle success message
-		//Need to add validation for successful mess
+		Thread.sleep(500);
+		clickCloseAlert();
 	}
 
 	public void clickBtnAdjustmentAtContainerAdjustmentPopUp() throws InterruptedException {
 		scrollTop(btnAdjustmentOnContainerWastagePopUp);
 		click(btnAdjustmentOnContainerWastagePopUp);
-		Thread.sleep(3000); //To handle success message
+		Thread.sleep(500);
+		clickCloseAlert();
 	}
 
 	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
@@ -1591,5 +1594,21 @@ public class SupplyConsolePage extends BasePage {
 
 	public void refreshBrowser() throws InterruptedException {
 		driver.navigate().refresh();
+	}
+
+	public void clickCloseAlert() throws InterruptedException {
+		Thread.sleep(500);
+		By alert_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
+		waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
+		System.out.println("***Debug-- Alert Close Button is found");
+		WebElement alert_close_btn = driver.findElement(alert_close_btn_path);
+		try {
+			alert_close_btn.click();
+		} catch(ElementClickInterceptedException ex) {
+			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
+			Thread.sleep(1000);
+			alert_close_btn = driver.findElement(alert_close_btn_path);
+			alert_close_btn.click();
+		}
 	}
 }

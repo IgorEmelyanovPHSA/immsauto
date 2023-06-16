@@ -93,10 +93,12 @@ public class CommonMethods extends BasePage{
     }
 
     public void globalSearchCP(String textToSearch) throws InterruptedException {
-        waitForElementToBeVisible(driver, searchInput, 10);
-        typeIn(searchInput,textToSearch);
-        searchInput.sendKeys(Keys.RETURN);
-        Thread.sleep(12000);
+        Thread.sleep(500);
+        By search_field_path = By.xpath("//input[@aria-label = 'Search...']");
+        waitForElementToBeEnabled(driver, search_field_path, 10);
+        WebElement search_field = driver.findElement(search_field_path);
+        search_field.sendKeys(textToSearch);
+        search_field.sendKeys(Keys.RETURN);
     }
 
     public boolean isUserFoundValidation(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {

@@ -321,10 +321,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//span[@title='Trade Name']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[2]")
 	private WebElement tradeNameUserDefaults;
 
-	@FindBy(xpath = ".//span[text() = 'User Defaults']")
-	private WebElement user_defaults_tab;
-	private By user_defaults_tab1 = By.xpath(".//span[text() = 'User Defaults']");
-
 	private By click_vaccine_agent_dropdown1 = By.xpath(".//button[@aria-label = 'Agent, Select an option']");
 
 	@FindBy(xpath = ".//button[@data-value = 'Influenza-LAIV']")
@@ -1551,10 +1547,11 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickUserDefaultsTab() throws InterruptedException {
-		waitForElementToBeLocated(driver, user_defaults_tab1, 10);
-		WebElement element = driver.findElement(user_defaults_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+		By user_defaults_tab_path = By.xpath("//one-app-nav-bar-item-root[@data-target-selection-name='sfdc:TabDefinition.BCH_In_Clinic_User_Defaults']");
+		waitForElementToBeEnabled(driver, user_defaults_tab_path, 10);
+		WebElement user_defaults_tab = driver.findElement(user_defaults_tab_path);
+		user_defaults_tab.click();
 	}
 
 	public void selectClinicUserDefaults(String clinicLocation) throws InterruptedException {
@@ -1981,7 +1978,9 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void setProvider(String provider) throws InterruptedException {
+		Thread.sleep(500);
 		By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
+		waitForElementToBeEnabled(driver, providerFieldPath, 10);
 		WebElement providerField =  driver.findElement(providerFieldPath);
 		scrollTop(providerField);
 		providerField.sendKeys(provider);

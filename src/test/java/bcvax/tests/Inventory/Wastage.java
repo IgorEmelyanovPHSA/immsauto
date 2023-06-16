@@ -225,7 +225,7 @@ public class Wastage extends BaseTest {
 
 		log("/*9----Clicking on btn Wastage --*/");
 		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
-
+		Thread.sleep(2000);
 		log("/*10.----Quantity Remaining Doses/Remaining Quantity check After --*/");
 		double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 		double remainingDosesAfter = remDosesQtyConversionFactorAfter[0];

@@ -6,15 +6,22 @@ import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class DIWA_CIB extends BaseTest {
-	
-	
+	String env;
+	String consumptionRoute;
+	Map<String, Object> testData;
+
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
-		log("Target Environment: "+ Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
+		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinicianDIWACIB();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
@@ -79,7 +86,7 @@ public class DIWA_CIB extends BaseTest {
 
 		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> 300042698 - Exp. 2021 June 18 ---*/");
 		profilesPage.selectLot();
-
+		//profilesPage.setRoute(consumptionRoute);
 		log("/*---21. Select Injection Site ---*/");
 		profilesPage.selectInjectionSite();
 		log("/*---22. Select Dosage---*/");
