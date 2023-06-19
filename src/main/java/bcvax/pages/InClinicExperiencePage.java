@@ -1299,7 +1299,13 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
 		scrollIfNeeded(driver, verify_contact_information_checkbox);
 		Thread.sleep(500);
-		verify_contact_information_checkbox.click();
+		try {
+			verify_contact_information_checkbox.click();
+		} catch(ElementClickInterceptedException ex) {
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+			Thread.sleep(500);
+			verify_contact_information_checkbox.click();
+		}
 	}
 
 	public void clickTodayAppointments() throws InterruptedException {
