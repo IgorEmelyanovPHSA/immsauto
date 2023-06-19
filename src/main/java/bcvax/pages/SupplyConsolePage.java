@@ -517,6 +517,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, transactions_tab_path, 10);
 		WebElement transactions_tab = driver.findElement(transactions_tab_path);
 		scrollTop(transactions_tab);
+		Thread.sleep(500);
 		transactions_tab.click();
 	}
 
