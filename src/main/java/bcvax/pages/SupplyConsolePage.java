@@ -204,12 +204,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[text() = 'Save'] | //button[@title = 'Save']")
 	private WebElement saveExpectedDeliveryDate;
 
-	@FindBy(xpath = "//button[text() = 'Approve Requisition'] | //a[@title = 'Approve Requisition']")
-	private WebElement approveRequisition;
-
-	@FindBy(xpath = "//button[text() = 'Save']")
-	private WebElement saveApprovedRequisition;
-
 	@FindBy(xpath = "//button[text() = 'Ship Requisition'] | //a[@title = 'Ship Requisition']")
 	private WebElement shipRequisition;
 
@@ -279,8 +273,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void checkShowInStockCheckbox() throws InterruptedException {
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']")).click();
+		Thread.sleep(500);
+		By show_trades_in_stock_ckbox_path = By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']");
+		waitForElementToBeEnabled(driver, show_trades_in_stock_ckbox_path, 10);
+		WebElement show_trades_in_stock_ckbox = driver.findElement(show_trades_in_stock_ckbox_path);
+		show_trades_in_stock_ckbox.click();
 	}
 
 	public void clickSubmitRequisition() throws InterruptedException {
@@ -464,7 +461,7 @@ public class SupplyConsolePage extends BasePage {
 	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
 		log(" -- select 'To' " + supplyLocation + "  -");
 		Thread.sleep(500);
-		By search_supplu_location_path = By.xpath("//input[@placeholder='Search Supply Locations...']");
+		By search_supplu_location_path = By.xpath("//label[@lightning-groupedcombobox_groupedcombobox and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
 		waitForElementToBeEnabled(driver, search_supplu_location_path, 10);
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
@@ -1479,7 +1476,7 @@ public class SupplyConsolePage extends BasePage {
 		search_supply_location_from.sendKeys(supply_location);
 		Thread.sleep(500);
 		By my_location_item_path = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supply_location + "')]/../..");
-		waitForElementToBeEnabled(driver, my_location_item_path, 10);
+		waitForElementToBeEnabled(driver, my_location_item_path, 20);
 		WebElement my_location_item = driver.findElement(my_location_item_path);
 		my_location_item.click();
 	}
@@ -1505,7 +1502,6 @@ public class SupplyConsolePage extends BasePage {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_YEAR, 1);
 		Date tomorrow = calendar.getTime();
-		//DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		String tomorrowAsString = dateFormat.format(tomorrow);
 		waitForElementToBeVisible(driver, inputExpectedDate, 30);
@@ -1517,18 +1513,21 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickApproveRequisition() throws InterruptedException {
-		//Scroll to top of the Screen to find approve button and Approve requisition
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollBy(0,-400)", "");
-//		Thread.sleep(5000);
-		approveRequisition.click();
+		Thread.sleep(500);
+		By approve_requisition_btn_path = By.xpath("//button[text() = 'Approve Requisition'] | //a[@title = 'Approve Requisition']");
+		waitForElementToBeEnabled(driver, approve_requisition_btn_path, 10);
+		WebElement approve_requisition_btn = driver.findElement(approve_requisition_btn_path);
+		scrollTop(approve_requisition_btn);
+		approve_requisition_btn.click();
 	}
 
 	public void clickSaveApprovedRequisition() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, saveApprovedRequisition, 10);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveApprovedRequisition);
-		saveApprovedRequisition.click();
+		Thread.sleep(500);
+		By save_approved_requisition_btn_path = By.xpath("//button[text() = 'Save']");
+		waitForElementToBeEnabled(driver, save_approved_requisition_btn_path, 10);
+		WebElement save_approved_requisition_btn = driver.findElement(save_approved_requisition_btn_path);
+		scrollTop(save_approved_requisition_btn);
+		save_approved_requisition_btn.click();
 	}
 
 	public void enterApprovedDose(String inputDose) throws InterruptedException {
@@ -1606,6 +1605,12 @@ public class SupplyConsolePage extends BasePage {
 		try {
 			alert_close_btn.click();
 		} catch(ElementClickInterceptedException ex) {
+			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
+			Thread.sleep(1000);
+			alert_close_btn = driver.findElement(alert_close_btn_path);
+			alert_close_btn.click();
+		}
+		catch(ElementNotInteractableException ex) {
 			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
 			Thread.sleep(1000);
 			alert_close_btn = driver.findElement(alert_close_btn_path);

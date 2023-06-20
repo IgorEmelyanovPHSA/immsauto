@@ -228,13 +228,14 @@ public class MainPageCP extends BasePage{
             waitForElementToBeEnabled(driver, input_current_date_path, 10);
             input_current_date = driver.findElement(input_current_date_path);
             input_current_date.isEnabled();
+            input_current_date.clear();
         } catch(StaleElementReferenceException ex) {
             System.out.println("***DEBUG*** Stale element exception ***");
             Thread.sleep(500);
             waitForElementToBeEnabled(driver, input_current_date_path, 10);
             input_current_date = driver.findElement(input_current_date_path);
+            input_current_date.clear();
         }
-        input_current_date.clear();
         input_current_date.click();
         Thread.sleep(2000);
         input_current_date.sendKeys(todayAsString);

@@ -17,11 +17,12 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class WastageCP extends BaseTest {
-
+	String supplyLocation = "Automation Supply Location_1";
+	int firstRow = 1; //Default value, wasting from first row only
 	@Test()
 	public void Can_Do_Single_Wastage_ByDosagesCP() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		int numberOfRows = 1; //Default value, wasting from first row only
+
 		double amountOfDosesToWaste = 3;
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -37,14 +38,12 @@ public class WastageCP extends BaseTest {
 				log("Login AS default user (ClinicianInventory)");
 				TestcaseID = "243116"; //C243116
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
-				Thread.sleep(10000);
 		}
 
 		log("/2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyConsolePage();
-
+		cpMainPage.selectSupplyLocationName(supplyLocation);
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
-		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
+		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
 
 		log("/*4.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
@@ -68,12 +67,14 @@ public class WastageCP extends BaseTest {
 
 		log("/*8.----Clicking on btn Wastage --*/");
 		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
-
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		//Verification values in Container - Wastage pop-up
 		assertEquals((remainingDosesBeforeWastage - amountOfDosesToWaste), remainingDosesAfterWastage);
 
 		log("/*9.----Read Remaining Doses And Quantity After Deduction --*/");
-		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
+		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
 
 		log("/*10.----Calculating Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> calculatedRemainingDosesAndQuantityAfterDeduction = new HashMap<>();
@@ -134,11 +135,9 @@ public class WastageCP extends BaseTest {
 	@Test()
 	public void Can_Do_Single_Wastage_ByQuantityCP() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		int firstRow = 1; //Default value for first row in the grid (Supply container)
 		double amountOfQuantityToWaste = 1;
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
-		CommonMethods common = new CommonMethods(getDriver());
 
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
@@ -151,19 +150,18 @@ public class WastageCP extends BaseTest {
 				log("Login AS default user (ClinicianInventory)");
 				TestcaseID = "243116"; //C243116
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
-				Thread.sleep(10000);
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyConsolePage();
-
+		//cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.selectSupplyLocationName(supplyLocation);
 		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesBefore = remDosesQtyConversionFactorBefore[0];
+		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
+		double remainingDosesBefore = remainingDosesAndQuantityBeforeDeduction.get(0).get(0);
 		log("/*-- . remaining doses Distribution_1_1 Before are: -->" + remainingDosesBefore);
-		double remainingQuantitiesBefore = remDosesQtyConversionFactorBefore[1];
+		double remainingQuantitiesBefore = remainingDosesAndQuantityBeforeDeduction.get(0).get(1);
 		log("/*-- . remaining Quantity Distribution_1_1 Before are: -->" + remainingQuantitiesBefore);
-		double remainingConversionFactor = remDosesQtyConversionFactorBefore[2];
+		double remainingConversionFactor = remainingDosesAndQuantityBeforeDeduction.get(0).get(2);
 		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
 
 		log("/*4.----Click on Container's dropdown --*/");
@@ -181,14 +179,16 @@ public class WastageCP extends BaseTest {
 
 		log("/*8.----Clicking on btn Wastage --*/");
 		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
-
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesAfter = remDosesQtyConversionFactorAfter[0];
+		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
+		double remainingDosesAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(0);
 		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
-		double remainingQuantitiesAfter = remDosesQtyConversionFactorAfter[1];
+		double remainingQuantitiesAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(1);
 		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
-		double remainingConversionAfter = remDosesQtyConversionFactorAfter[2];
+		double remainingConversionAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(2);
 		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
 
 		log("/*10.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");

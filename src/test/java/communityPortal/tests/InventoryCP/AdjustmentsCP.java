@@ -61,7 +61,6 @@ public class AdjustmentsCP extends BaseTest {
 				log("Login AS default user (ClinicianInventory)");
 				TestcaseID = "243117"; //C243117
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
-				Thread.sleep(10000);
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
@@ -154,7 +153,6 @@ public class AdjustmentsCP extends BaseTest {
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		CommonMethods common = new CommonMethods(getDriver());
 		double amountOfQuantitiesToAdjust = Double.parseDouble(quantitiesAmount);
 		boolean isNegativeFlag = isNegative(amountOfQuantitiesToAdjust);
 		int firstRow = 1; //Default value for first row in the grid (Supply container)
@@ -178,11 +176,9 @@ public class AdjustmentsCP extends BaseTest {
 				log("Login AS default user (ClinicianInventory)");
 				TestcaseID = "243117"; //C243117
 				loginPage.loginIntoCommunityPortalAsClinicianInventory();
-				Thread.sleep(10000);
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		//cpMainPage.navigateToSupplyConsolePage();
 		cpMainPage.selectSupplyLocationName(supplyLocation);
 
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
@@ -213,7 +209,6 @@ public class AdjustmentsCP extends BaseTest {
 
 		Thread.sleep(2000);
 		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		//double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		double remainingDosesAfter = remainingDosesAndQuantityAfterAdjustment.get(0).get(0);
 		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
