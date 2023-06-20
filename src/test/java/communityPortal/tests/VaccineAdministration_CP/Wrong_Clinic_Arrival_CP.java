@@ -255,7 +255,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*45.---Navigate to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
-
+        inClinicExperience_CP = new InClinicExperiencePage(driver);
         log("/*46.---Immunization status is in After Care ---*/");
         inClinicExperience_CP.ValidateStatusisInAftercare();
 
