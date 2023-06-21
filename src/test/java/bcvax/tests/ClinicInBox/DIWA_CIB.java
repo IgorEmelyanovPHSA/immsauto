@@ -30,7 +30,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
 		log("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
-		mainPageOrg.globalSearch("Maegan Tanya bcvaxvillage");
+		mainPageOrg.globalSearch("Maegan Tanya BCVaxVillage");
 		//clinicInBoxPage.searchForCitizen("Maegan Tanya bcvaxvillage");
 		log("/*----5. select Citizen from search results --*/");
 		clinicInBoxPage.userClickCitizen();
