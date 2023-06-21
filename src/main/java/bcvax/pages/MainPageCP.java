@@ -242,7 +242,11 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         input_current_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        closeSuccessDialog();
+        try {
+            closeSuccessDialog();
+        } catch(NoSuchElementException ex) {
+            System.out.println("No Suucess dialog. Continue...");
+        }
         Thread.sleep(500);
     }
 
