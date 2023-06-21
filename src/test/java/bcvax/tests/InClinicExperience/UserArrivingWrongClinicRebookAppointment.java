@@ -61,6 +61,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
 		inClinicExperiencePage.closeTabsHCA();
+		Thread.sleep(2000);
 		orgMainPage = new MainPageOrg(driver);
 
 		log("/*-- 2. Navigate to In Clinic Experience App --*/");
