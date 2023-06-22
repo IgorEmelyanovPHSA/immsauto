@@ -128,11 +128,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
 	private WebElement dropdownMenu;
 
-	@FindBy(xpath = ".//*[@title='Receive Supplies']")
-	private WebElement receiveSupplies;
-
-	private By btnShowMoreAction = By.xpath("//a[@title='Show one more action']");
-
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
 
@@ -1103,25 +1098,29 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
+		By receive_supplies_btn_path = By.xpath("//*[@title='Receive Supplies']");
 		try {
-			click(receiveSupplies);
+			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);
+			receive_supplies_btn.click();
 		} catch(Exception ex) {
-			List<WebElement> listOfElements = driver.findElements(btnShowMoreAction);
+			By show_more_action_btn_path = By.xpath("//a[@title='Show 2 more actions']");
+			List<WebElement> listOfElements = driver.findElements(show_more_action_btn_path);
 			System.out.println("--- FOR DEBUG: Trying to Click More Actions button---");
 			System.out.println("--- Found " + listOfElements.size() + " More button elements");
 			if (listOfElements.size() >= 1) {
-				click(btnShowMoreAction);
+				listOfElements.get(0).click();
 				System.out.println("--- FOR DEBUG: Clicked More Actions button---");
 			} else {
 				System.out.println("--- FOR DEBUG: Didn't find More Actions button---");
 				System.out.println("--- FOR DEBUG: Try again find More Actions button after 2 seconds---");
 				Thread.sleep(2000);
-				listOfElements = driver.findElements(btnShowMoreAction);
+				listOfElements = driver.findElements(show_more_action_btn_path);
 				System.out.println("--- After Second attempt Found " + listOfElements.size() + " More button elements");
-				click(btnShowMoreAction);
+				listOfElements.get(0).click();
 			}
 			Thread.sleep(1000);
-			click(receiveSupplies);
+			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);
+			receive_supplies_btn.click();
 		}
 	}
 
