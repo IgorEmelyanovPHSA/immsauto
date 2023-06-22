@@ -13,7 +13,8 @@ public class DIWA_CIB extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
-
+	String participant_name = "Maegan Tanya bcvaxvillage";
+	String clinic_location = "All Ages - Atlin Health Centre";
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
@@ -30,11 +31,10 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
 		log("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
-		mainPageOrg.globalSearch("Maegan Tanya BCVaxVillage");
-		//clinicInBoxPage.searchForCitizen("Maegan Tanya bcvaxvillage");
+		mainPageOrg.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");
-		clinicInBoxPage.userClickCitizen();
 		ProfilesPage profilesPage = new ProfilesPage(driver);
+		profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		profilesPage.clickRelatedTab();
 		log("/*----7. Click Create Immunization Record ---*/");
@@ -46,7 +46,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----10. Select COVID19-mRNA as an Option  ---*/");
 		profilesPage.selectOption("COVID19-mRNA");
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
-		profilesPage.searchClinicLocation("All Ages - Atlin Health Centre");
+		profilesPage.searchClinicLocation(clinic_location);
 		log("/*---12. Select a Date and Time of Administration ---*/");
 		profilesPage.clickTimeBox();
 		log("/*---13. Click Record Immunization ---*/");
