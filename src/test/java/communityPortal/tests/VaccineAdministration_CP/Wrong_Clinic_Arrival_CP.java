@@ -194,7 +194,10 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         }
 
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
-
+        if(consentProvider.equals("")) {
+            inClinicExperience_CP.selectConsentProvider();
+            consentProvider = inClinicExperience_CP.consentProviderSelected();
+        }
         inClinicExperience_CP.ClickSaveConsentButton();
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
         String agent = inClinicExperience_CP.getVaccineAgent();
