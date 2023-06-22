@@ -34,7 +34,7 @@ public class API_Create_Practitioner_Account_NO_Associated_SysAdmin extends API_
 
 
     @Test(priority = 2)
-    public void API_Remove_Practitioner_MOA_Account_No_Associated_in_Salesforce_as_SysAdmin(){
+    public void API_Delete_Practitioner_MOA_Account_No_Associated_in_Salesforce_as_SysAdmin(){
         TestcaseID = "252885"; //C252885
         APIDelete apidelete = new APIDelete();
         log("Delete Practitioner account from Account.");

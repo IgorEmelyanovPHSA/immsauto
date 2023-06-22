@@ -40,7 +40,7 @@ public class API_Create_Patient_Account_SysAdmin extends API_BaseTest_PrimaryCar
 
 
     @Test(priority = 2)
-    public void API_Remove_Patient_Account_in_Salesforce_Status_Code_204_as_SysAdmin(){
+    public void API_Delete_Patient_Account_in_Salesforce_Status_Code_204_as_SysAdmin(){
         TestcaseID = "252628"; //C252628
         APIDelete apidelete = new APIDelete();
         log("Delete Patient account from Account.");
