@@ -1103,7 +1103,7 @@ public class SupplyConsolePage extends BasePage {
 			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);
 			receive_supplies_btn.click();
 		} catch(Exception ex) {
-			By show_more_action_btn_path = By.xpath("//a[@title='Show 2 more actions']");
+			By show_more_action_btn_path = By.xpath("//li[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies')]//a");
 			List<WebElement> listOfElements = driver.findElements(show_more_action_btn_path);
 			System.out.println("--- FOR DEBUG: Trying to Click More Actions button---");
 			System.out.println("--- Found " + listOfElements.size() + " More button elements");
