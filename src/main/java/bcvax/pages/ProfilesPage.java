@@ -641,7 +641,6 @@ public class ProfilesPage extends BasePage{
     }
 
     public void openProfile(String clientName) throws InterruptedException {
-        Thread.sleep(5000);
         WebElement profile = null;
         long timeout = 15000;
         Instant start = Instant.now();

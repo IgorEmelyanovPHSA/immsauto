@@ -23,6 +23,8 @@ bcvaxdevit:
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-03 09:28 a.m)"
   vaccineAgent: "COVID-19 mRNA"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
   agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EL1404"
@@ -56,6 +58,8 @@ prodsuppqa:
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-31 18:11:30)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-31 18:12:16)"
   vaccineAgent: "COVID-19 mRNA"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.3"
   consumptionLot: "EL0203"
   useDefaultSettingsLots:
@@ -172,6 +176,8 @@ comuat:
     - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:45:47)"
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:47:07)"
   consumptionDose: "0.3"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
   vaccineAgent: "COVID-19 mRNA"
 bcvaxuat:
   supplyLocationFrom: "Automation Supply Location_1"
@@ -199,6 +205,8 @@ bcvaxuat:
     - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:39:50)"
   vaccineAgent: "COVID-19 mRNA"
   agentConsumption: "COVID-19 mRNA"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.3"
   consumptionLot: "35035BD-CC01"
   useDefaultSettingsLots:

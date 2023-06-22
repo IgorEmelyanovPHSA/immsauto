@@ -1316,7 +1316,9 @@ public class InClinicExperiencePage extends BasePage {
 		todayAppointments.click();
 	}
 
-	public void clickTodayAppointmentCaseViewButton() {
+	public void clickTodayAppointmentCaseViewButton() throws InterruptedException {
+		By view_case_btn_path = By.xpath("//button[@title = 'View Case']");
+		waitForElementToBeEnabled(driver, view_case_btn_path, 10);
 		List<WebElement> todayAppointments = driver.findElements(By.xpath("//button[@title = 'View Case']"));
 		WebElement myAppointment = todayAppointments.get(todayAppointments.size() - 1);
 		myAppointment.click();

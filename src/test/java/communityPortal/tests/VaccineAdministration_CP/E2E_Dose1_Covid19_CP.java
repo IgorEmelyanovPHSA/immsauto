@@ -157,8 +157,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(2000);
         try {
-            //log("/---select Vaccine Agent picklist Value: " +vaccineAgent);
-            //inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
             log("/---select Vaccine Agent picklist Value: " + vaccineAgent);
             inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
         } catch(Exception ex) {
