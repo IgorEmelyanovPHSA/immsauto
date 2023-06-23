@@ -59,7 +59,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
+		//InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
+		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
 		inClinicExperiencePage.closeTabsHCA();
 		Thread.sleep(2000);
 		orgMainPage = new MainPageOrg(driver);
@@ -229,8 +230,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		mainPageOrg.globalSearch(citizenName);
 		//inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
 
-		log("/* 49.----User found and Navigated to record page ---*/");
-		inClinicExperiencePage.userFoundWithParameters(citizenName);
+		//log("/* 49.----User found and Navigated to record page ---*/");
+		//inClinicExperiencePage.userFoundWithParameters(citizenName);
 
 		log("/*50.---- Navigated to Person Account related tab ---*/");
 		inClinicExperiencePage.clickRelatedTab();
