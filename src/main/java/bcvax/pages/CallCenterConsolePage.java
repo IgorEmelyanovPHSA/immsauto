@@ -210,6 +210,7 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void successRegisteredMessageAppear() throws InterruptedException {
+		Thread.sleep(500);
 		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
 		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
 		Thread.sleep(2000);

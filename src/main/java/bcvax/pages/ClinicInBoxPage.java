@@ -93,9 +93,9 @@ public class ClinicInBoxPage extends BasePage {
 
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 	
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]")
+	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya BCVaxVillage')]")
 	private WebElement click_on_citizen;
-	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]");
+	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya BCVaxVillage')]");
 	
 	@FindBy(xpath = "//button[text() = 'Confirm']")
 	private WebElement confirm_button;
@@ -251,9 +251,7 @@ public class ClinicInBoxPage extends BasePage {
 
 	public void userClickCitizen() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_citizen, 10);
-		Thread.sleep(5000);
 		WebElement element = driver.findElement(click_on_citizen1);
-		Thread.sleep(5000);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}

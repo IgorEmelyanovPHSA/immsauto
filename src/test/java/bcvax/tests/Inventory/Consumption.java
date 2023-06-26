@@ -91,7 +91,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickUserDefaultsTab();
 		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*-- 13. Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputUserDefaultsCurrentDate();
+		userDefaultsPage.inputCurrentDateUserDefaults();
 		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
 		inClinicExperiencePage.clickSaveDefaultsButton();

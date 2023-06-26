@@ -144,7 +144,7 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
 
         log("/*32----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();

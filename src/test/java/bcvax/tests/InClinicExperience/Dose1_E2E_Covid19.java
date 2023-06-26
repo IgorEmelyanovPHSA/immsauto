@@ -72,7 +72,10 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
 		log("/*6.----- Enter current date for UserDefaults --*/");
-		inClinicExperience.inputCurrentDateUserDefaults();
+		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
+		log("/*-- 13. Enter current date for UserDefaults --*/");
+		userDefaultsPage.inputCurrentDateUserDefaults();
+		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
 		inClinicExperience.clickSaveDefaultsButton();
 		System.out.println("/*8.----- Click on register Tab --*/");
@@ -117,14 +120,15 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 
 		try {
 			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			commn.selectEarlyBookingReason();
+			inClinicExperience.selectEarlyBookingReason();
+			//commn.selectEarlyBookingReason();
 		} catch(Exception ex) {
 			System.out.println("There is not Early Booking Option");
 		}
 
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperience.clickOnVaccinationCheckbox();
 
 		//System.out.println("/*29----click on 'More' search tab --*/");
@@ -156,6 +160,12 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickRelatedTab();
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		inClinicExperience.ClickGoToInClinicExperienceButton();
+		try {
+			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+			inClinicExperience.selectEarlyBookingReason();
+		} catch(Exception ex) {
+			System.out.println("There is not Early Booking Option");
+		}
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();

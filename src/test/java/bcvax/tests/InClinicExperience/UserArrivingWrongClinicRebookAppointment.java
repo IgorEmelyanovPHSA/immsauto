@@ -61,6 +61,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
 		inClinicExperiencePage.closeTabsHCA();
+		Thread.sleep(2000);
 		orgMainPage = new MainPageOrg(driver);
 
 		log("/*-- 2. Navigate to In Clinic Experience App --*/");
@@ -229,7 +230,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		//inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
 
 		log("/* 49.----User found and Navigated to record page ---*/");
-		inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName);
+		inClinicExperiencePage.userFoundWithParameters(citizenName);
 
 		log("/*50.---- Navigated to Person Account related tab ---*/");
 		inClinicExperiencePage.clickRelatedTab();

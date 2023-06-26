@@ -132,7 +132,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
 
         log("/*32----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();
@@ -157,8 +157,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(2000);
         try {
-            //log("/---select Vaccine Agent picklist Value: " +vaccineAgent);
-            //inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
             log("/---select Vaccine Agent picklist Value: " + vaccineAgent);
             inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
         } catch(Exception ex) {

@@ -27,8 +27,8 @@ public class UserDefaultsPage extends BasePage{
     @FindBy(xpath = "(//span[@title='Trade Name']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[2]")
     private WebElement tradeNameUserDefaults;
 
-    @FindBy(xpath = "//input[@name='BCH_Date__c']")
-    private WebElement input_current_date;
+//    @FindBy(xpath = "//input[@name='BCH_Date__c']")
+//    private WebElement input_current_date;
 
     @FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
     private WebElement clinicLocationUserDefaults;
@@ -157,15 +157,65 @@ public class UserDefaultsPage extends BasePage{
         return flag;
     }
 
+//    public void inputCurrentDateUserDefaults() throws InterruptedException {
+//        Calendar calendar = Calendar.getInstance();
+//        Date today = calendar.getTime();
+//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+//        waitForElementToBeVisible(driver, input_current_date, 10);
+//        String todayAsString = dateFormat.format(today);
+//        click(input_current_date);
+//        typeIn(input_current_date,todayAsString);
+//        clickBtnSaveWithSuccessMsgValidation();
+//    }
+
     public void inputCurrentDateUserDefaults() throws InterruptedException {
+        Thread.sleep(500);
         Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        waitForElementToBeVisible(driver, input_current_date, 10);
+        By input_current_date_path = By.xpath("//input[@name='BCH_Date__c']");
+        waitForElementToBeEnabled(driver, input_current_date_path, 10);
         String todayAsString = dateFormat.format(today);
-        click(input_current_date);
-        typeIn(input_current_date,todayAsString);
-        clickBtnSaveWithSuccessMsgValidation();
+        WebElement input_current_date = driver.findElement(input_current_date_path);
+
+        try {
+            input_current_date.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, input_current_date_path, 10);
+            input_current_date = driver.findElement(input_current_date_path);
+            input_current_date.isEnabled();
+        } catch(StaleElementReferenceException ex) {
+            System.out.println("***DEBUG*** Stale element exception ***");
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, input_current_date_path, 10);
+            input_current_date = driver.findElement(input_current_date_path);
+        }
+        input_current_date.clear();
+        input_current_date.click();
+        Thread.sleep(2000);
+        input_current_date.sendKeys(todayAsString);
+        Thread.sleep(500);
+        input_current_date.sendKeys(Keys.ENTER);
+        Thread.sleep(500);
+        closeSuccessDialog();
+        Thread.sleep(500);
+    }
+
+    public void closeSuccessDialog() throws InterruptedException {
+        try {
+            WebElement alertCloseBtn = driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']"));
+            alertCloseBtn.click();
+            System.out.println("Alert dialog found and Closed.");
+        } catch(Exception ex) {
+            System.out.println("Alert Dialog not found, try again");
+            System.out.println("Exception: " + ex.getMessage());
+            Thread.sleep(500);
+            driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']")).click();
+            System.out.println("Alert dialog found and Closed.");
+        } finally {
+            System.out.println("Continue ....");
+        }
     }
 
     public void selectClinicUserDefaults(String clinicLocation) throws InterruptedException {
@@ -184,13 +234,13 @@ public class UserDefaultsPage extends BasePage{
         Thread.sleep(1000);
     }
 
-    public void inputUserDefaultsCurrentDate() throws InterruptedException {
-        Calendar calendar = Calendar.getInstance();
-        Date today = calendar.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        waitForElementToBeVisible(driver, input_current_date, 10);
-        String todayAsString = dateFormat.format(today);
-        click(input_current_date);
-        typeIn(input_current_date,todayAsString);
-    }
+//    public void inputUserDefaultsCurrentDate() throws InterruptedException {
+//        Calendar calendar = Calendar.getInstance();
+//        Date today = calendar.getTime();
+//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+//        waitForElementToBeVisible(driver, input_current_date, 10);
+//        String todayAsString = dateFormat.format(today);
+//        click(input_current_date);
+//        typeIn(input_current_date,todayAsString);
+//    }
 }

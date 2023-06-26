@@ -1,10 +1,9 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.CallCenterConsolePage;
-import bcvax.pages.Utils;
+import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,6 +18,7 @@ public class BookingDose1 extends BaseTest {
 	private String legalLastName = "BcvaxLimeburn";
 	private String dateOfBirth = "Sep 21, 1923";
 	private String postalCode = "V3L5L2";
+	MainPageOrg orgMainPage;
 	private String personalHealthNumber = "9746170911";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
@@ -34,6 +34,12 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.CALL_CENTER_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.CALL_CENTER_CONSOLE.value);
+		}
+
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
 		callCenterConsole.closeAllTabs();

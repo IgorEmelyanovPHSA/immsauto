@@ -93,7 +93,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//button[text() = 'Cancel transactions']")
 	private WebElement btnCancelTransaction2;
-	private By confirm_incoming_transfers_modal_button_1 = By.xpath(".//button[text() = 'Confirm Transaction']");
 
 	private By get_remaining_doses_ = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
@@ -128,11 +127,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
 	private WebElement dropdownMenu;
-
-	@FindBy(xpath = ".//*[@title='Receive Supplies']")
-	private WebElement receiveSupplies;
-
-	private By btnShowMoreAction = By.xpath("//a[@title='Show one more action']");
 
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
@@ -205,12 +199,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[text() = 'Save'] | //button[@title = 'Save']")
 	private WebElement saveExpectedDeliveryDate;
 
-	@FindBy(xpath = "//button[text() = 'Approve Requisition'] | //a[@title = 'Approve Requisition']")
-	private WebElement approveRequisition;
-
-	@FindBy(xpath = "//button[text() = 'Save']")
-	private WebElement saveApprovedRequisition;
-
 	@FindBy(xpath = "//button[text() = 'Ship Requisition'] | //a[@title = 'Ship Requisition']")
 	private WebElement shipRequisition;
 
@@ -280,8 +268,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void checkShowInStockCheckbox() throws InterruptedException {
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']")).click();
+		Thread.sleep(500);
+		By show_trades_in_stock_ckbox_path = By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']");
+		waitForElementToBeEnabled(driver, show_trades_in_stock_ckbox_path, 10);
+		WebElement show_trades_in_stock_ckbox = driver.findElement(show_trades_in_stock_ckbox_path);
+		show_trades_in_stock_ckbox.click();
 	}
 
 	public void clickSubmitRequisition() throws InterruptedException {
@@ -465,7 +456,7 @@ public class SupplyConsolePage extends BasePage {
 	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
 		log(" -- select 'To' " + supplyLocation + "  -");
 		Thread.sleep(500);
-		By search_supplu_location_path = By.xpath("//input[@placeholder='Search Supply Locations...']");
+		By search_supplu_location_path = By.xpath("//label[@lightning-groupedcombobox_groupedcombobox and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
 		waitForElementToBeEnabled(driver, search_supplu_location_path, 10);
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
@@ -518,6 +509,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, transactions_tab_path, 10);
 		WebElement transactions_tab = driver.findElement(transactions_tab_path);
 		scrollTop(transactions_tab);
+		Thread.sleep(500);
 		transactions_tab.click();
 	}
 
@@ -695,13 +687,16 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, confirm_incoming_transfers_modal_button_1, 10);
+		Thread.sleep(500);
+		By confirm_incoming_transfers_modal_button_path = By.xpath("//button[text() = 'Confirm Transaction']");
+		waitForElementToBeEnabled(driver, confirm_incoming_transfers_modal_button_path, 10);
+		WebElement confirm_incoming_transfers_modal_button = driver.findElement(confirm_incoming_transfers_modal_button_path);
 		moveToElement(confirm_incoming_transfers_modal_button);
 		//handle issue when popup not fully loaded and button is partially hidden
 		if (isElementPresent(labelComments)) {
 			click(labelComments);
 		}
-		click(confirm_incoming_transfers_modal_button_1);
+		click(confirm_incoming_transfers_modal_button);
 	}
 
 	public void clickOnButtonInModalTransaction(WebElement element) throws InterruptedException {
@@ -886,14 +881,15 @@ public class SupplyConsolePage extends BasePage {
 		WebElement btnWastageOnContainerWastagePopUp = driver.findElement(wastage_btn_path);
 		scrollTop(btnWastageOnContainerWastagePopUp);
 		click(btnWastageOnContainerWastagePopUp);
-		Thread.sleep(3000); //To handle success message
-		//Need to add validation for successful mess
+		Thread.sleep(500);
+		clickCloseAlert();
 	}
 
 	public void clickBtnAdjustmentAtContainerAdjustmentPopUp() throws InterruptedException {
 		scrollTop(btnAdjustmentOnContainerWastagePopUp);
 		click(btnAdjustmentOnContainerWastagePopUp);
-		Thread.sleep(3000); //To handle success message
+		Thread.sleep(500);
+		clickCloseAlert();
 	}
 
 	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
@@ -1102,25 +1098,29 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
+		By receive_supplies_btn_path = By.xpath("//*[@title='Receive Supplies']");
 		try {
-			click(receiveSupplies);
+			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);
+			receive_supplies_btn.click();
 		} catch(Exception ex) {
-			List<WebElement> listOfElements = driver.findElements(btnShowMoreAction);
+			By show_more_action_btn_path = By.xpath("//li[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies')]//a");
+			List<WebElement> listOfElements = driver.findElements(show_more_action_btn_path);
 			System.out.println("--- FOR DEBUG: Trying to Click More Actions button---");
 			System.out.println("--- Found " + listOfElements.size() + " More button elements");
 			if (listOfElements.size() >= 1) {
-				click(btnShowMoreAction);
+				listOfElements.get(0).click();
 				System.out.println("--- FOR DEBUG: Clicked More Actions button---");
 			} else {
 				System.out.println("--- FOR DEBUG: Didn't find More Actions button---");
 				System.out.println("--- FOR DEBUG: Try again find More Actions button after 2 seconds---");
 				Thread.sleep(2000);
-				listOfElements = driver.findElements(btnShowMoreAction);
+				listOfElements = driver.findElements(show_more_action_btn_path);
 				System.out.println("--- After Second attempt Found " + listOfElements.size() + " More button elements");
-				click(btnShowMoreAction);
+				listOfElements.get(0).click();
 			}
 			Thread.sleep(1000);
-			click(receiveSupplies);
+			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);
+			receive_supplies_btn.click();
 		}
 	}
 
@@ -1475,7 +1475,7 @@ public class SupplyConsolePage extends BasePage {
 		search_supply_location_from.sendKeys(supply_location);
 		Thread.sleep(500);
 		By my_location_item_path = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supply_location + "')]/../..");
-		waitForElementToBeEnabled(driver, my_location_item_path, 10);
+		waitForElementToBeEnabled(driver, my_location_item_path, 20);
 		WebElement my_location_item = driver.findElement(my_location_item_path);
 		my_location_item.click();
 	}
@@ -1501,7 +1501,6 @@ public class SupplyConsolePage extends BasePage {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_YEAR, 1);
 		Date tomorrow = calendar.getTime();
-		//DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		String tomorrowAsString = dateFormat.format(tomorrow);
 		waitForElementToBeVisible(driver, inputExpectedDate, 30);
@@ -1513,18 +1512,21 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickApproveRequisition() throws InterruptedException {
-		//Scroll to top of the Screen to find approve button and Approve requisition
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollBy(0,-400)", "");
-//		Thread.sleep(5000);
-		approveRequisition.click();
+		Thread.sleep(500);
+		By approve_requisition_btn_path = By.xpath("//button[text() = 'Approve Requisition'] | //a[@title = 'Approve Requisition']");
+		waitForElementToBeEnabled(driver, approve_requisition_btn_path, 10);
+		WebElement approve_requisition_btn = driver.findElement(approve_requisition_btn_path);
+		scrollTop(approve_requisition_btn);
+		approve_requisition_btn.click();
 	}
 
 	public void clickSaveApprovedRequisition() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, saveApprovedRequisition, 10);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveApprovedRequisition);
-		saveApprovedRequisition.click();
+		Thread.sleep(500);
+		By save_approved_requisition_btn_path = By.xpath("//button[text() = 'Save']");
+		waitForElementToBeEnabled(driver, save_approved_requisition_btn_path, 10);
+		WebElement save_approved_requisition_btn = driver.findElement(save_approved_requisition_btn_path);
+		scrollTop(save_approved_requisition_btn);
+		save_approved_requisition_btn.click();
 	}
 
 	public void enterApprovedDose(String inputDose) throws InterruptedException {
@@ -1591,5 +1593,27 @@ public class SupplyConsolePage extends BasePage {
 
 	public void refreshBrowser() throws InterruptedException {
 		driver.navigate().refresh();
+	}
+
+	public void clickCloseAlert() throws InterruptedException {
+		Thread.sleep(500);
+		By alert_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
+		waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
+		System.out.println("***Debug-- Alert Close Button is found");
+		WebElement alert_close_btn = driver.findElement(alert_close_btn_path);
+		try {
+			alert_close_btn.click();
+		} catch(ElementClickInterceptedException ex) {
+			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
+			Thread.sleep(1000);
+			alert_close_btn = driver.findElement(alert_close_btn_path);
+			alert_close_btn.click();
+		}
+		catch(ElementNotInteractableException ex) {
+			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
+			Thread.sleep(1000);
+			alert_close_btn = driver.findElement(alert_close_btn_path);
+			alert_close_btn.click();
+		}
 	}
 }

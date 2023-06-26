@@ -130,7 +130,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.clickNextButtonApptSchedulingPage();
 
         log("/*27----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation_CP();
+        inClinicExperience_CP.clickVerifyContactInformation();
 
         log("/*28----click Confirm Appointment button  --*/");
         inClinicExperience_CP.clickAppointmentConfirmButton();
@@ -194,7 +194,10 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         }
 
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
-
+        if(consentProvider.equals("")) {
+            inClinicExperience_CP.selectConsentProvider();
+            consentProvider = inClinicExperience_CP.consentProviderSelected();
+        }
         inClinicExperience_CP.ClickSaveConsentButton();
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
         String agent = inClinicExperience_CP.getVaccineAgent();
@@ -255,7 +258,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         log("/*45.---Navigate to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
-
+        inClinicExperience_CP = new InClinicExperiencePage(driver);
         log("/*46.---Immunization status is in After Care ---*/");
         inClinicExperience_CP.ValidateStatusisInAftercare();
 

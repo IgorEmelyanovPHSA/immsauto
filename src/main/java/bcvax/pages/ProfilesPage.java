@@ -411,6 +411,12 @@ public class ProfilesPage extends BasePage{
         select_lot.click();
     }
 
+    public void setRoute(String route) throws InterruptedException {
+        driver.findElement(By.xpath("//label[text() = 'Route']/..//button")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//span[@title = '" + route + "'] ")).click();
+    }
+
     public void selectInjectionSite() throws InterruptedException {
         waitForElementToBeLocated(driver, selectSite1, 10);
         WebElement element = driver.findElement(selectSite1);
@@ -635,7 +641,6 @@ public class ProfilesPage extends BasePage{
     }
 
     public void openProfile(String clientName) throws InterruptedException {
-        Thread.sleep(5000);
         WebElement profile = null;
         long timeout = 15000;
         Instant start = Instant.now();
