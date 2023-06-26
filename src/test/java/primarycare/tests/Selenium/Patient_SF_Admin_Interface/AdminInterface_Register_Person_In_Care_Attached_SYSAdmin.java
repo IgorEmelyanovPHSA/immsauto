@@ -127,9 +127,9 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         assertEquals(empiStatusActual, empiStatusExpected);
         Thread.sleep(2000);
 
-        log("/*19.---Click sex 'Male' button--*/");
-        healthCloudConsolePage.clickSexMale();
-        Thread.sleep(1000);
+        //log("/*19.---Click sex 'Male' button--*/");
+        //healthCloudConsolePage.clickSexMale();
+        //Thread.sleep(1000);
 
         log("/*20.---Enter Street address " +streetAddress +"----*/");
         healthCloudConsolePage.enterStreetAddress(streetAddress);

@@ -109,7 +109,7 @@ public class CommonMethods extends BasePage {
         WebElement element = driver.findElement(appsLauncher);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         waitForElementToBeLocated(driver, appsHealthCloudConsole, 10);
         WebElement element1 = driver.findElement(appsHealthCloudConsole);
         JavascriptExecutor executor1 = (JavascriptExecutor) driver;

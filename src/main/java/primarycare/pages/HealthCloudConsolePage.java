@@ -176,9 +176,9 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement less_than_5km_radiobutton;
     private By less_than_5km_radiobutton_1 = By.xpath("//span[text() ='Less than 5 km']");
 
-    @FindBy(xpath = "(//span[text() ='Female'])[2]")
+    @FindBy(xpath = "(//span[text() ='Female'])[1]")
     private WebElement gender_of_family_doctor_button;
-    private By gender_of_family_doctor_button_1 = By.xpath("(//span[text() ='Female'])[2]");
+    private By gender_of_family_doctor_button_1 = By.xpath("(//span[text() ='Female'])[1]");
 
     @FindBy(xpath = "(//span[text() ='Yes'])[2]")
     private WebElement need_translator_button;

@@ -47,7 +47,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
 
         log("/*1.---Open Patient Registry Portal (Health Connect Registry site)--*/");
         PortalHealthConnectRegistryPage portalHealthConnectRegistryPage= loginPage.openPortalHealthConnectRegistryPage();
-        //Thread.sleep(1000);
+        Thread.sleep(10000);
 
         log("/*2.---- Validate that the Register to get doctor page has displayed --*/");
         PortalHealthConnectRegistryPage.validateRegisterToGetDoctorPageDisplayed();
@@ -63,7 +63,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
 
         log("/*5.---Click Register my household button--*/");
         portalHealthConnectRegistryPage.clickRegisterMyHouseholdButton();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
 
         log("/*6.---Enter First Name " +legalFirstName +"--*/");
         portalHealthConnectRegistryPage.enterFirstName(legalFirstName);
@@ -114,8 +114,8 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
         portalHealthConnectRegistryPage.clickContinueButton();
         //Thread.sleep(1000);
 
-        log("/*17.---Select Sex female----*/");
-        portalHealthConnectRegistryPage.selectSex();
+        //log("/*17.---Select Sex female----*/");
+        //portalHealthConnectRegistryPage.selectSex();
         //Thread.sleep(1000);
 
         log("/*17.---Enter email" +email +"----*/");

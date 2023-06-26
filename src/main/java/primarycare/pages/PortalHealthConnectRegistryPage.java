@@ -90,9 +90,9 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     private WebElement mobile_phone;
     private By mobile_phone_1 = By.xpath("(.//input[@type='tel'])[1]");
 
-    @FindBy(xpath = "(.//input[@role='combobox'])[2]")
+    @FindBy(xpath = "(.//input[@role='combobox'])[1]")
     private WebElement communication_preference_dropdown;
-    private By communication_preference_dropdown_1 = By.xpath("(.//input[@role='combobox'])[2]");
+    private By communication_preference_dropdown_1 = By.xpath("(.//input[@role='combobox'])[1]");
 
     @FindBy(xpath = "(.//span[text() = 'Email'])[1]")
     private WebElement select_communication_preference;
