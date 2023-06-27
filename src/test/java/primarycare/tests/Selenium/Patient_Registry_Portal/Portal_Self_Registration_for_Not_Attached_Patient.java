@@ -1,6 +1,5 @@
 package primarycare.tests.Selenium.Patient_Registry_Portal;
 
-import org.openqa.selenium.JavascriptExecutor;
 import primarycare.pages.CommonMethods;
 import primarycare.pages.HealthCloudConsolePage;
 import primarycare.tests.Utilities.ApiQueries;
@@ -14,7 +13,7 @@ import primarycare.pages.PortalHealthConnectRegistryPage;
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
-public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_PrimaryCare {
+public class Portal_Self_Registration_for_Not_Attached_Patient extends BaseTest_PrimaryCare {
     private String legalFirstName = "Sandy";
     private String legalLastName = "Prior";
     private String personalHealthNumber = "9873010063";
@@ -36,7 +35,7 @@ public class Portal_Registration_for_an_Not_Attached_Patient extends BaseTest_Pr
     private String caseReasonExpected = "Unattached - Requires attachment to family doctor or nurse practitioner";
 
     @Test(priority = 1)
-    public void Can_do_Registration_for_an_Not_Attached_Patient_in_Portal () throws Exception {
+    public void Can_do_Self_Registration_for_Not_Attached_Patient_in_Portal () throws Exception {
         TestcaseID = "251780"; //C251780
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
