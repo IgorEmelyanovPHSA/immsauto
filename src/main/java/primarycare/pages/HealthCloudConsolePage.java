@@ -1,9 +1,6 @@
 package primarycare.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import primarycare.pages.BasePage;
@@ -188,11 +185,16 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement language_dropdown_component;
     private By language_dropdown_component_1 = By.xpath("(//div[@class = 'slds-combobox_container']//input[@class = 'slds-input'])[5]");
 
+    @FindBy(xpath = "//span[text() ='French']")
+    private WebElement select_from_language_dropdown_list;
+    private By select_from_language_dropdown_list_1 = By.xpath("//span[text() ='French']");
+
     @FindBy(xpath = "(//span[text() ='Finish registration'])[1]")
     private WebElement finish_registration_button;
     private By finish_registration_button_1 = By.xpath("(//span[text() ='Finish registration'])[1]");
 
-
+    @FindBy(xpath = ".//div/p[text() = 'Successfully registered!']")
+    private static WebElement successfully_registered_page_validation;
 
     /*---------Constructor-------*/
     public HealthCloudConsolePage(WebDriver driver) {
@@ -513,6 +515,8 @@ public class HealthCloudConsolePage extends BasePage {
         Thread.sleep(1000);
         Actions actions = new Actions(driver);
         actions.sendKeys(Language).build().perform();
+        Thread.sleep(5000);
+        select_from_language_dropdown_list.click();
         Thread.sleep(1000);
     }
 
@@ -524,6 +528,17 @@ public class HealthCloudConsolePage extends BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
         Thread.sleep(2000);
         finish_registration_button.click();
+    }
+
+    public static boolean validateSuccessfullyRegisteredPageDisplayed() throws InterruptedException {
+        try {
+            waitForElementToBeVisible(driver, successfully_registered_page_validation, 10);
+            System.out.println("/*---Successfully registered page - shown up");
+        } catch (NoSuchElementException e) {
+            System.out.println("/*---Successfully registered page page has NOT show up");
+            throw e;
+        }
+        return false;
     }
 
 

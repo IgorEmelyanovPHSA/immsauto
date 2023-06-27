@@ -2,6 +2,7 @@ package primarycare.tests.Selenium.Patient_SF_Admin_Interface;
 
 import primarycare.pages.CommonMethods;
 import primarycare.pages.HealthCloudConsolePage;
+import primarycare.pages.PortalHealthConnectRegistryPage;
 import primarycare.tests.Utilities.TestListener;
 import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
@@ -201,7 +202,11 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
         log("/*36.---click button 'Finish registration'----*/");
         healthCloudConsolePage.clickFinishRegistration();
-        Thread.sleep(1000);
+        Thread.sleep(10000);
+
+        log("/*37.--- Validate is 'Successfully registered!' page displayed? --*/");
+        healthCloudConsolePage.validateSuccessfullyRegisteredPageDisplayed();
+        Thread.sleep(5000);
 
     }
 
