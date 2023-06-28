@@ -24,10 +24,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement click_save_defaults_button;
 	private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
 
-	@FindBy(xpath = ".//button[@class='slds-button slds-button_brand saveBtn']")
-	private WebElement click_save_modal_defaults_button;
-	private By click_save_modal_defaults_button_ = By.xpath(".//button[@class='slds-button slds-button_brand saveBtn']");
-
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
 	private By search_assistant1 = By.xpath(".//button[@aria-label = 'Search']");
@@ -38,123 +34,53 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "(.//lightning-formatted-rich-text[@class = 'primary slds-truncate slds-rich-text-editor__output'])[1]")
 	private WebElement profile_in_search_dropdown;
-	private By profile_in_search_dropdown_ = By.xpath("(.//lightning-formatted-rich-text[@class = 'primary slds-truncate slds-rich-text-editor__output'])[1]");
 
-	//@FindBy(xpath = "(.//A[@data-refid='recordId'])[1]")
-	@FindBy(xpath = ".//a[@title='Ludovika BcvaxLimeburn']")
-	private WebElement user_found;
 	private By user_found1 = By.xpath(".//a[@title='Ludovika BcvaxLimeburn']");
 
-	@FindBy(xpath = "(//a[@data-label='Related' or @title = 'Related'])")
-	private WebElement click_related_tab;
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related' or @title = 'Related']");
 
-	@FindBy(xpath = ".//th//lightning-primitive-cell-factory[@data-label='Immunization Record']//div[@class='slds-grid']//span[@force-lookup_lookup='']")
-	private WebElement select_Imms_record;
 	private By select_Imms_record1 = By.xpath(".//th//lightning-primitive-cell-factory[@data-label='Immunization Record']//div[@class='slds-grid']//span[@force-lookup_lookup='']");
 
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]")
-	private WebElement click_on_citizen;
-	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya bcvaxvillage')]");
-
-	@FindBy(xpath = ".//button[@class='slds-button slds-button_icon-border-filled']")
-	private WebElement imms_drop_down;
 	private By imms_drop_down1 = By.xpath("//*[@id=\"brandBand_2\"]/div/div/div[4]/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-b-c-h_-clinical_-pathway_-record_-page___-case___-v-i-e-w/forcegenerated-flexipage_bch_clinical_pathway_record_page_case__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[1]/slot/flexipage-component2[2]/slot/records-lwc-highlights-panel/records-lwc-record-layout/forcegenerated-highlightspanel_case___0125w0000004kq6qam___compact___view___recordlayout2/records-highlights2/div[1]/div[1]/div[3]/div/runtime_platform_actions-actions-ribbon/ul/li[4]/lightning-button-menu/button");
 
-	@FindBy(xpath = "//a[@runtime_platform_actions-ribbonmenuitem_ribbonmenuitem='']")
-	private WebElement imms_drop_down_del;
 	private By imms_drop_down_del1 = By.xpath(".//a[@runtime_platform_actions-ribbonmenuitem_ribbonmenuitem='']");
 
-	@FindBy(xpath = "//span[@dir='ltr'][text()='Delete']")
-	private WebElement delete_record_button;
 	private By delete_record_button1 = By.xpath("//span[@dir='ltr'][text()='Delete']");
 
-	@FindBy(xpath = "(//span[@id='window'])")
-	private WebElement select_rern_record;
 	private By select_rern_record1 = By.xpath("/html/body/div[4]/div[1]/section/div[1]/div[2]/div[2]/div[1]/div/div/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___-b-c-h_-participant_-record_-page___-account___-v-i-e-w/forcegenerated-flexipage_bch_participant_record_page_account__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[2]/div[1]/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/flexipage-tab2[2]/slot/flexipage-component2[5]/slot/lst-related-list-container/div/div[8]/lst-related-list-single-container/laf-progressive-container/slot/lst-related-list-single-app-builder-mapper/article/lst-related-list-view-manager/lst-common-list-internal/div/div/lst-primary-display-manager/div/lst-primary-display/lst-primary-display-grid/lst-customized-datatable/div[2]/div/div/table/tbody/tr/th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/force-lookup/div/records-hoverable-link/div");
 
-	@FindBy(xpath = "//BUTTON[@name='Delete'][text()='Delete']")
-	private WebElement delete_rern_record;
 	private By delete_rern_record1 = By.xpath("//*[@id='brandBand_2']/div/div/div/div/one-record-home-flexipage2/forcegenerated-adg-rollup_component___force-generated__flexipage_-record-page___flexipage__default_rec_-l___-d-d-h__-h-c_-rules_-engine_-response__c___-v-i-e-w/forcegenerated-flexipage_default_rec_l_ddh__hc_rules_engine_response__c__view_js/record_flexipage-record-page-decorator/div[1]/records-record-layout-event-broker/slot/slot/flexipage-record-home-template-desktop2/div/div[1]/slot/flexipage-component2/slot/records-lwc-highlights-panel/records-lwc-record-layout/forcegenerated-highlightspanel_ddh__hc_rules_engine_response__c___012000000000000aaa___compact___view___recordlayout2/records-highlights2/div[1]/div/div[3]/div/runtime_platform_actions-actions-ribbon/ul/li[2]/runtime_platform_actions-action-renderer/runtime_platform_actions-executor-aura-legacy/slot/slot/lightning-button/button");
 
-	@FindBy(xpath = "//button[text()='Delete']")
-	private WebElement delete_person_account;
 	private By delete_person_account1 = By.xpath("//button[text()='Delete']");
 
-	@FindBy(xpath = "//div[@class='slds-icon-waffle']")
-	private WebElement select_app_launcher;
 	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
 
-	@FindBy(xpath = "//p[text()='Clinic in a Box (IPM)']")
-	private WebElement click_cib_app;
 	private By click_cib_app1 = By.xpath("//p[text()='Clinic in a Box (IPM)']");
 
-	@FindBy(xpath = "//p[text()='Health Connect - Supply Console']")
-	private WebElement click_healthconnect_app;
 	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
 
-	@FindBy(xpath = "//p[text()='In-Clinic Experience']")
-	private WebElement click_ice_app;
 	private By click_ice_app1 = By.xpath("//p[text()='In-Clinic Experience']");
 
-	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
-	private WebElement dropdownMenu;
-
-	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
-	private WebElement supplyLocationInDropdown;
-
-	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
-	private WebElement supplyItemsInDropdown;
 
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
 	private WebElement select_desired_supply_loc;
 
-	@FindBy(xpath = "//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']")
-	private WebElement select_desired_supply_item;
-	private By select_desired_supply_item1 = By.xpath("//a[@title='COMIRNATY (Pfizer) - 35035BD-CC01']");
-
-	@FindBy(xpath = "(//button[@class='slds-combobox__input slds-input_faux'])[1]")
-	private WebElement click_agent_value;
 	private By click_agent_value1 = By.xpath("(//button[@class='slds-combobox__input slds-input_faux'])[1]");
 
 	@FindBy(xpath = "(//span[text()='COVID-19 mRNA'])[1]")
 	private WebElement select_agent_name;
 	private By select_agent_name1 = By.xpath("(//span[text()='COVID-19 mRNA'])[1]");
 
-	@FindBy(xpath = "//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]")
-	private WebElement select_desired_supply_container;
-	private By select_desired_supply_container1 = By.xpath("//a[contains(text(),'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)')]");
-
-	@FindBy(xpath = ".//span[@title='Health Connect - Supply Console']")
-	private WebElement supply_console_App_displayed;
 	private By supply_console_App_displayed1 = By.xpath(".//span[@title='Health Connect - Supply Console']");
 
-	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
-	private WebElement ice_App_displayed;
 	private By ice_App_displayed1 = By.xpath(".//span[@title='In-Clinic Experience']");
 
-	@FindBy(xpath = "//a[@title='Supply Locations']")
-	private WebElement supply_location_displayed;
-	private By supply_location_displayed1 = By.xpath("//a[@title='Supply Locations']");
-
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
-	private WebElement get_remaining_doses;
 	private By get_remaining_doses1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
-	private WebElement get_dose_conversion_factor;
 	private By get_dose_conversion_factor1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Dose Conversion Factor']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']")
-	private WebElement get_supply_distribution_name;
 	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']");
 
-	@FindBy(xpath = "(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Supply Distribution_1']")
-	private WebElement get_supply_distribution_description;
-	private By get_supply_distribution_description1 = By.xpath("(//DIV[@records-recordlayoutitem_recordlayoutitem=''])[19]/..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field'][text()='Supply Distribution_1']");
-
-	@FindBy(xpath = "//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']")
-	private WebElement get_remaining_Qty;
 	private By get_remaining_Qty1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Quantity']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
 	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
@@ -189,32 +115,15 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement review_details;
 	private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
 
-	@FindBy(xpath = "//button[@title='Check Eligibility']")
-	private WebElement click_eligibility_button;
-	private By click_eligibility_button1 = By.xpath("(//button[@title='Check Eligibility'])");
-
-	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
-	private WebElement click_eligibility_dropdown;
-	private By click_eligibility_dropdown1 = By.xpath(".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']");
-
-	@FindBy(xpath = ".//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination']")
-	private WebElement select_covid19_option_from_dropdown;
-	private By select_covid19_option_from_dropdown1 = By.xpath("(.//select[@name = 'typeId']/option[text() = 'COVID_19_Vaccination'])");
-
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement select_clinic;
-	private By select_clinic1 = By.xpath("//input[@name='clinicstag']");
 
 	@FindBy(xpath = "(.//button[@name = 'facility'][1])")
 	private WebElement option_loc_facility;
-	private By select_option_loc_facility1 = By.xpath("(.//button[@name = 'facility'][1])");
 
 	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'][1])")
 	private WebElement booking_app_active_day;
-	private By booking_app_active_day1 = By.xpath("(.//button[@class = 'slds-day active-day'][1])");
 
-	@FindBy(xpath = "(.//button[@name='timeslot'][1])")
-	private WebElement time_slot_appointment;
 	private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'][1])");
 
 	@FindBy(xpath = ".//button[text() = 'Rebook at Current Location']")
@@ -236,75 +145,50 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement status_after_care;
 	private By status_after_care1 = By.xpath("(//SPAN[@class='slds-page-header__title slds-truncate'][text()='Immunization Records (1)']/../../../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[2]");
 
-	@FindBy(xpath = "(//span[@lightning-input_input=''])[2]")
-	private WebElement verify_contact_information_checkbox_CP;
-	private By verify_contact_information_checkbox1_CP = By.xpath("(//span[@lightning-input_input=''])[2]");
-
 	@FindBy(xpath = ".//h1[text() = 'Oops...']")
 	private WebElement vlidate_oops_message;
-	private By vlidate_oops_message1 = By.xpath(".//h1[text() = 'Oops...']");
 
 	@FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
 	private WebElement show_all_lot_numbers_checkbox;
-	private By show_all_lot_numbers_checkbox_ = By.xpath("//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN");
-
 	@FindBy(xpath = "//*[@class='slds-icon slds-icon_large']")
 	private WebElement close_button_diwa;
-	private By close_button_diwa1 = By.xpath("//*[@class='slds-icon slds-icon_large']");
+
 	@FindBy(xpath = "(//button[normalize-space()='Save Consent'])")
 	private WebElement save_consent_btn;
-	private By save_consent_btn1 = By.xpath("//button[normalize-space()='Save Consent']");
 
 	@FindBy(xpath = "(//button[normalize-space()='Continue Editing and Save'])")
 	private WebElement continue_editing_btn;
-	private By continue_editing_btn1 = By.xpath("//button[normalize-space()='Continue Editing and Save']");
 
 	@FindBy(xpath = "(//button[@title='Confirm & Save Administration'])")
 	private WebElement confirm_save_adm_btn;
-	private By confirm_save_adm_btn1 = By.xpath("//button[@title='Confirm & Save Administration']");
 
 	@FindBy(xpath = "//button[text()='Confirm']")
 	private WebElement confirm_admin_another_vaccine_modal_screen_btn;
-	private By confirm_admin_another_vaccine_modal_screen_btn_ = By.xpath("//button[text()='Confirm']");
 
 	@FindBy(xpath = "(//button[@title='Save Administration & Record Another Vaccine'])")
 	private WebElement save_and_record_another_vaccine_btn;
-	private By save_and_record_another_vaccine_btn1 = By.xpath("//button[@title='Save Administration & Record Another Vaccine']");
-
 	@FindBy(xpath = ".//h2[text() = 'Vaccine Administration']")
 	private WebElement validate_vaccine_admin_page_open;
-	private By validate_vaccine_admin_page_open1 = By.xpath(".//h2[text() = 'Vaccine Administration']");
 
 	@FindBy(xpath = ".//span[@title='In-Clinic Experience']")
 	private WebElement ice_page_displayed;
 
 	@FindBy(xpath = ".//div[@class = 'slds-form-element__control']//span[text() = 'Influenza Vaccine']")
 	private WebElement click_on_influenza_vaccination_checkbox;
-	private By click_on_influenza_vaccination_checkbox_ = By.xpath(".//div[@class = 'slds-form-element__control']//span[text() = 'Influenza Vaccine']");
-
 
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
-	private By click_early_booking_reason1 = By.xpath(".//span[text() = 'Select One']");
 
 	@FindBy(xpath = ".//span[text() = 'Travel']") //(.//span[text() = 'Travel'])[2]
 	private WebElement select_early_booking_reason;
-	private By select_early_booking_reason1 = By.xpath(".//span[text() = 'Travel']");
 
 	@FindBy(xpath = "(.//span[text() = 'Travel'])[2]")
 	private WebElement select_early_booking_reason_for_prodsup;
 
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
-	private By click_more_search_tabs1 = By.xpath(".//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs']");
 
-	@FindBy(xpath = ".//a[text()='Search by Clinic name']")
-	private WebElement search_by_clinic_name_tab;
 	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
-
-	@FindBy(xpath = "//input[@name='BCH_Date__c']")
-	private WebElement input_current_date;
-	private By input_current_date1 = By.xpath("//input[@name='BCH_Date__c']");
 
 	@FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
 	private WebElement clinicLocationUserDefaults;
@@ -321,28 +205,16 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(//span[@title='Trade Name']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[2]")
 	private WebElement tradeNameUserDefaults;
 
-	private By click_vaccine_agent_dropdown1 = By.xpath(".//button[@aria-label = 'Agent, Select an option']");
-
-	@FindBy(xpath = ".//button[@data-value = 'Influenza-LAIV']")
-	private WebElement click_vaccine_agent_dropdown_cp;
 	@FindBy(xpath = ".//button[@aria-label = 'Route, Select an Option']")
 	private WebElement click_route_dropdown;
-	private By click_route_dropdown1 = By.xpath(".//button[@aria-label = 'Route, Select an Option']");
 
 	@FindBy(xpath = ".//span[text() = 'Intranasal']")
 	private WebElement select_route_intranasal_dropdown;
-	private By select_route_intranasal_dropdown1 = By.xpath(".//span[text() = 'Intranasal']");
 
-	//@FindBy(xpath = ".//span[text() = 'Select an Option']")
-	//private WebElement click_dosage_dropdown;
-	//private By click_dosage_dropdown1 = By.xpath(".//span[text() = 'Select an Option']");
 	@FindBy(xpath = ".//button[@name='dosePicklist']")
 	private WebElement click_dosage_dropdown;
 	private By click_dosage_dropdown1 = By.xpath(".//button[@name='dosePicklist']");
 
-	//@FindBy(xpath = "(.//lightning-combobox[@data-id='dosage']//span[@class='slds-truncate'])[2]")
-	//private WebElement select_dosage_from_dropdown;
-	//private By select_dosage_from_dropdown1 = By.xpath("(.//lightning-combobox[@data-id='dosage']//span[@class='slds-truncate'])[2]");
 	@FindBy(xpath = ".//span[@title='0.2']")
 	private WebElement select_dosage_from_dropdown;
 	private By select_dosage_from_dropdown1 = By.xpath(".//span[@title='0.2']");
@@ -350,76 +222,24 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = ".//button[@name = 'injectionSite']")
 	private WebElement click_site_dropdown;
-	private By click_site_dropdown1 = By.xpath(".//button[@name = 'injectionSite']");
 
 	@FindBy(xpath = ".//span[text() = 'Arm - Left deltoid']")
 	private WebElement select_site_left_deltoid_from_dropdown;
-	private By select_site_left_deltoid_from_dropdown1 = By.xpath(".//span[text() = 'Arm - Left deltoid']");
-
-	//@FindBy(xpath = "(.//div[@class = 'slds-form-element'])[2]")
-	//private WebElement click_lot_number_dropdown;
-	//private By click_lot_number_dropdown1 = By.xpath("(.//div[@class = 'slds-form-element'])[2]");
 
 	@FindBy(xpath = ".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']")
 	private WebElement click_lot_number_dropdown;
-	private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']");
 
 	@FindBy(xpath = ".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']")
 	private WebElement select_pneumo_lot_number_dropdown;
-	private By select_pneumo_lot_number_dropdown1 = By.xpath(".//li[@title = 'T005729-CC07 - Exp. 2021 November 16']");
-
 
 	@FindBy(xpath = ".//h1[text() = 'Client Search']")
 	private WebElement validate_home_client_search_page_open;
-	private By validate_home_client_search_page_open1 = By.xpath(".//h1[text() = 'Client Search']");
 
-	@FindBy(xpath = ".//a[text()='Search clinic name']")
-	private WebElement click_select_search_clinic;
 	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by clinic name']");
-
-	@FindBy(xpath = "//a[contains(text(),'Supply Distribution_1 - SDST-000')]")
-	private WebElement click_supply_distribution;
-	private By click_supply_distribution1 = By.xpath("//a[contains(text(),'Supply Distribution_1 - SDST-000')]");
-
-	@FindBy(xpath = "//BUTTON[@class='slds-button slds-button_icon-border-filled']")
-	private WebElement select_drpdown_to_receive_supplies;
-	private By select_drpdown_to_receive_supplies1 = By.xpath("//BUTTON[@class='slds-button slds-button_icon-border-filled']");
-
-	@FindBy(xpath = "//span[text()='Receive Supplies']")
-	private WebElement click_to_select_receive_supplies;
-	private By click_to_select_receive_supplies1 = By.xpath("//span[text()='Receive Supplies']");
-
-	@FindBy(xpath = "//label[@class='slds-form-element__label'][text()='Supply Item']")
-	private WebElement validate_supply_item_field;
-	private By validate_supply_item_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Item']");
 
 	@FindBy(xpath = "//lightning-formatted-text[text()='All Ages - Atlin Health Centre']")
 	private WebElement validate_clinic_name_before_booking;
 	private By validate_clinic_name_before_booking1 = By.xpath("//lightning-formatted-text[text()='All Ages - Atlin Health Centre']");
-
-	@FindBy(xpath = "//lightning-formatted-text[text()='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
-	private WebElement validate_clinic_name_after_booking;
-	private By validate_clinic_name_after_booking1 = By.xpath("//lightning-formatted-text[text()='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']");
-
-	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']")
-	private WebElement validate_qty_field;
-	private By validate_qty_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']");
-
-	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Dose Conversion Factor']")
-	private WebElement validate_dcf_field;
-	private By validate_dcf_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Dose Conversion Factor']");
-
-	@FindBy(xpath = "//label[@class='slds-form-element__label slds-no-flex'][text()='Doses']")
-	private WebElement validate_doses_field;
-	private By validate_doses_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Doses']");
-
-	@FindBy(xpath = "//label[@class='slds-form-element__label'][text()='Supply Distribution To']")
-	private WebElement supply_distribution_to_field;
-	private By supply_distribution_to_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Distribution To']");
-
-	@FindBy(xpath = "//button[contains(text(),'Save')]")
-	private WebElement save_button_receive_supplies;
-	private By save_button_receive_supplies1 = By.xpath("//button[contains(text(),'Save')]");
 
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement Create_Immunization_Record;
@@ -427,11 +247,9 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "//button[text() = 'Confirm']")
 	private WebElement confirm_button;
-	private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
 
 	@FindBy(xpath = "//option[contains(text(),'Select an option')]")
 	private WebElement select_an_option;
-	private By select_an_option1 = By.xpath("//option[contains(text(),'Select an option')]");
 
 	@FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
 	private WebElement covidmRna;
@@ -439,10 +257,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]")
 	private WebElement inputDate;
-	private By inputDate1 = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]");
 
-	@FindBy(xpath = "//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]")
-	private WebElement yes_button_save_on_popup_window;
 	private By yes_button_save_on_popup_window1 = By.xpath("//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]");
 
 	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
@@ -450,23 +265,9 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
 	private WebElement informed_consent_provider_dropdown;
-	private By informed_consent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
-
-	@FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
-	private WebElement immunizing_agent_provider_dropdown;
-	private By immunizing_agent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[2]");
 
 	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
 	private WebElement select_inform_consent_provider;
-	private By select_inform_consent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
-
-	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
-	private WebElement select_immunizing_agent_provider;
-	private By select_immunizing_agent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
-
-
-	@FindBy(xpath = "//input[@name='effectiveToDate']")
-	private WebElement consentEffectiveToDate;
 
 	@FindBy(xpath = "//button[contains(text(),'Save Consent')]")
 	private WebElement saveConsentButton;
@@ -474,25 +275,15 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@title='Appointments']")
 	private WebElement appointmentSection;
 
-	@FindBy(xpath = "//button[@name='injectionSite']")
-	private WebElement selectSite;
 	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
 
 	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
 	private WebElement select_lot;
-	private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
 
-	@FindBy(xpath = "//span[@title='Arm - Left deltoid']")
-	private WebElement select_injection_site_value;
 	private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
 
-
-	@FindBy(xpath = "//button[@name='dosePicklist']")
-	private WebElement select_dosage_field;
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 
-	@FindBy(xpath = "//span[@title='0.3']")
-	private WebElement select_dosage;
 	private By select_dosage1 = By.xpath("//span[@title='0.5']");
 
 	@FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
@@ -504,53 +295,16 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
 	private WebElement lastConfirmAndSave;
 
-	@FindBy(xpath = "//button[contains(text(),'Save')]")
-	private WebElement save_button_historical_dose;
-	private By save_button_historical_dose1 = By.xpath("//button[contains(text(),'Save')]");
-
 	@FindBy(xpath = ".//input[@data-id = 'userinput']")
 	private WebElement search_clinic;
-	private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
 
-	@FindBy(xpath = "(//span[contains(text(),'Cancel')])[2]")
-	private WebElement cancel_button_receive_supplies;
-	private By cancel_button_receive_supplies1 = By.xpath("(//span[contains(text(),'Cancel')])[2]");
-
-	@FindBy(xpath = "//input[@placeholder='Search Supply Items...']")
-	private WebElement click_to_select_supply_item;
-	private By click_to_select_supply_item1 = By.xpath("//input[@placeholder='Search Supply Items...']");
-
-	@FindBy(xpath = "//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]")
-	private WebElement choose_supply_item;
-	private By choose_supply_item1 = By.xpath("//span[contains(text(),'COMIRNATY (Pfizer) - 35035BD-CC01')]");
-
-	@FindBy(xpath = "(//input[@class='slds-input'])[2]")
-	private WebElement click_to_select_quantity;
 	private By click_to_select_quantity1 = By.xpath("(//input[@class='slds-input'])[2]");
-
-	@FindBy(xpath = "//button[@name='distributionBox']")
-	private WebElement supply_distribution_to;
-	private By supply_distribution_to1 = By.xpath("//button[@name='distributionBox']");
-
-	@FindBy(xpath = "(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]")
-	private WebElement select_supply_distributor;
-	private By select_supply_distributor1 = By.xpath("(//span[contains(text(),'Supply Distribution_1 - SDST-000')])[1]");
-
-	@FindBy(xpath = "//button[@aria-label='Reason for Reception, --None--']")
-	private WebElement click_reason;
-	private By click_reason1 = By.xpath("//button[@aria-label='Reason for Reception, --None--']");
-
-	@FindBy(xpath = "//span[@title='Other']")
-	private WebElement select_reason;
-	private By select_reason1 = By.xpath("//span[@title='Other']");
 
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement create_Immunization_Record;
-	private By creat_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
 
 	@FindBy(xpath = ".//button[text() = 'Save']")
 	private WebElement save_immune_info_btn;
-	private By save_immune_info_btn_ = By.xpath(".//button[text() = 'Save']");
 
 	@FindBy(xpath = ".//lightning-base-formatted-text[text() = 'Influenza-LAIV']")
 	private WebElement validate_create_immunization_record_Influenza;
@@ -559,10 +313,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//lightning-base-formatted-text[text() = 'After Care'])[2]")
 	private WebElement validate_after_care_status_immunization_record_Influenza;
 	private By validate_after_care_status_immunization_record_Influenza_ = By.xpath("(.//lightning-base-formatted-text[text() = 'After Care'])[2]");
-
-	@FindBy(xpath = ".//lightning-base-formatted-text[text() = 'Pneumo-P-23']")
-	private WebElement validate_create_immunization_record_Pneumo;
-	private By validate_create_immunization_record_Pneumo_ = By.xpath(".//lightning-base-formatted-text[text() = 'Influenza-LAIV']");
 
 	@FindBy(xpath = "(.//lightning-base-formatted-text[text() = 'After Care'])[1]")
 	private WebElement validate_after_care_status_immunization_record_Pneumo;
@@ -579,9 +329,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "//label[text() = 'Clinic Name']/../../../lightning-formatted-text")
 	private WebElement appointmentLocation;
-
-	@FindBy(xpath = "//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']")
-	private WebElement newDeferralBtn;
 
 
 	Tables tables;
@@ -656,6 +403,12 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, register_btn_path, 10);
 		WebElement register_btn = driver.findElement(register_btn_path);
 		register_btn.click();
+		Thread.sleep(500);
+		try {
+			clickCloseAlert();
+		} catch(Exception ex) {
+			System.out.println("No alert message found. Continue...");
+		}
 		Thread.sleep(500);
 	}
 
@@ -1337,6 +1090,7 @@ public class InClinicExperiencePage extends BasePage {
 			waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
 			driver.findElement(consent_provider_item_path).click();
 		} catch(Exception ex) {
+			System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
 			waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
 			driver.findElement(consent_provider_field_path).click();
 			Thread.sleep(500);
@@ -1579,39 +1333,6 @@ public class InClinicExperiencePage extends BasePage {
 		agentLotTradeNameMap.put("lot", lot);
 		agentLotTradeNameMap.put("tradeName", tradeName);
 		return agentLotTradeNameMap;
-	}
-
-	public void inputCurrentDateUserDefaults() throws InterruptedException {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 0);
-		Date today = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		waitForElementToBeVisible(driver, input_current_date, 10);
-		String todayAsString = dateFormat.format(today);
-		input_current_date.click();
-		Thread.sleep(2000);
-		input_current_date.clear();
-		Thread.sleep(2000);
-		input_current_date.sendKeys(todayAsString);
-		Thread.sleep(2000);
-		input_current_date.sendKeys(Keys.ENTER);
-		clickCloseAlert();
-	}
-
-	public void inputPreviousDateUserDefaults() throws InterruptedException {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -1);
-		Date previousDay = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		waitForElementToBeVisible(driver, input_current_date, 10);
-		String previousDateAsString = dateFormat.format(previousDay);
-		input_current_date.click();
-		Thread.sleep(2000);
-		input_current_date.clear();
-		Thread.sleep(2000);
-		input_current_date.sendKeys(previousDateAsString);
-		Thread.sleep(2000);
-		input_current_date.sendKeys(Keys.ENTER);
 	}
 
 	public boolean validateHomePageShownUp() throws InterruptedException {

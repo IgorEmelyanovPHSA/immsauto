@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.LoginPage;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,8 +11,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class Dose2_E2E_Covid19 extends BaseTest {
+	String env;
+	Map<String, Object> testData;
 	private String legalFirstName = "Hugues";
 	private String legalLastName = "BCVaxLampard";
 	private String dateOfBirth = "March 3, 1904";
@@ -25,14 +26,24 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	MainPageOrg orgMainPage;
+	String consumptionLot;
+	String consumptionDose;
+	String consumptionRoute;
+	String consumptionSite;
 	@Test(priority = 1)
 	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
 		TestcaseID = "222811"; //C222811
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
 		log("TestRail test case ID: C" +TestcaseID);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*1.----Login as an Clinician to ICE --*/");
+		consumptionLot = String.valueOf(testData.get("consumptionLot"));
+		consumptionDose = String.valueOf(testData.get("consumptionDose"));
+		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
 
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -46,9 +57,9 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
-
+		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
-		inClinicExperience.inputCurrentDateUserDefaults();
+		userDefaultsPage.inputCurrentDateUserDefaults();
 
 		log("/*7.----- Click on Save defaults button --*/");
 		inClinicExperience.clickSaveDefaultsButton();
@@ -157,7 +168,22 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();
-
+		String lot = inClinicExperience.getLotNumber();
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperience.setLotNumber(consumptionLot);
+		}
+		String route = inClinicExperience.getRoute();
+		String site = inClinicExperience.getSite();
+		String dose = inClinicExperience.getDosage();
+		if(!dose.equals(consumptionDose)) {
+			inClinicExperience.setDosage(consumptionDose);
+		}
+		if(route.equals("")) {
+			inClinicExperience.setRoute(consumptionRoute);
+		}
+		if(site.equals("")) {
+			inClinicExperience.setSite(consumptionSite);
+		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();
 		inClinicExperience.clickOkForExpiredLot();

@@ -39,10 +39,12 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(2000);
 
         log("/*4.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
 
         log("/*5.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
         Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");

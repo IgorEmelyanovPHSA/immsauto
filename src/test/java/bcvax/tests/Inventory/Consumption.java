@@ -58,8 +58,7 @@ public class Consumption extends BaseTest {
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
-		loginPage.loginWithClinicianCon();
-		orgMainPage = new MainPageOrg(driver);
+		orgMainPage = loginPage.orgLoginAsClinicianICE();
 		String currentApp = orgMainPage.currentApp();
 		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
@@ -184,9 +183,6 @@ public class Consumption extends BaseTest {
 		}
 		inClinicExperiencePage.ClickSaveConsentButton();
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
-		if(consentProvider.equals("")) {
-			inClinicExperiencePage.selectConsentProvider();
-		}
 
 		String agent = inClinicExperiencePage.getVaccineAgent();
 		String provider =  inClinicExperiencePage.getProvider();

@@ -71,10 +71,11 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*8.----- Click on User Defaults Tab --*/");
         cpMainPage.clickUserDefaultsTab();
         log("/*9.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
-        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
         log("/*11.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
 

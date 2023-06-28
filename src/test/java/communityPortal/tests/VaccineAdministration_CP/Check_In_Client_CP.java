@@ -41,10 +41,11 @@ public class Check_In_Client_CP extends BaseTest {
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         cpMainPage.clickUserDefaultsTab();
         log("/*9.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
-        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
