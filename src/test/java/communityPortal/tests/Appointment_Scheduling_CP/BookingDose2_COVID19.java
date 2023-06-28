@@ -81,7 +81,12 @@ public class BookingDose2_COVID19 extends BaseTest {
 
         log("/*19.----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
-
+        //In case of Early Booking
+        try {
+            inClinicExperience_CP.selectEarlyBookingReason();
+        } catch(Exception ex) {
+            System.out.println("No early Booking screen. Continue...");
+        }
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         inClinicExperience_CP.selectOneOption(vaccineToSelect);
 

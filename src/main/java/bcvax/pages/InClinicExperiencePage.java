@@ -1087,12 +1087,17 @@ public class InClinicExperiencePage extends BasePage {
 		consentProviderField.click();
 		Thread.sleep(500);
 		try {
-			waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
-			driver.findElement(consent_provider_item_path).click();
+			String consent_provider_selected = consentProviderSelected();
+			if(consent_provider_selected.equals("")) {
+				waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
+				driver.findElement(consent_provider_item_path).click();
+			}
 		} catch(Exception ex) {
 			System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
 			waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
-			driver.findElement(consent_provider_field_path).click();
+			consentProviderField = driver.findElement(consent_provider_field_path);
+			scrollTop(consentProviderField);
+			consentProviderField.click();
 			Thread.sleep(500);
 			waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
 			driver.findElement(consent_provider_item_path).click();
@@ -1668,7 +1673,8 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(500);
 		By providerFieldPath = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[@lightning-basecombobox_basecombobox]");
 		waitForElementToBeEnabled(driver, providerFieldPath, 10);
-		return driver.findElement(providerFieldPath).getAttribute("data-value");
+		WebElement consent_provider_selected = driver.findElement(providerFieldPath);
+		return consent_provider_selected.getAttribute("data-value");
 	}
 	public String getProvider() throws InterruptedException {
 		By provider_path = By.xpath("//label[text() = 'Provider']/..//input");
