@@ -35,6 +35,10 @@ public class CommonMethods extends BasePage {
     private WebElement patient_founded;
     private By patient_founded_1 = By.xpath("(//a[@title='Sandy Prior'])[2]");
 
+    @FindBy(xpath = "(//a[@title='Kenton Troup'])[2]")
+    private WebElement patient_Kenton_founded;
+    private By patient_Kenton_founded_1 = By.xpath("(//a[@title='Kenton Troup'])[2]");
+
 
     /*---------Constructor-------*/
     public CommonMethods(WebDriver driver) {
@@ -135,6 +139,12 @@ public class CommonMethods extends BasePage {
         waitForElementToBeLocated(driver, patient_founded_1, 10);
         Thread.sleep(2000);
         patient_founded.click();
+    }
+
+    public void clickOnFondedKentonPatient(String legalFirstName, String legalLastName) throws InterruptedException {
+        waitForElementToBeLocated(driver, patient_Kenton_founded_1, 10);
+        Thread.sleep(2000);
+        patient_Kenton_founded.click();
     }
 
 

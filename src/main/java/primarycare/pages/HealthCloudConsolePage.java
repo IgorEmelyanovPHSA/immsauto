@@ -196,6 +196,23 @@ public class HealthCloudConsolePage extends BasePage {
     @FindBy(xpath = ".//div/p[text() = 'Successfully registered!']")
     private static WebElement successfully_registered_page_validation;
 
+    @FindBy(xpath = "//span[text() ='SELENIUM Social']")
+    private WebElement caller_name_actual_field_value;
+    private By caller_name_actual_field_value_1 = By.xpath("//span[text() ='SELENIUM Social']");
+
+    @FindBy(xpath = "//span[text() ='Igor PrimaryContactName']")
+    private WebElement primary_contact_name_actual_field_value;
+    private By primary_contact_name_actual_field_value_1 = By.xpath("//span[text() ='Igor PrimaryContactName']");
+
+    @FindBy(xpath = ".//a[@title = 'Social Worker']")
+    private WebElement caller_related_role_actual_field_value;
+    private By caller_related_role_actual_field_value_1 = By.xpath(".//a[@title = 'Social Worker']");
+
+    @FindBy(xpath = ".//a[@title ='Primary Contact']")
+    private WebElement primary_contact_related_role_actual_field_value;
+    private By primary_contact_related_role_actual_field_value_1 = By.xpath(".//a[@title ='Primary Contact']");
+
+
     /*---------Constructor-------*/
     public HealthCloudConsolePage(WebDriver driver) {
         super(driver);
@@ -540,6 +557,50 @@ public class HealthCloudConsolePage extends BasePage {
         }
         return false;
     }
+
+    public String getContactNameActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, caller_name_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        caller_name_actual_field_value.isDisplayed();
+        return (caller_name_actual_field_value.getText());
+    }
+
+    public String getPrimaryContactNameActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, primary_contact_name_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        primary_contact_name_actual_field_value.isDisplayed();
+        return (primary_contact_name_actual_field_value.getText());
+    }
+
+    public String getCallerRelatedRoleActualForValidation() throws InterruptedException {
+        //waitForElementToBeLocated(driver, caller_related_role_actual_field_value_1, 10);
+        //Thread.sleep(2000);
+        //caller_related_role_actual_field_value.isDisplayed();
+        //Thread.sleep(2000);
+        //return (caller_related_role_actual_field_value.getText());
+
+        WebElement element = driver.findElement(caller_related_role_actual_field_value_1);
+        Thread.sleep(2000);
+        caller_related_role_actual_field_value.isDisplayed();
+        Thread.sleep(2000);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        String textReturn = (String) executor.executeScript("return arguments[0].textContent;", element);
+        return textReturn;
+    }
+
+    public String getPrimaryContactRelatedRoleActualForValidation() throws InterruptedException {
+        WebElement element = driver.findElement(primary_contact_related_role_actual_field_value_1);
+        Thread.sleep(2000);
+        primary_contact_related_role_actual_field_value.isDisplayed();
+        Thread.sleep(2000);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        String textReturn = (String) executor.executeScript("return arguments[0].textContent;", element);
+        return textReturn;
+    }
+
+
+
+
 
 
 }

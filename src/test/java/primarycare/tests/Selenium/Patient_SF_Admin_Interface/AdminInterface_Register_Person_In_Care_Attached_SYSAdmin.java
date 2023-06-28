@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends BaseTest_PrimaryCare {
     private String callersRelationships = "Social worker";
-    private String callerName = "SELENIUM Social Worker behalf Caller";
+    private String callerName = "SELENIUM Social";
 
     private String legalFirstName = "Kenton";
     private String legalLastName = "Troup";
@@ -206,7 +206,45 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
         log("/*37.--- Validate is 'Successfully registered!' page displayed? --*/");
         healthCloudConsolePage.validateSuccessfullyRegisteredPageDisplayed();
-        Thread.sleep(5000);
+        Thread.sleep(20000);
+
+        log("/*38.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
+        common.globalSearch(personalHealthNumber);
+        Thread.sleep(2000);
+
+        log("/*39.---Click on founded Patient--*/");
+        common.clickOnFondedKentonPatient(legalFirstName, legalLastName);
+        Thread.sleep(2000);
+
+        log("/*40.---Go to Related Tab--*/");
+        healthCloudConsolePage.clickOnRelatedTab();
+        Thread.sleep(2000);
+
+        log("---- Validation of Contact-Contact Relations(Related Contact)  ---*/");
+
+        log("/*41.---- Validate the Caller's Contact Name: 'SELENIUM Social'  ---*/");
+        String contactActualValue = healthCloudConsolePage.getContactNameActualForValidation();
+        log("/*---- Contact(Caller's) Name the actual value is: " + contactActualValue + " --*/");
+        assertEquals(contactActualValue, callerName);
+        Thread.sleep(2000);
+
+        log("/*42.---- Validate the Caller's Related Role: 'Social Worker' ---*/");
+        String callerRelatedRoleActualValue = healthCloudConsolePage.getCallerRelatedRoleActualForValidation();
+        log("/*---- Contact(Caller's) Related Role the actual value is: " + callerRelatedRoleActualValue + " --*/");
+        assertEquals(callerRelatedRoleActualValue, "Social Worker");
+        Thread.sleep(2000);
+
+        log("/*43.---- Validate the Primary Contact Name: 'Igor PrimaryContactName'  ---*/");
+        String primaryContactNameActualValue = healthCloudConsolePage.getPrimaryContactNameActualForValidation();
+        log("/*---- Primary Contact Name the actual value is: " + primaryContactNameActualValue + " --*/");
+        assertEquals(primaryContactNameActualValue, primaryContactName);
+        Thread.sleep(2000);
+
+        log("/*44.---- Validate the Primary Related Role: 'Primary Contact'  ---*/");
+        String primaryContactRelatedRoleActualValue = healthCloudConsolePage.getPrimaryContactRelatedRoleActualForValidation();
+        log("/*---- Primary Contact Related Role the actual value is: " + primaryContactRelatedRoleActualValue + " --*/");
+        assertEquals(primaryContactRelatedRoleActualValue, "Primary Contact");
+        Thread.sleep(2000);
 
     }
 
