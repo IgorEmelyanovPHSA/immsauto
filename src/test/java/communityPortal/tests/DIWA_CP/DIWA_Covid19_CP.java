@@ -32,9 +32,7 @@ public class DIWA_Covid19_CP extends BaseTest {
             default:
                 log("Login as Clinician user");
                 TestcaseID = "243108"; //C223187
-                //loginPage.loginIntoCommunityPortalAsClinician();
-                loginPage.loginIntoCommunityPortalAsDIWAClinician();
-
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
         log("TestRail test case ID: C" +TestcaseID);
 

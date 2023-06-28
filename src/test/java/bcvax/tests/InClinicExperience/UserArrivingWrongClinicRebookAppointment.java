@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.LoginPage;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -60,10 +57,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
 		//InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
-		inClinicExperiencePage.closeTabsHCA();
-		Thread.sleep(2000);
-		orgMainPage = new MainPageOrg(driver);
+		orgMainPage = loginPage.orgLoginAsClinicianICE();
 
 		log("/*-- 2. Navigate to In Clinic Experience App --*/");
 		String currentApp = orgMainPage.currentApp();
@@ -72,13 +66,14 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		}
 
 		log("/*-- 3. Click on User Defaults Tab  --*/");
+		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
 		inClinicExperiencePage.clickUserDefaultsTab();
-
+		UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
 		log("/*-- 4. Enter current date for UserDefaults --*/");
-		inClinicExperiencePage.inputPreviousDateUserDefaults();
+		userDefaultPage.inputPreviousDateUserDefaults();
 
 		log("/*-- 5.----- Click on Save defaults button --*/");
-		inClinicExperiencePage.clickSaveDefaultsButton();
+		userDefaultPage.clickBtnSave();
 
 		log("/*-- 6. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();

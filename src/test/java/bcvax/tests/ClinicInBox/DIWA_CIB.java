@@ -23,7 +23,7 @@ public class DIWA_CIB extends BaseTest {
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
-		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinicianDIWACIB();
+		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinicianCIB();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
@@ -34,7 +34,7 @@ public class DIWA_CIB extends BaseTest {
 		mainPageOrg.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");
 		ProfilesPage profilesPage = new ProfilesPage(driver);
-		profilesPage.openProfile(participant_name);
+		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		profilesPage.clickRelatedTab();
 		log("/*----7. Click Create Immunization Record ---*/");
@@ -62,7 +62,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 		String consentProvider = profilesPage.consentProviderSelected();
 		Thread.sleep(2000);
-		String myConsentProvider = "Auto Clinician DIWA_CIB";
+		String myConsentProvider = "Clinician Auto CIB";
 		if(consentProvider.equals("")) {
 			consentProvider = profilesPage.selectConsentProvider(myConsentProvider);
 			try {

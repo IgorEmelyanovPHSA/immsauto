@@ -1,6 +1,7 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
+import bcvax.pages.UserDefaultsPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
@@ -50,13 +51,13 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         System.out.println("/*5.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
         Thread.sleep(2000);
-
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
         System.out.println("/*6.----- Enter current date for UserDefaults --*/");
-        inClinicExperience.inputCurrentDateUserDefaults();
+        userDefaultPage.inputCurrentDateUserDefaults();
         Thread.sleep(2000);
 
         System.out.println("/*7.----- Click on Save defaults button --*/");
-        inClinicExperience.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
         Thread.sleep(2000);
 
         System.out.println("/*8.----- Click on register Tab --*/");

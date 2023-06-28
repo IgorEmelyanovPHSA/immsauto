@@ -211,65 +211,6 @@ public class MainPageCP extends BasePage{
         return new UserDefaultsPage(driver);
     }
 
-    public void inputCurrentDateUserDefaults() throws InterruptedException {
-        Thread.sleep(500);
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 0);
-        Date today = calendar.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        By input_current_date_path = By.xpath("//input[@name='BCH_Date__c']");
-        waitForElementToBeEnabled(driver, input_current_date_path, 10);
-        String todayAsString = dateFormat.format(today);
-        WebElement input_current_date = driver.findElement(input_current_date_path);
-
-        try {
-            input_current_date.click();
-            Thread.sleep(500);
-            waitForElementToBeEnabled(driver, input_current_date_path, 10);
-            input_current_date = driver.findElement(input_current_date_path);
-            input_current_date.isEnabled();
-            input_current_date.clear();
-        } catch(StaleElementReferenceException ex) {
-            System.out.println("***DEBUG*** Stale element exception ***");
-            Thread.sleep(500);
-            waitForElementToBeEnabled(driver, input_current_date_path, 10);
-            input_current_date = driver.findElement(input_current_date_path);
-            input_current_date.clear();
-        }
-        input_current_date.click();
-        Thread.sleep(2000);
-        input_current_date.sendKeys(todayAsString);
-        Thread.sleep(500);
-        input_current_date.sendKeys(Keys.ENTER);
-        Thread.sleep(500);
-        try {
-            closeSuccessDialog();
-        } catch(NoSuchElementException ex) {
-            System.out.println("No Suucess dialog. Continue...");
-        }
-        Thread.sleep(500);
-    }
-
-    public void selectUserDefaultLocation(String location) throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
-        Thread.sleep(1000);
-    }
-
-    public void clickSaveDefaultsButton() throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, click_save_defaults_button, 10);
-        WebElement element = driver.findElement(click_save_defaults_button_);
-        click_save_defaults_button.click();
-        Thread.sleep(500);
-        closeSuccessDialog();
-    }
-
     public void closeSuccessDialog() throws InterruptedException {
         try {
             WebElement alertCloseBtn = driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']"));

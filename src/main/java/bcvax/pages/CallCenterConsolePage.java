@@ -166,13 +166,13 @@ public class CallCenterConsolePage extends BasePage {
 		verify_phn_button.click();
 	}
 	
-	public void successMessageAppear() throws InterruptedException {
+	public String successMessageAppear() throws InterruptedException {
 		Thread.sleep(500);
 		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
 		waitForElementToBeEnabled(driver, message_path, 10);
 		WebElement message = driver.findElement(message_path);
-		Assert.assertEquals(message.getText(), "Success", "Expected PHN Match Success but found " + message.getText());
 		log("  -- success message has been Appears - /");
+		return message.getText();
 	}
 	
 	public void clickNextButton() throws InterruptedException {

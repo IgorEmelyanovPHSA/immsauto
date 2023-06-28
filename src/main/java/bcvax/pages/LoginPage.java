@@ -51,21 +51,13 @@ public class LoginPage extends BasePage {
 		return new InClinicExperiencePage(driver);
 	}
 
-	public InClinicExperiencePage loginAsClinicianICEUserDefaults() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_UserDefaults"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_UserDefaults"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
-
-	public InClinicExperiencePage loginAsClinician_DIWA_ICE() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_DIWA_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_DIWA_ICE_PW"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
+//	public InClinicExperiencePage loginAsClinicianICEUserDefaults() throws Exception {
+//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_UserDefaults"));
+//		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_UserDefaults"));
+//		click(login_button);
+//		return new InClinicExperiencePage(driver);
+//	}
 
 	public InClinicExperiencePage loginAsImmsBCAdmin_DIWA_ICE() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
@@ -136,43 +128,27 @@ public class LoginPage extends BasePage {
 	public Tables getTables(){
 		return new Tables(driver);
 	}
-
-	public RequisitionPage loginAsPPHIS1() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
-		click(login_button);
-		return new RequisitionPage(driver);
-	}
 	
-	public InClinicExperiencePage loginWithClinicianCon() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Consumption"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Consumption"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
+//	public InClinicExperiencePage loginWithClinicianCon() throws Exception {
+//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Consumption"));
+//		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Consumption"));
+//		click(login_button);
+//		return new InClinicExperiencePage(driver);
+//	}
 	
-	public InClinicExperiencePage loginWithClinicianWrongClinic() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_WrongClinic"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_WrongClinic"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
+//	public InClinicExperiencePage loginWithClinicianWrongClinic() throws Exception {
+//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_WrongClinic"));
+//		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_WrongClinic"));
+//		click(login_button);
+//		return new InClinicExperiencePage(driver);
+//	}
 	
 	public ClinicInBoxPage loginAsClinicianCIB() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CIB"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_CIB"));
-		click(login_button);
-		return new ClinicInBoxPage(driver);
-	}
-	
-	public ClinicInBoxPage loginAsClinicianDIWACIB() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_DIWA_CIB"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_DIWA_CIB_PW"));
 		click(login_button);
 		return new ClinicInBoxPage(driver);
 	}
@@ -188,30 +164,6 @@ public class LoginPage extends BasePage {
 	public RegisterToGetVaccinatedPage openRegisterToGetVaccinatedPage() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url_citizenportal"));
 		return new RegisterToGetVaccinatedPage(driver);
-	}
-
-	public ClinicInBoxPage loginAsClinicianPneumo() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Pneumo_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Pneumo_ICE"));
-		click(login_button);
-		return new ClinicInBoxPage(driver);
-	}
-
-	public InClinicExperiencePage loginAsClinicianInfluenzaICE() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Influenza_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Influenza_ICE"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
-
-	public InClinicExperiencePage loginAsClinicianPneumoICE() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Pneumo_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Pneumo_ICE"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
 	}
 	
 	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
@@ -284,11 +236,6 @@ public class LoginPage extends BasePage {
 
 	public MainPageCP loginIntoCommunityPortalAsClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
-		return new MainPageCP(driver);
-	}
-
-	public MainPageCP loginIntoCommunityPortalAsDIWAClinician() throws Exception {
-		loginIntoCommunityPortalAs("user_CLINICIAN_diwa_CP", "password_CLINICIAN_PW_diwa_CP");
 		return new MainPageCP(driver);
 	}
 
