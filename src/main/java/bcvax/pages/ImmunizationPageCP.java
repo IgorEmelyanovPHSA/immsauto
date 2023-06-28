@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ImmunizationPageCP extends BasePage{
-
-    private By pir_submission_status_field_displayed = By.xpath("//span[@class='test-id__field-label'][text()='PIR Submission Status']");
     private By pathway_status_field_displayed = By.xpath("//span[@class='test-id__field-label'][text()='Pathway Status']");
     private By pir_immunization_id_field = By.xpath("//span[@class='test-id__field-label'][text()='PIR Immunization ID']/../..//span[@class='uiOutputText']");
     private By pir_submission_status_field_value = By.xpath("//span[@class='test-id__field-label'][text()='PIR Submission Status']/../..//span[@class='uiOutputTextArea']");
@@ -18,10 +16,12 @@ public class ImmunizationPageCP extends BasePage{
     public ImmunizationPageCP(WebDriver driver) {
         super(driver);
     }
+
     public String validatePirSubmissionStatusFieldIsDisplayed() throws InterruptedException {
+        Thread.sleep(500);
+        By pir_submission_status_field_displayed = By.xpath("//span[@class='test-id__field-label'][text()='PIR Submission Status']");
+        waitForElementToBeLocated(driver, pir_submission_status_field_displayed, 10);
         WebElement element = driver.findElement(pir_submission_status_field_displayed);
-        Thread.sleep(2000);
-        element.getText();
         return (element.getText());
     }
 

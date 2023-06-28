@@ -179,13 +179,15 @@ public class UserDefaultsPage extends BasePage{
             waitForElementToBeEnabled(driver, input_date_path, 10);
             input_date = driver.findElement(input_date_path);
             input_date.isEnabled();
+            input_date.clear();
         } catch(StaleElementReferenceException ex) {
             System.out.println("***DEBUG*** Stale element exception ***");
             Thread.sleep(500);
             waitForElementToBeEnabled(driver, input_date_path, 10);
             input_date = driver.findElement(input_date_path);
+            input_date.clear();
         }
-        input_date.clear();
+
         input_date.click();
         Thread.sleep(2000);
         input_date.sendKeys(todayAsString);

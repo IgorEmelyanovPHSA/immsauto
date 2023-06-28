@@ -108,6 +108,12 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         log("/*19----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
+        //In case of early booking screen appeared
+        try {
+            inClinicExperience_CP.selectEarlyBookingReason();
+        } catch(Exception ex) {
+            System.out.println("No early booking button. Continue...");
+        }
         log("/*20.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 

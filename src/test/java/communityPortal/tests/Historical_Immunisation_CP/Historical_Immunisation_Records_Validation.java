@@ -43,41 +43,32 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
-        Thread.sleep(2000);
 
         String field = profilePage.pirSubmissionStatusFieldIsDisplayed();
         log("/*9---- " + field + "is displayed --*/");
-        Thread.sleep(2000);
         int record_num = 1;
         String status = profilePage.pirSubmissionFieldStatus(record_num);
         log("/*10---- Pir Submission Field status is: " + status + " --*/");
         assertFalse(status.isEmpty());
-        Thread.sleep(5000);
         log("/*11---- Click Historical Immunization record --*/");
 
         profilePage.ClickHistoricalImmunizationRecord(record_num);
         ImmunizationPageCP immunizationPage = new ImmunizationPageCP(driver);
-        Thread.sleep(5000);
         String pirSubmissionStatus = immunizationPage.validatePirSubmissionStatusFieldIsDisplayed();
         log("/*12---- Field " + pirSubmissionStatus + "is displayed --*/");
         assertEquals(pirSubmissionStatusFieldValidation, pirSubmissionStatus);
-        Thread.sleep(2000);
         String pathwayStatus = immunizationPage.validatePathwayStatusFieldIsDisplayed();
         log("/*13---- Field " + pathwayStatus + "is displayed --*/");
         assertEquals(patwayStatusFieldValidation, pathwayStatus);
-        Thread.sleep(2000);
         log("/*14---- remediation needed checkbox is not checked --*/");
         immunizationPage.remidiationNeededCheckBox();
-        Thread.sleep(2000);
         String pirId = immunizationPage.pirImmunizationId();
         log("/*15---- Pir ID is: " + pirId + "--*/");
         assertNotNull(pirId);
-        Thread.sleep(2000);
         String pirSubmissionStatusFieldValue = immunizationPage.pirSubmissionStatusFieldValue();
         log("/*16---- Pir Submission Field status is: " + pirSubmissionStatusFieldValue + " --*/");
         assertEquals(pirSubmissionStatusFieldValue, status);
         //assertEquals(pirSubmissionField, pirSubmissionStatusFieldValue);
-        Thread.sleep(2000);
     }
 
     //@Test(priority = 2)
