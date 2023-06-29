@@ -208,6 +208,10 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         healthCloudConsolePage.validateSuccessfullyRegisteredPageDisplayed();
         Thread.sleep(20000);
 
+        log("/*37_1 ----Refresh page --*/");
+        common.refreshBrowser();
+        Thread.sleep(5000);
+
         log("/*38.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
         common.globalSearch(personalHealthNumber);
         Thread.sleep(5000);

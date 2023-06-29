@@ -147,6 +147,10 @@ public class CommonMethods extends BasePage {
         patient_Kenton_founded.click();
     }
 
+    public void refreshBrowser() throws InterruptedException {
+        driver.navigate().refresh();
+    }
+
 
 
 
