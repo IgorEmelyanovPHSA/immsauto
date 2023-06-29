@@ -110,7 +110,7 @@ public class PortalHealthConnectRegistryPage extends BasePage{
     private WebElement submit_registration_button;
     private By submit_registration_button_1 = By.xpath("(.//button[@aria-label = 'Submit registration'])[1]");
 
-    @FindBy(xpath = ".//strong[text() = 'Registration successful!']")
+    @FindBy(xpath = ".//strong[text() = 'Successfully registered!']") //Registration successful!
     private static WebElement registration_successful_page_validation;
 
     /*---------Constructor-------*/

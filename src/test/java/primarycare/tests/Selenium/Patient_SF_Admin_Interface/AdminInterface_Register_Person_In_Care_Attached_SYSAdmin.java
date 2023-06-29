@@ -202,7 +202,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
         log("/*36.---click button 'Finish registration'----*/");
         healthCloudConsolePage.clickFinishRegistration();
-        Thread.sleep(10000);
+        Thread.sleep(15000);
 
         log("/*37.--- Validate is 'Successfully registered!' page displayed? --*/");
         healthCloudConsolePage.validateSuccessfullyRegisteredPageDisplayed();
@@ -210,7 +210,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
         log("/*38.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
         common.globalSearch(personalHealthNumber);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         log("/*39.---Click on founded Patient--*/");
         common.clickOnFondedKentonPatient(legalFirstName, legalLastName);
