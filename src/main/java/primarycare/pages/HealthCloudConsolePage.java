@@ -40,6 +40,14 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement contact_name_actual_field_value;
     private By contact_name_actual_field_value_1 = By.xpath("(//span[text() ='Sandy Prior'])[3]");
 
+    @FindBy(xpath = "(//span[text() ='Kenton Troup'])[3]")
+    private WebElement contact_name_Attached_actual_field_value;
+    private By contact_name_Attached_actual_field_value_1 = By.xpath("(//span[text() ='Kenton Troup'])[3]");
+
+    @FindBy(xpath = "(.//lightning-formatted-text[text() ='Less than 5 km'])")
+    private WebElement distance_able_to_travel_Attached_actual_value;
+    private By distance_able_to_travel_Attached_actual_value_1 = By.xpath("(.//lightning-formatted-text[text() ='Less than 5 km'])");
+
     @FindBy(xpath = "//span[text() ='Richmond - West']")
     private WebElement primary_care_network_actual_field_value;
     private By primary_care_network_actual_field_value_1 = By.xpath("//span[text() ='Richmond - West']");
@@ -153,25 +161,30 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement communicarion_preference_Email_button;
     private By communicarion_preference_Email_button_1 = By.xpath("//span[text() ='Email']");
 
-    @FindBy(xpath = "(//span[text() ='No'])[1]")
-    private WebElement currently_No_family_doctor_button;
-    private By currently_No_family_doctor_button_1 = By.xpath("(//span[text() ='No'])[1]");
+    @FindBy(xpath = "(//span[text() ='Yes'])[1]")
+    private WebElement currently_Yes_family_doctor_button;
+    private By currently_Yes_family_doctor_button_1 = By.xpath("(//span[text() ='Yes'])[1]");
 
-    @FindBy(xpath = "//omnistudio-omniscript-typeahead[@data-omni-key = 'mostRecentPractitionerDoSearch']")
-    private WebElement most_recent_family_doctor;
-    private By most_recent_family_doctor_1 = By.xpath("//omnistudio-omniscript-typeahead[@data-omni-key = 'mostRecentPractitionerDoSearch']");
+    @FindBy(xpath = "//omnistudio-omniscript-typeahead[@data-omni-key = 'searchPractitioner']")
+    private WebElement current_family_doctor_search_component;
+    private By current_family_doctor_search_component_1 = By.xpath("//omnistudio-omniscript-typeahead[@data-omni-key = 'searchPractitioner']");
 
     @FindBy(xpath = "//span[text() ='Lori-Ann May Bus']")
-    private WebElement select_from_recent_fmily_dropdown_list;
-    private By select_from_recent_fmily_dropdown_list_1 = By.xpath("//span[text() ='Lori-Ann May Bus']");
+    private WebElement select_from_current_family_doctors_dropdown_list;
+    private By select_from_current_family_doctors_dropdown_list_1 = By.xpath("//span[text() ='Lori-Ann May Bus']");
 
-    @FindBy(xpath = "//omnistudio-omniscript-text[@data-omni-key = 'lastPractitionerVisit']")
-    private WebElement when_last_seen_family_doctor;
-    private By when_last_seen_family_doctor_1 = By.xpath("//omnistudio-omniscript-text[@data-omni-key = 'lastPractitionerVisit']");
+    @FindBy(xpath = ".//input[@placeholder ='Enter city or town']")
+    private WebElement practitioner_location;
+    private By practitioner_location_1 = By.xpath(".//input[@placeholder ='Enter city or town']");
+
+    @FindBy(xpath = ".//span[text() ='Not happy with the care received from a current family doctor or nurse practitioner']")
+    private WebElement not_happy_with_current_doctor_radiobutton;
+    private By not_happy_with_current_doctor_radiobutton_1 = By.xpath(".//span[text() ='Not happy with the care received from a current family doctor or nurse practitioner']");
 
     @FindBy(xpath = "//span[text() ='Less than 5 km']")
     private WebElement less_than_5km_radiobutton;
     private By less_than_5km_radiobutton_1 = By.xpath("//span[text() ='Less than 5 km']");
+
 
     @FindBy(xpath = "(//span[text() ='Female'])[1]")
     private WebElement gender_of_family_doctor_button;
@@ -261,14 +274,39 @@ public class HealthCloudConsolePage extends BasePage {
         WebElement element2 = driver.findElement(contact_name_actual_field_value_1);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element2);
         Thread.sleep(1000);
-        WebElement element3 = driver.findElement(status_actual_field_value_1);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element3);
+        WebElement element4 = driver.findElement(status_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element4);
         Thread.sleep(1000);
         waitForElementToBeLocated(driver, status_actual_field_value_1, 10);
         Thread.sleep(1000);
         priority_actual_field_value.isDisplayed();
         return (status_actual_field_value.getText());
     }
+
+    public String getStatusActualAttachedForValidation() throws InterruptedException {
+        //case_origin_actual_field_value.click();//let's change the focused on actual Case Detail window frame
+        //Thread.sleep(2000);
+        log("/*----scroll down to Status field --*/");
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+        //Thread.sleep(2000);
+        WebElement element1 = driver.findElement(primary_care_network_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element1);
+        Thread.sleep(1000);
+        WebElement element2 = driver.findElement(contact_name_Attached_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element2);
+        Thread.sleep(1000);
+        WebElement element3 = driver.findElement(distance_able_to_travel_Attached_actual_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element3);
+        Thread.sleep(1000);
+        WebElement element4 = driver.findElement(status_actual_field_value_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element4);
+        Thread.sleep(1000);
+        waitForElementToBeLocated(driver, status_actual_field_value_1, 10);
+        Thread.sleep(1000);
+        priority_actual_field_value.isDisplayed();
+        return (status_actual_field_value.getText());
+    }
+
 
     public String getAccountNameActualForValidation() throws InterruptedException {
         waitForElementToBeLocated(driver, account_name_actual_field_value_1, 10);
@@ -479,29 +517,39 @@ public class HealthCloudConsolePage extends BasePage {
         communicarion_preference_Email_button.click();
     }
 
-    public void clickNoFamilyDoctor() throws InterruptedException {
-        waitForElementToBeLocated(driver, currently_No_family_doctor_button_1, 10);
+    public void clickYesFamilyDoctor() throws InterruptedException {
+        waitForElementToBeLocated(driver, currently_Yes_family_doctor_button_1, 10);
         Thread.sleep(1000);
         log("/*----scroll down --*/");
-        WebElement element = driver.findElement(currently_No_family_doctor_button_1);
+        WebElement element = driver.findElement(currently_Yes_family_doctor_button_1);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
         Thread.sleep(2000);
-        currently_No_family_doctor_button.click();
+        currently_Yes_family_doctor_button.click();
     }
 
-    public void selectMostResentFamilyDoctor(String mostRecentPractitioner) throws InterruptedException {
-        waitForElementToBeLocated(driver, most_recent_family_doctor_1, 10);
+    public void selectCurrentFamilyDoctor(String currentPractitioner) throws InterruptedException {
+        waitForElementToBeLocated(driver, current_family_doctor_search_component_1, 10);
         Thread.sleep(1000);
-        most_recent_family_doctor.sendKeys(mostRecentPractitioner);
+        current_family_doctor_search_component.sendKeys(currentPractitioner);
         Thread.sleep(5000);
-        select_from_recent_fmily_dropdown_list.click();
+        select_from_current_family_doctors_dropdown_list.click();
         Thread.sleep(1000);
     }
 
-    public void enterWhenLastSeenFamilyDoctor(String lastPractitionerVisit) throws InterruptedException {
-        waitForElementToBeLocated(driver, when_last_seen_family_doctor_1, 10);
+    public void enterDoctorsCityOrTown(String cityOrTown) throws InterruptedException {
+        waitForElementToBeLocated(driver, practitioner_location_1, 10);
         Thread.sleep(1000);
-        when_last_seen_family_doctor.sendKeys(lastPractitionerVisit);
+        practitioner_location.sendKeys(cityOrTown);
+    }
+
+    public void choseWhyLookingForDoctor() throws InterruptedException {
+        waitForElementToBeLocated(driver, not_happy_with_current_doctor_radiobutton_1, 10);
+        Thread.sleep(1000);
+        log("/*----jump to component --*/");
+        WebElement element = driver.findElement(not_happy_with_current_doctor_radiobutton_1);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
+        Thread.sleep(2000);
+        not_happy_with_current_doctor_radiobutton.click();
     }
 
     public void choseHowFarDoctorFromTheirHome() throws InterruptedException {

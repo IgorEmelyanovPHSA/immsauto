@@ -37,9 +37,16 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
     private String email = "accountToDelete@phsa.ca";
     private String mobilePhone = "7788797899";
-    private String recentFamilyDoctor = "Lori-Ann May Bus";
-    private String whenLastSeenFamilyDoctor = "5 week ago";
+    private String currentFamilyDoctor = "Lori-Ann May Bus";
+    private String cityOrTown = "Richmond";
     private String language = "French";
+
+    private String caseOriginExpectedValue = "Phone";
+    private String priorityExpectedValue = "None";//"Medium" for UAT;
+    private String statusExpected = "Active";
+    private String accountNameExpected = "3113 Broadmoor";
+    private String caseReasonExpected = "Attached - Not happy with the care received from a current family doctor or nurse practitioner";
+
 
 
 
@@ -172,16 +179,20 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         healthCloudConsolePage.clickEmailCommunicationPreference();
         Thread.sleep(1000);
 
-        log("/*29.---Click button 'No' for Patient currently have a family doctor?----*/");
-        healthCloudConsolePage.clickNoFamilyDoctor();
+        log("/*29.---Click button 'Yes' for Patient currently have a family doctor?----*/");
+        healthCloudConsolePage.clickYesFamilyDoctor();
         Thread.sleep(1000);
 
-        log("/*30.---Select 'most recent Family doctor'" + recentFamilyDoctor +"----*/");
-        healthCloudConsolePage.selectMostResentFamilyDoctor(recentFamilyDoctor);
+        log("/*30.---Select current Family doctor'" + currentFamilyDoctor +"----*/");
+        healthCloudConsolePage.selectCurrentFamilyDoctor(currentFamilyDoctor);
         Thread.sleep(1000);
 
-        log("/*31.---Enter 'When last see a doctor'" + whenLastSeenFamilyDoctor +"----*/");
-        healthCloudConsolePage.enterWhenLastSeenFamilyDoctor(whenLastSeenFamilyDoctor);
+        log("/*31.---Enter Doctor's location 'city or town'" + cityOrTown +"----*/");
+        healthCloudConsolePage.enterDoctorsCityOrTown(cityOrTown);
+        Thread.sleep(1000);
+
+        log("/*31_1.---chose radiobutton 'Why looking for doctor?'----*/");
+        healthCloudConsolePage.choseWhyLookingForDoctor();
         Thread.sleep(1000);
 
         log("/*32.---chose radiobutton 'How far Doctor from their home?'----*/");
@@ -226,7 +237,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
 
         log("/*40.---Go to Related Tab--*/");
         healthCloudConsolePage.clickOnRelatedTab();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         log("---- Validation of Contact-Contact Relations(Related Contact)  ---*/");
 
@@ -252,6 +263,44 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         String primaryContactRelatedRoleActualValue = healthCloudConsolePage.getPrimaryContactRelatedRoleActualForValidation();
         log("/*---- Primary Contact Related Role the actual value is: " + primaryContactRelatedRoleActualValue + " --*/");
         assertEquals(primaryContactRelatedRoleActualValue, "Primary Contact");
+        Thread.sleep(2000);
+
+        log("/*45.---Go to Related Tab--*/");
+        healthCloudConsolePage.clickOnRelatedTab();
+        Thread.sleep(2000);
+
+        log("/*46.---Click on Case record link--*/");
+        healthCloudConsolePage.clickOnCaseRecord();
+        Thread.sleep(2000);
+
+        log("/*47.---- Validate field Case origin - 'Web'  ---*/");
+        String caseOriginActualValue = healthCloudConsolePage.getCaseOriginActualForValidation();
+        log("/*---- Case Origin actual value is: " + caseOriginActualValue + " --*/");
+        assertEquals(caseOriginActualValue, caseOriginExpectedValue);
+        Thread.sleep(2000);
+
+        log("/*48.---- Validate Priority  - 'None'  ---*/");
+        String priorityActualValue = healthCloudConsolePage.getPriorityActualForValidation();
+        log("/*---- Priority actual value is: " + priorityActualValue + " --*/");
+        assertEquals(priorityActualValue, priorityExpectedValue);
+        Thread.sleep(2000);
+
+        log("/*49.---- Validate Account name - '3113 Broadmoor'  ---*/");
+        String accountNameActual = healthCloudConsolePage.getAccountNameActualForValidation();
+        log("/*---- Account Name actual is: " + accountNameActual + " --*/");
+        assertEquals(accountNameActual, accountNameExpected);
+        Thread.sleep(2000);
+
+        log("/*50.---- Validate Case Reason - 'Attached - Not happy with the care received from a current family doctor or nurse practitioner'  ---*/");
+        String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
+        log("/*---Case Reason actual is: " + caseReasonActual + " --*/");
+        assertEquals(caseReasonActual, caseReasonExpected);
+        Thread.sleep(2000);
+
+        log("/*51.---- Validate Status - 'Active'  ---*/");
+        String statusActual = healthCloudConsolePage.getStatusActualAttachedForValidation();
+        log("/*---- Status actual is: " + statusActual + " --*/");
+        assertEquals(statusActual, statusExpected);
         Thread.sleep(2000);
 
     }
