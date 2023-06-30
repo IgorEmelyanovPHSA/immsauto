@@ -172,12 +172,17 @@ public class Portal_Self_Registration_for_Not_Attached_Patient extends BaseTest_
 
         log("/*29_1.----Select Home from Navigation Menu Dropdown --*/");
         common.selectHomeFromNavigationMenuDropdown();
-        Thread.sleep(2000);
+        Thread.sleep(20000);
 
         Thread.sleep(5000);
         log("/*29_2 ----Refresh page --*/");
         common.refreshBrowser();
+        Thread.sleep(10000);
+
         Thread.sleep(5000);
+        log("/*29_3 ----Refresh page --*/");
+        common.refreshBrowser();
+        Thread.sleep(10000);
 
         log("/*30.---Search for Patient by PHN " + legalFirstName + " "+ legalLastName +"--*/");
         common.globalSearch(personalHealthNumber);
