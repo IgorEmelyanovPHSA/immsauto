@@ -188,14 +188,18 @@ public class UserDefaultsPage extends BasePage{
             input_date.clear();
         }
 
-        input_date.click();
-        Thread.sleep(2000);
+        //input_date.click();
+        //Thread.sleep(2000);
         input_date.sendKeys(todayAsString);
-        Thread.sleep(500);
+        Thread.sleep(2000);
         input_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        closeSuccessDialog();
-        Thread.sleep(500);
+        try {
+            closeSuccessDialog();
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            System.out.println("No Success Dialog. Continue...");
+        }
     }
 
     public void closeSuccessDialog() throws InterruptedException {

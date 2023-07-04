@@ -28,7 +28,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	private String personalHealthNumber = "9746171121";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "All Ages - Atlin Health Centre";
+	String clinicNameToBook = "All Ages - Atlin Health Centre";
+	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 
 	String citizenName = "Hugues BCVaxLampard";
 	String consumptionLot;
@@ -71,7 +72,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
 		log("/*-- 4. Enter current date for UserDefaults --*/");
 		userDefaultPage.inputPreviousDateUserDefaults();
-
+		userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*-- 5.----- Click on Save defaults button --*/");
 		userDefaultPage.clickBtnSave();
 
@@ -126,6 +127,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 
+		//If there is early reason screen select Early Reason
+		try {
+			inClinicExperiencePage.selectEarlyBookingReason();
+		} catch (Exception ex) {
+			System.out.println("Tried to select early reason if exist. Continue...");
+		}
 		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 
@@ -133,7 +140,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickToSearchClinic();
 
 		log("/*25__.----search the Clinic " +clinicNameToSearch +" --*/");
-		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
+		inClinicExperiencePage.searchClinicName(clinicNameToBook);
 
 		log("/*--26.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();

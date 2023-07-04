@@ -2,9 +2,11 @@ package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
 import bcvax.pages.CommonMethods;
+import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
 import org.testng.annotations.BeforeMethod;
@@ -24,6 +26,7 @@ import static org.testng.Assert.assertTrue;
 public class BulkAdjustments extends BaseTest {
 	String supply_location_from;
 	String env;
+	MainPageOrg orgMainPage;
 	Map<String, Object> testData;
 
 	@BeforeMethod
@@ -64,7 +67,11 @@ public class BulkAdjustments extends BaseTest {
 		
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
@@ -176,8 +183,11 @@ public class BulkAdjustments extends BaseTest {
 
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
-
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
 		log("/*2.----Validate if Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 

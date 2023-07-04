@@ -185,6 +185,7 @@ public class ProfilesPage extends BasePage{
 
 
     public void clickRelatedTab() throws InterruptedException {
+        Thread.sleep(500);
         By related_tab_path = By.xpath("//a[text() = 'Related'] | //a[@title = 'Related']");
         waitForElementToBeEnabled(driver, related_tab_path, 10);
         WebElement related_tab = driver.findElement(related_tab_path);

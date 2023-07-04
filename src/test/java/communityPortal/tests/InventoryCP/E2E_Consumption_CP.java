@@ -72,6 +72,7 @@ public class E2E_Consumption_CP extends BaseTest {
         cpMainPage.clickUserDefaultsTab();
         log("/*9.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+
         userDefaultPage.inputCurrentDateUserDefaults();
         userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
@@ -157,7 +158,9 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*35_1.----Refresh page again - should not be like that again --*/");
+        Thread.sleep(500);
         inClinicExperience_CP.refreshBrowser();
+        Thread.sleep(500);
         log("/*36.----click on In-clinic Experience button --*/");
         inClinicExperience_CP.ClickGoToInClinicExperienceButton();
 
