@@ -585,6 +585,12 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
 		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
 		transfer_transaction_btn.click();
+		try {
+			clickCloseAlert();
+			Thread.sleep(500);
+		} catch(Exception ex) {
+			System.out.println("Success Dialog not found. Continue...");
+		}
 	}
 
 	public void clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(int countDraftTransactions, int numberOfRows) throws InterruptedException {

@@ -18,28 +18,14 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = ".//button[text() = 'Register New Citizen']")
 	private WebElement register_button;
 	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
-	
-	@FindBy(xpath = ".//span[@title='Clinic in a Box (IPM)']")
-	private WebElement clinicinbox_page_displayed;
 
-	private By cib_App_displayed1 = By.xpath(".//span[@title='Clinic in a Box (IPM)']");
-	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
-	private By click_cib_app1 = By.xpath("//p[text()='Clinic in a Box (IPM)']");
-	private By register_tab1 = By.xpath("(.//a[@title = 'Register'])");
-	
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
 	@FindBy(xpath = ".//lightning-input[@class = 'saInput slds-grow slds-form-element']")
 	private WebElement search_input;
 
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
-	
-	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
-	private WebElement create_Immunization_Record;
-	
-	@FindBy(xpath = "//option[contains(text(),'Select an option')]")
-	private WebElement select_an_option;
-	
+
 	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
 	private WebElement first_name;
 	private By first_name1 = By.xpath("(.//input[@name = 'FirstName'])");
@@ -69,17 +55,6 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "(.//button[@title = 'Next'])")
 	private WebElement next_button;
 
-	@FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
-	private WebElement covidmRna;
-	private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
-	
-	@FindBy(xpath = ".//input[@data-id = 'userinput']")
-	private WebElement search_clinic;
-	
-	@FindBy(xpath = "//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right']")
-	private WebElement inputDate;
-	private By inputDate1 = By.xpath("//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right']");
-	
 	@FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
 	private WebElement email;
 	private By email1 = By.xpath("(.//input[@name = 'PersonEmail'])");
@@ -92,65 +67,8 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement review_details;
 
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
-	
-	@FindBy(xpath = ".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya BCVaxVillage')]")
-	private WebElement click_on_citizen;
-	private By click_on_citizen1 = By.xpath(".//div[@aria-label = 'Profiles||List View']//a[contains(text(),'Maegan Tanya BCVaxVillage')]");
-	
-	@FindBy(xpath = "//button[text() = 'Confirm']")
-	private WebElement confirm_button;
-
-	private By yes_button_save_on_popup_window1 = By.xpath("//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]");
-	
-	@FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
-	private WebElement recordImmunizationBtn;
-	
-	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
-	private WebElement informed_consent_provider_dropdown;
-
-	@FindBy(xpath = "//input[@placeholder = 'Search People...']")
-	private WebElement immunizing_agent_provider_dropdown;
-
-	@FindBy(xpath = "//button[text() = 'Save Consent']")
-	private WebElement saveConsentButton;
-	private By saveConsentButton1 = By.xpath("//button[text() = 'Save Consent']");
-
-	@FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
-	private WebElement show_all_lot_numbers_checkbox;
-	
-	@FindBy(xpath = "//input[@data-id = 'select-sobject-id']")
-	private WebElement click_lot_number_dropdown;
-
-	private By selectSite1 = By.xpath("//button[@name='injectionSite']");
-
-	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
-
-	private By select_dosage1 = By.xpath("//span[@title='0.25']");
-	
-	@FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
-	private WebElement select_lot;
-	private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
-	
-	@FindBy(xpath = "(//button[@type='submit'])[1]")
-	private WebElement saveAgain;
-	
-	@FindBy(xpath = "//button[@title='Confirm & Save Administration']")
-	private WebElement confirmAndSave;
-	
-	//@FindBy(xpath = "//A[text()='06957433']/self::A")
-
-	
-	@FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
-	private WebElement lastConfirmAndSave;
-	private By lastConfirmAndSave1 = By.xpath( "//button[contains(text(),'Confirm and Save')]");
 
 	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-	
-	@FindBy(xpath = ".//a[@id = 'customTab__item']")
-	private WebElement appointment_tab;
-	
-	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
-	private WebElement click_more_search_tabs;
 
 	@FindBy(xpath = ".//span[text() = 'Select One']")
 	private WebElement click_early_booking_reason;
@@ -183,17 +101,6 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "(.//button[@name='navigateToICE'])")
 	private WebElement click_navigate_to_ICE_btn;
-	@FindBy(xpath = "//span[contains(text(),'I verify')]/..//span[@class='slds-checkbox_faux']")
-	private WebElement verify_contact_information_checkbox;
-
-	private By click_ice_app1 = By.xpath("//p[text()='In-Clinic Experience']");
-	@FindBy(xpath = ".//h1[text() = 'Client Search']")
-	private WebElement validate_home_client_search_page_open;
-	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
-	private WebElement select_inform_consent_provider;
-
-	@FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
-	private WebElement select_immunizing_agent_provider;
 
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
@@ -221,12 +128,6 @@ public class ClinicInBoxPage extends BasePage {
 			}
 		}
 	}
-	
-//	public void verifyIsClinicInBoxPageDisplayed() throws InterruptedException {
-//		Thread.sleep(500);
-//		waitForElementToBeVisible(driver, clinicinbox_page_displayed, 10);
-//		this.clinicinbox_page_displayed.isDisplayed();
-//	}
 
 	public boolean verifyIsClinicInBoxPageDisplayed() throws InterruptedException {
 		int timeout = 30000;
@@ -248,18 +149,6 @@ public class ClinicInBoxPage extends BasePage {
 		}
 		return found;
 	}
-
-	public void userClickCitizen() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_on_citizen, 10);
-		WebElement element = driver.findElement(click_on_citizen1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
-	public void clickConfirmButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, confirm_button, 10);
-		this.confirm_button.click();
-	}
 	
 	public void clickRelatedTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, click_related_tab1, 10);
@@ -268,208 +157,7 @@ public class ClinicInBoxPage extends BasePage {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
-	public void clickCreatImmunizationRecord() throws InterruptedException {
-		create_Immunization_Record.click();
-	}
-	
-	public void clickSelectAnOptionDropdown() {
-		this.select_an_option.click();
-	}
-	
-	public void selectOption(String vaccine) throws InterruptedException {
-		//waitForElementToBeLocated(driver,clinicName,10);
-		waitForElementToBeVisible(driver, covidmRna, 10);
-		WebElement search_input = driver.findElement(covidmRna2);
-		search_input.click();
-	}
-	
-	public void searchClinicLocation(String clinic) throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, search_clinic, 10);
-		Thread.sleep(2000);
-		search_clinic.sendKeys(clinic);
-		Thread.sleep(4000);
-		By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
-		driver.findElement(select_dropdown_option).click();
-		Thread.sleep(2000);
-	}
-	
-	public void clickTimeBox() throws InterruptedException {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 0);
-		Date today = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		String todayAsString = dateFormat.format(today);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		this.inputDate.click();
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(todayAsString);
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(Keys.ENTER);
-	}
-	
-	public boolean selectDateOfAdministration() throws InterruptedException {
-		if (!isDisplayed(inputDate1)) {
-			return false;
-		}
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -1);
-		Date today = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", inputDate);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		String todayAsString = dateFormat.format(today);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		this.inputDate.click();
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(todayAsString);
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(Keys.ENTER);
-		return true;
-	}
-	
-	public void clickRecordImmunization() throws InterruptedException {
-		waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
-		recordImmunizationBtn.click();
-	}
-	
-	public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
-		Thread.sleep(1000);
-		if (!isDisplayed(yes_button_save_on_popup_window1)) {
-			return false;
-		}
-		waitForElementToBeLocated(driver, yes_button_save_on_popup_window1, 10);
-		WebElement element = driver.findElement(yes_button_save_on_popup_window1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		return true;
-	}
-	
-	public void clickSaveConsent() throws InterruptedException {
-		waitForElementToBeVisible(driver, saveConsentButton, 10);
-		WebElement search_input = driver.findElement(saveConsentButton1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", search_input);
-		this.saveConsentButton.click();
-		Thread.sleep(3000);
-	}
 
-	public void clickToClose() throws InterruptedException {
-		Thread.sleep(500);
-		By close_button_diwa_path = By.xpath("//*[@class='slds-icon slds-icon_large']");
-		waitForElementToBeEnabled(driver, close_button_diwa_path, 10);
-		WebElement close_button_diwa = driver.findElement(close_button_diwa_path);
-		close_button_diwa.click();
-	}
-
-	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informed_consent_provider_dropdown);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, informed_consent_provider_dropdown, 10);
-		Thread.sleep(2000);
-		informed_consent_provider_dropdown.click();
-		Thread.sleep(5000);
-		informed_consent_provider_dropdown.sendKeys(Provider);
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_inform_consent_provider, 10);
-		Thread.sleep(5000);
-		select_inform_consent_provider.click();
-		Thread.sleep(2000);
-	}
-
-	public void selectImmunizingAgentProvider(String Provider) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", immunizing_agent_provider_dropdown);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, immunizing_agent_provider_dropdown, 10);
-		Thread.sleep(2000);
-		immunizing_agent_provider_dropdown.click();
-		Thread.sleep(5000);
-		immunizing_agent_provider_dropdown.sendKeys(Provider);
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_immunizing_agent_provider, 10);
-		Thread.sleep(5000);
-		select_immunizing_agent_provider.click();
-		Thread.sleep(2000);
-	}
-
-	public void selectLot() throws InterruptedException {
-		waitForElementToBeVisible(driver, select_lot, 10);
-		Thread.sleep(2000);
-		select_lot.click();
-	}
-
-	public void saveImmunizationInformation() throws InterruptedException {
-		saveAgain.click();
-	}
-	
-	public void confirmAndSaveAdministration() throws InterruptedException {
-		confirmAndSave.click();
-	}
-
-	public void clickOkForExpiredLot() throws InterruptedException {
-		Thread.sleep(1000);
-		System.out.println("Check if the expired lot message appears. If yes click OK");
-		try {
-			WebElement modalBox = driver.findElement(By.xpath("//div[@class = 'slds-modal__container']"));
-			modalBox.findElement(By.xpath("//button[text() = 'OK']")).click();
-			Thread.sleep(2000);
-		}
-		catch(Exception ex) {
-			System.out.println("No expired lots");
-		}
-
-	}
-	public void summaryConfirmAndSave() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", lastConfirmAndSave);
-		waitForElementToBeLocated(driver, lastConfirmAndSave1, 10);
-		lastConfirmAndSave.click();
-	}
-
-	public void clickShowAllLotNumbersCheckBox()throws InterruptedException{
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, show_all_lot_numbers_checkbox, 10);
-		Thread.sleep(2000);
-		show_all_lot_numbers_checkbox.click();
-		Thread.sleep(2000);
-	}
-	
-	public void clickLotNumberDropDown() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_lot_number_dropdown);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_lot_number_dropdown, 10);
-		Thread.sleep(2000);
-		click_lot_number_dropdown.click();
-		Thread.sleep(2000);
-	}
-	
-	public void selectInjectionSite() throws InterruptedException {
-		waitForElementToBeLocated(driver, selectSite1, 10);
-		WebElement element = driver.findElement(selectSite1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, select_injection_site_value1, 10);
-		WebElement element1 = driver.findElement(select_injection_site_value1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-	}
-	
-	public void selectDosage() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_dosage_field1, 10);
-		WebElement element = driver.findElement(select_dosage_field1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, select_dosage1, 10);
-		WebElement element1 = driver.findElement(select_dosage1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-	}
-	
 	public void enterFirstName(String firstname) throws InterruptedException {
 		waitForElementToBeLocated(driver, first_name1, 10);
 		first_name.sendKeys(firstname);
@@ -593,12 +281,6 @@ public class ClinicInBoxPage extends BasePage {
 		select_early_booking_reason.click();
 	}
 	
-	public void clickOnMoreSearchTabs() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
-		click_more_search_tabs.click();
-	}
-	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
 		Thread.sleep(2000);
@@ -687,47 +369,6 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(500);
 	}
 	
-	public boolean displayClinicInBoxApp() {
-		return isDisplayed(cib_App_displayed1);
-	}
-	
-	public void cIBApp() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-		WebElement element = driver.findElement(select_app_launcher1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
-		waitForElementToBeLocated(driver, click_cib_app1, 10);
-		WebElement element1 = driver.findElement(click_cib_app1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-		Thread.sleep(2000);
-	}
-	
-	public void selectICEFromApp() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-		WebElement element = driver.findElement(select_app_launcher1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, click_ice_app1, 10);
-		WebElement element1 = driver.findElement(click_ice_app1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-		Thread.sleep(2000);
-	}
-	
-	public boolean validateHomePageShownUp() throws InterruptedException {
-		try {
-			waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
-			log("/*---Home page-Client Search page shown up");
-			return true;
-		} catch (NoSuchElementException e) {
-			log("/*---no Home page-Client Search page show up");
-			return false;
-		}
-	}
-	
 	public void searchForCitizen(String citizen) throws InterruptedException {
 		waitForElementToBeVisible(driver, search_assistant, 10);
 		search_assistant.click();
@@ -735,13 +376,6 @@ public class ClinicInBoxPage extends BasePage {
 		search_input.click();
 		search_input.sendKeys(citizen);
 		search_input.sendKeys(Keys.RETURN);
-	}
-
-	public void clickRegisterTab() throws InterruptedException {
-		waitForElementToBeLocated(driver, register_tab1, 10);
-		WebElement element = driver.findElement(register_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
 	}
 
 	public void selectOneOption(String vaccine) throws InterruptedException {

@@ -120,7 +120,12 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+		//If there is early reason screen select Early Reason
+		try {
+			inClinicExperience.selectEarlyBookingReason();
+		} catch (Exception ex) {
+			System.out.println("Tried to select early reason if exist. Continue...");
+		}
 		inClinicExperience.clickOnVaccinationCheckbox();
 
 		log("/*28.----select 'Search by Clinic name' tab --*/");
@@ -164,7 +169,18 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 
 		log("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");
-		inClinicExperience.selectVaccineAgent();
+		try {
+			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperience.selectVaccineAgent();
+		} catch(Exception ex) {
+			log("/*46.---Open Today's appointments from Home page --*/");
+
+			inClinicExperience.clickTodayAppointments();
+			log("/*47.---Open Today appointment Details --*/");
+			inClinicExperience.clickTodayAppointmentCaseViewButton();
+			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperience.selectVaccineAgent();
+		}
 
 		log("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();

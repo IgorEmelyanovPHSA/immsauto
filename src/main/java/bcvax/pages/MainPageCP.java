@@ -207,7 +207,8 @@ public class MainPageCP extends BasePage{
         waitForElementToBeEnabled(driver, user_default_tab_path, 10);
         WebElement element = driver.findElement(user_default_tab_path);
         element.click();
-        Thread.sleep(500);
+        //Try to avoid stale elelemnt exception
+        Thread.sleep(2000);
         return new UserDefaultsPage(driver);
     }
 

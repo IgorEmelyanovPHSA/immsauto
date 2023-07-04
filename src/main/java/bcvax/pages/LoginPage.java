@@ -240,7 +240,7 @@ public class LoginPage extends BasePage {
 	}
 
 	public MainPageCP loginIntoCommunityPortalAsInventoryClinician() throws Exception {
-		loginIntoCommunityPortalAs("user_inventory_CLINICIAN_CP", "password_inventory_CLINICIAN_PW_CP");
+		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
 		return new MainPageCP(driver);
 	}
 
