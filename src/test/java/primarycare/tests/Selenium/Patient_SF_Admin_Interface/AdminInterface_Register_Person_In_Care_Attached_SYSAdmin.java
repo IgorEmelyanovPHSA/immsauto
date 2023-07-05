@@ -45,8 +45,9 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
     private String priorityExpectedValue = "None";//"Medium" for UAT;
     private String statusExpected = "Active";
     private String accountNameExpected = "3113 Broadmoor";
+    private String primaryCareNetworkExpected = "Richmond - West";
     private String caseReasonExpected = "Attached - Not happy with the care received from a current family doctor or nurse practitioner";
-
+    private String caseCommentExpected = "Practitioner Location: Richmond";
 
 
 
@@ -235,7 +236,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         common.clickOnFondedKentonPatient(legalFirstName, legalLastName);
         Thread.sleep(2000);
 
-        log("/*40.---Go to Related Tab--*/");
+        log("/*40.---Go to Patient Account Related Tab--*/");
         healthCloudConsolePage.clickOnRelatedTab();
         Thread.sleep(5000);
 
@@ -265,15 +266,11 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         assertEquals(primaryContactRelatedRoleActualValue, "Primary Contact");
         Thread.sleep(2000);
 
-        log("/*45.---Go to Related Tab--*/");
-        healthCloudConsolePage.clickOnRelatedTab();
-        Thread.sleep(2000);
-
         log("/*46.---Click on Case record link--*/");
         healthCloudConsolePage.clickOnCaseRecord();
         Thread.sleep(2000);
 
-        log("/*47.---- Validate field Case origin - 'Web'  ---*/");
+        log("/*47.---- Validate field Case origin - 'Phone'  ---*/");
         String caseOriginActualValue = healthCloudConsolePage.getCaseOriginActualForValidation();
         log("/*---- Case Origin actual value is: " + caseOriginActualValue + " --*/");
         assertEquals(caseOriginActualValue, caseOriginExpectedValue);
@@ -291,16 +288,58 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         assertEquals(accountNameActual, accountNameExpected);
         Thread.sleep(2000);
 
-        log("/*50.---- Validate Case Reason - 'Attached - Not happy with the care received from a current family doctor or nurse practitioner'  ---*/");
+        log("/*50.---- Validate Primary Care Network - 'Richmond - West'  ---*/");
+        String primaryCareNetworkActual = healthCloudConsolePage.getPrimaryCareNetworkActualForValidation();
+        log("/*----Primary Care Network actual is: " + primaryCareNetworkActual + " --*/");
+        assertEquals(primaryCareNetworkActual, primaryCareNetworkExpected);
+        Thread.sleep(2000);
+
+        log("/*51.---- Validate Case Reason - 'Attached - Not happy with the care received from a current family doctor or nurse practitioner'  ---*/");
         String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
         log("/*---Case Reason actual is: " + caseReasonActual + " --*/");
         assertEquals(caseReasonActual, caseReasonExpected);
         Thread.sleep(2000);
 
-        log("/*51.---- Validate Status - 'Active'  ---*/");
+        log("/*52.---- Validate Status - 'Active'  ---*/");
         String statusActual = healthCloudConsolePage.getStatusActualAttachedForValidation();
         log("/*---- Status actual is: " + statusActual + " --*/");
         assertEquals(statusActual, statusExpected);
+        Thread.sleep(2000);
+
+        log("/*53.---Go to the Case Related Tab--*/");
+        healthCloudConsolePage.clickOnCaseRelatedTab();
+        Thread.sleep(2000);
+
+        log("/*54.---- Validate Case Comments - 'Practitioner Location: Richmond'  ---*/");
+        String caseCommentActual = healthCloudConsolePage.getCaseCommentActualForValidation();
+        log("/*---Case Comment actual is: " + caseCommentActual + " --*/");
+        assertEquals(caseCommentActual, caseCommentExpected);
+        Thread.sleep(2000);
+
+        log("---- Validation of Case -> Related -> Contact Roles  ---*/");
+
+        log("/*55.---- Validate the Case Caller's Contact Name: 'SELENIUM Social'  ---*/");
+        String caseContactActualValue = healthCloudConsolePage.getCaseContactNameActualForValidation();
+        log("/*---- Case Contact(Caller's) Name the actual value is: " + caseContactActualValue + " --*/");
+        assertEquals(caseContactActualValue, callerName);
+        Thread.sleep(2000);
+
+        log("/*56.---- Validate the Case Caller's Role: 'Submitted By' ---*/");
+        String caseCallerRoleActualValue = healthCloudConsolePage.getCaseCallerRoleActualForValidation();
+        log("/*---- Case Contact(Caller's) Role the actual value is: " + caseCallerRoleActualValue + " --*/");
+        assertEquals(caseCallerRoleActualValue, "Submitted By");
+        Thread.sleep(2000);
+
+        log("/*57.---- Validate the Case Practitioner Contact Name: 'Lori-Ann May Bus'  ---*/");
+        String casePractitionerContactNameActualValue = healthCloudConsolePage.getCasePractitionerContactNameActualForValidation();
+        log("/*---- Case Practitioner Name the actual value is: " + casePractitionerContactNameActualValue + " --*/");
+        assertEquals(casePractitionerContactNameActualValue, currentFamilyDoctor);
+        Thread.sleep(2000);
+
+        log("/*58.---- Validate the Case Practitioner Role: 'Current Practitioner'  ---*/");
+        String casePractitionerRoleActualValue = healthCloudConsolePage.getCaseContactPractitionerRoleActualForValidation();
+        log("/*---- Case Practitioner Role the actual value is: " + casePractitionerRoleActualValue + " --*/");
+        assertEquals(casePractitionerRoleActualValue, "Current Practitioner");
         Thread.sleep(2000);
 
     }

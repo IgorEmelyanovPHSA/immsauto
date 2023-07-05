@@ -12,6 +12,11 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement patient_account_Related_tab;
     private By patient_account_Related_tab_1 = By.xpath(".//a[text() = 'Related']");
 
+    @FindBy(xpath = "(.//a[text() = 'Related'])[2]")
+    private WebElement case_Related_tab;
+    private By case_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])[2]");
+
+
     @FindBy(xpath = ".//a[@title='Attachment Registry']")
     private WebElement case_record;
     private By case_record_1 = By.xpath(".//a[@title='Attachment Registry']");
@@ -213,17 +218,38 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement caller_name_actual_field_value;
     private By caller_name_actual_field_value_1 = By.xpath("//span[text() ='SELENIUM Social']");
 
+    @FindBy(xpath = "(//span[text() ='SELENIUM Social'])[2]")
+    private WebElement case_caller_name_actual_field_value;
+    private By case_caller_name_actual_field_value_1 = By.xpath("(//span[text() ='SELENIUM Social'])[2]");
+
+
     @FindBy(xpath = "//span[text() ='Igor PrimaryContactName']")
     private WebElement primary_contact_name_actual_field_value;
     private By primary_contact_name_actual_field_value_1 = By.xpath("//span[text() ='Igor PrimaryContactName']");
+
+    @FindBy(xpath = "//span[text() ='Lori-Ann May Bus']")
+    private WebElement case_practitioner_contact_name_actual_field_value;
+    private By case_practitioner_contact_name_actual_field_value_1 = By.xpath("//span[text() ='Lori-Ann May Bus']");
 
     @FindBy(xpath = ".//a[@title = 'Social Worker']")
     private WebElement caller_related_role_actual_field_value;
     private By caller_related_role_actual_field_value_1 = By.xpath(".//a[@title = 'Social Worker']");
 
+    @FindBy(xpath = ".//lst-formatted-text[text() = 'Submitted By']")
+    private WebElement case_caller_role_actual_field_value;
+    private By case_caller_role_actual_field_value_1 = By.xpath(".//lst-formatted-text[text() = 'Submitted By']");
+
     @FindBy(xpath = ".//a[@title ='Primary Contact']")
     private WebElement primary_contact_related_role_actual_field_value;
     private By primary_contact_related_role_actual_field_value_1 = By.xpath(".//a[@title ='Primary Contact']");
+
+    @FindBy(xpath = ".//lst-formatted-text[text() ='Current Practitioner']")
+    private WebElement case_contact_practitioner_role_actual_field_value;
+    private By case_contact_practitioner_role_actual_field_value_1 = By.xpath(".//lst-formatted-text[text() ='Current Practitioner']");
+
+    @FindBy(xpath = "//span[text() ='Practitioner Location: Richmond']")
+    private WebElement case_comment_actual_field_value;
+    private By case_comment_actual_field_value_1 = By.xpath("//span[text() ='Practitioner Location: Richmond']");
 
 
     /*---------Constructor-------*/
@@ -238,6 +264,14 @@ public class HealthCloudConsolePage extends BasePage {
         WebElement element = driver.findElement(patient_account_Related_tab_1);
         Thread.sleep(2000);
         isDisplayed(patient_account_Related_tab_1);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void clickOnCaseRelatedTab() throws InterruptedException {
+        WebElement element = driver.findElement(case_Related_tab_1);
+        Thread.sleep(2000);
+        isDisplayed(case_Related_tab_1);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
@@ -313,6 +347,13 @@ public class HealthCloudConsolePage extends BasePage {
         Thread.sleep(2000);
         account_name_actual_field_value.isDisplayed();
         return (account_name_actual_field_value.getText());
+    }
+
+    public String getPrimaryCareNetworkActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, primary_care_network_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        primary_care_network_actual_field_value.isDisplayed();
+        return (primary_care_network_actual_field_value.getText());
     }
 
     public String getCaseReasonActualForValidation() throws InterruptedException {
@@ -613,11 +654,25 @@ public class HealthCloudConsolePage extends BasePage {
         return (caller_name_actual_field_value.getText());
     }
 
+    public String getCaseContactNameActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, case_caller_name_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        case_caller_name_actual_field_value.isDisplayed();
+        return (case_caller_name_actual_field_value.getText());
+    }
+
     public String getPrimaryContactNameActualForValidation() throws InterruptedException {
         waitForElementToBeLocated(driver, primary_contact_name_actual_field_value_1, 10);
         Thread.sleep(2000);
         primary_contact_name_actual_field_value.isDisplayed();
         return (primary_contact_name_actual_field_value.getText());
+    }
+
+    public String getCasePractitionerContactNameActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, case_practitioner_contact_name_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        case_practitioner_contact_name_actual_field_value.isDisplayed();
+        return (case_practitioner_contact_name_actual_field_value.getText());
     }
 
     public String getCallerRelatedRoleActualForValidation() throws InterruptedException {
@@ -636,6 +691,22 @@ public class HealthCloudConsolePage extends BasePage {
         return textReturn;
     }
 
+    public String getCaseCallerRoleActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, case_caller_role_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        case_caller_role_actual_field_value.isDisplayed();
+        Thread.sleep(2000);
+        return (case_caller_role_actual_field_value.getText());
+
+        //WebElement element = driver.findElement(case_caller_role_actual_field_value_1);
+        //Thread.sleep(2000);
+        //case_caller_role_actual_field_value.isDisplayed();
+        //Thread.sleep(2000);
+        //JavascriptExecutor executor = (JavascriptExecutor) driver;
+        //String textReturn = (String) executor.executeScript("return arguments[0].textContent;", element);
+        //return textReturn;
+    }
+
     public String getPrimaryContactRelatedRoleActualForValidation() throws InterruptedException {
         WebElement element = driver.findElement(primary_contact_related_role_actual_field_value_1);
         Thread.sleep(2000);
@@ -644,6 +715,28 @@ public class HealthCloudConsolePage extends BasePage {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         String textReturn = (String) executor.executeScript("return arguments[0].textContent;", element);
         return textReturn;
+    }
+    public String getCaseContactPractitionerRoleActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, case_contact_practitioner_role_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        case_contact_practitioner_role_actual_field_value.isDisplayed();
+        Thread.sleep(2000);
+        return (case_contact_practitioner_role_actual_field_value.getText());
+
+        //WebElement element = driver.findElement(case_contact_practitioner_role_actual_field_value_1);
+        //Thread.sleep(2000);
+        //case_contact_practitioner_role_actual_field_value.isDisplayed();
+        //Thread.sleep(2000);
+        //JavascriptExecutor executor = (JavascriptExecutor) driver;
+        //String textReturn = (String) executor.executeScript("return arguments[0].textContent;", element);
+        //return textReturn;
+    }
+
+    public String getCaseCommentActualForValidation() throws InterruptedException {
+        waitForElementToBeLocated(driver, case_comment_actual_field_value_1, 10);
+        Thread.sleep(2000);
+        case_comment_actual_field_value.isDisplayed();
+        return (case_comment_actual_field_value.getText());
     }
 
 
