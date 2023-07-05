@@ -182,9 +182,9 @@ public class HealthCloudConsolePage extends BasePage {
     private WebElement practitioner_location;
     private By practitioner_location_1 = By.xpath(".//input[@placeholder ='Enter city or town']");
 
-    @FindBy(xpath = ".//span[text() ='Not happy with the care received from a current family doctor or nurse practitioner']")
-    private WebElement not_happy_with_current_doctor_radiobutton;
-    private By not_happy_with_current_doctor_radiobutton_1 = By.xpath(".//span[text() ='Not happy with the care received from a current family doctor or nurse practitioner']");
+    @FindBy(xpath = ".//span[text() ='Family doctor or nurse practitioner is not accepting additional family members']")
+    private WebElement doctor_is_not_accepting_additional_family_members_radiobutton;
+    private By doctor_is_not_accepting_additional_family_members_radiobutton_1 = By.xpath(".//span[text() ='Family doctor or nurse practitioner is not accepting additional family members']");
 
     @FindBy(xpath = "//span[text() ='Less than 5 km']")
     private WebElement less_than_5km_radiobutton;
@@ -584,13 +584,13 @@ public class HealthCloudConsolePage extends BasePage {
     }
 
     public void choseWhyLookingForDoctor() throws InterruptedException {
-        waitForElementToBeLocated(driver, not_happy_with_current_doctor_radiobutton_1, 10);
+        waitForElementToBeLocated(driver, doctor_is_not_accepting_additional_family_members_radiobutton_1, 10);
         Thread.sleep(1000);
         log("/*----jump to component --*/");
-        WebElement element = driver.findElement(not_happy_with_current_doctor_radiobutton_1);
+        WebElement element = driver.findElement(doctor_is_not_accepting_additional_family_members_radiobutton_1);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
         Thread.sleep(2000);
-        not_happy_with_current_doctor_radiobutton.click();
+        doctor_is_not_accepting_additional_family_members_radiobutton.click();
     }
 
     public void choseHowFarDoctorFromTheirHome() throws InterruptedException {
@@ -622,6 +622,10 @@ public class HealthCloudConsolePage extends BasePage {
         Actions actions = new Actions(driver);
         actions.sendKeys(Language).build().perform();
         Thread.sleep(5000);
+        select_from_language_dropdown_list.isDisplayed();
+        Thread.sleep(5000);
+        //JavascriptExecutor executor = (JavascriptExecutor) driver;
+        //executor.executeScript("arguments[0].click();", element);
         select_from_language_dropdown_list.click();
         Thread.sleep(1000);
     }

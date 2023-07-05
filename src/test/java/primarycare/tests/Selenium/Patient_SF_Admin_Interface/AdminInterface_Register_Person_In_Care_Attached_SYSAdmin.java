@@ -46,7 +46,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
     private String statusExpected = "Active";
     private String accountNameExpected = "3113 Broadmoor";
     private String primaryCareNetworkExpected = "Richmond - West";
-    private String caseReasonExpected = "Attached - Not happy with the care received from a current family doctor or nurse practitioner";
+    private String caseReasonExpected = "Attached - Family doctor or nurse practitioner is not accepting additional family members";
     private String caseCommentExpected = "Practitioner Location: Richmond";
 
 
@@ -294,7 +294,7 @@ public class AdminInterface_Register_Person_In_Care_Attached_SYSAdmin extends Ba
         assertEquals(primaryCareNetworkActual, primaryCareNetworkExpected);
         Thread.sleep(2000);
 
-        log("/*51.---- Validate Case Reason - 'Attached - Not happy with the care received from a current family doctor or nurse practitioner'  ---*/");
+        log("/*51.---- Validate Case Reason - 'Attached - doctor_is_not_accepting_additional_family_members_radiobutton'  ---*/");
         String caseReasonActual = healthCloudConsolePage.getCaseReasonActualForValidation();
         log("/*---Case Reason actual is: " + caseReasonActual + " --*/");
         assertEquals(caseReasonActual, caseReasonExpected);

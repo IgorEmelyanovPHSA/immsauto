@@ -62,7 +62,7 @@ public class Portal_Self_Registration_for_Not_Attached_Patient extends BaseTest_
 
         log("/*5.---Click Register my household button--*/");
         portalHealthConnectRegistryPage.clickRegisterMyHouseholdButton();
-        Thread.sleep(10000);
+        Thread.sleep(20000);
 
         log("/*6.---Enter First Name " +legalFirstName +"--*/");
         portalHealthConnectRegistryPage.enterFirstName(legalFirstName);
