@@ -3,6 +3,7 @@ package bcvax.tests.InClinicExperience;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,7 +25,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 	private String personalHealthNumber = "9746171121";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	String supplyLocationConsumption;
 	MainPageOrg orgMainPage;
 	String consumptionLot;
 	String consumptionDose;
@@ -44,14 +45,16 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
-		InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
-
+		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
+		orgMainPage = loginPage.orgLoginAsClinicianICE();
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		inClinicExperience.verifyIsICEpageDisplayed();
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+			log("/*3.--- Navigate to In Clinic Experience App --*/");
+			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		}
 
-		log("/*3.--- Navigate to In Clinic Experience App --*/");
-		inClinicExperience.selectICEFromApp();
-
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 
@@ -60,9 +63,9 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		userDefaultsPage.inputCurrentDateUserDefaults();
-
+		userDefaultsPage.selectUserDefaultLocation(supplyLocationConsumption);
 		log("/*7.----- Click on Save defaults button --*/");
-		inClinicExperience.clickSaveDefaultsButton();
+		userDefaultsPage.clickBtnSave();
 
 		log("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
@@ -131,8 +134,8 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*28.----select 'Search by Clinic name' tab --*/");
 		inClinicExperience.selectSearchByClinicNameTab();
 
-		log("/*29.----search the Clinic " +clinicNameToSearch +" --*/");
-		inClinicExperience.searchClinicName(clinicNameToSearch);
+		log("/*29.----search the Clinic " + supplyLocationConsumption +" --*/");
+		inClinicExperience.searchClinicName(supplyLocationConsumption);
 
 		log("/*30.----click on Option Facility location  --*/");
 		inClinicExperience.clickOnFacilityOptionLocation();

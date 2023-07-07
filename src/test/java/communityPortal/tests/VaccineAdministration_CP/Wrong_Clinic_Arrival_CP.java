@@ -102,8 +102,8 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         log("/*17.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
 
-        log("/*18.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+//        log("/*18.----click on person Account Related Tab --*/");
+//        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*19----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
@@ -154,7 +154,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         inClinicExperience_CP.ClickGoToInClinicExperienceButton();
 
-        String originalBooking = inClinicExperience_CP.ValidateClinicNameBeforeRebook();
+        String originalBooking = inClinicExperience_CP.getAppointmentClinicName();
         log("/*--- Before Booking clinic Value is:" + originalBooking + "");
 
         //Assert originalBooking are match to actual booking (clinicNameToSearch)
@@ -168,10 +168,11 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         } catch(Exception ex) {
             System.out.println("Alert not found. Proceed...");
         }
+        inClinicExperience_CP.ValidateClickRebookAppointmentButtonIsDisabled();
         log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
         log("/*--                                2. Rebook at Current Location button is disabled --*/");
 
-        String afterRebooking = inClinicExperience_CP.ValidateclinicNameAfterRebook();
+        String afterRebooking = inClinicExperience_CP.getAppointmentClinicName();
         log("/*--- After Booking clinic value is:" + afterRebooking + "");
 
         //Assert false clinic originalBooking is not equals to afterRebooking

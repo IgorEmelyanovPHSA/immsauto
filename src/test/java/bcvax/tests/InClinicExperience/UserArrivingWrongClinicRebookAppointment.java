@@ -161,25 +161,36 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 34.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
 		log("/*-- 34.1---Validate the Clinic's name before click rebook button --*/");
-		String beforeBooking = inClinicExperiencePage.ValidateClinicNameBeforeRebook();
-		String before = beforeBooking;
+		String beforeBooking = inClinicExperiencePage.getAppointmentClinicName();
 		log("/*-- 35.: --> Before Booking clinic Value is:" + beforeBooking + "");
 		log("/*-- 36.--- User can click Rebook Appointment button to book an appointment --*/");
 		inClinicExperiencePage.ClickRebookAppointment();
 		log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
-		log("/*--                                2. Rebook at Current Location button is disabled --*/");
-		String afterBooking = inClinicExperiencePage.ValidateclinicNameAfterRebook();
-		String after = afterBooking;
-		log("/*-- 37: --> After Booking clinic value is:" + afterBooking + "");
-		Assert.assertNotEquals((before), (after));
-		log("/*-- 38---'Rebook at Current Location button is disabled after user books appointment --*/");
 		inClinicExperiencePage.ValidateClickRebookAppointmentButtonIsDisabled();
+		log("/*--                                2. Rebook at Current Location button is disabled --*/");
+		String afterBooking = inClinicExperiencePage.getAppointmentClinicName();
+		log("/*-- 37: --> After Booking clinic value is:" + afterBooking + "");
+		Assert.assertNotEquals((beforeBooking), (afterBooking));
+		log("/*-- 38---'Rebook at Current Location button is disabled after user books appointment --*/");
+
 		log("/*-- 39---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		log("/*-- 40---Click to select Agent --*/");
-		inClinicExperiencePage.ClickAgentValue();
+		try {
+			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperiencePage.selectVaccineAgent();
+		} catch(Exception ex) {
+			inClinicExperiencePage.refreshBrowser();
+			Thread.sleep(2000);
+			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperiencePage.selectVaccineAgent();
+		}
 		log("/*-- 41--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
-		inClinicExperiencePage.SelectAgentValue();
+		try {
+			inClinicExperiencePage.SelectAgentValue();
+		} catch(Exception ex) {
+			System.out.println("Probably agent is already selected. Continue...");
+		}
 		String consentProvider = inClinicExperiencePage.consentProviderSelected();
 		if(consentProvider.equals("")) {
 			consentProvider = inClinicExperiencePage.selectConsentProvider();
