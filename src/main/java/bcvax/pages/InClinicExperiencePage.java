@@ -237,10 +237,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	private By click_select_search_clinic1 = By.xpath(".//a[text()='Search by clinic name']");
 
-	@FindBy(xpath = "//lightning-formatted-text[text()='All Ages - Atlin Health Centre']")
-	private WebElement validate_clinic_name_before_booking;
-	private By validate_clinic_name_before_booking1 = By.xpath("//lightning-formatted-text[text()='All Ages - Atlin Health Centre']");
-
 	@FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
 	private WebElement Create_Immunization_Record;
 	private By Create_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
@@ -944,7 +940,7 @@ public class InClinicExperiencePage extends BasePage {
 			waitForElementToBeLocated(driver, appointment_confirm_message_path, 10);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
-		} catch (NoSuchElementException e) {
+		} catch (TimeoutException e) {
 			System.out.println("/*---the screen does not show up 'Appointment confirmed!'");
 			return false;
 		}
@@ -953,20 +949,31 @@ public class InClinicExperiencePage extends BasePage {
 	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
 		Thread.sleep(500);
 		By in_clinic_experience_app_path = By.xpath("//button[@name='navigateToICE']");
-		waitForElementToBeEnabled(driver, in_clinic_experience_app_path, 10);
+		waitForElementToBeEnabled(driver, in_clinic_experience_app_path, 30);
 		WebElement in_clinic_experience_app = driver.findElement(in_clinic_experience_app_path);
 		in_clinic_experience_app.click();
 		Thread.sleep(500);
 	}
 
 	public void ClickRebookAppointment() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_to_rebook_button, 10);
-		click_to_rebook_button.click();
+		Thread.sleep(500);
+		By rebook_at_current_location_btn_path = By.xpath("//button[text() = 'Rebook at Current Location']");
+		waitForElementToBeEnabled(driver, rebook_at_current_location_btn_path, 10);
+		WebElement rebook_at_current_location_btn = driver.findElement(rebook_at_current_location_btn_path);
+		rebook_at_current_location_btn.click();
 	}
 
 	public void ValidateClickRebookAppointmentButtonIsDisabled() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_to_rebook_button1, 10);
-		click_to_rebook_button.isDisplayed();
+		Thread.sleep(500);
+		By rebook_at_current_location_btn_path = By.xpath("//button[text() = 'Rebook at Current Location']");
+		waitForElementToBeLocated(driver, rebook_at_current_location_btn_path, 10);
+		WebElement rebook_at_current_location_btn = driver.findElement(rebook_at_current_location_btn_path);
+		boolean is_enabled = true;
+		while(is_enabled) {
+			is_enabled = rebook_at_current_location_btn.isEnabled();
+			Thread.sleep(500);
+			rebook_at_current_location_btn = driver.findElement(rebook_at_current_location_btn_path);
+		}
 	}
 
 	public void ValidateAppointmentCancelledIsPresentCP() throws InterruptedException {
@@ -1004,21 +1011,13 @@ public class InClinicExperiencePage extends BasePage {
 		return status_after_care.getText();
 	}
 
-	public String ValidateclinicNameAfterRebook() throws InterruptedException {
-		WebElement element = driver.findElement(By.xpath("//p[@c-bchcheader_bchcheader and text() = 'Clinic Location']/..//lightning-icon[@title = 'Account']/.."));
-		return element.getText();
+	public String getAppointmentClinicName() throws InterruptedException {
+		By appointment_clinic_name_path = By.xpath("//c-bc-hc-appointment-details//label[@aria-label='Clinic Name']/../../..//lightning-formatted-text");
+		waitForElementToBeLocated(driver, appointment_clinic_name_path, 10);
+		WebElement appointment_clinic_name = driver.findElement(appointment_clinic_name_path);
+		String clinic_name = appointment_clinic_name.getText();
+		return clinic_name;
 	}
-
-	public String ValidateClinicNameBeforeRebook() throws InterruptedException {
-		waitForElementToBeVisible(driver, validate_clinic_name_before_booking, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(validate_clinic_name_before_booking1);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
-	}
-
 
 	public void ContinueEditingButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, continue_editing_btn, 10);
@@ -1084,6 +1083,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
 		WebElement consentProviderField = driver.findElement(consent_provider_field_path);
 		scrollTop(consentProviderField);
+		Thread.sleep(500);
 		consentProviderField.click();
 		Thread.sleep(500);
 		try {

@@ -527,6 +527,8 @@ public class SupplyConsolePage extends BasePage {
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
 		WebElement transaction = tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
 		waitForElementToBeVisible(driver, transaction, 10);
+		scrollTop(transaction);
+		Thread.sleep(500);
 		transaction.click();
 	}
 
@@ -1083,19 +1085,19 @@ public class SupplyConsolePage extends BasePage {
 		supplyDistributorItem.click();
 	}
 
-	public void selectHealthConnectApp() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-		Thread.sleep(5000);
-		WebElement element = driver.findElement(select_app_launcher1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
-		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
-		WebElement element1 = driver.findElement(click_healthconnect_app1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-		Thread.sleep(2000);
-	}
+//	public void selectHealthConnectApp() throws InterruptedException {
+//		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+//		Thread.sleep(5000);
+//		WebElement element = driver.findElement(select_app_launcher1);
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript("arguments[0].click();", element);
+//		Thread.sleep(5000);
+//		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
+//		WebElement element1 = driver.findElement(click_healthconnect_app1);
+//		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+//		executor1.executeScript("arguments[0].click();", element1);
+//		Thread.sleep(2000);
+//	}
 
 	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
 		Thread.sleep(500);
