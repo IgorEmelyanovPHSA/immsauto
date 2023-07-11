@@ -225,13 +225,20 @@ public class UserDefaultsPage extends BasePage{
     }
 
     public void selectUserDefaultLocation(String location) throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(500);
+        By location_input_field_path = By.xpath("//c-bc-hc-input-search-drop-down//input");
+        waitForElementToBeEnabled(driver, location_input_field_path, 10);
+        WebElement location_input_field = driver.findElement(location_input_field_path);
+        location_input_field.click();
+        By combo_box_path = By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']");
+        waitForElementToBeEnabled(driver, combo_box_path, 10);
+        WebElement combo_box = driver.findElement(combo_box_path);
+        combo_box.sendKeys(location);
+        Thread.sleep(500);
+        By my_location_path = By.xpath("//span[text() = '" + location + "']");
+        waitForElementToBeEnabled(driver, my_location_path, 10);
+        WebElement my_location = driver.findElement(my_location_path);
+        my_location.click();
     }
 
 //    public void inputUserDefaultsCurrentDate() throws InterruptedException {
