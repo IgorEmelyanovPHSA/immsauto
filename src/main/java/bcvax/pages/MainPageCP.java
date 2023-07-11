@@ -33,9 +33,6 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
     private WebElement tabRelatedItems;
 
-    @FindBy(xpath = "//button[text() = 'More']")
-    private WebElement main_menu_btn_More;
-
     @FindBy(xpath = "//a[@title = 'All Client']")
     private WebElement sub_menu_AllClients;
 
@@ -64,9 +61,6 @@ public class MainPageCP extends BasePage{
 
     @FindBy(xpath = "//div[@aria-modal='true']")
     private WebElement modal_dialog;
-
-    @FindBy(xpath = "//input[@class='search-input search-input--left']")
-    private WebElement search_field;
 
     @FindBy(xpath = "//input[@placeholder = 'Search...']")
     private WebElement searchAssistant;
@@ -243,18 +237,20 @@ public class MainPageCP extends BasePage{
         }
     }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
-        waitForElementToBeClickable(driver, main_menu_btn_More, 30);
-        Thread.sleep(2000);
+        By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");
+        waitForElementToBeEnabled(driver, main_menu_more_btn_path, 30);
         By registerBtnPath = By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']");
-        if(driver.findElement(registerBtnPath).isDisplayed()) {
-            try {
-                driver.findElement(registerBtnPath).click();
-            } catch(ElementClickInterceptedException ex) {
-                Thread.sleep(3000);
-                driver.findElement(registerBtnPath).click();
-            }
-        } else {
-            click(main_menu_btn_More);
+        try {
+            waitForElementToBeEnabled(driver, registerBtnPath, 10);
+            WebElement register_btn = driver.findElement(registerBtnPath);
+            register_btn.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(3000);
+            WebElement register_btn = driver.findElement(registerBtnPath);
+            register_btn.click();
+        } catch(TimeoutException ex) {
+            WebElement main_menu_more_btn = driver.findElement(main_menu_more_btn_path);
+            click(main_menu_more_btn);
             Thread.sleep(2000);
             waitForElementToBeClickable(sub_menu_Register);
             Thread.sleep(2000);
@@ -275,12 +271,16 @@ public class MainPageCP extends BasePage{
         submitRequisitionButton.click();
     }
 
-    public void search(String criteria) {
-        waitForElementToBeVisible(driver, search_field, 30);
+    public void search(String criteria) throws InterruptedException {
+        Thread.sleep(500);
+        By search_field_path = By.xpath("//input[@class='search-input search-input--left']");
+        waitForElementToBeEnabled(driver, search_field_path, 10);
+        WebElement search_field = driver.findElement(search_field_path);
         search_field.sendKeys(criteria);
         search_field.sendKeys(Keys.ENTER);
-
-        waitForElementToBePresent(driver, By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']"), 30);
+        Thread.sleep(500);
+        By table_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
+        waitForElementToBeEnabled(driver, table_path, 30);
     }
     public void refreshBrowser() throws InterruptedException {
         driver.navigate().refresh();

@@ -15,9 +15,6 @@ import static constansts.Header.SUPPLY_LOCATION_NAME;
 
 public class InClinicExperiencePage extends BasePage {
 	private By register_tab1 = By.xpath("(.//a[@title = 'Register'])");
-
-	@FindBy(xpath = ".//button[@title = ' Create New Profile']")
-	private WebElement register_button;
 	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
 
 	@FindBy(xpath = ".//button[text()='Save']")
@@ -102,18 +99,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//input[@name = 'HC_Personal_Health_Number'])")
 	private WebElement phn;
 	private By phn1 = By.xpath("(.//input[@name = 'HC_Personal_Health_Number'])");
-
-	@FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
-	private WebElement email;
-	private By email1 = By.xpath("(.//input[@name = 'PersonEmail'])");
-
-	@FindBy(xpath = "(.//input[@name = 'ConfirmEmail'])")
-	private WebElement confirm_email;
-	private By confirm_email1 = By.xpath("(.//input[@name = 'ConfirmEmail'])");
-
-	@FindBy(xpath = ".//button[text()= 'Review Details']")
-	private WebElement review_details;
-	private By review_details1 = By.xpath("(.//button[text()= 'Review Details'])");
 
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement select_clinic;
@@ -752,9 +737,11 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickRegisterButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, register_button, 10);
-		WebElement element = driver.findElement(register_button_1);
-		register_button.click();
+		Thread.sleep(500);
+		By register_btn_path = By.xpath("//button[@title = ' Create New Profile']");
+		waitForElementToBeEnabled(driver, register_btn_path, 10);
+		WebElement register_btn = driver.findElement(register_btn_path);
+		register_btn.click();
 	}
 
 	public void clickSaveDefaultsButton() throws InterruptedException {
@@ -817,20 +804,31 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void enterEmail(String enteremail) throws InterruptedException {
-		waitForElementToBeLocated(driver, email1, 10);
-		Thread.sleep(2000);
-		email.sendKeys(enteremail);
+		Thread.sleep(500);
+		By email_field_path = By.xpath("//input[@name = 'PersonEmail']");
+		waitForElementToBeEnabled(driver, email_field_path, 10);
+		WebElement email_field = driver.findElement(email_field_path);
+		try {
+			email_field.sendKeys(enteremail);
+		} catch (ElementNotInteractableException ex) {
+			Thread.sleep(2000);
+			email_field = driver.findElement(email_field_path);
+			email_field.sendKeys(enteremail);
+		}
 	}
 
 	public void confirmEmail(String confirmemail) throws InterruptedException {
-		waitForElementToBeLocated(driver, confirm_email1, 10);
-		confirm_email.sendKeys(confirmemail);
+		By confirm_email_field_path = By.xpath("//input[@name = 'ConfirmEmail']");
+		waitForElementToBeEnabled(driver, confirm_email_field_path, 10);
+		WebElement confirm_email_field = driver.findElement(confirm_email_field_path);
+		confirm_email_field.sendKeys(confirmemail);
 	}
 
 	public void clickReviewDetails() throws InterruptedException {
-		waitForElementToBeVisible(driver, review_details, 10);
-		WebElement element = driver.findElement(review_details1);
-		review_details.click();
+		By review_details_btn_path = By.xpath("//button[text()= 'Review Details']");
+		waitForElementToBeEnabled(driver, review_details_btn_path, 10);
+		WebElement review_details_btn = driver.findElement(review_details_btn_path);
+		review_details_btn.click();
 	}
 
 	public void navigateToVaccineSchedulingTab() throws InterruptedException {

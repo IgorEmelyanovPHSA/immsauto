@@ -457,7 +457,7 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- select 'To' " + supplyLocation + "  -");
 		Thread.sleep(500);
 		By search_supplu_location_path = By.xpath("//label[@lightning-groupedcombobox_groupedcombobox and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
-		waitForElementToBeEnabled(driver, search_supplu_location_path, 10);
+		waitForElementToBeEnabled(driver, search_supplu_location_path, 30);
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
 		searchSupplyLocationCombobox.sendKeys(supplyLocation);
