@@ -71,7 +71,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickUserDefaultsTab();
 		UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
 		log("/*-- 4. Enter current date for UserDefaults --*/");
-		userDefaultPage.inputPreviousDateUserDefaults();
+		userDefaultPage.inputCurrentDateUserDefaults();
+		//userDefaultPage.inputPreviousDateUserDefaults();
 		userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*-- 5.----- Click on Save defaults button --*/");
 		userDefaultPage.clickBtnSave();
@@ -145,7 +146,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*--26.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		log("/*--27.----select Appointment Day --*/");
-		inClinicExperiencePage.selectBookingAppointmentDay();
+		inClinicExperiencePage.selectBookingAppointmentDay(1);
 		log("/*--28.---- select time slot for Appointment --*/");
 		inClinicExperiencePage.selectTimeSlotForAppointment();
 		log("/*--29.---Click Next Button to Schedule Appointment --*/");
