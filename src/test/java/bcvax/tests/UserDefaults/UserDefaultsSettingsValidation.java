@@ -79,7 +79,8 @@ public class UserDefaultsSettingsValidation extends BaseTest {
 
         log("/*10.---- Validating results, given lot numbers should match --*/");
         for(int i = 0; i < lots.length; i++) {
-            Assert.assertTrue(supplyConsolePage.validateLotUserDefaults(lots[i]));
+            boolean lot_exist = supplyConsolePage.validateLotUserDefaults(lots[i]);
+            Assert.assertTrue(lot_exist);
         }
 
         log("/*12.---- Navigate User Defaults Page --*/");
