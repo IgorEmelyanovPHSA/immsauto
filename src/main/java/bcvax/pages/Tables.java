@@ -57,6 +57,12 @@ public class Tables extends BasePage {
         return new GenericTable(supplyItemsTable);
     }
 
+    public GenericTable getAppointmentDayTable() {
+        By appointment_day_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+        waitForElementToBeLocated(driver, appointment_day_table_path, 10);
+        WebElement appointment_day_table = driver.findElement(appointment_day_table_path);
+        return new GenericTable(appointment_day_table);
+    }
     public GenericTable getContainerTransferTable() {
         waitForTextToBePresent(driver, containerTransfer ,30, "Distribution");
         return new GenericTable(containerTransfer);

@@ -114,8 +114,8 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
-        log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        //log("/*22.----click on person Account Related Tab --*/");
+        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
