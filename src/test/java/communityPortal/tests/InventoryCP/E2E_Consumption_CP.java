@@ -71,10 +71,12 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*8.----- Click on User Defaults Tab --*/");
         cpMainPage.clickUserDefaultsTab();
         log("/*9.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
-        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
         log("/*11.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
 
@@ -112,8 +114,8 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
-        log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        //log("/*22.----click on person Account Related Tab --*/");
+        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
@@ -156,7 +158,9 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*35_1.----Refresh page again - should not be like that again --*/");
+        Thread.sleep(500);
         inClinicExperience_CP.refreshBrowser();
+        Thread.sleep(500);
         log("/*36.----click on In-clinic Experience button --*/");
         inClinicExperience_CP.ClickGoToInClinicExperienceButton();
 

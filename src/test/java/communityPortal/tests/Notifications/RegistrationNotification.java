@@ -1,27 +1,30 @@
-package communityPortal.tests.Appointment_Scheduling_CP;
+package communityPortal.tests.Notifications;
 
 import Utilities.TestListener;
-import bcvax.pages.*;
+import bcvax.pages.CommonMethods;
+import bcvax.pages.InClinicExperiencePage;
+import bcvax.pages.MainPageCP;
+import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
 @Listeners({TestListener.class})
-public class BookingDose1_COVID19 extends BaseTest {
-    private String legalFirstName = "Ludovika";
-    private String legalLastName = "BcvaxLimeburn";
-    private String dateOfBirth = "Sep 21, 1923";
+public class RegistrationNotification extends BaseTest {
+    private String legalFirstName = "Lockwood";
+    private String legalLastName = "BCVaxPenketh";
+    private String dateOfBirth = "Jan 23, 1993";
     private String postalCode = "V3L5L2";
-    private String personalHealthNumber = "9746170911";
+    private String personalHealthNumber = "9746173963";
     //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
+    private String email = "dmytro.bilous@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test(priority = 1)
-    public void Can_Book_Dose1_Appointment_as_Clerk_CP() throws Exception {
-        TestcaseID = "243154"; //C243154
+    public void VerifyRegistrationNotification_CP() throws Exception {
+        TestcaseID = "246562"; //C246562
         CommonMethods commn = new CommonMethods(getDriver());
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
@@ -79,8 +82,8 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
 
-        //log("/*22.----click on person Account Related Tab --*/");
-        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        log("/*22.----click on person Account Related Tab --*/");
+        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();

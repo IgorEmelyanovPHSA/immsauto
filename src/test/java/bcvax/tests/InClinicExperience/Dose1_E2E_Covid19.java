@@ -38,7 +38,6 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		CommonMethods commn = new CommonMethods(getDriver());
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));

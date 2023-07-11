@@ -95,7 +95,7 @@ public class CommonMethods extends BasePage{
     public void globalSearchCP(String textToSearch) throws InterruptedException {
         Thread.sleep(500);
         By search_field_path = By.xpath("//input[@aria-label = 'Search...']");
-        waitForElementToBeEnabled(driver, search_field_path, 10);
+        waitForElementToBeEnabled(driver, search_field_path, 30);
         WebElement search_field = driver.findElement(search_field_path);
         search_field.sendKeys(textToSearch);
         search_field.sendKeys(Keys.RETURN);

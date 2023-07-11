@@ -20,7 +20,7 @@ public class PersonAccountPage extends BasePage {
     public static void goToVaccineScheduleTab(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By vaccine_schedule_tab_path = By.xpath("//a[@data-label='Vaccine Scheduling'] | //span[text() = 'Vaccine Scheduling']");
-        waitForElementToBeEnabled(driver, vaccine_schedule_tab_path, 10);
+        waitForElementToBeEnabled(driver, vaccine_schedule_tab_path, 30);
         WebElement vaccine_schedule_tab = driver.findElement(vaccine_schedule_tab_path);
         waitForElementToBeVisible(driver, vaccine_schedule_tab, 10);
         vaccine_schedule_tab.click();

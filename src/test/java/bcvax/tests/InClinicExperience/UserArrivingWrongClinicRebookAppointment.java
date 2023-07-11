@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.LoginPage;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,7 +28,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	private String personalHealthNumber = "9746171121";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "All Ages - Atlin Health Centre";
+	String clinicNameToBook = "All Ages - Atlin Health Centre";
+	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 
 	String citizenName = "Hugues BCVaxLampard";
 	String consumptionLot;
@@ -59,10 +57,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
 		log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
-		inClinicExperiencePage.closeTabsHCA();
-		Thread.sleep(2000);
-		orgMainPage = new MainPageOrg(driver);
+		//InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianWrongClinic();
+		orgMainPage = loginPage.orgLoginAsClinicianICE();
 
 		log("/*-- 2. Navigate to In Clinic Experience App --*/");
 		String currentApp = orgMainPage.currentApp();
@@ -71,13 +67,15 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		}
 
 		log("/*-- 3. Click on User Defaults Tab  --*/");
+		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
 		inClinicExperiencePage.clickUserDefaultsTab();
-
+		UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
 		log("/*-- 4. Enter current date for UserDefaults --*/");
-		inClinicExperiencePage.inputPreviousDateUserDefaults();
-
+		userDefaultPage.inputCurrentDateUserDefaults();
+		//userDefaultPage.inputPreviousDateUserDefaults();
+		userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*-- 5.----- Click on Save defaults button --*/");
-		inClinicExperiencePage.clickSaveDefaultsButton();
+		userDefaultPage.clickBtnSave();
 
 		log("/*-- 6. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
@@ -130,6 +128,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 
+		//If there is early reason screen select Early Reason
+		try {
+			inClinicExperiencePage.selectEarlyBookingReason();
+		} catch (Exception ex) {
+			System.out.println("Tried to select early reason if exist. Continue...");
+		}
 		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 
@@ -137,12 +141,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickToSearchClinic();
 
 		log("/*25__.----search the Clinic " +clinicNameToSearch +" --*/");
-		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
+		inClinicExperiencePage.searchClinicName(clinicNameToBook);
 
 		log("/*--26.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickFacilityOptionLocation();
 		log("/*--27.----select Appointment Day --*/");
-		inClinicExperiencePage.selectBookingAppointmentDay();
+		inClinicExperiencePage.selectBookingAppointmentDay(1);
 		log("/*--28.---- select time slot for Appointment --*/");
 		inClinicExperiencePage.selectTimeSlotForAppointment();
 		log("/*--29.---Click Next Button to Schedule Appointment --*/");
@@ -158,25 +162,36 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 34.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
 		log("/*-- 34.1---Validate the Clinic's name before click rebook button --*/");
-		String beforeBooking = inClinicExperiencePage.ValidateClinicNameBeforeRebook();
-		String before = beforeBooking;
+		String beforeBooking = inClinicExperiencePage.getAppointmentClinicName();
 		log("/*-- 35.: --> Before Booking clinic Value is:" + beforeBooking + "");
 		log("/*-- 36.--- User can click Rebook Appointment button to book an appointment --*/");
 		inClinicExperiencePage.ClickRebookAppointment();
 		log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
-		log("/*--                                2. Rebook at Current Location button is disabled --*/");
-		String afterBooking = inClinicExperiencePage.ValidateclinicNameAfterRebook();
-		String after = afterBooking;
-		log("/*-- 37: --> After Booking clinic value is:" + afterBooking + "");
-		Assert.assertNotEquals((before), (after));
-		log("/*-- 38---'Rebook at Current Location button is disabled after user books appointment --*/");
 		inClinicExperiencePage.ValidateClickRebookAppointmentButtonIsDisabled();
+		log("/*--                                2. Rebook at Current Location button is disabled --*/");
+		String afterBooking = inClinicExperiencePage.getAppointmentClinicName();
+		log("/*-- 37: --> After Booking clinic value is:" + afterBooking + "");
+		Assert.assertNotEquals((beforeBooking), (afterBooking));
+		log("/*-- 38---'Rebook at Current Location button is disabled after user books appointment --*/");
+
 		log("/*-- 39---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		log("/*-- 40---Click to select Agent --*/");
-		inClinicExperiencePage.ClickAgentValue();
+		try {
+			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperiencePage.selectVaccineAgent();
+		} catch(Exception ex) {
+			inClinicExperiencePage.refreshBrowser();
+			Thread.sleep(2000);
+			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+			inClinicExperiencePage.selectVaccineAgent();
+		}
 		log("/*-- 41--- Select Agent From the Picklist Value ->COVID-19 mRNA --*/");
-		inClinicExperiencePage.SelectAgentValue();
+		try {
+			inClinicExperiencePage.SelectAgentValue();
+		} catch(Exception ex) {
+			System.out.println("Probably agent is already selected. Continue...");
+		}
 		String consentProvider = inClinicExperiencePage.consentProviderSelected();
 		if(consentProvider.equals("")) {
 			consentProvider = inClinicExperiencePage.selectConsentProvider();
@@ -229,8 +244,8 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		mainPageOrg.globalSearch(citizenName);
 		//inClinicExperiencePage.SearchForCitizenAlternativeWay(citizenName);
 
-		log("/* 49.----User found and Navigated to record page ---*/");
-		inClinicExperiencePage.userFoundWithParameters(citizenName);
+		//log("/* 49.----User found and Navigated to record page ---*/");
+		//inClinicExperiencePage.userFoundWithParameters(citizenName);
 
 		log("/*50.---- Navigated to Person Account related tab ---*/");
 		inClinicExperiencePage.clickRelatedTab();

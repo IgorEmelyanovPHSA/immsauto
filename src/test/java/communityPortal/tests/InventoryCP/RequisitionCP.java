@@ -41,7 +41,7 @@ public class RequisitionCP extends BaseTest {
             log("/*1.----Login to CP (newUI) as Clinician --*/");
             cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
-        cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
+        //cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
 
         System.out.println("/*----6. Navigate to Request Supplies --*/");

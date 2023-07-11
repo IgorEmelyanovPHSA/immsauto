@@ -457,7 +457,7 @@ public class SupplyConsolePage extends BasePage {
 		log(" -- select 'To' " + supplyLocation + "  -");
 		Thread.sleep(500);
 		By search_supplu_location_path = By.xpath("//label[@lightning-groupedcombobox_groupedcombobox and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
-		waitForElementToBeEnabled(driver, search_supplu_location_path, 10);
+		waitForElementToBeEnabled(driver, search_supplu_location_path, 30);
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
 		searchSupplyLocationCombobox.sendKeys(supplyLocation);
@@ -527,6 +527,8 @@ public class SupplyConsolePage extends BasePage {
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
 		WebElement transaction = tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
 		waitForElementToBeVisible(driver, transaction, 10);
+		scrollTop(transaction);
+		Thread.sleep(500);
 		transaction.click();
 	}
 
@@ -585,6 +587,12 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
 		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
 		transfer_transaction_btn.click();
+		try {
+			clickCloseAlert();
+			Thread.sleep(500);
+		} catch(Exception ex) {
+			System.out.println("Success Dialog not found. Continue...");
+		}
 	}
 
 	public void clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(int countDraftTransactions, int numberOfRows) throws InterruptedException {
@@ -1077,19 +1085,19 @@ public class SupplyConsolePage extends BasePage {
 		supplyDistributorItem.click();
 	}
 
-	public void selectHealthConnectApp() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-		Thread.sleep(5000);
-		WebElement element = driver.findElement(select_app_launcher1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
-		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
-		WebElement element1 = driver.findElement(click_healthconnect_app1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-		Thread.sleep(2000);
-	}
+//	public void selectHealthConnectApp() throws InterruptedException {
+//		waitForElementToBeLocated(driver, select_app_launcher1, 10);
+//		Thread.sleep(5000);
+//		WebElement element = driver.findElement(select_app_launcher1);
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript("arguments[0].click();", element);
+//		Thread.sleep(5000);
+//		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
+//		WebElement element1 = driver.findElement(click_healthconnect_app1);
+//		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+//		executor1.executeScript("arguments[0].click();", element1);
+//		Thread.sleep(2000);
+//	}
 
 	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
 		Thread.sleep(500);

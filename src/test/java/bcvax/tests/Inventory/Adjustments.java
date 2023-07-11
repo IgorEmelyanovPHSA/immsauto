@@ -2,9 +2,11 @@ package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
 import bcvax.pages.CommonMethods;
+import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -24,6 +26,7 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class Adjustments extends BaseTest {
 	String env;
+	MainPageOrg orgMainPage;
 	Map<String, Object> testData;
 	String supply_location_from;
 	String supply_location_to;
@@ -80,6 +83,11 @@ public class Adjustments extends BaseTest {
 				log("Login AS default user (PPHIS)");
 				TestcaseID = "223357"; //C223357
 				loginPage.loginAsPPHIS();
+		}
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*2.----Supply Console Page displayed --*/");
@@ -209,7 +217,11 @@ public class Adjustments extends BaseTest {
 				TestcaseID = "223357"; //C223357
 				loginPage.loginAsPPHIS();
 		}
-
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
 		CommonMethods common = new CommonMethods(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*2.----Supply Console Page displayed --*/");

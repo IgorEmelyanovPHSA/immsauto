@@ -11,6 +11,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BookingDose2 extends BaseTest {
@@ -58,7 +59,8 @@ public class BookingDose2 extends BaseTest {
 		log("/*10.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-		callCenterConsole.successMessageAppear();
+		String successMessageText = callCenterConsole.successMessageAppear();
+		assertTrue(successMessageText.equals("Success") || successMessageText.equals(""), "Actual Result: " + successMessageText);
 		log("/*12.----click Next button --*/");
 		callCenterConsole.clickNextButton();
 		log("/*13.'Enter email address " +email +"--*/");
@@ -104,7 +106,7 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.clickRelatedTab();
 	}
 
-	//@Test(priority = 2)
+	@Test(priority = 2)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");

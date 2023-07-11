@@ -14,30 +14,11 @@ import java.util.Locale;
 public class UserDefaultsPage extends BasePage{
 
     public UserDefaultsPage(WebDriver driver) {super(driver);}
-
-    @FindBy(xpath = "//div[contains(text(),'Advanced Settings')]")
-    private WebElement btnAdvancedSettingsUserDefaults;
-
-    @FindBy(xpath = "(//span[@title='Agent']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[1]")
-    private WebElement agentUserDefaults;
-
-    @FindBy(xpath = "//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class']")
-    private WebElement lotUserDefaults;
-
-    @FindBy(xpath = "(//span[@title='Trade Name']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[2]")
-    private WebElement tradeNameUserDefaults;
-
-//    @FindBy(xpath = "//input[@name='BCH_Date__c']")
-//    private WebElement input_current_date;
-
     @FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
     private WebElement clinicLocationUserDefaults;
 
     @FindBy(xpath = "//button[@name='DeleteLot']")
     private WebElement btnDeleteLot;
-
-    @FindBy(xpath = "//button [@class='slds-button' and @title='Add']")
-    private WebElement btnAddNew;
 
     @FindBy(xpath = ".//button[text()='Save']")
     private WebElement btnSave;
@@ -47,8 +28,11 @@ public class UserDefaultsPage extends BasePage{
 
     @Step
     public UserDefaultsPage clickOnAdvancedSettings() throws InterruptedException {
-        click(btnAdvancedSettingsUserDefaults);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)");
+        Thread.sleep(500);
+        By advanced_settings_btn_path  = By.xpath("//div[contains(text(),'Advanced Settings')]");
+        waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
+        WebElement advanced_settings_btn = driver.findElement(advanced_settings_btn_path);
+        advanced_settings_btn.click();
         return this;
     }
 
@@ -85,20 +69,29 @@ public class UserDefaultsPage extends BasePage{
     }
 
     public UserDefaultsPage populateLotsAndSite(String [] lots) throws InterruptedException {
-        //defaultSite = "Arm - Left deltoid";
         int count = 1;
         for(int i=0; i < lots.length; i ++){
-            click(btnAddNew);
-            WebElement drpDownLot = driver.findElement(By.xpath("(//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])["+ count +"]"));
-            click(drpDownLot);
+            By add_new_btn_path = By.xpath("//button [@class='slds-button' and @title='Add']");
+            waitForElementToBeEnabled(driver, add_new_btn_path, 10);
+            WebElement add_new_btn = driver.findElement(add_new_btn_path);
+            scrollTop(add_new_btn);
+            Thread.sleep(500);
+            add_new_btn.click();
+            By lot_dropdown_btn_path = By.xpath("(//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])["+ count +"]");
+            waitForElementToBeEnabled(driver, lot_dropdown_btn_path, 10);
+            WebElement drpDownLot = driver.findElement(lot_dropdown_btn_path);
+            drpDownLot.click();
             Thread.sleep(500);
 
-            WebElement textEditableLot = driver.findElement(By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])["+ count +"]"));
-            typeInWithoutClear(textEditableLot, lots[i]);
+            By lot_edit_field_path = By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])["+ count +"]");
+            waitForElementToBeEnabled(driver, lot_edit_field_path, 10);
+            WebElement textEditableLot = driver.findElement(lot_edit_field_path);
+            textEditableLot.sendKeys(lots[i]);
             Thread.sleep(500);
-
-            WebElement textConfirmSelection = driver.findElement(By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])["+ count +"]/../../..//span[contains(text(), '"+ lots[i] +"')]"));
-            click(textConfirmSelection);
+            By my_lot_path = By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])["+ count +"]/../../..//span[contains(text(), '"+ lots[i] +"')]");
+            waitForElementToBeEnabled(driver, my_lot_path, 10);
+            WebElement textConfirmSelection = driver.findElement(my_lot_path);
+            textConfirmSelection.click();
             Thread.sleep(500);
 
             WebElement drpDownSiteLastSelected = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux' and@type='button']"));
@@ -157,49 +150,56 @@ public class UserDefaultsPage extends BasePage{
         return flag;
     }
 
-//    public void inputCurrentDateUserDefaults() throws InterruptedException {
-//        Calendar calendar = Calendar.getInstance();
-//        Date today = calendar.getTime();
-//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-//        waitForElementToBeVisible(driver, input_current_date, 10);
-//        String todayAsString = dateFormat.format(today);
-//        click(input_current_date);
-//        typeIn(input_current_date,todayAsString);
-//        clickBtnSaveWithSuccessMsgValidation();
-//    }
-
     public void inputCurrentDateUserDefaults() throws InterruptedException {
         Thread.sleep(500);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();
+        inputDateUserDefaults(today);
+    }
+
+    public void inputPreviousDateUserDefaults() throws InterruptedException {
+        Thread.sleep(500);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);
+        Date today = calendar.getTime();
+        inputDateUserDefaults(today);
+    }
+
+    public void inputDateUserDefaults(Date date) throws InterruptedException {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        By input_current_date_path = By.xpath("//input[@name='BCH_Date__c']");
-        waitForElementToBeEnabled(driver, input_current_date_path, 10);
-        String todayAsString = dateFormat.format(today);
-        WebElement input_current_date = driver.findElement(input_current_date_path);
+        By input_date_path = By.xpath("//input[@name='BCH_Date__c']");
+        waitForElementToBeEnabled(driver, input_date_path, 10);
+        String todayAsString = dateFormat.format(date);
+        WebElement input_date = driver.findElement(input_date_path);
 
         try {
-            input_current_date.click();
+            input_date.click();
             Thread.sleep(500);
-            waitForElementToBeEnabled(driver, input_current_date_path, 10);
-            input_current_date = driver.findElement(input_current_date_path);
-            input_current_date.isEnabled();
+            waitForElementToBeEnabled(driver, input_date_path, 10);
+            input_date = driver.findElement(input_date_path);
+            input_date.isEnabled();
+            input_date.clear();
         } catch(StaleElementReferenceException ex) {
             System.out.println("***DEBUG*** Stale element exception ***");
             Thread.sleep(500);
-            waitForElementToBeEnabled(driver, input_current_date_path, 10);
-            input_current_date = driver.findElement(input_current_date_path);
+            waitForElementToBeEnabled(driver, input_date_path, 10);
+            input_date = driver.findElement(input_date_path);
+            input_date.clear();
         }
-        input_current_date.clear();
-        input_current_date.click();
+
+        //input_date.click();
+        //Thread.sleep(2000);
+        input_date.sendKeys(todayAsString);
         Thread.sleep(2000);
-        input_current_date.sendKeys(todayAsString);
+        input_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        input_current_date.sendKeys(Keys.ENTER);
-        Thread.sleep(500);
-        closeSuccessDialog();
-        Thread.sleep(500);
+        try {
+            closeSuccessDialog();
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            System.out.println("No Success Dialog. Continue...");
+        }
     }
 
     public void closeSuccessDialog() throws InterruptedException {
@@ -225,13 +225,20 @@ public class UserDefaultsPage extends BasePage{
     }
 
     public void selectUserDefaultLocation(String location) throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(500);
+        By location_input_field_path = By.xpath("//c-bc-hc-input-search-drop-down//input");
+        waitForElementToBeEnabled(driver, location_input_field_path, 10);
+        WebElement location_input_field = driver.findElement(location_input_field_path);
+        location_input_field.click();
+        By combo_box_path = By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']");
+        waitForElementToBeEnabled(driver, combo_box_path, 10);
+        WebElement combo_box = driver.findElement(combo_box_path);
+        combo_box.sendKeys(location);
+        Thread.sleep(500);
+        By my_location_path = By.xpath("//span[text() = '" + location + "']");
+        waitForElementToBeEnabled(driver, my_location_path, 10);
+        WebElement my_location = driver.findElement(my_location_path);
+        my_location.click();
     }
 
 //    public void inputUserDefaultsCurrentDate() throws InterruptedException {

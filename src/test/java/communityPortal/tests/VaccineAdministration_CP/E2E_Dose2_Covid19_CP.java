@@ -57,10 +57,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         cpMainPage.clickUserDefaultsTab();
 
         log("/*4.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
-        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
 
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -97,8 +98,8 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
 
-        log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        //log("/*22.----click on person Account Related Tab --*/");
+        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();

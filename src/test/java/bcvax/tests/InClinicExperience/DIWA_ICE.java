@@ -20,6 +20,7 @@ import java.util.*;
 
 @Listeners({TestListener.class})
 public class DIWA_ICE extends BaseTest {
+	MainPageOrg mainPageOrg;
 	@DataProvider(name = "testData")
 	public static Object[][] names() {return new Object[][]{{"Benoite Denna BCVaxD'Hooge"}};
 	}
@@ -62,11 +63,11 @@ public class DIWA_ICE extends BaseTest {
 				TestcaseID = "244854"; //C244854
 				break;
 			default:
-				loginPage.loginAsClinician_DIWA_ICE();
+				mainPageOrg = loginPage.orgLoginAsClinicianICE();
 				log("Login AS default user (Clinician to ICE)");
 				TestcaseID = "223187"; //C223187
 		}
-		MainPageOrg mainPageOrg = new MainPageOrg(driver);
+
 		log("/*2.--- Navigate to In Clinic Experience App --*/");
 		String currentApp = mainPageOrg.currentApp();
 		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
@@ -79,10 +80,11 @@ public class DIWA_ICE extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
+		log("/*----6. select Citizen from search results --*/");
 		mainPageOrg.globalSearch(citizenName);
 		//inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
-		log("/*----6. select Citizen from search results --*/");
-		inClinicExperience.userClickCitizen(citizenName);
+
+		//inClinicExperience.userClickCitizen(citizenName);
 		//Thread.sleep(4000);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		inClinicExperience.clickRelatedTab();
@@ -113,16 +115,16 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---18. click on continue editing button to continue with the flow ---*/");
 		inClinicExperience.ContinueEditingButton();
 		log("/*---19. select date of Administration ---*/");
-		if (inClinicExperience.selectDateOfAdministration())
-
+		inClinicExperience.selectDateOfAdministration();
+		String  informed_consent_provider = "Clinician ICE Automation";
 		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-		inClinicExperience.setInformedConsentProvider("Auto Clinician DIWA_ICE");
+		inClinicExperience.setInformedConsentProvider(informed_consent_provider);
 
 		log("/*---21. click Save Consent ---*/");
 		inClinicExperience.clickSaveConsent();
 		Thread.sleep(2000);
 		log("/*---22. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-		inClinicExperience.setProvider("Auto Clinician DIWA_ICE");
+		inClinicExperience.setProvider(informed_consent_provider);
 
 		log("/*---23. Click Show all lot numbers Checkbox---*/");
 		inClinicExperience.clickShowAllLotNumbersCheckBox();

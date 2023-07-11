@@ -1,9 +1,11 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -19,6 +21,7 @@ import static org.testng.Assert.assertTrue;
 @Listeners({TestListener.class})
 public class BulkDrafts extends BaseTest {
     String supply_location_from;
+    MainPageOrg orgMainPage;
     String env;
     Map<String, Object> testData;
     String supply_location_to;
@@ -39,7 +42,11 @@ public class BulkDrafts extends BaseTest {
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 9 need some refactoring in the future
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-
+        orgMainPage = new MainPageOrg(driver);
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
 

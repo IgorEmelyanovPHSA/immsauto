@@ -106,6 +106,12 @@ public class MainPageOrg extends BasePage {
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_input = driver.findElement(search_field_path);
         search_input.sendKeys(search_value);
-        search_input.sendKeys(Keys.RETURN);
+        Thread.sleep(500);
+        By found_client_path = By.xpath("//span[@search_dialog-instantresultitem_instantresultitem and @title=\"" + search_value + "\"]");
+        waitForElementToBeEnabled(driver, found_client_path, 10);
+        WebElement found_client = driver.findElement(found_client_path);
+        scrollTop(found_client);
+        Thread.sleep(500);
+        found_client.click();
     }
 }

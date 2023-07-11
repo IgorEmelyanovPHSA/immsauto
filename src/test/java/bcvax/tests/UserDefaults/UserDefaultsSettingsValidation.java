@@ -28,20 +28,17 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         testData = Utils.getTestData(env);
         String[] lots = ((ArrayList<String>)testData.get("useDefaultSettingsLots")).toArray(new String[0]);
         UserDefaultsPage userDefaultsPage = new UserDefaultsPage(getDriver());
-        CommonMethods common = new CommonMethods(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*1.----Login as clinician ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEUserDefaults();
+        orgMainPage = loginPage.orgLoginAsClinicianICE();
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
-        if (inClinicExperience.displayIceApp()) {
-            log("/*-- User already on In-Clinic Experience page --*/");
-        } else {
-            log("/*-- Navigate to In-Clinic Experience page --*/");
-            inClinicExperience.selectICEFromApp();
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
         }
-
+        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*3.----Close All previously opened Tab's --*/");
         inClinicExperience.closeTabsHCA();
 
@@ -67,7 +64,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
 
         log("/*9.---- Navigate to Supply Console Page --*/");
         orgMainPage = new MainPageOrg(getDriver());
-        String currentApp = orgMainPage.currentApp();
+        currentApp = orgMainPage.currentApp();
         if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
@@ -86,7 +83,12 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         }
 
         log("/*12.---- Navigate User Defaults Page --*/");
-        common.goToUserDefaultsIfNeededAndConfirmPageIsDisplayed();
+        orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+        InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
+        inClinicExperiencePage.clickUserDefaultsTab();
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicLocation);
 
         log("/*13.----- Open Advanced Settings --*/");
         userDefaultsPage.clickOnAdvancedSettings();
@@ -95,7 +97,6 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         userDefaultsPage.populateLotsAndSite(lots);
 
         log("/*15.----- Click btn Save and validate success msg --*/");
-        //userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
         userDefaultsPage.clickBtnSave();
         userDefaultsPage.clickOkForExpiredLot();
         userDefaultsPage.validateSuccessfullyUpdatedMsg();

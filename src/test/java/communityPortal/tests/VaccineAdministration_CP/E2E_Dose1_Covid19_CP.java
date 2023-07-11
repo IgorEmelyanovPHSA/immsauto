@@ -56,10 +56,11 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         cpMainPage.clickUserDefaultsTab();
 
         log("/*4.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
-        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
+        userDefaultPage.inputCurrentDateUserDefaults();
+        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
+        userDefaultPage.clickBtnSave();
         Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
