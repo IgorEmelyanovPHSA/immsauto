@@ -210,8 +210,8 @@ bcvaxuat:
   consumptionDose: "0.3"
   consumptionLot: "35035BD-CC01"
   useDefaultSettingsLots:
-    - "016F21A-CC07"
-    - "0649AA"
+    - "300042698-CC04"
+    - "NK2858B"
 ssotdev:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
