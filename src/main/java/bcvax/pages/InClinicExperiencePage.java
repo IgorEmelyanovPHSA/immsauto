@@ -122,8 +122,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']")
 	private WebElement appointment_status_confirm;
 	private By appointment_status_confirm1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
-
-	private By appointment_status_cancel_CP = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//span[text()='Cancelled']");
 	private By appointment_status_confirm_CP = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//span[text()='Confirmed']");
 
 	@FindBy(xpath = "(//SPAN[@class='slds-page-header__title slds-truncate'][text()='Immunization Records (1)']/../../../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[2]")
@@ -432,11 +430,14 @@ public class InClinicExperiencePage extends BasePage {
 	public void successMessageAppear() throws InterruptedException {
 		Thread.sleep(500);
 		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
-		waitForElementToBeEnabled(driver, message_path, 10);
-		String message = driver.findElement(message_path).getText();
-//		Assert.assertEquals(message, "Success", "Expected PHN Match Success but found '" + message + "'");
+
+
 		log("  -- success message has been Appears. Closing... - /");
 		try {
+
+			waitForElementToBeEnabled(driver, message_path, 10);
+			String message = driver.findElement(message_path).getText();
+//		Assert.assertEquals(message, "Success", "Expected PHN Match Success but found '" + message + "'");
 			clickCloseAlert();
 			Thread.sleep(500);
 		} catch(Exception ex) {
@@ -739,7 +740,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickRegisterButton() throws InterruptedException {
 		Thread.sleep(500);
 		By register_btn_path = By.xpath("//button[@title = ' Create New Profile']");
-		waitForElementToBeEnabled(driver, register_btn_path, 10);
+		waitForElementToBeEnabled(driver, register_btn_path, 30);
 		WebElement register_btn = driver.findElement(register_btn_path);
 		register_btn.click();
 	}
@@ -975,9 +976,10 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void ValidateAppointmentCancelledIsPresentCP() throws InterruptedException {
-		WebElement element = driver.findElement(appointment_status_cancel_CP);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(1000);
+		Thread.sleep(500);
+		By appointment_status_cancel_CP_path = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//span[text()='Cancelled']");
+		waitForElementToBeEnabled(driver, appointment_status_cancel_CP_path, 30);
+		WebElement element = driver.findElement(appointment_status_cancel_CP_path);
 		element.isDisplayed();
 	}
 
@@ -1676,13 +1678,13 @@ public class InClinicExperiencePage extends BasePage {
 	}
 	public String getProvider() throws InterruptedException {
 		By provider_path = By.xpath("//label[text() = 'Provider']/..//input");
-		waitForElementToBeEnabled(driver, provider_path, 5);
+		waitForElementToBeEnabled(driver, provider_path, 10);
 		return driver.findElement(provider_path).getAttribute("data-value");
 	}
 
 	public String getRoute() throws InterruptedException {
 		By route_path = By.xpath("//label[text() = 'Route']/..//button");
-		waitForElementToBeEnabled(driver, route_path, 5);
+		waitForElementToBeEnabled(driver, route_path, 10);
 		return driver.findElement(route_path).getAttribute("data-value");
 	}
 

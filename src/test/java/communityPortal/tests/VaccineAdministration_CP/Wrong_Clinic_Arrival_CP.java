@@ -127,7 +127,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.clickOnFacilityOptionLocation();
 
         log("/*24----select Active booking appointment day  --*/");
-        inClinicExperience_CP.selectBookingAppointmentDay();
+        inClinicExperience_CP.selectBookingAppointmentDay(1);
 
         log("/*25----select the time slot  --*/");
         inClinicExperience_CP.selectTimeSlotForAppointment();
