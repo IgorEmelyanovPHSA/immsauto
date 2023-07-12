@@ -66,18 +66,25 @@ public class MainPageOrg extends BasePage {
             if(StringEscapeUtils.unescapeHtml4(appElement.getAttribute("data-label")).equals(app)) {
                 WebElement myApp = appElement.findElement(By.xpath("./.."));
                 myApp.click();
+                List<String> windows = new ArrayList<String>(driver.getWindowHandles());
+                if(windows.size() > 1) {
+                    driver.switchTo().window(windows.get(1));
+                }
                 String currentApp = currentApp();
+                By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
                 while(!currentApp.equals(app)) {
+                    List<WebElement> breadcrump_list = driver.findElements(breadcrump_path);
+                    if(breadcrump_list.size() > 1) {
+                        String breadcrump_text = breadcrump_list.get(1).getText();
+                        if (breadcrump_text.equals(app)) {
+                            break;
+                        }
+                    }
                     currentApp = currentApp();
                     Thread.sleep(200);
                 }
             }
         }
-        List<String> windows = new ArrayList<String>(driver.getWindowHandles());
-        if(windows.size() > 1) {
-            driver.switchTo().window(windows.get(1));
-        }
-
     }
 
     public void closeAllTabs() throws InterruptedException {
