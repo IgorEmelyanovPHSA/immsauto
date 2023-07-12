@@ -177,10 +177,12 @@ public class ProfilesPage extends BasePage{
     }
 
     public void selectCitizenParticipant(String name) throws InterruptedException {
+        Thread.sleep(500);
         By citizen_participant_acc_path = By.xpath("//a[contains(text(),'"+ name +"')]");
-       // WebElement citizen_participant_acc = driver.findElement(By.xpath("//a[contains(text(),'Benoite Denna BCVaxD')]"));  ("(//span[@title= '"+ reason +"'])
-        waitForElementToBePresent(driver, citizen_participant_acc_path, 10);
-        driver.findElement(citizen_participant_acc_path).click();
+        waitForElementToBePresent(driver, citizen_participant_acc_path, 30);
+        WebElement my_citizen = driver.findElement(citizen_participant_acc_path);
+        scrollTop(my_citizen);
+        my_citizen.click();
     }
 
 

@@ -237,6 +237,7 @@ public class MainPageCP extends BasePage{
         }
     }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
+        Thread.sleep(500);
         By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");
         waitForElementToBeEnabled(driver, main_menu_more_btn_path, 30);
         By registerBtnPath = By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']");
@@ -277,10 +278,11 @@ public class MainPageCP extends BasePage{
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_field = driver.findElement(search_field_path);
         search_field.sendKeys(criteria);
+        Thread.sleep(500);
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
         By table_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
-        waitForElementToBeEnabled(driver, table_path, 30);
+        waitForElementToBeEnabled(driver, table_path, 60);
     }
     public void refreshBrowser() throws InterruptedException {
         driver.navigate().refresh();
