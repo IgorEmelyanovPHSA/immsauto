@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.time.Duration;
 import java.time.Instant;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -16,7 +18,7 @@ public class MainPageOrg extends BasePage {
 
     @FindBy(xpath = "//span[text()='App Launcher']")
     private WebElement appsLauncher;
-
+    Tables tables;
     public MainPageOrg(WebDriver driver) {
         super(driver);
     }
