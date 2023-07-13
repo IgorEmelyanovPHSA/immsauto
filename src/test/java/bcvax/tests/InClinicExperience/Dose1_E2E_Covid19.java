@@ -112,8 +112,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickRegisterButtonOnConfirmationPage();
 		System.out.println("/*24.--toast success message - 'Success' --*/");
 		inClinicExperience.successRegisteredMessageAppear();
-		System.out.println("/*25.----click on person Account Related Tab --*/");
-		inClinicExperience.clickOnPersonAccountRelatedTab();
+		//System.out.println("/*25.----click on person Account Related Tab --*/");
+		//inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateToVaccineSchedulingTab();
 

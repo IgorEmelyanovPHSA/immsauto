@@ -31,7 +31,6 @@ public class PersonAccountPage extends BasePage {
         By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
         waitForElementToBeEnabled(driver, related_tab_path, 10);
         WebElement related_tab = driver.findElement(related_tab_path);
-        scrollTop(driver, related_tab, true);
         Thread.sleep(500);
         related_tab.click();
         Thread.sleep(2000);
