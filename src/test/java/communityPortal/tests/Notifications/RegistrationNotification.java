@@ -56,7 +56,9 @@ public class RegistrationNotification extends BaseTest {
         inClinicExperience_CP.enterPNH(personalHealthNumber);
 
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
 
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();

@@ -61,7 +61,9 @@ public class Check_In_Client_CP extends BaseTest {
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperience_CP.enterPNH(personalHealthNumber);
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");

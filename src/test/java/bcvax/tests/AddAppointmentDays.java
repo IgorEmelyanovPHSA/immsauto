@@ -4,6 +4,7 @@ import bcvax.pages.AppointmentDayManagementPage;
 import bcvax.pages.MainPageOrg;
 import bcvax.pages.Utils;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -12,7 +13,7 @@ public class AddAppointmentDays extends BaseTest {
     String env;
     @Test()
     public void createAppointmentDays() throws Exception {
-        String appointment_date = "2023-7-14";
+        String appointment_date = "2023-7-18";
         String appointment_type = "BC Immunization Program";
 
         //String provider = "Age 12 and Above - Abbotsford - Abby Pharmacy";

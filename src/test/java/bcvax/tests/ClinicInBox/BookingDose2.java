@@ -70,7 +70,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*8.----Enter PHN: " +personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		clinicInBox.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			clinicInBox.clickNonIndigenousRadioButton();
+		}
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");

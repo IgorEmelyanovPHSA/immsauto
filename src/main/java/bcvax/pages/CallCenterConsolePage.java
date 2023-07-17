@@ -151,6 +151,9 @@ public class CallCenterConsolePage extends BasePage {
 	public void enterPNH(String phn_number) throws InterruptedException {
 		waitForElementToBeLocated(driver, phn1, 10);
 		phn.sendKeys(phn_number);
+		Thread.sleep(500);
+		phn.sendKeys(Keys.TAB);
+		Thread.sleep(500);
 	}
 	
 	public void clickNonIndigenousRadioButton() throws InterruptedException {

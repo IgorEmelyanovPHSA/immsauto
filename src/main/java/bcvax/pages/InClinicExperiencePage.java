@@ -778,6 +778,8 @@ public class InClinicExperiencePage extends BasePage {
 	public void enterPNH(String phn_number) throws InterruptedException {
 		waitForElementToBeLocated(driver, phn1, 10);
 		phn.sendKeys(phn_number);
+		Thread.sleep(500);
+		phn.sendKeys(Keys.TAB);
 	}
 
 	public void clickNonIndigenousRadioButton() throws InterruptedException {
@@ -791,7 +793,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickVerifyPHNButton() throws InterruptedException {
 		Thread.sleep(500);
 		By verify_phn_button_path = By.xpath("//button[@title = 'Verify Personal Health Number']");
-		waitForElementToBeEnabled(driver, verify_phn_button_path, 10);
+		waitForElementToBeEnabled(driver, verify_phn_button_path, 30);
 		WebElement verify_phn_button = driver.findElement(verify_phn_button_path);
 		verify_phn_button.click();
 	}

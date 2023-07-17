@@ -62,7 +62,9 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*8.----Enter PHN " +personalHealthNumber +"--*/");
 		callCenterConsole.enterPNH(personalHealthNumber);
 		System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
-		callCenterConsole.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			callCenterConsole.clickNonIndigenousRadioButton();
+		}
 		System.out.println("/*10.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");

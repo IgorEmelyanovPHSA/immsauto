@@ -76,7 +76,9 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.enterPNH(personalHealthNumber);
 
         log("/*9.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
 
         log("/*10.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();

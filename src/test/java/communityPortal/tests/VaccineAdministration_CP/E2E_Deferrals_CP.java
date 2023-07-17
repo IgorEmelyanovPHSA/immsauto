@@ -61,7 +61,9 @@ public class E2E_Deferrals_CP extends BaseTest {
         inClinicExperience_CP.enterPNH(personalHealthNumber);
         Thread.sleep(2000);
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
         Thread.sleep(2000);
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
