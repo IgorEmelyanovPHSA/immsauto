@@ -22,7 +22,7 @@ public class RegistrationNotification extends BaseTest {
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
-    @Test(priority = 1)
+    @Test()
     public void VerifyRegistrationNotification_CP() throws Exception {
         TestcaseID = "246562"; //C246562
         CommonMethods commn = new CommonMethods(getDriver());
@@ -140,7 +140,7 @@ public class RegistrationNotification extends BaseTest {
     }
 
 
-    @Test(priority = 2)
+    @Test()
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
