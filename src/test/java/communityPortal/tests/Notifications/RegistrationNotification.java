@@ -12,13 +12,18 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class RegistrationNotification extends BaseTest {
+
+    // Gmail registered to verify email notifications:
+    // email: verify.notifications.now@gmail.com
+    // password: Technology1990!!!!!!
+    // email registration details, for password recovery only: 01 Jan 1980, Male
+
     private String legalFirstName = "Lockwood";
     private String legalLastName = "BCVaxPenketh";
     private String dateOfBirth = "Jan 23, 1993";
     private String postalCode = "V3L5L2";
     private String personalHealthNumber = "9746173963";
-    //private boolean isIndigenous = false;
-    private String email = "dmytro.bilous@phsa.ca";
+    private String email = "verify.notifications.now@gmail.com";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
@@ -129,23 +134,8 @@ public class RegistrationNotification extends BaseTest {
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-        //////
+
         log("/*35_1.----Refresh page again - should not be like that again --*/");
         inClinicExperience_CP.refreshBrowser();
-        ///////
-
-        //Validation Steps
-        log("/ 36. --- We need Validation that Booking Record " +
-                "in New Status has created and In-Clinic Experience button is Visible, Active, Clickable");
     }
-
-
-    @Test()
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-    }
-
-
 }
