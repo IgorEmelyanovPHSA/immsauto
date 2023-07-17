@@ -97,11 +97,18 @@ public class RegisterToGetVaccinatedPage extends BasePage{
         typeIn(textDateOfBirth, dob);
         typeIn(textPostalCode, postalCode);
         typeIn(textPersonalHealthNumber, phn);
-
-        if (isIndigenous==false){
-            click(radioBtnNoIndigenous);
-        } else {
-            click(radioBtnYesIndigenous);
+        String nonIndigenousDialog = "";
+        try {
+            nonIndigenousDialog = Utils.getEnvConfigProperty("nonIndigenousDialog");
+        } catch(Exception ex) {
+            nonIndigenousDialog = "";
+        }
+        if(nonIndigenousDialog.equals("yes")) {
+            if (isIndigenous == false) {
+                click(radioBtnNoIndigenous);
+            } else {
+                click(radioBtnYesIndigenous);
+            }
         }
         click(btnContinueRegistration);
         By success_error_msg_path = By.xpath("//div[@class='toastTitle slds-text-heading--small' and text()='Error']");

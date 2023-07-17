@@ -112,7 +112,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 23.----Enter PHN --*/");
 		inClinicExperiencePage.enterPNH(personalHealthNumber);
 		log("/*-- 24.----click on non-Indigenous person radiobutton --*/");
-		inClinicExperiencePage.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			inClinicExperiencePage.clickNonIndigenousRadioButton();
+		}
 		log("/*-- 25.----click Verify PHN button --*/");
 		inClinicExperiencePage.clickVerifyPHNButton();
 		log("/*-- 26.'PNH match successful' --*/");

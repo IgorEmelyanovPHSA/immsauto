@@ -69,6 +69,9 @@ public class BookingDose1 extends BaseTest {
 		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			clinicInBox.clickNonIndigenousRadioButton();
+		}
 		clinicInBox.clickNonIndigenousRadioButton();
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();

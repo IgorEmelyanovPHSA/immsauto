@@ -18,19 +18,32 @@ public class AppointmentDayManagementPage extends BasePage {
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);
-        Map<String, WebElement> appointment_days_res;
+        Map<String, WebElement> appointment_days_res = new HashMap<>();
         tables = new Tables(driver);
         String appointment_name = appointment_type + " " + appointment_date;
         Map<String, String> search_criteria = new HashMap<String, String>();
         search_criteria.put("Name", appointment_name);
         search_criteria.put("Provider", provider);
-
+        GenericTable appointment_days_table = tables.getAppointmentDayTable();
+        int retries = 5;
+        int retry = 0;
         try {
-            GenericTable appointment_days_table = tables.getAppointmentDayTable();
             Thread.sleep(2000);
             appointment_days_res = appointment_days_table.getMappedRow(search_criteria);
         } catch(AssertionError ex) {
-            appointment_days_res = new HashMap<>();
+            for(int i = 0; i < retries; i++) {
+                int mySize = tables.getAppointmentDayTable().getRows().size();
+                WebElement lastRow = tables.getAppointmentDayTable().getRows().get(mySize - 1).get(0);
+                //Scrool to the last row
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].scrollIntoView();", lastRow);
+                try {
+                    appointment_days_res = appointment_days_table.getMappedRow(search_criteria);
+                    break;
+                } catch(AssertionError myEx1) {
+                    System.out.println("***DEBUG*** Table size currently " + mySize);
+                }
+            }
         }
         return appointment_days_res;
     }

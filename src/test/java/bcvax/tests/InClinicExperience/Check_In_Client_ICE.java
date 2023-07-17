@@ -79,7 +79,9 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperiencePage.enterPNH(personalHealthNumber);
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperiencePage.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperiencePage.clickNonIndigenousRadioButton();
+        }
         log("/*14.----click Verify PHN button --*/");
         inClinicExperiencePage.clickVerifyPHNButton();
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");

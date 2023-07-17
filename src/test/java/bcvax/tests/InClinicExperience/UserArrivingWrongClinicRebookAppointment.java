@@ -102,7 +102,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.enterPNH(personalHealthNumber);
 
 		log("/*-- 14.----click on non-Indigenous person radiobutton --*/");
-		inClinicExperiencePage.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			inClinicExperiencePage.clickNonIndigenousRadioButton();
+		}
 
 		log("/*-- 15.----click Verify PHN button --*/");
 		inClinicExperiencePage.clickVerifyPHNButton();
