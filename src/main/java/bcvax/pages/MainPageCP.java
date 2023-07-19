@@ -249,7 +249,7 @@ public class MainPageCP extends BasePage{
             Thread.sleep(3000);
             WebElement register_btn = driver.findElement(registerBtnPath);
             register_btn.click();
-        } catch(TimeoutException ex) {
+        } catch(Exception ex) {
             WebElement main_menu_more_btn = driver.findElement(main_menu_more_btn_path);
             click(main_menu_more_btn);
             Thread.sleep(2000);
