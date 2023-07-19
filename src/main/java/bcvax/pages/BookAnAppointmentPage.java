@@ -134,13 +134,16 @@ public class BookAnAppointmentPage extends BasePage{
         click(btnConfirmAppointment);
     }
 
-    public void appointmentConfirmationPageDisplayed() {
+    public boolean appointmentConfirmationPageDisplayed() {
         By successMessage = By.xpath("//div[contains(text(),'Appointment confirmed!')]");
         try {
             waitForElementToBeLocated(driver, successMessage, 10);
+            log("/*---Appointment confirmed! Page Successfully displayed--*/");
+            return true;
         } catch (Exception e){
             log("/*---Appointment confirmation page is NOT displayed--*/");
+            return false;
         }
-        log("/*---Appointment confirmed! Page Successfully displayed--*/");
+
     }
 }

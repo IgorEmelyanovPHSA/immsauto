@@ -2,6 +2,7 @@ package communityPortal.tests.Appointment_Scheduling_CP;
 
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.MainPageCP;
+import bcvax.pages.PersonAccountPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Test;

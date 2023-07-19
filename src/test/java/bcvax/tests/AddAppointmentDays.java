@@ -13,8 +13,8 @@ public class AddAppointmentDays extends BaseTest {
     String env;
     @Test()
     public void createAppointmentDays() throws Exception {
-        String appointment_date = "2023-7-18";
-        String appointment_type = "BC Immunization Program";
+        String appointment_date = "2023-7-20";
+        String appointment_type = "COVID-19 Vaccination";
 
         //String provider = "Age 12 and Above - Abbotsford - Abby Pharmacy";
         //String address_id = "AD-0000142140";

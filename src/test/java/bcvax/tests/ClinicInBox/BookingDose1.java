@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
@@ -72,7 +73,6 @@ public class BookingDose1 extends BaseTest {
 		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
 			clinicInBox.clickNonIndigenousRadioButton();
 		}
-		clinicInBox.clickNonIndigenousRadioButton();
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -104,7 +104,10 @@ public class BookingDose1 extends BaseTest {
 
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		clinicInBox.selectOneOption(vaccineToSelect);
-
+		////////////////////
+		//May will be removed
+		PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		log("/*24----select 'Search by Clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
@@ -122,7 +125,8 @@ public class BookingDose1 extends BaseTest {
 		log("/*31----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
 		log("/*32----see 'Appointment confirmed!' screen --*/");
-		clinicInBox.validateAppointmentConfirmedScreen();
+		boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+		Assert.assertTrue(appointment_result);
 		log("/*33----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
