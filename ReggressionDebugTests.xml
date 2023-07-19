@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation run">
+    <test name="Regression">
+        <classes>
+            <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose1_Covid19_CP"/>
+            <class name="communityPortal.tests.VaccineAdministration_CP.Check_In_Client_CP"/>
+            <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>
+            <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_COVID19"/>
+            <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose2_COVID19"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
