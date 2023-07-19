@@ -12,6 +12,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
 	private String legalFirstName = "Ludovika";
@@ -81,11 +84,14 @@ public class BookingDose1 extends BaseTest {
 		callCenterConsole.clickRegisterButtonOnConfirmationPage();
 		System.out.println("/*17.--toast success message - 'Success' --*/");
 		callCenterConsole.successRegisteredMessageAppear();
+
 		System.out.println("/*18.----click on person Account Related Tab --*/");
-		callCenterConsole.clickOnPersonAccountRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
+		//callCenterConsole.clickOnPersonAccountRelatedTab();
 
 		System.out.println("/*21----Go to Appointment Tab --*/");
-		callCenterConsole.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
+		//callCenterConsole.navigateToVaccineSchedulingTab();
 
 		try {
 			System.out.println("---click on reason Early Booking Reason - Travel --*/");
@@ -96,9 +102,11 @@ public class BookingDose1 extends BaseTest {
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		callCenterConsole.clickOnVaccinationCheckbox();
-
+		////////////////////
+		//May will be removed
+		PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		System.out.println("/*24----select 'Search by Clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
@@ -116,8 +124,10 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*31----click Confirm Appointment button  --*/");
 		callCenterConsole.clickOnConfirmButton();
 		System.out.println("/*32----see 'Appointment confirmed!' screen --*/");
-		callCenterConsole.validateAppointmentConfirmedScreen();
+		boolean appointment_result = callCenterConsole.validateAppointmentConfirmedScreen();
+		assertTrue(appointment_result);
 		System.out.println("/*33----Refresh page --*/");
+
 		callCenterConsole.refreshBrowser();
 		System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
 		callCenterConsole.clickRelatedTab();

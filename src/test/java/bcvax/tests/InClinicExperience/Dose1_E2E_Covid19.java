@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -131,7 +132,10 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("/*----scroll down a bit --*/");
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperience.clickOnVaccinationCheckbox();
-
+		////////////////////
+		//May will be removed
+		PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
@@ -154,7 +158,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*34----click Confirm Appointment button  --*/");
 		inClinicExperience.clickAppointmentConfirmButton();
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
-		inClinicExperience.AppointmentConfirmationMessage();
+		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+		Assert.assertTrue(appointment_result);
 		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");

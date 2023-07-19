@@ -31,6 +31,7 @@ public class PersonAccountPage extends BasePage {
         By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
         waitForElementToBeEnabled(driver, related_tab_path, 10);
         WebElement related_tab = driver.findElement(related_tab_path);
+        scrollTop(driver, related_tab, false);
         Thread.sleep(500);
         related_tab.click();
         Thread.sleep(2000);
@@ -73,6 +74,20 @@ public class PersonAccountPage extends BasePage {
             Thread.sleep(500);
             influenza_checkbox.click();
         }
+    }
 
+    public static void select_covid_19_agent(WebDriver driver, String covid_19_agent) throws InterruptedException {
+        Thread.sleep(500);
+        By covid_19_agent_button_path = By.xpath("//button[@name='covidvaccine']");
+        waitForElementToBeEnabled(driver, covid_19_agent_button_path, 10);
+        WebElement covid_10_agent_button = driver.findElement(covid_19_agent_button_path);
+        scrollTop(driver, covid_10_agent_button, true);
+        Thread.sleep(500);
+        covid_10_agent_button.click();
+        Thread.sleep(500);
+        By my_item_path = By.xpath("//lightning-base-combobox-item[@data-value='" + covid_19_agent + "']");
+        waitForElementToBeEnabled(driver, my_item_path, 10);
+        WebElement my_item = driver.findElement(my_item_path);
+        my_item.click();
     }
 }

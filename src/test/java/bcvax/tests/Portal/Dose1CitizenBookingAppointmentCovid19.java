@@ -117,7 +117,8 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
 
 		log("/*16---Verify appointment conformation message is displayed--*/");
-		bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+		boolean appointment_result = bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+		Assert.assertTrue(appointment_result);
 		}
 
 	@Test(priority = 2)

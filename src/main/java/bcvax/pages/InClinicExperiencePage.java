@@ -937,7 +937,7 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean AppointmentConfirmationMessage() throws InterruptedException {
 		Thread.sleep(500);
 		try {
-			By appointment_confirm_message_path = By.xpath("//div[@role = 'heading' and text() = 'Appointment confirmed!']");
+			By appointment_confirm_message_path = By.xpath("//div[@role = 'heading']/h1[text() = 'Appointment confirmed!']");
 			waitForElementToBeLocated(driver, appointment_confirm_message_path, 10);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
