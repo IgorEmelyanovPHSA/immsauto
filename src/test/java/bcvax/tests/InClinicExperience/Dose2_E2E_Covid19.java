@@ -161,7 +161,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*35.----see 'Appointment confirmed!' screen --*/");
 		boolean apointment_result = inClinicExperience.AppointmentConfirmationMessage();
-		Assert.assertTrue(apointment_result);
+		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
 		log("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
