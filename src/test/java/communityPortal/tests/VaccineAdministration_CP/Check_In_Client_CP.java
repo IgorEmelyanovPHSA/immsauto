@@ -46,6 +46,7 @@ public class Check_In_Client_CP extends BaseTest {
         userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
         userDefaultPage.clickBtnSave();
+        Thread.sleep(7000);
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
