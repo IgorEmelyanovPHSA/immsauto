@@ -2,10 +2,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 
 import Utilities.ApiQueries;
 import Utilities.TestListener;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.ProfilesPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -118,6 +115,11 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         }
         log("/*20.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
+
+        ////////////////////
+        //May will be removed
+        PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        ///////////////////
 
         log("/*21----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
