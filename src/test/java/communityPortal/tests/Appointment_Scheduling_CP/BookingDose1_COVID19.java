@@ -3,6 +3,7 @@ package communityPortal.tests.Appointment_Scheduling_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -125,7 +126,8 @@ public class BookingDose1_COVID19 extends BaseTest {
         inClinicExperience_CP.clickAppointmentConfirmButton();
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
+        Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();

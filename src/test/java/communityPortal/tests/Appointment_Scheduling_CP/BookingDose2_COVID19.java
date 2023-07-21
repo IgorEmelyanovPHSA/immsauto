@@ -5,6 +5,7 @@ import bcvax.pages.MainPageCP;
 import bcvax.pages.PersonAccountPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BookingDose2_COVID19 extends BaseTest {
@@ -93,6 +94,11 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         inClinicExperience_CP.selectOneOption(vaccineToSelect);
 
+        ////////////////////
+        //May will be removed
+        PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        ///////////////////
+
         log("/*21.----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
 
@@ -118,7 +124,8 @@ public class BookingDose2_COVID19 extends BaseTest {
         inClinicExperience_CP.clickAppointmentConfirmButton();
 
         log("/*29.----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
+        Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
     }
 
     @Test(priority = 2)

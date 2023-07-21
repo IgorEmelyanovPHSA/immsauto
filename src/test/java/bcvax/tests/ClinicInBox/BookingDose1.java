@@ -126,7 +126,7 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.clickOnConfirmButton();
 		log("/*32----see 'Appointment confirmed!' screen --*/");
 		boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
-		Assert.assertTrue(appointment_result);
+		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		log("/*33----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");

@@ -125,7 +125,7 @@ public class BookingDose1 extends BaseTest {
 		callCenterConsole.clickOnConfirmButton();
 		System.out.println("/*32----see 'Appointment confirmed!' screen --*/");
 		boolean appointment_result = callCenterConsole.validateAppointmentConfirmedScreen();
-		assertTrue(appointment_result);
+		assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*33----Refresh page --*/");
 
 		callCenterConsole.refreshBrowser();

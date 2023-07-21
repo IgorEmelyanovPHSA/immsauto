@@ -159,7 +159,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickAppointmentConfirmButton();
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
 		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
-		Assert.assertTrue(appointment_result);
+		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
