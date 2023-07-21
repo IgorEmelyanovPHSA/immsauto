@@ -67,7 +67,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		userDefaultsPage.selectUserDefaultLocation(supplyLocationConsumption);
 		log("/*7.----- Click on Save defaults button --*/");
 		userDefaultsPage.clickBtnSave();
-
+		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
 
