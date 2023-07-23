@@ -547,6 +547,13 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
+	public void closeLastTabHCA() throws InterruptedException {
+		Thread.sleep(500);
+		By hca_tabs_path = By.xpath("//div[@role='tablist]/ul[@role='presentation' and @class='tabBarItems slds-grid']/li[@role='presentation']/div[@class='close slds-col--bump-left slds-p-left--none slds-context-bar__icon-action ']/button");
+		List<WebElement> my_tabs = driver.findElements(hca_tabs_path);
+		my_tabs.size();
+	}
+
 	public int getRowsIncomingTransactionsCount() throws InterruptedException {
 		waitForElementToBeVisible(driver, rows_incoming_transactions_count_path, 10);
 		List<WebElement> rows = rows_incoming_transactions_count_path.findElements(By.tagName("tr"));
@@ -1419,16 +1426,25 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void selectIncomingSupplyDistributionReceive() throws InterruptedException {
+		Thread.sleep(500);
 		By supply_distribution_to_path = By.xpath("//button[@name='distributionBox']");
-		waitForElementToBeEnabled(driver, supply_distribution_to_path, 10);
+		waitForElementToBeEnabled(driver, supply_distribution_to_path, 5);
 		WebElement element = driver.findElement(supply_distribution_to_path);
 		scrollTop(element);
 		element.click();
 		Thread.sleep(500);
 		By supply_distributor_path = By.xpath("(//span[contains(text(),'- SDST-000')])[1]");
-		waitForElementToBeEnabled(driver, supply_distributor_path, 10);
-		WebElement myDistributor = driver.findElement(supply_distributor_path);
-		myDistributor.click();
+		try {
+			waitForElementToBeEnabled(driver, supply_distributor_path, 5);
+			WebElement myDistributor = driver.findElement(supply_distributor_path);
+			myDistributor.click();
+		} catch(Exception ex) {
+			element.click();
+			Thread.sleep(500);
+			waitForElementToBeEnabled(driver, supply_distributor_path, 10);
+			WebElement myDistributor = driver.findElement(supply_distributor_path);
+			myDistributor.click();
+		}
 	}
 
 	@Step
@@ -1573,6 +1589,22 @@ public class SupplyConsolePage extends BasePage {
 		receiveRequestBtn.click();
 	}
 
+	public void clickReturnBtn() throws InterruptedException {
+		Thread.sleep(500);
+		By return_btn_path = By.xpath("//button[@name='HC_Supply_Location__c.Return']");
+		waitForElementToBeEnabled(driver, return_btn_path, 10);
+		WebElement return_btn = driver.findElement(return_btn_path);
+		return_btn.click();
+	}
+
+	public void clickReturnsTab() throws InterruptedException {
+		Thread.sleep(500);
+		By return_tab_path = By.xpath("//a[@nclass='slds-tabs_default__link' and @data-label='Returns']");
+		waitForElementToBeEnabled(driver, return_tab_path, 10);
+		WebElement return_tab = driver.findElement(return_tab_path);
+		return_tab.click();
+	}
+
 	public void clickOnSearchSupplyDistributions() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_search_supply_distributions_to_component, 10);
 		Thread.sleep(2000);
@@ -1623,5 +1655,10 @@ public class SupplyConsolePage extends BasePage {
 			alert_close_btn = driver.findElement(alert_close_btn_path);
 			alert_close_btn.click();
 		}
+	}
+
+	public void openReturnDetails(String return_id) {
+		GenericTable outgoing_Returns_table = tables.getOutgoingReturnsTable();
+		System.out.println();
 	}
 }

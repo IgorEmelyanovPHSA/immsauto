@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation run">
+    <test name="Smoke">
+        <classes>
+            <class name="communityPortal.tests.InventoryCP.TransferCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkTransfersCP"/>
+            <class name="communityPortal.tests.InventoryCP.TransferCancellationCP"/>
+            <class name="communityPortal.tests.InventoryCP.BulkTransfersCancellationCP"/>
+            <class name="communityPortal.tests.InventoryCP.RequisitionCP"/>
+            <class name="communityPortal.tests.Historical_Immunisation_CP.Historical_Immunisation_Records_Validation"/>
+            <class name="communityPortal.tests.InventoryCP.E2E_Consumption_CP"/>
+            <class name="communityPortal.tests.VaccineAdministration_CP.Check_In_Client_CP"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->

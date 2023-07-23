@@ -272,6 +272,13 @@ public class Tables extends BasePage {
         return new GenericTable(singleTable);
     }
 
+    public GenericTable getOutgoingReturnsTable() {
+        WebElement singleTable = null;
+        By returns_table_path = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader and @title='Outgoing Returns']/../../../../../../../../..//div[@lightning-datatable_table]");
+        waitForElementToBeLocated(driver, returns_table_path, 10);
+        singleTable = driver.findElement(returns_table_path);
+        return new GenericTable(singleTable);
+    }
     public GenericTable getImmunizationRecordsTable() {
         return new GenericTable(immunizationRecordsTable);
     }

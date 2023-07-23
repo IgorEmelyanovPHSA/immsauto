@@ -104,6 +104,15 @@ public class MainPageOrg extends BasePage {
         }
     }
 
+    public void closeLastTab() throws InterruptedException {
+        Thread.sleep(500);
+        waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+        By hca_tabs_path = By.xpath("//div[@role='tablist']/ul[@role='presentation' and @class='tabBarItems slds-grid']/li[@role='presentation']/div[@class='close slds-col--bump-left slds-p-left--none slds-context-bar__icon-action ']/button");
+        List<WebElement> closeButtons = driver.findElements(hca_tabs_path);
+        int my_last_button = closeButtons.size() - 1;
+        closeButtons.get(my_last_button).click();
+    }
+
     public void globalSearch(String search_value) throws InterruptedException {
         Thread.sleep(500);
         By search_btn_path = By.xpath("//button[@aria-label = 'Search']");
@@ -122,5 +131,11 @@ public class MainPageOrg extends BasePage {
         scrollTop(found_client);
         Thread.sleep(500);
         found_client.click();
+    }
+
+    public void logout() throws InterruptedException {
+        By logout_link_path = By.xpath("//a[@href='/secur/logout.jsp']");
+        WebElement logout_link = driver.findElement(logout_link_path);
+        logout_link.click();
     }
 }

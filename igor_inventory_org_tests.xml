@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation run">
+    <test name="Smoke">
+        <classes>
+            <class name="bcvax.tests.Inventory.Transfer"/>
+            <class name="bcvax.tests.Inventory.BulkTransfers"/>
+            <class name="bcvax.tests.Inventory.TransferCancellation"/>
+            <class name="bcvax.tests.Inventory.BulkTransfersCancellation"/>
+            <class name="bcvax.tests.Inventory.Requisition"/>
+            <class name="bcvax.tests.Inventory.Consumption"/>
+            <class name="bcvax.tests.InClinicExperience.Check_In_Client_ICE"/>
+            <class name="bcvax.tests.ClinicInBox.Historical_Immunization"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
