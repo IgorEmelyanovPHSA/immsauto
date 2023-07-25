@@ -279,6 +279,23 @@ public class Tables extends BasePage {
         singleTable = driver.findElement(returns_table_path);
         return new GenericTable(singleTable);
     }
+
+    public GenericTable getReturnLineItemsTable() {
+        WebElement singleTable = null;
+        By returns_line_items_table_path = By.xpath("//flexipage-component2[@data-component-id='force_relatedListSingleContainer2']//lst-customized-datatable");
+        waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
+        singleTable = driver.findElement(returns_line_items_table_path);
+        return new GenericTable(singleTable);
+    }
+
+    public GenericTable getReturnsLocationHistoryTable() {
+        WebElement singleTable = null;
+        By returns_location_history_table_path = By.xpath("//flexipage-component2[@data-component-id='lst_dynamicRelatedList']//lst-customized-datatable");
+        waitForElementToBeLocated(driver, returns_location_history_table_path, 10);
+        singleTable = driver.findElement(returns_location_history_table_path);
+        return new GenericTable(singleTable);
+    }
+
     public GenericTable getImmunizationRecordsTable() {
         return new GenericTable(immunizationRecordsTable);
     }
