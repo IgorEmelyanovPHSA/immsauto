@@ -4,9 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ReturnPage extends BasePage {
+    Tables tables;
     public ReturnPage(WebDriver driver) {
         super(driver);
+        tables = new Tables(driver);
     }
 
     public String getReturnId() throws InterruptedException {
@@ -35,6 +40,33 @@ public class ReturnPage extends BasePage {
         waitForElementToBeEnabled(driver, return_from_path, 10);
         WebElement return_from = driver.findElement(return_from_path);
         return return_from.getText();
+    }
+
+    public Map<String, WebElement> getReturnLineItemsTable() throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable return_line_items_table = tables.getReturnLineItemsTable();
+        Map<String, WebElement> first_row = return_line_items_table.getRowsMappedToHeadings().get(1);
+        return first_row;
+    }
+
+    public String getLinkTextFromCellValue(WebElement table_value) {
+        return table_value.findElement(By.xpath(".//a")).getAttribute("title");
+    }
+
+    public String getReturnLocationHistoryId(WebElement table_value) {
+        return table_value.findElement(By.xpath(".//a//span")).getText();
+    }
+    public Map<String, WebElement> getReturnLocationHistoryTable() throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable return_location_history_table = tables.getReturnsLocationHistoryTable();
+        int table_size = return_location_history_table.getRows().size();
+        if(table_size > 0) {
+            Map<String, WebElement> first_row = return_location_history_table.getRowsMappedToHeadings().get(1);
+            return first_row;
+        } else {
+            Map<String, WebElement> empty_row = new HashMap<>();
+            return empty_row;
+        }
     }
 
     public String getReturnedToValue() throws InterruptedException {
@@ -72,6 +104,22 @@ public class ReturnPage extends BasePage {
     public void clickReceiveReturnButton() throws InterruptedException {
         Thread.sleep(500);
         By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Receive_Return']");
+        waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
+        WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
+        receive_return_btn.click();
+    }
+
+    public void clickPrintButton() throws InterruptedException {
+        Thread.sleep(500);
+        By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Print']");
+        waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
+        WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
+        receive_return_btn.click();
+    }
+
+    public void clickForwardReturnButton() throws InterruptedException {
+        Thread.sleep(500);
+        By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Forward_Return_Flow']");
         waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
         WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
         receive_return_btn.click();
