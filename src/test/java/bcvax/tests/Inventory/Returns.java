@@ -73,7 +73,7 @@ public class Returns extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin_org":
                 log("Login AS comunityqa_org_immsbc_admin");
-                TestcaseID = "244853"; //C244853
+                TestcaseID = "261384"; //C261384
                 loginPage.loginAsImmsBCAdminICE();
                 break;
             default:
@@ -121,7 +121,7 @@ public class Returns extends BaseTest {
         //supplyConsolePage.openReturnDetails(return_id);
 
         log("/*10. ----Verify The Return Status and Sender Comment --*/");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         ReturnPage returnPage = new ReturnPage(driver);
         String return_status = returnPage.getReturnStatus();
 
@@ -228,6 +228,5 @@ public class Returns extends BaseTest {
 
         Assert.assertEquals(forward_return_id, return_id);
         Assert.assertEquals(forward_supply_location, returned_from);
-        System.out.println();
     }
 }

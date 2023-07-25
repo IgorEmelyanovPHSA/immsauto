@@ -116,7 +116,13 @@ public abstract class BasePage<T> {
 		while(!found) {
 			try {
 				found = driver.findElement(xpath).isEnabled();
-				System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Element found, Enabled Status is: " + String.valueOf(found));
+				try {
+					if (Utils.getEnvConfigProperty("debug_info").equals("yes")) {
+						System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Element found, Enabled Status is: " + String.valueOf(found));
+					}
+				}catch(Exception ex) {
+					continue;
+				}
 				System.out.println(end.toString());
 				if(!found) {
 					end = Instant.now();
