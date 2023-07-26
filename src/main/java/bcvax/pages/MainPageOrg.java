@@ -126,7 +126,13 @@ public class MainPageOrg extends BasePage {
         By search_field_path = By.xpath("//input[@lightning-input_input and @type='search']");
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_input = driver.findElement(search_field_path);
-        search_input.sendKeys(search_value);
+        try {
+            search_input.sendKeys(search_value);
+        } catch(ElementNotInteractableException ex) {
+            //////Retry
+            Thread.sleep(2000);
+            search_input.sendKeys(search_value);
+        }
         Thread.sleep(500);
         By found_client_path = By.xpath("//span[@search_dialog-instantresultitem_instantresultitem and @title=\"" + search_value + "\"]");
         waitForElementToBeEnabled(driver, found_client_path, 10);

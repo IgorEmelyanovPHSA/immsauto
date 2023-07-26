@@ -376,12 +376,12 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement register_btn = driver.findElement(register_btn_path);
 		register_btn.click();
 		Thread.sleep(500);
-		try {
-			clickCloseAlert();
-		} catch(Exception ex) {
-			System.out.println("No alert message found. Continue...");
-		}
-		Thread.sleep(500);
+//		try {
+//			clickCloseAlert();
+//		} catch(Exception ex) {
+//			System.out.println("No alert message found. Continue...");
+//		}
+//		Thread.sleep(500);
 	}
 
 	public boolean userFound() throws InterruptedException {
@@ -1244,20 +1244,25 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void successRegisteredMessageAppear() throws InterruptedException {
 		Thread.sleep(500);
-		By success_alert = By.xpath("//div[text() = 'Citizen Successfully Registered']");
-		try {
-			waitForElementToBePresent(driver, success_alert, 30);
-			System.out.println("/* ----the toast success Citizen Registered message has been Appears. Closing...");
-			clickCloseAlert();
-			Thread.sleep(500);
-			waitForElementNotToBeVisible(driver, success_alert, 30);
-			System.out.println("Alert popup not visible any more...");
-		} catch(TimeoutException ex) {
-			System.out.println("**** Warning *****");
-			System.out.println("**** Citizen Successfully Registered Message didn't appear. Continue...*****");
-			System.out.println("**** Warning *****");
-		}
-		Thread.sleep(500);
+		boolean alert_found = AlertDialog.alertFound(driver);
+		WebElement alert_content = AlertDialog.getAlertContent(driver);
+		String alert_text = alert_content.getText();
+		Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"));
+		AlertDialog.closeAlert(driver);
+//		By success_alert = By.xpath("//div[text() = 'Citizen Successfully Registered']");
+//		try {
+//			waitForElementToBePresent(driver, success_alert, 30);
+//			System.out.println("/* ----the toast success Citizen Registered message has been Appears. Closing...");
+//			clickCloseAlert();
+//			Thread.sleep(500);
+//			waitForElementNotToBeVisible(driver, success_alert, 30);
+//			System.out.println("Alert popup not visible any more...");
+//		} catch(TimeoutException ex) {
+//			System.out.println("**** Warning *****");
+//			System.out.println("**** Citizen Successfully Registered Message didn't appear. Continue...*****");
+//			System.out.println("**** Warning *****");
+//		}
+//		Thread.sleep(500);
 	}
 
 	public void clickOnPersonAccountRelatedTab() throws InterruptedException {

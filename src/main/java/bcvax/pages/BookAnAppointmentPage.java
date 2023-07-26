@@ -31,11 +31,6 @@ public class BookAnAppointmentPage extends BasePage{
     @FindBy(xpath = ".//button[text() = 'Next']")
     private WebElement btnNext;
 
-    @FindBy(xpath = "//span[@class='slds-checkbox_faux']")
-    private WebElement checkBoxVerifyContactInformation;
-
-    @FindBy(xpath = "//button[text() = 'Confirm appointment']")
-    private WebElement btnConfirmAppointment;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,15 +122,21 @@ public class BookAnAppointmentPage extends BasePage{
     }
 
     public void clickCheckBoxVerifyContactInformationAndConfirmAppointment() throws InterruptedException{
-        Thread.sleep(2000);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
-        //scrollTop(checkBoxVerifyContactInformation);
-        click(checkBoxVerifyContactInformation);
-        click(btnConfirmAppointment);
+        Thread.sleep(500);
+        By verify_contact_info_chkbox_path = By.xpath("//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../span[@class='slds-checkbox_faux']");
+        waitForElementToBeEnabled(driver, verify_contact_info_chkbox_path, 10);
+        WebElement verify_contact_chkbox = driver.findElement(verify_contact_info_chkbox_path);
+        scrollIfNeeded(driver, verify_contact_chkbox);
+        verify_contact_chkbox.click();
+        Thread.sleep(500);
+        By confirm_appointment_btn_path = By.xpath("//button[text() = 'Confirm appointment']");
+        WebElement confirm_appointment_btn = driver.findElement(confirm_appointment_btn_path);
+        scrollIfNeeded(driver, confirm_appointment_btn);
+        confirm_appointment_btn.click();
     }
 
     public boolean appointmentConfirmationPageDisplayed() {
-        By successMessage = By.xpath("//div[contains(text(),'Appointment confirmed!')]");
+        By successMessage = By.xpath("//div[contains(text(),'Appointment confirmed!')] | //h1[text() = 'Appointment confirmed!']");
         try {
             waitForElementToBeLocated(driver, successMessage, 10);
             log("/*---Appointment confirmed! Page Successfully displayed--*/");

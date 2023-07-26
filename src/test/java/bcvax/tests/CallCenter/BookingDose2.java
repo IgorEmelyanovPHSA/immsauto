@@ -78,6 +78,7 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.successRegisteredMessageAppear();
 		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
 		callCenterConsole.clickRefreshForecastButton();
+		Thread.sleep(2000);
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.navigateToVaccineSchedulingTab();
 

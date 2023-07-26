@@ -162,7 +162,7 @@ public class MainPageCP extends BasePage{
         System.out.println("/*-- Choose List View --*/");
         Thread.sleep(2000);
         By list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
-        waitForElementToBeLocated(driver, list_view_btn_path, 10);
+        waitForElementToBeLocated(driver, list_view_btn_path, 30);
         WebElement list_view_btn = driver.findElement(list_view_btn_path);
         list_view_btn.click();
         Thread.sleep(500);

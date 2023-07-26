@@ -11,9 +11,6 @@ public class RegisterToGetVaccinatedPage extends BasePage{
     @FindBy(xpath = "//span[@class='button-label-primary' and contains(text(), 'Register')]")
     private WebElement btnRegisterNow;
 
-    @FindBy(xpath = "//div[@class='confirmation-number']")
-    private WebElement conformationNumber;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Registration information section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,9 +140,12 @@ public class RegisterToGetVaccinatedPage extends BasePage{
         } catch (Exception e){
             log("/*---Registration is NOT Successful, check for duplicates ---*/");
         }
-        String conformationNumberText = (conformationNumber.getText()).replaceAll("\\s+","");
-        log("/*---Registration Successful message displayed, conformation number: " +conformationNumberText +" ---*/");
-        return conformationNumberText;
+        By confirmation_number_path = By.xpath("//div[@class='confirmation-number']");
+        waitForElementToBeLocated(driver, confirmation_number_path, 10);
+        WebElement confirmation_number = driver.findElement(confirmation_number_path);
+        String confirmation_number_value = (confirmation_number.getText()).replaceAll("\\s+","");
+        log("/*---Registration Successful message displayed, conformation number: " + confirmation_number_value +" ---*/");
+        return confirmation_number_value;
     }
 
 }
