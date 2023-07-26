@@ -86,7 +86,7 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.clickOnVaccinationCheckbox();
 		////////////////////
 		//May will be removed
-		PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*24----select 'Search clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();

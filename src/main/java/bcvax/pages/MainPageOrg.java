@@ -27,6 +27,7 @@ public class MainPageOrg extends BasePage {
         By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
         waitForElementToBeEnabled(driver, current_app_path, 30);
         WebElement current_app = driver.findElement(current_app_path);
+        String current_app_text = new String();
         int timeout = 30000;
         boolean found = false;
         Instant start = Instant.now();
@@ -36,6 +37,7 @@ public class MainPageOrg extends BasePage {
                 found = current_app.isDisplayed();
                 System.out.println("Current App found");
                 System.out.println(end.toString());
+                current_app_text = current_app.getText();
             } catch (NotFoundException ex) {
                 end = Instant.now();
                 if(Duration.between(start, end).toMillis() > timeout) {
@@ -47,13 +49,14 @@ public class MainPageOrg extends BasePage {
                 end = Instant.now();
                 current_app = driver.findElement(current_app_path);
                 found = current_app.isDisplayed();
+                current_app_text = current_app.getText();
                 if(Duration.between(start, end).toMillis() > timeout) {
                     throw new NotFoundException("Current APP tab not found");
                 }
                 Thread.sleep(200);
             }
         }
-        return current_app.getText();
+        return current_app_text;
     }
 
     public void switchApp(String app) throws InterruptedException {

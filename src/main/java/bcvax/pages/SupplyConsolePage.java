@@ -39,9 +39,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement bulk_cancel_button;
 	private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
 
-	@FindBy(xpath = "//button[contains(text(),\"Save\")]")
-	private WebElement saveButton;
-
 	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
 	private WebElement successMessage;
 
@@ -64,23 +61,12 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[1]")
 	private WebElement rows_incoming_transactions_count_path;
 
-	@FindBy(xpath = ".//button[text() = 'Confirm Transfer']")
-	private WebElement bulk_confirm_incoming_transfers_button;
-	private By bulk_confirm_incoming_transfers_button_1 = By.xpath(".//button[text() = 'Confirm Transfer']");
-
-	@FindBy(xpath = ".//span[text() = 'Select Supply Distributor']")
-	private WebElement search_incoming_supply_distributor;
-	private By search_incoming_supply_distributor_ = By.xpath(".//span[text() = 'Select Supply Distributor']");
-
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
 
 	@FindBy(xpath = "//input[contains(@placeholder,'Search Supply Items')]")
 	private WebElement searchSupplyItems;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
-
-	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_2_1')]")
-	private WebElement select_incoming_supply_distributor;
 
 	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_1_2')]")
 	private WebElement select_same_clinic_supply_distributor_1_2;
@@ -246,9 +232,12 @@ public class SupplyConsolePage extends BasePage {
 		dosesInput.sendKeys(inputQuantity);
 	}
 
-	public void clickSaveButton() {
-		moveToElement(saveButton);
-		saveButton.click();
+	public void clickSaveButton() throws InterruptedException {
+		By save_btn_path = By.xpath("//button[contains(text(),'Save')]");
+		waitForElementToBeEnabled(driver, save_btn_path, 10);
+		WebElement save_btn = driver.findElement(save_btn_path);
+		scrollTop(save_btn, false);
+		save_btn.click();
 	}
 
 	public void inputRequestDate() {
@@ -375,9 +364,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public int getRowsSupplyContainersFromCount() throws InterruptedException {
 		Thread.sleep(500);
-		waitForElementToBePresent(driver, rows_supply_containers_from_count_path_1, 10);
-		List<WebElement> rows = driver.findElements(rows_supply_containers_from_count_path_1);
-		return (rows.size());
+		return (tables.getSupplyContainerTable().getRows().size() - 1);
 	}
 
 	public void clickBulkTransfersButton() {
@@ -679,25 +666,28 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
-		waitForElementToBeLocated(driver, bulk_confirm_incoming_transfers_button_1, 10);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false)", bulk_confirm_incoming_transfers_button);
-		//moveToElement(driver.findElement(bulk_confirm_incoming_transfers_button_1));
-		click(bulk_confirm_incoming_transfers_button);
+		Thread.sleep(500);
+		By bulk_confirm_incoming_transfers_button_path = By.xpath(".//button[text() = 'Confirm Transfer']");
+		waitForElementToBeEnabled(driver, bulk_confirm_incoming_transfers_button_path, 10);
+		WebElement bulk_confirm_incoming_transfers_button = driver.findElement(bulk_confirm_incoming_transfers_button_path);
+		scrollTop(bulk_confirm_incoming_transfers_button, false);
+		Thread.sleep(500);
+		bulk_confirm_incoming_transfers_button.click();
 	}
 
 	public void selectIncomingSupplyDistribution() throws InterruptedException {
-		waitForElementToBeVisible(driver, search_incoming_supply_distributor, 10);
-		WebElement element = driver.findElement(search_incoming_supply_distributor_);
-		Thread.sleep(2000);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		Thread.sleep(1000);
+		Thread.sleep(500);
+		By search_incoming_supply_distributor_path = By.xpath(".//span[text() = 'Select Supply Distributor']");
+		waitForElementToBeEnabled(driver, search_incoming_supply_distributor_path, 10);
+		WebElement search_incoming_supply_distributor = driver.findElement(search_incoming_supply_distributor_path);
+		scrollTop(search_incoming_supply_distributor, false);
+		Thread.sleep(500);
 		search_incoming_supply_distributor.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_incoming_supply_distributor, 10);
-		Thread.sleep(2000);
+		Thread.sleep(500);
+		By select_incoming_supply_distributor_path = By.xpath("//span[contains(text(),'Supply Distribution_2_1')]");
+		waitForElementToBeEnabled(driver, select_incoming_supply_distributor_path, 10);
+		WebElement select_incoming_supply_distributor = driver.findElement(select_incoming_supply_distributor_path);
 		select_incoming_supply_distributor.click();
-		//#search_supply_location_To.sendKeys(Keys.ARROW_DOWN);
-		//#search_supply_location_To.sendKeys(Keys.ENTER);
 	}
 
 	@Step
@@ -957,12 +947,13 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public boolean validateLotUserDefaults(String lot) {
-		boolean flag = false;
-		List countOfFoundLot = driver.findElements(By.xpath("//lightning-base-formatted-text/..//*[contains(text(),'"+ lot +"')]"));
-		if(countOfFoundLot.size()>0){
-			flag = true;
+		By my_lot_path = By.xpath("//lightning-base-formatted-text/..//*[contains(text(),'"+ lot +"')]");
+		try {
+			waitForElementToBeLocated(driver, my_lot_path, 10);
+			return true;
+		} catch (Exception ex) {
+			return false;
 		}
-		return flag;
 	}
 
 	public void enterBulkWastageByDosageWithReason(double amount, String reason) throws InterruptedException {
