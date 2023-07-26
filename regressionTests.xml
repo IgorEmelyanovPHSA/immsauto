@@ -25,6 +25,7 @@
             <class name="bcvax.tests.Inventory.Transfer"/>
             <class name="bcvax.tests.Inventory.TransferCancellation"/>
             <class name="bcvax.tests.Inventory.Wastage"/>
+            <class name="bcvax.tests.Inventory.Returns"/>
             <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointmentCovid19"/>
             <class name="bcvax.tests.Portal.Dose2CitizenBookingAppointmentCovid19"/>
             <class name="bcvax.tests.UserDefaults.UserDefaultsSettingsValidation"/>

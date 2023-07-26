@@ -96,7 +96,7 @@ public class BookingDose2_COVID19 extends BaseTest {
 
         ////////////////////
         //May will be removed
-        PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
         ///////////////////
 
         log("/*21.----select 'Search by Clinic name' tab --*/");

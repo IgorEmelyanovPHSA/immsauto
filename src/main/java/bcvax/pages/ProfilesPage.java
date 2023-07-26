@@ -635,7 +635,7 @@ public class ProfilesPage extends BasePage{
                 break;
             } catch (Exception ex) {
                 System.out.println("Try " + i + "; Table is still empty");
-                driver.navigate().refresh();
+                //driver.navigate().refresh();
                 waitForElementToBePresent(driver, historical_records_title, 10);
                 Thread.sleep(1000);
                 element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");

@@ -132,7 +132,7 @@ public class E2E_Consumption_CP extends BaseTest {
 
         ////////////////////
         //May will be removed
-        PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
         ///////////////////
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");

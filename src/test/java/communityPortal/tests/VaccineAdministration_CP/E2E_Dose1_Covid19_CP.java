@@ -119,7 +119,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         ////////////////////
         //May will be removed
-        PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
         ///////////////////
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");

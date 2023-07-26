@@ -284,7 +284,8 @@ public class Adjustments extends BaseTest {
 				(remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
 		assertEquals(remainingDosesAfter, remainingDosesCalculation);
 		log("----Validation by Quantities --");
-		assertEquals(remainingQuantitiesAfter, (remainingQuantitiesBefore + amountOfQuantitiesToAdjust));
+		double remainingQuantitiesCalculation = Double.parseDouble(df.format(remainingQuantitiesBefore + amountOfQuantitiesToAdjust));
+		assertEquals(remainingQuantitiesAfter, remainingQuantitiesCalculation);
 		log("----Validation Conversion factor --");
 		assertEquals(remainingConversionAfter, remainingConversionFactor);
 	}

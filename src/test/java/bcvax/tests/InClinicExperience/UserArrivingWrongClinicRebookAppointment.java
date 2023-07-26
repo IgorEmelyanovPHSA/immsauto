@@ -140,7 +140,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		////////////////////
 		//May will be removed
-		PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*25.----search the Clinic " + clinicNameToSearch + " --*/");
 		inClinicExperiencePage.clickToSearchClinic();
