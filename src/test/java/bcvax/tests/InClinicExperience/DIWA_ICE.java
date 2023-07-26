@@ -82,6 +82,7 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
 		mainPageOrg.globalSearch(citizenName);
+
 		//inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
 
 		//inClinicExperience.userClickCitizen(citizenName);

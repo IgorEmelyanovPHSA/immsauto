@@ -86,8 +86,8 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         log("/*11.---Schedule vaccination page is displayed--*/");
         bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
 
-        //log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
-        //bookAnAppointmentPage.selectOneOption(vaccineToSelect);
+        log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
+        bookAnAppointmentPage.selectOneOption(vaccineToSelect);
 
         log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
         bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
