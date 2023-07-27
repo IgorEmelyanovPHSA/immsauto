@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 
 @Listeners({TestListener.class})
-public class RegistrationNotification extends BaseTest {
+public class RegistrationNotificationCP extends BaseTest {
 
     // Gmail registered to verify email notifications:
     // email: verify.notifications.now@gmail.com
@@ -88,6 +88,7 @@ public class RegistrationNotification extends BaseTest {
 
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
+        Thread.sleep(5000);
 
         log("/*22.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
@@ -96,10 +97,10 @@ public class RegistrationNotification extends BaseTest {
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         try {
-            System.out.println("---click on reason Early Booking Reason - Travel --*/");
+            log("---click on reason Early Booking Reason - Travel --*/");
             commn.selectEarlyBookingReason();
         } catch(Exception ex) {
-            System.out.println("There is not Early Booking Option");
+            log("There is not Early Booking Option");
         }
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
@@ -137,5 +138,8 @@ public class RegistrationNotification extends BaseTest {
 
         log("/*35_1.----Refresh page again - should not be like that again --*/");
         inClinicExperience_CP.refreshBrowser();
+
+        log("To validate the actual email, please login into gmail account with following credentials:" +
+                "\nemail: " +email +"\npassword: Technology1990!!!!!!");
     }
 }
