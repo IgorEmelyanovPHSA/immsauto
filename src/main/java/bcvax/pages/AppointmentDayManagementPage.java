@@ -216,15 +216,15 @@ public class AppointmentDayManagementPage extends BasePage {
             waitForElementToBeEnabled(driver, start_time_path, 10);
             WebElement start_time = driver.findElement(start_time_path);
             start_time.sendKeys(time_slots.get(i).get("start_time"));
-
+            Thread.sleep(500);
             By end_time_path = By.xpath("//input[@name='DDH__HC_End_Time__c']");
             WebElement end_time = driver.findElement(end_time_path);
             end_time.sendKeys(time_slots.get(i).get("end_time"));
-
+            Thread.sleep(500);
             By block_capacity_path = By.xpath("//input[@name='DDH__HC_Block_Capacity__c']");
             WebElement block_capacity = driver.findElement(block_capacity_path);
             block_capacity.sendKeys("10");
-
+            Thread.sleep(500);
             //By booking_counter_path = By.xpath("//input[@name='DDH__HC_Block_Booking_Counter__c']");
             //WebElement booking_counter = driver.findElement(booking_counter_path);
             //booking_counter.sendKeys("1");

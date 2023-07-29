@@ -77,7 +77,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		userDefaultsPage.inputCurrentDateUserDefaults();
 		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
-		inClinicExperience.clickSaveDefaultsButton();
+		userDefaultsPage.clickBtnSave();
+		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
@@ -159,6 +160,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickAppointmentConfirmButton();
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
 		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();

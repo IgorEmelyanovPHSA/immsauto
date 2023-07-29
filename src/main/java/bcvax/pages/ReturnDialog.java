@@ -24,6 +24,7 @@ public class ReturnDialog extends BasePage {
         return_to_location_field.sendKeys(return_to_location);
         Thread.sleep(500);
         By location_item_path = By.xpath("//div[@title='" + return_to_location + "']/../../../a[@role='option']");
+        waitForElementToBeEnabled(driver, location_item_path, 10);
         WebElement my_item = driver.findElement(location_item_path);
         my_item.click();
     }

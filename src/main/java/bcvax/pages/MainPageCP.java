@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class MainPageCP extends BasePage{
 
-    public MainPageCP(WebDriver driver) { super(driver);}
-
     @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
     private WebElement btnScanUsingCamera;
 
@@ -77,8 +75,14 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']")
     private WebElement participantsTable;
 
-    public void verifyYouAreOnTheMainPageCP(){
+    private Tables tables;
 
+    public void verifyYouAreOnTheMainPageCP(){
+    }
+
+    public MainPageCP(WebDriver driver) {
+        super(driver);
+        tables = new Tables(driver);
     }
 
     public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
@@ -176,7 +180,7 @@ public class MainPageCP extends BasePage{
         search_location_field.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         System.out.println("/*---- Go to " + supplyLocation + " --*/");
-        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
+        tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
         return supplyConsolePage;
     }
 
