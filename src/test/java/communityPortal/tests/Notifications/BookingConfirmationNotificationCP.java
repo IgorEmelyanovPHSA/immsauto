@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
-public class BookingConfirmationNotification extends BaseTest {
+public class BookingConfirmationNotificationCP extends BaseTest {
 
     private String legalFirstName = "Barb";
     private String legalLastName = "BCVaxHaverty";
