@@ -34,6 +34,10 @@ public class Check_In_Client_CP extends BaseTest {
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
+
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+
         log("/*1.----Login as an Inventory Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 
