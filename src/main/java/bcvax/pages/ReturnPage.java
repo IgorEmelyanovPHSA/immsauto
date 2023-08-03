@@ -55,6 +55,13 @@ public class ReturnPage extends BasePage {
         return first_row;
     }
 
+    public Map<String, WebElement> getReturnLineItemsTableCP() throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable return_line_items_table = tables.getReturnLineItemsTableCP();
+        Map<String, WebElement> first_row = return_line_items_table.getRowsMappedToHeadings().get(1);
+        return first_row;
+    }
+
     public String getLinkTextFromCellValue(WebElement table_value) {
         return table_value.findElement(By.xpath(".//a")).getAttribute("title");
     }
@@ -62,9 +69,27 @@ public class ReturnPage extends BasePage {
     public String getReturnLocationHistoryId(WebElement table_value) {
         return table_value.findElement(By.xpath(".//a//span")).getText();
     }
+
+    public String getReturnLocationHistoryIdCP(WebElement table_value) {
+        return table_value.findElement(By.xpath(".//a")).getText();
+    }
+
     public Map<String, WebElement> getReturnLocationHistoryTable() throws InterruptedException {
         Thread.sleep(500);
         GenericTable return_location_history_table = tables.getReturnsLocationHistoryTable();
+        int table_size = return_location_history_table.getRows().size();
+        if(table_size > 0) {
+            Map<String, WebElement> first_row = return_location_history_table.getRowsMappedToHeadings().get(1);
+            return first_row;
+        } else {
+            Map<String, WebElement> empty_row = new HashMap<>();
+            return empty_row;
+        }
+    }
+
+    public Map<String, WebElement> getReturnLocationHistoryTableCP() throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable return_location_history_table = tables.getReturnsLocationHistoryTableCP();
         int table_size = return_location_history_table.getRows().size();
         if(table_size > 0) {
             Map<String, WebElement> first_row = return_location_history_table.getRowsMappedToHeadings().get(1);
@@ -123,6 +148,14 @@ public class ReturnPage extends BasePage {
         receive_return_btn.click();
     }
 
+    public void clickReceiveReturnButtonCP() throws InterruptedException {
+        Thread.sleep(500);
+        By receive_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Receive_Return']/a");
+        waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
+        WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
+        receive_return_btn.click();
+    }
+
     public void clickPrintButton() throws InterruptedException {
         Thread.sleep(500);
         By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Print']");
@@ -131,11 +164,32 @@ public class ReturnPage extends BasePage {
         receive_return_btn.click();
     }
 
+    public void clickPrintButtonCP() throws InterruptedException {
+        Thread.sleep(500);
+        By extend_list_btn_path = By.xpath("//a[@class='slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix']");
+        waitForElementToBeEnabled(driver, extend_list_btn_path, 10);
+        WebElement extend_btn = driver.findElement(extend_list_btn_path);
+        extend_btn.click();
+        Thread.sleep(500);
+        By print_return_btn_path = By.xpath("//a[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Print']");
+        waitForElementToBeLocated(driver, print_return_btn_path, 10);
+        WebElement print_return_btn = driver.findElement(print_return_btn_path);
+        print_return_btn.click();
+    }
+
     public void clickForwardReturnButton() throws InterruptedException {
         Thread.sleep(500);
         By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Forward_Return_Flow']");
         waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
         WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
         receive_return_btn.click();
+    }
+
+    public void clickForwardReturnButtonCP() throws InterruptedException {
+        Thread.sleep(500);
+        By forward_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Forward_Return_Flow']/a");
+        waitForElementToBeEnabled(driver, forward_return_btn_path, 10);
+        WebElement forward_return_btn = driver.findElement(forward_return_btn_path);
+        forward_return_btn.click();
     }
 }

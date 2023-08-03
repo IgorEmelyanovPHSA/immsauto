@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.Map;
 
@@ -26,6 +27,7 @@ public class Return_CP extends BaseTest {
     @Test()
     public void Validate_Return_Inventory_as_PPHIS() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        SoftAssert softAssert = new SoftAssert();
         log("/*1.----Login --*/");
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin_org":
@@ -68,23 +70,23 @@ public class Return_CP extends BaseTest {
         ReturnPage returnPage = new ReturnPage(driver);
         String return_status = returnPage.getReturnStatus();
 
-        Assert.assertEquals(return_status, "Draft");
+        softAssert.assertEquals(return_status, "Draft");
 
         String return_id_from_details = returnPage.getReturnId();
         String returned_from = returnPage.getReturnedFromValue();
         String returned_to = returnPage.getReturnedToValue();
         String sender_comment = returnPage.getSenderComment();
 
-        Assert.assertEquals(sender_comment, "This is to Add Return");
+        softAssert.assertEquals(sender_comment, "This is to Add Return");
 
         log("/*11. ----Click Add Line Item Button --*/");
         returnPage.clickAddLineItemButton();
 
         log("/*12. ----Verify the Add Return Line Item popup window is displayed with correct Return ID and Supply Location --*/");
         String return_id_from_add_line_items = AddReturnLineItemsDialog.getReturnId(driver);
-        Assert.assertEquals(return_id_from_add_line_items, return_id);
+        softAssert.assertEquals(return_id_from_add_line_items, return_id);
         String return_from_from_add_line_items = AddReturnLineItemsDialog.getReturnFrom(driver);
-        Assert.assertEquals(return_from_from_add_line_items, supply_location_from_value);
+        softAssert.assertEquals(return_from_from_add_line_items, supply_location_from_value);
         //Select First Wastage from the list
 
         log("/*13. ----Select First Wastage --*/");
@@ -103,10 +105,10 @@ public class Return_CP extends BaseTest {
         System.out.println(alert_content);
         AlertDialog.closeAlert(driver);
 
-        Assert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
+        softAssert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
 
         log("/*17. ----Verify Return Line Item record is created and Info is correct --*/");
-        Map<String, WebElement> line_items = returnPage.getReturnLineItemsTable();
+        Map<String, WebElement> line_items = returnPage.getReturnLineItemsTableCP();
         String return_line_item_number = line_items.get("Return Line Item Number").getText();
         String supply_transaction_name = returnPage.getLinkTextFromCellValue(line_items.get("Supply Transaction Name"));
         String trade_description = line_items.get("Trade Description").getText();
@@ -115,24 +117,24 @@ public class Return_CP extends BaseTest {
         String returned_doses = line_items.get("Returned Doses").getText();
         String return_reason_for_wastage = line_items.get("Reason for Wastage").getText();
         String return_line_item_comments = line_items.get("Return Line Item Comments").getText();
-        Assert.assertTrue(!return_line_item_number.isEmpty(), "Return Line Item ID is empty");
-        Assert.assertTrue(!supply_transaction_name.isEmpty(), "Supply Transaction Name is empty");
-        Assert.assertTrue(!trade_description.isEmpty(), "Trade Description is empty");
-        Assert.assertEquals(return_lot_number, lot_number, "Incorrect Lot Number");
-        Assert.assertEquals(Double.parseDouble(returned_doses), doses, "Incorrect Doses");
-        Assert.assertEquals(return_reason_for_wastage, reason_for_wastage, "Incorrect Reason for Wastage");
+        softAssert.assertTrue(!return_line_item_number.isEmpty(), "Return Line Item ID is empty");
+        softAssert.assertTrue(!supply_transaction_name.isEmpty(), "Supply Transaction Name is empty");
+        softAssert.assertTrue(!trade_description.isEmpty(), "Trade Description is empty");
+        softAssert.assertEquals(return_lot_number, lot_number, "Incorrect Lot Number");
+        softAssert.assertEquals(Double.parseDouble(returned_doses), doses, "Incorrect Doses");
+        softAssert.assertEquals(return_reason_for_wastage, reason_for_wastage, "Incorrect Reason for Wastage");
         ////////***May later use
         //String cancelled = line_items.get("Cancelled").getText();
         ////////
 
         log("/*18. ----Verify Print Return Form --*/");
-        returnPage.clickPrintButton();
+        returnPage.clickPrintButtonCP();
         boolean print_label_btn_exists = PrintReturnFormDialog.printReturnLabelBtnExists(driver);
         boolean print_manifest_btn_exists = PrintReturnFormDialog.printReturnManifestBtnExists(driver);
         boolean close_btn_exists = PrintReturnFormDialog.closeBtnExists(driver);
-        Assert.assertTrue(print_label_btn_exists, "Print Label Button not found");
-        Assert.assertTrue(print_manifest_btn_exists, "Print Manifest Button not found");
-        Assert.assertTrue(close_btn_exists, "Close Button not found");
+        softAssert.assertTrue(print_label_btn_exists, "Print Label Button not found");
+        softAssert.assertTrue(print_manifest_btn_exists, "Print Manifest Button not found");
+        softAssert.assertTrue(close_btn_exists, "Close Button not found");
 
         log("/*19. ----Verify Close Print Return Form --*/");
         PrintReturnFormDialog.clickCloseBtn(driver);
@@ -141,28 +143,28 @@ public class Return_CP extends BaseTest {
         returnPage.clickShipReturnButton();
 
         log("/*21. ----Verify Save Ship Return Form --*/");
-        ShipReturnDialog.clickSaveBtn(driver);
+        ShipReturnDialog.clickSaveBtnCP(driver);
 
         log("/*22. ----Verify Success Dialog --*/");
         alert_found = AlertDialog.alertFound(driver);
         alert_content = AlertDialog.getAlertContent(driver).getText();
         System.out.println(alert_content);
         AlertDialog.closeAlert(driver);
-        Assert.assertEquals(alert_content, "You have successfully Shipped the Return.");
+        softAssert.assertEquals(alert_content, "You have successfully Shipped the Return.");
 
         log("/*23. ----Verify Return Status is changed to Shipped --*/");
         String return_status_shipped = returnPage.getReturnStatus();
 
-        Assert.assertEquals(return_status_shipped, "Shipped");
+        softAssert.assertEquals(return_status_shipped, "Shipped");
 
         log("/*24. ----Click Receive Return Button --*/");
-        returnPage.clickReceiveReturnButton();
+        returnPage.clickReceiveReturnButtonCP();
 
         log("/*25. ----Enter Receiver Comment --*/");
         ReceiveReturnDialog.typeReceiverComment(driver, receiver_comment);
 
         log("/*26. ----Save Receive Return Form --*/");
-        ReceiveReturnDialog.clickSaveBtn(driver);
+        ReceiveReturnDialog.clickSaveBtnCP(driver);
 
         log("/*27. ----Verify Success Dialog --*/");
         alert_found = AlertDialog.alertFound(driver);
@@ -170,34 +172,35 @@ public class Return_CP extends BaseTest {
         System.out.println(alert_content);
         AlertDialog.closeAlert(driver);
 
-        Assert.assertEquals(alert_content, "You have successfully received the Return.");
+        softAssert.assertEquals(alert_content, "You have successfully received the Return.");
 
         log("/*28. ----Verify Return Status is changed to Received --*/");
         String return_status_received = returnPage.getReturnStatus();
-        Assert.assertEquals(return_status_received, "Received");
+        softAssert.assertEquals(return_status_received, "Received");
 
         log("/*29. ----Verify Return Location History --*/");
-        Map<String, WebElement> location_history = returnPage.getReturnLocationHistoryTable();
-        String history_return_id = returnPage.getReturnLocationHistoryId(location_history.get("Return Location History ID"));
+        Map<String, WebElement> location_history = returnPage.getReturnLocationHistoryTableCP();
+        String history_return_id = returnPage.getReturnLocationHistoryIdCP(location_history.get("Return Location History ID"));
         String history_receive_date = location_history.get("Received Date").getText();
         String history_received_by = location_history.get("Received By").getText();
         String history_from_location = returnPage.getLinkTextFromCellValue(location_history.get("From Location"));
         String history_to_location = returnPage.getLinkTextFromCellValue(location_history.get("To Location"));
         String history_receiver_comment = location_history.get("Receiver Comment").getText();
-        Assert.assertTrue(!history_return_id.isEmpty(), "History Return ID is Empty");
-        Assert.assertTrue(!history_receive_date.isEmpty(), "History Return Receive Date is Empty");
-        Assert.assertTrue(!history_received_by.isEmpty(), "History Return Receive By is Empty");
-        Assert.assertEquals(history_from_location, supply_location, "Supply Location From doesn't match");
-        Assert.assertEquals(history_to_location, supply_location_to, "Supply Location To doesn't match");
-        Assert.assertEquals(history_receiver_comment, receiver_comment, "History Receiver Comment doesn't match");
+        softAssert.assertTrue(!history_return_id.isEmpty(), "History Return ID is Empty");
+        softAssert.assertTrue(!history_receive_date.isEmpty(), "History Return Receive Date is Empty");
+        softAssert.assertTrue(!history_received_by.isEmpty(), "History Return Receive By is Empty");
+        softAssert.assertEquals(history_from_location, supply_location, "Supply Location From doesn't match");
+        softAssert.assertEquals(history_to_location, supply_location_to, "Supply Location To doesn't match");
+        softAssert.assertEquals(history_receiver_comment, receiver_comment, "History Receiver Comment doesn't match");
 
         log("/*30. ----Verify Forward Return Dialog --*/");
-        returnPage.clickForwardReturnButton();
+        returnPage.clickForwardReturnButtonCP();
         String forward_return_id = ForwardReturnDialog.getReturnId(driver);
         String forward_supply_location = ForwardReturnDialog.getOriginalSupplyLocation(driver);
         String forward_returned_to = ForwardReturnDialog.getReturnedTo(driver);
 
-        Assert.assertEquals(forward_return_id, return_id);
-        Assert.assertEquals(forward_supply_location, returned_from);
+        softAssert.assertEquals(forward_return_id, return_id);
+        softAssert.assertEquals(forward_supply_location, returned_from);
+        softAssert.assertAll();
     }
 }
