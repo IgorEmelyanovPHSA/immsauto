@@ -846,14 +846,14 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void selectEarlyBookingReason() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
 		Thread.sleep(2000);
 		click_early_booking_reason.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		if (isDisplayed(select_early_booking_reason)) {
 			//waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			select_early_booking_reason.click();
 		} else {//it's never go here - it's the same xpath for devit and prodsuppqa
 			waitForElementToBeVisible(driver, select_early_booking_reason_for_prodsup, 10);
