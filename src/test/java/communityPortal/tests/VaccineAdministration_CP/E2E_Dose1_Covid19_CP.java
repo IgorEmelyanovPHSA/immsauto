@@ -62,7 +62,8 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
         userDefaultPage.clickBtnSave();
-        Thread.sleep(7000);
+        AlertDialog.closeAlert(driver);
+        Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();

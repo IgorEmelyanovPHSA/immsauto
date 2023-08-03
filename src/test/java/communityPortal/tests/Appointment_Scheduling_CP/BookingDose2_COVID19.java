@@ -17,7 +17,9 @@ public class BookingDose2_COVID19 extends BaseTest {
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
 
-    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    //private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    //workaround
+    private String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test(priority = 1)

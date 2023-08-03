@@ -182,7 +182,8 @@ comuat:
 bcvaxuat:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
-  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
+#  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
+  supplyLocationConsumption: "All Ages - Atlin Health Centre"
   distributionFrom: "Automation Supply Distribution_1_1"
   distributionTo: "Supply Distribution_2_1"
   distributionToSameClinic: "Supply Distribution_1_2"
@@ -208,7 +209,8 @@ bcvaxuat:
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.3"
-  consumptionLot: "35035BD-CC01"
+#  consumptionLot: "35035BD-CC01"
+  consumptionLot: "EL0203"
   useDefaultSettingsLots:
     - "300042698-CC04"
     - "NK2858B"

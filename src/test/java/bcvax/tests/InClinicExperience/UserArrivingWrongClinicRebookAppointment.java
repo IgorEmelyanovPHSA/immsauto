@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,7 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import java.util.List;
 import java.util.Map;
 
 @Listeners({TestListener.class})
@@ -30,6 +31,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToBook = "All Ages - Atlin Health Centre";
 	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+	//Workaround
+	//String clinicNameToBook = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+	//String clinicNameToSearch = "All Ages - Atlin Health Centre";
 
 	String citizenName = "Hugues BCVaxLampard";
 	String consumptionLot;
@@ -76,7 +80,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*-- 5.----- Click on Save defaults button --*/");
 		userDefaultPage.clickBtnSave();
-
+		AlertDialog.closeAlert(driver);
 		log("/*-- 6. Click on register Tab --*/");
 		inClinicExperiencePage.clickRegisterTab();
 
@@ -126,7 +130,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 
 		log("/*-- 21.Click register Button on confirmation page --*/");
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
-
+		AlertDialog.closeAlert(driver);
 		log("/*-- 22.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 
@@ -171,6 +175,13 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 35.: --> Before Booking clinic Value is:" + beforeBooking + "");
 		log("/*-- 36.--- User can click Rebook Appointment button to book an appointment --*/");
 		inClinicExperiencePage.ClickRebookAppointment();
+		log("/*-- 36.1.--- Close Success Dialog --*/");
+		List<String> alert_texts = AlertDialog.getAllAlertsText(driver);
+		for (String alert_text: alert_texts) {
+			System.out.println("Alert Text: " + alert_text);
+		}
+		AlertDialog.closeAllAlerts(driver);
+		//In case another alert
 		log("/*--  We need to add Validation for 1.(Clinic has changed & address has changed) --*/");
 		inClinicExperiencePage.ValidateClickRebookAppointmentButtonIsDisabled();
 		log("/*--                                2. Rebook at Current Location button is disabled --*/");
@@ -181,6 +192,12 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 
 		log("/*-- 39---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
+		log("/*-- 39.1.---Close Success Dialog --*/");
+		alert_texts = AlertDialog.getAllAlertsText(driver);
+		for (String alert_text: alert_texts) {
+			System.out.println("Alert Text: " + alert_text);
+		}
+		AlertDialog.closeAllAlerts(driver);
 		log("/*-- 40---Click to select Agent --*/");
 		try {
 			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
@@ -235,6 +252,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*---43. Save Immunization Information ---*/");
 		inClinicExperiencePage.saveImmunizationInformation();
 		inClinicExperiencePage.clickOkForExpiredLot();
+		String alert_text = AlertDialog.getAlertContent(driver).getText();
+		System.out.println("Alert Text: " + alert_text);
+		AlertDialog.closeAlert(driver);
 		log("/*-- 44---Click Confirm and Save Administration Button --*/");
 		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
 		log("/*45.---Click Modal screen Confirm&Save Administration Button --*/");

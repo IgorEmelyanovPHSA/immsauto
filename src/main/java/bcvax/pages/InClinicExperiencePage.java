@@ -788,6 +788,7 @@ public class InClinicExperiencePage extends BasePage {
 		By next_btn_path = By.xpath("//button[@title='Next']");
 		waitForElementToBeEnabled(driver, next_btn_path, 10);
 		WebElement next_btn = driver.findElement(next_btn_path);
+		scrollIfNeeded(driver, next_btn);
 		next_btn.click();
 	}
 
@@ -879,6 +880,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void selectBookingAppointmentDay(int day) throws InterruptedException {
 		Thread.sleep(2000);
 		List<WebElement> myDays = driver.findElements(By.xpath("(.//button[@class = 'slds-day active-day'])"));
+		scrollIfNeeded(driver, myDays.get(day));
 		myDays.get(day).click();
 	}
 
@@ -1091,7 +1093,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void selectVaccineAgent(String agent) throws InterruptedException {
 		Thread.sleep(500);
 		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option']");
-		waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 10);
+		waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 30);
 		WebElement click_vaccine_agent_dropdown = driver.findElement(vaccine_agent_dropdown_path);
 		scrollTop(click_vaccine_agent_dropdown);
 		click_vaccine_agent_dropdown.click();

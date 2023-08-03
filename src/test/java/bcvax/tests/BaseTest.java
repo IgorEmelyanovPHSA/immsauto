@@ -37,6 +37,7 @@ public class BaseTest {
 		captureBothStreams();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--remote-allow-origins=*");
+		options.setBinary("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(getDriver());

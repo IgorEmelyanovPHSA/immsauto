@@ -1583,7 +1583,9 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickReturnBtn() throws InterruptedException {
 		Thread.sleep(500);
-		By return_btn_path = By.xpath("//button[@name='HC_Supply_Location__c.Return']");
+		By return_btn_path = By.xpath("//button[@name='HC_Supply_Location__c.Return'] "
+				.concat(" | ")
+				.concat("//li[@data-target-selection-name='sfdc:QuickAction.HC_Supply_Location__c.Return']"));
 		waitForElementToBeEnabled(driver, return_btn_path, 10);
 		WebElement return_btn = driver.findElement(return_btn_path);
 		return_btn.click();

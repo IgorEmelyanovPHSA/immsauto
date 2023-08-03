@@ -139,7 +139,13 @@ public class MainPageOrg extends BasePage {
         WebElement found_client = driver.findElement(found_client_path);
         scrollTop(found_client);
         Thread.sleep(500);
-        found_client.click();
+        try {
+            found_client.click();
+        } catch(ElementNotInteractableException ex) {
+            //Re-try after 2 seconds
+            Thread.sleep(2000);
+            found_client.click();
+        }
     }
 
     public void logout() throws InterruptedException {

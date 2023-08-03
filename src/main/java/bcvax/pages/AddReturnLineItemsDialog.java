@@ -44,6 +44,8 @@ public class AddReturnLineItemsDialog {
         By next_btn_path = By.xpath("//button[text() = 'Next']");
         BasePage.waitForElementToBeEnabled(driver, next_btn_path, 10);
         WebElement next_btn = driver.findElement(next_btn_path);
+        BasePage.scrollIfNeeded(driver, next_btn);
+        Thread.sleep(500);
         next_btn.click();
     }
 

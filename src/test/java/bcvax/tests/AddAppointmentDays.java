@@ -16,7 +16,7 @@ public class AddAppointmentDays extends BaseTest {
     String env;
     @Test()
     public void createAppointmentDays() throws Exception {
-        String appointment_date = "2023-7-28";
+        String appointment_date = "2023-8-6";
         //String appointment_type = "COVID-19 Vaccination";
         String appointment_type = "BC Immunization Program";
 

@@ -24,7 +24,8 @@ public class RegistrationNotificationCP extends BaseTest {
     private String postalCode = "V3L5L2";
     private String personalHealthNumber = "9746173963";
     private String email = "verify.notifications.now@gmail.com";
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    //String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test()
