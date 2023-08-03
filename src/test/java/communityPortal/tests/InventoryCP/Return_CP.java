@@ -32,12 +32,12 @@ public class Return_CP extends BaseTest {
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin_org":
                 log("Login AS comunityqa_org_immsbc_admin");
-                TestcaseID = "261384"; //C261384
+                TestcaseID = "261523"; //C261384
                 loginPage.loginAsImmsBCAdminICE();
                 break;
             default:
                 log("Login AS default user (PPHIS)");
-                TestcaseID = "261384";
+                TestcaseID = "261523";
                 cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
         }
 
