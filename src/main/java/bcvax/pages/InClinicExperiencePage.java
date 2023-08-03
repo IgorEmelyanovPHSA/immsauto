@@ -788,6 +788,7 @@ public class InClinicExperiencePage extends BasePage {
 		By next_btn_path = By.xpath("//button[@title='Next']");
 		waitForElementToBeEnabled(driver, next_btn_path, 10);
 		WebElement next_btn = driver.findElement(next_btn_path);
+		scrollIfNeeded(driver, next_btn);
 		next_btn.click();
 	}
 
@@ -879,6 +880,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void selectBookingAppointmentDay(int day) throws InterruptedException {
 		Thread.sleep(2000);
 		List<WebElement> myDays = driver.findElements(By.xpath("(.//button[@class = 'slds-day active-day'])"));
+		scrollIfNeeded(driver, myDays.get(day));
 		myDays.get(day).click();
 	}
 

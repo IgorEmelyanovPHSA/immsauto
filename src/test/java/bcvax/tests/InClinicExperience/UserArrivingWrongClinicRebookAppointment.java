@@ -31,6 +31,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToBook = "All Ages - Atlin Health Centre";
 	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+	//Workaround
+	//String clinicNameToBook = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+	//String clinicNameToSearch = "All Ages - Atlin Health Centre";
 
 	String citizenName = "Hugues BCVaxLampard";
 	String consumptionLot;
