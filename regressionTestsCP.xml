@@ -25,7 +25,9 @@
             <class name="communityPortal.tests.InventoryCP.BulkDraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.ReceiveSuppliesCP"/>
             <class name="communityPortal.tests.InventoryCP.E2E_Consumption_CP"/>
+            <class name="communityPortal.tests.InventoryCP.Return_CP"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.Wrong_Clinic_Arrival_CP"/>
+            <class name="communityPortal.tests.Notifications.RegistrationNotificationCP"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

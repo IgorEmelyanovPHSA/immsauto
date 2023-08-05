@@ -62,7 +62,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
         userDefaultPage.clickBtnSave();
-
+        Thread.sleep(7000);
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
 
@@ -79,7 +79,10 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperience_CP.enterPNH(personalHealthNumber);
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
+
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -111,6 +114,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
             System.out.println("DEBUG No need to select Early Booking Reason. Continue...");
         }
         inClinicExperience_CP.clickOnVaccinationCheckbox();
+
+        ////////////////////
+        //May will be removed
+        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        ///////////////////
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();

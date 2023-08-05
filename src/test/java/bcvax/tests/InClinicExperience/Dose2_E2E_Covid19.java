@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -66,7 +67,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		userDefaultsPage.selectUserDefaultLocation(supplyLocationConsumption);
 		log("/*7.----- Click on Save defaults button --*/");
 		userDefaultsPage.clickBtnSave();
-
+		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
 
@@ -89,7 +90,9 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.enterPNH(personalHealthNumber);
 
 		log("/*16.----click on non-Indigenous person radiobutton --*/");
-		inClinicExperience.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			inClinicExperience.clickNonIndigenousRadioButton();
+		}
 
 		log("/*17.----click Verify PHN button --*/");
 		inClinicExperience.clickVerifyPHNButton();
@@ -130,7 +133,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			System.out.println("Tried to select early reason if exist. Continue...");
 		}
 		inClinicExperience.clickOnVaccinationCheckbox();
-
+		////////////////////
+		//May will be removed
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		log("/*28.----select 'Search by Clinic name' tab --*/");
 		inClinicExperience.selectSearchByClinicNameTab();
 
@@ -154,7 +160,8 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickAppointmentConfirmButton();
 
 		log("/*35.----see 'Appointment confirmed!' screen --*/");
-		inClinicExperience.AppointmentConfirmationMessage();
+		boolean apointment_result = inClinicExperience.AppointmentConfirmationMessage();
+		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
 		log("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();

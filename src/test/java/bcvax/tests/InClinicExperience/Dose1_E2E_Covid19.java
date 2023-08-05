@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -76,7 +77,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		userDefaultsPage.inputCurrentDateUserDefaults();
 		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
-		inClinicExperience.clickSaveDefaultsButton();
+		userDefaultsPage.clickBtnSave();
+		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
@@ -95,7 +97,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
 		inClinicExperience.enterPNH(personalHealthNumber);
 		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
-		inClinicExperience.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			inClinicExperience.clickNonIndigenousRadioButton();
+		}
 		System.out.println("/*17.----click Verify PHN button --*/");
 		inClinicExperience.clickVerifyPHNButton();
 		System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -112,8 +116,8 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickRegisterButtonOnConfirmationPage();
 		System.out.println("/*24.--toast success message - 'Success' --*/");
 		inClinicExperience.successRegisteredMessageAppear();
-		System.out.println("/*25.----click on person Account Related Tab --*/");
-		inClinicExperience.clickOnPersonAccountRelatedTab();
+		//System.out.println("/*25.----click on person Account Related Tab --*/");
+		//inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateToVaccineSchedulingTab();
 
@@ -129,7 +133,10 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		log("/*----scroll down a bit --*/");
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperience.clickOnVaccinationCheckbox();
-
+		////////////////////
+		//May will be removed
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		//System.out.println("/*29----click on 'More' search tab --*/");
 		//inClinicExperience.clickOnMoreSearchTabs();
 		//Thread.sleep(2000);
@@ -152,7 +159,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*34----click Confirm Appointment button  --*/");
 		inClinicExperience.clickAppointmentConfirmButton();
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
-		inClinicExperience.AppointmentConfirmationMessage();
+		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+
+		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");

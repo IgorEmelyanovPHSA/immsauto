@@ -11,18 +11,24 @@ import org.testng.annotations.Test;
 
 
 @Listeners({TestListener.class})
-public class RegistrationNotification extends BaseTest {
+public class RegistrationNotificationCP extends BaseTest {
+
+    // Gmail registered to verify email notifications:
+    // email: verify.notifications.now@gmail.com
+    // password: Technology1990!!!!!!
+    // email registration details, for password recovery only: 01 Jan 1980, Male
+
     private String legalFirstName = "Lockwood";
     private String legalLastName = "BCVaxPenketh";
     private String dateOfBirth = "Jan 23, 1993";
     private String postalCode = "V3L5L2";
     private String personalHealthNumber = "9746173963";
-    //private boolean isIndigenous = false;
-    private String email = "dmytro.bilous@phsa.ca";
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    private String email = "verify.notifications.now@gmail.com";
+    //String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
-    @Test(priority = 1)
+    @Test()
     public void VerifyRegistrationNotification_CP() throws Exception {
         TestcaseID = "246562"; //C246562
         CommonMethods commn = new CommonMethods(getDriver());
@@ -56,7 +62,9 @@ public class RegistrationNotification extends BaseTest {
         inClinicExperience_CP.enterPNH(personalHealthNumber);
 
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
 
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
@@ -81,6 +89,7 @@ public class RegistrationNotification extends BaseTest {
 
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
+        Thread.sleep(5000);
 
         log("/*22.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
@@ -89,10 +98,10 @@ public class RegistrationNotification extends BaseTest {
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         try {
-            System.out.println("---click on reason Early Booking Reason - Travel --*/");
+            log("---click on reason Early Booking Reason - Travel --*/");
             commn.selectEarlyBookingReason();
         } catch(Exception ex) {
-            System.out.println("There is not Early Booking Option");
+            log("There is not Early Booking Option");
         }
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
@@ -127,23 +136,11 @@ public class RegistrationNotification extends BaseTest {
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-        //////
+
         log("/*35_1.----Refresh page again - should not be like that again --*/");
         inClinicExperience_CP.refreshBrowser();
-        ///////
 
-        //Validation Steps
-        log("/ 36. --- We need Validation that Booking Record " +
-                "in New Status has created and In-Clinic Experience button is Visible, Active, Clickable");
+        log("To validate the actual email, please login into gmail account with following credentials:" +
+                "\nemail: " +email +"\npassword: Technology1990!!!!!!");
     }
-
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-    }
-
-
 }

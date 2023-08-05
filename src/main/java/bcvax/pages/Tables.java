@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,12 +58,21 @@ public class Tables extends BasePage {
         return new GenericTable(supplyItemsTable);
     }
 
-    public GenericTable getAppointmentDayTable() {
+    public GenericTable getAppointmentDayTable() throws InterruptedException {
+        Thread.sleep(500);
         By appointment_day_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
-        waitForElementToBeLocated(driver, appointment_day_table_path, 10);
+        waitForElementToBeEnabled(driver, appointment_day_table_path, 10);
         WebElement appointment_day_table = driver.findElement(appointment_day_table_path);
         return new GenericTable(appointment_day_table);
     }
+
+    public GenericTable getAppointmentTimeTable() throws InterruptedException {
+        Thread.sleep(500);
+        By appointment_time_table_path = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader and @title='Appointment Block Time']/../../../../../../../../..//table[@title='Appointment Block Time']");
+        WebElement appointment_time_table = driver.findElement(appointment_time_table_path);
+        return new GenericTable(appointment_time_table);
+    }
+
     public GenericTable getContainerTransferTable() {
         waitForTextToBePresent(driver, containerTransfer ,30, "Distribution");
         return new GenericTable(containerTransfer);
@@ -262,6 +272,45 @@ public class Tables extends BasePage {
         return new GenericTable(singleTable);
     }
 
+    public GenericTable getOutgoingReturnsTable() {
+        WebElement singleTable = null;
+        By returns_table_path = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader and @title='Outgoing Returns']/../../../../../../../../..//div[@lightning-datatable_table]");
+        waitForElementToBeLocated(driver, returns_table_path, 10);
+        singleTable = driver.findElement(returns_table_path);
+        return new GenericTable(singleTable);
+    }
+
+    public GenericTable getReturnLineItemsTable() {
+        WebElement singleTable = null;
+        By returns_line_items_table_path = By.xpath("//flexipage-component2[@data-component-id='force_relatedListSingleContainer2']//lst-customized-datatable");
+        waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
+        singleTable = driver.findElement(returns_line_items_table_path);
+        return new GenericTable(singleTable);
+    }
+
+    public GenericTable getReturnLineItemsTableCP() {
+        WebElement singleTable = null;
+        By returns_line_items_table_path = By.xpath("//div[@class='simpleEmptyState autoHeight  test-listViewManager slds-card slds-card_boundary slds-grid slds-grid--vertical forceListViewManager' and @aria-label='Return Line Items|Return Line Items|List View']");
+        waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
+        singleTable = driver.findElement(returns_line_items_table_path);
+        return new GenericTable(singleTable);
+    }
+
+    public GenericTable getReturnsLocationHistoryTable() {
+        WebElement singleTable = null;
+        By returns_location_history_table_path = By.xpath("//flexipage-component2[@data-component-id='lst_dynamicRelatedList']//lst-customized-datatable");
+        waitForElementToBeLocated(driver, returns_location_history_table_path, 10);
+        singleTable = driver.findElement(returns_location_history_table_path);
+        return new GenericTable(singleTable);
+    }
+
+    public GenericTable getReturnsLocationHistoryTableCP() {
+        WebElement singleTable = null;
+        By returns_location_history_table_path = By.xpath("//div[@class='simpleEmptyState autoHeight  test-listViewManager slds-card slds-card_boundary slds-grid slds-grid--vertical forceListViewManager' and @aria-label='Returns Location History|Returns Location History|List View']");
+        waitForElementToBeLocated(driver, returns_location_history_table_path, 10);
+        singleTable = driver.findElement(returns_location_history_table_path);
+        return new GenericTable(singleTable);
+    }
     public GenericTable getImmunizationRecordsTable() {
         return new GenericTable(immunizationRecordsTable);
     }

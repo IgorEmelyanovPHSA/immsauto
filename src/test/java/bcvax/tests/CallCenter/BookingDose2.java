@@ -1,6 +1,7 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
+import bcvax.pages.PersonAccountPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
@@ -55,7 +56,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*8.----Enter PHN " +personalHealthNumber +"--*/");
 		callCenterConsole.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		callCenterConsole.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			callCenterConsole.clickNonIndigenousRadioButton();
+		}
 		log("/*10.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -75,15 +78,20 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.successRegisteredMessageAppear();
 		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
 		callCenterConsole.clickRefreshForecastButton();
+		Thread.sleep(2000);
 		log("/*21----Go to Appointment Tab --*/");
 		callCenterConsole.navigateToVaccineSchedulingTab();
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		callCenterConsole.clickOnVaccinationCheckbox();
-
+		////////////////////
+		//May will be removed
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		log("/*24----select 'Search clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
+
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
 		callCenterConsole.searchClinicName(clinicNameToSearch);
 		log("/*26----click on Option Facility location  --*/");
@@ -99,7 +107,8 @@ public class BookingDose2 extends BaseTest {
 		log("/*31----click Confirm Appointment button  --*/");
 		callCenterConsole.clickOnConfirmButton();
 		log("/*32----see 'Appointment Confirmed!' screen --*/");
-		callCenterConsole.validateAppointmentConfirmedScreen();
+		boolean appointment_result = callCenterConsole.validateAppointmentConfirmedScreen();
+		assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		log("/*33----Refresh page --*/");
 		callCenterConsole.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");

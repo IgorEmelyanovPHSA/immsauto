@@ -151,6 +151,9 @@ public class CallCenterConsolePage extends BasePage {
 	public void enterPNH(String phn_number) throws InterruptedException {
 		waitForElementToBeLocated(driver, phn1, 10);
 		phn.sendKeys(phn_number);
+		Thread.sleep(500);
+		phn.sendKeys(Keys.TAB);
+		Thread.sleep(500);
 	}
 	
 	public void clickNonIndigenousRadioButton() throws InterruptedException {
@@ -322,8 +325,9 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public boolean validateAppointmentConfirmedScreen() throws InterruptedException {
+		By appointment_confirm_message_path = By.xpath("//div[@role = 'heading']/h1[text() = 'Appointment confirmed!']");
 		try {
-			waitForElementToBeVisible(driver, vlidate_appointment_confirm_message, 10);
+			waitForElementToBeLocated(driver, appointment_confirm_message_path, 10);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
 		} catch (Exception e) {

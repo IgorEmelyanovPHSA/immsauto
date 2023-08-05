@@ -2,10 +2,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 
 import Utilities.ApiQueries;
 import Utilities.TestListener;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.ProfilesPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -76,7 +73,9 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.enterPNH(personalHealthNumber);
 
         log("/*9.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
 
         log("/*10.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
@@ -117,6 +116,11 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         log("/*20.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 
+        ////////////////////
+        //May will be removed
+        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        ///////////////////
+
         log("/*21----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
 
@@ -127,7 +131,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
         inClinicExperience_CP.clickOnFacilityOptionLocation();
 
         log("/*24----select Active booking appointment day  --*/");
-        inClinicExperience_CP.selectBookingAppointmentDay();
+        inClinicExperience_CP.selectBookingAppointmentDay(1);
 
         log("/*25----select the time slot  --*/");
         inClinicExperience_CP.selectTimeSlotForAppointment();

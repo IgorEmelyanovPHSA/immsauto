@@ -3,6 +3,7 @@ package communityPortal.tests.Appointment_Scheduling_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -53,7 +54,9 @@ public class BookingDose1_COVID19 extends BaseTest {
         inClinicExperience_CP.enterPNH(personalHealthNumber);
 
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
 
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
@@ -94,7 +97,10 @@ public class BookingDose1_COVID19 extends BaseTest {
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         inClinicExperience_CP.clickOnVaccinationCheckbox();
-
+        ////////////////////
+        //May will be removed
+        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+        ///////////////////
         log("/*25----select 'Search by Clinic name' tab --*/");
         inClinicExperience_CP.selectSearchByClinicNameTab();
 
@@ -120,7 +126,8 @@ public class BookingDose1_COVID19 extends BaseTest {
         inClinicExperience_CP.clickAppointmentConfirmButton();
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
+        Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();

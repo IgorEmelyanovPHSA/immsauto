@@ -116,12 +116,58 @@ public abstract class BasePage<T> {
 		while(!found) {
 			try {
 				found = driver.findElement(xpath).isEnabled();
-				System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Element found, Enabled Status is: " + String.valueOf(found));
+				try {
+					if (Utils.getEnvConfigProperty("debug_info").equals("yes")) {
+						System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Element found, Enabled Status is: " + String.valueOf(found));
+					}
+				}catch(Exception ex) {
+					continue;
+				}
 				System.out.println(end.toString());
 				if(!found) {
 					end = Instant.now();
 					if(Duration.between(start, end).toMillis() > timeout) {
 						throw new NotFoundException("***DEBUG*** Element " + xpath + " is Found but not Enabled after " + seconds + " seconds");
+					}
+					Thread.sleep(200);
+				}
+			} catch (NotFoundException ex) {
+				end = Instant.now();
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("***DEBUG*** Next attempt. Waiting for Element xpath " + xpath + " Element not found after " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			} catch (StaleElementReferenceException ex) {
+				end = Instant.now();
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Stale Element " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			}
+		}
+	}
+
+	public static void waitForAttribute(WebDriver driver, By xpath, String attribute, String attribute_value, int seconds) throws InterruptedException {
+		int timeout = seconds * 1000;
+		boolean attribute_match = false;
+		Instant start = Instant.now();
+		Instant end = Instant.now();
+		while(!attribute_match) {
+			try {
+				String found_attribute_value = driver.findElement(xpath).getAttribute(attribute);
+				attribute_match = found_attribute_value.equals(attribute_value);
+				try {
+					if (Utils.getEnvConfigProperty("debug_info").equals("yes")) {
+						System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Attribute " + attribute + " value is: " + String.valueOf(found_attribute_value));
+					}
+				}catch(Exception ex) {
+					continue;
+				}
+				System.out.println(end.toString());
+				if(!attribute_match) {
+					end = Instant.now();
+					if(Duration.between(start, end).toMillis() > timeout) {
+						throw new NotFoundException("***DEBUG*** Element " + xpath + " is Found but " + attribute + " value is " + found_attribute_value + " after " + seconds + " seconds");
 					}
 					Thread.sleep(200);
 				}

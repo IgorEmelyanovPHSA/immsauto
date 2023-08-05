@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class MainPageCP extends BasePage{
 
-    public MainPageCP(WebDriver driver) { super(driver);}
-
     @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
     private WebElement btnScanUsingCamera;
 
@@ -77,8 +75,14 @@ public class MainPageCP extends BasePage{
     @FindBy(xpath = "//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']")
     private WebElement participantsTable;
 
-    public void verifyYouAreOnTheMainPageCP(){
+    private Tables tables;
 
+    public void verifyYouAreOnTheMainPageCP(){
+    }
+
+    public MainPageCP(WebDriver driver) {
+        super(driver);
+        tables = new Tables(driver);
     }
 
     public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
@@ -162,7 +166,7 @@ public class MainPageCP extends BasePage{
         System.out.println("/*-- Choose List View --*/");
         Thread.sleep(2000);
         By list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
-        waitForElementToBeLocated(driver, list_view_btn_path, 10);
+        waitForElementToBeLocated(driver, list_view_btn_path, 30);
         WebElement list_view_btn = driver.findElement(list_view_btn_path);
         list_view_btn.click();
         Thread.sleep(500);
@@ -176,7 +180,7 @@ public class MainPageCP extends BasePage{
         search_location_field.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         System.out.println("/*---- Go to " + supplyLocation + " --*/");
-        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
+        tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
         return supplyConsolePage;
     }
 
@@ -237,6 +241,7 @@ public class MainPageCP extends BasePage{
         }
     }
     public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
+        Thread.sleep(500);
         By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");
         waitForElementToBeEnabled(driver, main_menu_more_btn_path, 30);
         By registerBtnPath = By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']");
@@ -248,7 +253,7 @@ public class MainPageCP extends BasePage{
             Thread.sleep(3000);
             WebElement register_btn = driver.findElement(registerBtnPath);
             register_btn.click();
-        } catch(TimeoutException ex) {
+        } catch(Exception ex) {
             WebElement main_menu_more_btn = driver.findElement(main_menu_more_btn_path);
             click(main_menu_more_btn);
             Thread.sleep(2000);
@@ -277,10 +282,11 @@ public class MainPageCP extends BasePage{
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_field = driver.findElement(search_field_path);
         search_field.sendKeys(criteria);
+        Thread.sleep(500);
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
         By table_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
-        waitForElementToBeEnabled(driver, table_path, 30);
+        waitForElementToBeEnabled(driver, table_path, 60);
     }
     public void refreshBrowser() throws InterruptedException {
         driver.navigate().refresh();

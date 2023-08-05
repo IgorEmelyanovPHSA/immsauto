@@ -34,6 +34,10 @@ public class Check_In_Client_CP extends BaseTest {
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
+
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+
         log("/*1.----Login as an Inventory Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
 
@@ -46,6 +50,7 @@ public class Check_In_Client_CP extends BaseTest {
         userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
         userDefaultPage.clickBtnSave();
+        Thread.sleep(7000);
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -61,7 +66,9 @@ public class Check_In_Client_CP extends BaseTest {
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
         inClinicExperience_CP.enterPNH(personalHealthNumber);
         log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+            inClinicExperience_CP.clickNonIndigenousRadioButton();
+        }
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");

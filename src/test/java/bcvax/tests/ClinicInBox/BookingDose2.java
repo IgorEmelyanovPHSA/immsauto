@@ -6,6 +6,7 @@ import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -70,7 +71,9 @@ public class BookingDose2 extends BaseTest {
 		log("/*8.----Enter PHN: " +personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		clinicInBox.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			clinicInBox.clickNonIndigenousRadioButton();
+		}
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -99,6 +102,13 @@ public class BookingDose2 extends BaseTest {
 		}
 		log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		clinicInBox.selectOneOption(vaccineToSelect);
+
+		////////////////////
+		//May will be removed
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
+
+
 		log("/*21----select 'Search clinic name' tab --*/");
 		clinicInBox.selectSearchByClinicNameTab();
 		log("/*22----search the Clinic " +clinicNameToSearch +" --*/");
@@ -116,7 +126,8 @@ public class BookingDose2 extends BaseTest {
 		log("/*28----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
 		log("/*29----see 'Appointment Confirmed!' screen --*/");
-		clinicInBox.validateAppointmentConfirmedScreen();
+		boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		log("/*30----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		log("/*31----Go to back to the Citizen Related Tab --*/");

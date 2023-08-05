@@ -112,7 +112,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 23.----Enter PHN --*/");
 		inClinicExperiencePage.enterPNH(personalHealthNumber);
 		log("/*-- 24.----click on non-Indigenous person radiobutton --*/");
-		inClinicExperiencePage.clickNonIndigenousRadioButton();
+		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+			inClinicExperiencePage.clickNonIndigenousRadioButton();
+		}
 		log("/*-- 25.----click Verify PHN button --*/");
 		inClinicExperiencePage.clickVerifyPHNButton();
 		log("/*-- 26.'PNH match successful' --*/");
@@ -134,7 +136,10 @@ public class Consumption extends BaseTest {
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
-
+		////////////////////
+		//May will be removed
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		inClinicExperiencePage.selectSearchByClinicNameTab();
 

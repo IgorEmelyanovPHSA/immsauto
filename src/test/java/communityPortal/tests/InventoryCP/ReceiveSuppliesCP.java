@@ -58,9 +58,9 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- Receive Supplies --*/");
 		supplyConsolePage.clickBtnReceiveSuppliesCP();
 		Thread.sleep(2000);
-		supplyConsolePage.selectSupplyItemTo(lot).
-				enterTransferDosages(String.valueOf(doses)).
-				selectReasonForReception();
+		supplyConsolePage.selectSupplyItemTo(lot);
+		supplyConsolePage.enterTransferDosages(String.valueOf(doses));
+		supplyConsolePage.selectReasonForReception();
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 
 		log("/*-- Validate Layout Text --*/");
