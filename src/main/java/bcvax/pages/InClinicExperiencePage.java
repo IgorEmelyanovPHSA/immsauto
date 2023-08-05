@@ -789,6 +789,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, next_btn_path, 10);
 		WebElement next_btn = driver.findElement(next_btn_path);
 		scrollIfNeeded(driver, next_btn);
+		Thread.sleep(500);
 		next_btn.click();
 	}
 
@@ -930,7 +931,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
 		Thread.sleep(500);
-		By in_clinic_experience_app_path = By.xpath("//button[@name='navigateToICE']");
+		By in_clinic_experience_app_path = By.xpath("//button[@name='navigateToICE' and @aria-disabled='false']");
 		waitForElementToBeEnabled(driver, in_clinic_experience_app_path, 30);
 		WebElement in_clinic_experience_app = driver.findElement(in_clinic_experience_app_path);
 		in_clinic_experience_app.click();
@@ -1250,7 +1251,11 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement alert_content = AlertDialog.getAlertContent(driver);
 		String alert_text = alert_content.getText();
 		Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"));
-		AlertDialog.closeAlert(driver);
+		try {
+			AlertDialog.closeAlert(driver);
+		} catch(ElementClickInterceptedException ex) {
+			AlertDialog.closeAlert(driver);
+		}
 //		By success_alert = By.xpath("//div[text() = 'Citizen Successfully Registered']");
 //		try {
 //			waitForElementToBePresent(driver, success_alert, 30);
