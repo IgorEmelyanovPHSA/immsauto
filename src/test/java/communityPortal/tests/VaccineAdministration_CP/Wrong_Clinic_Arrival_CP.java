@@ -22,7 +22,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
     private String personalHealthNumber = "9746171121";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
-    String clinicNameToSearch = "All Ages - Atlin Health Centre";
+    String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
     String citizenName = "Hugues Fawn BCVaxLampard";
     String consumptionLot;
     String consumptionDose;
