@@ -23,7 +23,7 @@ public class DIWA_CIB extends BaseTest {
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
-		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClinicianCIB();
+		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClerk();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
