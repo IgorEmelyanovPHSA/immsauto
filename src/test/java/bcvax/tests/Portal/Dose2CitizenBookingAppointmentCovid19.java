@@ -69,7 +69,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         //InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
         //Thread.sleep(5000);
         log("/*6.----Login as an Clinician to CIB --*/");
-        ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
+        ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
 
         clinicInBox.verifyIsClinicInBoxPageDisplayed();
 
