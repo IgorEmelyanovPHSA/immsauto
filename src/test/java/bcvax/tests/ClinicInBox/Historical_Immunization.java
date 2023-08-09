@@ -10,10 +10,10 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertFalse;
 
 public class Historical_Immunization extends BaseTest {
-	
-	private String legalFirstName = "Maegan";
-	private String legalLastName = "bcvaxvillage";
-	private String legalMiddleName = "Tanya";
+
+	private String legalFirstName = "Rochester";
+	private String legalLastName = "BCVaxStonbridge";
+	private String legalMiddleName = "Sheelagh";
 	private String pirSubmissionField = "Submitted";
 	private String patwayStatusFieldValidation = "Pathway Status";
 	private String pirSubmissionStatusFieldValidation = "PIR Submission Status";
