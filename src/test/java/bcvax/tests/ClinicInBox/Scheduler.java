@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class Scheduler extends BaseTest {
-    private String legalFirstName = "Dacia";
-    private String legalLastName = "Bcvaxdod";
-    private String dateOfBirth = "May 19, 1904";
-    private String postalCode = "V7N3K1";
-    private String personalHealthNumber = "9746172456";
+    //Courtnay BCVaxGoncaves
+    private String legalFirstName = "Courtnay";
+    private String legalLastName = "BCVaxGoncaves";
+    private String dateOfBirth = "Nov 29, 1949";
+    private String postalCode = "V3J3Y1";
+    private String personalHealthNumber = "9746172961";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Chilliwack - Sardis Pharmacy";

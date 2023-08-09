@@ -13,7 +13,7 @@ public class DIWA_CIB extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
-	String participant_name = "Maegan Tanya bcvaxvillage";
+	String participant_name = "Rawley BCVaxIsmirnioglou";
 	String clinic_location = "All Ages - Atlin Health Centre";
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
@@ -30,7 +30,7 @@ public class DIWA_CIB extends BaseTest {
 		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
-		log("/*----4. Search for Participant account Maegan BCVaxVillage ---*/");
+		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
 		mainPageOrg.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");
 		ProfilesPage profilesPage = new ProfilesPage(driver);

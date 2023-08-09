@@ -18,9 +18,9 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
     MainPageOrg orgMainPage;
     ProfilesPage profilePage;
     String env;
-    private String legalFirstName = "Maegan";
-    private String legalLastName = "bcvaxvillage";
-    private String legalMiddleName = "Tanya";
+    private String legalFirstName = "Rochester";
+    private String legalLastName = "BCVaxStonbridge";
+    private String legalMiddleName = "Sheelagh";
     private String pirSubmissionField = "Submitted";
     private String patwayStatusFieldValidation = "Pathway Status";
     private String pirSubmissionStatusFieldValidation = "PIR Submission Status";

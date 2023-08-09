@@ -22,17 +22,14 @@ import java.util.*;
 public class DIWA_ICE extends BaseTest {
 	MainPageOrg mainPageOrg;
 	@DataProvider(name = "testData")
-	public static Object[][] names() {return new Object[][]{{"Benoite Denna BCVaxD'Hooge"}};
+	public static Object[][] names() {return new Object[][]{{"John Yuan bo BCVaxChan"}};
 	}
 
 	@Test(dataProvider = "testData")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE(String citizenName) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		//0.
-		//String nameToSearch = "Benoite Denna BCVaxD";
-
 		//1.
-		//String citizenName = "BCVaxChan John";
+		//String citizenName = "John Yuan bo BCVaxChan";
 		//2.
 		//String citizenName = "BCVaxZhang Ping an";
 		//3.

@@ -17,7 +17,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         //TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         CommonMethods commonMethods = new CommonMethods(getDriver());
-        String nameToSearch = "Benoite Denna BCVaxD'Hooge";
+        String nameToSearch = "John Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
         MainPageCP cpMainPage = new MainPageCP(getDriver());
