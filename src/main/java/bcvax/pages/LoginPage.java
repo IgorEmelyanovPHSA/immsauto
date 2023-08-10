@@ -37,8 +37,8 @@ public class LoginPage extends BasePage {
 
 	public InClinicExperiencePage loginAsClinicianICE() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_ICE"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}
@@ -95,8 +95,8 @@ public class LoginPage extends BasePage {
 	public MainPageOrg orgLoginAsClinicianICE() throws Exception {
 		log("/*----Login to ORG (oldUI) As Clinician ICE--*/");
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_ICE"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
 		click(login_button);
 		return new MainPageOrg(driver);
 	}
@@ -145,10 +145,10 @@ public class LoginPage extends BasePage {
 //		return new InClinicExperiencePage(driver);
 //	}
 	
-	public ClinicInBoxPage loginAsClinicianCIB() throws Exception {
+	public ClinicInBoxPage loginAsClerk() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_CIB"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_CIB"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLERK"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW"));
 		click(login_button);
 		return new ClinicInBoxPage(driver);
 	}

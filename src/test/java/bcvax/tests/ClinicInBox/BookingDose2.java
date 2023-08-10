@@ -4,11 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -43,7 +39,7 @@ public class BookingDose2 extends BaseTest {
 				break;
 			default:
 				log("Login AS default user in CIB");
-				loginPage.loginAsClinicianCIB();
+				loginPage.loginAsClerk();
 				TestcaseID = "225653"; //C225653
 		}
 		log("TestRail test case ID: C" +TestcaseID);
