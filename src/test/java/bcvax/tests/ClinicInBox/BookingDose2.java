@@ -40,6 +40,7 @@ public class BookingDose2 extends BaseTest {
 			default:
 				log("Login AS default user in CIB");
 				loginPage.loginAsClerk();
+				orgMainPage = new MainPageOrg(driver);
 				TestcaseID = "225653"; //C225653
 		}
 		log("TestRail test case ID: C" +TestcaseID);

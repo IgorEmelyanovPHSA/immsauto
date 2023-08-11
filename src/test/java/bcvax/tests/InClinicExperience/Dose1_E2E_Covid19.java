@@ -55,8 +55,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (Clinician to ICE)");
-				orgMainPage = loginPage.orgLoginAsClinicianICE();
-				//orgMainPage = loginPage.orgLoginAsPPHIS();
+				loginPage.loginAsClerk();
+				orgMainPage = new MainPageOrg(driver);
+						//orgMainPage = loginPage.orgLoginAsPPHIS();
 				TestcaseID = "222694"; //
 		}
 		log("TestRail test case ID: C" +TestcaseID);

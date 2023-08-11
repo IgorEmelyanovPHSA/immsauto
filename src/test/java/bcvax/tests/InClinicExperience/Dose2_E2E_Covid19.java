@@ -47,7 +47,8 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
-		orgMainPage = loginPage.orgLoginAsClinicianICE();
+		loginPage.loginAsClerk();
+		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {

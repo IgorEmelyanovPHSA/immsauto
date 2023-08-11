@@ -58,7 +58,8 @@ public class Consumption extends BaseTest {
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
-		orgMainPage = loginPage.orgLoginAsClinicianICE();
+		loginPage.loginAsClerk();
+		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
 		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);

@@ -27,8 +27,9 @@ public class Scheduler extends BaseTest {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-        InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
-        Thread.sleep(10000);
+        loginPage.loginAsClerk();
+        InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
+                Thread.sleep(10000);
         inClinicExperiencePage.closeTabsHCA();
         Thread.sleep(5000);
         if (inClinicExperiencePage.displaySupplyConsolePage()) {

@@ -35,13 +35,13 @@ public class LoginPage extends BasePage {
 		super(driver);
 	}
 
-	public InClinicExperiencePage loginAsClinicianICE() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
+//	public InClinicExperiencePage loginAsClinicianICE() throws Exception {
+//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
+//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
+//		click(login_button);
+//		return new InClinicExperiencePage(driver);
+//	}
 
 	public InClinicExperiencePage loginAsImmsBCAdminICE() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
@@ -92,14 +92,14 @@ public class LoginPage extends BasePage {
 		return new MainPageOrg(driver);
 	}
 
-	public MainPageOrg orgLoginAsClinicianICE() throws Exception {
-		log("/*----Login to ORG (oldUI) As Clinician ICE--*/");
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
-		click(login_button);
-		return new MainPageOrg(driver);
-	}
+//	public MainPageOrg orgLoginAsClinicianICE() throws Exception {
+//		log("/*----Login to ORG (oldUI) As Clinician ICE--*/");
+//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
+//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
+//		click(login_button);
+//		return new MainPageOrg(driver);
+//	}
 
 	public SupplyConsolePage loginAsImmsBCAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));

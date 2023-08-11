@@ -31,8 +31,8 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*1.----Login as clinician ICE --*/");
-        orgMainPage = loginPage.orgLoginAsClinicianICE();
-
+        loginPage.loginAsClerk();
+        orgMainPage = new MainPageOrg(driver);
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {

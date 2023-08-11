@@ -28,6 +28,7 @@ bcvaxdevit:
   agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EL1404"
+  diwaCitizen: "Rawley BCVaxIsmirnioglou"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "0649AA"
@@ -212,6 +213,7 @@ bcvaxuat:
   consumptionDose: "0.3"
 #  consumptionLot: "35035BD-CC01"
   consumptionLot: "EL0203"
+  diwaCitizen: "Ping an Penelope BCVaxZhang"
   useDefaultSettingsLots:
     - "300042698-CC04"
     - "NK2858B"

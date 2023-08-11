@@ -49,7 +49,6 @@ public class BookingDose1 extends BaseTest {
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
-
 		log("/*3.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 		log("/*4.----click Register New Citizen --*/");
