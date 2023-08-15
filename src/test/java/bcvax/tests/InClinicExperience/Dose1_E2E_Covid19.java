@@ -25,8 +25,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	private String postalCode = "V3L5L2";
 	Map<String, Object> testData;
 	private String personalHealthNumber = "9746170911";
-	//private boolean isIndigenous = false;
+	private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
+	//private String email = "jason.yulghun@phsa.ca";
 	String clinicNameToSearch;
 	MainPageOrg orgMainPage;
 	String consumptionLot;
@@ -166,7 +167,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
-		inClinicExperience.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		inClinicExperience.ClickGoToInClinicExperienceButton();
 		try {

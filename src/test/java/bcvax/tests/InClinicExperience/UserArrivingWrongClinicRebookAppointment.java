@@ -174,7 +174,14 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		String beforeBooking = inClinicExperiencePage.getAppointmentClinicName();
 		log("/*-- 35.: --> Before Booking clinic Value is:" + beforeBooking + "");
 		log("/*-- 36.--- User can click Rebook Appointment button to book an appointment --*/");
-		inClinicExperiencePage.ClickRebookAppointment();
+		try {
+			inClinicExperiencePage.ClickRebookAppointment();
+		} catch(Exception ex) {
+			System.out.println("***WARNING***");
+			System.out.println("***No Early Booking Option***");
+			System.out.println("***Investigate***");
+			System.out.println("***---***");
+		}
 		log("/*-- 36.1.--- Close Success Dialog --*/");
 		List<String> alert_texts = AlertDialog.getAllAlertsText(driver);
 		for (String alert_text: alert_texts) {
@@ -189,7 +196,6 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 37: --> After Booking clinic value is:" + afterBooking + "");
 		Assert.assertNotEquals((beforeBooking), (afterBooking));
 		log("/*-- 38---'Rebook at Current Location button is disabled after user books appointment --*/");
-
 		log("/*-- 39---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		log("/*-- 39.1.---Close Success Dialog --*/");

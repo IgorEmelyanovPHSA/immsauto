@@ -18,7 +18,8 @@ public class BookingDose1 extends BaseTest {
 	private String personalHealthNumber = "9746170911";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
-	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	//String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 	private String vaccineToSelect = "Covid19Vaccine";
 	MainPageOrg orgMainPage;
 

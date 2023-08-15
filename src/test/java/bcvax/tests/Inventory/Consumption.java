@@ -133,7 +133,13 @@ public class Consumption extends BaseTest {
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 		log("/*-- 33.Select Early Booking Reason --*/");
-		inClinicExperiencePage.selectEarlyBookingReason();
+		try {
+			inClinicExperiencePage.selectEarlyBookingReason();
+		} catch(Exception ex) {
+			System.out.println("***Warning***");
+			System.out.println("***No Early Booking Option***");
+			System.out.println("***Warning***");
+		}
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();

@@ -54,7 +54,7 @@ public class BookingDose2 extends BaseTest {
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
+		orgMainPage.closeAllTabs();
 		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();
 		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
