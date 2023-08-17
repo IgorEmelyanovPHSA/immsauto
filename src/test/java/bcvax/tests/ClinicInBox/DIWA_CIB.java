@@ -3,6 +3,7 @@ package bcvax.tests.ClinicInBox;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -13,8 +14,12 @@ public class DIWA_CIB extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
-	String participant_name = "Rawley BCVaxIsmirnioglou";
+	//String participant_name = "Rawley BCVaxIsmirnioglou";
+	//String participant_name = "Ping an Penelope BCVaxZhang";
+	String participant_name;
+
 	String clinic_location = "All Ages - Atlin Health Centre";
+	MainPageOrg orgMainPage;
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
@@ -23,11 +28,16 @@ public class DIWA_CIB extends BaseTest {
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+		participant_name = String.valueOf(testData.get("diwaCitizen"));
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClerk();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
-		clinicInBoxPage.verifyIsClinicInBoxPageDisplayed();
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+		}
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
 		log("/*----4. Search for Participant account: " +participant_name +" ---*/");

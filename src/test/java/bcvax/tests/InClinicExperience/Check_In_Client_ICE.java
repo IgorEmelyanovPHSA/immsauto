@@ -50,7 +50,8 @@ public class Check_In_Client_ICE extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*6.----Navigate to More -> Register --*/");
-        orgMainPage = loginPage.orgLoginAsClinicianICE();
+        loginPage.loginAsClerk();
+        orgMainPage = new MainPageOrg(driver);
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
             orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);

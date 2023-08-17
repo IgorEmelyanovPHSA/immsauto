@@ -40,6 +40,7 @@ public class BookingDose2 extends BaseTest {
 			default:
 				log("Login AS default user in CIB");
 				loginPage.loginAsClerk();
+				orgMainPage = new MainPageOrg(driver);
 				TestcaseID = "225653"; //C225653
 		}
 		log("TestRail test case ID: C" +TestcaseID);
@@ -53,7 +54,7 @@ public class BookingDose2 extends BaseTest {
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
+		orgMainPage.closeAllTabs();
 		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();
 		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
@@ -129,9 +130,18 @@ public class BookingDose2 extends BaseTest {
 		log("/*31----Go to back to the Citizen Related Tab --*/");
 		clinicInBox.clickRelatedTab();
 		log("/*32----click on In-clinic Experience button --*/");
-		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		inClinicExperience.clickCheckInButton();
+		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		log("/*46.---Open Today's appointments from Home page --*/");
+
+		inClinicExperience.clickTodayAppointments();
+		log("/*47.---Open Today appointment Details --*/");
+		Thread.sleep(2000);
+		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		log("/*33----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		InClinicExperience.validateVaccineAdminPageOpen();
+		inClinicExperience.validateVaccineAdminPageOpen();
 	}
 
 	@Test(priority = 2)

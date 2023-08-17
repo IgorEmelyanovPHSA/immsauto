@@ -20,8 +20,9 @@ public class RegisterNewCitizen extends BaseTest {
 		//loginPage.enterClinicianPW();
 		//loginPage.clickLoginButton();
 		//InClinicExperiencePage inClinicExperiencePage = loginPage.clickLoginButton();
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
-		//Thread.sleep(10000);
+		loginPage.loginAsClerk();
+		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
+				//Thread.sleep(10000);
 		/*----Go to Register Tab ---*/
 		System.out.println("/*----Go to Register Tab ---*/");
 		inClinicExperiencePage.clickRegisterTab();

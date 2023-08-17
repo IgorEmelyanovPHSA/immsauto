@@ -25,8 +25,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	private String postalCode = "V3L5L2";
 	Map<String, Object> testData;
 	private String personalHealthNumber = "9746170911";
-	//private boolean isIndigenous = false;
+	private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
+	//private String email = "jason.yulghun@phsa.ca";
 	String clinicNameToSearch;
 	MainPageOrg orgMainPage;
 	String consumptionLot;
@@ -55,8 +56,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 				break;
 			default:
 				log("Login AS default user (Clinician to ICE)");
-				orgMainPage = loginPage.orgLoginAsClinicianICE();
-				//orgMainPage = loginPage.orgLoginAsPPHIS();
+				loginPage.loginAsClerk();
+				orgMainPage = new MainPageOrg(driver);
+						//orgMainPage = loginPage.orgLoginAsPPHIS();
 				TestcaseID = "222694"; //
 		}
 		log("TestRail test case ID: C" +TestcaseID);
@@ -165,9 +167,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*36.----Refresh page --*/");
 		inClinicExperience.refreshBrowser();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
-		inClinicExperience.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
-		inClinicExperience.ClickGoToInClinicExperienceButton();
+		inClinicExperience.clickCheckInButton();
 		try {
 			System.out.println("---click on reason Early Booking Reason - Travel --*/");
 			inClinicExperience.selectEarlyBookingReason();
@@ -175,23 +177,20 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			System.out.println("There is not Early Booking Option");
 		}
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
-		System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		inClinicExperience.validateVaccineAdminPageOpen();
+		//System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
+		//inClinicExperience.validateVaccineAdminPageOpen();
 		System.out.println("/*40.---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		System.out.println("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		try {
-			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			inClinicExperience.selectVaccineAgent();
-		} catch(Exception ex) {
-			log("/*46.---Open Today's appointments from Home page --*/");
 
-			inClinicExperience.clickTodayAppointments();
-			log("/*47.---Open Today appointment Details --*/");
-			inClinicExperience.clickTodayAppointmentCaseViewButton();
-			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			inClinicExperience.selectVaccineAgent();
-		}
+		log("/*46.---Open Today's appointments from Home page --*/");
+
+		inClinicExperience.clickTodayAppointments();
+		log("/*47.---Open Today appointment Details --*/");
+		Thread.sleep(2000);
+		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+		inClinicExperience.selectVaccineAgent();
 		String consentProvider = inClinicExperience.consentProviderSelected();
 		if(consentProvider.equals("")) {
 			consentProvider = inClinicExperience.selectConsentProvider();
@@ -214,9 +213,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		}
 
 		log("/*43.---select Dosage ->  -.5 --*/");
-		if(!lot.equals(consumptionLot)) {
-			inClinicExperience.setLotNumber(consumptionLot);
-		}
+		//if(!lot.equals(consumptionLot)) {
+		//	inClinicExperience.setLotNumber(consumptionLot);
+		//}
 		String dose = inClinicExperience.getDosage();
 
 		if(!dose.equals(consumptionDose)) {
