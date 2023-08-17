@@ -194,7 +194,7 @@ bcvaxuat:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
-  containerConsumption: "Pfizer mRNA BNT162b2 - EL0203 (2022-08-08 09:52:02)"
+  containerConsumption: "SPIKEVAX (Moderna) - 300042698-CC04 (2022-08-16 16:00:57)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:07:03)"
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
@@ -211,9 +211,10 @@ bcvaxuat:
   agentConsumption: "COVID-19 mRNA"
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
-  consumptionDose: "0.3"
-  #consumptionLot: "35035BD-CC01"
-  consumptionLot: "EL0203"
+  consumptionDose: "0.5"
+  consumptionLot: "300042698-CC04"
+  #consumptionLot: "EL0203"
+
   diwaCitizen: "Ping an Penelope BCVaxZhang"
   useDefaultSettingsLots:
     - "300042698-CC04"

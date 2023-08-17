@@ -171,34 +171,43 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickRelatedTab();
 
 		log("/*38.----click on In-clinic Experience button --*/");
-		inClinicExperience.ClickGoToInClinicExperienceButton();
+		inClinicExperience.clickCheckInButton();
+		//inClinicExperience.ClickGoToInClinicExperienceButton();
 
 		log("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		inClinicExperience.validateVaccineAdminPageOpen();
+		//inClinicExperience.validateVaccineAdminPageOpen();
 
 		log("/*40.---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 
 		log("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");
-		try {
-			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			inClinicExperience.selectVaccineAgent();
-		} catch(Exception ex) {
-			log("/*46.---Open Today's appointments from Home page --*/");
 
-			inClinicExperience.clickTodayAppointments();
-			log("/*47.---Open Today appointment Details --*/");
-			inClinicExperience.clickTodayAppointmentCaseViewButton();
-			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			inClinicExperience.selectVaccineAgent();
+		log("/*46.---Open Today's appointments from Home page --*/");
+
+		inClinicExperience.clickTodayAppointments();
+		Thread.sleep(2000);
+		log("/*47.---Open Today appointment Details --*/");
+		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+		inClinicExperience.selectVaccineAgent();
+
+		String consentProvider = inClinicExperience.consentProviderSelected();
+		if(consentProvider.equals("")) {
+			consentProvider = inClinicExperience.selectConsentProvider();
 		}
 
 		log("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();
-		String lot = inClinicExperience.getLotNumber();
-		if(!lot.equals(consumptionLot)) {
-			inClinicExperience.setLotNumber(consumptionLot);
+		//String lot = inClinicExperience.getLotNumber();
+		//if(!lot.equals(consumptionLot)) {
+		//	inClinicExperience.setLotNumber(consumptionLot);
+		//}
+
+		String provider =  inClinicExperience.getProvider();
+		if(!provider.equals(consentProvider)) {
+			inClinicExperience.setProvider(consentProvider);
 		}
+
 		String route = inClinicExperience.getRoute();
 		String site = inClinicExperience.getSite();
 		String dose = inClinicExperience.getDosage();

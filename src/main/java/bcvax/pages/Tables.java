@@ -83,6 +83,13 @@ public class Tables extends BasePage {
         return new GenericTable(containerAdjustmentWastage);
     }
 
+    public GenericTable getTodayAppointmentsTable() {
+        By container_today_appointments_table_path = By.xpath("//c-bc-hc-datatable-custom-types[@c-bchcdatatablepagination_bchcdatatablepagination]");
+        waitForElementToBeLocated(driver, container_today_appointments_table_path, 10);
+        WebElement container_today_appointments_table = driver.findElement(container_today_appointments_table_path);
+        return new GenericTable(container_today_appointments_table);
+    }
+
     public GenericTable getSupplyContainerTable() {
         waitForTextToBePresent(driver, supplyContainerTable ,30, "Container");
         return new GenericTable(supplyContainerTable);
