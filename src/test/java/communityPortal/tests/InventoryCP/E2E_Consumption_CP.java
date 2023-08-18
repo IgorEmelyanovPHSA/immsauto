@@ -165,41 +165,35 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-
-        log("/*35_1.----Refresh page again - should not be like that again --*/");
-        Thread.sleep(500);
-        inClinicExperience_CP.refreshBrowser();
         Thread.sleep(500);
         log("/*36.----click on In-clinic Experience button --*/");
-        inClinicExperience_CP.ClickGoToInClinicExperienceButton();
-
-        log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-        inClinicExperience_CP.validateVaccineAdminPageOpen();
-        inClinicExperience_CP.clickCloseAlert();
-        log("/*38.---Click confirm and Save Button --*/");
+        inClinicExperience_CP.clickCheckInButton();
+        Thread.sleep(2000);
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
-        try {
-            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-            inClinicExperience_CP.selectVaccineAgent();
-        } catch(Exception ex) {
-            log("/*39.---Open Today's appointments from Home page --*/");
-            System.out.println(ex.getMessage());
-            inClinicExperience_CP.clickTodayAppointments();
-            log("/*40.---Open Today appointment Details --*/");
-            inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
-            log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-            inClinicExperience_CP.selectVaccineAgent();
-        }
+        Thread.sleep(2000);
+        //log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
+       // inClinicExperience_CP.validateVaccineAdminPageOpen();
+        //inClinicExperience_CP.clickCloseAlert();
+        //log("/*38.---Click confirm and Save Button --*/");
+
+
+        log("/*39.---Open Today's appointments from Home page --*/");
+        inClinicExperience_CP.clickTodayAppointments();
+        log("/*40.---Open Today appointment Details --*/");
+        inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+
+
+        inClinicExperience_CP.selectVaccineAgent();
+        Thread.sleep(2000);
 
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
         if(consentProvider.equals("")) {
             consentProvider = inClinicExperience_CP.selectConsentProvider();
+            consentProvider = inClinicExperience_CP.consentProviderSelected();
         }
         inClinicExperience_CP.ClickSaveConsentButton();
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
-        if(consentProvider.equals("")) {
-            consentProvider = inClinicExperience_CP.selectConsentProvider();
-        }
         String agent = inClinicExperience_CP.getVaccineAgent();
         System.out.println("Current Agent: " + agent);
         String provider =  inClinicExperience_CP.getProvider();
@@ -217,9 +211,9 @@ public class E2E_Consumption_CP extends BaseTest {
         }
 
         log("/*43.---select Dosage ->  -.5 --*/");
-        if(!lot.equals(consumptionLot)) {
-            inClinicExperience_CP.setLotNumber(consumptionLot);
-        }
+        //if(!lot.equals(consumptionLot)) {
+        //    inClinicExperience_CP.setLotNumber(consumptionLot);
+        //}
         String dose = inClinicExperience_CP.getDosage();
 
         if(!dose.equals(consumptionDose)) {
@@ -247,7 +241,9 @@ public class E2E_Consumption_CP extends BaseTest {
         supplyConsolePage = cpMainPage.goToSupplyLocation();
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
         supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
-
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         //////////Validation for Dosages and Qty After Consumption
         System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
         double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
