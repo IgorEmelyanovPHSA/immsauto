@@ -149,13 +149,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-        //////
-        log("/*35_1.----Refresh page again - should not be like that again --*/");
-        inClinicExperience_CP.refreshBrowser();
-        ///////
+
         Thread.sleep(2000);
         log("/*36.----click on In-clinic Experience button --*/");
-        inClinicExperience_CP.ClickGoToInClinicExperienceButton();
+
+        inClinicExperience_CP.clickCheckInButton();
 
         log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
         inClinicExperience_CP.validateVaccineAdminPageOpen();
@@ -164,22 +162,19 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(2000);
 
-        log("/*39.---select Vaccine Agent picklist Value");
-        try {
-            log("/---select Vaccine Agent picklist Value: " + consumptionAgent);
-            inClinicExperience_CP.selectVaccineAgentValue(consumptionAgent);
-        } catch(Exception ex) {
-            log("/*40.---Open Today's appointments from Home page --*/");
-            System.out.println(ex.getMessage());
-            Thread.sleep(2000);
-            inClinicExperience_CP.clickTodayAppointments();
-            Thread.sleep(2000);
-            log("/*41.---Open Today appointment Details --*/");
-            inClinicExperience_CP.clickTodayAppointmentCaseViewButton();
-            Thread.sleep(2000);
-            log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-            inClinicExperience_CP.selectVaccineAgent();
-        }
+        log("/*39.---Open Today's appointments from Home page --*/");
+        Thread.sleep(2000);
+        log("/*40.---Open Today appointment Details --*/");
+
+        log("/*40.---Open Today's appointments from Home page --*/");
+        Thread.sleep(2000);
+        inClinicExperience_CP.clickTodayAppointments();
+        Thread.sleep(2000);
+        log("/*41.---Open Today appointment Details --*/");
+        inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Thread.sleep(2000);
+        log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+        inClinicExperience_CP.selectVaccineAgent();
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
         Thread.sleep(2000);
         if(consentProvider.equals("")) {
@@ -207,9 +202,9 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         }
 
         log("/*45.---select Dosage ->  -.5 --*/");
-        if(!lot.equals(consumptionLot)) {
-            inClinicExperience_CP.setLotNumber(consumptionLot);
-        }
+        //if(!lot.equals(consumptionLot)) {
+        //    inClinicExperience_CP.setLotNumber(consumptionLot);
+        //}
         Thread.sleep(2000);
         String dose = inClinicExperience_CP.getDosage();
 
