@@ -17,7 +17,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         //TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         CommonMethods commonMethods = new CommonMethods(getDriver());
-        String nameToSearch = "John Yuan bo BCVaxChan";
+        String nameToSearch = "Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
         MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -43,6 +43,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*----3. select Citizen Participant acc from search results --*/");
         profilesPage.selectCitizenParticipantAcc(nameToSearch);
 
+        //If the PIR Warning is shown close it
+        try {
+            profilesPage.closePIRWarningDialog();
+        } catch(Exception ex) {
+            System.out.println("No PIR Warning. Continue...");
+        }
         log("/*---- 4. Navigate to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
 
@@ -67,8 +73,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*---11. Click Record Immunization ---*/");
         profilesPage.clickRecordImmunization();
 
-        if (profilesPage.clickPopupYesButtonIfDisplayed())
-            log("/*---11.1. Pop up window is displayed and clicked  ---*/");
+        //If the Potential Duplicate Warning is shown Click yes it
+        try {
+            profilesPage.clickPotentialDuplicateYes();
+        } catch(Exception ex) {
+            System.out.println("No Potential Duplicate Warning. Continue...");
+        }
 
         log("/*---12. Click X button on Diwa flow ---*/");
         profilesPage.clickToClose();
@@ -124,6 +134,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*---26. Vaccine Administration Summary Confirm and Save ---*/");
         profilesPage.summaryConfirmAndSave();
         Thread.sleep(2000);
+        //If the PIR Warning is shown close it
+        try {
+            profilesPage.closePIRWarningDialog();
+        } catch(Exception ex) {
+            System.out.println("No PIR Warning. Continue...");
+        }
         log("/*---27. Navigate to Related tab and Confirm new Imms Record is created ---*/");
         profilesPage.clickRelatedTab();
         log("We need to validate that Documented Without Appointment created - not validated yet  ---*/");

@@ -21,27 +21,13 @@ public class ProfilesPage extends BasePage{
     @FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
     private WebElement btn_create_Immunization_Record;
     private By btn_create_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
-    private By navigate_to_historical_immunization_records1 = By.xpath("//span[contains(text(),'Historical Immunization Records ')]");
-    private By pir_submission_status_field = By.xpath("//span[@title='PIR Submission Status']");
-    private By pir_submission_field_status = By.xpath("(//SPAN[@class='slds-truncate'][text()='PIR Submission Status']/../../../../../../..//LIGHTNING-BASE-FORMATTED-TEXT)[1]");
     @FindBy(xpath = "//button[text() = 'Confirm']")
     private WebElement confirm_button;
-    private By confirm_button1 = By.xpath("//button[text() = 'Confirm']");
-    @FindBy(xpath = "(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]/../../../../../..//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records')]")
-    private WebElement getValueOfHistoricalDoses;
     private By getValueOfHistoricalDoses1 = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]/../../../../../..//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records')]");
 
-    @FindBy(xpath = "//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records ')]/../../../../..//BUTTON[@class='slds-button slds-button_neutral'][text()='New']")
-    private WebElement create_Historical_Immunization_Record;
     private By create_Historical_Immunization_Record1 = By.xpath("//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records ')]/../../../../..//BUTTON[@class='slds-button slds-button_neutral'][text()='New']");
-
-    @FindBy(xpath = "(//flexipage-component2[@data-component-id='bcHcHistoricalDosesCIB']//lightning-primitive-cell-factory[@data-label='Immunization Record']//a[@target='_self'])[1]")
-    private WebElement click_historical_immunization_record;
-    private By click_historical_immunization_record1 = By.xpath("(//flexipage-component2[@data-component-id='bcHcHistoricalDosesCIB']//lightning-primitive-cell-factory[@data-label='Immunization Record']//a[@target='_self'])[1]");
-
     @FindBy(xpath = "//option[contains(text(),'Select an option')]")
     private WebElement select_an_option;
-    private By select_an_option1 = By.xpath("//option[contains(text(),'Select an option')]");
 
     @FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
     private WebElement covidmRna;
@@ -49,107 +35,65 @@ public class ProfilesPage extends BasePage{
 
     @FindBy(xpath = ".//input[@data-id = 'userinput']")
     private WebElement search_clinic;
-    private By search_clinic1 = By.xpath(".//input[@data-id = 'userinput']");
     @FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]")
     private WebElement inputDate;
-    private By inputDate1 = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]");
     @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
     private WebElement recordImmunizationBtn;
-    private By recordImmunizationBtn1 = By.xpath("//button[contains(text(),'Record Immunization')]");
 
     @FindBy(xpath = "//option[@label='COVID-19 mRNA']")
     private WebElement select_agent;
     private By select_agent1 = By.xpath("//option[@label='COVID-19 mRNA']");
 
-    @FindBy(xpath = "//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]")
-    private WebElement yes_button_save_on_popup_window;
     private By yes_button_save_on_popup_window1 = By.xpath("//button[@class='slds-button slds-button_brand'][contains(text(),'Yes')]");
 
     @FindBy(xpath = "//*[@class='slds-icon slds-icon_large']")
     private WebElement close_button_diwa;
-    private By close_button_diwa1 = By.xpath("//*[@class='slds-icon slds-icon_large']");
 
     @FindBy(xpath = ".//h1[text() = 'Oops...']")
     private WebElement vlidate_oops_message;
-    private By vlidate_oops_message1 = By.xpath(".//h1[text() = 'Oops...']");
-
-
-    @FindBy(xpath = "//select[@data-id='agent']")
-    private WebElement click_agent_value;
     private By click_agent_value1 = By.xpath("//select[@data-id='agent']");
 
     @FindBy(xpath = "(//button[normalize-space()='Continue Editing and Save'])")
     private WebElement continue_editing_btn;
-    private By continue_editing_btn1 = By.xpath("//button[normalize-space()='Continue Editing and Save']");
     @FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
     private WebElement informed_consent_provider_dropdown;
-    private By informed_consent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[1]");
 
     @FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
     private WebElement select_inform_consent_provider;
-    private By select_inform_consent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
 
     @FindBy(xpath = "//button[contains(text(),'Save Consent')]")
     private WebElement saveConsentButton;
 
-    @FindBy(xpath = "(//input[@placeholder = 'Search People...'])[1]")
-    private WebElement immunizing_agent_provider_dropdown;
-    private By immunizing_agent_provider_dropdown_ = By.xpath("(//input[@placeholder = 'Search People...'])[1]");
-
-    @FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
-    private WebElement select_immunizing_agent_provider;
-    private By select_immunizing_agent_provider_ = By.xpath("//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text");
-
     @FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
     private WebElement show_all_lot_numbers_checkbox;
-    private By show_all_lot_numbers_checkbox_ = By.xpath("//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN");
 
     @FindBy(xpath = ".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']")
     private WebElement click_lot_number_dropdown;
-    private By click_lot_number_dropdown1 = By.xpath(".//div[@class = 'slds-col slds-size_1-of-2 dropdown-container']//div[@class = 'slds-form-element']");
 
     @FindBy(xpath = "//li[@title='300042698 - Exp. 2021 June 18']")
     private WebElement select_lot;
-    private By select_lot_ = By.xpath("//li[@title='300042698 - Exp. 2021 June 18']");
 
-    @FindBy(xpath = "//button[@name='injectionSite']")
-    private WebElement selectSite;
     private By selectSite1 = By.xpath("//button[@name='injectionSite']");
 
-    @FindBy(xpath = "//span[@title='Arm - Left deltoid']")
-    private WebElement select_injection_site_value;
     private By select_injection_site_value1 = By.xpath("//span[@title='Arm - Left deltoid']");
 
     @FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]")
     private WebElement inputDateVaccineAdmin;
-    private By inputDateVaccineAdmin1 = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[2]");
 
-    @FindBy(xpath = "//button[contains(text(),'Save')]")
-    private WebElement save_button_historical_dose;
     private By save_button_historical_dose1 = By.xpath("//button[contains(text(),'Save')]");
 
-    @FindBy(xpath = "//button[@name='dosePicklist']")
-    private WebElement select_dosage_field;
     private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 
-    @FindBy(xpath = "//span[@title='0.3']")
-    private WebElement select_dosage;
     private By select_dosage1 = By.xpath("//span[@title='0.5']");
 
     @FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
     private WebElement saveAgain;
     private By saveAgain1 = By.xpath("//label[contains(text(),'Site')]/../../../..//button[@type='submit']");
 
-    @FindBy(xpath = "//lightning-formatted-name[@class='slds-form-element__static']")
-    private WebElement UserDetailsHomePage;
     private By UserDetailsHomePage1 = By.xpath("//lightning-formatted-name[@class='slds-form-element__static']");
 
-    @FindBy(xpath = "(//button[contains(text(),'Save')])[2]")
-    private WebElement save_button_historical_dose_vaccineAdmin;
     private By save_button_historical_dose_vaccineAdmin1 = By.xpath("(//button[contains(text(),'Save')])[2]");
 
-    @FindBy(xpath = "(//button[text()='Add'])[1]")
-    private WebElement clickAddBtn;
     private By clickAddBtn1 = By.xpath("(//button[text()='Add'])[1]");
 
     @FindBy(xpath = "//button[@title='Confirm & Save Administration']")
@@ -185,6 +129,21 @@ public class ProfilesPage extends BasePage{
         my_citizen.click();
     }
 
+    public void closePIRWarningDialog() throws InterruptedException {
+        Thread.sleep(500);
+        By cancel_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']/footer//button[text()='Cancel']");
+        waitForElementToBeEnabled(driver, cancel_btn_path, 20);
+        WebElement cnncel_btn = driver.findElement(cancel_btn_path);
+        cnncel_btn.click();
+    }
+
+    public void clickPotentialDuplicateYes() throws InterruptedException {
+        Thread.sleep(500);
+        By cancel_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']/footer//button[text()='Yes']");
+        waitForElementToBeEnabled(driver, cancel_btn_path, 20);
+        WebElement cnncel_btn = driver.findElement(cancel_btn_path);
+        cnncel_btn.click();
+    }
 
     public void clickRelatedTab() throws InterruptedException {
         Thread.sleep(500);
