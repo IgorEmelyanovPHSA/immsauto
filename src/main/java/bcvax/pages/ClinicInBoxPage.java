@@ -115,8 +115,17 @@ public class ClinicInBoxPage extends BasePage {
 	public void closeAllTabs() throws InterruptedException {
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
-		Thread.sleep(5000);
 		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+		int count = closeButtons.size();
+		int retry_count = 0;
+		while(count == 0) {
+			Thread.sleep(500);
+			closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+			retry_count++;
+			if(retry_count > 5) {
+				break;
+			}
+		}
 		for(WebElement closeTabBtn : closeButtons) {
 			try {
 				closeTabBtn.click();
