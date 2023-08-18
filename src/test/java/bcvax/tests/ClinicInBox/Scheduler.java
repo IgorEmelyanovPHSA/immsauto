@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class Scheduler extends BaseTest {
-    private String legalFirstName = "Dacia";
-    private String legalLastName = "Bcvaxdod";
-    private String dateOfBirth = "May 19, 1904";
-    private String postalCode = "V7N3K1";
-    private String personalHealthNumber = "9746172456";
+    //Courtnay BCVaxGoncaves
+    private String legalFirstName = "Courtnay";
+    private String legalLastName = "BCVaxGoncaves";
+    private String dateOfBirth = "Nov 29, 1949";
+    private String postalCode = "V3J3Y1";
+    private String personalHealthNumber = "9746172961";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Chilliwack - Sardis Pharmacy";
@@ -26,8 +27,9 @@ public class Scheduler extends BaseTest {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
         log("/*-- 1.Login as an Clinician In-Clinic Experience --*/");
-        InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
-        Thread.sleep(10000);
+        loginPage.loginAsClerk();
+        InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
+                Thread.sleep(10000);
         inClinicExperiencePage.closeTabsHCA();
         Thread.sleep(5000);
         if (inClinicExperiencePage.displaySupplyConsolePage()) {

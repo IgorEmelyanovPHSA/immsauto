@@ -288,14 +288,21 @@ public class CallCenterConsolePage extends BasePage {
 	}
 
 
+//	public void clickOnFacilityOptionLocation() throws InterruptedException {
+//		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
+//		Thread.sleep(2000);
+//		waitForElementToBeVisible(driver, option_loc_facility, 10);
+//		option_loc_facility.click();
+//	}
+
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
+		scrollTop(option_loc_facility, true);
 		option_loc_facility.click();
 	}
-	
+
 	public void selectBookingAppointmentDay() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);

@@ -28,6 +28,7 @@ bcvaxdevit:
   agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EL1404"
+  diwaCitizen: "Rawley BCVaxIsmirnioglou"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "0649AA"
@@ -185,6 +186,7 @@ bcvaxuat:
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   #Workaround
   #supplyLocationConsumption: "All Ages - Atlin Health Centre"
+  #supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
   distributionFrom: "Automation Supply Distribution_1_1"
   distributionTo: "Supply Distribution_2_1"
   distributionToSameClinic: "Supply Distribution_1_2"
@@ -192,7 +194,7 @@ bcvaxuat:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
-  containerConsumption: "COMIRNATY (Pfizer) - EL0203 (2022-08-19 15:21:23)"
+  containerConsumption: "SPIKEVAX (Moderna) - 300042698-CC04 (2022-08-16 16:00:57)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:07:03)"
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
@@ -209,9 +211,11 @@ bcvaxuat:
   agentConsumption: "COVID-19 mRNA"
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
-  consumptionDose: "0.3"
-#  consumptionLot: "35035BD-CC01"
-  consumptionLot: "EL0203"
+  consumptionDose: "0.5"
+  consumptionLot: "300042698-CC04"
+  #consumptionLot: "EL0203"
+
+  diwaCitizen: "Ping an Penelope BCVaxZhang"
   useDefaultSettingsLots:
     - "300042698-CC04"
     - "NK2858B"

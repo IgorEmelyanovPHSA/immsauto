@@ -24,11 +24,11 @@ import static org.testng.Assert.assertTrue;
 public class Check_In_Client_ICE extends BaseTest {
     MainPageOrg orgMainPage;
     String env;
-    private String legalFirstName = "Dacia";
-    private String legalLastName = "Bcvaxdod";
-    private String dateOfBirth = "May 19, 1904";
-    private String postalCode = "V7N3K1";
-    private String personalHealthNumber = "9746172456";
+    private String legalFirstName = "Courtnay";
+    private String legalLastName = "BCVaxGoncaves";
+    private String dateOfBirth = "Nov 29, 1949";
+    private String postalCode = "V3J3Y1";
+    private String personalHealthNumber = "9746172961";
 //    private String legalFirstName = "Ludovika";
 //    private String legalLastName = "BcvaxLimeburn";
 //    private String dateOfBirth = "Sep 21, 1923";
@@ -46,8 +46,12 @@ public class Check_In_Client_ICE extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+
         log("/*6.----Navigate to More -> Register --*/");
-        orgMainPage = loginPage.orgLoginAsClinicianICE();
+        loginPage.loginAsClerk();
+        orgMainPage = new MainPageOrg(driver);
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
             orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);

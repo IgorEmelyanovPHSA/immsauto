@@ -28,8 +28,9 @@ public class Dose1_E2E_Influenza extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as an Clinician to ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
-       // InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianInfluenzaICE();
+        loginPage.loginAsClerk();
+        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+                // InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianInfluenzaICE();
         Thread.sleep(10000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");

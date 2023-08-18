@@ -15,10 +15,6 @@ import java.util.Locale;
 
 public class ClinicInBoxPage extends BasePage {
 	/*---------Properties-------*/
-	@FindBy(xpath = ".//button[text() = 'Register New Citizen']")
-	private WebElement register_button;
-	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
-
 	@FindBy(xpath = ".//button[@aria-label = 'Search']")
 	private WebElement search_assistant;
 	@FindBy(xpath = ".//lightning-input[@class = 'saInput slds-grow slds-form-element']")
@@ -109,16 +105,27 @@ public class ClinicInBoxPage extends BasePage {
 	
 	/*-------------Methods--------------*/
 	public void clickRegisterButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, register_button, 10);
-		WebElement element = driver.findElement(register_button_1);
+		Thread.sleep(500);
+		By register_button_path = By.xpath("//button[text() = 'Register New Citizen']");
+		waitForElementToBeEnabled(driver, register_button_path, 10);
+		WebElement register_button = driver.findElement(register_button_path);
 		register_button.click();
 	}
 	
 	public void closeAllTabs() throws InterruptedException {
 		Thread.sleep(2000);
 		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
-		Thread.sleep(5000);
 		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+		int count = closeButtons.size();
+		int retry_count = 0;
+		while(count == 0) {
+			Thread.sleep(500);
+			closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+			retry_count++;
+			if(retry_count > 5) {
+				break;
+			}
+		}
 		for(WebElement closeTabBtn : closeButtons) {
 			try {
 				closeTabBtn.click();

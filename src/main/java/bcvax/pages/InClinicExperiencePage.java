@@ -166,21 +166,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 
-	@FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
-	private WebElement clinicLocationUserDefaults;
-
-	@FindBy(xpath = "//div[contains(text(),'Advanced Settings')]")
-	private WebElement btnAdvancedSettingsUserDefaults;
-
-	@FindBy(xpath = "(//span[@title='Agent']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[1]")
-	private WebElement agentUserDefaults;
-
-	@FindBy(xpath = "//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class']")
-	private WebElement lotUserDefaults;
-
-	@FindBy(xpath = "(//span[@title='Trade Name']/../../../../../../..//span[@class='slds-grid slds-grid_align-spread'])[2]")
-	private WebElement tradeNameUserDefaults;
-
 	@FindBy(xpath = ".//button[@aria-label = 'Route, Select an Option']")
 	private WebElement click_route_dropdown;
 
@@ -1061,6 +1046,32 @@ public class InClinicExperiencePage extends BasePage {
 		myAppointment.click();
 	}
 
+	public void clickTodayAppointmentCaseViewButton(String client_name) throws InterruptedException {
+		Thread.sleep(1000);
+
+		GenericTable today_Appointments = tables.getTodayAppointmentsTable();
+		int counter = 0;
+		while(today_Appointments.getRows().size() < 1) {
+			Thread.sleep(1000);
+			today_Appointments = tables.getTodayAppointmentsTable();
+			counter++;
+			if(counter > 5) {
+				break;
+			}
+		}
+		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
+		System.out.println("Found " + my_table.size() + "rows");
+		for (Map<String, WebElement> my_row: my_table) {
+			if(my_row.get("Profile Name").getText().equals(client_name)) {
+				WebElement my_view = my_row.get("View");
+				Thread.sleep(500);
+				scrollIfNeeded(driver, my_view);
+				my_view.click();
+				break;
+			}
+		}
+	}
+
 	public String selectConsentProvider() throws InterruptedException {
 		Thread.sleep(500);
 		By consent_provider_field_path = By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]");
@@ -1070,6 +1081,11 @@ public class InClinicExperiencePage extends BasePage {
 		scrollTop(consentProviderField);
 		Thread.sleep(500);
 		consentProviderField.click();
+		String provider = "Automation Clinician";
+		consentProviderField.sendKeys(provider);
+		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
+		waitForElementToBeLocated(driver, providerItemPath, 10);
+		driver.findElement(providerItemPath).click();
 		Thread.sleep(500);
 		try {
 			String consent_provider_selected = consentProviderSelected();

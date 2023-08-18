@@ -30,8 +30,9 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICE();
-        Thread.sleep(10000);
+        loginPage.loginAsClerk();
+        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+                Thread.sleep(10000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
         if (inClinicExperience.displayIceApp()) {

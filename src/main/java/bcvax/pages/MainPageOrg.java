@@ -13,11 +13,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 
 public class MainPageOrg extends BasePage {
-    @FindBy(xpath = "//h3[text()='Apps']")
-    private WebElement appsLauncherHeader;
-
-    @FindBy(xpath = "//span[text()='App Launcher']")
-    private WebElement appsLauncher;
     Tables tables;
     public MainPageOrg(WebDriver driver) {
         super(driver);
@@ -60,17 +55,29 @@ public class MainPageOrg extends BasePage {
     }
 
     public void switchApp(String app) throws InterruptedException {
+        String currentAppBefore = currentApp();
+        System.out.println("Current App Before: " + currentAppBefore);
         Thread.sleep(2000);
-        waitForElementToBeVisible(driver, appsLauncher, 60);
-        driver.findElement(By.xpath("//span[text()='App Launcher']/..")).click();
-        waitForElementToBeVisible(driver, appsLauncherHeader, 30);
-        driver.findElement(By.xpath("//input[@placeholder='Search apps and items...']")).sendKeys(app);
-        Thread.sleep(2000);
-        List<WebElement> apps = driver.findElements(By.xpath("//div[@class='al-menu-dropdown-list']//a"));
+        By apps_launcher_path = By.xpath("//div[@role='navigation' and @aria-label='App']//button");
+        waitForElementToBeEnabled(driver, apps_launcher_path, 60);
+        WebElement app_launcher = driver.findElement(apps_launcher_path);
+        app_launcher.click();
+        Thread.sleep(500);
+        By apps_launcher_input_path = By.xpath("//input[@placeholder='Search apps and items...']");
+        waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+
+        WebElement app_launcher_input = driver.findElement(apps_launcher_input_path);
+        app_launcher_input.sendKeys(app);
+        Thread.sleep(500);
+        By apps_items_path = By.xpath("//div[@class='al-menu-dropdown-list']//a");
+        waitForElementToBeEnabled(driver, apps_items_path, 10);
+        List<WebElement> apps = driver.findElements(apps_items_path);
+        System.out.println("Found " + apps.size() + " apps");
         for(WebElement appElement : apps) {
             if(StringEscapeUtils.unescapeHtml4(appElement.getAttribute("data-label")).equals(app)) {
                 WebElement myApp = appElement.findElement(By.xpath("./.."));
                 myApp.click();
+                Thread.sleep(2000);
                 List<String> windows = new ArrayList<String>(driver.getWindowHandles());
                 if(windows.size() > 1) {
                     driver.switchTo().window(windows.get(1));
@@ -90,6 +97,8 @@ public class MainPageOrg extends BasePage {
                 }
             }
         }
+        String currentAppAfter = currentApp();
+        System.out.println("Current App After: " + currentAppAfter);
     }
 
     public void closeAllTabs() throws InterruptedException {
