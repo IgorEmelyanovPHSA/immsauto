@@ -736,6 +736,7 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(1000);
 		WebElement action = tables.getSupplyContainerTable().getRowsMappedToHeadings().get(1).get("Actions");
 		action.click();
+		Thread.sleep(500);
 	}
 	@Step
 	public void selectTransferFromDropDown() throws InterruptedException {
@@ -789,13 +790,17 @@ public class SupplyConsolePage extends BasePage {
 
 	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double doses;
-		try {
-			doses = tables.getRemainingDoses(supplyContainer);
-		} catch(Exception ex) {
-			driver.navigate().refresh();
-			Thread.sleep(2000);
-			doses = tables.getRemainingDoses(supplyContainer);
+		double doses = 0;
+		int tries = 0;
+		while(tries < 10) {
+			try {
+				doses = tables.getRemainingDoses(supplyContainer);
+				break;
+			} catch (Exception ex) {
+				driver.navigate().refresh();
+				Thread.sleep(1000);
+				tries++;
+			}
 		}
 		return (doses);
 	}

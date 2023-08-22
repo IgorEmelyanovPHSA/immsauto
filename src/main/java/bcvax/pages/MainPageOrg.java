@@ -70,7 +70,17 @@ public class MainPageOrg extends BasePage {
         app_launcher_input.sendKeys(app);
         Thread.sleep(500);
         By apps_items_path = By.xpath("//div[@class='al-menu-dropdown-list']//a");
-        waitForElementToBeEnabled(driver, apps_items_path, 10);
+        try {
+            waitForElementToBeEnabled(driver, apps_items_path, 10);
+        } catch(Exception ex) {
+            app_launcher = driver.findElement(apps_launcher_path);
+            app_launcher.click();
+            waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+            app_launcher_input = driver.findElement(apps_launcher_input_path);
+            app_launcher_input.sendKeys(app);
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, apps_items_path, 10);
+        }
         List<WebElement> apps = driver.findElements(apps_items_path);
         System.out.println("Found " + apps.size() + " apps");
         for(WebElement appElement : apps) {
@@ -102,10 +112,18 @@ public class MainPageOrg extends BasePage {
     }
 
     public void closeAllTabs() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(500);
         waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
-        Thread.sleep(5000);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+        int counter = 0;
+        while(closeButtons.size() < 1) {
+            Thread.sleep(1000);
+            closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+            counter++;
+            if(counter > 5) {
+                break;
+            }
+        }
         for(WebElement closeTabBtn : closeButtons) {
             try {
                 closeTabBtn.click();

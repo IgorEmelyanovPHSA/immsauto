@@ -55,6 +55,7 @@ public class BookingDose2 extends BaseTest {
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
 		orgMainPage.closeAllTabs();
+		Thread.sleep(2000);
 		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();
 		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
@@ -88,7 +89,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*17.--toast success message - 'Success' --*/");
 		clinicInBox.successRegisteredMessageAppear();
 		log("/*18.----click on person Account Related Tab --*/");
-		clinicInBox.clickOnPersonAccountRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*19----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
 		try {
@@ -132,6 +133,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*32----click on In-clinic Experience button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		inClinicExperience.clickCheckInButton();
+		Thread.sleep(2000);
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		log("/*46.---Open Today's appointments from Home page --*/");
 
