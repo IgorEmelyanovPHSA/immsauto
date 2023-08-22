@@ -275,9 +275,6 @@ public class InClinicExperiencePage extends BasePage {
 	private WebElement validate_after_care_status_immunization_record_Pneumo;
 	private By validate_after_care_status_immunization_record_Pneumo_ = By.xpath("(.//lightning-base-formatted-text[text() = 'After Care'])[2]");
 
-	@FindBy(xpath = "//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']")
-	private WebElement check_in_button;
-
 	@FindBy(xpath = "//label[text() = 'Date']/../../../lightning-formatted-text")
 	private WebElement appointmentDate;
 
@@ -1607,16 +1604,25 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	public boolean checkInButtonAvailable() {
+	public boolean checkInButtonAvailable() throws  InterruptedException {
+		Thread.sleep(500);
+		By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
+		waitForElementToBeEnabled(driver, checkin_btn_path, 10);
+		WebElement check_in_button = driver.findElement(checkin_btn_path);
 		waitForElementToBeVisible(driver, check_in_button, 10);
 		return check_in_button.isDisplayed();
 	}
 
-	public void clickCheckInButton() {
+	public void clickCheckInButton() throws InterruptedException {
+		Thread.sleep(500);
+		By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
+		waitForElementToBeEnabled(driver, checkin_btn_path, 10);
+		WebElement check_in_button = driver.findElement(checkin_btn_path);
 		check_in_button.click();
 	}
 
-	public String getCurrentTab() {
+	public String getCurrentTab() throws InterruptedException {
+		Thread.sleep(500);
 		By myXpath = By.xpath("//div[@class='slds-col slds-size_1-of-3 slds-align_absolute-center step first-step current-step']");
 		waitForElementToBeLocated(driver, myXpath, 10);
 		WebElement currentTab = driver.findElement(myXpath);
@@ -1699,8 +1705,20 @@ public class InClinicExperiencePage extends BasePage {
 
 	}
 
-	public void setInformedConsentProvider  (String provider) throws InterruptedException{
-		driver.findElement(By.xpath("//label[text() = 'Informed Consent Provider (User)']/..//input")).sendKeys(provider);
+	public void setInformedConsentProvider  (String provider) throws InterruptedException {
+		Thread.sleep(500);
+		By informed_consent_provider_path = By.xpath("//label[text() = 'Informed Consent Provider (User)']/..//input");
+		By informed_consent_provider_clear_btn_path = By.xpath("//label[text() = 'Informed Consent Provider (User)']/..//button[@title='Clear Selection']");
+		waitForElementToBeEnabled(driver, informed_consent_provider_path, 10);
+		WebElement informed_consent_provider = driver.findElement(informed_consent_provider_path);
+		if(!informed_consent_provider.getAttribute("title").equals("")) {
+			WebElement informed_consent_provider_clear_btn = driver.findElement(informed_consent_provider_clear_btn_path);
+			scrollIfNeeded(driver, informed_consent_provider_clear_btn);
+			Thread.sleep(500);
+			informed_consent_provider_clear_btn.click();
+			Thread.sleep(500);
+		}
+		informed_consent_provider.sendKeys(provider);
 		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
 		waitForElementToBeLocated(driver, providerItemPath, 10);
 		driver.findElement(providerItemPath).click();

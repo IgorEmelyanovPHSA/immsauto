@@ -3,6 +3,7 @@ package bcvax.tests.Portal;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.junit.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +27,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
-
+    MainPageOrg orgMainPage;
     @BeforeMethod
     public void beforeMethod() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -70,7 +71,11 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         //Thread.sleep(5000);
         log("/*6.----Login as an Clinician to CIB --*/");
         ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
-
+        orgMainPage = new MainPageOrg(driver);
+        String currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+            orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+        }
         clinicInBox.verifyIsClinicInBoxPageDisplayed();
 
         log("/*6.1.----Close All previously opened Tab's --*/");

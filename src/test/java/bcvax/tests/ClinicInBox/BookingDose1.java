@@ -85,8 +85,7 @@ public class BookingDose1 extends BaseTest {
 		log("/*17.--toast success message - 'Success' --*/");
 		clinicInBox.successRegisteredMessageAppear();
 		log("/*18.----click on person Account Related Tab --*/");
-		clinicInBox.clickOnPersonAccountRelatedTab();
-
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.navigateToVaccineSchedulingTab();
 
@@ -129,6 +128,7 @@ public class BookingDose1 extends BaseTest {
 		log("/*35----click on In-clinic Experience button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		inClinicExperience.clickCheckInButton();
+		Thread.sleep(2000);
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		log("/*46.---Open Today's appointments from Home page --*/");
 
