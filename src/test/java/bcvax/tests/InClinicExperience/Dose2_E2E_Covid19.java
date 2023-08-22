@@ -65,6 +65,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		userDefaultsPage.inputCurrentDateUserDefaults();
+		Thread.sleep(2000);
 		userDefaultsPage.selectUserDefaultLocation(supplyLocationConsumption);
 		log("/*7.----- Click on Save defaults button --*/");
 		userDefaultsPage.clickBtnSave();
