@@ -1066,7 +1066,8 @@ public class InClinicExperiencePage extends BasePage {
 				Thread.sleep(500);
 				scrollIfNeeded(driver, my_view);
 				Thread.sleep(1000);
-				my_view.click();
+				WebElement my_button = my_view.findElement(By.xpath(".//button"));
+				my_button.click();
 				break;
 			}
 		}
