@@ -17,12 +17,50 @@ public class Return_CP extends BaseTest {
     MainPageCP cpMainPage;
     String supply_item = "FluMist-Tri - BK2024B";
     String lot_number = "BK2024B";
+    SupplyConsolePage supplyConsolePage;
     String supply_location = "Automation Supply Location_1";
     String supply_location_to = "Automation Supply Location_2";
     double doses = 100;
     String distribution_to = "Automation Supply Distribution_1_1";
     String reason_for_wastage = "CCI: Equipment Malfunction";
     String receiver_comment = "This is to test the Receiver Comment";
+
+    @BeforeMethod
+    public void setUpClass() throws Exception {
+        env = Utils.getTargetEnvironment();
+        log("Target Environment: " + env);
+        log("/*----Run Pre-conditions --*/");
+        testData = Utils.getTestData(env);
+        //Login as Admin
+        log("/*----Login as Admin --*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+
+        //Get Flu supplies using Receive Supplies feature
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
+        Thread.sleep(2000);
+        log("/*b.----Receive Supplies for Flu --*/");
+        supplyConsolePage.clickBtnReceiveSuppliesCP();
+        supplyConsolePage.clickSupplyItemTextBox();
+        supplyConsolePage.selectSupplyItem(supply_item);
+        supplyConsolePage.enterTransferDosages(Double.toString(doses));
+        //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
+        supplyConsolePage.selectIncomingSupplyDistributionReceive();
+        supplyConsolePage.selectReasonForReception();
+        supplyConsolePage.ClickSaveButton();
+
+        log("/*d.----Create Wastage for the Flu Container --*/");
+        //Create Wastage Record for Flu supply item
+        supplyConsolePage.clickOnContainerDropDownMenu(supply_item, distribution_to);
+        supplyConsolePage.selectWastageFromDropDown();
+
+        log("/*f.----Add Doses and Reason for Wastage --*/");
+        supplyConsolePage.setDosesAmount(Double.toString(doses));
+        supplyConsolePage.selectReasonForWastageDropDown();
+
+        log("/*g.----Click Wastage Button--*/");
+        supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
+        cpMainPage.logout();
+    }
 
     @Test()
     public void Validate_Return_Inventory_as_PPHIS() throws Exception {

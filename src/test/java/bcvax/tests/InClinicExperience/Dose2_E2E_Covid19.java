@@ -179,6 +179,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		//inClinicExperience.validateVaccineAdminPageOpen();
 
 		log("/*40.---Click confirm and Save Button --*/");
+		Thread.sleep(2000);
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 
 		log("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");

@@ -119,7 +119,7 @@ public class ClinicInBoxPage extends BasePage {
 		int count = closeButtons.size();
 		int retry_count = 0;
 		while(count == 0) {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
 			retry_count++;
 			if(retry_count > 5) {

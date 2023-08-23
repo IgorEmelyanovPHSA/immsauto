@@ -105,6 +105,9 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		log("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -284,6 +287,9 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		log("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
 		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -477,6 +483,9 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		log("/*14.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		///////////////////// Doses&Qty AFTER for the same Automation Location_1///////////////////////////////////
 		log("/*15.----Getting Remaining Doses/Remaining Quantity - AFTER - for the same Clinic --*/");
 		//// Supply Distribution_1_1 - containers#1 and #2, #3
