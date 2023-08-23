@@ -46,6 +46,7 @@ public class RequisitionCP extends BaseTest {
 
         System.out.println("/*----6. Navigate to Request Supplies --*/");
         supplyConsolePage.clickRequestSupplies();
+        Thread.sleep(2000);
         System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
         supplyConsolePage.selectShipped_From(supply_location_from);
         System.out.println("/*----9. Choose Requested Delivery Date --*/");
@@ -66,6 +67,7 @@ public class RequisitionCP extends BaseTest {
         supplyConsolePage.clickSaveButton();
         System.out.println("/*----15. Submit Requisition --*/");
         supplyConsolePage.clickSubmitRequisition();
+        Thread.sleep(1000);
         System.out.println("/*----16. Confirm and Save Requisition --*/");
         supplyConsolePage.clickSaveSubmitRequisition();
         System.out.println("/*----17. Click Edit Expected Delivery Date--*/");

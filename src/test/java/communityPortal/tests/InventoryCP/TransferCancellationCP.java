@@ -78,6 +78,9 @@ public class TransferCancellationCP extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		System.out.println("/*13.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		Thread.sleep(1000);
+		driver.navigate().refresh();
+		Thread.sleep(1000);
 		log("/---- Count and Validate Remaining Supplies After Transfer --*/");
 		double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
@@ -220,7 +223,9 @@ public class TransferCancellationCP extends BaseTest {
 		//tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
 		supplyConsolePage.cancelIncomingTransfer();
 		supplyConsolePage.clickOnRelatedItemTab();
-
+		Thread.sleep(1000);
+		driver.navigate().refresh();
+		Thread.sleep(1000);
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
 		double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
