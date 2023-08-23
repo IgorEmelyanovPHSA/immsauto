@@ -131,14 +131,8 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//*[@class='slds-icon slds-icon_large']")
 	private WebElement close_button_diwa;
 
-	@FindBy(xpath = "(//button[normalize-space()='Save Consent'])")
-	private WebElement save_consent_btn;
-
 	@FindBy(xpath = "(//button[normalize-space()='Continue Editing and Save'])")
 	private WebElement continue_editing_btn;
-
-	@FindBy(xpath = "(//button[@title='Confirm & Save Administration'])")
-	private WebElement confirm_save_adm_btn;
 
 	@FindBy(xpath = "//button[text()='Confirm']")
 	private WebElement confirm_admin_another_vaccine_modal_screen_btn;
@@ -1185,18 +1179,20 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void ClickSaveConsentButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, save_consent_btn, 10);
-		Thread.sleep(2000);
+		By save_consent_btn_path = By.xpath("//button[normalize-space()='Save Consent']");
+		waitForElementToBeEnabled(driver, save_consent_btn_path, 10);
+		WebElement save_consent_btn = driver.findElement(save_consent_btn_path);
+		scrollIfNeeded(driver, save_consent_btn);
+		Thread.sleep(1000);
 		save_consent_btn.click();
 	}
 
 	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1000)", "");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, confirm_save_adm_btn, 10);
+		By confirm_save_adm_btn_path = By.xpath("//button[@title='Confirm & Save Administration']");
+		waitForElementToBeEnabled(driver, confirm_save_adm_btn_path, 10);
+		WebElement confirm_save_adm_btn = driver.findElement(confirm_save_adm_btn_path);
+		scrollIfNeeded(driver, confirm_save_adm_btn);
+		Thread.sleep(1000);
 		confirm_save_adm_btn.click();
 	}
 
