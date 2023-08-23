@@ -157,9 +157,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//h2[text()='Container - Adjustment']/../..//button[(text()='Adjustment')]")
 	private WebElement btnAdjustmentOnContainerWastagePopUp;
 
-	@FindBy(xpath = "//button[contains(text(),'draft')]")
-	private WebElement btnSaveAsDraftOnContainerWastagePopUp;
-
 	@FindBy(xpath = "//button[text() = 'Wastage']")
 	private WebElement btnBulkWastageSupplyPage;
 
@@ -911,9 +908,13 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
-		scrollTop(btnSaveAsDraftOnContainerWastagePopUp);
-		click(btnSaveAsDraftOnContainerWastagePopUp);
-		Thread.sleep(2000); //To handle success message
+		Thread.sleep(500);
+		By save_draft_btn_path = By.xpath("//button[text()='Save as draft']");
+		waitForElementToBeEnabled(driver, save_draft_btn_path, 10);
+		WebElement btnSaveAsDraftOnContainerWastagePopUp = driver.findElement(save_draft_btn_path);
+		scrollIfNeeded(driver, btnSaveAsDraftOnContainerWastagePopUp);
+		Thread.sleep(500);
+		btnSaveAsDraftOnContainerWastagePopUp.click();
 	}
 
 	public void clickBulkWastageButton() throws InterruptedException {
