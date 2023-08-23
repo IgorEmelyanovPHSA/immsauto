@@ -125,7 +125,7 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
 		clinicInBox.clickRelatedTab();
-		log("/*35----click on In-clinic Experience button --*/");
+		log("/*35----click on Check-In button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		inClinicExperience.clickCheckInButton();
 		Thread.sleep(2000);

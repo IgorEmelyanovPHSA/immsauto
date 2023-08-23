@@ -497,7 +497,15 @@ public class SupplyConsolePage extends BasePage {
 		WebElement transactions_tab = driver.findElement(transactions_tab_path);
 		scrollTop(transactions_tab);
 		Thread.sleep(500);
-		transactions_tab.click();
+		int counter = 0;
+
+		try {
+			transactions_tab.click();
+		} catch(Exception ex) {
+			System.out.println("Exception: " + ex.getMessage());
+			Thread.sleep(2000);
+			transactions_tab.click();
+		}
 	}
 
 	public int getRowsOutgoingTransactionsCount() throws InterruptedException {
@@ -564,19 +572,19 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(int value) throws InterruptedException {
-		Thread.sleep(200);
+		Thread.sleep(500);
 		By draft_transaction_element_path = By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + value + "]");
 		waitForElementToBeEnabled(driver, draft_transaction_element_path, 10);
 		WebElement draft_transaction_element = driver.findElement(draft_transaction_element_path);
 		scrollTop(draft_transaction_element);
 		draft_transaction_element.click();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		By transfer_draft_btn_path = By.xpath("//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']");
 		waitForElementToBeEnabled(driver, transfer_draft_btn_path, 10);
 		WebElement transfer_draft_btn = driver.findElement(transfer_draft_btn_path);
 		scrollTop(transfer_draft_btn);
 		transfer_draft_btn.click();
-		Thread.sleep(200);
+		Thread.sleep(500);
 		By transfer_transaction_btn_path = By.xpath("//button[text() = 'Transfer Transactions']");
 		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
 		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
@@ -1110,6 +1118,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickBtnReceiveSuppliesCP() throws InterruptedException {
+		Thread.sleep(500);
 		By receive_supplies_btn_path = By.xpath("//*[@title='Receive Supplies']");
 		try {
 			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);

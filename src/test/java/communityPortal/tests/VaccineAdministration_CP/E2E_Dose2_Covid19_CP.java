@@ -55,7 +55,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*3.----- Click on User Defaults Tab --*/");
         cpMainPage.clickUserDefaultsTab();
-
+        Thread.sleep(2000);
         log("/*4.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
         userDefaultPage.inputCurrentDateUserDefaults();

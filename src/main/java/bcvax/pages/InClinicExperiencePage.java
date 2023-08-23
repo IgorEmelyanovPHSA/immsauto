@@ -1032,6 +1032,8 @@ public class InClinicExperiencePage extends BasePage {
 		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"]");
 		waitForElementToBeEnabled(driver, today_appointments_path, 10);
 		WebElement todayAppointments = driver.findElement(today_appointments_path);
+		scrollIfNeeded(driver, todayAppointments);
+		Thread.sleep(500);
 		todayAppointments.click();
 	}
 
@@ -1063,6 +1065,7 @@ public class InClinicExperiencePage extends BasePage {
 				WebElement my_view = my_row.get("View");
 				Thread.sleep(500);
 				scrollIfNeeded(driver, my_view);
+				Thread.sleep(1000);
 				my_view.click();
 				break;
 			}
@@ -1080,6 +1083,7 @@ public class InClinicExperiencePage extends BasePage {
 		consentProviderField.click();
 		String provider = "Automation Clinician";
 		consentProviderField.sendKeys(provider);
+		Thread.sleep(1000);
 		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
 		waitForElementToBeLocated(driver, providerItemPath, 10);
 		driver.findElement(providerItemPath).click();
