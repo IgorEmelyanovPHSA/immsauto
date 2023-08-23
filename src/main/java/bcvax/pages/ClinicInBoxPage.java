@@ -132,6 +132,9 @@ public class ClinicInBoxPage extends BasePage {
 				Thread.sleep(2000);
 			} catch (Exception ex) {
 				System.out.println(ex.getMessage());
+				AlertDialog.closeAllAlerts(driver);
+				Thread.sleep(500);
+				closeTabBtn.click();
 			}
 		}
 	}
