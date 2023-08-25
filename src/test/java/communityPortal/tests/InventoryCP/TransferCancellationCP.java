@@ -205,8 +205,9 @@ public class TransferCancellationCP extends BaseTest {
 
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
-
+		Thread.sleep(2000);
 		supplyConsolePage.refreshBrowser();
+		Thread.sleep(2000);
 		supplyConsolePage.clickTransactionsTab();
 
 		System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
