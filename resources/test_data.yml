@@ -9,7 +9,7 @@ bcvaxdevit:
   containerFrom: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-03 16:20:35)"
   containerToSameClinic: "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:04 a.m)"
-  containerConsumption: "COMIRNATY (Pfizer) - EL1404 (2023-06-12 14:46:11)"
+  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2022-08-05 08:49 a.m)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-02 03:11 p.m)"
     - "Pfizer mRNA BNT162b2 - EK4241 (2022-08-02 09:03 a.m)"
@@ -27,7 +27,7 @@ bcvaxdevit:
   siteConsumption: "Arm - Right deltoid"
   agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
-  consumptionLot: "EL1404"
+  consumptionLot: "35035BD-CC01"
   diwaCitizen: "Rawley BCVaxIsmirnioglou"
   useDefaultSettingsLots:
     - "016F21A-CC07"
