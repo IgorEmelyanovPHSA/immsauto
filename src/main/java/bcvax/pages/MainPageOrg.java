@@ -150,7 +150,7 @@ public class MainPageOrg extends BasePage {
         WebElement search_btn = driver.findElement(search_btn_path);
         search_btn.click();
         Thread.sleep(500);
-        By search_field_path = By.xpath("//input[@lightning-input_input and @type='search']");
+        By search_field_path = By.xpath("//div[@class='forceSearchAssistantDialog']//input[@type='search']");
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_input = driver.findElement(search_field_path);
         try {
@@ -161,7 +161,7 @@ public class MainPageOrg extends BasePage {
             search_input.sendKeys(search_value);
         }
         Thread.sleep(500);
-        By found_client_path = By.xpath("//span[@search_dialog-instantresultitem_instantresultitem and @title=\"" + search_value + "\"]");
+        By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
         waitForElementToBeEnabled(driver, found_client_path, 10);
         WebElement found_client = driver.findElement(found_client_path);
         scrollTop(found_client);

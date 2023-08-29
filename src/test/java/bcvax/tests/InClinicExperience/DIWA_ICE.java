@@ -71,7 +71,12 @@ public class DIWA_ICE extends BaseTest {
 		mainPageOrg = new MainPageOrg(driver);
 		String currentApp = mainPageOrg.currentApp();
 		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			try {
+				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			} catch(Exception ex) {
+				Thread.sleep(5000);
+				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			}
 		}
 
 		//log("/*3.----In Clinic Experience(ICE) page displayed --*/");

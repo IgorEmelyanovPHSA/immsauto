@@ -126,8 +126,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = ".//h1[text() = 'Oops...']")
 	private WebElement vlidate_oops_message;
 
-	@FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
-	private WebElement show_all_lot_numbers_checkbox;
 	@FindBy(xpath = "//*[@class='slds-icon slds-icon_large']")
 	private WebElement close_button_diwa;
 
@@ -236,9 +234,6 @@ public class InClinicExperiencePage extends BasePage {
 	private By select_dosage_field1 = By.xpath("//button[@name='dosePicklist']");
 
 	private By select_dosage1 = By.xpath("//span[@title='0.5']");
-
-	@FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
-	private WebElement saveAgain;
 
 	@FindBy(xpath = "//button[@title='Confirm & Save Administration']")
 	private WebElement confirmAndSave;
@@ -1536,7 +1531,11 @@ public class InClinicExperiencePage extends BasePage {
 
 
 	public void saveImmunizationInformation() throws InterruptedException {
-		saveAgain.click();
+		By save_immunization_btn_path = By.xpath("//div[@c-bchcimmunizationinfo_bchcimmunizationinfo]/lightning-button[@c-bchcimmunizationinfo_bchcimmunizationinfo]/button[@type='submit' and text()='Save']");
+		waitForElementToBeEnabled(driver, save_immunization_btn_path, 10);
+		WebElement save_immunization_btn = driver.findElement(save_immunization_btn_path);
+		scrollIfNeeded(driver, save_immunization_btn);
+		save_immunization_btn.click();
 	}
 
 	public void confirmAndSaveAdministration() throws InterruptedException {
@@ -1548,10 +1547,12 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickShowAllLotNumbersCheckBox() throws InterruptedException {
-		waitForElementToBeVisible(driver, show_all_lot_numbers_checkbox, 10);
-		Thread.sleep(2000);
+		By show_all_chkbox_path = By.xpath("//span[@part='label' and text()='Show all lot numbers.']/../..");
+		waitForElementToBeEnabled(driver, show_all_chkbox_path, 10);
+		WebElement show_all_lot_numbers_checkbox = driver.findElement(show_all_chkbox_path);
+		scrollIfNeeded(driver, show_all_lot_numbers_checkbox);
+		Thread.sleep(1000);
 		show_all_lot_numbers_checkbox.click();
-		Thread.sleep(2000);
 	}
 
 	public void clickToClose() throws InterruptedException {
@@ -1652,7 +1653,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public String consentProviderSelected() throws InterruptedException {
 		Thread.sleep(500);
-		By providerFieldPath = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[@lightning-basecombobox_basecombobox]");
+		By providerFieldPath = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]");
 		waitForElementToBeEnabled(driver, providerFieldPath, 10);
 		WebElement consent_provider_selected = driver.findElement(providerFieldPath);
 		return consent_provider_selected.getAttribute("data-value");
