@@ -86,10 +86,6 @@ public class ProfilesPage extends BasePage{
 
     private By select_dosage1 = By.xpath("//span[@title='0.5']");
 
-    @FindBy(xpath = "//label[contains(text(),'Site')]/../../../..//button[@type='submit']")
-    private WebElement saveAgain;
-    private By saveAgain1 = By.xpath("//label[contains(text(),'Site')]/../../../..//button[@type='submit']");
-
     private By UserDetailsHomePage1 = By.xpath("//lightning-formatted-name[@class='slds-form-element__static']");
 
     private By save_button_historical_dose_vaccineAdmin1 = By.xpath("(//button[contains(text(),'Save')])[2]");
@@ -351,11 +347,12 @@ public class ProfilesPage extends BasePage{
     }
 
     public void clickShowAllLotNumbersCheckBox() throws InterruptedException {
-        waitForElementToBeVisible(driver, show_all_lot_numbers_checkbox, 10);
-        scrollTop(show_all_lot_numbers_checkbox);
-        Thread.sleep(2000);
+        By show_all_chkbox_path = By.xpath("//span[@part='label' and text()='Show all lot numbers.']/../..");
+        waitForElementToBeEnabled(driver, show_all_chkbox_path, 10);
+        WebElement show_all_lot_numbers_checkbox = driver.findElement(show_all_chkbox_path);
+        scrollIfNeeded(driver, show_all_lot_numbers_checkbox);
+        Thread.sleep(1000);
         show_all_lot_numbers_checkbox.click();
-        Thread.sleep(2000);
     }
 
     public void clickLotNumberDropDown() throws InterruptedException {
@@ -404,9 +401,11 @@ public class ProfilesPage extends BasePage{
     }
 
     public void saveImmunizationInformation() throws InterruptedException {
-        waitForElementToBeLocated(driver, saveAgain1, 10);
-        Thread.sleep(2000);
-        saveAgain.click();
+        By save_immunization_btn_path = By.xpath("//div[@c-bchcimmunizationinfo_bchcimmunizationinfo]/lightning-button[@c-bchcimmunizationinfo_bchcimmunizationinfo]/button[@type='submit' and text()='Save']");
+        waitForElementToBeEnabled(driver, save_immunization_btn_path, 10);
+        WebElement save_immunization_btn = driver.findElement(save_immunization_btn_path);
+        scrollIfNeeded(driver, save_immunization_btn);
+        save_immunization_btn.click();
     }
 
     public void confirmAndSaveAdministration() throws InterruptedException {

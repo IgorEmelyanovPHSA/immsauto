@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +19,15 @@ public class AddAppointmentDays extends BaseTest {
     @Test()
     public void createAppointmentDays() throws Exception {
         String appointment_date = "2023-8-27";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
+
+        LocalDate start_date = LocalDate.parse("2023-8-28", dtf);
+        LocalDate end_date = LocalDate.parse("2023-9-2", dtf);
+        ArrayList<String> appointment_dates = new ArrayList();
+        for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
+        {
+            appointment_dates.add(my_appointment_date.format(dtf));
+        }
         //String appointment_type = "COVID-19 Vaccination";
         String appointment_type = "BC Immunization Program";
 
@@ -50,22 +61,24 @@ public class AddAppointmentDays extends BaseTest {
         orgMainPage.switchApp("Appointment Day Management");
         AppointmentDayManagementPage appointment_day_page = new AppointmentDayManagementPage(driver);
         appointment_day_page.selectShowAllAppointmentDays();
-        for(int i = 0; i < providers.size(); i++){
-            Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_date, appointment_type, (String)providers.get(i).get("provider"));
-            if (my_row.size() > 0) {
-                WebElement my_name_link = my_row.get("Name");
-                BasePage.scrollIfNeeded(driver, my_name_link);
-                Thread.sleep(500);
-                my_name_link.click();
-            } else {
-                appointment_day_page.addAppointmentDay();
-                appointment_day_page.fillUpNewAppointmentDay(appointment_name, (String)providers.get(i).get("provider"), (String)providers.get(i).get("address_id"), appointment_date, (String)providers.get(i).get("appointment_city"), appointment_type, localization);
+        for(int d = 0; d < appointment_dates.size(); d++) {
+            for (int i = 0; i < providers.size(); i++) {
+                Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_dates.get(d), appointment_type, (String) providers.get(i).get("provider"));
+                if (my_row.size() > 0) {
+                    WebElement my_name_link = my_row.get("Name");
+                    BasePage.scrollIfNeeded(driver, my_name_link);
+                    Thread.sleep(500);
+                    my_name_link.click();
+                } else {
+                    appointment_day_page.addAppointmentDay();
+                    appointment_day_page.fillUpNewAppointmentDay(appointment_name, (String) providers.get(i).get("provider"), (String) providers.get(i).get("address_id"), appointment_dates.get(d), (String) providers.get(i).get("appointment_city"), appointment_type, localization);
+                }
+                appointment_day_page.selectAppointmentDayRelatedTab();
+                appointment_day_page.addAppointmentTime();
+                Thread.sleep(10000);
+                orgMainPage.closeLastTab();
+                Thread.sleep(2000);
             }
-            appointment_day_page.selectAppointmentDayRelatedTab();
-            appointment_day_page.addAppointmentTime();
-            Thread.sleep(10000);
-            orgMainPage.closeLastTab();
-            Thread.sleep(2000);
         }
         System.out.println("Here");
     }

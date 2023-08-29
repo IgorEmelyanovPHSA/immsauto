@@ -440,7 +440,7 @@ public class SupplyConsolePage extends BasePage {
 	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
 		log(" -- select 'To' " + supplyLocation + "  -");
 		Thread.sleep(500);
-		By search_supplu_location_path = By.xpath("//label[@lightning-groupedcombobox_groupedcombobox and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
+		By search_supplu_location_path = By.xpath("//label[@class='slds-form-element__label' and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
 		waitForElementToBeEnabled(driver, search_supplu_location_path, 30);
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
@@ -770,24 +770,18 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public Double getValueOfRemainingQuantity() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, get_remaining_quantity1, 10);
-		WebElement element = driver.findElement(get_remaining_quantity1);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
+		By remaining_quantity_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Remaining_Quantity__c']//lightning-formatted-number");
+		waitForElementToBeEnabled(driver, remaining_quantity_path, 10);
+		WebElement element = driver.findElement(remaining_quantity_path);
 		String Quantity = element.getText();
 		Double doses = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (doses);
 	}
 
 	public Double getValueOfRemainingDoses() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, get_remaining_doses_, 10);
-		WebElement element = driver.findElement(get_remaining_doses_);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
+		By remaining_dose_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Remaining_Measures__c']//lightning-formatted-number");
+		waitForElementToBeEnabled(driver, remaining_dose_path, 10);
+		WebElement element = driver.findElement(remaining_dose_path);
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
@@ -1420,10 +1414,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public double getDoseConversionFactorReceive() throws InterruptedException {
-		WebElement element = driver.findElement(get_dose_conversion_factor1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		return Double.parseDouble(element.getText());
+		By dose_conversion_factor_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Product_Measure__c']//lightning-formatted-number");
+		waitForElementToBeEnabled(driver, dose_conversion_factor_path, 10);
+		WebElement element = driver.findElement(dose_conversion_factor_path);
+		String dose_conversion_factor_string = element.getText();
+		Double dose_conversion_factor = Double.parseDouble(dose_conversion_factor_string.replaceAll(",", ""));
+		return (dose_conversion_factor);
 	}
 	public double getDoseConversionFactorOnReceive() {
 		waitForElementToBePresent(driver, get_dose_conversion_factor2, 10);

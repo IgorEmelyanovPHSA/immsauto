@@ -16,7 +16,7 @@ public class ForwardReturnDialog {
 
     public static String getOriginalSupplyLocation(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By original_supply_location_path = By.xpath("//div[@class='modal-container slds-modal__container']//p[contains(text(), 'Original Supply Location:')]");
+        By original_supply_location_path = By.xpath("//div[@class='runtime_platform_actionsQuickActionWrapper']//p[contains(text(), 'Original Supply Location:')]");
         BasePage.waitForElementToBeEnabled(driver, original_supply_location_path, 10);
         WebElement original_supply_location = driver.findElement(original_supply_location_path);
         String supply_location = original_supply_location.getText().split(": ")[1];
@@ -25,7 +25,7 @@ public class ForwardReturnDialog {
 
     public static String getReturnedTo(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By returned_to_path = By.xpath("//div[@class='modal-container slds-modal__container']//input[@lightning-basecombobox_basecombobox]");
+        By returned_to_path = By.xpath("//lightning-base-combobox[@class='slds-combobox_container']//input[@class='slds-combobox__input slds-input']");
         BasePage.waitForElementToBeEnabled(driver, returned_to_path, 10);
         WebElement returned_to_field = driver.findElement(returned_to_path);
         String returned_to_value = returned_to_field.getAttribute("data-value");
