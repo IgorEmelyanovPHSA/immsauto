@@ -155,8 +155,8 @@ public class LoginPage extends BasePage {
 
 	public CallCenterConsolePage loginAsCalCenterAgentCC() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT_CC"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CALLCENTERAGENT_PW_CC"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CALLCENTERAGENT_PW"));
 		click(login_button);
 		return new CallCenterConsolePage(driver);
 	}
