@@ -94,9 +94,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Confirm_in_dropdown;
 	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
 
-	@FindBy(xpath = ".//a/span[text() = 'Cancel Transfer']")
-	private WebElement drdCancel;
-
 	@FindBy(xpath = ".//*[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
 	private By click_on_related_item_tab_1 = By.xpath(".//*[text() = 'Related Items']");
@@ -282,7 +279,12 @@ public class SupplyConsolePage extends BasePage {
 			Thread.sleep(1000);
 			driver.findElement(By.xpath("//span[@class='menuLabel slds-listbox__option-text slds-listbox__option-text_entity' and text() = 'Supply Locations']")).click();
 		}
-		supply_locations_tab.click();
+		try {
+			supply_locations_tab.click();
+		} catch(ElementClickInterceptedException ex) {
+			Thread.sleep(5000);
+			supply_locations_tab.click();
+		}
 		boolean loaded = false;
 		while(!loaded) {
 			try {
@@ -500,7 +502,7 @@ public class SupplyConsolePage extends BasePage {
 			transactions_tab.click();
 		} catch(Exception ex) {
 			System.out.println("Exception: " + ex.getMessage());
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			transactions_tab.click();
 		}
 	}
@@ -695,6 +697,22 @@ public class SupplyConsolePage extends BasePage {
 		select_incoming_supply_distributor.click();
 	}
 
+	public void selectIncomingSupplyDistribution(String distribution) throws InterruptedException {
+		Thread.sleep(500);
+		By search_incoming_supply_distributor_path = By.xpath(".//span[text() = 'Select Supply Distributor']");
+		waitForElementToBeEnabled(driver, search_incoming_supply_distributor_path, 10);
+		WebElement search_incoming_supply_distributor = driver.findElement(search_incoming_supply_distributor_path);
+		scrollTop(search_incoming_supply_distributor, false);
+		Thread.sleep(500);
+		search_incoming_supply_distributor.click();
+		Thread.sleep(500);
+		By select_incoming_supply_distributor_path = By.xpath("//span[contains(text(), '" + distribution + "')]");
+		waitForElementToBeEnabled(driver, select_incoming_supply_distributor_path, 10);
+		WebElement select_incoming_supply_distributor = driver.findElement(select_incoming_supply_distributor_path);
+		select_incoming_supply_distributor.click();
+	}
+
+
 	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
 		Thread.sleep(500);
@@ -765,7 +783,12 @@ public class SupplyConsolePage extends BasePage {
 		WebElement transfer_item = driver.findElement(transfer_dropdawn_item_path);
 		scrollTop(transfer_item);
 		Thread.sleep(500);
-		transfer_item.click();
+		try {
+			transfer_item.click();
+		} catch(ElementNotInteractableException ex) {
+			Thread.sleep(5000);
+			transfer_item.click();
+		}
 		Thread.sleep(500);
 	}
 
@@ -806,7 +829,19 @@ public class SupplyConsolePage extends BasePage {
 
 	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double quantity = tables.getRemainingQty(supplyContainer);
+		double quantity = 0;
+		int tries = 0;
+		while(tries < 10) {
+			try {
+				quantity = tables.getRemainingQty(supplyContainer);
+				break;
+			} catch (Exception ex) {
+				driver.navigate().refresh();
+				Thread.sleep(1000);
+				tries++;
+			}
+		}
+
 		return (quantity);
 	}
 
@@ -1034,20 +1069,24 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
-		waitForElementToBeVisible(driver, drdCancel, 10);
-		scrollTop(drdCancel);
-		click(drdCancel);
+		Thread.sleep(500);
+		By drd_cancel_btn_path = By.xpath("//a/span[text() = 'Cancel Transfer']");
+		waitForElementToBeEnabled(driver, drd_cancel_btn_path, 10);
+		WebElement drd_cance_btn = driver.findElement(drd_cancel_btn_path);
+		scrollIfNeeded(driver, drd_cance_btn);
+		Thread.sleep(500);
+		drd_cance_btn.click();
 	}
 
 	public void clickOnRelatedItemTab() throws InterruptedException {
-		//scroll up
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+		Thread.sleep(500);
+		By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
+		waitForElementToBeEnabled(driver, related_tab_path, 10);
+		WebElement related_tab = driver.findElement(related_tab_path);
+		scrollTop(driver, related_tab, false);
+		Thread.sleep(500);
+		related_tab.click();
 		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, click_on_related_item_tab_1, 10);
-		Thread.sleep(1000);
-		WebElement element = driver.findElement(click_on_related_item_tab_1);
-		Thread.sleep(2000);
-		click_on_related_item_tab.click();
 	}
 
 	public void selectSameClinicSupplyDistribution() throws InterruptedException {

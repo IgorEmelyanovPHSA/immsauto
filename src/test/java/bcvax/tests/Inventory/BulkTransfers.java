@@ -193,7 +193,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*25----click Confirm Incoming button Transfer --*/");
 		supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-		supplyConsolePage.selectIncomingSupplyDistribution();
+		supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
@@ -369,7 +369,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*25----click Confirm Incoming button Transfer --*/");
 		supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-		supplyConsolePage.selectIncomingSupplyDistribution();
+		supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");

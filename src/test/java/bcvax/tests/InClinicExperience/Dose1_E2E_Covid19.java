@@ -218,9 +218,9 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		}
 
 		log("/*43.---select Dosage ->  -.5 --*/");
-		//if(!lot.equals(consumptionLot)) {
-		//	inClinicExperience.setLotNumber(consumptionLot);
-		//}
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperience.setLotNumber(consumptionLot);
+		}
 		String dose = inClinicExperience.getDosage();
 
 		if(!dose.equals(consumptionDose)) {

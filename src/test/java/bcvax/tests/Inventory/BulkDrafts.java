@@ -25,6 +25,9 @@ public class BulkDrafts extends BaseTest {
     String env;
     Map<String, Object> testData;
     String supply_location_to;
+    String supply_distribution_from;
+    String supply_distribution_to;
+    String supply_distribution_to_same_clinic;
 
     @BeforeMethod
     public void setUpClass() throws Exception {
@@ -33,6 +36,9 @@ public class BulkDrafts extends BaseTest {
         testData = Utils.getTestData(env);
         supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
         supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+        supply_distribution_from = String.valueOf(testData.get("distributionFrom"));
+        supply_distribution_to = String.valueOf(testData.get("distributionTo"));
+        supply_distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
     }
 
     @Test
@@ -161,7 +167,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
 
         log("/*23.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectIncomingSupplyDistribution(supply_distribution_to);
 
         log("/*24.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();

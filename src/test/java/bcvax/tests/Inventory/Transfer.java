@@ -122,7 +122,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
         supplyConsolePage.selectConfirmIncomingDropDown();
         System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
         System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
         System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
@@ -229,7 +229,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
         supplyConsolePage.selectConfirmIncomingDropDown();
         System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
         System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
         System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
