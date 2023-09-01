@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
@@ -20,14 +21,23 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class BulkDraftsCP extends BaseTest {
-
+    String env;
     private final String supplyLocationFrom = SUPPLY_LOCATION_1;
     private final String supplyLocationTo = SUPPLY_LOCATION_2;
+    String distribution_from;
+    String distribution_to;
+    String distribution_to_same_clinic;
+    Map<String, Object> testData;
 
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
         //TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        distribution_from = String.valueOf(testData.get("distributionFrom"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
+        distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
@@ -143,7 +153,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
 
         log("/*20.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 
         log("/*21.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();

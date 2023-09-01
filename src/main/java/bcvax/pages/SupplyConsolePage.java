@@ -697,6 +697,22 @@ public class SupplyConsolePage extends BasePage {
 		select_incoming_supply_distributor.click();
 	}
 
+	public void selectIncomingSupplyDistribution(String distribution) throws InterruptedException {
+		Thread.sleep(500);
+		By search_incoming_supply_distributor_path = By.xpath(".//span[text() = 'Select Supply Distributor']");
+		waitForElementToBeEnabled(driver, search_incoming_supply_distributor_path, 10);
+		WebElement search_incoming_supply_distributor = driver.findElement(search_incoming_supply_distributor_path);
+		scrollTop(search_incoming_supply_distributor, false);
+		Thread.sleep(500);
+		search_incoming_supply_distributor.click();
+		Thread.sleep(500);
+		By select_incoming_supply_distributor_path = By.xpath("//span[contains(text(), '" + distribution + "')]");
+		waitForElementToBeEnabled(driver, select_incoming_supply_distributor_path, 10);
+		WebElement select_incoming_supply_distributor = driver.findElement(select_incoming_supply_distributor_path);
+		select_incoming_supply_distributor.click();
+	}
+
+
 	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
 		Thread.sleep(500);
