@@ -216,9 +216,9 @@ public class Consumption extends BaseTest {
 		if(site.equals("")) {
 			inClinicExperiencePage.setSite(consumptionSite);
 		}
-		//if(!lot.equals(consumptionLot)) {
-		//	inClinicExperiencePage.setLotNumber(consumptionLot);
-		//}
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperiencePage.setLotNumber(consumptionLot);
+		}
 		String dose = inClinicExperiencePage.getDosage();
 		if(!dose.equals(consumptionDose)) {
 			inClinicExperiencePage.setDosage(consumptionDose);

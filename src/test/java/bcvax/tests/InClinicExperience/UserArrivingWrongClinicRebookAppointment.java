@@ -248,9 +248,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		}
 
 		log("/*43.---select Dosage ->  -.5 --*/");
-		//if(!lot.equals(consumptionLot)) {
-		//	inClinicExperiencePage.setLotNumber(consumptionLot);
-		//}
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperiencePage.setLotNumber(consumptionLot);
+		}
 		String dose = inClinicExperiencePage.getDosage();
 
 		if(!dose.equals(consumptionDose)) {
