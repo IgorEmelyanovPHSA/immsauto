@@ -1071,7 +1071,7 @@ public class InClinicExperiencePage extends BasePage {
 		scrollTop(consentProviderField);
 		Thread.sleep(500);
 		consentProviderField.click();
-		String provider = "Clerk Auto";
+		String provider = "Auto Bchcomclinician";
 		consentProviderField.sendKeys(provider);
 		Thread.sleep(1000);
 		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");

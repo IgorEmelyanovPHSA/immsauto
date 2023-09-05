@@ -13,16 +13,23 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class BulkWastagesCP extends BaseTest {
 
+	Map<String, Object> testData;
+	String env;
+	String supply_location_from;
 	@Test()
 	public void CP_Can_Do_Bulk_Wastage_By_Dosages() throws Exception {
 		//TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		int amountOfDosesToWaste = 1;
@@ -42,7 +49,7 @@ public class BulkWastagesCP extends BaseTest {
 		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.selectSupplyLocationName(supply_location_from);
 		
 		log("/*3.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -125,6 +132,9 @@ public class BulkWastagesCP extends BaseTest {
 	public void CP_Can_Do_Bulk_Wastage_ByQuantity() throws Exception {
 		//TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		int amountOfQuantityToWaste = 1;
@@ -143,14 +153,13 @@ public class BulkWastagesCP extends BaseTest {
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
-		cpMainPage.navigateToSupplyConsolePage();
+		cpMainPage.selectSupplyLocationName(supply_location_from);
 
 		log("/*3.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
 		log("/*---     count:" + countSupplyContainers);
 
 		log("/*4.----Click on Container's records Checkboxes --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		if (countSupplyContainers >= 3) {
 			int k = 1;
 			while (k <= 3) {

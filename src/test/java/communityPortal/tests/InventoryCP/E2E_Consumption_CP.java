@@ -211,9 +211,9 @@ public class E2E_Consumption_CP extends BaseTest {
         }
 
         log("/*43.---select Dosage ->  -.5 --*/");
-        //if(!lot.equals(consumptionLot)) {
-        //    inClinicExperience_CP.setLotNumber(consumptionLot);
-        //}
+        if(!lot.equals(consumptionLot)) {
+            inClinicExperience_CP.setLotNumber(consumptionLot);
+        }
         String dose = inClinicExperience_CP.getDosage();
 
         if(!dose.equals(consumptionDose)) {

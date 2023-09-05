@@ -81,14 +81,14 @@ public class DraftsCP extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
 
         log("/*9.----Entering Doses amount, select supply location and Save as Draft -*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust)).
-                draftToDistributionWithinSameClinic(supply_location_from, SUPPLY_DISTRIBUTION_1_2);
+        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        supplyConsolePage.draftToDistributionWithinSameClinic(supply_location_from, distribution_to_same_clinic);
 
         log("/*10.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -182,7 +182,7 @@ public class DraftsCP extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
@@ -198,7 +198,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -323,7 +323,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -423,7 +423,7 @@ public class DraftsCP extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
         supplyConsolePage.selectTransferFromDropDown();
@@ -439,7 +439,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
