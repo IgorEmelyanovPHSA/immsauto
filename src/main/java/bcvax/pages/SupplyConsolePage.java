@@ -447,14 +447,18 @@ public class SupplyConsolePage extends BasePage {
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
 		searchSupplyLocationCombobox.sendKeys(supplyLocation);
-		Thread.sleep(2000);
 		log(" -- Start typing into Search Combobox  -");
 		By supplyLocationItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title='" + supplyLocation + "']");
 		waitForElementToBeEnabled(driver, supplyLocationItemPath, 10);
 		WebElement supplyLocationItem = driver.findElement(supplyLocationItemPath);
 		scrollTop(supplyLocationItem, true);
 		log(" -- Drop down with supply required Supply location appeared  -");
-		supplyLocationItem.click();
+		try {
+			supplyLocationItem.click();
+		} catch(Exception ex) {
+			searchSupplyLocationCombobox.click();
+			supplyLocationItem.click();
+		}
 		//Probable delay when select supply location causing teh javascript error
 		Thread.sleep(2000);
 		log(" -- Selected Supply location successfully  -");
@@ -1080,7 +1084,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnRelatedItemTab() throws InterruptedException {
 		Thread.sleep(500);
-		By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
+		By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related Items']");
 		waitForElementToBeEnabled(driver, related_tab_path, 10);
 		WebElement related_tab = driver.findElement(related_tab_path);
 		scrollTop(driver, related_tab, false);

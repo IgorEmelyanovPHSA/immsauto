@@ -205,10 +205,10 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         }
 
         log("/*43.---select Dosage ->  -.5 --*/");
-        //if(!lot.equals(consumptionLot)) {
-        //    inClinicExperience_CP.setLotNumber(consumptionLot);
-        //}
-        //Thread.sleep(2000);
+        if(!lot.equals(consumptionLot)) {
+            inClinicExperience_CP.setLotNumber(consumptionLot);
+        }
+        Thread.sleep(2000);
         String dose = inClinicExperience_CP.getDosage();
 
         if(!dose.equals(consumptionDose)) {

@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
@@ -26,7 +27,9 @@ public class BulkAdjustmentsCP extends BaseTest {
     public static Object[][] primeNumbers() {
         return new Object[][]{{"50"}, {"-30"}};
     }
-
+    Map<String, Object> testData;
+    String env;
+    String supply_location_from;
     @DataProvider(name = "quantitiesAmount")
     public static Object[][] primeNumbers2() {
         return new Object[][]{{"3"},{"-2"}};
@@ -36,12 +39,16 @@ public class BulkAdjustmentsCP extends BaseTest {
     public void CP_Can_Do_Bulk_Adjustment_ByDosages_Positive_And_Negative_Value_AS_Clinician(String value) throws Exception {
         //TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+
         AllureLifecycle lifecycle = Allure.getLifecycle();
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToAdjust = Double.parseDouble(value);
         boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
         String reasonForAdjustment = "Administered Vaccine";
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
 
         if (isNegativeFlag == false) {
             log("/*0.----Positive Scenario: Can_Do_Bulk_Adjustment_ByDosages_Positive_Value_AS_PPHIS--*/");
@@ -63,11 +70,10 @@ public class BulkAdjustmentsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "243120"; //C243120
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
@@ -152,13 +158,15 @@ public class BulkAdjustmentsCP extends BaseTest {
     public void CP_Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantity) throws Exception {
         //TestcaseID = "223360"; //C223360
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
         AllureLifecycle lifecycle = Allure.getLifecycle();
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfQuantityToAdjust = Double.parseDouble(quantity);
         boolean isNegativeFlag = isNegative(amountOfQuantityToAdjust);
         String reasonForAdjustment = "Administered Vaccine";
-
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
         if (isNegativeFlag == false) {
             log("/*0.----Positive Scenario: Can_Do_Bulk_Adjustment_ByQuantities_Positive_Value_AS_PPHIS--*/");
             lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Bulk_Adjustment_ByQuantities_Positive_Value_AS_PPHIS"));
@@ -178,11 +186,10 @@ public class BulkAdjustmentsCP extends BaseTest {
                 log("Login AS default user (ClinicianInventory)");
                 TestcaseID = "243120"; //C243120
                 loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();

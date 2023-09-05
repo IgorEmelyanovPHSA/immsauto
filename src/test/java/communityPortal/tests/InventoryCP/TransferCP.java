@@ -420,5 +420,6 @@ public class TransferCP extends BaseTest {
 		}
 		Thread.sleep(3000);
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+		supplyConsolePage.clickOnRelatedItemTab();
 	}
 }

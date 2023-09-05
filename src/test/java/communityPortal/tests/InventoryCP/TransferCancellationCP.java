@@ -260,5 +260,6 @@ public class TransferCancellationCP extends BaseTest {
 			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
 		}
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+		supplyConsolePage.clickOnRelatedItemTab();
 	}
 }
