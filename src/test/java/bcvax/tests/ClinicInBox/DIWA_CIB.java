@@ -14,6 +14,12 @@ public class DIWA_CIB extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
+	private String legalFirstName = "Rawley";
+	private String legalLastName = "BCVaxIsmirnioglou";
+	private String legalMiddleName = "Marijo";
+	private String personal_health_nunber = "9746173039";
+	private String date_of_birth = "1959-01-23";
+	private String postal_code = "V2X9T1";
 	//String participant_name = "Rawley BCVaxIsmirnioglou";
 	//String participant_name = "Ping an Penelope BCVaxZhang";
 	String participant_name;
@@ -72,7 +78,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 		String consentProvider = profilesPage.consentProviderSelected();
 		Thread.sleep(2000);
-		String myConsentProvider = "Clinician Auto CIB";
+		String myConsentProvider = "Auto Bchcomclinician";
 		if(consentProvider.equals("")) {
 			consentProvider = profilesPage.selectConsentProvider(myConsentProvider);
 			try {

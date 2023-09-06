@@ -11,13 +11,18 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 public class DIWA_Covid19_CP extends BaseTest {
-
+    private String legalFirstName = "John";
+    private String legalLastName = "BCVaxChan";
+    private String legalMiddleName = "Yuan bo";
+    private String personal_health_nunber = "9746170785";
+    private String date_of_birth = "1934-02-28";
+    private String postal_code = "V2T0N1";
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         //TestcaseID = "223187"; //C223187
         log("Target Environment: "+ Utils.getTargetEnvironment());
         CommonMethods commonMethods = new CommonMethods(getDriver());
-        String nameToSearch = "Yuan bo BCVaxChan";
+        String nameToSearch = "John Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
 
         MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -90,7 +95,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         profilesPage.ContinueEditingButton();
 
         log("/*---15. select date of Administration ---*/");
-        if (profilesPage.selectDateOfAdministration())
+        if (profilesPage.selectConsentEffectiveDate())
             Thread.sleep(3000);
 
         log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
