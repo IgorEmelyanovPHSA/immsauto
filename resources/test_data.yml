@@ -63,7 +63,7 @@ prodsuppqa:
   agentConsumption: "COVID-19 mRNA"
   consumptionDose: "0.3"
   consumptionLot: "EK4241"
-  diwaCitizen: "Rawley BCVaxIsmirnioglou"
+  diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
   useDefaultSettingsLots:
     - "016F21A-CC07"
     - "T005729-CC07"

@@ -1462,21 +1462,6 @@ public class InClinicExperiencePage extends BasePage {
 		saveConsentButton.click();
 	}
 
-	public void selectInformedConsentProvider(String Provider) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informed_consent_provider_dropdown);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, informed_consent_provider_dropdown, 10);
-		Thread.sleep(2000);
-		informed_consent_provider_dropdown.click();
-		Thread.sleep(5000);
-		informed_consent_provider_dropdown.sendKeys(Provider);
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, select_inform_consent_provider, 10);
-		Thread.sleep(5000);
-		select_inform_consent_provider.click();
-		Thread.sleep(2000);
-	}
-
 	public void clickLotNumberDropDown() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_lot_number_dropdown);
 		Thread.sleep(2000);

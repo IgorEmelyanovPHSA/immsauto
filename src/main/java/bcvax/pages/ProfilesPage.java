@@ -35,7 +35,8 @@ public class ProfilesPage extends BasePage{
 
     @FindBy(xpath = ".//input[@data-id = 'userinput']")
     private WebElement search_clinic;
-    @FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]")
+    //@FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]")
+    @FindBy(xpath = "//lightning-input[@class='dateCmp slds-form-element']/lightning-datepicker")
     private WebElement inputDate;
     @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
     private WebElement recordImmunizationBtn;
@@ -60,9 +61,6 @@ public class ProfilesPage extends BasePage{
 
     @FindBy(xpath = "//span[@class='slds-listbox__option-text slds-listbox__option-text_entity']//lightning-base-combobox-formatted-text")
     private WebElement select_inform_consent_provider;
-
-    @FindBy(xpath = "//button[contains(text(),'Save Consent')]")
-    private WebElement saveConsentButton;
 
     @FindBy(xpath = "//SPAN[@lightning-input_input=''][text()='Show all lot numbers.']/preceding-sibling::SPAN")
     private WebElement show_all_lot_numbers_checkbox;
@@ -243,77 +241,91 @@ public class ProfilesPage extends BasePage{
     }
 
     public boolean selectDateOfAdministration() throws InterruptedException {
-        By inputDateFieldPath = By.xpath("(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]");
-        waitForElementToBePresent(driver, inputDateFieldPath, 10);
-//        if (!isInputActive(inputDate)) {
-//            return false;
-//        }
+        Thread.sleep(500);
+        By input_date_field_path = By.xpath("//label[text()='Date of Administration']/../..");
+        waitForElementToBeEnabled(driver, input_date_field_path, 10);
+        WebElement input_date_field = driver.findElement(input_date_field_path);
+        Calendar calendar = Calendar.getInstance();
+        //calendar.add(Calendar.DATE, -1);
+        Date today = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+        String todayAsString = dateFormat.format(today);
+        input_date_field.sendKeys(todayAsString);
+        Thread.sleep(500);
+        //input_date_field.sendKeys(Keys.ENTER);
+        return true;
+    }
+
+    public boolean selectConsentEffectiveDate() throws InterruptedException {
+        By input_consent_date_field_path = By.xpath("//label[text()='Consent Effective To Date']/../..");
+        waitForElementToBeEnabled(driver, input_consent_date_field_path, 10);
+        WebElement input_consent_date_field = driver.findElement(input_consent_date_field_path);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
         Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", inputDate);
-        waitForElementToBeVisible(driver, inputDate, 10);
+        scrollIfNeeded(driver, input_consent_date_field);
         String todayAsString = dateFormat.format(today);
-        waitForElementToBeVisible(driver, inputDate, 10);
-        this.inputDate.click();
+        input_consent_date_field.sendKeys(todayAsString);
         Thread.sleep(2000);
-        this.inputDate.sendKeys(todayAsString);
-        Thread.sleep(2000);
-        this.inputDate.sendKeys(Keys.ENTER);
+        input_consent_date_field.sendKeys(Keys.ENTER);
         return true;
     }
-
-    public void selectInformedConsentProvider(String Provider) throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", informed_consent_provider_dropdown);
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, informed_consent_provider_dropdown, 10);
-        Thread.sleep(2000);
-        informed_consent_provider_dropdown.click();
-        Thread.sleep(5000);
-        informed_consent_provider_dropdown.sendKeys(Provider);
-        Thread.sleep(5000);
-        waitForElementToBeVisible(driver, select_inform_consent_provider, 10);
-        Thread.sleep(5000);
-        select_inform_consent_provider.click();
-        Thread.sleep(2000);
-    }
-
     public String consentProviderSelected() {
-        By providerFieldPath = By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]");
+        By providerFieldPath = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]");
         waitForElementToBeLocated(driver, providerFieldPath, 10);
         return driver.findElement(providerFieldPath).getAttribute("data-value");
     }
 
     public String selectConsentProvider() throws InterruptedException {
-        WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
+        WebElement consentProviderField = driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]"));
         scrollTop(consentProviderField);
         consentProviderField.click();
         Thread.sleep(2000);
         try {
             driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
         } catch(Exception ex) {
-            driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
+            driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]")).click();
             Thread.sleep(2000);
             driver.findElement(By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']")).click();
         }
         Thread.sleep(2000);
-        return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
+        return driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
     }
 
     public String selectConsentProvider(String consentProvider) throws InterruptedException {
-        WebElement consentProviderField = driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]"));
-        scrollTop(consentProviderField);
-        consentProviderField.click();
-        Thread.sleep(1000);
-        consentProviderField.sendKeys(consentProvider);
         Thread.sleep(500);
-        By consent_provider_value_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
-        waitForElementToBeEnabled(driver, consent_provider_value_path, 10);
-        WebElement consent_provider_value = driver.findElement(consent_provider_value_path);
-        consent_provider_value.click();
+        By consent_provider_field_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]");
+        By consent_provider_item_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
+        waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
+        WebElement consentProviderField = driver.findElement(consent_provider_field_path);
+        scrollTop(consentProviderField);
+        Thread.sleep(500);
+        consentProviderField.click();
+        consentProviderField.sendKeys(consentProvider);
+        Thread.sleep(1000);
+        By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + consentProvider + "']");
+        waitForElementToBeLocated(driver, providerItemPath, 10);
+        driver.findElement(providerItemPath).click();
+        Thread.sleep(500);
+        try {
+            String consent_provider_selected = consentProviderSelected();
+            if(consent_provider_selected.equals("")) {
+                waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
+                driver.findElement(consent_provider_item_path).click();
+            }
+        } catch(Exception ex) {
+            System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
+            waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
+            consentProviderField = driver.findElement(consent_provider_field_path);
+            scrollTop(consentProviderField);
+            consentProviderField.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
+            driver.findElement(consent_provider_item_path).click();
+        }
         Thread.sleep(2000);
-        return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
+        return driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
     }
 
     public void confirmConsentProvider(String consentPorvider) throws InterruptedException {
@@ -324,9 +336,12 @@ public class ProfilesPage extends BasePage{
     }
 
     public void clickSaveConsent() throws InterruptedException {
-        waitForElementToBeVisible(driver, saveConsentButton, 10);
-        scrollTop(saveConsentButton);
-        saveConsentButton.click();
+        Thread.sleep(500);
+        By save_consent_btn_path = By.xpath("//button[text()='Save Consent']");
+        waitForElementToBeEnabled(driver, save_consent_btn_path, 10);
+        WebElement save_consent_btn = driver.findElement(save_consent_btn_path);
+        scrollIfNeeded(driver, save_consent_btn);
+        save_consent_btn.click();
     }
 
     public void selectImmunizingAgentProvider(String provider) throws InterruptedException {

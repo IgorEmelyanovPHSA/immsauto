@@ -13,6 +13,9 @@ public class Historical_Immunization extends BaseTest {
 
 	private String legalFirstName = "Rochester";
 	private String legalLastName = "BCVaxStonbridge";
+	private String personal_health_nunber = "9746173132";
+	private String date_of_birth = "Apr 20, 1945";
+	private String postal_code = "V1Y8U9";
 	private String legalMiddleName = "Sheelagh";
 	private String pirSubmissionField = "Submitted";
 	private String patwayStatusFieldValidation = "Pathway Status";
