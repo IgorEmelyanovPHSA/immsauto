@@ -65,8 +65,8 @@ prodsuppqa:
   consumptionLot: "EK4241"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
   useDefaultSettingsLots:
-    - "016F21A-CC07"
-    - "T005729-CC07"
+    - "ABZ5320-CC01"
+    - "TL0006"
 comunityqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
