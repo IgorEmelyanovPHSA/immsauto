@@ -257,7 +257,7 @@ public class TransferCancellationCP extends BaseTest {
 			cpMainPage.clickGoToUserDefaultsButton();
 		} else {
 			log("/*1.----Login to CP (newUI) as Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+			cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 		}
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 		supplyConsolePage.clickOnRelatedItemTab();

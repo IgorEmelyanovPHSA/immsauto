@@ -35,9 +35,9 @@ public class WastageCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
-				log("Login AS default user (ClinicianInventory)");
+				log("Login as Clinician");
 				TestcaseID = "243116"; //C243116
-				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				loginPage.loginIntoCommunityPortalAsClinician();
 		}
 
 		log("/2.----Navigate to Supply Console Page --*/");
@@ -147,9 +147,9 @@ public class WastageCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
-				log("Login AS default user (ClinicianInventory)");
+				log("Login as Clinician");
 				TestcaseID = "243116"; //C243116
-				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				loginPage.loginIntoCommunityPortalAsClinician();
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");

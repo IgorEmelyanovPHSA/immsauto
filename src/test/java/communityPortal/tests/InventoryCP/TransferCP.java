@@ -415,8 +415,8 @@ public class TransferCP extends BaseTest {
 			cpMainPage = new MainPageCP(driver);
 			cpMainPage.clickGoToUserDefaultsButton();
 		} else {
-			log("/*1.----Login to CP (newUI) as Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+			log("/*1.----Login As Clinician --*/");
+			cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 		}
 		Thread.sleep(3000);
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
