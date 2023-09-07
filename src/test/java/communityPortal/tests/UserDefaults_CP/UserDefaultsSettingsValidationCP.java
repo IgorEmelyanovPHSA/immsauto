@@ -18,8 +18,8 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         TestcaseID = "222176"; //C222176
         log("Target Environment: " + Utils.getTargetEnvironment());
 
-        log("/*1.----Login --*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+        log("/*1.----Login as Clinician --*/");
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         Thread.sleep(10000);
 
         log("/*2.----- Navigate to User Defaults Tab --*/");

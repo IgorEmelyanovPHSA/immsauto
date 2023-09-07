@@ -57,9 +57,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login AS default user (ClinicianInventory)");
+                log("Login as Clinician");
                 TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -155,9 +155,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login AS default user (ClinicianInventory)");
+                log("Login as Clinician");
                 TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
@@ -279,9 +279,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login AS default user (ClinicianInventory)");
+                log("Login as Clinician");
                 TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
@@ -396,9 +396,9 @@ public class DraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login AS default user (ClinicianInventory)");
+                log("Login as Clinician");
                 TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();

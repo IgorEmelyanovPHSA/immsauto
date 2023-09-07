@@ -42,9 +42,9 @@ public class BulkWastagesCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
-				log("Login AS default user (ClinicianInventory)");
+				log("Login as Clinician");
 				TestcaseID = "243121"; //C243121
-				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				loginPage.loginIntoCommunityPortalAsClinician();
 		}
 		log("TestRail test case ID: C" +TestcaseID);
 
@@ -147,9 +147,9 @@ public class BulkWastagesCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
-				log("Login AS default user (ClinicianInventory)");
+				log("Login as Clinician");
 				TestcaseID = "243121"; //C243121
-				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				loginPage.loginIntoCommunityPortalAsClinician();
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
