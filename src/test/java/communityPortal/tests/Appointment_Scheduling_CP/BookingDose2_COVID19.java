@@ -29,8 +29,8 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
-        log("/*1.----Login as a Clerk to Community Portal --*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClerk();
+        log("/*1.----Login as Clinician to Community Portal --*/");
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();

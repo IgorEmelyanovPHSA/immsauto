@@ -50,9 +50,9 @@ public class BulkDraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login AS default user (ClinicianInventory)");
+                log("Login as Clinician");
                 TestcaseID = "245220"; //C245220
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");

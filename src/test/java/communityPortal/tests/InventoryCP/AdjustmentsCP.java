@@ -58,9 +58,9 @@ public class AdjustmentsCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
-				log("Login AS default user (ClinicianInventory)");
+				log("Login as Clinician");
 				TestcaseID = "243117"; //C243117
-				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				loginPage.loginIntoCommunityPortalAsClinician();
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
@@ -173,9 +173,9 @@ public class AdjustmentsCP extends BaseTest {
 				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
 				break;
 			default:
-				log("Login AS default user (ClinicianInventory)");
+				log("Login as Clinician");
 				TestcaseID = "243117"; //C243117
-				loginPage.loginIntoCommunityPortalAsClinicianInventory();
+				loginPage.loginIntoCommunityPortalAsClinician();
 		}
 
 		log("/*2.----Navigate to Supply Console Page --*/");
