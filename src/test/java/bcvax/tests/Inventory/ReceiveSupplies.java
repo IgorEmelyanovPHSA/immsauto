@@ -19,7 +19,7 @@ public class ReceiveSupplies extends BaseTest {
 	String supply_container = "COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)";
 	Map<String, Object> testData;
 	MainPageOrg orgMainPage;
-	String supply_item = "COMIRNATY (Pfizer) - 35035BD-CC01";
+	String supply_item = "COMIRNATY (Pfizer) - EK4241";
 
 	@BeforeMethod
 	public void setUpClass() throws Exception {
@@ -93,8 +93,8 @@ public class ReceiveSupplies extends BaseTest {
 		Assert.assertEquals((supplyItem), (expectedSupplyItemLabel));
 		log("/*-- 21. click to select the Supply Item --*/");
 		supplyConsolePage.clickSupplyItemTextBox();
-		log("/*-- 22. Select Supply Item COMIRNATY (Pfizer) - 35035BD-CC01  --*/");
-		supplyConsolePage.selectSupplyItem("COMIRNATY (Pfizer) - 35035BD-CC01");
+		log("/*-- 22. Select Supply Item COMIRNATY (Pfizer) - EK4241  --*/");
+		supplyConsolePage.selectSupplyItem(supply_item);
 		Thread.sleep(2000);
 		log("/*-- 23. Validate Quantity Filed Present on Layout --*/");
 		String qty = supplyConsolePage.validateQTYField();
