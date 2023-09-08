@@ -64,8 +64,8 @@ public class DIWA_ICE extends BaseTest {
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
-				log("Login AS comunityqa_org_immsbc_admin");
+				loginPage.loginAsImmsBCAdmin();
+				log("Login as ImmsBCAdmin");
 				TestcaseID = "244854"; //C244854
 				break;
 			default:
