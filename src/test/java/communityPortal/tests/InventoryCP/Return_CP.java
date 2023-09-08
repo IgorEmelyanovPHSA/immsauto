@@ -33,7 +33,7 @@ public class Return_CP extends BaseTest {
         testData = Utils.getTestData(env);
         //Login as Admin
         log("/*----Login as Admin --*/");
-        cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         //Get Flu supplies using Receive Supplies feature
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
@@ -74,9 +74,9 @@ public class Return_CP extends BaseTest {
                 loginPage.loginAsImmsBCAdminICE();
                 break;
             default:
-                log("Login AS default user (PPHIS)");
+                log("Login as Clinician");
                 TestcaseID = "261523";
-                cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();;
+                cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         }
 
         log("/*4. ----Open Supply Location " + supply_location + " --*/");

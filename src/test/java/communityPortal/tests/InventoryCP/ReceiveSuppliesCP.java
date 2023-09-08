@@ -32,7 +32,8 @@ public class ReceiveSuppliesCP extends BaseTest {
 		env = Utils.getTargetEnvironment();
 		log("Target Environment: " + env);
 		testData = Utils.getTestData(env);
-		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+		log("Login as Clinician");
+		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 		tables = loginPage.getTables();
 		vaccine = String.valueOf(testData.get("containerTo"));
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");

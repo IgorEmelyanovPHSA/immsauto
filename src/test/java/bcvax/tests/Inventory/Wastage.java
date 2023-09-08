@@ -78,7 +78,6 @@ public class Wastage extends BaseTest {
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.selectSupplyLocationName(supply_location_from);
-		Thread.sleep(5000);
 		
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -114,7 +113,9 @@ public class Wastage extends BaseTest {
 
 		//Verification values in Container - Wastage pop-up
 		assertEquals((remainingDosesBeforeWastage - amountOfDosesToWaste), remainingDosesAfterWastage);
-		
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
@@ -211,7 +212,6 @@ public class Wastage extends BaseTest {
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
 		supplyConsolePage.selectSupplyLocationName(supply_location_from);
-		Thread.sleep(5000);
 
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -249,6 +249,9 @@ public class Wastage extends BaseTest {
 		assertEquals((remainingDosesBeforeWastage - amountOfDosesToWaste), remainingDosesAfterWastage);
 
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*11.----Calculating Remaining Doses And Quantity After Deduction --*/");

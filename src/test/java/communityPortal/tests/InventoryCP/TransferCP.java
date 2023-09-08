@@ -123,7 +123,7 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
 		supplyConsolePage.selectConfirmIncomingDropDown();
 		System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
-		supplyConsolePage.selectIncomingSupplyDistribution();
+		supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 		System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 		System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
@@ -230,7 +230,7 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
 		supplyConsolePage.selectConfirmIncomingDropDown();
 		System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
-		supplyConsolePage.selectIncomingSupplyDistribution();
+		supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 		System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 		System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
@@ -415,10 +415,11 @@ public class TransferCP extends BaseTest {
 			cpMainPage = new MainPageCP(driver);
 			cpMainPage.clickGoToUserDefaultsButton();
 		} else {
-			log("/*1.----Login to CP (newUI) as Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsInventoryClinician();
+			log("/*1.----Login As Clinician --*/");
+			cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 		}
 		Thread.sleep(3000);
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+		supplyConsolePage.clickOnRelatedItemTab();
 	}
 }

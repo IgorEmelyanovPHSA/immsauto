@@ -46,8 +46,6 @@ public class Drafts extends BaseTest {
 
     @Test()
     public void Can_Do_Single_Draft_ByDosages_Within_The_Same_Clinic() throws Exception {
-        String container_from = String.valueOf(testData.get("containerFrom"));
-        String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#1 save draft and transfer after");
         double amountOfDosesToAdjust = 10;
@@ -83,21 +81,17 @@ public class Drafts extends BaseTest {
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.selectSupplyLocationName(supply_location_from);
-        //CommonMethods common = new CommonMethods(driver);
+
         log("/*4.----Get a matching row for first row Lot number --*/");
         //int matchedRow = common.getMatchedRowToLotInRow1();
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        //double[] remDosesQtyConversionFactorBefore_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
-
         double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        //double[] remDosesQtyConversionFactorBefore_Distribution_1_2 = common.getRemainingDosesQtyAndConversionFactor(matchedRow);
 
         double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
@@ -107,7 +101,7 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
         Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
@@ -130,7 +124,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*12.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*13.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -139,8 +133,8 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
 
+        supplyConsolePage.clickTransactionsTab();
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
         String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
@@ -151,7 +145,9 @@ public class Drafts extends BaseTest {
 
         log("/*18----Navigate to Related Item tab --*/");
         supplyConsolePage.clickOnRelatedItemTab();
-
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         //double[] remDosesQtyConversionFactorAfter_Distribution_1_1 = common.getRemainingDosesQtyAndConversionFactor(firstRow);
 
@@ -241,7 +237,7 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
         Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
@@ -264,7 +260,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*12.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*13.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -287,7 +283,9 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*18.1----Refresh Page to get doses/quantities updated--*/");
-        supplyConsolePage.refreshBrowser();
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -375,7 +373,7 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*8.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
         Thread.sleep(500);
         log("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
@@ -399,7 +397,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);;
 
         log("/*13.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*14.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -420,7 +418,9 @@ public class Drafts extends BaseTest {
 
         log("/*19----Navigate to Related Item tab --*/");
         supplyConsolePage.clickOnRelatedItemTab();
-
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         log("/*20----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
             log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
@@ -500,7 +500,7 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
         Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
@@ -523,7 +523,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 
         log("/*12.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSameClinicSupplyDistribution();
+        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
 
         log("/*13.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -544,7 +544,9 @@ public class Drafts extends BaseTest {
 
         log("/*18----Navigate to Related Item tab --*/");
         supplyConsolePage.clickOnRelatedItemTab();
-
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);

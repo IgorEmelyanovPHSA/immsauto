@@ -2,6 +2,7 @@ package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
 import bcvax.pages.MainPageOrg;
+import bcvax.pages.ProfilesPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
 import bcvax.pages.Utils;
@@ -24,6 +25,12 @@ public class DIWA_ICE extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	String citizenName;
+	private String legalFirstName = "Rawley";
+	private String legalLastName = "BCVaxIsmirnioglou";
+	private String legalMiddleName = "Marijo";
+	private String personal_health_nunber = "9746173039";
+	private String date_of_birth = "1959-01-23";
+	private String postal_code = "V2X9T1";
 	@Test()
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
 		env = Utils.getTargetEnvironment();
@@ -71,7 +78,12 @@ public class DIWA_ICE extends BaseTest {
 		mainPageOrg = new MainPageOrg(driver);
 		String currentApp = mainPageOrg.currentApp();
 		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			try {
+				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			} catch(Exception ex) {
+				Thread.sleep(5000);
+				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			}
 		}
 
 		//log("/*3.----In Clinic Experience(ICE) page displayed --*/");
@@ -82,50 +94,55 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
 		mainPageOrg.globalSearch(citizenName);
-
-		//inClinicExperience.SearchForCitizenAlternativeWay(citizenName);
-
-		//inClinicExperience.userClickCitizen(citizenName);
-		//Thread.sleep(4000);
+		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
-		inClinicExperience.clickRelatedTab();
-		log("/*-- 8. Create Immunization Record Button is Present on Layout --*/");
-		inClinicExperience.ValidateCreateImmunizationRecordButtonIsDisplayed();
+		profilesPage.clickRelatedTab();
 		log("/*----9. Click to Create Immunization Record Button ---*/");
-		inClinicExperience.clickCreatImmunizationRecord();
+		profilesPage.clickCreateImmunizationRecord();
 		log("/*----10. Click confirm Button on the popup window---*/");
-		inClinicExperience.clickConfirmButton();
+		profilesPage.clickConfirmButton();
 		log("/*----11. Select an Option from the DropDown ---*/)");
-		inClinicExperience.clickSelectAnOptionDropdown();
+		profilesPage.clickSelectAnOptionDropdown();
 		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
-		inClinicExperience.selectOption("COVID19-mRNA");
+		profilesPage.selectOption("COVID19-mRNA");
 		log("/*----13. Enter a Clinic Location: " +clinicLocation +"---*/");
-		inClinicExperience.searchClinicLocation(clinicLocation);
+		profilesPage.searchClinicLocation(clinicLocation);
 		log("/*---14. Select a Date and Time of Administration ---*/");
-		inClinicExperience.clickTimeBox();
+		profilesPage.clickTimeBox();
 		log("/*---15. Click Record Immunization ---*/");
-		inClinicExperience.clickRecordImmunization();
+		profilesPage.clickRecordImmunization();
 		Thread.sleep(2000);
-		if (inClinicExperience.clickPopupYesButtonIfDisplayed())
+		if (profilesPage.clickPopupYesButtonIfDisplayed())
 			log("/*---15.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---16. Click X button on Diwa flow ---*/");
 		Thread.sleep(2000);
-		inClinicExperience.clickToClose();
+		profilesPage.clickToClose();
 		log("/*---17. Validate message on clicking close button on modal popup ---*/");
-		inClinicExperience.validateoopsMessage();
+		profilesPage.validateoopsMessage();
 		log("/*---18. click on continue editing button to continue with the flow ---*/");
-		inClinicExperience.ContinueEditingButton();
-		log("/*---19. select date of Administration ---*/");
-		inClinicExperience.selectDateOfAdministration();
-		String  informed_consent_provider = "Clinician ICE Automation";
-		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-		inClinicExperience.setInformedConsentProvider(informed_consent_provider);
-
-		log("/*---21. click Save Consent ---*/");
-		inClinicExperience.clickSaveConsent();
+		profilesPage.ContinueEditingButton();
+		String consentProvider = profilesPage.consentProviderSelected();
 		Thread.sleep(2000);
+		String myConsentProvider = "Auto Bchcomclinician";
+		if(consentProvider.equals("")) {
+			consentProvider = profilesPage.selectConsentProvider(myConsentProvider);
+			try {
+				profilesPage.confirmConsentProvider(myConsentProvider);
+			} catch(Exception ex) {
+				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
+			}
+		}
+
+		profilesPage.selectConsentEffectiveDate();
+		log("/*---21. click Save Consent ---*/");
+		profilesPage.clickSaveConsent();
+		Thread.sleep(2000);
+
 		log("/*---22. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-		inClinicExperience.setProvider(informed_consent_provider);
+		//log("/*---19. select date of Administration ---*/");
+		//profilesPage.selectDateOfAdministration();
+		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
+		profilesPage.selectImmunizingAgentProvider(consentProvider);
 
 		log("/*---23. Click Show all lot numbers Checkbox---*/");
 		inClinicExperience.clickShowAllLotNumbersCheckBox();

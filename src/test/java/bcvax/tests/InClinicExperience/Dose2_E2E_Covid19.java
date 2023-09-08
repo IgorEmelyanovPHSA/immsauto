@@ -200,10 +200,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*42.---Click Save Consent Button --*/");
 		inClinicExperience.ClickSaveConsentButton();
-		//String lot = inClinicExperience.getLotNumber();
-		//if(!lot.equals(consumptionLot)) {
-		//	inClinicExperience.setLotNumber(consumptionLot);
-		//}
+		String lot = inClinicExperience.getLotNumber();
+		if(!lot.equals(consumptionLot)) {
+			inClinicExperience.setLotNumber(consumptionLot);
+		}
 
 		String provider =  inClinicExperience.getProvider();
 		if(!provider.equals(consentProvider)) {

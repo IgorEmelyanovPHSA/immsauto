@@ -26,7 +26,7 @@ public class ReturnPage extends BasePage {
 
     public String getReturnStatus() throws InterruptedException {
         Thread.sleep(500);
-        By return_status_path = By.xpath("//span[@class='test-id__field-label' and text()='Status']/../..//lightning-formatted-text[@slot='outputField']"
+        By return_status_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Status__c']//lightning-formatted-text[@slot='outputField']"
                 .concat(" | ")
                 .concat("//span[@class='test-id__field-label' and text()='Status']/../../div[@class='slds-form-element__control slds-grid itemBody']/span/span"));
         waitForElementToBeEnabled(driver, return_status_path, 10);
@@ -40,9 +40,9 @@ public class ReturnPage extends BasePage {
 
     public String getReturnedFromValue() throws InterruptedException {
         Thread.sleep(500);
-        By return_from_path = By.xpath("//span[@class='test-id__field-label' and text()='Returned From']/../..//a[@records-hoverablelink_hoverablelink]//span[@force-lookup_lookup]"
+        By return_from_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_From__c']//a//span"
                 .concat(" | ")
-                .concat("//span[@class='test-id__field-label' and text()='Returned From']/../..//a[@data-aura-class='forceOutputLookup']"));
+                .concat("//span[@class='test-id__field-label' and text()='Returned From']//a"));
         waitForElementToBeEnabled(driver, return_from_path, 10);
         WebElement return_from = driver.findElement(return_from_path);
         return return_from.getText();
@@ -102,9 +102,9 @@ public class ReturnPage extends BasePage {
 
     public String getReturnedToValue() throws InterruptedException {
         Thread.sleep(500);
-        By return_to_path = By.xpath("//span[@class='test-id__field-label' and text()='Returned To']/../..//a[@records-hoverablelink_hoverablelink]//span[@force-lookup_lookup]"
+        By return_to_path = By.xpath("//span[@class='test-id__field-label' and text()='Returned To']/../..//a//span[@force-lookup_lookup]"
                 .concat(" | ")
-                .concat("//span[@class='test-id__field-label' and text()='Returned To']/../..//a[@data-aura-class='forceOutputLookup']"));
+                .concat("//span[@class='test-id__field-label' and text()='Returned To']/../..//a"));
         waitForElementToBeEnabled(driver, return_to_path, 10);
         WebElement return_to = driver.findElement(return_to_path);
         return return_to.getText();

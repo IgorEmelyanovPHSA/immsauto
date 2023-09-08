@@ -94,9 +94,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement select_Confirm_in_dropdown;
 	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
 
-	@FindBy(xpath = ".//a/span[text() = 'Cancel Transfer']")
-	private WebElement drdCancel;
-
 	@FindBy(xpath = ".//*[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
 	private By click_on_related_item_tab_1 = By.xpath(".//*[text() = 'Related Items']");
@@ -282,7 +279,12 @@ public class SupplyConsolePage extends BasePage {
 			Thread.sleep(1000);
 			driver.findElement(By.xpath("//span[@class='menuLabel slds-listbox__option-text slds-listbox__option-text_entity' and text() = 'Supply Locations']")).click();
 		}
-		supply_locations_tab.click();
+		try {
+			supply_locations_tab.click();
+		} catch(ElementClickInterceptedException ex) {
+			Thread.sleep(5000);
+			supply_locations_tab.click();
+		}
 		boolean loaded = false;
 		while(!loaded) {
 			try {
@@ -440,19 +442,23 @@ public class SupplyConsolePage extends BasePage {
 	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
 		log(" -- select 'To' " + supplyLocation + "  -");
 		Thread.sleep(500);
-		By search_supplu_location_path = By.xpath("//label[@lightning-groupedcombobox_groupedcombobox and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
+		By search_supplu_location_path = By.xpath("//label[@class='slds-form-element__label' and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
 		waitForElementToBeEnabled(driver, search_supplu_location_path, 30);
 		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
 		log(" -- Combobox Supply Location To is found  -");
 		searchSupplyLocationCombobox.sendKeys(supplyLocation);
-		Thread.sleep(2000);
 		log(" -- Start typing into Search Combobox  -");
 		By supplyLocationItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title='" + supplyLocation + "']");
 		waitForElementToBeEnabled(driver, supplyLocationItemPath, 10);
 		WebElement supplyLocationItem = driver.findElement(supplyLocationItemPath);
 		scrollTop(supplyLocationItem, true);
 		log(" -- Drop down with supply required Supply location appeared  -");
-		supplyLocationItem.click();
+		try {
+			supplyLocationItem.click();
+		} catch(Exception ex) {
+			searchSupplyLocationCombobox.click();
+			supplyLocationItem.click();
+		}
 		//Probable delay when select supply location causing teh javascript error
 		Thread.sleep(2000);
 		log(" -- Selected Supply location successfully  -");
@@ -500,7 +506,7 @@ public class SupplyConsolePage extends BasePage {
 			transactions_tab.click();
 		} catch(Exception ex) {
 			System.out.println("Exception: " + ex.getMessage());
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			transactions_tab.click();
 		}
 	}
@@ -695,6 +701,22 @@ public class SupplyConsolePage extends BasePage {
 		select_incoming_supply_distributor.click();
 	}
 
+	public void selectIncomingSupplyDistribution(String distribution) throws InterruptedException {
+		Thread.sleep(500);
+		By search_incoming_supply_distributor_path = By.xpath(".//span[text() = 'Select Supply Distributor']");
+		waitForElementToBeEnabled(driver, search_incoming_supply_distributor_path, 10);
+		WebElement search_incoming_supply_distributor = driver.findElement(search_incoming_supply_distributor_path);
+		scrollTop(search_incoming_supply_distributor, false);
+		Thread.sleep(500);
+		search_incoming_supply_distributor.click();
+		Thread.sleep(500);
+		By select_incoming_supply_distributor_path = By.xpath("//span[contains(text(), '" + distribution + "')]");
+		waitForElementToBeEnabled(driver, select_incoming_supply_distributor_path, 10);
+		WebElement select_incoming_supply_distributor = driver.findElement(select_incoming_supply_distributor_path);
+		select_incoming_supply_distributor.click();
+	}
+
+
 	@Step
 	public void clickOnConfirmModalIncomingTransactionButton() throws InterruptedException {
 		Thread.sleep(500);
@@ -765,29 +787,28 @@ public class SupplyConsolePage extends BasePage {
 		WebElement transfer_item = driver.findElement(transfer_dropdawn_item_path);
 		scrollTop(transfer_item);
 		Thread.sleep(500);
-		transfer_item.click();
+		try {
+			transfer_item.click();
+		} catch(ElementNotInteractableException ex) {
+			Thread.sleep(5000);
+			transfer_item.click();
+		}
 		Thread.sleep(500);
 	}
 
 	public Double getValueOfRemainingQuantity() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, get_remaining_quantity1, 10);
-		WebElement element = driver.findElement(get_remaining_quantity1);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
+		By remaining_quantity_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Remaining_Quantity__c']//lightning-formatted-number");
+		waitForElementToBeEnabled(driver, remaining_quantity_path, 10);
+		WebElement element = driver.findElement(remaining_quantity_path);
 		String Quantity = element.getText();
 		Double doses = Double.parseDouble(Quantity.replaceAll(",", ""));
 		return (doses);
 	}
 
 	public Double getValueOfRemainingDoses() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, get_remaining_doses_, 10);
-		WebElement element = driver.findElement(get_remaining_doses_);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
+		By remaining_dose_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Remaining_Measures__c']//lightning-formatted-number");
+		waitForElementToBeEnabled(driver, remaining_dose_path, 10);
+		WebElement element = driver.findElement(remaining_dose_path);
 		String Doses = element.getText();
 		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
 		return (doses);
@@ -812,7 +833,19 @@ public class SupplyConsolePage extends BasePage {
 
 	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double quantity = tables.getRemainingQty(supplyContainer);
+		double quantity = 0;
+		int tries = 0;
+		while(tries < 10) {
+			try {
+				quantity = tables.getRemainingQty(supplyContainer);
+				break;
+			} catch (Exception ex) {
+				driver.navigate().refresh();
+				Thread.sleep(1000);
+				tries++;
+			}
+		}
+
 		return (quantity);
 	}
 
@@ -1040,20 +1073,24 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
-		waitForElementToBeVisible(driver, drdCancel, 10);
-		scrollTop(drdCancel);
-		click(drdCancel);
+		Thread.sleep(500);
+		By drd_cancel_btn_path = By.xpath("//a/span[text() = 'Cancel Transfer']");
+		waitForElementToBeEnabled(driver, drd_cancel_btn_path, 10);
+		WebElement drd_cance_btn = driver.findElement(drd_cancel_btn_path);
+		scrollIfNeeded(driver, drd_cance_btn);
+		Thread.sleep(500);
+		drd_cance_btn.click();
 	}
 
 	public void clickOnRelatedItemTab() throws InterruptedException {
-		//scroll up
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
+		Thread.sleep(500);
+		By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related Items']");
+		waitForElementToBeEnabled(driver, related_tab_path, 10);
+		WebElement related_tab = driver.findElement(related_tab_path);
+		scrollTop(driver, related_tab, false);
+		Thread.sleep(500);
+		related_tab.click();
 		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, click_on_related_item_tab_1, 10);
-		Thread.sleep(1000);
-		WebElement element = driver.findElement(click_on_related_item_tab_1);
-		Thread.sleep(2000);
-		click_on_related_item_tab.click();
 	}
 
 	public void selectSameClinicSupplyDistribution() throws InterruptedException {
@@ -1098,20 +1135,6 @@ public class SupplyConsolePage extends BasePage {
 		supplyDistributorItem.click();
 	}
 
-//	public void selectHealthConnectApp() throws InterruptedException {
-//		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-//		Thread.sleep(5000);
-//		WebElement element = driver.findElement(select_app_launcher1);
-//		JavascriptExecutor executor = (JavascriptExecutor) driver;
-//		executor.executeScript("arguments[0].click();", element);
-//		Thread.sleep(5000);
-//		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
-//		WebElement element1 = driver.findElement(click_healthconnect_app1);
-//		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-//		executor1.executeScript("arguments[0].click();", element1);
-//		Thread.sleep(2000);
-//	}
-
 	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, dropdownMenu, 10);
@@ -1153,6 +1176,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickSupplyItemName(String supply_item) throws InterruptedException {
+		switchToTableView();
 		Thread.sleep(500);
 		By supply_item_path = By.xpath("//a[@title='" + supply_item + "']");
 		waitForElementToBeLocated(driver, supply_item_path, 10);
@@ -1171,7 +1195,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, all_supply_items_path, 10);
 		WebElement all_supply_items =  driver.findElement(all_supply_items_path);
 		all_supply_items.click();
-		Thread.sleep(2000);
+		switchToTableView();
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);
@@ -1194,6 +1218,25 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
+	public void switchToTableView() throws InterruptedException {
+		Thread.sleep(500);
+		By view_option_btn_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']");
+		waitForElementToBeEnabled(driver, view_option_btn_path, 10);
+		By selected_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']/div");
+		WebElement selected_view_option = driver.findElement(selected_view_option_path);
+		String selected_view_option_title = selected_view_option.getAttribute("title");
+		if(!selected_view_option_title.equals("Display as Table")) {
+			WebElement view_switch_btn = driver.findElement(view_option_btn_path);
+			view_switch_btn.click();
+			Thread.sleep(500);
+			By select_table_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']//li[@role='presentation' and @title='Table']/a");
+			waitForElementToBeEnabled(driver, view_option_btn_path, 10);
+			WebElement table_view_option = driver.findElement(select_table_view_option_path);
+			table_view_option.click();
+			Thread.sleep(500);
+		}
+	}
+
 	public void selectSupplyLocationName() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_desired_supply_loc, 10);
 		Thread.sleep(2000);
@@ -1212,6 +1255,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement active_supply_locations_item =  driver.findElement(active_supply_locations_path);
 		active_supply_locations_item.click();
 		Thread.sleep(2000);
+		switchToTableView();
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);
@@ -1420,10 +1464,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public double getDoseConversionFactorReceive() throws InterruptedException {
-		WebElement element = driver.findElement(get_dose_conversion_factor1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		return Double.parseDouble(element.getText());
+		By dose_conversion_factor_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Product_Measure__c']//lightning-formatted-number");
+		waitForElementToBeEnabled(driver, dose_conversion_factor_path, 10);
+		WebElement element = driver.findElement(dose_conversion_factor_path);
+		String dose_conversion_factor_string = element.getText();
+		Double dose_conversion_factor = Double.parseDouble(dose_conversion_factor_string.replaceAll(",", ""));
+		return (dose_conversion_factor);
 	}
 	public double getDoseConversionFactorOnReceive() {
 		waitForElementToBePresent(driver, get_dose_conversion_factor2, 10);

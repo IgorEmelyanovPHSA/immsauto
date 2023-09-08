@@ -356,7 +356,7 @@ public class CallCenterConsolePage extends BasePage {
 	
 	public void clickVerifyContactInformation() throws InterruptedException {
 		Thread.sleep(500);
-		By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@lightning-input_input=''][2]");
+		By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@class='slds-checkbox_faux']");
 		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
 		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
 		Thread.sleep(1000);

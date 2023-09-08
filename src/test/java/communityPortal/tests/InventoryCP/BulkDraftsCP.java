@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
@@ -20,14 +21,24 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class BulkDraftsCP extends BaseTest {
-
-    private final String supplyLocationFrom = SUPPLY_LOCATION_1;
-    private final String supplyLocationTo = SUPPLY_LOCATION_2;
-
+    String env;
+    Map<String, Object> testData;
+    String distribution_from;
+    String distribution_to;
+    String distribution_to_same_clinic;
+    String supply_location_from;
+    String supply_location_to;
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
         //TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        distribution_from = String.valueOf(testData.get("distributionFrom"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
+        distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
@@ -39,20 +50,19 @@ public class BulkDraftsCP extends BaseTest {
                 loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
                 break;
             default:
-                log("Login AS default user (ClinicianInventory)");
+                log("Login as Clinician");
                 TestcaseID = "245220"; //C245220
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
+                loginPage.loginIntoCommunityPortalAsClinician();
         }
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
         log("/*---     count:" + countSupplyContainers);
 
         log("/*4.----Click on Container's records Checkboxes --*/");
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
         if (countSupplyContainers >= 3) {
             int k = 1;
             while (k <= 3) {
@@ -82,7 +92,7 @@ public class BulkDraftsCP extends BaseTest {
         }
 
         log("/*8.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation(supplyLocationTo);
+        supplyConsolePage.selectSupplyLocation(supply_location_to);
 
         log("/*9.----click Save as draft dialog Modal button --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
@@ -114,7 +124,7 @@ public class BulkDraftsCP extends BaseTest {
         log("/*--transactions record number --*/:" + countOutgoingTransactions);
         Thread.sleep(2000);
         log("/*15.----Go to Supply Locations Tab --*/");
-        cpMainPage.selectSupplyLocationName(supplyLocationTo);
+        cpMainPage.selectSupplyLocationName(supply_location_to);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         supplyConsolePage.clickTransactionsTab();
@@ -143,7 +153,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
 
         log("/*20.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
+        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 
         log("/*21.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
@@ -152,7 +162,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.successMessageAppear();
 
         log("/*23.----Click on Automation Supply Location_1 --*/");
-        cpMainPage.selectSupplyLocationName(supplyLocationFrom);
+        cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
 
         log("/*24.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
