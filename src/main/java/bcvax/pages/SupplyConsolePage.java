@@ -1135,20 +1135,6 @@ public class SupplyConsolePage extends BasePage {
 		supplyDistributorItem.click();
 	}
 
-//	public void selectHealthConnectApp() throws InterruptedException {
-//		waitForElementToBeLocated(driver, select_app_launcher1, 10);
-//		Thread.sleep(5000);
-//		WebElement element = driver.findElement(select_app_launcher1);
-//		JavascriptExecutor executor = (JavascriptExecutor) driver;
-//		executor.executeScript("arguments[0].click();", element);
-//		Thread.sleep(5000);
-//		waitForElementToBeLocated(driver, click_healthconnect_app1, 10);
-//		WebElement element1 = driver.findElement(click_healthconnect_app1);
-//		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-//		executor1.executeScript("arguments[0].click();", element1);
-//		Thread.sleep(2000);
-//	}
-
 	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, dropdownMenu, 10);
@@ -1190,6 +1176,7 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickSupplyItemName(String supply_item) throws InterruptedException {
+		switchToTableView();
 		Thread.sleep(500);
 		By supply_item_path = By.xpath("//a[@title='" + supply_item + "']");
 		waitForElementToBeLocated(driver, supply_item_path, 10);
@@ -1208,7 +1195,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, all_supply_items_path, 10);
 		WebElement all_supply_items =  driver.findElement(all_supply_items_path);
 		all_supply_items.click();
-		Thread.sleep(2000);
+		switchToTableView();
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);
@@ -1231,6 +1218,25 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
+	public void switchToTableView() throws InterruptedException {
+		Thread.sleep(500);
+		By view_option_btn_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']");
+		waitForElementToBeEnabled(driver, view_option_btn_path, 10);
+		By selected_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']/div");
+		WebElement selected_view_option = driver.findElement(selected_view_option_path);
+		String selected_view_option_title = selected_view_option.getAttribute("title");
+		if(!selected_view_option_title.equals("Display as Table")) {
+			WebElement view_switch_btn = driver.findElement(view_option_btn_path);
+			view_switch_btn.click();
+			Thread.sleep(500);
+			By select_table_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']//li[@role='presentation' and @title='Table']/a");
+			waitForElementToBeEnabled(driver, view_option_btn_path, 10);
+			WebElement table_view_option = driver.findElement(select_table_view_option_path);
+			table_view_option.click();
+			Thread.sleep(500);
+		}
+	}
+
 	public void selectSupplyLocationName() throws InterruptedException {
 		waitForElementToBeVisible(driver, select_desired_supply_loc, 10);
 		Thread.sleep(2000);
@@ -1249,6 +1255,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement active_supply_locations_item =  driver.findElement(active_supply_locations_path);
 		active_supply_locations_item.click();
 		Thread.sleep(2000);
+		switchToTableView();
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);

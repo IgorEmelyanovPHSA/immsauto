@@ -98,6 +98,13 @@ public class BookingDose2 extends BaseTest {
 		} catch(Exception ex) {
 			System.out.println("There is not Early Booking Option");
 		}
+		//If override Eligibility is shown
+		try {
+			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+			PersonAccountPage.overrideEligibility(driver);
+		} catch(Exception ex) {
+			System.out.println("There is not Override Eligibility Option");
+		}
 		log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		clinicInBox.selectOneOption(vaccineToSelect);
 

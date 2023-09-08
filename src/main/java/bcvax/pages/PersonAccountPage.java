@@ -3,6 +3,7 @@ package bcvax.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class PersonAccountPage extends BasePage {
     public PersonAccountPage(WebDriver driver) {
@@ -25,6 +26,38 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeVisible(driver, vaccine_schedule_tab, 10);
         vaccine_schedule_tab.click();
         waitForAttribute(driver, vaccine_schedule_tab_path, "aria-selected", "true", 10);
+    }
+
+    public static void selectEarlyBookingReason(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By select_early_booking_reason_field_path = By.xpath("//span[text() = 'Select One']");
+        waitForElementToBeEnabled(driver, select_early_booking_reason_field_path, 10);
+        WebElement select_early_booking_dropdown = driver.findElement(select_early_booking_reason_field_path);
+        select_early_booking_dropdown.click();
+        Thread.sleep(500);
+        By early_booking_reason_travel_path = By.xpath("//span[text() = 'Travel']");
+        waitForElementToBeEnabled(driver, early_booking_reason_travel_path, 10);
+        WebElement early_booking_reason_travel = driver.findElement(early_booking_reason_travel_path);
+        waitForElementToBeVisible(driver, early_booking_reason_travel, 10);
+        early_booking_reason_travel.click();
+    }
+
+    public static void overrideEligibility(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By override_eligibility_btn_path = By.xpath("//button[@title='Primary action' and text()='Override Eligibility']");
+        waitForElementToBeEnabled(driver, override_eligibility_btn_path, 10);
+        WebElement override_eligibility_btn = driver.findElement(override_eligibility_btn_path);
+        override_eligibility_btn.click();
+        Thread.sleep(500);
+        By reason_for_override_path = By.xpath("//button[@aria-label='Reason for Override, Select One']");
+        waitForElementToBeEnabled(driver, reason_for_override_path, 10);
+        WebElement reason_for_verride_btn = driver.findElement(reason_for_override_path);
+        reason_for_verride_btn.click();
+        Thread.sleep(500);
+        By travel_item_path = By.xpath("//lightning-base-combobox-item[@data-value='Travel']");
+        waitForElementToBeEnabled(driver, travel_item_path, 10);
+        WebElement travel_item = driver.findElement(travel_item_path);
+        travel_item.click();
     }
 
     public static void goToRelatedTab(WebDriver driver) throws InterruptedException {
