@@ -77,9 +77,9 @@ public class Returns extends BaseTest {
         log("/*1.----Login --*/");
         switch (Utils.getTargetEnvironment()) {
             case "comunityqa_immsbc_admin_org":
-                log("Login AS comunityqa_org_immsbc_admin");
-                TestcaseID = "261384"; //C261384
-                loginPage.loginAsImmsBCAdminICE();
+                log("Login as ImmsBCAdmin");
+                TestcaseID = "261439"; //C261439
+                loginPage.loginAsImmsBCAdmin();
                 break;
             default:
                 log("Login AS default user (PPHIS)");

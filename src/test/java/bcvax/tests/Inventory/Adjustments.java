@@ -75,9 +75,9 @@ public class Adjustments extends BaseTest {
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
+				log("Login as ImmsBCAdmin");
 				TestcaseID = "244846"; //C244846
-				loginPage.loginAsImmsBCAdminICE();
+				loginPage.loginAsImmsBCAdmin();
 				break;
 			default:
 				log("Login AS default user (PPHIS)");
@@ -208,9 +208,9 @@ public class Adjustments extends BaseTest {
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
+				log("Login as ImmsBCAdmin");
 				TestcaseID = "244846"; //C244846
-				loginPage.loginAsImmsBCAdminICE();
+				loginPage.loginAsImmsBCAdmin();
 				break;
 			default:
 				log("Login AS default user (PPHIS)");

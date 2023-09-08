@@ -43,30 +43,21 @@ public class Wastage extends BaseTest {
 
 	@Test()
 	public void Can_Do_Single_Wastage_ByDosages() throws Exception {
+		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		//CommonMethods common = new CommonMethods(getDriver());
+		supplyConsolePage = new SupplyConsolePage(driver);
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				TestcaseID = "244844"; //C244844
-				loginPage.loginAsImmsBCAdminICE();
-				break;
-			default:
-				log("Login AS default user (PPHIS)");
-				TestcaseID = "223356"; //C223356
-				loginPage.loginAsPPHIS();
-		}
+		log("/*1.----Login as PPHIS--*/");
+		loginPage.loginAsPPHIS();
+
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		supplyConsolePage = new SupplyConsolePage(driver);
+
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
@@ -177,30 +168,21 @@ public class Wastage extends BaseTest {
 
 	@Test()
 	public void Can_Do_Single_Wastage_ByQuantity() throws Exception {
+		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		//CommonMethods common = new CommonMethods(getDriver());
+		supplyConsolePage = new SupplyConsolePage(driver);
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				TestcaseID = "244844"; //C244844
-				loginPage.loginAsImmsBCAdminICE();
-				break;
-			default:
-				log("Login AS default user (PPHIS)");
-				TestcaseID = "223356"; //C223356
-				loginPage.loginAsPPHIS();
-		}
+		log("/*1.----Login as PPHIS--*/");
+		loginPage.loginAsPPHIS();
+
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		supplyConsolePage = new SupplyConsolePage(driver);
+
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
