@@ -63,21 +63,13 @@ public class Return_CP extends BaseTest {
     }
 
     @Test()
-    public void Validate_Return_Inventory_as_PPHIS() throws Exception {
+    public void Validate_Return_Inventory_as_Clinician() throws Exception {
+        TestcaseID = "261523";
         log("Target Environment: "+ Utils.getTargetEnvironment());
         SoftAssert softAssert = new SoftAssert();
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin_org":
-                log("Login AS comunityqa_org_immsbc_admin");
-                TestcaseID = "261523"; //C261384
-                loginPage.loginAsImmsBCAdminICE();
-                break;
-            default:
-                log("Login as Clinician");
-                TestcaseID = "261523";
-                cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        }
+
+        log("/*1.----Login as Clinician--*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*4. ----Open Supply Location " + supply_location + " --*/");
         cpMainPage.selectSupplyLocationName(supply_location);

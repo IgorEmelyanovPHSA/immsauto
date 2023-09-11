@@ -64,8 +64,8 @@ public class DIWA_ICE extends BaseTest {
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin_DIWA_ICE();
-				log("Login AS comunityqa_org_immsbc_admin");
+				loginPage.loginAsImmsBCAdmin();
+				log("Login as ImmsBCAdmin");
 				TestcaseID = "244854"; //C244854
 				break;
 			default:
@@ -100,7 +100,11 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----9. Click to Create Immunization Record Button ---*/");
 		profilesPage.clickCreateImmunizationRecord();
 		log("/*----10. Click confirm Button on the popup window---*/");
-		profilesPage.clickConfirmButton();
+		try {
+			profilesPage.clickConfirmButton();
+		} catch(Exception ex) {
+			System.out.println("No Confitm Dialog");
+		}
 		log("/*----11. Select an Option from the DropDown ---*/)");
 		profilesPage.clickSelectAnOptionDropdown();
 		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
