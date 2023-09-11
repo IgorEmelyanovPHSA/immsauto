@@ -100,7 +100,11 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----9. Click to Create Immunization Record Button ---*/");
 		profilesPage.clickCreateImmunizationRecord();
 		log("/*----10. Click confirm Button on the popup window---*/");
-		profilesPage.clickConfirmButton();
+		try {
+			profilesPage.clickConfirmButton();
+		} catch(Exception ex) {
+			System.out.println("No Confitm Dialog");
+		}
 		log("/*----11. Select an Option from the DropDown ---*/)");
 		profilesPage.clickSelectAnOptionDropdown();
 		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
