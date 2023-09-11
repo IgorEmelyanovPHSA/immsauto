@@ -20,7 +20,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
     String env;
     private String legalFirstName = "Rochester";
     private String legalLastName = "BCVaxStonbridge";
-    private String legalMiddleName = "Sheelagh";
+   // private String legalMiddleName = "";
     private String pirSubmissionField = "Submitted";
     private String patwayStatusFieldValidation = "Pathway Status";
     private String pirSubmissionStatusFieldValidation = "PIR Submission Status";
@@ -38,9 +38,9 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         //profilePage = cpMainPage.navigateToProfilesPage();
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
         //profilePage.selectAllParticipantsOption();
-        cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+        cpMainPage.search(legalFirstName + " " + legalLastName);
         profilePage = new ProfilesPage(driver);
-        profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+        profilePage.openProfile(legalFirstName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
 
@@ -81,9 +81,9 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
 
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
         //profilePage.selectAllParticipantsOption();
-        cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+       // cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage = new ProfilesPage(driver);
-        profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+      //  profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
         Thread.sleep(1000);
