@@ -56,7 +56,11 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----7. Click Create Immunization Record ---*/");
 		profilesPage.clickCreateImmunizationRecord();
 		log("/*----8. Click confirm Button on the popup window---*/");
-		profilesPage.clickConfirmButton();
+		try {
+			profilesPage.clickConfirmButton();
+		} catch(Exception ex) {
+			System.out.println("No Confirm dialog");
+		}
 		log("/*----9. Select an Option ---*/)");
 		profilesPage.clickSelectAnOptionDropdown();
 		log("/*----10. Select COVID19-mRNA as an Option  ---*/");

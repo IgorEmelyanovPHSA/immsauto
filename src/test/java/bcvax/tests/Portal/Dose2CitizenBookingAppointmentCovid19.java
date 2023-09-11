@@ -110,6 +110,14 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         log("/*11.---Schedule vaccination page is displayed--*/");
         bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
 
+        //If override Eligibility is shown
+        try {
+            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+            PersonAccountPage.overrideEligibility(driver);
+        } catch(Exception ex) {
+            System.out.println("There is not Override Eligibility Option");
+        }
+
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
         bookAnAppointmentPage.selectOneOption(vaccineToSelect);
 
