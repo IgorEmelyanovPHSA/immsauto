@@ -177,6 +177,7 @@ public class MainPageCP extends BasePage{
         Thread.sleep(2000);
         System.out.println("/*---- Locate " + supplyLocation + " --*/");
         search_location_field.sendKeys(supplyLocation);
+        Thread.sleep(500);
         search_location_field.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         System.out.println("/*---- Go to " + supplyLocation + " --*/");

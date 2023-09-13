@@ -113,6 +113,14 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         } catch(TimeoutException ex) {
             System.out.println("DEBUG No need to select Early Booking Reason. Continue...");
         }
+
+        //If override Eligibility is shown
+        try {
+            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+            PersonAccountPage.overrideEligibility(driver);
+        } catch(Exception ex) {
+            System.out.println("There is not Override Eligibility Option");
+        }
         inClinicExperience_CP.clickOnVaccinationCheckbox();
 
         ////////////////////

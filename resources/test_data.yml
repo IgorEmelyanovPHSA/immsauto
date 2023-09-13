@@ -32,8 +32,8 @@ bcvaxdevit:
   consumptionLot: "EK4241"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
   useDefaultSettingsLots:
-    - "016F21A-CC07"
-    - "0649AA"
+    - "EK4241"
+    - "CM1216"
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
