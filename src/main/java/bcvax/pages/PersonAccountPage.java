@@ -52,11 +52,15 @@ public class PersonAccountPage extends BasePage {
         By reason_for_override_path = By.xpath("//button[@aria-label='Reason for Override, Select One']");
         waitForElementToBeEnabled(driver, reason_for_override_path, 10);
         WebElement reason_for_verride_btn = driver.findElement(reason_for_override_path);
+        scrollTop(driver, reason_for_verride_btn, true);
+        Thread.sleep(500);
         reason_for_verride_btn.click();
         Thread.sleep(500);
         By travel_item_path = By.xpath("//lightning-base-combobox-item[@data-value='Travel']");
         waitForElementToBeEnabled(driver, travel_item_path, 10);
         WebElement travel_item = driver.findElement(travel_item_path);
+        scrollTop(driver, travel_item, true);
+        Thread.sleep(500);
         travel_item.click();
     }
 

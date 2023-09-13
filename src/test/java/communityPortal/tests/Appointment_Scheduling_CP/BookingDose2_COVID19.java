@@ -93,6 +93,14 @@ public class BookingDose2_COVID19 extends BaseTest {
         } catch(Exception ex) {
             System.out.println("No early Booking screen. Continue...");
         }
+
+        //If override Eligibility is shown
+        try {
+            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+            PersonAccountPage.overrideEligibility(driver);
+        } catch(Exception ex) {
+            System.out.println("There is not Override Eligibility Option");
+        }
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         inClinicExperience_CP.selectOneOption(vaccineToSelect);
 

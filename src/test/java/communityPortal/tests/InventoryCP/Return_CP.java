@@ -18,10 +18,10 @@ public class Return_CP extends BaseTest {
     String supply_item = "FluMist-Tri - BK2024B";
     String lot_number = "BK2024B";
     SupplyConsolePage supplyConsolePage;
-    String supply_location = "Automation Supply Location_1";
-    String supply_location_to = "Automation Supply Location_2";
+    String supply_location_from;
+    String supply_location_to;
     double doses = 100;
-    String distribution_to = "Automation Supply Distribution_1_1";
+    String distribution_to = "Operational Fridge";
     String reason_for_wastage = "CCI: Equipment Malfunction";
     String receiver_comment = "This is to test the Receiver Comment";
 
@@ -31,12 +31,15 @@ public class Return_CP extends BaseTest {
         log("Target Environment: " + env);
         log("/*----Run Pre-conditions --*/");
         testData = Utils.getTestData(env);
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
         //Login as Admin
         log("/*----Login as Admin --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         //Get Flu supplies using Receive Supplies feature
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
+        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
         log("/*b.----Receive Supplies for Flu --*/");
         supplyConsolePage.clickBtnReceiveSuppliesCP();
@@ -71,8 +74,8 @@ public class Return_CP extends BaseTest {
         log("/*1.----Login as Clinician--*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
-        log("/*4. ----Open Supply Location " + supply_location + " --*/");
-        cpMainPage.selectSupplyLocationName(supply_location);
+        log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
+        cpMainPage.selectSupplyLocationName(supply_location_from);
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*5. ----Click Return Button --*/");
         supplyConsolePage.clickReturnBtn();
@@ -211,15 +214,18 @@ public class Return_CP extends BaseTest {
         log("/*29. ----Verify Return Location History --*/");
         Map<String, WebElement> location_history = returnPage.getReturnLocationHistoryTableCP();
         String history_return_id = returnPage.getReturnLocationHistoryIdCP(location_history.get("Return Location History ID"));
-        String history_receive_date = location_history.get("Received Date").getText();
-        String history_received_by = location_history.get("Received By").getText();
+        WebElement history_receive_date_row = location_history.get("Received Date");
+        String history_receive_date = history_receive_date_row.getText();
+        WebElement history_actioned_by_row = location_history.get("Actioned By");
+        String history_actioned_by = history_actioned_by_row.getText();
         String history_from_location = returnPage.getLinkTextFromCellValue(location_history.get("From Location"));
         String history_to_location = returnPage.getLinkTextFromCellValue(location_history.get("To Location"));
-        String history_receiver_comment = location_history.get("Receiver Comment").getText();
+        WebElement history_receiver_comment_row = location_history.get("Comment");
+        String history_receiver_comment = history_receiver_comment_row.getText();
         softAssert.assertTrue(!history_return_id.isEmpty(), "History Return ID is Empty");
         softAssert.assertTrue(!history_receive_date.isEmpty(), "History Return Receive Date is Empty");
-        softAssert.assertTrue(!history_received_by.isEmpty(), "History Return Receive By is Empty");
-        softAssert.assertEquals(history_from_location, supply_location, "Supply Location From doesn't match");
+        softAssert.assertTrue(!history_actioned_by.isEmpty(), "History Return Actioned By is Empty");
+        softAssert.assertEquals(history_from_location, supply_location_from, "Supply Location From doesn't match");
         softAssert.assertEquals(history_to_location, supply_location_to, "Supply Location To doesn't match");
         softAssert.assertEquals(history_receiver_comment, receiver_comment, "History Receiver Comment doesn't match");
 
