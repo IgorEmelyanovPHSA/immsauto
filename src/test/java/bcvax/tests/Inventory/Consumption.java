@@ -140,6 +140,15 @@ public class Consumption extends BaseTest {
 			System.out.println("***No Early Booking Option***");
 			System.out.println("***Warning***");
 		}
+
+		//If override Eligibility is shown
+		try {
+			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+			PersonAccountPage.overrideEligibility(driver);
+		} catch(Exception ex) {
+			System.out.println("There is not Override Eligibility Option");
+		}
+
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
