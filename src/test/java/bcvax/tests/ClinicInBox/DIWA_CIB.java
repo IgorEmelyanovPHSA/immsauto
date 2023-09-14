@@ -71,10 +71,19 @@ public class DIWA_CIB extends BaseTest {
 		profilesPage.clickTimeBox();
 		log("/*---13. Click Record Immunization ---*/");
 		profilesPage.clickRecordImmunization();
+		Thread.sleep(2000);
+
 		if (profilesPage.clickPopupYesButtonIfDisplayed())
 			log("/*---13.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---12. Click X button on Diwa flow ---*/");
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
 		profilesPage.clickToClose();
+
 		log("/*---13. Validate message on clicking close button on modal popup ---*/");
 		profilesPage.validateoopsMessage();
 		log("/*---14. click on continue editing button to continue with the flow ---*/");

@@ -202,6 +202,14 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		inClinicExperience.selectVaccineAgent();
+
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
+
 		String consentProvider = inClinicExperience.consentProviderSelected();
 		if(consentProvider.equals("")) {
 			consentProvider = inClinicExperience.selectConsentProvider();

@@ -218,6 +218,14 @@ public class ProfilesPage extends BasePage{
         return true;
     }
 
+    public static void confirm_warning(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By confirm_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']//button[text()='Confirm']");
+        waitForElementToBeEnabled(driver, confirm_btn_path, 10);
+        WebElement confirm_btn = driver.findElement(confirm_btn_path);
+        confirm_btn.click();
+    }
+
     public void clickToClose() throws InterruptedException {
         Thread.sleep(500);
         waitForElementToBeVisible(driver, close_button_diwa, 10);
