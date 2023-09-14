@@ -21,7 +21,7 @@ public class AddAppointmentDays extends BaseTest {
         String appointment_date = "2023-8-27";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
 
-        LocalDate start_date = LocalDate.parse("2023-9-12", dtf);
+        LocalDate start_date = LocalDate.parse("2023-9-13", dtf);
         LocalDate end_date = LocalDate.parse("2023-9-17", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
@@ -34,18 +34,18 @@ public class AddAppointmentDays extends BaseTest {
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         HashMap<String, String> provider = new HashMap<String, String>();
 
-        //provider.put("provider", "Age 12 and Above - Abbotsford - Abby Pharmacy");
-        //provider.put("address_id", "AD-0000142140");
-        //provider.put("appointment_city", "Abbotsford");
-        //providers.add(provider);
+        provider.put("provider", "Age 12 and Above - Abbotsford - Abby Pharmacy");
+        provider.put("address_id", "AD-0000142140");
+        provider.put("appointment_city", "Abbotsford");
+        providers.add(provider);
 
-        //provider = new HashMap<String, String>();
-        //provider.put("provider", "All Ages - Atlin Health Centre");
-        //provider.put("address_id", "AD-0004045718");
-        //provider.put("appointment_city", "Atlin");
-        //providers.add(provider);
+        provider = new HashMap<String, String>();
+        provider.put("provider", "All Ages - Atlin Health Centre");
+        provider.put("address_id", "AD-0004045718");
+        provider.put("appointment_city", "Atlin");
+        providers.add(provider);
 
-        //rovider = new HashMap<String, String>();
+        provider = new HashMap<String, String>();
         provider.put("provider", "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic");
         provider.put("address_id", "AD-0004045603");
         provider.put("appointment_city", "Coquitlam");

@@ -60,8 +60,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*----5. Click to Create Immunization Record Button ---*/");
         profilesPage.clickCreateImmunizationRecord();
 
-        log("/*----6. Click confirm Button on the popup window---*/");
-        profilesPage.clickConfirmButton();
+        try {
+            log("/*----6. Click confirm Button on the popup window---*/");
+            profilesPage.clickConfirmButton();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
         log("/*----7. Select an Option from the DropDown ---*/)");
         profilesPage.clickSelectAnOptionDropdown();

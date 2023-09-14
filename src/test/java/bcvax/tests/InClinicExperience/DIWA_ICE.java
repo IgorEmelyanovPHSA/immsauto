@@ -115,11 +115,18 @@ public class DIWA_ICE extends BaseTest {
 		profilesPage.clickTimeBox();
 		log("/*---15. Click Record Immunization ---*/");
 		profilesPage.clickRecordImmunization();
-		Thread.sleep(2000);
+
 		if (profilesPage.clickPopupYesButtonIfDisplayed())
 			log("/*---15.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---16. Click X button on Diwa flow ---*/");
-		Thread.sleep(2000);
+
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
+
 		profilesPage.clickToClose();
 		log("/*---17. Validate message on clicking close button on modal popup ---*/");
 		profilesPage.validateoopsMessage();

@@ -198,6 +198,14 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.selectVaccineAgent(consumptionAgent);
 		}
 		Thread.sleep(2000);
+
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
+
 		String consentProvider = inClinicExperiencePage.consentProviderSelected();
 		log("/*-- 48---Click Save Consent Button --*/");
 		if(consentProvider.equals("")) {
