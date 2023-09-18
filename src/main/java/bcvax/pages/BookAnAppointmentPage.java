@@ -2,6 +2,9 @@ package bcvax.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class BookAnAppointmentPage extends BasePage{
 
@@ -31,6 +34,29 @@ public class BookAnAppointmentPage extends BasePage{
     @FindBy(xpath = ".//button[text() = 'Next']")
     private WebElement btnNext;
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Confirm Booking section //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @FindBy(xpath = "//button[text() = 'Confirm appointment']")
+    private WebElement btnConfirmAppointment;
+
+    private By toastErrorMessage = By.xpath("//span[contains(text(),'Please complete all required fields before proceeding.')]");
+
+    @FindBy(xpath = "//button[@title='Close']")
+    private WebElement btnCloseToastMessage;
+
+    @FindBy(xpath = "//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../span[@class='slds-checkbox_faux']")
+    private WebElement checkBoxIVerifyThatTheContactInformation;
+
+    @FindBy(xpath = "//span[text()='I consent to notifications being sent to my preferred contact method for the purpose of informing me about my pharmacy appointment.']/../span[@class='slds-checkbox_faux']")
+    private WebElement checkBoxIConsentToNotifications;
+
+    @FindBy(xpath = "//*[contains(text(), 'Booking Confirmed')]")
+    private WebElement textBookConfirmed;
+
+    @FindBy(xpath = "//div[@class='slds-col slds-p-left_small slds-p-bottom_xx-large']/div")
+    private WebElement textGetDateAndTime;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,10 +167,68 @@ public class BookAnAppointmentPage extends BasePage{
             waitForElementToBeLocated(driver, successMessage, 10);
             log("/*---Appointment confirmed! Page Successfully displayed--*/");
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             log("/*---Appointment confirmation page is NOT displayed--*/");
             return false;
         }
+    }
+
+        public boolean isToastErrorMessageCompleteAllRequiredFieldsDisplayed() throws InterruptedException {
+            try {
+                waitForElementToBeLocated(driver, toastErrorMessage, 10);
+                log("Toast message is displayed");
+                click(btnCloseToastMessage);
+                log("Closing (X) the toast message");
+                return true;
+            } catch (Exception e) {
+                log("Could not catch toast error message");
+                return false;
+            }
+    }
+        public boolean isToastErrorMessageCompleteAllRequiredFieldsDisplayedOld() throws InterruptedException {
+        Thread.sleep(1000);
+        boolean flag = false;
+            List countOfFoundLot = driver.findElements(toastErrorMessage);
+            if(countOfFoundLot.size()>0){
+            flag = true;
+            log("Toast message is displayed: " +flag);
+            click(btnCloseToastMessage);
+            log("Closing (X) the toast message");
+        }
+             return flag;
+        }
+
+        public void clickCheckBoxVerifyContactInformationAndConsentToNotifications() throws InterruptedException{
+            Thread.sleep(500);
+            scrollIfNeeded(driver,checkBoxIConsentToNotifications);
+            click(checkBoxIVerifyThatTheContactInformation);
+            click(checkBoxIConsentToNotifications);
+        }
+
+        public void clickBtnConfirmAppointment() throws InterruptedException {
+            waitForElementToBeClickable(btnConfirmAppointment);
+            click(btnConfirmAppointment);
+        }
+
+        public boolean isBookingConfirmedDisplayed() throws InterruptedException {
+        boolean isBookingDisplayedFlag = false;
+            for(int i = 1; i<=15; i++ ) {
+                if(textBookConfirmed.isDisplayed()==false){
+                    Thread.sleep(1000);
+                    log("Re-try: Booking confirmation page is NOT displayed");
+                }else {
+                    isBookingDisplayedFlag = true;
+                    log("Booking Confirmed! Page Successfully displayed");
+                    break;
+                }
+            }
+            return isBookingDisplayedFlag;
+        }
+
+        public String getConfirmedAppointmentDateTime() {
+            String dateAndTime = textGetDateAndTime.getText();
+            log("Confirmed Appointment Date and Time: " +dateAndTime);
+            return dateAndTime;
+         }
 
     }
-}
