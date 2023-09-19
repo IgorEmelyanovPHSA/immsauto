@@ -279,7 +279,7 @@ public class ProfilesPage extends BasePage{
         input_consent_date_field.sendKeys(Keys.ENTER);
         return true;
     }
-    public String consentProviderSelected() {
+    public static String consentProviderSelected(WebDriver driver) {
         By providerFieldPath = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]");
         waitForElementToBeLocated(driver, providerFieldPath, 10);
         return driver.findElement(providerFieldPath).getAttribute("data-value");
@@ -301,13 +301,13 @@ public class ProfilesPage extends BasePage{
         return driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
     }
 
-    public String selectConsentProvider(String consentProvider) throws InterruptedException {
+    public static String selectConsentProvider(WebDriver driver, String consentProvider) throws InterruptedException {
         Thread.sleep(500);
         By consent_provider_field_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]");
         By consent_provider_item_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
         waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
         WebElement consentProviderField = driver.findElement(consent_provider_field_path);
-        scrollTop(consentProviderField);
+        BasePage.scrollTop(driver, consentProviderField, false);
         Thread.sleep(500);
         consentProviderField.click();
         consentProviderField.sendKeys(consentProvider);
@@ -317,7 +317,7 @@ public class ProfilesPage extends BasePage{
         driver.findElement(providerItemPath).click();
         Thread.sleep(500);
         try {
-            String consent_provider_selected = consentProviderSelected();
+            String consent_provider_selected = consentProviderSelected(driver);
             if(consent_provider_selected.equals("")) {
                 waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
                 driver.findElement(consent_provider_item_path).click();
@@ -326,7 +326,7 @@ public class ProfilesPage extends BasePage{
             System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
             waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
             consentProviderField = driver.findElement(consent_provider_field_path);
-            scrollTop(consentProviderField);
+            BasePage.scrollTop(driver, consentProviderField, true);
             consentProviderField.click();
             Thread.sleep(500);
             waitForElementToBeEnabled(driver, consent_provider_item_path, 10);

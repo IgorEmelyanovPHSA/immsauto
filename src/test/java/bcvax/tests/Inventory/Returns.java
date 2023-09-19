@@ -246,11 +246,18 @@ public class Returns extends BaseTest {
         WebElement history_receive_date_row = location_history.get("Received Date");
         String history_receive_date = history_receive_date_row.getText();
         WebElement history_actioned_by_row = location_history.get("Actioned By");
+        if(history_actioned_by_row == null) {
+            history_actioned_by_row = location_history.get("Received By");
+        }
         String history_actioned_by = history_actioned_by_row.getText();
         String history_from_location = returnPage.getLinkTextFromCellValue(location_history.get("From Location"));
         String history_to_location = returnPage.getLinkTextFromCellValue(location_history.get("To Location"));
         WebElement history_receiver_comment_row = location_history.get("Comment");
+        if(history_receiver_comment_row == null) {
+            history_receiver_comment_row = location_history.get("Receiver Comment");
+        }
         String history_receiver_comment = history_receiver_comment_row.getText();
+
         softAssert.assertTrue(!history_return_id.isEmpty(), "History Return ID is Empty");
         softAssert.assertTrue(!history_receive_date.isEmpty(), "History Return Receive Date is Empty");
         softAssert.assertTrue(!history_actioned_by.isEmpty(), "History Return Actioned By is Empty");

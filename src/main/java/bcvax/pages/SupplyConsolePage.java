@@ -1176,7 +1176,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickSupplyItemName(String supply_item) throws InterruptedException {
-		switchToTableView();
+		try {
+			switchToTableView();
+		} catch(Exception ex) {
+			System.out.println("Cannot switch to Table view");
+		}
 		Thread.sleep(500);
 		By supply_item_path = By.xpath("//a[@title='" + supply_item + "']");
 		waitForElementToBeLocated(driver, supply_item_path, 10);
@@ -1195,7 +1199,11 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, all_supply_items_path, 10);
 		WebElement all_supply_items =  driver.findElement(all_supply_items_path);
 		all_supply_items.click();
-		switchToTableView();
+		try {
+			switchToTableView();
+		} catch (Exception ex) {
+			System.out.println("Cannot switch the view");
+		}
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);
@@ -1255,7 +1263,11 @@ public class SupplyConsolePage extends BasePage {
 		WebElement active_supply_locations_item =  driver.findElement(active_supply_locations_path);
 		active_supply_locations_item.click();
 		Thread.sleep(2000);
-		switchToTableView();
+		try {
+			switchToTableView();
+		} catch(Exception ex) {
+			System.out.println("---Cannot switch the view---");
+		}
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);

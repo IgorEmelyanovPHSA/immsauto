@@ -29,7 +29,6 @@ public class BookingDose1 extends BaseTest {
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
-		CommonMethods commn = new CommonMethods(getDriver());
 
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
