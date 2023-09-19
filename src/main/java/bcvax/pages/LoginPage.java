@@ -165,6 +165,11 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(Utils.getEnvConfigProperty("url_citizenportal"));
 		return new RegisterToGetVaccinatedPage(driver);
 	}
+
+	public MinorAilmentsPage openMinorAilmentsPortal() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url_minorail"));
+		return new MinorAilmentsPage(driver);
+	}
 	
 	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
 		driver.navigate().to(uniqueLink);
