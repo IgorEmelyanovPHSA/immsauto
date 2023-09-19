@@ -31,33 +31,15 @@ public class DIWA_ICE extends BaseTest {
 	private String personal_health_nunber = "9746173039";
 	private String date_of_birth = "1959-01-23";
 	private String postal_code = "V2X9T1";
+	String consentProvider;
+
 	@Test()
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
 		env = Utils.getTargetEnvironment();
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		testData = Utils.getTestData(env);
-		citizenName = String.valueOf(testData.get("diwaCitizen"));
-		//1.
-		//String citizenName = "John Yuan bo BCVaxChan";
-		//2.
-		//String citizenName = "BCVaxZhang Ping an";
-		//3.
-		//String citizenName = "BCVaxFlay Leontine";
-		//4.
-		//String citizenName = "BCVaxFuke Fawne";
-		//5.
-		//String citizenName = "BCVaxDrake Warren";
-		//6.
-		//String citizenName = "BCVaxPerrelli Coletta";
-		//7.
-		//String citizenName = "BCVaxKnightley Vasily";
-		//8.
-		//String citizenName = "BCVaxGilbride Kania";
-		//9.
-		//String citizenName = "BCVaxJancik Tab";
-		//10.
-		//String citizenName = "BCVaxAleksandrev Nanete";
-
+		citizenName = legalFirstName + " " + legalMiddleName + " " + legalLastName;
+		consentProvider = String.valueOf(testData.get("consentProvider"));
 		String clinicLocation = "All Ages - Atlin Health Centre";
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
 
@@ -132,13 +114,12 @@ public class DIWA_ICE extends BaseTest {
 		profilesPage.validateoopsMessage();
 		log("/*---18. click on continue editing button to continue with the flow ---*/");
 		profilesPage.ContinueEditingButton();
-		String consentProvider = profilesPage.consentProviderSelected();
+		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 		Thread.sleep(2000);
-		String myConsentProvider = "Auto Bchcomclinician";
-		if(consentProvider.equals("")) {
-			consentProvider = profilesPage.selectConsentProvider(myConsentProvider);
+		if(consentProviderSelected.equals("")) {
+			consentProvider = ProfilesPage.selectConsentProvider(driver, consentProvider);
 			try {
-				profilesPage.confirmConsentProvider(myConsentProvider);
+				profilesPage.confirmConsentProvider(consentProvider);
 			} catch(Exception ex) {
 				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
 			}

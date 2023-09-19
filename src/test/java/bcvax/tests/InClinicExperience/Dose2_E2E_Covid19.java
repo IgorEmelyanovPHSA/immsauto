@@ -32,6 +32,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 	String consumptionDose;
 	String consumptionRoute;
 	String consumptionSite;
+	String consentProvider;
 	@Test(priority = 1)
 	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
 		TestcaseID = "222811"; //C222811
@@ -47,6 +48,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
+		consentProvider = String.valueOf(testData.get("consentProvider"));
 		loginPage.loginAsClerk();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -208,9 +210,9 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			System.out.println("No Warning found");
 		}
 
-		String consentProvider = inClinicExperience.consentProviderSelected();
-		if(consentProvider.equals("")) {
-			consentProvider = inClinicExperience.selectConsentProvider();
+		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+		if(consentProviderSelected.equals("")) {
+			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
 		}
 
 		log("/*42.---Click Save Consent Button --*/");

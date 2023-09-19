@@ -232,9 +232,11 @@ public class AppointmentDayManagementPage extends BasePage {
             By save_and_new_btn_path = By.xpath("//button[@name='SaveAndNew']");
             if(i < time_slots.size() - 1) {
                 WebElement save_and_new_btn = driver.findElement(save_and_new_btn_path);
+                Thread.sleep(500);
                 save_and_new_btn.click();
             } else {
                 WebElement save_btn = driver.findElement(save_btn_path);
+                Thread.sleep(500);
                 save_btn.click();
             }
         }

@@ -103,7 +103,7 @@ public class DIWA_Covid19_CP extends BaseTest {
             Thread.sleep(3000);
 
         log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
-        String consentProvider = profilesPage.consentProviderSelected();
+        String consentProvider = ProfilesPage.consentProviderSelected(driver);
         Thread.sleep(2000);
         if(consentProvider.equals("")) {
             consentProvider = profilesPage.selectConsentProvider();
