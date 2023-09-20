@@ -40,12 +40,16 @@ public class ReturnPage extends BasePage {
 
     public String getReturnedFromValue() throws InterruptedException {
         Thread.sleep(500);
-        By return_from_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_From__c']//a//span"
-                .concat(" | ")
-                .concat("//span[@class='test-id__field-label' and text()='Returned From']//a"));
+        By return_from_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_From__c']//a");
+                //.concat(" | ")
+                //.concat("//span[@class='test-id__field-label' and text()='Returned From']//a"));
         waitForElementToBeEnabled(driver, return_from_path, 10);
         WebElement return_from = driver.findElement(return_from_path);
-        return return_from.getText();
+        if(return_from.getText().isEmpty()) {
+            return return_from.findElement(By.xpath(".//span")).getText();
+        } else {
+            return return_from.getText();
+        }
     }
 
     public Map<String, WebElement> getReturnLineItemsTable() throws InterruptedException {

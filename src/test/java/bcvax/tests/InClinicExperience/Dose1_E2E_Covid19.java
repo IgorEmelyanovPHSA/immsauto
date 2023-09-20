@@ -34,6 +34,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	String consumptionDose;
 	String consumptionRoute;
 	String consumptionSite;
+	String consentProvider;
 
 	@Test(priority = 1)
 	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
@@ -47,6 +48,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
+		consentProvider = String.valueOf(testData.get("consentProvider"));
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
@@ -202,9 +204,17 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		inClinicExperience.selectVaccineAgent();
-		String consentProvider = inClinicExperience.consentProviderSelected();
-		if(consentProvider.equals("")) {
-			consentProvider = inClinicExperience.selectConsentProvider();
+
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
+
+		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+		if(consentProviderSelected.equals("")) {
+			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
 		}
 
 		System.out.println("/*42.---Click Save Consent Button --*/");

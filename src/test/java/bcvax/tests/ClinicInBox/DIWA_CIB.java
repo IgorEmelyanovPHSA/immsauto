@@ -23,6 +23,7 @@ public class DIWA_CIB extends BaseTest {
 	//String participant_name = "Rawley BCVaxIsmirnioglou";
 	//String participant_name = "Ping an Penelope BCVaxZhang";
 	String participant_name;
+	String consentProvider;
 
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
@@ -34,7 +35,8 @@ public class DIWA_CIB extends BaseTest {
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
-		participant_name = String.valueOf(testData.get("diwaCitizen"));
+		consentProvider = String.valueOf(testData.get("consentProvider"));
+		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClerk();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
@@ -71,22 +73,30 @@ public class DIWA_CIB extends BaseTest {
 		profilesPage.clickTimeBox();
 		log("/*---13. Click Record Immunization ---*/");
 		profilesPage.clickRecordImmunization();
+		Thread.sleep(2000);
+
 		if (profilesPage.clickPopupYesButtonIfDisplayed())
 			log("/*---13.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---12. Click X button on Diwa flow ---*/");
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
 		profilesPage.clickToClose();
+
 		log("/*---13. Validate message on clicking close button on modal popup ---*/");
 		profilesPage.validateoopsMessage();
 		log("/*---14. click on continue editing button to continue with the flow ---*/");
 		profilesPage.ContinueEditingButton();
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
-		String consentProvider = profilesPage.consentProviderSelected();
+		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 		Thread.sleep(2000);
-		String myConsentProvider = "Auto Bchcomclinician";
-		if(consentProvider.equals("")) {
-			consentProvider = profilesPage.selectConsentProvider(myConsentProvider);
+		if(consentProviderSelected.equals("")) {
+			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
 			try {
-				profilesPage.confirmConsentProvider(myConsentProvider);
+				profilesPage.confirmConsentProvider(consentProviderSelected);
 			} catch(Exception ex) {
 				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
 			}

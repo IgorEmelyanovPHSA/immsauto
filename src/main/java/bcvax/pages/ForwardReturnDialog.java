@@ -16,7 +16,7 @@ public class ForwardReturnDialog {
 
     public static String getOriginalSupplyLocation(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By original_supply_location_path = By.xpath("//div[@class='runtime_platform_actionsQuickActionWrapper']//p[contains(text(), 'Original Supply Location:')]");
+        By original_supply_location_path = By.xpath("//p[contains(text(), 'Original Supply Location:')]");
         BasePage.waitForElementToBeEnabled(driver, original_supply_location_path, 10);
         WebElement original_supply_location = driver.findElement(original_supply_location_path);
         String supply_location = original_supply_location.getText().split(": ")[1];

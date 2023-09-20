@@ -17,10 +17,10 @@ public class Returns extends BaseTest {
     MainPageOrg orgMainPage;
     String supply_item = "FluMist-Tri - BK2024B";
     String lot_number = "BK2024B";
-    String supply_location = "Automation Supply Location_1";
-    String supply_location_to = "Automation Supply Location_2";
+    String supply_location_from;
+    String supply_location_to;
     double doses = 100;
-    String distribution_to = "Automation Supply Distribution_1_1";
+    String distribution_to;
     String reason_for_wastage = "CCI: Equipment Malfunction";
     String receiver_comment = "This is to test the Receiver Comment";
 
@@ -30,6 +30,9 @@ public class Returns extends BaseTest {
         log("Target Environment: " + env);
         log("/*----Run Pre-conditions --*/");
         testData = Utils.getTestData(env);
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
         //Login as Admin
         log("/*----Login as Admin --*/");
         orgMainPage = loginPage.orgLoginAsPPHIS();
@@ -43,7 +46,7 @@ public class Returns extends BaseTest {
         supplyConsolePage.closeTabsHCA();
         supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
         supplyConsolePage.selectSupplyLocationFromDropdown();
-        supplyConsolePage.selectSupplyLocationName(supply_location);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*b.----Receive Supplies for Flu --*/");
         supplyConsolePage.SelectDropDownToClickReceiveSuppliesButton();
@@ -99,10 +102,10 @@ public class Returns extends BaseTest {
         log("/*3. ----Close all open tabs --*/");
         supplyConsolePage.closeTabsHCA();
 
-        log("/*4. ----Open Supply Location " + supply_location + " --*/");
+        log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
         supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
         supplyConsolePage.selectSupplyLocationFromDropdown();
-        supplyConsolePage.selectSupplyLocationName(supply_location);
+        supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*5. ----Click Return Button --*/");
         supplyConsolePage.clickReturnBtn();
@@ -237,19 +240,28 @@ public class Returns extends BaseTest {
         log("/*28. ----Verify Return Status is changed to Received --*/");
         String return_status_received = returnPage.getReturnStatus();
         softAssert.assertEquals(return_status_received, "Received");
-
         log("/*29. ----Verify Return Location History --*/");
         Map<String, WebElement> location_history = returnPage.getReturnLocationHistoryTable();
         String history_return_id = returnPage.getReturnLocationHistoryId(location_history.get("Return Location History ID"));
-        String history_receive_date = location_history.get("Received Date").getText();
-        String history_received_by = location_history.get("Received By").getText();
+        WebElement history_receive_date_row = location_history.get("Received Date");
+        String history_receive_date = history_receive_date_row.getText();
+        WebElement history_actioned_by_row = location_history.get("Actioned By");
+        if(history_actioned_by_row == null) {
+            history_actioned_by_row = location_history.get("Received By");
+        }
+        String history_actioned_by = history_actioned_by_row.getText();
         String history_from_location = returnPage.getLinkTextFromCellValue(location_history.get("From Location"));
         String history_to_location = returnPage.getLinkTextFromCellValue(location_history.get("To Location"));
-        String history_receiver_comment = location_history.get("Receiver Comment").getText();
+        WebElement history_receiver_comment_row = location_history.get("Comment");
+        if(history_receiver_comment_row == null) {
+            history_receiver_comment_row = location_history.get("Receiver Comment");
+        }
+        String history_receiver_comment = history_receiver_comment_row.getText();
+
         softAssert.assertTrue(!history_return_id.isEmpty(), "History Return ID is Empty");
         softAssert.assertTrue(!history_receive_date.isEmpty(), "History Return Receive Date is Empty");
-        softAssert.assertTrue(!history_received_by.isEmpty(), "History Return Receive By is Empty");
-        softAssert.assertEquals(history_from_location, supply_location, "Supply Location From doesn't match");
+        softAssert.assertTrue(!history_actioned_by.isEmpty(), "History Return Actioned By is Empty");
+        softAssert.assertEquals(history_from_location, supply_location_from, "Supply Location From doesn't match");
         softAssert.assertEquals(history_to_location, supply_location_to, "Supply Location To doesn't match");
         softAssert.assertEquals(history_receiver_comment, receiver_comment, "History Receiver Comment doesn't match");
 
@@ -259,8 +271,8 @@ public class Returns extends BaseTest {
         String forward_supply_location = ForwardReturnDialog.getOriginalSupplyLocation(driver);
         String forward_returned_to = ForwardReturnDialog.getReturnedTo(driver);
 
-        softAssert.assertEquals(forward_return_id, return_id);
-        softAssert.assertEquals(forward_supply_location, returned_from);
+        softAssert.assertEquals(forward_return_id, return_id, "Return IDs not match");
+        softAssert.assertEquals(forward_supply_location, returned_from, "Forward Supply Locations don't match");
         softAssert.assertAll();
     }
 }

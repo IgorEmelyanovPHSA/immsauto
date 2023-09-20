@@ -60,8 +60,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*----5. Click to Create Immunization Record Button ---*/");
         profilesPage.clickCreateImmunizationRecord();
 
-        log("/*----6. Click confirm Button on the popup window---*/");
-        profilesPage.clickConfirmButton();
+        try {
+            log("/*----6. Click confirm Button on the popup window---*/");
+            profilesPage.clickConfirmButton();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
         log("/*----7. Select an Option from the DropDown ---*/)");
         profilesPage.clickSelectAnOptionDropdown();
@@ -99,7 +103,7 @@ public class DIWA_Covid19_CP extends BaseTest {
             Thread.sleep(3000);
 
         log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
-        String consentProvider = profilesPage.consentProviderSelected();
+        String consentProvider = ProfilesPage.consentProviderSelected(driver);
         Thread.sleep(2000);
         if(consentProvider.equals("")) {
             consentProvider = profilesPage.selectConsentProvider();

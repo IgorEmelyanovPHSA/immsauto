@@ -39,6 +39,7 @@ public class Consumption extends BaseTest {
 	String consumptionDose;
 	SupplyConsolePage supplyConsolePage;
 	MainPageOrg orgMainPage;
+	String consentProvider;
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
@@ -56,6 +57,7 @@ public class Consumption extends BaseTest {
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
+		consentProvider = String.valueOf(testData.get("consentProvider"));
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		loginPage.loginAsClerk();
@@ -132,6 +134,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
+		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
 		try {
 			inClinicExperiencePage.selectEarlyBookingReason();
@@ -140,6 +143,15 @@ public class Consumption extends BaseTest {
 			System.out.println("***No Early Booking Option***");
 			System.out.println("***Warning***");
 		}
+
+		//If override Eligibility is shown
+		try {
+			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+			PersonAccountPage.overrideEligibility(driver);
+		} catch(Exception ex) {
+			System.out.println("There is not Override Eligibility Option");
+		}
+
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
@@ -189,11 +201,19 @@ public class Consumption extends BaseTest {
 			inClinicExperiencePage.selectVaccineAgent(consumptionAgent);
 		}
 		Thread.sleep(2000);
-		String consentProvider = inClinicExperiencePage.consentProviderSelected();
+
+		//If Incorrect vaccine warning is displayed
+		try {
+			ProfilesPage.confirm_warning(driver);
+		} catch(Exception ex) {
+			System.out.println("No Warning found");
+		}
+
+		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 		log("/*-- 48---Click Save Consent Button --*/");
-		if(consentProvider.equals("")) {
-			inClinicExperiencePage.selectConsentProvider();
-			consentProvider = inClinicExperiencePage.consentProviderSelected();
+		if(consentProviderSelected.equals("")) {
+			ProfilesPage.selectConsentProvider(driver, consentProvider);
+			consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 		}
 		inClinicExperiencePage.ClickSaveConsentButton();
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
