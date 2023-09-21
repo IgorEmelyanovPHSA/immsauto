@@ -132,7 +132,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 
 		try {
 			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			inClinicExperience.selectEarlyBookingReason();
+			PersonAccountPage.selectEarlyBookingReason(driver);
 			//commn.selectEarlyBookingReason();
 		} catch(Exception ex) {
 			System.out.println("There is not Early Booking Option");
@@ -185,7 +185,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickCheckInButton();
 		try {
 			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			inClinicExperience.selectEarlyBookingReason();
+			PersonAccountPage.selectEarlyBookingReason(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Early Booking Option");
 		}

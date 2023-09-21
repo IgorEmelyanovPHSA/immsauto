@@ -109,7 +109,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
         try {
-            inClinicExperience_CP.selectEarlyBookingReason();
+            PersonAccountPage.selectEarlyBookingReason(driver);
         } catch(TimeoutException ex) {
             System.out.println("DEBUG No need to select Early Booking Reason. Continue...");
         }

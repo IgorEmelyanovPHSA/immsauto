@@ -132,7 +132,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*----scroll down a bit --*/");
 		//If there is early reason screen select Early Reason
 		try {
-			inClinicExperience.selectEarlyBookingReason();
+			PersonAccountPage.selectEarlyBookingReason(driver);
 		} catch (Exception ex) {
 			System.out.println("Tried to select early reason if exist. Continue...");
 		}
