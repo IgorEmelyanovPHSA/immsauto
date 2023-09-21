@@ -189,9 +189,15 @@ public class ApiQueries {
     public static String queryToGetAccountId(String PersonEmail, String LastName, String FirstName) throws Exception {
         log("/*---Query to get AccountId record--*/ ");
         String AccountId = null;
+        String query;
         String oauthToken = getOauthToken();
 
-        String query ="/query?q=SELECT+ID+FROM+Account+WHERE+PersonEmail='"+PersonEmail+"'+AND+LastName='"+LastName+"'+AND+FirstName='"+FirstName+"'+Limit+3";
+        if(PersonEmail.equalsIgnoreCase("PIR_ACCOUNT")){
+           query ="/query?q=SELECT+ID+FROM+Account+WHERE+LastName='"+LastName+"'+AND+FirstName='"+FirstName+"'+Limit+3";
+        }
+        else{
+            query ="/query?q=SELECT+ID+FROM+Account+WHERE+PersonEmail='"+PersonEmail+"'+AND+LastName='"+LastName+"'+AND+FirstName='"+FirstName+"'+Limit+3";
+        }
 
         baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
         oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
@@ -393,6 +399,31 @@ public class ApiQueries {
             }
             deleteAccount(AccountId);
         }
+    }
+
+    public static void apiCallToRemoveCitizenParticipantAndPIRAccount(String PersonEmail, String LastName, String FirstName) throws Exception {
+        //Removing Participant account
+        String participantAccountId = queryToGetAccountId(PersonEmail,LastName,FirstName);
+        if(participantAccountId==null){
+            log("Duplicate account not found");
+        }
+        else {
+            ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(participantAccountId);
+            if (listOfImmunizationRecords.size() == 0) {
+                log("Immunization records not found");
+            } else {
+                for(int i=0; i < listOfImmunizationRecords.size(); i++){
+                    String immunizationRecordId = listOfImmunizationRecords.get(i);
+                    log("Immunization record to delete " +immunizationRecordId);
+                    deleteImmunizationRecord(immunizationRecordId);
+                }
+            }
+            deleteAccount(participantAccountId);
+        }
+
+        //Removing PIR account
+        String pirAccountId = queryToGetAccountId("PIR_ACCOUNT",LastName,FirstName);
+        deleteAccount(pirAccountId);
     }
 
 }
