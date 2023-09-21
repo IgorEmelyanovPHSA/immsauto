@@ -247,6 +247,68 @@ public class ApiQueries {
         return AccountId;
     }
 
+    public static String queryToGetAccountId(String phn, String accountType) throws Exception {
+        //Account type participant or PIR
+        log("/*---Query to get AccountId record--*/ ");
+        String AccountId = null;
+        String query;
+        String oauthToken = getOauthToken();
+
+        if(accountType.equalsIgnoreCase("participantAccount")){
+            query ="/query?q=SELECT+ID+FROM+Account+WHERE+BCH_Personal_Health_Number__c='"+phn+"'+AND+DDH__HC_Record_Type_Developer_Name__c='HC_Participant'";
+        }
+        else{
+            query ="/query?q=SELECT+ID+FROM+Account+WHERE+BCH_Personal_Health_Number__c='"+phn+"'+AND+DDH__HC_Record_Type_Developer_Name__c='PIR_Account'";
+        }
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        AccountId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("AccountId: " + AccountId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        } catch (Exception e) {  //reference to custom throws new Exception
+            e.printStackTrace();
+        }
+        return AccountId;
+    }
+
     public static ArrayList<String> queryToGetListOfImmunizationRecords(String AccountId) throws Exception {
         log("/*---Query to get immunization record--*/ ");
         ArrayList<String> ImmunizationRecordList = new ArrayList<String>();
@@ -343,7 +405,7 @@ public class ApiQueries {
     }
 
     public static void deleteAccount(String AccountId) throws Exception {
-        log("/*---Delete participant account " +AccountId +"--*/ ");
+        log("/*---Delete account " +AccountId +"--*/ ");
         String oauthToken = getOauthToken();
         oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
 
@@ -426,4 +488,33 @@ public class ApiQueries {
         deleteAccount(pirAccountId);
     }
 
+    public static void apiCallToRemoveParticipantAccountByPHN(String phn) throws Exception {
+        String AccountId = queryToGetAccountId(phn, "participantAccount");
+        if(AccountId==null){
+            log("Participant account not found");
+        }
+        else {
+            ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(AccountId);
+            if (listOfImmunizationRecords.size() == 0) {
+                log("Immunization records not found");
+            } else {
+                for(int i=0; i < listOfImmunizationRecords.size(); i++){
+                    String immunizationRecordId = listOfImmunizationRecords.get(i);
+                    log("Immunization record to delete " +immunizationRecordId);
+                    deleteImmunizationRecord(immunizationRecordId);
+                }
+            }
+            deleteAccount(AccountId);
+        }
+    }
+
+    public static void apiCallToRemovePIRAccountByPHN(String phn) throws Exception {
+        String AccountId = queryToGetAccountId(phn, "PIR");
+        if(AccountId==null){
+            log("PIR account not found");
+        }
+        else {
+            deleteAccount(AccountId);
+        }
+    }
 }
