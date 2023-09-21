@@ -34,7 +34,9 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastName, legalFirstName);
+        //tilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
