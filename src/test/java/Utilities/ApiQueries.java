@@ -463,31 +463,6 @@ public class ApiQueries {
         }
     }
 
-    public static void apiCallToRemoveCitizenParticipantAndPIRAccount(String PersonEmail, String LastName, String FirstName) throws Exception {
-        //Removing Participant account
-        String participantAccountId = queryToGetAccountId(PersonEmail,LastName,FirstName);
-        if(participantAccountId==null){
-            log("Duplicate account not found");
-        }
-        else {
-            ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(participantAccountId);
-            if (listOfImmunizationRecords.size() == 0) {
-                log("Immunization records not found");
-            } else {
-                for(int i=0; i < listOfImmunizationRecords.size(); i++){
-                    String immunizationRecordId = listOfImmunizationRecords.get(i);
-                    log("Immunization record to delete " +immunizationRecordId);
-                    deleteImmunizationRecord(immunizationRecordId);
-                }
-            }
-            deleteAccount(participantAccountId);
-        }
-
-        //Removing PIR account
-        String pirAccountId = queryToGetAccountId("PIR_ACCOUNT",LastName,FirstName);
-        deleteAccount(pirAccountId);
-    }
-
     public static void apiCallToRemoveParticipantAccountByPHN(String phn) throws Exception {
         String AccountId = queryToGetAccountId(phn, "participantAccount");
         if(AccountId==null){
@@ -515,6 +490,144 @@ public class ApiQueries {
         }
         else {
             deleteAccount(AccountId);
+        }
+    }
+
+    public static void apiCallToRemoveAppointmentsFromParticipantAccountByPHN(String phn) throws Exception {
+        String accountId = queryToGetAccountId(phn, "participantAccount");
+        if(accountId==null){
+            log("Participant account not found");
+        }
+        else {
+            ArrayList<String> listOfAppointmentsRecords = queryToGetListOfRecords(accountId, "appointment");
+            if (listOfAppointmentsRecords.size() == 0) {
+                log("Appointments records not found");
+            } else {
+                for(int i=0; i < listOfAppointmentsRecords.size(); i++){
+                    String appointmentRecordId = listOfAppointmentsRecords.get(i);
+                    log("Appointment record to delete " +appointmentRecordId);
+                    deleteRecord(appointmentRecordId,"appointment");
+                }
+            }
+        }
+    }
+
+    public static ArrayList<String> queryToGetListOfRecords(String accountId, String recordType) throws Exception {
+        //Query to get records for "appointment" OR "immunization"
+        String stringRecordType = null;
+        if(recordType.equalsIgnoreCase("appointment"))
+        {
+            stringRecordType ="/query?q=SELECT+ID+FROM+DDH__HC_Session__c+WHERE+DDH__HC_Patient__c='"+accountId+"'";
+        }
+
+        if(recordType.equalsIgnoreCase("immunization"))
+        {
+            stringRecordType ="/query?q=SELECT+ID+FROM+Case+WHERE+AccountId='"+accountId+"'";
+        }
+
+        log("Query to get record");
+        ArrayList<String> recordsList = new ArrayList<String>();
+        String recordId = null;
+        String oauthToken = getOauthToken();
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + stringRecordType;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        recordId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("recordId: " + recordId);
+                        recordsList.add(recordId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occurred. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        log("Found amount of " +recordType +" records: " + recordsList.size());
+        return recordsList;
+    }
+
+
+    public static void deleteRecord(String recordId, String recordType) throws Exception {
+        //Query to get records for "appointment" OR "immunization"
+        String stringQuery = null;
+        if(recordType.equalsIgnoreCase("appointment"))
+        {
+            stringQuery ="/sobjects/DDH__HC_Session__c/"+recordId;
+        }
+
+        if(recordType.equalsIgnoreCase("immunization"))
+        {
+            stringQuery ="/sobjects/Case/"+recordId;
+        }
+        log("Delete " +recordType +" record " +recordId +"--*/ ");
+
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + stringQuery;
+      //  String uri = baseUri + "/sobjects/Case/" + recordId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpDelete httpDelete = new HttpDelete(uri);
+            httpDelete.addHeader(oauthHeader);
+            httpDelete.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpDelete);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                log("Delete the " +recordType +" record successful.");
+            } else {
+                log(recordType +" record delete NOT successful. Status code is " + statusCode);
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
     }
 }
