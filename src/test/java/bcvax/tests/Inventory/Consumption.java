@@ -185,6 +185,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickRelatedTab();
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.clickCheckInButton();
+		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");

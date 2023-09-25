@@ -32,25 +32,7 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 	public void beforeMethod() throws Exception {
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-
-		loginPage.orgLoginAsPPHIS();
-		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
-		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
-		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
-		}
-		clinicInBox.verifyIsClinicInBoxPageDisplayed();
-
-		log("/*6.1.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
-		try {
-			orgMainPage.globalSearch(personalHealthNumber);
-			System.out.println("");
-		} catch(Exception ex) {
-			System.out.println("");
-		}
-		orgMainPage.logout();
+		Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastName, legalFirstName);
 	}
 
 	@AfterMethod
@@ -110,7 +92,15 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 //		if (!isUserFound){
 //			throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
 //		}
+		try {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+		} catch(Exception ex) {
+			System.out.println("Warning dialog didn't appear");
+		}
 
+		PersonAccountPage.clickVerifyPHNButton(driver);
+		PersonAccountPage.successMessageAppear(driver);
+		Thread.sleep(2000);
 		log("/*8.---Get unique link using Sales Force query over API--*/");
 		String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
@@ -155,7 +145,7 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		Assert.assertTrue(appointment_result);
 		}
 
-	//@Test(priority = 2)
+	@Test(priority = 2)
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");

@@ -106,12 +106,14 @@ public class Adjustments extends BaseTest {
 
 		log("/*7.----Click on Container's dropdown --*/");
 		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		Thread.sleep(1000);
 		log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
 		try {
 			supplyConsolePage.selectAdjustmentFromDropDown();
 		} catch (ElementNotInteractableException ex) {
 			System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
 			supplyConsolePage.clickOnFirstContainerDropDownMenu();
+			Thread.sleep(1000);
 			supplyConsolePage.selectAdjustmentFromDropDown();
 		}
 		double remainingDosesBeforeAdjustment = supplyConsolePage.getActualRemainingDoses();

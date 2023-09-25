@@ -40,9 +40,6 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
 	private WebElement verify_phn_button;
 	
-	@FindBy(xpath = "(.//button[@title = 'Next'])")
-	private WebElement next_button;
-	
 	@FindBy(xpath = "(.//input[@name = 'PersonEmail'])")
 	private WebElement email;
 	private By email1 = By.xpath("(.//input[@name = 'PersonEmail'])");
@@ -179,8 +176,11 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickNextButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", next_button);
-		waitForElementToBeVisible(driver, next_button, 10);
+		Thread.sleep(500);
+		By btn_next_path = By.xpath("(//button[@title = 'Next'])");
+		waitForElementToBeEnabled(driver, btn_next_path, 10);
+		WebElement next_button = driver.findElement(btn_next_path);
+		scrollIfNeeded(driver, next_button);
 		next_button.click();
 	}
 	

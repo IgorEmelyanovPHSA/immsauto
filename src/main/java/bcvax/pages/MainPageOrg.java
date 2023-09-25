@@ -101,6 +101,11 @@ public class MainPageOrg extends BasePage {
                         if (breadcrump_text.equals(app)) {
                             break;
                         }
+                    } else {
+                        String breadcrump_text = breadcrump_list.get(0).getText();
+                        if (breadcrump_text.equals(app)) {
+                            break;
+                        }
                     }
                     currentApp = currentApp();
                     Thread.sleep(200);
