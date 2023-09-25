@@ -21,8 +21,8 @@ public class AddAppointmentDays extends BaseTest {
         String appointment_date = "2023-8-27";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
 
-        LocalDate start_date = LocalDate.parse("2023-9-18", dtf);
-        LocalDate end_date = LocalDate.parse("2023-9-24", dtf);
+        LocalDate start_date = LocalDate.parse("2023-9-27", dtf);
+        LocalDate end_date = LocalDate.parse("2023-9-27", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {

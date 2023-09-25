@@ -137,7 +137,7 @@ public class Consumption extends BaseTest {
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
 		try {
-			inClinicExperiencePage.selectEarlyBookingReason();
+			PersonAccountPage.selectEarlyBookingReason(driver);
 		} catch(Exception ex) {
 			System.out.println("***Warning***");
 			System.out.println("***No Early Booking Option***");
@@ -168,7 +168,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 
 		log("/*--36.----click on Option Facility location  --*/");
-		inClinicExperiencePage.clickFacilityOptionLocation();
+		inClinicExperiencePage.clickOnFacilityOptionLocation();
 		log("/*--37.----select Appointment Day --*/");
 		inClinicExperiencePage.selectBookingAppointmentDay();
 		log("/*--38.---- select time slot for Appointment --*/");
@@ -185,6 +185,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickRelatedTab();
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.clickCheckInButton();
+		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");

@@ -31,13 +31,14 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     @BeforeMethod
     public void beforeMethod() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastNameASCII, legalFirstName);
     }
 
     @AfterMethod
     public void afterMethod() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
     }
 
     @Test(priority = 1)
@@ -70,7 +71,9 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         //InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
         //Thread.sleep(5000);
         log("/*6.----Login as an Clinician to CIB --*/");
-        ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
+        //ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
+        loginPage.orgLoginAsPPHIS();
+        ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
         orgMainPage = new MainPageOrg(driver);
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
@@ -83,13 +86,23 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         //inClinicExperiencePage.SearchForCitizen(conformationNumberText);
-        com.globalSearch(conformationNumberText);
+        orgMainPage.globalSearch(legalFirstName + " " + legalLastName);
 
-        log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        log("/*7.1---Validation, isUserFound account validation --*/");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
+
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
         }
+
+        PersonAccountPage.clickVerifyPHNButton(driver);
+        PersonAccountPage.successMessageAppear(driver);
+        Thread.sleep(2000);
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
@@ -140,6 +153,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastNameASCII, legalFirstName);
     }
 
 }

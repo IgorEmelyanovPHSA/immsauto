@@ -109,7 +109,7 @@ public class Wrong_Clinic_Arrival_CP extends BaseTest {
 
         //In case of early booking screen appeared
         try {
-            inClinicExperience_CP.selectEarlyBookingReason();
+            PersonAccountPage.selectEarlyBookingReason(driver);
         } catch(Exception ex) {
             System.out.println("No early booking button. Continue...");
         }

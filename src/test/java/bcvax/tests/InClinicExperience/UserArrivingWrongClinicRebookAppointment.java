@@ -136,7 +136,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 
 		//If there is early reason screen select Early Reason
 		try {
-			inClinicExperiencePage.selectEarlyBookingReason();
+			PersonAccountPage.selectEarlyBookingReason(driver);
 		} catch (Exception ex) {
 			System.out.println("Tried to select early reason if exist. Continue...");
 		}
@@ -153,7 +153,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.searchClinicName(clinicNameToBook);
 
 		log("/*--26.----click on Option Facility location  --*/");
-		inClinicExperiencePage.clickFacilityOptionLocation();
+		inClinicExperiencePage.clickOnFacilityOptionLocation();
 		log("/*--27.----select Appointment Day --*/");
 		inClinicExperiencePage.selectBookingAppointmentDay(1);
 		log("/*--28.---- select time slot for Appointment --*/");

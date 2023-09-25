@@ -128,4 +128,32 @@ public class PersonAccountPage extends BasePage {
         WebElement my_item = driver.findElement(my_item_path);
         my_item.click();
     }
+
+    public static void cancelProfileNotLinkedToPIRWarning(WebDriver driver) throws InterruptedException{
+        By cancel_btn_path = By.xpath("//button[@c-bchcmodal_bchcmodal and text()='Cancel']");
+        Thread.sleep(500);
+        waitForElementToBeEnabled(driver, cancel_btn_path, 10);
+        WebElement cancel_btn = driver.findElement(cancel_btn_path);
+        cancel_btn.click();
+    }
+
+    public static void clickVerifyPHNButton(WebDriver driver) throws InterruptedException {
+        By verify_phn_btn_path = By.xpath("//button[@title='Verify Personal Health Number']");
+        waitForElementToBeEnabled(driver, verify_phn_btn_path, 10);
+        WebElement verify_phn_btn = driver.findElement(verify_phn_btn_path);
+        verify_phn_btn.click();
+    }
+
+    public static void successMessageAppear(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
+        log("  -- success message has been Appears. Closing... - /");
+        try {
+            waitForElementToBeEnabled(driver, message_path, 10);
+            String message = driver.findElement(message_path).getText();
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            System.out.println("Probably alert already closed. Continue...");
+        }
+    }
 }
