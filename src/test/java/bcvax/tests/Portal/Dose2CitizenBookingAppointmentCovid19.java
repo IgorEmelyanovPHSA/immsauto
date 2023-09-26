@@ -32,7 +32,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     public void beforeMethod() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
-        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 
     @AfterMethod
@@ -153,7 +153,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
-        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 
 }

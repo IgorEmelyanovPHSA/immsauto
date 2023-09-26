@@ -32,7 +32,7 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 	public void beforeMethod() throws Exception {
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-		Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 
 	@AfterMethod
