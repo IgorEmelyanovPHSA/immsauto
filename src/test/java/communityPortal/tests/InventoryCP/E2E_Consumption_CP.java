@@ -122,11 +122,11 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
-        try {
-            PersonAccountPage.selectEarlyBookingReason(driver);
-        } catch(Exception ex) {
-            System.out.println("Early Booking reason option is not found. Continue...");
-        }
+//        try {
+//            PersonAccountPage.selectEarlyBookingReason(driver);
+//        } catch(Exception ex) {
+//            System.out.println("Early Booking reason option is not found. Continue...");
+//        }
 
         //If override Eligibility is shown
         try {

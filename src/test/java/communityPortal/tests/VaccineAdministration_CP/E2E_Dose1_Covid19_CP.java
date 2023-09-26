@@ -108,12 +108,12 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
-        try {
-            System.out.println("---click on reason Early Booking Reason - Travel --*/");
-            PersonAccountPage.selectEarlyBookingReason(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Early Booking Option");
-        }
+//        try {
+//            System.out.println("---click on reason Early Booking Reason - Travel --*/");
+//            PersonAccountPage.selectEarlyBookingReason(driver);
+//        } catch(Exception ex) {
+//            System.out.println("There is not Early Booking Option");
+//        }
 
         //If override Eligibility is shown
         try {

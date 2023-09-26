@@ -130,13 +130,13 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateToVaccineSchedulingTab();
 
-		try {
-			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			PersonAccountPage.selectEarlyBookingReason(driver);
-			//commn.selectEarlyBookingReason();
-		} catch(Exception ex) {
-			System.out.println("There is not Early Booking Option");
-		}
+//		try {
+//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//			//commn.selectEarlyBookingReason();
+//		} catch(Exception ex) {
+//			System.out.println("There is not Early Booking Option");
+//		}
 //If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -183,12 +183,12 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		inClinicExperience.clickCheckInButton();
-		try {
-			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			PersonAccountPage.selectEarlyBookingReason(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Early Booking Option");
-		}
+//		try {
+//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch(Exception ex) {
+//			System.out.println("There is not Early Booking Option");
+//		}
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		//System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		//inClinicExperience.validateVaccineAdminPageOpen();

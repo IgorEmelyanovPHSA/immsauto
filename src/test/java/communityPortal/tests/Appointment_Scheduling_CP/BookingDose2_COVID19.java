@@ -88,11 +88,11 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*19.----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
         //In case of Early Booking
-        try {
-            PersonAccountPage.selectEarlyBookingReason(driver);
-        } catch(Exception ex) {
-            System.out.println("No early Booking screen. Continue...");
-        }
+//        try {
+//            PersonAccountPage.selectEarlyBookingReason(driver);
+//        } catch(Exception ex) {
+//            System.out.println("No early Booking screen. Continue...");
+//        }
 
         //If override Eligibility is shown
         try {

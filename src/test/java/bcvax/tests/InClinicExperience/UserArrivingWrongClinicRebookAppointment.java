@@ -135,11 +135,11 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 
 		//If there is early reason screen select Early Reason
-		try {
-			PersonAccountPage.selectEarlyBookingReason(driver);
-		} catch (Exception ex) {
-			System.out.println("Tried to select early reason if exist. Continue...");
-		}
+//		try {
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch (Exception ex) {
+//			System.out.println("Tried to select early reason if exist. Continue...");
+//		}
 		System.out.println("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		inClinicExperiencePage.clickOnVaccinationCheckbox();
 		////////////////////
