@@ -66,6 +66,13 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         if (!isUserFound){
             throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
         }
+
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
+
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
         log("/*14.----click Verify PHN button --*/");
         inClinicExperience_CP.clickVerifyPHNButton();
@@ -97,12 +104,12 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
 
         //If override Eligibility is shown
-        try {
-            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
-        }
+//        try {
+//            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+//            PersonAccountPage.overrideEligibility(driver);
+//        } catch(Exception ex) {
+//            System.out.println("There is not Override Eligibility Option");
+//        }
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
         bookAnAppointmentPage.selectOneOption(vaccineToSelect);
