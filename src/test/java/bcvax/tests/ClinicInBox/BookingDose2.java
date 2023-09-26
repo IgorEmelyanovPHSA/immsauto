@@ -88,6 +88,13 @@ public class BookingDose2 extends BaseTest {
 		clinicInBox.clickRegisterButtonOnConfirmationPage();
 		log("/*17.--toast success message - 'Success' --*/");
 		clinicInBox.successRegisteredMessageAppear();
+
+		try {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+		} catch(Exception ex) {
+			System.out.println("Warning dialog didn't appear");
+		}
+
 		log("/*18.----click on person Account Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*19----Go to Appointment Tab --*/");

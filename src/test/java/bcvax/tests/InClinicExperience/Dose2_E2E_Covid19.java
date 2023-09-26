@@ -131,11 +131,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		//If there is early reason screen select Early Reason
-		try {
-			PersonAccountPage.selectEarlyBookingReason(driver);
-		} catch (Exception ex) {
-			System.out.println("Tried to select early reason if exist. Continue...");
-		}
+//		try {
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch (Exception ex) {
+//			System.out.println("Tried to select early reason if exist. Continue...");
+//		}
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");

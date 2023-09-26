@@ -9,18 +9,30 @@ import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
 
-    private String legalFirstName = "Hugues";
-    private String legalLastName = "BCVaxLampard";
+//    private String legalFirstName = "Hugues";
+//    private String legalLastName = "BCVaxLampard";
+//    private String legalMiddleName = "";
+//    private String dateOfBirth = "March 3, 1904";
+//    private String postalCode = "V1N3Q3";
+//    private String personalHealthNumber = "9746171121";
+//    private boolean isIndigenous = false;
+//    private String email = "accountToDelete@phsa.ca";
+//    private String phoneNumber = "6041234568";
+//    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+//    private String vaccineToSelect = "Covid19Vaccine";
+
+    private String legalFirstName = "Alexandro";
+    private String legalLastName = "BCVaxDa Costa";
+    private String legalLastNameASCII = "BCVaxDa%20Costa";
     private String legalMiddleName = "";
-    private String dateOfBirth = "March 3, 1904";
-    private String postalCode = "V1N3Q3";
-    private String personalHealthNumber = "9746171121";
+    private String dateOfBirth = "May 06, 1977";
+    private String postalCode = "V8W7P2";
+    private String personalHealthNumber = "9746172069";
     private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
-
     @Test(priority = 1)
     public void citizenPortalFlowDoseTwo() throws Exception {
         TestcaseID = "245218"; //C245218
@@ -28,7 +40,8 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastNameASCII, legalFirstName);
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -58,7 +71,14 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         if (!isUserFound){
             throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
         }
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
 
+        PersonAccountPage.clickVerifyPHNButton(driver);
+        PersonAccountPage.successMessageAppear(driver);
         //Extra step to log out from CP
         loginPage.logOutCommunityPortal();
 
@@ -82,12 +102,12 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
 
         //If override Eligibility is shown
-        try {
-            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
-        }
+//        try {
+//            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+//            PersonAccountPage.overrideEligibility(driver);
+//        } catch(Exception ex) {
+//            System.out.println("There is not Override Eligibility Option");
+//        }
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
         bookAnAppointmentPage.selectOneOption(vaccineToSelect);
@@ -109,6 +129,7 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastNameASCII, legalFirstName);
     }
 }

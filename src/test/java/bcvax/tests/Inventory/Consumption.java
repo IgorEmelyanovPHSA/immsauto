@@ -136,13 +136,13 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
-		try {
-			PersonAccountPage.selectEarlyBookingReason(driver);
-		} catch(Exception ex) {
-			System.out.println("***Warning***");
-			System.out.println("***No Early Booking Option***");
-			System.out.println("***Warning***");
-		}
+//		try {
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch(Exception ex) {
+//			System.out.println("***Warning***");
+//			System.out.println("***No Early Booking Option***");
+//			System.out.println("***Warning***");
+//		}
 
 		//If override Eligibility is shown
 		try {
