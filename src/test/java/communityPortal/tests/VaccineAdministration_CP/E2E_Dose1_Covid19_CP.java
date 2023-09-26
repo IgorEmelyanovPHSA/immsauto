@@ -22,7 +22,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     String clinicNameToSearch;
     Map<String, Object> testData;
     String consumptionAgent;
-    String vaccineAgent;
     String consumptionLot;
     String consumptionDose;
     String consumptionProvider;
@@ -41,7 +40,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         consumptionAgent = String.valueOf(testData.get("agentConsumption"));
-        vaccineAgent = String.valueOf(testData.get("vaccineAgent"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         consumptionProvider = String.valueOf(testData.get("providerConsumption"));
@@ -183,7 +181,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
+        inClinicExperience_CP.selectVaccineAgentValue(consumptionAgent);
 
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
         Thread.sleep(2000);

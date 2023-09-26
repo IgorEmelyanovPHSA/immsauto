@@ -20,10 +20,13 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
     String env;
     private String legalFirstName = "Rochester";
     private String legalLastName = "BCVaxStonbridge";
-   // private String legalMiddleName = "";
+    private String legalMiddleName = "Sheelagh";
     private String pirSubmissionField = "Submitted";
     private String patwayStatusFieldValidation = "Pathway Status";
     private String pirSubmissionStatusFieldValidation = "PIR Submission Status";
+    private String personalHealthNumber = "9746173132";
+    private String dateOfBirth = "1945-04-20";
+    private String postalCode = "V1Y8U9";
 
     @BeforeMethod
     public void setUpClass() throws Exception {
@@ -38,9 +41,9 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         //profilePage = cpMainPage.navigateToProfilesPage();
         log("/* 2.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");
         //profilePage.selectAllParticipantsOption();
-        cpMainPage.search(legalFirstName + " " + legalLastName);
+        cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage = new ProfilesPage(driver);
-        profilePage.openProfile(legalFirstName + " " + legalLastName);
+        profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage.clickRelatedTab();
         profilePage.navigateToHistoricalImmunizationRecords();
 
