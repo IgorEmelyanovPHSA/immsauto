@@ -1157,10 +1157,15 @@ public class SupplyConsolePage extends BasePage {
 				System.out.println("--- FOR DEBUG: Clicked More Actions button---");
 			} else {
 				System.out.println("--- FOR DEBUG: Didn't find More Actions button---");
-				System.out.println("--- FOR DEBUG: Try again find More Actions button after 2 seconds---");
-				Thread.sleep(2000);
-				listOfElements = driver.findElements(show_more_action_btn_path);
-				System.out.println("--- After Second attempt Found " + listOfElements.size() + " More button elements");
+				for(int i = 0; i < 10; i++) {
+					System.out.println("--- FOR DEBUG: Try again find More Actions button after 1 seconds---");
+					Thread.sleep(1000);
+					listOfElements = driver.findElements(show_more_action_btn_path);
+					System.out.println("--- After " + i + " attempt Found " + listOfElements.size() + " More button elements");
+					if(listOfElements.size() > 0) {
+						break;
+					}
+				}
 				listOfElements.get(0).click();
 			}
 			Thread.sleep(1000);
