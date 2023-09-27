@@ -12,17 +12,22 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class WastageCP extends BaseTest {
-	String supplyLocation = "Automation Supply Location_1";
+	String supplyLocation;
+	String env;
+	Map<String, Object> testData;
 	int firstRow = 1; //Default value, wasting from first row only
 	@Test()
 	public void Can_Do_Single_Wastage_ByDosagesCP() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		supplyLocation = String.valueOf(testData.get("supplyLocationFrom"));
 		double amountOfDosesToWaste = 3;
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
@@ -135,6 +140,9 @@ public class WastageCP extends BaseTest {
 	@Test()
 	public void Can_Do_Single_Wastage_ByQuantityCP() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		supplyLocation = String.valueOf(testData.get("supplyLocationFrom"));
 		double amountOfQuantityToWaste = 1;
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());

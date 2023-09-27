@@ -295,12 +295,12 @@ public class MainPageCP extends BasePage{
 
     public void logout() throws InterruptedException {
         Thread.sleep(500);
-        By profile_menu_btn_path = By.xpath("//button[@community_user-userprofilemenu_userprofilemenu]");
+        By profile_menu_btn_path = By.xpath("//community_user-user-profile-menu//button");
         waitForElementToBeEnabled(driver, profile_menu_btn_path, 10);
         WebElement profile_menu_button = driver.findElement(profile_menu_btn_path);
         profile_menu_button.click();
         Thread.sleep(500);
-        By logout_link_path = By.xpath("//span[@community_user-userprofilemenu_userprofilemenu and @title='Log Out']/..");
+        By logout_link_path = By.xpath("//community_user-user-profile-menu//span[@title='Log Out']/..");
         waitForElementToBeEnabled(driver, logout_link_path, 10);
         WebElement logout_link = driver.findElement(logout_link_path);
         logout_link.click();

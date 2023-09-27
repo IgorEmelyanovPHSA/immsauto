@@ -49,7 +49,7 @@ public class E2E_Consumption_CP extends BaseTest {
         consumptionSite = String.valueOf(testData.get("siteConsumption"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*1.----Login as Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
@@ -122,11 +122,11 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
-        try {
-            inClinicExperience_CP.selectEarlyBookingReason();
-        } catch(Exception ex) {
-            System.out.println("Early Booking reason option is not found. Continue...");
-        }
+//        try {
+//            PersonAccountPage.selectEarlyBookingReason(driver);
+//        } catch(Exception ex) {
+//            System.out.println("Early Booking reason option is not found. Continue...");
+//        }
 
         //If override Eligibility is shown
         try {
@@ -268,7 +268,7 @@ public class E2E_Consumption_CP extends BaseTest {
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 
 

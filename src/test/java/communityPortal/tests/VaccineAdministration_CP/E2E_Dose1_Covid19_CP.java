@@ -22,7 +22,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     String clinicNameToSearch;
     Map<String, Object> testData;
     String consumptionAgent;
-    String vaccineAgent;
     String consumptionLot;
     String consumptionDose;
     String consumptionProvider;
@@ -35,13 +34,12 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         CommonMethods commn = new CommonMethods(getDriver());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         consumptionAgent = String.valueOf(testData.get("agentConsumption"));
-        vaccineAgent = String.valueOf(testData.get("vaccineAgent"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         consumptionProvider = String.valueOf(testData.get("providerConsumption"));
@@ -108,12 +106,12 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*23----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
-        try {
-            System.out.println("---click on reason Early Booking Reason - Travel --*/");
-            PersonAccountPage.selectEarlyBookingReason(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Early Booking Option");
-        }
+//        try {
+//            System.out.println("---click on reason Early Booking Reason - Travel --*/");
+//            PersonAccountPage.selectEarlyBookingReason(driver);
+//        } catch(Exception ex) {
+//            System.out.println("There is not Early Booking Option");
+//        }
 
         //If override Eligibility is shown
         try {
@@ -183,7 +181,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.selectVaccineAgentValue(vaccineAgent);
+        inClinicExperience_CP.selectVaccineAgentValue(consumptionAgent);
 
         String consentProvider = inClinicExperience_CP.consentProviderSelected();
         Thread.sleep(2000);
@@ -246,7 +244,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 
 }

@@ -130,7 +130,7 @@ public class ClinicInBoxPage extends BasePage {
 			try {
 				closeTabBtn.click();
 				Thread.sleep(2000);
-			} catch (Exception ex) {
+			} catch (ElementNotInteractableException ex) {
 				System.out.println(ex.getMessage());
 				AlertDialog.closeAllAlerts(driver);
 				Thread.sleep(500);

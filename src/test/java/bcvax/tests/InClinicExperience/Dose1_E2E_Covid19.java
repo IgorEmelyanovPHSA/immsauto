@@ -40,7 +40,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -130,13 +130,13 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateToVaccineSchedulingTab();
 
-		try {
-			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			inClinicExperience.selectEarlyBookingReason();
-			//commn.selectEarlyBookingReason();
-		} catch(Exception ex) {
-			System.out.println("There is not Early Booking Option");
-		}
+//		try {
+//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//			//commn.selectEarlyBookingReason();
+//		} catch(Exception ex) {
+//			System.out.println("There is not Early Booking Option");
+//		}
 //If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -183,12 +183,12 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		inClinicExperience.clickCheckInButton();
-		try {
-			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-			inClinicExperience.selectEarlyBookingReason();
-		} catch(Exception ex) {
-			System.out.println("There is not Early Booking Option");
-		}
+//		try {
+//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch(Exception ex) {
+//			System.out.println("There is not Early Booking Option");
+//		}
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		//System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		//inClinicExperience.validateVaccineAdminPageOpen();
@@ -263,7 +263,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 
 }

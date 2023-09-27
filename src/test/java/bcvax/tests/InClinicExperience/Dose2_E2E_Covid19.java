@@ -41,7 +41,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("TestRail test case ID: C" +TestcaseID);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*1.----Login as an Clinician to ICE --*/");
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
@@ -131,11 +131,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		//If there is early reason screen select Early Reason
-		try {
-			inClinicExperience.selectEarlyBookingReason();
-		} catch (Exception ex) {
-			System.out.println("Tried to select early reason if exist. Continue...");
-		}
+//		try {
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch (Exception ex) {
+//			System.out.println("Tried to select early reason if exist. Continue...");
+//		}
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -256,6 +256,6 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 }

@@ -15,13 +15,16 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
 
 @Listeners({TestListener.class})
 public class AdjustmentsCP extends BaseTest {
-	String supplyLocation = "Automation Supply Location_1";
+	String env;
+	Map<String, Object> testData;
+	String supplyLocation;
 	@DataProvider(name = "dosesAmount")
 	public static Object[][] primeNumbers() {
 		return new Object[][]{{"25"}, {"-30"}};
@@ -35,6 +38,9 @@ public class AdjustmentsCP extends BaseTest {
 	@Test(dataProvider = "dosesAmount")
 	public void CP_Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value(String dosesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		supplyLocation = String.valueOf(testData.get("supplyLocationFrom"));
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
@@ -150,6 +156,9 @@ public class AdjustmentsCP extends BaseTest {
 	@Test(dataProvider = "quantitiesAmount")
 	public void CP_Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		supplyLocation = String.valueOf(testData.get("supplyLocationFrom"));
 		AllureLifecycle lifecycle = Allure.getLifecycle();
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());

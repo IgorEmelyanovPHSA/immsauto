@@ -17,9 +17,9 @@ public class BookingDose2_COVID19 extends BaseTest {
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
 
-    //private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     //workaround
-    private String clinicNameToSearch = "All Ages - Atlin Health Centre";
+    //private String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test(priority = 1)
@@ -27,7 +27,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         TestcaseID = "243155";
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*1.----Login as Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
@@ -88,11 +88,11 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*19.----Go to Appointment Tab --*/");
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
         //In case of Early Booking
-        try {
-            inClinicExperience_CP.selectEarlyBookingReason();
-        } catch(Exception ex) {
-            System.out.println("No early Booking screen. Continue...");
-        }
+//        try {
+//            PersonAccountPage.selectEarlyBookingReason(driver);
+//        } catch(Exception ex) {
+//            System.out.println("No early Booking screen. Continue...");
+//        }
 
         //If override Eligibility is shown
         try {
@@ -142,6 +142,6 @@ public class BookingDose2_COVID19 extends BaseTest {
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

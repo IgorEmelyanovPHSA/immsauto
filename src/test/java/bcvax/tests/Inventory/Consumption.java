@@ -58,7 +58,7 @@ public class Consumption extends BaseTest {
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		loginPage.loginAsClerk();
 		orgMainPage = new MainPageOrg(driver);
@@ -136,13 +136,13 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.navigateToVaccineSchedulingTab();
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
-		try {
-			inClinicExperiencePage.selectEarlyBookingReason();
-		} catch(Exception ex) {
-			System.out.println("***Warning***");
-			System.out.println("***No Early Booking Option***");
-			System.out.println("***Warning***");
-		}
+//		try {
+//			PersonAccountPage.selectEarlyBookingReason(driver);
+//		} catch(Exception ex) {
+//			System.out.println("***Warning***");
+//			System.out.println("***No Early Booking Option***");
+//			System.out.println("***Warning***");
+//		}
 
 		//If override Eligibility is shown
 		try {
@@ -168,7 +168,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
 
 		log("/*--36.----click on Option Facility location  --*/");
-		inClinicExperiencePage.clickFacilityOptionLocation();
+		inClinicExperiencePage.clickOnFacilityOptionLocation();
 		log("/*--37.----select Appointment Day --*/");
 		inClinicExperiencePage.selectBookingAppointmentDay();
 		log("/*--38.---- select time slot for Appointment --*/");
@@ -185,6 +185,7 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickRelatedTab();
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
 		inClinicExperiencePage.clickCheckInButton();
+		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
@@ -277,7 +278,7 @@ public class Consumption extends BaseTest {
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 
 }

@@ -101,6 +101,11 @@ public class MainPageOrg extends BasePage {
                         if (breadcrump_text.equals(app)) {
                             break;
                         }
+                    } else {
+                        String breadcrump_text = breadcrump_list.get(0).getText();
+                        if (breadcrump_text.equals(app)) {
+                            break;
+                        }
                     }
                     currentApp = currentApp();
                     Thread.sleep(200);
@@ -155,10 +160,14 @@ public class MainPageOrg extends BasePage {
         WebElement search_input = driver.findElement(search_field_path);
         try {
             search_input.sendKeys(search_value);
+            //Thread.sleep(500);
+            //search_input.sendKeys(Keys.ENTER);
         } catch(ElementNotInteractableException ex) {
             //////Retry
             Thread.sleep(2000);
             search_input.sendKeys(search_value);
+            //Thread.sleep(500);
+            //search_input.sendKeys(Keys.ENTER);
         }
         Thread.sleep(500);
         By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");

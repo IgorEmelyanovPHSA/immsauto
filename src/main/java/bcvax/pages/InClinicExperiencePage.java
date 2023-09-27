@@ -816,31 +816,31 @@ public class InClinicExperiencePage extends BasePage {
 		click_on_influenza_vaccination_checkbox.click();
 	}
 
-	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
-		Thread.sleep(5000);
-		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
-		Thread.sleep(2000);
-		click_early_booking_reason.click();
-		Thread.sleep(1000);
-		if (isDisplayed(select_early_booking_reason)) {
-			//waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-			Thread.sleep(1000);
-			select_early_booking_reason.click();
-		} else {//it's never go here - it's the same xpath for devit and prodsuppqa
-			waitForElementToBeVisible(driver, select_early_booking_reason_for_prodsup, 10);
-			Thread.sleep(2000);
-			select_early_booking_reason_for_prodsup.click();
-		}
-	}
+//	public void selectEarlyBookingReason() throws InterruptedException {
+//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
+//		Thread.sleep(5000);
+//		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
+//		Thread.sleep(2000);
+//		click_early_booking_reason.click();
+//		Thread.sleep(1000);
+//		if (isDisplayed(select_early_booking_reason)) {
+//			//waitForElementToBeVisible(driver, select_early_booking_reason, 10);
+//			Thread.sleep(1000);
+//			select_early_booking_reason.click();
+//		} else {//it's never go here - it's the same xpath for devit and prodsuppqa
+//			waitForElementToBeVisible(driver, select_early_booking_reason_for_prodsup, 10);
+//			Thread.sleep(2000);
+//			select_early_booking_reason_for_prodsup.click();
+//		}
+//	}
 
-	public void clickFacilityOptionLocation() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, option_loc_facility, 10);
-		option_loc_facility.click();
-	}
+//	public void clickFacilityOptionLocation() throws InterruptedException {
+//		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
+//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
+//		Thread.sleep(2000);
+//		waitForElementToBeVisible(driver, option_loc_facility, 10);
+//		option_loc_facility.click();
+//	}
 
 	public void selectBookingAppointmentDay() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
