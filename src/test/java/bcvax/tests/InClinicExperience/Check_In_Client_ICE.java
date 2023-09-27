@@ -47,7 +47,7 @@ public class Check_In_Client_ICE extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*6.----Navigate to More -> Register --*/");
         loginPage.loginAsClerk();
@@ -139,6 +139,6 @@ public class Check_In_Client_ICE extends BaseTest {
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

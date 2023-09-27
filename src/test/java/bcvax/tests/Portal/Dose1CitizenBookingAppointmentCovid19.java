@@ -31,14 +31,15 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 	}
 
 	@AfterMethod
 	public void afterMethod() throws Exception {
 		log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 	}
 
 	@Test(priority = 1)
@@ -149,7 +150,8 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 		}
 
 	}
