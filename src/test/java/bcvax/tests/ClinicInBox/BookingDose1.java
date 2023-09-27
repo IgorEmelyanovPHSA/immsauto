@@ -27,7 +27,7 @@ public class BookingDose1 extends BaseTest {
 	public void Can_Book_Dose1_Appointment_as_Clinician_CIB() throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
 
 		log("/*1.----Login --*/");
@@ -151,7 +151,7 @@ public class BookingDose1 extends BaseTest {
 	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
 		TestcaseID = "219865"; //C219865
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 
 }
