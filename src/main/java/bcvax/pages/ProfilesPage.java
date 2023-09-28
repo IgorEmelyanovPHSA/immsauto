@@ -285,6 +285,39 @@ public class ProfilesPage extends BasePage{
         return driver.findElement(providerFieldPath).getAttribute("data-value");
     }
 
+    public static void clickRecordConsentButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
+        waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
+        WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
+        scrollIfNeeded(driver, record_consent_btn);
+        Thread.sleep(500);
+        record_consent_btn.click();
+    }
+
+    public static void checkExistingConsent(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By existing_consent_checkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']/../../../..");
+        waitForElementToBeEnabled(driver, existing_consent_checkbox_path, 10);
+        WebElement existing_consent_checkbox = driver.findElement(existing_consent_checkbox_path);
+        scrollIfNeeded(driver, existing_consent_checkbox);
+        Thread.sleep(500);
+        if(existing_consent_checkbox.getAttribute("checked") == null) {
+            WebElement chkbox = existing_consent_checkbox.findElement(By.xpath(".//span[@part='indicator']"));
+            chkbox.click();
+        }
+    }
+
+    public static void clickEditImmunizationInformation(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By edit_immunization_info_btn_path = By.xpath("//c-bc-hc-immunization-info//button[@title='Edit']");
+        waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
+        WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
+        scrollIfNeeded(driver, edit_immunization_info_btn);
+        Thread.sleep(500);
+        edit_immunization_info_btn.click();
+    }
+
     public String selectConsentProvider() throws InterruptedException {
         WebElement consentProviderField = driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]"));
         scrollTop(consentProviderField);

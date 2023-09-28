@@ -210,13 +210,17 @@ public class Consumption extends BaseTest {
 			System.out.println("No Warning found");
 		}
 
-		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-		log("/*-- 48---Click Save Consent Button --*/");
-		if(consentProviderSelected.equals("")) {
-			ProfilesPage.selectConsentProvider(driver, consentProvider);
-			consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-		}
-		inClinicExperiencePage.ClickSaveConsentButton();
+//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		log("/*-- 48---Click Save Consent Button --*/");
+//		if(consentProviderSelected.equals("")) {
+//			ProfilesPage.selectConsentProvider(driver, consentProvider);
+//			consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		}
+//		inClinicExperiencePage.ClickSaveConsentButton();
+
+		ProfilesPage.checkExistingConsent(driver);
+		ProfilesPage.clickEditImmunizationInformation(driver);
+
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
 
 

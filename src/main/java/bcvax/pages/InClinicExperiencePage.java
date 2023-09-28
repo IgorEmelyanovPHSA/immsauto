@@ -868,7 +868,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void clickNextButtonApptSchedulingPage() throws InterruptedException {
 		Thread.sleep(500);
-		By next_btn_path = By.xpath("//button[text()='Next']");
+		By next_btn_path = By.xpath("//button[@c-bchappointmentscheduler_bchappointmentscheduler and text()='Next']");
 		waitForElementToBeEnabled(driver, next_btn_path, 10);
 		WebElement next_btn = driver.findElement(next_btn_path);
 		next_btn.click();

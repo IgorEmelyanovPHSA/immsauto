@@ -30,6 +30,7 @@ public class E2E_Consumption_CP extends BaseTest {
     String consumptionDose;
     String consumptionAgent;
     String consumptionProvider;
+    String consentProvider;
     String consumptionRoute;
     String consumptionSite;
 
@@ -45,6 +46,7 @@ public class E2E_Consumption_CP extends BaseTest {
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionAgent = String.valueOf(testData.get("agentConsumption"));
         consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+        consentProvider = String.valueOf(testData.get("consentProvider"));
         consumptionRoute = String.valueOf(testData.get("routeConsumption"));
         consumptionSite = String.valueOf(testData.get("siteConsumption"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
@@ -195,12 +197,16 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.selectVaccineAgent();
         Thread.sleep(2000);
 
-        String consentProvider = inClinicExperience_CP.consentProviderSelected();
-        if(consentProvider.equals("")) {
-            consentProvider = inClinicExperience_CP.selectConsentProvider();
-            consentProvider = inClinicExperience_CP.consentProviderSelected();
-        }
-        inClinicExperience_CP.ClickSaveConsentButton();
+//        String consentProvider = inClinicExperience_CP.consentProviderSelected();
+//        if(consentProvider.equals("")) {
+//            consentProvider = inClinicExperience_CP.selectConsentProvider();
+//            consentProvider = inClinicExperience_CP.consentProviderSelected();
+//        }
+//        inClinicExperience_CP.ClickSaveConsentButton();
+
+        ProfilesPage.checkExistingConsent(driver);
+        ProfilesPage.clickEditImmunizationInformation(driver);
+
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
         String agent = inClinicExperience_CP.getVaccineAgent();
         System.out.println("Current Agent: " + agent);
