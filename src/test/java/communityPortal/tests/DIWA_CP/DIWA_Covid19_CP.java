@@ -9,22 +9,29 @@ import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class DIWA_Covid19_CP extends BaseTest {
+    String env;
     private String legalFirstName = "John";
     private String legalLastName = "BCVaxChan";
     private String legalMiddleName = "Yuan bo";
     private String personal_health_nunber = "9746170785";
     private String date_of_birth = "1934-02-28";
     private String postal_code = "V2T0N1";
+    Map<String, Object> testData;
+    private String consentProvider;
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         //TestcaseID = "223187"; //C223187
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
         CommonMethods commonMethods = new CommonMethods(getDriver());
         String nameToSearch = "John Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
-
+        consentProvider = String.valueOf(testData.get("consentProvider"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
 
         log("/*1.----Login --*/");
@@ -98,21 +105,25 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*---14. click on continue editing button to continue with the flow ---*/");
         profilesPage.ContinueEditingButton();
 
-        log("/*---15. select date of Administration ---*/");
-        if (profilesPage.selectConsentEffectiveDate())
-            Thread.sleep(3000);
+//        log("/*---15. select date of Administration ---*/");
+//        if (profilesPage.selectConsentEffectiveDate())
+//            Thread.sleep(3000);
+//
+//        log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
+//        String consentProvider = ProfilesPage.consentProviderSelected(driver);
+//        Thread.sleep(2000);
+//        if(consentProvider.equals("")) {
+//            consentProvider = profilesPage.selectConsentProvider();
+//        }
+//        //profilesPage.selectInformedConsentProvider("Auto Clinician_DIWA_CP");
+//
+//        log("/*---17. click Save Consent ---*/");
+//        profilesPage.clickSaveConsent();
+//        Thread.sleep(2000);
 
-        log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
-        String consentProvider = ProfilesPage.consentProviderSelected(driver);
-        Thread.sleep(2000);
-        if(consentProvider.equals("")) {
-            consentProvider = profilesPage.selectConsentProvider();
-        }
-        //profilesPage.selectInformedConsentProvider("Auto Clinician_DIWA_CP");
+        ProfilesPage.checkExistingConsent(driver);
+        ProfilesPage.clickEditImmunizationInformation(driver);
 
-        log("/*---17. click Save Consent ---*/");
-        profilesPage.clickSaveConsent();
-        Thread.sleep(2000);
         log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician_DIWA_CP ---*/");
         profilesPage.selectImmunizingAgentProvider(consentProvider);
 

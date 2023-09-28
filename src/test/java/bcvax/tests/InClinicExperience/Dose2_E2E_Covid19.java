@@ -210,13 +210,17 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			System.out.println("No Warning found");
 		}
 
-		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-		if(consentProviderSelected.equals("")) {
-			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
-		}
+//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		if(consentProviderSelected.equals("")) {
+//			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
+//		}
+//
+//		log("/*42.---Click Save Consent Button --*/");
+//		inClinicExperience.ClickSaveConsentButton();
 
-		log("/*42.---Click Save Consent Button --*/");
-		inClinicExperience.ClickSaveConsentButton();
+		ProfilesPage.checkExistingConsent(driver);
+		ProfilesPage.clickEditImmunizationInformation(driver);
+
 		String lot = inClinicExperience.getLotNumber();
 		if(!lot.equals(consumptionLot)) {
 			inClinicExperience.setLotNumber(consumptionLot);

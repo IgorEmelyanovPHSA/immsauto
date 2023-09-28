@@ -29,6 +29,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
     String consumptionProvider;
     String consumptionRoute;
     String consumptionSite;
+    String consentProvider;
 
     @Test(priority = 1)
     public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
@@ -45,6 +46,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+        consentProvider = String.valueOf(testData.get("consentProvider"));
         consumptionRoute = String.valueOf(testData.get("routeConsumption"));
         consumptionSite = String.valueOf(testData.get("siteConsumption"));
         log("/*1.----Login as an Clinician to Community Portal --*/");
@@ -183,17 +185,21 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         Thread.sleep(2000);
         log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         inClinicExperience_CP.selectVaccineAgent();
-        String consentProvider = inClinicExperience_CP.consentProviderSelected();
-        Thread.sleep(2000);
-        if(consentProvider.equals("")) {
-            consentProvider = inClinicExperience_CP.selectConsentProvider();
-        }
-        Thread.sleep(2000);
-        log("/*43.---Click Save Consent Button --*/");
-        inClinicExperience_CP.ClickSaveConsentButton();
-        if(consentProvider.equals("")) {
-            consentProvider = inClinicExperience_CP.selectConsentProvider();
-        }
+//        String consentProvider = inClinicExperience_CP.consentProviderSelected();
+//        Thread.sleep(2000);
+//        if(consentProvider.equals("")) {
+//            consentProvider = inClinicExperience_CP.selectConsentProvider();
+//        }
+//        Thread.sleep(2000);
+//        log("/*43.---Click Save Consent Button --*/");
+//        inClinicExperience_CP.ClickSaveConsentButton();
+//        if(consentProvider.equals("")) {
+//            consentProvider = inClinicExperience_CP.selectConsentProvider();
+//        }
+
+        ProfilesPage.checkExistingConsent(driver);
+        ProfilesPage.clickEditImmunizationInformation(driver);
+
         Thread.sleep(2000);
         String agent = inClinicExperience_CP.getVaccineAgent();
         Thread.sleep(2000);

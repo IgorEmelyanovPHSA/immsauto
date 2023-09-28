@@ -114,22 +114,23 @@ public class DIWA_ICE extends BaseTest {
 		profilesPage.validateoopsMessage();
 		log("/*---18. click on continue editing button to continue with the flow ---*/");
 		profilesPage.ContinueEditingButton();
-		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-		Thread.sleep(2000);
-		if(consentProviderSelected.equals("")) {
-			consentProvider = ProfilesPage.selectConsentProvider(driver, consentProvider);
-			try {
-				profilesPage.confirmConsentProvider(consentProvider);
-			} catch(Exception ex) {
-				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
-			}
-		}
-
-		profilesPage.selectConsentEffectiveDate();
-		log("/*---21. click Save Consent ---*/");
-		profilesPage.clickSaveConsent();
-		Thread.sleep(2000);
-
+//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		Thread.sleep(2000);
+//		if(consentProviderSelected.equals("")) {
+//			consentProvider = ProfilesPage.selectConsentProvider(driver, consentProvider);
+//			try {
+//				profilesPage.confirmConsentProvider(consentProvider);
+//			} catch(Exception ex) {
+//				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
+//			}
+//		}
+//
+//		profilesPage.selectConsentEffectiveDate();
+//		log("/*---21. click Save Consent ---*/");
+//		profilesPage.clickSaveConsent();
+//		Thread.sleep(2000);
+		ProfilesPage.checkExistingConsent(driver);
+		ProfilesPage.clickEditImmunizationInformation(driver);
 		log("/*---22. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
 		//log("/*---19. select date of Administration ---*/");
 		//profilesPage.selectDateOfAdministration();
