@@ -59,9 +59,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Supply Items')]")
-	private WebElement searchSupplyItems;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 
 	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_1_2')]")
@@ -1367,9 +1364,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public SupplyConsolePage selectSupplyItemTo(String supplyItem) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		log(" -- select supply item  -  " + supplyItem);
-		selectSupplyTo(searchSupplyItems, supplyItem);
+		By search_supply_item_path = By.xpath("//input[contains(@placeholder,'Search Supply Items')]");
+		waitForElementToBeEnabled(driver, search_supply_item_path, 10);
+		WebElement search_supply_items = driver.findElement(search_supply_item_path);
+		selectSupplyTo(search_supply_items, supplyItem);
 		return this;
 	}
 
@@ -1380,8 +1380,9 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys(location);
 		Thread.sleep(5000);
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + location + "')]");
-		waitForElementToBePresent(driver, locationTo, 30);
-		click(driver.findElement(locationTo));
+		waitForElementToBeEnabled(driver, locationTo, 30);
+		WebElement my_location = driver.findElement(locationTo);
+		my_location.click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 	@Step
