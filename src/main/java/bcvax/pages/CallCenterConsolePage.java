@@ -9,10 +9,6 @@ import java.util.List;
 public class CallCenterConsolePage extends BasePage {
 	
 	/*---------Properties-------*/
-	@FindBy(xpath = ".//button[text() = 'Register New Citizen']")
-	private WebElement register_button;
-	private By register_button_1 = By.xpath(".//button[text() = 'Register New Citizen']");
-	
 	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
 	private WebElement first_name;
 	private By first_name1 = By.xpath("(.//input[@name = 'FirstName'])");
@@ -120,8 +116,10 @@ public class CallCenterConsolePage extends BasePage {
 	}
 	
 	public void clickRegisterButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, register_button, 10);
-		WebElement element = driver.findElement(register_button_1);
+		Thread.sleep(500);
+		By register_button_path = By.xpath("//button[text() = 'Register New Citizen']");
+		waitForElementToBeEnabled(driver, register_button_path, 10);
+		WebElement register_button = driver.findElement(register_button_path);
 		register_button.click();
 	}
 	

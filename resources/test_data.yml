@@ -293,5 +293,5 @@ regression:
   consumptionDose: "0.3"
   consumptionLot: "EK4241"
   useDefaultSettingsLots:
-    - "ABZ5320"
-    - "FF5109"
+    - "NK2858B"
+    - "EK4241"

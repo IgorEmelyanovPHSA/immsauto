@@ -102,7 +102,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
 
         log("/*11.---Schedule vaccination page is displayed--*/");
         bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
-
+        Thread.sleep(1000);
         //If override Eligibility is shown
 //        try {
 //            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");

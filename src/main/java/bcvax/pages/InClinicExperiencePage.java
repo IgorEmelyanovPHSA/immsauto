@@ -108,8 +108,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'][1])")
 	private WebElement booking_app_active_day;
 
-	private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'][1])");
-
 	@FindBy(xpath = "//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']")
 	private WebElement appointment_status_cancel;
 	private By appointment_status_cance1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
@@ -858,12 +856,13 @@ public class InClinicExperiencePage extends BasePage {
 
 
 	public void selectTimeSlotForAppointment() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(time_slot_appointment1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+		By time_slot_appointment_path = By.xpath("(.//button[@name='timeslot'][1])");
+		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
+		WebElement element = driver.findElement(time_slot_appointment_path);
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript("arguments[0].click();", element);
+		element.click();
 	}
 
 	public void clickNextButtonApptSchedulingPage() throws InterruptedException {
@@ -1057,6 +1056,7 @@ public class InClinicExperiencePage extends BasePage {
 				Thread.sleep(1000);
 				WebElement my_button = my_view.findElement(By.xpath(".//button"));
 				my_button.click();
+				Thread.sleep(1000);
 				break;
 			}
 		}
