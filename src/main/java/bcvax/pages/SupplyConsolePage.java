@@ -35,10 +35,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
 
-	@FindBy(xpath = ".//button[text() = 'Cancel Transfer']")
-	private WebElement bulk_cancel_button;
-	private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
-
 	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
 	private WebElement successMessage;
 
@@ -366,14 +362,21 @@ public class SupplyConsolePage extends BasePage {
 		return (tables.getSupplyContainerTable().getRows().size() - 1);
 	}
 
-	public void clickBulkTransfersButton() {
-		waitForElementToBeLocated(driver, bulk_transfers_button_1, 10);
-		this.bulk_transfers_button.click();
+	public void clickBulkTransfersButton() throws InterruptedException{
+		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
+		waitForElementToBeEnabled(driver, transfer_button_path, 10);
+		WebElement transfer_button = driver.findElement(transfer_button_path);
+		scrollIfNeeded(driver, transfer_button);
+		transfer_button.click();
 	}
 	public SupplyConsolePage clickBulkCancelButton() throws InterruptedException {
-		waitForElementToBePresent(driver, bulk_transfers_button_1, 10);
-		moveToElement(bulk_cancel_button);
-		click(bulk_cancel_button);
+		By cancel_transfer_button_path = By.xpath("//button[text() = 'Cancel Transfer']");
+		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
+		waitForElementToBeEnabled(driver, cancel_transfer_button_path, 10);
+		WebElement bulk_cancel_button = driver.findElement(cancel_transfer_button_path);
+		waitForElementToBeEnabled(driver, transfer_button_path, 10);
+		scrollIfNeeded(driver, bulk_cancel_button);
+		bulk_cancel_button.click();
 		return this;
 	}
 
@@ -500,14 +503,14 @@ public class SupplyConsolePage extends BasePage {
 		WebElement transactions_tab = driver.findElement(transactions_tab_path);
 		scrollTop(transactions_tab);
 		Thread.sleep(500);
-		int counter = 0;
-
-		try {
-			transactions_tab.click();
-		} catch(Exception ex) {
-			System.out.println("Exception: " + ex.getMessage());
-			Thread.sleep(5000);
-			transactions_tab.click();
+		for(int i = 0; i < 10; i++) {
+			try {
+				transactions_tab.click();
+				break;
+			} catch (ElementClickInterceptedException ex) {
+				System.out.println("Exception: " + ex.getMessage());
+				Thread.sleep(1000);
+			}
 		}
 	}
 
@@ -1273,6 +1276,7 @@ public class SupplyConsolePage extends BasePage {
 		} catch(Exception ex) {
 			System.out.println("---Cannot switch the view---");
 		}
+		Thread.sleep(1000);
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);

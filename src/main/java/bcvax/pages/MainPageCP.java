@@ -44,9 +44,6 @@ public class MainPageCP extends BasePage{
     private WebElement click_save_defaults_button;
     private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
 
-    @FindBy(xpath = "//a[@title = 'Register']")
-    private WebElement sub_menu_Register;
-
     @FindBy(xpath = "//a[@title = 'Submit Requisition']")
     private WebElement submitRequisitionButton;
     private By submit_requisition_button = By.xpath("//a[@title = 'Submit Requisition']");
@@ -251,16 +248,19 @@ public class MainPageCP extends BasePage{
             WebElement register_btn = driver.findElement(registerBtnPath);
             register_btn.click();
         } catch(ElementClickInterceptedException ex) {
+            System.out.println("Tried to click Register Tab " + ex.getMessage());
             Thread.sleep(3000);
             WebElement register_btn = driver.findElement(registerBtnPath);
             register_btn.click();
         } catch(Exception ex) {
+            System.out.println("Tried to click Register Tab " + ex.getMessage());
             WebElement main_menu_more_btn = driver.findElement(main_menu_more_btn_path);
-            click(main_menu_more_btn);
+            main_menu_more_btn.click();
             Thread.sleep(2000);
-            waitForElementToBeClickable(sub_menu_Register);
-            Thread.sleep(2000);
-            click(sub_menu_Register);
+            By submenu_register_item_path = By.xpath("//a[@title = 'Register']");
+            waitForElementToBeEnabled(driver, submenu_register_item_path, 10);
+            WebElement sub_menu_register = driver.findElement(submenu_register_item_path);
+            sub_menu_register.click();
         }
         Thread.sleep(2000);
         return new InClinicExperiencePage(driver);

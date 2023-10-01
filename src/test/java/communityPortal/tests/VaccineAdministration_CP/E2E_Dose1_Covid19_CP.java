@@ -184,8 +184,8 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         Thread.sleep(2000);
+        Thread.sleep(1000);
         inClinicExperience_CP.selectVaccineAgentValue(consumptionAgent);
-
 //        String consentProvider = inClinicExperience_CP.consentProviderSelected();
 //        Thread.sleep(2000);
 //        if(consentProvider.equals("")) {
@@ -202,6 +202,8 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         ProfilesPage.checkExistingConsent(driver);
         ProfilesPage.clickEditImmunizationInformation(driver);
 
+
+        Thread.sleep(1000);
         String agent = inClinicExperience_CP.getVaccineAgent();
         Thread.sleep(2000);
         String provider =  inClinicExperience_CP.getProvider();

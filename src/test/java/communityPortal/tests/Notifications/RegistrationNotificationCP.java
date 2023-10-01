@@ -1,10 +1,7 @@
 package communityPortal.tests.Notifications;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -89,8 +86,13 @@ public class RegistrationNotificationCP extends BaseTest {
 
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
-        Thread.sleep(5000);
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
 
+        Thread.sleep(1000);
         log("/*22.----click on person Account Related Tab --*/");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
@@ -98,10 +100,10 @@ public class RegistrationNotificationCP extends BaseTest {
         inClinicExperience_CP.navigateToVaccineSchedulingTab();
 
         try {
-            log("---click on reason Early Booking Reason - Travel --*/");
-            commn.selectEarlyBookingReason();
+            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+            PersonAccountPage.overrideEligibility(driver);
         } catch(Exception ex) {
-            log("There is not Early Booking Option");
+            System.out.println("There is not Override Eligibility Option");
         }
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
