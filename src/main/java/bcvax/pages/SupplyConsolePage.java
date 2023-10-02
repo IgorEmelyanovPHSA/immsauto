@@ -83,10 +83,6 @@ public class SupplyConsolePage extends BasePage {
 	private WebElement get_trade_name;
 	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
 
-	@FindBy(xpath = ".//a/span[text() = 'Confirm']")
-	private WebElement select_Confirm_in_dropdown;
-	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
-
 	@FindBy(xpath = ".//*[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
 	private By click_on_related_item_tab_1 = By.xpath(".//*[text() = 'Related Items']");
@@ -1067,9 +1063,11 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void selectConfirmIncomingDropDown() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 30);
-		Thread.sleep(2000);
-		select_Confirm_in_dropdown.click();
+		Thread.sleep(500);
+		By select_confirm_in_dropdown_path = By.xpath("//span[text() = 'Confirm']/..");
+		waitForElementToBeEnabled(driver, select_confirm_in_dropdown_path, 10);
+		WebElement select_confirm_in_dropdown = driver.findElement(select_confirm_in_dropdown_path);
+		select_confirm_in_dropdown.click();
 	}
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
