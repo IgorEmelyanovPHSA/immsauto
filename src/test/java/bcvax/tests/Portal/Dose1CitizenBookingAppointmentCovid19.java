@@ -42,14 +42,12 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 	}
 
-	@Test(priority = 1)
+	@Test()
 	public void citizenPortalBookDoseOneCovid19() throws Exception {
-		TestcaseID = "222521"; //C222521
+		TestcaseID = "222521";
+		log("TestCase: C222521");
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		//CommonMethods com = new CommonMethods(getDriver());
-
-		//log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		//Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
 		log("/*1.---Open citizen portal and click btn Register Now--*/");
 		RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -146,12 +144,4 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		Assert.assertTrue(appointment_result);
 		}
 
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
-		}
-
-	}
+}

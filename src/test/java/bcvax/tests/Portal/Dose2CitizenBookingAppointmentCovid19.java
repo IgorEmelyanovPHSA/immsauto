@@ -17,7 +17,6 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
     private String legalFirstName = "Alexandro";
     private String legalLastName = "BCVaxDa Costa";
-    private String legalLastNameASCII = "BCVaxDa%20Costa";
     private String legalMiddleName = "";
     private String dateOfBirth = "May 06, 1977";
     private String postalCode = "V8W7P2";
@@ -28,6 +27,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
     MainPageOrg orgMainPage;
+
     @BeforeMethod
     public void beforeMethod() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -42,14 +42,12 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
     }
 
-    @Test(priority = 1)
+    @Test()
     public void citizenPortalFlowDoseTwo() throws Exception {
-        TestcaseID = "222522"; //C222522
+        TestcaseID = "222522";
+        log("TestCase: C222522");
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        CommonMethods com = new CommonMethods(getDriver());
-
-        //log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        //CommonMethods com = new CommonMethods(getDriver());
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -147,14 +145,6 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         log("/*16---Verify appointment conformation message is displayed--*/");
         boolean appointment_result = bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
         Assert.assertTrue(appointment_result);
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
     }
 
 }

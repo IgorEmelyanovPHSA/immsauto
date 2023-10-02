@@ -15,14 +15,14 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
     private String dateOfBirth = "Dec 17, 1992";
     private String personalHealthNumber = "9746173078";
     private String postalCode = "V9L6G8";
-    private String email = "accountToDelete@phsa.ca";
     private String minorAilmentsToSelect = "Contraception";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String notesToPharmacist = "This message created by automation";
 
     @Test
-    public void MinorAilmentsE2EBooking() throws Exception {
-        TestcaseID = "259525"; //C259525
+    public void MinorAilmentsE2EBooking_C259525() throws Exception {
+        TestcaseID = "259525";
+        log("TestCase: C259525");
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("API call to remove appointments from participant account by PHN if found");
@@ -98,11 +98,16 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         log("19. Navigate to Related tab");
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
+        log("20. Navigate to Appointments and click view all");
+        inClinicExperience_CP.navigateToAppointmentRecords();
 
+        log("21. Open created appointment");
+        inClinicExperience_CP.openAppointmentRecord(confirmedAppointmentDataTime);
 
+        log("22. Verify Citizen Comment: " +notesToPharmacist);
+        Assert.assertEquals(inClinicExperience_CP.getCitizenComment(), notesToPharmacist);
 
-
-
-        log("/*1. Open Minor Ailments portal");
+        log("23. Verify that Client Reason for Visit: Minor Ailments and Contraception");
+        Assert.assertEquals(inClinicExperience_CP.getReasonForVisit(), "Minor Ailments and Contraception");
     }
 }
