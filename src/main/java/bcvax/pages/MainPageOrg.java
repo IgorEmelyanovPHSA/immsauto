@@ -37,6 +37,8 @@ public class MainPageOrg extends BasePage {
                 end = Instant.now();
                 if(Duration.between(start, end).toMillis() > timeout) {
                     throw new NotFoundException("Current APP tab not found");
+                } else {
+                    current_app = driver.findElement(current_app_path);
                 }
                 Thread.sleep(200);
             }

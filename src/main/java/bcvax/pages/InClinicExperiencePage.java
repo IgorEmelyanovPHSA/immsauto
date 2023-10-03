@@ -273,6 +273,11 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//label[text() = 'Clinic Name']/../../../lightning-formatted-text")
 	private WebElement appointmentLocation;
 
+	@FindBy(xpath = "//span[@title and contains(text(), 'Appointments')]")
+	private WebElement appointmentsRecordsTitle;
+
+	@FindBy(xpath = "//div[@aria-label='Appointments|Appointments|List View']/..//span[@class='view-all-label']")
+	private WebElement btnViewAllAppointments;
 
 	Tables tables;
 
@@ -858,17 +863,18 @@ public class InClinicExperiencePage extends BasePage {
 
 
 	public void selectTimeSlotForAppointment() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", time_slot_appointment);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(time_slot_appointment1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+		By time_slot_appointment_path = By.xpath("(.//button[@name='timeslot'][1])");
+		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
+		WebElement element = driver.findElement(time_slot_appointment_path);
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript("arguments[0].click();", element);
+		element.click();
 	}
 
 	public void clickNextButtonApptSchedulingPage() throws InterruptedException {
 		Thread.sleep(500);
-		By next_btn_path = By.xpath("//button[text()='Next']");
+		By next_btn_path = By.xpath("//button[@c-bchappointmentscheduler_bchappointmentscheduler and text()='Next']");
 		waitForElementToBeEnabled(driver, next_btn_path, 10);
 		WebElement next_btn = driver.findElement(next_btn_path);
 		next_btn.click();
@@ -1057,6 +1063,7 @@ public class InClinicExperiencePage extends BasePage {
 				Thread.sleep(1000);
 				WebElement my_button = my_view.findElement(By.xpath(".//button"));
 				my_button.click();
+				Thread.sleep(1000);
 				break;
 			}
 		}
@@ -1774,4 +1781,49 @@ public class InClinicExperiencePage extends BasePage {
 		int count = tables.getDeferralsTable().getRows().size();
 		return count;
 	}
+
+	public void navigateToAppointmentRecords() throws InterruptedException {
+		Thread.sleep(2000);
+		waitForElementToBeVisible(driver, appointmentsRecordsTitle, 10);
+		scrollTop(appointmentsRecordsTitle);
+		Thread.sleep(3000);
+
+		for(int i = 0; i < 10; i++) {
+			try {
+				WebElement element = tables.getAppointmentsRecordsTable().getRowsMappedToHeadings().get(0).get("Subject");
+				scrollTop(element);
+				Thread.sleep(1000);
+				tables.getAppointmentsRecordsTable().getRowsMappedToHeadings().get(1);
+				break;
+			} catch (Exception ex) {
+				log("Try " + i + "; Table is still empty");
+			}
+		}
+		click(btnViewAllAppointments);
+	}
+
+	public void openAppointmentRecord(String appointmentDataTime) throws InterruptedException {
+		By titleAppointments = By.xpath("//h1[@title='Appointments']");
+		waitForElementToBePresent(driver, titleAppointments, 10);
+		String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
+
+		WebElement appointmentDataTimeWebElement = driver.findElement(By.xpath("(//span[contains(text(),'" + formatAppointmentDataTime + "')]/../../..//a[@data-refid='recordId'])"));
+		click(appointmentDataTimeWebElement);
+		Thread.sleep(3000);
+	}
+
+	public String getReasonForVisit(){
+		By clientReasonForVisitElement = By.xpath("//span[contains(text(),'Client Reason for Visit')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']");
+		waitForElementToBePresent(driver, clientReasonForVisitElement, 10);
+		String getClientReasonForVisitString = driver.findElement(clientReasonForVisitElement).getText();
+		return getClientReasonForVisitString;
+	}
+
+	public String getCitizenComment(){
+		By clientReasonForVisitElement = By.xpath("//span[contains(text(),'Citizen Comment')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']");
+		waitForElementToBePresent(driver, clientReasonForVisitElement, 10);
+		String getClientReasonForVisitString = driver.findElement(clientReasonForVisitElement).getText();
+		return getClientReasonForVisitString;
+	}
+
 }

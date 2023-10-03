@@ -129,14 +129,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		//inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		inClinicExperience.navigateToVaccineSchedulingTab();
-
-//		try {
-//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-//			PersonAccountPage.selectEarlyBookingReason(driver);
-//			//commn.selectEarlyBookingReason();
-//		} catch(Exception ex) {
-//			System.out.println("There is not Early Booking Option");
-//		}
+		Thread.sleep(2000);
 //If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -144,17 +137,11 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
+		Thread.sleep(2000);
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		inClinicExperience.clickOnVaccinationCheckbox();
-		////////////////////
-		//May will be removed
-		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
-		///////////////////
-		//System.out.println("/*29----click on 'More' search tab --*/");
-		//inClinicExperience.clickOnMoreSearchTabs();
-		//Thread.sleep(2000);
+
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
 		inClinicExperience.selectSearchByClinicNameTab();
 
@@ -183,15 +170,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		inClinicExperience.clickCheckInButton();
-//		try {
-//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-//			PersonAccountPage.selectEarlyBookingReason(driver);
-//		} catch(Exception ex) {
-//			System.out.println("There is not Early Booking Option");
-//		}
-		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
-		//System.out.println("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		//inClinicExperience.validateVaccineAdminPageOpen();
+
 		System.out.println("/*40.---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		System.out.println("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
@@ -212,14 +191,16 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			System.out.println("No Warning found");
 		}
 
-		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-		if(consentProviderSelected.equals("")) {
-			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
-		}
+		ProfilesPage.checkExistingConsent(driver);
+		ProfilesPage.clickEditImmunizationInformation(driver);
+		//String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+		//if(consentProviderSelected.equals("")) {
+		//	consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
+		//}
 
-		System.out.println("/*42.---Click Save Consent Button --*/");
+		//System.out.println("/*42.---Click Save Consent Button --*/");
 
-		inClinicExperience.ClickSaveConsentButton();
+		//inClinicExperience.ClickSaveConsentButton();
 		String agent = inClinicExperience.getVaccineAgent();
 		String provider =  inClinicExperience.getProvider();
 		String route = inClinicExperience.getRoute();

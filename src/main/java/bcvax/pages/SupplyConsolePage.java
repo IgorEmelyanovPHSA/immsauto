@@ -35,10 +35,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
 
-	@FindBy(xpath = ".//button[text() = 'Cancel Transfer']")
-	private WebElement bulk_cancel_button;
-	private By bulk_transfers_button_1 = By.xpath(".//button[text() = 'Transfer']");
-
 	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
 	private WebElement successMessage;
 
@@ -63,9 +59,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Supply Items')]")
-	private WebElement searchSupplyItems;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 
 	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_1_2')]")
@@ -89,10 +82,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//input[@name = 'BCH_Product_Name__c']")
 	private WebElement get_trade_name;
 	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
-
-	@FindBy(xpath = ".//a/span[text() = 'Confirm']")
-	private WebElement select_Confirm_in_dropdown;
-	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
 
 	@FindBy(xpath = ".//*[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
@@ -366,14 +355,21 @@ public class SupplyConsolePage extends BasePage {
 		return (tables.getSupplyContainerTable().getRows().size() - 1);
 	}
 
-	public void clickBulkTransfersButton() {
-		waitForElementToBeLocated(driver, bulk_transfers_button_1, 10);
-		this.bulk_transfers_button.click();
+	public void clickBulkTransfersButton() throws InterruptedException{
+		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
+		waitForElementToBeEnabled(driver, transfer_button_path, 10);
+		WebElement transfer_button = driver.findElement(transfer_button_path);
+		scrollIfNeeded(driver, transfer_button);
+		transfer_button.click();
 	}
 	public SupplyConsolePage clickBulkCancelButton() throws InterruptedException {
-		waitForElementToBePresent(driver, bulk_transfers_button_1, 10);
-		moveToElement(bulk_cancel_button);
-		click(bulk_cancel_button);
+		By cancel_transfer_button_path = By.xpath("//button[text() = 'Cancel Transfer']");
+		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
+		waitForElementToBeEnabled(driver, cancel_transfer_button_path, 10);
+		WebElement bulk_cancel_button = driver.findElement(cancel_transfer_button_path);
+		waitForElementToBeEnabled(driver, transfer_button_path, 10);
+		scrollIfNeeded(driver, bulk_cancel_button);
+		bulk_cancel_button.click();
 		return this;
 	}
 
@@ -500,14 +496,14 @@ public class SupplyConsolePage extends BasePage {
 		WebElement transactions_tab = driver.findElement(transactions_tab_path);
 		scrollTop(transactions_tab);
 		Thread.sleep(500);
-		int counter = 0;
-
-		try {
-			transactions_tab.click();
-		} catch(Exception ex) {
-			System.out.println("Exception: " + ex.getMessage());
-			Thread.sleep(5000);
-			transactions_tab.click();
+		for(int i = 0; i < 10; i++) {
+			try {
+				transactions_tab.click();
+				break;
+			} catch (ElementClickInterceptedException ex) {
+				System.out.println("Exception: " + ex.getMessage());
+				Thread.sleep(1000);
+			}
 		}
 	}
 
@@ -1067,9 +1063,11 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void selectConfirmIncomingDropDown() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 30);
-		Thread.sleep(2000);
-		select_Confirm_in_dropdown.click();
+		Thread.sleep(500);
+		By select_confirm_in_dropdown_path = By.xpath("//span[text() = 'Confirm']/..");
+		waitForElementToBeEnabled(driver, select_confirm_in_dropdown_path, 10);
+		WebElement select_confirm_in_dropdown = driver.findElement(select_confirm_in_dropdown_path);
+		select_confirm_in_dropdown.click();
 	}
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
@@ -1273,6 +1271,7 @@ public class SupplyConsolePage extends BasePage {
 		} catch(Exception ex) {
 			System.out.println("---Cannot switch the view---");
 		}
+		Thread.sleep(1000);
 		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
 		waitForElementToBeEnabled(driver, search_field_path, 10);
 		WebElement search_location_field = driver.findElement(search_field_path);
@@ -1291,6 +1290,7 @@ public class SupplyConsolePage extends BasePage {
 			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
 			Thread.sleep(2000);
 		} catch (NullPointerException ex) {
+			System.out.println("Couldn't click on Supply Location " + SUPPLY_LOCATION_NAME + " and location " + location);
 			Thread.sleep(2000);
 			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
 			Thread.sleep(2000);
@@ -1363,9 +1363,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public SupplyConsolePage selectSupplyItemTo(String supplyItem) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		log(" -- select supply item  -  " + supplyItem);
-		selectSupplyTo(searchSupplyItems, supplyItem);
+		By search_supply_item_path = By.xpath("//input[contains(@placeholder,'Search Supply Items')]");
+		waitForElementToBeEnabled(driver, search_supply_item_path, 10);
+		WebElement search_supply_items = driver.findElement(search_supply_item_path);
+		selectSupplyTo(search_supply_items, supplyItem);
 		return this;
 	}
 
@@ -1376,8 +1379,9 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys(location);
 		Thread.sleep(5000);
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + location + "')]");
-		waitForElementToBePresent(driver, locationTo, 30);
-		click(driver.findElement(locationTo));
+		waitForElementToBeEnabled(driver, locationTo, 30);
+		WebElement my_location = driver.findElement(locationTo);
+		my_location.click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 	@Step
