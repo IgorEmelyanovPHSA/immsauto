@@ -59,9 +59,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Supply Items')]")
-	private WebElement searchSupplyItems;
 	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
 
 	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_1_2')]")
@@ -85,10 +82,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//input[@name = 'BCH_Product_Name__c']")
 	private WebElement get_trade_name;
 	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
-
-	@FindBy(xpath = ".//a/span[text() = 'Confirm']")
-	private WebElement select_Confirm_in_dropdown;
-	private By select_Confirm_in_dropdown1 = By.xpath(".//a/span[text() = 'Confirm']");
 
 	@FindBy(xpath = ".//*[text() = 'Related Items']")
 	private WebElement click_on_related_item_tab;
@@ -1070,9 +1063,11 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void selectConfirmIncomingDropDown() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_Confirm_in_dropdown1, 30);
-		Thread.sleep(2000);
-		select_Confirm_in_dropdown.click();
+		Thread.sleep(500);
+		By select_confirm_in_dropdown_path = By.xpath("//span[text() = 'Confirm']/..");
+		waitForElementToBeEnabled(driver, select_confirm_in_dropdown_path, 10);
+		WebElement select_confirm_in_dropdown = driver.findElement(select_confirm_in_dropdown_path);
+		select_confirm_in_dropdown.click();
 	}
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
@@ -1295,6 +1290,7 @@ public class SupplyConsolePage extends BasePage {
 			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
 			Thread.sleep(2000);
 		} catch (NullPointerException ex) {
+			System.out.println("Couldn't click on Supply Location " + SUPPLY_LOCATION_NAME + " and location " + location);
 			Thread.sleep(2000);
 			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
 			Thread.sleep(2000);
@@ -1367,9 +1363,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public SupplyConsolePage selectSupplyItemTo(String supplyItem) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		log(" -- select supply item  -  " + supplyItem);
-		selectSupplyTo(searchSupplyItems, supplyItem);
+		By search_supply_item_path = By.xpath("//input[contains(@placeholder,'Search Supply Items')]");
+		waitForElementToBeEnabled(driver, search_supply_item_path, 10);
+		WebElement search_supply_items = driver.findElement(search_supply_item_path);
+		selectSupplyTo(search_supply_items, supplyItem);
 		return this;
 	}
 
@@ -1380,8 +1379,9 @@ public class SupplyConsolePage extends BasePage {
 		element.sendKeys(location);
 		Thread.sleep(5000);
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + location + "')]");
-		waitForElementToBePresent(driver, locationTo, 30);
-		click(driver.findElement(locationTo));
+		waitForElementToBeEnabled(driver, locationTo, 30);
+		WebElement my_location = driver.findElement(locationTo);
+		my_location.click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 	@Step

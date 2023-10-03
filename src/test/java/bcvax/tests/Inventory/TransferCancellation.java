@@ -74,6 +74,9 @@ public class TransferCancellation extends BaseTest {
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        Thread.sleep(1000);
+        driver.navigate().refresh();
+        Thread.sleep(1000);
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
