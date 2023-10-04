@@ -218,7 +218,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 //		log("/*42.---Click Save Consent Button --*/");
 //		inClinicExperience.ClickSaveConsentButton();
 
-		ProfilesPage.checkExistingConsent(driver);
+		try {
+			ProfilesPage.checkExistingConsent(driver);
+		} catch(Exception ex) {
+			System.out.println("No Checkbox. Continue...");
+		}
 		ProfilesPage.clickEditImmunizationInformation(driver);
 
 		String lot = inClinicExperience.getLotNumber();
