@@ -885,7 +885,10 @@ public class SupplyConsolePage extends BasePage {
 		By quantity_field_path = By.xpath("//label[(text()='Quantity')]/..//input[@type='text']");
 		waitForElementToBeEnabled(driver, quantity_field_path, 10);
 		WebElement quantity_field = driver.findElement(quantity_field_path);
-		typeIn(quantity_field, quantity);
+		quantity_field.clear();
+		Thread.sleep(500);
+		quantity_field.sendKeys(quantity);
+		Thread.sleep(2000);
 	}
 
 	public double getDoseConversionFactor() {
@@ -1024,10 +1027,13 @@ public class SupplyConsolePage extends BasePage {
 			if(row.get(dose_qty_column).getText().equals(dose_qty_column)) {
 				continue;
 			}
-			row.get(dose_qty_column).findElement(By.xpath(".//input")).sendKeys(Double.toString(amount));
-			row.get(reason_column).findElement(By.xpath(".//button")).click();
+			WebElement quantity_field = row.get(dose_qty_column).findElement(By.xpath(".//input"));
+			quantity_field.sendKeys(Double.toString(amount));
+			WebElement reason_btn = row.get(reason_column).findElement(By.xpath(".//button"));
+			reason_btn.click();
 			Thread.sleep(1000);
-			row.get(reason_column).findElement(By.xpath(".//span[@title='" + reason + "']")).click();
+			WebElement reason_link = row.get(reason_column).findElement(By.xpath(".//span[@title='" + reason + "']"));
+			reason_link.click();
 		}
 	}
 	@Step

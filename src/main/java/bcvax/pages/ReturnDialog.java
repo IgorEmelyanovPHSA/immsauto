@@ -42,5 +42,6 @@ public class ReturnDialog extends BasePage {
         waitForElementToBeEnabled(driver, save_btn_path, 10);
         WebElement save_btn = driver.findElement(save_btn_path);
         save_btn.click();
+        Thread.sleep(2000);
     }
 }

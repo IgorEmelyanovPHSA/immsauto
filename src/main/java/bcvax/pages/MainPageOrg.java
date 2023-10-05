@@ -20,7 +20,7 @@ public class MainPageOrg extends BasePage {
     public String currentApp() throws InterruptedException {
         Thread.sleep(500);
         By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
-        waitForElementToBeEnabled(driver, current_app_path, 30);
+        waitForElementToBeEnabled(driver, current_app_path, 60);
         WebElement current_app = driver.findElement(current_app_path);
         String current_app_text = new String();
         int timeout = 30000;
@@ -167,13 +167,22 @@ public class MainPageOrg extends BasePage {
         } catch(ElementNotInteractableException ex) {
             //////Retry
             Thread.sleep(2000);
+            search_input.clear();
+            Thread.sleep(500);
             search_input.sendKeys(search_value);
             //Thread.sleep(500);
             //search_input.sendKeys(Keys.ENTER);
         }
         Thread.sleep(500);
         By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
-        waitForElementToBeEnabled(driver, found_client_path, 10);
+        try {
+            waitForElementToBeEnabled(driver, found_client_path, 10);
+        } catch(NotFoundException ex) {
+            Thread.sleep(500);
+            search_input.clear();
+            Thread.sleep(500);
+            search_input.sendKeys(search_value);
+        }
         WebElement found_client = driver.findElement(found_client_path);
         scrollTop(found_client);
         Thread.sleep(500);

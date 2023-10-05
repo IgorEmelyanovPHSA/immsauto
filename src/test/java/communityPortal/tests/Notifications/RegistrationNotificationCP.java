@@ -83,7 +83,7 @@ public class RegistrationNotificationCP extends BaseTest {
 
         log("/*20.----Click register Button on confirmation page--*/");
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
-
+        Thread.sleep(2000);
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
         try {
