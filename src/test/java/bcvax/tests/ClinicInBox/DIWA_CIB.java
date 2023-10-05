@@ -111,10 +111,17 @@ public class DIWA_CIB extends BaseTest {
 			System.out.println("No Checkbox. Continue...");
 		}
 
-		ProfilesPage.clickEditImmunizationInformation(driver);
+
 
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-		profilesPage.selectImmunizingAgentProvider(consentProvider);
+
+		try {
+			profilesPage.selectImmunizingAgentProvider(consentProvider);
+		} catch(Exception ex) {
+			ProfilesPage.clickEditImmunizationInformation(driver);
+			Thread.sleep(500);
+			profilesPage.selectImmunizingAgentProvider(consentProvider);
+		}
 
 		log("/*---18. Click Show all lot numbers Checkbox ---*/");
 		profilesPage.clickShowAllLotNumbersCheckBox();
