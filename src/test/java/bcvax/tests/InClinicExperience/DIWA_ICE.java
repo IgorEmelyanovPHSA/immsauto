@@ -136,12 +136,17 @@ public class DIWA_ICE extends BaseTest {
 			System.out.println("No Checkbox. Continue...");
 		}
 
-		ProfilesPage.clickEditImmunizationInformation(driver);
 		log("/*---22. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
 		//log("/*---19. select date of Administration ---*/");
 		//profilesPage.selectDateOfAdministration();
 		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
-		profilesPage.selectImmunizingAgentProvider(consentProvider);
+		try {
+			profilesPage.selectImmunizingAgentProvider(consentProvider);
+		} catch(Exception ex) {
+			ProfilesPage.clickEditImmunizationInformation(driver);
+			Thread.sleep(500);
+			profilesPage.selectImmunizingAgentProvider(consentProvider);
+		}
 
 		log("/*---23. Click Show all lot numbers Checkbox---*/");
 		inClinicExperience.clickShowAllLotNumbersCheckBox();

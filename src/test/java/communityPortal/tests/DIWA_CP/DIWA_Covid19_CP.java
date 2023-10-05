@@ -127,10 +127,14 @@ public class DIWA_Covid19_CP extends BaseTest {
             System.out.println("No Checkbox. Continue...");
         }
 
-        ProfilesPage.clickEditImmunizationInformation(driver);
-
         log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician_DIWA_CP ---*/");
-        profilesPage.selectImmunizingAgentProvider(consentProvider);
+        try {
+            profilesPage.selectImmunizingAgentProvider(consentProvider);
+        } catch(Exception ex) {
+            ProfilesPage.clickEditImmunizationInformation(driver);
+            Thread.sleep(500);
+            profilesPage.selectImmunizingAgentProvider(consentProvider);
+        }
 
         log("/*---19. Click Show all lot numbers Checkbox---*/");
         profilesPage.clickShowAllLotNumbersCheckBox();
