@@ -897,7 +897,7 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(500);
 		try {
 			By appointment_confirm_message_path = By.xpath("//div[@role = 'heading']/h1[text() = 'Appointment confirmed!']");
-			waitForElementToBeLocated(driver, appointment_confirm_message_path, 10);
+			waitForElementToBeLocated(driver, appointment_confirm_message_path, 30);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
 		} catch (TimeoutException e) {

@@ -414,7 +414,7 @@ public class Drafts extends BaseTest {
         log("/*17----Getting id for the latest created Transaction Draft " +latestDraftTransactionId +" --*/");
 
         log("/*18----Selecting the latest draft transactions and Edit, update doses: --*/");
-        supplyConsolePage.clickDropDownLatestDraftTransactionsAndCancelTransfer(countDraftTransactions);
+        supplyConsolePage.clickOnDraftTransactionsDropDownMenu(countDraftTransactions - 1);
 
         log("/*19----Navigate to Related Item tab --*/");
         supplyConsolePage.clickOnRelatedItemTab();

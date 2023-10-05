@@ -125,6 +125,10 @@ public class Tables extends BasePage {
         return getTableRow(searchCriteria, getSingleTransactionsTable("Incoming"));
     }
 
+    public Map<String, WebElement> getShippedTransactionsDraftRow(Map<String, String> searchCriteria) {
+        return getTableRow(searchCriteria, getSingleTransactionsTable("Draft"));
+    }
+
     public Map<String, WebElement> getSupplyLocationRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getSupplyLocationTable());
     }

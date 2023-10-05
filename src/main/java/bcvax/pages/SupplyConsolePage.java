@@ -90,9 +90,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
 	private WebElement btnEditOnTrasactionPage;
 
-	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Cancel')]")
-	private WebElement btnCancelTransfer;
-
 	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
 
 	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
@@ -646,16 +643,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	public void clickDropDownLatestDraftTransactionsAndCancelTransfer(int countDraftTransactions) throws InterruptedException {
-		//Offset due to 0 is not a real value
-		int offset = countDraftTransactions-1;
-		WebElement draftTransactionElement = driver.findElement
-				(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small'])[" + offset + "]"));
-		click(draftTransactionElement);
-		click(btnCancelTransfer);
-		Thread.sleep(2000);
-	}
-
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
 		WebElement checkbox = tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Choose a Row\n" +
 				"Select All");
@@ -1065,6 +1052,10 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnOutgoingTransactionsDropDownMenu(int j) throws InterruptedException {
 		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("Actions").click();
+	}
+
+	public void clickOnDraftTransactionsDropDownMenu(int j) throws InterruptedException {
+		tables.getSingleTransactionsTable("Draft").getRowsMappedToHeadings().get(j).get("Actions").click();
 	}
 
 	@Step
