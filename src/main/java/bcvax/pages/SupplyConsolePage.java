@@ -90,9 +90,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
 	private WebElement btnEditOnTrasactionPage;
 
-	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Cancel')]")
-	private WebElement btnCancelTransfer;
-
 	private By select_app_launcher1 = By.xpath("//div[@class='slds-icon-waffle']");
 
 	private By click_healthconnect_app1 = By.xpath("//p[text()='Health Connect - Supply Console']");
@@ -646,16 +643,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	public void clickDropDownLatestDraftTransactionsAndCancelTransfer(int countDraftTransactions) throws InterruptedException {
-		//Offset due to 0 is not a real value
-		int offset = countDraftTransactions-1;
-		WebElement draftTransactionElement = driver.findElement
-				(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small'])[" + offset + "]"));
-		click(draftTransactionElement);
-		click(btnCancelTransfer);
-		Thread.sleep(2000);
-	}
-
 	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
 		WebElement checkbox = tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Choose a Row\n" +
 				"Select All");
@@ -885,7 +872,10 @@ public class SupplyConsolePage extends BasePage {
 		By quantity_field_path = By.xpath("//label[(text()='Quantity')]/..//input[@type='text']");
 		waitForElementToBeEnabled(driver, quantity_field_path, 10);
 		WebElement quantity_field = driver.findElement(quantity_field_path);
-		typeIn(quantity_field, quantity);
+		quantity_field.clear();
+		Thread.sleep(500);
+		quantity_field.sendKeys(quantity);
+		Thread.sleep(2000);
 	}
 
 	public double getDoseConversionFactor() {
@@ -1024,10 +1014,13 @@ public class SupplyConsolePage extends BasePage {
 			if(row.get(dose_qty_column).getText().equals(dose_qty_column)) {
 				continue;
 			}
-			row.get(dose_qty_column).findElement(By.xpath(".//input")).sendKeys(Double.toString(amount));
-			row.get(reason_column).findElement(By.xpath(".//button")).click();
+			WebElement quantity_field = row.get(dose_qty_column).findElement(By.xpath(".//input"));
+			quantity_field.sendKeys(Double.toString(amount));
+			WebElement reason_btn = row.get(reason_column).findElement(By.xpath(".//button"));
+			reason_btn.click();
 			Thread.sleep(1000);
-			row.get(reason_column).findElement(By.xpath(".//span[@title='" + reason + "']")).click();
+			WebElement reason_link = row.get(reason_column).findElement(By.xpath(".//span[@title='" + reason + "']"));
+			reason_link.click();
 		}
 	}
 	@Step
@@ -1059,6 +1052,10 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickOnOutgoingTransactionsDropDownMenu(int j) throws InterruptedException {
 		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("Actions").click();
+	}
+
+	public void clickOnDraftTransactionsDropDownMenu(int j) throws InterruptedException {
+		tables.getSingleTransactionsTable("Draft").getRowsMappedToHeadings().get(j).get("Actions").click();
 	}
 
 	@Step

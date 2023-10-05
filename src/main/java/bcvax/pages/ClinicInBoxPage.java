@@ -85,13 +85,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	@FindBy(xpath = "(.//button[@name='timeslot'])[1]")
 	private WebElement time_slot_appointment;
-	
-	@FindBy(xpath = ".//button[text() = 'Next']")
-	private WebElement click_next_button;
-	
-	@FindBy(xpath = ".//button[text() = 'Confirm appointment']")
-	private WebElement click_confirm_appointment_button;
-	
+
 	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
 	private WebElement vlidate_appointment_confirm_message;
 	
@@ -336,15 +330,19 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void clickOnNextButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_next_button, 10);
-		Thread.sleep(2000);
-		click_next_button.click();
+		Thread.sleep(500);
+		By next_btn_path = By.xpath("//button[@c-bchappointmentscheduler_bchappointmentscheduler and text() = 'Next']");
+		waitForElementToBeEnabled(driver, next_btn_path, 10);
+		WebElement next_btn = driver.findElement(next_btn_path);
+		next_btn.click();
 	}
 	
 	public void clickOnConfirmButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_confirm_appointment_button, 10);
-		Thread.sleep(2000);
-		click_confirm_appointment_button.click();
+		Thread.sleep(500);
+		By confirm_appointment_btn_path = By.xpath("//button[@c-bchschedulerreviewfooter_bchschedulerreviewfooter and text() = 'Confirm appointment']");
+		waitForElementToBeEnabled(driver, confirm_appointment_btn_path, 10);
+		WebElement confirm_appointment_button = driver.findElement(confirm_appointment_btn_path);
+		confirm_appointment_button.click();
 	}
 	
 	public boolean validateAppointmentConfirmedScreen() throws InterruptedException {

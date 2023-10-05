@@ -105,7 +105,12 @@ public class DIWA_CIB extends BaseTest {
 //		log("/*---16. click Save Consent button ---*/");
 //		profilesPage.clickSaveConsent();
 
-		ProfilesPage.checkExistingConsent(driver);
+		try {
+			ProfilesPage.checkExistingConsent(driver);
+		} catch(Exception ex) {
+			System.out.println("No Checkbox. Continue...");
+		}
+
 		ProfilesPage.clickEditImmunizationInformation(driver);
 
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");

@@ -198,8 +198,12 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 //        if(consentProvider.equals("")) {
 //            consentProvider = inClinicExperience_CP.selectConsentProvider();
 //        }
+        try {
+            ProfilesPage.checkExistingConsent(driver);
+        } catch(Exception ex) {
+            System.out.println("No Checkbox. Continue...");
+        }
 
-        ProfilesPage.checkExistingConsent(driver);
         ProfilesPage.clickEditImmunizationInformation(driver);
 
 

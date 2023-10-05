@@ -191,7 +191,12 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			System.out.println("No Warning found");
 		}
 
-		ProfilesPage.checkExistingConsent(driver);
+		try {
+			ProfilesPage.checkExistingConsent(driver);
+		} catch(Exception ex) {
+			System.out.println("No Checkbox. Continue...");
+		}
+
 		ProfilesPage.clickEditImmunizationInformation(driver);
 		//String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 		//if(consentProviderSelected.equals("")) {

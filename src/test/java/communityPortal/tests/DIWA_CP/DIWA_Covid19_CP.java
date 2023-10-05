@@ -121,7 +121,12 @@ public class DIWA_Covid19_CP extends BaseTest {
 //        profilesPage.clickSaveConsent();
 //        Thread.sleep(2000);
 
-        ProfilesPage.checkExistingConsent(driver);
+        try {
+            ProfilesPage.checkExistingConsent(driver);
+        } catch(Exception ex) {
+            System.out.println("No Checkbox. Continue...");
+        }
+
         ProfilesPage.clickEditImmunizationInformation(driver);
 
         log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician_DIWA_CP ---*/");

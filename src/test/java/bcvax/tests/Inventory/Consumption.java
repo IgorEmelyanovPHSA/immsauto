@@ -218,7 +218,12 @@ public class Consumption extends BaseTest {
 //		}
 //		inClinicExperiencePage.ClickSaveConsentButton();
 
-		ProfilesPage.checkExistingConsent(driver);
+		try {
+			ProfilesPage.checkExistingConsent(driver);
+		} catch(Exception ex) {
+			System.out.println("No Checkbox. Continue...");
+		}
+
 		ProfilesPage.clickEditImmunizationInformation(driver);
 
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
