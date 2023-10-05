@@ -176,6 +176,8 @@ public class ProfilesPage extends BasePage{
         By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
         waitForElementToBeEnabled(driver, select_dropdown_option, 10);
         WebElement dropdown_field = driver.findElement(select_dropdown_option);
+        scrollIfNeeded(driver, dropdown_field);
+        Thread.sleep(500);
         dropdown_field.click();
         Thread.sleep(1000);
     }
