@@ -175,7 +175,16 @@ public class ProfilesPage extends BasePage{
         Thread.sleep(500);
         By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
         waitForElementToBeEnabled(driver, select_dropdown_option, 10);
-        WebElement dropdown_field = driver.findElement(select_dropdown_option);
+        WebElement dropdown_field = driver.findElements(select_dropdown_option).get(0);
+        String my_clinic = dropdown_field.getText();
+        for(int i = 0; i < 10; i++) {
+            Thread.sleep(500);
+            dropdown_field = driver.findElements(select_dropdown_option).get(0);
+            my_clinic = dropdown_field.getText();
+            if(my_clinic.equals(clinic)) {
+                break;
+            }
+        }
         scrollIfNeeded(driver, dropdown_field);
         Thread.sleep(500);
         dropdown_field.click();
