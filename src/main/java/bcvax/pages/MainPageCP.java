@@ -107,7 +107,9 @@ public class MainPageCP extends BasePage{
         }
         WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
         scrollTop(tab_supply_location);
+        Thread.sleep(1000);
         tab_supply_location.click();
+        Thread.sleep(1000);
         return new SupplyConsolePage(driver);
     }
 

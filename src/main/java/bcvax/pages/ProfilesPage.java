@@ -18,23 +18,10 @@ public class ProfilesPage extends BasePage{
     @FindBy(xpath = "//button[@title='Select a List View']")
     private WebElement selectListViewBtn;
 
-    @FindBy(xpath = "//button[contains(text(),'Create Immunization Record')]")
-    private WebElement btn_create_Immunization_Record;
-    private By btn_create_Immunization_Record1 = By.xpath("//button[contains(text(),'Create Immunization Record')]");
-    @FindBy(xpath = "//button[text() = 'Confirm']")
-    private WebElement confirm_button;
     private By getValueOfHistoricalDoses1 = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]/../../../../../..//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records')]");
 
     private By create_Historical_Immunization_Record1 = By.xpath("//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records ')]/../../../../..//BUTTON[@class='slds-button slds-button_neutral'][text()='New']");
-    @FindBy(xpath = "//option[contains(text(),'Select an option')]")
-    private WebElement select_an_option;
 
-    @FindBy(xpath = "//option[contains(text(),'COVID-19 mRNA')]")
-    private WebElement covidmRna;
-    private By covidmRna2 = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
-
-    @FindBy(xpath = ".//input[@data-id = 'userinput']")
-    private WebElement search_clinic;
     //@FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]")
     @FindBy(xpath = "//lightning-input[@class='dateCmp slds-form-element']/lightning-datepicker")
     private WebElement inputDate;
@@ -148,40 +135,49 @@ public class ProfilesPage extends BasePage{
     }
 
     public void clickCreateImmunizationRecord() throws InterruptedException {
-        waitForElementToBeLocated(driver, btn_create_Immunization_Record1, 10);
-        Thread.sleep(2000);
-        btn_create_Immunization_Record.click();
+        Thread.sleep(500);
+        By create_immunization_record_btn_path = By.xpath("//button[contains(text(),'Create Immunization Record')]");
+        waitForElementToBeEnabled(driver, create_immunization_record_btn_path, 10);
+        WebElement create_immunization_record_btn = driver.findElement(create_immunization_record_btn_path);
+        create_immunization_record_btn.click();
     }
 
     public void clickConfirmButton() throws InterruptedException {
-        waitForElementToBeVisible(driver, confirm_button, 10);
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        By confirm_btn_path = By.xpath("//button[text() = 'Confirm']");
+        waitForElementToBeEnabled(driver, confirm_btn_path, 10);
+        WebElement confirm_button = driver.findElement(confirm_btn_path);
         confirm_button.click();
     }
 
     public void clickSelectAnOptionDropdown() throws InterruptedException {
-        waitForElementToBeVisible(driver, select_an_option, 10);
-        Thread.sleep(2000);
-        select_an_option.click();
+        Thread.sleep(500);
+        By agent_option_path = By.xpath("//option[contains(text(),'Select an option')]");
+        waitForElementToBeEnabled(driver, agent_option_path, 10);
+        WebElement agent_option = driver.findElement(agent_option_path);
+        agent_option.click();
     }
 
     public void selectOption(String vaccine) throws InterruptedException {
-        waitForElementToBeVisible(driver, covidmRna, 10);
-        Thread.sleep(2000);
-        WebElement search_input = driver.findElement(covidmRna2);
-        Thread.sleep(2000);
-        search_input.click();
+        Thread.sleep(500);
+        By agent_option_path = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
+        waitForElementToBeEnabled(driver, agent_option_path, 10);
+        WebElement covidmRna = driver.findElement(agent_option_path);
+        covidmRna.click();
     }
 
     public void searchClinicLocation(String clinic) throws InterruptedException {
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, search_clinic, 10);
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        By clinic_location_path = By.xpath("//input[@data-id = 'userinput']");
+        waitForElementToBeEnabled(driver, clinic_location_path, 10);
+        WebElement search_clinic = driver.findElement(clinic_location_path);
         search_clinic.sendKeys(clinic);
-        Thread.sleep(4000);
+        Thread.sleep(500);
         By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
-        driver.findElement(select_dropdown_option).click();
-        Thread.sleep(2000);
+        waitForElementToBeEnabled(driver, select_dropdown_option, 10);
+        WebElement dropdown_field = driver.findElement(select_dropdown_option);
+        dropdown_field.click();
+        Thread.sleep(1000);
     }
 
     public void clickTimeBox() throws InterruptedException {
