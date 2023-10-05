@@ -746,7 +746,21 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(1000);
 		WebElement action = tables.getSupplyContainerTable().getRowsMappedToHeadings().get(1).get("Actions");
 		action.click();
-		Thread.sleep(500);
+		boolean menu_visible = false;
+		Thread.sleep(1000);
+		for (int i = 0; i < 10; i++) {
+			try {
+				menu_visible = driver.findElement(By.xpath("//div[@part='overlay dropdown']")).isDisplayed();
+				if(menu_visible) {
+					break;
+				} else {
+					action.click();
+					Thread.sleep(1000);
+				}
+			} catch (Exception ex) {
+				menu_visible = false;
+			}
+		}
 	}
 	@Step
 	public void selectTransferFromDropDown() throws InterruptedException {
