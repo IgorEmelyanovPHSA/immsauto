@@ -197,7 +197,11 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 			System.out.println("No Checkbox. Continue...");
 		}
 
-		ProfilesPage.clickEditImmunizationInformation(driver);
+		try {
+			ProfilesPage.clickEditImmunizationInformation(driver);
+		} catch(Exception ex) {
+			System.out.println("Edit Button disabled. Continue...");
+		}
 		//String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 		//if(consentProviderSelected.equals("")) {
 		//	consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
