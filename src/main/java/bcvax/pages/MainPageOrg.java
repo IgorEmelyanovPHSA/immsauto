@@ -20,7 +20,13 @@ public class MainPageOrg extends BasePage {
     public String currentApp() throws InterruptedException {
         Thread.sleep(500);
         By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
-        waitForElementToBeEnabled(driver, current_app_path, 60);
+        try {
+            waitForElementToBeEnabled(driver, current_app_path, 30);
+        } catch(NotFoundException ex) {
+            driver.navigate().refresh();
+            Thread.sleep(2000);
+            waitForElementToBeEnabled(driver, current_app_path, 30);
+        }
         WebElement current_app = driver.findElement(current_app_path);
         String current_app_text = new String();
         int timeout = 30000;
@@ -182,6 +188,8 @@ public class MainPageOrg extends BasePage {
             search_input.clear();
             Thread.sleep(500);
             search_input.sendKeys(search_value);
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, found_client_path, 10);
         }
         WebElement found_client = driver.findElement(found_client_path);
         scrollTop(found_client);

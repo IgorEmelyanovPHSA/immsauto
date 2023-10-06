@@ -46,7 +46,7 @@ public class Utils {
 		System.out.println(getLogTime()+" "+msg);
 	}
 
-	private static String getConfigProperty(String targetProperty) throws Exception {
+	public static String getConfigProperty(String targetProperty) throws Exception {
 		config.load(new FileInputStream(PATH_TO_CONFIG));
 		return config.getProperty(targetProperty);
 	}
