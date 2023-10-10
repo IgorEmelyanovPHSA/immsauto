@@ -1803,6 +1803,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void openAppointmentRecord(String appointmentDataTime) throws InterruptedException {
+		Thread.sleep(2000);
 		By titleAppointments = By.xpath("//h1[@title='Appointments']");
 		waitForElementToBePresent(driver, titleAppointments, 10);
 		String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
