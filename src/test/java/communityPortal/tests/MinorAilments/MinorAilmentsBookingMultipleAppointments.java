@@ -23,6 +23,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
     @Test
     public void MinorAilmentsBookingMultipleAppointmentsTest() throws Exception {
         TestcaseID = "259543"; //C259543
+        log("TestCase: C259543");
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("API call to remove appointments from participant account by PHN if found");
