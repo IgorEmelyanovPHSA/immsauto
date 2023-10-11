@@ -308,7 +308,7 @@ public class BulkTransfersCP extends BaseTest {
         log("/*15.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
         log("/*----Validation for container#1 Distribution_1_1 - VAXZEVRIA (AstraZeneca) - MT0055");
         assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1,
-                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_1_1 - lot_MT0055_conversion_factor)));
+                Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_1_1 - quantity * lot_MT0055_conversion_factor)));
         assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1,
                 Double.parseDouble(df.format(remainingQty_before_Lot_MT0055_Distribution_1_1 - quantity)));
         log("/*----Validation for container#2 Distribution_1_1 - Pfizer mRNA BNT162b2 - EK4241");

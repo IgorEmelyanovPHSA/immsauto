@@ -121,7 +121,6 @@ public class Returns extends BaseTest {
 
         log("/*8. ----Save Return --*/");
         returnDialog.clickSaveBtn();
-
         log("/*9. ----Verify The Return with Return_ID is created and click Return_ID link from Toast Box --*/");
         String return_id = AlertDialog.clickAlertLink(driver);
         log("/* Result: ----The Return with Return_ID " + return_id +" is created --*/");

@@ -143,7 +143,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
         supplyConsolePage.clickBulkCancelButton();
-        supplyConsolePage.cancelBulkTransfer();
+        supplyConsolePage.cancelTransfer();
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         supplyConsolePage.clickOnRelatedItemTab();
@@ -263,7 +263,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
         supplyConsolePage.clickBulkCancelButton();
-        supplyConsolePage.cancelBulkTransfer();
+        supplyConsolePage.cancelTransfer();
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         supplyConsolePage.clickOnRelatedItemTab();
         Thread.sleep(2000);

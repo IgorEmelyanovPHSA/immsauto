@@ -137,7 +137,8 @@ public class BulkTransfersCancellation extends BaseTest {
         } else {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
-        supplyConsolePage.clickBulkCancelButton().cancelBulkTransfer();
+        supplyConsolePage.clickBulkCancelButton();
+        supplyConsolePage.cancelTransfer();
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         supplyConsolePage.clickOnRelatedItemTab();
@@ -249,7 +250,8 @@ public class BulkTransfersCancellation extends BaseTest {
         } else {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
-        supplyConsolePage.clickBulkCancelButton().cancelBulkTransfer();
+        supplyConsolePage.clickBulkCancelButton();
+        supplyConsolePage.cancelTransfer();
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         supplyConsolePage.clickOnRelatedItemTab();
         double remainingQtyAfterCancelLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
