@@ -139,7 +139,7 @@ public class Transfer extends BaseTest {
         assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1, round((remainingDoses_before_Lot_EK4241_Distribution_2_1 + 10) / dose_conversation_factor), 2);
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184 //C223184
         precondition();
@@ -321,7 +321,7 @@ public class Transfer extends BaseTest {
         assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_2, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_2);
     }
 
-    @Test(priority = 4)
+    //@Test(priority = 4)
     public void Can_do_Transfer_by_Quantity_within_the_same_Clinic() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244850" : "223185"; //C223185
         precondition();

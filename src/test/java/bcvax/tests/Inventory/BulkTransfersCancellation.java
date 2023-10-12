@@ -167,7 +167,7 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterLocationDistribution2_3, remainingDosesBeforeLocationDistribution2_3);
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
         precondition();

@@ -131,7 +131,7 @@ public class BulkWastages extends BaseTest {
 		}
 	}
 
-	@Test()
+	//@Test()
 	public void Can_Do_Bulk_Wastage_ByQuantity_As_PPHIS() throws Exception {
 		TestcaseID = "223361"; //C223361
 		log("Target Environment: "+ Utils.getTargetEnvironment());

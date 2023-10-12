@@ -10,7 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.sql.Timestamp;

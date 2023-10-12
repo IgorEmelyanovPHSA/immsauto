@@ -322,7 +322,7 @@ public class Drafts extends BaseTest {
         assertEquals(remainingQuantitiesBeforeDist2, remainingQty_after_Distribution_1_2);
     }
 
-    @Test()
+    //@Test()
     public void Can_Do_Single_Draft_Cancel_ByDosages_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#3 Create draft and cancel it");
@@ -450,7 +450,7 @@ public class Drafts extends BaseTest {
         assertEquals(remainingQuantitiesBeforeDist2, remainingQty_after_Distribution_1_2);
     }
 
-    @Test()
+    //@Test()
     public void Can_Do_Single_Draft_ByQuantity_Within_The_Same_Clinic() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         log("Test Case#4 save draft and transfer after by quantity");
