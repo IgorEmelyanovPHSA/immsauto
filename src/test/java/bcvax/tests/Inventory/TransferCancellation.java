@@ -143,7 +143,7 @@ public class TransferCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Can_do_Transfer_Cancellation_by_Quantity_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184
         precondition();

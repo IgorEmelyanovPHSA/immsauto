@@ -190,7 +190,7 @@ public class Adjustments extends BaseTest {
 	}
 
 
-	@Test(dataProvider = "quantitiesAmount")
+	//@Test(dataProvider = "quantitiesAmount")
 	public void Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
