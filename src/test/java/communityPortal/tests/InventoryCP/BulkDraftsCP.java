@@ -51,6 +51,7 @@ public class BulkDraftsCP extends BaseTest {
                 break;
             default:
                 log("Login as Clinician");
+                log("TestCase: C245220");
                 TestcaseID = "245220"; //C245220
                 loginPage.loginIntoCommunityPortalAsClinician();
         }
