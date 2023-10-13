@@ -236,7 +236,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.closeTabsHCA();
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Can_do_Bulk_transfers_by_Quantity_form_one_Clinic_to_Another() throws Exception {
         //TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "223359";
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";

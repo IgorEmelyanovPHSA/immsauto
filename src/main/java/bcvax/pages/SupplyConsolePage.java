@@ -200,9 +200,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	/*-------------Methods--------------*/
-	public void inputRequestedQuantity(String inputQuantity) throws InterruptedException {
+	public void inputRequestedDose(String inputQuantity) throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[4]//input"));
+		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[5]//input"));
 		dosesInput.clear();
 		dosesInput.sendKeys(inputQuantity);
 	}
@@ -1639,7 +1639,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
 		scrollTop(trade);
 		String tradeValue = trade.getAttribute("value");
-		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input")).get(0);
+		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[7]//input")).get(0);
 		approveDoseField.sendKeys(inputDose);
 	}
 
