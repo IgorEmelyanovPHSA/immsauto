@@ -129,6 +129,8 @@ public class ClinicInBoxPage extends BasePage {
 				AlertDialog.closeAllAlerts(driver);
 				Thread.sleep(500);
 				closeTabBtn.click();
+			} catch (StaleElementReferenceException ex) {
+				System.out.println(ex.getMessage());
 			}
 		}
 	}

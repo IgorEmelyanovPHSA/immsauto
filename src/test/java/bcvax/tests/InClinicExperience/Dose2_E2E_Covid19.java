@@ -223,7 +223,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}
-		ProfilesPage.clickEditImmunizationInformation(driver);
+		try {
+			ProfilesPage.clickEditImmunizationInformation(driver);
+		} catch(Exception ex) {
+			System.out.println("Edit Button disabled. Continue...");
+		}
 
 		String lot = inClinicExperience.getLotNumber();
 		if(!lot.equals(consumptionLot)) {

@@ -163,7 +163,7 @@ public class BulkAdjustments extends BaseTest {
 			}
 	}
 
-	@Test(dataProvider = "quantitiesAmount")
+	//@Test(dataProvider = "quantitiesAmount")
 	public void Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_PPHIS(String quantity) throws Exception {
 		TestcaseID = "223360"; //C223360
 		log("Target Environment: "+ Utils.getTargetEnvironment());

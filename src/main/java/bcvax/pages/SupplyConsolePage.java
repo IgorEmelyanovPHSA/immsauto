@@ -67,11 +67,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//button[text() = 'Confirm Transaction']")
 	private WebElement confirm_incoming_transfers_modal_button;
 
-	@FindBy(xpath = ".//button[text() = 'Cancel Transaction']")
-	private WebElement btnCancelTransaction;
-
-	@FindBy(xpath = ".//button[text() = 'Cancel transactions']")
-	private WebElement btnCancelTransaction2;
 
 	private By get_remaining_doses_ = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
@@ -464,7 +459,7 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, transfer_btn_path, 10);
 		WebElement transfer_btn = driver.findElement(transfer_btn_path);
 		scrollTop(transfer_btn);
-		click(transfer_btn);
+		transfer_btn.click();
 		return this;
 	}
 	@Step
@@ -483,6 +478,7 @@ public class SupplyConsolePage extends BasePage {
 			;
 		}
 		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_path, 10);
+		Thread.sleep(2000);
 	}
 
 	@Step
@@ -709,9 +705,10 @@ public class SupplyConsolePage extends BasePage {
 		moveToElement(confirm_incoming_transfers_modal_button);
 		//handle issue when popup not fully loaded and button is partially hidden
 		if (isElementPresent(labelComments)) {
-			click(labelComments);
+			labelComments.click();
 		}
-		click(confirm_incoming_transfers_modal_button);
+		Thread.sleep(500);
+		confirm_incoming_transfers_modal_button.click();
 	}
 
 	public void clickOnButtonInModalTransaction(WebElement element) throws InterruptedException {
@@ -1540,13 +1537,10 @@ public class SupplyConsolePage extends BasePage {
 
 	@Step
 	public void cancelTransfer() throws InterruptedException {
-		clickOnButtonInModalTransaction(btnCancelTransaction);
-		successMessageAppear();
-	}
-
-	@Step
-	public void cancelBulkTransfer() throws InterruptedException {
-		clickOnButtonInModalTransaction(btnCancelTransaction2);
+		By cancel_transaction_btn_path = By.xpath("//button[text() = 'Cancel transactions' or text() = 'Cancel Transaction']");
+		waitForElementToBeEnabled(driver, cancel_transaction_btn_path, 10);
+		WebElement cancel_transaction_btn = driver.findElement(cancel_transaction_btn_path);
+		clickOnButtonInModalTransaction(cancel_transaction_btn);
 		successMessageAppear();
 	}
 

@@ -41,6 +41,7 @@ public class WastageCP extends BaseTest {
 				break;
 			default:
 				log("Login as Clinician");
+				log("TestCase: C243116");
 				TestcaseID = "243116"; //C243116
 				loginPage.loginIntoCommunityPortalAsClinician();
 		}
@@ -137,75 +138,79 @@ public class WastageCP extends BaseTest {
 		assertEquals(actualDosesAmount, remainingDosesAfterWastage);
 	}
 
-	@Test()
-	public void Can_Do_Single_Wastage_ByQuantityCP() throws Exception {
-		log("Target Environment: "+ Utils.getTargetEnvironment());
-		env = Utils.getTargetEnvironment();
-		testData = Utils.getTestData(env);
-		supplyLocation = String.valueOf(testData.get("supplyLocationFrom"));
-		double amountOfQuantityToWaste = 1;
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		MainPageCP cpMainPage = new MainPageCP(getDriver());
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin":
-				log("Login AS comunityqa_immsbc_admin");
-				TestcaseID = "245090"; //C245090
-				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-				break;
-			default:
-				log("Login as Clinician");
-				TestcaseID = "243116"; //C243116
-				loginPage.loginIntoCommunityPortalAsClinician();
-		}
+	//We don't use Quantity field anymore it will be in READ ONLY mode, Oct 12,2023 as per Sheila Artes
+	//Testcase will be disabled
+//	@Test()
+//	public void Can_Do_Single_Wastage_ByQuantityCP() throws Exception {
+//		log("Target Environment: "+ Utils.getTargetEnvironment());
+//		env = Utils.getTargetEnvironment();
+//		testData = Utils.getTestData(env);
+//		supplyLocation = String.valueOf(testData.get("supplyLocationFrom"));
+//		double amountOfQuantityToWaste = 1;
+//		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+//		MainPageCP cpMainPage = new MainPageCP(getDriver());
+//
+//		log("/*1.----Login --*/");
+//		switch (Utils.getTargetEnvironment()) {
+//			case "comunityqa_immsbc_admin":
+//				log("Login AS comunityqa_immsbc_admin");
+//				TestcaseID = "245090"; //C245090
+//				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
+//				break;
+//			default:
+//				log("Login as Clinician");
+//				TestcaseID = "243116"; //C243116
+//				loginPage.loginIntoCommunityPortalAsClinician();
+//		}
+//
+//		log("/*2.----Navigate to Supply Console Page --*/");
+//		//cpMainPage.navigateToSupplyConsolePage();
+//		cpMainPage.selectSupplyLocationName(supplyLocation);
+//		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+//		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
+//		double remainingDosesBefore = remainingDosesAndQuantityBeforeDeduction.get(0).get(0);
+//		log("/*-- . remaining doses Distribution_1_1 Before are: -->" + remainingDosesBefore);
+//		double remainingQuantitiesBefore = remainingDosesAndQuantityBeforeDeduction.get(0).get(1);
+//		log("/*-- . remaining Quantity Distribution_1_1 Before are: -->" + remainingQuantitiesBefore);
+//		double remainingConversionFactor = remainingDosesAndQuantityBeforeDeduction.get(0).get(2);
+//		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
+//
+//		log("/*4.----Click on Container's dropdown --*/");
+//		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+//		Thread.sleep(2000);
+//
+//		log("/*5.----select Wastage from the DropDownMenu dropdown menu --*/");
+//		supplyConsolePage.selectWastageFromDropDown();
+//
+//		log("/*6.----set Wastage Quantity amount: " +amountOfQuantityToWaste +"--*/");
+//		supplyConsolePage.setQuantityAmount(Double.toString(amountOfQuantityToWaste));
+//
+//		log("/*7.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
+//		supplyConsolePage.selectReasonForWastageDropDown();
+//
+//		log("/*8.----Clicking on btn Wastage --*/");
+//		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
+//		Thread.sleep(2000);
+//		driver.navigate().refresh();
+//		Thread.sleep(2000);
+//		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");
+//		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
+//		double remainingDosesAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(0);
+//		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
+//		double remainingQuantitiesAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(1);
+//		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
+//		double remainingConversionAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(2);
+//		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
+//
+//		log("/*10.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
+//		log("----Validation by Doses --");
+//		double remainingDosesBeforeCalculation = (remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor;
+//		assertEquals(remainingDosesBeforeCalculation, remainingDosesAfter, 0.1);
+//		log("----Validation by Quantities --");
+//		assertEquals((remainingQuantitiesBefore - amountOfQuantityToWaste), remainingQuantitiesAfter);
+//		log("----Validation Conversion factor --");
+//		assertEquals(remainingConversionFactor,remainingConversionAfter);
+//	}
 
-		log("/*2.----Navigate to Supply Console Page --*/");
-		//cpMainPage.navigateToSupplyConsolePage();
-		cpMainPage.selectSupplyLocationName(supplyLocation);
-		log("/*3.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
-		double remainingDosesBefore = remainingDosesAndQuantityBeforeDeduction.get(0).get(0);
-		log("/*-- . remaining doses Distribution_1_1 Before are: -->" + remainingDosesBefore);
-		double remainingQuantitiesBefore = remainingDosesAndQuantityBeforeDeduction.get(0).get(1);
-		log("/*-- . remaining Quantity Distribution_1_1 Before are: -->" + remainingQuantitiesBefore);
-		double remainingConversionFactor = remainingDosesAndQuantityBeforeDeduction.get(0).get(2);
-		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
-
-		log("/*4.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
-
-		log("/*5.----select Wastage from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectWastageFromDropDown();
-
-		log("/*6.----set Wastage Quantity amount: " +amountOfQuantityToWaste +"--*/");
-		supplyConsolePage.setQuantityAmount(Double.toString(amountOfQuantityToWaste));
-
-		log("/*7.----Reason For Wastage: 'CCI: Equipment Malfunction' --*/");
-		supplyConsolePage.selectReasonForWastageDropDown();
-
-		log("/*8.----Clicking on btn Wastage --*/");
-		supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
-		Thread.sleep(2000);
-		driver.navigate().refresh();
-		Thread.sleep(2000);
-		log("/*9.----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
-		double remainingDosesAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(0);
-		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
-		double remainingQuantitiesAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(1);
-		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
-		double remainingConversionAfter = remainingDosesAndQuantityAfterDeduction.get(0).get(2);
-		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
-
-		log("/*10.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
-		log("----Validation by Doses --");
-		double remainingDosesBeforeCalculation = (remainingQuantitiesBefore - amountOfQuantityToWaste) * remainingConversionFactor;
-		assertEquals(remainingDosesBeforeCalculation, remainingDosesAfter, 0.1);
-		log("----Validation by Quantities --");
-		assertEquals((remainingQuantitiesBefore - amountOfQuantityToWaste), remainingQuantitiesAfter);
-		log("----Validation Conversion factor --");
-		assertEquals(remainingConversionFactor,remainingConversionAfter);
-	}
 }

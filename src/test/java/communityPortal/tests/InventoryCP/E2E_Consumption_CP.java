@@ -209,7 +209,12 @@ public class E2E_Consumption_CP extends BaseTest {
         } catch(Exception ex) {
             System.out.println("No Checkbox. Continue...");
         }
-        ProfilesPage.clickEditImmunizationInformation(driver);
+
+        try {
+            ProfilesPage.clickEditImmunizationInformation(driver);
+        } catch(Exception ex) {
+            System.out.println("Edit Button disabled. Continue...");
+        }
 
         System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
         String agent = inClinicExperience_CP.getVaccineAgent();

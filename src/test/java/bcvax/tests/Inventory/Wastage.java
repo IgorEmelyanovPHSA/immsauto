@@ -166,7 +166,7 @@ public class Wastage extends BaseTest {
 		assertEquals(actualDosesAmount, remainingDosesAfterWastage);
 	}
 
-	@Test()
+	//@Test()
 	public void Can_Do_Single_Wastage_ByQuantity() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());

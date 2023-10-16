@@ -29,12 +29,11 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
     @Test(priority = 1)
     public void CP_CitizenPortalBookDoseOneCovid19() throws Exception {
         TestcaseID = "245217"; //C245217
+        log("TestCase: C245217");
         log("Target Environment: " + Utils.getTargetEnvironment());
         CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        //Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-        //tilities.ApiQueries.apiCallToRemoveCitizenParticipantAndPIRAccount(email, legalLastName, legalFirstName);
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 
@@ -132,5 +131,6 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
     }
 }
