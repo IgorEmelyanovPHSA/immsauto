@@ -83,7 +83,7 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         log("15. Validate Book a Pharmacy Appointment page is displayed");
         Assert.assertTrue(minorAilmentsPage.isBookAPharmacyAppointmentDisplayed());
 
-        log("16. Login as an Clinician into CP*/");
+        log("16. Login as an Clinician into CP");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("17. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);

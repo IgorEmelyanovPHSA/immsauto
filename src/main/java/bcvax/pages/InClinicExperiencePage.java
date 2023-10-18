@@ -110,6 +110,15 @@ public class InClinicExperiencePage extends BasePage {
 
 	private By time_slot_appointment1 = By.xpath("(.//button[@name='timeslot'][1])");
 
+	@FindBy(xpath = "//button[contains(text(),'Cancel Appointment')]")
+	private WebElement btnCancelAppointment;
+
+	@FindBy(xpath = "//button[contains(text(),'Yes')]")
+	private WebElement btnYes;
+
+	@FindBy(xpath = "//button[contains(text(),'Yes')]")
+	private WebElement btnCloseWindowAppointment;
+
 	@FindBy(xpath = "//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']")
 	private WebElement appointment_status_cancel;
 	private By appointment_status_cance1 = By.xpath("//SPAN[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//LST-FORMATTED-TEXT[text()='Cancelled']");
@@ -1820,11 +1829,33 @@ public class InClinicExperiencePage extends BasePage {
 		return getClientReasonForVisitString;
 	}
 
+	public String getMinorAilmentsAndContraceptionAppointmentType(){
+		By minorAilmentsAndContraceptionAppointmentTypeElement = By.xpath("//span[contains(text(),'Minor Ailments and Contraception')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']");
+		waitForElementToBePresent(driver, minorAilmentsAndContraceptionAppointmentTypeElement, 10);
+		String getMinorAilmentsAndContraceptionAppointmentTypeString = driver.findElement(minorAilmentsAndContraceptionAppointmentTypeElement).getText();
+		return getMinorAilmentsAndContraceptionAppointmentTypeString;
+	}
+
 	public String getCitizenComment(){
-		By clientReasonForVisitElement = By.xpath("//span[contains(text(),'Citizen Comment')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']");
-		waitForElementToBePresent(driver, clientReasonForVisitElement, 10);
-		String getClientReasonForVisitString = driver.findElement(clientReasonForVisitElement).getText();
-		return getClientReasonForVisitString;
+		By citizenCommentElement = By.xpath("//span[contains(text(),'Citizen Comment')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']");
+		waitForElementToBePresent(driver, citizenCommentElement, 10);
+		String getCitizenCommentString = driver.findElement(citizenCommentElement).getText();
+		return getCitizenCommentString;
+	}
+
+	public String getAppointmentStatus(){
+		By appointmentStatusElement = By.xpath("//span[contains(text(),'Status')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']");
+		waitForElementToBePresent(driver, appointmentStatusElement, 10);
+		String getAppointmentStatusString = driver.findElement(appointmentStatusElement).getText();
+		return getAppointmentStatusString;
+	}
+
+	public void clickBtnCancelAppointment() throws InterruptedException {
+		click(btnCancelAppointment);
+		click(btnYes);
+		Thread.sleep(2000);
+		click(btnCloseWindowAppointment);
+		Thread.sleep(2000);
 	}
 
 }
