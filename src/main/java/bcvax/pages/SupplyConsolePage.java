@@ -19,6 +19,7 @@ import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
 import static constansts.Apps.*;
 import static constansts.Header.SUPPLY_TRANSACTION_NAME_FULL;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
@@ -34,9 +35,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
-
-	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
-	private WebElement successMessage;
 
 	@FindBy(xpath = "//input[@name='BCH_Requested_Delivery_Date__c']")
 	private WebElement inputDate;
@@ -712,8 +710,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public void successMessageAppear() throws InterruptedException {
-		waitForElementToBeVisible(driver, successMessage, 20);
-		assertTrue(isElementPresent(successMessage));
+		By alert_popup_path = By.xpath("//div[@role='alertdialog']");
+		waitForElementToBeEnabled(driver, alert_popup_path, 10);
+		WebElement alert_popup = driver.findElement(alert_popup_path);
+		String success_message = alert_popup.findElement(By.xpath(".//div[@class='toastTitle slds-text-heading--small']")).getText();
+		assertEquals(success_message, "Success!");
 		log(" -- Toast success message appears");
 		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
 		try {
