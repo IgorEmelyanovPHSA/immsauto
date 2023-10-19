@@ -29,6 +29,7 @@
             <class name="communityPortal.tests.Notifications.RegistrationNotificationCP"/>
             <class name="communityPortal.tests.MinorAilments.E2EMinorAilmentsCitizenPortal"/>
             <class name="communityPortal.tests.MinorAilments.MinorAilmentsIdentificationPage"/>
+            <class name="communityPortal.tests.MinorAilments.MinorAilmentsBookingMultipleAppointments"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
