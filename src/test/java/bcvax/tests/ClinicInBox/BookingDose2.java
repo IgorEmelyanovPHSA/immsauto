@@ -50,7 +50,7 @@ public class BookingDose2 extends BaseTest {
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
-
+		orgMainPage.selectFromNavigationMenu("Home");
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");

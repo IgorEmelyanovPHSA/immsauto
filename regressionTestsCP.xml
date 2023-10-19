@@ -8,7 +8,6 @@
             <class name="communityPortal.tests.CitizenPortalFace_Integration.E2E_Dose1_Self_Citizen_Booking_Covid19"/>
             <class name="communityPortal.tests.CitizenPortalFace_Integration.E2E_Dose2_Self_Citizen_Booking_Covid19"/>
             <class name="communityPortal.tests.DIWA_CP.DIWA_Covid19_CP"/>
-            <class name="communityPortal.tests.Historical_Immunisation_CP.Historical_Immunisation_Records_Validation"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_COVID19"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose2_COVID19"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>

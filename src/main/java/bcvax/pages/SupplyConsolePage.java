@@ -151,12 +151,6 @@ public class SupplyConsolePage extends BasePage {
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
 
-	@FindBy(xpath = "//button[@title='Edit Expected Delivery Date']")
-	private WebElement editExpectedDeliveryDate;
-
-	@FindBy(xpath = "//*[text()='Expected Delivery Date']/../..//input")
-	private WebElement inputExpectedDate;
-
 	@FindBy(xpath = "//button[text() = 'Save'] | //button[@title = 'Save']")
 	private WebElement saveExpectedDeliveryDate;
 
@@ -1594,20 +1588,26 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickEditExpectedDeliveryDate() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, editExpectedDeliveryDate, 30);
-		editExpectedDeliveryDate.click();
+		Thread.sleep(500);
+		By edit_expected_delivery_date_btn_path = By.xpath("//button[@title='Edit Expected Delivery Date']");
+		waitForElementToBeEnabled(driver, edit_expected_delivery_date_btn_path, 10);
+		WebElement edit_expected_delivery_date_btn = driver.findElement(edit_expected_delivery_date_btn_path);
+		edit_expected_delivery_date_btn.click();
 	}
 
 	public void inputExpectedDate() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_YEAR, 1);
 		Date tomorrow = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		String tomorrowAsString = dateFormat.format(tomorrow);
-		waitForElementToBeVisible(driver, inputExpectedDate, 30);
-		inputExpectedDate.sendKeys(tomorrowAsString, Keys.ENTER);
+		By expected_delivery_date_field_path = By.xpath("//*[text()='Expected Delivery Date']/../..//input");
+		waitForElementToBeEnabled(driver, expected_delivery_date_field_path, 10);
+		WebElement expected_delivery_date_field = driver.findElement(expected_delivery_date_field_path);
+		expected_delivery_date_field.sendKeys(tomorrowAsString);
+		Thread.sleep(500);
+		expected_delivery_date_field.sendKeys(Keys.ENTER);
 	}
 
 	public void clickSaveExpectedDeliveryDate() {

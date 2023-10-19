@@ -70,6 +70,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
 		}
+
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
 		inClinicExperience.closeTabsHCA();
