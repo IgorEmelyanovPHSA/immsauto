@@ -88,6 +88,7 @@ public class Consumption extends BaseTest {
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
 		orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+
 		log("/*-- 12. Click on User Defaults Tab  --*/");
 		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
 		inClinicExperiencePage.clickUserDefaultsTab();

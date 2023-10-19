@@ -124,6 +124,19 @@ public class MainPageOrg extends BasePage {
         System.out.println("Current App After: " + currentAppAfter);
     }
 
+    public void selectFromNavigationMenu(String item) throws InterruptedException {
+        Thread.sleep(500);
+        By navigation_menu_path = By.xpath("//button[@title='Show Navigation Menu']");
+        waitForElementToBeEnabled(driver, navigation_menu_path, 10);
+        WebElement navigation_menu = driver.findElement(navigation_menu_path);
+        navigation_menu.click();
+        Thread.sleep(500);
+        By navigation_item_path = By.xpath("//a[@role='option' and @data-label='" + item + "']");
+        waitForElementToBeEnabled(driver, navigation_item_path, 10);
+        WebElement my_item = driver.findElement(navigation_item_path);
+        my_item.click();
+    }
+
     public void closeAllTabs() throws InterruptedException {
         Thread.sleep(500);
         waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);

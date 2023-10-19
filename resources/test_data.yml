@@ -284,7 +284,7 @@ regression:
     - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:31:43)"
     - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-14 11:32:30)"
   vaccineAgent: "COVID-19 Non-replicating Viral Vector"
-  consentProvider: "BCHComClinician Auto"
+  consentProvider: "Auto Bchcomclinician"
   agentConsumption: "COVID-19 mRNA"
   diwaCitizen: "Rawley BCVaxIsmirnioglou"
   providerConsumption: "BCHComClinician Auto"

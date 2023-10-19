@@ -21,8 +21,8 @@ public class AddAppointmentDays extends BaseTest {
         String appointment_date = "2023-8-27";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
 
-        LocalDate start_date = LocalDate.parse("2023-10-15", dtf);
-        LocalDate end_date = LocalDate.parse("2023-10-15", dtf);
+        LocalDate start_date = LocalDate.parse("2023-10-23", dtf);
+        LocalDate end_date = LocalDate.parse("2023-10-25", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
@@ -71,6 +71,7 @@ public class AddAppointmentDays extends BaseTest {
                     my_name_link.click();
                 } else {
                     appointment_day_page.addAppointmentDay();
+                    appointment_name = appointment_type + " " + appointment_dates.get(d);
                     appointment_day_page.fillUpNewAppointmentDay(appointment_name, (String) providers.get(i).get("provider"), (String) providers.get(i).get("address_id"), appointment_dates.get(d), (String) providers.get(i).get("appointment_city"), appointment_type, localization);
                 }
                 appointment_day_page.selectAppointmentDayRelatedTab();
