@@ -5,6 +5,7 @@ import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import constansts.Apps;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
@@ -79,7 +80,12 @@ public class RequisitionCP extends BaseTest {
         System.out.println("/*----20. Save Chosen Expected Delivery Date--*/");
         supplyConsolePage.clickSaveExpectedDeliveryDate();
         System.out.println("/*----21. Approve Requisition--*/");
-        supplyConsolePage.clickApproveRequisition();
+        try {
+            supplyConsolePage.clickApproveRequisition();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(1000);
+            supplyConsolePage.clickApproveRequisition();
+        }
         supplyConsolePage.clickSaveApprovedRequisition();
         System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
         supplyConsolePage.enterApprovedDose("1");
