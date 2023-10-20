@@ -3,6 +3,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -124,7 +125,15 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
             System.out.println("There is not Override Eligibility Option");
         }
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationCheckbox();
+
+        try {
+            inClinicExperience_CP.clickOnVaccinationCheckbox();
+        } catch(NotFoundException ex) {
+            Thread.sleep(2000);
+            PersonAccountPage.overrideEligibility(driver);
+            Thread.sleep(2000);
+            inClinicExperience_CP.clickOnVaccinationCheckbox();
+        }
 
         ////////////////////
         //May will be removed
