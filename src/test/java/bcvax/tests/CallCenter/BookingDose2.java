@@ -8,6 +8,7 @@ import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NotFoundException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -95,7 +96,14 @@ public class BookingDose2 extends BaseTest {
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		callCenterConsole.clickOnVaccinationCheckbox();
+		try {
+			callCenterConsole.clickOnVaccinationCheckbox();
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
+			callCenterConsole.navigateToVaccineSchedulingTab();
+			Thread.sleep(2000);
+			callCenterConsole.clickOnVaccinationCheckbox();
+		}
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");

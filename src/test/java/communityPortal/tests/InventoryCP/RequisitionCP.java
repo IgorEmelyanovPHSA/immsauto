@@ -23,9 +23,10 @@ public class RequisitionCP extends BaseTest {
         env = Utils.getTargetEnvironment();
         TestcaseID = (env.contains("immsbc_admin")) ? "245095" : "243087"; //C243087
         testData = Utils.getTestData(env);
-        //String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
-        String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-        String supply_location_from = "Atlin Health Centre";
+        String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        String supply_location = String.valueOf(testData.get("supplyLocationTo"));
+//        String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+//        String supply_location_from = "Atlin Health Centre";
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
 

@@ -144,10 +144,22 @@ public class BookingDose2 extends BaseTest {
 		clinicInBox.refreshBrowser();
 		log("/*31----Go to back to the Citizen Related Tab --*/");
 		clinicInBox.clickRelatedTab();
+
+		try {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+		} catch(Exception ex) {
+			System.out.println("Warning dialog didn't appear");
+		}
+
 		log("/*32----click on In-clinic Experience button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		inClinicExperience.clickCheckInButton();
 		Thread.sleep(2000);
+		try {
+			PersonAccountPage.confirmNoForecastWarning(driver);
+		} catch(Exception ex) {
+			System.out.println("Warning dialog didn't appear");
+		}
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		log("/*46.---Open Today's appointments from Home page --*/");
 
