@@ -5,6 +5,7 @@ import bcvax.pages.MainPageCP;
 import bcvax.pages.PersonAccountPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -102,7 +103,15 @@ public class BookingDose2_COVID19 extends BaseTest {
             System.out.println("There is not Override Eligibility Option");
         }
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
-        inClinicExperience_CP.selectOneOption(vaccineToSelect);
+
+        try {
+            inClinicExperience_CP.selectOneOption(vaccineToSelect);
+        } catch(NotFoundException ex) {
+            Thread.sleep(2000);
+            PersonAccountPage.overrideEligibility(driver);
+            Thread.sleep(2000);
+            inClinicExperience_CP.selectOneOption(vaccineToSelect);
+        }
 
         ////////////////////
         //May will be removed
