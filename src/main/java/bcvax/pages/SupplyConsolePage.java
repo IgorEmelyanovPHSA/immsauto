@@ -1590,6 +1590,8 @@ public class SupplyConsolePage extends BasePage {
 
 	public void clickEditExpectedDeliveryDate() throws InterruptedException {
 		Thread.sleep(500);
+		driver.navigate().refresh();
+		Thread.sleep(500);
 		By edit_expected_delivery_date_btn_path = By.xpath("//button[@title='Edit Expected Delivery Date']");
 		waitForElementToBeEnabled(driver, edit_expected_delivery_date_btn_path, 10);
 		WebElement edit_expected_delivery_date_btn = driver.findElement(edit_expected_delivery_date_btn_path);

@@ -22,9 +22,10 @@ public class Requisition extends BaseTest {
 		env = Utils.getTargetEnvironment();
 		TestcaseID = (env.contains("immsbc_admin")) ? "244848" : "222344";
 		testData = Utils.getTestData(env);
-		//String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
-		String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-		String supply_location_from = "Atlin Health Centre";
+		String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+		String supply_location = String.valueOf(testData.get("supplyLocationTo"));
+//		String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+//		String supply_location_from = "Atlin Health Centre";
 		boolean is_new_ui = Utils.isCommunityPortal();
 //		if(is_new_ui) {
 //			throw new SkipException("Temporarily Ignore test in CP");
