@@ -35,6 +35,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	String consumptionRoute;
 	String consumptionSite;
 	String consentProvider;
+	String consumptionAgent;
 
 	@Test(priority = 1)
 	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
@@ -49,6 +50,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
+		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
@@ -183,7 +185,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		Thread.sleep(2000);
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		inClinicExperience.selectVaccineAgent();
+		inClinicExperience.selectVaccineAgent(consumptionAgent);
 
 		//If Incorrect vaccine warning is displayed
 		try {

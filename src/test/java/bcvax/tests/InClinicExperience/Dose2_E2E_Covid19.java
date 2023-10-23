@@ -33,6 +33,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 	String consumptionRoute;
 	String consumptionSite;
 	String consentProvider;
+	String consumptionAgent;
 	@Test(priority = 1)
 	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
 		TestcaseID = "222811"; //C222811
@@ -49,6 +50,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
+		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
 		loginPage.loginAsClerk();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -200,7 +202,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*47.---Open Today appointment Details --*/");
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		inClinicExperience.selectVaccineAgent();
+		inClinicExperience.selectVaccineAgent(consumptionAgent);
 
 		Thread.sleep(2000);
 		//If Incorrect vaccine warning is displayed
