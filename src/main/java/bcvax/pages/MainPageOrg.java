@@ -72,7 +72,14 @@ public class MainPageOrg extends BasePage {
         app_launcher.click();
         Thread.sleep(500);
         By apps_launcher_input_path = By.xpath("//input[@placeholder='Search apps and items...']");
-        waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+        try {
+            waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+        } catch(Exception ex) {
+            System.out.println("Not found search field. Try again");
+            app_launcher.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+        }
 
         WebElement app_launcher_input = driver.findElement(apps_launcher_input_path);
         app_launcher_input.sendKeys(app);
