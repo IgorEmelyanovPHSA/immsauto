@@ -78,6 +78,8 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
             orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
         }
+        orgMainPage.closeAllTabs();
+        orgMainPage.selectFromNavigationMenu("Home");
         clinicInBox.verifyIsClinicInBoxPageDisplayed();
 
         log("/*6.1.----Close All previously opened Tab's --*/");

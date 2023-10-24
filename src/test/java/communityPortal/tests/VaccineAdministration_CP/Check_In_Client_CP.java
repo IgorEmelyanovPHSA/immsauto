@@ -86,6 +86,15 @@ public class Check_In_Client_CP extends BaseTest {
         inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
         log("/*21.--toast success message - 'Success' --*/");
         inClinicExperience_CP.successRegisteredMessageAppear();
+
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
+
+        Thread.sleep(1000);
+
         log("/*22.--Check if check-in button available --*/");
         assertTrue(inClinicExperience_CP.checkInButtonAvailable());
         //Get Date/Time of Check-In

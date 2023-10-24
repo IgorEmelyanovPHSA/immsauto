@@ -19,6 +19,7 @@ import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
 import static constansts.Apps.*;
 import static constansts.Header.SUPPLY_TRANSACTION_NAME_FULL;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
@@ -34,9 +35,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//button[text() = 'Transfer']")
 	private WebElement bulk_transfers_button;
-
-	@FindBy(xpath = "//*[contains(text(), 'Success!')]")
-	private WebElement successMessage;
 
 	@FindBy(xpath = "//input[@name='BCH_Requested_Delivery_Date__c']")
 	private WebElement inputDate;
@@ -151,12 +149,6 @@ public class SupplyConsolePage extends BasePage {
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
 
-	@FindBy(xpath = "//button[@title='Edit Expected Delivery Date']")
-	private WebElement editExpectedDeliveryDate;
-
-	@FindBy(xpath = "//*[text()='Expected Delivery Date']/../..//input")
-	private WebElement inputExpectedDate;
-
 	@FindBy(xpath = "//button[text() = 'Save'] | //button[@title = 'Save']")
 	private WebElement saveExpectedDeliveryDate;
 
@@ -200,9 +192,9 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	/*-------------Methods--------------*/
-	public void inputRequestedQuantity(String inputQuantity) throws InterruptedException {
+	public void inputRequestedDose(String inputQuantity) throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[4]//input"));
+		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[5]//input"));
 		dosesInput.clear();
 		dosesInput.sendKeys(inputQuantity);
 	}
@@ -718,8 +710,11 @@ public class SupplyConsolePage extends BasePage {
 	}
 	@Step
 	public void successMessageAppear() throws InterruptedException {
-		waitForElementToBeVisible(driver, successMessage, 20);
-		assertTrue(isElementPresent(successMessage));
+		By alert_popup_path = By.xpath("//div[@role='alertdialog']");
+		waitForElementToBeEnabled(driver, alert_popup_path, 10);
+		WebElement alert_popup = driver.findElement(alert_popup_path);
+		String success_message = alert_popup.findElement(By.xpath(".//div[@class='toastTitle slds-text-heading--small']")).getText();
+		assertEquals(success_message, "Success!");
 		log(" -- Toast success message appears");
 		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
 		try {
@@ -1594,20 +1589,28 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public void clickEditExpectedDeliveryDate() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, editExpectedDeliveryDate, 30);
-		editExpectedDeliveryDate.click();
+		Thread.sleep(500);
+		driver.navigate().refresh();
+		Thread.sleep(500);
+		By edit_expected_delivery_date_btn_path = By.xpath("//button[@title='Edit Expected Delivery Date']");
+		waitForElementToBeEnabled(driver, edit_expected_delivery_date_btn_path, 10);
+		WebElement edit_expected_delivery_date_btn = driver.findElement(edit_expected_delivery_date_btn_path);
+		edit_expected_delivery_date_btn.click();
 	}
 
 	public void inputExpectedDate() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_YEAR, 1);
 		Date tomorrow = calendar.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		String tomorrowAsString = dateFormat.format(tomorrow);
-		waitForElementToBeVisible(driver, inputExpectedDate, 30);
-		inputExpectedDate.sendKeys(tomorrowAsString, Keys.ENTER);
+		By expected_delivery_date_field_path = By.xpath("//*[text()='Expected Delivery Date']/../..//input");
+		waitForElementToBeEnabled(driver, expected_delivery_date_field_path, 10);
+		WebElement expected_delivery_date_field = driver.findElement(expected_delivery_date_field_path);
+		expected_delivery_date_field.sendKeys(tomorrowAsString);
+		Thread.sleep(500);
+		expected_delivery_date_field.sendKeys(Keys.ENTER);
 	}
 
 	public void clickSaveExpectedDeliveryDate() {
@@ -1639,7 +1642,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
 		scrollTop(trade);
 		String tradeValue = trade.getAttribute("value");
-		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[6]//input")).get(0);
+		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[7]//input")).get(0);
 		approveDoseField.sendKeys(inputDose);
 	}
 

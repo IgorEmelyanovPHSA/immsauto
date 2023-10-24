@@ -16,7 +16,7 @@ public class MinorAilmentsIdentificationPage extends BaseTest {
     private String personalHealthNumber = "9746173078";
 
     @Test
-    public void MinorAilmentsIdentificationPageValidationsTest() throws Exception {
+    public void MinorAilmentsIdentificationPageValidations_C259503() throws Exception {
         TestcaseID = "259503"; //C259503
         log("Target Environment: " + Utils.getTargetEnvironment());
 

@@ -12,17 +12,29 @@ import static Utilities.ApiQueries.queryToGetUniqueLink;
 @Listeners({TestListener.class})
 public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
 
-    private String legalFirstName = "Anne-marie";
-    private String legalLastName = "BCVaxJacketts";
-    private String legalMiddleName = "Elissa";
-    private String dateOfBirth = "Aug 16, 1903";
-    private String postalCode = "V3B0J5";
-    private String personalHealthNumber = "9746173988";
+    private String legalFirstName = "Candis";
+    private String legalLastName = "BCVaxHobden";
+    private String legalMiddleName = "Aube";
+    private String dateOfBirth = "Mar 30, 1991";
+    private String postalCode = "V2G1V5";
+    private String personalHealthNumber = "9746171683";
     private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
+
+//    private String legalFirstName = "Anne-marie";
+//    private String legalLastName = "BCVaxJacketts";
+//    private String legalMiddleName = "Elissa";
+//    private String dateOfBirth = "Aug 16, 1903";
+//    private String postalCode = "V3B0J5";
+//    private String personalHealthNumber = "9746173988";
+//    private boolean isIndigenous = false;
+//    private String email = "accountToDelete@phsa.ca";
+//    private String phoneNumber = "6041234568";
+//    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+//    private String vaccineToSelect = "Covid19Vaccine";
 
     //Login as an admin for now, needs to be updated to ICE
     //Needs to update TestcaseId

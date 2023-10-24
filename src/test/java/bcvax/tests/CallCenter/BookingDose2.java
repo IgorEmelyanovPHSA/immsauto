@@ -1,11 +1,14 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
+import bcvax.pages.MainPageOrg;
 import bcvax.pages.PersonAccountPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
+import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NotFoundException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -24,6 +27,7 @@ public class BookingDose2 extends BaseTest {
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+	MainPageOrg orgMainPage;
 
 	@AfterMethod
 	public void afterMethod() throws Exception {
@@ -39,7 +43,15 @@ public class BookingDose2 extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
+		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----CallCenter Console page displayed --*/");
+
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.CALL_CENTER_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.CALL_CENTER_CONSOLE.value);
+		}
+		orgMainPage.selectFromNavigationMenu("Home");
+
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
 		callCenterConsole.closeAllTabs();
@@ -84,7 +96,14 @@ public class BookingDose2 extends BaseTest {
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		callCenterConsole.clickOnVaccinationCheckbox();
+		try {
+			callCenterConsole.clickOnVaccinationCheckbox();
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
+			callCenterConsole.navigateToVaccineSchedulingTab();
+			Thread.sleep(2000);
+			callCenterConsole.clickOnVaccinationCheckbox();
+		}
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");

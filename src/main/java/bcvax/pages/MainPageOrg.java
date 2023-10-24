@@ -72,7 +72,14 @@ public class MainPageOrg extends BasePage {
         app_launcher.click();
         Thread.sleep(500);
         By apps_launcher_input_path = By.xpath("//input[@placeholder='Search apps and items...']");
-        waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+        try {
+            waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+        } catch(Exception ex) {
+            System.out.println("Not found search field. Try again");
+            app_launcher.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, apps_launcher_input_path, 10);
+        }
 
         WebElement app_launcher_input = driver.findElement(apps_launcher_input_path);
         app_launcher_input.sendKeys(app);
@@ -122,6 +129,19 @@ public class MainPageOrg extends BasePage {
         }
         String currentAppAfter = currentApp();
         System.out.println("Current App After: " + currentAppAfter);
+    }
+
+    public void selectFromNavigationMenu(String item) throws InterruptedException {
+        Thread.sleep(500);
+        By navigation_menu_path = By.xpath("//button[@title='Show Navigation Menu']");
+        waitForElementToBeEnabled(driver, navigation_menu_path, 10);
+        WebElement navigation_menu = driver.findElement(navigation_menu_path);
+        navigation_menu.click();
+        Thread.sleep(500);
+        By navigation_item_path = By.xpath("//a[@role='option' and @data-label='" + item + "']");
+        waitForElementToBeEnabled(driver, navigation_item_path, 10);
+        WebElement my_item = driver.findElement(navigation_item_path);
+        my_item.click();
     }
 
     public void closeAllTabs() throws InterruptedException {

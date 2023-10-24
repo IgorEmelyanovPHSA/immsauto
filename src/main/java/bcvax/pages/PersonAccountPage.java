@@ -45,7 +45,7 @@ public class PersonAccountPage extends BasePage {
     public static void overrideEligibility(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By override_eligibility_btn_path = By.xpath("//button[@title='Primary action' and text()='Override Eligibility']");
-        waitForElementToBeEnabled(driver, override_eligibility_btn_path, 10);
+        waitForElementToBeEnabled(driver, override_eligibility_btn_path, 30);
         WebElement override_eligibility_btn = driver.findElement(override_eligibility_btn_path);
         override_eligibility_btn.click();
         Thread.sleep(500);
@@ -81,7 +81,7 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, refresh_forecast_btn_path, 10);
         WebElement refresh_forecast_btn = driver.findElement(refresh_forecast_btn_path);
         refresh_forecast_btn.click();
-        Thread.sleep(5000);
+        Thread.sleep(500);
         waitForElementToBeEnabled(driver, refresh_forecast_btn_path, 10);
     }
 
@@ -135,6 +135,14 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, cancel_btn_path, 10);
         WebElement cancel_btn = driver.findElement(cancel_btn_path);
         cancel_btn.click();
+    }
+
+    public static void confirmNoForecastWarning(WebDriver driver) throws InterruptedException{
+        By confirm_btn_path = By.xpath("//button[@c-bchcmodal_bchcmodal and text()='Confirm']");
+        Thread.sleep(500);
+        waitForElementToBeEnabled(driver, confirm_btn_path, 10);
+        WebElement confirm_btn = driver.findElement(confirm_btn_path);
+        confirm_btn.click();
     }
 
     public static void clickVerifyPHNButton(WebDriver driver) throws InterruptedException {

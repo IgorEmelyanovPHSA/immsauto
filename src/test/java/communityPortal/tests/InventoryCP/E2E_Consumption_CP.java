@@ -194,7 +194,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
 
-        inClinicExperience_CP.selectVaccineAgent();
+        inClinicExperience_CP.selectVaccineAgentValue(consumptionAgent);
         Thread.sleep(2000);
 
 //        String consentProvider = inClinicExperience_CP.consentProviderSelected();

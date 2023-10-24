@@ -5,6 +5,7 @@ import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import constansts.Apps;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import bcvax.pages.SupplyConsolePage;
@@ -23,9 +24,10 @@ public class RequisitionCP extends BaseTest {
         env = Utils.getTargetEnvironment();
         TestcaseID = (env.contains("immsbc_admin")) ? "245095" : "243087"; //C243087
         testData = Utils.getTestData(env);
-        //String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
-        String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-        String supply_location_from = "Atlin Health Centre";
+        String supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        String supply_location = String.valueOf(testData.get("supplyLocationTo"));
+//        String supply_location = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+//        String supply_location_from = "Atlin Health Centre";
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
@@ -62,7 +64,7 @@ public class RequisitionCP extends BaseTest {
         log("/*----12. click Next button --*/");
         supplyConsolePage.clickNextButton();
         System.out.println("/*----13. Input Requested Quantity and Doses --*/");
-        supplyConsolePage.inputRequestedQuantity("1");
+        supplyConsolePage.inputRequestedDose("1");
         System.out.println("/*----14. Save Quantity and Doses --*/");
         supplyConsolePage.clickSaveButton();
         System.out.println("/*----15. Submit Requisition --*/");
@@ -78,7 +80,12 @@ public class RequisitionCP extends BaseTest {
         System.out.println("/*----20. Save Chosen Expected Delivery Date--*/");
         supplyConsolePage.clickSaveExpectedDeliveryDate();
         System.out.println("/*----21. Approve Requisition--*/");
-        supplyConsolePage.clickApproveRequisition();
+        try {
+            supplyConsolePage.clickApproveRequisition();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(1000);
+            supplyConsolePage.clickApproveRequisition();
+        }
         supplyConsolePage.clickSaveApprovedRequisition();
         System.out.println("/*----22. Select Supply Container With Entering Approved Request Dose--*/");
         supplyConsolePage.enterApprovedDose("1");

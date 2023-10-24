@@ -67,7 +67,6 @@ public class DIWA_ICE extends BaseTest {
 				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
 			}
 		}
-
 		//log("/*3.----In Clinic Experience(ICE) page displayed --*/");
 		//inClinicExperience.verifyIsICEpageDisplayed();
 

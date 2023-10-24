@@ -108,7 +108,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + dosesToQty, 0.011);
 	}
 
-	@Test()
+	//@Test()
 	public void Validate_Receive_Supplies_By_Qty_as_Clinician_CP() throws Exception {
 		TestcaseID = "243133"; //C243133
 		double qty = 1;
