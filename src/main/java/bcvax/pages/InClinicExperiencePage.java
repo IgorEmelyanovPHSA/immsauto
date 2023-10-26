@@ -1704,7 +1704,8 @@ public class InClinicExperiencePage extends BasePage {
 		providerField.sendKeys(provider);
 		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
 		waitForElementToBeLocated(driver, providerItemPath, 10);
-		driver.findElement(providerItemPath).click();
+		WebElement provider_item = driver.findElement(providerItemPath);
+		provider_item.click();
 
 	}
 
@@ -1724,7 +1725,8 @@ public class InClinicExperiencePage extends BasePage {
 		informed_consent_provider.sendKeys(provider);
 		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
 		waitForElementToBeLocated(driver, providerItemPath, 10);
-		driver.findElement(providerItemPath).click();
+		WebElement provider_item = driver.findElement(providerItemPath);
+		provider_item.click();
 	}
 
 	public void setRoute(String route) throws InterruptedException {
@@ -1744,18 +1746,20 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void setLotNumber(String lot) throws InterruptedException {
-		By lotItemPath = By.xpath("//li[contains(@title, '" + lot + "')]");
-		By lotField = By.xpath("//span[text() = 'Lot Number']/..//input");
+		By lot_item_path = By.xpath("//li[contains(@title, '" + lot + "')]");
+		By lot_field_path = By.xpath("//span[text() = 'Lot Number']/..//input");
 		WebElement lotSearchInputField = driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input[@class = 'slds-input search-input-class']"));
 		if(!lotSearchInputField.isDisplayed()) {
-			driver.findElement(lotField).click();
+			waitForElementToBeEnabled(driver, lot_field_path, 10);
+			WebElement lot_field = driver.findElement(lot_field_path);
+			lot_field.click();
 		}
 		Thread.sleep(1000);
 		lotSearchInputField.sendKeys(lot);
 		Thread.sleep(1000);
-
-		waitForElementToBePresent(driver, lotItemPath, 10);
-		driver.findElement(lotItemPath).click();
+		waitForElementToBeEnabled(driver, lot_item_path, 10);
+		WebElement lot_item = driver.findElement(lot_item_path);
+		lot_item.click();
 	}
 
 	public void setDosage(String dose) throws InterruptedException {
