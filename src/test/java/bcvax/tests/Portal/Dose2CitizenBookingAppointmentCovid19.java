@@ -104,7 +104,13 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         PersonAccountPage.clickVerifyPHNButton(driver);
         PersonAccountPage.successMessageAppear(driver);
         Thread.sleep(2000);
-
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            PersonAccountPage.clickVerifyPHNButton(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
