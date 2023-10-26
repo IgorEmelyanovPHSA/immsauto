@@ -78,6 +78,7 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
+		orgMainPage.closeAllTabs();
 		orgMainPage.selectFromNavigationMenu("Home");
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 
@@ -92,6 +93,8 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 //		if (!isUserFound){
 //			throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
 //		}
+
+		Thread.sleep(2000);
 		try {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
 		} catch(Exception ex) {
@@ -99,8 +102,16 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		}
 
 		PersonAccountPage.clickVerifyPHNButton(driver);
+
 		PersonAccountPage.successMessageAppear(driver);
 		Thread.sleep(2000);
+		try {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.clickVerifyPHNButton(driver);
+		} catch(Exception ex) {
+			System.out.println("Warning dialog didn't appear");
+		}
 		log("/*8.---Get unique link using Sales Force query over API--*/");
 		String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
