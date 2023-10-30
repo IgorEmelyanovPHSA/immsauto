@@ -645,14 +645,6 @@ public class InClinicExperiencePage extends BasePage {
 		return (doses);
 	}
 
-	public String getDoseConversionFactor() throws InterruptedException {
-		WebElement element = driver.findElement(get_dose_conversion_factor1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
-	}
-
 	public void clickToSearchClinic() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(2000);
@@ -830,32 +822,6 @@ public class InClinicExperiencePage extends BasePage {
 		click_on_influenza_vaccination_checkbox.click();
 	}
 
-//	public void selectEarlyBookingReason() throws InterruptedException {
-//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,300)");
-//		Thread.sleep(5000);
-//		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
-//		Thread.sleep(2000);
-//		click_early_booking_reason.click();
-//		Thread.sleep(1000);
-//		if (isDisplayed(select_early_booking_reason)) {
-//			//waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-//			Thread.sleep(1000);
-//			select_early_booking_reason.click();
-//		} else {//it's never go here - it's the same xpath for devit and prodsuppqa
-//			waitForElementToBeVisible(driver, select_early_booking_reason_for_prodsup, 10);
-//			Thread.sleep(2000);
-//			select_early_booking_reason_for_prodsup.click();
-//		}
-//	}
-
-//	public void clickFacilityOptionLocation() throws InterruptedException {
-//		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", option_loc_facility);
-//		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-//		Thread.sleep(2000);
-//		waitForElementToBeVisible(driver, option_loc_facility, 10);
-//		option_loc_facility.click();
-//	}
-
 	public void selectBookingAppointmentDay() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		Thread.sleep(2000);
@@ -876,8 +842,7 @@ public class InClinicExperiencePage extends BasePage {
 		By time_slot_appointment_path = By.xpath("(.//button[@name='timeslot'][1])");
 		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
 		WebElement element = driver.findElement(time_slot_appointment_path);
-//		JavascriptExecutor executor = (JavascriptExecutor) driver;
-//		executor.executeScript("arguments[0].click();", element);
+		scrollTop(element, true);
 		element.click();
 	}
 
@@ -987,11 +952,6 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement appointment_clinic_name = driver.findElement(appointment_clinic_name_path);
 		String clinic_name = appointment_clinic_name.getText();
 		return clinic_name;
-	}
-
-	public void ContinueEditingButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, continue_editing_btn, 10);
-		continue_editing_btn.click();
 	}
 
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
@@ -1281,20 +1241,6 @@ public class InClinicExperiencePage extends BasePage {
 		} catch(ElementClickInterceptedException ex) {
 			AlertDialog.closeAlert(driver);
 		}
-//		By success_alert = By.xpath("//div[text() = 'Citizen Successfully Registered']");
-//		try {
-//			waitForElementToBePresent(driver, success_alert, 30);
-//			System.out.println("/* ----the toast success Citizen Registered message has been Appears. Closing...");
-//			clickCloseAlert();
-//			Thread.sleep(500);
-//			waitForElementNotToBeVisible(driver, success_alert, 30);
-//			System.out.println("Alert popup not visible any more...");
-//		} catch(TimeoutException ex) {
-//			System.out.println("**** Warning *****");
-//			System.out.println("**** Citizen Successfully Registered Message didn't appear. Continue...*****");
-//			System.out.println("**** Warning *****");
-//		}
-//		Thread.sleep(500);
 	}
 
 	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
@@ -1358,16 +1304,6 @@ public class InClinicExperiencePage extends BasePage {
 		search_input.click();
 	}
 
-	public void clickCreatImmunizationRecord() throws InterruptedException {
-		create_Immunization_Record.click();
-	}
-
-	public void ValidateCreateImmunizationRecordButtonIsDisplayed() throws InterruptedException {
-		waitForElementToBeLocated(driver, Create_Immunization_Record1, 10);
-		Thread.sleep(2000);
-		Create_Immunization_Record.isDisplayed();
-	}
-
 	public void ValidateCreateImmunizationRecordInfluenzaDisplayed() throws InterruptedException {
 		waitForElementToBeLocated(driver, validate_create_immunization_record_Influenza_, 10);
 		Thread.sleep(2000);
@@ -1392,91 +1328,6 @@ public class InClinicExperiencePage extends BasePage {
 		validate_after_care_status_immunization_record_Pneumo.isDisplayed();
 	}
 
-	public void clickConfirmButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, confirm_button, 10);
-		this.confirm_button.click();
-	}
-
-	public void clickSelectAnOptionDropdown() {
-		this.select_an_option.click();
-	}
-
-	public void selectOption(String vaccine) throws InterruptedException {
-		//waitForElementToBeLocated(driver,clinicName,10);
-		waitForElementToBeVisible(driver, covidmRna, 10);
-		WebElement search_input = driver.findElement(covidmRna2);
-		search_input.click();
-	}
-
-	public void searchClinicLocation(String clinic) throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, search_clinic, 10);
-		Thread.sleep(2000);
-		search_clinic.sendKeys(clinic);
-		Thread.sleep(4000);
-		By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
-		driver.findElement(select_dropdown_option).click();
-		Thread.sleep(2000);
-	}
-
-	public void clickTimeBox() throws InterruptedException {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 0);
-		Date today = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		String todayAsString = dateFormat.format(today);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		this.inputDate.click();
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(todayAsString);
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(Keys.ENTER);
-	}
-
-	public void clickRecordImmunization() throws InterruptedException {
-		waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
-		click(recordImmunizationBtn);
-	}
-
-	public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
-		if (!isDisplayed(yes_button_save_on_popup_window1)) {
-			return false;
-		}
-		waitForElementToBeLocated(driver, yes_button_save_on_popup_window1, 10);
-		WebElement element = driver.findElement(yes_button_save_on_popup_window1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		return true;
-	}
-
-	public boolean selectDateOfAdministration() throws InterruptedException {
-		if (!isInputActive(inputDate)) {
-			return false;
-		}
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -1);
-		Date today = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", inputDate);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		String todayAsString = dateFormat.format(today);
-		waitForElementToBeVisible(driver, inputDate, 10);
-		this.inputDate.click();
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(todayAsString);
-		Thread.sleep(2000);
-		this.inputDate.sendKeys(Keys.ENTER);
-		return true;
-	}
-
-	public void clickSaveConsent() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveConsentButton);
-		Thread.sleep(2000);
-		saveConsentButton.click();
-	}
 
 	public void clickLotNumberDropDown() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_lot_number_dropdown);
@@ -1772,6 +1623,16 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, my_dosage_path, 10);
 		WebElement my_dosage = driver.findElement(my_dosage_path);
 		my_dosage.click();
+	}
+
+	public void selectNotApprovedAdministrationReason() throws InterruptedException {
+		Thread.sleep(500);
+		By administration_reason_path = By.xpath("//input[@type='radio' and @value='Intentional administration']/..//span[@part='indicator']");
+		waitForElementToBeEnabled(driver, administration_reason_path, 10);
+		WebElement administration_reason = driver.findElement(administration_reason_path);
+		scrollTop(administration_reason, false);
+		Thread.sleep(500);
+		administration_reason.click();
 	}
 
 	public void clickCloseAlert() throws InterruptedException {

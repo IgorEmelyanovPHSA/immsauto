@@ -58,9 +58,6 @@ public class BookingDose1Influenza extends BaseTest {
 		log("/*9.----Enter PHN " +personalHealthNumber +"--*/");
 		callCenterConsole.enterPNH(personalHealthNumber);
 
-		log("/*10.----click on non-Indigenous person radiobutton --*/");
-		callCenterConsole.clickNonIndigenousRadioButton();
-
 		log("/*11.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		Thread.sleep(2000);
@@ -111,13 +108,6 @@ public class BookingDose1Influenza extends BaseTest {
 		log("/*21.---Select vaccination type: " + vaccineToSelect + "--*/");
 		callCenterConsole.selectOneOption(vaccineToSelect);
 		Thread.sleep(1000);
-
-		//System.out.println("/*23----click on reason Early Booking Reason --*/");
-		//callCenterConsole.selectEarlyBookingReason();
-		//Thread.sleep(2000);
-		//System.out.println("/*23----click on 'More' search tab --*/");
-		//callCenterConsole.clickOnMoreSearchTabs();
-		//Thread.sleep(2000);
 
 		log("/*22----select 'Search by Clinic name' tab --*/");
 		callCenterConsole.selectSearchClinicNameTab();
