@@ -104,9 +104,6 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
 		inClinicExperience.enterPNH(personalHealthNumber);
 		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
-		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-			inClinicExperience.clickNonIndigenousRadioButton();
-		}
 		System.out.println("/*17.----click Verify PHN button --*/");
 		inClinicExperience.clickVerifyPHNButton();
 		System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");

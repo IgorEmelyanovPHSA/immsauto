@@ -33,9 +33,22 @@ bcvaxdevit:
   consumptionLot: "35035BD-CC01"
   #consumptionLot: "EK4241"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
+  agentInfluenza: "Influenza-LAIV"
+  influenzaLot: "HL2478-CC01"
+  influenzaDose: "0.2"
   useDefaultSettingsLots:
     - "EK4241"
     - "CM1216"
+  supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0000142140"
+        appointment_city: "Abbotsford"
+    - "All Ages - Atlin Health Centre":
+        address_id: "AD-0004045718"
+        appointment_city: "Atlin"
+    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
+        address_id: "AD-0004045603"
+        appointment_city: "Coquitlam"
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -71,6 +84,16 @@ prodsuppqa:
   useDefaultSettingsLots:
     - "ABZ5320-CC01"
     - "TL0006"
+  supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006760073"
+        appointment_city: "Abbotsford"
+    - "All Ages - Atlin Health Centre":
+        address_id: "AD-0006760077"
+        appointment_city: "Atlin"
+    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
+        address_id: "AD-0006760075"
+        appointment_city: "Coquitlam"
 comunityqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -295,6 +318,16 @@ regression:
   useDefaultSettingsLots:
     - "NK2858B"
     - "EK4241"
+  supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006752443"
+        appointment_city: "Abbotsford"
+    - "All Ages - Atlin Health Centre":
+        address_id: "AD-0006752447"
+        appointment_city: "Atlin"
+    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
+        address_id: "AD-0006752445"
+        appointment_city: "Coquitlam"
 regress2:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -332,3 +365,13 @@ regress2:
   useDefaultSettingsLots:
     - "NK2858B"
     - "EK4241"
+  supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006752443"
+        appointment_city: "Abbotsford"
+    - "All Ages - Atlin Health Centre":
+        address_id: "AD-0006752447"
+        appointment_city: "Atlin"
+    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
+        address_id: "AD-0006752445"
+        appointment_city: "Coquitlam"

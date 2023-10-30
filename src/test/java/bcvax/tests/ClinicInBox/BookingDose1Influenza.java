@@ -61,9 +61,6 @@ public class BookingDose1Influenza extends BaseTest {
 		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
 
-		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		clinicInBox.clickNonIndigenousRadioButton();
-
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 
@@ -131,10 +128,19 @@ public class BookingDose1Influenza extends BaseTest {
 		clinicInBox.clickRelatedTab();
 
 		log("/*32.----click on In-clinic Experience button --*/");
-		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		inClinicExperience.clickCheckInButton();
+		Thread.sleep(2000);
+		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		log("/*46.---Open Today's appointments from Home page --*/");
 
-		log("/*33.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		InClinicExperience.validateVaccineAdminPageOpen();
+		inClinicExperience.clickTodayAppointments();
+		log("/*47.---Open Today appointment Details --*/");
+		Thread.sleep(2000);
+		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
+		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
+		inClinicExperience.validateVaccineAdminPageOpen();
 	}
 
 	@Test(priority = 2)
