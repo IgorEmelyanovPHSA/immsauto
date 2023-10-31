@@ -19,6 +19,7 @@ public class MinorAilmentsIdentificationPage extends BaseTest {
     public void MinorAilmentsIdentificationPageValidations_C259503() throws Exception {
         TestcaseID = "259503"; //C259503
         log("Target Environment: " + Utils.getTargetEnvironment());
+        log("TestCase: C259503");
 
         log("1. Open Minor Ailments portal");
         MinorAilmentsPage minorAilmentsPage = loginPage.openMinorAilmentsPortal();
