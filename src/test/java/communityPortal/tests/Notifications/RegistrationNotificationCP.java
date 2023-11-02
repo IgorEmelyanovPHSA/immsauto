@@ -26,14 +26,13 @@ public class RegistrationNotificationCP extends BaseTest {
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test()
-    public void VerifyRegistrationNotification_CP() throws Exception {
+    public void CP_VerifyRegistrationNotification_C246562() throws Exception {
         TestcaseID = "246562"; //C246562
-        CommonMethods commn = new CommonMethods(getDriver());
+        log("TestCase: C246562");
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-       // Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         log("/*1.----Login as Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();

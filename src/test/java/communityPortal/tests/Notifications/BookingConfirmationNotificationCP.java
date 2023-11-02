@@ -25,9 +25,10 @@ public class BookingConfirmationNotificationCP extends BaseTest {
     private String vaccineToSelect = "Covid19Vaccine";
 
     @Test
-    public void CP_CitizenPortalBookDoseOneCovid19() throws Exception {
+    public void CP_BookingConfirmationNotification_C246565() throws Exception {
         TestcaseID = "246565"; //C246565
         log("Target Environment: " + Utils.getTargetEnvironment());
+        log("TestCase: C246565");
         CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -50,8 +51,6 @@ public class BookingConfirmationNotificationCP extends BaseTest {
         log("/*5.---Check for registration successful message and save conformation number--*/");
         String conformationNumberText = registerToGetVaccinatedPage.registrationSuccessfulPageDisplayed();
 
-
-
         log("/*6.---Login as an Clinician--*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
@@ -66,8 +65,6 @@ public class BookingConfirmationNotificationCP extends BaseTest {
 
         //Extra step to log out from CP
         loginPage.logOutCommunityPortal();
-
-
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);

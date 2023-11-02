@@ -134,6 +134,16 @@ public class ReturnPage extends BasePage {
         add_line_items_btn.click();
     }
 
+    public void clickAdHocLineItemButton() throws InterruptedException {
+        Thread.sleep(500);
+        By adHocLineItemBtnPath = By.xpath("//button[@name='HC_Return__c.Add_Ad_Hoc_Line_Item']"
+                .concat(" | ")
+                .concat("//a[@title = 'Add Ad hoc Line Item']"));
+        waitForElementToBeEnabled(driver, adHocLineItemBtnPath, 10);
+        WebElement adHocLineItemBtn = driver.findElement(adHocLineItemBtnPath);
+        adHocLineItemBtn.click();
+    }
+
     public void clickShipReturnButton() throws InterruptedException {
         Thread.sleep(500);
         By ship_return_btn_path = By.xpath("//button[@name='HC_Return__c.Ship_Return']"
@@ -142,6 +152,29 @@ public class ReturnPage extends BasePage {
         waitForElementToBeEnabled(driver, ship_return_btn_path, 10);
         WebElement ship_return_btn = driver.findElement(ship_return_btn_path);
         ship_return_btn.click();
+    }
+    public void removeReturnedTo() throws InterruptedException {
+        Thread.sleep(500);
+        By return_to_path = By.xpath("//a[@tabindex='deleteAction']");
+        waitForElementToBeEnabled(driver, return_to_path, 10);
+        WebElement return_to = driver.findElement(return_to_path);
+        return_to.findElement(By.xpath(".//button")).click();
+
+    }
+
+    public void selectSupplyLocationFromDropdown(String supply_location_to) throws InterruptedException {
+        Thread.sleep(500);
+        By loc_field_path = By.xpath("//input[@role='combobox']");
+        waitForElementToBeEnabled(driver, loc_field_path, 10);
+        WebElement loc_field = driver.findElement(loc_field_path);
+        loc_field.sendKeys(supply_location_to);
+
+        Thread.sleep(500);
+        By location_path = By.xpath("//a[@role='option']"); //click dropdown
+        waitForElementToBeEnabled(driver, location_path, 10);
+        WebElement location = driver.findElement(location_path);
+        location.click();
+
     }
 
     public void clickReceiveReturnButton() throws InterruptedException {
@@ -196,4 +229,5 @@ public class ReturnPage extends BasePage {
         WebElement forward_return_btn = driver.findElement(forward_return_btn_path);
         forward_return_btn.click();
     }
+
 }

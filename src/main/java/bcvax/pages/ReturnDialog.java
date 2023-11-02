@@ -44,4 +44,19 @@ public class ReturnDialog extends BasePage {
         save_btn.click();
         Thread.sleep(2000);
     }
+
+    public String getReturnError() throws InterruptedException {
+        Thread.sleep(500);
+        By generic_error_path = By.xpath("//ul[@class='errorsList']");
+        waitForElementToBeEnabled(driver, generic_error_path, 10);
+        WebElement generic_error = driver.findElement(generic_error_path);
+        return generic_error.getText();
+    }
+    public String getReturnWastageError() throws InterruptedException {
+        Thread.sleep(500);
+        By generic_error_path = By.xpath("//div[@class='slds-form-element__help']");
+        waitForElementToBeEnabled(driver, generic_error_path, 10);
+        WebElement generic_error = driver.findElement(generic_error_path);
+        return generic_error.getText();
+    }
 }

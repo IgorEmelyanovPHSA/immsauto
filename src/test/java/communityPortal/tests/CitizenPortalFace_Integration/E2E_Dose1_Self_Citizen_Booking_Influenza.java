@@ -21,16 +21,15 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "InfluenzaVaccine";
 
-    //Login as an admin for now, needs to be updated to ICE
-    //Needs to update TestcaseId
     @Test(priority = 1)
-    public void CP_CitizenPortalBookDoseOneInfluenza() throws Exception {
+    public void CP_CitizenPortalBookDoseOneInfluenza_C245219() throws Exception {
         TestcaseID = "245219"; //C245219
         log("Target Environment: " + Utils.getTargetEnvironment());
         CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -61,6 +60,19 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
         if (!isUserFound){
             throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
         }
+
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
+
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
+        log("---click Verify PHN button ---");
+        inClinicExperience_CP.clickVerifyPHNButton();
+        Thread.sleep(2000);
+        log("---Expecting to see the toast success message - 'PNH match successful' ---");
+        inClinicExperience_CP.successMessageAppear();
 
         //Extra step to log out from CP
         loginPage.logOutCommunityPortal();
@@ -104,6 +116,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
     public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
         TestcaseID = "219865"; //C219865
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
     }
 }
