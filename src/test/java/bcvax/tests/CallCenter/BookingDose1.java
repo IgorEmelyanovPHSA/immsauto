@@ -1,6 +1,7 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
+import org.testng.annotations.DataProvider;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
@@ -27,10 +28,20 @@ public class BookingDose1 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
-	@Test(priority = 1)
-	public void Can_Book_Dose1_Appointment_as_Call_Center_Agent() throws Exception {
-		TestcaseID = "222524"; //C222524
+	@DataProvider(name="booking_data")
+	public Object[][] dpMethod() {
+		return new Object[][] {{"222524", "Covid19Vaccine"}, {"228856", "InfluenzaVaccine"}};
+	}
+
+	@Test(dataProvider = "booking_data")
+	public void Can_Book_Dose1_Appointment_as_Call_Center_Agent(String testcase_id, String vaccine_agent) throws Exception {
+		//TestcaseID = "222524"; //C222524
+		TestcaseID = testcase_id;
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("------------------------------");
+		log("Testcase ID: " + testcase_id);
+		log("Vaccine Agent: " + vaccine_agent);
+		log("------------------------------");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		CommonMethods commn = new CommonMethods(getDriver());
@@ -93,12 +104,6 @@ public class BookingDose1 extends BaseTest {
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 		//callCenterConsole.navigateToVaccineSchedulingTab();
 
-//		try {
-//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-//			PersonAccountPage.selectEarlyBookingReason(driver);
-//		} catch(Exception ex) {
-//			System.out.println("There is not Early Booking Option");
-//		}
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -108,7 +113,8 @@ public class BookingDose1 extends BaseTest {
 		}
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		callCenterConsole.clickOnVaccinationCheckbox();
+		//callCenterConsole.clickOnVaccinationCheckbox();
+		callCenterConsole.selectOneOption(vaccine_agent);
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");

@@ -135,6 +135,7 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, cancel_btn_path, 10);
         WebElement cancel_btn = driver.findElement(cancel_btn_path);
         cancel_btn.click();
+        Thread.sleep(500);
     }
 
     public static void confirmNoForecastWarning(WebDriver driver) throws InterruptedException{
