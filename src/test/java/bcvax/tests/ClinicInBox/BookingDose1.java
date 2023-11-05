@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
@@ -20,12 +21,21 @@ public class BookingDose1 extends BaseTest {
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	//String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
-	private String vaccineToSelect = "Covid19Vaccine";
+	private String vaccineToSelect;
 	MainPageOrg orgMainPage;
 
-	@Test(priority = 1)
-	public void Can_Book_Dose1_Appointment_as_Clinician_CIB() throws Exception {
+	@DataProvider(name="booking_data")
+	public Object[][] dpMethod() {
+		return new Object[][] {{"225652", "Covid19Vaccine"}, {"228857", "InfluenzaVaccine"}};
+	}
+
+	@Test(dataProvider = "booking_data")
+	public void Can_Book_Dose1_Appointment_as_Clinician_CIB(String testcase_id, String vaccine_agent) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("------------------------------");
+		log("Testcase ID: " + testcase_id);
+		log("Vaccine Agent: " + vaccine_agent);
+		log("------------------------------");
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
@@ -40,9 +50,10 @@ public class BookingDose1 extends BaseTest {
 			default:
 				log("Login AS default user in CIB");
 				loginPage.loginAsClerk();
-				TestcaseID = "225652"; //C225652
+				//TestcaseID = "225652"; //C225652
+				TestcaseID = testcase_id;
 		}
-
+		vaccineToSelect = vaccine_agent;
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
@@ -65,10 +76,10 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.enterPostalCode(postalCode);
 		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
-		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-			clinicInBox.clickNonIndigenousRadioButton();
-		}
+//		log("/*9.----click on non-Indigenous person radiobutton --*/");
+//		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+//			clinicInBox.clickNonIndigenousRadioButton();
+//		}
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");

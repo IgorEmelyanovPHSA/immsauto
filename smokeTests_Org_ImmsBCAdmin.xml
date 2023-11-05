@@ -12,7 +12,7 @@
             <class name="bcvax.tests.Inventory.ReceiveSupplies"/>
             <class name="bcvax.tests.ClinicInBox.BookingDose1"/>
             <class name="bcvax.tests.ClinicInBox.BookingDose2"/>
-            <class name="bcvax.tests.InClinicExperience.Dose1_E2E_Covid19"/>
+            <class name="bcvax.tests.InClinicExperience.Dose1_ICE_E2E"/>
             <class name="bcvax.tests.Inventory.Consumption"/>
             <class name="bcvax.tests.Inventory.Requisition"/>
         </classes>

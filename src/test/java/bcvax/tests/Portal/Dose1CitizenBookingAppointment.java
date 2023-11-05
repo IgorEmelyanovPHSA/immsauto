@@ -5,15 +5,12 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
-public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
+public class Dose1CitizenBookingAppointment extends BaseTest {
 
 	private String legalFirstName = "Anne-marie";
 	private String legalLastName = "BCVaxJacketts";
@@ -42,10 +39,17 @@ public class Dose1CitizenBookingAppointmentCovid19 extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 	}
 
-	@Test()
-	public void citizenPortalBookDoseOneCovid19() throws Exception {
-		TestcaseID = "222521";
-		log("TestCase: C222521");
+	@DataProvider(name="booking_data")
+	public Object[][] dpMethod() {
+		return new Object[][] {{"222521", "Covid19Vaccine"}, {"228855", "InfluenzaVaccine"}};
+	}
+
+	@Test(dataProvider = "booking_data")
+	public void citizenPortalBookDoseOneCovid19(String testcase_id, String vaccine_agent) throws Exception {
+		//TestcaseID = "222521";
+		TestcaseID = testcase_id;
+		vaccineToSelect = vaccine_agent;
+		log("TestCase: " + testcase_id);
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		//CommonMethods com = new CommonMethods(getDriver());
 
