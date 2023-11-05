@@ -53,10 +53,11 @@ public class BookingDose1 extends BaseTest {
 		if(!currentApp.equals(Apps.CALL_CENTER_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.CALL_CENTER_CONSOLE.value);
 		}
+		callCenterConsole.closeAllTabs();
 		orgMainPage.selectFromNavigationMenu("Home");
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
-		callCenterConsole.closeAllTabs();
+
 		System.out.println("/*4.----click Register New Citizen--*/");
 		try {
 			callCenterConsole.clickRegisterButton();

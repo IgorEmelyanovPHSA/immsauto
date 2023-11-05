@@ -4,12 +4,8 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -17,7 +13,7 @@ import java.util.Map;
 
 
 @Listeners({TestListener.class})
-public class Dose1_E2E_Covid19 extends BaseTest {
+public class Dose1_ICE_E2E extends BaseTest {
 	String env;
 	private String legalFirstName = "Ludovika";
 	private String legalLastName = "BcvaxLimeburn";
@@ -37,20 +33,26 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 	String consentProvider;
 	String consumptionAgent;
 
-	@Test(priority = 1)
-	public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
+	@DataProvider(name="booking_data")
+	public Object[][] dpMethod() {
+		return new Object[][] {{"222694", "Covid19Vaccine", "agentConsumption", "covidLot", "covidDose"}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
+		//return new Object[][] {{"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
+	}
+
+	@Test(dataProvider = "booking_data")
+	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE(String testcase_id, String vaccine_agent, String administration_agent, String administration_lot, String administration_dose) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
-		consumptionDose = String.valueOf(testData.get("consumptionDose"));
-		consumptionLot = String.valueOf(testData.get("consumptionLot"));
+		consumptionDose = String.valueOf(testData.get(administration_dose));
+		consumptionLot = String.valueOf(testData.get(administration_lot));
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
-		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+		consumptionAgent = String.valueOf(testData.get(administration_agent));
 		log("/*1.----Login --*/");
 		switch (Utils.getTargetEnvironment()) {
 			case "comunityqa_immsbc_admin_org":
@@ -63,7 +65,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 				loginPage.loginAsClerk();
 				orgMainPage = new MainPageOrg(driver);
 						//orgMainPage = loginPage.orgLoginAsPPHIS();
-				TestcaseID = "222694"; //
+				TestcaseID = testcase_id; //
 		}
 		log("TestRail test case ID: C" +TestcaseID);
 
@@ -140,7 +142,7 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		Thread.sleep(2000);
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		inClinicExperience.clickOnVaccinationCheckbox();
+		inClinicExperience.selectOneOption(vaccine_agent);
 
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
 		inClinicExperience.selectSearchByClinicNameTab();
@@ -237,6 +239,12 @@ public class Dose1_E2E_Covid19 extends BaseTest {
 		}
 		if(site.equals("")) {
 			inClinicExperience.setSite(consumptionSite);
+		}
+
+		try {
+			inClinicExperience.selectNotApprovedAdministrationReason();
+		} catch(Exception ex) {
+			System.out.println("Continue...");
 		}
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();

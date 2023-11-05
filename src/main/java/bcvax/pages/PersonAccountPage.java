@@ -90,7 +90,7 @@ public class PersonAccountPage extends BasePage {
         By covid19_vaccine_checkbox_path = By.xpath("//span[text() = 'Covid-19 Vaccine']");
         By influenza_checkbox_path = By.xpath("//span[text() = 'Influenza Vaccine']");
         if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
-            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 30);
+            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 60);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
             scrollTop(driver, covid19_vaccine_checkbox, true);
             Thread.sleep(500);

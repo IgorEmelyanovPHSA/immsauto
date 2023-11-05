@@ -1150,6 +1150,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void ClickSaveConsentButton() throws InterruptedException {
+		Thread.sleep(500);
 		By save_consent_btn_path = By.xpath("//button[normalize-space()='Save Consent']");
 		waitForElementToBeEnabled(driver, save_consent_btn_path, 10);
 		WebElement save_consent_btn = driver.findElement(save_consent_btn_path);
@@ -1159,6 +1160,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
+		Thread.sleep(500);
 		By confirm_save_adm_btn_path = By.xpath("//button[@title='Confirm & Save Administration']");
 		waitForElementToBeEnabled(driver, confirm_save_adm_btn_path, 10);
 		WebElement confirm_save_adm_btn = driver.findElement(confirm_save_adm_btn_path);
@@ -1628,7 +1630,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void selectNotApprovedAdministrationReason() throws InterruptedException {
 		Thread.sleep(500);
 		By administration_reason_path = By.xpath("//input[@type='radio' and @value='Intentional administration']/..//span[@part='indicator']");
-		waitForElementToBeEnabled(driver, administration_reason_path, 10);
+		waitForElementToBeEnabled(driver, administration_reason_path, 2);
 		WebElement administration_reason = driver.findElement(administration_reason_path);
 		scrollTop(administration_reason, false);
 		Thread.sleep(500);
