@@ -2,9 +2,11 @@ package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
 import bcvax.pages.CommonMethods;
+import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import io.qameta.allure.Story;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -23,6 +25,7 @@ public class BulkWastages extends BaseTest {
 	String supply_location_from;
 	String env;
 	Map<String, Object> testData;
+	MainPageOrg orgMainPage;
 
 	@BeforeMethod
 	public void setUpClass() throws Exception {
@@ -40,7 +43,11 @@ public class BulkWastages extends BaseTest {
 		String reasonForWastage = "CCI: Handling Error";
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
 		log("/*2.----Validate if Supply Console Page displayed --*/");log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*4.----Go to Supply Locations Tab --*/");
