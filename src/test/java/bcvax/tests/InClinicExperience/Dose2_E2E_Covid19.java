@@ -180,10 +180,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.refreshBrowser();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
-		inClinicExperience.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*38.----click on In-clinic Experience button --*/");
-		inClinicExperience.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		//inClinicExperience.ClickGoToInClinicExperienceButton();
 
 		log("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");

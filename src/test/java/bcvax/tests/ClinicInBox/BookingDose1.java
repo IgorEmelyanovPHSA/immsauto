@@ -146,7 +146,7 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.clickRelatedTab();
 		log("/*35----click on Check-In button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
-		inClinicExperience.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		log("/*46.---Open Today's appointments from Home page --*/");

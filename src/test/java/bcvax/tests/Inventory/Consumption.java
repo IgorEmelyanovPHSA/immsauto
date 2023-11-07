@@ -183,9 +183,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		log("/*-- 43.---Navigate to person account Related Tab --*/");
-		inClinicExperiencePage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
-		inClinicExperiencePage.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();

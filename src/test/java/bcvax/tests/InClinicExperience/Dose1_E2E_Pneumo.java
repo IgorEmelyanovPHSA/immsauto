@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.UserDefaultsPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
@@ -138,7 +135,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         System.out.println("/*36.----Refresh page --*/");
         inClinicExperience.refreshBrowser();
         System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
-        inClinicExperience.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         System.out.println("/*38.----click on In-clinic Experience button --*/");
         inClinicExperience.ClickGoToInClinicExperienceButton();
         //InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();

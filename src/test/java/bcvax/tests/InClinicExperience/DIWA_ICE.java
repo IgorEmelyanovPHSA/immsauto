@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.ProfilesPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import constansts.Apps;
@@ -176,7 +173,7 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.summaryConfirmAndSave();
 		Thread.sleep(2000);
 		log("/*---31. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-		inClinicExperience.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 
 //	//@Test()

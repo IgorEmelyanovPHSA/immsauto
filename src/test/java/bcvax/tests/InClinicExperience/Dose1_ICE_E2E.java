@@ -171,7 +171,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
-		inClinicExperience.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 
 		System.out.println("/*40.---Click confirm and Save Button --*/");
 		inClinicExperience.HomePageClickConfirmAndSaveButton();

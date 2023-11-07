@@ -165,4 +165,12 @@ public class PersonAccountPage extends BasePage {
             System.out.println("Probably alert already closed. Continue...");
         }
     }
+
+    public static void clickCheckInButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
+        waitForElementToBeEnabled(driver, checkin_btn_path, 10);
+        WebElement check_in_button = driver.findElement(checkin_btn_path);
+        check_in_button.click();
+    }
 }
