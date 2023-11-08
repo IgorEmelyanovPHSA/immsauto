@@ -143,7 +143,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*30----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		log("/*31----Go to back to the Citizen Related Tab --*/");
-		clinicInBox.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		try {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

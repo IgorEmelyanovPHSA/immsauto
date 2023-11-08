@@ -122,7 +122,7 @@ public class BookingDose1Influenza extends BaseTest {
 		clinicInBox.refreshBrowser();
 
 		log("/*31.----Go to back to the Citizen Related Tab --*/");
-		clinicInBox.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*32.----click on In-clinic Experience button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
