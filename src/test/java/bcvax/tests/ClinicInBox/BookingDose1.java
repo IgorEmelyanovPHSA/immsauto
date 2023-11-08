@@ -57,6 +57,24 @@ public class BookingDose1 extends BaseTest {
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		}
+
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		log("/*4.----Close All previously opened Tab's --*/");
+		inClinicExperience.closeTabsHCA();
+		log("/*5.----- Click on User Defaults Tab --*/");
+		inClinicExperience.clickUserDefaultsTab();
+		log("/*6.----- Enter current date for UserDefaults --*/");
+		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
+		log("/*-- 13. Enter current date for UserDefaults --*/");
+		userDefaultsPage.inputCurrentDateUserDefaults();
+		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		log("/*7.----- Click on Save defaults button --*/");
+		userDefaultsPage.clickBtnSave();
+		AlertDialog.closeAlert(driver);
+		currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
@@ -101,13 +119,6 @@ public class BookingDose1 extends BaseTest {
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.navigateToVaccineSchedulingTab();
 
-//		try {
-//			System.out.println("---click on reason Early Booking Reason - Travel --*/");
-//			PersonAccountPage.selectEarlyBookingReason(driver);
-//		} catch(Exception ex) {
-//			System.out.println("There is not Early Booking Option");
-//		}
-
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -145,7 +156,7 @@ public class BookingDose1 extends BaseTest {
 		log("/*34----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*35----click on Check-In button --*/");
-		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		inClinicExperience = new InClinicExperiencePage(driver);
 		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
