@@ -167,9 +167,9 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		log("/*-- 32.---Appointment Confirmed! Message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		log("/*-- 33.---Navigate to person account Related Tab --*/");
-		inClinicExperiencePage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*-- 34.---Click Go To In clinic experience button --*/");
-		inClinicExperiencePage.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		System.out.println("/*40.---Click confirm and Save Button --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
@@ -286,7 +286,7 @@ public class UserArrivingWrongClinicRebookAppointment extends BaseTest {
 		//inClinicExperiencePage.userFoundWithParameters(citizenName);
 
 		log("/*50.---- Navigated to Person Account related tab ---*/");
-		inClinicExperiencePage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*51.---- Immunization status is in After Care ---*/");
 		inClinicExperiencePage.ValidateStatusisInAftercare();
 		log("/*52.---- User Navigated to Appointment Section  ---*/");

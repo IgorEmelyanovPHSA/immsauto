@@ -1,11 +1,8 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -129,7 +126,7 @@ public class BookingDose1Influenza extends BaseTest {
 
 		log("/*32.----click on In-clinic Experience button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
-		inClinicExperience.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		log("/*46.---Open Today's appointments from Home page --*/");

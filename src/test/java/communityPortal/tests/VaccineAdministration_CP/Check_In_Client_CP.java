@@ -104,7 +104,7 @@ public class Check_In_Client_CP extends BaseTest {
         String expectedDate = df.format(currentTime).replace(".", "");
         String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
         log("/*23.--Click check-in button --*/");
-        inClinicExperience_CP.clickCheckInButton();
+        PersonAccountPage.clickCheckInButton(driver);
         log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
         String currentTab = inClinicExperience_CP.getCurrentTab();
         assertEquals(currentTab, "Identification");

@@ -177,7 +177,7 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
         Thread.sleep(500);
         log("/*36.----click on In-clinic Experience button --*/");
-        inClinicExperience_CP.clickCheckInButton();
+        PersonAccountPage.clickCheckInButton(driver);
         Thread.sleep(2000);
         inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
         Thread.sleep(2000);

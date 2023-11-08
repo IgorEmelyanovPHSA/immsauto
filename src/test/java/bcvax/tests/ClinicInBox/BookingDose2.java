@@ -153,7 +153,7 @@ public class BookingDose2 extends BaseTest {
 
 		log("/*32----click on In-clinic Experience button --*/");
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
-		inClinicExperience.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		try {
 			PersonAccountPage.confirmNoForecastWarning(driver);

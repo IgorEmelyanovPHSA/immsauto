@@ -1,6 +1,7 @@
 package bcvax.tests.Precondition;
 
 import Utilities.TestListener;
+import bcvax.pages.PersonAccountPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
@@ -39,7 +40,7 @@ public class CitizenDuplicates extends BaseTest {
 		while (inClinicExperiencePage.userFound()) {
 			log("/*----User found and Navigated to record page ---*/");
 			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
+			PersonAccountPage.goToRelatedTab(driver);
 			log("/*---- Navigated to Person Account related tab ---*/");
 			Thread.sleep(2000);
 			if (!inClinicExperiencePage.selectImmsRecord()) {
@@ -51,7 +52,7 @@ public class CitizenDuplicates extends BaseTest {
 				log("/*---- Imms record deleted Successfully ---*/");
 				Thread.sleep(2000);
 			}
-			inClinicExperiencePage.clickRelatedTab();
+			PersonAccountPage.goToRelatedTab(driver);
 			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
 			Thread.sleep(5000);
 			if (!inClinicExperiencePage.selectRERNRecord()) {
@@ -110,7 +111,7 @@ public class CitizenDuplicates extends BaseTest {
 		while (inClinicExperiencePage.userFoundWithParameters(legalFirstName, legalMiddleName, legalLastName)) {
 			log("/*----User found and Navigated to record page ---*/");
 			Thread.sleep(2000);
-			inClinicExperiencePage.clickRelatedTab();
+			PersonAccountPage.goToRelatedTab(driver);
 			log("/*---- Navigated to Person Account related tab ---*/");
 			Thread.sleep(7000);
 			if (!inClinicExperiencePage.selectImmsRecord()) {
@@ -122,7 +123,7 @@ public class CitizenDuplicates extends BaseTest {
 				System.out.println("/*---- Imms record deleted Successfully ---*/");
 				Thread.sleep(2000);
 			}
-			inClinicExperiencePage.clickRelatedTab();
+			PersonAccountPage.goToRelatedTab(driver);
 			log("/*---- Navigate back to Person Account related tab after deleting imms record---*/");
 			Thread.sleep(5000);
 			if (!inClinicExperiencePage.selectRERNRecord()) {

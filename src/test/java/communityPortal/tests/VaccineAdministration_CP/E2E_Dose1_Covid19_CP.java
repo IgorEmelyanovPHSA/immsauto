@@ -167,7 +167,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
-        inClinicExperience_CP.clickCheckInButton();
+        PersonAccountPage.clickCheckInButton(driver);
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
         //////
