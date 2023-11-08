@@ -287,9 +287,9 @@ regress2:
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.3"
   consumptionLot: "EK4241"
-  covidLot: "3001530-CC01"
+  covidLot: "35035BD"
   influenzaLot: "NK2858B"
-  covidDose: "0.5"
+  covidDose: "0.3"
   influenzaDose: "0.2"
   useDefaultSettingsLots:
     - "NK2858B"
