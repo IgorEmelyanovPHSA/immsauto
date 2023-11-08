@@ -15,13 +15,6 @@ import java.util.Locale;
 
 public class ClinicInBoxPage extends BasePage {
 	/*---------Properties-------*/
-	@FindBy(xpath = ".//button[@aria-label = 'Search']")
-	private WebElement search_assistant;
-	@FindBy(xpath = ".//lightning-input[@class = 'saInput slds-grow slds-form-element']")
-	private WebElement search_input;
-
-	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
-
 	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
 	private WebElement first_name;
 	private By first_name1 = By.xpath("(.//input[@name = 'FirstName'])");
@@ -86,9 +79,6 @@ public class ClinicInBoxPage extends BasePage {
 	@FindBy(xpath = "(.//button[@name='timeslot'])[1]")
 	private WebElement time_slot_appointment;
 
-	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
-	private WebElement vlidate_appointment_confirm_message;
-	
 	@FindBy(xpath = "(.//button[@name='navigateToICE'])")
 	private WebElement click_navigate_to_ICE_btn;
 
@@ -154,14 +144,6 @@ public class ClinicInBoxPage extends BasePage {
 			}
 		}
 		return found;
-	}
-	
-	public void clickRelatedTab() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_related_tab1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(click_related_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
 	}
 
 	public void enterFirstName(String firstname) throws InterruptedException {
@@ -381,15 +363,6 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(1000);
 		verify_contact_information_checkbox.click();
 		Thread.sleep(500);
-	}
-	
-	public void searchForCitizen(String citizen) throws InterruptedException {
-		waitForElementToBeVisible(driver, search_assistant, 10);
-		search_assistant.click();
-		waitForElementToBeVisible(driver, search_input, 10);
-		search_input.click();
-		search_input.sendKeys(citizen);
-		search_input.sendKeys(Keys.RETURN);
 	}
 
 	public void selectOneOption(String vaccine) throws InterruptedException {
