@@ -20,7 +20,7 @@ public class RegisterNewCitizen extends BaseTest {
 		//loginPage.enterClinicianPW();
 		//loginPage.clickLoginButton();
 		//InClinicExperiencePage inClinicExperiencePage = loginPage.clickLoginButton();
-		loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
 		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
 				//Thread.sleep(10000);
 		/*----Go to Register Tab ---*/

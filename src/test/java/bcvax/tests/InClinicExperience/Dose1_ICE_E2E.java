@@ -54,19 +54,12 @@ public class Dose1_ICE_E2E extends BaseTest {
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		consumptionAgent = String.valueOf(testData.get(administration_agent));
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				loginPage.loginAsImmsBCAdmin();
-				TestcaseID = "244843"; //244843
-				break;
-			default:
-				log("Login AS default user (Clinician to ICE)");
-				loginPage.loginAsClerk();
-				orgMainPage = new MainPageOrg(driver);
-						//orgMainPage = loginPage.orgLoginAsPPHIS();
-				TestcaseID = testcase_id; //
-		}
+
+		loginPage.loginAsImmsBCAdmin();
+		orgMainPage = new MainPageOrg(driver);
+		//orgMainPage = loginPage.orgLoginAsPPHIS();
+		TestcaseID = testcase_id; //
+
 		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");

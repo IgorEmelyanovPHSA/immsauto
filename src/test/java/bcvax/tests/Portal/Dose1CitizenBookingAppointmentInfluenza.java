@@ -55,7 +55,8 @@ public class Dose1CitizenBookingAppointmentInfluenza extends BaseTest {
 		//Thread.sleep(5000);
 
 		log("/*6.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
+		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		Thread.sleep(10000);
 
 		//inClinicExperiencePage.verifyIsICEpageDisplayed();
