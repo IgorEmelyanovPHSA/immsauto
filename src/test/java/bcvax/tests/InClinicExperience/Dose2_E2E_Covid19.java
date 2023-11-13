@@ -51,7 +51,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
-		loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		String currentApp = orgMainPage.currentApp();

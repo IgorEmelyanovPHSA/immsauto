@@ -28,7 +28,8 @@ public class BookingDose1Influenza extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
+		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		orgMainPage = new MainPageOrg(driver);
 
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");

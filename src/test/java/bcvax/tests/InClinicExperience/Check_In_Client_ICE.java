@@ -47,7 +47,7 @@ public class Check_In_Client_ICE extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*6.----Navigate to More -> Register --*/");
-        loginPage.loginAsClerk();
+        loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {

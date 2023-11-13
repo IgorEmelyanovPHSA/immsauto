@@ -30,7 +30,7 @@ public class Dose1_E2E_Pneumo extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        loginPage.loginAsClerk();
+        loginPage.loginAsImmsBCAdmin();
         Thread.sleep(2000);
         orgMainPage = new MainPageOrg(driver);
 

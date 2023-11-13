@@ -41,17 +41,9 @@ public class DIWA_ICE extends BaseTest {
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
 
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin();
-				log("Login as ImmsBCAdmin");
-				TestcaseID = "244854"; //C244854
-				break;
-			default:
-				loginPage.loginAsClerk();
-				log("Login AS default user (Clinician to ICE)");
-				TestcaseID = "223187"; //C223187
-		}
+		loginPage.loginAsPPHIS();
+		log("Login AS default user (Clinician to ICE)");
+		TestcaseID = "223187"; //C223187
 
 		log("/*2.--- Navigate to In Clinic Experience App --*/");
 		mainPageOrg = new MainPageOrg(driver);

@@ -31,18 +31,9 @@ public class BookingDose2 extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin();
-				log("Login AS comunityqa_org_immsbc_admin");
-				TestcaseID = "244875"; //C244875
-				break;
-			default:
-				log("Login AS default user in CIB");
-				loginPage.loginAsClerk();
-				orgMainPage = new MainPageOrg(driver);
-				TestcaseID = "225653"; //C225653
-		}
+		loginPage.loginAsImmsBCAdmin();
+		orgMainPage = new MainPageOrg(driver);
+		TestcaseID = "225653"; //C225653
 
 		log("TestRail test case ID: C" +TestcaseID);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");

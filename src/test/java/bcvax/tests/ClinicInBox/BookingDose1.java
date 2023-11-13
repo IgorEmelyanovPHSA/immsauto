@@ -41,18 +41,9 @@ public class BookingDose1 extends BaseTest {
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
 
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				loginPage.loginAsImmsBCAdmin();
-				TestcaseID = "244842"; //C244842
-				break;
-			default:
-				log("Login AS default user in CIB");
-				loginPage.loginAsClerk();
-				//TestcaseID = "225652"; //C225652
-				TestcaseID = testcase_id;
-		}
+		loginPage.loginAsImmsBCAdmin();
+		//TestcaseID = "225652"; //C225652
+		TestcaseID = testcase_id;
 		vaccineToSelect = vaccine_agent;
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);

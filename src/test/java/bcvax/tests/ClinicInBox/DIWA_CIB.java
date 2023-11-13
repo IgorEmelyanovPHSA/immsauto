@@ -37,7 +37,8 @@ public class DIWA_CIB extends BaseTest {
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
-		ClinicInBoxPage clinicInBoxPage = loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
+		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
