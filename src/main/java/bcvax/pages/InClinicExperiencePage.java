@@ -730,6 +730,7 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
 		WebElement element = driver.findElement(time_slot_appointment_path);
 		scrollTop(element, true);
+		Thread.sleep(500);
 		element.click();
 	}
 
