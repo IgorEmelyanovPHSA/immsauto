@@ -31,25 +31,36 @@ public class BookingDose2 extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				loginPage.loginAsImmsBCAdmin();
-				log("Login AS comunityqa_org_immsbc_admin");
-				TestcaseID = "244875"; //C244875
-				break;
-			default:
-				log("Login AS default user in CIB");
-				loginPage.loginAsClerk();
-				orgMainPage = new MainPageOrg(driver);
-				TestcaseID = "225653"; //C225653
-		}
+		loginPage.loginAsImmsBCAdmin();
+		orgMainPage = new MainPageOrg(driver);
+		TestcaseID = "225653"; //C225653
+
 		log("TestRail test case ID: C" +TestcaseID);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
+		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		}
+
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		log("/*4.----Close All previously opened Tab's --*/");
+		inClinicExperience.closeTabsHCA();
+		log("/*5.----- Click on User Defaults Tab --*/");
+		inClinicExperience.clickUserDefaultsTab();
+		log("/*6.----- Enter current date for UserDefaults --*/");
+		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
+		log("/*-- 13. Enter current date for UserDefaults --*/");
+		userDefaultsPage.inputCurrentDateUserDefaults();
+		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		log("/*7.----- Click on Save defaults button --*/");
+		userDefaultsPage.clickBtnSave();
+		AlertDialog.closeAlert(driver);
+		currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
+		orgMainPage.closeAllTabs();
 		orgMainPage.selectFromNavigationMenu("Home");
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
@@ -99,12 +110,12 @@ public class BookingDose2 extends BaseTest {
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*19----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
-		try {
-			System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
-			clinicInBox.selectEarlyBookingReason();
-		} catch(Exception ex) {
-			System.out.println("There is not Early Booking Option");
-		}
+//		try {
+//			System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
+//			clinicInBox.selectEarlyBookingReason();
+//		} catch(Exception ex) {
+//			System.out.println("There is not Early Booking Option");
+//		}
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -143,7 +154,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*30----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		log("/*31----Go to back to the Citizen Related Tab --*/");
-		clinicInBox.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		try {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
@@ -152,8 +163,8 @@ public class BookingDose2 extends BaseTest {
 		}
 
 		log("/*32----click on In-clinic Experience button --*/");
-		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
-		inClinicExperience.clickCheckInButton();
+		inClinicExperience = new InClinicExperiencePage(driver);
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		try {
 			PersonAccountPage.confirmNoForecastWarning(driver);

@@ -34,38 +34,6 @@ public class LoginPage extends BasePage {
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-
-//	public InClinicExperiencePage loginAsClinicianICE() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
-//		click(login_button);
-//		return new InClinicExperiencePage(driver);
-//	}
-
-//	public InClinicExperiencePage loginAsImmsBCAdminICE() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
-//		click(login_button);
-//		return new InClinicExperiencePage(driver);
-//	}
-
-//	public InClinicExperiencePage loginAsClinicianICEUserDefaults() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_UserDefaults"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_UserDefaults"));
-//		click(login_button);
-//		return new InClinicExperiencePage(driver);
-//	}
-
-//	public InClinicExperiencePage loginAsImmsBCAdmin_DIWA_ICE() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
-//		click(login_button);
-//		return new InClinicExperiencePage(driver);
-//	}
 	
 	public InClinicExperiencePage loginAsPrecondition() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
@@ -92,19 +60,10 @@ public class LoginPage extends BasePage {
 		return new MainPageOrg(driver);
 	}
 
-//	public MainPageOrg orgLoginAsClinicianICE() throws Exception {
-//		log("/*----Login to ORG (oldUI) As Clinician ICE--*/");
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW"));
-//		click(login_button);
-//		return new MainPageOrg(driver);
-//	}
-
 	public SupplyConsolePage loginAsImmsBCAdmin() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMSBC_ADMIN_PW"));
 		click(login_button);
 		return new SupplyConsolePage(driver);
 	}
@@ -129,29 +88,13 @@ public class LoginPage extends BasePage {
 		return new Tables(driver);
 	}
 	
-//	public InClinicExperiencePage loginWithClinicianCon() throws Exception {
+//	public ClinicInBoxPage loginAsClerk() throws Exception {
 //		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Consumption"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_Consumption"));
+//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLERK"));
+//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW"));
 //		click(login_button);
-//		return new InClinicExperiencePage(driver);
+//		return new ClinicInBoxPage(driver);
 //	}
-	
-//	public InClinicExperiencePage loginWithClinicianWrongClinic() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_WrongClinic"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_PW_WrongClinic"));
-//		click(login_button);
-//		return new InClinicExperiencePage(driver);
-//	}
-	
-	public ClinicInBoxPage loginAsClerk() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLERK"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW"));
-		click(login_button);
-		return new ClinicInBoxPage(driver);
-	}
 
 	public CallCenterConsolePage loginAsCalCenterAgentCC() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));

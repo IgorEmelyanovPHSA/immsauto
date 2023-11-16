@@ -90,7 +90,7 @@ public class PersonAccountPage extends BasePage {
         By covid19_vaccine_checkbox_path = By.xpath("//span[text() = 'Covid-19 Vaccine']");
         By influenza_checkbox_path = By.xpath("//span[text() = 'Influenza Vaccine']");
         if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
-            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 30);
+            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 60);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
             scrollTop(driver, covid19_vaccine_checkbox, true);
             Thread.sleep(500);
@@ -135,6 +135,7 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, cancel_btn_path, 10);
         WebElement cancel_btn = driver.findElement(cancel_btn_path);
         cancel_btn.click();
+        Thread.sleep(500);
     }
 
     public static void confirmNoForecastWarning(WebDriver driver) throws InterruptedException{
@@ -163,5 +164,13 @@ public class PersonAccountPage extends BasePage {
         } catch(Exception ex) {
             System.out.println("Probably alert already closed. Continue...");
         }
+    }
+
+    public static void clickCheckInButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
+        waitForElementToBeEnabled(driver, checkin_btn_path, 10);
+        WebElement check_in_button = driver.findElement(checkin_btn_path);
+        check_in_button.click();
     }
 }

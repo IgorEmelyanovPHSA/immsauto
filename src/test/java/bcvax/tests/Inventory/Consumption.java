@@ -60,7 +60,7 @@ public class Consumption extends BaseTest {
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
-		loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
 		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
@@ -183,9 +183,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		log("/*-- 43.---Navigate to person account Related Tab --*/");
-		inClinicExperiencePage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
-		inClinicExperiencePage.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
 		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();

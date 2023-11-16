@@ -9,8 +9,11 @@
             <class name="bcvax.tests.ClinicInBox.BookingDose2"/>
             <class name="bcvax.tests.ClinicInBox.DIWA_CIB"/>
             <class name="bcvax.tests.InClinicExperience.DIWA_ICE"/>
-            <class name="bcvax.tests.InClinicExperience.Dose1_E2E_Covid19"/>
+            <class name="bcvax.tests.InClinicExperience.Dose1_ICE_E2E"/>
             <class name="bcvax.tests.InClinicExperience.Dose2_E2E_Covid19"/>
+            <!--class name="bcvax.tests.InClinicExperience.Dose1_E2E_Influenza"/-->
+            <!--class name="bcvax.tests.InClinicExperience.Dose1_E2E_Pneumo"/-->
+            <!--class name="bcvax.tests.InClinicExperience.Dose1_E2E_Influenza_Pneumo"/-->
             <!--class name="bcvax.tests.InClinicExperience.UserArrivingWrongClinicRebookAppointment"/-->
             <class name="bcvax.tests.Inventory.Adjustments"/>
             <class name="bcvax.tests.Inventory.BulkAdjustments"/>
@@ -26,7 +29,7 @@
             <class name="bcvax.tests.Inventory.TransferCancellation"/>
             <class name="bcvax.tests.Inventory.Wastage"/>
             <class name="bcvax.tests.Inventory.Returns"/>
-            <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointmentCovid19"/>
+            <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointment"/>
             <class name="bcvax.tests.Portal.Dose2CitizenBookingAppointmentCovid19"/>
             <class name="bcvax.tests.UserDefaults.UserDefaultsSettingsValidation"/>
             <class name="bcvax.tests.InClinicExperience.Check_In_Client_ICE"/>

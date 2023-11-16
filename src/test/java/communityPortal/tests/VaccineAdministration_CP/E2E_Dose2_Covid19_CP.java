@@ -163,7 +163,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         Thread.sleep(2000);
         log("/*36.----click on In-clinic Experience button --*/");
 
-        inClinicExperience_CP.clickCheckInButton();
+        PersonAccountPage.clickCheckInButton(driver);
 
         log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
         inClinicExperience_CP.validateVaccineAdminPageOpen();

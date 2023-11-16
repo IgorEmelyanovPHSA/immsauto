@@ -91,7 +91,7 @@ public class E2E_Deferrals_CP extends BaseTest {
         inClinicExperience_CP.successRegisteredMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         log("/*22.--Click Related Tab --*/");
-        inClinicExperience_CP.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(3000);
         inClinicExperience_CP.scrollToDeferrals();
         Thread.sleep(2000);

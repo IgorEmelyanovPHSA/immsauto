@@ -1,11 +1,8 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -31,7 +28,8 @@ public class BookingDose1Influenza extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
 		log("/*1.----Login as an Clinician to CIB --*/");
-		ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
+		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		orgMainPage = new MainPageOrg(driver);
 
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
@@ -60,9 +58,6 @@ public class BookingDose1Influenza extends BaseTest {
 
 		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
-
-		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		clinicInBox.clickNonIndigenousRadioButton();
 
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
@@ -128,13 +123,22 @@ public class BookingDose1Influenza extends BaseTest {
 		clinicInBox.refreshBrowser();
 
 		log("/*31.----Go to back to the Citizen Related Tab --*/");
-		clinicInBox.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*32.----click on In-clinic Experience button --*/");
-		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		PersonAccountPage.clickCheckInButton(driver);
+		Thread.sleep(2000);
+		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		log("/*46.---Open Today's appointments from Home page --*/");
 
-		log("/*33.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		InClinicExperience.validateVaccineAdminPageOpen();
+		inClinicExperience.clickTodayAppointments();
+		log("/*47.---Open Today appointment Details --*/");
+		Thread.sleep(2000);
+		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
+		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
+		inClinicExperience.validateVaccineAdminPageOpen();
 	}
 
 	@Test(priority = 2)

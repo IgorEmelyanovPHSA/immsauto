@@ -39,7 +39,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
     //Login as an admin for now, needs to be updated to ICE
     //Needs to update TestcaseId
     @Test(priority = 1)
-    public void CP_CitizenPortalBookDoseOneCovid19() throws Exception {
+    public void CP_CitizenPortalBookDoseOneCovid19_C245217() throws Exception {
         TestcaseID = "245217"; //C245217
         log("TestCase: C245217");
         log("Target Environment: " + Utils.getTargetEnvironment());
@@ -85,12 +85,11 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         }
 
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
-        log("/*14.----click Verify PHN button --*/");
+        log("---click Verify PHN button ---");
         inClinicExperience_CP.clickVerifyPHNButton();
         Thread.sleep(2000);
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
+        log("---Expecting to see the toast success message - 'PNH match successful' ---");
         inClinicExperience_CP.successMessageAppear();
-
 
         //Extra step to log out from CP
         loginPage.logOutCommunityPortal();

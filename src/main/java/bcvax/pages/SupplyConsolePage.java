@@ -25,8 +25,6 @@ import static org.testng.Assert.assertTrue;
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
-	private By rows_supply_containers_from_count_path_1 = By.xpath("(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit']/tbody/tr)");
-
 	@FindBy(xpath = "//h2[@class='slds-text-heading_medium slds-hyphenate']/../..//button[text() = 'Transfer']")
 	private WebElement btnTransferDraftOnContainerTransferPage;
 

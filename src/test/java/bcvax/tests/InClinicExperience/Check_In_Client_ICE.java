@@ -1,9 +1,6 @@
 package bcvax.tests.InClinicExperience;
 
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import bcvax.pages.UserDefaultsPage;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -50,7 +47,7 @@ public class Check_In_Client_ICE extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*6.----Navigate to More -> Register --*/");
-        loginPage.loginAsClerk();
+        loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);
         String currentApp = orgMainPage.currentApp();
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
@@ -115,7 +112,7 @@ public class Check_In_Client_ICE extends BaseTest {
         String expectedDate = df.format(currentTime).replace(".", "");
         String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
         log("/*23.--Click check-in button --*/");
-        inClinicExperiencePage.clickCheckInButton();
+        PersonAccountPage.clickCheckInButton(driver);
         Thread.sleep(500);
         log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
         String currentTab = inClinicExperiencePage.getCurrentTab();

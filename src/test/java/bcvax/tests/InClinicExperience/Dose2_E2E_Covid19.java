@@ -51,7 +51,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
-		loginPage.loginAsClerk();
+		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		String currentApp = orgMainPage.currentApp();
@@ -180,10 +180,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.refreshBrowser();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
-		inClinicExperience.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*38.----click on In-clinic Experience button --*/");
-		inClinicExperience.clickCheckInButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		//inClinicExperience.ClickGoToInClinicExperienceButton();
 
 		log("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");

@@ -35,10 +35,8 @@ public class Historical_Immunization extends BaseTest {
 		}
 		orgMainPage.closeAllTabs();
 		Thread.sleep(2000);
-		clinicInBox = new ClinicInBoxPage(driver);
 		log("/*2.----Close All previously opened Tab's --*/");
-
-		clinicInBox.searchForCitizen(legalFirstName + " " + legalLastName);
+		orgMainPage.globalSearch(legalFirstName + " " + legalMiddleName + " " + legalLastName);
 		Thread.sleep(2000);
 		ProfilesPage profilePage = new ProfilesPage(driver);
 		log("/* 5.----Search for " + legalFirstName + " " + legalLastName + " is Successful ---*/");

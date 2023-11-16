@@ -1,6 +1,7 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
+import bcvax.pages.PersonAccountPage;
 import bcvax.pages.UserDefaultsPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.InClinicExperiencePage;
@@ -30,9 +31,9 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
 
         System.out.println("/*1.----Login as an Clinician to ICE --*/");
-        loginPage.loginAsClerk();
+        loginPage.loginAsImmsBCAdmin();
         InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
-                Thread.sleep(10000);
+        Thread.sleep(10000);
 
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
         if (inClinicExperience.displayIceApp()) {
@@ -158,7 +159,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         inClinicExperience.refreshBrowser();
         Thread.sleep(5000);
         System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
-        inClinicExperience.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(5000);
 
         // Administrate first Vaccine -> Influenza
@@ -254,7 +255,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(4000);
 
         log("/*---- 58. Navigate to Person Account related tab ---*/");
-        inClinicExperience.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(2000);
 
         log("/*-- 59. Validate Aftercare status for Influenza --*/");

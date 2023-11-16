@@ -71,9 +71,6 @@ public class RegisterToGetVaccinatedPage extends BasePage{
     @FindBy(xpath = "//input[@name='DDH_HC_Patient_Consent']")
     private WebElement checkBoxCertify;
 
-    @FindBy(xpath = "//button[contains(text(),'Edit')]")
-    private WebElement btnEdit;
-
     @FindBy(xpath = "//button[contains(text(),'Submit')]")
     private WebElement btnSubmit;
 
