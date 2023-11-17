@@ -91,9 +91,14 @@ public class Tables extends BasePage {
 
     public GenericTable getTodayAppointmentsTable() {
         By container_today_appointments_table_path = By.xpath("//c-bc-hc-datatable-custom-types[@c-bchcdatatablepagination_bchcdatatablepagination]");
-        waitForElementToBeLocated(driver, container_today_appointments_table_path, 10);
-        WebElement container_today_appointments_table = driver.findElement(container_today_appointments_table_path);
-        return new GenericTable(container_today_appointments_table);
+        //waitForElementToBeLocated(driver, container_today_appointments_table_path, 10);
+        List<WebElement> container_today_appointments_tables = driver.findElements(container_today_appointments_table_path);
+        for(WebElement container_today_appointments_table : container_today_appointments_tables) {
+            if(container_today_appointments_table.isDisplayed()) {
+                return new GenericTable(container_today_appointments_table);
+            }
+        }
+        return null;
     }
 
     public GenericTable getSupplyContainerTable() {

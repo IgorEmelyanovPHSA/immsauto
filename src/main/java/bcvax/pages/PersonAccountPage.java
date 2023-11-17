@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+import java.util.Map;
+
 public class PersonAccountPage extends BasePage {
     public PersonAccountPage(WebDriver driver) {
         super(driver);
@@ -172,5 +175,28 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, checkin_btn_path, 10);
         WebElement check_in_button = driver.findElement(checkin_btn_path);
         check_in_button.click();
+    }
+
+    public static int getImmunizationRecordsSize(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By immunization_records_table_path = By.xpath("//c-bc-hc-client-immunization-records");
+        waitForElementToBeEnabled(driver, immunization_records_table_path, 10);
+        WebElement immunization_records_table = driver.findElement(immunization_records_table_path);
+        GenericTable immuizationRecordsTable = new GenericTable(immunization_records_table);
+        int table_size = immuizationRecordsTable.getRows().size() - 1;
+        return table_size;
+    }
+
+    public static String getImmunizationRecordPathwayStatus(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By immunization_records_table_path = By.xpath("//c-bc-hc-client-immunization-records");
+        waitForElementToBeEnabled(driver, immunization_records_table_path, 10);
+        WebElement immunization_records_table = driver.findElement(immunization_records_table_path);
+        GenericTable immuizationRecordsTable = new GenericTable(immunization_records_table);
+        List<Map<String, WebElement>> my_table = immuizationRecordsTable.getRowsMappedToHeadings();
+        System.out.println("Found " + my_table.size() + "rows");
+        WebElement my_view = my_table.get(1).get("Pathway Status");
+        String my_pathway_status = my_view.getText();
+        return my_pathway_status;
     }
 }

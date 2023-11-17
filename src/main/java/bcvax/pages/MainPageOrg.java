@@ -201,15 +201,20 @@ public class MainPageOrg extends BasePage {
         }
         Thread.sleep(500);
         By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
-        try {
-            waitForElementToBeEnabled(driver, found_client_path, 10);
-        } catch(NotFoundException ex) {
-            Thread.sleep(500);
-            search_input.clear();
-            Thread.sleep(500);
-            search_input.sendKeys(search_value);
-            Thread.sleep(500);
-            waitForElementToBeEnabled(driver, found_client_path, 10);
+        int counter = 5;
+        for(int i = 0; i < counter; i++) {
+            try {
+                waitForElementToBeEnabled(driver, found_client_path, 10);
+                break;
+            } catch (NotFoundException ex) {
+                if(i == counter - 1) {
+                    throw ex;
+                }
+                Thread.sleep(500);
+                search_input.clear();
+                Thread.sleep(500);
+                search_input.sendKeys(search_value);
+            }
         }
         WebElement found_client = driver.findElement(found_client_path);
         scrollTop(found_client);
