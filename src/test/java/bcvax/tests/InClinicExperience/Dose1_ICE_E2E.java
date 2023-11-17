@@ -134,7 +134,6 @@ public class Dose1_ICE_E2E extends BaseTest {
 		}
 		Thread.sleep(2000);
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		log("/*----scroll down a bit --*/");
 		inClinicExperience.selectOneOption(vaccine_agent);
 
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");

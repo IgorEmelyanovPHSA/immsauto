@@ -881,7 +881,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void clickTodayAppointments() throws InterruptedException {
 		Thread.sleep(500);
-		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"]");
+		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"] | //a[text() = \"Today's Appointments\"]");
 		waitForElementToBeEnabled(driver, today_appointments_path, 10);
 		WebElement todayAppointments = driver.findElement(today_appointments_path);
 		scrollIfNeeded(driver, todayAppointments);
@@ -897,7 +897,7 @@ public class InClinicExperiencePage extends BasePage {
 		myAppointment.click();
 	}
 
-	public void clickTodayAppointmentCaseViewButton(String client_name) throws InterruptedException {
+	public GenericTable getTodayAppointmentTable() throws InterruptedException {
 		Thread.sleep(1000);
 
 		GenericTable today_Appointments = tables.getTodayAppointmentsTable();
@@ -910,6 +910,13 @@ public class InClinicExperiencePage extends BasePage {
 				break;
 			}
 		}
+		return today_Appointments;
+	}
+
+	public void clickTodayAppointmentCaseViewButton(String client_name) throws InterruptedException {
+		Thread.sleep(1000);
+
+		GenericTable today_Appointments = getTodayAppointmentTable();
 		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
 		System.out.println("Found " + my_table.size() + "rows");
 		for (Map<String, WebElement> my_row: my_table) {
@@ -925,6 +932,85 @@ public class InClinicExperiencePage extends BasePage {
 			}
 		}
 	}
+
+	public void clickTodayAppointmentCheckinButton(String client_name) throws InterruptedException {
+		Thread.sleep(1000);
+
+		GenericTable today_Appointments = getTodayAppointmentTable();
+		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
+		System.out.println("Found " + my_table.size() + "rows");
+		for (Map<String, WebElement> my_row: my_table) {
+			if(my_row.get("Profile Name").getText().equals(client_name)) {
+				WebElement my_view = my_row.get("Check-in Client");
+				Thread.sleep(500);
+				scrollIfNeeded(driver, my_view);
+				Thread.sleep(1000);
+				WebElement my_button = my_view.findElement(By.xpath(".//button"));
+				my_button.click();
+				Thread.sleep(1000);
+				break;
+			}
+		}
+	}
+
+	public String getTodayAppointmentPathwayStatus(String client_name) throws InterruptedException {
+		Thread.sleep(1000);
+		String my_pathway_status = "";
+		GenericTable today_Appointments = getTodayAppointmentTable();
+		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
+		System.out.println("Found " + my_table.size() + "rows");
+		for (Map<String, WebElement> my_row: my_table) {
+			if(my_row.get("Profile Name").getText().equals(client_name)) {
+				WebElement my_view = my_row.get("Pathway Status");
+				my_pathway_status = my_view.getText();
+				break;
+			}
+		}
+		return my_pathway_status;
+	}
+
+	public boolean todayAppointmentViewButtonExists(String client_name) throws InterruptedException {
+		Thread.sleep(1000);
+		boolean button_exist = false;
+		GenericTable today_Appointments = getTodayAppointmentTable();
+		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
+		System.out.println("Found " + my_table.size() + "rows");
+		for (Map<String, WebElement> my_row: my_table) {
+			if(my_row.get("Profile Name").getText().equals(client_name)) {
+				WebElement my_view = my_row.get("View");
+				if(my_view.findElement(By.xpath(".//button")).isDisplayed()) {
+					button_exist = true;
+					break;
+				} else {
+					button_exist = false;
+					break;
+				}
+			}
+		}
+		return button_exist;
+	}
+
+	public boolean todayAppointmentCheckinButtonExists(String client_name) throws InterruptedException {
+		Thread.sleep(1000);
+		boolean button_exist = false;
+		GenericTable today_Appointments = getTodayAppointmentTable();
+		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
+		System.out.println("Found " + my_table.size() + "rows");
+		for (Map<String, WebElement> my_row: my_table) {
+			if(my_row.get("Profile Name").getText().equals(client_name)) {
+				WebElement my_view = my_row.get("Check-in Client");
+				if(my_view.findElement(By.xpath(".//button")).isDisplayed()) {
+					button_exist = true;
+					break;
+				} else {
+					button_exist = false;
+					break;
+				}
+			}
+		}
+		return button_exist;
+	}
+
 
 	public String selectConsentProvider() throws InterruptedException {
 		Thread.sleep(500);
@@ -1175,6 +1261,14 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, user_defaults_tab_path, 10);
 		WebElement user_defaults_tab = driver.findElement(user_defaults_tab_path);
 		user_defaults_tab.click();
+	}
+
+	public void clickClientListTab() throws InterruptedException {
+		Thread.sleep(500);
+		By client_list_tab_path = By.xpath("//one-app-nav-bar-item-root[@data-target-selection-name='sfdc:TabDefinition.BCH_Client_List']");
+		waitForElementToBeEnabled(driver, client_list_tab_path, 10);
+		WebElement client_list_tab = driver.findElement(client_list_tab_path);
+		client_list_tab.click();
 	}
 
 	public boolean validateHomePageShownUp() throws InterruptedException {
