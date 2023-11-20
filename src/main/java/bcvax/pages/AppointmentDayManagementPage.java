@@ -215,13 +215,22 @@ public class AppointmentDayManagementPage extends BasePage {
             By start_time_path = By.xpath("//input[@name='DDH__HC_Start_Time__c']");
             waitForElementToBeEnabled(driver, start_time_path, 10);
             WebElement start_time = driver.findElement(start_time_path);
-            start_time.sendKeys(time_slots.get(i).get("start_time"));
+            try {
+                start_time.sendKeys(time_slots.get(i).get("start_time"));
+            } catch(StaleElementReferenceException ex) {
+                Thread.sleep(100);
+                waitForElementToBeEnabled(driver, start_time_path, 10);
+                start_time = driver.findElement(start_time_path);
+                start_time.sendKeys(time_slots.get(i).get("start_time"));
+            }
             Thread.sleep(500);
             By end_time_path = By.xpath("//input[@name='DDH__HC_End_Time__c']");
+            waitForElementToBeEnabled(driver, end_time_path, 10);
             WebElement end_time = driver.findElement(end_time_path);
             end_time.sendKeys(time_slots.get(i).get("end_time"));
             Thread.sleep(500);
             By block_capacity_path = By.xpath("//input[@name='DDH__HC_Block_Capacity__c']");
+            waitForElementToBeEnabled(driver, block_capacity_path, 10);
             WebElement block_capacity = driver.findElement(block_capacity_path);
             block_capacity.sendKeys("10");
             Thread.sleep(500);
@@ -231,10 +240,12 @@ public class AppointmentDayManagementPage extends BasePage {
             By save_btn_path = By.xpath("//button[@name='SaveEdit']");
             By save_and_new_btn_path = By.xpath("//button[@name='SaveAndNew']");
             if(i < time_slots.size() - 1) {
+                waitForElementToBeEnabled(driver, save_and_new_btn_path, 10);
                 WebElement save_and_new_btn = driver.findElement(save_and_new_btn_path);
                 Thread.sleep(500);
                 save_and_new_btn.click();
             } else {
+                waitForElementToBeEnabled(driver, save_btn_path, 10);
                 WebElement save_btn = driver.findElement(save_btn_path);
                 Thread.sleep(500);
                 save_btn.click();

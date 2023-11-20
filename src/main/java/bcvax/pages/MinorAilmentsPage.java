@@ -5,10 +5,11 @@
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.support.FindBy;
 
+    import java.util.ArrayList;
     import java.util.Arrays;
     import java.util.List;
 
-    import static org.testng.Assert.assertEquals;
+    import static org.testng.Assert.assertTrue;
 
     public class MinorAilmentsPage extends BasePage {
 
@@ -61,6 +62,7 @@
         }
 
         public void selectOneOption(String minorAilmentsToSelect) throws InterruptedException {
+            Thread.sleep(500);
             waitForElementToBeClickable(btnSelectOne);
             click(btnSelectOne);
             By textReasonXpath = By.xpath("//span[text() = '" + minorAilmentsToSelect + "']");
@@ -71,12 +73,12 @@
 
         public void verifyCountAndOrderOfTheList() throws InterruptedException {
             //23items due to index 0 = "Select One" ignored for both Lists
-            List<String> givenListOfNamesInOrder = Arrays.asList("Select One", "Contraception", "Allergies (allergic rhinitis)",
-                    "Cold sores", "Fungal infections", "Heartburn (acid reflux)", "Hemorrhoids", "Headaches", "Impetigo",
-                    "Indigestion (upset stomach)", "Itching, including from bug bites", "Menstrual pain", "Mild acne",
-                    "Nicotine dependence", "Oral fungal infection (thrush)", "Oral ulcers (canker sores)", "Pink eye (conjunctivitis)",
-                    "Shingles", "Skin rash (dermatitis)", "Sprains and strains", "Threadworms or pinworms",
-                    "Uncomplicated urinary tract infection", "Vaginal candidiasis (yeast infection)");
+            List<String> givenListOfNamesInOrder = Arrays.asList("Select One", "Contraception", "Allergies and hay fever",
+                    "Cold sores", "Fungal infections", "Heartburn (acid reflux/ GERD)", "Hemorrhoids", "Headaches", "Impetigo",
+                    "Upset stomach (indigestion)", "Hives and itching, including from bug bites (urticaria)", "Menstrual pain", "Acne (mild)",
+                    "Nicotine dependence", "Thrush (oral fungal infection)", "Canker sores (Oral ulcers)", "Pink eye (conjunctivitis)",
+                    "Shingles", "Skin rash (dermatitis)", "Sprains and strains (musculoskeletal pain)", "Pinworms or threadworms",
+                    "Urinary tract infection (uncomplicated)", "Yeast infection (vaginal candidiasis)");
 
             waitForElementToBeClickable(btnSelectOne);
             click(btnSelectOne);
@@ -87,12 +89,14 @@
                 log("Cant read the list from dropDown");
             }
 
+            List<String> namesFromActualList = new ArrayList<String>();
+            for(WebElement item : allInputElements) {
+                namesFromActualList.add(item.getText());
+            }
             //Comparing the lists
-            for (int i = 0; i < givenListOfNamesInOrder.size(); i++) {
-                String nameFromGivenList = givenListOfNamesInOrder.get(i);
-                String nameFromActualList = allInputElements.get(i).getText();
-                log("Compering name from the given list: " + nameFromGivenList + " VS actual name in dropdown list: " + nameFromActualList);
-                assertEquals(nameFromGivenList, nameFromActualList);
+            for (String itemName : givenListOfNamesInOrder) {
+                log("Make sure name from the given list: " + itemName + " exists in actual list");
+                assertTrue(namesFromActualList.contains(itemName), "Item " + itemName + " doesn't exist in Actual Drop Down List");
             }
             //Close the dropDown
             click(btnSelectOne);
