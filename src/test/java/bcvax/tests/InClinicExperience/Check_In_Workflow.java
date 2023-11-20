@@ -196,7 +196,7 @@ public class Check_In_Workflow extends BaseTest {
         log("/*4----Go to Appointment Tab --*/");
         inClinicExperience.navigateToVaccineSchedulingTab();
         Thread.sleep(2000);
-//If override Eligibility is shown
+        //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
             PersonAccountPage.overrideEligibility(driver);
