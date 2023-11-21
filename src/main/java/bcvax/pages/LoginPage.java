@@ -87,14 +87,6 @@ public class LoginPage extends BasePage {
 	public Tables getTables(){
 		return new Tables(driver);
 	}
-	
-//	public ClinicInBoxPage loginAsClerk() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CLERK"));
-//		textPassword.sendKeys(Utils.getEnvConfigProperty("password_CLERK_PW"));
-//		click(login_button);
-//		return new ClinicInBoxPage(driver);
-//	}
 
 	public CallCenterConsolePage loginAsCalCenterAgentCC() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
@@ -162,35 +154,10 @@ public class LoginPage extends BasePage {
 		Thread.sleep(1000);
 	}
 
-//	public MainPageCP loginIntoCommunityPortalAsClinicianInventory() throws Exception {
-//		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-//		Thread.sleep(2000);
-//		waitForElementToBeVisible(driver, input_username_CP, 10);
-//		input_username_CP.sendKeys(Utils.getEnvConfigProperty("user_CLINICIAN_Inventory_CP"));
-//		input_password_CP.sendKeys(Utils.getEnvConfigProperty("password_CLINICIAN_PW_Inventory_CP"));
-//		login_button_CP.click();
-//		return new MainPageCP(driver);
-//	}
-
-//	public MainPageCP loginIntoCommunityPortalAsClinicianWrongClinic() throws Exception {
-//		loginIntoCommunityPortalAs("user_CLINICIAN_WrongClinic_CP", "user_CLINICIAN_PW_WrongClinic_CP");
-//		return new MainPageCP(driver);
-//	}
-
-//	public MainPageCP loginIntoCommunityPortalAsClerk() throws Exception {
-//		loginIntoCommunityPortalAs("user_CLERK_Booking_CP", "password_CLERK_PW_Booking_CP");
-//		return new MainPageCP(driver);
-//	}
-
 	public MainPageCP loginIntoCommunityPortalAsClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
 		return new MainPageCP(driver);
 	}
-
-//	public MainPageCP loginIntoCommunityPortalAsInventoryClinician() throws Exception {
-//		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
-//		return new MainPageCP(driver);
-//	}
 
 	public void loginIntoCommunityPortalAs(String user, String pass) throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
