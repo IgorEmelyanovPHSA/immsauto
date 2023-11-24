@@ -23,11 +23,6 @@ public class ProfilesPage extends BasePage{
     private By create_Historical_Immunization_Record1 = By.xpath("//SPAN[@class='slds-page-header__title slds-truncate'][contains(text(),'Historical Immunization Records ')]/../../../../..//BUTTON[@class='slds-button slds-button_neutral'][text()='New']");
 
     //@FindBy(xpath = "(//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon_right'])[1]")
-    @FindBy(xpath = "//lightning-input[@class='dateCmp slds-form-element']/lightning-datepicker")
-    private WebElement inputDate;
-    @FindBy(xpath = "//button[contains(text(),'Record Immunization')]")
-    private WebElement recordImmunizationBtn;
-
     @FindBy(xpath = "//option[@label='COVID-19 mRNA']")
     private WebElement select_agent;
     private By select_agent1 = By.xpath("//option[@label='COVID-19 mRNA']");
@@ -148,68 +143,6 @@ public class ProfilesPage extends BasePage{
         waitForElementToBeEnabled(driver, confirm_btn_path, 10);
         WebElement confirm_button = driver.findElement(confirm_btn_path);
         confirm_button.click();
-    }
-
-    public void clickSelectAnOptionDropdown() throws InterruptedException {
-        Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'Select an option')]");
-        waitForElementToBeEnabled(driver, agent_option_path, 10);
-        WebElement agent_option = driver.findElement(agent_option_path);
-        agent_option.click();
-    }
-
-    public void selectOption(String vaccine) throws InterruptedException {
-        Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
-        waitForElementToBeEnabled(driver, agent_option_path, 10);
-        WebElement covidmRna = driver.findElement(agent_option_path);
-        covidmRna.click();
-    }
-
-    public void searchClinicLocation(String clinic) throws InterruptedException {
-        Thread.sleep(500);
-        By clinic_location_path = By.xpath("//input[@data-id = 'userinput']");
-        waitForElementToBeEnabled(driver, clinic_location_path, 10);
-        WebElement search_clinic = driver.findElement(clinic_location_path);
-        search_clinic.sendKeys(clinic);
-        Thread.sleep(500);
-        By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
-        waitForElementToBeEnabled(driver, select_dropdown_option, 10);
-        WebElement dropdown_field = driver.findElements(select_dropdown_option).get(0);
-        String my_clinic = dropdown_field.getText();
-        for(int i = 0; i < 10; i++) {
-            Thread.sleep(500);
-            dropdown_field = driver.findElements(select_dropdown_option).get(0);
-            my_clinic = dropdown_field.getText();
-            if(my_clinic.equals(clinic)) {
-                break;
-            }
-        }
-        scrollIfNeeded(driver, dropdown_field);
-        Thread.sleep(500);
-        dropdown_field.click();
-        Thread.sleep(1000);
-    }
-
-    public void clickTimeBox() throws InterruptedException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 0);
-        Date today = calendar.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        waitForElementToBeVisible(driver, inputDate, 10);
-        String todayAsString = dateFormat.format(today);
-        waitForElementToBeVisible(driver, inputDate, 10);
-        inputDate.click();
-        Thread.sleep(2000);
-        inputDate.sendKeys(todayAsString);
-        Thread.sleep(2000);
-        inputDate.sendKeys(Keys.ENTER);
-    }
-
-    public void clickRecordImmunization() throws InterruptedException {
-        waitForElementToBeVisible(driver, recordImmunizationBtn, 10);
-        Thread.sleep(2000);
-        recordImmunizationBtn.click();
     }
 
     public boolean clickPopupYesButtonIfDisplayed() throws InterruptedException {
@@ -552,18 +485,20 @@ public class ProfilesPage extends BasePage{
     }
 
     public void selectHistoricalDateAndTime() throws InterruptedException {
+        By input_date_path = By.xpath("//lightning-input[@class='dateCmp slds-form-element']/lightning-datepicker");
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, -180);
         Date historicalDate = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
 
         String historicalDateasString = dateFormat.format(historicalDate);
-        waitForElementToBeVisible(driver, inputDate, 10);
-        this.inputDate.click();
-        Thread.sleep(2000);
-        this.inputDate.sendKeys(historicalDateasString);
-        Thread.sleep(2000);
-        this.inputDate.sendKeys(Keys.ENTER);
+        waitForElementToBeEnabled(driver, input_date_path, 10);
+        WebElement inputDate = driver.findElement(input_date_path);
+        inputDate.click();
+        Thread.sleep(500);
+        inputDate.sendKeys(historicalDateasString);
+        Thread.sleep(500);
+        inputDate.sendKeys(Keys.ENTER);
     }
 
     public void selectConsentEffectiveToDate() throws InterruptedException {

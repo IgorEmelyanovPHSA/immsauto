@@ -1,10 +1,7 @@
 package communityPortal.tests.DIWA_CP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.ProfilesPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -75,19 +72,19 @@ public class DIWA_Covid19_CP extends BaseTest {
         }
 
         log("/*----7. Select an Option from the DropDown ---*/)");
-        profilesPage.clickSelectAnOptionDropdown();
+        DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
 
         log("/*----8. Select COVID19-mRNA as an Option  ---*/");
-        profilesPage.selectOption("COVID19-mRNA");
+        DiwaImmunizationRecord.selectOption(driver, "COVID19-mRNA");
 
         log("/*----9. Enter a Clinic Location: " +clinicLocation +"---*/");
-        profilesPage.searchClinicLocation(clinicLocation);
+        DiwaImmunizationRecord.searchClinicLocation(driver, clinicLocation);
 
         log("/*---10. Select a Date and Time of Administration ---*/");
-        profilesPage.clickTimeBox();
+        DiwaImmunizationRecord.clickTimeBox(driver);
 
         log("/*---11. Click Record Immunization ---*/");
-        profilesPage.clickRecordImmunization();
+        DiwaImmunizationRecord.clickRecordImmunization(driver);
 
         //If the Potential Duplicate Warning is shown Click yes it
         try {
