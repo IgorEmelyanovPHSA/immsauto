@@ -129,7 +129,14 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         log("30. Cancel second appointment");
         inClinicExperience_CP.clickBtnCancelAppointment();
 
-        log("31. Verify Appointment status is 'Canceled'");
-        Assert.assertEquals(inClinicExperience_CP. getAppointmentStatus(), "Canceled");
+        //work around due to the bug: https://jira.phsa.ca/browse/BCVAX-33747
+
+        log("31.----Refresh page --");
+        inClinicExperience_CP.refreshBrowser();
+        Thread.sleep(3000);
+
+        log("32. Verify Appointment status is 'Cancelled'");
+        Assert.assertEquals(inClinicExperience_CP. getAppointmentStatus(), "Cancelled");
+
     }
 }
