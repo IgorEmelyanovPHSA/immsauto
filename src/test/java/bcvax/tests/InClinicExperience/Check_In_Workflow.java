@@ -144,7 +144,7 @@ public class Check_In_Workflow extends BaseTest {
         inClinicExperience.clickTodayAppointments();
         my_status = inClinicExperience.getTodayAppointmentPathwayStatus(citizenName);
         log("/*----14. Verify the Pathway Status is Vaccine_Administration --*/");
-        Assert.assertTrue(my_status.equals("Vaccine_Administration"));
+        Assert.assertEquals(my_status,"Vaccine_Administration");
         view_button_exist = inClinicExperience.todayAppointmentViewButtonExists(citizenName);
         log("/*----15. Verify View Button exist --*/");
         Assert.assertTrue(view_button_exist);

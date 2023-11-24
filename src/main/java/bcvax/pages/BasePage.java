@@ -304,6 +304,21 @@ public abstract class BasePage<T> {
 		return (T) this;
 	}
 
+	public T scrollCenter(WebElement element) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+		return (T) this;
+	}
+
 	public T scrollTop(WebElement element, boolean allignTop) {
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(" + Boolean.toString(allignTop) + ");", element);

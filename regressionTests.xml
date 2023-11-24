@@ -33,6 +33,7 @@
             <class name="bcvax.tests.Portal.Dose2CitizenBookingAppointmentCovid19"/>
             <class name="bcvax.tests.UserDefaults.UserDefaultsSettingsValidation"/>
             <class name="bcvax.tests.InClinicExperience.Check_In_Client_ICE"/>
+            <class name="bcvax.tests.InClinicExperience.Check_In_Workflow"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

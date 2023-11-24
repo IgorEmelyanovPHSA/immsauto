@@ -4,33 +4,37 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
 @Listeners({TestListener.class})
-public class DIWA_CIB extends BaseTest {
+public class Consent_In_DIWA_Flow extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
-	private String legalFirstName = "Rawley";
-	private String legalLastName = "BCVaxIsmirnioglou";
-	private String legalMiddleName = "Marijo";
-	private String personal_health_nunber = "9746173039";
-	private String date_of_birth = "1959-01-23";
-	private String postal_code = "V2X9T1";
-	//String participant_name = "Rawley BCVaxIsmirnioglou";
-	//String participant_name = "Ping an Penelope BCVaxZhang";
+	private String legalFirstName = "Gill";
+	private String legalLastName = "BCVaxOrigan";
+	private String legalMiddleName = "Ashely";
+	private String personal_health_nunber = "9746172463";
+	private String date_of_birth = "1915-02-14";
+	private String postal_code = "V2T8T1";
 	String participant_name;
 	String consentProvider;
+	private String email = "accountToDelete@phsa.ca";
 
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
-		TestcaseID = "222289"; //C222289
+		TestcaseID = "273661";
 		env = Utils.getTargetEnvironment();
+		log("/---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
 		testData = Utils.getTestData(env);
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
@@ -38,7 +42,6 @@ public class DIWA_CIB extends BaseTest {
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		loginPage.loginAsImmsBCAdmin();
-		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		CommonMethods commonMethods = new CommonMethods(getDriver());
 		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
@@ -48,10 +51,38 @@ public class DIWA_CIB extends BaseTest {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
 		orgMainPage.selectFromNavigationMenu("Home");
+		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
-		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
-		mainPageOrg.globalSearch(participant_name);
+
+		clinicInBoxPage.clickRegisterButton();
+		log("/*5.----Enter First Name: " + legalFirstName +"--*/");
+		clinicInBoxPage.enterFirstName(legalFirstName);
+		log("/*6.----Enter Last Name: " + legalLastName +"--*/");
+		clinicInBoxPage.enterLastName(legalLastName);
+		log("/*6.----Enter Date of birth: " + date_of_birth +"--*/");
+		clinicInBoxPage.enterDateOfBirth(date_of_birth);
+		log("/*7.----Enter Postal code: " + postal_code +"--*/");
+		clinicInBoxPage.enterPostalCode(postal_code);
+		log("/*8.----Enter PHN: "+ personal_health_nunber +"--*/");
+		clinicInBoxPage.enterPNH(personal_health_nunber);
+		log("/*10.----click Verify PHN button --*/");
+		clinicInBoxPage.clickVerifyPHNButton();
+		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
+		clinicInBoxPage.successMessageAppear();
+		log("/*12.----click Next button --*/");
+		clinicInBoxPage.clickNextButton();
+		log("/*13.'Enter email address: " + email +"--*/");
+		clinicInBoxPage.enterEmail(email);
+		log("/*14.'Confirm email address: " + email +"--*/");
+		clinicInBoxPage.confirmEmail(email);
+		log("/*15.Click review details Button--*/");
+		clinicInBoxPage.clickReviewDetails();
+		log("/*16.Click register Button on confirmation page--*/");
+		clinicInBoxPage.clickRegisterButtonOnConfirmationPage();
+		log("/*17.--toast success message - 'Success' --*/");
+		clinicInBoxPage.successRegisteredMessageAppear();
+
 		log("/*----5. select Citizen from search results --*/");
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
@@ -68,14 +99,29 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----9. Select an Option ---*/)");
 		DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
 		log("/*----10. Select COVID19-mRNA as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "COVID19-mRNA");
+		DiwaImmunizationRecord.selectOption(driver, "Pneumo-P-23");
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
 		log("/*---12. Select a Date and Time of Administration ---*/");
 		DiwaImmunizationRecord.clickTimeBox(driver);
 		log("/*---13. Click Record Immunization ---*/");
 		DiwaImmunizationRecord.clickRecordImmunization(driver);
-		Thread.sleep(2000);
+		DiwaImmunizationRecord.clickRecordConsent(driver);
+		boolean add_consent_dialog_exists = AddConsentDialog.dialogExists(driver);
+		//Verify Headers in Infromed Consent Table
+		List<String> expected_headers = new ArrayList<String>();
+		expected_headers.add("Consent Number");
+		expected_headers.add("Response");
+		expected_headers.add("Agent");
+		expected_headers.add("Consent Given By");
+		expected_headers.add("Consent Given To");
+		expected_headers.add("Consent Effective From Date");
+		expected_headers.add("Consent Effective To Date");
+		List<String> actual_headers = AddConsentDialog.getInformedConsentTableHeaders(driver);
+
+		for(String header : expected_headers) {
+			Assert.assertTrue(actual_headers.contains(header), "Table doesn't contain header " + header);
+		}
 
 		if (profilesPage.clickPopupYesButtonIfDisplayed())
 			log("/*---13.1. Pop up window is displayed and clicked  ---*/");
@@ -86,12 +132,17 @@ public class DIWA_CIB extends BaseTest {
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}
+
+
 		profilesPage.clickToClose();
 
 		log("/*---13. Validate message on clicking close button on modal popup ---*/");
 		profilesPage.validateoopsMessage();
 		log("/*---14. click on continue editing button to continue with the flow ---*/");
+
 		profilesPage.ContinueEditingButton();
+		boolean consent_dialog_exists = AddConsentDialog.dialogExists(driver);
+		Assert.assertTrue(consent_dialog_exists);
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 //		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
 //		Thread.sleep(2000);

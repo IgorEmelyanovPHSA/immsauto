@@ -726,12 +726,12 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void selectTimeSlotForAppointment() throws InterruptedException {
 		Thread.sleep(500);
-		By time_slot_appointment_path = By.xpath("(.//button[@name='timeslot'][1])");
+		By time_slot_appointment_path = By.xpath("(//button[@name='timeslot'])");
 		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
-		WebElement element = driver.findElement(time_slot_appointment_path);
-		scrollTop(element, true);
+		List<WebElement> elements = driver.findElements(time_slot_appointment_path);
+		scrollCenter(elements.get(0));
 		Thread.sleep(500);
-		element.click();
+		elements.get(0).click();
 	}
 
 	public void clickNextButtonApptSchedulingPage() throws InterruptedException {
