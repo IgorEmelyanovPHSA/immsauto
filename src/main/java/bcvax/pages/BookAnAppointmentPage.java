@@ -119,12 +119,23 @@ public class BookAnAppointmentPage extends BasePage{
     }
 
     public void selectDateAndTimeForAppointmentAndClickBtnNext() throws InterruptedException{
-        click(selectFirstAvailableDayInTheCalendarId);
-        Thread.sleep(2000);
-        //scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
         Thread.sleep(500);
-        click(selectFirstAvailableTimeSlotInTheCalendar);
+        By booking_days_path = By.xpath("//button[@class = 'slds-day active-day']");
+        waitForElementToBeEnabled(driver, booking_days_path, 10);
+        List<WebElement> booking_days = driver.findElements(booking_days_path);
+        scrollCenter(booking_days.get(0));
+        booking_days.get(0).click();
+        //click(selectFirstAvailableDayInTheCalendarId);
+        //Thread.sleep(2000);
+        //scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        Thread.sleep(500);
+        //click(selectFirstAvailableTimeSlotInTheCalendar);
+        By booking_time_slots_path = By.xpath("//button[@name='timeslot']");
+        waitForElementToBeEnabled(driver, booking_time_slots_path, 10);
+        List<WebElement> myDays = driver.findElements(booking_time_slots_path);
+        scrollCenter(driver, myDays.get(0));
+        myDays.get(0).click();
         click(btnNext);
     }
 

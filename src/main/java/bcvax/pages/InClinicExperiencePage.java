@@ -710,23 +710,25 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectBookingAppointmentDay() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, booking_app_active_day, 10);
-		booking_app_active_day.click();
+		Thread.sleep(500);
+		By booking_days_path = By.xpath("//button[@class = 'slds-day active-day']");
+		waitForElementToBeEnabled(driver, booking_days_path, 10);
+		List<WebElement> booking_days = driver.findElements(booking_days_path);
+		scrollCenter(booking_days.get(0));
+		booking_days.get(0).click();
 	}
 
 	public void selectBookingAppointmentDay(int day) throws InterruptedException {
 		Thread.sleep(2000);
-		List<WebElement> myDays = driver.findElements(By.xpath("(.//button[@class = 'slds-day active-day'])"));
-		scrollIfNeeded(driver, myDays.get(day));
+		List<WebElement> myDays = driver.findElements(By.xpath("//button[@class = 'slds-day active-day']"));
+		scrollCenter(driver, myDays.get(day));
 		myDays.get(day).click();
 	}
 
 
 	public void selectTimeSlotForAppointment() throws InterruptedException {
 		Thread.sleep(500);
-		By time_slot_appointment_path = By.xpath("(//button[@name='timeslot'])");
+		By time_slot_appointment_path = By.xpath("//button[@name='timeslot']");
 		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
 		List<WebElement> elements = driver.findElements(time_slot_appointment_path);
 		scrollCenter(elements.get(0));
