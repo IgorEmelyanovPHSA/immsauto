@@ -74,7 +74,7 @@ public class UserDefaultsPage extends BasePage{
             By add_new_btn_path = By.xpath("//button [@class='slds-button' and @title='Add']");
             waitForElementToBeEnabled(driver, add_new_btn_path, 10);
             WebElement add_new_btn = driver.findElement(add_new_btn_path);
-            scrollTop(add_new_btn);
+            scrollCenter(add_new_btn);
             Thread.sleep(500);
             add_new_btn.click();
             By lot_dropdown_btn_path = By.xpath("(//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])["+ count +"]");
