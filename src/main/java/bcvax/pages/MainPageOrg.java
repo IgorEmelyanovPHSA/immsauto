@@ -217,7 +217,7 @@ public class MainPageOrg extends BasePage {
             }
         }
         WebElement found_client = driver.findElement(found_client_path);
-        scrollTop(found_client);
+        scrollCenter(found_client);
         Thread.sleep(500);
         try {
             found_client.click();

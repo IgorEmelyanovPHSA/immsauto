@@ -101,7 +101,7 @@ public class BookAnAppointmentPage extends BasePage{
         By tabSearchByClinicNamePath = By.xpath("//a[@data-label='Search by clinic name']");
         waitForElementToBeEnabled(driver, tabSearchByClinicNamePath, 10);
         WebElement tabSearchByClinicName = driver.findElement(tabSearchByClinicNamePath);
-        scrollTop(tabSearchByClinicName, true);
+        scrollCenter(tabSearchByClinicName);
         Thread.sleep(500);
         tabSearchByClinicName.click();
         Thread.sleep(500);

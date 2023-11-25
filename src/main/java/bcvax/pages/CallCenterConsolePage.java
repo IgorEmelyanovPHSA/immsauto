@@ -288,7 +288,7 @@ public class CallCenterConsolePage extends BasePage {
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
-		scrollTop(option_loc_facility, true);
+		scrollCenter(option_loc_facility);
 		option_loc_facility.click();
 	}
 
@@ -349,7 +349,7 @@ public class CallCenterConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
 		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
 		Thread.sleep(1000);
-		scrollTop(verify_contact_information_checkbox, true);
+		scrollCenter(verify_contact_information_checkbox);
 		Thread.sleep(1000);
 		verify_contact_information_checkbox.click();
 		Thread.sleep(500);

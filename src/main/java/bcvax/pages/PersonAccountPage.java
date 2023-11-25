@@ -55,14 +55,14 @@ public class PersonAccountPage extends BasePage {
         By reason_for_override_path = By.xpath("//button[@aria-label='Reason for Override, Select One']");
         waitForElementToBeEnabled(driver, reason_for_override_path, 10);
         WebElement reason_for_verride_btn = driver.findElement(reason_for_override_path);
-        scrollTop(driver, reason_for_verride_btn, true);
+        scrollCenter(driver, reason_for_verride_btn);
         Thread.sleep(500);
         reason_for_verride_btn.click();
         Thread.sleep(500);
         By travel_item_path = By.xpath("//lightning-base-combobox-item[@data-value='Travel']");
         waitForElementToBeEnabled(driver, travel_item_path, 10);
         WebElement travel_item = driver.findElement(travel_item_path);
-        scrollTop(driver, travel_item, true);
+        scrollCenter(driver, travel_item);
         Thread.sleep(500);
         travel_item.click();
     }
@@ -72,7 +72,7 @@ public class PersonAccountPage extends BasePage {
         By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
         waitForElementToBeEnabled(driver, related_tab_path, 10);
         WebElement related_tab = driver.findElement(related_tab_path);
-        scrollTop(driver, related_tab, false);
+        scrollCenter(driver, related_tab);
         Thread.sleep(500);
         related_tab.click();
         Thread.sleep(2000);
@@ -95,23 +95,23 @@ public class PersonAccountPage extends BasePage {
         if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
             waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 60);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
-            scrollTop(driver, covid19_vaccine_checkbox, true);
+            scrollCenter(driver, covid19_vaccine_checkbox);
             Thread.sleep(500);
             covid19_vaccine_checkbox.click();
         } else if (vaccine.equalsIgnoreCase("InfluenzaVaccine")) {
             waitForElementToBeEnabled(driver, influenza_checkbox_path, 10);
             WebElement influenza_checkbox = driver.findElement(influenza_checkbox_path);
-            scrollTop(driver, influenza_checkbox, true);
+            scrollCenter(driver, influenza_checkbox);
             Thread.sleep(500);
             influenza_checkbox.click();
         } else {
             waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 10);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
-            scrollTop(driver, covid19_vaccine_checkbox, true);
+            scrollCenter(driver, covid19_vaccine_checkbox);
             Thread.sleep(500);
             covid19_vaccine_checkbox.click();
             WebElement influenza_checkbox = driver.findElement(influenza_checkbox_path);
-            scrollTop(driver, influenza_checkbox, true);
+            scrollCenter(driver, influenza_checkbox);
             Thread.sleep(500);
             influenza_checkbox.click();
         }
@@ -122,7 +122,7 @@ public class PersonAccountPage extends BasePage {
         By covid_19_agent_button_path = By.xpath("//button[@name='covidvaccine']");
         waitForElementToBeEnabled(driver, covid_19_agent_button_path, 10);
         WebElement covid_10_agent_button = driver.findElement(covid_19_agent_button_path);
-        scrollTop(driver, covid_10_agent_button, true);
+        scrollCenter(driver, covid_10_agent_button);
         Thread.sleep(500);
         covid_10_agent_button.click();
         Thread.sleep(500);

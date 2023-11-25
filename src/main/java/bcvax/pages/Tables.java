@@ -196,13 +196,13 @@ public class Tables extends BasePage {
     @Step
     public void checkShippedTransactionsIncomingCheckbox(Map<String, String> searchCriteria) {
         WebElement element = getShippedTransactionsIncomingRow(searchCriteria).get(SELECT_ALL);
-        scrollTop(element);
+        scrollCenter(element);
         element.click();
     }
     @Step
     public void checkShippedTransactionsOutgoingCheckbox(Map<String, String> searchCriteria) {
         WebElement element = getShippedTransactionsOutgoingRow(searchCriteria).get(SELECT_ALL);
-        scrollTop(element);
+        scrollCenter(element);
         element.click();
     }
     @Step

@@ -106,7 +106,7 @@ public class MainPageCP extends BasePage{
             waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
         }
         WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
-        scrollTop(tab_supply_location);
+        scrollCenter(tab_supply_location);
         Thread.sleep(1000);
         tab_supply_location.click();
         Thread.sleep(1000);

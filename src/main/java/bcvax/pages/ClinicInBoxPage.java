@@ -176,7 +176,7 @@ public class ClinicInBoxPage extends BasePage {
 	
 	public void clickNonIndigenousRadioButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-		scrollTop(non_indigenous_radio_button);
+		scrollCenter(non_indigenous_radio_button);
 		click(non_indigenous_radio_button);
 	}
 	
@@ -359,7 +359,7 @@ public class ClinicInBoxPage extends BasePage {
 		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
 		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
 		Thread.sleep(1000);
-		scrollTop(verify_contact_information_checkbox, true);
+		scrollCenter(verify_contact_information_checkbox);
 		Thread.sleep(1000);
 		verify_contact_information_checkbox.click();
 		Thread.sleep(500);

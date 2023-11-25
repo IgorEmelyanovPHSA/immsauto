@@ -101,7 +101,7 @@ public class ProfilesPage extends BasePage{
         By citizen_participant_acc_path = By.xpath("//a[contains(text(),'"+ name +"')]");
         waitForElementToBePresent(driver, citizen_participant_acc_path, 30);
         WebElement my_citizen = driver.findElement(citizen_participant_acc_path);
-        scrollTop(my_citizen);
+        scrollCenter(my_citizen);
         my_citizen.click();
     }
 
@@ -260,7 +260,7 @@ public class ProfilesPage extends BasePage{
 
     public String selectConsentProvider() throws InterruptedException {
         WebElement consentProviderField = driver.findElement(By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]"));
-        scrollTop(consentProviderField);
+        scrollCenter(consentProviderField);
         consentProviderField.click();
         Thread.sleep(2000);
         try {
@@ -280,7 +280,7 @@ public class ProfilesPage extends BasePage{
         By consent_provider_item_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
         waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
         WebElement consentProviderField = driver.findElement(consent_provider_field_path);
-        BasePage.scrollTop(driver, consentProviderField, false);
+        BasePage.scrollCenter(driver, consentProviderField);
         Thread.sleep(500);
         consentProviderField.click();
         consentProviderField.sendKeys(consentProvider);
@@ -299,7 +299,7 @@ public class ProfilesPage extends BasePage{
             System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
             waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
             consentProviderField = driver.findElement(consent_provider_field_path);
-            BasePage.scrollTop(driver, consentProviderField, true);
+            BasePage.scrollCenter(driver, consentProviderField);
             consentProviderField.click();
             Thread.sleep(500);
             waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
@@ -330,13 +330,13 @@ public class ProfilesPage extends BasePage{
         By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
         waitForElementToBePresent(driver, providerFieldPath, 30);
         WebElement providerField =  driver.findElement(providerFieldPath);
-        scrollTop(providerField);
+        scrollCenter(providerField);
         providerField.sendKeys(provider);
         Thread.sleep(1000);
         By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
         waitForElementToBeLocated(driver, providerItemPath, 10);
         WebElement providerItem = driver.findElement(providerItemPath);
-        scrollTop(providerItem);
+        scrollCenter(providerItem);
         Thread.sleep(500);
         providerItem.click();
 
@@ -430,7 +430,7 @@ public class ProfilesPage extends BasePage{
 
     public String pirSubmissionStatusFieldIsDisplayed() throws InterruptedException {
         WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");
-        scrollTop(element);
+        scrollCenter(element);
         Thread.sleep(2000);
         element.getText();
         return (element.getText());
@@ -439,7 +439,7 @@ public class ProfilesPage extends BasePage{
     public String pirSubmissionFieldStatus(int index) throws InterruptedException {
 
         WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(index).get("PIR Submission Status");
-        scrollTop(element);
+        scrollCenter(element);
         Thread.sleep(2000);
         element.getText();
         return (element.getText());
@@ -447,7 +447,7 @@ public class ProfilesPage extends BasePage{
 
     public ImmunizationPage ClickHistoricalImmunizationRecord(int index) throws InterruptedException {
         WebElement element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(index).get("Immunization Record");
-        scrollTop(element);
+        scrollCenter(element);
         element.findElement(By.xpath(".//a/..")).click();
         return new ImmunizationPage(driver);
     }
@@ -511,7 +511,7 @@ public class ProfilesPage extends BasePage{
         By efective_to_date_field_path = By.xpath("//input[@name='effectiveToDate']");
         waitForElementToBeEnabled(driver, efective_to_date_field_path, 10);
         WebElement efective_to_date_field = driver.findElement(efective_to_date_field_path);
-        scrollTop(efective_to_date_field);
+        scrollCenter(efective_to_date_field);
         Thread.sleep(500);
         efective_to_date_field.click();
         Thread.sleep(2000);
@@ -585,7 +585,7 @@ public class ProfilesPage extends BasePage{
 
         for(int i = 0; i < 100; i++) {
             try {
-                scrollTop(element);
+                scrollCenter(element);
                 Thread.sleep(1000);
                 tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(1);
                 break;
