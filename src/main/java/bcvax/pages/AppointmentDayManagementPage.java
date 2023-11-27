@@ -115,6 +115,7 @@ public class AppointmentDayManagementPage extends BasePage {
         By save_appointment_day_btn_path = By.xpath("//button[@name='SaveEdit']");
         waitForElementToBeEnabled(driver, save_appointment_day_btn_path, 10);
         WebElement save_btn = driver.findElement(save_appointment_day_btn_path);
+        scrollCenter(save_btn);
         save_btn.click();
     }
 

@@ -38,19 +38,10 @@ public class BookAnAppointmentPage extends BasePage{
     // Confirm Booking section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @FindBy(xpath = "//button[text() = 'Confirm appointment']")
-    private WebElement btnConfirmAppointment;
-
     private By toastErrorMessage = By.xpath("//span[contains(text(),'Please complete all required fields before proceeding.')]");
 
     @FindBy(xpath = "//button[@title='Close']")
     private WebElement btnCloseToastMessage;
-
-    @FindBy(xpath = "//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../span[@class='slds-checkbox_faux']")
-    private WebElement checkBoxIVerifyThatTheContactInformation;
-
-    @FindBy(xpath = "//span[text()='I consent to notifications being sent to my preferred contact method for the purpose of informing me about my pharmacy appointment.']/../span[@class='slds-checkbox_faux']")
-    private WebElement checkBoxIConsentToNotifications;
 
     @FindBy(xpath = "//*[contains(text(), 'Booking Confirmed')]")
     private WebElement textBookConfirmed;
@@ -192,14 +183,30 @@ public class BookAnAppointmentPage extends BasePage{
 
         public void clickCheckBoxVerifyContactInformationAndConsentToNotifications() throws InterruptedException{
             Thread.sleep(500);
-            scrollIfNeeded(driver,checkBoxIConsentToNotifications);
-            click(checkBoxIVerifyThatTheContactInformation);
-            click(checkBoxIConsentToNotifications);
+            By checkbox_i_consent_path = By.xpath("//span[text()='I consent to notifications being sent to my preferred contact method for the purpose of informing me about my pharmacy appointment.']/../../../..");
+            By checkbox_i_verify_path = By.xpath("//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../../../..");
+            waitForElementToBeEnabled(driver, checkbox_i_verify_path, 10);
+            WebElement checkBoxIVerifyThatTheContactInformation = driver.findElement(checkbox_i_verify_path);
+            scrollIfNeeded(driver,checkBoxIVerifyThatTheContactInformation);
+
+            Thread.sleep(500);
+            if(checkBoxIVerifyThatTheContactInformation.getAttribute("checked") == null) {
+                checkBoxIVerifyThatTheContactInformation.findElement(By.xpath("./div/span")).click();
+            }
+            checkBoxIVerifyThatTheContactInformation.sendKeys(Keys.TAB);
+            Thread.sleep(500);
+            WebElement checkBoxIConsentToNotifications = driver.findElement(checkbox_i_consent_path);
+            if(checkBoxIConsentToNotifications.getAttribute("checked") == null) {
+                checkBoxIConsentToNotifications.findElement(By.xpath("./div/span")).click();
+            }
         }
 
         public void clickBtnConfirmAppointment() throws InterruptedException {
-            waitForElementToBeClickable(btnConfirmAppointment);
-            click(btnConfirmAppointment);
+            Thread.sleep(500);
+            By confirm_appointment_btn_path = By.xpath("//button[text() = 'Confirm appointment']");
+            waitForElementToBeEnabled(driver, confirm_appointment_btn_path, 10);
+            WebElement btnConfirmAppointment = driver.findElement(confirm_appointment_btn_path);
+            btnConfirmAppointment.click();
         }
 
         public boolean isBookingConfirmedDisplayed() throws InterruptedException {
