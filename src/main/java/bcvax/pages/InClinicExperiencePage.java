@@ -710,28 +710,30 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void selectBookingAppointmentDay() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, booking_app_active_day, 10);
-		booking_app_active_day.click();
+		Thread.sleep(500);
+		By booking_days_path = By.xpath("//button[@class = 'slds-day active-day']");
+		waitForElementToBeEnabled(driver, booking_days_path, 10);
+		List<WebElement> booking_days = driver.findElements(booking_days_path);
+		scrollCenter(booking_days.get(0));
+		booking_days.get(0).click();
 	}
 
 	public void selectBookingAppointmentDay(int day) throws InterruptedException {
 		Thread.sleep(2000);
-		List<WebElement> myDays = driver.findElements(By.xpath("(.//button[@class = 'slds-day active-day'])"));
-		scrollIfNeeded(driver, myDays.get(day));
+		List<WebElement> myDays = driver.findElements(By.xpath("//button[@class = 'slds-day active-day']"));
+		scrollCenter(driver, myDays.get(day));
 		myDays.get(day).click();
 	}
 
 
 	public void selectTimeSlotForAppointment() throws InterruptedException {
 		Thread.sleep(500);
-		By time_slot_appointment_path = By.xpath("(.//button[@name='timeslot'][1])");
+		By time_slot_appointment_path = By.xpath("//button[@name='timeslot']");
 		waitForElementToBeEnabled(driver, time_slot_appointment_path, 10);
-		WebElement element = driver.findElement(time_slot_appointment_path);
-		scrollTop(element, true);
+		List<WebElement> elements = driver.findElements(time_slot_appointment_path);
+		scrollCenter(elements.get(0));
 		Thread.sleep(500);
-		element.click();
+		elements.get(0).click();
 	}
 
 	public void clickNextButtonApptSchedulingPage() throws InterruptedException {
@@ -858,7 +860,7 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
 		WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
-		scrollTop(confirm_and_save_btn);
+		scrollCenter(confirm_and_save_btn);
 		Thread.sleep(500);
 		confirm_and_save_btn.click();
 	}
@@ -1018,7 +1020,7 @@ public class InClinicExperiencePage extends BasePage {
 		By consent_provider_item_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
 		waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
 		WebElement consentProviderField = driver.findElement(consent_provider_field_path);
-		scrollTop(consentProviderField);
+		scrollCenter(consentProviderField);
 		Thread.sleep(500);
 		consentProviderField.click();
 		String provider = "Auto Bchcomclinician";
@@ -1038,7 +1040,7 @@ public class InClinicExperiencePage extends BasePage {
 			System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
 			waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
 			consentProviderField = driver.findElement(consent_provider_field_path);
-			scrollTop(consentProviderField);
+			scrollCenter(consentProviderField);
 			consentProviderField.click();
 			Thread.sleep(500);
 			waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
@@ -1053,7 +1055,7 @@ public class InClinicExperiencePage extends BasePage {
 		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option']");
 		waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 30);
 		WebElement click_vaccine_agent_dropdown = driver.findElement(vaccine_agent_dropdown_path);
-		scrollTop(click_vaccine_agent_dropdown);
+		scrollCenter(click_vaccine_agent_dropdown);
 		click_vaccine_agent_dropdown.click();
 		Thread.sleep(500);
 		By my_vaccine_path = By.xpath("//span[text() = '" + agent + "']");
@@ -1156,7 +1158,7 @@ public class InClinicExperiencePage extends BasePage {
 		By confirm_save_btn_path = By.xpath("//button[text()='Confirm & Save Administration']");
 		waitForElementToBeEnabled(driver, confirm_save_btn_path, 10);
 		WebElement confirm_save_btn = driver.findElement(confirm_save_btn_path);
-		scrollTop(confirm_save_btn);
+		scrollCenter(confirm_save_btn);
 		Thread.sleep(500);
 		confirm_save_btn.click();
 		Thread.sleep(500);
@@ -1226,7 +1228,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void selectSearchByClinicNameTab() throws InterruptedException {
 		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
 		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		scrollTop(element);
+		scrollCenter(element);
 		Thread.sleep(1000);
 		int footerSize = driver.findElement(By.xpath("//div[@class = 'bch-scheduler-footer']")).getSize().getHeight();
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + footerSize + ")");
@@ -1247,7 +1249,7 @@ public class InClinicExperiencePage extends BasePage {
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
-		scrollTop(option_loc_facility, true);
+		scrollCenter(option_loc_facility);
 		option_loc_facility.click();
 	}
 
@@ -1527,7 +1529,7 @@ public class InClinicExperiencePage extends BasePage {
 		By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
 		waitForElementToBeEnabled(driver, providerFieldPath, 10);
 		WebElement providerField =  driver.findElement(providerFieldPath);
-		scrollTop(providerField);
+		scrollCenter(providerField);
 		providerField.sendKeys(provider);
 		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
 		waitForElementToBeLocated(driver, providerItemPath, 10);
@@ -1564,7 +1566,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void setSite(String site) throws InterruptedException {
 		WebElement siteBtn = driver.findElement(By.xpath("//label[text() = 'Site']/..//button"));
-		scrollTop(siteBtn);
+		scrollCenter(siteBtn);
 		siteBtn.click();
 		Thread.sleep(2000);
 		WebElement mySite = driver.findElement(By.xpath("//span[@title = '" + site + "']"));
@@ -1606,7 +1608,7 @@ public class InClinicExperiencePage extends BasePage {
 		By administration_reason_path = By.xpath("//input[@type='radio' and @value='Intentional administration']/..//span[@part='indicator']");
 		waitForElementToBeEnabled(driver, administration_reason_path, 2);
 		WebElement administration_reason = driver.findElement(administration_reason_path);
-		scrollTop(administration_reason, false);
+		scrollCenter(administration_reason);
 		Thread.sleep(500);
 		administration_reason.click();
 	}
@@ -1635,13 +1637,13 @@ public class InClinicExperiencePage extends BasePage {
 	public void navigateToAppointmentRecords() throws InterruptedException {
 		Thread.sleep(2000);
 		waitForElementToBeVisible(driver, appointmentsRecordsTitle, 10);
-		scrollTop(appointmentsRecordsTitle);
+		scrollCenter(appointmentsRecordsTitle);
 		Thread.sleep(3000);
 
 		for(int i = 0; i < 10; i++) {
 			try {
 				WebElement element = tables.getAppointmentsRecordsTable().getRowsMappedToHeadings().get(0).get("Subject");
-				scrollTop(element);
+				scrollCenter(element);
 				Thread.sleep(1000);
 				tables.getAppointmentsRecordsTable().getRowsMappedToHeadings().get(1);
 				break;

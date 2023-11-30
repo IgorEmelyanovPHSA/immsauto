@@ -78,7 +78,7 @@ public abstract class BasePage<T> {
 	public Boolean isInputActive(WebElement element){
 		//This method to be used ONLY when isClickable method is not successful
 		try{
-			scrollTop(element);
+			scrollCenter(element);
 			click(element);
 			element.sendKeys("T");
 			element.sendKeys(Keys.BACK_SPACE);
@@ -302,6 +302,36 @@ public abstract class BasePage<T> {
 			log(e.toString());
 		}
 		return (T) this;
+	}
+
+	public T scrollCenter(WebElement element) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+		return (T) this;
+	}
+
+
+	public static void scrollCenter(WebDriver driver, WebElement element) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
 	}
 
 	public T scrollTop(WebElement element, boolean allignTop) {

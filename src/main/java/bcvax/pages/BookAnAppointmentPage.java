@@ -38,19 +38,10 @@ public class BookAnAppointmentPage extends BasePage{
     // Confirm Booking section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @FindBy(xpath = "//button[text() = 'Confirm appointment']")
-    private WebElement btnConfirmAppointment;
-
     private By toastErrorMessage = By.xpath("//span[contains(text(),'Please complete all required fields before proceeding.')]");
 
     @FindBy(xpath = "//button[@title='Close']")
     private WebElement btnCloseToastMessage;
-
-    @FindBy(xpath = "//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../span[@class='slds-checkbox_faux']")
-    private WebElement checkBoxIVerifyThatTheContactInformation;
-
-    @FindBy(xpath = "//span[text()='I consent to notifications being sent to my preferred contact method for the purpose of informing me about my pharmacy appointment.']/../span[@class='slds-checkbox_faux']")
-    private WebElement checkBoxIConsentToNotifications;
 
     @FindBy(xpath = "//*[contains(text(), 'Booking Confirmed')]")
     private WebElement textBookConfirmed;
@@ -101,7 +92,7 @@ public class BookAnAppointmentPage extends BasePage{
         By tabSearchByClinicNamePath = By.xpath("//a[@data-label='Search by clinic name']");
         waitForElementToBeEnabled(driver, tabSearchByClinicNamePath, 10);
         WebElement tabSearchByClinicName = driver.findElement(tabSearchByClinicNamePath);
-        scrollTop(tabSearchByClinicName, true);
+        scrollCenter(tabSearchByClinicName);
         Thread.sleep(500);
         tabSearchByClinicName.click();
         Thread.sleep(500);
@@ -119,12 +110,23 @@ public class BookAnAppointmentPage extends BasePage{
     }
 
     public void selectDateAndTimeForAppointmentAndClickBtnNext() throws InterruptedException{
-        click(selectFirstAvailableDayInTheCalendarId);
-        Thread.sleep(2000);
-        //scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
         Thread.sleep(500);
-        click(selectFirstAvailableTimeSlotInTheCalendar);
+        By booking_days_path = By.xpath("//button[@class = 'slds-day active-day']");
+        waitForElementToBeEnabled(driver, booking_days_path, 10);
+        List<WebElement> booking_days = driver.findElements(booking_days_path);
+        scrollCenter(booking_days.get(0));
+        booking_days.get(0).click();
+        //click(selectFirstAvailableDayInTheCalendarId);
+        //Thread.sleep(2000);
+        //scrollTop(selectFirstAvailableTimeSlotInTheCalendar);
+        //((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
+        Thread.sleep(500);
+        //click(selectFirstAvailableTimeSlotInTheCalendar);
+        By booking_time_slots_path = By.xpath("//button[@name='timeslot']");
+        waitForElementToBeEnabled(driver, booking_time_slots_path, 10);
+        List<WebElement> myDays = driver.findElements(booking_time_slots_path);
+        scrollCenter(driver, myDays.get(0));
+        myDays.get(0).click();
         click(btnNext);
     }
 
@@ -181,14 +183,30 @@ public class BookAnAppointmentPage extends BasePage{
 
         public void clickCheckBoxVerifyContactInformationAndConsentToNotifications() throws InterruptedException{
             Thread.sleep(500);
-            scrollIfNeeded(driver,checkBoxIConsentToNotifications);
-            click(checkBoxIVerifyThatTheContactInformation);
-            click(checkBoxIConsentToNotifications);
+            By checkbox_i_consent_path = By.xpath("//span[text()='I consent to notifications being sent to my preferred contact method for the purpose of informing me about my pharmacy appointment.']/../../../..");
+            By checkbox_i_verify_path = By.xpath("//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../../../..");
+            waitForElementToBeEnabled(driver, checkbox_i_verify_path, 10);
+            WebElement checkBoxIVerifyThatTheContactInformation = driver.findElement(checkbox_i_verify_path);
+            scrollIfNeeded(driver,checkBoxIVerifyThatTheContactInformation);
+
+            Thread.sleep(500);
+            if(checkBoxIVerifyThatTheContactInformation.getAttribute("checked") == null) {
+                checkBoxIVerifyThatTheContactInformation.findElement(By.xpath("./div/span")).click();
+            }
+            checkBoxIVerifyThatTheContactInformation.sendKeys(Keys.TAB);
+            Thread.sleep(500);
+            WebElement checkBoxIConsentToNotifications = driver.findElement(checkbox_i_consent_path);
+            if(checkBoxIConsentToNotifications.getAttribute("checked") == null) {
+                checkBoxIConsentToNotifications.findElement(By.xpath("./div/span")).click();
+            }
         }
 
         public void clickBtnConfirmAppointment() throws InterruptedException {
-            waitForElementToBeClickable(btnConfirmAppointment);
-            click(btnConfirmAppointment);
+            Thread.sleep(500);
+            By confirm_appointment_btn_path = By.xpath("//button[text() = 'Confirm appointment']");
+            waitForElementToBeEnabled(driver, confirm_appointment_btn_path, 10);
+            WebElement btnConfirmAppointment = driver.findElement(confirm_appointment_btn_path);
+            btnConfirmAppointment.click();
         }
 
         public boolean isBookingConfirmedDisplayed() throws InterruptedException {
