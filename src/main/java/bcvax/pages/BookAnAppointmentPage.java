@@ -197,7 +197,7 @@ public class BookAnAppointmentPage extends BasePage{
             Thread.sleep(500);
             WebElement checkBoxIConsentToNotifications = driver.findElement(checkbox_i_consent_path);
             if(checkBoxIConsentToNotifications.getAttribute("checked") == null) {
-                checkBoxIConsentToNotifications.findElement(By.xpath("./div/span")).click();
+                checkBoxIConsentToNotifications.findElement(By.xpath("./div[@class='slds-form-element__control slds-grow']/span[@part='input-checkbox']/input")).sendKeys(Keys.SPACE);
             }
         }
 
