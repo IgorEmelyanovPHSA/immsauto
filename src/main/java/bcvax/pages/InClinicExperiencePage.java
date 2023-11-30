@@ -1655,14 +1655,29 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void openAppointmentRecord(String appointmentDataTime) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
+
 		By titleAppointments = By.xpath("//h1[@title='Appointments']");
-		waitForElementToBePresent(driver, titleAppointments, 10);
+		waitForElementToBeEnabled(driver, titleAppointments, 10);
+		By appointments_table_path = By.xpath("//div[@data-aura-class='forceListViewManagerGrid']");
+		WebElement appointments_tbl_html = driver.findElement(appointments_table_path);
+		GenericTable appointment_table = new GenericTable(appointments_tbl_html);
+		int tries = 0;
+		while(appointment_table.getRows().size() < 1) {
+			appointments_tbl_html = driver.findElement(appointments_table_path);
+			appointment_table = new GenericTable(appointments_tbl_html);
+			if(tries > 10) {
+				break;
+			} else {
+				Thread.sleep(500);
+				tries++;
+			}
+		}
+		List<Map<String, WebElement>> appointment_table_map = appointment_table.getRowsMappedToHeadings();
 		String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
 
-		WebElement appointmentDataTimeWebElement = driver.findElement(By.xpath("(//span[contains(text(),'" + formatAppointmentDataTime + "')]/../../..//a[@data-refid='recordId'])"));
-		click(appointmentDataTimeWebElement);
-		Thread.sleep(3000);
+		WebElement appointmentDataTimeWebElement = appointment_table_map.get(1).get("Appointment Code").findElement(By.xpath(".//a"));
+		appointmentDataTimeWebElement.click();
 	}
 
 	public String getReasonForVisit(){
