@@ -8,9 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 public class DiwaImmunizationRecord extends BasePage {
     public DiwaImmunizationRecord(WebDriver driver) {
@@ -88,5 +86,24 @@ public class DiwaImmunizationRecord extends BasePage {
         waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
         WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
         record_consent_btn.click();
+    }
+
+    public static List<Map<String, WebElement>> getInformedConsentTable(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By informed_consent_table_path = By.xpath("//c-bchc-active-consent-table[@c-createimmunizationrecordmodal_createimmunizationrecordmodal]");
+        waitForElementToBeEnabled(driver, informed_consent_table_path, 10);
+        WebElement informed_consent_table_node = driver.findElement(informed_consent_table_path);
+        GenericTable informed_consent_table = new GenericTable(informed_consent_table_node);
+        List<Map<String, WebElement>> table = informed_consent_table.getRowsMappedToHeadings();
+        int tries = 0;
+        while(table.size() < 2) {
+            Thread.sleep(500);
+            table = informed_consent_table.getRowsMappedToHeadings();
+            if(tries > 5) {
+                break;
+            }
+            tries++;
+        }
+        return table;
     }
 }

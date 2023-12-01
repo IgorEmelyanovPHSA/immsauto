@@ -94,9 +94,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "(.//button[@name = 'facility'][1])")
 	private WebElement option_loc_facility;
 
-	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'][1])")
-	private WebElement booking_app_active_day;
-
 	@FindBy(xpath = "//button[contains(text(),'Cancel Appointment')]")
 	private WebElement btnCancelAppointment;
 
@@ -847,17 +844,17 @@ public class InClinicExperiencePage extends BasePage {
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
 		Thread.sleep(500);
 		By confirm_and_save_btn_path = By.xpath("(//button[@title='Confirm & Save Identification'])");
-		try {
-			waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
-		} catch(NotFoundException ex) {
-			System.out.println(ex.getMessage());
-			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
-			By rebook_btn_path = By.xpath("//button[text() ='Rebook at Current Location']");
-			waitForElementToBeEnabled(driver, rebook_btn_path, 10);
-			WebElement rebook_btn = driver.findElement(rebook_btn_path);
-			rebook_btn.click();
-			Thread.sleep(500);
-		}
+//		try {
+//			waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
+//		} catch(NotFoundException ex) {
+//			System.out.println(ex.getMessage());
+//			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
+//			By rebook_btn_path = By.xpath("//button[text() ='Rebook at Current Location']");
+//			waitForElementToBeEnabled(driver, rebook_btn_path, 10);
+//			WebElement rebook_btn = driver.findElement(rebook_btn_path);
+//			rebook_btn.click();
+//			Thread.sleep(500);
+//		}
 		waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
 		WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
 		scrollCenter(confirm_and_save_btn);
@@ -1655,14 +1652,29 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void openAppointmentRecord(String appointmentDataTime) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(500);
+
 		By titleAppointments = By.xpath("//h1[@title='Appointments']");
-		waitForElementToBePresent(driver, titleAppointments, 10);
+		waitForElementToBeEnabled(driver, titleAppointments, 10);
+		By appointments_table_path = By.xpath("//div[@data-aura-class='forceListViewManagerGrid']");
+		WebElement appointments_tbl_html = driver.findElement(appointments_table_path);
+		GenericTable appointment_table = new GenericTable(appointments_tbl_html);
+		int tries = 0;
+		while(appointment_table.getRows().size() < 1) {
+			appointments_tbl_html = driver.findElement(appointments_table_path);
+			appointment_table = new GenericTable(appointments_tbl_html);
+			if(tries > 10) {
+				break;
+			} else {
+				Thread.sleep(500);
+				tries++;
+			}
+		}
+		List<Map<String, WebElement>> appointment_table_map = appointment_table.getRowsMappedToHeadings();
 		String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
 
-		WebElement appointmentDataTimeWebElement = driver.findElement(By.xpath("(//span[contains(text(),'" + formatAppointmentDataTime + "')]/../../..//a[@data-refid='recordId'])"));
-		click(appointmentDataTimeWebElement);
-		Thread.sleep(3000);
+		WebElement appointmentDataTimeWebElement = appointment_table_map.get(1).get("Appointment Code").findElement(By.xpath(".//a"));
+		appointmentDataTimeWebElement.click();
 	}
 
 	public String getReasonForVisit(){
