@@ -79,9 +79,6 @@ public class CallCenterConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm appointment']")
 	private WebElement click_confirm_appointment_button;
-	
-	@FindBy(xpath = ".//div[text() = 'Appointment confirmed!']")
-	private WebElement vlidate_appointment_confirm_message;
 
 	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 

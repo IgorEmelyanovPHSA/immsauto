@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -123,40 +124,43 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 			Assert.assertTrue(actual_headers.contains(header), "Table doesn't contain header " + header);
 		}
 
-		if (profilesPage.clickPopupYesButtonIfDisplayed())
-			log("/*---13.1. Pop up window is displayed and clicked  ---*/");
-		log("/*---12. Click X button on Diwa flow ---*/");
-		//If Incorrect vaccine warning is displayed
-		try {
-			ProfilesPage.confirm_warning(driver);
-		} catch(Exception ex) {
-			System.out.println("No Warning found");
+		AddConsentDialog.selectResponseGrantRadioButton(driver);
+		AddConsentDialog.selectImmsBCProviderRadioButton(driver);
+		AddConsentDialog.selectObtainedFromClient(driver);
+		AddConsentDialog.selectFormOfConsentInPerson(driver);
+		AddConsentDialog.selectInformedConsentProvider(driver, "ImmsBCAdmin Auto");
+		String date_effective_from = AddConsentDialog.getConsentEffectiveDateFromSelected(driver);
+		if(!date_effective_from.equals("Nov 29, 2023")) {
+			AddConsentDialog.setConsentEffectiveDateFrom(driver, "Nov 29, 2023");
 		}
+		AddConsentDialog.clickNextButton(driver);
 
+		String profile = AddConsentDialog.getProfile(driver);
+		String phn = AddConsentDialog.getPHN(driver);
+		String agent = AddConsentDialog.getAgent(driver);
+		String response = AddConsentDialog.getResponse(driver);
+		String provider_type = AddConsentDialog.getProviderType(driver);
+		String obtained_from = AddConsentDialog.getInformedConsentObtainedFrom(driver);
+		String form_of_consent = AddConsentDialog.getFormOfConsent(driver);
+		String effective_from = AddConsentDialog.getConsentEffectiveFrom(driver);
+		String effective_to = AddConsentDialog.getConsentEffectiveTo(driver);
 
-		profilesPage.clickToClose();
+		AddConsentDialog.click_create_consent_record(driver);
+		boolean error_exists = AddConsentDialog.errorConfirmExists(driver);
+		AddConsentDialog.click_confirm_info(driver);
 
-		log("/*---13. Validate message on clicking close button on modal popup ---*/");
-		profilesPage.validateoopsMessage();
-		log("/*---14. click on continue editing button to continue with the flow ---*/");
+		AddConsentDialog.click_create_consent_record(driver);
 
-		profilesPage.ContinueEditingButton();
-		boolean consent_dialog_exists = AddConsentDialog.dialogExists(driver);
-		Assert.assertTrue(consent_dialog_exists);
+		List<Map<String, WebElement>> consent_records = DiwaImmunizationRecord.getInformedConsentTable(driver);
+		String consent_number_col = consent_records.get(1).get("Consent Number").getText();
+		String response_col = consent_records.get(1).get("Response").getText();
+		String agent_col = consent_records.get(1).get("Agent").getText();
+		String given_by_col = consent_records.get(1).get("Consent Given By").getText();
+		String given_to_col = consent_records.get(1).get("Consent Given To").getText();
+		String effective_from_col = consent_records.get(1).get("Effective From Date").getText();
+		String effective_to_col = consent_records.get(1).get("Effective To Date").getText();
+
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
-//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-//		Thread.sleep(2000);
-//		if(consentProviderSelected.equals("")) {
-//			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
-//			try {
-//				profilesPage.confirmConsentProvider(consentProviderSelected);
-//			} catch(Exception ex) {
-//				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
-//			}
-//		}
-//		profilesPage.selectConsentEffectiveToDate();
-//		log("/*---16. click Save Consent button ---*/");
-//		profilesPage.clickSaveConsent();
 
 		try {
 			ProfilesPage.checkExistingConsent(driver);
