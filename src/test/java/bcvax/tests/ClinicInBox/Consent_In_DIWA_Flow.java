@@ -162,16 +162,11 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 
-		try {
-			ProfilesPage.checkExistingConsent(driver);
-		} catch(Exception ex) {
-			System.out.println("No Checkbox. Continue...");
-		}
-
+		boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
+		boolean confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
 
 
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-
 		try {
 			profilesPage.selectImmunizingAgentProvider(consentProvider);
 		} catch(Exception ex) {
@@ -193,6 +188,7 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		profilesPage.selectInjectionSite();
 		log("/*---22. Select Dosage---*/");
 		profilesPage.selectDosage();
+
 		log("/*---23. Save Immunization Information ---*/");
 		profilesPage.saveImmunizationInformation();
 
@@ -200,12 +196,15 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		commonMethods.expiredVaxHandler();
 		///////
 
+		confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+
 		log("/*---24. Confirm and Save Administration ---*/");
 		profilesPage.confirmAndSaveAdministration();
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
 		profilesPage.summaryConfirmAndSave();
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		profilesPage.clickRelatedTab();
+		System.out.println();
 	}
 	
 }
