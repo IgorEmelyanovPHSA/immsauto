@@ -1,9 +1,6 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.text.DateFormat;
@@ -105,5 +102,26 @@ public class DiwaImmunizationRecord extends BasePage {
             tries++;
         }
         return table;
+    }
+
+    public static boolean recordConsentMessageExists(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_1_path = By.xpath("//lightning-formatted-text[text()='This Client has already provided Consent for the selected agent']");
+        By record_consent_2_path = By.xpath("//lightning-formatted-text[text()='To record a new Consent, click the button below']");
+        try {
+            driver.findElement(record_consent_1_path);
+            driver.findElement(record_consent_2_path);
+            return true;
+        } catch(NotFoundException ex) {
+            return false;
+        }
+    }
+
+    public static boolean confirm_and_save_button_is_active(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By confirm_and_save_btn_path = By.xpath("//button[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @title='Confirm & Save Administration']");
+        waitForElementToBeLocated(driver, confirm_and_save_btn_path, 10);
+        WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
+        return confirm_and_save_btn.isEnabled();
     }
 }
