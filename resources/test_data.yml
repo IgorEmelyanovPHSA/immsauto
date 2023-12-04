@@ -304,3 +304,56 @@ regress2:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006752445"
         appointment_city: "Coquitlam"
+bcvaxqa:
+  supplyLocationFrom: "Automation Supply Location_1"
+  supplyLocationTo: "Automation Supply Location_2"
+  #supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
+  supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  distributionFrom: "Operational Fridge"
+  distributionTo: "Operational Fridge"
+  distributionToSameClinic: "Same Clinic"
+  distributionConsumption: "Operational Fridge"
+  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:25:02)"
+  containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:43:35)"
+  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:31:36)"
+  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2023-12-04 13:34:21)"
+  #containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-09-11 09:03:17)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:23:58)"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:25:02)"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-12-04 12:25:43)"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:59:11)"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:43:35)"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-12-04 13:00:51)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:31:02)"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:31:36)"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-12-04 12:31:58)"
+  vaccineAgent: "COVID-19 mRNA"
+  consentProvider: "Auto Bchcomclinician"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
+  agentConsumption: "COVID-19 mRNA"
+  agentInfluenza: "Influenza-LAIV"
+  consumptionDose: "0.3"
+  consumptionLot: "35035BD-CC01"
+  covidLot: "35035BD-CC01"
+  #consumptionLot: "EK4241"
+  diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
+  influenzaLot: "HL2478-CC01"
+  covidDose: "0.3"
+  influenzaDose: "0.2"
+  useDefaultSettingsLots:
+    - "EK4241"
+    - "CM1216"
+  supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006762018"
+        appointment_city: "Abbotsford"
+    - "All Ages - Atlin Health Centre":
+        address_id: "AD-0006762022"
+        appointment_city: "Atlin"
+    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
+        address_id: "AD-0006762020"
+        appointment_city: "Coquitlam"
