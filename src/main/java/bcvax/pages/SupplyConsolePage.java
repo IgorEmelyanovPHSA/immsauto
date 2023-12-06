@@ -1178,7 +1178,7 @@ public class SupplyConsolePage extends BasePage {
 			WebElement view_switch_btn = driver.findElement(view_option_btn_path);
 			view_switch_btn.click();
 			Thread.sleep(500);
-			By select_table_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']//li[@role='presentation' and @title='Table']/a");
+			By select_table_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']//li[@role='presentation'][@title='Display as table' or @title='Table']/a");
 			waitForElementToBeEnabled(driver, view_option_btn_path, 10);
 			WebElement table_view_option = driver.findElement(select_table_view_option_path);
 			table_view_option.click();
