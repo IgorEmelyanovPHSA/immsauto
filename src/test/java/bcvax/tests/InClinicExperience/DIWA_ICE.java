@@ -22,6 +22,7 @@ public class DIWA_ICE extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	String citizenName;
+
 	private String legalFirstName = "Rawley";
 	private String legalLastName = "BCVaxIsmirnioglou";
 	private String legalMiddleName = "Marijo";
@@ -42,6 +43,7 @@ public class DIWA_ICE extends BaseTest {
 
 		log("/*1.----Login --*/");
 		loginPage.loginAsPPHIS();
+
 		log("Login AS default user (Clinician to ICE)");
 		TestcaseID = "223187"; //C223187
 
@@ -64,6 +66,7 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
 		mainPageOrg.globalSearch(citizenName);
+
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		profilesPage.clickRelatedTab();
