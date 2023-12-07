@@ -127,9 +127,6 @@ public class SupplyConsolePage extends BasePage {
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
 
-	@FindBy(xpath = "//button[text() = 'Save'] | //button[@title = 'Save']")
-	private WebElement saveExpectedDeliveryDate;
-
 	@FindBy(xpath = "//button[text() = 'Ship Requisition'] | //a[@title = 'Ship Requisition']")
 	private WebElement shipRequisition;
 
@@ -1537,8 +1534,12 @@ public class SupplyConsolePage extends BasePage {
 		expected_delivery_date_field.sendKeys(Keys.ENTER);
 	}
 
-	public void clickSaveExpectedDeliveryDate() {
-		saveExpectedDeliveryDate.click();
+	public void clickSaveExpectedDeliveryDate() throws InterruptedException {
+		Thread.sleep(500);
+		By save_expected_delivery_date_btn_path = By.xpath("//button[text() = 'Save'] | //button[@title = 'Save']");
+		waitForElementToBeEnabled(driver, save_expected_delivery_date_btn_path, 10);
+		WebElement save_expected_delivery_date_btn = driver.findElement(save_expected_delivery_date_btn_path);
+		save_expected_delivery_date_btn.click();
 	}
 
 	public void clickApproveRequisition() throws InterruptedException {

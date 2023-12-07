@@ -48,6 +48,11 @@ public class BookingDose1 extends BaseTest {
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
+		try {
+			orgMainPage.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
 		}
@@ -66,12 +71,17 @@ public class BookingDose1 extends BaseTest {
 		userDefaultsPage.clickBtnSave();
 		AlertDialog.closeAlert(driver);
 		currentApp = orgMainPage.currentApp();
+		try {
+			clinicInBox.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
 		orgMainPage.selectFromNavigationMenu("Home");
 		log("/*3.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
+
 		log("/*4.----click Register New Citizen --*/");
 
 		clinicInBox.clickRegisterButton();

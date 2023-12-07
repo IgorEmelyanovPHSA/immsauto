@@ -64,6 +64,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		String currentApp = orgMainPage.currentApp();
+		try {
+			orgMainPage.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
 		}
