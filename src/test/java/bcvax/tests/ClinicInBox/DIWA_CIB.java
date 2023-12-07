@@ -17,9 +17,15 @@ public class DIWA_CIB extends BaseTest {
 	private String legalFirstName = "Rawley";
 	private String legalLastName = "BCVaxIsmirnioglou";
 	private String legalMiddleName = "Marijo";
-	private String personal_health_nunber = "9746173039";
+	private String personal_health_number = "9746173039";
 	private String date_of_birth = "1959-01-23";
 	private String postal_code = "V2X9T1";
+//	private String legalFirstName = "Gill";
+//	private String legalLastName = "BCVaxOrigan";
+//	private String legalMiddleName = "Ashely";
+//	private String personal_health_number = "9746172463";
+//	private String date_of_birth = "1915-02-14";
+//	private String postal_code = "V2T8T1";
 	//String participant_name = "Rawley BCVaxIsmirnioglou";
 	//String participant_name = "Ping an Penelope BCVaxZhang";
 	String participant_name;
@@ -31,6 +37,9 @@ public class DIWA_CIB extends BaseTest {
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
 		env = Utils.getTargetEnvironment();
+
+		//Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
+
 		testData = Utils.getTestData(env);
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");

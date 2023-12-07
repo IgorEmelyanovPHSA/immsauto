@@ -55,6 +55,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
 		String currentApp = orgMainPage.currentApp();
+		try {
+			orgMainPage.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			log("/*3.--- Navigate to In Clinic Experience App --*/");
 			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
