@@ -41,7 +41,13 @@ public class DiwaImmunizationRecord extends BasePage {
         for(int i = 0; i < 10; i++) {
             Thread.sleep(500);
             dropdown_field = driver.findElements(select_dropdown_option).get(0);
-            my_clinic = dropdown_field.getText();
+            try {
+                my_clinic = dropdown_field.getText();
+            } catch(StaleElementReferenceException ex) {
+                Thread.sleep(2000);
+                dropdown_field = driver.findElements(select_dropdown_option).get(0);
+                my_clinic = dropdown_field.getText();
+            }
             if(my_clinic.equals(clinic)) {
                 break;
             }
