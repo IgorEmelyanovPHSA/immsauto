@@ -130,15 +130,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[text() = 'Ship Requisition'] | //a[@title = 'Ship Requisition']")
 	private WebElement shipRequisition;
 
-	@FindBy(xpath = "//button[contains(text(),'Save')]")
-	private WebElement saveShipRequisition;
-
-	@FindBy(xpath = "//h2[contains(text(),'Ship Requisition')]")
-	private WebElement verified;
-
-	@FindBy(xpath = "//button[text() = 'Receive Requisition'] | //a[@title = 'Receive Requisition']")
-	private WebElement receiveRequestBtn;
-
 	@FindBy(xpath = "//input[@placeholder='Search Supply Distributions...']")
 	private WebElement click_on_search_supply_distributions_to_component;
 
@@ -1577,23 +1568,29 @@ public class SupplyConsolePage extends BasePage {
 		shipRequisition.click();
 	}
 
-	public void clickSaveShipRequisition() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,-400)", "");
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", saveShipRequisition);
-		waitForElementToBeVisible(driver, saveShipRequisition, 10);
-		saveShipRequisition.click();
+	public void clickSaveShipRequisition() throws InterruptedException {
+		Thread.sleep(500);
+		By save_ship_requisition_btn_path = By.xpath("//button[contains(text(),'Save')]");
+		waitForElementToBeEnabled(driver, save_ship_requisition_btn_path, 10);
+		WebElement save_ship_requisition_btn = driver.findElement(save_ship_requisition_btn_path);
+		scrollCenter(save_ship_requisition_btn);
+		save_ship_requisition_btn.click();
 	}
 
 	public String ShipRequisition() throws InterruptedException {
-		Thread.sleep(2000);
-		return verified.getText();
+		Thread.sleep(500);
+		By verified_label_path = By.xpath("//h2[contains(text(),'Ship Requisition')]");
+		waitForElementToBeEnabled(driver, verified_label_path, 10);
+		WebElement verified_label = driver.findElement(verified_label_path);
+		return verified_label.getText();
 	}
 
 	public void clickReceiveRequestBtn() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, receiveRequestBtn, 30);
-		receiveRequestBtn.click();
+		Thread.sleep(500);
+		By receive_request_btn_path = By.xpath("//button[text() = 'Receive Requisition'] | //a[@title = 'Receive Requisition']");
+		waitForElementToBeEnabled(driver, receive_request_btn_path, 30);
+		WebElement receive_request_btn = driver.findElement(receive_request_btn_path);
+		receive_request_btn.click();
 	}
 
 	public void clickReturnBtn() throws InterruptedException {

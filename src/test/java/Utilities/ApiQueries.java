@@ -309,6 +309,31 @@ public class ApiQueries {
         return AccountId;
     }
 
+    public static int getAppointmentDays(String appointment_date, String appointment_type, String appointment_city) throws Exception {
+        String oauthToken = getOauthToken();
+        String query ="/query?q=SELECT+Id+FROM+DDH__HC_Appointment_Day_Management__c+WHERE+DDH__HC_Appointments_Date__c+=+" + appointment_date + "+AND+DDH__HC_Address__r.DDH__HC_City__c+=+%27" + appointment_city + "%27+AND+DDH__HC_Appointment_Type__r.Name+=+%27" + appointment_type.replace(" ", "+") + "%27";
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet httpGet = new HttpGet(uri);
+        httpGet.addHeader(oauthHeader);
+        httpGet.addHeader(prettyPrintHeader);
+
+        // Make the request.
+        HttpResponse response = httpClient.execute(httpGet);
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        int resp_size = 0;
+        if (statusCode == 200) {
+            String response_string = EntityUtils.toString(response.getEntity());
+            JSONObject json = new JSONObject(response_string);
+            JSONArray j = json.getJSONArray("records");
+            resp_size = j.length();
+        }
+        return resp_size;
+    }
+
     public static ArrayList<String> queryToGetListOfImmunizationRecords(String AccountId) throws Exception {
         log("/*---Query to get immunization record--*/ ");
         ArrayList<String> ImmunizationRecordList = new ArrayList<String>();

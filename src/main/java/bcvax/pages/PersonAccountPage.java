@@ -74,6 +74,7 @@ public class PersonAccountPage extends BasePage {
         WebElement related_tab = driver.findElement(related_tab_path);
         scrollCenter(driver, related_tab);
         Thread.sleep(500);
+        waitForElementToBeEnabled(driver, related_tab_path, 10);
         related_tab.click();
         Thread.sleep(2000);
     }
