@@ -79,9 +79,9 @@ public class DIWA_ICE extends BaseTest {
 			System.out.println("No Confitm Dialog");
 		}
 		log("/*----11. Select an Option from the DropDown ---*/)");
-		DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
+		//DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
 		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "COVID19-mRNA");
+		DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
 		log("/*----13. Enter a Clinic Location: " +clinicLocation +"---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinicLocation);
 		log("/*---14. Select a Date and Time of Administration ---*/");

@@ -2,7 +2,7 @@ package bcvax.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.ui.Select;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -13,18 +13,26 @@ public class DiwaImmunizationRecord extends BasePage {
     }
     public static void clickSelectAnOptionDropdown(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'Select an option')]");
+        By agent_option_path = By.xpath("//select[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @data-id='agent']");
         waitForElementToBeEnabled(driver, agent_option_path, 10);
         WebElement agent_option = driver.findElement(agent_option_path);
         agent_option.click();
+        Thread.sleep(500);
     }
 
     public static void selectOption(WebDriver driver, String vaccine) throws InterruptedException {
         Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'" + vaccine + "')]");
-        waitForElementToBeEnabled(driver, agent_option_path, 10);
-        WebElement covidmRna = driver.findElement(agent_option_path);
-        covidmRna.click();
+        By select_agent_path = By.xpath("//select[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @data-id='agent']");
+        waitForElementToBeEnabled(driver, select_agent_path, 10);
+        WebElement select_agent = driver.findElement(select_agent_path);
+        Select my_select_option = new Select(select_agent);
+        List<WebElement> my_options = my_select_option.getOptions();
+        for(WebElement my_option: my_options) {
+            if(my_option.getAttribute("label").equals(vaccine)) {
+                my_option.click();
+                break;
+            }
+        }
     }
 
     public static void searchClinicLocation(WebDriver driver, String clinic) throws InterruptedException {

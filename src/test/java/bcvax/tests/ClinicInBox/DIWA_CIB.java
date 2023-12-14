@@ -75,9 +75,9 @@ public class DIWA_CIB extends BaseTest {
 			System.out.println("No Confirm dialog");
 		}
 		log("/*----9. Select an Option ---*/)");
-		DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
+		//DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
 		log("/*----10. Select COVID19-mRNA as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "COVID19-mRNA");
+		DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
 		log("/*---12. Select a Date and Time of Administration ---*/");
