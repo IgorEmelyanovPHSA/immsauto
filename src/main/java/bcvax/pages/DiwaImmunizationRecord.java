@@ -21,7 +21,7 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static void selectOption(WebDriver driver, String vaccine) throws InterruptedException {
         Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
+        By agent_option_path = By.xpath("//option[contains(text(),'" + vaccine + "')]");
         waitForElementToBeEnabled(driver, agent_option_path, 10);
         WebElement covidmRna = driver.findElement(agent_option_path);
         covidmRna.click();
@@ -91,6 +91,17 @@ public class DiwaImmunizationRecord extends BasePage {
         record_consent_btn.click();
     }
 
+    public static boolean recordConsentBtnExists(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
+        try {
+            waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
+            driver.findElement(record_consent_btn_path);
+            return true;
+        } catch(NotFoundException ex) {
+            return false;
+        }
+    }
     public static List<Map<String, WebElement>> getInformedConsentTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By informed_consent_table_path = By.xpath("//c-bchc-active-consent-table[@c-createimmunizationrecordmodal_createimmunizationrecordmodal]");

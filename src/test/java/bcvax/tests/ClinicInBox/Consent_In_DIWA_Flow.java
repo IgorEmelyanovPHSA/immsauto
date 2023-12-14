@@ -27,7 +27,9 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 	String participant_name;
 	String consentProvider;
 	private String email = "accountToDelete@phsa.ca";
-
+	private String consent_effective_date = "November 29, 2023";
+	private String lot_to_select = "0486AA-CC01";
+	private String dosage_to_select = "0.5";
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
@@ -99,7 +101,7 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		}
 		log("/*----9. Select an Option ---*/)");
 		DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
-		log("/*----10. Select COVID19-mRNA as an Option  ---*/");
+		log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
 		DiwaImmunizationRecord.selectOption(driver, "Pneumo-P-23");
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
@@ -107,8 +109,11 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		DiwaImmunizationRecord.clickTimeBox(driver);
 		log("/*---13. Click Record Immunization ---*/");
 		DiwaImmunizationRecord.clickRecordImmunization(driver);
+		boolean recordConsentBtnExists = DiwaImmunizationRecord.recordConsentBtnExists(driver);
+		Assert.assertTrue(recordConsentBtnExists, "Record Consent Button doesn't exist");
 		DiwaImmunizationRecord.clickRecordConsent(driver);
 		boolean add_consent_dialog_exists = AddConsentDialog.dialogExists(driver);
+
 		//Verify Headers in Infromed Consent Table
 		List<String> expected_headers = new ArrayList<String>();
 		expected_headers.add("Consent Number");
@@ -128,25 +133,34 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		AddConsentDialog.selectImmsBCProviderRadioButton(driver);
 		AddConsentDialog.selectObtainedFromClient(driver);
 		AddConsentDialog.selectFormOfConsentInPerson(driver);
-		AddConsentDialog.selectInformedConsentProvider(driver, "ImmsBCAdmin Auto");
+		AddConsentDialog.selectInformedConsentProvider(driver, consentProvider);
 		String date_effective_from = AddConsentDialog.getConsentEffectiveDateFromSelected(driver);
 		if(!date_effective_from.equals("Nov 29, 2023")) {
-			AddConsentDialog.setConsentEffectiveDateFrom(driver, "Nov 29, 2023");
+			AddConsentDialog.setConsentEffectiveDateFrom(driver, consent_effective_date);
 		}
 		AddConsentDialog.clickNextButton(driver);
 
 		String profile = AddConsentDialog.getProfile(driver);
+		Assert.assertEquals(profile, legalFirstName + " " + legalLastName);
 		String phn = AddConsentDialog.getPHN(driver);
+		Assert.assertEquals(phn, personal_health_nunber);
 		String agent = AddConsentDialog.getAgent(driver);
+		Assert.assertEquals(agent, "Pneumo-P-23");
 		String response = AddConsentDialog.getResponse(driver);
+		Assert.assertEquals(response, "Grant");
 		String provider_type = AddConsentDialog.getProviderType(driver);
+		Assert.assertEquals(provider_type, "ImmsBC Provider (User)");
 		String obtained_from = AddConsentDialog.getInformedConsentObtainedFrom(driver);
+		Assert.assertEquals(obtained_from, "Client");
 		String form_of_consent = AddConsentDialog.getFormOfConsent(driver);
+		Assert.assertEquals(form_of_consent, "In Person");
 		String effective_from = AddConsentDialog.getConsentEffectiveFrom(driver);
+		Assert.assertEquals(effective_from, consent_effective_date);
 		String effective_to = AddConsentDialog.getConsentEffectiveTo(driver);
 
 		AddConsentDialog.click_create_consent_record(driver);
 		boolean error_exists = AddConsentDialog.errorConfirmExists(driver);
+		Assert.assertTrue(error_exists);
 		AddConsentDialog.click_confirm_info(driver);
 
 		AddConsentDialog.click_create_consent_record(driver);
@@ -181,14 +195,14 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		log("/*---19. click Lot Number DropDown component ---*/");
 		profilesPage.clickLotNumberDropDown();
 
-		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> 300042698 - Exp. 2021 June 18 ---*/");
-		profilesPage.selectLot();
+		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> " + lot_to_select + " ---*/");
+		profilesPage.selectLot(lot_to_select);
 		//profilesPage.setRoute(consumptionRoute);
 		log("/*---21. Select Injection Site ---*/");
 		profilesPage.selectInjectionSite();
 		log("/*---22. Select Dosage---*/");
-		profilesPage.selectDosage();
-
+		profilesPage.selectDosage(dosage_to_select);
+		profilesPage.setRoute("Intramuscular");
 		log("/*---23. Save Immunization Information ---*/");
 		profilesPage.saveImmunizationInformation();
 
@@ -197,11 +211,12 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		///////
 
 		confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
-
+		Assert.assertTrue(confirm_and_save_btn_status);
 		log("/*---24. Confirm and Save Administration ---*/");
 		profilesPage.confirmAndSaveAdministration();
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
 		profilesPage.summaryConfirmAndSave();
+		Thread.sleep(2000);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		profilesPage.clickRelatedTab();
 		System.out.println();

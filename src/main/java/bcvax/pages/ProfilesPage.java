@@ -366,6 +366,15 @@ public class ProfilesPage extends BasePage{
         select_lot.click();
     }
 
+    public void selectLot(String lot_string) throws InterruptedException {
+        By my_lot_path = By.xpath("//li[@data-value='" + lot_string + "']");
+        waitForElementToBeEnabled(driver, my_lot_path, 10);
+        WebElement my_lot = driver.findElement(my_lot_path);
+        scrollCenter(my_lot);
+        Thread.sleep(500);
+        my_lot.click();
+    }
+
     public void setRoute(String route) throws InterruptedException {
         driver.findElement(By.xpath("//label[text() = 'Route']/..//button")).click();
         Thread.sleep(2000);
@@ -394,6 +403,21 @@ public class ProfilesPage extends BasePage{
         WebElement element1 = driver.findElement(select_dosage1);
         JavascriptExecutor executor1 = (JavascriptExecutor) driver;
         executor1.executeScript("arguments[0].click();", element1);
+    }
+
+    public void selectDosage(String dosage) throws InterruptedException {
+        Thread.sleep(500);
+        By select_dosage_field_path = By.xpath("//button[@name='dosePicklist']");
+        waitForElementToBeEnabled(driver, select_dosage_field_path, 10);
+        WebElement field_element = driver.findElement(select_dosage_field_path);
+        scrollCenter(field_element);
+        field_element.click();
+        Thread.sleep(500);
+        By select_dosage_value_path = By.xpath("//span[@title='" + dosage + "']");
+        waitForElementToBeEnabled(driver, select_dosage_value_path, 10);
+        WebElement item_element = driver.findElement(select_dosage_value_path);
+        scrollCenter(item_element);
+        item_element.click();
     }
 
     public void saveImmunizationInformation() throws InterruptedException {
