@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import bcvax.pages.Utils;
 import org.apache.http.Header;
@@ -307,6 +308,70 @@ public class ApiQueries {
             e.printStackTrace();
         }
         return AccountId;
+    }
+
+    public static String getAppointmentDays(String appointment_date, String appointment_type, String appointment_city) throws Exception {
+        String oauthToken = getOauthToken();
+        String query ="/query?q=SELECT+Id+FROM+DDH__HC_Appointment_Day_Management__c+WHERE+DDH__HC_Appointments_Date__c+=+" + appointment_date + "+AND+DDH__HC_Address__r.DDH__HC_City__c+=+%27" + appointment_city + "%27+AND+DDH__HC_Appointment_Type__r.Name+=+%27" + appointment_type.replace(" ", "+") + "%27";
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet httpGet = new HttpGet(uri);
+        httpGet.addHeader(oauthHeader);
+        httpGet.addHeader(prettyPrintHeader);
+
+        // Make the request.
+        HttpResponse response = httpClient.execute(httpGet);
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        int resp_size = 0;
+        if (statusCode == 200) {
+            String response_string = EntityUtils.toString(response.getEntity());
+            JSONObject json = new JSONObject(response_string);
+            JSONArray my_array = json.getJSONArray("records");
+            if(my_array.length() > 0) {
+                String my_id = my_array.getJSONObject(0).getString("Id");
+                return my_id;
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    public static ArrayList<HashMap> getAppointmentDayTimes(String appointment_day_id) throws Exception {
+        String oauthToken = getOauthToken();
+        String query ="/query?q=SELECT+DDH__HC_Start_Time__c,+DDH__HC_End_Time__c+FROM+DDH__HC_Appointment_Block_Time__c+WHERE+DDH__HC_Appointment_Day_Management__c+=+%27" + appointment_day_id + "%27";
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpGet httpGet = new HttpGet(uri);
+        httpGet.addHeader(oauthHeader);
+        httpGet.addHeader(prettyPrintHeader);
+
+        // Make the request.
+        HttpResponse response = httpClient.execute(httpGet);
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        int resp_size = 0;
+        if (statusCode == 200) {
+            String response_string = EntityUtils.toString(response.getEntity());
+            JSONObject json = new JSONObject(response_string);
+            JSONArray records = json.getJSONArray("records");
+            ArrayList existing_times = new ArrayList();
+            for(int i = 0; i < records.length(); i++) {
+                HashMap<String, String> ext_time = new HashMap<String, String>();
+                ext_time.put("start_time", records.getJSONObject(i).get("DDH__HC_Start_Time__c").toString());
+                ext_time.put("end_time", records.getJSONObject(i).get("DDH__HC_End_Time__c").toString());
+                existing_times.add(ext_time);
+            }
+            return existing_times;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public static ArrayList<String> queryToGetListOfImmunizationRecords(String AccountId) throws Exception {

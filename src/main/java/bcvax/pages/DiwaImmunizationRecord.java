@@ -1,11 +1,8 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.ui.Select;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,18 +13,26 @@ public class DiwaImmunizationRecord extends BasePage {
     }
     public static void clickSelectAnOptionDropdown(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'Select an option')]");
+        By agent_option_path = By.xpath("//select[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @data-id='agent']");
         waitForElementToBeEnabled(driver, agent_option_path, 10);
         WebElement agent_option = driver.findElement(agent_option_path);
         agent_option.click();
+        Thread.sleep(500);
     }
 
     public static void selectOption(WebDriver driver, String vaccine) throws InterruptedException {
         Thread.sleep(500);
-        By agent_option_path = By.xpath("//option[contains(text(),'COVID-19 mRNA')]");
-        waitForElementToBeEnabled(driver, agent_option_path, 10);
-        WebElement covidmRna = driver.findElement(agent_option_path);
-        covidmRna.click();
+        By select_agent_path = By.xpath("//select[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @data-id='agent']");
+        waitForElementToBeEnabled(driver, select_agent_path, 10);
+        WebElement select_agent = driver.findElement(select_agent_path);
+        Select my_select_option = new Select(select_agent);
+        List<WebElement> my_options = my_select_option.getOptions();
+        for(WebElement my_option: my_options) {
+            if(my_option.getAttribute("label").equals(vaccine)) {
+                my_option.click();
+                break;
+            }
+        }
     }
 
     public static void searchClinicLocation(WebDriver driver, String clinic) throws InterruptedException {
@@ -44,7 +49,13 @@ public class DiwaImmunizationRecord extends BasePage {
         for(int i = 0; i < 10; i++) {
             Thread.sleep(500);
             dropdown_field = driver.findElements(select_dropdown_option).get(0);
-            my_clinic = dropdown_field.getText();
+            try {
+                my_clinic = dropdown_field.getText();
+            } catch(StaleElementReferenceException ex) {
+                Thread.sleep(2000);
+                dropdown_field = driver.findElements(select_dropdown_option).get(0);
+                my_clinic = dropdown_field.getText();
+            }
             if(my_clinic.equals(clinic)) {
                 break;
             }
@@ -88,6 +99,17 @@ public class DiwaImmunizationRecord extends BasePage {
         record_consent_btn.click();
     }
 
+    public static boolean recordConsentBtnExists(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
+        try {
+            waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
+            driver.findElement(record_consent_btn_path);
+            return true;
+        } catch(NotFoundException ex) {
+            return false;
+        }
+    }
     public static List<Map<String, WebElement>> getInformedConsentTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By informed_consent_table_path = By.xpath("//c-bchc-active-consent-table[@c-createimmunizationrecordmodal_createimmunizationrecordmodal]");
@@ -105,5 +127,26 @@ public class DiwaImmunizationRecord extends BasePage {
             tries++;
         }
         return table;
+    }
+
+    public static boolean recordConsentMessageExists(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_1_path = By.xpath("//lightning-formatted-text[text()='This Client has already provided Consent for the selected agent']");
+        By record_consent_2_path = By.xpath("//lightning-formatted-text[text()='To record a new Consent, click the button below']");
+        try {
+            driver.findElement(record_consent_1_path);
+            driver.findElement(record_consent_2_path);
+            return true;
+        } catch(NotFoundException ex) {
+            return false;
+        }
+    }
+
+    public static boolean confirm_and_save_button_is_active(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By confirm_and_save_btn_path = By.xpath("//button[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @title='Confirm & Save Administration']");
+        waitForElementToBeLocated(driver, confirm_and_save_btn_path, 10);
+        WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
+        return confirm_and_save_btn.isEnabled();
     }
 }

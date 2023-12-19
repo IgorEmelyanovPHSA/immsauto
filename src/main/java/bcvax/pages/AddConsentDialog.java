@@ -354,18 +354,4 @@ public class AddConsentDialog extends BasePage {
             return false;
         }
     }
-
-    public static boolean recordConsentExists(WebDriver driver) throws InterruptedException {
-        Thread.sleep(500);
-        By record_consent_1_path = By.xpath("//lightning-formatted-text[text()='This Client has already provided Consent for the selected agent']");
-        By record_consent_2_path = By.xpath("//lightning-formatted-text[text()='To record a new Consent, click the button below']");
-        try {
-            driver.findElement(record_consent_1_path);
-            driver.findElement(record_consent_2_path);
-            return true;
-        } catch(NotFoundException ex) {
-            return false;
-        }
-    }
-
 }

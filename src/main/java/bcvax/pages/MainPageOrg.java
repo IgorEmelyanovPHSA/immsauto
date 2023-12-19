@@ -137,16 +137,22 @@ public class MainPageOrg extends BasePage {
         waitForElementToBeEnabled(driver, navigation_menu_path, 10);
         WebElement navigation_menu = driver.findElement(navigation_menu_path);
         navigation_menu.click();
-        Thread.sleep(500);
+        Thread.sleep(2000);
         By navigation_item_path = By.xpath("//a[@role='option' and @data-label='" + item + "']");
-        waitForElementToBeEnabled(driver, navigation_item_path, 10);
+        try {
+            waitForElementToBeEnabled(driver, navigation_item_path, 10);
+        } catch(NotFoundException ex) {
+            navigation_menu = driver.findElement(navigation_menu_path);
+            navigation_menu.click();
+            waitForElementToBeEnabled(driver, navigation_item_path, 10);
+        }
         WebElement my_item = driver.findElement(navigation_item_path);
         my_item.click();
     }
 
     public void closeAllTabs() throws InterruptedException {
         Thread.sleep(500);
-        waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
         int counter = 0;
         while(closeButtons.size() < 1) {
@@ -225,6 +231,12 @@ public class MainPageOrg extends BasePage {
             //Re-try after 2 seconds
             Thread.sleep(2000);
             found_client.click();
+        }
+        Thread.sleep(1000);
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("PIT Ok");
         }
     }
 

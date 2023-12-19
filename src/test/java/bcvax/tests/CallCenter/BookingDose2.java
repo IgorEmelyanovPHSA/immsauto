@@ -47,6 +47,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*2.----CallCenter Console page displayed --*/");
 
 		String currentApp = orgMainPage.currentApp();
+		orgMainPage.closeAllTabs();
 		if(!currentApp.equals(Apps.CALL_CENTER_CONSOLE.value)) {
 			orgMainPage.switchApp(Apps.CALL_CENTER_CONSOLE.value);
 		}

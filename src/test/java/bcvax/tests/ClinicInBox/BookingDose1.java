@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -48,6 +49,11 @@ public class BookingDose1 extends BaseTest {
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
+		try {
+			orgMainPage.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
 		}
@@ -66,12 +72,17 @@ public class BookingDose1 extends BaseTest {
 		userDefaultsPage.clickBtnSave();
 		AlertDialog.closeAlert(driver);
 		currentApp = orgMainPage.currentApp();
+		try {
+			clinicInBox.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
 		orgMainPage.selectFromNavigationMenu("Home");
 		log("/*3.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
+
 		log("/*4.----click Register New Citizen --*/");
 
 		clinicInBox.clickRegisterButton();
@@ -105,8 +116,15 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.clickRegisterButtonOnConfirmationPage();
 		log("/*17.--toast success message - 'Success' --*/");
 		clinicInBox.successRegisteredMessageAppear();
+		Thread.sleep(2000);
 		log("/*18.----click on person Account Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementNotInteractableException ex) {
+			driver.navigate().refresh();
+			Thread.sleep(1000);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		log("/*21----Go to Appointment Tab --*/");
 		clinicInBox.navigateToVaccineSchedulingTab();
 
@@ -139,9 +157,16 @@ public class BookingDose1 extends BaseTest {
 		clinicInBox.clickVerifyContactInformation();
 		log("/*31----click Confirm Appointment button  --*/");
 		clinicInBox.clickOnConfirmButton();
-		log("/*32----see 'Appointment confirmed!' screen --*/");
-		boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
-		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+		try {
+			log("/*32----see 'Appointment confirmed!' screen --*/");
+			boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+		} catch(Exception ex) {
+			clinicInBox.clickOnConfirmButton();
+			log("/*32----see 'Appointment confirmed!' screen. Second attempt --*/");
+			boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+		}
 		log("/*33----Refresh page --*/");
 		clinicInBox.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
