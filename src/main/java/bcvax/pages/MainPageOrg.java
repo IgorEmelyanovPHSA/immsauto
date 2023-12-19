@@ -152,7 +152,7 @@ public class MainPageOrg extends BasePage {
 
     public void closeAllTabs() throws InterruptedException {
         Thread.sleep(500);
-        waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
         int counter = 0;
         while(closeButtons.size() < 1) {
