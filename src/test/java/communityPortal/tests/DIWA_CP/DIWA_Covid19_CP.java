@@ -71,9 +71,6 @@ public class DIWA_Covid19_CP extends BaseTest {
             System.out.println(ex.getMessage());
         }
 
-        //log("/*----7. Select an Option from the DropDown ---*/)");
-        //DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
-
         log("/*----8. Select COVID19-mRNA as an Option  ---*/");
         DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
 

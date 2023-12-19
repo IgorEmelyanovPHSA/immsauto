@@ -3,10 +3,15 @@ package bcvax.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.sql.Time;
 
 public class AppointmentDayManagementPage extends BasePage {
     Tables tables;
@@ -139,7 +144,7 @@ public class AppointmentDayManagementPage extends BasePage {
         related_tab.click();
     }
 
-    public void addAppointmentTime() throws InterruptedException {
+    public void addAppointmentTime(ArrayList<HashMap> day_times) throws InterruptedException, ParseException {
         Thread.sleep(500);
         List<Map<String, String>> time_slots = new ArrayList();
         HashMap<String, String> time_slot = new HashMap<>();
@@ -207,28 +212,59 @@ public class AppointmentDayManagementPage extends BasePage {
         time_slot.put("end_time", "11:59 p.m.");
         time_slots.add(time_slot);
 
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+        DateFormat formatter24 = new SimpleDateFormat("hh:mm a");
+
+        for(int i = 0; i < time_slots.size(); i++) {
+            Time slot_start_time = new Time(formatter24.parse(time_slots.get(i).get("start_time")).getTime());
+            Time slot_end_time = new Time(formatter24.parse(time_slots.get(i).get("end_time")).getTime());
+
+            for(int j = 0; j < day_times.size(); j++) {
+
+                Time db_start_time = new Time(formatter.parse(day_times.get(j).get("start_time").toString()).getTime());
+                Time db_end_time = new Time(formatter.parse(day_times.get(j).get("end_time").toString()).getTime());
+
+                if(db_start_time.getTime() >= slot_start_time.getTime() && db_start_time.getTime() < slot_end_time.getTime()) {
+                    time_slots.get(i).put("skip", "yes");
+                    break;
+                }
+                if(db_start_time.getTime() < slot_start_time.getTime() && db_end_time.getTime() >= slot_end_time.getTime()) {
+                    time_slots.get(i).put("skip", "yes");
+                    break;
+                }
+            }
+        }
+
+        List<Map<String, String>> time_slots_cleaned = new ArrayList();
+        for(int i = 0; i < time_slots.size(); i++) {
+            if(time_slots.get(i).get("skip") != "yes") {
+                time_slots_cleaned.add(time_slots.get(i));
+            }
+        }
         By add_time_slot_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:StandardButton.DDH__HC_Appointment_Block_Time__c.New']");
         waitForElementToBeEnabled(driver, add_time_slot_btn_path, 10);
         WebElement add_time_slot_btn = driver.findElement(add_time_slot_btn_path);
-        add_time_slot_btn.click();
-        for(int i = 0; i < time_slots.size(); i++) {
+        if(time_slots_cleaned.size() > 0) {
+            add_time_slot_btn.click();
+        }
+        for(int i = 0; i < time_slots_cleaned.size(); i++) {
             Thread.sleep(1000);
             By start_time_path = By.xpath("//input[@name='DDH__HC_Start_Time__c']");
             waitForElementToBeEnabled(driver, start_time_path, 10);
             WebElement start_time = driver.findElement(start_time_path);
             try {
-                start_time.sendKeys(time_slots.get(i).get("start_time"));
+                start_time.sendKeys(time_slots_cleaned.get(i).get("start_time"));
             } catch(StaleElementReferenceException ex) {
                 Thread.sleep(100);
                 waitForElementToBeEnabled(driver, start_time_path, 10);
                 start_time = driver.findElement(start_time_path);
-                start_time.sendKeys(time_slots.get(i).get("start_time"));
+                start_time.sendKeys(time_slots_cleaned.get(i).get("start_time"));
             }
             Thread.sleep(500);
             By end_time_path = By.xpath("//input[@name='DDH__HC_End_Time__c']");
             waitForElementToBeEnabled(driver, end_time_path, 10);
             WebElement end_time = driver.findElement(end_time_path);
-            end_time.sendKeys(time_slots.get(i).get("end_time"));
+            end_time.sendKeys(time_slots_cleaned.get(i).get("end_time"));
             Thread.sleep(500);
             By block_capacity_path = By.xpath("//input[@name='DDH__HC_Block_Capacity__c']");
             waitForElementToBeEnabled(driver, block_capacity_path, 10);
@@ -240,7 +276,7 @@ public class AppointmentDayManagementPage extends BasePage {
             //booking_counter.sendKeys("1");
             By save_btn_path = By.xpath("//button[@name='SaveEdit']");
             By save_and_new_btn_path = By.xpath("//button[@name='SaveAndNew']");
-            if(i < time_slots.size() - 1) {
+            if(i < time_slots_cleaned.size() - 1) {
                 waitForElementToBeEnabled(driver, save_and_new_btn_path, 10);
                 WebElement save_and_new_btn = driver.findElement(save_and_new_btn_path);
                 Thread.sleep(500);
