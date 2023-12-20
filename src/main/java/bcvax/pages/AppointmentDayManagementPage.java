@@ -121,6 +121,7 @@ public class AppointmentDayManagementPage extends BasePage {
         waitForElementToBeEnabled(driver, save_appointment_day_btn_path, 10);
         WebElement save_btn = driver.findElement(save_appointment_day_btn_path);
         scrollCenter(save_btn);
+        Thread.sleep(500);
         save_btn.click();
     }
 
@@ -138,10 +139,16 @@ public class AppointmentDayManagementPage extends BasePage {
     }
 
     public void selectAppointmentDayRelatedTab() throws InterruptedException {
+        Thread.sleep(500);
         By related_tab_path = By.xpath("//a[@class='slds-tabs_default__link' and @data-label='Related']");
         waitForElementToBeEnabled(driver, related_tab_path, 10);
         WebElement related_tab = driver.findElement(related_tab_path);
-        related_tab.click();
+        try {
+            related_tab.click();
+        } catch(ElementNotInteractableException ex) {
+            Thread.sleep(2000);
+            related_tab.click();
+        }
     }
 
     public void addAppointmentTime(ArrayList<HashMap> day_times) throws InterruptedException, ParseException {
@@ -255,12 +262,12 @@ public class AppointmentDayManagementPage extends BasePage {
             try {
                 start_time.sendKeys(time_slots_cleaned.get(i).get("start_time"));
             } catch(StaleElementReferenceException ex) {
-                Thread.sleep(100);
+                Thread.sleep(1000);
                 waitForElementToBeEnabled(driver, start_time_path, 10);
                 start_time = driver.findElement(start_time_path);
                 start_time.sendKeys(time_slots_cleaned.get(i).get("start_time"));
             }
-            Thread.sleep(500);
+            Thread.sleep(1000);
             By end_time_path = By.xpath("//input[@name='DDH__HC_End_Time__c']");
             waitForElementToBeEnabled(driver, end_time_path, 10);
             WebElement end_time = driver.findElement(end_time_path);
