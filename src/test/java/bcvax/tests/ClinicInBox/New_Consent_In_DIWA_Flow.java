@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.List;
 
 @Listeners({TestListener.class})
-public class Consent_In_DIWA_Flow extends BaseTest {
+public class New_Consent_In_DIWA_Flow extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
@@ -46,7 +46,6 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		loginPage.loginAsImmsBCAdmin();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
-		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
