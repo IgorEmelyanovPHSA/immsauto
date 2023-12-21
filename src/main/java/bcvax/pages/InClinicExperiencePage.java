@@ -212,9 +212,6 @@ public class InClinicExperiencePage extends BasePage {
 	@FindBy(xpath = "//span[@title and contains(text(), 'Appointments')]")
 	private WebElement appointmentsRecordsTitle;
 
-	@FindBy(xpath = "//div[@aria-label='Appointments|Appointments|List View']/..//span[@class='view-all-label']")
-	private WebElement btnViewAllAppointments;
-
 	Tables tables;
 
 	/*---------Constructor-------*/
@@ -1648,6 +1645,11 @@ public class InClinicExperiencePage extends BasePage {
 				log("Try " + i + "; Table is still empty");
 			}
 		}
+		By view_all_appointments_btn_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']/..//span[@class='view-all-label']");
+		waitForElementToBeEnabled(driver, view_all_appointments_btn_path, 10);
+		WebElement btnViewAllAppointments = driver.findElement(view_all_appointments_btn_path);
+		scrollCenter(driver, btnViewAllAppointments);
+		Thread.sleep(500);
 		click(btnViewAllAppointments);
 	}
 
