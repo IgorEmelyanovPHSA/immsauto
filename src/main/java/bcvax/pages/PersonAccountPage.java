@@ -176,6 +176,8 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, checkin_btn_path, 10);
         WebElement check_in_button = driver.findElement(checkin_btn_path);
         check_in_button.click();
+        By identification_tab_path = By.xpath("//h2[text()='Identification']");
+        waitForElementToBeEnabled(driver, identification_tab_path, 10);
     }
 
     public static int getImmunizationRecordsSize(WebDriver driver) throws InterruptedException {
