@@ -248,6 +248,7 @@ public class AppointmentDayManagementPage extends BasePage {
                 time_slots_cleaned.add(time_slots.get(i));
             }
         }
+        Thread.sleep(2000);
         By add_time_slot_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:StandardButton.DDH__HC_Appointment_Block_Time__c.New']");
         waitForElementToBeEnabled(driver, add_time_slot_btn_path, 10);
         WebElement add_time_slot_btn = driver.findElement(add_time_slot_btn_path);
@@ -281,6 +282,10 @@ public class AppointmentDayManagementPage extends BasePage {
             //By booking_counter_path = By.xpath("//input[@name='DDH__HC_Block_Booking_Counter__c']");
             //WebElement booking_counter = driver.findElement(booking_counter_path);
             //booking_counter.sendKeys("1");
+            start_time = driver.findElement(start_time_path);
+            if(!start_time.getAttribute("value").equals(time_slots_cleaned.get(i).get("start_time"))) {
+                start_time.sendKeys(time_slots_cleaned.get(i).get("start_time"));
+            }
             By save_btn_path = By.xpath("//button[@name='SaveEdit']");
             By save_and_new_btn_path = By.xpath("//button[@name='SaveAndNew']");
             if(i < time_slots_cleaned.size() - 1) {
