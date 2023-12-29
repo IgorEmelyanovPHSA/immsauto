@@ -20,21 +20,21 @@ public class AddAppointmentDays extends BaseTest {
     Map<String, Object> testData;
     @Test()
     public void createAppointmentDays() throws Exception {
-        String appointment_date = "2023-8-27";
+        String appointment_date = "2023-8-29";
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
 
-        LocalDate start_date = LocalDate.parse("2023-12-21", dtf);
-        LocalDate end_date = LocalDate.parse("2023-12-24", dtf);
+        LocalDate start_date = LocalDate.parse("2023-12-27", dtf);
+        LocalDate end_date = LocalDate.parse("2023-12-31", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
             appointment_dates.add(my_appointment_date.format(dtf));
         }
         //String appointment_type = "COVID-19 Vaccination";
-        String appointment_type = "Minor Ailments and Contraception";
-        //String appointment_type = "BC Immunization Program";
+        //String appointment_type = "Minor Ailments and Contraception";
+        String appointment_type = "BC Immunization Program";
 
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         String appointment_name = appointment_type + " " + appointment_date;
@@ -77,6 +77,12 @@ public class AddAppointmentDays extends BaseTest {
                 }
                 appointment_day_page.selectAppointmentDayRelatedTab();
                 ArrayList<HashMap> day_times = Utilities.ApiQueries.getAppointmentDayTimes(appointment_day_id);
+                System.out.println("------------------------------------");
+                System.out.println("Appointment Date " + appointment_dates.get(d));
+                System.out.println("Appointment Time " + appointment_type);
+                System.out.println("Appointment City " + appointment_city);
+                System.out.println("Found " + day_times.size() + " in the database");
+                System.out.println("------------------------------------");
                 appointment_day_page.addAppointmentTime(day_times);
                 Thread.sleep(10000);
                 orgMainPage.closeLastTab();

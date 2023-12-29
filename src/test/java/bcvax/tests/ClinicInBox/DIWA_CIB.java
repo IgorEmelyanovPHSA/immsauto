@@ -55,9 +55,11 @@ public class DIWA_CIB extends BaseTest {
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.selectFromNavigationMenu("Home");
+
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
+		Thread.sleep(500);
+		orgMainPage.selectFromNavigationMenu("Home");
 		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
 		orgMainPage.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");
