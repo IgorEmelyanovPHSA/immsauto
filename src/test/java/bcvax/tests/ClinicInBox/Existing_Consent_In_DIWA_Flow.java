@@ -74,6 +74,6 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         DiwaImmunizationRecord.clickTimeBox(driver);
         log("/*---13. Click Record Immunization ---*/");
         DiwaImmunizationRecord.clickRecordImmunization(driver);
-
+        System.out.println();
     }
 }
