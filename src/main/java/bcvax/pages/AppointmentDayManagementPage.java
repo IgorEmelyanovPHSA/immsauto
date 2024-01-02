@@ -4,13 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
 
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.sql.Time;
 
 public class AppointmentDayManagementPage extends BasePage {
@@ -20,12 +21,13 @@ public class AppointmentDayManagementPage extends BasePage {
     }
 
     public Map<String, WebElement> findAppointmentDay(String appointment_date, String appointment_type, String provider) throws InterruptedException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);
         Map<String, WebElement> appointment_days_res = new HashMap<>();
         tables = new Tables(driver);
-        String appointment_name = appointment_type + " " + appointment_date;
+        String appointment_name = appointment_type + " " + LocalDate.parse(appointment_date, dtf).format(dtf);
         Map<String, String> search_criteria = new HashMap<String, String>();
         search_criteria.put("Name", appointment_name);
         search_criteria.put("Provider", provider);
