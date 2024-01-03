@@ -30,7 +30,6 @@ public class Requisition extends BaseTest {
 //		if(is_new_ui) {
 //			throw new SkipException("Temporarily Ignore test in CP");
 //		}
-		testData = Utils.getTestData(env);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
