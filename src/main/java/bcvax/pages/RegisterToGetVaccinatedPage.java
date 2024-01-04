@@ -7,10 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class RegisterToGetVaccinatedPage extends BasePage{
-
-    @FindBy(xpath = "//span[@class='button-label-primary' and contains(text(), 'Register')]")
-    private WebElement btnRegisterNow;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Registration information section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +76,12 @@ public class RegisterToGetVaccinatedPage extends BasePage{
     public RegisterToGetVaccinatedPage(WebDriver driver) {super(driver);}
 
     public void clickBtnRegisterNow() throws InterruptedException {
-        click(btnRegisterNow);
+        By btn_register_now_path = By.xpath("//button[text()='Register Now'] | //span[text()='Register now']/..");
+        waitForElementToBeEnabled(driver, btn_register_now_path, 10);
+        WebElement btnRegisterNow = driver.findElement(btn_register_now_path);
+        scrollCenter(driver, btnRegisterNow);
+        Thread.sleep(1000);
+        btnRegisterNow.click();
     }
 
     public void fillMandatoryFieldsOnRegistrationSection(String firstName, String lastName, String middleName, String dob, String postalCode,
