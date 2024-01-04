@@ -248,7 +248,7 @@ public class TransferCancellation extends BaseTest {
 
     public void precondition() throws Exception {
         log("/*1.----Login to ORG (oldUI) --*/");
-        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
+        orgMainPage = loginPage.orgLoginAsPPHIS();
         String currentApp = orgMainPage.currentApp();
         log("/*1.1.----Current App " + currentApp + "--*/");
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
