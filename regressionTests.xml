@@ -35,6 +35,7 @@
             <class name="bcvax.tests.InClinicExperience.Check_In_Client_ICE"/>
             <class name="bcvax.tests.InClinicExperience.Check_In_Workflow"/>
             <class name="bcvax.tests.ClinicInBox.New_Consent_In_DIWA_Flow"/>
+            <class name="bcvax.tests.ClinicInBox.New_Consent_In_DIWA_Errors"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
