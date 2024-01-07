@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,18 +43,24 @@ public class AddConsentDialog extends BasePage {
         return table;
     }
 
-    public static void selectResponseGrantRadioButton(WebDriver driver) {
-        WebElement grant_radio = driver.findElement(By.xpath("//input[@value='ConsentResponseValues.Grant']/..//span[@class='slds-radio_faux']"));
+    public static void selectResponseGrantRadioButton(WebDriver driver) throws InterruptedException {
+        By grant_radio_path = By.xpath("//input[@value='ConsentResponseValues.Grant']/..//span[@class='slds-radio_faux']");
+        waitForElementToBeEnabled(driver, grant_radio_path, 10);
+        WebElement grant_radio = driver.findElement(grant_radio_path);
         grant_radio.click();
     }
 
-    public static void selectResponseRefuseRadioButton(WebDriver driver) {
-        WebElement response_radio = driver.findElement(By.xpath("//input[@value='ConsentResponseValues.Refuse']/..//span[@class='slds-radio_faux']"));
+    public static void selectResponseRefuseRadioButton(WebDriver driver) throws InterruptedException {
+        By response_radio_path = By.xpath("//input[@value='ConsentResponseValues.Refuse']/..//span[@class='slds-radio_faux']");
+        waitForElementToBeEnabled(driver, response_radio_path, 10);
+        WebElement response_radio = driver.findElement(response_radio_path);
         response_radio.click();
     }
 
-    public static void selectImmsBCProviderRadioButton(WebDriver driver) {
-        WebElement provider_type_radio = driver.findElement(By.xpath("//input[@value='ProviderTypeValues.ImmsBC Provider (User)']/..//span[@class='slds-radio_faux']"));
+    public static void selectImmsBCProviderRadioButton(WebDriver driver) throws InterruptedException {
+        By provider_type_radio_path = By.xpath("//input[@value='ProviderTypeValues.ImmsBC Provider (User)']/..//span[@class='slds-radio_faux']");
+        waitForElementToBeEnabled(driver, provider_type_radio_path, 10);
+        WebElement provider_type_radio = driver.findElement(provider_type_radio_path);
         provider_type_radio.click();
     }
 
@@ -167,6 +172,14 @@ public class AddConsentDialog extends BasePage {
         provider_item.click();
     }
 
+    public static void cleanupInformedConsentProvider(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By informed_consent_provider_clear_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='Clear Selection']");
+        waitForElementToBeEnabled(driver, informed_consent_provider_clear_path, 10);
+        WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_clear_path);
+        informed_consent_provider_input.click();
+    }
+
     public static String getInformedConsentProviderSelected(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By informed_consent_provider_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input");
@@ -183,6 +196,24 @@ public class AddConsentDialog extends BasePage {
         informed_consent_provider_input.clear();
         informed_consent_provider_input.sendKeys(date);
     }
+
+    public static void setConsentEffectiveDateTo(WebDriver driver, String date) throws InterruptedException {
+        Thread.sleep(500);
+        By consent_from_date_path = By.xpath("//span[text()='Consent Effective To Date']/../../..//input[@class='slds-input']");
+        waitForElementToBeEnabled(driver, consent_from_date_path, 10);
+        WebElement informed_consent_provider_input = driver.findElement(consent_from_date_path);
+        informed_consent_provider_input.clear();
+        informed_consent_provider_input.sendKeys(date);
+    }
+
+    public static void clearConsentEffectiveDateFrom(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By consent_from_date_path = By.xpath("//span[text()='Consent Effective From Date']/../../..//input[@class='slds-input']");
+        waitForElementToBeEnabled(driver, consent_from_date_path, 10);
+        WebElement informed_consent_provider_input = driver.findElement(consent_from_date_path);
+        informed_consent_provider_input.clear();
+    }
+
     public static String getConsentEffectiveDateFromSelected(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By consent_from_date_path = By.xpath("//span[text()='Consent Effective From Date']/../../..//input[@class='slds-input']");
@@ -196,6 +227,118 @@ public class AddConsentDialog extends BasePage {
         scrollCenter(driver, next_button);
         Thread.sleep(500);
         next_button.click();
+    }
+
+    public static void clickCloseButton(WebDriver driver) throws InterruptedException {
+        WebElement next_button = driver.findElement(By.xpath("//h1[text()='Add Consent']/../..//button[text()='Close']"));
+        scrollCenter(driver, next_button);
+        Thread.sleep(500);
+        next_button.click();
+    }
+
+    public static String getResponseMundatoryError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Response']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getResponseRefuseReasonMundatoryError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Reason for Refusal']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getConsentEffectiveFromMundatoryError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Consent Effective From Date']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getConsentEffectiveDateFromError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Consent Effective From Date']/../../../../../../../../..//flowruntime-display-text-lwc/lightning-formatted-rich-text/span/p/span");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getConsentEffectiveDateToError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Consent Effective To Date']/../../../div[@class='flowruntime-input-error slds-form-element__help']//span[@part='formatted-rich-text']/p/span");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getObtainedFromMundatoryError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Informed Consent for Series Obtained from']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getRelationshipToClientError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Relationship to Client']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getRelationshipFirstNameError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='First Name of Person Giving Consent']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static String getRelationshipLastNameError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//span[text()='Last Name of Person Giving Consent']/../../..//div[@class='flowruntime-input-error slds-form-element__help']//lightning-formatted-rich-text/span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
+    }
+
+    public static List<String> getConsentProviderMissingError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        ArrayList errors_list = new ArrayList<String>();
+        By error_path = By.xpath("//label[text()='Informed Consent Provider (User)']/../div[@class='slds-form-element__help']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        errors_list.add(error_text);
+        By second_error_path = By.xpath("//label[text()='Informed Consent Provider (User)']/../../../../../../../flowruntime-error-content//span[@part='formatted-rich-text']");
+        WebElement second_error = driver.findElement(second_error_path);
+        String second_error_text = second_error.getText();
+        errors_list.add(second_error_text);
+        return errors_list;
+    }
+
+    public static String getConsentProviderContactMissingError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By error_path = By.xpath("//label[text()='Informed Consent Provider (Contact)']/../../../../../../../flowruntime-error-content//span[@part='formatted-rich-text']");
+        waitForElementToBeEnabled(driver, error_path, 10);
+        WebElement error = driver.findElement(error_path);
+        String error_text = error.getText();
+        return error_text;
     }
 
     public static void click_confirm_info(WebDriver driver) throws InterruptedException {
