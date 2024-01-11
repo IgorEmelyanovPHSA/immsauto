@@ -110,6 +110,8 @@ public class MainPageCP extends BasePage{
         Thread.sleep(1000);
         tab_supply_location.click();
         Thread.sleep(1000);
+        By supply_location_header_path = By.xpath("//lst-breadcrumbs//span[text()='Supply Locations']");
+        waitForElementToBeEnabled(driver, supply_location_header_path, 10);
         return new SupplyConsolePage(driver);
     }
 

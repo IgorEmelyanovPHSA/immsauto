@@ -49,18 +49,19 @@ public class DIWA_CIB extends BaseTest {
 		loginPage.loginAsImmsBCAdmin();
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		CommonMethods commonMethods = new CommonMethods(getDriver());
-		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.selectFromNavigationMenu("Home");
+
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
+		Thread.sleep(500);
+		orgMainPage.selectFromNavigationMenu("Home");
 		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
-		mainPageOrg.globalSearch(participant_name);
+		orgMainPage.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);

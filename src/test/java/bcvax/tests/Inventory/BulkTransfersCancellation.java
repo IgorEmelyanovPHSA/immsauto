@@ -137,6 +137,7 @@ public class BulkTransfersCancellation extends BaseTest {
         } else {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
+        Thread.sleep(1000);
         supplyConsolePage.clickBulkCancelButton();
         supplyConsolePage.cancelTransfer();
 

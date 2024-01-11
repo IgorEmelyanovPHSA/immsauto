@@ -153,14 +153,14 @@ public class BookingDose2 extends BaseTest {
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		log("/*30----Refresh page --*/");
 		clinicInBox.refreshBrowser();
-		log("/*31----Go to back to the Citizen Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
 
 		try {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("Warning dialog didn't appear");
 		}
+		log("/*31----Go to back to the Citizen Related Tab --*/");
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*32----click on In-clinic Experience button --*/");
 		inClinicExperience = new InClinicExperiencePage(driver);

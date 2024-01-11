@@ -44,25 +44,26 @@ public class DiwaImmunizationRecord extends BasePage {
         Thread.sleep(500);
         By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
         waitForElementToBeEnabled(driver, select_dropdown_option, 10);
-        WebElement dropdown_field = driver.findElements(select_dropdown_option).get(0);
-        String my_clinic = dropdown_field.getText();
+        List<WebElement> dropdown_list = driver.findElements(select_dropdown_option);
+        WebElement my_option = dropdown_list.get(0);
+        String my_clinic = my_option.getText();
         for(int i = 0; i < 10; i++) {
             Thread.sleep(500);
-            dropdown_field = driver.findElements(select_dropdown_option).get(0);
+            my_option = driver.findElements(select_dropdown_option).get(0);
             try {
-                my_clinic = dropdown_field.getText();
+                my_clinic = my_option.getText();
             } catch(StaleElementReferenceException ex) {
                 Thread.sleep(2000);
-                dropdown_field = driver.findElements(select_dropdown_option).get(0);
-                my_clinic = dropdown_field.getText();
+                my_option = driver.findElements(select_dropdown_option).get(0);
+                my_clinic = my_option.getText();
             }
             if(my_clinic.equals(clinic)) {
                 break;
             }
         }
-        scrollIfNeeded(driver, dropdown_field);
+        scrollIfNeeded(driver, my_option);
         Thread.sleep(500);
-        dropdown_field.click();
+        my_option.click();
         Thread.sleep(1000);
     }
 

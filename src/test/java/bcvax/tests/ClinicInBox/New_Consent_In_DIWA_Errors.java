@@ -8,22 +8,24 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Listeners({TestListener.class})
-public class Consent_In_DIWA_Flow extends BaseTest {
+public class New_Consent_In_DIWA_Errors extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
-	private String legalFirstName = "Gill";
-	private String legalLastName = "BCVaxOrigan";
-	private String legalMiddleName = "Ashely";
-	private String personal_health_nunber = "9746172463";
-	private String date_of_birth = "1915-02-14";
-	private String postal_code = "V2T8T1";
+	private String legalFirstName = "Celestyna";
+	private String legalLastName = "BCVaxHeffy";
+	private String legalMiddleName = "Anastassia";
+	private String personal_health_nunber = "9746173741";
+	private String date_of_birth = "1962-07-09";
+	private String postal_code = "V5Y9M1";
 	String participant_name;
 	String consentProvider;
 	private String email = "accountToDelete@phsa.ca";
@@ -32,9 +34,9 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 	private String dosage_to_select = "0.5";
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
-	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
-	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
-		TestcaseID = "273661";
+	@Test(testName = "Verify Errors when creating DIWA Immunisation record without Appointments(Java)")
+	public void Verify_Errors_When_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
+		TestcaseID = "278971";
 		env = Utils.getTargetEnvironment();
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
@@ -46,7 +48,6 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		loginPage.loginAsImmsBCAdmin();
 		CommonMethods commonMethods = new CommonMethods(getDriver());
-		MainPageOrg mainPageOrg = new MainPageOrg(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
@@ -113,7 +114,7 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 		Assert.assertTrue(recordConsentBtnExists, "Record Consent Button doesn't exist");
 		DiwaImmunizationRecord.clickRecordConsent(driver);
 		boolean add_consent_dialog_exists = AddConsentDialog.dialogExists(driver);
-
+		Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
 		//Verify Headers in Infromed Consent Table
 		List<String> expected_headers = new ArrayList<String>();
 		expected_headers.add("Consent Number");
@@ -129,7 +130,7 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 			Assert.assertTrue(actual_headers.contains(header), "Table doesn't contain header " + header);
 		}
 
-		AddConsentDialog.selectResponseGrantRadioButton(driver);
+		//Verify Error when Response is not selected
 		AddConsentDialog.selectImmsBCProviderRadioButton(driver);
 		AddConsentDialog.selectObtainedFromClient(driver);
 		AddConsentDialog.selectFormOfConsentInPerson(driver);
@@ -139,87 +140,85 @@ public class Consent_In_DIWA_Flow extends BaseTest {
 			AddConsentDialog.setConsentEffectiveDateFrom(driver, consent_effective_date);
 		}
 		AddConsentDialog.clickNextButton(driver);
+		String response_error = AddConsentDialog.getResponseMundatoryError(driver);
+		Assert.assertEquals(response_error, "Please select a choice.");
 
-		String profile = AddConsentDialog.getProfile(driver);
-		Assert.assertEquals(profile, legalFirstName + " " + legalLastName);
-		String phn = AddConsentDialog.getPHN(driver);
-		Assert.assertEquals(phn, personal_health_nunber);
-		String agent = AddConsentDialog.getAgent(driver);
-		Assert.assertEquals(agent, "Pneumo-P-23");
-		String response = AddConsentDialog.getResponse(driver);
-		Assert.assertEquals(response, "Grant");
-		String provider_type = AddConsentDialog.getProviderType(driver);
-		Assert.assertEquals(provider_type, "ImmsBC Provider (User)");
-		String obtained_from = AddConsentDialog.getInformedConsentObtainedFrom(driver);
-		Assert.assertEquals(obtained_from, "Client");
-		String form_of_consent = AddConsentDialog.getFormOfConsent(driver);
-		Assert.assertEquals(form_of_consent, "In Person");
-		String effective_from = AddConsentDialog.getConsentEffectiveFrom(driver);
-		Assert.assertEquals(effective_from, consent_effective_date);
-		String effective_to = AddConsentDialog.getConsentEffectiveTo(driver);
+		//Verify Error when Refusal Reason is missing
+		AddConsentDialog.selectResponseRefuseRadioButton(driver);
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getResponseRefuseReasonMundatoryError(driver);
+		Assert.assertEquals(response_error, "Please select a choice.");
+		AddConsentDialog.clickCloseButton(driver);
 
-		AddConsentDialog.click_create_consent_record(driver);
-		boolean error_exists = AddConsentDialog.errorConfirmExists(driver);
-		Assert.assertTrue(error_exists);
-		AddConsentDialog.click_confirm_info(driver);
+		DiwaImmunizationRecord.clickRecordConsent(driver);
+		add_consent_dialog_exists = AddConsentDialog.dialogExists(driver);
+		Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
 
-		AddConsentDialog.click_create_consent_record(driver);
-
-		List<Map<String, WebElement>> consent_records = DiwaImmunizationRecord.getInformedConsentTable(driver);
-		String consent_number_col = consent_records.get(1).get("Consent Number").getText();
-		String response_col = consent_records.get(1).get("Response").getText();
-		String agent_col = consent_records.get(1).get("Agent").getText();
-		String given_by_col = consent_records.get(1).get("Consent Given By").getText();
-		String given_to_col = consent_records.get(1).get("Consent Given To").getText();
-		String effective_from_col = consent_records.get(1).get("Effective From Date").getText();
-		String effective_to_col = consent_records.get(1).get("Effective To Date").getText();
-
-		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
-
-		boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
-		boolean confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
-
-
-		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-		try {
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
-		} catch(Exception ex) {
-			ProfilesPage.clickEditImmunizationInformation(driver);
-			Thread.sleep(500);
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+		//Verify Error when Infromed Consent Obtained From is missing
+		AddConsentDialog.selectResponseGrantRadioButton(driver);
+		AddConsentDialog.selectImmsBCProviderRadioButton(driver);
+		AddConsentDialog.selectFormOfConsentInPerson(driver);
+		AddConsentDialog.selectInformedConsentProvider(driver, consentProvider);
+		date_effective_from = AddConsentDialog.getConsentEffectiveDateFromSelected(driver);
+		if(!date_effective_from.equals("Nov 29, 2023")) {
+			AddConsentDialog.setConsentEffectiveDateFrom(driver, consent_effective_date);
 		}
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getObtainedFromMundatoryError(driver);
+		Assert.assertEquals(response_error, "Please select a choice.");
 
-		log("/*---18. Click Show all lot numbers Checkbox ---*/");
-		profilesPage.clickShowAllLotNumbersCheckBox();
+		//Verify Error when Parent/Gardian First/Last names are missing
+		AddConsentDialog.selectObtainedFromClientGuardian(driver);
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getRelationshipToClientError(driver);
+		Assert.assertEquals(response_error, "Please select a choice.");
+		response_error = AddConsentDialog.getRelationshipFirstNameError(driver);
+		Assert.assertEquals(response_error, "Please enter some valid input. Input is not optional.");
+		response_error = AddConsentDialog.getRelationshipLastNameError(driver);
+		Assert.assertEquals(response_error, "Please enter some valid input. Input is not optional.");
 
-		log("/*---19. click Lot Number DropDown component ---*/");
-		profilesPage.clickLotNumberDropDown();
+		//Verify Missing Consent Provider Error
+		AddConsentDialog.selectObtainedFromClient(driver);
+		AddConsentDialog.cleanupInformedConsentProvider(driver);
+		AddConsentDialog.clickNextButton(driver);
+		List<String> response_errors = AddConsentDialog.getConsentProviderMissingError(driver);
+		Assert.assertEquals(response_errors.get(0), "Complete this field.");
+		Assert.assertEquals(response_errors.get(1), "A value is required.");
 
-		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> " + lot_to_select + " ---*/");
-		profilesPage.selectLot(lot_to_select);
-		//profilesPage.setRoute(consumptionRoute);
-		log("/*---21. Select Injection Site ---*/");
-		profilesPage.selectInjectionSite();
-		log("/*---22. Select Dosage---*/");
-		profilesPage.selectDosage(dosage_to_select);
-		profilesPage.setRoute("Intramuscular");
-		log("/*---23. Save Immunization Information ---*/");
-		profilesPage.saveImmunizationInformation();
+		//Verify Missing Consent Provider Contact Error
+		AddConsentDialog.selectNonImmsBCProviderRadioButton(driver);
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getConsentProviderContactMissingError(driver);
+		Assert.assertEquals(response_error, "A value is required.");
 
-		//Click Ok if the lot is expired
-		commonMethods.expiredVaxHandler();
-		///////
+		//Verify Missing Effective Date From Error
+		AddConsentDialog.selectImmsBCProviderRadioButton(driver);
+		AddConsentDialog.selectInformedConsentProvider(driver, consentProvider);
+		AddConsentDialog.clearConsentEffectiveDateFrom(driver);
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getConsentEffectiveFromMundatoryError(driver);
+		Assert.assertEquals(response_error, "Please enter some valid input. Input is not optional.");
 
-		confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
-		Assert.assertTrue(confirm_and_save_btn_status);
-		log("/*---24. Confirm and Save Administration ---*/");
-		profilesPage.confirmAndSaveAdministration();
-		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
-		profilesPage.summaryConfirmAndSave();
-		Thread.sleep(2000);
-		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-		profilesPage.clickRelatedTab();
-		System.out.println();
+		//Verify Effective Date From in Future Error
+		LocalDate today_date = LocalDate.now();
+		today_date = today_date.plusDays(1);
+		DateTimeFormatter dtf_today = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+		String my_date = today_date.format(dtf_today);
+		AddConsentDialog.setConsentEffectiveDateFrom(driver, my_date);
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getConsentEffectiveDateFromError(driver);
+		Assert.assertEquals(response_error, "Effective From Date cannot be in the future and cannot overlap with the Effective to Date of an existing Consent record for the same Agent");
+
+		//Verify Effective Date To Earlier than Effective Date From Error
+		LocalDate from_date = LocalDate.now().minusDays(1);
+		LocalDate to_date = from_date.minusDays(1);
+		String my_from_date = from_date.format(dtf_today);
+		String my_to_date = to_date.format(dtf_today);
+		AddConsentDialog.setConsentEffectiveDateFrom(driver, my_from_date);
+		AddConsentDialog.setConsentEffectiveDateTo(driver, my_to_date);
+		AddConsentDialog.clickNextButton(driver);
+		response_error = AddConsentDialog.getConsentEffectiveDateToError(driver);
+		Assert.assertEquals(response_error, "Effective To Date must be greater than or equal to Effective From Date or blank");
 	}
 	
 }

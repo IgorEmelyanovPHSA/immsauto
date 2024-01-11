@@ -312,7 +312,8 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, cancel_transfer_button_path, 10);
 		WebElement bulk_cancel_button = driver.findElement(cancel_transfer_button_path);
 		waitForElementToBeEnabled(driver, transfer_button_path, 10);
-		scrollIfNeeded(driver, bulk_cancel_button);
+		scrollCenter(driver, bulk_cancel_button);
+		Thread.sleep(1000);
 		bulk_cancel_button.click();
 		return this;
 	}
