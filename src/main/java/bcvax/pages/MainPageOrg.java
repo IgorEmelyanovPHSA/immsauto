@@ -138,7 +138,7 @@ public class MainPageOrg extends BasePage {
         WebElement navigation_menu = driver.findElement(navigation_menu_path);
         navigation_menu.click();
         Thread.sleep(2000);
-        By navigation_item_path = By.xpath("//a[@role='option' and @data-label='" + item + "']");
+        By navigation_item_path = By.xpath("//a[(@role='option' or @role='menuitem') and @data-label='" + item + "']");
         try {
             waitForElementToBeEnabled(driver, navigation_item_path, 10);
         } catch(NotFoundException ex) {
