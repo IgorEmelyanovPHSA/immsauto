@@ -16,7 +16,7 @@ public class ReturnPage extends BasePage {
 
     public String getReturnId() throws InterruptedException {
         Thread.sleep(500);
-        By return_id_path = By.xpath("//span[@class='test-id__field-label' and text()='Return ID']/../..//lightning-formatted-text[@slot='outputField']"
+        By return_id_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.Name']//lightning-formatted-text"
                 .concat(" | ")
                 .concat("//span[@class='test-id__field-label' and text()='Return ID']/../../div[@class='slds-form-element__control slds-grid itemBody']/span/span"));
         waitForElementToBeEnabled(driver, return_id_path, 10);
@@ -40,9 +40,9 @@ public class ReturnPage extends BasePage {
 
     public String getReturnedFromValue() throws InterruptedException {
         Thread.sleep(500);
-        By return_from_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_From__c']//a");
-                //.concat(" | ")
-                //.concat("//span[@class='test-id__field-label' and text()='Returned From']//a"));
+        By return_from_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_From__c']//a"
+                .concat(" | ")
+                .concat("//span[@class='test-id__field-label' and text()='Returned From']//a"));
         waitForElementToBeEnabled(driver, return_from_path, 10);
         WebElement return_from = driver.findElement(return_from_path);
         if(return_from.getText().isEmpty()) {
@@ -106,7 +106,7 @@ public class ReturnPage extends BasePage {
 
     public String getReturnedToValue() throws InterruptedException {
         Thread.sleep(500);
-        By return_to_path = By.xpath("//span[@class='test-id__field-label' and text()='Returned To']/../..//a//span[@force-lookup_lookup]"
+        By return_to_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_To__c']//a//span"
                 .concat(" | ")
                 .concat("//span[@class='test-id__field-label' and text()='Returned To']/../..//a"));
         waitForElementToBeEnabled(driver, return_to_path, 10);
@@ -116,7 +116,7 @@ public class ReturnPage extends BasePage {
 
     public String getSenderComment() throws InterruptedException {
         Thread.sleep(500);
-        By sender_comment_path = By.xpath("//span[@class='test-id__field-label' and text()='Sender Comment']/../..//lightning-formatted-text[@slot='outputField']"
+        By sender_comment_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Sender_Comment__c']//lightning-formatted-text"
                 .concat(" | ")
                 .concat("//span[@class='test-id__field-label' and text()='Sender Comment']/../../div[@class='slds-form-element__control slds-grid itemBody']/span/span"));
         waitForElementToBeEnabled(driver, sender_comment_path, 10);

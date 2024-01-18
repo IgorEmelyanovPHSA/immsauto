@@ -94,9 +94,9 @@ public class UserDefaultsPage extends BasePage{
             textConfirmSelection.click();
             Thread.sleep(500);
 
-            WebElement drpDownSiteLastSelected = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux' and@type='button']"));
-            click(drpDownSiteLastSelected);
-
+            WebElement drpDownSiteLastSelected = driver.findElement(By.xpath("(//lightning-primitive-cell-factory[@data-label='Site']//button)[" + count + "]"));
+            drpDownSiteLastSelected.click();
+            Thread.sleep(500);
             WebElement dropDownSiteArmLeftDeltoid = driver.findElement(By.xpath("(//span[@title='Arm - Left deltoid'])["+ count +"]"));
             click(dropDownSiteArmLeftDeltoid);
             Thread.sleep(500);
