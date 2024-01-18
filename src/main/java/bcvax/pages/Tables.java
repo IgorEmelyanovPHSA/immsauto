@@ -304,7 +304,7 @@ public class Tables extends BasePage {
 
     public GenericTable getReturnLineItemsTable() {
         WebElement singleTable = null;
-        By returns_line_items_table_path = By.xpath("//flexipage-component2[@data-component-id='force_relatedListSingleContainer2']//lst-customized-datatable");
+        By returns_line_items_table_path = By.xpath("//article[@aria-label='Return Line Items']");
         waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
         singleTable = driver.findElement(returns_line_items_table_path);
         return new GenericTable(singleTable);
@@ -320,7 +320,7 @@ public class Tables extends BasePage {
 
     public GenericTable getReturnsLocationHistoryTable() {
         WebElement singleTable = null;
-        By returns_location_history_table_path = By.xpath("//flexipage-component2[@data-component-id='lst_dynamicRelatedList']//lst-customized-datatable");
+        By returns_location_history_table_path = By.xpath("//article[@aria-label='Returns Location History']");
         waitForElementToBeLocated(driver, returns_location_history_table_path, 10);
         singleTable = driver.findElement(returns_location_history_table_path);
         return new GenericTable(singleTable);

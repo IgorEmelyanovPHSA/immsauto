@@ -52,7 +52,7 @@ public class PersonAccountPage extends BasePage {
         WebElement override_eligibility_btn = driver.findElement(override_eligibility_btn_path);
         override_eligibility_btn.click();
         Thread.sleep(500);
-        By reason_for_override_path = By.xpath("//button[@aria-label='Reason for Override, Select One']");
+        By reason_for_override_path = By.xpath("//button[(@aria-label='Reason for Override, Select One') or (@aria-label='Reason for Override - Current Selection: Select One')]");
         waitForElementToBeEnabled(driver, reason_for_override_path, 10);
         WebElement reason_for_verride_btn = driver.findElement(reason_for_override_path);
         scrollCenter(driver, reason_for_verride_btn);
