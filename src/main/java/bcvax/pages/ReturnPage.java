@@ -187,7 +187,7 @@ public class ReturnPage extends BasePage {
 
     public void clickReceiveReturnButtonCP() throws InterruptedException {
         Thread.sleep(500);
-        By receive_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Receive_Return']/a");
+        By receive_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Receive_Return']/a | //li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Receive_Return']//button");
         waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
         WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
         receive_return_btn.click();
@@ -203,12 +203,12 @@ public class ReturnPage extends BasePage {
 
     public void clickPrintButtonCP() throws InterruptedException {
         Thread.sleep(500);
-        By extend_list_btn_path = By.xpath("//a[@class='slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix']");
+        By extend_list_btn_path = By.xpath("//li[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Return__c.Print')]//a | //lightning-button-menu[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Return__c.Print')]//button");
         waitForElementToBeEnabled(driver, extend_list_btn_path, 10);
         WebElement extend_btn = driver.findElement(extend_list_btn_path);
         extend_btn.click();
         Thread.sleep(500);
-        By print_return_btn_path = By.xpath("//a[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Print']");
+        By print_return_btn_path = By.xpath("//lightning-menu-item[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Print']//a | //a[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Print']");
         waitForElementToBeLocated(driver, print_return_btn_path, 10);
         WebElement print_return_btn = driver.findElement(print_return_btn_path);
         print_return_btn.click();
@@ -224,7 +224,7 @@ public class ReturnPage extends BasePage {
 
     public void clickForwardReturnButtonCP() throws InterruptedException {
         Thread.sleep(500);
-        By forward_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Forward_Return_Flow']/a");
+        By forward_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Forward_Return_Flow']/a | //li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Forward_Return_Flow']//button");
         waitForElementToBeEnabled(driver, forward_return_btn_path, 10);
         WebElement forward_return_btn = driver.findElement(forward_return_btn_path);
         forward_return_btn.click();

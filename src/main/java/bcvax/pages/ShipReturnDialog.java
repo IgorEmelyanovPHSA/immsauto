@@ -20,7 +20,7 @@ public class ShipReturnDialog extends BasePage{
 
     public static void clickSaveBtnCP(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By save_btn_path = By.xpath("//h2[text() = 'Ship Return']/../../div[@class='modal-footer slds-modal__footer']/button[@class = 'slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']");
+        By save_btn_path = By.xpath("//h2[text() = 'Ship Return']/../..//button[@class = 'slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']");
         BasePage.waitForElementToBeEnabled(driver, save_btn_path, 10);
         WebElement save_btn = driver.findElement(save_btn_path);
         save_btn.click();
