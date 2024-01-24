@@ -104,21 +104,6 @@ public class DIWA_ICE extends BaseTest {
 		profilesPage.validateoopsMessage();
 		log("/*---18. click on continue editing button to continue with the flow ---*/");
 		profilesPage.ContinueEditingButton();
-//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-//		Thread.sleep(2000);
-//		if(consentProviderSelected.equals("")) {
-//			consentProvider = ProfilesPage.selectConsentProvider(driver, consentProvider);
-//			try {
-//				profilesPage.confirmConsentProvider(consentProvider);
-//			} catch(Exception ex) {
-//				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
-//			}
-//		}
-//
-//		profilesPage.selectConsentEffectiveDate();
-//		log("/*---21. click Save Consent ---*/");
-//		profilesPage.clickSaveConsent();
-//		Thread.sleep(2000);
 
 		try {
 			ProfilesPage.checkExistingConsent(driver);
@@ -139,32 +124,32 @@ public class DIWA_ICE extends BaseTest {
 		}
 
 		log("/*---23. Click Show all lot numbers Checkbox---*/");
-		inClinicExperience.clickShowAllLotNumbersCheckBox();
+		profilesPage.clickShowAllLotNumbersCheckBox();
 
 		log("/*---24. click Lot Number dropdown component ---*/");
-		inClinicExperience.clickLotNumberDropDown();
+		profilesPage.clickLotNumberDropDown();
 
 		log("/*---25. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
-		inClinicExperience.selectLot();
+		profilesPage.selectLot();
 
 		log("/*---26. Select Injection Site ---*/");
-		inClinicExperience.selectInjectionSite();
+		profilesPage.selectInjectionSite();
 		log("/*---27. Select Dosage---*/");
-		inClinicExperience.selectDosageDIWA();
+		profilesPage.selectDosage();
 		log("/*---28. Save Immunization Information ---*/");
-		inClinicExperience.saveImmunizationInformation();
+		profilesPage.saveImmunizationInformation();
 		Thread.sleep(2000);
 
 		//Click Ok if the lot is expired
-		inClinicExperience.clickOkForExpiredLot();
+		profilesPage.expiredVaxHandler();
 		Thread.sleep(2000);
 		///////
 
 		log("/*---29. Confirm and Save Administration ---*/");
-		inClinicExperience.confirmAndSaveAdministration();
+		profilesPage.confirmAndSaveAdministration();
 		Thread.sleep(2000);
 		log("/*---30. Vaccine Administration Summary Confirm and Save ---*/");
-		inClinicExperience.summaryConfirmAndSave();
+		profilesPage.summaryConfirmAndSave();
 		Thread.sleep(2000);
 		log("/*---31. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		PersonAccountPage.goToRelatedTab(driver);

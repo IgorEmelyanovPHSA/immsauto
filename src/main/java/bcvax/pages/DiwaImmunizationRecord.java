@@ -61,7 +61,7 @@ public class DiwaImmunizationRecord extends BasePage {
                 break;
             }
         }
-        scrollIfNeeded(driver, my_option);
+        scrollCenter(driver, my_option);
         Thread.sleep(500);
         my_option.click();
         Thread.sleep(1000);
