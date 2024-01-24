@@ -20,14 +20,6 @@ public class DIWA_CIB extends BaseTest {
 	private String personal_health_number = "9746173039";
 	private String date_of_birth = "1959-01-23";
 	private String postal_code = "V2X9T1";
-//	private String legalFirstName = "Gill";
-//	private String legalLastName = "BCVaxOrigan";
-//	private String legalMiddleName = "Ashely";
-//	private String personal_health_number = "9746172463";
-//	private String date_of_birth = "1915-02-14";
-//	private String postal_code = "V2T8T1";
-	//String participant_name = "Rawley BCVaxIsmirnioglou";
-	//String participant_name = "Ping an Penelope BCVaxZhang";
 	String participant_name;
 	String consentProvider;
 
@@ -48,7 +40,6 @@ public class DIWA_CIB extends BaseTest {
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		loginPage.loginAsImmsBCAdmin();
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
-		CommonMethods commonMethods = new CommonMethods(getDriver());
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = orgMainPage.currentApp();
@@ -102,19 +93,6 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---14. click on continue editing button to continue with the flow ---*/");
 		profilesPage.ContinueEditingButton();
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
-//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-//		Thread.sleep(2000);
-//		if(consentProviderSelected.equals("")) {
-//			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
-//			try {
-//				profilesPage.confirmConsentProvider(consentProviderSelected);
-//			} catch(Exception ex) {
-//				System.out.println("Env Feature: No consent confirmation dialog. Continue...");
-//			}
-//		}
-//		profilesPage.selectConsentEffectiveToDate();
-//		log("/*---16. click Save Consent button ---*/");
-//		profilesPage.clickSaveConsent();
 
 		try {
 			ProfilesPage.checkExistingConsent(driver);
@@ -151,7 +129,7 @@ public class DIWA_CIB extends BaseTest {
 		profilesPage.saveImmunizationInformation();
 
 		//Click Ok if the lot is expired
-		commonMethods.expiredVaxHandler();
+		profilesPage.expiredVaxHandler();
 		///////
 
 		log("/*---24. Confirm and Save Administration ---*/");
