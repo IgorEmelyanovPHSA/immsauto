@@ -52,7 +52,7 @@ public class PersonAccountPage extends BasePage {
         WebElement override_eligibility_btn = driver.findElement(override_eligibility_btn_path);
         override_eligibility_btn.click();
         Thread.sleep(500);
-        By reason_for_override_path = By.xpath("//button[@aria-label='Reason for Override, Select One']");
+        By reason_for_override_path = By.xpath("//button[(@aria-label='Reason for Override, Select One') or (@aria-label='Reason for Override - Current Selection: Select One')]");
         waitForElementToBeEnabled(driver, reason_for_override_path, 10);
         WebElement reason_for_verride_btn = driver.findElement(reason_for_override_path);
         scrollCenter(driver, reason_for_verride_btn);
@@ -176,8 +176,13 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, checkin_btn_path, 10);
         WebElement check_in_button = driver.findElement(checkin_btn_path);
         check_in_button.click();
+        try {
+            PersonAccountPage.confirmNoForecastWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
         By identification_tab_path = By.xpath("//h2[text()='Identification']");
-        waitForElementToBeEnabled(driver, identification_tab_path, 10);
+        waitForElementToBeEnabled(driver, identification_tab_path, 30);
     }
 
     public static int getImmunizationRecordsSize(WebDriver driver) throws InterruptedException {

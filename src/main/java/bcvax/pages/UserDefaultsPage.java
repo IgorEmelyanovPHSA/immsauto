@@ -32,7 +32,13 @@ public class UserDefaultsPage extends BasePage{
         By advanced_settings_btn_path  = By.xpath("//div[contains(text(),'Advanced Settings')]");
         waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
         WebElement advanced_settings_btn = driver.findElement(advanced_settings_btn_path);
-        advanced_settings_btn.click();
+        try {
+            advanced_settings_btn.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(2000);
+            waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
+            advanced_settings_btn.click();
+        }
         return this;
     }
 
@@ -94,9 +100,9 @@ public class UserDefaultsPage extends BasePage{
             textConfirmSelection.click();
             Thread.sleep(500);
 
-            WebElement drpDownSiteLastSelected = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux' and@type='button']"));
-            click(drpDownSiteLastSelected);
-
+            WebElement drpDownSiteLastSelected = driver.findElement(By.xpath("(//lightning-primitive-cell-factory[@data-label='Site']//button)[" + count + "]"));
+            drpDownSiteLastSelected.click();
+            Thread.sleep(500);
             WebElement dropDownSiteArmLeftDeltoid = driver.findElement(By.xpath("(//span[@title='Arm - Left deltoid'])["+ count +"]"));
             click(dropDownSiteArmLeftDeltoid);
             Thread.sleep(500);

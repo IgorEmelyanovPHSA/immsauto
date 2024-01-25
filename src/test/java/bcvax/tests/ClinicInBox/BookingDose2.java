@@ -161,16 +161,12 @@ public class BookingDose2 extends BaseTest {
 		}
 		log("/*31----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
-
+		Thread.sleep(1000);
 		log("/*32----click on In-clinic Experience button --*/");
 		inClinicExperience = new InClinicExperiencePage(driver);
+
 		PersonAccountPage.clickCheckInButton(driver);
-		Thread.sleep(2000);
-		try {
-			PersonAccountPage.confirmNoForecastWarning(driver);
-		} catch(Exception ex) {
-			System.out.println("Warning dialog didn't appear");
-		}
+
 		inClinicExperience.HomePageClickConfirmAndSaveButton();
 		log("/*46.---Open Today's appointments from Home page --*/");
 

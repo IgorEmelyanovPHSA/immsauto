@@ -1046,7 +1046,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void selectVaccineAgent(String agent) throws InterruptedException {
 		Thread.sleep(500);
-		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option']");
+		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option' or @aria-label='Agent - Current Selection: Select an option']");
 		waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 30);
 		WebElement click_vaccine_agent_dropdown = driver.findElement(vaccine_agent_dropdown_path);
 		scrollCenter(click_vaccine_agent_dropdown);

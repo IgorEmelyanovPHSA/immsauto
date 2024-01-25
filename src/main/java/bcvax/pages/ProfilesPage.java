@@ -76,10 +76,6 @@ public class ProfilesPage extends BasePage{
     private WebElement confirmAndSave;
     private By confirmAndSave1 = By.xpath("//button[@title='Confirm & Save Administration']");
 
-    @FindBy(xpath = "//button[contains(text(),'Confirm and Save')]")
-    private WebElement lastConfirmAndSave;
-    private By lastConfirmAndSave1 = By.xpath("//button[contains(text(),'Confirm and Save')]");
-
     Tables tables;
     /*---------Constructor-------*/
     public ProfilesPage(WebDriver driver) {
@@ -435,9 +431,11 @@ public class ProfilesPage extends BasePage{
     }
 
     public void summaryConfirmAndSave() throws InterruptedException {
-        waitForElementToBeLocated(driver, lastConfirmAndSave1, 10);
-        Thread.sleep(2000);
-        lastConfirmAndSave.click();
+        Thread.sleep(500);
+        By confirm_and_save_btn_path = By.xpath("//button[text()='Confirm & Save Administration' or text()='Confirm and Save']");
+        waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
+        WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
+        confirm_and_save_btn.click();
     }
 
     public boolean userFoundWithParameters(String legalFirstName, String legalMiddleName, String legalLastName) throws InterruptedException {
@@ -620,6 +618,15 @@ public class ProfilesPage extends BasePage{
                 Thread.sleep(1000);
                 element = tables.getHistoricalImmunizationRecordsTable().getRowsMappedToHeadings().get(0).get("PIR Submission Status");
             }
+        }
+    }
+
+    public void expiredVaxHandler() throws InterruptedException {
+        List<WebElement> listOfElements = driver.findElements(By.xpath("//h1[contains(text(),'Confirm')]"));
+        if(listOfElements.size()>=1){
+            WebElement btnOk = driver.findElement(By.xpath("//button[@data-ok-button]"));
+            click(btnOk);
+            Thread.sleep(2000);
         }
     }
 

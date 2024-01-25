@@ -96,10 +96,6 @@ public class SupplyConsolePage extends BasePage {
 
 	private By supply_distribution_to_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Distribution To']");
 
-	private By click_reason1 = By.xpath("//button[@aria-label='Reason for Reception, --None--']");
-
-	private By select_reason1 = By.xpath("//span[@title='Other']");
-
 	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
 
 	@FindBy(xpath = "//label[(text()='Dose Conversion Factor')]/..//input[@type='text']")
@@ -1073,7 +1069,7 @@ public class SupplyConsolePage extends BasePage {
 			WebElement receive_supplies_btn = driver.findElement(receive_supplies_btn_path);
 			receive_supplies_btn.click();
 		} catch(Exception ex) {
-			By show_more_action_btn_path = By.xpath("//li[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies')]//a");
+			By show_more_action_btn_path = By.xpath("//li[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies')]//a | //lightning-button-menu[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies')]//button");
 			List<WebElement> listOfElements = driver.findElements(show_more_action_btn_path);
 			System.out.println("--- FOR DEBUG: Trying to Click More Actions button---");
 			System.out.println("--- Found " + listOfElements.size() + " More button elements");
@@ -1356,15 +1352,16 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	public SupplyConsolePage selectReasonForReception() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_reason1, 10);
-		WebElement element = driver.findElement(click_reason1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, select_reason1, 10);
-		WebElement element1 = driver.findElement(select_reason1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
+		Thread.sleep(500);
+		By select_reason_path = By.xpath("//button[@name='BCH_Reason_for_Reception__c']");
+		waitForElementToBeEnabled(driver, select_reason_path, 10);
+		WebElement select_reason_btn = driver.findElement(select_reason_path);
+		select_reason_btn.click();
+		Thread.sleep(500);
+		By select_other_reason_path = By.xpath("//lightning-base-combobox-item[@data-value='Other']");
+		waitForElementToBeEnabled(driver, select_other_reason_path, 10);
+		WebElement reason_other_item = driver.findElement(select_other_reason_path);
+		reason_other_item.click();
 		return this;
 	}
 

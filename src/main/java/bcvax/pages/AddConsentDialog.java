@@ -1,9 +1,7 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -178,6 +176,7 @@ public class AddConsentDialog extends BasePage {
         waitForElementToBeEnabled(driver, informed_consent_provider_clear_path, 10);
         WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_clear_path);
         informed_consent_provider_input.click();
+        Thread.sleep(1000);
     }
 
     public static String getInformedConsentProviderSelected(WebDriver driver) throws InterruptedException {
@@ -227,6 +226,7 @@ public class AddConsentDialog extends BasePage {
         scrollCenter(driver, next_button);
         Thread.sleep(500);
         next_button.click();
+        Thread.sleep(500);
     }
 
     public static void clickCloseButton(WebDriver driver) throws InterruptedException {
@@ -318,6 +318,11 @@ public class AddConsentDialog extends BasePage {
     }
 
     public static List<String> getConsentProviderMissingError(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By add_consent_title_path = By.xpath("//h1[text()='Add Consent']");
+        waitForElementToBeEnabled(driver, add_consent_title_path, 10);
+        WebElement my_label = driver.findElement(add_consent_title_path);
+        my_label.click();
         Thread.sleep(500);
         ArrayList errors_list = new ArrayList<String>();
         By error_path = By.xpath("//label[text()='Informed Consent Provider (User)']/../div[@class='slds-form-element__help']");

@@ -70,7 +70,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
+        Thread.sleep(2000);
         log("/*----8. Select COVID19-mRNA as an Option  ---*/");
         DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
 
