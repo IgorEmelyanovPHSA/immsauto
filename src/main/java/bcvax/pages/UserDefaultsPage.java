@@ -32,7 +32,13 @@ public class UserDefaultsPage extends BasePage{
         By advanced_settings_btn_path  = By.xpath("//div[contains(text(),'Advanced Settings')]");
         waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
         WebElement advanced_settings_btn = driver.findElement(advanced_settings_btn_path);
-        advanced_settings_btn.click();
+        try {
+            advanced_settings_btn.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(2000);
+            waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
+            advanced_settings_btn.click();
+        }
         return this;
     }
 
