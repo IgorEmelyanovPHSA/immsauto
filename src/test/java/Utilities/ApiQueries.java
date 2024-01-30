@@ -548,6 +548,25 @@ public class ApiQueries {
         }
     }
 
+    public static void apiCallToRemoveAllImmunizationRecordsByPHN(String phn) throws Exception {
+        String AccountId = queryToGetAccountId(phn, "participantAccount");
+        if(AccountId==null){
+            log("Participant account not found");
+        }
+        else {
+            ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(AccountId);
+            if (listOfImmunizationRecords.size() == 0) {
+                log("Immunization records not found");
+            } else {
+                for(int i=0; i < listOfImmunizationRecords.size(); i++){
+                    String immunizationRecordId = listOfImmunizationRecords.get(i);
+                    log("Immunization record to delete " +immunizationRecordId);
+                    deleteImmunizationRecord(immunizationRecordId);
+                }
+            }
+        }
+    }
+
     public static void apiCallToRemovePIRAccountByPHN(String phn) throws Exception {
         String AccountId = queryToGetAccountId(phn, "PIR");
         if(AccountId==null){

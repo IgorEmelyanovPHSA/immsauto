@@ -1680,7 +1680,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String getReasonForVisit(){
-		By clientReasonForVisitElement = By.xpath("//span[contains(text(),'Client Reason for Visit')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']");
+		By clientReasonForVisitElement = By.xpath("//span[contains(text(),'Client Reason for Visit')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']  | //span[@class='test-id__field-label' and text()='Client Reason for Visit']/../../..//lightning-formatted-text");
 		waitForElementToBePresent(driver, clientReasonForVisitElement, 10);
 		String getClientReasonForVisitString = driver.findElement(clientReasonForVisitElement).getText();
 		return getClientReasonForVisitString;
@@ -1694,14 +1694,14 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public String getCitizenComment(){
-		By citizenCommentElement = By.xpath("//span[contains(text(),'Citizen Comment')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']");
+		By citizenCommentElement = By.xpath("//span[text()='Citizen Comment']/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only'] | //span[@class='test-id__field-label' and text()='Citizen Comment']/../../..//lightning-formatted-text");
 		waitForElementToBePresent(driver, citizenCommentElement, 10);
 		String getCitizenCommentString = driver.findElement(citizenCommentElement).getText();
 		return getCitizenCommentString;
 	}
 
 	public String getAppointmentStatus(){
-		By appointmentStatusElement = By.xpath("//span[contains(text(),'Status')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']");
+		By appointmentStatusElement = By.xpath("//span[contains(text(),'Status')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']  | //span[@class='test-id__field-label' and text()='Status']/../../..//lightning-formatted-text");
 		waitForElementToBePresent(driver, appointmentStatusElement, 10);
 		String getAppointmentStatusString = driver.findElement(appointmentStatusElement).getText();
 		return getAppointmentStatusString;

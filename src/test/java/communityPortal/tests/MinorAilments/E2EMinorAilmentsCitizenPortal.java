@@ -105,9 +105,11 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         inClinicExperience_CP.openAppointmentRecord(confirmedAppointmentDataTime);
 
         log("22. Verify Citizen Comment: " +notesToPharmacist);
-        Assert.assertEquals(inClinicExperience_CP.getCitizenComment(), notesToPharmacist);
+        String actual_citizen_comment = inClinicExperience_CP.getCitizenComment();
+        Assert.assertEquals(actual_citizen_comment, notesToPharmacist);
 
         log("23. Verify that Client Reason for Visit: Minor Ailments and Contraception");
-        Assert.assertEquals(inClinicExperience_CP.getReasonForVisit(), "Minor Ailments and Contraception");
+        String actual_reason_for_visit = inClinicExperience_CP.getReasonForVisit();
+        Assert.assertEquals(actual_reason_for_visit, "Minor Ailments and Contraception");
     }
 }
