@@ -26,17 +26,19 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     private String postal_code = "V2X9T1";
     String participant_name;
     String consentProvider;
+    String agent = "COVID-19 mRNA";
     private String lot_to_select = "0486AA-CC01";
     private String dosage_to_select = "0.5";
     String clinic_location = "All Ages - Atlin Health Centre";
     MainPageOrg orgMainPage;
 
-    @Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
-    public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
+    @Test(testName = "Create DIWA Immunisation record with Active Consent for the selected agent")
+    public void Can_Create_DIWA_Immunisation_record_with_Active_consent() throws Exception {
         TestcaseID = "275966";
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         log("Target Environment: "+ env);
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personal_health_number);
         log("/*----1. Login as an DIWA to CIB  --*/");
         participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
         loginPage.loginAsImmsBCAdmin();
@@ -56,6 +58,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         //profilesPage.openProfile(participant_name);
         log("/*----6. Navigated to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
+        String active_consent_resp = profilesPage.getReletedActiveConsentsResponse(agent);
         log("/*----7. Click Create Immunization Record ---*/");
         profilesPage.clickCreateImmunizationRecord();
         log("/*----8. Click confirm Button on the popup window---*/");
