@@ -124,7 +124,8 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
 //        Assert.assertEquals(inClinicExperience_CP.getMinorAilmentsAndContraceptionAppointmentType(), minorAilmentsToSelectSecondAppointment);
 
         log("29. Verify Appointment status is 'Confirmed'");
-        Assert.assertEquals(inClinicExperience_CP. getAppointmentStatus(), "Confirmed");
+        String actual_appointment_status = inClinicExperience_CP.getAppointmentStatus();
+        Assert.assertEquals(actual_appointment_status, "Confirmed");
 
         log("30. Cancel second appointment");
         inClinicExperience_CP.clickBtnCancelAppointment();
