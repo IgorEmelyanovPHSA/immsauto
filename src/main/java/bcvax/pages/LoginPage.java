@@ -170,5 +170,12 @@ public class LoginPage extends BasePage {
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//HEALTH GATEWAY
+	public MainPageHealthGateway openHealthGatewayPortal() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		return new MainPageHealthGateway(driver);
+	}
+
+
 
 }
