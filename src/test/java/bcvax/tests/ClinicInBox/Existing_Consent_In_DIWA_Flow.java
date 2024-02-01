@@ -37,6 +37,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         TestcaseID = "275966";
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
+        consentProvider = String.valueOf(testData.get("consentProvider"));
         log("Target Environment: "+ env);
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personal_health_number);
         log("/*----1. Login as an DIWA to CIB  --*/");
@@ -55,10 +56,12 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         orgMainPage.globalSearch(participant_name);
         log("/*----5. select Citizen from search results --*/");
         ProfilesPage profilesPage = new ProfilesPage(driver);
-        //profilesPage.openProfile(participant_name);
+
         log("/*----6. Navigated to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
+        int immunization_records_count = profilesPage.getImmunizationRecords().size();
         String active_consent_resp = profilesPage.getReletedActiveConsentsResponse(agent);
+        Assert.assertEquals(active_consent_resp, "Grant");
         log("/*----7. Click Create Immunization Record ---*/");
         profilesPage.clickCreateImmunizationRecord();
         log("/*----8. Click confirm Button on the popup window---*/");
@@ -70,13 +73,40 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         log("/*----9. Select an Option ---*/)");
         DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
         log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
-        DiwaImmunizationRecord.selectOption(driver, "Pneumo-P-23");
+        DiwaImmunizationRecord.selectOption(driver, agent);
         log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
         DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
         log("/*---12. Select a Date and Time of Administration ---*/");
         DiwaImmunizationRecord.clickTimeBox(driver);
         log("/*---13. Click Record Immunization ---*/");
         DiwaImmunizationRecord.clickRecordImmunization(driver);
+        List<Map<String, WebElement>> consent_table = DiwaImmunizationRecord.getInformedConsentTable(driver);
+        Assert.assertTrue(consent_table.size() > 1, "Active Consent record is not displayed");
+        boolean record_consent_btn_exists = DiwaImmunizationRecord.recordConsentBtnExists(driver);
+        Assert.assertTrue(record_consent_btn_exists, "Record Consent button is not displayed");
+        boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
+        Assert.assertTrue(record_consent_message_exists, "Record Consent Message not found");
+        boolean confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+        Assert.assertFalse(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously Active");
+
+        DiwaImmunizationRecord.select_provider(driver, consentProvider);
+        DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
+        Thread.sleep(1000);
+
+        try {
+            DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            System.out.println("No Expired Lot Warning");
+        }
+        confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+        Assert.assertTrue(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously disabled");
+        DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+        DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
+        Thread.sleep(2000);
+        profilesPage.clickRelatedTab();
+        int immunization_records_count_new = profilesPage.getImmunizationRecords().size();
+        Assert.assertTrue(immunization_records_count_new == immunization_records_count + 1);
         System.out.println();
     }
 }
