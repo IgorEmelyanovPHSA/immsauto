@@ -73,11 +73,10 @@
 
         public void verifyCountAndOrderOfTheList() throws InterruptedException {
             //23items due to index 0 = "Select One" ignored for both Lists
-            List<String> givenListOfNamesInOrder = Arrays.asList("Select One", "Contraception", "Allergies and hay fever",
-                    "Cold sores", "Fungal infections", "Heartburn (acid reflux/ GERD)", "Hemorrhoids", "Headaches", "Impetigo",
-                    "Upset stomach (indigestion)", "Hives and itching, including from bug bites (urticaria)", "Menstrual pain", "Acne (mild)",
-                    "Nicotine dependence", "Thrush (oral fungal infection)", "Canker sores (Oral ulcers)", "Pink eye (conjunctivitis)",
-                    "Shingles", "Skin rash (dermatitis)", "Sprains and strains (musculoskeletal pain)", "Pinworms or threadworms",
+            List<String> givenListOfNamesInOrder = Arrays.asList("Select One", "Contraception", "Acne (mild)", "Allergies and hay fever",
+                    "Canker sores (Oral ulcers)", "Cold sores", "Fungal infections", "Headaches", "Heartburn (acid reflux/ GERD)", "Hemorrhoids", "Hives and itching, including from bug bites (urticaria)", "Impetigo",
+                    "Menstrual pain", "Nicotine dependence", "Pink eye (conjunctivitis)", "Pinworms or threadworms", "Shingles", "Skin rash (dermatitis)",
+                    "Sprains and strains (musculoskeletal pain)", "Thrush (oral fungal infection)", "Upset stomach (indigestion)",
                     "Urinary tract infection (uncomplicated)", "Yeast infection (vaginal candidiasis)");
 
             waitForElementToBeClickable(btnSelectOne);
@@ -94,9 +93,9 @@
                 namesFromActualList.add(item.getText());
             }
             //Comparing the lists
-            for (String itemName : givenListOfNamesInOrder) {
-                log("Make sure name from the given list: " + itemName + " exists in actual list");
-                assertTrue(namesFromActualList.contains(itemName), "Item " + itemName + " doesn't exist in Actual Drop Down List");
+            for (int i = 0; i < givenListOfNamesInOrder.size(); i++) {
+                log("Make sure name from the given list: " + givenListOfNamesInOrder.get(i) + " exists in actual list");
+                assertTrue(namesFromActualList.get(i).equals(givenListOfNamesInOrder.get(i)), "Item " + givenListOfNamesInOrder.get(i) + " doesn't exist in Actual Drop Down List");
             }
             //Close the dropDown
             click(btnSelectOne);

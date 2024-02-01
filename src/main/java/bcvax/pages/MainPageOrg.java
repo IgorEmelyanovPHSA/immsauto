@@ -211,6 +211,7 @@ public class MainPageOrg extends BasePage {
         for(int i = 0; i < counter; i++) {
             try {
                 waitForElementToBeEnabled(driver, found_client_path, 10);
+                Thread.sleep(1000);
                 break;
             } catch (NotFoundException ex) {
                 if(i == counter - 1) {
@@ -223,8 +224,8 @@ public class MainPageOrg extends BasePage {
             }
         }
         WebElement found_client = driver.findElement(found_client_path);
-        scrollCenter(found_client);
-        Thread.sleep(500);
+        //scrollCenter(found_client);
+        Thread.sleep(1000);
         try {
             found_client.click();
         } catch(ElementNotInteractableException ex) {

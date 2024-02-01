@@ -131,6 +131,8 @@ public class ProfilesPage extends BasePage{
         By create_immunization_record_btn_path = By.xpath("//button[contains(text(),'Create Immunization Record')]");
         waitForElementToBeEnabled(driver, create_immunization_record_btn_path, 10);
         WebElement create_immunization_record_btn = driver.findElement(create_immunization_record_btn_path);
+        scrollCenter(create_immunization_record_btn);
+        Thread.sleep(500);
         create_immunization_record_btn.click();
     }
 
@@ -663,11 +665,18 @@ public class ProfilesPage extends BasePage{
         List<Map<String, WebElement>> my_rows = related_active_consents.getRowsMappedToHeadings();
         String my_response = null;
         for(Map<String, WebElement> my_row : my_rows) {
-            if(my_row.get("Agent").equals(agent)) {
+            if(my_row.get("Agent").getText().equals(agent)) {
                 my_response = my_row.get("Response").getText();
                 break;
             }
         }
         return my_response;
+    }
+
+    public List<Map<String, WebElement>> getImmunizationRecords() throws InterruptedException {
+        By immunization_records_table_path = By.xpath("//c-bc-hc-client-immunization-records");
+        WebElement immunization_records_table_node = driver.findElement(immunization_records_table_path);
+        GenericTable immunization_table = new GenericTable(immunization_records_table_node);
+        return immunization_table.getRowsMappedToHeadings();
     }
 }
