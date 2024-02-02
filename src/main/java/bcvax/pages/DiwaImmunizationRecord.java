@@ -150,4 +150,53 @@ public class DiwaImmunizationRecord extends BasePage {
         WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
         return confirm_and_save_btn.isEnabled();
     }
+
+    public static void clickConfirmAndSaveAdministration(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By confirm_and_save_btn_path = By.xpath("//button[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @title='Confirm & Save Administration']");
+        waitForElementToBeLocated(driver, confirm_and_save_btn_path, 10);
+        WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
+        confirm_and_save_btn.click();
+    }
+
+    public static void select_provider(WebDriver driver, String provider) throws InterruptedException {
+        By provider_input_field_path = By.xpath("//label[@c-bchcimmunizationinfo_bchcimmunizationinfo and text()='Provider']/..//input");
+        waitForElementToBeEnabled(driver, provider_input_field_path, 10);
+        WebElement provider_input_field = driver.findElement(provider_input_field_path);
+        provider_input_field.sendKeys(provider);
+        By my_provider_item_path = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
+        waitForElementToBeEnabled(driver, my_provider_item_path, 10);
+        WebElement my_provider_item = driver.findElement(my_provider_item_path);
+        my_provider_item.click();
+    }
+
+    public static void clickSaveImmunizationInfo(WebDriver driver) throws InterruptedException {
+        By save_btn_path = By.xpath("//c-bc-hc-immunization-info//button[text()='Save']");
+        waitForElementToBeEnabled(driver, save_btn_path, 10);
+        WebElement save_btn = driver.findElement(save_btn_path);
+        scrollCenter(driver, save_btn);
+        Thread.sleep(500);
+        save_btn.click();
+    }
+
+    public static void clickOkForExpiredLot(WebDriver driver) throws InterruptedException {
+        Thread.sleep(1000);
+        System.out.println("Check if the expired lot message appears. If yes click OK");
+        try {
+            WebElement modalBox = driver.findElement(By.xpath("//div[@class = 'slds-modal__container']"));
+            modalBox.findElement(By.xpath("//button[text() = 'OK']")).click();
+            Thread.sleep(2000);
+        }
+        catch(Exception ex) {
+            System.out.println("No expired lots");
+        }
+    }
+
+    public static void clickSaveAdministrationSummary(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By confirm_and_save_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']//button[text()='Confirm and Save']");
+        waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
+        WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
+        confirm_and_save_btn.click();
+    }
 }

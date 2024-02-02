@@ -230,7 +230,7 @@ regression:
   agentConsumption: "COVID-19 Non-replicating Viral Vector"
   agentInfluenza: "Influenza-LAIV"
   diwaCitizen: "Rawley BCVaxIsmirnioglou"
-  providerConsumption: "BCHComClinician Auto"
+  providerConsumption: "Auto Bchcomclinician"
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.5"
