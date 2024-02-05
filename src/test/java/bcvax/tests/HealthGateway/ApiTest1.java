@@ -33,9 +33,9 @@ public class ApiTest1 extends BaseTest {
 		MainPageHealthGateway mainPageHealthGateway = loginPage.openHealthGatewayPortal();
 
 		mainPageHealthGateway.loginWithBCServiceCard();
-		Thread.sleep(7000);
+		Thread.sleep(3000);
 		mainPageHealthGateway.getNetWorkValue();
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		log("no bearer");
 		mainPageHealthGateway.goToTabTimeLine();
 		mainPageHealthGateway.getNetWorkValue();

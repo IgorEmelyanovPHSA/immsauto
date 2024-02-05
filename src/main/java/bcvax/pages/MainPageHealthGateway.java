@@ -6,8 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v120.network.Network;
-import org.openqa.selenium.devtools.v120.network.model.Headers;
-import org.openqa.selenium.devtools.v120.network.model.Response;
+import org.openqa.selenium.devtools.v120.network.model.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
@@ -85,19 +84,37 @@ public class MainPageHealthGateway extends BasePage{
         devTools.send(Network.enable(Optional.empty(),Optional.empty(),Optional.empty()));
 
         //listener
-        devTools.addListener(Network.responseReceived(), response ->
-                {
-                    Response res = response.getResponse();
-                  //  Headers tempLog = res.getHeaders();
+        final RequestId[] requestIds = new RequestId[1];
+        devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+        devTools.addListener(Network.responseReceived(), responseReceived -> {
 
-                    Optional<Headers> tempLog2 = res.getRequestHeaders();
-                  //  log(res.getUrl());
-                  //  log("value of string " +tempLog.toString());
-                    log("value of string " +tempLog2.toString());
-//                    System.out.println (res.getStatus());
-//                    System.out.println (res.getHeaders());
+                    requestIds[0] = responseReceived.getRequestId();
+                    String url = responseReceived.getResponse().getUrl();
+
+                    int status = responseReceived.getResponse().getStatus();
+                    String type = responseReceived.getType().toJson();
+                    String headers = responseReceived.getResponse().getHeaders().toString();
+
+                    String  responseBody = devTools.send(Network.getResponseBody(requestIds[0])).getBody();
+                    log("header1 " +headers);
+                    log("response body " +responseBody);
                 }
-                );
+        );
+
+
+//        devTools.addListener(Network.responseReceived(), response ->
+//                {
+//                    Response res = response.getResponse();
+//                  //  Headers tempLog = res.getHeaders();
+//
+//                    Optional<Headers> tempLog2 = res.getRequestHeaders();
+//                  //  log(res.getUrl());
+//                  //  log("value of string " +tempLog.toString());
+//                    log("value of string " +tempLog2.toString());
+////                    System.out.println (res.getStatus());
+////                    System.out.println (res.getHeaders());
+//                }
+//                );
 
  //       devTools.addListener(Network.requestWillBeSent()
 
@@ -111,12 +128,24 @@ public class MainPageHealthGateway extends BasePage{
         devTools.createSession();
         devTools.send(Network.enable(Optional.empty(),Optional.empty(),Optional.empty()));
 
+
+        //listener
+        devTools.addListener(Network.requestWillBeSent(), request ->
+                {
+                    Request req = request.getRequest();
+                    log("req url " +req.getUrl());
+                 //   System.out.println ("request status " +req.());
+//                    System.out.println (res.getHeaders());
+                }
+        );
+
+
         //listener
         devTools.addListener(Network.responseReceived(), response ->
                 {
                     Response res = response.getResponse();
-                    log(res.getUrl());
-//                    System.out.println (res.getStatus());
+                    log("res url " +res.getUrl());
+                    System.out.println ("res status " +res.getStatus());
 //                    System.out.println (res.getHeaders());
                 }
         );
