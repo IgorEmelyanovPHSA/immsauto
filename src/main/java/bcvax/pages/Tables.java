@@ -67,7 +67,7 @@ public class Tables extends BasePage {
     public GenericTable getAppointmentDayTable() throws InterruptedException {
         Thread.sleep(500);
         By appointment_day_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
-        waitForElementToBeEnabled(driver, appointment_day_table_path, 10);
+        waitForElementToBeEnabled(driver, appointment_day_table_path, 30);
         WebElement appointment_day_table = driver.findElement(appointment_day_table_path);
         return new GenericTable(appointment_day_table);
     }

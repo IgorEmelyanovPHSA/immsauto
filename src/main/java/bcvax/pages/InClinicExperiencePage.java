@@ -875,6 +875,13 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 
+	public void clickRecordConsent() throws InterruptedException {
+		Thread.sleep(500);
+		By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
+		waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
+		WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
+		record_consent_btn.click();
+	}
 	public void clickTodayAppointments() throws InterruptedException {
 		Thread.sleep(500);
 		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"] | //a[text() = \"Today's Appointments\"]");

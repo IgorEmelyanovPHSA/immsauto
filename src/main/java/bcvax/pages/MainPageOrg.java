@@ -224,12 +224,13 @@ public class MainPageOrg extends BasePage {
             }
         }
         WebElement found_client = driver.findElement(found_client_path);
-        //scrollCenter(found_client);
+        scrollCenter(found_client);
         Thread.sleep(1000);
         try {
             found_client.click();
         } catch(ElementNotInteractableException ex) {
             //Re-try after 2 seconds
+            scrollCenter(found_client);
             Thread.sleep(2000);
             found_client.click();
         }

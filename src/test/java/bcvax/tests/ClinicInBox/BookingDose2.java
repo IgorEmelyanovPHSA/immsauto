@@ -110,12 +110,6 @@ public class BookingDose2 extends BaseTest {
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*19----Go to Appointment Tab --*/");
 		clinicInBox.clickAppointmentTab();
-//		try {
-//			System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
-//			clinicInBox.selectEarlyBookingReason();
-//		} catch(Exception ex) {
-//			System.out.println("There is not Early Booking Option");
-//		}
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
