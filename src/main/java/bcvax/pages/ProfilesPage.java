@@ -136,6 +136,16 @@ public class ProfilesPage extends BasePage{
         create_immunization_record_btn.click();
     }
 
+    public void clickCheckInClientButton() throws InterruptedException {
+        Thread.sleep(500);
+        By check_in_client_btn_path = By.xpath("//button[text()='Check-in Client']");
+        waitForElementToBeEnabled(driver, check_in_client_btn_path, 10);
+        WebElement check_in_client_btn = driver.findElement(check_in_client_btn_path);
+        scrollCenter(check_in_client_btn);
+        Thread.sleep(500);
+        check_in_client_btn.click();
+    }
+
     public void clickConfirmButton() throws InterruptedException {
         Thread.sleep(500);
         By confirm_btn_path = By.xpath("//button[text() = 'Confirm']");
@@ -652,7 +662,7 @@ public class ProfilesPage extends BasePage{
         profile.click();
     }
 
-    public String getReletedActiveConsentsResponse(String agent) throws InterruptedException {
+    public String getRelatedActiveConsentsResponse(String agent) throws InterruptedException {
         Thread.sleep(500);
         By active_consents_path = By.xpath("//c-bchc-active-consent-table");
         By active_consent_new_btn_path = By.xpath("//c-bchc-active-consent-table//button[text()='New']");
@@ -671,6 +681,18 @@ public class ProfilesPage extends BasePage{
             }
         }
         return my_response;
+    }
+
+    public void clickNewActiveConsentButton() throws InterruptedException {
+        Thread.sleep(500);
+        By active_consent_new_btn_path = By.xpath("//c-bchc-active-consent-table//button[text()='New']");
+        waitForElementToBeEnabled(driver, active_consent_new_btn_path, 10);
+        WebElement active_consent_new_btn = driver.findElement(active_consent_new_btn_path);
+        scrollCenter(active_consent_new_btn);
+        Thread.sleep(1000);
+        scrollCenter(active_consent_new_btn);
+        Thread.sleep(1000);
+        active_consent_new_btn.click();
     }
 
     public List<Map<String, WebElement>> getImmunizationRecords() throws InterruptedException {

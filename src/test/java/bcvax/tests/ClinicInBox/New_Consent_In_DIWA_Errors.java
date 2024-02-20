@@ -34,9 +34,11 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 	private String dosage_to_select = "0.5";
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
-	@Test(testName = "Verify Errors when creating DIWA Immunisation record without Appointments(Java)")
+	String consent_agent = "COVID-19 mRNA";
+
+	@Test(testName = "Verify Errors when creating New Consent Record from DIWA")
 	public void Verify_Errors_When_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
-		TestcaseID = "278971";
+		TestcaseID = "278975";
 		env = Utils.getTargetEnvironment();
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
@@ -220,5 +222,4 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		response_error = AddConsentDialog.getConsentEffectiveDateToError(driver);
 		Assert.assertEquals(response_error, "Effective To Date must be greater than or equal to Effective From Date or blank");
 	}
-	
 }
