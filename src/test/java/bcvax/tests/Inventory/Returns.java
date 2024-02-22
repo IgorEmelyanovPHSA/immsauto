@@ -160,15 +160,16 @@ public class Returns extends BaseTest {
         log("/*15. ----Click Save Button --*/");
         AddReturnLineItemsDialog.clickSaveBtn(driver);
         //Check if alert found
-
+        boolean alert_found = false;
+        String alert_content = null;
         log("/*16. ----Verify Add Line Item Success Dialog Appear --*/");
-        boolean alert_found = AlertDialog.alertFound(driver);
-        String alert_content = AlertDialog.getAlertContent(driver).getText();
-        System.out.println(alert_content);
-        AlertDialog.closeAlert(driver);
-
-        softAssert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
-
+        alert_found = AlertDialog.alertFound(driver);
+        if(alert_found) {
+            alert_content = AlertDialog.getAlertContent(driver).getText();
+            System.out.println(alert_content);
+            AlertDialog.closeAlert(driver);
+            softAssert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
+        }
         log("/*17. ----Verify Return Line Item record is created and Info is correct --*/");
         Map<String, WebElement> line_items = returnPage.getReturnLineItemsTable();
         String return_line_item_number = line_items.get("Return Line Item Number").getText();

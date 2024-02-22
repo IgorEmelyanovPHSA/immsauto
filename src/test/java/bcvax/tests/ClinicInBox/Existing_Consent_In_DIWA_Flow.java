@@ -97,6 +97,9 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         Assert.assertFalse(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously Active");
 
         DiwaImmunizationRecord.select_provider(driver, consentProvider);
+        profilesPage.clickShowAllLotNumbersCheckBox();
+        profilesPage.clickLotNumberDropDown();
+        profilesPage.selectLot();
         DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
         Thread.sleep(1000);
 
