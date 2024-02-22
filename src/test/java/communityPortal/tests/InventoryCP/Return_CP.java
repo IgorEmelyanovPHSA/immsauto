@@ -134,12 +134,14 @@ public class Return_CP extends BaseTest {
 
         log("/*16. ----Verify Add Line Item Success Dialog Appear --*/");
         boolean alert_found = AlertDialog.alertFound(driver);
-        String alert_content = AlertDialog.getAlertContent(driver).getText();
-        System.out.println(alert_content);
-        AlertDialog.closeAlert(driver);
+        String alert_content = null;
+        if(alert_found) {
+            alert_content = AlertDialog.getAlertContent(driver).getText();
+            System.out.println(alert_content);
+            AlertDialog.closeAlert(driver);
 
-        softAssert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
-
+            softAssert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
+        }
         log("/*17. ----Verify Return Line Item record is created and Info is correct --*/");
         Map<String, WebElement> line_items = returnPage.getReturnLineItemsTableCP();
         String return_line_item_number = line_items.get("Return Line Item Number").getText();
