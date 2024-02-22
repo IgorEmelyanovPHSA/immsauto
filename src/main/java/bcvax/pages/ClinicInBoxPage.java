@@ -64,11 +64,6 @@ public class ClinicInBoxPage extends BasePage {
 
 	@FindBy(xpath = ".//span[text() = 'Travel']")
 	private WebElement select_early_booking_reason;
-
-	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
-	
-	@FindBy(xpath = "//input[@name='clinicstag']")
-	private WebElement search_clinic_name;
 	
 	@FindBy(xpath = "(.//button[@name = 'facility'])[1]")
 	private WebElement option_loc_facility;
@@ -273,20 +268,23 @@ public class ClinicInBoxPage extends BasePage {
 	}
 	
 	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
+		By search_by_clinic_name_tab_path = By.xpath(".//a[text()='Search by clinic name']");
+		waitForElementToBeEnabled(driver, search_by_clinic_name_tab_path, 10);
+		Thread.sleep(500);
+		WebElement search_by_clinic_name_tab = driver.findElement(search_by_clinic_name_tab_path);
+		scrollCenter(driver, search_by_clinic_name_tab);
+		Thread.sleep(500);
+		search_by_clinic_name_tab.click();
 	}
 	
 	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-		waitForElementToBeVisible(driver, search_clinic_name, 10);
+		By search_clinic_input_path = By.xpath("//input[@name='clinicstag']");
+		waitForElementToBeEnabled(driver, search_clinic_input_path, 10);
+		WebElement search_clinic_name = driver.findElement(search_clinic_input_path);
+		scrollCenter(driver, search_clinic_name);
+		Thread.sleep(500);
 		search_clinic_name.click();
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		search_clinic_name.sendKeys(clinicNameToSearch);
 		search_clinic_name.sendKeys(Keys.RETURN);
 	}
