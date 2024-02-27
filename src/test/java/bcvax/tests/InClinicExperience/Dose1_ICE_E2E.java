@@ -128,7 +128,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//System.out.println("/*25.----click on person Account Related Tab --*/");
 		//inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
-		inClinicExperience.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 		Thread.sleep(2000);
 //If override Eligibility is shown
 		try {
@@ -139,13 +139,13 @@ public class Dose1_ICE_E2E extends BaseTest {
 		}
 		Thread.sleep(2000);
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		inClinicExperience.selectOneOption(vaccine_agent);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
-		inClinicExperience.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
-		inClinicExperience.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		System.out.println("/*29----click on Option Facility location  --*/");
 		inClinicExperience.clickOnFacilityOptionLocation();
