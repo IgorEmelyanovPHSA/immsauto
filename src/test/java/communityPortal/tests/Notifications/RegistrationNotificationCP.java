@@ -97,7 +97,7 @@ public class RegistrationNotificationCP extends BaseTest {
         inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
 
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -107,13 +107,13 @@ public class RegistrationNotificationCP extends BaseTest {
         }
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationCheckbox();
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 
         log("/*25----select 'Search by Clinic name' tab --*/");
-        inClinicExperience_CP.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
         log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         log("/*27----click on Option Facility location  --*/");
         inClinicExperience_CP.clickOnFacilityOptionLocation();

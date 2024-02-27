@@ -105,19 +105,19 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(5000);//wait for accordion loading
 
         log("/*23----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         Thread.sleep(5000);
 
         log("/*24.----click on the Vaccine 'COVID-19 Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationCheckbox();
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         Thread.sleep(2000);
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
-        inClinicExperience_CP.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         Thread.sleep(2000);
 
         log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
         Thread.sleep(2000);
 
         log("/*27----click on Option Facility location  --*/");

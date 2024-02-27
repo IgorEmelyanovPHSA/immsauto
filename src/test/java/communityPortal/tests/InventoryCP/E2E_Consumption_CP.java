@@ -123,7 +123,7 @@ public class E2E_Consumption_CP extends BaseTest {
         //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
 //        try {
 //            PersonAccountPage.selectEarlyBookingReason(driver);
 //        } catch(Exception ex) {
@@ -138,7 +138,7 @@ public class E2E_Consumption_CP extends BaseTest {
             System.out.println("There is not Override Eligibility Option");
         }
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationCheckbox();
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 
         ////////////////////
         //May will be removed
@@ -146,10 +146,10 @@ public class E2E_Consumption_CP extends BaseTest {
         ///////////////////
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
-        inClinicExperience_CP.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
         log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         log("/*27----click on Option Facility location  --*/");
         inClinicExperience_CP.clickOnFacilityOptionLocation();

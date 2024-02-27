@@ -526,26 +526,6 @@ public class InClinicExperiencePage extends BasePage {
 		return (doses);
 	}
 
-	public void clickToSearchClinic() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, click_select_search_clinic1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(click_select_search_clinic1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-
-	public Double getValueOfRemainingQty() throws InterruptedException {
-		waitForElementToBeLocated(driver, get_remaining_Qty1, 10);
-		WebElement element = driver.findElement(get_remaining_Qty1);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		String Quantity = element.getText();
-		Double quantity = Double.parseDouble(Quantity.replaceAll(",", ""));
-		return (quantity);
-	}
-
 	public void selectICEFromApp() throws InterruptedException {
 		waitForElementToBeLocated(driver, select_app_launcher1, 10);
 		Thread.sleep(2000);
@@ -679,19 +659,6 @@ public class InClinicExperiencePage extends BasePage {
 		review_details_btn.click();
 	}
 
-	public void navigateToVaccineSchedulingTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(ElementClickInterceptedException ex) {
-			Thread.sleep(2000);
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		}
-	}
-
-	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-	}
-
 	public void clickOnVaccinationInfluenzaCheckbox() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,400)");
 		Thread.sleep(5000);
@@ -770,85 +737,9 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(500);
 	}
 
-	public void ClickRebookAppointment() throws InterruptedException {
-		Thread.sleep(500);
-		By rebook_at_current_location_btn_path = By.xpath("//button[text() = 'Rebook at Current Location']");
-		waitForElementToBeEnabled(driver, rebook_at_current_location_btn_path, 10);
-		WebElement rebook_at_current_location_btn = driver.findElement(rebook_at_current_location_btn_path);
-		rebook_at_current_location_btn.click();
-	}
-
-	public void ValidateClickRebookAppointmentButtonIsDisabled() throws InterruptedException {
-		Thread.sleep(500);
-		By rebook_at_current_location_btn_path = By.xpath("//button[text() = 'Rebook at Current Location']");
-		waitForElementToBeLocated(driver, rebook_at_current_location_btn_path, 10);
-		WebElement rebook_at_current_location_btn = driver.findElement(rebook_at_current_location_btn_path);
-		boolean is_enabled = true;
-		while(is_enabled) {
-			is_enabled = rebook_at_current_location_btn.isEnabled();
-			Thread.sleep(500);
-			rebook_at_current_location_btn = driver.findElement(rebook_at_current_location_btn_path);
-		}
-	}
-
-	public void ValidateAppointmentCancelledIsPresentCP() throws InterruptedException {
-		Thread.sleep(500);
-		By appointment_status_cancel_CP_path = By.xpath("//span[@lst-listviewmanagerheader_listviewmanagerheader=''][text()='Appointments']/../../../../../../../../..//span[text()='Cancelled']");
-		waitForElementToBeEnabled(driver, appointment_status_cancel_CP_path, 30);
-		WebElement element = driver.findElement(appointment_status_cancel_CP_path);
-		element.isDisplayed();
-	}
-
-	public void ValidateAppointmentConfirmIsPresentCP() throws InterruptedException {
-		WebElement element = driver.findElement(appointment_status_confirm_CP);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(1000);
-		element.isDisplayed();
-	}
-
-	public void ValidateAppointmentCancelledIsPresent() throws InterruptedException {
-		WebElement element = driver.findElement(appointment_status_cance1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		appointment_status_cancel.isDisplayed();
-	}
-
-	public void ValidateAppointmentConfirmIsPresent() throws InterruptedException {
-		WebElement element = driver.findElement(appointment_status_confirm1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		appointment_status_confirm.isDisplayed();
-	}
-
-	public String ValidateStatusisInAftercare() throws InterruptedException {
-		waitForElementToBeLocated(driver, status_after_care1, 10);
-		status_after_care.isDisplayed();
-		status_after_care.getText();
-		return status_after_care.getText();
-	}
-
-	public String getAppointmentClinicName() throws InterruptedException {
-		By appointment_clinic_name_path = By.xpath("//c-bc-hc-appointment-details//label[@aria-label='Clinic Name']/../../..//lightning-formatted-text");
-		waitForElementToBeLocated(driver, appointment_clinic_name_path, 10);
-		WebElement appointment_clinic_name = driver.findElement(appointment_clinic_name_path);
-		String clinic_name = appointment_clinic_name.getText();
-		return clinic_name;
-	}
-
 	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
 		Thread.sleep(500);
 		By confirm_and_save_btn_path = By.xpath("(//button[@title='Confirm & Save Identification'])");
-//		try {
-//			waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
-//		} catch(NotFoundException ex) {
-//			System.out.println(ex.getMessage());
-//			System.out.println("Confirm and Save button is not available. Try to Rebook at current Location button");
-//			By rebook_btn_path = By.xpath("//button[text() ='Rebook at Current Location']");
-//			waitForElementToBeEnabled(driver, rebook_btn_path, 10);
-//			WebElement rebook_btn = driver.findElement(rebook_btn_path);
-//			rebook_btn.click();
-//			Thread.sleep(500);
-//		}
 		waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
 		WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
 		scrollCenter(confirm_and_save_btn);
@@ -1011,43 +902,6 @@ public class InClinicExperiencePage extends BasePage {
 		return button_exist;
 	}
 
-
-	public String selectConsentProvider() throws InterruptedException {
-		Thread.sleep(500);
-		By consent_provider_field_path = By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]");
-		By consent_provider_item_path = By.xpath("//span[@class = 'slds-listbox__option-text slds-listbox__option-text_entity']");
-		waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
-		WebElement consentProviderField = driver.findElement(consent_provider_field_path);
-		scrollCenter(consentProviderField);
-		Thread.sleep(500);
-		consentProviderField.click();
-		String provider = "Auto Bchcomclinician";
-		consentProviderField.sendKeys(provider);
-		Thread.sleep(1000);
-		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
-		waitForElementToBeLocated(driver, providerItemPath, 10);
-		driver.findElement(providerItemPath).click();
-		Thread.sleep(500);
-		try {
-			String consent_provider_selected = consentProviderSelected();
-			if(consent_provider_selected.equals("")) {
-				waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
-				driver.findElement(consent_provider_item_path).click();
-			}
-		} catch(Exception ex) {
-			System.out.println("***DEBUG*** Tried to select Consent Provider. Error: " + ex.getMessage());
-			waitForElementToBeEnabled(driver, consent_provider_field_path, 10);
-			consentProviderField = driver.findElement(consent_provider_field_path);
-			scrollCenter(consentProviderField);
-			consentProviderField.click();
-			Thread.sleep(500);
-			waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
-			driver.findElement(consent_provider_item_path).click();
-		}
-		Thread.sleep(2000);
-		return driver.findElement(By.xpath("//input[contains(@class, 'slds-combobox__input slds-input')]")).getAttribute("data-value");
-	}
-
 	public void selectVaccineAgent(String agent) throws InterruptedException {
 		Thread.sleep(500);
 		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option' or @aria-label='Agent - Current Selection: Select an option']");
@@ -1071,10 +925,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void selectVaccineAgentValue(String vaccineAgent) throws InterruptedException {
 		selectVaccineAgent(vaccineAgent);
-	}
-
-	public void selectVaccineAgent() throws InterruptedException {
-		selectVaccineAgent("COVID-19 mRNA");
 	}
 
 	public void selectVaccineAgentInfluenza() throws InterruptedException {
@@ -1223,27 +1073,6 @@ public class InClinicExperiencePage extends BasePage {
 		PersonAccountPage.goToRelatedTab(driver);
 	}
 
-	public void selectSearchByClinicNameTab() throws InterruptedException {
-		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		scrollCenter(element);
-		Thread.sleep(1000);
-		int footerSize = driver.findElement(By.xpath("//div[@class = 'bch-scheduler-footer']")).getSize().getHeight();
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + footerSize + ")");
-		element.click();
-	}
-
-	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_clinic, 10);
-		Thread.sleep(2000);
-		select_clinic.click();
-		Thread.sleep(2000);
-		select_clinic.sendKeys(clinicNameToSearch);
-		select_clinic.sendKeys(Keys.RETURN);
-	}
-
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeVisible(driver, option_loc_facility, 10);
@@ -1312,46 +1141,6 @@ public class InClinicExperiencePage extends BasePage {
 		validate_after_care_status_immunization_record_Pneumo.isDisplayed();
 	}
 
-
-	public void clickLotNumberDropDown() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", click_lot_number_dropdown);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_lot_number_dropdown, 10);
-		Thread.sleep(2000);
-		click_lot_number_dropdown.click();
-		Thread.sleep(2000);
-	}
-
-	public void selectInjectionSite() throws InterruptedException {
-		waitForElementToBeLocated(driver, selectSite1, 10);
-		WebElement element = driver.findElement(selectSite1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, select_injection_site_value1, 10);
-		WebElement element1 = driver.findElement(select_injection_site_value1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-	}
-
-	public void selectLot() throws InterruptedException {
-		waitForElementToBeVisible(driver, select_lot, 10);
-		Thread.sleep(2000);
-		select_lot.click();
-	}
-
-	public void selectDosageDIWA() throws InterruptedException {
-		waitForElementToBeLocated(driver, select_dosage_field1, 10);
-		WebElement element = driver.findElement(select_dosage_field1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, select_dosage1, 10);
-		WebElement element1 = driver.findElement(select_dosage1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-	}
-
 	public void selectDosageVaccineAdmin() throws InterruptedException {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,450)");
 		Thread.sleep(2000);
@@ -1363,50 +1152,6 @@ public class InClinicExperiencePage extends BasePage {
 		Thread.sleep(2000);
 		select_dosage_from_dropdown.click();
 		Thread.sleep(2000);
-	}
-
-
-	public void saveImmunizationInformation() throws InterruptedException {
-		By save_immunization_btn_path = By.xpath("//div[@c-bchcimmunizationinfo_bchcimmunizationinfo]/lightning-button[@c-bchcimmunizationinfo_bchcimmunizationinfo]/button[@type='submit' and text()='Save']");
-		waitForElementToBeEnabled(driver, save_immunization_btn_path, 10);
-		WebElement save_immunization_btn = driver.findElement(save_immunization_btn_path);
-		scrollIfNeeded(driver, save_immunization_btn);
-		save_immunization_btn.click();
-	}
-
-	public void confirmAndSaveAdministration() throws InterruptedException {
-		confirmAndSave.click();
-	}
-
-	public void summaryConfirmAndSave() throws InterruptedException {
-		lastConfirmAndSave.click();
-	}
-
-	public void clickShowAllLotNumbersCheckBox() throws InterruptedException {
-		By show_all_chkbox_path = By.xpath("//span[@part='label' and text()='Show all lot numbers.']/../..");
-		waitForElementToBeEnabled(driver, show_all_chkbox_path, 10);
-		WebElement show_all_lot_numbers_checkbox = driver.findElement(show_all_chkbox_path);
-		scrollIfNeeded(driver, show_all_lot_numbers_checkbox);
-		Thread.sleep(1000);
-		show_all_lot_numbers_checkbox.click();
-	}
-
-	public void clickToClose() throws InterruptedException {
-		waitForElementToBeVisible(driver, close_button_diwa, 10);
-		Thread.sleep(2000);
-		close_button_diwa.click();
-		Thread.sleep(2000);
-	}
-
-	public boolean validateoopsMessage() throws InterruptedException {
-		try {
-			waitForElementToBeVisible(driver, vlidate_oops_message, 10);
-			System.out.println("/*---'There are unsaved changes!' message shown up");
-			return true;
-		} catch (NoSuchElementException e) {
-			System.out.println("/*---the screen does not show up 'There are unsaved changes Message!'");
-			return false;
-		}
 	}
 
 	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
@@ -1429,17 +1174,6 @@ public class InClinicExperiencePage extends BasePage {
 				System.out.println("No expired lots");
 		}
 
-	}
-	public void selectOneOption(String vaccine) throws InterruptedException {
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine);
-	}
-
-	public void NavigateToAppointmentsSection() throws InterruptedException {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1100)", "");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, appointmentSection, 10);
-		Thread.sleep(2000);
 	}
 
 	public boolean checkInButtonAvailable() throws  InterruptedException {
@@ -1479,13 +1213,6 @@ public class InClinicExperiencePage extends BasePage {
 		return driver.findElement(vaccine_agent_path).getAttribute("data-value");
 	}
 
-	public String consentProviderSelected() throws InterruptedException {
-		Thread.sleep(500);
-		By providerFieldPath = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input[contains(@class, 'slds-combobox__input slds-input')]");
-		waitForElementToBeEnabled(driver, providerFieldPath, 10);
-		WebElement consent_provider_selected = driver.findElement(providerFieldPath);
-		return consent_provider_selected.getAttribute("data-value");
-	}
 	public String getProvider() throws InterruptedException {
 		By provider_path = By.xpath("//label[text() = 'Provider']/..//input");
 		waitForElementToBeEnabled(driver, provider_path, 10);
@@ -1534,26 +1261,6 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement provider_item = driver.findElement(providerItemPath);
 		provider_item.click();
 
-	}
-
-	public void setInformedConsentProvider  (String provider) throws InterruptedException {
-		Thread.sleep(500);
-		By informed_consent_provider_path = By.xpath("//label[text() = 'Informed Consent Provider (User)']/..//input");
-		By informed_consent_provider_clear_btn_path = By.xpath("//label[text() = 'Informed Consent Provider (User)']/..//button[@title='Clear Selection']");
-		waitForElementToBeEnabled(driver, informed_consent_provider_path, 10);
-		WebElement informed_consent_provider = driver.findElement(informed_consent_provider_path);
-		if(!informed_consent_provider.getAttribute("title").equals("")) {
-			WebElement informed_consent_provider_clear_btn = driver.findElement(informed_consent_provider_clear_btn_path);
-			scrollIfNeeded(driver, informed_consent_provider_clear_btn);
-			Thread.sleep(500);
-			informed_consent_provider_clear_btn.click();
-			Thread.sleep(500);
-		}
-		informed_consent_provider.sendKeys(provider);
-		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
-		waitForElementToBeLocated(driver, providerItemPath, 10);
-		WebElement provider_item = driver.findElement(providerItemPath);
-		provider_item.click();
 	}
 
 	public void setRoute(String route) throws InterruptedException {

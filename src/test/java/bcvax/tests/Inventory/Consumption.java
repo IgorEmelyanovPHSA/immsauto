@@ -134,7 +134,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 31.Click register Button on confirmation page --*/");
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
-		inClinicExperiencePage.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
 //		try {
@@ -155,18 +155,16 @@ public class Consumption extends BaseTest {
 
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		inClinicExperiencePage.clickOnVaccinationCheckbox();
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
-		inClinicExperiencePage.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*35.----search the Clinic " +clinicNameToSearch +" --*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		log("/*--36.----click on Option Facility location  --*/");
 		inClinicExperiencePage.clickOnFacilityOptionLocation();

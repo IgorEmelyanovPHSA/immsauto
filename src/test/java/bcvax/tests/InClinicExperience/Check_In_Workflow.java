@@ -215,7 +215,7 @@ public class Check_In_Workflow extends BaseTest {
 
     private void bookAppointment() throws InterruptedException {
         log("/*4----Go to Appointment Tab --*/");
-        inClinicExperience.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         Thread.sleep(2000);
         //If override Eligibility is shown
         try {
@@ -224,15 +224,15 @@ public class Check_In_Workflow extends BaseTest {
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }
-        inClinicExperience.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         ////////////////////
         //May will be removed
         //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
         ///////////////////
         log("/*24----select 'Search by Clinic name' tab --*/");
-        inClinicExperience.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
         log("/*26----click on Option Facility location  --*/");
         inClinicExperience.clickOnFacilityOptionLocation();
         log("/*27----select Active booking appointment day  --*/");

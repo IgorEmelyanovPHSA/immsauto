@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.PersonAccountPage;
-import bcvax.pages.UserDefaultsPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -116,7 +113,7 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         Thread.sleep(5000);
 
         System.out.println("/*26----Go to Appointment Tab --*/");
-        inClinicExperience.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         Thread.sleep(15000);
 
         log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
@@ -128,11 +125,11 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         //Thread.sleep(2000);
 
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
-        inClinicExperience.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         Thread.sleep(2000);
 
         log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
         Thread.sleep(2000);
         System.out.println("/*29----click on Option Facility location  --*/");
         inClinicExperience.clickOnFacilityOptionLocation();

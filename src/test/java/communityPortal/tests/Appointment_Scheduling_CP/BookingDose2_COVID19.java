@@ -84,7 +84,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*19.----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         //In case of Early Booking
 //        try {
 //            PersonAccountPage.selectEarlyBookingReason(driver);
@@ -102,12 +102,12 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
 
         try {
-            inClinicExperience_CP.selectOneOption(vaccineToSelect);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         } catch(NotFoundException ex) {
             Thread.sleep(2000);
             PersonAccountSchedulePage.overrideEligibility(driver);
             Thread.sleep(2000);
-            inClinicExperience_CP.selectOneOption(vaccineToSelect);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         }
 
         ////////////////////
@@ -116,10 +116,10 @@ public class BookingDose2_COVID19 extends BaseTest {
         ///////////////////
 
         log("/*21.----select 'Search by Clinic name' tab --*/");
-        inClinicExperience_CP.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
         log("/*22.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         log("/*23.----click on Option Facility location  --*/");
         inClinicExperience_CP.clickOnFacilityOptionLocation();
