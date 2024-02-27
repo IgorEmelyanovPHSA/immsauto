@@ -94,7 +94,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         log("/*----6. Navigated to Person Account related tab ---*/");
         profilesPage.clickRelatedTab();
         log("/*----7. Click Create Immunization Record ---*/");
-        profilesPage.clickNewActiveConsentButton();
+        PersonAccountRelatedPage.clickNewActiveConsentButton(driver);
         boolean add_consent_dialog_exists = AddConsentDialog.dialogExists(driver);
         //Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
         //Verify Headers in Infromed Consent Table
@@ -132,7 +132,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         Assert.assertEquals(response_error, "Please select a choice.");
         InformedConsentDialog.clickCloseButton(driver);
         Thread.sleep(500);
-        profilesPage.clickNewActiveConsentButton();
+        PersonAccountRelatedPage.clickNewActiveConsentButton(driver);
         //Verify Error when Infromed Consent Obtained From is missing
         InformedConsentDialog.selectResponseGrantRadioButton(driver);
         InformedConsentDialog.selectImmsBCProviderRadioButton(driver);

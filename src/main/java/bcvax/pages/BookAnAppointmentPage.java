@@ -25,12 +25,6 @@ public class BookAnAppointmentPage extends BasePage{
     // Schedule appointment section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @FindBy(xpath = "(//button[@class = 'slds-day active-day'])[1]")
-    private WebElement selectFirstAvailableDayInTheCalendarId;
-
-    @FindBy(xpath = "(//button[@name='timeslot'])[1]")
-    private WebElement selectFirstAvailableTimeSlotInTheCalendar;
-
     @FindBy(xpath = ".//button[text() = 'Next']")
     private WebElement btnNext;
 
@@ -84,7 +78,7 @@ public class BookAnAppointmentPage extends BasePage{
     }
 
     public void selectOneOption(String vaccine) throws InterruptedException{
-        PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine);
     }
 
     public void searchByClinicName(String clinicName) throws InterruptedException{
@@ -168,18 +162,7 @@ public class BookAnAppointmentPage extends BasePage{
                 return false;
             }
     }
-        public boolean isToastErrorMessageCompleteAllRequiredFieldsDisplayedOld() throws InterruptedException {
-        Thread.sleep(1000);
-        boolean flag = false;
-            List countOfFoundLot = driver.findElements(toastErrorMessage);
-            if(countOfFoundLot.size()>0){
-            flag = true;
-            log("Toast message is displayed: " +flag);
-            click(btnCloseToastMessage);
-            log("Closing (X) the toast message");
-        }
-             return flag;
-        }
+
 
         public void clickCheckBoxVerifyContactInformationAndConsentToNotifications() throws InterruptedException{
             Thread.sleep(500);

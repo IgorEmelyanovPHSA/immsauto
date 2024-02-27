@@ -120,7 +120,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }
@@ -130,7 +130,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
             inClinicExperience_CP.clickOnVaccinationCheckbox();
         } catch(NotFoundException ex) {
             Thread.sleep(2000);
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
             Thread.sleep(2000);
             inClinicExperience_CP.clickOnVaccinationCheckbox();
         }

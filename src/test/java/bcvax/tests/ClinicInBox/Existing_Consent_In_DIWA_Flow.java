@@ -66,8 +66,8 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
             Thread.sleep(1000);
         }
         profilesPage.clickRelatedTab();
-        int immunization_records_count = profilesPage.getImmunizationRecords().size();
-        String active_consent_resp = profilesPage.getRelatedActiveConsentsResponse(agent);
+        int immunization_records_count = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
+        String active_consent_resp = PersonAccountRelatedPage.getActiveConsentsResponse(driver, agent);
         Assert.assertEquals(active_consent_resp, "Grant");
         log("/*----7. Click Create Immunization Record ---*/");
         profilesPage.clickCreateImmunizationRecord();
@@ -100,6 +100,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         profilesPage.clickShowAllLotNumbersCheckBox();
         profilesPage.clickLotNumberDropDown();
         profilesPage.selectLot();
+        profilesPage.selectDosage();
         DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
         Thread.sleep(1000);
 
@@ -115,7 +116,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
         Thread.sleep(2000);
         profilesPage.clickRelatedTab();
-        int immunization_records_count_new = profilesPage.getImmunizationRecords().size();
+        int immunization_records_count_new = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
         Assert.assertTrue(immunization_records_count_new == immunization_records_count + 1, "Expected: " + (immunization_records_count + 1) + ";  Actual: " + immunization_records_count_new);
         System.out.println();
     }
