@@ -113,7 +113,7 @@ public class BookingDose2 extends BaseTest {
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
@@ -127,9 +127,9 @@ public class BookingDose2 extends BaseTest {
 
 
 		log("/*21----select 'Search clinic name' tab --*/");
-		clinicInBox.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		log("/*22----search the Clinic " +clinicNameToSearch +" --*/");
-		clinicInBox.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*23----click on Option Facility location  --*/");
 		clinicInBox.clickOnFacilityOptionLocation();
 		log("/*24----select Active booking appointment day  --*/");

@@ -1,9 +1,6 @@
 package communityPortal.tests.Appointment_Scheduling_CP;
 
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.PersonAccountPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
@@ -98,7 +95,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }
@@ -108,7 +105,7 @@ public class BookingDose2_COVID19 extends BaseTest {
             inClinicExperience_CP.selectOneOption(vaccineToSelect);
         } catch(NotFoundException ex) {
             Thread.sleep(2000);
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
             Thread.sleep(2000);
             inClinicExperience_CP.selectOneOption(vaccineToSelect);
         }

@@ -1,11 +1,8 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.PersonAccountPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.CallCenterConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NotFoundException;
@@ -69,9 +66,6 @@ public class BookingDose2 extends BaseTest {
 		log("/*8.----Enter PHN " +personalHealthNumber +"--*/");
 		callCenterConsole.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-			callCenterConsole.clickNonIndigenousRadioButton();
-		}
 		log("/*10.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -110,10 +104,10 @@ public class BookingDose2 extends BaseTest {
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*24----select 'Search clinic name' tab --*/");
-		callCenterConsole.selectSearchClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-		callCenterConsole.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*26----click on Option Facility location  --*/");
 		callCenterConsole.clickOnFacilityOptionLocation();
 		log("/*27----select Active booking appointment day  --*/");
@@ -132,7 +126,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*33----Refresh page --*/");
 		callCenterConsole.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
-		callCenterConsole.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 
 	@Test(priority = 2)

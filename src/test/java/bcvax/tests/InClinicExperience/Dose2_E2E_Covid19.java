@@ -137,7 +137,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
@@ -369,7 +369,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}

@@ -93,10 +93,10 @@ public class BookingDose1Influenza extends BaseTest {
 		clinicInBox.selectOneOption(vaccineToSelect);
 
 		log("/*21.----select 'Search by Clinic name' tab --*/");
-		clinicInBox.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*22.----search the Clinic " +clinicNameToSearch +" --*/");
-		clinicInBox.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		log("/*23.----click on Option Facility location  --*/");
 		clinicInBox.clickOnFacilityOptionLocation();

@@ -1,6 +1,8 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
+import bcvax.pages.PersonAccountPage;
+import bcvax.pages.PersonAccountSchedulePage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.CallCenterConsolePage;
 import bcvax.pages.Utils;
@@ -89,7 +91,7 @@ public class BookingDose1Influenza extends BaseTest {
 		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
 		log("/*19.----click on person Account Related Tab --*/");
-		callCenterConsole.clickOnPersonAccountRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		Thread.sleep(2000);
 
 		//System.out.println("/*18.----click on Eligibility button --*/");
@@ -102,19 +104,19 @@ public class BookingDose1Influenza extends BaseTest {
 		//callCenterConsole.successEligibilityMessageAppear();
 		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 		log("/*20----Go to Appointment Tab --*/");
-		callCenterConsole.clickAppointmentTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 		Thread.sleep(2000);
 
 		log("/*21.---Select vaccination type: " + vaccineToSelect + "--*/");
-		callCenterConsole.selectOneOption(vaccineToSelect);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		Thread.sleep(1000);
 
 		log("/*22----select 'Search by Clinic name' tab --*/");
-		callCenterConsole.selectSearchClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		Thread.sleep(2000);
 
 		log("/*23----search the Clinic " +clinicNameToSearch +" --*/");
-		callCenterConsole.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		Thread.sleep(2000);
 
 		log("/*24----click on Option Facility location  --*/");
@@ -150,7 +152,7 @@ public class BookingDose1Influenza extends BaseTest {
 		Thread.sleep(2000);
 
 		log("/*32----Go to back to the Citizen Related Tab --*/");
-		callCenterConsole.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 
 	@Test(priority = 2)

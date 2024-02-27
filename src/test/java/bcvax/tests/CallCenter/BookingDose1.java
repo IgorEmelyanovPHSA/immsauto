@@ -77,9 +77,6 @@ public class BookingDose1 extends BaseTest {
 		System.out.println("/*8.----Enter PHN " +personalHealthNumber +"--*/");
 		callCenterConsole.enterPNH(personalHealthNumber);
 		System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
-		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-			callCenterConsole.clickNonIndigenousRadioButton();
-		}
 		System.out.println("/*10.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -108,22 +105,22 @@ public class BookingDose1 extends BaseTest {
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		//callCenterConsole.clickOnVaccinationCheckbox();
-		callCenterConsole.selectOneOption(vaccine_agent);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		System.out.println("/*24----select 'Search by Clinic name' tab --*/");
-		callCenterConsole.selectSearchClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-		callCenterConsole.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		System.out.println("/*26----click on Option Facility location  --*/");
 		callCenterConsole.clickOnFacilityOptionLocation();
 		System.out.println("/*27----select Active booking appointment day  --*/");
@@ -143,7 +140,7 @@ public class BookingDose1 extends BaseTest {
 
 		callCenterConsole.refreshBrowser();
 		System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
-		callCenterConsole.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 
 	@Test(priority = 2)

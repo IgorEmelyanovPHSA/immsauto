@@ -133,7 +133,7 @@ public class E2E_Consumption_CP extends BaseTest {
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }

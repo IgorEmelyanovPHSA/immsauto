@@ -234,59 +234,11 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void navigateToVaccineSchedulingTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
-		}
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 	}
 
 	public void clickAppointmentTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
-		}
-	}
-
-	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-	}
-
-	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
-		Thread.sleep(2000);
-		click_early_booking_reason.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-		Thread.sleep(2000);
-		select_early_booking_reason.click();
-	}
-	
-	public void selectSearchByClinicNameTab() throws InterruptedException {
-		By search_by_clinic_name_tab_path = By.xpath(".//a[text()='Search by clinic name']");
-		waitForElementToBeEnabled(driver, search_by_clinic_name_tab_path, 10);
-		Thread.sleep(500);
-		WebElement search_by_clinic_name_tab = driver.findElement(search_by_clinic_name_tab_path);
-		scrollCenter(driver, search_by_clinic_name_tab);
-		Thread.sleep(500);
-		search_by_clinic_name_tab.click();
-	}
-	
-	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		By search_clinic_input_path = By.xpath("//input[@name='clinicstag']");
-		waitForElementToBeEnabled(driver, search_clinic_input_path, 10);
-		WebElement search_clinic_name = driver.findElement(search_clinic_input_path);
-		scrollCenter(driver, search_clinic_name);
-		Thread.sleep(500);
-		search_clinic_name.click();
-		Thread.sleep(500);
-		search_clinic_name.sendKeys(clinicNameToSearch);
-		search_clinic_name.sendKeys(Keys.RETURN);
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 	}
 	
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
@@ -364,7 +316,7 @@ public class ClinicInBoxPage extends BasePage {
 	}
 
 	public void selectOneOption(String vaccine) throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine);
 	}
 
 }

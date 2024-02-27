@@ -682,9 +682,6 @@ public class InClinicExperiencePage extends BasePage {
 	public void navigateToVaccineSchedulingTab() throws InterruptedException {
 		try {
 			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			Thread.sleep(2000);
 			PersonAccountPage.goToVaccineScheduleTab(driver);
@@ -692,7 +689,7 @@ public class InClinicExperiencePage extends BasePage {
 	}
 
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 	}
 
 	public void clickOnVaccinationInfluenzaCheckbox() throws InterruptedException {
@@ -1434,7 +1431,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	}
 	public void selectOneOption(String vaccine) throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine);
 	}
 
 	public void NavigateToAppointmentsSection() throws InterruptedException {

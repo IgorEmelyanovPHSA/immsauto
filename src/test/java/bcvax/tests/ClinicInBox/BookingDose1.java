@@ -131,7 +131,7 @@ public class BookingDose1 extends BaseTest {
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
@@ -142,9 +142,9 @@ public class BookingDose1 extends BaseTest {
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*24----select 'Search by Clinic name' tab --*/");
-		clinicInBox.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-		clinicInBox.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*26----click on Option Facility location  --*/");
 		clinicInBox.clickOnFacilityOptionLocation();
 		log("/*27----select Active booking appointment day  --*/");

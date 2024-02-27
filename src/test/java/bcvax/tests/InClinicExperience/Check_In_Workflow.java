@@ -52,7 +52,7 @@ public class Check_In_Workflow extends BaseTest {
         log("/*3.----click on person Account Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);
         log("/*4.----Verify no Imms record was created --*/");
-        int records_count = PersonAccountPage.getImmunizationRecordsSize(driver);
+        int records_count = PersonAccountRelatedPage.getImmunizationRecordsSize(driver);
         Assert.assertTrue(records_count == 0);
         log("/*5.----Verify nteh appointment is booked successfully --*/");
         bookAppointment();
@@ -74,7 +74,7 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(current_tab.equals("Identification"));
         orgMainPage.globalSearch(citizenName);
         PersonAccountPage.goToRelatedTab(driver);
-        String pathway_status = PersonAccountPage.getImmunizationRecordPathwayStatus(driver);
+        String pathway_status = PersonAccountRelatedPage.getImmunizationRecordPathwayStatus(driver);
         log("/*10.----Verify Pathway Status is New --*/");
         Assert.assertTrue(pathway_status.equals("New"));
         inClinicExperience.clickClientListTab();
@@ -120,7 +120,7 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(current_tab.equals("Identification"));
         orgMainPage.globalSearch(citizenName);
         PersonAccountPage.goToRelatedTab(driver);
-        String pathway_status = PersonAccountPage.getImmunizationRecordPathwayStatus(driver);
+        String pathway_status = PersonAccountRelatedPage.getImmunizationRecordPathwayStatus(driver);
         log("/*----9. Verify the Pathway Status is New --*/");
         Assert.assertTrue(pathway_status.equals("New"));
         inClinicExperience.clickClientListTab();
@@ -220,7 +220,7 @@ public class Check_In_Workflow extends BaseTest {
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }
