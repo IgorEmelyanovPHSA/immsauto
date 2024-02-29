@@ -96,7 +96,7 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         }
 
         log("19. Navigate to Related tab");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
 
         log("20. Navigate to Appointments and click view all");
         inClinicExperience_CP.navigateToAppointmentRecords();

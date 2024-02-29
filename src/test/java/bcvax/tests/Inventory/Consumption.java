@@ -167,17 +167,17 @@ public class Consumption extends BaseTest {
 		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		log("/*--36.----click on Option Facility location  --*/");
-		inClinicExperiencePage.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		log("/*--37.----select Appointment Day --*/");
-		inClinicExperiencePage.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		log("/*--38.---- select time slot for Appointment --*/");
-		inClinicExperiencePage.selectTimeSlotForAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		log("/*--39.---Click Next Button to Schedule Appointment --*/");
-		inClinicExperiencePage.clickNextButtonApptSchedulingPage();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		log("/*40.----click Verify Contact Info checkbox  --*/");
-		inClinicExperiencePage.clickVerifyContactInformation();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		log("/*-- 41.---Click Appointment Confirm Button --*/");
-		inClinicExperiencePage.clickAppointmentConfirmButton();
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		log("/*-- 43.---Navigate to person account Related Tab --*/");

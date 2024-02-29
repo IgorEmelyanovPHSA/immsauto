@@ -126,7 +126,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.successRegisteredMessageAppear();
 
 		log("/*25.----click on person Account Related Tab --*/");
-		inClinicExperience.clickOnPersonAccountRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*26.----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
@@ -152,20 +152,20 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*29.----search the Clinic " + supplyLocationConsumption +" --*/");
 		PersonAccountSchedulePage.searchClinicName(driver, supplyLocationConsumption);
 		log("/*30.----click on Option Facility location  --*/");
-		inClinicExperience.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
 		log("/*31.----select Active booking appointment day  --*/");
-		inClinicExperience.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
 		log("/*32.----select the time slot  --*/");
-		inClinicExperience.selectTimeSlotForAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 
 		log("/*33.----click Next button  --*/");
-		inClinicExperience.clickNextButtonApptSchedulingPage();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
 		log("/*34.----click Verify Contact Info checkbox  --*/");
-		inClinicExperience.clickVerifyContactInformation();
-		inClinicExperience.clickAppointmentConfirmButton();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
 		log("/*35.----see 'Appointment confirmed!' screen --*/");
 		boolean apointment_result = inClinicExperience.AppointmentConfirmationMessage();
@@ -357,7 +357,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.successRegisteredMessageAppear();
 
 		log("/*25.----click on person Account Related Tab --*/");
-		inClinicExperience.clickOnPersonAccountRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 
 		log("/*26.----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
@@ -384,20 +384,20 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		PersonAccountSchedulePage.searchClinicName(driver, supplyLocationConsumption);
 
 		log("/*30.----click on Option Facility location  --*/");
-		inClinicExperience.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
 		log("/*31.----select Active booking appointment day  --*/");
-		inClinicExperience.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
 		log("/*32.----select the time slot  --*/");
-		inClinicExperience.selectTimeSlotForAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 
 		log("/*33.----click Next button  --*/");
-		inClinicExperience.clickNextButtonApptSchedulingPage();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
 		log("/*34.----click Verify Contact Info checkbox  --*/");
-		inClinicExperience.clickVerifyContactInformation();
-		inClinicExperience.clickAppointmentConfirmButton();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
 		log("/*35.----see 'Appointment confirmed!' screen --*/");
 		boolean apointment_result = inClinicExperience.AppointmentConfirmationMessage();

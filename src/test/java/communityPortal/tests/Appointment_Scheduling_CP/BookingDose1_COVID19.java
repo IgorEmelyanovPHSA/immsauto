@@ -115,29 +115,29 @@ public class BookingDose1_COVID19 extends BaseTest {
         PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         log("/*27----click on Option Facility location  --*/");
-        inClinicExperience_CP.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*28----select Active booking appointment day  --*/");
-        inClinicExperience_CP.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
         log("/*29----select the time slot  --*/");
-        inClinicExperience_CP.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 
         log("/*30----click Next button  --*/");
-        inClinicExperience_CP.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 
         log("/*32----click Confirm Appointment button  --*/");
-        inClinicExperience_CP.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         //////
         log("/*35_1.----Refresh page again - should not be like that again --*/");
         inClinicExperience_CP.refreshBrowser();
