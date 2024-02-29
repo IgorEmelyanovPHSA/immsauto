@@ -122,22 +122,22 @@ public class BookingDose2_COVID19 extends BaseTest {
         PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         log("/*23.----click on Option Facility location  --*/");
-        inClinicExperience_CP.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*24.----select Active booking appointment day  --*/");
-        inClinicExperience_CP.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
         log("/*25.----select the time slot  --*/");
-        inClinicExperience_CP.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 
         log("/*26.----click Next button  --*/");
-        inClinicExperience_CP.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*27.----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 
         log("/*28.----click Confirm Appointment button  --*/");
-        inClinicExperience_CP.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*29.----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();

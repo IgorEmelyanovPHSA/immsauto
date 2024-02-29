@@ -107,7 +107,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         }
 
         log("24. Navigate to Related tab");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
 
         log("25. Navigate to Appointments and click view all");
         inClinicExperience_CP.navigateToAppointmentRecords();

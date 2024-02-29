@@ -140,17 +140,17 @@ public class Alerts_ICE_CIB extends BaseTest {
         PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         System.out.println("/*29----click on Option Facility location  --*/");
-        inClinicExperience.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
         System.out.println("/*30----select Active booking appointment day  --*/");
-        inClinicExperience.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
         System.out.println("/*31----select the time slot  --*/");
-        inClinicExperience.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
         System.out.println("/*32----click Next button  --*/");
-        inClinicExperience.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
         System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
         System.out.println("/*34----click Confirm Appointment button  --*/");
-        inClinicExperience.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
         System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
 
