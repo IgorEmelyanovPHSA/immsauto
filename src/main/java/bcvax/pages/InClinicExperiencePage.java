@@ -190,7 +190,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public void clickRegisterTab() throws InterruptedException {
 		Thread.sleep(500);
-		By register_tab_path = By.xpath("(//a[@title = 'Register'])");
+		By register_tab_path = By.xpath("//a[@title='Register']/..");
 		waitForElementToBeEnabled(driver, register_tab_path, 10);
 		WebElement register_tab = driver.findElement(register_tab_path);
 		register_tab.click();

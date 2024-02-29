@@ -204,10 +204,6 @@ public class CallCenterConsolePage extends BasePage {
 		Thread.sleep(2000);
 		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
 	}
-
-	public void navigateToVaccineSchedulingTab() throws InterruptedException {
-		PersonAccountPage.goToVaccineScheduleTab(driver);
-	}
 	
 	public void clickOnVaccinationCheckbox() throws InterruptedException {
 		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");

@@ -87,7 +87,7 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.clickRefreshForecastButton();
 		Thread.sleep(2000);
 		log("/*21----Go to Appointment Tab --*/");
-		callCenterConsole.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
@@ -95,7 +95,7 @@ public class BookingDose2 extends BaseTest {
 			callCenterConsole.clickOnVaccinationCheckbox();
 		} catch(NotFoundException ex) {
 			Thread.sleep(2000);
-			callCenterConsole.navigateToVaccineSchedulingTab();
+			PersonAccountPage.goToVaccineScheduleTab(driver);
 			Thread.sleep(2000);
 			callCenterConsole.clickOnVaccinationCheckbox();
 		}
