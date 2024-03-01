@@ -35,9 +35,6 @@ public class ClinicInBoxPage extends BasePage {
 	private WebElement phn;
 	private By phn1 = By.xpath("(.//input[@name = 'HC_Personal_Health_Number'])");
 	
-	@FindBy(xpath = "(.//input[@name = 'BCH_Indigenous'])[2]")
-	private WebElement non_indigenous_radio_button;
-	
 	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
 	private WebElement verify_phn_button;
 	
@@ -58,29 +55,12 @@ public class ClinicInBoxPage extends BasePage {
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 
 	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-
-	@FindBy(xpath = ".//span[text() = 'Select One']")
-	private WebElement click_early_booking_reason;
-
-	@FindBy(xpath = ".//span[text() = 'Travel']")
-	private WebElement select_early_booking_reason;
-
-	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
-	
-	@FindBy(xpath = "//input[@name='clinicstag']")
-	private WebElement search_clinic_name;
-	
-	@FindBy(xpath = "(.//button[@name = 'facility'])[1]")
-	private WebElement option_loc_facility;
 	
 	@FindBy(xpath = "(.//button[@class = 'slds-day active-day'])[1]")
 	private WebElement booking_app_active_day;
 	
 	@FindBy(xpath = "(.//button[@name='timeslot'])[1]")
 	private WebElement time_slot_appointment;
-
-	@FindBy(xpath = "(.//button[@name='navigateToICE'])")
-	private WebElement click_navigate_to_ICE_btn;
 
 	/*---------Constructor-------*/
 	public ClinicInBoxPage(WebDriver driver) {
@@ -174,12 +154,6 @@ public class ClinicInBoxPage extends BasePage {
 		Thread.sleep(500);
 	}
 	
-	public void clickNonIndigenousRadioButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-		scrollCenter(non_indigenous_radio_button);
-		click(non_indigenous_radio_button);
-	}
-	
 	public void clickVerifyPHNButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, verify_phn_button, 10);
 		verify_phn_button.click();
@@ -230,105 +204,6 @@ public class ClinicInBoxPage extends BasePage {
 		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
 	}
 	
-	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(person_account_Related_tab_1);
-		isDisplayed(person_account_Related_tab_1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-
-	public void navigateToVaccineSchedulingTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
-		}
-	}
-
-	public void clickAppointmentTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
-		}
-	}
-
-	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-	}
-
-	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
-		Thread.sleep(2000);
-		click_early_booking_reason.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-		Thread.sleep(2000);
-		select_early_booking_reason.click();
-	}
-	
-	public void selectSearchByClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
-	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-		waitForElementToBeVisible(driver, search_clinic_name, 10);
-		search_clinic_name.click();
-		Thread.sleep(2000);
-		search_clinic_name.sendKeys(clinicNameToSearch);
-		search_clinic_name.sendKeys(Keys.RETURN);
-	}
-	
-	public void clickOnFacilityOptionLocation() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, option_loc_facility, 10);
-		option_loc_facility.click();
-	}
-	
-	public void selectBookingAppointmentDay() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, booking_app_active_day, 10);
-		booking_app_active_day.click();
-	}
-	
-	public void selectTimeSlotAppointment() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, time_slot_appointment, 10);
-		Thread.sleep(2000);
-		time_slot_appointment.click();
-	}
-	
-	public void clickOnNextButton() throws InterruptedException {
-		Thread.sleep(500);
-		By next_btn_path = By.xpath("//button[@c-bchappointmentscheduler_bchappointmentscheduler and text() = 'Next']");
-		waitForElementToBeEnabled(driver, next_btn_path, 10);
-		WebElement next_btn = driver.findElement(next_btn_path);
-		next_btn.click();
-	}
-	
-	public void clickOnConfirmButton() throws InterruptedException {
-		Thread.sleep(500);
-		By confirm_appointment_btn_path = By.xpath("//button[@c-bchschedulerreviewfooter_bchschedulerreviewfooter and text() = 'Confirm appointment']");
-		waitForElementToBeEnabled(driver, confirm_appointment_btn_path, 10);
-		WebElement confirm_appointment_button = driver.findElement(confirm_appointment_btn_path);
-		confirm_appointment_button.click();
-	}
-	
 	public boolean validateAppointmentConfirmedScreen() throws InterruptedException {
 		By appointment_confirm_message_path = By.xpath("//div[@role = 'heading']/h1[text() = 'Appointment confirmed!']");
 		try {
@@ -344,29 +219,4 @@ public class ClinicInBoxPage extends BasePage {
 	public void refreshBrowser() throws InterruptedException {
 		driver.navigate().refresh();
 	}
-	
-	public InClinicExperiencePage ClickGoToInClinicExperienceButton() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_navigate_to_ICE_btn, 10);
-		Thread.sleep(2000);
-		click_navigate_to_ICE_btn.click();
-		Thread.sleep(2000);
-		return new InClinicExperiencePage(driver);
-	}
-
-	public void clickVerifyContactInformation() throws InterruptedException {
-		Thread.sleep(500);
-		By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@class='slds-checkbox_faux']");
-		waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
-		WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
-		Thread.sleep(1000);
-		scrollCenter(verify_contact_information_checkbox);
-		Thread.sleep(1000);
-		verify_contact_information_checkbox.click();
-		Thread.sleep(500);
-	}
-
-	public void selectOneOption(String vaccine) throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
-	}
-
 }

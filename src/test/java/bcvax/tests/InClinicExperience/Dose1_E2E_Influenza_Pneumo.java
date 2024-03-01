@@ -1,11 +1,8 @@
 package bcvax.tests.InClinicExperience;
 
 import Utilities.TestListener;
-import bcvax.pages.PersonAccountPage;
-import bcvax.pages.UserDefaultsPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -112,15 +109,15 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         inClinicExperience.successRegisteredMessageAppear();
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         System.out.println("/*25.----click on person Account Related Tab --*/");
-        inClinicExperience.clickOnPersonAccountRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(5000);
 
         System.out.println("/*26----Go to Appointment Tab --*/");
-        inClinicExperience.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         Thread.sleep(15000);
 
         log("/*27.----click on the Vaccine 'Influenza' checkbox --*/");
-        inClinicExperience.clickOnVaccinationInfluenzaCheckbox();
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Influenza Vaccine");
         Thread.sleep(2000);
 
         //System.out.println("/*29----click on 'More' search tab --*/");
@@ -128,29 +125,29 @@ public class Dose1_E2E_Influenza_Pneumo extends BaseTest {
         //Thread.sleep(2000);
 
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
-        inClinicExperience.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         Thread.sleep(2000);
 
         log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
         Thread.sleep(2000);
         System.out.println("/*29----click on Option Facility location  --*/");
-        inClinicExperience.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
         Thread.sleep(2000);
         System.out.println("/*30----select Active booking appointment day  --*/");
-        inClinicExperience.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
         Thread.sleep(2000);
         System.out.println("/*31----select the time slot  --*/");
-        inClinicExperience.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
         Thread.sleep(2000);
         System.out.println("/*32----click Next button  --*/");
-        inClinicExperience.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
         Thread.sleep(5000);
         System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
         Thread.sleep(2000);
         System.out.println("/*34----click Confirm Appointment button  --*/");
-        inClinicExperience.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
         Thread.sleep(2000);
         System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
         inClinicExperience.AppointmentConfirmationMessage();

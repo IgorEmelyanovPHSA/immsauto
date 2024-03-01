@@ -126,43 +126,43 @@ public class BookingDose1 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 		log("/*21----Go to Appointment Tab --*/");
-		clinicInBox.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
 		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		clinicInBox.selectOneOption(vaccineToSelect);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*24----select 'Search by Clinic name' tab --*/");
-		clinicInBox.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-		clinicInBox.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*26----click on Option Facility location  --*/");
-		clinicInBox.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		log("/*27----select Active booking appointment day  --*/");
-		clinicInBox.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		log("/*28----select the time slot  --*/");
-		clinicInBox.selectTimeSlotAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		log("/*29----click Next button  --*/");
-		clinicInBox.clickOnNextButton();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		log("/*30----click Verify Contact Information Checkbox  --*/");
-		clinicInBox.clickVerifyContactInformation();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		log("/*31----click Confirm Appointment button  --*/");
-		clinicInBox.clickOnConfirmButton();
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		try {
 			log("/*32----see 'Appointment confirmed!' screen --*/");
 			boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
 			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		} catch(Exception ex) {
-			clinicInBox.clickOnConfirmButton();
+			PersonAccountSchedulePage.clickOnConfirmButton(driver);
 			log("/*32----see 'Appointment confirmed!' screen. Second attempt --*/");
 			boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
 			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");

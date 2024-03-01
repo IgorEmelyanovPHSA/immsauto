@@ -80,9 +80,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*8.----Enter PHN: " +personalHealthNumber +"--*/");
 		clinicInBox.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-			clinicInBox.clickNonIndigenousRadioButton();
-		}
+
 		log("/*10.----click Verify PHN button --*/");
 		clinicInBox.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -109,22 +107,16 @@ public class BookingDose2 extends BaseTest {
 		log("/*18.----click on person Account Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*19----Go to Appointment Tab --*/");
-		clinicInBox.clickAppointmentTab();
-//		try {
-//			System.out.println("/*20.----click on reason Early Booking Reason - Travel --*/");
-//			clinicInBox.selectEarlyBookingReason();
-//		} catch(Exception ex) {
-//			System.out.println("There is not Early Booking Option");
-//		}
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
 		log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		clinicInBox.selectOneOption(vaccineToSelect);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 
 		////////////////////
 		//May will be removed
@@ -133,21 +125,21 @@ public class BookingDose2 extends BaseTest {
 
 
 		log("/*21----select 'Search clinic name' tab --*/");
-		clinicInBox.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		log("/*22----search the Clinic " +clinicNameToSearch +" --*/");
-		clinicInBox.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*23----click on Option Facility location  --*/");
-		clinicInBox.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		log("/*24----select Active booking appointment day  --*/");
-		clinicInBox.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		log("/*25----select the time slot  --*/");
-		clinicInBox.selectTimeSlotAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		log("/*26----click Next button  --*/");
-		clinicInBox.clickOnNextButton();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		log("/*27----click Verify Contact Information Checkbox  --*/");
-		clinicInBox.clickVerifyContactInformation();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		log("/*28----click Confirm Appointment button  --*/");
-		clinicInBox.clickOnConfirmButton();
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		log("/*29----see 'Appointment Confirmed!' screen --*/");
 		boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");

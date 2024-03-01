@@ -1,9 +1,6 @@
 package communityPortal.tests.Appointment_Scheduling_CP;
 
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.PersonAccountPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
@@ -87,7 +84,7 @@ public class BookingDose2_COVID19 extends BaseTest {
         //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*19.----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         //In case of Early Booking
 //        try {
 //            PersonAccountPage.selectEarlyBookingReason(driver);
@@ -98,19 +95,19 @@ public class BookingDose2_COVID19 extends BaseTest {
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
 
         try {
-            inClinicExperience_CP.selectOneOption(vaccineToSelect);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         } catch(NotFoundException ex) {
             Thread.sleep(2000);
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
             Thread.sleep(2000);
-            inClinicExperience_CP.selectOneOption(vaccineToSelect);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         }
 
         ////////////////////
@@ -119,28 +116,28 @@ public class BookingDose2_COVID19 extends BaseTest {
         ///////////////////
 
         log("/*21.----select 'Search by Clinic name' tab --*/");
-        inClinicExperience_CP.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
         log("/*22.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
         log("/*23.----click on Option Facility location  --*/");
-        inClinicExperience_CP.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*24.----select Active booking appointment day  --*/");
-        inClinicExperience_CP.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
         log("/*25.----select the time slot  --*/");
-        inClinicExperience_CP.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 
         log("/*26.----click Next button  --*/");
-        inClinicExperience_CP.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*27.----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 
         log("/*28.----click Confirm Appointment button  --*/");
-        inClinicExperience_CP.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*29.----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();

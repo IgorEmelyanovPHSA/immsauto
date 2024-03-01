@@ -160,7 +160,7 @@ public abstract class BasePage<T> {
 					if (Utils.getEnvConfigProperty("debug_info").equals("yes")) {
 						System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Attribute " + attribute + " value is: " + String.valueOf(found_attribute_value));
 					}
-				}catch(Exception ex) {
+				} catch(Exception ex) {
 					continue;
 				}
 				System.out.println(end.toString());

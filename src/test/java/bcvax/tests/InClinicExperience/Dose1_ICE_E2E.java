@@ -128,37 +128,37 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//System.out.println("/*25.----click on person Account Related Tab --*/");
 		//inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
-		inClinicExperience.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 		Thread.sleep(2000);
 //If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
 		Thread.sleep(2000);
 		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		inClinicExperience.selectOneOption(vaccine_agent);
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
-		inClinicExperience.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
-		inClinicExperience.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		System.out.println("/*29----click on Option Facility location  --*/");
-		inClinicExperience.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		System.out.println("/*30----select Active booking appointment day  --*/");
-		inClinicExperience.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		System.out.println("/*31----select the time slot  --*/");
-		inClinicExperience.selectTimeSlotForAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		System.out.println("/*32----click Next button  --*/");
-		inClinicExperience.clickNextButtonApptSchedulingPage();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
-		inClinicExperience.clickVerifyContactInformation();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		System.out.println("/*34----click Confirm Appointment button  --*/");
-		inClinicExperience.clickAppointmentConfirmButton();
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
 		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
 

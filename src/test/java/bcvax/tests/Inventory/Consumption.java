@@ -134,7 +134,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 31.Click register Button on confirmation page --*/");
 		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
-		inClinicExperiencePage.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
 //		try {
@@ -148,38 +148,36 @@ public class Consumption extends BaseTest {
 		//If override Eligibility is shown
 		try {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountPage.overrideEligibility(driver);
+			PersonAccountSchedulePage.overrideEligibility(driver);
 		} catch(Exception ex) {
 			System.out.println("There is not Override Eligibility Option");
 		}
 
 		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
-		inClinicExperiencePage.clickOnVaccinationCheckbox();
+		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
-		inClinicExperiencePage.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*35.----search the Clinic " +clinicNameToSearch +" --*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		log("/*--36.----click on Option Facility location  --*/");
-		inClinicExperiencePage.clickOnFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		log("/*--37.----select Appointment Day --*/");
-		inClinicExperiencePage.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		log("/*--38.---- select time slot for Appointment --*/");
-		inClinicExperiencePage.selectTimeSlotForAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		log("/*--39.---Click Next Button to Schedule Appointment --*/");
-		inClinicExperiencePage.clickNextButtonApptSchedulingPage();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		log("/*40.----click Verify Contact Info checkbox  --*/");
-		inClinicExperiencePage.clickVerifyContactInformation();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		log("/*-- 41.---Click Appointment Confirm Button --*/");
-		inClinicExperiencePage.clickAppointmentConfirmButton();
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
 		inClinicExperiencePage.AppointmentConfirmationMessage();
 		log("/*-- 43.---Navigate to person account Related Tab --*/");

@@ -1,14 +1,12 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.PersonAccountPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.CallCenterConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -69,9 +67,6 @@ public class BookingDose2 extends BaseTest {
 		log("/*8.----Enter PHN " +personalHealthNumber +"--*/");
 		callCenterConsole.enterPNH(personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-			callCenterConsole.clickNonIndigenousRadioButton();
-		}
 		log("/*10.----click Verify PHN button --*/");
 		callCenterConsole.clickVerifyPHNButton();
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -90,30 +85,32 @@ public class BookingDose2 extends BaseTest {
 		log("/*17.--toast success message - 'Success' --*/");
 		callCenterConsole.successRegisteredMessageAppear();
 		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
-		callCenterConsole.clickRefreshForecastButton();
+		PersonAccountPage.clickRefreshForecastButton(driver);
 		Thread.sleep(2000);
 		log("/*21----Go to Appointment Tab --*/");
-		callCenterConsole.navigateToVaccineSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");
 		try {
-			callCenterConsole.clickOnVaccinationCheckbox();
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		} catch(NotFoundException ex) {
-			Thread.sleep(2000);
-			callCenterConsole.navigateToVaccineSchedulingTab();
-			Thread.sleep(2000);
-			callCenterConsole.clickOnVaccinationCheckbox();
+			Thread.sleep(500);
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+			Thread.sleep(500);
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		} catch(StaleElementReferenceException ex) {
+			Thread.sleep(500);
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+			Thread.sleep(500);
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
-		////////////////////
-		//May will be removed
-		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
-		///////////////////
+
 		log("/*24----select 'Search clinic name' tab --*/");
-		callCenterConsole.selectSearchClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-		callCenterConsole.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*26----click on Option Facility location  --*/");
 		callCenterConsole.clickOnFacilityOptionLocation();
 		log("/*27----select Active booking appointment day  --*/");
@@ -132,7 +129,7 @@ public class BookingDose2 extends BaseTest {
 		log("/*33----Refresh page --*/");
 		callCenterConsole.refreshBrowser();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
-		callCenterConsole.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 
 	@Test(priority = 2)

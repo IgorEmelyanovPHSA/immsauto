@@ -101,47 +101,47 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
         Thread.sleep(10000); //wait for Related Tab showing up
 
         log("/*22.----click on person Account Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(5000);//wait for accordion loading
 
         log("/*23----Go to Appointment Tab --*/");
-        inClinicExperience_CP.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         Thread.sleep(5000);
 
         log("/*24.----click on the Vaccine 'Influenza Vaccine' checkbox --*/");
-        inClinicExperience_CP.clickOnVaccinationInfluenzaCheckbox();
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Influenza Vaccine");
         Thread.sleep(2000);
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
-        inClinicExperience_CP.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         Thread.sleep(2000);
 
         log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience_CP.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
         Thread.sleep(2000);
 
         log("/*27----click on Option Facility location  --*/");
-        inClinicExperience_CP.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
         Thread.sleep(2000);
 
         log("/*28----select Active booking appointment day  --*/");
-        inClinicExperience_CP.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
         Thread.sleep(2000);
 
         log("/*29----select the time slot  --*/");
-        inClinicExperience_CP.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
         Thread.sleep(2000);
 
         log("/*30----click Next button  --*/");
-        inClinicExperience_CP.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
         Thread.sleep(2000);
 
         log("/*31----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience_CP.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
         Thread.sleep(2000);
 
         log("/*32----click Confirm Appointment button  --*/");
-        inClinicExperience_CP.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
         Thread.sleep(2000);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
@@ -149,7 +149,7 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
         Thread.sleep(3000);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
-        inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(5000);
         //////
         log("/*35_1.----Refresh page again - should not be like that again --*/");

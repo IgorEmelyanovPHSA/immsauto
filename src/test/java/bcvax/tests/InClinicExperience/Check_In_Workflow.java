@@ -52,7 +52,7 @@ public class Check_In_Workflow extends BaseTest {
         log("/*3.----click on person Account Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);
         log("/*4.----Verify no Imms record was created --*/");
-        int records_count = PersonAccountPage.getImmunizationRecordsSize(driver);
+        int records_count = PersonAccountRelatedPage.getImmunizationRecordsSize(driver);
         Assert.assertTrue(records_count == 0);
         log("/*5.----Verify nteh appointment is booked successfully --*/");
         bookAppointment();
@@ -74,7 +74,7 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(current_tab.equals("Identification"));
         orgMainPage.globalSearch(citizenName);
         PersonAccountPage.goToRelatedTab(driver);
-        String pathway_status = PersonAccountPage.getImmunizationRecordPathwayStatus(driver);
+        String pathway_status = PersonAccountRelatedPage.getImmunizationRecordPathwayStatus(driver);
         log("/*10.----Verify Pathway Status is New --*/");
         Assert.assertTrue(pathway_status.equals("New"));
         inClinicExperience.clickClientListTab();
@@ -120,7 +120,7 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(current_tab.equals("Identification"));
         orgMainPage.globalSearch(citizenName);
         PersonAccountPage.goToRelatedTab(driver);
-        String pathway_status = PersonAccountPage.getImmunizationRecordPathwayStatus(driver);
+        String pathway_status = PersonAccountRelatedPage.getImmunizationRecordPathwayStatus(driver);
         log("/*----9. Verify the Pathway Status is New --*/");
         Assert.assertTrue(pathway_status.equals("New"));
         inClinicExperience.clickClientListTab();
@@ -142,7 +142,9 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(current_tab.equals("Identification"));
         inClinicExperience.HomePageClickConfirmAndSaveButton();
         inClinicExperience.clickTodayAppointments();
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        driver.navigate().refresh();
+        Thread.sleep(500);
         my_status = inClinicExperience.getTodayAppointmentPathwayStatus(citizenName);
         log("/*----14. Verify the Pathway Status is Vaccine_Administration --*/");
         Assert.assertEquals(my_status,"Vaccine_Administration");
@@ -215,36 +217,36 @@ public class Check_In_Workflow extends BaseTest {
 
     private void bookAppointment() throws InterruptedException {
         log("/*4----Go to Appointment Tab --*/");
-        inClinicExperience.navigateToVaccineSchedulingTab();
+        PersonAccountPage.goToVaccineScheduleTab(driver);
         Thread.sleep(2000);
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountPage.overrideEligibility(driver);
+            PersonAccountSchedulePage.overrideEligibility(driver);
         } catch(Exception ex) {
             System.out.println("There is not Override Eligibility Option");
         }
-        inClinicExperience.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         ////////////////////
         //May will be removed
         //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
         ///////////////////
         log("/*24----select 'Search by Clinic name' tab --*/");
-        inClinicExperience.selectSearchByClinicNameTab();
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-        inClinicExperience.searchClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
         log("/*26----click on Option Facility location  --*/");
-        inClinicExperience.clickOnFacilityOptionLocation();
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
         log("/*27----select Active booking appointment day  --*/");
-        inClinicExperience.selectBookingAppointmentDay();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
         log("/*28----select the time slot  --*/");
-        inClinicExperience.selectTimeSlotForAppointment();
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
         log("/*29----click Next button  --*/");
-        inClinicExperience.clickNextButtonApptSchedulingPage();
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
         log("/*30----click Verify Contact Information Checkbox  --*/");
-        inClinicExperience.clickVerifyContactInformation();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
         log("/*31----click Confirm Appointment button  --*/");
-        inClinicExperience.clickAppointmentConfirmButton();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
         log("/*32----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");

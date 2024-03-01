@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -58,9 +59,15 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         ProfilesPage profilesPage = new ProfilesPage(driver);
 
         log("/*----6. Navigated to Person Account related tab ---*/");
+        try {
+            profilesPage.clickRelatedTab();
+        } catch (NotFoundException ex) {
+            driver.navigate().refresh();
+            Thread.sleep(1000);
+        }
         profilesPage.clickRelatedTab();
-        int immunization_records_count = profilesPage.getImmunizationRecords().size();
-        String active_consent_resp = profilesPage.getReletedActiveConsentsResponse(agent);
+        int immunization_records_count = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
+        String active_consent_resp = PersonAccountRelatedPage.getActiveConsentsResponse(driver, agent);
         Assert.assertEquals(active_consent_resp, "Grant");
         log("/*----7. Click Create Immunization Record ---*/");
         profilesPage.clickCreateImmunizationRecord();
@@ -90,6 +97,10 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         Assert.assertFalse(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously Active");
 
         DiwaImmunizationRecord.select_provider(driver, consentProvider);
+        profilesPage.clickShowAllLotNumbersCheckBox();
+        profilesPage.clickLotNumberDropDown();
+        profilesPage.selectLot();
+        profilesPage.selectDosage();
         DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
         Thread.sleep(1000);
 
@@ -105,8 +116,8 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
         Thread.sleep(2000);
         profilesPage.clickRelatedTab();
-        int immunization_records_count_new = profilesPage.getImmunizationRecords().size();
-        Assert.assertTrue(immunization_records_count_new == immunization_records_count + 1);
+        int immunization_records_count_new = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
+        Assert.assertTrue(immunization_records_count_new == immunization_records_count + 1, "Expected: " + (immunization_records_count + 1) + ";  Actual: " + immunization_records_count_new);
         System.out.println();
     }
 }

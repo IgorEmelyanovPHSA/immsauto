@@ -59,8 +59,6 @@ public class CallCenterConsolePage extends BasePage {
 	
 	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
 	private WebElement click_more_search_tabs;
-
-	private By search_by_clinic_name_tab1 = By.xpath(".//a[text()='Search by clinic name']");
 	
 	@FindBy(xpath = "//input[@name='clinicstag']")
 	private WebElement search_clinic_name;
@@ -148,14 +146,6 @@ public class CallCenterConsolePage extends BasePage {
 		Thread.sleep(500);
 	}
 	
-	public void clickNonIndigenousRadioButton() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,150)");
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", non_indigenous_radio_button);
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, non_indigenous_radio_button, 10);
-		non_indigenous_radio_button.click();
-	}
-	
 	public void clickVerifyPHNButton() throws InterruptedException {
 		waitForElementToBeVisible(driver, verify_phn_button, 10);
 		verify_phn_button.click();
@@ -203,83 +193,12 @@ public class CallCenterConsolePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void clickRefreshForecastButton() throws InterruptedException {
-		PersonAccountPage.clickRefreshForecastButton(driver);
-	}
-	
 	public void successRegisteredMessageAppear() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
 		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
 		Thread.sleep(2000);
 		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
-	}
-	
-	public void clickOnPersonAccountRelatedTab() throws InterruptedException {
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(person_account_Related_tab_1);
-		isDisplayed(person_account_Related_tab_1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-
-	public void navigateToVaccineSchedulingTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
-		}
-	}
-
-	public void clickAppointmentTab() throws InterruptedException {
-		try {
-			PersonAccountPage.goToVaccineScheduleTab(driver);
-		} catch(NotFoundException ex) {
-			System.out.println("Vaccine Scheduling tab not found. Try Appointment Scheduling Tab...");
-			PersonAccountPage.goToAppointmentScheduleTab(driver);
-		}
-	}
-	
-	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-	}
-	
-	public void selectEarlyBookingReason() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,250)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_early_booking_reason, 10);
-		Thread.sleep(2000);
-		click_early_booking_reason.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_early_booking_reason, 10);
-		Thread.sleep(2000);
-		select_early_booking_reason.click();
-	}
-	
-	public void clickOnMoreSearchTabs() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_more_search_tabs, 10);
-		click_more_search_tabs.click();
-	}
-	
-	public void selectSearchClinicNameTab() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,500)");
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, search_by_clinic_name_tab1, 10);
-		Thread.sleep(2000);
-		WebElement element = driver.findElement(search_by_clinic_name_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-
-	public void searchClinicName(String clinicNameToSearch) throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-		waitForElementToBeVisible(driver, search_clinic_name, 10);
-		search_clinic_name.click();
-		Thread.sleep(2000);
-		search_clinic_name.sendKeys(clinicNameToSearch);
-		search_clinic_name.sendKeys(Keys.RETURN);
 	}
 
 	public void clickOnFacilityOptionLocation() throws InterruptedException {
@@ -333,13 +252,6 @@ public class CallCenterConsolePage extends BasePage {
 		driver.navigate().refresh();
 	}
 	
-	public void clickRelatedTab() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_related_tab1, 10);
-		WebElement element = driver.findElement(click_related_tab1);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-	}
-	
 	public void clickVerifyContactInformation() throws InterruptedException {
 		Thread.sleep(500);
 		By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@class='slds-checkbox_faux']");
@@ -351,10 +263,5 @@ public class CallCenterConsolePage extends BasePage {
 		verify_contact_information_checkbox.click();
 		Thread.sleep(500);
 	}
-
-	public void selectOneOption(String vaccine) throws InterruptedException {
-		PersonAccountPage.checkBookingVaccineCheckbox(driver, vaccine);
-	}
-
 }
 
