@@ -79,9 +79,9 @@ public class PersonAccountSchedulePage extends BasePage {
     }
 
     public static void selectSearchByClinicNameTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
         By search_by_clinic_name_tab_path = By.xpath(".//a[text()='Search by clinic name']");
         waitForElementToBeEnabled(driver, search_by_clinic_name_tab_path, 10);
-        Thread.sleep(500);
         WebElement search_by_clinic_name_tab = driver.findElement(search_by_clinic_name_tab_path);
         scrollCenter(driver, search_by_clinic_name_tab);
         Thread.sleep(500);
