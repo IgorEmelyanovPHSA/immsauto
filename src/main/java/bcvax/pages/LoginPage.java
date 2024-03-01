@@ -64,7 +64,7 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN"));
 		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMSBC_ADMIN_PW"));
-		click(login_button);
+		login_button.click();
 		return new SupplyConsolePage(driver);
 	}
 

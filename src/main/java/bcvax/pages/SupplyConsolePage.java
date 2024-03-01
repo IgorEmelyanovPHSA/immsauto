@@ -714,7 +714,7 @@ public class SupplyConsolePage extends BasePage {
 		try {
 			transfer_item.click();
 		} catch(ElementNotInteractableException ex) {
-			Thread.sleep(5000);
+			Thread.sleep(500);
 			transfer_item.click();
 		}
 		Thread.sleep(500);

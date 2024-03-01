@@ -193,20 +193,12 @@ public class CallCenterConsolePage extends BasePage {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void clickRefreshForecastButton() throws InterruptedException {
-		PersonAccountPage.clickRefreshForecastButton(driver);
-	}
-	
 	public void successRegisteredMessageAppear() throws InterruptedException {
 		Thread.sleep(500);
 		waitForElementToBeLocated(driver, By.xpath(".//div[text() = 'Citizen Successfully Registered']"), 20);
 		driver.findElement(By.xpath(".//div[text() = 'Citizen Successfully Registered']"));
 		Thread.sleep(2000);
 		System.out.println("/* ----the toast success Citizen Registered message has been Appears");
-	}
-	
-	public void clickOnVaccinationCheckbox() throws InterruptedException {
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 	}
 
 	public void clickOnFacilityOptionLocation() throws InterruptedException {

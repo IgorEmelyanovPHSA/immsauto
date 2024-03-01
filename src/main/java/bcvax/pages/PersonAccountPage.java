@@ -31,6 +31,7 @@ public class PersonAccountPage extends BasePage {
         WebElement vaccine_schedule_tab = driver.findElement(vaccine_schedule_tab_path);
         waitForElementToBeVisible(driver, vaccine_schedule_tab, 10);
         vaccine_schedule_tab.click();
+        Thread.sleep(500);
         waitForAttribute(driver, vaccine_schedule_tab_path, "aria-selected", "true", 10);
     }
 
@@ -40,6 +41,8 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, refresh_forecast_btn_path, 10);
         WebElement refresh_forecast_btn = driver.findElement(refresh_forecast_btn_path);
         refresh_forecast_btn.click();
+        Thread.sleep(500);
+        waitForElementNotToBePresent(driver, refresh_forecast_btn_path, 10);
         Thread.sleep(500);
         waitForElementToBeEnabled(driver, refresh_forecast_btn_path, 10);
     }
