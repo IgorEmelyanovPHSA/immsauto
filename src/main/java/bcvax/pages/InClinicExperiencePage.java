@@ -60,26 +60,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	private By get_remaining_doses1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Remaining Doses']/../..//LIGHTNING-FORMATTED-NUMBER[@lightning-formattednumber_formattednumber-host='']");
 
-	@FindBy(xpath = "(.//input[@name = 'FirstName'])")
-	private WebElement first_name;
-	private By first_name1 = By.xpath("(.//input[@name = 'FirstName'])");
-
-	@FindBy(xpath = "(.//input[@name = 'LastName'])")
-	private WebElement last_name;
-	private By last_name1 = By.xpath("(.//input[@name = 'LastName'])");
-
-	@FindBy(xpath = "(.//input[@name = 'PersonBirthdate'])")
-	private WebElement date_of_birth;
-	private By date_of_birth1 = By.xpath("(.//input[@name = 'PersonBirthdate'])");
-
-	@FindBy(xpath = "(.//input[@name = 'DDH_HC_Zip_Code'])")
-	private WebElement postal_code;
-	private By postal_code1 = By.xpath("(.//input[@name = 'DDH_HC_Zip_Code'])");
-
-	@FindBy(xpath = "(.//input[@name = 'HC_Personal_Health_Number'])")
-	private WebElement phn;
-	private By phn1 = By.xpath("(.//input[@name = 'HC_Personal_Health_Number'])");
-
 	@FindBy(xpath = "//button[contains(text(),'Cancel Appointment')]")
 	private WebElement btnCancelAppointment;
 
@@ -196,15 +176,6 @@ public class InClinicExperiencePage extends BasePage {
 		register_tab.click();
 	}
 
-	public void clickRegisterButtonOnConfirmationPage() throws InterruptedException {
-		Thread.sleep(500);
-		By register_btn_path = By.xpath("//button[text() = 'Register']");
-		waitForElementToBeEnabled(driver, register_btn_path, 10);
-		WebElement register_btn = driver.findElement(register_btn_path);
-		register_btn.click();
-		Thread.sleep(500);
-	}
-
 	public boolean userFound() throws InterruptedException {
 		if (!isDisplayed(user_found1)) {
 			return false;
@@ -227,24 +198,6 @@ public class InClinicExperiencePage extends BasePage {
 		}
 		user_link.click();
 		return true;
-	}
-
-	public void successMessageAppear() throws InterruptedException {
-		Thread.sleep(500);
-		By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
-
-
-		log("  -- success message has been Appears. Closing... - /");
-		try {
-
-			waitForElementToBeEnabled(driver, message_path, 10);
-			String message = driver.findElement(message_path).getText();
-//		Assert.assertEquals(message, "Success", "Expected PHN Match Success but found '" + message + "'");
-			clickCloseAlert();
-			Thread.sleep(500);
-		} catch(Exception ex) {
-			System.out.println("Probably alert already closed. Continue...");
-		}
 	}
 
 	public void newDeferral() throws InterruptedException {
@@ -515,85 +468,12 @@ public class InClinicExperiencePage extends BasePage {
 		clickCloseAlert();
 	}
 
-	public void enterFirstName(String firstname) throws InterruptedException {
-		waitForElementToBeLocated(driver, first_name1, 10);
-		first_name.sendKeys(firstname);
-	}
-
-	public void enterLastName(String lastname) throws InterruptedException {
-		waitForElementToBeLocated(driver, last_name1, 10);
-		last_name.sendKeys(lastname);
-	}
-
-	public void enterDateOfBirth(String dateofbirth) throws InterruptedException {
-		waitForElementToBeLocated(driver, date_of_birth1, 10);
-		date_of_birth.sendKeys(dateofbirth);
-	}
-
-	public void enterPostalCode(String postalcode) throws InterruptedException {
-		waitForElementToBeLocated(driver, postal_code1, 10);
-		postal_code.sendKeys(postalcode);
-	}
-
-	public void enterPNH(String phn_number) throws InterruptedException {
-		waitForElementToBeLocated(driver, phn1, 10);
-		phn.sendKeys(phn_number);
-		Thread.sleep(500);
-		phn.sendKeys(Keys.TAB);
-	}
-
 	public void clickNonIndigenousRadioButton() throws InterruptedException {
 		Thread.sleep(500);
 		By non_indigenous_radio_button_path = By.xpath("(//input[@name = 'BCH_Indigenous'])[2]");
 		waitForElementToBeEnabled(driver, non_indigenous_radio_button_path, 10);
 		WebElement non_indigenous_radio_button = driver.findElement(non_indigenous_radio_button_path);
 		non_indigenous_radio_button.click();
-	}
-
-	public void clickVerifyPHNButton() throws InterruptedException {
-		Thread.sleep(500);
-		By verify_phn_button_path = By.xpath("//button[@title = 'Verify Personal Health Number']");
-		waitForElementToBeEnabled(driver, verify_phn_button_path, 30);
-		WebElement verify_phn_button = driver.findElement(verify_phn_button_path);
-		verify_phn_button.click();
-	}
-
-	public void clickNextButton() throws InterruptedException {
-		Thread.sleep(500);
-		By next_btn_path = By.xpath("//button[@title='Next']");
-		waitForElementToBeEnabled(driver, next_btn_path, 10);
-		WebElement next_btn = driver.findElement(next_btn_path);
-		scrollIfNeeded(driver, next_btn);
-		Thread.sleep(500);
-		next_btn.click();
-	}
-
-	public void enterEmail(String enteremail) throws InterruptedException {
-		Thread.sleep(500);
-		By email_field_path = By.xpath("//input[@name = 'PersonEmail']");
-		waitForElementToBeEnabled(driver, email_field_path, 10);
-		WebElement email_field = driver.findElement(email_field_path);
-		try {
-			email_field.sendKeys(enteremail);
-		} catch (ElementNotInteractableException ex) {
-			Thread.sleep(2000);
-			email_field = driver.findElement(email_field_path);
-			email_field.sendKeys(enteremail);
-		}
-	}
-
-	public void confirmEmail(String confirmemail) throws InterruptedException {
-		By confirm_email_field_path = By.xpath("//input[@name = 'ConfirmEmail']");
-		waitForElementToBeEnabled(driver, confirm_email_field_path, 10);
-		WebElement confirm_email_field = driver.findElement(confirm_email_field_path);
-		confirm_email_field.sendKeys(confirmemail);
-	}
-
-	public void clickReviewDetails() throws InterruptedException {
-		By review_details_btn_path = By.xpath("//button[text()= 'Review Details']");
-		waitForElementToBeEnabled(driver, review_details_btn_path, 10);
-		WebElement review_details_btn = driver.findElement(review_details_btn_path);
-		review_details_btn.click();
 	}
 
 	public boolean AppointmentConfirmationMessage() throws InterruptedException {
@@ -918,19 +798,6 @@ public class InClinicExperiencePage extends BasePage {
 		} catch (NoSuchElementException e) {
 			System.out.println("/*---no Vaccine Admin ICE Page show up");
 			return false;
-		}
-	}
-
-	public void successRegisteredMessageAppear() throws InterruptedException {
-		Thread.sleep(500);
-		boolean alert_found = AlertDialog.alertFound(driver);
-		WebElement alert_content = AlertDialog.getAlertContent(driver);
-		String alert_text = alert_content.getText();
-		Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"));
-		try {
-			AlertDialog.closeAlert(driver);
-		} catch(ElementClickInterceptedException ex) {
-			AlertDialog.closeAlert(driver);
 		}
 	}
 

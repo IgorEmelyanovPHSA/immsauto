@@ -70,38 +70,38 @@ public class Check_In_Client_ICE extends BaseTest {
         inClinicExperiencePage.clickRegisterTab();
         inClinicExperiencePage.clickRegisterButton();
         log("/*6.----Enter First Name " +legalFirstName +"--*/");
-        inClinicExperiencePage.enterFirstName(legalFirstName);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*7.----Enter Last Name " +legalLastName +"--*/");
-        inClinicExperiencePage.enterLastName(legalLastName);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
         log("/*8.----Enter Date of birth " +dateOfBirth +"--*/");
-        inClinicExperiencePage.enterDateOfBirth(dateOfBirth);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
         log("/*9.----Enter Postal code " +postalCode +"--*/");
-        inClinicExperiencePage.enterPostalCode(postalCode);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
         log("/*10.----Enter PHN " +personalHealthNumber +"--*/");
-        inClinicExperiencePage.enterPNH(personalHealthNumber);
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
         log("/*11.----click on non-Indigenous person radiobutton --*/");
-        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-            inClinicExperiencePage.clickNonIndigenousRadioButton();
-        }
+//        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
+//            inClinicExperiencePage.clickNonIndigenousRadioButton();
+//        }
         log("/*12.----click Verify PHN button --*/");
-        inClinicExperiencePage.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         log("/*13.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperiencePage.successMessageAppear();
+        CitizenPrimaryInfo.successMessageAppear(driver);
 
         log("/*14.----click Next button --*/");
-        inClinicExperiencePage.clickNextButton();
+        CitizenPrimaryInfo.clickNextButton(driver);
         log("/*15.----'Enter email address " +email +"--*/");
-        inClinicExperiencePage.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*16.----'Confirm email address " +email +"--*/");
-        inClinicExperiencePage.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
         log("/*17.---Click review details Button--*/");
-        inClinicExperiencePage.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
         Thread.sleep(2000);
         log("/*18.----Click register Button on confirmation page--*/");
-        inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         Thread.sleep(2000);
         log("/*19.--toast success message - 'Success' --*/");
-        inClinicExperiencePage.successRegisteredMessageAppear();
+        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
         Thread.sleep(2000);
         log("/*20.--Check if check-in button available --*/");
         assertTrue(inClinicExperiencePage.checkInButtonAvailable());
