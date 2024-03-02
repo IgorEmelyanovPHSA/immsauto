@@ -187,32 +187,32 @@ public class Check_In_Workflow extends BaseTest {
         System.out.println("/*10.----click Register button New Citizen --*/");
         inClinicExperience.clickRegisterButton();
         log("/*5.----Enter First Name: " +legalFirstName +"--*/");
-        inClinicExperience.enterFirstName(legalFirstName);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*6.----Enter Last Name: " +legalLastName +"--*/");
-        inClinicExperience.enterLastName(legalLastName);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
         log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-        inClinicExperience.enterDateOfBirth(dateOfBirth);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
         log("/*7.----Enter Postal code: " +postalCode +"--*/");
-        inClinicExperience.enterPostalCode(postalCode);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
         log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
-        inClinicExperience.enterPNH(personalHealthNumber);
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
 
         log("/*10.----click Verify PHN button --*/");
-        inClinicExperience.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience.successMessageAppear();
+        CitizenPrimaryInfo.successMessageAppear(driver);
         log("/*12.----click Next button --*/");
-        inClinicExperience.clickNextButton();
+        CitizenPrimaryInfo.clickNextButton(driver);
         log("/*13.'Enter email address: " +email +"--*/");
-        inClinicExperience.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*14.'Confirm email address: " +email +"--*/");
-        inClinicExperience.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
         log("/*15.Click review details Button--*/");
-        inClinicExperience.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*16.Click register Button on confirmation page--*/");
-        inClinicExperience.clickRegisterButtonOnConfirmationPage();
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         log("/*17.--toast success message - 'Success' --*/");
-        inClinicExperience.successRegisteredMessageAppear();
+        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
     }
 
     private void bookAppointment() throws InterruptedException {
