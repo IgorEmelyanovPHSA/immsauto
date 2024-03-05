@@ -1,9 +1,7 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
 import java.util.List;
 import java.util.Map;
 
@@ -72,5 +70,33 @@ public class PersonAccountRelatedPage extends BasePage {
         WebElement immunization_records_table_node = driver.findElement(immunization_records_table_path);
         GenericTable immunization_table = new GenericTable(immunization_records_table_node);
         return immunization_table.getRowsMappedToHeadings();
+    }
+
+    public static void scrollToAlertsSection(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By alert_section_path = By.xpath("//article[@aria-label='Alerts']");
+        boolean found = false;
+        while(!found) {
+            try {
+                waitForElementToBeEnabled(driver, alert_section_path, 1);
+                found = true;
+
+            } catch (NotFoundException ex) {
+                Thread.sleep(500);
+                js.executeScript("window.scrollBy(0,350)");
+            }
+        }
+        WebElement alert_section = driver.findElement(alert_section_path);
+        scrollCenter(driver, alert_section);
+        Thread.sleep(500);
+    }
+
+    public static void clickNewAlertButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By new_alert_button_path = By.xpath("//article[@aria-label='Alerts']//button[@name='New']");
+        waitForElementToBeEnabled(driver, new_alert_button_path, 10);
+        WebElement new_alert_button = driver.findElement(new_alert_button_path);
+        new_alert_button.click();
     }
 }
