@@ -37,48 +37,43 @@ public class BookingDose2_COVID19 extends BaseTest {
         inClinicExperience_CP.clickRegisterButton();
 
         log("/*4.----Enter First Name: " +legalFirstName +"--*/");
-        inClinicExperience_CP.enterFirstName(legalFirstName);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
 
         log("/*5.----Enter Last Name: " +legalLastName +"--*/");
-        inClinicExperience_CP.enterLastName(legalLastName);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
 
         log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-        inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
 
         log("/*7.----Enter Postal code: " +postalCode +"--*/");
-        inClinicExperience_CP.enterPostalCode(postalCode);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
 
         log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
-        inClinicExperience_CP.enterPNH(personalHealthNumber);
-
-        log("/*9.----click on non-Indigenous person radiobutton --*/");
-        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-            inClinicExperience_CP.clickNonIndigenousRadioButton();
-        }
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
 
         log("/*10.----click Verify PHN button --*/");
-        inClinicExperience_CP.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
 
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience_CP.successMessageAppear();
+        CitizenPrimaryInfo.successMessageAppear(driver);
 
         log("/*12.----click Next button --*/");
-        inClinicExperience_CP.clickNextButton();
+        CitizenPrimaryInfo.clickNextButton(driver);
 
         log("/*13.'Enter email address: " +email +"--*/");
-        inClinicExperience_CP.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
 
         log("/*14.'Confirm email address: " +email +"--*/");
-        inClinicExperience_CP.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
 
         log("/*15.Click review details Button--*/");
-        inClinicExperience_CP.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
 
         log("/*16.Click register Button on confirmation page--*/");
-        inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 
         log("/*17.--toast success message - 'Success' --*/");
-        inClinicExperience_CP.successRegisteredMessageAppear();
+        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
         //log("/*18.----click on person Account Related Tab --*/");
         //inClinicExperience_CP.clickOnPersonAccountRelatedTab();

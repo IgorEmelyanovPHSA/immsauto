@@ -70,33 +70,33 @@ public class BookingDose2 extends BaseTest {
 		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();
 		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
-		clinicInBox.enterFirstName(legalFirstName);
+		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
 		log("/*6.----Enter Last Name: " +legalLastName +"--*/");
-		clinicInBox.enterLastName(legalLastName);
+		CitizenPrimaryInfo.enterLastName(driver, legalLastName);
 		log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-		clinicInBox.enterDateOfBirth(dateOfBirth);
+		CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
 		log("/*7.----Enter Postal code: " +postalCode +"--*/");
-		clinicInBox.enterPostalCode(postalCode);
+		CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
 		log("/*8.----Enter PHN: " +personalHealthNumber +"--*/");
-		clinicInBox.enterPNH(personalHealthNumber);
+		CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
 
 		log("/*10.----click Verify PHN button --*/");
-		clinicInBox.clickVerifyPHNButton();
+		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-		clinicInBox.successMessageAppear();
+		CitizenPrimaryInfo.successMessageAppear(driver);
 		log("/*12.----click Next button --*/");
-		clinicInBox.clickNextButton();
+		CitizenPrimaryInfo.clickNextButton(driver);
 		log("/*13.'Enter email address: " +email +"--*/");
-		clinicInBox.enterEmail(email);
+		CitizenPrimaryInfo.enterEmail(driver, email);
 		log("/*14.'Confirm email address: " +email +"--*/");
-		clinicInBox.confirmEmail(email);
+		CitizenPrimaryInfo.confirmEmail(driver, email);
 		log("/*15.Click review details Button--*/");
-		clinicInBox.clickReviewDetails();
+		CitizenPrimaryInfo.clickReviewDetails(driver);
 		log("/*16.Click register Button on confirmation page--*/");
-		clinicInBox.clickRegisterButtonOnConfirmationPage();
+		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*17.--toast success message - 'Success' --*/");
-		clinicInBox.successRegisteredMessageAppear();
+		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
 		try {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

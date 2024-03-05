@@ -69,10 +69,10 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
 
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
         log("---click Verify PHN button ---");
-        inClinicExperience_CP.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         Thread.sleep(2000);
         log("---Expecting to see the toast success message - 'PNH match successful' ---");
-        inClinicExperience_CP.successMessageAppear();
+        CitizenPrimaryInfo.successMessageAppear(driver);
 
         //Extra step to log out from CP
         loginPage.logOutCommunityPortal();

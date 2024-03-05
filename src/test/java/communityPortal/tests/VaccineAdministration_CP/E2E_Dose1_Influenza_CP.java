@@ -55,47 +55,45 @@ public class E2E_Dose1_Influenza_CP extends BaseTest{
         inClinicExperience_CP.clickRegisterButton();
         Thread.sleep(2000);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        inClinicExperience_CP.enterFirstName(legalFirstName);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         Thread.sleep(2000);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        inClinicExperience_CP.enterLastName(legalLastName);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
         Thread.sleep(2000);
         log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
         Thread.sleep(2000);
         log("/*11.----Enter Postal code " +postalCode +"--*/");
-        inClinicExperience_CP.enterPostalCode(postalCode);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
         Thread.sleep(2000);
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        inClinicExperience_CP.enterPNH(personalHealthNumber);
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
         Thread.sleep(2000);
-        log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
-        Thread.sleep(2000);
+
         log("/*14.----click Verify PHN button --*/");
-        inClinicExperience_CP.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         Thread.sleep(2000);
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience_CP.successMessageAppear();
+        CitizenPrimaryInfo.successMessageAppear(driver);
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*16.----click Next button --*/");
-        inClinicExperience_CP.clickNextButton();
+        CitizenPrimaryInfo.clickNextButton(driver);
         Thread.sleep(2000);
         log("/*17.----'Enter email address " +email +"--*/");
-        inClinicExperience_CP.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*18.----'Confirm email address " +email +"--*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
         log("/*19.---Click review details Button--*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*20.----Click register Button on confirmation page--*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         Thread.sleep(2000);
         log("/*21.--toast success message - 'Success' --*/");
-        inClinicExperience_CP.successRegisteredMessageAppear();
+        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         Thread.sleep(10000); //wait for Related Tab showing up

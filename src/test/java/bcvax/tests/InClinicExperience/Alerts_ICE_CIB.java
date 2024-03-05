@@ -8,6 +8,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import java.util.Map;
 
 @Listeners({TestListener.class})
@@ -86,74 +90,74 @@ public class Alerts_ICE_CIB extends BaseTest {
         System.out.println("/*10.----click Register button New Citizen --*/");
         inClinicExperience.clickRegisterButton();
         System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
-        inClinicExperience.enterFirstName(legalFirstName);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
-        inClinicExperience.enterLastName(legalLastName);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
         System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
-        inClinicExperience.enterDateOfBirth(dateOfBirth);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
         System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
-        inClinicExperience.enterPostalCode(postalCode);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
         System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
-        inClinicExperience.enterPNH(personalHealthNumber);
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
         System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
         System.out.println("/*17.----click Verify PHN button --*/");
-        inClinicExperience.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience.successMessageAppear();
+        CitizenPrimaryInfo.successMessageAppear(driver);
         System.out.println("/*19.----click Next button --*/");
-        inClinicExperience.clickNextButton();
+        CitizenPrimaryInfo.clickNextButton(driver);
         System.out.println("/*20.----'Enter email address " +email +"--*/");
-        inClinicExperience.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
         System.out.println("/*21.----'Confirm email address " +email +"--*/");
-        inClinicExperience.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
         System.out.println("/*22.---Click review details Button--*/");
-        inClinicExperience.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
         System.out.println("/*23.----Click register Button on confirmation page--*/");
-        inClinicExperience.clickRegisterButtonOnConfirmationPage();
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         System.out.println("/*24.--toast success message - 'Success' --*/");
         try {
-            inClinicExperience.successRegisteredMessageAppear();
+            CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
         } catch(Exception ex) {
             System.out.println("No Success Message. Contrinue ...");
             System.out.println(ex.getMessage());
         }
-        //System.out.println("/*25.----click on person Account Related Tab --*/");
-        //inClinicExperience.clickOnPersonAccountRelatedTab();
-        System.out.println("/*26----Go to Appointment Tab --*/");
-        PersonAccountPage.goToVaccineScheduleTab(driver);
-        Thread.sleep(2000);
-//If override Eligibility is shown
-        try {
-            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
-        }
-        Thread.sleep(2000);
-        System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        System.out.println("/*25.----click on person Account Related Tab --*/");
+        PersonAccountPage.goToRelatedTab(driver);
 
-        System.out.println("/*27----select 'Search by Clinic name' tab --*/");
-        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        Thread.sleep(500);
+        PersonAccountRelatedPage.scrollToAlertsSection(driver);
+        PersonAccountRelatedPage.clickNewAlertButton(driver);
 
-        log("/*28.----search the Clinic " +clinicNameToSearch +" --*/");
-        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
-        System.out.println("/*29----click on Option Facility location  --*/");
-        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
-        System.out.println("/*30----select Active booking appointment day  --*/");
-        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
-        System.out.println("/*31----select the time slot  --*/");
-        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
-        System.out.println("/*32----click Next button  --*/");
-        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
-        System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
-        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
-        System.out.println("/*34----click Confirm Appointment button  --*/");
-        PersonAccountSchedulePage.clickOnConfirmButton(driver);
-        System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
-        boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+        List<String> my_alert_types = NewAlertPage.getTypesOfAlert(driver);
+        List<String> my_reasons_for_update = NewAlertPage.getAlertReasonForUpdate(driver);
+        List<Map<String, String>> alert_data = new ArrayList<>();
+        Map<String, String> alert_data_row = new HashMap<String, String>();
+        alert_data_row.put("Name", "First Alert");
+        alert_data_row.put("DateFrom", "2024-03-03");
+        alert_data_row.put("DateTo", "2024-03-05");
+        alert_data_row.put("AlertType", "Sensitive Record");
+        alert_data.add(alert_data_row);
 
-        Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+        alert_data_row = new HashMap<String, String>();
+        alert_data_row.put("Name", "Second Alert");
+        alert_data_row.put("DateFrom", "2024-03-02");
+        alert_data_row.put("DateTo", "2024-03-06");
+        alert_data_row.put("AlertType", "Safety Concern for Staff");
+        alert_data.add(alert_data_row);
+
+        alert_data_row = new HashMap<String, String>();
+        alert_data_row.put("Name", "Third Alert");
+        alert_data_row.put("DateFrom", "2024-03-01");
+        alert_data_row.put("DateTo", "2024-03-07");
+        alert_data_row.put("AlertType", "Other (Specify)");
+        alert_data.add(alert_data_row);
+
+        NewAlertPage.setAlertName(driver, "First Alert");
+        NewAlertPage.setAlertEffectiveFrom(driver, "2024-03-03");
+        NewAlertPage.setAlertEffectiveTo(driver, "2024-03-05");
+        NewAlertPage.setTypesOfAlert(driver, "Sensitive Record");
+        NewAlertPage.setAlertMessage(driver, "Alert Short Message");
+        NewAlertPage.clickSaveButton(driver);
     }
 }
