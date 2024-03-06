@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -131,6 +131,8 @@ public class Alerts_ICE_CIB extends BaseTest {
 
         List<String> my_alert_types = NewAlertPage.getTypesOfAlert(driver);
         List<String> my_reasons_for_update = NewAlertPage.getAlertReasonForUpdate(driver);
+
+        Date today_date = new Date();
         List<Map<String, String>> alert_data = new ArrayList<>();
         Map<String, String> alert_data_row = new HashMap<String, String>();
         alert_data_row.put("Name", "First Alert");
@@ -153,11 +155,18 @@ public class Alerts_ICE_CIB extends BaseTest {
         alert_data_row.put("AlertType", "Other (Specify)");
         alert_data.add(alert_data_row);
 
-        NewAlertPage.setAlertName(driver, "First Alert");
-        NewAlertPage.setAlertEffectiveFrom(driver, "2024-03-03");
-        NewAlertPage.setAlertEffectiveTo(driver, "2024-03-05");
-        NewAlertPage.setTypesOfAlert(driver, "Sensitive Record");
-        NewAlertPage.setAlertMessage(driver, "Alert Short Message");
-        NewAlertPage.clickSaveButton(driver);
+        for(int i = 0; i < alert_data.size(); i++) {
+            NewAlertPage.setAlertName(driver, alert_data.get(i).get("Name"));
+            NewAlertPage.setAlertEffectiveFrom(driver, alert_data.get(i).get("DateFrom"));
+            NewAlertPage.setAlertEffectiveTo(driver, alert_data.get(i).get("DateTo"));
+            NewAlertPage.setTypesOfAlert(driver, alert_data.get(i).get("AlertType"));
+            NewAlertPage.setAlertMessage(driver, "Alert Short Message");
+            if(i < alert_data.size() - 1) {
+                NewAlertPage.clickSaveAndNewButton(driver);
+            } else {
+                NewAlertPage.clickSaveButton(driver);
+            }
+        }
+        System.out.println();
     }
 }

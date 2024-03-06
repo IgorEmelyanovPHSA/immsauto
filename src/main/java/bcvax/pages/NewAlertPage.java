@@ -159,6 +159,7 @@ public class NewAlertPage extends BasePage {
         scrollCenter(driver, alert_save_btn);
         Thread.sleep(500);
         alert_save_btn.click();
+        Thread.sleep(500);
     }
 
     public static void clickSaveAndNewButton(WebDriver driver) throws InterruptedException {
@@ -169,6 +170,7 @@ public class NewAlertPage extends BasePage {
         scrollCenter(driver, alert_save_new_btn);
         Thread.sleep(500);
         alert_save_new_btn.click();
+        Thread.sleep(3000);
     }
     public static boolean saveButtonExists(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
