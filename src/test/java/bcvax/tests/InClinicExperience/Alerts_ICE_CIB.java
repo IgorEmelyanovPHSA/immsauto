@@ -7,11 +7,13 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 @Listeners({TestListener.class})
@@ -121,6 +123,8 @@ public class Alerts_ICE_CIB extends BaseTest {
             System.out.println("No Success Message. Contrinue ...");
             System.out.println(ex.getMessage());
         }
+        System.out.println("/*25.----click on CheckIn button --*/");
+        PersonAccountPage.clickCheckInButton(driver);
         System.out.println("/*25.----click on person Account Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);
 
@@ -132,26 +136,28 @@ public class Alerts_ICE_CIB extends BaseTest {
         List<String> my_alert_types = NewAlertPage.getTypesOfAlert(driver);
         List<String> my_reasons_for_update = NewAlertPage.getAlertReasonForUpdate(driver);
 
-        Date today_date = new Date();
+        LocalDate today_date = LocalDate.now();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         List<Map<String, String>> alert_data = new ArrayList<>();
         Map<String, String> alert_data_row = new HashMap<String, String>();
         alert_data_row.put("Name", "First Alert");
-        alert_data_row.put("DateFrom", "2024-03-03");
-        alert_data_row.put("DateTo", "2024-03-05");
+        alert_data_row.put("DateFrom", sdf.format(sdf.parse(today_date.minusDays(1).toString())));
+        alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.plusDays(1).toString())));
         alert_data_row.put("AlertType", "Sensitive Record");
         alert_data.add(alert_data_row);
 
         alert_data_row = new HashMap<String, String>();
         alert_data_row.put("Name", "Second Alert");
-        alert_data_row.put("DateFrom", "2024-03-02");
-        alert_data_row.put("DateTo", "2024-03-06");
+        alert_data_row.put("DateFrom", sdf.format(sdf.parse(today_date.minusDays(2).toString())));
+        alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.plusDays(2).toString())));
         alert_data_row.put("AlertType", "Safety Concern for Staff");
         alert_data.add(alert_data_row);
 
         alert_data_row = new HashMap<String, String>();
         alert_data_row.put("Name", "Third Alert");
-        alert_data_row.put("DateFrom", "2024-03-01");
-        alert_data_row.put("DateTo", "2024-03-07");
+        alert_data_row.put("DateFrom", sdf.format(sdf.parse(today_date.minusDays(3).toString())));
+        alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.plusDays(3).toString())));
         alert_data_row.put("AlertType", "Other (Specify)");
         alert_data.add(alert_data_row);
 

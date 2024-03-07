@@ -69,6 +69,8 @@ public class MainPageOrg extends BasePage {
         By apps_launcher_path = By.xpath("//div[@role='navigation' and @aria-label='App']//button");
         waitForElementToBeEnabled(driver, apps_launcher_path, 60);
         WebElement app_launcher = driver.findElement(apps_launcher_path);
+        scrollCenter(driver, app_launcher);
+        Thread.sleep(500);
         app_launcher.click();
         Thread.sleep(500);
         By apps_launcher_input_path = By.xpath("//input[@placeholder='Search apps and items...']");

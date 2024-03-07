@@ -262,7 +262,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
-		inClinicExperiencePage.selectHealthConnectApp();
+		orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
