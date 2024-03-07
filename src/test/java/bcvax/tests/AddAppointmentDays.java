@@ -24,15 +24,15 @@ public class AddAppointmentDays extends BaseTest {
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate start_date = LocalDate.parse("2024-03-04", dtf);
+        LocalDate start_date = LocalDate.parse("2024-03-06", dtf);
         LocalDate end_date = LocalDate.parse("2024-03-10", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
             appointment_dates.add(my_appointment_date.format(dtf));
         }
-        //String appointment_type = "Minor Ailments and Contraception";
-        String appointment_type = "BC Immunization Program";
+        String appointment_type = "Minor Ailments and Contraception";
+        //String appointment_type = "BC Immunization Program";
 
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         String appointment_name = appointment_type + " " + appointment_date;
@@ -58,34 +58,36 @@ public class AddAppointmentDays extends BaseTest {
                 String provider_name = providers.get(i).keySet().toArray()[0].toString();
                 String address_id = ((HashMap<String, String>)providers.get(i).get(provider_name)).get("address_id");
                 String appointment_city = ((HashMap<String, String>)providers.get(i).get(provider_name)).get("appointment_city");
+                String minor_ailments = ((HashMap<String, String>)providers.get(i).get(provider_name)).get("minor_ailments");
+                if((appointment_type.equals("Minor Ailments and Contraception") && minor_ailments.equals("Yes")) || appointment_type.equals("BC Immunization Program")) {
+                    String appointment_day_id = Utilities.ApiQueries.getAppointmentDays(appointment_dates.get(d), appointment_type, appointment_city);
+                    if (!appointment_day_id.equals("")) {
+                        Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_dates.get(d), appointment_type, provider_name);
 
-                String appointment_day_id = Utilities.ApiQueries.getAppointmentDays(appointment_dates.get(d), appointment_type, appointment_city);
-                if (!appointment_day_id.equals("")) {
-                    Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_dates.get(d), appointment_type, provider_name);
-
-                    WebElement my_name_link = my_row.get("Name");
-                    BasePage.scrollIfNeeded(driver, my_name_link);
-                    Thread.sleep(500);
-                    my_name_link.click();
-                } else {
-                    DateTimeFormatter dtf_name = DateTimeFormatter.ofPattern("yyyy-M-d");
-                    appointment_day_page.addAppointmentDay();
-                    appointment_name = appointment_type + " " + LocalDate.parse(appointment_dates.get(d), dtf).format(dtf_name);
-                    appointment_day_page.fillUpNewAppointmentDay(appointment_name, provider_name, address_id, appointment_dates.get(d), appointment_city, appointment_type, localization);
-                    appointment_day_id = Utilities.ApiQueries.getAppointmentDays(appointment_dates.get(d), appointment_type, appointment_city);
+                        WebElement my_name_link = my_row.get("Name");
+                        BasePage.scrollIfNeeded(driver, my_name_link);
+                        Thread.sleep(500);
+                        my_name_link.click();
+                    } else {
+                        DateTimeFormatter dtf_name = DateTimeFormatter.ofPattern("yyyy-M-d");
+                        appointment_day_page.addAppointmentDay();
+                        appointment_name = appointment_type + " " + LocalDate.parse(appointment_dates.get(d), dtf).format(dtf_name);
+                        appointment_day_page.fillUpNewAppointmentDay(appointment_name, provider_name, address_id, appointment_dates.get(d), appointment_city, appointment_type, localization);
+                        appointment_day_id = Utilities.ApiQueries.getAppointmentDays(appointment_dates.get(d), appointment_type, appointment_city);
+                    }
+                    appointment_day_page.selectAppointmentDayRelatedTab();
+                    ArrayList<HashMap> day_times = Utilities.ApiQueries.getAppointmentDayTimes(appointment_day_id);
+                    System.out.println("------------------------------------");
+                    System.out.println("Appointment Date " + appointment_dates.get(d));
+                    System.out.println("Appointment Time " + appointment_type);
+                    System.out.println("Appointment City " + appointment_city);
+                    System.out.println("Found " + day_times.size() + " in the database");
+                    System.out.println("------------------------------------");
+                    appointment_day_page.addAppointmentTime(day_times);
+                    Thread.sleep(10000);
+                    orgMainPage.closeLastTab();
+                    Thread.sleep(2000);
                 }
-                appointment_day_page.selectAppointmentDayRelatedTab();
-                ArrayList<HashMap> day_times = Utilities.ApiQueries.getAppointmentDayTimes(appointment_day_id);
-                System.out.println("------------------------------------");
-                System.out.println("Appointment Date " + appointment_dates.get(d));
-                System.out.println("Appointment Time " + appointment_type);
-                System.out.println("Appointment City " + appointment_city);
-                System.out.println("Found " + day_times.size() + " in the database");
-                System.out.println("------------------------------------");
-                appointment_day_page.addAppointmentTime(day_times);
-                Thread.sleep(10000);
-                orgMainPage.closeLastTab();
-                Thread.sleep(2000);
             }
         }
         System.out.println("Here");

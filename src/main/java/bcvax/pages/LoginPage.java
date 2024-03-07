@@ -37,8 +37,8 @@ public class LoginPage extends BasePage {
 	
 	public InClinicExperiencePage loginAsPrecondition() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_Precondition"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PreconditionPW"));
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
 		click(login_button);
 		return new InClinicExperiencePage(driver);
 	}

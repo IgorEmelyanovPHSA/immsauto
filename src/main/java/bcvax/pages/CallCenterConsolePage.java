@@ -28,11 +28,7 @@ public class CallCenterConsolePage extends BasePage {
 	@FindBy(xpath = "(.//input[@name = 'HC_Personal_Health_Number'])")
 	private WebElement phn;
 	private By phn1 = By.xpath("(.//input[@name = 'HC_Personal_Health_Number'])");
-	
-	@FindBy(xpath = "(.//input[@name = 'BCH_Indigenous'])[2]")
-	private WebElement non_indigenous_radio_button;
-	private By non_indigenous_radio_button1 = By.xpath("(.//input[@name = 'BCH_Indigenous'])[2]");
-	
+
 	@FindBy(xpath = ".//button[@title = 'Verify Personal Health Number']")
 	private WebElement verify_phn_button;
 	
@@ -49,20 +45,6 @@ public class CallCenterConsolePage extends BasePage {
 
 	private By register_confirmation_page_button1 = By.xpath(".//button[text() = 'Register']");
 
-	private By person_account_Related_tab_1 = By.xpath("(.//a[text() = 'Related'])");
-
-	@FindBy(xpath = ".//span[text() = 'Select One']")
-	private WebElement click_early_booking_reason;
-	
-	@FindBy(xpath = ".//span[text() = 'Travel']")
-	private WebElement select_early_booking_reason;
-	
-	@FindBy(xpath = "(.//div[@class = 'slds-tabs_scoped']//button[@title = 'More Tabs'])")
-	private WebElement click_more_search_tabs;
-	
-	@FindBy(xpath = "//input[@name='clinicstag']")
-	private WebElement search_clinic_name;
-	
 	@FindBy(xpath = "(.//button[@name = 'facility'])[1]")
 	private WebElement option_loc_facility;
 	
@@ -77,8 +59,6 @@ public class CallCenterConsolePage extends BasePage {
 	
 	@FindBy(xpath = ".//button[text() = 'Confirm appointment']")
 	private WebElement click_confirm_appointment_button;
-
-	private By click_related_tab1 = By.xpath("//a[@data-label='Related']");
 
 	/*---------Constructor-------*/
 	public CallCenterConsolePage(WebDriver driver) {
