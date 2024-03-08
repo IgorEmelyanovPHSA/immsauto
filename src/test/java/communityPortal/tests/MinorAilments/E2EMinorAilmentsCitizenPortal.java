@@ -73,7 +73,7 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         Assert.assertTrue(bookAnAppointmentPage.isBookingConfirmedDisplayed());
 
         log("13. Get booked date and time");
-        String confirmedAppointmentDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
+        //String confirmedAppointmentDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
 
         //TR Step11 verify link for the Home page link
 
@@ -99,17 +99,17 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         PersonAccountPage.goToRelatedTab(driver);
 
         log("20. Navigate to Appointments and click view all");
-        inClinicExperience_CP.navigateToAppointmentRecords();
-
+        PersonAccountRelatedPage.scrollToAppointmentsSection(driver);
+        //PersonAccountRelatedPage.clickAppointmentViewAllButton(driver);
         log("21. Open created appointment");
-        inClinicExperience_CP.openAppointmentRecord(confirmedAppointmentDataTime);
+        PersonAccountRelatedPage.openFirstAppointmentRecord(driver);
 
         log("22. Verify Citizen Comment: " +notesToPharmacist);
-        String actual_citizen_comment = inClinicExperience_CP.getCitizenComment();
+        String actual_citizen_comment = AppointmentDetailsPage.getCitizenComment(driver);
         Assert.assertEquals(actual_citizen_comment, notesToPharmacist);
 
         log("23. Verify that Client Reason for Visit: Minor Ailments and Contraception");
-        String actual_reason_for_visit = inClinicExperience_CP.getReasonForVisit();
+        String actual_reason_for_visit = AppointmentDetailsPage.getReasonForVisit(driver);
         Assert.assertEquals(actual_reason_for_visit, "Minor Ailments and Contraception");
     }
 }

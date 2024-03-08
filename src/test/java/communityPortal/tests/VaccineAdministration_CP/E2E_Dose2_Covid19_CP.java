@@ -165,7 +165,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.validateVaccineAdminPageOpen();
         Thread.sleep(2000);
         log("/*38.---Click confirm and Save Button --*/");
-        inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+        InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
         Thread.sleep(2000);
 
         log("/*39.---Open Today's appointments from Home page --*/");

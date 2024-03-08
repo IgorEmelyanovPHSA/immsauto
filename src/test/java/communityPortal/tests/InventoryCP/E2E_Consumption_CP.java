@@ -176,7 +176,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*36.----click on In-clinic Experience button --*/");
         PersonAccountPage.clickCheckInButton(driver);
         Thread.sleep(2000);
-        inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+        InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
         Thread.sleep(2000);
         //log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
        // inClinicExperience_CP.validateVaccineAdminPageOpen();

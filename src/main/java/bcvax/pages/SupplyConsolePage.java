@@ -1290,6 +1290,8 @@ public class SupplyConsolePage extends BasePage {
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + location + "')]");
 		waitForElementToBeEnabled(driver, locationTo, 30);
 		WebElement my_location = driver.findElement(locationTo);
+		scrollCenter(driver, my_location);
+		Thread.sleep(500);
 		my_location.click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}

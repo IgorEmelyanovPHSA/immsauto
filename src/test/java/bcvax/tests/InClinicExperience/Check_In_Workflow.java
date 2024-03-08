@@ -140,7 +140,7 @@ public class Check_In_Workflow extends BaseTest {
         current_tab = inClinicExperience.getCurrentTab();
         log("/*----13. Verify the User is redirected to Identification page --*/");
         Assert.assertTrue(current_tab.equals("Identification"));
-        inClinicExperience.HomePageClickConfirmAndSaveButton();
+        InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
         inClinicExperience.clickTodayAppointments();
         Thread.sleep(500);
         driver.navigate().refresh();

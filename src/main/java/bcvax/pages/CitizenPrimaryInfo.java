@@ -74,11 +74,15 @@ public class CitizenPrimaryInfo extends BasePage {
         By email_field_path = By.xpath("//input[@name = 'PersonEmail']");
         waitForElementToBeEnabled(driver, email_field_path, 10);
         WebElement email_field = driver.findElement(email_field_path);
+        scrollCenter(driver, email_field);
+        Thread.sleep(500);
         try {
             email_field.sendKeys(enteremail);
         } catch (ElementNotInteractableException ex) {
             Thread.sleep(2000);
             email_field = driver.findElement(email_field_path);
+            scrollCenter(driver, email_field);
+            Thread.sleep(500);
             email_field.sendKeys(enteremail);
         }
     }
