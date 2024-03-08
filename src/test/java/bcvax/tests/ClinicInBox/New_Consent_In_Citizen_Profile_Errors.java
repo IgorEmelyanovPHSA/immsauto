@@ -263,7 +263,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         log("/*----8. Click confirm Button on the popup window---*/");
 
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
-        inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
+        InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
         inClinicExperiencePage.clickTodayAppointments();
         log("/*47.---Open Today appointment Details --*/");
         Thread.sleep(2000);

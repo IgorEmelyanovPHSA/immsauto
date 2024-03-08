@@ -182,7 +182,7 @@ public class Consumption extends BaseTest {
 		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
-		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
 		log("/*46.---Open Today's appointments from Home page --*/");

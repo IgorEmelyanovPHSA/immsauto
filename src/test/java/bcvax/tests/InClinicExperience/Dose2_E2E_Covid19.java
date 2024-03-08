@@ -186,7 +186,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*40.---Click confirm and Save Button --*/");
 		Thread.sleep(2000);
-		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 
 		log("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");
 
@@ -418,7 +418,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*40.---Click confirm and Save Button --*/");
 		Thread.sleep(2000);
-		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 
 		log("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");
 

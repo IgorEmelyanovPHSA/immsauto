@@ -62,7 +62,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         Assert.assertTrue(bookAnAppointmentPage.isBookingConfirmedDisplayed());
 
         log("10. Get booked date and time for first appointment");
-        String confirmedAppointmentOneDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
+        //String confirmedAppointmentOneDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
 
         log("11. Click btn Book another appointment");
         minorAilmentsPage.clickBtnBookAnotherAppointment();
@@ -92,7 +92,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         Assert.assertTrue(bookAnAppointmentPage.isBookingConfirmedDisplayed());
 
         log("20. Get booked date and time for second appointment");
-        String confirmedAppointmentTwoDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
+        //String confirmedAppointmentTwoDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
 
         log("21. Login as an Clinician into CP");
         loginPage.loginIntoCommunityPortalAsClinician();
@@ -110,25 +110,25 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         PersonAccountPage.goToRelatedTab(driver);
 
         log("25. Navigate to Appointments and click view all");
-        inClinicExperience_CP.navigateToAppointmentRecords();
-
+        PersonAccountRelatedPage.scrollToAppointmentsSection(driver);
+        //PersonAccountRelatedPage.clickAppointmentViewAllButton(driver);
         //Check status confirmed for 2 appointments
 
         log("26. Open second created appointment");
-        inClinicExperience_CP.openAppointmentRecord(confirmedAppointmentOneDataTime);
+        PersonAccountRelatedPage.openFirstAppointmentRecord(driver);
 
         log("27. Verify Citizen Comment: " +notesToPharmacist);
-        Assert.assertEquals(inClinicExperience_CP.getCitizenComment(), notesToPharmacist);
+        Assert.assertEquals(AppointmentDetailsPage.getCitizenComment(driver), notesToPharmacist);
 
 //        log("28. Verify Minor Ailments type selected for second appointment (confirmed first appointment is open): " +minorAilmentsToSelectSecondAppointment);
 //        Assert.assertEquals(inClinicExperience_CP.getMinorAilmentsAndContraceptionAppointmentType(), minorAilmentsToSelectSecondAppointment);
 
         log("29. Verify Appointment status is 'Confirmed'");
-        String actual_appointment_status = inClinicExperience_CP.getAppointmentStatus();
+        String actual_appointment_status = AppointmentDetailsPage.getAppointmentStatus(driver);
         Assert.assertEquals(actual_appointment_status, "Confirmed");
 
         log("30. Cancel second appointment");
-        inClinicExperience_CP.clickBtnCancelAppointment();
+        AppointmentPage.clickBtnCancelAppointment(driver);
 
         //work around due to the bug: https://jira.phsa.ca/browse/BCVAX-33747
 
@@ -137,7 +137,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         Thread.sleep(3000);
 
         log("32. Verify Appointment status is 'Cancelled'");
-        Assert.assertEquals(inClinicExperience_CP. getAppointmentStatus(), "Cancelled");
+        Assert.assertEquals(AppointmentDetailsPage. getAppointmentStatus(driver), "Cancelled");
 
     }
 }

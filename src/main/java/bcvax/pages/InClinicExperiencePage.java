@@ -14,15 +14,6 @@ import static constansts.Header.SUPPLY_LOCATION_NAME;
 
 
 public class InClinicExperiencePage extends BasePage {
-	@FindBy(xpath = "//button[contains(text(),'Cancel Appointment')]")
-	private WebElement btnCancelAppointment;
-
-	@FindBy(xpath = "//button[contains(text(),'Yes')]")
-	private WebElement btnYes;
-
-	@FindBy(xpath = "//button[text()='Close Window']")
-	private WebElement btnCloseWindowAppointment;
-
 	@FindBy(xpath = ".//button[@aria-label = 'Route, Select an Option']")
 	private WebElement click_route_dropdown;
 
@@ -43,9 +34,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	@FindBy(xpath = "//label[text() = 'Clinic Name']/../../../lightning-formatted-text")
 	private WebElement appointmentLocation;
-
-	@FindBy(xpath = "//span[@title and contains(text(), 'Appointments')]")
-	private WebElement appointmentsRecordsTitle;
 
 	Tables tables;
 
@@ -136,7 +124,7 @@ public class InClinicExperiencePage extends BasePage {
 	public boolean AppointmentConfirmationMessage() throws InterruptedException {
 		Thread.sleep(500);
 		try {
-			By appointment_confirm_message_path = By.xpath("//div[@role = 'heading']/h1[text() = 'Appointment confirmed!']");
+			By appointment_confirm_message_path = By.xpath("//h1[@class='bch-scheduler-title'] | //div[@class='bch-scheduler-title']");
 			waitForElementToBeLocated(driver, appointment_confirm_message_path, 30);
 			System.out.println("/*---'Appointment confirmed!' message shown up");
 			return true;
@@ -153,16 +141,6 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement in_clinic_experience_app = driver.findElement(in_clinic_experience_app_path);
 		in_clinic_experience_app.click();
 		Thread.sleep(500);
-	}
-
-	public void HomePageClickConfirmAndSaveButton() throws InterruptedException {
-		Thread.sleep(500);
-		By confirm_and_save_btn_path = By.xpath("(//button[@title='Confirm & Save Identification'])");
-		waitForElementToBeEnabled(driver, confirm_and_save_btn_path, 10);
-		WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
-		scrollCenter(confirm_and_save_btn);
-		Thread.sleep(500);
-		confirm_and_save_btn.click();
 	}
 
 	public void clickRecordConsent() throws InterruptedException {
@@ -624,32 +602,7 @@ public class InClinicExperiencePage extends BasePage {
 		return count;
 	}
 
-	public void navigateToAppointmentRecords() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, appointmentsRecordsTitle, 10);
-		scrollCenter(appointmentsRecordsTitle);
-		Thread.sleep(3000);
-
-		for(int i = 0; i < 10; i++) {
-			try {
-				WebElement element = tables.getAppointmentsRecordsTable().getRowsMappedToHeadings().get(0).get("Subject");
-				scrollCenter(element);
-				Thread.sleep(1000);
-				tables.getAppointmentsRecordsTable().getRowsMappedToHeadings().get(1);
-				break;
-			} catch (Exception ex) {
-				log("Try " + i + "; Table is still empty");
-			}
-		}
-		By view_all_appointments_btn_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']/..//span[@class='view-all-label']");
-		waitForElementToBeEnabled(driver, view_all_appointments_btn_path, 10);
-		WebElement btnViewAllAppointments = driver.findElement(view_all_appointments_btn_path);
-		scrollCenter(driver, btnViewAllAppointments);
-		Thread.sleep(500);
-		click(btnViewAllAppointments);
-	}
-
-	public void openAppointmentRecord(String appointmentDataTime) throws InterruptedException {
+	public void openAppointmentRecord() throws InterruptedException {
 		Thread.sleep(500);
 
 		By titleAppointments = By.xpath("//h1[@title='Appointments']");
@@ -669,39 +622,9 @@ public class InClinicExperiencePage extends BasePage {
 			}
 		}
 		List<Map<String, WebElement>> appointment_table_map = appointment_table.getRowsMappedToHeadings();
-		String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
+		//String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
 
 		WebElement appointmentDataTimeWebElement = appointment_table_map.get(1).get("Appointment Code").findElement(By.xpath(".//a"));
 		appointmentDataTimeWebElement.click();
 	}
-
-	public String getReasonForVisit(){
-		By clientReasonForVisitElement = By.xpath("//span[contains(text(),'Client Reason for Visit')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only']  | //span[@class='test-id__field-label' and text()='Client Reason for Visit']/../../..//lightning-formatted-text");
-		waitForElementToBePresent(driver, clientReasonForVisitElement, 10);
-		String getClientReasonForVisitString = driver.findElement(clientReasonForVisitElement).getText();
-		return getClientReasonForVisitString;
-	}
-
-	public String getCitizenComment(){
-		By citizenCommentElement = By.xpath("//span[text()='Citizen Comment']/../..//span[@class='test-id__field-value slds-form-element__static slds-grow  is-read-only'] | //span[@class='test-id__field-label' and text()='Citizen Comment']/../../..//lightning-formatted-text");
-		waitForElementToBePresent(driver, citizenCommentElement, 10);
-		String getCitizenCommentString = driver.findElement(citizenCommentElement).getText();
-		return getCitizenCommentString;
-	}
-
-	public String getAppointmentStatus(){
-		By appointmentStatusElement = By.xpath("//span[contains(text(),'Status')]/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']  | //span[@class='test-id__field-label' and text()='Status']/../../..//lightning-formatted-text");
-		waitForElementToBePresent(driver, appointmentStatusElement, 10);
-		String getAppointmentStatusString = driver.findElement(appointmentStatusElement).getText();
-		return getAppointmentStatusString;
-	}
-
-	public void clickBtnCancelAppointment() throws InterruptedException {
-		click(btnCancelAppointment);
-		click(btnYes);
-		Thread.sleep(2000);
-		click(btnCloseWindowAppointment);
-		Thread.sleep(2000);
-	}
-
 }

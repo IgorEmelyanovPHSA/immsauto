@@ -35,6 +35,7 @@ public class MainPageOrg extends BasePage {
         Instant end = Instant.now();
         while(!found) {
             try {
+                current_app = driver.findElement(current_app_path);
                 found = current_app.isDisplayed();
                 System.out.println("Current App found");
                 System.out.println(end.toString());
@@ -47,8 +48,7 @@ public class MainPageOrg extends BasePage {
                     current_app = driver.findElement(current_app_path);
                 }
                 Thread.sleep(200);
-            }
-            catch (StaleElementReferenceException ex) {
+            } catch (StaleElementReferenceException ex) {
                 end = Instant.now();
                 current_app = driver.findElement(current_app_path);
                 found = current_app.isDisplayed();

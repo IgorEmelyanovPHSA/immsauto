@@ -171,7 +171,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		PersonAccountPage.clickCheckInButton(driver);
 
 		System.out.println("/*40.---Click confirm and Save Button --*/");
-		inClinicExperience.HomePageClickConfirmAndSaveButton();
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 		System.out.println("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
 		log("/*46.---Open Today's appointments from Home page --*/");
