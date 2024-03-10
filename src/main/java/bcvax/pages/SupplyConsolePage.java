@@ -52,10 +52,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
-	private By search_incoming_supply_distributor_1_2_ = By.xpath(".//span[contains(text(),'Select an Option')]");
-
-	@FindBy(xpath = "//span[contains(text(),'Supply Distribution_1_2')]")
-	private WebElement select_same_clinic_supply_distributor_1_2;
 
 	@FindBy(xpath = ".//input[@name = 'HC_Product_Measure__c']")
 	private WebElement get_dose_conversation_factor;
@@ -76,8 +72,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = ".//th//a[@data-refid='recordId' and @title='Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic']")
 	private WebElement select_desired_supply_loc;
-
-	private By get_supply_distribution_name1 = By.xpath("//SPAN[@records-recordlayoutitem_recordlayoutitem=''][text()='Supply Distribution Name']/../..//LIGHTNING-FORMATTED-TEXT[@data-output-element-id='output-field']");
 
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
 	private WebElement supplyLocationInDropdown;
@@ -1296,6 +1290,8 @@ public class SupplyConsolePage extends BasePage {
 		By locationTo = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + location + "')]");
 		waitForElementToBeEnabled(driver, locationTo, 30);
 		WebElement my_location = driver.findElement(locationTo);
+		scrollCenter(driver, my_location);
+		Thread.sleep(500);
 		my_location.click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}

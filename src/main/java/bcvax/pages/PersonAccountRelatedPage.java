@@ -74,6 +74,7 @@ public class PersonAccountRelatedPage extends BasePage {
 
     public static void scrollToAlertsSection(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
+        int counter = 0;
         JavascriptExecutor js = (JavascriptExecutor) driver;
         By alert_section_path = By.xpath("//article[@aria-label='Alerts']");
         boolean found = false;
@@ -84,12 +85,62 @@ public class PersonAccountRelatedPage extends BasePage {
 
             } catch (NotFoundException ex) {
                 Thread.sleep(500);
-                js.executeScript("window.scrollBy(0,350)");
+                js.executeScript("window.scrollBy(0,200)");
+                counter++;
+                if(counter > 20) {
+                    break;
+                }
             }
         }
         WebElement alert_section = driver.findElement(alert_section_path);
         scrollCenter(driver, alert_section);
         Thread.sleep(500);
+    }
+
+    public static void scrollToAppointmentsSection(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        int counter = 0;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By appointment_section_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']");
+        boolean found = false;
+        while(!found) {
+            try {
+                waitForElementToBeEnabled(driver, appointment_section_path, 2);
+                found = true;
+
+            } catch (NotFoundException ex) {
+                Thread.sleep(500);
+                js.executeScript("window.scrollBy(0,200)");
+                counter++;
+                if(counter > 20) {
+                    break;
+                }
+            }
+        }
+        WebElement appointment_section = driver.findElement(appointment_section_path);
+        scrollCenter(driver, appointment_section);
+        Thread.sleep(500);
+    }
+
+    public static void openFirstAppointmentRecord(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By appointment_section_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']");
+        waitForElementToBeEnabled(driver, appointment_section_path, 10);
+        WebElement appointemnt_section = driver.findElement(appointment_section_path);
+        GenericTable appointments_table = new GenericTable(appointemnt_section);
+        List<Map<String, WebElement>> appointment_table_map = appointments_table.getRowsMappedToHeadings();
+        WebElement appointmentDataTimeWebElement = appointment_table_map.get(1).get("Appointment Code").findElement(By.xpath(".//a"));
+        appointmentDataTimeWebElement.click();
+    }
+
+    public static void clickAppointmentViewAllButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By view_all_appointments_button_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']/..//span[@class='view-all-label']");
+        waitForElementToBeEnabled(driver, view_all_appointments_button_path, 10);
+        WebElement view_all_appointments_button = driver.findElement(view_all_appointments_button_path);
+        scrollCenter(driver, view_all_appointments_button);
+        Thread.sleep(500);
+        view_all_appointments_button.click();
     }
 
     public static void clickNewAlertButton(WebDriver driver) throws InterruptedException {

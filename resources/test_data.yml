@@ -46,12 +46,15 @@ bcvaxdevit:
     - "Age 12 and Above - Abbotsford - Abby Pharmacy":
         address_id: "AD-0006759689"
         appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006759693"
         appointment_city: "Atlin"
+        minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006759691"
         appointment_city: "Coquitlam"
+        minor_ailments: "No"
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -97,12 +100,15 @@ prodsuppqa:
     - "Age 12 and Above - Abbotsford - Abby Pharmacy":
         address_id: "AD-0006760073"
         appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006760077"
         appointment_city: "Atlin"
+        minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006760075"
         appointment_city: "Coquitlam"
+        minor_ailments: "No"
 comuat:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -249,12 +255,15 @@ regression:
     - "Age 12 and Above - Abbotsford - Abby Pharmacy":
         address_id: "AD-0006752443"
         appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006752447"
         appointment_city: "Atlin"
+        minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006752445"
         appointment_city: "Coquitlam"
+        minor_ailments: "No"
 regress2:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -302,12 +311,15 @@ regress2:
     - "Age 12 and Above - Abbotsford - Abby Pharmacy":
         address_id: "AD-0006752443"
         appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006752447"
         appointment_city: "Atlin"
+        minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006752445"
         appointment_city: "Coquitlam"
+        minor_ailments: "No"
 bcvaxqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -355,9 +367,12 @@ bcvaxqa:
     - "Age 12 and Above - Abbotsford - Abby Pharmacy":
         address_id: "AD-0006762018"
         appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006762022"
         appointment_city: "Atlin"
+        minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006762020"
         appointment_city: "Coquitlam"
+        minor_ailments: "No"

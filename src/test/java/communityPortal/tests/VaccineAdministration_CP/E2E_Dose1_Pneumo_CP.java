@@ -164,7 +164,7 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(5000);
 
         log("/*38.---Click confirm and Save Button --*/");
-        inClinicExperience_CP.HomePageClickConfirmAndSaveButton();
+        InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
         Thread.sleep(5000);
 
         log("/*39.---select Vaccine Agent picklist Value ->  Pneumo-P-23 --*/");

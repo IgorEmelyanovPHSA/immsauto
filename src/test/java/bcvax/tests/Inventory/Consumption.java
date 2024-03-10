@@ -182,7 +182,7 @@ public class Consumption extends BaseTest {
 		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
-		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
 		log("/*46.---Open Today's appointments from Home page --*/");
@@ -262,7 +262,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
-		inClinicExperiencePage.selectHealthConnectApp();
+		orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
