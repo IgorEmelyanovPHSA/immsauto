@@ -44,7 +44,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
         cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage = new ProfilesPage(driver);
         profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
-        profilePage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         profilePage.navigateToHistoricalImmunizationRecords();
 
         String field = profilePage.pirSubmissionStatusFieldIsDisplayed();
@@ -87,7 +87,7 @@ public class Historical_Immunisation_Records_Validation extends BaseTest {
        // cpMainPage.search(legalFirstName + " " + legalMiddleName + " " + legalLastName);
         profilePage = new ProfilesPage(driver);
       //  profilePage.openProfile(legalFirstName + " " + legalMiddleName + " " + legalLastName);
-        profilePage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         profilePage.navigateToHistoricalImmunizationRecords();
         Thread.sleep(1000);
         int historicalDosesbefore = Integer.parseInt(profilePage.getHistoricalDosesValue());

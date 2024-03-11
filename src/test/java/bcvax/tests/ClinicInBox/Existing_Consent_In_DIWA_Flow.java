@@ -60,12 +60,12 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
 
         log("/*----6. Navigated to Person Account related tab ---*/");
         try {
-            profilesPage.clickRelatedTab();
+            PersonAccountPage.goToRelatedTab(driver);
         } catch (NotFoundException ex) {
             driver.navigate().refresh();
             Thread.sleep(1000);
         }
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         int immunization_records_count = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
         String active_consent_resp = PersonAccountRelatedPage.getActiveConsentsResponse(driver, agent);
         Assert.assertEquals(active_consent_resp, "Grant");
@@ -73,7 +73,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         profilesPage.clickCreateImmunizationRecord();
         log("/*----8. Click confirm Button on the popup window---*/");
         try {
-            profilesPage.clickConfirmButton();
+            PersonAccountPage.confirmNoForecastWarning(driver);
         } catch(Exception ex) {
             System.out.println("No Confirm dialog");
         }
@@ -115,7 +115,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
         DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
         Thread.sleep(2000);
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         int immunization_records_count_new = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
         Assert.assertTrue(immunization_records_count_new == immunization_records_count + 1, "Expected: " + (immunization_records_count + 1) + ";  Actual: " + immunization_records_count_new);
         System.out.println();

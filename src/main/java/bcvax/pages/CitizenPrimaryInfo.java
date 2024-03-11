@@ -130,7 +130,7 @@ public class CitizenPrimaryInfo extends BasePage {
         boolean alert_found = AlertDialog.alertFound(driver);
         WebElement alert_content = AlertDialog.getAlertContent(driver);
         String alert_text = alert_content.getText();
-        Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"));
+        Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"), "Expected Alert text: Citizen Successfully Registered; Actual Alert Text: " + alert_text);
         try {
             AlertDialog.closeAlert(driver);
         } catch(ElementClickInterceptedException ex) {

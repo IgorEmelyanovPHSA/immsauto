@@ -69,12 +69,12 @@ public class DIWA_ICE extends BaseTest {
 
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
-		profilesPage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----9. Click to Create Immunization Record Button ---*/");
 		profilesPage.clickCreateImmunizationRecord();
 		log("/*----10. Click confirm Button on the popup window---*/");
 		try {
-			profilesPage.clickConfirmButton();
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Confitm Dialog");
 		}
@@ -94,7 +94,7 @@ public class DIWA_ICE extends BaseTest {
 
 		//If Incorrect vaccine warning is displayed
 		try {
-			ProfilesPage.confirm_warning(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}

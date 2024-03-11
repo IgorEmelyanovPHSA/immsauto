@@ -1,6 +1,7 @@
 package bcvax.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +31,12 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, vaccine_schedule_tab_path, 30);
         WebElement vaccine_schedule_tab = driver.findElement(vaccine_schedule_tab_path);
         waitForElementToBeVisible(driver, vaccine_schedule_tab, 10);
-        vaccine_schedule_tab.click();
+        try {
+            vaccine_schedule_tab.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(2000);
+            vaccine_schedule_tab.click();
+        }
         Thread.sleep(500);
         waitForAttribute(driver, vaccine_schedule_tab_path, "aria-selected", "true", 10);
     }

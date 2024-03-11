@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -120,7 +121,12 @@ public class Consumption extends BaseTest {
 		log("/*-- 26.'PNH match successful' --*/");
 		CitizenPrimaryInfo.successMessageAppear(driver);
 		log("/*-- 27.'Click next button --*/");
-		CitizenPrimaryInfo.clickNextButton(driver);
+		try {
+			CitizenPrimaryInfo.clickNextButton(driver);
+		} catch(ElementClickInterceptedException ex) {
+			CitizenPrimaryInfo.successMessageAppear(driver);
+			CitizenPrimaryInfo.clickNextButton(driver);
+		}
 		log("/*-- 28.'Enter email address " +email +"--*/");
 		CitizenPrimaryInfo.enterEmail(driver, email);
 		log("/*-- 29.'Confirm email address " +email +"--*/");
@@ -200,7 +206,7 @@ public class Consumption extends BaseTest {
 
 		//If Incorrect vaccine warning is displayed
 		try {
-			ProfilesPage.confirm_warning(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}

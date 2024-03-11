@@ -185,7 +185,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		//If Incorrect vaccine warning is displayed
 		try {
-			ProfilesPage.confirm_warning(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}

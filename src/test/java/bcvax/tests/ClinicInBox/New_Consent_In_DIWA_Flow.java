@@ -89,12 +89,12 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
-		profilesPage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----7. Click Create Immunization Record ---*/");
 		profilesPage.clickCreateImmunizationRecord();
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
-			profilesPage.clickConfirmButton();
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Confirm dialog");
 		}
@@ -217,6 +217,6 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		profilesPage.summaryConfirmAndSave();
 		Thread.sleep(2000);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-		profilesPage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 }
