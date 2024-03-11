@@ -44,7 +44,7 @@ public class Historical_Immunization extends BaseTest {
 		log("/* 6.----User found and Navigated to record page ---*/");
 		log("/*7----Go to back to the Citizen Related Tab --*/");
 		Thread.sleep(2000);
-		profilePage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		Thread.sleep(2000);
 		log("/*8----Navigate to Historical Immunization Records --*/");
 		profilePage.navigateToHistoricalImmunizationRecords();

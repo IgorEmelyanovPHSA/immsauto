@@ -66,6 +66,7 @@ public class PersonAccountRelatedPage extends BasePage {
     }
 
     public static List<Map<String, WebElement>> getImmunizationRecords(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
         By immunization_records_table_path = By.xpath("//c-bc-hc-client-immunization-records");
         WebElement immunization_records_table_node = driver.findElement(immunization_records_table_path);
         GenericTable immunization_table = new GenericTable(immunization_records_table_node);

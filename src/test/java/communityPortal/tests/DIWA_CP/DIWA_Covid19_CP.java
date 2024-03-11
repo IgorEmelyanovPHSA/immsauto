@@ -54,19 +54,19 @@ public class DIWA_Covid19_CP extends BaseTest {
 
         //If the PIR Warning is shown close it
         try {
-            profilesPage.closePIRWarningDialog();
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         } catch(Exception ex) {
             System.out.println("No PIR Warning. Continue...");
         }
         log("/*---- 4. Navigate to Person Account related tab ---*/");
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
 
         log("/*----5. Click to Create Immunization Record Button ---*/");
         profilesPage.clickCreateImmunizationRecord();
 
         try {
             log("/*----6. Click confirm Button on the popup window---*/");
-            profilesPage.clickConfirmButton();
+            PersonAccountPage.confirmNoForecastWarning(driver);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -159,12 +159,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         Thread.sleep(2000);
         //If the PIR Warning is shown close it
         try {
-            profilesPage.closePIRWarningDialog();
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         } catch(Exception ex) {
             System.out.println("No PIR Warning. Continue...");
         }
         log("/*---27. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         log("We need to validate that Documented Without Appointment created - not validated yet  ---*/");
     }
 

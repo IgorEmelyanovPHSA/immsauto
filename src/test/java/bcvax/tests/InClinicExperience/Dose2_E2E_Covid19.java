@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -108,7 +109,12 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		CitizenPrimaryInfo.successMessageAppear(driver);
 
 		log("/*19.----click Next button --*/");
-		CitizenPrimaryInfo.clickNextButton(driver);
+		try {
+			CitizenPrimaryInfo.clickNextButton(driver);
+		} catch(ElementClickInterceptedException ex) {
+			CitizenPrimaryInfo.successMessageAppear(driver);
+			CitizenPrimaryInfo.clickNextButton(driver);
+		}
 
 		log("/*20.----'Enter email address " +email +"--*/");
 		CitizenPrimaryInfo.enterEmail(driver, email);
@@ -434,7 +440,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		Thread.sleep(2000);
 		//If Incorrect vaccine warning is displayed
 		try {
-			ProfilesPage.confirm_warning(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}

@@ -92,7 +92,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         ProfilesPage profilesPage = new ProfilesPage(driver);
         //profilesPage.openProfile(participant_name);
         log("/*----6. Navigated to Person Account related tab ---*/");
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         log("/*----7. Click Create Immunization Record ---*/");
         PersonAccountRelatedPage.clickNewActiveConsentButton(driver);
         boolean add_consent_dialog_exists = AddConsentDialog.dialogExists(driver);
@@ -257,7 +257,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         ProfilesPage profilesPage = new ProfilesPage(driver);
         //profilesPage.openProfile(participant_name);
         log("/*----6. Navigated to Person Account related tab ---*/");
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         log("/*----7. Click Create Immunization Record ---*/");
         PersonAccountPage.clickCheckInButton(driver);
         log("/*----8. Click confirm Button on the popup window---*/");

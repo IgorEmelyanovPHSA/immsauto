@@ -13,20 +13,6 @@ public class PersonAccountSchedulePage extends BasePage {
         super(driver);
     }
 
-    public static void selectEarlyBookingReason(WebDriver driver) throws InterruptedException {
-        Thread.sleep(500);
-        By select_early_booking_reason_field_path = By.xpath("//span[text() = 'Select One']");
-        waitForElementToBeEnabled(driver, select_early_booking_reason_field_path, 10);
-        WebElement select_early_booking_dropdown = driver.findElement(select_early_booking_reason_field_path);
-        select_early_booking_dropdown.click();
-        Thread.sleep(500);
-        By early_booking_reason_travel_path = By.xpath("//span[text() = 'Travel']");
-        waitForElementToBeEnabled(driver, early_booking_reason_travel_path, 10);
-        WebElement early_booking_reason_travel = driver.findElement(early_booking_reason_travel_path);
-        waitForElementToBeVisible(driver, early_booking_reason_travel, 10);
-        early_booking_reason_travel.click();
-    }
-
     public static void overrideEligibility(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By override_eligibility_btn_path = By.xpath("//button[@title='Primary action' and text()='Override Eligibility']");

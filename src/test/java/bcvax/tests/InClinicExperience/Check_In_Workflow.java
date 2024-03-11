@@ -6,6 +6,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -202,7 +203,12 @@ public class Check_In_Workflow extends BaseTest {
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
         CitizenPrimaryInfo.successMessageAppear(driver);
         log("/*12.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
+        try {
+            CitizenPrimaryInfo.clickNextButton(driver);
+        } catch(ElementClickInterceptedException ex) {
+            CitizenPrimaryInfo.successMessageAppear(driver);
+            CitizenPrimaryInfo.clickNextButton(driver);
+        }
         log("/*13.'Enter email address: " +email +"--*/");
         CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*14.'Confirm email address: " +email +"--*/");

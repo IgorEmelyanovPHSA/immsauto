@@ -999,6 +999,8 @@ public class SupplyConsolePage extends BasePage {
 		By select_confirm_in_dropdown_path = By.xpath("//span[text() = 'Confirm']/..");
 		waitForElementToBeEnabled(driver, select_confirm_in_dropdown_path, 10);
 		WebElement select_confirm_in_dropdown = driver.findElement(select_confirm_in_dropdown_path);
+		scrollCenter(driver, select_confirm_in_dropdown);
+		Thread.sleep(500);
 		select_confirm_in_dropdown.click();
 	}
 	@Step
@@ -1007,7 +1009,7 @@ public class SupplyConsolePage extends BasePage {
 		By drd_cancel_btn_path = By.xpath("//a/span[text() = 'Cancel Transfer']");
 		waitForElementToBeEnabled(driver, drd_cancel_btn_path, 10);
 		WebElement drd_cance_btn = driver.findElement(drd_cancel_btn_path);
-		scrollIfNeeded(driver, drd_cance_btn);
+		scrollCenter(driver, drd_cance_btn);
 		Thread.sleep(500);
 		drd_cance_btn.click();
 	}

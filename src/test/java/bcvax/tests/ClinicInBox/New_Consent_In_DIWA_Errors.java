@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -77,7 +78,12 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
 		CitizenPrimaryInfo.successMessageAppear(driver);
 		log("/*12.----click Next button --*/");
-		CitizenPrimaryInfo.clickNextButton(driver);
+		try {
+			CitizenPrimaryInfo.clickNextButton(driver);
+		} catch(ElementClickInterceptedException ex) {
+			CitizenPrimaryInfo.successMessageAppear(driver);
+			CitizenPrimaryInfo.clickNextButton(driver);
+		}
 		log("/*13.'Enter email address: " + email +"--*/");
 		CitizenPrimaryInfo.enterEmail(driver, email);
 		log("/*14.'Confirm email address: " + email +"--*/");
@@ -93,12 +99,12 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
-		profilesPage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----7. Click Create Immunization Record ---*/");
 		profilesPage.clickCreateImmunizationRecord();
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
-			profilesPage.clickConfirmButton();
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Confirm dialog");
 		}
