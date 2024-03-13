@@ -3,6 +3,8 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -107,7 +109,12 @@ public class Alerts_ICE_CIB extends BaseTest {
         System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
         CitizenPrimaryInfo.successMessageAppear(driver);
         System.out.println("/*19.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
+        try {
+            CitizenPrimaryInfo.clickNextButton(driver);
+        } catch(ElementClickInterceptedException ex) {
+            CitizenPrimaryInfo.successMessageAppear(driver);
+            CitizenPrimaryInfo.clickNextButton(driver);
+        }
         System.out.println("/*20.----'Enter email address " +email +"--*/");
         CitizenPrimaryInfo.enterEmail(driver, email);
         System.out.println("/*21.----'Confirm email address " +email +"--*/");
@@ -125,19 +132,28 @@ public class Alerts_ICE_CIB extends BaseTest {
         }
         System.out.println("/*25.----click on CheckIn button --*/");
         PersonAccountPage.clickCheckInButton(driver);
-        System.out.println("/*25.----click on person Account Related Tab --*/");
-        PersonAccountPage.goToRelatedTab(driver);
+        String sidebar_alerts_text = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
+        Assert.assertEquals("Alerts(0)", sidebar_alerts_text);
+        boolean alert_section_minimized = InClinicExperienceIdentificationPage.alertSectionMinimized(driver);
+        Assert.assertTrue(alert_section_minimized, "Alerts Section is EXPANDED");
 
-        Thread.sleep(500);
-        PersonAccountRelatedPage.scrollToAlertsSection(driver);
-        PersonAccountRelatedPage.clickNewAlertButton(driver);
-
-
-        List<String> my_alert_types = NewAlertPage.getTypesOfAlert(driver);
-        List<String> my_reasons_for_update = NewAlertPage.getAlertReasonForUpdate(driver);
+        InClinicExperienceIdentificationPage.expandAlertSection(driver);
+        boolean alert_section_empty = InClinicExperienceIdentificationPage.alertSectionEmpty(driver);
+        Assert.assertTrue(alert_section_empty, "Alerts Section is not Empty");
 
         LocalDate today_date = LocalDate.now();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        InClinicExperienceIdentificationPage.clickAddAlertButton(driver);
+        List<String> my_alert_types = AddAlertDialog.getTypesOfAlert(driver);
+
+        AddAlertDialog.setAlertEffectiveFrom(driver, sdf.format(sdf.parse(today_date.minusDays(1).toString())));
+        AddAlertDialog.setAlertEffectiveTo(driver, sdf.format(sdf.parse(today_date.plusDays(1).toString())));
+        AddAlertDialog.setTypesOfAlert(driver, "Sensitive Record");
+        AddAlertDialog.setAlertMessage(driver, "Alert For Editing");
+        Thread.sleep(1000);
+        AddAlertDialog.clickSaveButton(driver);
+        System.out.println("/*25.----click on person Account Related Tab --*/");
 
         List<Map<String, String>> alert_data = new ArrayList<>();
         Map<String, String> alert_data_row = new HashMap<String, String>();
@@ -145,6 +161,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         alert_data_row.put("DateFrom", sdf.format(sdf.parse(today_date.minusDays(1).toString())));
         alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.plusDays(1).toString())));
         alert_data_row.put("AlertType", "Sensitive Record");
+        alert_data_row.put("AlertMessage", "Sensitive Record");
         alert_data.add(alert_data_row);
 
         alert_data_row = new HashMap<String, String>();
@@ -152,27 +169,100 @@ public class Alerts_ICE_CIB extends BaseTest {
         alert_data_row.put("DateFrom", sdf.format(sdf.parse(today_date.minusDays(2).toString())));
         alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.plusDays(2).toString())));
         alert_data_row.put("AlertType", "Safety Concern for Staff");
+        alert_data_row.put("AlertMessage", "Safety Concern for Staff");
         alert_data.add(alert_data_row);
 
         alert_data_row = new HashMap<String, String>();
         alert_data_row.put("Name", "Third Alert");
         alert_data_row.put("DateFrom", sdf.format(sdf.parse(today_date.minusDays(3).toString())));
-        alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.plusDays(3).toString())));
+        alert_data_row.put("DateTo", sdf.format(sdf.parse(today_date.minusDays(1).toString())));
         alert_data_row.put("AlertType", "Other (Specify)");
+        alert_data_row.put("AlertMessage", "Alert Not Active Message");
         alert_data.add(alert_data_row);
 
         for(int i = 0; i < alert_data.size(); i++) {
-            NewAlertPage.setAlertName(driver, alert_data.get(i).get("Name"));
-            NewAlertPage.setAlertEffectiveFrom(driver, alert_data.get(i).get("DateFrom"));
-            NewAlertPage.setAlertEffectiveTo(driver, alert_data.get(i).get("DateTo"));
-            NewAlertPage.setTypesOfAlert(driver, alert_data.get(i).get("AlertType"));
-            NewAlertPage.setAlertMessage(driver, "Alert Short Message");
-            if(i < alert_data.size() - 1) {
-                NewAlertPage.clickSaveAndNewButton(driver);
-            } else {
-                NewAlertPage.clickSaveButton(driver);
-            }
+            InClinicExperienceIdentificationPage.clickAddAlertButton(driver);
+            AddAlertDialog.setAlertEffectiveFrom(driver, alert_data.get(i).get("DateFrom"));
+            AddAlertDialog.setAlertEffectiveTo(driver, alert_data.get(i).get("DateTo"));
+            AddAlertDialog.setTypesOfAlert(driver, alert_data.get(i).get("AlertType"));
+            AddAlertDialog.setAlertMessage(driver, alert_data.get(i).get("AlertMessage"));
+            AddAlertDialog.clickSaveButton(driver);
         }
+
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+        InClinicExperienceIdentificationPage.expandAlertSection(driver);
+        List<Map<String, WebElement>> alert_table = InClinicExperienceIdentificationPage.getAlertSectionTable(driver);
+        Assert.assertEquals(5, alert_table.size());
+        String my_alerts_from_sidebar = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
+        Assert.assertEquals("Alerts(3)", my_alerts_from_sidebar);
+
+        String icon_not_active = InClinicExperienceIdentificationPage.getAlertIcon(alert_table, "Alert Not Active Message");
+        Assert.assertEquals("BCH_GreyTriangleIcon", icon_not_active);
+
+        String icon_safety = InClinicExperienceIdentificationPage.getAlertIcon(alert_table, "Safety Concern for Staff");
+        Assert.assertEquals(icon_safety, "BCH_PurpleWarningIcon");
+
+        String icon_sensitive = InClinicExperienceIdentificationPage.getAlertIcon(alert_table, "Sensitive Record");
+        Assert.assertEquals(icon_sensitive, "BCH_YellowWarningIcon");
+
+        InClinicExperienceIdentificationPage.clickViewEditAlert(driver, "Alert For Editing");
+        ViewEditAlertPage.setAlertEffectiveTo(driver, sdf.format(sdf.parse(today_date.minusDays(1).toString())));
+        ViewEditAlertPage.clickSaveButton(driver);
+        List<String> my_errors = AlertDialog.getAllAlertsText(driver);
+        AlertDialog.closeAllAlerts(driver);
+        Assert.assertEquals("Error\n" +
+                "Unable to update Alert You must provide a reason for update to edit this alert", my_errors.get(0));
+
+        ViewEditAlertPage.selectAlertReasonForUpdate(driver, "Other, specify");
+        ViewEditAlertPage.clickSaveButton(driver);
+        List<String> my_other_errors = AlertDialog.getAllAlertsText(driver);
+        AlertDialog.closeAllAlerts(driver);
+        Assert.assertEquals("Error\n" +
+                "Unable to update Alert You must enter details in Update Comment if Reason for Update is Other", my_other_errors.get(0));
+
+        ViewEditAlertPage.setAlertUpdateComments(driver, "Alert Update Comment");
+        ViewEditAlertPage.clickSaveButton(driver);
+        Thread.sleep(1000);
+        InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
+
+        inClinicExperience.clickTodayAppointments();
+        Thread.sleep(2000);
+        inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+
+        String final_alerts_from_sidebar = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
+        Assert.assertEquals("Alerts(2)", final_alerts_from_sidebar);
+
+        alert_section_minimized = InClinicExperienceIdentificationPage.alertSectionMinimized(driver);
+        Assert.assertTrue(alert_section_minimized, "Alerts Section is EXPANDED");
+
+        InClinicExperienceIdentificationPage.expandAlertSection(driver);
+        alert_table = InClinicExperienceIdentificationPage.getAlertSectionTable(driver);
+        Assert.assertEquals(5, alert_table.size());
+
+        currentApp = orgMainPage.currentApp();
+        if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+            orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+        }
+        orgMainPage.closeAllTabs();
+        orgMainPage.globalSearch(legalFirstName + " " + legalLastName);
+        PersonAccountPage.goToRelatedTab(driver);
+        String alerts_text = PersonAccountPage.getClientAlerts(driver);
+        Assert.assertEquals("Active(2)", alerts_text);
+        List<String> my_images = PersonAccountPage.getClientAlertImages(driver);
+        Assert.assertTrue(my_images.contains("BCH_PurpleWarningIcon"));
+        Assert.assertTrue(my_images.contains("BCH_YellowWarningIcon"));
+        PersonAccountRelatedPage.scrollToAlertsSection(driver);
+        Thread.sleep(500);
+        PersonAccountRelatedPage.clickNewAlertButton(driver);
+        NewAlertPage.setAlertName(driver, "Alert from CIB");
+        NewAlertPage.setAlertEffectiveFrom(driver, sdf.format(sdf.parse(today_date.minusDays(5).toString())));
+        NewAlertPage.setAlertEffectiveTo(driver, sdf.format(sdf.parse(today_date.plusDays(5).toString())));
+        NewAlertPage.setTypesOfAlert(driver, "Safety Concern for Client");
+        NewAlertPage.setAlertMessage(driver, "Alert Message CIB");
+        NewAlertPage.clickSaveButton(driver);
         System.out.println();
     }
+
+
 }

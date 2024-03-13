@@ -1035,7 +1035,7 @@ public class SupplyConsolePage extends BasePage {
 		By supplyDistributor = By.xpath("//span[contains(text(),'" + supplyDistribution + "')]");
 		waitForElementToBePresent(driver, supplyDistributor, 10);
 		WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
-		scrollIfNeeded(driver, supplyDistributorItem);
+		scrollCenter(driver, supplyDistributorItem);
 		supplyDistributorItem.click();
 	}
 
