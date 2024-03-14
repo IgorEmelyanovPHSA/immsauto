@@ -151,4 +151,12 @@ public class PersonAccountRelatedPage extends BasePage {
         WebElement new_alert_button = driver.findElement(new_alert_button_path);
         new_alert_button.click();
     }
+
+    public static List<Map<String, WebElement>> getAlertSectionTable(WebDriver driver) throws InterruptedException {
+        By alerts_datatable_path = By.xpath("//article[@aria-label='Alerts']");
+        waitForElementToBeEnabled(driver, alerts_datatable_path, 10);
+        WebElement alerts_datatable = driver.findElement(alerts_datatable_path);
+        GenericTable my_alerts = new GenericTable(alerts_datatable);
+        return my_alerts.getRowsMappedToHeadings();
+    }
 }
