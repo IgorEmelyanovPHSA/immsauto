@@ -5,11 +5,6 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -181,7 +176,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 41.---Click Appointment Confirm Button --*/");
 		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
-		inClinicExperiencePage.AppointmentConfirmationMessage();
+		PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 		log("/*-- 43.---Navigate to person account Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*-- 44.---Click Go To In clinic experience button --*/");

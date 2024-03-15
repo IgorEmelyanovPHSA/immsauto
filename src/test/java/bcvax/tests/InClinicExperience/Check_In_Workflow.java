@@ -2,14 +2,10 @@ package bcvax.tests.InClinicExperience;
 
 import bcvax.tests.BaseTest;
 
-import Utilities.TestListener;
 import bcvax.pages.*;
-import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -254,7 +250,7 @@ public class Check_In_Workflow extends BaseTest {
         log("/*31----click Confirm Appointment button  --*/");
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
         log("/*32----see 'Appointment confirmed!' screen --*/");
-        boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
     }
 }

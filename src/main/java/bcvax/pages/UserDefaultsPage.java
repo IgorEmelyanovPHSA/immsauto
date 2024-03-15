@@ -14,8 +14,6 @@ import java.util.Locale;
 public class UserDefaultsPage extends BasePage{
 
     public UserDefaultsPage(WebDriver driver) {super(driver);}
-    @FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
-    private WebElement clinicLocationUserDefaults;
 
     @FindBy(xpath = "//button[@name='DeleteLot']")
     private WebElement btnDeleteLot;
@@ -120,21 +118,6 @@ public class UserDefaultsPage extends BasePage{
         return flag;
     }
 
-    public boolean successfullyUpdatedMsgDisplayed() throws InterruptedException {
-        boolean flag = false;
-        for (int i = 0; i < 12; i++) {
-            if(isToastMessageDisplayed() == true) {
-                flag = true;
-                Thread.sleep(500);
-        }
-            else{
-                log("NOT DISPLAYED: User Defaults Successfully Updated");
-                break;
-            }
-        }
-        return flag;
-    }
-
     public void validateSuccessfullyUpdatedMsg() throws InterruptedException {
         if (isToastMessageDisplayed() == false) {
             throw new RuntimeException("NOT DISPLAYED: User Defaults Successfully Updated");
@@ -160,14 +143,6 @@ public class UserDefaultsPage extends BasePage{
         Thread.sleep(500);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
-        Date today = calendar.getTime();
-        inputDateUserDefaults(today);
-    }
-
-    public void inputPreviousDateUserDefaults() throws InterruptedException {
-        Thread.sleep(500);
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -1);
         Date today = calendar.getTime();
         inputDateUserDefaults(today);
     }
@@ -224,12 +199,6 @@ public class UserDefaultsPage extends BasePage{
         }
     }
 
-    public void selectClinicUserDefaults(String clinicLocation) throws InterruptedException {
-        click(clinicLocationUserDefaults);
-        clinicLocationUserDefaults.sendKeys(clinicLocation);
-        validateSuccessfullyUpdatedMsg();
-    }
-
     public void selectUserDefaultLocation(String location) throws InterruptedException {
         Thread.sleep(500);
         By location_input_field_path = By.xpath("//c-bc-hc-input-search-drop-down//input");
@@ -246,14 +215,4 @@ public class UserDefaultsPage extends BasePage{
         WebElement my_location = driver.findElement(my_location_path);
         my_location.click();
     }
-
-//    public void inputUserDefaultsCurrentDate() throws InterruptedException {
-//        Calendar calendar = Calendar.getInstance();
-//        Date today = calendar.getTime();
-//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-//        waitForElementToBeVisible(driver, input_current_date, 10);
-//        String todayAsString = dateFormat.format(today);
-//        click(input_current_date);
-//        typeIn(input_current_date,todayAsString);
-//    }
 }

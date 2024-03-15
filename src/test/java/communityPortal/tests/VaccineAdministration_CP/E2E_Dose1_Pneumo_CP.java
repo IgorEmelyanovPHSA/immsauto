@@ -142,7 +142,7 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(2000);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Thread.sleep(3000);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");

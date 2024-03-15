@@ -47,19 +47,24 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
 
         log("5. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("6. Select date and time for appointment and click btn Next ");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("7. Click the checkboxes: 1)I verify that the contact information and 2)I consent to notifications");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConsentToNotifications();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickVerifyConsentInformation(driver);
 
         log("8. Click btn Confirm Appointment");
-        bookAnAppointmentPage.clickBtnConfirmAppointment();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("9. Validate booking is confirmed");
-        Assert.assertTrue(bookAnAppointmentPage.isBookingConfirmedDisplayed());
+        Assert.assertTrue(PersonAccountSchedulePage.appointmentConfirmationMessage(driver));
 
         log("10. Get booked date and time for first appointment");
         //String confirmedAppointmentOneDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
@@ -77,19 +82,24 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
 
         log("15. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("16. Select date and time for appointment and click btn Next ");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("17. Click the checkboxes: 1)I verify that the contact information and 2)I consent to notifications");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConsentToNotifications();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickVerifyConsentInformation(driver);
 
         log("18. Click btn Confirm Appointment");
-        bookAnAppointmentPage.clickBtnConfirmAppointment();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("19. Validate booking is confirmed");
-        Assert.assertTrue(bookAnAppointmentPage.isBookingConfirmedDisplayed());
+        Assert.assertTrue(PersonAccountSchedulePage.appointmentConfirmationMessage(driver));
 
         log("20. Get booked date and time for second appointment");
         //String confirmedAppointmentTwoDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();

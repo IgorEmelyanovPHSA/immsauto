@@ -121,19 +121,6 @@ public class InClinicExperiencePage extends BasePage {
 		clickCloseAlert();
 	}
 
-	public boolean AppointmentConfirmationMessage() throws InterruptedException {
-		Thread.sleep(500);
-		try {
-			By appointment_confirm_message_path = By.xpath("//h1[@class='bch-scheduler-title'] | //div[contains(@class, 'bch-scheduler-title')]");
-			waitForElementToBeLocated(driver, appointment_confirm_message_path, 30);
-			System.out.println("/*---'Appointment confirmed!' message shown up");
-			return true;
-		} catch (TimeoutException e) {
-			System.out.println("/*---the screen does not show up 'Appointment confirmed!'");
-			return false;
-		}
-	}
-
 	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
 		Thread.sleep(500);
 		By in_clinic_experience_app_path = By.xpath("//button[@name='navigateToICE' and @aria-disabled='false']");

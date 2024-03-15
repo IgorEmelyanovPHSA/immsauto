@@ -167,7 +167,7 @@ public class E2E_Consumption_CP extends BaseTest {
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
