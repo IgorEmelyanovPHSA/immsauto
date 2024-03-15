@@ -160,7 +160,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		System.out.println("/*34----click Confirm Appointment button  --*/");
 		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
-		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+		boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");

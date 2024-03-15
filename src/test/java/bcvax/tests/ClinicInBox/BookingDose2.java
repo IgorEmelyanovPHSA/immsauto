@@ -147,10 +147,10 @@ public class BookingDose2 extends BaseTest {
 		log("/*28----click Confirm Appointment button  --*/");
 		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		log("/*29----see 'Appointment Confirmed!' screen --*/");
-		boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+		boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		log("/*30----Refresh page --*/");
-		clinicInBox.refreshBrowser();
+		driver.navigate().refresh();
 
 		try {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

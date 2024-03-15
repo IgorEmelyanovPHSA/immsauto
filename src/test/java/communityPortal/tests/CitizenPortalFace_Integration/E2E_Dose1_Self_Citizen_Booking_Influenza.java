@@ -97,19 +97,24 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
         bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
-        bookAnAppointmentPage.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 
         log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*14.---Select date and time for appointment and click btn Next--*/");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*15.---Click verify contact information checkbox--*/");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*16.---Verify appointment conformation message is displayed--*/");
-        bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
     }
 
     @Test(priority = 2)

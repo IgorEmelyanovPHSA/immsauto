@@ -129,7 +129,7 @@ public class RegistrationNotificationCP extends BaseTest {
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);

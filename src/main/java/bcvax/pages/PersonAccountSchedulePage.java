@@ -1,10 +1,6 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.*;
 
 import java.util.List;
 
@@ -135,7 +131,19 @@ public class PersonAccountSchedulePage extends BasePage {
 
     public static void clickVerifyContactInformation(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By verify_contact_information_checkbox_path = By.xpath("//lightning-input[@class='slds-p-left_xxx-small verifyCheckbox slds-form-element']//span[@class='slds-checkbox_faux']");
+        By verify_contact_information_checkbox_path = By.xpath("//span[text()='I verify that the contact information (email address and phone number) entered is accurate and up to date.']/../span[@class='slds-checkbox_faux']");
+        waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
+        WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
+        Thread.sleep(1000);
+        scrollCenter(driver, verify_contact_information_checkbox);
+        Thread.sleep(1000);
+        verify_contact_information_checkbox.click();
+        Thread.sleep(500);
+    }
+
+    public static void clickVerifyConsentInformation(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By verify_contact_information_checkbox_path = By.xpath("//span[text()='I consent to notifications being sent to my preferred contact method for the purpose of informing me about my pharmacy appointment.']/../span[@class='slds-checkbox_faux']");
         waitForElementToBeEnabled(driver, verify_contact_information_checkbox_path, 10);
         WebElement verify_contact_information_checkbox = driver.findElement(verify_contact_information_checkbox_path);
         Thread.sleep(1000);
@@ -151,5 +159,18 @@ public class PersonAccountSchedulePage extends BasePage {
         waitForElementToBeEnabled(driver, confirm_appointment_btn_path, 10);
         WebElement confirm_appointment_button = driver.findElement(confirm_appointment_btn_path);
         confirm_appointment_button.click();
+    }
+
+    public static boolean appointmentConfirmationMessage(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        try {
+            By appointment_confirm_message_path = By.xpath("//h1[@class='bch-scheduler-title'] | //div[contains(@class, 'bch-scheduler-title')]");
+            waitForElementToBeLocated(driver, appointment_confirm_message_path, 30);
+            System.out.println("/*---'Appointment confirmed!' message shown up");
+            return true;
+        } catch (TimeoutException e) {
+            System.out.println("/*---the screen does not show up 'Appointment confirmed!'");
+            return false;
+        }
     }
 }

@@ -156,16 +156,16 @@ public class BookingDose1 extends BaseTest {
 		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		try {
 			log("/*32----see 'Appointment confirmed!' screen --*/");
-			boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+			boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		} catch(Exception ex) {
 			PersonAccountSchedulePage.clickOnConfirmButton(driver);
 			log("/*32----see 'Appointment confirmed!' screen. Second attempt --*/");
-			boolean appointment_result = clinicInBox.validateAppointmentConfirmedScreen();
+			boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		}
 		log("/*33----Refresh page --*/");
-		clinicInBox.refreshBrowser();
+		driver.navigate().refresh();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*35----click on Check-In button --*/");

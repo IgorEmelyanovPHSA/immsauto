@@ -3,8 +3,6 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -151,7 +149,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);

@@ -77,20 +77,4 @@ public class ClinicInBoxPage extends BasePage {
 		}
 		return found;
 	}
-	
-	public boolean validateAppointmentConfirmedScreen() throws InterruptedException {
-		By appointment_confirm_message_path = By.xpath("//h1[@class='bch-scheduler-title'] | //div[contains(@class, 'bch-scheduler-title')]");
-		try {
-			waitForElementToBeLocated(driver, appointment_confirm_message_path, 10);
-			System.out.println("/*---'Appointment confirmed!' message shown up");
-			return true;
-		} catch (NoSuchElementException e) {
-			System.out.println("/*---the screen does not show up 'Appointment confirmed!'");
-			return false;
-		}
-	}
-	
-	public void refreshBrowser() throws InterruptedException {
-		driver.navigate().refresh();
-	}
 }

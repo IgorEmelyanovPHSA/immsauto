@@ -52,25 +52,30 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
 
         log("6. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("7. Select date and time for appointment and click btn Next ");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("8. Click btn Confirm Appointment without consents");
-        bookAnAppointmentPage.clickBtnConfirmAppointment();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("9. Validate the error message is displayed: Please complete all required fields before proceeding.");
         Assert.assertTrue(bookAnAppointmentPage.isToastErrorMessageCompleteAllRequiredFieldsDisplayed());
 
         log("10. Click the checkboxes: 1)I verify that the contact information and 2)I consent to notifications");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConsentToNotifications();
+        PersonAccountSchedulePage.clickVerifyConsentInformation(driver);
 
         log("11. Click btn Confirm Appointment");
-        bookAnAppointmentPage.clickBtnConfirmAppointment();
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("12. Validate booking is confirmed");
-        Assert.assertTrue(bookAnAppointmentPage.isBookingConfirmedDisplayed());
+        Assert.assertTrue(PersonAccountSchedulePage.appointmentConfirmationMessage(driver));
 
         log("13. Get booked date and time");
         //String confirmedAppointmentDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();

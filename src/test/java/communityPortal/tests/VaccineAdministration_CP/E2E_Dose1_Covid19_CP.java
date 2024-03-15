@@ -3,6 +3,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -107,13 +108,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
-//        try {
-//            System.out.println("---click on reason Early Booking Reason - Travel --*/");
-//            PersonAccountPage.selectEarlyBookingReason(driver);
-//        } catch(Exception ex) {
-//            System.out.println("There is not Early Booking Option");
-//        }
-
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -126,9 +120,10 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         try {
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         } catch(NotFoundException ex) {
-            Thread.sleep(2000);
             PersonAccountSchedulePage.overrideEligibility(driver);
-            Thread.sleep(2000);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountSchedulePage.overrideEligibility(driver);
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
 
@@ -162,7 +157,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        boolean appointment_result = inClinicExperience_CP.AppointmentConfirmationMessage();
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
         PersonAccountPage.clickCheckInButton(driver);
         log("/*35.----Go to back to the Citizen Related Tab --*/");
