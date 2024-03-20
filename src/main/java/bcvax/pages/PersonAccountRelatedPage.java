@@ -2,6 +2,8 @@ package bcvax.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +125,33 @@ public class PersonAccountRelatedPage extends BasePage {
         Thread.sleep(500);
     }
 
+    public static void scrollToActiveConsentsSection(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        int counter = 0;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By alert_section_path = By.xpath("//c-bchc-active-consent-table//span[contains(text(), 'Active Consent')]");
+        boolean found = false;
+        while(!found) {
+            try {
+                waitForElementToBeEnabled(driver, alert_section_path, 1);
+                found = true;
+
+            } catch (NotFoundException ex) {
+                Thread.sleep(500);
+                js.executeScript("window.scrollBy(0,200)");
+                counter++;
+                if(counter > 20) {
+                    break;
+                }
+            }
+        }
+        WebElement alert_section = driver.findElement(alert_section_path);
+        scrollCenter(driver, alert_section);
+        Thread.sleep(1000);
+        scrollCenter(driver, alert_section);
+        Thread.sleep(500);
+    }
+
     public static void openFirstAppointmentRecord(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By appointment_section_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']");
@@ -158,5 +187,53 @@ public class PersonAccountRelatedPage extends BasePage {
         WebElement alerts_datatable = driver.findElement(alerts_datatable_path);
         GenericTable my_alerts = new GenericTable(alerts_datatable);
         return my_alerts.getRowsMappedToHeadings();
+    }
+
+    public static void clickCreateImmunizationRecord(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By create_immunization_record_btn_path = By.xpath("//button[contains(text(),'Create Immunization Record')]");
+        waitForElementToBeEnabled(driver, create_immunization_record_btn_path, 10);
+        WebElement create_immunization_record_btn = driver.findElement(create_immunization_record_btn_path);
+        scrollCenter(driver, create_immunization_record_btn);
+        Thread.sleep(500);
+        create_immunization_record_btn.click();
+    }
+
+    public static void checkExistingConsent(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By existing_consent_checkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']/../../../..");
+        waitForElementToBeEnabled(driver, existing_consent_checkbox_path, 10);
+        WebElement existing_consent_checkbox = driver.findElement(existing_consent_checkbox_path);
+        scrollCenter(driver, existing_consent_checkbox);
+        Thread.sleep(500);
+        if(existing_consent_checkbox.getAttribute("checked") == null) {
+            WebElement chkbox = existing_consent_checkbox.findElement(By.xpath(".//span[@part='indicator']"));
+            chkbox.click();
+        }
+    }
+
+    public static void navigateToHistoricalImmunizationRecords(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        By historical_records_title = By.xpath("//span[@title and contains(text(), 'Historical Immunization Records')]");
+        waitForElementToBePresent(driver, historical_records_title, 10);
+        By historical_records_table_path = By.xpath("//c-bc-hc-historical-doses-c-i-b");
+        WebElement historical_immunization_records_table = driver.findElement(historical_records_table_path);
+        GenericTable historical_immunization_records_table_gt = new GenericTable(historical_immunization_records_table);
+        WebElement element = historical_immunization_records_table_gt.getRowsMappedToHeadings().get(0).get("PIR Submission Status");
+
+        for(int i = 0; i < 100; i++) {
+            try {
+                scrollCenter(driver, element);
+                Thread.sleep(1000);
+                historical_immunization_records_table_gt.getRowsMappedToHeadings().get(1);
+                break;
+            } catch (Exception ex) {
+                System.out.println("Try " + i + "; Table is still empty");
+                //driver.navigate().refresh();
+                waitForElementToBePresent(driver, historical_records_title, 10);
+                Thread.sleep(1000);
+                element = historical_immunization_records_table_gt.getRowsMappedToHeadings().get(0).get("PIR Submission Status");
+            }
+        }
     }
 }

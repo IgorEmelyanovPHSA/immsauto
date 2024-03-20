@@ -36,7 +36,7 @@ public class PersonAccountSchedulePage extends BasePage {
         By covid19_vaccine_checkbox_path = By.xpath("//span[text() = 'Covid-19 Vaccine']");
         By influenza_checkbox_path = By.xpath("//span[text() = 'Influenza Vaccine']");
         if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
-            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 60);
+            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 10);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
             scrollCenter(driver, covid19_vaccine_checkbox);
             Thread.sleep(500);

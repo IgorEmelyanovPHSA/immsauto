@@ -88,10 +88,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 12. Click on User Defaults Tab  --*/");
 		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
 		inClinicExperiencePage.clickUserDefaultsTab();
-		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*-- 13. Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputCurrentDateUserDefaults();
-		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
 		inClinicExperiencePage.clickSaveDefaultsButton();
 		log("/*-- 15. Click on register Tab --*/");
@@ -193,9 +192,9 @@ public class Consumption extends BaseTest {
 		inClinicExperiencePage.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		Thread.sleep(2000);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		String agent = inClinicExperiencePage.getVaccineAgent();
+		String agent = InClinicExperienceVaccineAdministrationPage.getVaccineAgent(driver);
 		if(agent.equals("")) {
-			inClinicExperiencePage.selectVaccineAgent(consumptionAgent);
+			InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 		}
 		Thread.sleep(2000);
 
@@ -215,7 +214,7 @@ public class Consumption extends BaseTest {
 //		inClinicExperiencePage.ClickSaveConsentButton();
 
 		try {
-			ProfilesPage.checkExistingConsent(driver);
+			PersonAccountRelatedPage.checkExistingConsent(driver);
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}
@@ -229,29 +228,29 @@ public class Consumption extends BaseTest {
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
 
 
-		String provider =  inClinicExperiencePage.getProvider();
-		String route = inClinicExperiencePage.getRoute();
-		String site = inClinicExperiencePage.getSite();
-		String lot = inClinicExperiencePage.getLotNumber();
+		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
+		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
+		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 
 		if(agent.equals("")) {
-			inClinicExperiencePage.setVaccineAgent(consumptionAgent);
+			InClinicExperienceVaccineAdministrationPage.setVaccineAgent(driver, consumptionAgent);
 		}
 		if(provider.equals("")) {
-			inClinicExperiencePage.setProvider(consentProvider);
+			InClinicExperienceVaccineAdministrationPage.setProvider(driver, consentProvider);
 		}
 		if(route.equals("")) {
-			inClinicExperiencePage.setRoute(consumptionRoute);
+			InClinicExperienceVaccineAdministrationPage.setRoute(driver, consumptionRoute);
 		}
 		if(site.equals("")) {
-			inClinicExperiencePage.setSite(consumptionSite);
+			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		if(!lot.equals(consumptionLot)) {
-			inClinicExperiencePage.setLotNumber(consumptionLot);
+			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
-		String dose = inClinicExperiencePage.getDosage();
+		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 		if(!dose.equals(consumptionDose)) {
-			inClinicExperiencePage.setDosage(consumptionDose);
+			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
 		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
 		inClinicExperiencePage.clickOkForExpiredLot();

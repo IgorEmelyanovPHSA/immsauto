@@ -64,12 +64,11 @@ public class BookingDose1 extends BaseTest {
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
 		log("/*6.----- Enter current date for UserDefaults --*/");
-		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*-- 13. Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputCurrentDateUserDefaults();
-		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
-		userDefaultsPage.clickBtnSave();
+		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
 		currentApp = orgMainPage.currentApp();
 		try {

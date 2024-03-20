@@ -67,10 +67,11 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         }
         PersonAccountPage.goToRelatedTab(driver);
         int immunization_records_count = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
+
         String active_consent_resp = PersonAccountRelatedPage.getActiveConsentsResponse(driver, agent);
         Assert.assertEquals(active_consent_resp, "Grant");
         log("/*----7. Click Create Immunization Record ---*/");
-        profilesPage.clickCreateImmunizationRecord();
+        PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
         log("/*----8. Click confirm Button on the popup window---*/");
         try {
             PersonAccountPage.confirmNoForecastWarning(driver);
@@ -93,10 +94,10 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         Assert.assertTrue(record_consent_btn_exists, "Record Consent button is not displayed");
         boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
         Assert.assertTrue(record_consent_message_exists, "Record Consent Message not found");
-        boolean confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+        boolean confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
         Assert.assertFalse(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously Active");
 
-        DiwaImmunizationRecord.select_provider(driver, consentProvider);
+        DiwaImmunizationRecord.selectProvider(driver, consentProvider);
         profilesPage.clickShowAllLotNumbersCheckBox();
         profilesPage.clickLotNumberDropDown();
         profilesPage.selectLot();
@@ -110,7 +111,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         } catch(Exception ex) {
             System.out.println("No Expired Lot Warning");
         }
-        confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+        confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
         Assert.assertTrue(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously disabled");
         DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
         DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);

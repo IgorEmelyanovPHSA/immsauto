@@ -83,13 +83,6 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
-        try {
-            System.out.println("---click on reason Early Booking Reason - Travel --*/");
-            commn.selectEarlyBookingReason();
-        } catch(Exception ex) {
-            System.out.println("There is not Early Booking Option");
-        }
-
         //If override Eligibility is shown
         try {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");

@@ -60,10 +60,9 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*-- 3. Click on User Defaults Tab  --*/");
         inClinicExperiencePage.clickUserDefaultsTab();
         Thread.sleep(2000);
-        UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
         log("/*-- 4. Enter current date for UserDefaults --*/");
-        userDefaultsPage.inputCurrentDateUserDefaults();
-        userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         System.out.println("/*----- Click on Save defaults button --*/");
         inClinicExperiencePage.clickSaveDefaultsButton();
         log("/*5.----click Register button New Citizen --*/");

@@ -15,12 +15,6 @@ public class LoginPage extends BasePage {
 
 	@FindBy(id = "Login")
 	private WebElement login_button;
-	
-	@FindBy(xpath = "//a[contains(text(),'Submit')]")
-	private WebElement submit_button;
-	
-	@FindBy(xpath = "//div[contains(text(),'The form was successfully submitted!')]")
-	private WebElement alertSuccess;
 
 	@FindBy(xpath = "//input[@placeholder='Username']")
 	private WebElement input_username_CP;
@@ -34,15 +28,7 @@ public class LoginPage extends BasePage {
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-	
-	public InClinicExperiencePage loginAsPrecondition() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_PPHIS_PW"));
-		click(login_button);
-		return new InClinicExperiencePage(driver);
-	}
-	
+
 	public SupplyConsolePage loginAsPPHIS() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_PPHIS"));
@@ -106,16 +92,13 @@ public class LoginPage extends BasePage {
 		return new MinorAilmentsPage(driver);
 	}
 	
-	public BookAnAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
+	public BookAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
 		driver.navigate().to(uniqueLink);
-		return new BookAnAppointmentPage(driver);
+		return new BookAppointmentPage(driver);
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Community Portal section //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@FindBy(xpath = "//a[@class='inverseTextColor' and contains(text(),'Login here')]")
-	private WebElement btnLoginHere;
 
 	@FindBy(xpath = "//img[@src='/bchvaxportal/profilephoto/005/T']")
 	private WebElement btnProfile;
@@ -133,18 +116,6 @@ public class LoginPage extends BasePage {
 		click(login_button);
 		Thread.sleep(15000);
 		common.goToVaccinationPortalIfNeededAndConfirmPageIsDisplayed();
-		return new MainPageCP(driver);
-	}
-
-	@Step public MainPageCP loginIntoCommunityPortalAsSysAdmin() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		Thread.sleep(2000);
-		click(btnLoginHere);
-		waitForElementToBeClickable(textUserName);
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_SYS_ADMIN_CP_PW"));
-		click(login_button);
-		log("  -- Login AS " + Utils.getEnvConfigProperty("user_SYS_ADMIN_CP") +  " +--*/");
 		return new MainPageCP(driver);
 	}
 
@@ -167,8 +138,4 @@ public class LoginPage extends BasePage {
 		input_password_CP.sendKeys(Utils.getEnvConfigProperty(pass));
 		login_button_CP.click();
 	}
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 }

@@ -28,7 +28,6 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         log("API call to remove appointments from participant account by PHN if found");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(personalHealthNumber);
 
-        BookAnAppointmentPage bookAnAppointmentPage = new BookAnAppointmentPage(getDriver());
         CommonMethods com = new CommonMethods(getDriver());
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
 
@@ -66,7 +65,7 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("9. Validate the error message is displayed: Please complete all required fields before proceeding.");
-        Assert.assertTrue(bookAnAppointmentPage.isToastErrorMessageCompleteAllRequiredFieldsDisplayed());
+        Assert.assertTrue(BookAppointmentPage.isToastErrorMessageCompleteAllRequiredFieldsDisplayed(driver));
 
         log("10. Click the checkboxes: 1)I verify that the contact information and 2)I consent to notifications");
         PersonAccountSchedulePage.clickVerifyConsentInformation(driver);

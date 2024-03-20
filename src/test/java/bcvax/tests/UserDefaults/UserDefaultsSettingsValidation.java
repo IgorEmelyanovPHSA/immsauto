@@ -27,7 +27,6 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("Target Environment: " + env);
         testData = Utils.getTestData(env);
         String[] lots = ((ArrayList<String>)testData.get("useDefaultSettingsLots")).toArray(new String[0]);
-        UserDefaultsPage userDefaultsPage = new UserDefaultsPage(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*1.----Login as clinician ICE --*/");
@@ -46,20 +45,20 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         inClinicExperience.clickUserDefaultsTab();
 
         log("/*5.----- Enter current date for UserDefaults --*/");
-        userDefaultsPage.inputCurrentDateUserDefaults();
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 
         log("/*6.----- Enter clinic for UserDefaults: " + clinicLocation + "--*/");
        // userDefaultsPage.selectClinicUserDefaults(clinicLocation);
 
         log("/*7.----- Open Advanced Settings--*/");
-        userDefaultsPage.clickOnAdvancedSettings();
+        UserDefaultsPage.clickOnAdvancedSettings(driver);
 
         log("/*8.----- Delete lots if any present and save--*/");
-        Boolean isAnyLotsPresent = userDefaultsPage.isAnyLotsPresent();
+        Boolean isAnyLotsPresent = UserDefaultsPage.isAnyLotsPresent(driver);
         if(isAnyLotsPresent==true){
-            userDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously();
+            UserDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously(driver);
             log("All lots are deleted");
-            userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+            UserDefaultsPage.clickBtnSaveWithSuccessMsgValidation(driver);
         }
 
         log("/*9.---- Navigate to Supply Console Page --*/");
@@ -87,20 +86,19 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         inClinicExperiencePage.clickUserDefaultsTab();
-        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
-        userDefaultPage.inputCurrentDateUserDefaults();
-        userDefaultPage.selectUserDefaultLocation(clinicLocation);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicLocation);
 
         log("/*13.----- Open Advanced Settings --*/");
-        userDefaultsPage.clickOnAdvancedSettings();
+        UserDefaultsPage.clickOnAdvancedSettings(driver);
 
         log("/*14.----- Populate Lots and Sites --*/");
-        userDefaultsPage.populateLotsAndSite(lots);
+        UserDefaultsPage.populateLotsAndSite(driver, lots);
 
         log("/*15.----- Click btn Save and validate success msg --*/");
-        userDefaultsPage.clickBtnSave();
-        userDefaultsPage.clickOkForExpiredLot();
-        userDefaultsPage.validateSuccessfullyUpdatedMsg();
+        UserDefaultsPage.clickBtnSave(driver);
+        UserDefaultsPage.clickOkForExpiredLot(driver);
+        UserDefaultsPage.validateSuccessfullyUpdatedMsg(driver);
     }
 }
 

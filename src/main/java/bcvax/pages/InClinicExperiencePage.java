@@ -261,39 +261,6 @@ public class InClinicExperiencePage extends BasePage {
 		return button_exist;
 	}
 
-	public void selectVaccineAgent(String agent) throws InterruptedException {
-		Thread.sleep(500);
-		By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option' or @aria-label='Agent - Current Selection: Select an option']");
-		waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 30);
-		WebElement click_vaccine_agent_dropdown = driver.findElement(vaccine_agent_dropdown_path);
-		scrollCenter(click_vaccine_agent_dropdown);
-		click_vaccine_agent_dropdown.click();
-		Thread.sleep(500);
-		By my_vaccine_path = By.xpath("//span[text() = '" + agent + "']");
-		waitForElementToBeEnabled(driver, my_vaccine_path, 10);
-		WebElement my_vaccine = driver.findElement(my_vaccine_path);
-		try {
-			my_vaccine.click();
-		} catch(Exception ex) {
-			click_vaccine_agent_dropdown.click();
-			waitForElementToBeEnabled(driver, my_vaccine_path, 10);
-			my_vaccine = driver.findElement(my_vaccine_path);
-			my_vaccine.click();
-		}
-	}
-
-	public void selectVaccineAgentValue(String vaccineAgent) throws InterruptedException {
-		selectVaccineAgent(vaccineAgent);
-	}
-
-	public void selectVaccineAgentInfluenza() throws InterruptedException {
-		selectVaccineAgent("Influenza-LAIV");
-	}
-
-	public void selectVaccineAgentPneumo() throws InterruptedException {
-		selectVaccineAgent("Pneumo-P-23");
-	}
-
 	public void selectRouteIntranasal() throws InterruptedException {
 		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
 		//Thread.sleep(2000);
@@ -457,107 +424,6 @@ public class InClinicExperiencePage extends BasePage {
 		return appointmentLocation.getText();
 	}
 
-	public String getVaccineAgent() throws InterruptedException {
-		By vaccine_agent_path = By.xpath("//label[text()='Agent']/..//button");
-		waitForElementToBeEnabled(driver, vaccine_agent_path, 5);
-		return driver.findElement(vaccine_agent_path).getAttribute("data-value");
-	}
-
-	public String getProvider() throws InterruptedException {
-		By provider_path = By.xpath("//label[text() = 'Provider']/..//input");
-		waitForElementToBeEnabled(driver, provider_path, 10);
-		return driver.findElement(provider_path).getAttribute("data-value");
-	}
-
-	public String getRoute() throws InterruptedException {
-		By route_path = By.xpath("//label[text() = 'Route']/..//button");
-		waitForElementToBeEnabled(driver, route_path, 10);
-		return driver.findElement(route_path).getAttribute("data-value");
-	}
-
-	public String getSite() throws InterruptedException {
-		By site_path = By.xpath("//label[text() = 'Site']/..//button");
-		waitForElementToBeEnabled(driver, site_path, 5);
-		return driver.findElement(site_path).getAttribute("data-value");
-	}
-
-	public String getLotNumber() throws InterruptedException {
-		By lot_number_path = By.xpath("//span[text() = 'Lot Number']/..//input");
-		waitForElementToBeEnabled(driver, lot_number_path, 5);
-		driver.findElement(lot_number_path).click();
-		Thread.sleep(1000);
-		return driver.findElement(lot_number_path).getAttribute("title");
-	}
-
-	public String getDosage() throws InterruptedException {
-		By dosage_path = By.xpath("//label[text() = 'Dosage']/..//button");
-		waitForElementToBeEnabled(driver, dosage_path, 5);
-		return driver.findElement(dosage_path).getAttribute("data-value");
-	}
-
-	public void setVaccineAgent(String agent) {
-		driver.findElement(By.xpath("//label[text()='Agent']/..//button")).getAttribute("data-value");
-	}
-
-	public void setProvider(String provider) throws InterruptedException {
-		Thread.sleep(500);
-		By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
-		waitForElementToBeEnabled(driver, providerFieldPath, 10);
-		WebElement providerField =  driver.findElement(providerFieldPath);
-		scrollCenter(providerField);
-		providerField.sendKeys(provider);
-		By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
-		waitForElementToBeLocated(driver, providerItemPath, 10);
-		WebElement provider_item = driver.findElement(providerItemPath);
-		provider_item.click();
-
-	}
-
-	public void setRoute(String route) throws InterruptedException {
-		driver.findElement(By.xpath("//label[text() = 'Route']/..//button")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//span[@title = '" + route + "'] ")).click();
-	}
-
-	public void setSite(String site) throws InterruptedException {
-		WebElement siteBtn = driver.findElement(By.xpath("//label[text() = 'Site']/..//button"));
-		scrollCenter(siteBtn);
-		siteBtn.click();
-		Thread.sleep(2000);
-		WebElement mySite = driver.findElement(By.xpath("//span[@title = '" + site + "']"));
-		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(false);", mySite );
-		mySite.click();
-	}
-
-	public void setLotNumber(String lot) throws InterruptedException {
-		By lot_item_path = By.xpath("//li[contains(@title, '" + lot + "')]");
-		By lot_field_path = By.xpath("//span[text() = 'Lot Number']/..//input");
-		WebElement lotSearchInputField = driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input[@class = 'slds-input search-input-class']"));
-		if(!lotSearchInputField.isDisplayed()) {
-			waitForElementToBeEnabled(driver, lot_field_path, 10);
-			WebElement lot_field = driver.findElement(lot_field_path);
-			lot_field.click();
-		}
-		Thread.sleep(1000);
-		lotSearchInputField.sendKeys(lot);
-		Thread.sleep(1000);
-		waitForElementToBeEnabled(driver, lot_item_path, 10);
-		WebElement lot_item = driver.findElement(lot_item_path);
-		lot_item.click();
-	}
-
-	public void setDosage(String dose) throws InterruptedException {
-		By dosage_field_path = By.xpath("//label[text() = 'Dosage']/..//button");
-		waitForElementToBeEnabled(driver, dosage_field_path, 10);
-		WebElement dosage_input_field = driver.findElement(dosage_field_path);
-		dosage_input_field.click();
-		Thread.sleep(500);
-		By my_dosage_path = By.xpath("//span[@title = '" + dose + "']");
-		waitForElementToBeEnabled(driver, my_dosage_path, 10);
-		WebElement my_dosage = driver.findElement(my_dosage_path);
-		my_dosage.click();
-	}
-
 	public void selectNotApprovedAdministrationReason() throws InterruptedException {
 		Thread.sleep(500);
 		By administration_reason_path = By.xpath("//input[@type='radio' and @value='Intentional administration']/..//span[@part='indicator']");
@@ -587,31 +453,5 @@ public class InClinicExperiencePage extends BasePage {
 	public int getDeferralsCount() {
 		int count = tables.getDeferralsTable().getRows().size();
 		return count;
-	}
-
-	public void openAppointmentRecord() throws InterruptedException {
-		Thread.sleep(500);
-
-		By titleAppointments = By.xpath("//h1[@title='Appointments']");
-		waitForElementToBeEnabled(driver, titleAppointments, 10);
-		By appointments_table_path = By.xpath("//div[@data-aura-class='forceListViewManagerGrid']");
-		WebElement appointments_tbl_html = driver.findElement(appointments_table_path);
-		GenericTable appointment_table = new GenericTable(appointments_tbl_html);
-		int tries = 0;
-		while(appointment_table.getRows().size() < 1) {
-			appointments_tbl_html = driver.findElement(appointments_table_path);
-			appointment_table = new GenericTable(appointments_tbl_html);
-			if(tries > 10) {
-				break;
-			} else {
-				Thread.sleep(500);
-				tries++;
-			}
-		}
-		List<Map<String, WebElement>> appointment_table_map = appointment_table.getRowsMappedToHeadings();
-		//String formatAppointmentDataTime = appointmentDataTime.replaceAll(",", "").replaceAll("at ", "");
-
-		WebElement appointmentDataTimeWebElement = appointment_table_map.get(1).get("Appointment Code").findElement(By.xpath(".//a"));
-		appointmentDataTimeWebElement.click();
 	}
 }
