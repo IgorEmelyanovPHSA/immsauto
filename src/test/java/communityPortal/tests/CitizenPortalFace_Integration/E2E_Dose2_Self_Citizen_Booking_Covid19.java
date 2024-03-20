@@ -87,20 +87,20 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        BookAnAppointmentPage bookAnAppointmentPage = loginPage.openBookAnAppointmentPage(uniqueLink);
-        bookAnAppointmentPage.bookAnAppointmentPageDisplayed();
+        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
-        String registrationConfirmationNumber = bookAnAppointmentPage.getRegistrationConfirmationNumber();
+        String registrationConfirmationNumber = BookAppointmentPage.getRegistrationConfirmationNumber(driver);
         log("Compering registration confirmation number from registration page: " + conformationNumberText
                 + " vs registration confirmation number from book an appointment page " + registrationConfirmationNumber);
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        bookAnAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
 
         log("/*11.---Schedule vaccination page is displayed--*/");
-        bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
+        BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
 
         //If override Eligibility is shown
 //        try {

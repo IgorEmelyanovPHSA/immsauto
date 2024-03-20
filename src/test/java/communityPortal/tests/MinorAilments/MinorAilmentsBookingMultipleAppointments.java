@@ -30,7 +30,6 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         log("API call to remove appointments from participant account by PHN if found");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(personalHealthNumber);
 
-        BookAnAppointmentPage bookAnAppointmentPage = new BookAnAppointmentPage(getDriver());
         CommonMethods com = new CommonMethods(getDriver());
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
 

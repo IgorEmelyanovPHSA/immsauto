@@ -68,13 +68,12 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
-		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputCurrentDateUserDefaults();
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		Thread.sleep(2000);
-		userDefaultsPage.selectUserDefaultLocation(supplyLocationConsumption);
+		UserDefaultsPage.selectUserDefaultLocation(driver, supplyLocationConsumption);
 		log("/*7.----- Click on Save defaults button --*/");
-		userDefaultsPage.clickBtnSave();
+		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
@@ -198,56 +197,29 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*47.---Open Today appointment Details --*/");
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		inClinicExperience.selectVaccineAgent(consumptionAgent);
+		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
-//		Thread.sleep(2000);
-//		//If Incorrect vaccine warning is displayed
-//		try {
-//			ProfilesPage.confirm_warning(driver);
-//		} catch(Exception ex) {
-//			System.out.println("No Warning found");
-//		}
-
-//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-//		if(consentProviderSelected.equals("")) {
-//			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
-//		}
-//
-//		log("/*42.---Click Save Consent Button --*/");
-//		inClinicExperience.ClickSaveConsentButton();
-
-//		try {
-//			ProfilesPage.checkExistingConsent(driver);
-//		} catch(Exception ex) {
-//			System.out.println("No Checkbox. Continue...");
-//		}
-//		try {
-//			ProfilesPage.clickEditImmunizationInformation(driver);
-//		} catch(Exception ex) {
-//			System.out.println("Edit Button disabled. Continue...");
-//		}
-
-		String lot = inClinicExperience.getLotNumber();
+		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 		if(!lot.equals(consumptionLot)) {
-			inClinicExperience.setLotNumber(consumptionLot);
+			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
 
-		String provider =  inClinicExperience.getProvider();
+		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
 		if(!provider.equals(consentProvider)) {
-			inClinicExperience.setProvider(consentProvider);
+			InClinicExperienceVaccineAdministrationPage.setProvider(driver, consentProvider);
 		}
 
-		String route = inClinicExperience.getRoute();
-		String site = inClinicExperience.getSite();
-		String dose = inClinicExperience.getDosage();
+		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
+		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
+		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 		if(!dose.equals(consumptionDose)) {
-			inClinicExperience.setDosage(consumptionDose);
+			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
 		if(route.equals("")) {
-			inClinicExperience.setRoute(consumptionRoute);
+			InClinicExperienceVaccineAdministrationPage.setRoute(driver, consumptionRoute);
 		}
 		if(site.equals("")) {
-			inClinicExperience.setSite(consumptionSite);
+			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();
@@ -299,13 +271,12 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
-		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputCurrentDateUserDefaults();
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		Thread.sleep(2000);
-		userDefaultsPage.selectUserDefaultLocation(supplyLocationConsumption);
+		UserDefaultsPage.selectUserDefaultLocation(driver, supplyLocationConsumption);
 		log("/*7.----- Click on Save defaults button --*/");
-		userDefaultsPage.clickBtnSave();
+		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
@@ -430,7 +401,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*47.---Open Today appointment Details --*/");
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		inClinicExperience.selectVaccineAgent(consumptionAgent);
+		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
 		Thread.sleep(2000);
 		//If Incorrect vaccine warning is displayed
@@ -449,7 +420,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 //		inClinicExperience.ClickSaveConsentButton();
 
 		try {
-			ProfilesPage.checkExistingConsent(driver);
+			PersonAccountRelatedPage.checkExistingConsent(driver);
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}
@@ -459,27 +430,27 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			System.out.println("Edit Button disabled. Continue...");
 		}
 
-		String lot = inClinicExperience.getLotNumber();
+		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 		if(!lot.equals(consumptionLot)) {
-			inClinicExperience.setLotNumber(consumptionLot);
+			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
 
-		String provider =  inClinicExperience.getProvider();
+		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
 		if(!provider.equals(consentProvider)) {
-			inClinicExperience.setProvider(consentProvider);
+			InClinicExperienceVaccineAdministrationPage.setProvider(driver, consentProvider);
 		}
 
-		String route = inClinicExperience.getRoute();
-		String site = inClinicExperience.getSite();
-		String dose = inClinicExperience.getDosage();
+		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
+		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
+		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 		if(!dose.equals(consumptionDose)) {
-			inClinicExperience.setDosage(consumptionDose);
+			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
 		if(route.equals("")) {
-			inClinicExperience.setRoute(consumptionRoute);
+			InClinicExperienceVaccineAdministrationPage.setRoute(driver, consumptionRoute);
 		}
 		if(site.equals("")) {
-			inClinicExperience.setSite(consumptionSite);
+			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
 		inClinicExperience.ClickSaveImmuneInfoSaveButton();

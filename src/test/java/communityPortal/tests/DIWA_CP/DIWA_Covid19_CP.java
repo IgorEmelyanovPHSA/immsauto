@@ -62,7 +62,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         PersonAccountPage.goToRelatedTab(driver);
 
         log("/*----5. Click to Create Immunization Record Button ---*/");
-        profilesPage.clickCreateImmunizationRecord();
+        PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 
         try {
             log("/*----6. Click confirm Button on the popup window---*/");
@@ -99,24 +99,8 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*---14. click on continue editing button to continue with the flow ---*/");
         profilesPage.ContinueEditingButton();
 
-//        log("/*---15. select date of Administration ---*/");
-//        if (profilesPage.selectConsentEffectiveDate())
-//            Thread.sleep(3000);
-//
-//        log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
-//        String consentProvider = ProfilesPage.consentProviderSelected(driver);
-//        Thread.sleep(2000);
-//        if(consentProvider.equals("")) {
-//            consentProvider = profilesPage.selectConsentProvider();
-//        }
-//        //profilesPage.selectInformedConsentProvider("Auto Clinician_DIWA_CP");
-//
-//        log("/*---17. click Save Consent ---*/");
-//        profilesPage.clickSaveConsent();
-//        Thread.sleep(2000);
-
         try {
-            ProfilesPage.checkExistingConsent(driver);
+            PersonAccountRelatedPage.checkExistingConsent(driver);
         } catch(Exception ex) {
             System.out.println("No Checkbox. Continue...");
         }

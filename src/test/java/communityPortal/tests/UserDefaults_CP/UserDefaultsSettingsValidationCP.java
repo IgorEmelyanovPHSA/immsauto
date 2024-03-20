@@ -23,24 +23,24 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         Thread.sleep(10000);
 
         log("/*2.----- Navigate to User Defaults Tab --*/");
-        UserDefaultsPage userDefaultsPage = cpMainPage.clickUserDefaultsTab();
+        cpMainPage.clickUserDefaultsTab();
         Thread.sleep(2000);
 
         log("/*3.----- Enter current date for UserDefaults --*/");
-        userDefaultsPage.inputCurrentDateUserDefaults();
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 
         log("/*4.----- Enter clinic for UserDefaults: " + clinicLocation + "--*/");
      //   userDefaultsPage.selectClinicUserDefaults(clinicLocation);
 
         log("/*5.----- Open Advanced Settings--*/");
-        userDefaultsPage.clickOnAdvancedSettings();
+        UserDefaultsPage.clickOnAdvancedSettings(driver);
 
         log("/*6.----- Delete lots if any present and save--*/");
-        Boolean isAnyLotsPresent = userDefaultsPage.isAnyLotsPresent();
+        Boolean isAnyLotsPresent = UserDefaultsPage.isAnyLotsPresent(driver);
              if(isAnyLotsPresent==true){
-                 userDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously();
+                 UserDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously(driver);
                  log("All lots are deleted");
-                 userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+                 UserDefaultsPage.clickBtnSaveWithSuccessMsgValidation(driver);
              }
 
         log("/*7.---- Navigate to Supply Console Page --*/");
@@ -57,12 +57,12 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         Thread.sleep(2000);
 
         log("/*10.----- Open Advanced Settings --*/");
-        userDefaultsPage.clickOnAdvancedSettings();
+        UserDefaultsPage.clickOnAdvancedSettings(driver);
 
         log("/*11.----- Populate Lots and Sites --*/");
-        userDefaultsPage.populateLotsAndSite(lots);
+        UserDefaultsPage.populateLotsAndSite(driver, lots);
 
         log("/*12.----- Click btn Save and validate success msg --*/");
-        userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+        UserDefaultsPage.clickBtnSaveWithSuccessMsgValidation(driver);
     }
 }

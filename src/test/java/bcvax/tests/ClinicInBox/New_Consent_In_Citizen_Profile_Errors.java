@@ -269,7 +269,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         Thread.sleep(2000);
         inClinicExperiencePage.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
         log("/*----9. Select an Option ---*/)");
-        inClinicExperiencePage.selectVaccineAgent(consent_agent);
+        InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consent_agent);
 
         inClinicExperiencePage.clickRecordConsent();
         boolean add_consent_dialog_exists = InformedConsentDialog.dialogExists(driver);

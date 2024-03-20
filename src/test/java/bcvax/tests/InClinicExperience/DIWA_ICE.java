@@ -71,7 +71,7 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----9. Click to Create Immunization Record Button ---*/");
-		profilesPage.clickCreateImmunizationRecord();
+		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----10. Click confirm Button on the popup window---*/");
 		try {
 			PersonAccountPage.confirmNoForecastWarning(driver);
@@ -106,7 +106,7 @@ public class DIWA_ICE extends BaseTest {
 		profilesPage.ContinueEditingButton();
 
 		try {
-			ProfilesPage.checkExistingConsent(driver);
+			PersonAccountRelatedPage.checkExistingConsent(driver);
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}

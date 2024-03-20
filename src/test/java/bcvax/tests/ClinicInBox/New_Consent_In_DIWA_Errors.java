@@ -101,7 +101,7 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----7. Click Create Immunization Record ---*/");
-		profilesPage.clickCreateImmunizationRecord();
+		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
 			PersonAccountPage.confirmNoForecastWarning(driver);

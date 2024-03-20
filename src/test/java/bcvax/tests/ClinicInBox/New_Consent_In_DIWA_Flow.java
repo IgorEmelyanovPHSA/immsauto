@@ -91,7 +91,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----7. Click Create Immunization Record ---*/");
-		profilesPage.clickCreateImmunizationRecord();
+		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
 			PersonAccountPage.confirmNoForecastWarning(driver);
@@ -176,7 +176,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 
 		boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
-		boolean confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+		boolean confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
 
 
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
@@ -209,7 +209,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		commonMethods.expiredVaxHandler();
 		///////
 
-		confirm_and_save_btn_status = DiwaImmunizationRecord.confirm_and_save_button_is_active(driver);
+		confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
 		Assert.assertTrue(confirm_and_save_btn_status);
 		log("/*---24. Confirm and Save Administration ---*/");
 		profilesPage.confirmAndSaveAdministration();
