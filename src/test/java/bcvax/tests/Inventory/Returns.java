@@ -36,10 +36,10 @@ public class Returns extends BaseTest {
         //Login as Admin
         log("/*----Login as Admin --*/");
         orgMainPage = loginPage.orgLoginAsPPHIS();
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         log("/*a.----Go to Health Connect Supply Location --*/");
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         //Get Flu supplies using Receive Supplies feature
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
@@ -90,9 +90,9 @@ public class Returns extends BaseTest {
                 orgMainPage = loginPage.orgLoginAsPPHIS();
         }
 
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 

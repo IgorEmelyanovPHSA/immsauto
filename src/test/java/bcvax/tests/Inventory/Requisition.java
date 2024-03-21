@@ -33,9 +33,9 @@ public class Requisition extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		System.out.println("/*----1. Login as an PPHIS_BCVAXDEVIT to Supply Console --*/");
 		orgMainPage = loginPage.orgLoginAsPPHIS();
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		supplyConsolePage = new SupplyConsolePage(driver);
 

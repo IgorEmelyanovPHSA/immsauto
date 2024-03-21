@@ -42,15 +42,15 @@ public class DIWA_CIB extends BaseTest {
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
 
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
 		Thread.sleep(500);
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
 		orgMainPage.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");

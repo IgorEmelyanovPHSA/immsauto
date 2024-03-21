@@ -51,15 +51,15 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			log("/*3.--- Navigate to In Clinic Experience App --*/");
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -254,15 +254,15 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			log("/*3.--- Navigate to In Clinic Experience App --*/");
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);

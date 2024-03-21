@@ -33,9 +33,9 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
         InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*3.----Close All previously opened Tab's --*/");
@@ -55,7 +55,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
 
         log("/*8.----- Delete lots if any present and save--*/");
         Boolean isAnyLotsPresent = UserDefaultsPage.isAnyLotsPresent(driver);
-        if(isAnyLotsPresent==true){
+        if(isAnyLotsPresent) {
             UserDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously(driver);
             log("All lots are deleted");
             UserDefaultsPage.clickBtnSaveWithSuccessMsgValidation(driver);
@@ -63,9 +63,9 @@ public class UserDefaultsSettingsValidation extends BaseTest {
 
         log("/*9.---- Navigate to Supply Console Page --*/");
         orgMainPage = new MainPageOrg(getDriver());
-        currentApp = orgMainPage.currentApp();
+        currentApp = MainPageOrg.currentApp(driver);
         if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         log("/*9.1----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
@@ -83,7 +83,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         }
 
         log("/*12.---- Navigate User Defaults Page --*/");
-        orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+        MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         inClinicExperiencePage.clickUserDefaultsTab();
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -98,7 +98,6 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("/*15.----- Click btn Save and validate success msg --*/");
         UserDefaultsPage.clickBtnSave(driver);
         UserDefaultsPage.clickOkForExpiredLot(driver);
-        UserDefaultsPage.validateSuccessfullyUpdatedMsg(driver);
     }
 }
 

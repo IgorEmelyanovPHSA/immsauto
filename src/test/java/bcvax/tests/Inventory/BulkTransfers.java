@@ -561,9 +561,9 @@ public class BulkTransfers extends BaseTest {
 	public void precondition() throws Exception {
 		log("/*1.----Login to ORG (oldUI) --*/");
 		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		supplyConsolePage = new SupplyConsolePage(driver);
 

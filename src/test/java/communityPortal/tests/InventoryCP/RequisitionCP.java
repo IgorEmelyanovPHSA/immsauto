@@ -35,7 +35,7 @@ public class RequisitionCP extends BaseTest {
             log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
             orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
             Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
+            MainPageOrg.switchApp(driver, Apps.BCH_VACCINATION_PORTAL.value);
             Thread.sleep(1000);
             cpMainPage = new MainPageCP(driver);
             cpMainPage.clickGoToUserDefaultsButton();

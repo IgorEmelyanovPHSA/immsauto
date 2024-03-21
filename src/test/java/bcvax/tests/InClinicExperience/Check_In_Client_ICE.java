@@ -49,9 +49,9 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*1.----Navigate to More -> Register --*/");
         loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         inClinicExperiencePage.closeTabsHCA();

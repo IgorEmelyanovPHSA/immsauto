@@ -63,14 +63,14 @@ public class Dose1_ICE_E2E extends BaseTest {
 		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);

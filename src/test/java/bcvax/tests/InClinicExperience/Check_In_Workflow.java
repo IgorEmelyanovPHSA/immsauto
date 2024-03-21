@@ -36,9 +36,9 @@ public class Check_In_Workflow extends BaseTest {
         citizenName = legalFirstName + " " + legalLastName;
         orgMainPage.logout();
         loginPage.loginAsImmsBCAdmin();
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
         inClinicExperience = new InClinicExperiencePage(driver);
         log("/*2.----Close All previously opened Tab's --*/");
@@ -100,9 +100,9 @@ public class Check_In_Workflow extends BaseTest {
         citizenName = legalFirstName + " " + legalLastName;
         orgMainPage.logout();
         loginPage.loginAsImmsBCAdmin();
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
         inClinicExperience = new InClinicExperiencePage(driver);
         log("/*2.----Close All previously opened Tab's --*/");
@@ -157,9 +157,9 @@ public class Check_In_Workflow extends BaseTest {
     private void registerCitizen() throws Exception {
         loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
 
         InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);

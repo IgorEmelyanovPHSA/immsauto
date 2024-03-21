@@ -17,7 +17,7 @@ public class MainPageOrg extends BasePage {
     public MainPageOrg(WebDriver driver) {
         super(driver);
     }
-    public String currentApp() throws InterruptedException {
+    public static String currentApp(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
         try {
@@ -62,8 +62,8 @@ public class MainPageOrg extends BasePage {
         return current_app_text;
     }
 
-    public void switchApp(String app) throws InterruptedException {
-        String currentAppBefore = currentApp();
+    public static void switchApp(WebDriver driver, String app) throws InterruptedException {
+        String currentAppBefore = currentApp(driver);
         System.out.println("Current App Before: " + currentAppBefore);
         Thread.sleep(2000);
         By apps_launcher_path = By.xpath("//div[@role='navigation' and @aria-label='App']//button");
@@ -109,7 +109,7 @@ public class MainPageOrg extends BasePage {
                 if(windows.size() > 1) {
                     driver.switchTo().window(windows.get(1));
                 }
-                String currentApp = currentApp();
+                String currentApp = currentApp(driver);
                 By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
                 while(!currentApp.equals(app)) {
                     List<WebElement> breadcrump_list = driver.findElements(breadcrump_path);
@@ -124,16 +124,16 @@ public class MainPageOrg extends BasePage {
                             break;
                         }
                     }
-                    currentApp = currentApp();
+                    currentApp = currentApp(driver);
                     Thread.sleep(200);
                 }
             }
         }
-        String currentAppAfter = currentApp();
+        String currentAppAfter = currentApp(driver);
         System.out.println("Current App After: " + currentAppAfter);
     }
 
-    public void selectFromNavigationMenu(String item) throws InterruptedException {
+    public static void selectFromNavigationMenu(WebDriver driver, String item) throws InterruptedException {
         Thread.sleep(500);
         By navigation_menu_path = By.xpath("//button[@title='Show Navigation Menu']");
         waitForElementToBeEnabled(driver, navigation_menu_path, 10);
@@ -152,7 +152,7 @@ public class MainPageOrg extends BasePage {
         my_item.click();
     }
 
-    public void closeAllTabs() throws InterruptedException {
+    public static void closeAllTabs(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));

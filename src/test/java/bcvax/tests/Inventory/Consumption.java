@@ -58,9 +58,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		supplyConsolePage = new SupplyConsolePage(driver);
 
@@ -83,7 +83,7 @@ public class Consumption extends BaseTest {
 		double doseConversionFactor = Double.parseDouble(df.format(remainingDoses_before / remainingQty_before));
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
-		orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 
 		log("/*-- 12. Click on User Defaults Tab  --*/");
 		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
@@ -262,7 +262,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		inClinicExperiencePage.validateHomePageShownUp();
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
-		orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
 		supplyConsolePage.closeTabsHCA();

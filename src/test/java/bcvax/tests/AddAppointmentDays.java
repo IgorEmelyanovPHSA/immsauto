@@ -39,17 +39,17 @@ public class AddAppointmentDays extends BaseTest {
 
         String localization = "Pacific Localization";
         MainPageOrg orgMainPage = loginPage.orgLoginAsPPHIS();
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             try {
-                orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+                MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
             } catch(Exception ex) {
                 Thread.sleep(5000);
-                orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+                MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
             }
         }
-        orgMainPage.closeAllTabs();
-        orgMainPage.switchApp("Appointment Day Management");
+        MainPageOrg.closeAllTabs(driver);
+        MainPageOrg.switchApp(driver, "Appointment Day Management");
         AppointmentDayManagementPage appointment_day_page = new AppointmentDayManagementPage(driver);
         appointment_day_page.selectShowAllAppointmentDays();
         for(int d = 0; d < appointment_dates.size(); d++) {

@@ -68,9 +68,9 @@ public class BulkAdjustments extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
@@ -184,9 +184,9 @@ public class BulkAdjustments extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		log("/*2.----Validate if Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
