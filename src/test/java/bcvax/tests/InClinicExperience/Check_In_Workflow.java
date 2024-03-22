@@ -2,13 +2,10 @@ package bcvax.tests.InClinicExperience;
 
 import bcvax.tests.BaseTest;
 
-import Utilities.TestListener;
 import bcvax.pages.*;
-import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -171,12 +168,11 @@ public class Check_In_Workflow extends BaseTest {
         log("/*5.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
         log("/*6.----- Enter current date for UserDefaults --*/");
-        UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
         log("/*-- 13. Enter current date for UserDefaults --*/");
-        userDefaultsPage.inputCurrentDateUserDefaults();
-        userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*7.----- Click on Save defaults button --*/");
-        userDefaultsPage.clickBtnSave();
+        UserDefaultsPage.clickBtnSave(driver);
         AlertDialog.closeAlert(driver);
 
         log("/*3.----Close All previously opened Tab's --*/");
@@ -202,7 +198,12 @@ public class Check_In_Workflow extends BaseTest {
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
         CitizenPrimaryInfo.successMessageAppear(driver);
         log("/*12.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
+        try {
+            CitizenPrimaryInfo.clickNextButton(driver);
+        } catch(ElementClickInterceptedException ex) {
+            CitizenPrimaryInfo.successMessageAppear(driver);
+            CitizenPrimaryInfo.clickNextButton(driver);
+        }
         log("/*13.'Enter email address: " +email +"--*/");
         CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*14.'Confirm email address: " +email +"--*/");
@@ -248,7 +249,7 @@ public class Check_In_Workflow extends BaseTest {
         log("/*31----click Confirm Appointment button  --*/");
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
         log("/*32----see 'Appointment confirmed!' screen --*/");
-        boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
     }
 }

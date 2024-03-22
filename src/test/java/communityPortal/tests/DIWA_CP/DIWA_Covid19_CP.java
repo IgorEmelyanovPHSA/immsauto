@@ -54,19 +54,19 @@ public class DIWA_Covid19_CP extends BaseTest {
 
         //If the PIR Warning is shown close it
         try {
-            profilesPage.closePIRWarningDialog();
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         } catch(Exception ex) {
             System.out.println("No PIR Warning. Continue...");
         }
         log("/*---- 4. Navigate to Person Account related tab ---*/");
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
 
         log("/*----5. Click to Create Immunization Record Button ---*/");
-        profilesPage.clickCreateImmunizationRecord();
+        PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 
         try {
             log("/*----6. Click confirm Button on the popup window---*/");
-            profilesPage.clickConfirmButton();
+            PersonAccountPage.confirmNoForecastWarning(driver);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -99,24 +99,8 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*---14. click on continue editing button to continue with the flow ---*/");
         profilesPage.ContinueEditingButton();
 
-//        log("/*---15. select date of Administration ---*/");
-//        if (profilesPage.selectConsentEffectiveDate())
-//            Thread.sleep(3000);
-//
-//        log("/*---16. select Informed Consent Provider -> Auto Clinician_DIWA_CP ---*/");
-//        String consentProvider = ProfilesPage.consentProviderSelected(driver);
-//        Thread.sleep(2000);
-//        if(consentProvider.equals("")) {
-//            consentProvider = profilesPage.selectConsentProvider();
-//        }
-//        //profilesPage.selectInformedConsentProvider("Auto Clinician_DIWA_CP");
-//
-//        log("/*---17. click Save Consent ---*/");
-//        profilesPage.clickSaveConsent();
-//        Thread.sleep(2000);
-
         try {
-            ProfilesPage.checkExistingConsent(driver);
+            PersonAccountRelatedPage.checkExistingConsent(driver);
         } catch(Exception ex) {
             System.out.println("No Checkbox. Continue...");
         }
@@ -159,12 +143,12 @@ public class DIWA_Covid19_CP extends BaseTest {
         Thread.sleep(2000);
         //If the PIR Warning is shown close it
         try {
-            profilesPage.closePIRWarningDialog();
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         } catch(Exception ex) {
             System.out.println("No PIR Warning. Continue...");
         }
         log("/*---27. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-        profilesPage.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         log("We need to validate that Documented Without Appointment created - not validated yet  ---*/");
     }
 

@@ -24,20 +24,6 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
-//    private String legalFirstName = "Anne-marie";
-//    private String legalLastName = "BCVaxJacketts";
-//    private String legalMiddleName = "Elissa";
-//    private String dateOfBirth = "Aug 16, 1903";
-//    private String postalCode = "V3B0J5";
-//    private String personalHealthNumber = "9746173988";
-//    private boolean isIndigenous = false;
-//    private String email = "accountToDelete@phsa.ca";
-//    private String phoneNumber = "6041234568";
-//    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-//    private String vaccineToSelect = "Covid19Vaccine";
-
-    //Login as an admin for now, needs to be updated to ICE
-    //Needs to update TestcaseId
     @Test(priority = 1)
     public void CP_CitizenPortalBookDoseOneCovid19_C245217() throws Exception {
         TestcaseID = "245217"; //C245217
@@ -98,20 +84,20 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        BookAnAppointmentPage bookAnAppointmentPage = loginPage.openBookAnAppointmentPage(uniqueLink);
-        bookAnAppointmentPage.bookAnAppointmentPageDisplayed();
+        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
-        String registrationConfirmationNumber = bookAnAppointmentPage.getRegistrationConfirmationNumber();
+        String registrationConfirmationNumber = BookAppointmentPage.getRegistrationConfirmationNumber(driver);
         log("Compering registration confirmation number from registration page: " + conformationNumberText
                 + " vs registration confirmation number from book an appointment page " + registrationConfirmationNumber);
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        bookAnAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
 
         log("/*11.---Schedule vaccination page is displayed--*/");
-        bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
+        BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
         Thread.sleep(1000);
         //If override Eligibility is shown
 //        try {
@@ -122,19 +108,24 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
 //        }
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
-        bookAnAppointmentPage.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 
         log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*14.---Select date and time for appointment and click btn Next--*/");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*15.---Click verify contact information checkbox--*/");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*16.---Verify appointment conformation message is displayed--*/");
-        bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
     }
 
     @Test(priority = 2)

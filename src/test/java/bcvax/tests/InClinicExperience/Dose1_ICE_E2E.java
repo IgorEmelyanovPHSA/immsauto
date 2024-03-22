@@ -79,12 +79,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
 		log("/*6.----- Enter current date for UserDefaults --*/");
-		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
 		log("/*-- 13. Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputCurrentDateUserDefaults();
-		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
-		userDefaultsPage.clickBtnSave();
+		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
 		inClinicExperience.clickRegisterTab();
@@ -160,7 +159,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		System.out.println("/*34----click Confirm Appointment button  --*/");
 		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
-		boolean appointment_result = inClinicExperience.AppointmentConfirmationMessage();
+		boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");
@@ -181,17 +180,17 @@ public class Dose1_ICE_E2E extends BaseTest {
 		Thread.sleep(2000);
 		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-		inClinicExperience.selectVaccineAgent(consumptionAgent);
+		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
 		//If Incorrect vaccine warning is displayed
 		try {
-			ProfilesPage.confirm_warning(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}
 
 		try {
-			ProfilesPage.checkExistingConsent(driver);
+			PersonAccountRelatedPage.checkExistingConsent(driver);
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}
@@ -209,33 +208,33 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//System.out.println("/*42.---Click Save Consent Button --*/");
 
 		//inClinicExperience.ClickSaveConsentButton();
-		String agent = inClinicExperience.getVaccineAgent();
-		String provider =  inClinicExperience.getProvider();
-		String route = inClinicExperience.getRoute();
-		String site = inClinicExperience.getSite();
+		String agent = InClinicExperienceVaccineAdministrationPage.getVaccineAgent(driver);
+		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
+		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
 
-		String lot = inClinicExperience.getLotNumber();
+		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 
 		log("/*42.---Click Save Consent Button --*/");
 
 		if(!provider.equals(consentProvider)) {
-			inClinicExperience.setProvider(consentProvider);
+			InClinicExperienceVaccineAdministrationPage.setProvider(driver, consentProvider);
 		}
 
 		log("/*43.---select Dosage ->  -.5 --*/");
 		if(!lot.equals(consumptionLot)) {
-			inClinicExperience.setLotNumber(consumptionLot);
+			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
-		String dose = inClinicExperience.getDosage();
+		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 
 		if(!dose.equals(consumptionDose)) {
-			inClinicExperience.setDosage(consumptionDose);
+			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
 		if(route.equals("")) {
-			inClinicExperience.setRoute(consumptionRoute);
+			InClinicExperienceVaccineAdministrationPage.setRoute(driver, consumptionRoute);
 		}
 		if(site.equals("")) {
-			inClinicExperience.setSite(consumptionSite);
+			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 
 		try {

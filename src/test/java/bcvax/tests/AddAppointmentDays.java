@@ -24,15 +24,15 @@ public class AddAppointmentDays extends BaseTest {
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate start_date = LocalDate.parse("2024-03-06", dtf);
-        LocalDate end_date = LocalDate.parse("2024-03-10", dtf);
+        LocalDate start_date = LocalDate.parse("2024-03-18", dtf);
+        LocalDate end_date = LocalDate.parse("2024-03-24", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
             appointment_dates.add(my_appointment_date.format(dtf));
         }
-        String appointment_type = "Minor Ailments and Contraception";
-        //String appointment_type = "BC Immunization Program";
+        //String appointment_type = "Minor Ailments and Contraception";
+        String appointment_type = "BC Immunization Program";
 
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         String appointment_name = appointment_type + " " + appointment_date;
@@ -73,6 +73,7 @@ public class AddAppointmentDays extends BaseTest {
                         appointment_day_page.addAppointmentDay();
                         appointment_name = appointment_type + " " + LocalDate.parse(appointment_dates.get(d), dtf).format(dtf_name);
                         appointment_day_page.fillUpNewAppointmentDay(appointment_name, provider_name, address_id, appointment_dates.get(d), appointment_city, appointment_type, localization);
+                        Thread.sleep(2000);
                         appointment_day_id = Utilities.ApiQueries.getAppointmentDays(appointment_dates.get(d), appointment_type, appointment_city);
                     }
                     appointment_day_page.selectAppointmentDayRelatedTab();

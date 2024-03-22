@@ -39,12 +39,11 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(2000);
 
         log("/*4.----- Enter current date for UserDefaults --*/");
-        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
-        userDefaultPage.inputCurrentDateUserDefaults();
-        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 
         log("/*5.----- Click on Save defaults button --*/");
-        userDefaultPage.clickBtnSave();
+        UserDefaultsPage.clickBtnSave(driver);
         Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
@@ -142,7 +141,7 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(2000);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Thread.sleep(3000);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
@@ -168,7 +167,7 @@ public class E2E_Dose1_Pneumo_CP extends BaseTest{
         Thread.sleep(5000);
 
         log("/*39.---select Vaccine Agent picklist Value ->  Pneumo-P-23 --*/");
-        inClinicExperience_CP.selectVaccineAgentPneumo();
+        InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, "Pneumo-P-23");
         Thread.sleep(3000);
 
         log("/*40.---Click Save Consent Button --*/");

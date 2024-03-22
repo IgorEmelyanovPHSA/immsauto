@@ -57,12 +57,12 @@ public class DIWA_CIB extends BaseTest {
 		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
-		profilesPage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----7. Click Create Immunization Record ---*/");
-		profilesPage.clickCreateImmunizationRecord();
+		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
-			profilesPage.clickConfirmButton();
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Confirm dialog");
 		}
@@ -82,7 +82,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---12. Click X button on Diwa flow ---*/");
 		//If Incorrect vaccine warning is displayed
 		try {
-			ProfilesPage.confirm_warning(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}
@@ -95,7 +95,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 
 		try {
-			ProfilesPage.checkExistingConsent(driver);
+			DiwaImmunizationRecord.checkExistingConsent(driver);
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}
@@ -105,11 +105,11 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
 
 		try {
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+			DiwaImmunizationRecord.selectProvider(driver, consentProvider);
 		} catch(Exception ex) {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 			Thread.sleep(500);
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+			DiwaImmunizationRecord.selectProvider(driver, consentProvider);
 		}
 
 		log("/*---18. Click Show all lot numbers Checkbox ---*/");
@@ -137,7 +137,7 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
 		profilesPage.summaryConfirmAndSave();
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-		profilesPage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 	}
 	
 }

@@ -110,19 +110,22 @@ public class CitizenPrimaryInfo extends BasePage {
         Thread.sleep(500);
     }
 
-    public static void successMessageAppear(WebDriver driver) throws InterruptedException {
+    public static String successMessageAppear(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By message_path = By.xpath("//div[text() = 'Success'] | //h2[@c-bchcvacinnepreregistrationinternal_bchcvacinnepreregistrationinternal and text() = 'Match Unsuccessful']");
         log("  -- success message has been Appears. Closing... - /");
+        String message = "";
         try {
             waitForElementToBeEnabled(driver, message_path, 10);
-            String message = driver.findElement(message_path).getText();
+            message = driver.findElement(message_path).getText();
 //		Assert.assertEquals(message, "Success", "Expected PHN Match Success but found '" + message + "'");
             AlertDialog.closeAlert(driver);
             Thread.sleep(500);
         } catch(Exception ex) {
             System.out.println("Probably alert already closed. Continue...");
+            return ex.getMessage();
         }
+        return message;
     }
 
     public static void successRegisteredMessageAppear(WebDriver driver) throws InterruptedException {
@@ -130,7 +133,7 @@ public class CitizenPrimaryInfo extends BasePage {
         boolean alert_found = AlertDialog.alertFound(driver);
         WebElement alert_content = AlertDialog.getAlertContent(driver);
         String alert_text = alert_content.getText();
-        Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"));
+        Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"), "Expected Alert text: Citizen Successfully Registered; Actual Alert Text: " + alert_text);
         try {
             AlertDialog.closeAlert(driver);
         } catch(ElementClickInterceptedException ex) {

@@ -3,8 +3,6 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -59,11 +57,10 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         cpMainPage.clickUserDefaultsTab();
         Thread.sleep(2000);
         log("/*4.----- Enter current date for UserDefaults --*/");
-        UserDefaultsPage userDefaultPage = new UserDefaultsPage(driver);
-        userDefaultPage.inputCurrentDateUserDefaults();
-        userDefaultPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
-        userDefaultPage.clickBtnSave();
+        UserDefaultsPage.clickBtnSave(driver);
         Thread.sleep(7000);
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -151,7 +148,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
-        inClinicExperience_CP.AppointmentConfirmationMessage();
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);
@@ -180,7 +177,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
         Thread.sleep(2000);
         log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-        inClinicExperience_CP.selectVaccineAgent(consumptionAgent);
+        InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 //        String consentProvider = inClinicExperience_CP.consentProviderSelected();
 //        Thread.sleep(2000);
 //        if(consentProvider.equals("")) {
@@ -194,7 +191,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 //        }
 
         try {
-            ProfilesPage.checkExistingConsent(driver);
+            PersonAccountRelatedPage.checkExistingConsent(driver);
         } catch(Exception ex) {
             System.out.println("No Checkbox. Continue...");
         }
@@ -206,35 +203,35 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         }
 
         Thread.sleep(2000);
-        String agent = inClinicExperience_CP.getVaccineAgent();
+        String agent = InClinicExperienceVaccineAdministrationPage.getVaccineAgent(driver);
         Thread.sleep(2000);
-        String provider =  inClinicExperience_CP.getProvider();
-        String route = inClinicExperience_CP.getRoute();
-        String site = inClinicExperience_CP.getSite();
+        String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+        String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
+        String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
 
-        String lot = inClinicExperience_CP.getLotNumber();
+        String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 
         log("/*44.---Click Save Consent Button --*/");
 
         if(!provider.equals(consentProvider)) {
-            inClinicExperience_CP.setProvider(consentProvider);
+            InClinicExperienceVaccineAdministrationPage.setProvider(driver, consentProvider);
         }
 
         log("/*45.---select Dosage ->  -.5 --*/");
         if(!lot.equals(consumptionLot)) {
-            inClinicExperience_CP.setLotNumber(consumptionLot);
+            InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
         }
         Thread.sleep(2000);
-        String dose = inClinicExperience_CP.getDosage();
+        String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 
         if(!dose.equals(consumptionDose)) {
-            inClinicExperience_CP.setDosage(consumptionDose);
+            InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
         }
         if(route.equals("")) {
-            inClinicExperience_CP.setRoute(consumptionRoute);
+            InClinicExperienceVaccineAdministrationPage.setRoute(driver, consumptionRoute);
         }
         if(site.equals("")) {
-            inClinicExperience_CP.setSite(consumptionSite);
+            InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
         }
         log("/*46.---Click Save button for Immunisation Information --*/");
         inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();

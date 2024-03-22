@@ -201,7 +201,7 @@ public class MainPageCP extends BasePage{
         client_search_label.isDisplayed();
     }
 
-    public UserDefaultsPage clickUserDefaultsTab() throws InterruptedException {
+    public void clickUserDefaultsTab() throws InterruptedException {
         Thread.sleep(500);
         By user_default_tab_path = By.xpath("//a[text()='User Defaults']");
         waitForElementToBeEnabled(driver, user_default_tab_path, 10);
@@ -209,7 +209,6 @@ public class MainPageCP extends BasePage{
         element.click();
         //Try to avoid stale elelemnt exception
         Thread.sleep(2000);
-        return new UserDefaultsPage(driver);
     }
 
     public void closeSuccessDialog() throws InterruptedException {

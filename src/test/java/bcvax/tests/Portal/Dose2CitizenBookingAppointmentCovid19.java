@@ -115,35 +115,40 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        BookAnAppointmentPage bookAnAppointmentPage = loginPage.openBookAnAppointmentPage(uniqueLink);
-        bookAnAppointmentPage.bookAnAppointmentPageDisplayed();
+        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
-        String registrationConfirmationNumber = bookAnAppointmentPage.getRegistrationConfirmationNumber();
+        String registrationConfirmationNumber = BookAppointmentPage.getRegistrationConfirmationNumber(driver);
         log("Compering registration confirmation number from registration page: " + conformationNumberText
                 + " vs registration confirmation number from book an appointment page " + registrationConfirmationNumber);
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        bookAnAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
 
         log("/*11.---Schedule vaccination page is displayed--*/");
-        bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
+        BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
-        bookAnAppointmentPage.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 
         log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*14.---Select date and time for appointment and click btn Next--*/");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*15---Click verify contact information checkbox--*/");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*16---Verify appointment conformation message is displayed--*/");
-        boolean appointment_result = bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result);
     }
 

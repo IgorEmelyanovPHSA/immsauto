@@ -1,10 +1,12 @@
 package bcvax.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +32,12 @@ public class PersonAccountPage extends BasePage {
         waitForElementToBeEnabled(driver, vaccine_schedule_tab_path, 30);
         WebElement vaccine_schedule_tab = driver.findElement(vaccine_schedule_tab_path);
         waitForElementToBeVisible(driver, vaccine_schedule_tab, 10);
-        vaccine_schedule_tab.click();
+        try {
+            vaccine_schedule_tab.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(2000);
+            vaccine_schedule_tab.click();
+        }
         Thread.sleep(500);
         waitForAttribute(driver, vaccine_schedule_tab_path, "aria-selected", "true", 10);
     }
@@ -97,5 +104,27 @@ public class PersonAccountPage extends BasePage {
         }
         By identification_tab_path = By.xpath("//h2[text()='Identification']");
         waitForElementToBeEnabled(driver, identification_tab_path, 30);
+    }
+
+    public static String getClientAlerts(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By client_alerts_path = By.xpath("//p[@title='Client Alerts']/..//lightning-formatted-rich-text/span");
+        waitForElementToBeEnabled(driver, client_alerts_path, 10);
+        WebElement client_alerts = driver.findElement(client_alerts_path);
+        return client_alerts.getText();
+    }
+
+    public static List<String> getClientAlertImages(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By client_alerts_path = By.xpath("//p[@title='Client Alerts']/..//lightning-formatted-rich-text/span/img");
+        waitForElementToBeEnabled(driver, client_alerts_path, 10);
+        List<WebElement> client_alert_images = driver.findElements(client_alerts_path);
+        List<String> images = new ArrayList<>();
+        for(WebElement my_image: client_alert_images) {
+            String my_src = my_image.getAttribute("src");
+            String[] my_src_splitted = my_src.split("/");
+            images.add(my_src_splitted[my_src_splitted.length -1]);
+        }
+        return images;
     }
 }

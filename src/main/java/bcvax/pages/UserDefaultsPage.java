@@ -14,20 +14,9 @@ import java.util.Locale;
 public class UserDefaultsPage extends BasePage{
 
     public UserDefaultsPage(WebDriver driver) {super(driver);}
-    @FindBy(xpath = "//label[contains(text(),'Clinic Location')]/..//div[@role='none']//input[@type='text' and @role='textbox']")
-    private WebElement clinicLocationUserDefaults;
-
-    @FindBy(xpath = "//button[@name='DeleteLot']")
-    private WebElement btnDeleteLot;
-
-    @FindBy(xpath = ".//button[text()='Save']")
-    private WebElement btnSave;
-
-    private By toastMessageSuccess = By.xpath("//span[contains(text(),'User defaults successfully updated.')]");
-
 
     @Step
-    public UserDefaultsPage clickOnAdvancedSettings() throws InterruptedException {
+    public static void clickOnAdvancedSettings(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By advanced_settings_btn_path  = By.xpath("//div[contains(text(),'Advanced Settings')]");
         waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
@@ -39,21 +28,23 @@ public class UserDefaultsPage extends BasePage{
             waitForElementToBeEnabled(driver, advanced_settings_btn_path, 10);
             advanced_settings_btn.click();
         }
-        return this;
     }
 
-    public void clickBtnSave() throws InterruptedException {
-        click(btnSave);
+    public static void clickBtnSave(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By save_btn_path = By.xpath("//button[text()='Save']");
+        waitForElementToBeEnabled(driver, save_btn_path, 10);
+        WebElement save_btn = driver.findElement(save_btn_path);
+        save_btn.click();
        Thread.sleep(1000); //Save function
     }
 
-    public UserDefaultsPage clickBtnSaveWithSuccessMsgValidation() throws InterruptedException {
-        clickBtnSave();
-        validateSuccessfullyUpdatedMsg();
-        return this;
+    public static void clickBtnSaveWithSuccessMsgValidation(WebDriver driver) throws InterruptedException {
+        clickBtnSave(driver);
+        validateSuccessfullyUpdatedMsg(driver);
     }
 
-    public void clickOkForExpiredLot() throws InterruptedException {
+    public static void clickOkForExpiredLot(WebDriver driver) throws InterruptedException {
         Thread.sleep(1000);
         System.out.println("Check if the expired lot message appears. If yes click OK");
         try {
@@ -67,20 +58,21 @@ public class UserDefaultsPage extends BasePage{
 
     }
 
-    public UserDefaultsPage deleteAllLotsIfAnyHasBeenSavedPreviously() throws InterruptedException {
-        while(isAnyLotsPresent() == true){
-            click(btnDeleteLot);
+    public static void deleteAllLotsIfAnyHasBeenSavedPreviously(WebDriver driver) throws InterruptedException {
+        By delete_lot_button_path = By.xpath("//button[@name='DeleteLot']");
+        WebElement delete_lot_button = driver.findElement(delete_lot_button_path);
+        while(isAnyLotsPresent(driver) == true){
+            delete_lot_button.click();
         }
-        return this;
     }
 
-    public UserDefaultsPage populateLotsAndSite(String [] lots) throws InterruptedException {
+    public static void populateLotsAndSite(WebDriver driver, String [] lots) throws InterruptedException {
         int count = 1;
         for(int i=0; i < lots.length; i ++){
             By add_new_btn_path = By.xpath("//button [@class='slds-button' and @title='Add']");
             waitForElementToBeEnabled(driver, add_new_btn_path, 10);
             WebElement add_new_btn = driver.findElement(add_new_btn_path);
-            scrollCenter(add_new_btn);
+            scrollCenter(driver, add_new_btn);
             Thread.sleep(500);
             add_new_btn.click();
             By lot_dropdown_btn_path = By.xpath("(//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])["+ count +"]");
@@ -104,50 +96,37 @@ public class UserDefaultsPage extends BasePage{
             drpDownSiteLastSelected.click();
             Thread.sleep(500);
             WebElement dropDownSiteArmLeftDeltoid = driver.findElement(By.xpath("(//span[@title='Arm - Left deltoid'])["+ count +"]"));
-            click(dropDownSiteArmLeftDeltoid);
+            dropDownSiteArmLeftDeltoid.click();
             Thread.sleep(500);
             count++;
         }
-        return this;
     }
 
-    public boolean isToastMessageDisplayed() {
+    public static boolean isToastMessageDisplayed(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By toast_message_success_path = By.xpath("//span[contains(text(),'User defaults successfully updated.')]");
+        waitForElementToBePresent(driver, toast_message_success_path, 10);
         boolean flag = false;
-        List countOfFoundLot = driver.findElements(toastMessageSuccess);
+        List countOfFoundLot = driver.findElements(toast_message_success_path);
         if(countOfFoundLot.size()>0){
             flag = true;
         }
         return flag;
     }
 
-    public boolean successfullyUpdatedMsgDisplayed() throws InterruptedException {
-        boolean flag = false;
-        for (int i = 0; i < 12; i++) {
-            if(isToastMessageDisplayed() == true) {
-                flag = true;
-                Thread.sleep(500);
-        }
-            else{
-                log("NOT DISPLAYED: User Defaults Successfully Updated");
-                break;
-            }
-        }
-        return flag;
-    }
-
-    public void validateSuccessfullyUpdatedMsg() throws InterruptedException {
-        if (isToastMessageDisplayed() == false) {
+    public static void validateSuccessfullyUpdatedMsg(WebDriver driver) throws InterruptedException {
+        if (isToastMessageDisplayed(driver) == false) {
             throw new RuntimeException("NOT DISPLAYED: User Defaults Successfully Updated");
         }
         for (int i = 0; i < 10; i++) {
-            if (isToastMessageDisplayed() == true) {
+            if (isToastMessageDisplayed(driver) == true) {
                 Thread.sleep(500);
             }
         }
             log("User Defaults Successfully Updated message displayed");
     }
 
-    public boolean isAnyLotsPresent() {
+    public static boolean isAnyLotsPresent(WebDriver driver) {
         boolean flag = false;
         List countOfFoundLot = driver.findElements(By.xpath("//button[@name='DeleteLot']"));
         if(countOfFoundLot.size()>0){
@@ -156,23 +135,15 @@ public class UserDefaultsPage extends BasePage{
         return flag;
     }
 
-    public void inputCurrentDateUserDefaults() throws InterruptedException {
+    public static void inputCurrentDateUserDefaults(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();
-        inputDateUserDefaults(today);
+        inputDateUserDefaults(driver, today);
     }
 
-    public void inputPreviousDateUserDefaults() throws InterruptedException {
-        Thread.sleep(500);
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -1);
-        Date today = calendar.getTime();
-        inputDateUserDefaults(today);
-    }
-
-    public void inputDateUserDefaults(Date date) throws InterruptedException {
+    public static void inputDateUserDefaults(WebDriver driver, Date date) throws InterruptedException {
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
         By input_date_path = By.xpath("//input[@name='BCH_Date__c']");
         waitForElementToBeEnabled(driver, input_date_path, 10);
@@ -193,22 +164,19 @@ public class UserDefaultsPage extends BasePage{
             input_date = driver.findElement(input_date_path);
             input_date.clear();
         }
-
-        //input_date.click();
-        //Thread.sleep(2000);
         input_date.sendKeys(todayAsString);
         Thread.sleep(2000);
         input_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
         try {
-            closeSuccessDialog();
+            closeSuccessDialog(driver);
             Thread.sleep(500);
         } catch(Exception ex) {
             System.out.println("No Success Dialog. Continue...");
         }
     }
 
-    public void closeSuccessDialog() throws InterruptedException {
+    public static void closeSuccessDialog(WebDriver driver) throws InterruptedException {
         try {
             WebElement alertCloseBtn = driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']"));
             alertCloseBtn.click();
@@ -224,13 +192,7 @@ public class UserDefaultsPage extends BasePage{
         }
     }
 
-    public void selectClinicUserDefaults(String clinicLocation) throws InterruptedException {
-        click(clinicLocationUserDefaults);
-        clinicLocationUserDefaults.sendKeys(clinicLocation);
-        validateSuccessfullyUpdatedMsg();
-    }
-
-    public void selectUserDefaultLocation(String location) throws InterruptedException {
+    public static void selectUserDefaultLocation(WebDriver driver, String location) throws InterruptedException {
         Thread.sleep(500);
         By location_input_field_path = By.xpath("//c-bc-hc-input-search-drop-down//input");
         waitForElementToBeEnabled(driver, location_input_field_path, 10);
@@ -246,14 +208,4 @@ public class UserDefaultsPage extends BasePage{
         WebElement my_location = driver.findElement(my_location_path);
         my_location.click();
     }
-
-//    public void inputUserDefaultsCurrentDate() throws InterruptedException {
-//        Calendar calendar = Calendar.getInstance();
-//        Date today = calendar.getTime();
-//        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-//        waitForElementToBeVisible(driver, input_current_date, 10);
-//        String todayAsString = dateFormat.format(today);
-//        click(input_current_date);
-//        typeIn(input_current_date,todayAsString);
-//    }
 }
