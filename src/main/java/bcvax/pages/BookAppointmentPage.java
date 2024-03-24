@@ -7,6 +7,10 @@ public class BookAppointmentPage extends BasePage {
         super(driver);
     }
 
+    public static void openBookAnAppointmentPage(WebDriver driver, String uniqueLink) {
+        driver.navigate().to(uniqueLink);
+    }
+
     public static void bookAnAppointmentPageDisplayed(WebDriver driver) {
         By vaccinationAppointmentTxt = By.xpath("//button[contains(text(),'Book appointment')]");
         try {

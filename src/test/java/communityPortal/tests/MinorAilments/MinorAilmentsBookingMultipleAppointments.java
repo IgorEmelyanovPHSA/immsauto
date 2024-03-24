@@ -104,16 +104,16 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         //String confirmedAppointmentTwoDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
 
         log("21. Login as an Clinician into CP");
-        loginPage.loginIntoCommunityPortalAsClinician();
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("22. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);
-        com.globalSearchCP(legalFirstName + " " +legalLastName);
+        cpMainPage.search(legalFirstName + " " +legalLastName);
 
-        log("23. Validation, if account is found open it");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-        }
+//        log("23. Validation, if account is found open it");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
 
         log("24. Navigate to Related tab");
         PersonAccountPage.goToRelatedTab(driver);

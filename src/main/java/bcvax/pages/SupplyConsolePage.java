@@ -254,11 +254,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(1000);
 	}
 
-	public void clickOnSupplyContainerCheckbox(int k) throws InterruptedException {
-		tables.getSupplyContainerTable().getRowsMappedToHeadings().get(k).get("Choose a Row\n" +
-				"Select All").click();
-	}
-
 	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		String tabindex_before_check =  tables.getSupplyContainerRow(supplyContainer).get("Choose a Row\n" +
@@ -282,11 +277,6 @@ public class SupplyConsolePage extends BasePage {
 			System.out.println("DEBUG: Container Checkbox is checked");
 			System.out.println("DEBUG: ------------------------------------");
 		}
-	}
-
-	public int getRowsSupplyContainersFromCount() throws InterruptedException {
-		Thread.sleep(500);
-		return (tables.getSupplyContainerTable().getRows().size() - 1);
 	}
 
 	public void clickBulkTransfersButton() throws InterruptedException{
@@ -327,17 +317,6 @@ public class SupplyConsolePage extends BasePage {
 			}
 		}
 		return found;
-	}
-
-	public void enterBulkTransferByDosages(int k) throws InterruptedException {
-		//private By doses_1 = By.xpath("(.//input[@class = 'slds-input'])[2]");
-		By dose_1_ = By.xpath("(.//input[@class = 'slds-input'])[" + k + "]");
-		waitForElementToBeLocated(driver, dose_1_, 10);
-		WebElement element = driver.findElement(dose_1_);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollRight = arguments[0].scrollWidth", element);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		click(dose_1_);
-		element.sendKeys("1");
 	}
 
 	public void enterBulkTransferByDosages(List<String> containers, double dose) {

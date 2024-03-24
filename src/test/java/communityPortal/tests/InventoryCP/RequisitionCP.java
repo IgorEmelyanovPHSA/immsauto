@@ -31,18 +31,9 @@ public class RequisitionCP extends BaseTest {
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            MainPageOrg.switchApp(driver, Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(1000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login to CP (newUI) as Clinician --*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+
         //cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
 

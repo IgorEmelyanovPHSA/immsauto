@@ -399,7 +399,7 @@ public class Transfer extends BaseTest {
 
     public void precondition() throws Exception {
         log("/*----Login to ORG (oldUI) --*/");
-        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
+        orgMainPage = loginPage.orgLoginAsPPHIS();
         String currentApp = MainPageOrg.currentApp(driver);
         if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);

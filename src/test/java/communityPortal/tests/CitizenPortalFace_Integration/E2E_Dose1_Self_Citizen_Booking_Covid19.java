@@ -56,13 +56,13 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        com.globalSearchCP(conformationNumberText);
-
-        log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-        }
+        cpMainPage.search(conformationNumberText);
+//
+//        log("/*7.1---Validation, isUserFound account validation --*/");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
 
         try {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
@@ -70,7 +70,6 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
             System.out.println("Warning dialog didn't appear");
         }
 
-        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
         log("---click Verify PHN button ---");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         Thread.sleep(2000);
@@ -78,13 +77,13 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         CitizenPrimaryInfo.successMessageAppear(driver);
 
         //Extra step to log out from CP
-        loginPage.logOutCommunityPortal();
+        cpMainPage.logout();
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
         BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
@@ -99,14 +98,6 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
         log("/*11.---Schedule vaccination page is displayed--*/");
         BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
         Thread.sleep(1000);
-        //If override Eligibility is shown
-//        try {
-//            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-//            PersonAccountPage.overrideEligibility(driver);
-//        } catch(Exception ex) {
-//            System.out.println("There is not Override Eligibility Option");
-//        }
-
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
         PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 

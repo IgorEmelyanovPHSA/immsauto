@@ -206,7 +206,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		profilesPage.saveImmunizationInformation();
 
 		//Click Ok if the lot is expired
-		commonMethods.expiredVaxHandler();
+		profilesPage.expiredVaxHandler();
 		///////
 
 		confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);

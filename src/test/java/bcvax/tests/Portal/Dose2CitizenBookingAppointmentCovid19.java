@@ -115,7 +115,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
         BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation

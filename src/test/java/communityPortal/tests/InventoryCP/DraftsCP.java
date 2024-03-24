@@ -49,18 +49,10 @@ public class DraftsCP extends BaseTest {
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                TestcaseID = "245092"; //C245092
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        TestcaseID = "243118"; //C243118
+        loginPage.loginIntoCommunityPortalAsClinician();
+
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.selectSupplyLocationName(supply_location_from);
@@ -147,18 +139,9 @@ public class DraftsCP extends BaseTest {
 
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                TestcaseID = "245092"; //C245092
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        TestcaseID = "243118"; //C243118
+        loginPage.loginIntoCommunityPortalAsClinician();
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -271,19 +254,11 @@ public class DraftsCP extends BaseTest {
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                TestcaseID = "245092"; //C245092
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                log("TestCase: C243118");
-                TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        log("TestCase: C243118");
+        TestcaseID = "243118"; //C243118
+        loginPage.loginIntoCommunityPortalAsClinician();
+
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");

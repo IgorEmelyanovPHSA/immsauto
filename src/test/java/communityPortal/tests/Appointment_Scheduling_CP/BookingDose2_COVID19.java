@@ -75,17 +75,8 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*17.--toast success message - 'Success' --*/");
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
-        //log("/*18.----click on person Account Related Tab --*/");
-        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-
         log("/*19.----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
-        //In case of Early Booking
-//        try {
-//            PersonAccountPage.selectEarlyBookingReason(driver);
-//        } catch(Exception ex) {
-//            System.out.println("No early Booking screen. Continue...");
-//        }
 
         //If override Eligibility is shown
         try {

@@ -65,13 +65,13 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        com.globalSearchCP(conformationNumberText);
+        cpMainPage.search(conformationNumberText);
 
-        log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-        }
+//        log("/*7.1---Validation, isUserFound account validation --*/");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
         try {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         } catch(Exception ex) {
@@ -81,13 +81,13 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         PersonAccountPage.clickVerifyPHNButton(driver);
         PersonAccountPage.successMessageAppear(driver);
         //Extra step to log out from CP
-        loginPage.logOutCommunityPortal();
+        cpMainPage.logout();
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
         BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation

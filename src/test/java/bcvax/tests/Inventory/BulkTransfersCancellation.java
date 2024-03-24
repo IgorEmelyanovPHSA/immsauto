@@ -3,6 +3,7 @@ package bcvax.tests.Inventory;
 import Utilities.TestListener;
 import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
+import bcvax.pages.SupplyLocationRelatedItems;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
@@ -64,7 +65,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Select Items to Transfer and Submit --*/");
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -181,7 +182,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Select Items to Transfer and Submit --*/");
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -286,7 +287,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*1.----Login ----*/");
 
         log("/----Login to ORG (oldUI) --*/");
-        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
+        orgMainPage = loginPage.orgLoginAsPPHIS();
         String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);

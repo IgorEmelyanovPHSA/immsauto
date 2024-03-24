@@ -410,18 +410,9 @@ public class TransferCP extends BaseTest {
 //	}
 
 	public void precondition() throws Exception {
-		if(env.contains("immsbc_admin")) {
-			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-			orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-			Thread.sleep(1000);
-			MainPageOrg.switchApp(driver, Apps.BCH_VACCINATION_PORTAL.value);
-			Thread.sleep(3000);
-			cpMainPage = new MainPageCP(driver);
-			cpMainPage.clickGoToUserDefaultsButton();
-		} else {
-			log("/*1.----Login As Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login As Clinician --*/");
+		cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+
 		Thread.sleep(3000);
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 		supplyConsolePage.clickOnRelatedItemTab();

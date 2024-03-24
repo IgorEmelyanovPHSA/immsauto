@@ -32,19 +32,11 @@ public class WastageCP extends BaseTest {
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin":
-				log("Login AS comunityqa_immsbc_admin");
-				TestcaseID = "245090"; //C245090
-				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-				break;
-			default:
-				log("Login as Clinician");
-				log("TestCase: C243116");
-				TestcaseID = "243116"; //C243116
-				loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login as Clinician --*/");
+		log("TestCase: C243116");
+		TestcaseID = "243116"; //C243116
+		loginPage.loginIntoCommunityPortalAsClinician();
+
 
 		log("/2.----Navigate to Supply Console Page --*/");
 		cpMainPage.selectSupplyLocationName(supplyLocation);

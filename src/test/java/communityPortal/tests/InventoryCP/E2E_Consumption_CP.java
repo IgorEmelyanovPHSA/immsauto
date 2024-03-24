@@ -115,16 +115,9 @@ public class E2E_Consumption_CP extends BaseTest {
         CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         log("/*21.--toast success message - 'Success' --*/");
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-        //log("/*22.----click on person Account Related Tab --*/");
-        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
 
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
-//        try {
-//            PersonAccountPage.selectEarlyBookingReason(driver);
-//        } catch(Exception ex) {
-//            System.out.println("Early Booking reason option is not found. Continue...");
-//        }
 
         //If override Eligibility is shown
         try {
@@ -177,11 +170,6 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(2000);
         InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
         Thread.sleep(2000);
-        //log("/*37.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-       // inClinicExperience_CP.validateVaccineAdminPageOpen();
-        //inClinicExperience_CP.clickCloseAlert();
-        //log("/*38.---Click confirm and Save Button --*/");
-
 
         log("/*39.---Open Today's appointments from Home page --*/");
         inClinicExperience_CP.clickTodayAppointments();
@@ -189,16 +177,8 @@ public class E2E_Consumption_CP extends BaseTest {
         inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
-
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
         Thread.sleep(2000);
-
-//        String consentProvider = inClinicExperience_CP.consentProviderSelected();
-//        if(consentProvider.equals("")) {
-//            consentProvider = inClinicExperience_CP.selectConsentProvider();
-//            consentProvider = inClinicExperience_CP.consentProviderSelected();
-//        }
-//        inClinicExperience_CP.ClickSaveConsentButton();
 
         try {
             PersonAccountRelatedPage.checkExistingConsent(driver);

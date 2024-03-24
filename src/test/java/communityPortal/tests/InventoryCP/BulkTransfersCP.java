@@ -1,15 +1,13 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.SupplyConsolePage;
 import bcvax.tests.BaseTest;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
+
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -84,7 +82,7 @@ public class BulkTransfersCP extends BaseTest {
         double lot_SPIKEVAX6_5Test001_conversion_factor = remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1;
         log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -467,7 +465,7 @@ public class BulkTransfersCP extends BaseTest {
         log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2 for the same Clinic/////////
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -565,18 +563,9 @@ public class BulkTransfersCP extends BaseTest {
     }
 
     public void precondition() throws Exception {
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            MainPageOrg.switchApp(driver, Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login to CP (newUI) as Clinician --*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         supplyConsolePage.clickOnRelatedItemTab();
     }
