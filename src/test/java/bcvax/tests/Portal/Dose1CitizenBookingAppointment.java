@@ -78,12 +78,12 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 		loginPage.orgLoginAsPPHIS();
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.closeAllTabs();
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.closeAllTabs(driver);
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 
 		log("/*6.1.----Close All previously opened Tab's --*/");
@@ -120,7 +120,7 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 		String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
 		log("/*9.---Open book an appointment portal from unique link--*/");
-		loginPage.openBookAnAppointmentPage(uniqueLink);
+		BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
 		BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
 		//Unique registration code validation

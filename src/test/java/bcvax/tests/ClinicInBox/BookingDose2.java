@@ -39,9 +39,9 @@ public class BookingDose2 extends BaseTest {
 		log("TestRail test case ID: C" +TestcaseID);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -56,16 +56,16 @@ public class BookingDose2 extends BaseTest {
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
-		currentApp = orgMainPage.currentApp();
+		currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.closeAllTabs();
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.closeAllTabs(driver);
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
-		orgMainPage.closeAllTabs();
+		MainPageOrg.closeAllTabs(driver);
 		Thread.sleep(2000);
 		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();

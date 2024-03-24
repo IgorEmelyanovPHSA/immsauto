@@ -49,13 +49,13 @@ public class DIWA_ICE extends BaseTest {
 
 		log("/*2.--- Navigate to In Clinic Experience App --*/");
 		mainPageOrg = new MainPageOrg(driver);
-		String currentApp = mainPageOrg.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			try {
-				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+				MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 			} catch(Exception ex) {
 				Thread.sleep(5000);
-				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+				MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 			}
 		}
 		//log("/*3.----In Clinic Experience(ICE) page displayed --*/");

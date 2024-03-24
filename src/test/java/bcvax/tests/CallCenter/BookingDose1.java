@@ -44,12 +44,12 @@ public class BookingDose1 extends BaseTest {
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		System.out.println("/*2.----CallCenter Console page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CALL_CENTER_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.CALL_CENTER_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.CALL_CENTER_CONSOLE.value);
 		}
 		callCenterConsole.closeAllTabs();
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		System.out.println("/*3.----Close All previously opened Tab's --*/");
 

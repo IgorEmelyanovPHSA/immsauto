@@ -54,22 +54,6 @@ public class LoginPage extends BasePage {
 		return new SupplyConsolePage(driver);
 	}
 
-	public MainPageOrg orgLoginAsImmsBCAdmin() throws Exception {
-		log("/*----Login to ORG (oldUI) as Imms BC Admin --*/");
-		driver.navigate().to(Utils.getEnvConfigProperty("url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_ICE"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMCBC_ADMIN_ICE_PW"));
-		click(login_button);
-		return new MainPageOrg(driver);
-	}
-
-	public MainPageOrg orgLoginAsImmsBCAdminCP() throws Exception {
-		driver.navigate().to(Utils.getEnvConfigProperty("api_url"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP_PW"));
-		click(login_button);
-		return new MainPageOrg(driver);
-	}
 	public Tables getTables(){
 		return new Tables(driver);
 	}
@@ -91,40 +75,10 @@ public class LoginPage extends BasePage {
 		driver.navigate().to(Utils.getEnvConfigProperty("url_minorail"));
 		return new MinorAilmentsPage(driver);
 	}
-	
-	public BookAppointmentPage openBookAnAppointmentPage(String uniqueLink) throws Exception {
-		driver.navigate().to(uniqueLink);
-		return new BookAppointmentPage(driver);
-	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Community Portal section //
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@FindBy(xpath = "//img[@src='/bchvaxportal/profilephoto/005/T']")
-	private WebElement btnProfile;
-
-	@FindBy(xpath = "//span[@title='Log Out']")
-	private WebElement logOut;
-
-	@Step
-	public MainPageCP loginIntoCommunityPortalAsImmsBCAdmin() throws Exception {
-		//To be able to login as Admin into community portal (new UI) we have to use old UI url and select portal in menu
-		CommonMethods common = new CommonMethods(driver);
-		driver.navigate().to(Utils.getEnvConfigProperty("url_old_ui"));
-		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP"));
-		textPassword.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN_CP_PW"));
-		click(login_button);
-		Thread.sleep(15000);
-		common.goToVaccinationPortalIfNeededAndConfirmPageIsDisplayed();
-		return new MainPageCP(driver);
-	}
-
-	public void logOutCommunityPortal() throws Exception {
-		click(btnProfile);
-		click(logOut);
-		Thread.sleep(1000);
-	}
-
 	public MainPageCP loginIntoCommunityPortalAsClinician() throws Exception {
 		loginIntoCommunityPortalAs("user_CLINICIAN_CP", "password_CLINICIAN_PW_CP");
 		return new MainPageCP(driver);

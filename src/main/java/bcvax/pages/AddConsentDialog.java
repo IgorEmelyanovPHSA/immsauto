@@ -496,7 +496,7 @@ public class AddConsentDialog extends BasePage {
         Thread.sleep(500);
         By consent_error_path = By.xpath("//span[text()='You must review and confirm before this consent record can be created']");
         try {
-            WebElement consent_error = driver.findElement(consent_error_path);
+            waitForElementToBeEnabled(driver, consent_error_path, 10);
             return true;
         } catch(NotFoundException ex) {
             return false;

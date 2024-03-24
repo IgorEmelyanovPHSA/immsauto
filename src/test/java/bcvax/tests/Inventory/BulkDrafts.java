@@ -1,9 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
@@ -49,9 +47,9 @@ public class BulkDrafts extends BaseTest {
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         log("/*2.----Supply Console Page displayed --*/");
         supplyConsolePage.verifyIsSupplyPageDisplayed();
@@ -66,16 +64,15 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*6.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
 
-        log("/*7.----Click on Container's records Checkboxes --*/");
+        ArrayList<String> my_containers = new ArrayList<>();
+        log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            int k = 1;
-            while (k <= 3) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-                log("/*---     containers record number: " + k);
-                k++;
+            for (int k = 1; k <= 3; k++) {
+                String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                my_containers.add(my_container_name);
             }
         } else {
             log("/*--not enough records for Bulk actions--*/");
@@ -90,12 +87,9 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickBulkTransfersButton();
 
         log("/*9.----Enter the Dosages values for 3 row Transfers --*/");
-        int k = 3;
-        while (k <= 7) {
-            supplyConsolePage.enterBulkTransferByDosages(k);
-            int n = k - 2;
-            log("/*---     dose slot N%: " + n);
-            k = k + 2;
+        for(String my_container: my_containers) {
+            ContainerTransferPage.enterTransferDose(driver, my_container, "1");
+            //supplyConsolePage.enterBulkTransferByDosages(k);
         }
 
         log("/*10.----select 'To' Automation Supply Location_2  --*/");

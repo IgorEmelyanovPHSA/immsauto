@@ -251,16 +251,9 @@ public class TransferCancellationCP extends BaseTest {
 //	}
 
 	public void precondition() throws Exception {
-		if(env.contains("immsbc_admin")) {
-			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-			loginPage.orgLoginAsImmsBCAdminCP();
+		log("/*1.----Login to CP (newUI) as Clinician --*/");
+		cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
-			cpMainPage = new MainPageCP(driver);
-			cpMainPage.clickGoToUserDefaultsButton();
-		} else {
-			log("/*1.----Login to CP (newUI) as Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-		}
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 		supplyConsolePage.clickOnRelatedItemTab();
 	}

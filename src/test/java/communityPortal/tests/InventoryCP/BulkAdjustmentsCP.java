@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
@@ -59,40 +56,30 @@ public class BulkAdjustmentsCP extends BaseTest {
         }
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                //TestcaseID = "223360"; //C22336
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                log("TestCase: C243120");
-                TestcaseID = "243120"; //C243120
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        log("TestCase: C243120");
+        TestcaseID = "243120"; //C243120
+        loginPage.loginIntoCommunityPortalAsClinician();
+
 
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
 
+        ArrayList<String> my_containers = new ArrayList<>();
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-            int k = 1;
-            while (k <= 3) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-                log("/*---     containers record number: " + k);
-                Thread.sleep(1000);
-                k++;
+            for (int k = 1; k <= 3; k++) {
+                String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                my_containers.add(my_container_name);
             }
         } else {
             log("/*--not enough records for Bulk actions--*/");
         }
+
         int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
         //Remaining Doses and Quantity count // 3 rows, ref step7 containers count
         log("/*5.----Read Remaining Doses And Quantity Before Deduction --*/");

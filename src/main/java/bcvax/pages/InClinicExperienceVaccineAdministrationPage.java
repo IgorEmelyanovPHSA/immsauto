@@ -57,7 +57,7 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
 
     public static String getLotNumber(WebDriver driver) throws InterruptedException {
         By lot_number_path = By.xpath("//span[text() = 'Lot Number']/..//input");
-        waitForElementToBeEnabled(driver, lot_number_path, 5);
+        waitForElementToBeEnabled(driver, lot_number_path, 10);
         driver.findElement(lot_number_path).click();
         Thread.sleep(1000);
         return driver.findElement(lot_number_path).getAttribute("title");

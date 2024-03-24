@@ -1,10 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import io.qameta.allure.Story;
@@ -44,9 +41,9 @@ public class BulkWastages extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		log("/*2.----Validate if Supply Console Page displayed --*/");log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
@@ -63,21 +60,20 @@ public class BulkWastages extends BaseTest {
 		//////////////////////////////////////////////////
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
-		
-		log("/*5.----Click on Container's records Checkboxes --*/");
+
+		ArrayList<String> my_containers = new ArrayList<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+			for (int k = 1; k <= 3; k++) {
+				String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_name);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
+
 		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
@@ -157,21 +153,20 @@ public class BulkWastages extends BaseTest {
 		supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		log("/*5.----Click on Container's records Checkboxes --*/");
+		ArrayList<String> my_containers = new ArrayList<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+			for (int k = 1; k <= 3; k++) {
+				String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_name);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
+
 		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref BulkWastage step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");

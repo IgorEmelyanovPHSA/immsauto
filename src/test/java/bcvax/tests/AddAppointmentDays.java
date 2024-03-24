@@ -24,32 +24,32 @@ public class AddAppointmentDays extends BaseTest {
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate start_date = LocalDate.parse("2024-03-18", dtf);
+        LocalDate start_date = LocalDate.parse("2024-03-22", dtf);
         LocalDate end_date = LocalDate.parse("2024-03-24", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
             appointment_dates.add(my_appointment_date.format(dtf));
         }
-        //String appointment_type = "Minor Ailments and Contraception";
-        String appointment_type = "BC Immunization Program";
+        String appointment_type = "Minor Ailments and Contraception";
+        //String appointment_type = "BC Immunization Program";
 
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         String appointment_name = appointment_type + " " + appointment_date;
 
         String localization = "Pacific Localization";
         MainPageOrg orgMainPage = loginPage.orgLoginAsPPHIS();
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             try {
-                orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+                MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
             } catch(Exception ex) {
                 Thread.sleep(5000);
-                orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+                MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
             }
         }
-        orgMainPage.closeAllTabs();
-        orgMainPage.switchApp("Appointment Day Management");
+        MainPageOrg.closeAllTabs(driver);
+        MainPageOrg.switchApp(driver, "Appointment Day Management");
         AppointmentDayManagementPage appointment_day_page = new AppointmentDayManagementPage(driver);
         appointment_day_page.selectShowAllAppointmentDays();
         for(int d = 0; d < appointment_dates.size(); d++) {

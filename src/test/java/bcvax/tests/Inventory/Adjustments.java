@@ -85,9 +85,9 @@ public class Adjustments extends BaseTest {
 				loginPage.loginAsPPHIS();
 		}
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*2.----Supply Console Page displayed --*/");
@@ -220,9 +220,9 @@ public class Adjustments extends BaseTest {
 				loginPage.loginAsPPHIS();
 		}
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		CommonMethods common = new CommonMethods(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());

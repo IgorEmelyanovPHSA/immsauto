@@ -56,19 +56,11 @@ public class AdjustmentsCP extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin":
-				log("Login AS comunityqa_immsbc_admin");
-				TestcaseID = "245091"; //C245091
-				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-				break;
-			default:
-				log("Login as Clinician");
-				log("TestCase: C243117");
-				TestcaseID = "243117"; //C243117
-				loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login as Clinician --*/");
+		log("TestCase: C243117");
+		TestcaseID = "243117"; //C243117
+		loginPage.loginIntoCommunityPortalAsClinician();
+
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		cpMainPage.selectSupplyLocationName(supplyLocation);

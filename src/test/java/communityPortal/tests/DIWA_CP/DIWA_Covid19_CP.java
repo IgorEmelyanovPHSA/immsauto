@@ -31,18 +31,10 @@ public class DIWA_Covid19_CP extends BaseTest {
         consentProvider = String.valueOf(testData.get("consentProvider"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login as ImmsBCAdmin");
-                TestcaseID = "245099"; //C245099
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician user");
-                TestcaseID = "243108"; //C223187
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.---Login as Clinician user---*");
+        TestcaseID = "243108"; //C223187
+        loginPage.loginIntoCommunityPortalAsClinician();
+
         log("TestRail test case ID: C" +TestcaseID);
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
@@ -133,7 +125,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         profilesPage.saveImmunizationInformation();
 
         //Expired vax handler
-        commonMethods.expiredVaxHandler();
+        profilesPage.expiredVaxHandler();
 
         log("/*---25. Confirm and Save Administration ---*/");
         profilesPage.confirmAndSaveAdministration();
