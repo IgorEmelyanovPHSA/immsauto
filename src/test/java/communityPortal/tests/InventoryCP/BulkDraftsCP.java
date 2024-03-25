@@ -52,13 +52,12 @@ public class BulkDraftsCP extends BaseTest {
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
-        ArrayList<String> my_containers = new ArrayList<>();
+        Map<String, Map<String, String>> my_containers = new HashMap<>();
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
             for (int k = 1; k <= 3; k++) {
-                String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-                my_containers.add(my_container_name);
-                //supplyConsolePage.clickOnSupplyContainerCheckbox(k);
+                Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
             }
         } else {
             log("/*--not enough records for Bulk actions--*/");
@@ -73,7 +72,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersButton();
 
         log("/*7.----Enter the Dosages values for 3 row Transfers --*/");
-        for(String my_container: my_containers) {
+        for(String my_container: my_containers.keySet()) {
             ContainerTransferPage.enterTransferDose(driver, my_container, "1");
             //supplyConsolePage.enterBulkTransferByDosages(k);
         }

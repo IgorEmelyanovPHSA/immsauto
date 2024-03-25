@@ -63,12 +63,12 @@ public class BulkWastages extends BaseTest {
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		ArrayList<String> my_containers = new ArrayList<>();
+		Map<String, Map<String, String>> my_containers = new HashMap<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
 			for (int k = 1; k <= 3; k++) {
-				String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-				my_containers.add(my_container_name);
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
@@ -80,7 +80,7 @@ public class BulkWastages extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
-		supplyConsolePage.clickBulkWastageButton();
+		SupplyLocationRelatedItems.clickWastageButton(driver);
 
 		log("/*8.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkWastageByDosageWithReason(amountOfDosesToWaste, reasonForWastage);
@@ -156,12 +156,12 @@ public class BulkWastages extends BaseTest {
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		ArrayList<String> my_containers = new ArrayList<>();
+		Map<String, Map<String, String>> my_containers = new HashMap<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
 			for (int k = 1; k <= 3; k++) {
-				String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-				my_containers.add(my_container_name);
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
@@ -173,7 +173,7 @@ public class BulkWastages extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
-		supplyConsolePage.clickBulkWastageButton();
+		SupplyLocationRelatedItems.clickWastageButton(driver);
 		Thread.sleep(2000);
 		log("/*8.----Enter the Quantity values for 3 row and reason for wastage:" +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkWastageByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage);

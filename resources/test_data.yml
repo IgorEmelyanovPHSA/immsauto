@@ -332,7 +332,7 @@ bcvaxqa:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:25:02)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:43:35)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:31:36)"
-  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2023-12-04 13:34:21)"
+  containerConsumption: "JANSSEN COVID-19 VACCINE - ABZ5320 (2023-12-04 13:13:35)"
   #containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-09-11 09:03:17)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:23:58)"
@@ -355,11 +355,11 @@ bcvaxqa:
   agentInfluenza: "Influenza-LAIV"
   consumptionDose: "0.5"
   consumptionLot: "ABZ5320"
-  covidLot: "35035BD-CC01"
+  covidLot: "ABZ5320"
   #consumptionLot: "EK4241"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
   influenzaLot: "HL2478-CC01"
-  covidDose: "0.3"
+  covidDose: "0.5"
   influenzaDose: "0.2"
   useDefaultSettingsLots:
     - "35035BD-CC01"

@@ -85,24 +85,24 @@ public class BulkAdjustments extends BaseTest {
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		ArrayList<String> my_containers = new ArrayList<>();
+		int numberOfRows = 3;
+		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			for (int k = 1; k <= 3; k++) {
-				String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-				my_containers.add(my_container_name);
+		if (countSupplyContainers >= numberOfRows) {
+			for (int k = 1; k <= numberOfRows; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_data);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
 		//Remaining Doses and Quantity count // 3 rows, ref step7 containers count
 		log("/*8.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*9.----Click on bulk Adjustment button on Supply page--*/");
-		supplyConsolePage.clickBulkAdjustmentButton();
+		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 		Thread.sleep(5000);
 		
 		log("/*10.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
@@ -196,25 +196,25 @@ public class BulkAdjustments extends BaseTest {
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		ArrayList<String> my_containers = new ArrayList<>();
+		int numberOfRows = 3;
+		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			for (int k = 1; k <= 3; k++) {
-				String my_container_name = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-				my_containers.add(my_container_name);
+		if (countSupplyContainers >= numberOfRows) {
+			for (int k = 1; k <= numberOfRows; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_data);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
+		  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*7.----Click on bulk Adjustment button on Supply page--*/");
-		supplyConsolePage.clickBulkAdjustmentButton();
-		Thread.sleep(5000);
+		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 
 		log("/*8.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
 		supplyConsolePage.enterBulkAdjustmentByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment);
