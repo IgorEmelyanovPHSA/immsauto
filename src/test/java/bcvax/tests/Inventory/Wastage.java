@@ -5,7 +5,6 @@ import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
-import bcvax.pages.CommonMethods;
 import constansts.Apps;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.annotations.BeforeMethod;

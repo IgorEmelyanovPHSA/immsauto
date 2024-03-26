@@ -29,7 +29,6 @@ public class BookingConfirmationNotificationCP extends BaseTest {
         TestcaseID = "246565"; //C246565
         log("Target Environment: " + Utils.getTargetEnvironment());
         log("TestCase: C246565");
-        CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);

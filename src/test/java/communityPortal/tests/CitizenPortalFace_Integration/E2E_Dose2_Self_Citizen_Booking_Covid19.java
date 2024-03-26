@@ -38,7 +38,6 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         TestcaseID = "245218"; //C245218
         log("TestCase: C245218");
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);

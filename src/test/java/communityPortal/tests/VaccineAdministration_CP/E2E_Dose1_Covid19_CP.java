@@ -39,7 +39,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-        CommonMethods commn = new CommonMethods(getDriver());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));

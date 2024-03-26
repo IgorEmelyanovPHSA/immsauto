@@ -1,7 +1,6 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
 import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -224,7 +223,6 @@ public class Adjustments extends BaseTest {
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		CommonMethods common = new CommonMethods(getDriver());
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		log("/*2.----Supply Console Page displayed --*/");
 		supplyConsolePage.verifyIsSupplyPageDisplayed();

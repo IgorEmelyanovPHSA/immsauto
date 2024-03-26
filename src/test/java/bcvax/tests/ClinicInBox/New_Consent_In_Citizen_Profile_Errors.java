@@ -48,7 +48,6 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         consentProvider = String.valueOf(testData.get("consentProvider"));
         participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
         loginPage.loginAsImmsBCAdmin();
-        CommonMethods commonMethods = new CommonMethods(getDriver());
         log("/*-- 2. Clinic In Box page displayed --*/");
         orgMainPage = new MainPageOrg(driver);
         String currentApp = MainPageOrg.currentApp(driver);
@@ -213,7 +212,6 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         consentProvider = String.valueOf(testData.get("consentProvider"));
         participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
         loginPage.loginAsImmsBCAdmin();
-        CommonMethods commonMethods = new CommonMethods(getDriver());
         log("/*-- 2. Clinic In Box page displayed --*/");
         orgMainPage = new MainPageOrg(driver);
         String currentApp = MainPageOrg.currentApp(driver);
