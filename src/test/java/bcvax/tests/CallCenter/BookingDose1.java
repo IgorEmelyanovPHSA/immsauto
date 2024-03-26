@@ -39,7 +39,6 @@ public class BookingDose1 extends BaseTest {
 		log("------------------------------");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-		CommonMethods commn = new CommonMethods(getDriver());
 		System.out.println("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		System.out.println("/*2.----CallCenter Console page displayed --*/");

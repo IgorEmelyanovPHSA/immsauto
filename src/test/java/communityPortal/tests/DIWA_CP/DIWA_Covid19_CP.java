@@ -25,7 +25,6 @@ public class DIWA_Covid19_CP extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        CommonMethods commonMethods = new CommonMethods(getDriver());
         String nameToSearch = "John Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
         consentProvider = String.valueOf(testData.get("consentProvider"));

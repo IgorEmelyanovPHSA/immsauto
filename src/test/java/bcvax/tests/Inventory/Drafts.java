@@ -2,7 +2,6 @@ package bcvax.tests.Inventory;
 import Utilities.TestListener;
 import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
-import bcvax.pages.CommonMethods;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
 import constansts.Apps;

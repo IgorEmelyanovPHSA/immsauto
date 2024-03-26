@@ -28,7 +28,6 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         log("API call to remove appointments from participant account by PHN if found");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(personalHealthNumber);
 
-        CommonMethods com = new CommonMethods(getDriver());
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
 
         log("1. Open Minor Ailments portal");
