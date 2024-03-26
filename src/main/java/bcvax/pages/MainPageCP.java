@@ -164,23 +164,41 @@ public class MainPageCP extends BasePage{
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
         By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
-        waitForElementToBeEnabled(driver, table_path, 60);
-        List<WebElement> found_client_table_nodes = driver.findElements(table_path);
-//        while(found_client_table_nodes.size() < 18) {
-//            Thread.sleep(1000);
-//            found_client_table_nodes = driver.findElements(table_path);
-//        }
-        for(WebElement found_client_table_node: found_client_table_nodes) {
-            if(found_client_table_node.isDisplayed()) {
-                GenericTable found_client_table = new GenericTable(found_client_table_node);
-                Map<String, WebElement> my_record = found_client_table.getRowsMappedToHeadings().get(1);
-                WebElement my_link = my_record.get("Name");
-                my_link.click();
+        try {
+            waitForElementToBeEnabled(driver, table_path, 10);
+        } catch(Exception ex) {
+            search_field = driver.findElement(search_field_path);
+            search_field.sendKeys(criteria);
+            Thread.sleep(500);
+            search_field.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, table_path, 10);
+        }
+        WebElement found_client_table_node = driver.findElement(table_path);
+
+        GenericTable found_client_table = new GenericTable(found_client_table_node);
+        List<Map<String, WebElement>> my_records = found_client_table.getRowsMappedToHeadings();
+        int row_count = my_records.size();
+        int loop_count = 0;
+        while(row_count < 2) {
+            Thread.sleep(1000);
+            my_records = found_client_table.getRowsMappedToHeadings();
+            row_count = my_records.size();
+            loop_count++;
+            if(loop_count > 10) {
                 break;
             }
         }
-
-
+        for(Map<String, WebElement> my_record: my_records) {
+            try {
+                    my_record.get("Email").findElement(By.xpath(".//a"));
+                    WebElement my_link = my_record.get("Name");
+                    my_link.click();
+                    break;
+            } catch(Exception ex) {
+                ;
+            }
+        }
     }
 
     public void refreshBrowser() throws InterruptedException {

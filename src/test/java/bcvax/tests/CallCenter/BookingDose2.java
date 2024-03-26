@@ -82,9 +82,7 @@ public class BookingDose2 extends BaseTest {
 		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*17.--toast success message - 'Success' --*/");
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
-		PersonAccountPage.clickRefreshForecastButton(driver);
-		Thread.sleep(2000);
+
 		log("/*21----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 
