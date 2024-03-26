@@ -107,7 +107,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("22. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);
-        cpMainPage.search(legalFirstName + " " +legalLastName);
+        cpMainPage.search(legalFirstName + " " + legalLastName);
 
 //        log("23. Validation, if account is found open it");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);

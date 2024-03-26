@@ -163,13 +163,13 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        By table_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
+        By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
         waitForElementToBeEnabled(driver, table_path, 60);
         List<WebElement> found_client_table_nodes = driver.findElements(table_path);
-        while(found_client_table_nodes.size() < 18) {
-            Thread.sleep(1000);
-            found_client_table_nodes = driver.findElements(table_path);
-        }
+//        while(found_client_table_nodes.size() < 18) {
+//            Thread.sleep(1000);
+//            found_client_table_nodes = driver.findElements(table_path);
+//        }
         for(WebElement found_client_table_node: found_client_table_nodes) {
             if(found_client_table_node.isDisplayed()) {
                 GenericTable found_client_table = new GenericTable(found_client_table_node);
