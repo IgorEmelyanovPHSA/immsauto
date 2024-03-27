@@ -129,11 +129,11 @@ public class PersonAccountRelatedPage extends BasePage {
         Thread.sleep(500);
         int counter = 0;
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        By alert_section_path = By.xpath("//c-bchc-active-consent-table//span[contains(text(), 'Active Consent')]");
+        By active_consent_section_path = By.xpath("//c-bchc-active-consent-table//span[contains(text(), 'Active Consent')]");
         boolean found = false;
         while(!found) {
             try {
-                waitForElementToBeEnabled(driver, alert_section_path, 1);
+                waitForElementToBeEnabled(driver, active_consent_section_path, 1);
                 found = true;
 
             } catch (NotFoundException ex) {
@@ -145,10 +145,10 @@ public class PersonAccountRelatedPage extends BasePage {
                 }
             }
         }
-        WebElement alert_section = driver.findElement(alert_section_path);
-        scrollCenter(driver, alert_section);
+        WebElement active_consent_section = driver.findElement(active_consent_section_path);
+        scrollCenter(driver, active_consent_section);
         Thread.sleep(1000);
-        scrollCenter(driver, alert_section);
+        scrollCenter(driver, active_consent_section);
         Thread.sleep(500);
     }
 

@@ -2,6 +2,7 @@ package bcvax.tests.Inventory;
 
 
 import bcvax.pages.MainPageOrg;
+import bcvax.pages.SupplyLocationPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.Utils;
 import constansts.Apps;
@@ -56,7 +57,7 @@ public class Requisition extends BaseTest {
 		//supplyConsolePage.clickOnSupplyLocation(supply_location_from);
 		//Thread.sleep(4000);
 		System.out.println("/*----6. Navigate to Request Supplies --*/");
-		supplyConsolePage.clickRequestSupplies();
+		SupplyLocationPage.clickCreateRequisitionButton(driver);
 		System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
 		supplyConsolePage.selectShipped_From(supply_location_from);
 		//requisitionPage.inputShipAddress();

@@ -1,9 +1,6 @@
 package communityPortal.tests.InventoryCP;
 
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Tables;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -57,7 +54,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
 		log("/*-- Receive Supplies --*/");
-		supplyConsolePage.clickBtnReceiveSuppliesCP();
+		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 		Thread.sleep(2000);
 		supplyConsolePage.selectSupplyItemTo(lot);
 		supplyConsolePage.enterTransferDosages(String.valueOf(doses));
@@ -120,7 +117,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
 		log("/*-- Receive Supplies --*/");
-		supplyConsolePage.clickBtnReceiveSuppliesCP();
+		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 
 		supplyConsolePage.selectSupplyItemTo(lot);
 		Thread.sleep(500);

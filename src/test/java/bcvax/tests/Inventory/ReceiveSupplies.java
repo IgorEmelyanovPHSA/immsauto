@@ -1,6 +1,7 @@
 package bcvax.tests.Inventory;
 
 import bcvax.pages.MainPageOrg;
+import bcvax.pages.SupplyLocationPage;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -85,9 +86,7 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.selectSupplyLocationName(supply_location);
 
 		log("/*-- 18. Navigate and Select Dropdown to Receive Supplies Button --*/");
-		supplyConsolePage.SelectDropDownToClickReceiveSuppliesButton();
-		log("/*-- 19. Click to Receive Supplies Button --*/");
-		supplyConsolePage.ClickDropDownToClickReceiveSuppliesButton();
+		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 		log("/*-- 20. Validate Supply Item Filed Present on Layout --*/");
 		String supplyItem = supplyConsolePage.validateSupplyItemField();
 		String expectedSupplyItemLabel = "*Supply Item";

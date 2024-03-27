@@ -51,8 +51,7 @@ public class ReturnsErrorValidation extends BaseTest {
         supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*b.----Receive Supplies for Flu --*/");
-        supplyConsolePage.SelectDropDownToClickReceiveSuppliesButton();
-        supplyConsolePage.ClickDropDownToClickReceiveSuppliesButton();
+        SupplyLocationPage.clickReceiveSuppliesButton(driver);
         supplyConsolePage.clickSupplyItemTextBox();
         supplyConsolePage.selectSupplyItem(supply_item);
         supplyConsolePage.enterTransferDosages(Double.toString(doses));
@@ -109,7 +108,7 @@ public class ReturnsErrorValidation extends BaseTest {
         supplyConsolePage.selectSupplyLocationName(supply_location);
 
         log("/*5. ----Click Return Button --*/");
-        supplyConsolePage.clickReturnBtn();
+        SupplyLocationPage.clickReturnButton(driver);
 
         log("/*6. ----Leave the Supply Location for the Returned To blank --*/");
 

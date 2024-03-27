@@ -42,7 +42,7 @@ public class Return_CP extends BaseTest {
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
         log("/*b.----Receive Supplies for Flu --*/");
-        supplyConsolePage.clickBtnReceiveSuppliesCP();
+        SupplyLocationPage.clickReceiveSuppliesButton(driver);
         supplyConsolePage.clickSupplyItemTextBox();
         supplyConsolePage.selectSupplyItem(supply_item);
         supplyConsolePage.enterTransferDosages(Double.toString(doses));
@@ -78,7 +78,7 @@ public class Return_CP extends BaseTest {
         cpMainPage.selectSupplyLocationName(supply_location_from);
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*5. ----Click Return Button --*/");
-        supplyConsolePage.clickReturnBtn();
+        SupplyLocationPage.clickReturnButton(driver);
 
         ReturnDialog returnDialog = new ReturnDialog(driver);
         String supply_location_from_value = returnDialog.getReturnFromValue();

@@ -1,14 +1,11 @@
 package communityPortal.tests.InventoryCP;
 
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import bcvax.pages.SupplyConsolePage;
 
 import java.util.Map;
 
@@ -38,7 +35,7 @@ public class RequisitionCP extends BaseTest {
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location);
 
         System.out.println("/*----6. Navigate to Request Supplies --*/");
-        supplyConsolePage.clickRequestSupplies();
+        SupplyLocationPage.clickCreateRequisitionButton(driver);
         Thread.sleep(2000);
         System.out.println("/*----7. select Shipped From-'All ages-Atlin Health Centre' --*/");
         supplyConsolePage.selectShipped_From(supply_location_from);
