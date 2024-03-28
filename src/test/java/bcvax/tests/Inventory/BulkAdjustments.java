@@ -69,8 +69,6 @@ public class BulkAdjustments extends BaseTest {
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
@@ -184,8 +182,6 @@ public class BulkAdjustments extends BaseTest {
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();

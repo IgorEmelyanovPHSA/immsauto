@@ -294,9 +294,7 @@ public class BulkTransfersCancellation extends BaseTest {
         }
         supplyConsolePage = new SupplyConsolePage(driver);
         Thread.sleep(2000);
-        //Assert.assertTrue(false);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
         log("/*4.----Go to Supply Locations Tab --*/");

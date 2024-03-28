@@ -92,12 +92,12 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         Assert.assertTrue(consent_table.size() > 1, "Active Consent record is not displayed");
         boolean record_consent_btn_exists = DiwaImmunizationRecord.recordConsentBtnExists(driver);
         Assert.assertTrue(record_consent_btn_exists, "Record Consent button is not displayed");
-        boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
+        boolean record_consent_message_exists = DiwaImmunizationRecord.recordExistingConsentMessageExists(driver);
         Assert.assertTrue(record_consent_message_exists, "Record Consent Message not found");
         boolean confirm_and_save_btn_enabled = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
         Assert.assertFalse(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously Active");
 
-        DiwaImmunizationRecord.selectProvider(driver, consentProvider);
+        DiwaImmunizationRecord.setProvider(driver, consentProvider);
         profilesPage.clickShowAllLotNumbersCheckBox();
         profilesPage.clickLotNumberDropDown();
         profilesPage.selectLot();

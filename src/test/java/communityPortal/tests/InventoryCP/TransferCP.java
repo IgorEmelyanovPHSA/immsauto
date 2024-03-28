@@ -1,15 +1,13 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
+
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -65,7 +63,7 @@ public class TransferCP extends BaseTest {
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-		supplyConsolePage.enterTransferDosages("10");
+		ContainerTransferForm.enterTransferDosages(driver, "10");
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
@@ -287,7 +285,7 @@ public class TransferCP extends BaseTest {
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 		System.out.println("/*12.----Entering 10 Doses in the Container-Transfer Form --*/");
-		supplyConsolePage.enterTransferDosages("10");
+		ContainerTransferForm.enterTransferDosages(driver, "10");
 		System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 		System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");

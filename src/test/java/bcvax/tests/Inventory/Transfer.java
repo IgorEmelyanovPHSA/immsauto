@@ -1,6 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerTransferForm;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -65,7 +66,7 @@ public class Transfer extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages("10");
+        ContainerTransferForm.enterTransferDosages(driver, "10");
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
@@ -168,7 +169,7 @@ public class Transfer extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Quantity in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferQuantity(Integer.toString(quantity));
+        ContainerTransferForm.enterTransferQuantity(driver, Integer.toString(quantity));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
         Thread.sleep(1000);
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
@@ -279,7 +280,7 @@ public class Transfer extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         System.out.println("/*12.----Entering 10 Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages("10");
+        ContainerTransferForm.enterTransferDosages(driver, "10");
         System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
         System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
@@ -355,7 +356,7 @@ public class Transfer extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         System.out.println("/*12.----Entering 10 Quantity in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferQuantity(Integer.toString(quantity));
+        ContainerTransferForm.enterTransferQuantity(driver, Integer.toString(quantity));
         System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
         System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
@@ -406,8 +407,6 @@ public class Transfer extends BaseTest {
         }
         supplyConsolePage = new SupplyConsolePage(driver);
 
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
         log("/*4.----Go to Supply Locations Tab --*/");

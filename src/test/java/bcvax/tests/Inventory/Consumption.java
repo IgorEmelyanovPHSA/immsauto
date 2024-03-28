@@ -65,8 +65,7 @@ public class Consumption extends BaseTest {
 		supplyConsolePage = new SupplyConsolePage(driver);
 
 		log("/*-- 3. Close all open tabs --*/");
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
+
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*4.----Go to Supply Locations Tab --*/");

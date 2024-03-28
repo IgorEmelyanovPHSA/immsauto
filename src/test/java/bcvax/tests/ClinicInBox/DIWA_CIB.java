@@ -105,11 +105,11 @@ public class DIWA_CIB extends BaseTest {
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
 
 		try {
-			DiwaImmunizationRecord.selectProvider(driver, consentProvider);
+			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		} catch(Exception ex) {
 			DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 			Thread.sleep(500);
-			DiwaImmunizationRecord.selectProvider(driver, consentProvider);
+			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		}
 
 		log("/*---18. Click Show all lot numbers Checkbox ---*/");

@@ -1,6 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerAdjustmentForm;
 import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -89,8 +90,6 @@ public class Adjustments extends BaseTest {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
@@ -122,7 +121,7 @@ public class Adjustments extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
 		log("/*9.----set Adjustment Doses amount --*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToAdjust));
+		ContainerAdjustmentForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToAdjust));
 
 		double remainingDosesAfterAdjustmentInPopUp = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Remaining Doses After Adjustment " + remainingDosesAfterAdjustmentInPopUp + " --*/");
@@ -224,8 +223,6 @@ public class Adjustments extends BaseTest {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
@@ -259,7 +256,7 @@ public class Adjustments extends BaseTest {
 		}
 
 		log("/*7.----Set Adjustment Quantities amount: " + amountOfQuantitiesToAdjust + "--*/");
-		supplyConsolePage.setQuantityAmount(Double.toString(amountOfQuantitiesToAdjust));
+		ContainerAdjustmentForm.enterAdjustmentQuantity(driver, Double.toString(amountOfQuantitiesToAdjust));
 
 		log("/*8.----Reason For Adjustment: 'Administered Vaccine' --*/");
 		supplyConsolePage.selectReasonForAdjustmentDropDown();

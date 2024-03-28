@@ -1,6 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerWastageForm;
 import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
@@ -57,9 +58,6 @@ public class Wastage extends BaseTest {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
 
@@ -91,7 +89,7 @@ public class Wastage extends BaseTest {
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 		
 		log("/*7.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
+		ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToWaste));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
 		
@@ -182,9 +180,6 @@ public class Wastage extends BaseTest {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-
 		log("/*3.----Close All previously opened Tab's --*/");
 		supplyConsolePage.closeTabsHCA();
 
@@ -216,7 +211,7 @@ public class Wastage extends BaseTest {
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 
 		log("/*7.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
-		supplyConsolePage.setQuantityAmount(Double.toString(amountOfDosesToWaste / doseConversionFactorValue));
+		ContainerWastageForm.enterAdjustmentQuantity(driver, Double.toString(amountOfDosesToWaste / doseConversionFactorValue));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
 

@@ -1,5 +1,6 @@
 package bcvax.tests.Inventory;
 import Utilities.TestListener;
+import bcvax.pages.ContainerTransferForm;
 import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
@@ -70,8 +71,7 @@ public class Drafts extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         supplyConsolePage = new SupplyConsolePage(driver);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
 
@@ -117,7 +117,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*10.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*11.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -207,8 +207,7 @@ public class Drafts extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         supplyConsolePage = new SupplyConsolePage(driver);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
 
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
@@ -253,7 +252,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*10.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*11.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -344,9 +343,6 @@ public class Drafts extends BaseTest {
 
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
-
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
 
@@ -390,7 +386,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*11.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*12.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);;
@@ -471,8 +467,6 @@ public class Drafts extends BaseTest {
         }
 
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
 
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
@@ -516,7 +510,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*10.----Entering quantity in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferQuantity(String.valueOf(amountOfQuantityToAdjust));
+        ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(amountOfQuantityToAdjust));
 
         log("/*11.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);

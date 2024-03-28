@@ -174,7 +174,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 
-		boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
+		boolean record_consent_message_exists = DiwaImmunizationRecord.recordExistingConsentMessageExists(driver);
 		boolean confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
 
 

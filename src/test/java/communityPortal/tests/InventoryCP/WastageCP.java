@@ -1,6 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerWastageForm;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -55,7 +56,7 @@ public class WastageCP extends BaseTest {
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 
 		log("/*6.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
+		ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToWaste));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
 

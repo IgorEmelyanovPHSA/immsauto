@@ -115,7 +115,7 @@ public class DiwaImmunizationRecord extends BasePage {
     public static boolean recordConsentBtnIsActive(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
-        waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
+        waitForElementToBeLocated(driver, record_consent_btn_path, 10);
         WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
         return record_consent_btn.isEnabled();
     }
@@ -139,7 +139,7 @@ public class DiwaImmunizationRecord extends BasePage {
         return table;
     }
 
-    public static boolean recordConsentMessageExists(WebDriver driver) throws InterruptedException {
+    public static boolean recordExistingConsentMessageExists(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By record_consent_1_path = By.xpath("//lightning-formatted-text[text()='This Client has already provided Consent for the selected agent']");
         By record_consent_2_path = By.xpath("//lightning-formatted-text[text()='To record a new Consent, click the button below']");
@@ -152,6 +152,18 @@ public class DiwaImmunizationRecord extends BasePage {
         }
     }
 
+    public static boolean recordNewConsentMessageExists(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_1_path = By.xpath("//lightning-formatted-text[text()='This Client does not have active Consent for the selected Agent']");
+        By record_consent_2_path = By.xpath("//lightning-formatted-text[text()='Select the appropriate response below']");
+        try {
+            driver.findElement(record_consent_1_path);
+            driver.findElement(record_consent_2_path);
+            return true;
+        } catch(NotFoundException ex) {
+            return false;
+        }
+    }
     public static boolean confirmAndSaveButtonIsActive(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By confirm_and_save_btn_path = By.xpath("//button[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @title='Confirm & Save Administration']");
@@ -168,19 +180,76 @@ public class DiwaImmunizationRecord extends BasePage {
         confirm_and_save_btn.click();
     }
 
-    public static void selectProvider(WebDriver driver, String provider) throws InterruptedException {
-        By provider_input_field_path = By.xpath("//label[@c-bchcimmunizationinfo_bchcimmunizationinfo and text()='Provider']/..//input");
-        waitForElementToBeEnabled(driver, provider_input_field_path, 10);
-        WebElement provider_input_field = driver.findElement(provider_input_field_path);
-        provider_input_field.sendKeys(provider);
-        By my_provider_item_path = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
-        waitForElementToBeEnabled(driver, my_provider_item_path, 10);
-        WebElement my_provider_item = driver.findElement(my_provider_item_path);
-        my_provider_item.click();
+    public static void setProvider(WebDriver driver, String provider) throws InterruptedException {
+        Thread.sleep(500);
+        By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
+        waitForElementToBeEnabled(driver, providerFieldPath, 10);
+        WebElement providerField =  driver.findElement(providerFieldPath);
+        scrollCenter(driver, providerField);
+        providerField.sendKeys(provider);
+        By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
+        waitForElementToBeLocated(driver, providerItemPath, 10);
+        WebElement provider_item = driver.findElement(providerItemPath);
+        provider_item.click();
+    }
+
+    public static void setRoute(WebDriver driver, String route) throws InterruptedException {
+        driver.findElement(By.xpath("//label[text() = 'Route']/..//button")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//span[@title = '" + route + "'] ")).click();
+    }
+
+    public static void setSite(WebDriver driver, String site) throws InterruptedException {
+        WebElement siteBtn = driver.findElement(By.xpath("//label[text() = 'Site']/..//button"));
+        scrollCenter(driver, siteBtn);
+        siteBtn.click();
+        Thread.sleep(2000);
+        WebElement mySite = driver.findElement(By.xpath("//span[@title = '" + site + "']"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(false);", mySite );
+        mySite.click();
+    }
+
+    public static void setLotNumber(WebDriver driver, String lot) throws InterruptedException {
+        By lot_item_path = By.xpath("//li[contains(@title, '" + lot + "')]");
+        By lot_field_path = By.xpath("//span[text() = 'Lot Number']/..//input");
+        WebElement lotSearchInputField = driver.findElement(By.xpath("//span[text() = 'Lot Number']/..//input[@class = 'slds-input search-input-class']"));
+        if(!lotSearchInputField.isDisplayed()) {
+            waitForElementToBeEnabled(driver, lot_field_path, 10);
+            WebElement lot_field = driver.findElement(lot_field_path);
+            lot_field.click();
+        }
+        Thread.sleep(1000);
+        lotSearchInputField.sendKeys(lot);
+        Thread.sleep(1000);
+        waitForElementToBeEnabled(driver, lot_item_path, 10);
+        WebElement lot_item = driver.findElement(lot_item_path);
+        lot_item.click();
+    }
+
+    public static void setDosage(WebDriver driver, String dose) throws InterruptedException {
+        By dosage_field_path = By.xpath("//label[text() = 'Dosage']/..//button");
+        waitForElementToBeEnabled(driver, dosage_field_path, 10);
+        WebElement dosage_input_field = driver.findElement(dosage_field_path);
+        dosage_input_field.click();
+        Thread.sleep(500);
+        By my_dosage_path = By.xpath("//span[@title = '" + dose + "']");
+        waitForElementToBeEnabled(driver, my_dosage_path, 10);
+        WebElement my_dosage = driver.findElement(my_dosage_path);
+        my_dosage.click();
+    }
+
+    public static void clickShowAllLotNumbersCheckBox(WebDriver driver) throws InterruptedException {
+        By show_all_chkbox_path = By.xpath("//span[@part='label' and text()='Show all lot numbers.']/../..");
+        waitForElementToBeEnabled(driver, show_all_chkbox_path, 10);
+        WebElement show_all_lot_numbers_checkbox = driver.findElement(show_all_chkbox_path);
+        scrollIfNeeded(driver, show_all_lot_numbers_checkbox);
+        Thread.sleep(1000);
+        show_all_lot_numbers_checkbox.click();
     }
 
     public static void clickSaveImmunizationInfo(WebDriver driver) throws InterruptedException {
-        By save_btn_path = By.xpath("//c-bc-hc-immunization-info//button[text()='Save']");
+        Thread.sleep(500);
+        By save_btn_path = By.xpath("//c-bc-hc-immunization-info//button[text()='Save']/..");
         waitForElementToBeEnabled(driver, save_btn_path, 10);
         WebElement save_btn = driver.findElement(save_btn_path);
         scrollCenter(driver, save_btn);
@@ -234,7 +303,7 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static void checkExistingConsent(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By existing_consent_checkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']/../../../..");
+        By existing_consent_checkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']/../../../../..");
         waitForElementToBeEnabled(driver, existing_consent_checkbox_path, 10);
         WebElement existing_consent_checkbox = driver.findElement(existing_consent_checkbox_path);
         scrollCenter(driver, existing_consent_checkbox);
@@ -242,6 +311,31 @@ public class DiwaImmunizationRecord extends BasePage {
         if(existing_consent_checkbox.getAttribute("checked") == null) {
             WebElement chkbox = existing_consent_checkbox.findElement(By.xpath(".//span[@part='indicator']"));
             chkbox.click();
+        }
+    }
+
+    public static void uncheckExistingConsent(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By existing_consent_checkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']/../../../../..");
+        waitForElementToBeEnabled(driver, existing_consent_checkbox_path, 10);
+        WebElement existing_consent_checkbox = driver.findElement(existing_consent_checkbox_path);
+        scrollCenter(driver, existing_consent_checkbox);
+        Thread.sleep(500);
+        if(existing_consent_checkbox.getAttribute("checked") != null) {
+            WebElement chkbox = existing_consent_checkbox.findElement(By.xpath(".//span[@part='indicator']"));
+            chkbox.click();
+        }
+    }
+
+    public static boolean usePrviousConsentChkboxExists(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By previous_consent_chkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']");
+        try {
+            waitForElementToBeEnabled(driver, previous_consent_chkbox_path, 10);
+            driver.findElement(previous_consent_chkbox_path);
+            return true;
+        } catch(NotFoundException ex) {
+            return false;
         }
     }
 
@@ -253,5 +347,13 @@ public class DiwaImmunizationRecord extends BasePage {
         scrollIfNeeded(driver, edit_immunization_info_btn);
         Thread.sleep(500);
         edit_immunization_info_btn.click();
+    }
+
+    public static boolean getEditImmunizationInfoButtonDisabled(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By edit_immunization_info_btn_path = By.xpath("//c-bc-hc-immunization-info//button[@title='Edit']");
+        waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
+        WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
+        return Boolean.parseBoolean(edit_immunization_info_btn.getAttribute("aria-disabled"));
     }
 }
