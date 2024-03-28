@@ -57,7 +57,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 		Thread.sleep(2000);
 		supplyConsolePage.selectSupplyItemTo(lot);
-		supplyConsolePage.enterTransferDosages(String.valueOf(doses));
+		ContainerTransferForm.enterTransferDosages(driver, String.valueOf(doses));
 		supplyConsolePage.selectReasonForReception();
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 
@@ -123,7 +123,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		Thread.sleep(500);
 		supplyConsolePage.selectReasonForReception();
 		Thread.sleep(500);
-		supplyConsolePage.enterTransferQuantity(String.valueOf(qty));
+		ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(qty));
 		Thread.sleep(500);
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 		supplyConsolePage.transferToDistributionOnSend(distribution);

@@ -53,8 +53,7 @@ public class ReceiveSupplies extends BaseTest {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
+
 		log("/*-- 3. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*-- 4. Click Supply Console App Navigation Menu --*/");

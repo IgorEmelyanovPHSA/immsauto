@@ -45,7 +45,7 @@ public class Return_CP extends BaseTest {
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
         supplyConsolePage.clickSupplyItemTextBox();
         supplyConsolePage.selectSupplyItem(supply_item);
-        supplyConsolePage.enterTransferDosages(Double.toString(doses));
+        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
         supplyConsolePage.selectIncomingSupplyDistributionReceive();
         supplyConsolePage.selectReasonForReception();
@@ -57,7 +57,7 @@ public class Return_CP extends BaseTest {
         supplyConsolePage.selectWastageFromDropDown();
 
         log("/*f.----Add Doses and Reason for Wastage --*/");
-        supplyConsolePage.setDosesAmount(Double.toString(doses));
+        ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(doses));
         supplyConsolePage.selectReasonForWastageDropDown();
 
         log("/*g.----Click Wastage Button--*/");

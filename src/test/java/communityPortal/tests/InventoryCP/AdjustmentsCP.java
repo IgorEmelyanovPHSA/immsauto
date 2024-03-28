@@ -1,6 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerAdjustmentForm;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -79,7 +80,7 @@ public class AdjustmentsCP extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
 		log("/*6.----set Adjustment Doses amount --*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToAdjust));
+		ContainerAdjustmentForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToAdjust));
 
 		double remainingDosesAfterAdjustmentInPopUp = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Remaining Doses After Adjustment " + remainingDosesAfterAdjustmentInPopUp + " --*/");

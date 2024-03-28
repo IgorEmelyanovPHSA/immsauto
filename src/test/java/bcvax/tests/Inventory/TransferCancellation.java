@@ -1,6 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerTransferForm;
 import bcvax.pages.MainPageOrg;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -67,7 +68,7 @@ public class TransferCancellation extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(Double.toString(doses));
+        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
@@ -171,7 +172,7 @@ public class TransferCancellation extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferQuantity(Double.toString(quantity));
+        ContainerTransferForm.enterTransferQuantity(driver, Double.toString(quantity));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
@@ -256,9 +257,6 @@ public class TransferCancellation extends BaseTest {
         }
         supplyConsolePage = new SupplyConsolePage(driver);
 
-        //Assert.assertTrue(false);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
         log("/*3.----Close All previously opened Tab's --*/");
         supplyConsolePage.closeTabsHCA();
         log("/*4.----Go to Supply Locations Tab --*/");

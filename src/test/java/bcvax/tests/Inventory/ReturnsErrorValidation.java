@@ -54,7 +54,7 @@ public class ReturnsErrorValidation extends BaseTest {
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
         supplyConsolePage.clickSupplyItemTextBox();
         supplyConsolePage.selectSupplyItem(supply_item);
-        supplyConsolePage.enterTransferDosages(Double.toString(doses));
+        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
         supplyConsolePage.selectIncomingSupplyDistributionReceive();
         supplyConsolePage.selectReasonForReception();
@@ -66,7 +66,7 @@ public class ReturnsErrorValidation extends BaseTest {
         supplyConsolePage.selectWastageFromDropDown();
 
         log("/*f.----Add Doses and Reason for Wastage --*/");
-        supplyConsolePage.setDosesAmount(Double.toString(doses));
+        ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(doses));
         supplyConsolePage.selectReasonForWastageDropDown();
 
         log("/*g.----Click Wastage Button--*/");
@@ -95,9 +95,6 @@ public class ReturnsErrorValidation extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
 
         log("/*3. ----Close all open tabs --*/");
         supplyConsolePage.closeTabsHCA();

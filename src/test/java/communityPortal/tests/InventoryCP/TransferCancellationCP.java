@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
@@ -71,7 +68,7 @@ public class TransferCancellationCP extends BaseTest {
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-		supplyConsolePage.enterTransferDosages(Double.toString(doses));
+		ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");

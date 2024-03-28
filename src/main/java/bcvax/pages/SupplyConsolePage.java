@@ -509,7 +509,7 @@ public class SupplyConsolePage extends BasePage {
 		click(draftTransactionElement);
 		click(btnEditOnTrasactionPage);
 		Thread.sleep(2000);
-		setDosesAmount(String.valueOf(amountOfDosesToAdjustInDraftEdit));
+		ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjustInDraftEdit));
 		clickUsingJS(btnTransferDraftOnContainerTransferPage);
 		//click(btnTransferDraftOnContainerTransferPage);
 		Thread.sleep(2000);
@@ -709,28 +709,6 @@ public class SupplyConsolePage extends BasePage {
 		return (quantity);
 	}
 
-	@Step
-	public SupplyConsolePage enterTransferDosages(String doses) throws InterruptedException {
-		Thread.sleep(500);
-		By Doses = By.xpath("//lightning-input//label[text()='Doses']//following-sibling::div/input[@class='slds-input']");
-		waitForElementToBePresent(driver, Doses,10);
-		moveToElement(driver.findElement(Doses));
-		click(Doses);
-		type(doses, Doses);
-		return this;
-
-	}
-
-	public SupplyConsolePage enterTransferQuantity(String quantity) throws InterruptedException {
-		By quantity_path = By.xpath("//lightning-input//label[text()='Quantity']//following-sibling::div/input[@class='slds-input']");
-		waitForElementToBePresent(driver, quantity_path,10);
-		WebElement quantity_field = driver.findElement(quantity_path);
-		scrollCenter(quantity_field);
-		quantity_field.click();
-		quantity_field.sendKeys(quantity);
-		return this;
-	}
-
 	public double getActualRemainingDoses() throws InterruptedException {
 		Thread.sleep(500);
 		By actual_remaining_doses_path = By.xpath("//input[@name='HC_Remaining_Measures__c']");
@@ -739,20 +717,6 @@ public class SupplyConsolePage extends BasePage {
 		String value = getValue(actualRemainingDoses);
 		Double actualDosage = Double.parseDouble(value.replaceAll(",", ""));
 		return actualDosage;
-	}
-
-	public void setDosesAmount(String value) {
-		typeIn(dosesText, value);
-	}
-
-	public void setQuantityAmount(String quantity) throws InterruptedException {
-		By quantity_field_path = By.xpath("//label[(text()='Quantity')]/..//input[@type='text']");
-		waitForElementToBeEnabled(driver, quantity_field_path, 10);
-		WebElement quantity_field = driver.findElement(quantity_field_path);
-		quantity_field.clear();
-		Thread.sleep(500);
-		quantity_field.sendKeys(quantity);
-		Thread.sleep(2000);
 	}
 
 	public double getDoseConversionFactor() {

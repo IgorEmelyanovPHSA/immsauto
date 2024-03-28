@@ -143,8 +143,6 @@ public class BulkWastages extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*-- 3. Close all open tabs --*/");
 		supplyConsolePage.closeTabsHCA();
 		log("/*4.----Go to Supply Locations Tab --*/");

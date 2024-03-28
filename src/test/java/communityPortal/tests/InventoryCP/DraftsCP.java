@@ -1,6 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerTransferForm;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -78,7 +79,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.selectTransferFromDropDown();
 
         log("/*9.----Entering Doses amount, select supply location and Save as Draft -*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
         supplyConsolePage.draftToDistributionWithinSameClinic(supply_location_from, distribution_to_same_clinic);
 
         log("/*10.----Go to Transactions Tab of Automation Supply Location_1 --*/");
@@ -174,7 +175,7 @@ public class DraftsCP extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -292,7 +293,7 @@ public class DraftsCP extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);

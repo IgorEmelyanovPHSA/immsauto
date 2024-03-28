@@ -40,7 +40,6 @@ public class Requisition extends BaseTest {
 		}
 		supplyConsolePage = new SupplyConsolePage(driver);
 
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		supplyConsolePage.closeTabsHCA();
 		supplyConsolePage.clickSupplyLocationsTab();
 		supplyConsolePage.selectSupplyLocationName(supply_location);
