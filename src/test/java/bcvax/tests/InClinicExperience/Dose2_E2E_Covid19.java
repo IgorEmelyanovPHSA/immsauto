@@ -425,7 +425,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			System.out.println("No Checkbox. Continue...");
 		}
 		try {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}

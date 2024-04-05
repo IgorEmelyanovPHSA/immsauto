@@ -2,19 +2,13 @@ package communityPortal.tests.VaccineAdministration_CP;
 
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import constansts.Apps;
-import java.lang.Math;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Locale;
-
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.util.Map;
+import java.util.List;
+import org.openqa.selenium.WebElement;
 
-public class Check_In_Client_CP extends BaseTest {
+public class CheckInBetterManagement_CP extends BaseTest {
     String env;
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
@@ -24,14 +18,10 @@ public class Check_In_Client_CP extends BaseTest {
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    @BeforeMethod
-    public void setUpClass() throws Exception {
-        env = Utils.getTargetEnvironment();
-        log("Target Environment: " + env);
-    }
+
     @Test(priority = 1)
-    public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
+    public void verifyCheckInAvoidMultipleImmunizationRecords_CP() throws Exception {
+        TestcaseID = "273420";
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
@@ -47,7 +37,7 @@ public class Check_In_Client_CP extends BaseTest {
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
-        Thread.sleep(7000);
+
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
         InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
@@ -80,45 +70,41 @@ public class Check_In_Client_CP extends BaseTest {
         CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         log("/*21.--toast success message - 'Success' --*/");
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        PersonAccountPage.goToRelatedTab(driver);
+        List<Map<String, WebElement>> immunization_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
+        //Verify No Immunization records in Related Tab (Table has only Headers
+        Assert.assertEquals(immunization_records.size(), 1);
 
-        try {
-            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-        } catch(Exception ex) {
-            System.out.println("Warning dialog didn't appear");
-        }
+        //Book the Appointment for Influenza
+        PersonAccountPage.goToVaccineScheduleTab(driver);
+        log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "InfluenzaVaccine");
 
-        Thread.sleep(1000);
+        log("/*25----select 'Search by Clinic name' tab --*/");
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
-        log("/*22.--Check if check-in button available --*/");
-        assertTrue(inClinicExperience_CP.checkInButtonAvailable());
-        //Get Date/Time of Check-In
-        LocalDateTime currentTime = LocalDateTime.now();
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
-        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm a", Locale.US);
-        String expectedDate = df.format(currentTime).replace(".", "");
-        String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
-        log("/*23.--Click check-in button --*/");
-        PersonAccountPage.clickCheckInButton(driver);
-        log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
-        String currentTab = inClinicExperience_CP.getCurrentTab();
-        assertEquals(currentTab, "Identification");
-        log("/*25.--Get new appointment location, date and time --*/");
-        String appointmentDate = inClinicExperience_CP.getAppointmentDate();
-        String appointmentTime = inClinicExperience_CP.getAppointmentTime();
-        String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
+        log("/*27----click on Option Facility location  --*/");
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
-        LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
-        assertEquals(appointmentDate, expectedDate);
-        //Verify the time difference between expect and actual appointment time is less than 2 minutes
-        assertTrue(Math.abs(appointmentTimeActual.getMinute() - currentTime.toLocalTime().getMinute()) <= 2, "Expected Time:" + currentTime.toLocalTime() + "; Actual Time: " + appointmentTime);
-        assertEquals(appointmentLocation, clinicNameToSearch);
-        System.out.println("Here");
-    }
+        log("/*28----select Active booking appointment day  --*/");
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        log("/*29----select the time slot  --*/");
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+
+        log("/*30----click Next button  --*/");
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
+        log("/*31----click Verify Contact Information Checkbox  --*/");
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+
+        log("/*32----click Confirm Appointment button  --*/");
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
+
+        log("/*33. ----see 'Appointment confirmed!' screen --*/");
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
+        Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+
     }
 }

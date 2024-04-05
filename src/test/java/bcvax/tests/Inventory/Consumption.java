@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -130,7 +131,6 @@ public class Consumption extends BaseTest {
 		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
-		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
 //		try {
 //			PersonAccountPage.selectEarlyBookingReason(driver);
@@ -219,7 +219,7 @@ public class Consumption extends BaseTest {
 		}
 
 		try {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}
@@ -227,7 +227,13 @@ public class Consumption extends BaseTest {
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
 
 
-		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		String provider = null;
+		try {
+			provider = InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
+			provider = InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		}
 		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
 		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
 		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);

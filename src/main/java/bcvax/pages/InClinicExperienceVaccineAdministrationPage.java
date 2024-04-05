@@ -131,4 +131,14 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         WebElement my_dosage = driver.findElement(my_dosage_path);
         my_dosage.click();
     }
+
+    public static void clickEditImmunizationInformation(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By edit_immunization_info_btn_path = By.xpath("//c-bc-hc-immunization-info//button[@title='Edit']");
+        waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
+        WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
+        scrollIfNeeded(driver, edit_immunization_info_btn);
+        Thread.sleep(500);
+        edit_immunization_info_btn.click();
+    }
 }

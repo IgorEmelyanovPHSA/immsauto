@@ -196,7 +196,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		}
 
 		try {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}

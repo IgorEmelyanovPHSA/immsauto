@@ -54,7 +54,6 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
 		orgMainPage.globalSearch(participant_name);
 		log("/*----5. select Citizen from search results --*/");
-		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
@@ -77,8 +76,11 @@ public class DIWA_CIB extends BaseTest {
 		DiwaImmunizationRecord.clickRecordImmunization(driver);
 		Thread.sleep(2000);
 
-		if (profilesPage.clickPopupYesButtonIfDisplayed())
-			log("/*---13.1. Pop up window is displayed and clicked  ---*/");
+		try {
+			DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+		} catch(Exception ex) {
+			;
+		}
 		log("/*---12. Click X button on Diwa flow ---*/");
 		//If Incorrect vaccine warning is displayed
 		try {
@@ -86,24 +88,13 @@ public class DIWA_CIB extends BaseTest {
 		} catch(Exception ex) {
 			System.out.println("No Warning found");
 		}
-		profilesPage.clickToClose();
-
-		log("/*---13. Validate message on clicking close button on modal popup ---*/");
-		profilesPage.validateoopsMessage();
-		log("/*---14. click on continue editing button to continue with the flow ---*/");
-		profilesPage.ContinueEditingButton();
-		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
-
 		try {
 			DiwaImmunizationRecord.checkExistingConsent(driver);
 		} catch(Exception ex) {
 			System.out.println("No Checkbox. Continue...");
 		}
 
-
-
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
-
 		try {
 			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		} catch(Exception ex) {
@@ -113,29 +104,23 @@ public class DIWA_CIB extends BaseTest {
 		}
 
 		log("/*---18. Click Show all lot numbers Checkbox ---*/");
-		profilesPage.clickShowAllLotNumbersCheckBox();
-
-		log("/*---19. click Lot Number DropDown component ---*/");
-		profilesPage.clickLotNumberDropDown();
+		DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
 		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> 300042698 - Exp. 2021 June 18 ---*/");
-		profilesPage.selectLot();
+		DiwaImmunizationRecord.setLotNumber(driver, "300042698 - Exp. 2021 June 18");
 		//profilesPage.setRoute(consumptionRoute);
 		log("/*---21. Select Injection Site ---*/");
-		profilesPage.selectInjectionSite();
+		DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
+		DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 		log("/*---22. Select Dosage---*/");
-		profilesPage.selectDosage();
+		DiwaImmunizationRecord.setDosage(driver, "0.5");
 		log("/*---23. Save Immunization Information ---*/");
-		profilesPage.saveImmunizationInformation();
-
-		//Click Ok if the lot is expired
-		profilesPage.expiredVaxHandler();
-		///////
+		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
 
 		log("/*---24. Confirm and Save Administration ---*/");
-		profilesPage.confirmAndSaveAdministration();
+		DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
-		profilesPage.summaryConfirmAndSave();
+		DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
 	}

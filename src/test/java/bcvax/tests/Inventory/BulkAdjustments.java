@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,6 +98,13 @@ public class BulkAdjustments extends BaseTest {
 
 		//Remaining Doses and Quantity count // 3 rows, ref step7 containers count
 		log("/*8.----Read Remaining Doses And Quantity Before Deduction --*/");
+		List<String> my_conts = new ArrayList<>();
+		for(Map<String, Map<String, String>> cont: my_containers) {
+			for(String my_key: cont.keySet()) {
+				my_conts.add(my_key);
+			}
+		}
+
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*9.----Click on bulk Adjustment button on Supply page--*/");
@@ -111,7 +119,8 @@ public class BulkAdjustments extends BaseTest {
 		Thread.sleep(2000);
 		driver.navigate().refresh();
 		Thread.sleep(2000);
-		
+
+		//Map<String, Map<String, String>> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoses(driver, my_conts);
 		log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		

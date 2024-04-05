@@ -56,7 +56,7 @@ public class CitizenPrimaryInfo extends BasePage {
         By next_btn_path = By.xpath("//button[@title='Next']");
         waitForElementToBeEnabled(driver, next_btn_path, 10);
         WebElement next_btn = driver.findElement(next_btn_path);
-        scrollIfNeeded(driver, next_btn);
+        scrollCenter(driver, next_btn);
         Thread.sleep(500);
         next_btn.click();
     }
