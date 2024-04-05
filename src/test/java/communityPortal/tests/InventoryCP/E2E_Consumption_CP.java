@@ -187,7 +187,7 @@ public class E2E_Consumption_CP extends BaseTest {
         }
 
         try {
-            ProfilesPage.clickEditImmunizationInformation(driver);
+            InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
         } catch(Exception ex) {
             System.out.println("Edit Button disabled. Continue...");
         }

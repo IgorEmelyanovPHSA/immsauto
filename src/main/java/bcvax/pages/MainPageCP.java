@@ -16,15 +16,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class MainPageCP extends BasePage{
-    @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
-    private WebElement tabRelatedItems;
-
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
-    private WebElement searchAssistant;
-
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
-    private WebElement searchInput;
-
     @FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
     private WebElement search_location_field;
 
@@ -57,17 +48,6 @@ public class MainPageCP extends BasePage{
         By supply_location_header_path = By.xpath("//lst-breadcrumbs//span[text()='Supply Locations']");
         waitForElementToBeEnabled(driver, supply_location_header_path, 10);
         return new SupplyConsolePage(driver);
-    }
-
-
-    public ProfilesPage globalSearch_CP(String textToSearch) throws InterruptedException {
-        waitForElementToBeVisible(driver, searchAssistant, 10);
-        click(searchAssistant);
-        waitForElementToBeVisible(driver, searchInput, 10);
-        typeIn(searchInput,textToSearch);
-        searchInput.sendKeys(Keys.RETURN);
-        Thread.sleep(5000);
-        return new ProfilesPage(driver);
     }
 
     @Step
@@ -164,15 +144,23 @@ public class MainPageCP extends BasePage{
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
         By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
-        try {
-            waitForElementToBeEnabled(driver, table_path, 10);
-        } catch(Exception ex) {
-            search_field = driver.findElement(search_field_path);
-            search_field.sendKeys(criteria);
-            Thread.sleep(500);
-            search_field.sendKeys(Keys.ENTER);
-            Thread.sleep(500);
-            waitForElementToBeEnabled(driver, table_path, 10);
+        int attempt = 0;
+        while(attempt < 10) {
+            try {
+                waitForElementToBeEnabled(driver, table_path, 10);
+                break;
+            } catch (Exception ex) {
+                System.out.println("-------------");
+                System.out.println("Search Attempt #" + attempt);
+                System.out.println("-------------");
+                search_field = driver.findElement(search_field_path);
+                search_field.sendKeys(criteria);
+                Thread.sleep(500);
+                search_field.sendKeys(Keys.ENTER);
+                Thread.sleep(500);
+                waitForElementToBeEnabled(driver, table_path, 10);
+                attempt++;
+            }
         }
         WebElement found_client_table_node = driver.findElement(table_path);
 
@@ -181,6 +169,9 @@ public class MainPageCP extends BasePage{
         int row_count = my_records.size();
         int loop_count = 0;
         while(row_count < 2) {
+            System.out.println("-----------");
+            System.out.println("Found Client rows: " + row_count);
+            System.out.println("-----------");
             Thread.sleep(1000);
             my_records = found_client_table.getRowsMappedToHeadings();
             row_count = my_records.size();
@@ -215,6 +206,14 @@ public class MainPageCP extends BasePage{
         By logout_link_path = By.xpath("//community_user-user-profile-menu//span[@title='Log Out']/..");
         waitForElementToBeEnabled(driver, logout_link_path, 10);
         WebElement logout_link = driver.findElement(logout_link_path);
-        logout_link.click();
+        try {
+            logout_link.click();
+        } catch(ElementNotInteractableException ex) {
+            profile_menu_button.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, logout_link_path, 10);
+            logout_link = driver.findElement(logout_link_path);
+            logout_link.click();
+        }
     }
 }

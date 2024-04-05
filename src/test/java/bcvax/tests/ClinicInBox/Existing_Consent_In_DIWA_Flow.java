@@ -28,8 +28,8 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     String participant_name;
     String consentProvider;
     String agent = "COVID-19 mRNA";
-    private String lot_to_select = "0486AA-CC01";
-    private String dosage_to_select = "0.5";
+    private String lot_to_select;
+    private String dosage_to_select;
     String clinic_location = "All Ages - Atlin Health Centre";
     MainPageOrg orgMainPage;
 
@@ -39,6 +39,8 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         consentProvider = String.valueOf(testData.get("consentProvider"));
+        dosage_to_select = String.valueOf(testData.get("covidDose"));
+        lot_to_select = String.valueOf(testData.get("covidLot"));
         log("Target Environment: "+ env);
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personal_health_number);
         log("/*----1. Login as an DIWA to CIB  --*/");
@@ -56,7 +58,6 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         log("/*----4. Search for Participant account: " +participant_name +" ---*/");
         orgMainPage.globalSearch(participant_name);
         log("/*----5. select Citizen from search results --*/");
-        ProfilesPage profilesPage = new ProfilesPage(driver);
 
         log("/*----6. Navigated to Person Account related tab ---*/");
         try {
@@ -98,10 +99,9 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         Assert.assertFalse(confirm_and_save_btn_enabled, "Confirm and Save button is erroneously Active");
 
         DiwaImmunizationRecord.setProvider(driver, consentProvider);
-        profilesPage.clickShowAllLotNumbersCheckBox();
-        profilesPage.clickLotNumberDropDown();
-        profilesPage.selectLot();
-        profilesPage.selectDosage();
+        DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
+        DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
+        DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
         DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
         Thread.sleep(1000);
 

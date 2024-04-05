@@ -301,6 +301,13 @@ public class DiwaImmunizationRecord extends BasePage {
         cancel_and_close_btn.click();
     }
 
+    public static void clickOopsContinueEditingAndSave(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By continue_editing_and_save_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']//button[text()='Continue Editing and Save']");
+        waitForElementToBeEnabled(driver, continue_editing_and_save_btn_path, 10);
+        WebElement continue_editing_and_save_btn = driver.findElement(continue_editing_and_save_btn_path);
+        continue_editing_and_save_btn.click();
+    }
     public static void checkExistingConsent(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By existing_consent_checkbox_path = By.xpath("//span[@part='label' and text()='Consent Previously Obtained (per BCCDC Standard)']/../../../../..");
@@ -355,5 +362,13 @@ public class DiwaImmunizationRecord extends BasePage {
         waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
         WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
         return Boolean.parseBoolean(edit_immunization_info_btn.getAttribute("aria-disabled"));
+    }
+
+    public static void clickPotentialDuplicateYes(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By cancel_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']/footer//button[text()='Yes']");
+        waitForElementToBeEnabled(driver, cancel_btn_path, 20);
+        WebElement cnncel_btn = driver.findElement(cancel_btn_path);
+        cnncel_btn.click();
     }
 }

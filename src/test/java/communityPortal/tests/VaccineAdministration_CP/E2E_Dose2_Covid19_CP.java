@@ -192,7 +192,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         }
 
         try {
-            ProfilesPage.clickEditImmunizationInformation(driver);
+            InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
         } catch(Exception ex) {
             System.out.println("Edit Button disabled. Continue...");
         }

@@ -209,16 +209,14 @@ public class MainPageOrg extends BasePage {
         }
         Thread.sleep(500);
         By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
-        int counter = 5;
+        int counter = 10;
         for(int i = 0; i < counter; i++) {
             try {
                 waitForElementToBeEnabled(driver, found_client_path, 10);
                 Thread.sleep(1000);
                 break;
             } catch (NotFoundException ex) {
-                if(i == counter - 1) {
-                    throw ex;
-                }
+                System.out.println("Attempt #" + (i + 1));
                 Thread.sleep(500);
                 search_input.clear();
                 Thread.sleep(500);

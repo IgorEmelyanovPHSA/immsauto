@@ -3,20 +3,17 @@ package communityPortal.tests.DIWA_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import constansts.Apps;
-import junit.framework.AssertionFailedError;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 
 @Listeners({TestListener.class})
-public class ExistingConsentInDIWAFlow_CP extends BaseTest {
+public class E2EConsentInDIWAFlow_CP extends BaseTest {
     String env;
     String consumptionRoute;
     Map<String, Object> testData;
@@ -64,10 +61,7 @@ public class ExistingConsentInDIWAFlow_CP extends BaseTest {
         loginPage.loginIntoCommunityPortalAsClinician();
         MainPageCP cpMainPage = new MainPageCP(driver);
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        ProfilesPage profilesPage = cpMainPage.globalSearch_CP(participant_name);
-
-        log("/*----3. select Citizen Participant acc from search results --*/");
-        profilesPage.selectCitizenParticipantAcc(participant_name);
+        cpMainPage.search(participant_name);
 
         log("/*----6. Navigated to Person Account related tab ---*/");
         try {
@@ -199,8 +193,10 @@ public class ExistingConsentInDIWAFlow_CP extends BaseTest {
         boolean recordConsentBtnActive = DiwaImmunizationRecord.recordConsentBtnIsActive(driver);
         Assert.assertTrue(recordConsentBtnActive, "Record Consent Button is not Enabled");
 
+
         boolean use_previous_consent = DiwaImmunizationRecord.usePrviousConsentChkboxExists(driver);
         Assert.assertTrue(use_previous_consent, "Use Previous Consent checkbox is not Displayed");
+
 
         boolean record_new_consent_msg_exists = DiwaImmunizationRecord.recordNewConsentMessageExists(driver);
         Assert.assertTrue(record_new_consent_msg_exists, "New Consent Message is not Displayed");

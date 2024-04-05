@@ -60,16 +60,20 @@ public class SupplyLocationRelatedItems extends BasePage {
         return my_container_rec;
     }
 
-    public static Map<String, Map<String, String>> getSupplyContainerDoses(WebDriver driver, Set<String> containers) throws InterruptedException {
+    public static Map<String, Map<String, String>> getSupplyContainerDoses(WebDriver driver, List<String> containers) throws InterruptedException {
         Thread.sleep(500);
         Map<String, Map<String, String>> my_container_rec = new HashMap<>();
         By supply_container_table_path = By.xpath("//lightning-datatable[@c-hccrossobjectrelationrecordslist_hccrossobjectrelationrecordslist]");
         waitForElementToBeEnabled(driver, supply_container_table_path, 10);
         WebElement supply_container_table_node = driver.findElement(supply_container_table_path);
         GenericTable supply_container_table = new GenericTable(supply_container_table_node);
+        if(supply_container_table.getRows().size() < 2) {
+            Thread.sleep(2000);
+            supply_container_table = new GenericTable(supply_container_table_node);
+        }
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
         for(Map<String, WebElement> my_record: my_records) {
-            if(containers.contains(my_record.keySet().toString())) {
+            if(containers.contains(my_record.get("Supply Container Name").getText())) {
                 String my_container_name = my_record.get("Supply Container Name").getText();
                 String my_dose = my_record.get("Remaining Doses").getText();
                 String my_quantity = my_record.get("Remaining Quantity").getText();

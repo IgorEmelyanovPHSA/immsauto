@@ -95,7 +95,6 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
 		log("/*----5. select Citizen from search results --*/");
-		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
