@@ -171,11 +171,61 @@ public class LoginPage extends BasePage {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//HEALTH GATEWAY
+
+	@FindBy(xpath = "//button[@value='BC_Services_Card_Login']")
+	private WebElement btnLoginWithBCServiceCard;
+
+	//Next screen //BC Services Card Login
+	@FindBy(xpath = "//h2[text() = 'Test with username and password']")
+	private WebElement btnTestWithUserNameAndPassword;
+
+	//Next screen //BC Services Card Login page2 USER/PASSWORD
+	@FindBy(xpath = "//input[@id='username']")
+	private WebElement emailOrUsernameId;  ///Work from here
+
+	@FindBy(xpath = "//input[@id='password']")
+	private WebElement passwordId;
+
+	@FindBy(xpath = "//button[text() = 'Continue']")
+	private WebElement btnContinue;
+
 	public MainPageHealthGateway openHealthGatewayPortal() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		return new MainPageHealthGateway(driver);
 	}
 
+	public void enterCredentialsForHGPortalAs(String user, String pass) throws Exception {
+		click(btnTestWithUserNameAndPassword);
+		Thread.sleep(1000);
+		typeIn(emailOrUsernameId, Utils.getEnvConfigProperty(user));
+		typeIn(passwordId, Utils.getEnvConfigProperty(pass));
+		Thread.sleep(500);
+		click(btnContinue);
+	}
 
+	public MainPageHealthGateway loginIntoHGWithBCServiceCardAsUser11() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(4000);
+		click(btnLoginWithBCServiceCard);
+		Thread.sleep(3000);
+		enterCredentialsForHGPortalAs("user_HTHGTWY11","password_HTHGTWY11_PW");
+		Thread.sleep(3000);
+		return new MainPageHealthGateway(driver);
+	}
+
+//	private void loginWithBCServiceCard() throws InterruptedException {
+//		String userName = "HTHGTWY11";
+//		String password = "00098911";
+//
+//		click(btnLoginWithBCServiceCard);
+//		Thread.sleep(3000);
+//		click(btnTestWithUserNameAndPassword);
+//		Thread.sleep(1000);
+//		typeIn(emailOrUsernameId, userName);
+//		typeIn(passwordId, password);
+//		Thread.sleep(500);
+//
+//		click(btnContinue);
+//	}
 
 }
