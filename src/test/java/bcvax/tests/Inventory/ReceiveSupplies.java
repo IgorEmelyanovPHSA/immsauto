@@ -55,7 +55,7 @@ public class ReceiveSupplies extends BaseTest {
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
 		log("/*-- 3. Close all open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 4. Click Supply Console App Navigation Menu --*/");
 		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
@@ -74,7 +74,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
 
 		log("/*-- 8. Close all open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 9. Click Supply Console App Navigation Menu --*/");
 		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
 

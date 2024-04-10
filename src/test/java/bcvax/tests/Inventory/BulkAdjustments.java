@@ -72,7 +72,7 @@ public class BulkAdjustments extends BaseTest {
 		}
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -193,7 +193,7 @@ public class BulkAdjustments extends BaseTest {
 		}
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		supplyConsolePage.selectSupplyLocationName(supply_location_from);

@@ -54,10 +54,6 @@ public class LoginPage extends BasePage {
 		return new SupplyConsolePage(driver);
 	}
 
-	public Tables getTables(){
-		return new Tables(driver);
-	}
-
 	public CallCenterConsolePage loginAsCalCenterAgentCC() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT"));

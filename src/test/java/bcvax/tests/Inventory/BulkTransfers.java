@@ -151,7 +151,7 @@ public class BulkTransfers extends BaseTest {
 //		supplyConsolePage.clickOnOutgoingTransactions(kk);
 //		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
@@ -233,7 +233,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
 	//@Test(priority = 2)
@@ -328,7 +328,7 @@ public class BulkTransfers extends BaseTest {
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		log("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
@@ -409,7 +409,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
 				Double.parseDouble(df.format(remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity)));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
 	@Test(priority = 3)
@@ -553,7 +553,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
 	public void precondition() throws Exception {
@@ -566,7 +566,7 @@ public class BulkTransfers extends BaseTest {
 		supplyConsolePage = new SupplyConsolePage(driver);
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 

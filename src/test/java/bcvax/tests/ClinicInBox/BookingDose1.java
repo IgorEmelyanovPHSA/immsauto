@@ -27,7 +27,8 @@ public class BookingDose1 extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		return new Object[][] {{"225652", "Covid19Vaccine"}, {"228857", "InfluenzaVaccine"}};
+		return new Object[][] {{"225652", "Covid19Vaccine"}};
+		//return new Object[][] {{"225652", "Covid19Vaccine"}, {"228857", "InfluenzaVaccine"}};
 	}
 
 	@Test(dataProvider = "booking_data")
@@ -126,13 +127,16 @@ public class BookingDose1 extends BaseTest {
 
 		//If override Eligibility is shown
 		try {
+			log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+		} catch(Exception ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		}
-		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");

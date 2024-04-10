@@ -43,7 +43,7 @@ public class Returns extends BaseTest {
         }
         //Get Flu supplies using Receive Supplies feature
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
         supplyConsolePage.selectSupplyLocationFromDropdown();
         supplyConsolePage.selectSupplyLocationName(supply_location_from);
@@ -98,7 +98,7 @@ public class Returns extends BaseTest {
 
 
         log("/*3. ----Close all open tabs --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
         supplyConsolePage.clickSupplyConsoleAppNavigationMenu();

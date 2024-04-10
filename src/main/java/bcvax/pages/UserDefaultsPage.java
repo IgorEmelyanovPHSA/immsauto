@@ -117,18 +117,6 @@ public class UserDefaultsPage extends BasePage{
         return flag;
     }
 
-    public static void validateSuccessfullyUpdatedMsg(WebDriver driver) throws InterruptedException {
-        if (!isToastMessageDisplayed(driver)) {
-            throw new RuntimeException("NOT DISPLAYED: User Defaults Successfully Updated");
-        }
-        for (int i = 0; i < 10; i++) {
-            if(isToastMessageDisplayed(driver)) {
-                Thread.sleep(500);
-            }
-        }
-            log("User Defaults Successfully Updated message displayed");
-    }
-
     public static boolean isAnyLotsPresent(WebDriver driver) {
         boolean flag = false;
         List countOfFoundLot = driver.findElements(By.xpath("//button[@name='DeleteLot']"));

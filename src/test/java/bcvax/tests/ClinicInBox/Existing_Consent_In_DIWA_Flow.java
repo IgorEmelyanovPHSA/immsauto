@@ -27,7 +27,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     private String postal_code = "V2X9T1";
     String participant_name;
     String consentProvider;
-    String agent = "COVID-19 mRNA";
+    String agent;
     private String lot_to_select;
     private String dosage_to_select;
     String clinic_location = "All Ages - Atlin Health Centre";
@@ -40,6 +40,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         testData = Utils.getTestData(env);
         consentProvider = String.valueOf(testData.get("consentProvider"));
         dosage_to_select = String.valueOf(testData.get("covidDose"));
+        agent = String.valueOf(testData.get("vaccineAgent"));
         lot_to_select = String.valueOf(testData.get("covidLot"));
         log("Target Environment: "+ env);
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personal_health_number);

@@ -106,21 +106,11 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
-        //If override Eligibility is shown
-//        try {
-//            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-//            PersonAccountSchedulePage.overrideEligibility(driver);
-//        } catch(Exception ex) {
-//            System.out.println("There is not Override Eligibility Option");
-//        }
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 
         try {
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-        } catch(NotFoundException ex) {
-            PersonAccountSchedulePage.overrideEligibility(driver);
-            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-        } catch(ElementClickInterceptedException ex) {
+        } catch(Exception ex) {
             PersonAccountSchedulePage.overrideEligibility(driver);
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }

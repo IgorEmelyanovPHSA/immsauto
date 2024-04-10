@@ -73,7 +73,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage = new SupplyConsolePage(driver);
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
@@ -210,7 +210,7 @@ public class Drafts extends BaseTest {
 
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
@@ -344,7 +344,7 @@ public class Drafts extends BaseTest {
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
@@ -469,7 +469,7 @@ public class Drafts extends BaseTest {
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();

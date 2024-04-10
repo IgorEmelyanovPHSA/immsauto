@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 
 public class MainPageOrg extends BasePage {
-    Tables tables;
     public MainPageOrg(WebDriver driver) {
         super(driver);
     }
