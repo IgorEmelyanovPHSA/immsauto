@@ -57,7 +57,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 3. Close all open tabs --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 4. Click Supply Console App Navigation Menu --*/");
-		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
+		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
@@ -76,10 +76,10 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 8. Close all open tabs --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 9. Click Supply Console App Navigation Menu --*/");
-		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
+		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 
 		log("/*-- 10. Navigate and Select Supply Locations --*/");
-		supplyConsolePage.selectSupplyLocationFromDropdown();
+		SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
 
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		supplyConsolePage.selectSupplyLocationName(supply_location);
@@ -130,7 +130,7 @@ public class ReceiveSupplies extends BaseTest {
 		supplyConsolePage.ClickSaveButton();
 		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*-- 35. Click Supply Console App Navigation Menu --*/");
-		supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
+		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
 		supplyConsolePage.selectSupplyItemsFromDropdown();
 		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");

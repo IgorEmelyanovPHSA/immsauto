@@ -46,8 +46,8 @@ public class ReturnsErrorValidation extends BaseTest {
         //Get Flu supplies using Receive Supplies feature
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         SupplyConsolePage.closeTabsHCA(driver);
-        supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
-        supplyConsolePage.selectSupplyLocationFromDropdown();
+        SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
+        SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
         supplyConsolePage.selectSupplyLocationName(supply_location_from);
 
         log("/*b.----Receive Supplies for Flu --*/");
@@ -100,8 +100,8 @@ public class ReturnsErrorValidation extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4. ----Open Supply Location " + supply_location + " --*/");
-        supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
-        supplyConsolePage.selectSupplyLocationFromDropdown();
+        SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
+        SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
         supplyConsolePage.selectSupplyLocationName(supply_location);
 
         log("/*5. ----Click Return Button --*/");
