@@ -104,19 +104,15 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 
-        //If override Eligibility is shown
         try {
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch(Exception ex) {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
             PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
+            Thread.sleep(500);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 
-        ////////////////////
-        //May will be removed
-        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
-        ///////////////////
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);

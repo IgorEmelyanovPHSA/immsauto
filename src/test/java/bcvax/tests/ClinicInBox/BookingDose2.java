@@ -115,10 +115,14 @@ public class BookingDose2 extends BaseTest {
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 		//If override Eligibility is shown
 		try {
+			log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+		} catch(Exception ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		}
 		log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);

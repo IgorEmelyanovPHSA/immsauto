@@ -88,7 +88,7 @@ prodsuppqa:
   agentInfluenza: "Influenza-LAIV"
   consumptionDose: "0.5"
   consumptionLot: "ABZ5320-CC01"
-  covidLot: "35035BD-CC01"
+  covidLot: "EK4241"
   influenzaLot: "CK2138-CC01"
   covidDose: "0.3"
   influenzaDose: "0.2"

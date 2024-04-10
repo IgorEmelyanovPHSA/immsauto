@@ -5,14 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 import static constansts.Header.SUPPLY_LOCATION_NAME;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class MainPageCP extends BasePage{

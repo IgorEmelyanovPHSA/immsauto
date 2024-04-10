@@ -152,7 +152,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.clickOnOutgoingTransactions(kk);
         log("/*--transactions record number --*/:" + kk);
         log("/*18.----Close All Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*19.----Go to Supply Locations Tab --*/");
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
@@ -231,7 +231,7 @@ public class BulkTransfersCP extends BaseTest {
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)), 0.011);
         log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
     }
 
     //We don't use Quantity field anymore it will be in READ ONLY mode, Oct 12,2023 as per Sheila Artes
@@ -559,7 +559,7 @@ public class BulkTransfersCP extends BaseTest {
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)), 0.011);
         log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
     }
 
     public void precondition() throws Exception {

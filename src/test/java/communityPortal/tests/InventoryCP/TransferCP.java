@@ -98,7 +98,7 @@ public class TransferCP extends BaseTest {
 		supplyConsolePage.clickOnOutgoingTransactions(kk);
 		Thread.sleep(3000);
 		System.out.println("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 

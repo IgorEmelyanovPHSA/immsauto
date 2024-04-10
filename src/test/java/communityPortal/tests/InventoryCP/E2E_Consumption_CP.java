@@ -251,7 +251,7 @@ public class E2E_Consumption_CP extends BaseTest {
         double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
         log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
         assertEquals(remainingQty_after, round((remainingDoses_before - 1)/conversionFactor), 2);
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*-- 58. Close all open tabs --*/");
     }
 

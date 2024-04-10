@@ -69,7 +69,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         }
 
         log("/*9.2----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*9.3----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
         log("/*9.4----Click on Automation Supply Location_1 --*/");

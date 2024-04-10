@@ -17,7 +17,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 	Map<String, Object> testData;
 	MainPageCP communityPortalMainPage;
 	SupplyConsolePage supplyConsolePage;
-	Tables tables;
 	String vaccine;
 	String lot;
 	String supply_location;
@@ -31,7 +30,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 		testData = Utils.getTestData(env);
 		log("Login as Clinician");
 		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-		tables = loginPage.getTables();
 		vaccine = String.valueOf(testData.get("containerTo"));
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
 		supply_location = String.valueOf(testData.get("supplyLocationTo"));
@@ -92,7 +90,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 		}
 
 		log("/----Count Supplies After Receiving--*/");
-		tables.hardWait(2);//needs couple seconds to refresh results
 
 		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
 		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
@@ -131,7 +128,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 		supplyConsolePage.successMessageAppear();
 
 		log("/----Count Supplies After Receiving--*/");
-		tables.hardWait(2);//needs couple seconds to refresh results
 		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
 		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
 		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);

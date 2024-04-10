@@ -99,7 +99,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 
         System.out.println("/*18.----Close All Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
@@ -204,7 +204,7 @@ public class Transfer extends BaseTest {
 //		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
 //		supplyConsolePage.clickOnOutgoingTransactions(kk);
         System.out.println("/*18.----Close All Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
 
         supplyConsolePage.clickSupplyLocationsTab();
@@ -408,7 +408,7 @@ public class Transfer extends BaseTest {
         supplyConsolePage = new SupplyConsolePage(driver);
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
 

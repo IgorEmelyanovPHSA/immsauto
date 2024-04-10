@@ -53,7 +53,7 @@ public class BulkDrafts extends BaseTest {
         }
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
@@ -125,7 +125,7 @@ public class BulkDrafts extends BaseTest {
         log("/*--transactions record number --*/:" + countOutgoingTransactions);
 
         log("/*16.----Close All Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*17.----Go to Supply Locations Tab --*/");
         supplyConsolePage.clickSupplyLocationsTab();
@@ -168,7 +168,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.successMessageAppear();
 
         log("/*26.----Close Automation_Supply_Location_2 Tab --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*27.----Click on Automation Supply Location_1 --*/");
         supplyConsolePage.selectSupplyLocationName(supply_location_from);

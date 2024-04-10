@@ -68,7 +68,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 3. Close all open tabs --*/");
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 
@@ -81,7 +81,7 @@ public class Consumption extends BaseTest {
 		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
 		log("/*-- 10. Close all open tabs --*/");
 		double doseConversionFactor = Double.parseDouble(df.format(remainingDoses_before / remainingQty_before));
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
 		MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 
@@ -132,29 +132,19 @@ public class Consumption extends BaseTest {
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
-//		try {
-//			PersonAccountPage.selectEarlyBookingReason(driver);
-//		} catch(Exception ex) {
-//			System.out.println("***Warning***");
-//			System.out.println("***No Early Booking Option***");
-//			System.out.println("***Warning***");
-//		}
 
 		//If override Eligibility is shown
 		try {
+			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		} catch(Exception ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
 
-		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		log("/*----scroll down a bit --*/");
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-		////////////////////
-		//May will be removed
-		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
-		///////////////////
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
@@ -270,7 +260,7 @@ public class Consumption extends BaseTest {
 		MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		supplyConsolePage.clickSupplyLocationsTab();
 		log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
 		supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
@@ -283,7 +273,7 @@ public class Consumption extends BaseTest {
 		double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
 		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/doseConversionFactor), 2);
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 58. Close all open tabs --*/");
 	}
 

@@ -35,8 +35,8 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		return new Object[][] {{"222694", "Covid19Vaccine", "agentConsumption", "covidLot", "covidDose"}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
-		//return new Object[][] {{"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
+		return new Object[][] {{"222694", "Covid19Vaccine", "vaccineAgent", "covidLot", "covidDose"}};
+		//return new Object[][] {{"222694", "Covid19Vaccine", "agentConsumption", "covidLot", "covidDose"}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
 	}
 
 	@Test(dataProvider = "booking_data")
@@ -131,14 +131,18 @@ public class Dose1_ICE_E2E extends BaseTest {
 		Thread.sleep(2000);
 //If override Eligibility is shown
 		try {
+			System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+
+		} catch(Exception ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 		}
-		Thread.sleep(2000);
-		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+
+
 
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
 		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);

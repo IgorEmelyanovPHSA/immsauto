@@ -5,8 +5,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-
-import java.beans.ExceptionListener;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -14,11 +12,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import org.testng.asserts.SoftAssert;
-import static constansts.Domain.SUPPLY_LOCATION_1;
-import static constansts.Domain.SUPPLY_LOCATION_2;
 import static constansts.Header.*;
-import static constansts.Apps.*;
-import static constansts.Header.SUPPLY_TRANSACTION_NAME_FULL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -89,9 +83,6 @@ public class SupplyConsolePage extends BasePage {
 
 	@FindBy(xpath = "//label[(text()='Dose Conversion Factor')]/..//input[@type='text']")
 	private WebElement doseConversionFactorForSingleWastage;
-
-	@FindBy(xpath = "//label[(text()='Doses')]/..//input[@type='text']")
-	private WebElement dosesText;
 
 	@FindBy(xpath = "//h2[text()='Container - Adjustment']/../..//button[(text()='Adjustment')]")
 	private WebElement btnAdjustmentOnContainerWastagePopUp;
@@ -404,15 +395,16 @@ public class SupplyConsolePage extends BasePage {
 		transaction.click();
 	}
 
-	public void closeTabsHCA() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
-		Thread.sleep(5000);
-		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
+		Thread.sleep(500);
+		By tablist_path = By.xpath("//div[@role='tablist']");
+		waitForElementToBeEnabled(driver, tablist_path, 30);
+		By tab_close_buttons_path = By.xpath("//div[@role='tablist']//button[@type='button']");
+		List<WebElement> closeButtons = driver.findElements(tab_close_buttons_path);
 		for(WebElement closeTabBtn : closeButtons) {
 			try {
 				closeTabBtn.click();
-				Thread.sleep(2000);
+				Thread.sleep(500);
 			} catch (Exception ex) {
 				System.out.println(ex.getMessage());
 			}

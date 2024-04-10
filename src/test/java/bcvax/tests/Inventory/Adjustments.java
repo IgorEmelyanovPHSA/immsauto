@@ -92,7 +92,7 @@ public class Adjustments extends BaseTest {
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
@@ -225,7 +225,7 @@ public class Adjustments extends BaseTest {
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();

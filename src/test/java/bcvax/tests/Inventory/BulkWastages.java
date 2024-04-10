@@ -46,7 +46,7 @@ public class BulkWastages extends BaseTest {
 			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		log("/*2.----Validate if Supply Console Page displayed --*/");log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 
@@ -144,7 +144,7 @@ public class BulkWastages extends BaseTest {
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 
 		log("/*-- 3. Close all open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
 		supplyConsolePage.clickSupplyLocationsTab();
 		log("/*3.----Click on Automation Supply Location_1 --*/");
