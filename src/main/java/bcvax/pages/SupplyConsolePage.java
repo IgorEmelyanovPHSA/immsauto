@@ -58,14 +58,8 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
 	private WebElement btnEditOnTrasactionPage;
 
-	@FindBy(xpath = "//button[@class='slds-button slds-button_icon slds-p-horizontal__xxx-small slds-button_icon-small slds-button_icon-container']")
-	private WebElement dropdownMenu;
-
 	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
 	private WebElement supplyItemsInDropdown;
-
-	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[7]/div/a/span[2]/span")
-	private WebElement supplyLocationInDropdown;
 
 	private By click_to_select_supply_item1 = By.xpath("//input[@placeholder='Search Supply Items...']");
 
@@ -942,10 +936,12 @@ public class SupplyConsolePage extends BasePage {
 		supplyDistributorItem.click();
 	}
 
-	public void clickSupplyConsoleAppNavigationMenu() throws InterruptedException {
+	public static void clickSupplyConsoleAppNavigationMenu(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
-		waitForElementToBeVisible(driver, dropdownMenu, 10);
-		this.dropdownMenu.click();
+		By app_navigation_menu_path = By.xpath("//div[@class='oneConsoleNav navexConsoleNav']//button[@title='Show Navigation Menu']");
+		WebElement app_navigation_menu = driver.findElement(app_navigation_menu_path);
+		waitForElementToBeEnabled(driver, app_navigation_menu_path, 10);
+		app_navigation_menu.click();
 	}
 
 	public void selectSupplyItemsFromDropdown() throws InterruptedException {
@@ -1067,10 +1063,12 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public void selectSupplyLocationFromDropdown() throws InterruptedException {
+	public static void selectSupplyLocationFromDropdown(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
-		waitForElementToBeVisible(driver, supplyLocationInDropdown, 10);
-		this.supplyLocationInDropdown.click();
+		By supply_location_item_path = By.xpath("//a[@role='menuitem' and @data-itemid='HC_Supply_Location__c']");
+		waitForElementToBeEnabled(driver, supply_location_item_path, 10);
+		WebElement supply_location_item = driver.findElement(supply_location_item_path);
+		supply_location_item.click();
 	}
 
 	public String validateSupplyItemField() throws InterruptedException {

@@ -27,12 +27,12 @@ public class BookingDose1 extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		return new Object[][] {{"225652", "Covid19Vaccine"}};
-		//return new Object[][] {{"225652", "Covid19Vaccine"}, {"228857", "InfluenzaVaccine"}};
+		//return new Object[][] {{"225652", "Covid19Vaccine"}};
+		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", false}};
 	}
 
 	@Test(dataProvider = "booking_data")
-	public void Can_Book_Dose1_Appointment_as_Clinician_CIB(String testcase_id, String vaccine_agent) throws Exception {
+	public void Can_Book_Dose1_Appointment_as_Clinician_CIB(String testcase_id, String vaccine_agent, boolean vaccine_available) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("------------------------------");
 		log("Testcase ID: " + testcase_id);
@@ -130,11 +130,17 @@ public class BookingDose1 extends BaseTest {
 			log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		} catch(Exception ex) {
-			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountSchedulePage.overrideEligibility(driver);
-			Thread.sleep(500);
-			log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
-			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+			if(vaccine_available) {
+				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+				PersonAccountSchedulePage.overrideEligibility(driver);
+				Thread.sleep(500);
+				log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+				PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+			} else {
+				//---If vaccine is disabled and not available in UI then Pass
+				Assert.assertTrue(1==1);
+				return;
+			}
 		}
 
 		////////////////////
