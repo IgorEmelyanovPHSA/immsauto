@@ -102,8 +102,7 @@ public class Wastage extends BaseTest {
 		//Verification values in Container - Wastage pop-up
 		assertEquals((remainingDosesBeforeWastage - amountOfDosesToWaste), remainingDosesAfterWastage);
 		Thread.sleep(2000);
-		driver.navigate().refresh();
-		Thread.sleep(2000);
+
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		

@@ -95,14 +95,16 @@ public class RegistrationNotificationCP extends BaseTest {
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
         try {
+            log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch(Exception ex) {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
             PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
+            log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
 
-        log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+
 
         log("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);

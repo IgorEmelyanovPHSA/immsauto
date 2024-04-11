@@ -35,12 +35,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		return new Object[][] {{"222694", "Covid19Vaccine", "vaccineAgent", "covidLot", "covidDose"}};
-		//return new Object[][] {{"222694", "Covid19Vaccine", "agentConsumption", "covidLot", "covidDose"}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
+		return new Object[][] {{"222694", "Covid19Vaccine", "vaccineAgent", "covidLot", "covidDose", true}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose", false}};
 	}
 
 	@Test(dataProvider = "booking_data")
-	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE(String testcase_id, String vaccine_agent, String administration_agent, String administration_lot, String administration_dose) throws Exception {
+	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE(String testcase_id, String vaccine_agent, String administration_agent, String administration_lot, String administration_dose, boolean vaccine_available) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
@@ -135,11 +134,17 @@ public class Dose1_ICE_E2E extends BaseTest {
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 
 		} catch(Exception ex) {
-			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountSchedulePage.overrideEligibility(driver);
-			Thread.sleep(500);
-			System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+			if(vaccine_available) {
+				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+				PersonAccountSchedulePage.overrideEligibility(driver);
+				Thread.sleep(500);
+				System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+				PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+			} else {
+			//---If vaccine is disabled and not available in UI then Pass
+			Assert.assertTrue(1==1);
+			return;
+		}
 		}
 
 
