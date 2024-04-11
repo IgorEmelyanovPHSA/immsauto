@@ -36,6 +36,8 @@ public class SupplyLocationPage extends BasePage {
         if(!hidden_items.contains("sfdc:QuickAction.HC_Supply_Location__c.Request_Supplies_Action") && !hidden_items.contains("sfdc:QuickAction.HC_Supply_Location__c.Request_Supplies")) {
             By return_button_path = By.xpath("//runtime_platform_actions-actions-ribbon//li[@data-target-selection-name='sfdc:QuickAction.HC_Supply_Location__c.Request_Supplies_Action' or @data-target-selection-name='sfdc:QuickAction.HC_Supply_Location__c.Request_Supplies']");
             WebElement return_button = driver.findElement(return_button_path);
+            scrollCenter(driver, return_button);
+            Thread.sleep(500);
             return_button.click();
         }
     }
@@ -56,6 +58,8 @@ public class SupplyLocationPage extends BasePage {
         if(!hidden_items.contains("sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies")) {
             By receive_supplies_button_path = By.xpath("//runtime_platform_actions-actions-ribbon//li[@data-target-selection-name='sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies']");
             WebElement receive_supplies_button = driver.findElement(receive_supplies_button_path);
+            scrollCenter(driver, receive_supplies_button);
+            Thread.sleep(500);
             receive_supplies_button.click();
         } else {
             revealHiddenActions(driver);
@@ -63,6 +67,8 @@ public class SupplyLocationPage extends BasePage {
             By receive_supplies_item_path = By.xpath("//runtime_platform_actions-actions-ribbon//lightning-menu-item[@data-target-selection-name='sfdc:QuickAction.HC_Supply_Location__c.HC_Receive_Supplies']");
             waitForElementToBeEnabled(driver, receive_supplies_item_path, 10);
             WebElement receive_supplies_item = driver.findElement(receive_supplies_item_path);
+            scrollCenter(driver, receive_supplies_item);
+            Thread.sleep(500);
             receive_supplies_item.click();
         }
     }

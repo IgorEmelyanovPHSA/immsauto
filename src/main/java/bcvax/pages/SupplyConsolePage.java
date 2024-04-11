@@ -389,17 +389,46 @@ public class SupplyConsolePage extends BasePage {
 		transaction.click();
 	}
 
+//	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
+//		Thread.sleep(500);
+//		By tablist_path = By.xpath("//div[@role='tablist']");
+//		waitForElementToBeEnabled(driver, tablist_path, 10);
+//		By tab_close_buttons_path = By.xpath("//div[@role='tablist']//button[@type='button']");
+//		List<WebElement> closeButtons = driver.findElements(tab_close_buttons_path);
+//		for(WebElement closeTabBtn : closeButtons) {
+//			try {
+//				closeTabBtn.click();
+//				Thread.sleep(500);
+//			} catch (Exception ex) {
+//				System.out.println(ex.getMessage());
+//			}
+//		}
+//	}
+
 	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
-		Thread.sleep(500);
-		By tablist_path = By.xpath("//div[@role='tablist']");
-		waitForElementToBeEnabled(driver, tablist_path, 30);
-		By tab_close_buttons_path = By.xpath("//div[@role='tablist']//button[@type='button']");
-		List<WebElement> closeButtons = driver.findElements(tab_close_buttons_path);
+		Thread.sleep(2000);
+		waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
+		List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+		int count = closeButtons.size();
+		int retry_count = 0;
+		while(count == 0) {
+			Thread.sleep(1000);
+			closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+			retry_count++;
+			if(retry_count > 5) {
+				break;
+			}
+		}
 		for(WebElement closeTabBtn : closeButtons) {
 			try {
 				closeTabBtn.click();
+				Thread.sleep(2000);
+			} catch (ElementNotInteractableException ex) {
+				System.out.println(ex.getMessage());
+				AlertDialog.closeAllAlerts(driver);
 				Thread.sleep(500);
-			} catch (Exception ex) {
+				closeTabBtn.click();
+			} catch (StaleElementReferenceException ex) {
 				System.out.println(ex.getMessage());
 			}
 		}
