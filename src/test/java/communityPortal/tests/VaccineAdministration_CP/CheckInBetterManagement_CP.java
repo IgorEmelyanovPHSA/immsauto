@@ -31,7 +31,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         log("/*2.----Community Portal Home page displayed --*/");
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
         log("/*9.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
@@ -40,8 +40,9 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-        inClinicExperience_CP.clickRegisterButton();
+        MainPageCP.navigateToRegisterClientPage(driver);
+
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");

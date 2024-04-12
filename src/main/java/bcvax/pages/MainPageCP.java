@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MainPageCP extends BasePage{
-    @FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
-    private WebElement search_location_field;
-
     private Tables tables;
 
     public MainPageCP(WebDriver driver) {
@@ -64,6 +61,9 @@ public class MainPageCP extends BasePage{
         System.out.println("/*---- Select Active Supply Locations --*/");
         driver.findElement(active_supply_pocation_item_path).click();
         Thread.sleep(2000);
+        By search_location_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
+        waitForElementToBeEnabled(driver, search_location_field_path, 10);
+        WebElement search_location_field = driver.findElement(search_location_field_path);
         System.out.println("/*---- Locate " + supplyLocation + " --*/");
         search_location_field.sendKeys(supplyLocation);
         Thread.sleep(500);
@@ -89,7 +89,7 @@ public class MainPageCP extends BasePage{
         client_search_label.isDisplayed();
     }
 
-    public void clickUserDefaultsTab() throws InterruptedException {
+    public static void clickUserDefaultsTab(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By user_default_tab_path = By.xpath("//a[text()='User Defaults']");
         waitForElementToBeEnabled(driver, user_default_tab_path, 10);
@@ -99,7 +99,7 @@ public class MainPageCP extends BasePage{
         Thread.sleep(2000);
     }
 
-    public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
+    public static void navigateToRegisterClientPage(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");
         waitForElementToBeEnabled(driver, main_menu_more_btn_path, 30);
@@ -124,10 +124,9 @@ public class MainPageCP extends BasePage{
             sub_menu_register.click();
         }
         Thread.sleep(2000);
-        return new InClinicExperiencePage(driver);
     }
 
-    public void search(String criteria) throws InterruptedException {
+    public static void search(WebDriver driver, String criteria) throws InterruptedException {
         Thread.sleep(500);
         By search_field_path = By.xpath("//input[@class='search-input search-input--left']");
         waitForElementToBeEnabled(driver, search_field_path, 10);
@@ -185,10 +184,6 @@ public class MainPageCP extends BasePage{
         }
     }
 
-    public void refreshBrowser() throws InterruptedException {
-        driver.navigate().refresh();
-    }
-
     public void logout() throws InterruptedException {
         Thread.sleep(500);
         By profile_menu_btn_path = By.xpath("//community_user-user-profile-menu//button");
@@ -204,6 +199,11 @@ public class MainPageCP extends BasePage{
         } catch(ElementNotInteractableException ex) {
             profile_menu_button.click();
             Thread.sleep(500);
+            waitForElementToBeEnabled(driver, logout_link_path, 10);
+            logout_link = driver.findElement(logout_link_path);
+            logout_link.click();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
             waitForElementToBeEnabled(driver, logout_link_path, 10);
             logout_link = driver.findElement(logout_link_path);
             logout_link.click();

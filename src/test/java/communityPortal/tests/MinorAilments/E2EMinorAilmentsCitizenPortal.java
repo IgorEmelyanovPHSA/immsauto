@@ -87,10 +87,10 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         Assert.assertTrue(minorAilmentsPage.isBookAPharmacyAppointmentDisplayed());
 
         log("16. Login as an Clinician into CP");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        loginPage.loginIntoCommunityPortalAsClinician();
 
         log("17. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);
-        cpMainPage.search(legalFirstName + " " +legalLastName);
+        MainPageCP.search(driver, legalFirstName + " " +legalLastName);
 
         log("18. Validation, if account is found open it");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);

@@ -72,7 +72,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*7. remaining Qty Before: -->" + remainingQty_before);
         long conversionFactor = round(remainingDoses_before / remainingQty_before);
         log("/*8.----- Click on User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
         log("/*9.----- Enter current date for UserDefaults --*/");
 
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -80,10 +80,11 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*10.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
         log("/*11.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
 
         log("/*12.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*13.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);

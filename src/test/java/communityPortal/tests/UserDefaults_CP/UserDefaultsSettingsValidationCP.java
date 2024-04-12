@@ -27,7 +27,7 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----- Navigate to User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
 
         log("/*3.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -55,7 +55,7 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         }
 
         log("/*9.----- Navigate to User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
 
         log("/*10.----- Open Advanced Settings --*/");
         UserDefaultsPage.clickOnAdvancedSettings(driver);

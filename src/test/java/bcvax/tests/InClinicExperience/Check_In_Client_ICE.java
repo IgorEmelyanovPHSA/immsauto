@@ -67,7 +67,7 @@ public class Check_In_Client_ICE extends BaseTest {
         inClinicExperiencePage.clickSaveDefaultsButton();
         log("/*5.----click Register button New Citizen --*/");
         inClinicExperiencePage.clickRegisterTab();
-        inClinicExperiencePage.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*6.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*7.----Enter Last Name " +legalLastName +"--*/");
@@ -128,12 +128,5 @@ public class Check_In_Client_ICE extends BaseTest {
         assertTrue(Math.abs(appointmentTimeActual.getMinute() - currentTime.toLocalTime().getMinute()) <= 2, "Expected Time:" + currentTime.toLocalTime() + "; Actual Time: " + appointmentTime);
         log("/*25.--Verify the Location is Age 12 and Above - Abbotsford - Abby Pharmacy --*/");
         assertEquals(appointmentLocation, clinicNameToSearch);
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

@@ -86,7 +86,7 @@ public class AddAppointmentDays extends BaseTest {
                     System.out.println("------------------------------------");
                     appointment_day_page.addAppointmentTime(day_times);
                     Thread.sleep(10000);
-                    orgMainPage.closeLastTab();
+                    MainPageOrg.closeAllTabs(driver);
                     Thread.sleep(2000);
                 }
             }

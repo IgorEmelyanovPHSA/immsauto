@@ -56,7 +56,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
 
         log("/*3.----- Click on User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
 
         log("/*4.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -67,10 +67,11 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
@@ -234,12 +235,4 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*44.---the Home - Client Search showing up  --*/");
         inClinicExperience_CP.validateHomePageShownUp();
     }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-    }
-
 }

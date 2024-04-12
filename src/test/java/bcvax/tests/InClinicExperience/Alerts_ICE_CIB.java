@@ -6,12 +6,10 @@ import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +89,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         //inClinicExperience.clickSaveModalDefaultsButton();
         //Thread.sleep(2000);
         System.out.println("/*10.----click Register button New Citizen --*/");
-        inClinicExperience.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
@@ -264,7 +262,7 @@ public class Alerts_ICE_CIB extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
         }
         MainPageOrg.closeAllTabs(driver);
-        orgMainPage.globalSearch(legalFirstName + " " + legalLastName);
+        MainPageOrg.search(driver, legalFirstName + " " + legalLastName);
         PersonAccountPage.goToRelatedTab(driver);
         String alerts_text = PersonAccountPage.getClientAlerts(driver);
 
@@ -286,7 +284,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         NewAlertPage.clickSaveButton(driver);
         Thread.sleep(2000);
         MainPageOrg.closeAllTabs(driver);
-        orgMainPage.globalSearch(legalFirstName + " " + legalLastName);
+        MainPageOrg.search(driver, legalFirstName + " " + legalLastName);
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountRelatedPage.scrollToAlertsSection(driver);
         List<Map<String, WebElement>> alerts_table = PersonAccountRelatedPage.getAlertSectionTable(driver);

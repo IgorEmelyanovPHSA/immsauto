@@ -52,7 +52,7 @@ public class DIWA_CIB extends BaseTest {
 		Thread.sleep(500);
 		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		log("/*----4. Search for Participant account: " +participant_name +" ---*/");
-		orgMainPage.globalSearch(participant_name);
+		MainPageOrg.search(driver, participant_name);
 		log("/*----5. select Citizen from search results --*/");
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");

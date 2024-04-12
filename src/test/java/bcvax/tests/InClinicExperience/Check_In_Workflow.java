@@ -45,7 +45,7 @@ public class Check_In_Workflow extends BaseTest {
         inClinicExperience.closeTabsHCA();
         log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
         log("/*----6. select Citizen from search results --*/");
-        orgMainPage.globalSearch(citizenName);
+        MainPageOrg.search(driver, citizenName);
         log("/*3.----click on person Account Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);
         log("/*4.----Verify no Imms record was created --*/");
@@ -69,7 +69,7 @@ public class Check_In_Workflow extends BaseTest {
         String current_tab = inClinicExperience.getCurrentTab();
         log("/*9.----Verify User is redirected to Identification --*/");
         Assert.assertTrue(current_tab.equals("Identification"));
-        orgMainPage.globalSearch(citizenName);
+        MainPageOrg.search(driver, citizenName);
         PersonAccountPage.goToRelatedTab(driver);
         String pathway_status = PersonAccountRelatedPage.getImmunizationRecordPathwayStatus(driver);
         log("/*10.----Verify Pathway Status is New --*/");
@@ -109,13 +109,13 @@ public class Check_In_Workflow extends BaseTest {
         inClinicExperience.closeTabsHCA();
         log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
         log("/*----6. select Citizen Previously registered citizen --*/");
-        orgMainPage.globalSearch(citizenName);
+        MainPageOrg.search(driver, citizenName);
         log("/*----7. Click Checkin button --*/");
         PersonAccountPage.clickCheckInButton(driver);
         String current_tab = inClinicExperience.getCurrentTab();
         log("/*----8. Verify the User is redirected to Identification page --*/");
         Assert.assertTrue(current_tab.equals("Identification"));
-        orgMainPage.globalSearch(citizenName);
+        MainPageOrg.search(driver, citizenName);
         PersonAccountPage.goToRelatedTab(driver);
         String pathway_status = PersonAccountRelatedPage.getImmunizationRecordPathwayStatus(driver);
         log("/*----9. Verify the Pathway Status is New --*/");
@@ -131,7 +131,7 @@ public class Check_In_Workflow extends BaseTest {
         boolean checkin_button_exist = inClinicExperience.todayAppointmentCheckinButtonExists(citizenName);
         log("/*----12. Verify Checkin Button doesn't exist --*/");
         Assert.assertFalse(checkin_button_exist);
-        orgMainPage.globalSearch(citizenName);
+        MainPageOrg.search(driver, citizenName);
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountPage.clickCheckInButton(driver);
         current_tab = inClinicExperience.getCurrentTab();
@@ -181,7 +181,7 @@ public class Check_In_Workflow extends BaseTest {
 
         inClinicExperience.clickRegisterTab();
         System.out.println("/*10.----click Register button New Citizen --*/");
-        inClinicExperience.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*5.----Enter First Name: " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*6.----Enter Last Name: " +legalLastName +"--*/");

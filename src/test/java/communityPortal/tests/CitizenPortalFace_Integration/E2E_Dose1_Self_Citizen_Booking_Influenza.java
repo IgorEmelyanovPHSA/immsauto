@@ -52,7 +52,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
         Thread.sleep(10000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        cpMainPage.search(conformationNumberText);
+        MainPageCP.search(driver, conformationNumberText);
 
 //        log("/*7.1---Validation, isUserFound account validation --*/");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
@@ -114,13 +114,5 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
 
         log("/*16.---Verify appointment conformation message is displayed--*/");
         PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
     }
 }

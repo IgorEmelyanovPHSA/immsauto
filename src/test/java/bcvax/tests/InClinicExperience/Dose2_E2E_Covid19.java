@@ -79,7 +79,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickRegisterTab();
 
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
-		inClinicExperience.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 
 		log("/*11.----Enter First Name " +legalFirstName  +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -287,7 +287,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.clickRegisterTab();
 
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
-		inClinicExperience.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 
 		log("/*11.----Enter First Name " +legalFirstName  +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -468,12 +468,5 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*45.---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
-	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 }

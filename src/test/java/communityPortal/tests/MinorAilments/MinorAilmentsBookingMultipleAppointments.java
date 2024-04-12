@@ -103,10 +103,10 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         //String confirmedAppointmentTwoDataTime = bookAnAppointmentPage.getConfirmedAppointmentDateTime();
 
         log("21. Login as an Clinician into CP");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        loginPage.loginIntoCommunityPortalAsClinician();
 
         log("22. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);
-        cpMainPage.search(legalFirstName + " " + legalLastName);
+        MainPageCP.search(driver, legalFirstName + " " + legalLastName);
 
 //        log("23. Validation, if account is found open it");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);

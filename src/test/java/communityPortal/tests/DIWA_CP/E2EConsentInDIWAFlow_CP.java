@@ -61,7 +61,7 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         loginPage.loginIntoCommunityPortalAsClinician();
         MainPageCP cpMainPage = new MainPageCP(driver);
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        cpMainPage.search(participant_name);
+        MainPageCP.search(driver, participant_name);
 
         log("/*----6. Navigated to Person Account related tab ---*/");
         try {
@@ -121,10 +121,10 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         //---Verify the NEW CONSENT flows---
 
         participant_name = legal_first_name_new + " " + legal_middle_name_new + " " + legal_last_name_new;
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*8.----Enter First Name " +legal_first_name_new +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legal_first_name_new);

@@ -91,7 +91,7 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 		clinicInBox.closeAllTabs();
 
 		log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-		orgMainPage.globalSearch(legalFirstName + " " + legalMiddleName + " " + legalLastName);
+		MainPageOrg.search(driver, legalFirstName + " " + legalMiddleName + " " + legalLastName);
 
 		log("/*7.1---Validation, isUserFound account validation --*/");
 //		boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);

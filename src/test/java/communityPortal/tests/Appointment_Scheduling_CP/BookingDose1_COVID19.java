@@ -32,10 +32,10 @@ public class BookingDose1_COVID19 extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-
-        log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
+                log("/*7.----click Register button New Citizen --*/");
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -136,14 +136,4 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/ 36. --- We need Validation that Booking Record " +
                 "in New Status has created and In-Clinic Experience button is Visible, Active, Clickable");
     }
-
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-    }
-
-
 }
