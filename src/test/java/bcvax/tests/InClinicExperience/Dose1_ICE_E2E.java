@@ -90,7 +90,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//inClinicExperience.clickSaveModalDefaultsButton();
 		//Thread.sleep(2000);
 		System.out.println("/*10.----click Register button New Citizen --*/");
-		inClinicExperience.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 		System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
 		System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
@@ -261,12 +261,4 @@ public class Dose1_ICE_E2E extends BaseTest {
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		inClinicExperience.validateHomePageShownUp();
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-	}
-
 }

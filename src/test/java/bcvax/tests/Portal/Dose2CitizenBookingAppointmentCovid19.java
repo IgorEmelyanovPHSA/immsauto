@@ -87,7 +87,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         //inClinicExperiencePage.SearchForCitizen(conformationNumberText);
-        orgMainPage.globalSearch(legalFirstName + " " + legalLastName);
+        MainPageOrg.search(driver, legalFirstName + " " + legalLastName);
 
 //        log("/*7.1---Validation, isUserFound account validation --*/");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);

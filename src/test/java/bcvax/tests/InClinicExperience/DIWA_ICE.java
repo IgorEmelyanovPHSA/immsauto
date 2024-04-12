@@ -3,15 +3,10 @@ package bcvax.tests.InClinicExperience;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import constansts.Apps;
-import org.openqa.selenium.JavascriptExecutor;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import java.io.*;
-import java.nio.file.Paths;
+
 import java.util.*;
 
 
@@ -65,7 +60,7 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.closeTabsHCA();
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
-		mainPageOrg.globalSearch(citizenName);
+		MainPageOrg.search(driver, citizenName);
 
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);

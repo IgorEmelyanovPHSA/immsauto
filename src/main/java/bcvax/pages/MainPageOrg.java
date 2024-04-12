@@ -1,12 +1,9 @@
 package bcvax.pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 import java.time.Duration;
 import java.time.Instant;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -174,16 +171,7 @@ public class MainPageOrg extends BasePage {
         }
     }
 
-    public void closeLastTab() throws InterruptedException {
-        Thread.sleep(500);
-        waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
-        By hca_tabs_path = By.xpath("//div[@role='tablist']/ul[@role='presentation' and @class='tabBarItems slds-grid']/li[@role='presentation']/div[@class='close slds-col--bump-left slds-p-left--none slds-context-bar__icon-action ']/button");
-        List<WebElement> closeButtons = driver.findElements(hca_tabs_path);
-        int my_last_button = closeButtons.size() - 1;
-        closeButtons.get(my_last_button).click();
-    }
-
-    public void globalSearch(String search_value) throws InterruptedException {
+    public static void search(WebDriver driver, String search_value) throws InterruptedException {
         Thread.sleep(500);
         By search_btn_path = By.xpath("//button[@aria-label = 'Search']");
         waitForElementToBeEnabled(driver, search_btn_path, 10);
@@ -223,13 +211,13 @@ public class MainPageOrg extends BasePage {
             }
         }
         WebElement found_client = driver.findElement(found_client_path);
-        scrollCenter(found_client);
+        scrollCenter(driver, found_client);
         Thread.sleep(1000);
         try {
             found_client.click();
         } catch(ElementNotInteractableException ex) {
             //Re-try after 2 seconds
-            scrollCenter(found_client);
+            scrollCenter(driver, found_client);
             Thread.sleep(2000);
             found_client.click();
         }

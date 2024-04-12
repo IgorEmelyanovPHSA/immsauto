@@ -10,7 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         log("/*----3. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
         log("/*----4. Search for Participant account: " +participant_name +" ---*/");
-        orgMainPage.globalSearch(participant_name);
+        MainPageOrg.search(driver, participant_name);
         log("/*----5. select Citizen from search results --*/");
 
         log("/*----6. Navigated to Person Account related tab ---*/");

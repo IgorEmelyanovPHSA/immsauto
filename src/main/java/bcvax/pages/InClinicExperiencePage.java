@@ -101,7 +101,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	}
 
-	public void clickRegisterButton() throws InterruptedException {
+	public static void clickRegisterButton(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By register_btn_path = By.xpath("//button[@title = ' Create New Profile']");
 		waitForElementToBeEnabled(driver, register_btn_path, 30);

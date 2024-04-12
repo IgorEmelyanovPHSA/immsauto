@@ -33,12 +33,10 @@ public class BookingDose2 extends BaseTest {
 
 		log("/*1.----Login --*/");
 		loginPage.loginAsImmsBCAdmin();
-		orgMainPage = new MainPageOrg(driver);
 		TestcaseID = "225653"; //C225653
 
 		log("TestRail test case ID: C" +TestcaseID);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
-		orgMainPage = new MainPageOrg(driver);
 		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
@@ -178,12 +176,5 @@ public class BookingDose2 extends BaseTest {
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		log("/*33----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();
-	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 }

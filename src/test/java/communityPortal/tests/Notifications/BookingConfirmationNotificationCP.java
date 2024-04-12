@@ -54,7 +54,7 @@ public class BookingConfirmationNotificationCP extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        cpMainPage.search(conformationNumberText);
+        MainPageCP.search(driver, conformationNumberText);
 
 //        log("/*7.1---Validation, isUserFound account validation --*/");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);

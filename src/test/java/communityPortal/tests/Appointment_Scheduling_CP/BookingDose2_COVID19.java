@@ -31,10 +31,10 @@ public class BookingDose2_COVID19 extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
 
         log("/*3.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*4.----Enter First Name: " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -119,12 +119,5 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*29.----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

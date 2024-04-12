@@ -38,10 +38,7 @@ public class DIWA_Covid19_CP extends BaseTest {
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.---Search for Participant account --*/");
-        //ProfilesPage profilesPage = cpMainPage.globalSearch_CP(nameToSearch);
-        cpMainPage.search(nameToSearch);
-        //log("/*----3. select Citizen Participant acc from search results --*/");
-        //profilesPage.selectCitizenParticipantAcc(nameToSearch);
+        MainPageCP.search(driver, nameToSearch);
 
         //If the PIR Warning is shown close it
         try {
