@@ -255,14 +255,4 @@ public class E2E_Consumption_CP extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
         log("/*-- 58. Close all open tabs --*/");
     }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-    }
-
-
-
 }
