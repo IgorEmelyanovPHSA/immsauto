@@ -171,6 +171,31 @@ public class MainPageOrg extends BasePage {
         }
     }
 
+    public static void closeLastTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
+        List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button' and contains(@title, 'Appointment Day Management') and not(contains(@title, 'Close All'))]"));
+        int counter = 0;
+        while(closeButtons.size() < 1) {
+            Thread.sleep(1000);
+            closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button' and contains(@title, 'Appointment Day Management')]"));
+            counter++;
+            if(counter > 5) {
+                break;
+            }
+        }
+        for(WebElement closeTabBtn : closeButtons) {
+            try {
+                if(!closeTabBtn.getAttribute("title").contains("Close All")) {
+                    closeTabBtn.click();
+                    Thread.sleep(2000);
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
     public static void search(WebDriver driver, String search_value) throws InterruptedException {
         Thread.sleep(500);
         By search_btn_path = By.xpath("//button[@aria-label = 'Search']");
