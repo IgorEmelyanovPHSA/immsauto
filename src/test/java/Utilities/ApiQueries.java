@@ -23,8 +23,8 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONTokener;
 import org.json.JSONException;
-
-
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import static bcvax.tests.BaseTest.log;
 
 public class ApiQueries {
@@ -312,7 +312,7 @@ public class ApiQueries {
 
     public static String getAppointmentDays(String appointment_date, String appointment_type, String appointment_city) throws Exception {
         String oauthToken = getOauthToken();
-        String query ="/query?q=SELECT+Id+FROM+DDH__HC_Appointment_Day_Management__c+WHERE+DDH__HC_Appointments_Date__c+=+" + appointment_date + "+AND+DDH__HC_Address__r.DDH__HC_City__c+=+%27" + appointment_city + "%27+AND+DDH__HC_Appointment_Type__r.Name+=+%27" + appointment_type.replace(" ", "+") + "%27";
+        String query ="/query?q=SELECT+Id+FROM+DDH__HC_Appointment_Day_Management__c+WHERE+DDH__HC_Appointments_Date__c+=+" + appointment_date + "+AND+DDH__HC_Address__r.DDH__HC_City__c+=+%27" + URLEncoder.encode(appointment_city, StandardCharsets.UTF_8.toString()) + "%27+AND+DDH__HC_Appointment_Type__r.Name+=+%27" + appointment_type.replace(" ", "+") + "%27";
         baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
         oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
         String uri = baseUri + query;
