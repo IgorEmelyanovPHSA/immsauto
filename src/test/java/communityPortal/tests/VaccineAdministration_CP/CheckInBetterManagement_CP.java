@@ -76,10 +76,10 @@ public class CheckInBetterManagement_CP extends BaseTest {
         //Verify No Immunization records in Related Tab (Table has only Headers
         Assert.assertEquals(immunization_records.size(), 1);
 
-        //Book the Appointment for Influenza
+        //Book the Appointment for Covid
         PersonAccountPage.goToVaccineScheduleTab(driver);
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "InfluenzaVaccine");
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 
         log("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -107,5 +107,28 @@ public class CheckInBetterManagement_CP extends BaseTest {
         boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 
+        log("/*33. ----Click User Defaults Tab --*/");
+        MainPageCP.clickUserDefaultsTab(driver);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
+        log("/*33. ----Click Client Lists Tab --*/");
+        MainPageCP.clickClientListTab(driver);
+
+        log("/*33. ----Click Client Lists Todays Appointments --*/");
+        ClientListPage.clickTodayAppointmentsTab(driver);
+
+        Map<String, WebElement> my_client_appointment = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        String my_pathway_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_client_appointment);
+        Assert.assertEquals(my_pathway_status, "",  "Pathway Status is NOT Blank");
+
+        boolean view_btn_displayed = ClientListTodayAppointmentsTab.viewButtonIsDisplayed(my_client_appointment);
+        Assert.assertFalse(view_btn_displayed, "View Button is Displayed erroneously");
+
+        boolean check_in_btn_displayed = ClientListTodayAppointmentsTab.checkInButtonIsDisplayed(my_client_appointment);
+        Assert.assertTrue(check_in_btn_displayed, "Check-In Button is not Displayed");
+
+        MainPageCP.search(driver, personalHealthNumber);
+        PersonAccountPage.clickCheckInButton(driver);
+        System.out.print("");
     }
 }

@@ -66,7 +66,7 @@ public class Check_In_Client_ICE extends BaseTest {
         System.out.println("/*----- Click on Save defaults button --*/");
         inClinicExperiencePage.clickSaveDefaultsButton();
         log("/*5.----click Register button New Citizen --*/");
-        inClinicExperiencePage.clickRegisterTab();
+        InClinicExperiencePage.clickRegisterTab(driver);
         InClinicExperiencePage.clickRegisterButton(driver);
         log("/*6.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -114,12 +114,12 @@ public class Check_In_Client_ICE extends BaseTest {
         PersonAccountPage.clickCheckInButton(driver);
         Thread.sleep(500);
         log("/*22.--Verify if the landing tab is IDENTIFICATION --*/");
-        String currentTab = inClinicExperiencePage.getCurrentTab();
+        String currentTab = InClinicExperiencePage.getCurrentTab(driver);
         assertEquals(currentTab, "Identification");
         log("/*23.--Get new appointment location, date and time --*/");
-        String appointmentDate = inClinicExperiencePage.getAppointmentDate();
-        String appointmentTime = inClinicExperiencePage.getAppointmentTime();
-        String appointmentLocation = inClinicExperiencePage.getAppointmentLocation();
+        String appointmentDate = InClinicExperienceIdentificationPage.getAppointmentDate(driver);
+        String appointmentTime = InClinicExperienceIdentificationPage.getAppointmentTime(driver);
+        String appointmentLocation = InClinicExperienceIdentificationPage.getAppointmentLocation(driver);
 
         LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
         assertEquals(appointmentDate, expectedDate);

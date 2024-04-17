@@ -30,7 +30,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     String consumptionRoute;
     String consumptionSite;
     String consentProvider;
-
+//Pneumo TC "243211",
 
     @Test(priority = 1)
     public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
@@ -233,6 +233,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
 
         log("/*44.---the Home - Client Search showing up  --*/");
-        inClinicExperience_CP.validateHomePageShownUp();
+        InClinicExperiencePage.validateHomePageShownUp(driver);
     }
 }

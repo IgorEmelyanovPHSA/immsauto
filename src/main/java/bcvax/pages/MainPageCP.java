@@ -99,6 +99,16 @@ public class MainPageCP extends BasePage{
         Thread.sleep(2000);
     }
 
+    public static void clickClientListTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By client_list_tab_path = By.xpath("//a[text()='Client List']");
+        waitForElementToBeEnabled(driver, client_list_tab_path, 10);
+        WebElement element = driver.findElement(client_list_tab_path);
+        element.click();
+        //Try to avoid stale elelemnt exception
+        Thread.sleep(2000);
+    }
+
     public static void navigateToRegisterClientPage(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");

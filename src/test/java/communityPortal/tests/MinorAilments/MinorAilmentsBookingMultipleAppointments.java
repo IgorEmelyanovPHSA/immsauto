@@ -141,7 +141,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         //work around due to the bug: https://jira.phsa.ca/browse/BCVAX-33747
 
         log("31.----Refresh page --");
-        inClinicExperience_CP.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(3000);
 
         log("32. Verify Appointment status is 'Cancelled'");

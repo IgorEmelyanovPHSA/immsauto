@@ -235,7 +235,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
         log("/*47.---the Home - Client Search showing up  --*/");
-        inClinicExperience_CP.validateHomePageShownUp();
+        InClinicExperiencePage.validateHomePageShownUp(driver);
 
         supplyConsolePage = new SupplyConsolePage(driver);
         supplyConsolePage = cpMainPage.goToSupplyLocation();

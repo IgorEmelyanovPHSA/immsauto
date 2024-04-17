@@ -101,12 +101,12 @@ public class Check_In_Client_CP extends BaseTest {
         log("/*23.--Click check-in button --*/");
         PersonAccountPage.clickCheckInButton(driver);
         log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
-        String currentTab = inClinicExperience_CP.getCurrentTab();
+        String currentTab = InClinicExperiencePage.getCurrentTab(driver);
         assertEquals(currentTab, "Identification");
         log("/*25.--Get new appointment location, date and time --*/");
-        String appointmentDate = inClinicExperience_CP.getAppointmentDate();
-        String appointmentTime = inClinicExperience_CP.getAppointmentTime();
-        String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
+        String appointmentDate = InClinicExperienceIdentificationPage.getAppointmentDate(driver);
+        String appointmentTime = InClinicExperienceIdentificationPage.getAppointmentTime(driver);
+        String appointmentLocation = InClinicExperienceIdentificationPage.getAppointmentLocation(driver);
 
         LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
         assertEquals(appointmentDate, expectedDate);

@@ -76,7 +76,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
-		inClinicExperience.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
@@ -177,7 +177,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
 		log("/*36.----Refresh page --*/");
-		inClinicExperience.refreshBrowser();
+		driver.navigate().refresh();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
@@ -236,7 +236,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 
 		log("/*45.---the Home - Client Search showing up  --*/");
-		inClinicExperience.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
 
 	@Test(priority = 2)
@@ -284,7 +284,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
-		inClinicExperience.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
@@ -381,7 +381,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
 		log("/*36.----Refresh page --*/");
-		inClinicExperience.refreshBrowser();
+		driver.navigate().refresh();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
@@ -467,6 +467,6 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 
 		log("/*45.---the Home - Client Search showing up  --*/");
-		inClinicExperience.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
 }
