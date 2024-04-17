@@ -237,6 +237,6 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
 
         log("/*49.---the Home - Client Search showing up  --*/");
-        inClinicExperience_CP.validateHomePageShownUp();
+        InClinicExperiencePage.validateHomePageShownUp(driver);
     }
 }

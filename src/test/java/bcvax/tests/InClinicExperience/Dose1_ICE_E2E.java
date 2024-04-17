@@ -85,7 +85,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
-		inClinicExperience.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
 		//inClinicExperience.clickSaveModalDefaultsButton();
 		//Thread.sleep(2000);
@@ -172,7 +172,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");
-		inClinicExperience.refreshBrowser();
+		driver.navigate().refresh();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
@@ -259,6 +259,6 @@ public class Dose1_ICE_E2E extends BaseTest {
 		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
-		inClinicExperience.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
 }

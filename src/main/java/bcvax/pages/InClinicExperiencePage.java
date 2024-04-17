@@ -14,26 +14,8 @@ import static constansts.Header.SUPPLY_LOCATION_NAME;
 
 
 public class InClinicExperiencePage extends BasePage {
-	@FindBy(xpath = ".//button[@aria-label = 'Route, Select an Option']")
-	private WebElement click_route_dropdown;
-
-	@FindBy(xpath = ".//span[text() = 'Intranasal']")
-	private WebElement select_route_intranasal_dropdown;
-
-	@FindBy(xpath = ".//h1[text() = 'Client Search']")
-	private WebElement validate_home_client_search_page_open;
-
 	@FindBy(xpath = ".//button[text() = 'Save']")
 	private WebElement save_immune_info_btn;
-
-	@FindBy(xpath = "//label[text() = 'Date']/../../../lightning-formatted-text")
-	private WebElement appointmentDate;
-
-	@FindBy(xpath = "//label[text() = 'Appointment Time']/../../../lightning-formatted-text")
-	private WebElement appointmentTime;
-
-	@FindBy(xpath = "//label[text() = 'Clinic Name']/../../../lightning-formatted-text")
-	private WebElement appointmentLocation;
 
 	Tables tables;
 
@@ -46,7 +28,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	/*-------------Methods--------------*/
 
-	public void clickRegisterTab() throws InterruptedException {
+	public static void clickRegisterTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By register_tab_path = By.xpath("//a[@title='Register']/..");
 		waitForElementToBeEnabled(driver, register_tab_path, 10);
@@ -119,15 +101,6 @@ public class InClinicExperiencePage extends BasePage {
 		save_defaults_button.click();
 		Thread.sleep(500);
 		clickCloseAlert();
-	}
-
-	public void ClickGoToInClinicExperienceButton() throws InterruptedException {
-		Thread.sleep(500);
-		By in_clinic_experience_app_path = By.xpath("//button[@name='navigateToICE' and @aria-disabled='false']");
-		waitForElementToBeEnabled(driver, in_clinic_experience_app_path, 30);
-		WebElement in_clinic_experience_app = driver.findElement(in_clinic_experience_app_path);
-		in_clinic_experience_app.click();
-		Thread.sleep(500);
 	}
 
 	public void clickRecordConsent() throws InterruptedException {
@@ -261,28 +234,6 @@ public class InClinicExperiencePage extends BasePage {
 		return button_exist;
 	}
 
-	public void selectRouteIntranasal() throws InterruptedException {
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		//Thread.sleep(2000);
-		waitForElementToBeVisible(driver, click_route_dropdown, 10);
-		Thread.sleep(2000);
-		click_route_dropdown.click();
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, select_route_intranasal_dropdown, 10);
-		Thread.sleep(2000);
-		select_route_intranasal_dropdown.click();
-	}
-
-	public void ClickSaveConsentButton() throws InterruptedException {
-		Thread.sleep(500);
-		By save_consent_btn_path = By.xpath("//button[normalize-space()='Save Consent']");
-		waitForElementToBeEnabled(driver, save_consent_btn_path, 10);
-		WebElement save_consent_btn = driver.findElement(save_consent_btn_path);
-		scrollIfNeeded(driver, save_consent_btn);
-		Thread.sleep(1000);
-		save_consent_btn.click();
-	}
-
 	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
 		Thread.sleep(500);
 		By confirm_save_adm_btn_path = By.xpath("//button[@title='Confirm & Save Administration']");
@@ -340,10 +291,6 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 
-	public void refreshBrowser() throws InterruptedException {
-		driver.navigate().refresh();
-	}
-
 	public void clickUserDefaultsTab() throws InterruptedException {
 		Thread.sleep(500);
 		By user_defaults_tab_path = By.xpath("//one-app-nav-bar-item-root[@data-target-selection-name='sfdc:TabDefinition.BCH_In_Clinic_User_Defaults']");
@@ -360,9 +307,11 @@ public class InClinicExperiencePage extends BasePage {
 		client_list_tab.click();
 	}
 
-	public boolean validateHomePageShownUp() throws InterruptedException {
+	public static boolean validateHomePageShownUp(WebDriver driver) throws InterruptedException {
+		Thread.sleep(500);
+		By home_title_path = By.xpath("//h1[text()='Client Search']");
 		try {
-			waitForElementToBeVisible(driver, validate_home_client_search_page_open, 10);
+			waitForElementToBeEnabled(driver, home_title_path, 10);
 			System.out.println("/*---Home page-Client Search page shown up");
 			return true;
 		} catch (NoSuchElementException e) {
@@ -402,26 +351,17 @@ public class InClinicExperiencePage extends BasePage {
 		return check_in_button.isDisplayed();
 	}
 
-	public String getCurrentTab() throws InterruptedException {
+	public static String getCurrentTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
-		By myXpath = By.xpath("//div[@class='slds-col slds-size_1-of-3 slds-align_absolute-center step first-step current-step']");
+		By myXpath = By.xpath("//c-hc-lightning-progress-indicator/div/div");
 		waitForElementToBeLocated(driver, myXpath, 10);
-		WebElement currentTab = driver.findElement(myXpath);
-		return currentTab.getText();
-	}
-
-	public String getAppointmentDate() {
-		waitForElementToBeVisible(driver, appointmentDate, 30);
-		return appointmentDate.getText();
-	}
-
-	public String getAppointmentTime() {
-		waitForElementToBeVisible(driver, appointmentTime, 30);
-		return appointmentTime.getText();
-	}
-
-	public String getAppointmentLocation() {
-		return appointmentLocation.getText();
+		List<WebElement> step_tabs = driver.findElements(myXpath);
+		for(WebElement step_tab: step_tabs) {
+			if(step_tab.getAttribute("class").contains("current-step")) {
+				return step_tab.getText();
+			}
+		}
+		return "";
 	}
 
 	public void selectNotApprovedAdministrationReason() throws InterruptedException {

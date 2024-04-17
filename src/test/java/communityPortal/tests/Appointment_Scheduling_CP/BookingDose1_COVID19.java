@@ -129,7 +129,7 @@ public class BookingDose1_COVID19 extends BaseTest {
         PersonAccountPage.goToRelatedTab(driver);
         //////
         log("/*35_1.----Refresh page again - should not be like that again --*/");
-        inClinicExperience_CP.refreshBrowser();
+        driver.navigate().refresh();
         ///////
 
         //Validation Steps

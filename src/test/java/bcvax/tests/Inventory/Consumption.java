@@ -94,7 +94,7 @@ public class Consumption extends BaseTest {
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
 		inClinicExperiencePage.clickSaveDefaultsButton();
 		log("/*-- 15. Click on register Tab --*/");
-		inClinicExperiencePage.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*-- 17. Close any open Tabs --*/");
 		inClinicExperiencePage.closeTabsHCA();
@@ -255,7 +255,7 @@ public class Consumption extends BaseTest {
 		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
-		inClinicExperiencePage.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
 		MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);

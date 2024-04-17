@@ -66,7 +66,7 @@ public class Check_In_Workflow extends BaseTest {
         log("/*8.----Verify Checkin button is shown --*/");
         Assert.assertTrue(checkin_button_exist);
         inClinicExperience.clickTodayAppointmentCheckinButton(citizenName);
-        String current_tab = inClinicExperience.getCurrentTab();
+        String current_tab = InClinicExperiencePage.getCurrentTab(driver);
         log("/*9.----Verify User is redirected to Identification --*/");
         Assert.assertTrue(current_tab.equals("Identification"));
         MainPageOrg.search(driver, citizenName);
@@ -112,7 +112,7 @@ public class Check_In_Workflow extends BaseTest {
         MainPageOrg.search(driver, citizenName);
         log("/*----7. Click Checkin button --*/");
         PersonAccountPage.clickCheckInButton(driver);
-        String current_tab = inClinicExperience.getCurrentTab();
+        String current_tab = InClinicExperiencePage.getCurrentTab(driver);
         log("/*----8. Verify the User is redirected to Identification page --*/");
         Assert.assertTrue(current_tab.equals("Identification"));
         MainPageOrg.search(driver, citizenName);
@@ -134,7 +134,7 @@ public class Check_In_Workflow extends BaseTest {
         MainPageOrg.search(driver, citizenName);
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountPage.clickCheckInButton(driver);
-        current_tab = inClinicExperience.getCurrentTab();
+        current_tab = InClinicExperiencePage.getCurrentTab(driver);
         log("/*----13. Verify the User is redirected to Identification page --*/");
         Assert.assertTrue(current_tab.equals("Identification"));
         InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
@@ -179,7 +179,7 @@ public class Check_In_Workflow extends BaseTest {
         inClinicExperience.closeTabsHCA();
         log("/*4.----click Register New Citizen --*/");
 
-        inClinicExperience.clickRegisterTab();
+        InClinicExperiencePage.clickRegisterTab(driver);
         System.out.println("/*10.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
         log("/*5.----Enter First Name: " +legalFirstName +"--*/");
