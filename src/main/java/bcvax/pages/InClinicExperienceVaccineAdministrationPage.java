@@ -141,4 +141,14 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         Thread.sleep(500);
         edit_immunization_info_btn.click();
     }
+
+    public static void clickSaveImmuneInfoButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By save_immunization_info_btn_path = By.xpath("//button[text()='Save']");
+        waitForElementToBeEnabled(driver, save_immunization_info_btn_path, 10);
+        WebElement save_immunization_info_btn = driver.findElement(save_immunization_info_btn_path);
+        scrollCenter(driver, save_immunization_info_btn);
+        Thread.sleep(500);
+        save_immunization_info_btn.click();
+    }
 }

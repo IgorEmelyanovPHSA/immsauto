@@ -227,7 +227,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
-		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperience.clickOkForExpiredLot();
 		log("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
@@ -458,7 +458,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
-		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperience.clickOkForExpiredLot();
 		log("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();

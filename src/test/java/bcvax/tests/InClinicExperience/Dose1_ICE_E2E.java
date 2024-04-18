@@ -252,7 +252,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 			System.out.println("Continue...");
 		}
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
-		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperience.clickOkForExpiredLot();
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();

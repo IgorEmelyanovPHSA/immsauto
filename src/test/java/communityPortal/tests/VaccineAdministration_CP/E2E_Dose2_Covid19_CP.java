@@ -226,7 +226,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
             InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
         }
         log("/*46.---Click Save button for Immunisation Information --*/");
-        inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
+        InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         Thread.sleep(2000);
         inClinicExperience_CP.clickOkForExpiredLot();
         Thread.sleep(2000);
