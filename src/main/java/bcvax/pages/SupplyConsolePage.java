@@ -25,19 +25,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//label[contains(text(),'Comments')]")
 	private WebElement labelComments;
 
-	@FindBy(xpath = "//input[@name='BCH_Requested_Delivery_Date__c']")
-	private WebElement inputDate;
-
-	@FindBy(xpath = "//button[contains(text(),'Next')]")
-	private WebElement nextButton;
-
-	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
-	private WebElement saveSubmitRequisition;
-	private By save_Submit_Requisition = By.xpath("//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']");
-
-	@FindBy(xpath = "//button[text() = 'Submit Requisition'] | //a[@title = 'Submit Requisition']")
-	private WebElement submitRequisition;
-
 	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
 	private WebElement rows_outgoing_transactions_count_path;
 
@@ -105,8 +92,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
 	private WebElement saveReceiveRequisition;
 
-	@FindBy(xpath = "//label[text()='Approver Comment']/..//input")
-	private WebElement approverComment;
 	//////////////////////////////////////////////////////////////////////////////////
 	Tables tables;
 
@@ -124,54 +109,12 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	/*-------------Methods--------------*/
-	public void inputRequestedDose(String inputQuantity) throws InterruptedException {
-		Thread.sleep(1000);
-		WebElement dosesInput = driver.findElement(By.xpath("//table/tbody/tr[1]/td[5]//input"));
-		dosesInput.clear();
-		dosesInput.sendKeys(inputQuantity);
-	}
-
 	public void clickSaveButton() throws InterruptedException {
 		By save_btn_path = By.xpath("//button[contains(text(),'Save')]");
 		waitForElementToBeEnabled(driver, save_btn_path, 10);
 		WebElement save_btn = driver.findElement(save_btn_path);
 		scrollCenter(save_btn);
 		save_btn.click();
-	}
-
-	public void inputRequestDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Date tomorrow = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-
-		String tomorrowAsString = dateFormat.format(tomorrow);
-		this.inputDate.sendKeys(tomorrowAsString, Keys.ENTER);
-	}
-
-	public void clickNextButton() {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", nextButton);
-		waitForElementToBeVisible(driver, nextButton, 10);
-		this.nextButton.click();
-	}
-
-	public void checkShowInStockCheckbox() throws InterruptedException {
-		Thread.sleep(500);
-		By show_trades_in_stock_ckbox_path = By.xpath("//div[text() = 'Show trades in stock']/..//span[@part = 'input-checkbox']");
-		waitForElementToBeEnabled(driver, show_trades_in_stock_ckbox_path, 10);
-		WebElement show_trades_in_stock_ckbox = driver.findElement(show_trades_in_stock_ckbox_path);
-		show_trades_in_stock_ckbox.click();
-	}
-
-	public void clickSubmitRequisition() throws InterruptedException {
-		waitForElementToBeVisible(driver, submitRequisition, 10);
-		submitRequisition.click();
-	}
-
-	public void clickSaveSubmitRequisition() {
-		waitForElementToBeVisible(driver, saveSubmitRequisition, 10);
-		WebElement element = driver.findElement(save_Submit_Requisition);
-		this.saveSubmitRequisition.click();
 	}
 
 	public void clickSupplyLocationsTab() throws InterruptedException {
@@ -388,22 +331,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(500);
 		transaction.click();
 	}
-
-//	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
-//		Thread.sleep(500);
-//		By tablist_path = By.xpath("//div[@role='tablist']");
-//		waitForElementToBeEnabled(driver, tablist_path, 10);
-//		By tab_close_buttons_path = By.xpath("//div[@role='tablist']//button[@type='button']");
-//		List<WebElement> closeButtons = driver.findElements(tab_close_buttons_path);
-//		for(WebElement closeTabBtn : closeButtons) {
-//			try {
-//				closeTabBtn.click();
-//				Thread.sleep(500);
-//			} catch (Exception ex) {
-//				System.out.println(ex.getMessage());
-//			}
-//		}
-//	}
 
 	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
 		Thread.sleep(2000);
@@ -1337,144 +1264,12 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementNotToBeVisible(driver, locationTo, 10);
 	}
 
-	public void selectShipped_From(String supply_location) throws InterruptedException {
-		Thread.sleep(500);
-		By search_supply_location_from_path = By.xpath("//label[text()='Shipped From']/..//input[@class='slds-combobox__input slds-input']");
-		waitForElementToBeEnabled(driver, search_supply_location_from_path, 60);
-		WebElement search_supply_location_from = driver.findElement(search_supply_location_from_path);
-		search_supply_location_from.sendKeys(supply_location);
-		Thread.sleep(500);
-		By my_location_item_path = By.xpath("//lightning-base-combobox-formatted-text[contains(@title, '" + supply_location + "')]/../..");
-		waitForElementToBeEnabled(driver, my_location_item_path, 20);
-		WebElement my_location_item = driver.findElement(my_location_item_path);
-		my_location_item.click();
-	}
-
-	public void clickLineItemCheckBox(int itemNum) throws InterruptedException {
-		WebElement element = tables.getRequisitionLineItemsTable().getRowsMappedToHeadings().get(itemNum).get("").findElement(By.xpath(".//span[@part='indicator']"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(500);
-		element.click();
-	}
-
-	public void clickEditExpectedDeliveryDate() throws InterruptedException {
-		Thread.sleep(500);
-		driver.navigate().refresh();
-		Thread.sleep(500);
-		By edit_expected_delivery_date_btn_path = By.xpath("//button[@title='Edit Expected Delivery Date']");
-		waitForElementToBeEnabled(driver, edit_expected_delivery_date_btn_path, 10);
-		WebElement edit_expected_delivery_date_btn = driver.findElement(edit_expected_delivery_date_btn_path);
-		edit_expected_delivery_date_btn.click();
-	}
-
-	public void inputExpectedDate() throws InterruptedException {
-		Thread.sleep(500);
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Date tomorrow = calendar.getTime();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-		String tomorrowAsString = dateFormat.format(tomorrow);
-		By expected_delivery_date_field_path = By.xpath("//*[text()='Expected Delivery Date']/../..//input");
-		waitForElementToBeEnabled(driver, expected_delivery_date_field_path, 10);
-		WebElement expected_delivery_date_field = driver.findElement(expected_delivery_date_field_path);
-		expected_delivery_date_field.sendKeys(tomorrowAsString);
-		Thread.sleep(500);
-		expected_delivery_date_field.sendKeys(Keys.ENTER);
-	}
-
-	public void clickSaveExpectedDeliveryDate() throws InterruptedException {
-		Thread.sleep(500);
-		By save_expected_delivery_date_btn_path = By.xpath("//button[text() = 'Save'] | //button[@title = 'Save']");
-		waitForElementToBeEnabled(driver, save_expected_delivery_date_btn_path, 10);
-		WebElement save_expected_delivery_date_btn = driver.findElement(save_expected_delivery_date_btn_path);
-		save_expected_delivery_date_btn.click();
-	}
-
-	public void clickApproveRequisition() throws InterruptedException {
-		Thread.sleep(500);
-		By approve_requisition_btn_path = By.xpath("//button[text() = 'Approve Requisition'] | //a[@title = 'Approve Requisition']");
-		waitForElementToBeEnabled(driver, approve_requisition_btn_path, 10);
-		WebElement approve_requisition_btn = driver.findElement(approve_requisition_btn_path);
-		scrollCenter(approve_requisition_btn);
-		approve_requisition_btn.click();
-	}
-
-	public void clickSaveApprovedRequisition() throws InterruptedException {
-		Thread.sleep(500);
-		By save_approved_requisition_btn_path = By.xpath("//button[text() = 'Save']");
-		waitForElementToBeEnabled(driver, save_approved_requisition_btn_path, 10);
-		WebElement save_approved_requisition_btn = driver.findElement(save_approved_requisition_btn_path);
-		scrollCenter(save_approved_requisition_btn);
-		save_approved_requisition_btn.click();
-	}
-
-	public void enterApprovedDose(String inputDose) throws InterruptedException {
-		Thread.sleep(1000);
-		By tradeLabelPath = By.xpath("//label[text() = 'Trade']");
-		waitForElementToBePresent(driver, tradeLabelPath, 30);
-		WebElement trade = driver.findElement(By.xpath("//label[text() = 'Trade']/..//input"));
-		scrollCenter(trade);
-		String tradeValue = trade.getAttribute("value");
-		WebElement approveDoseField = driver.findElements(By.xpath("//div[contains(text(), '" + tradeValue + "')]/../../td[7]//input")).get(0);
-		approveDoseField.sendKeys(inputDose);
-	}
-
-	public void clickShipRequisition() throws InterruptedException {
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, shipRequisition, 30);
-		shipRequisition.click();
-	}
-
-	public void clickSaveShipRequisition() throws InterruptedException {
-		Thread.sleep(500);
-		By save_ship_requisition_btn_path = By.xpath("//button[contains(text(),'Save')]");
-		waitForElementToBeEnabled(driver, save_ship_requisition_btn_path, 10);
-		WebElement save_ship_requisition_btn = driver.findElement(save_ship_requisition_btn_path);
-		scrollCenter(save_ship_requisition_btn);
-		save_ship_requisition_btn.click();
-	}
-
-	public String ShipRequisition() throws InterruptedException {
-		Thread.sleep(500);
-		By verified_label_path = By.xpath("//h2[contains(text(),'Ship Requisition')]");
-		waitForElementToBeEnabled(driver, verified_label_path, 10);
-		WebElement verified_label = driver.findElement(verified_label_path);
-		return verified_label.getText();
-	}
-
-	public void clickReceiveRequestBtn() throws InterruptedException {
-		Thread.sleep(500);
-		By receive_request_btn_path = By.xpath("//button[text() = 'Receive Requisition'] | //a[@title = 'Receive Requisition']");
-		waitForElementToBeEnabled(driver, receive_request_btn_path, 30);
-		WebElement receive_request_btn = driver.findElement(receive_request_btn_path);
-		receive_request_btn.click();
-	}
-
 	public void clickOnSearchSupplyDistributions() throws InterruptedException {
 		waitForElementToBeVisible(driver, click_on_search_supply_distributions_to_component, 10);
 		Thread.sleep(2000);
 		this.click_on_search_supply_distributions_to_component.click();
 	}
 
-	public void SelectSupplyDistributionTo() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_on_search_supply_distributions_to_component, 10);
-		Thread.sleep(3000);
-		click_on_search_supply_distributions_to_component.click();
-		Thread.sleep(3000);
-		click_on_search_supply_distributions_to_component.sendKeys("SDST");
-		Thread.sleep(3000);
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		Thread.sleep(3000);
-		select_supply_distributions_to.click();
-	}
-
-	public void clickSaveReceiveRequisition() {
-		saveReceiveRequisition.click();
-	}
-
-	public void enterApproverComments(String comment) {
-		approverComment.sendKeys(comment);
-	}
 
 	public void refreshBrowser() throws InterruptedException {
 		driver.navigate().refresh();

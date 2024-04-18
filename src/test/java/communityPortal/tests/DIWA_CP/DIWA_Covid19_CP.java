@@ -3,6 +3,7 @@ package communityPortal.tests.DIWA_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.NotFoundException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -72,7 +73,11 @@ public class DIWA_Covid19_CP extends BaseTest {
         DiwaImmunizationRecord.clickRecordImmunization(driver);
 
         log("/*---12. Click X button on Diwa flow ---*/");
-        DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+        try {
+            DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+        } catch(NotFoundException ex) {
+            System.out.println("---No Duplications. Continue---");
+        }
 
         log("/*---13. Validate message on clicking close button on modal popup ---*/");
         try {

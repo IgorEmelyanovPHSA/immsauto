@@ -27,8 +27,9 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     String participant_name;
     String consentProvider;
     String agent;
-    private String lot_to_select;
-    private String dosage_to_select;
+    String lot_to_select;
+    String dosage_to_select;
+    String site_to_select;
     String clinic_location = "All Ages - Atlin Health Centre";
     MainPageOrg orgMainPage;
 
@@ -39,6 +40,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         testData = Utils.getTestData(env);
         consentProvider = String.valueOf(testData.get("consentProvider"));
         dosage_to_select = String.valueOf(testData.get("covidDose"));
+        site_to_select = String.valueOf(testData.get("siteConsumption"));
         agent = String.valueOf(testData.get("vaccineAgent"));
         lot_to_select = String.valueOf(testData.get("covidLot"));
         log("Target Environment: "+ env);
@@ -102,6 +104,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
         DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
         DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
+        DiwaImmunizationRecord.setSite(driver, site_to_select);
         DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
         Thread.sleep(1000);
 

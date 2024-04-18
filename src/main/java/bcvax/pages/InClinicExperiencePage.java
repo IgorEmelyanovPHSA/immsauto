@@ -14,9 +14,6 @@ import static constansts.Header.SUPPLY_LOCATION_NAME;
 
 
 public class InClinicExperiencePage extends BasePage {
-	@FindBy(xpath = ".//button[text() = 'Save']")
-	private WebElement save_immune_info_btn;
-
 	Tables tables;
 
 	/*---------Constructor-------*/
@@ -318,14 +315,6 @@ public class InClinicExperiencePage extends BasePage {
 			System.out.println("/*---no Home page-Client Search page show up");
 			return false;
 		}
-	}
-
-	public void ClickSaveImmuneInfoSaveButton() throws InterruptedException {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-		Thread.sleep(2000);
-		waitForElementToBeVisible(driver, save_immune_info_btn, 10);
-		Thread.sleep(2000);
-		save_immune_info_btn.click();
 	}
 
 	public void clickOkForExpiredLot() throws InterruptedException {

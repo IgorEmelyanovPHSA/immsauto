@@ -247,7 +247,7 @@ public class Consumption extends BaseTest {
 		if(!dose.equals(consumptionDose)) {
 			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
-		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperiencePage.clickOkForExpiredLot();
 		Thread.sleep(2000);
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
