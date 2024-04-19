@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -22,6 +23,8 @@ public class DIWA_CIB extends BaseTest {
 	private String postal_code = "V2X9T1";
 	String participant_name;
 	String consentProvider;
+	private String lot_to_select;
+	private String dosage_to_select;
 
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
@@ -37,6 +40,8 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
+		lot_to_select = String.valueOf(testData.get("covidLot"));
+		dosage_to_select = String.valueOf(testData.get("covidDose"));
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		loginPage.loginAsImmsBCAdmin();
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
@@ -61,13 +66,15 @@ public class DIWA_CIB extends BaseTest {
 		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
-			PersonAccountPage.confirmNoForecastWarning(driver);
+			log("/*----10. Select COVID19-mRNA as an Option  ---*/");
+			DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
 		} catch(Exception ex) {
-			System.out.println("No Confirm dialog");
+			PersonAccountPage.confirmNoForecastWarning(driver);
+			log("/*----10. Select COVID19-mRNA as an Option  ---*/");
+			DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
 		}
 
-		log("/*----10. Select COVID19-mRNA as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
+
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
 		log("/*---12. Select a Date and Time of Administration ---*/");
@@ -107,18 +114,24 @@ public class DIWA_CIB extends BaseTest {
 		DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
 		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> 300042698 - Exp. 2021 June 18 ---*/");
-		DiwaImmunizationRecord.setLotNumber(driver, "300042698 - Exp. 2021 June 18");
+		DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
 		//profilesPage.setRoute(consumptionRoute);
 		log("/*---21. Select Injection Site ---*/");
 		DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
 		DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 		log("/*---22. Select Dosage---*/");
-		DiwaImmunizationRecord.setDosage(driver, "0.5");
+		DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
 		log("/*---23. Save Immunization Information ---*/");
 		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
 
 		log("/*---24. Confirm and Save Administration ---*/");
-		DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		try {
+			DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		} catch(ElementClickInterceptedException ex) {
+			Thread.sleep(1000);
+			DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+			DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		}
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
 		DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");

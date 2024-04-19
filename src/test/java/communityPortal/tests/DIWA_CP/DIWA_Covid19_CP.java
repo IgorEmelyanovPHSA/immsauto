@@ -20,6 +20,8 @@ public class DIWA_Covid19_CP extends BaseTest {
     private String postal_code = "V2T0N1";
     Map<String, Object> testData;
     private String consentProvider;
+    private String lot_to_select;
+    private String dosage_to_select;
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         //TestcaseID = "223187"; //C223187
@@ -29,6 +31,8 @@ public class DIWA_Covid19_CP extends BaseTest {
         String nameToSearch = "John Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
         consentProvider = String.valueOf(testData.get("consentProvider"));
+        lot_to_select = String.valueOf(testData.get("covidLot"));
+        dosage_to_select = String.valueOf(testData.get("covidDose"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
 
         log("/*1.---Login as Clinician user---*");
@@ -108,14 +112,14 @@ public class DIWA_Covid19_CP extends BaseTest {
         DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
         log("/*---20. click Lot Number dropdown component ---*/");
-        DiwaImmunizationRecord.setLotNumber(driver, "300042698 - Exp. 2021 June 18");
+        DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
 
         log("/*---22. Select Injection Site ---*/");
         DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
         DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 
         log("/*---23. Select Dosage---*/");
-        DiwaImmunizationRecord.setDosage(driver, "0.5");
+        DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
 
         log("/*---24. Save Immunization Information ---*/");
         DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);

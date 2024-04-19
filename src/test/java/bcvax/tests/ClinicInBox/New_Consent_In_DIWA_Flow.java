@@ -28,8 +28,8 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 	String consentProvider;
 	private String email = "accountToDelete@phsa.ca";
 	private String consent_effective_date = "November 29, 2023";
-	private String lot_to_select = "0486AA-CC01";
-	private String dosage_to_select = "0.5";
+	private String lot_to_select ;
+	private String dosage_to_select;
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
 	@Test(priority = 1, testName = "Create DIWA Immunisation record without Appointments(Java)")
@@ -39,6 +39,8 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
 		testData = Utils.getTestData(env);
+		lot_to_select = String.valueOf(testData.get("pneumoLot"));
+		dosage_to_select = String.valueOf(testData.get("pneumoDose"));
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
@@ -200,7 +202,12 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 		log("/*---23. Save Immunization Information ---*/");
 		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
-
+		try {
+			DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+		} catch(Exception ex) {
+			//Do nothing
+			;
+		}
 		confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
 		Assert.assertTrue(confirm_and_save_btn_status);
 		log("/*---24. Confirm and Save Administration ---*/");

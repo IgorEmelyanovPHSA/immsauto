@@ -146,6 +146,18 @@ public class MainPageCP extends BasePage{
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
         By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
+
+        //In case not found
+        By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
+        try {
+            waitForElementToBeEnabled(driver, not_found_message_path, 1);
+            search_field.sendKeys(criteria);
+            Thread.sleep(500);
+            search_field.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            //Do Nothing;
+        }
         int attempt = 0;
         while(attempt < 10) {
             try {
