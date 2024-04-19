@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,10 @@ public class DIWA_ICE extends BaseTest {
 	private String personal_health_nunber = "9746173039";
 	private String date_of_birth = "1959-01-23";
 	private String postal_code = "V2X9T1";
+	private String vaccine_to_select = "COVID-19 mRNA";
 	String consentProvider;
+	private String lot_to_select;
+	private String dosage_to_select;
 
 	@Test()
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
@@ -33,6 +37,9 @@ public class DIWA_ICE extends BaseTest {
 		testData = Utils.getTestData(env);
 		citizenName = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		consentProvider = String.valueOf(testData.get("consentProvider"));
+
+		lot_to_select = String.valueOf(testData.get("covidLot"));
+		dosage_to_select = String.valueOf(testData.get("covidDose"));
 		String clinicLocation = "All Ages - Atlin Health Centre";
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
 
@@ -68,13 +75,14 @@ public class DIWA_ICE extends BaseTest {
 		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----10. Click confirm Button on the popup window---*/");
 		try {
-			PersonAccountPage.confirmNoForecastWarning(driver);
+			log("/*----12. Select COVID19-mRNA as an Option  ---*/");
+			DiwaImmunizationRecord.selectOption(driver, vaccine_to_select);
 		} catch(Exception ex) {
-			System.out.println("No Confitm Dialog");
+			PersonAccountPage.confirmNoForecastWarning(driver);
+			DiwaImmunizationRecord.selectOption(driver, vaccine_to_select);
 		}
 
-		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
+
 		log("/*----13. Enter a Clinic Location: " +clinicLocation +"---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinicLocation);
 		log("/*---14. Select a Date and Time of Administration ---*/");
@@ -117,18 +125,23 @@ public class DIWA_ICE extends BaseTest {
 		DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
 		log("/*---25. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
-		DiwaImmunizationRecord.setLotNumber(driver, "300042698 - Exp. 2021 June 18");
+		DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
 
 		log("/*---26. Select Injection Site ---*/");
 		DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
 		DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 		log("/*---27. Select Dosage---*/");
-		DiwaImmunizationRecord.setDosage(driver, "0.5");
+		DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
 		log("/*---28. Save Immunization Information ---*/");
 		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
 
 		log("/*---29. Confirm and Save Administration ---*/");
-		DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		try {
+			DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		} catch(ElementClickInterceptedException ex) {
+			DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+			DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		}
 
 		log("/*---30. Vaccine Administration Summary Confirm and Save ---*/");
 		DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);

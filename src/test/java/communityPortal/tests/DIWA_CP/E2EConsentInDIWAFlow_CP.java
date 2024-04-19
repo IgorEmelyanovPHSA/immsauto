@@ -34,8 +34,8 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
     String participant_name;
     String consentProvider;
     String agent = "COVID-19 mRNA";
-    private String lot_to_select = "0486AA-CC01";
-    private String dosage_to_select = "0.5";
+    private String lot_to_select;
+    private String dosage_to_select;
     private String site_to_select = "Arm - Right deltoid";
     private String route_to_select = "Intramuscular";
     String clinic_location = "All Ages - Atlin Health Centre";
@@ -46,6 +46,8 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         consentProvider = String.valueOf(testData.get("consentProvider"));
+        lot_to_select = String.valueOf(testData.get("pneumoLot"));
+        dosage_to_select = String.valueOf(testData.get("pneumoDose"));
         log("Target Environment: " + env);
 
         //---Delete the existing client's immunization records ----
@@ -242,6 +244,8 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
             //---The save button sometimes is not clicked properly. Try again---
             DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
             Thread.sleep(1000);
+            DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+            Thread.sleep(500);
             confirm_button_active = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
             Assert.assertTrue(confirm_button_active, "Confirm and Save button Incorrectly Disabled");
         }

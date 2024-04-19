@@ -101,14 +101,14 @@ public class BookingDose2 extends BaseTest {
 		log("/*17.--toast success message - 'Success' --*/");
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
-		try {
-			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-		} catch(Exception ex) {
-			System.out.println("Warning dialog didn't appear");
-		}
-
 		log("/*18.----click on person Account Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(1000);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		log("/*19----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 		//If override Eligibility is shown
