@@ -1,15 +1,12 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.ContainerTransferForm;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.MainPageOrg;
 
 import java.text.DecimalFormat;
 
@@ -99,7 +96,7 @@ public class Transfer extends BaseTest {
         assertEquals(qty_after_distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
 
         System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -108,9 +105,9 @@ public class Transfer extends BaseTest {
         System.out.println("/*18.----Close All Tab's --*/");
         SupplyConsolePage.closeTabsHCA(driver);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_to);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
         //supplyConsolePage.clickOnSupplyLocation_2();
         ///////////////// Supply Location_2 -> Incoming //////////////////////////
 
@@ -122,7 +119,7 @@ public class Transfer extends BaseTest {
 
         System.out.println("/*-- . remaining Quantity are: -->" + qty_before_distribution_2_1);
         System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
         System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -204,7 +201,7 @@ public class Transfer extends BaseTest {
                         format(((doses_before_distribution_1_1 - quantity * dose_conversation_factor) / dose_conversation_factor)));
         assertEquals(qty_after_distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
         System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -219,9 +216,9 @@ public class Transfer extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_to);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
         //supplyConsolePage.clickOnSupplyLocation_2();
 
         ///////////////// Supply Location_2 -> Incoming //////////////////////////
@@ -232,7 +229,7 @@ public class Transfer extends BaseTest {
         double qty_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
         System.out.println("/*-- . remaining Quantity are: -->" + qty_before_distribution_2_1);
         System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
         System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -301,7 +298,7 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*16.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         /////////////////////Doses and Quantity AFTER///////////////////////////////////
         System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         double doses_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -377,7 +374,7 @@ public class Transfer extends BaseTest {
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*16.----click Close Modal button --*/");
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         /////////////////////Doses and Quantity AFTER///////////////////////////////////
         System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -422,7 +419,7 @@ public class Transfer extends BaseTest {
         log("/*3.----Close All previously opened Tab's --*/");
         SupplyConsolePage.closeTabsHCA(driver);
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         ////// Supply Location_1 -> Outcoming
         log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -430,7 +427,7 @@ public class Transfer extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         //////////////////////////////////////////////////
     }
 }

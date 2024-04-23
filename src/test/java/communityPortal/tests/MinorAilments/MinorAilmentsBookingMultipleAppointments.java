@@ -36,13 +36,13 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         MinorAilmentsPage minorAilmentsPage = loginPage.openMinorAilmentsPortal();
 
         log("2. Fill all identification information and click btn continue");
-        minorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
+        MinorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(driver, legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
 
         log("3. Select minor ailment type: " + minorAilmentsToSelectFirstAppointment);
-        minorAilmentsPage.selectOneOption(minorAilmentsToSelectFirstAppointment);
+        MinorAilmentsPage.selectOneOption(driver, minorAilmentsToSelectFirstAppointment);
 
         log("4. Add notes for the pharmacist: " + notesToPharmacist);
-        minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
+        MinorAilmentsPage.enterNotesForPharmacist(driver, notesToPharmacist);
 
         log("5. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -74,10 +74,10 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         Assert.assertTrue(minorAilmentsPage.isBookAPharmacyAppointmentDisplayed());
 
         log("13. Select minor ailment type for 2nd appointment: " + minorAilmentsToSelectSecondAppointment);
-        minorAilmentsPage.selectOneOption(minorAilmentsToSelectSecondAppointment);
+        MinorAilmentsPage.selectOneOption(driver, minorAilmentsToSelectSecondAppointment);
 
         log("14. Add notes for the pharmacist: " + notesToPharmacist);
-        minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
+        MinorAilmentsPage.enterNotesForPharmacist(driver, notesToPharmacist);
 
         log("15. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);

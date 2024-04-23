@@ -94,7 +94,7 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-		supplyConsolePage.refreshBrowser();
+		driver.navigate().refresh();
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
 		double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesBeforeDistribution2_1);
@@ -104,8 +104,8 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 
-		supplyConsolePage.refreshBrowser();
-		supplyConsolePage.clickTransactionsTab();
+		driver.navigate().refresh();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		System.out.println("/*23.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -132,7 +132,7 @@ public class TransferCancellationCP extends BaseTest {
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-		supplyConsolePage.refreshBrowser();
+		driver.navigate().refresh();
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
 		double remainingDosesAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);

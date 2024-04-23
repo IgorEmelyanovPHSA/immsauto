@@ -75,10 +75,10 @@ public class BulkAdjustments extends BaseTest {
 		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*6.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
@@ -195,8 +195,8 @@ public class BulkAdjustments extends BaseTest {
 		log("/*3.----Close All previously opened Tab's --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);

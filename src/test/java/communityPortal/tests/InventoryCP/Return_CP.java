@@ -44,7 +44,7 @@ public class Return_CP extends BaseTest {
         log("/*b.----Receive Supplies for Flu --*/");
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
         supplyConsolePage.clickSupplyItemTextBox();
-        supplyConsolePage.selectSupplyItem(supply_item);
+        SupplyConsolePage.selectSupplyItem(driver, supply_item);
         ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
         supplyConsolePage.selectIncomingSupplyDistributionReceive();

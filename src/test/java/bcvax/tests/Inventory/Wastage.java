@@ -62,10 +62,10 @@ public class Wastage extends BaseTest {
 		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -183,10 +183,10 @@ public class Wastage extends BaseTest {
 		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);

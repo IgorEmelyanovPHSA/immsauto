@@ -59,11 +59,11 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 4. Click Supply Console App Navigation Menu --*/");
 		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 5. Select Supply Items Option from the Drop Down --*/");
-		supplyConsolePage.selectSupplyItemsFromDropdown();
+		SupplyConsolePage.selectSupplyItemsFromDropdown(driver);
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-		supplyConsolePage.switchToTableView();
+		SupplyConsolePage.switchToTableView(driver);
 		Thread.sleep(1000);
-		supplyConsolePage.selectSupplyItemName(supply_item);
+		SupplyConsolePage.selectSupplyItemName(driver, supply_item);
 		//Validation for Doses/Qty Before Receiving needs to be add from supply container
 		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
 		double remainingQty_before = supplyConsolePage.getValueOfRemainingQuantity();
@@ -82,7 +82,7 @@ public class ReceiveSupplies extends BaseTest {
 		SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
 
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
 
 		log("/*-- 18. Navigate and Select Dropdown to Receive Supplies Button --*/");
 		SupplyLocationPage.clickReceiveSuppliesButton(driver);
@@ -94,7 +94,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 21. click to select the Supply Item --*/");
 		supplyConsolePage.clickSupplyItemTextBox();
 		log("/*-- 22. Select Supply Item COMIRNATY (Pfizer) - EK4241  --*/");
-		supplyConsolePage.selectSupplyItem(supply_item);
+		SupplyConsolePage.selectSupplyItem(driver, supply_item);
 		Thread.sleep(2000);
 		log("/*-- 23. Validate Quantity Filed Present on Layout --*/");
 		String qty = supplyConsolePage.validateQTYField();
@@ -132,9 +132,9 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 35. Click Supply Console App Navigation Menu --*/");
 		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
-		supplyConsolePage.selectSupplyItemsFromDropdown();
+		SupplyConsolePage.selectSupplyItemsFromDropdown(driver);
 		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-		supplyConsolePage.clickSupplyItemName(supply_item);
+		SupplyConsolePage.clickSupplyItemName(driver, supply_item);
 
 		///Validation for Doses/Qty Before and After Reciaving needs to be add.
 		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");

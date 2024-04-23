@@ -110,7 +110,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         log("/----Count Remaining Supplies Before Transaction --*/");
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
         double remainingDosesBeforeLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
         double remainingDosesBeforeLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
@@ -121,9 +121,9 @@ public class BulkTransfersCancellationCP extends BaseTest {
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         Thread.sleep(2000);
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
@@ -156,7 +156,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);

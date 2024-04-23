@@ -1,6 +1,7 @@
 package bcvax.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -70,6 +71,24 @@ public class SupplyLocationPage extends BasePage {
             scrollCenter(driver, receive_supplies_item);
             Thread.sleep(500);
             receive_supplies_item.click();
+        }
+    }
+
+    public static void clickTransactionsTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By transactions_tab_path = By.xpath("//a[text() = 'Transactions' or @title = 'Transactions']");
+        waitForElementToBeEnabled(driver, transactions_tab_path, 10);
+        WebElement transactions_tab = driver.findElement(transactions_tab_path);
+        scrollCenter(driver, transactions_tab);
+        Thread.sleep(500);
+        for(int i = 0; i < 10; i++) {
+            try {
+                transactions_tab.click();
+                break;
+            } catch (ElementClickInterceptedException ex) {
+                System.out.println("Exception: " + ex.getMessage());
+                Thread.sleep(1000);
+            }
         }
     }
 }

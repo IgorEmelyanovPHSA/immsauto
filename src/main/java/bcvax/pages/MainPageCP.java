@@ -172,7 +172,6 @@ public class MainPageCP extends BasePage{
                 Thread.sleep(500);
                 search_field.sendKeys(Keys.ENTER);
                 Thread.sleep(500);
-                waitForElementToBeEnabled(driver, table_path, 10);
                 attempt++;
             }
         }
