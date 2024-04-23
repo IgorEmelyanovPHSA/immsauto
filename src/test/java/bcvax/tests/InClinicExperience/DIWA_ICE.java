@@ -3,15 +3,11 @@ package bcvax.tests.InClinicExperience;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import constansts.Apps;
-import org.openqa.selenium.JavascriptExecutor;
-import org.testng.annotations.DataProvider;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import java.io.*;
-import java.nio.file.Paths;
+
 import java.util.*;
 
 
@@ -29,7 +25,10 @@ public class DIWA_ICE extends BaseTest {
 	private String personal_health_nunber = "9746173039";
 	private String date_of_birth = "1959-01-23";
 	private String postal_code = "V2X9T1";
+	private String vaccine_to_select = "COVID-19 mRNA";
 	String consentProvider;
+	private String lot_to_select;
+	private String dosage_to_select;
 
 	@Test()
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
@@ -38,6 +37,9 @@ public class DIWA_ICE extends BaseTest {
 		testData = Utils.getTestData(env);
 		citizenName = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		consentProvider = String.valueOf(testData.get("consentProvider"));
+
+		lot_to_select = String.valueOf(testData.get("covidLot"));
+		dosage_to_select = String.valueOf(testData.get("covidDose"));
 		String clinicLocation = "All Ages - Atlin Health Centre";
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
 
@@ -49,13 +51,13 @@ public class DIWA_ICE extends BaseTest {
 
 		log("/*2.--- Navigate to In Clinic Experience App --*/");
 		mainPageOrg = new MainPageOrg(driver);
-		String currentApp = mainPageOrg.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			try {
-				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+				MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 			} catch(Exception ex) {
 				Thread.sleep(5000);
-				mainPageOrg.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+				MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 			}
 		}
 		//log("/*3.----In Clinic Experience(ICE) page displayed --*/");
@@ -65,22 +67,22 @@ public class DIWA_ICE extends BaseTest {
 		inClinicExperience.closeTabsHCA();
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
-		mainPageOrg.globalSearch(citizenName);
+		MainPageOrg.search(driver, citizenName);
 
-		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*---- 7. Navigate to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		log("/*----9. Click to Create Immunization Record Button ---*/");
 		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----10. Click confirm Button on the popup window---*/");
 		try {
-			PersonAccountPage.confirmNoForecastWarning(driver);
+			log("/*----12. Select COVID19-mRNA as an Option  ---*/");
+			DiwaImmunizationRecord.selectOption(driver, vaccine_to_select);
 		} catch(Exception ex) {
-			System.out.println("No Confitm Dialog");
+			PersonAccountPage.confirmNoForecastWarning(driver);
+			DiwaImmunizationRecord.selectOption(driver, vaccine_to_select);
 		}
 
-		log("/*----12. Select COVID19-mRNA as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
+
 		log("/*----13. Enter a Clinic Location: " +clinicLocation +"---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinicLocation);
 		log("/*---14. Select a Date and Time of Administration ---*/");
@@ -88,8 +90,8 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---15. Click Record Immunization ---*/");
 		DiwaImmunizationRecord.clickRecordImmunization(driver);
 
-		if (profilesPage.clickPopupYesButtonIfDisplayed())
-			log("/*---15.1. Pop up window is displayed and clicked  ---*/");
+		DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+		log("/*---15.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---16. Click X button on Diwa flow ---*/");
 
 		//If Incorrect vaccine warning is displayed
@@ -99,11 +101,7 @@ public class DIWA_ICE extends BaseTest {
 			System.out.println("No Warning found");
 		}
 
-		profilesPage.clickToClose();
-		log("/*---17. Validate message on clicking close button on modal popup ---*/");
-		profilesPage.validateoopsMessage();
 		log("/*---18. click on continue editing button to continue with the flow ---*/");
-		profilesPage.ContinueEditingButton();
 
 		try {
 			PersonAccountRelatedPage.checkExistingConsent(driver);
@@ -116,41 +114,38 @@ public class DIWA_ICE extends BaseTest {
 		//profilesPage.selectDateOfAdministration();
 		log("/*---20. select Informed Consent Provider -> Auto Clinician DIWA_ICE ---*/");
 		try {
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		} catch(Exception ex) {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 			Thread.sleep(500);
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		}
 
 		log("/*---23. Click Show all lot numbers Checkbox---*/");
-		profilesPage.clickShowAllLotNumbersCheckBox();
-
-		log("/*---24. click Lot Number dropdown component ---*/");
-		profilesPage.clickLotNumberDropDown();
+		DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
 		log("/*---25. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
-		profilesPage.selectLot();
+		DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
 
 		log("/*---26. Select Injection Site ---*/");
-		profilesPage.selectInjectionSite();
+		DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
+		DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 		log("/*---27. Select Dosage---*/");
-		profilesPage.selectDosage();
+		DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
 		log("/*---28. Save Immunization Information ---*/");
-		profilesPage.saveImmunizationInformation();
-		Thread.sleep(2000);
-
-		//Click Ok if the lot is expired
-		profilesPage.expiredVaxHandler();
-		Thread.sleep(2000);
-		///////
+		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
 
 		log("/*---29. Confirm and Save Administration ---*/");
-		profilesPage.confirmAndSaveAdministration();
-		Thread.sleep(2000);
+		try {
+			DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		} catch(ElementClickInterceptedException ex) {
+			DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+			DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
+		}
+
 		log("/*---30. Vaccine Administration Summary Confirm and Save ---*/");
-		profilesPage.summaryConfirmAndSave();
-		Thread.sleep(2000);
+		DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
+
 		log("/*---31. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
 	}

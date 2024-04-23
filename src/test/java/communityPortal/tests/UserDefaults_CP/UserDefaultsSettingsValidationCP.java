@@ -7,24 +7,27 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class UserDefaultsSettingsValidationCP extends BaseTest {
-
-    private final String[] lots = {"016F21A-CC07", "LAIV-QTestLot001"};
+    String env;
+    Map<String, Object> testData;
     private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 
     @Test()
     public void UserDefaultsSettingsValidationTest_CP() throws Exception {
         TestcaseID = "222176"; //C222176
-        log("Target Environment: " + Utils.getTargetEnvironment());
-
+        env = Utils.getTargetEnvironment();
+        log("Target Environment: " + env);
+        testData = Utils.getTestData(env);
+        String[] lots = ((ArrayList<String>)testData.get("useDefaultSettingsLots")).toArray(new String[0]);
         log("/*1.----Login as Clinician --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        Thread.sleep(10000);
 
         log("/*2.----- Navigate to User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
-        Thread.sleep(2000);
+        MainPageCP.clickUserDefaultsTab(driver);
 
         log("/*3.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -45,7 +48,6 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
 
         log("/*7.---- Navigate to Supply Console Page --*/");
         SupplyConsolePage supplyConsolePage = cpMainPage.navigateToSupplyLocation(clinicLocation);
-        Thread.sleep(5000);
 
         log("/*8.---- Validating results, given lot numbers should match --*/");
         for(int i = 0; i < lots.length; i++) {
@@ -53,8 +55,7 @@ public class UserDefaultsSettingsValidationCP extends BaseTest {
         }
 
         log("/*9.----- Navigate to User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
-        Thread.sleep(2000);
+        MainPageCP.clickUserDefaultsTab(driver);
 
         log("/*10.----- Open Advanced Settings --*/");
         UserDefaultsPage.clickOnAdvancedSettings(driver);

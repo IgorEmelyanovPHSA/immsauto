@@ -1,23 +1,19 @@
 package bcvax.pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 import java.time.Duration;
 import java.time.Instant;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 
 public class MainPageOrg extends BasePage {
-    Tables tables;
     public MainPageOrg(WebDriver driver) {
         super(driver);
     }
-    public String currentApp() throws InterruptedException {
+    public static String currentApp(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
         try {
@@ -62,8 +58,8 @@ public class MainPageOrg extends BasePage {
         return current_app_text;
     }
 
-    public void switchApp(String app) throws InterruptedException {
-        String currentAppBefore = currentApp();
+    public static void switchApp(WebDriver driver, String app) throws InterruptedException {
+        String currentAppBefore = currentApp(driver);
         System.out.println("Current App Before: " + currentAppBefore);
         Thread.sleep(2000);
         By apps_launcher_path = By.xpath("//div[@role='navigation' and @aria-label='App']//button");
@@ -109,7 +105,7 @@ public class MainPageOrg extends BasePage {
                 if(windows.size() > 1) {
                     driver.switchTo().window(windows.get(1));
                 }
-                String currentApp = currentApp();
+                String currentApp = currentApp(driver);
                 By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
                 while(!currentApp.equals(app)) {
                     List<WebElement> breadcrump_list = driver.findElements(breadcrump_path);
@@ -124,16 +120,16 @@ public class MainPageOrg extends BasePage {
                             break;
                         }
                     }
-                    currentApp = currentApp();
+                    currentApp = currentApp(driver);
                     Thread.sleep(200);
                 }
             }
         }
-        String currentAppAfter = currentApp();
+        String currentAppAfter = currentApp(driver);
         System.out.println("Current App After: " + currentAppAfter);
     }
 
-    public void selectFromNavigationMenu(String item) throws InterruptedException {
+    public static void selectFromNavigationMenu(WebDriver driver, String item) throws InterruptedException {
         Thread.sleep(500);
         By navigation_menu_path = By.xpath("//button[@title='Show Navigation Menu']");
         waitForElementToBeEnabled(driver, navigation_menu_path, 10);
@@ -152,7 +148,7 @@ public class MainPageOrg extends BasePage {
         my_item.click();
     }
 
-    public void closeAllTabs() throws InterruptedException {
+    public static void closeAllTabs(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
@@ -175,16 +171,32 @@ public class MainPageOrg extends BasePage {
         }
     }
 
-    public void closeLastTab() throws InterruptedException {
+    public static void closeLastTab(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 30);
-        By hca_tabs_path = By.xpath("//div[@role='tablist']/ul[@role='presentation' and @class='tabBarItems slds-grid']/li[@role='presentation']/div[@class='close slds-col--bump-left slds-p-left--none slds-context-bar__icon-action ']/button");
-        List<WebElement> closeButtons = driver.findElements(hca_tabs_path);
-        int my_last_button = closeButtons.size() - 1;
-        closeButtons.get(my_last_button).click();
+        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
+        List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button' and contains(@title, 'Appointment Day Management') and not(contains(@title, 'Close All'))]"));
+        int counter = 0;
+        while(closeButtons.size() < 1) {
+            Thread.sleep(1000);
+            closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button' and contains(@title, 'Appointment Day Management')]"));
+            counter++;
+            if(counter > 5) {
+                break;
+            }
+        }
+        for(WebElement closeTabBtn : closeButtons) {
+            try {
+                if(!closeTabBtn.getAttribute("title").contains("Close All")) {
+                    closeTabBtn.click();
+                    Thread.sleep(2000);
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
-    public void globalSearch(String search_value) throws InterruptedException {
+    public static void search(WebDriver driver, String search_value) throws InterruptedException {
         Thread.sleep(500);
         By search_btn_path = By.xpath("//button[@aria-label = 'Search']");
         waitForElementToBeEnabled(driver, search_btn_path, 10);
@@ -209,16 +221,14 @@ public class MainPageOrg extends BasePage {
         }
         Thread.sleep(500);
         By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
-        int counter = 5;
+        int counter = 10;
         for(int i = 0; i < counter; i++) {
             try {
                 waitForElementToBeEnabled(driver, found_client_path, 10);
                 Thread.sleep(1000);
                 break;
             } catch (NotFoundException ex) {
-                if(i == counter - 1) {
-                    throw ex;
-                }
+                System.out.println("Attempt #" + (i + 1));
                 Thread.sleep(500);
                 search_input.clear();
                 Thread.sleep(500);
@@ -226,13 +236,13 @@ public class MainPageOrg extends BasePage {
             }
         }
         WebElement found_client = driver.findElement(found_client_path);
-        scrollCenter(found_client);
+        scrollCenter(driver, found_client);
         Thread.sleep(1000);
         try {
             found_client.click();
         } catch(ElementNotInteractableException ex) {
             //Re-try after 2 seconds
-            scrollCenter(found_client);
+            scrollCenter(driver, found_client);
             Thread.sleep(2000);
             found_client.click();
         }

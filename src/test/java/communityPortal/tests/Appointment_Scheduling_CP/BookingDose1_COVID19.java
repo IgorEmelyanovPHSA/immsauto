@@ -23,7 +23,6 @@ public class BookingDose1_COVID19 extends BaseTest {
     @Test(priority = 1)
     public void Can_Book_Dose1_Appointment_as_Clerk_CP() throws Exception {
         TestcaseID = "243154"; //C243154
-        CommonMethods commn = new CommonMethods(getDriver());
         log("Target Environment: "+ Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -33,10 +32,10 @@ public class BookingDose1_COVID19 extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-
-        log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
+                log("/*7.----click Register button New Citizen --*/");
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -83,15 +82,17 @@ public class BookingDose1_COVID19 extends BaseTest {
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
-        //If override Eligibility is shown
         try {
+            log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch(Exception ex) {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
             PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
+            Thread.sleep(500);
+            log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
-        log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+
         ////////////////////
         //May will be removed
         //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
@@ -128,21 +129,11 @@ public class BookingDose1_COVID19 extends BaseTest {
         PersonAccountPage.goToRelatedTab(driver);
         //////
         log("/*35_1.----Refresh page again - should not be like that again --*/");
-        inClinicExperience_CP.refreshBrowser();
+        driver.navigate().refresh();
         ///////
 
         //Validation Steps
         log("/ 36. --- We need Validation that Booking Record " +
                 "in New Status has created and In-Clinic Experience button is Visible, Active, Clickable");
     }
-
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-    }
-
-
 }

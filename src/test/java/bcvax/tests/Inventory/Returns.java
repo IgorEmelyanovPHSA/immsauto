@@ -36,24 +36,24 @@ public class Returns extends BaseTest {
         //Login as Admin
         log("/*----Login as Admin --*/");
         orgMainPage = loginPage.orgLoginAsPPHIS();
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         log("/*a.----Go to Health Connect Supply Location --*/");
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         //Get Flu supplies using Receive Supplies feature
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-        supplyConsolePage.closeTabsHCA();
-        supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
-        supplyConsolePage.selectSupplyLocationFromDropdown();
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.closeTabsHCA(driver);
+        SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
+        SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*b.----Receive Supplies for Flu --*/");
-        supplyConsolePage.SelectDropDownToClickReceiveSuppliesButton();
-        supplyConsolePage.ClickDropDownToClickReceiveSuppliesButton();
+        SupplyLocationPage.clickReceiveSuppliesButton(driver);
+
         supplyConsolePage.clickSupplyItemTextBox();
-        supplyConsolePage.selectSupplyItem(supply_item);
-        supplyConsolePage.enterTransferDosages(Double.toString(doses));
+        SupplyConsolePage.selectSupplyItem(driver, supply_item);
+        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
         supplyConsolePage.selectIncomingSupplyDistributionReceive();
         supplyConsolePage.selectReasonForReception();
@@ -65,7 +65,7 @@ public class Returns extends BaseTest {
         supplyConsolePage.selectWastageFromDropDown();
 
         log("/*f.----Add Doses and Reason for Wastage --*/");
-        supplyConsolePage.setDosesAmount(Double.toString(doses));
+        ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(doses));
         supplyConsolePage.selectReasonForWastageDropDown();
 
         log("/*g.----Click Wastage Button--*/");
@@ -90,25 +90,23 @@ public class Returns extends BaseTest {
                 orgMainPage = loginPage.orgLoginAsPPHIS();
         }
 
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
 
         log("/*3. ----Close all open tabs --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
-        supplyConsolePage.clickSupplyConsoleAppNavigationMenu();
-        supplyConsolePage.selectSupplyLocationFromDropdown();
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
+        SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*5. ----Click Return Button --*/");
-        supplyConsolePage.clickReturnBtn();
+        SupplyLocationPage.clickReturnButton(driver);
 
         ReturnDialog returnDialog = new ReturnDialog(driver);
         String supply_location_from_value = returnDialog.getReturnFromValue();

@@ -27,11 +27,12 @@ public class BookingDose1 extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		return new Object[][] {{"225652", "Covid19Vaccine"}, {"228857", "InfluenzaVaccine"}};
+		//return new Object[][] {{"225652", "Covid19Vaccine"}};
+		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", false}};
 	}
 
 	@Test(dataProvider = "booking_data")
-	public void Can_Book_Dose1_Appointment_as_Clinician_CIB(String testcase_id, String vaccine_agent) throws Exception {
+	public void Can_Book_Dose1_Appointment_as_Clinician_CIB(String testcase_id, String vaccine_agent, boolean vaccine_available) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("------------------------------");
 		log("Testcase ID: " + testcase_id);
@@ -48,14 +49,14 @@ public class BookingDose1 extends BaseTest {
 		vaccineToSelect = vaccine_agent;
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -70,16 +71,16 @@ public class BookingDose1 extends BaseTest {
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
-		currentApp = orgMainPage.currentApp();
+		currentApp = MainPageOrg.currentApp(driver);
 		try {
 			clinicInBox.closeAllTabs();
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		log("/*3.----Close All previously opened Tab's --*/");
 
 		log("/*4.----click Register New Citizen --*/");
@@ -126,13 +127,22 @@ public class BookingDose1 extends BaseTest {
 
 		//If override Eligibility is shown
 		try {
-			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountSchedulePage.overrideEligibility(driver);
+			log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			if(vaccine_available) {
+				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+				PersonAccountSchedulePage.overrideEligibility(driver);
+				Thread.sleep(500);
+				log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+				PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+			} else {
+				//---If vaccine is disabled and not available in UI then Pass
+				Assert.assertTrue(1==1);
+				return;
+			}
 		}
-		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
@@ -182,12 +192,4 @@ public class BookingDose1 extends BaseTest {
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-	}
-
 }

@@ -49,9 +49,9 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*1.----Navigate to More -> Register --*/");
         loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-            orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         inClinicExperiencePage.closeTabsHCA();
@@ -66,8 +66,8 @@ public class Check_In_Client_ICE extends BaseTest {
         System.out.println("/*----- Click on Save defaults button --*/");
         inClinicExperiencePage.clickSaveDefaultsButton();
         log("/*5.----click Register button New Citizen --*/");
-        inClinicExperiencePage.clickRegisterTab();
-        inClinicExperiencePage.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterTab(driver);
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*6.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*7.----Enter Last Name " +legalLastName +"--*/");
@@ -114,12 +114,12 @@ public class Check_In_Client_ICE extends BaseTest {
         PersonAccountPage.clickCheckInButton(driver);
         Thread.sleep(500);
         log("/*22.--Verify if the landing tab is IDENTIFICATION --*/");
-        String currentTab = inClinicExperiencePage.getCurrentTab();
+        String currentTab = InClinicExperiencePage.getCurrentTab(driver);
         assertEquals(currentTab, "Identification");
         log("/*23.--Get new appointment location, date and time --*/");
-        String appointmentDate = inClinicExperiencePage.getAppointmentDate();
-        String appointmentTime = inClinicExperiencePage.getAppointmentTime();
-        String appointmentLocation = inClinicExperiencePage.getAppointmentLocation();
+        String appointmentDate = InClinicExperienceIdentificationPage.getAppointmentDate(driver);
+        String appointmentTime = InClinicExperienceIdentificationPage.getAppointmentTime(driver);
+        String appointmentLocation = InClinicExperienceIdentificationPage.getAppointmentLocation(driver);
 
         LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
         assertEquals(appointmentDate, expectedDate);
@@ -128,12 +128,5 @@ public class Check_In_Client_ICE extends BaseTest {
         assertTrue(Math.abs(appointmentTimeActual.getMinute() - currentTime.toLocalTime().getMinute()) <= 2, "Expected Time:" + currentTime.toLocalTime() + "; Actual Time: " + appointmentTime);
         log("/*25.--Verify the Location is Age 12 and Above - Abbotsford - Abby Pharmacy --*/");
         assertEquals(appointmentLocation, clinicNameToSearch);
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

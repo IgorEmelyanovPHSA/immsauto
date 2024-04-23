@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
@@ -35,47 +32,38 @@ public class BulkWastagesCP extends BaseTest {
 		int amountOfDosesToWaste = 1;
 		String reasonForWastage = "CCI: Handling Error";
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin":
-				log("Login AS comunityqa_immsbc_admin");
-				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-				break;
-			default:
-				log("Login as Clinician");
-				log("TestCase: C243121");
-				TestcaseID = "243121"; //C243121
-				loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login as Clinician --*/");
+		log("TestCase: C243121");
+		TestcaseID = "243121"; //C243121
+		loginPage.loginIntoCommunityPortalAsClinician();
+
 		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		cpMainPage.selectSupplyLocationName(supply_location_from);
 		
 		log("/*3.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
+		Map<String, Map<String, String>> my_containers = new HashMap<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
 		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+			for (int k = 1; k <= 3; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
+
 		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*5.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*6.----Click on bulk Wastage button on Supply page--*/");
-		supplyConsolePage.clickBulkWastageButton();
+		SupplyLocationRelatedItems.clickWastageButton(driver);
 
 		log("/*7.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkWastageByDosageWithReason(amountOfDosesToWaste, reasonForWastage);

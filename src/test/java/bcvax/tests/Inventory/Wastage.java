@@ -1,11 +1,11 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
+import bcvax.pages.ContainerWastageForm;
 import bcvax.pages.MainPageOrg;
 import bcvax.tests.BaseTest;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
-import bcvax.pages.CommonMethods;
 import constansts.Apps;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.annotations.BeforeMethod;
@@ -53,22 +53,19 @@ public class Wastage extends BaseTest {
 		loginPage.loginAsPPHIS();
 
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -92,7 +89,7 @@ public class Wastage extends BaseTest {
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 		
 		log("/*7.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
+		ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToWaste));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
 		
@@ -105,8 +102,7 @@ public class Wastage extends BaseTest {
 		//Verification values in Container - Wastage pop-up
 		assertEquals((remainingDosesBeforeWastage - amountOfDosesToWaste), remainingDosesAfterWastage);
 		Thread.sleep(2000);
-		driver.navigate().refresh();
-		Thread.sleep(2000);
+
 		log("/*10.----Read Remaining Doses And Quantity After Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
@@ -178,22 +174,19 @@ public class Wastage extends BaseTest {
 		loginPage.loginAsPPHIS();
 
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*4.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -217,7 +210,7 @@ public class Wastage extends BaseTest {
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 
 		log("/*7.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
-		supplyConsolePage.setQuantityAmount(Double.toString(amountOfDosesToWaste / doseConversionFactorValue));
+		ContainerWastageForm.enterAdjustmentQuantity(driver, Double.toString(amountOfDosesToWaste / doseConversionFactorValue));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
 

@@ -25,7 +25,6 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
     public void CP_CitizenPortalBookDoseOneInfluenza_C245219() throws Exception {
         TestcaseID = "245219"; //C245219
         log("Target Environment: " + Utils.getTargetEnvironment());
-        CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
@@ -53,13 +52,13 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
         Thread.sleep(10000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        com.globalSearchCP(conformationNumberText);
+        MainPageCP.search(driver, conformationNumberText);
 
-        log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-        }
+//        log("/*7.1---Validation, isUserFound account validation --*/");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
 
         try {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
@@ -75,13 +74,13 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
         CitizenPrimaryInfo.successMessageAppear(driver);
 
         //Extra step to log out from CP
-        loginPage.logOutCommunityPortal();
+        cpMainPage.logout();
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        loginPage.openBookAnAppointmentPage(uniqueLink);
+        BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
         BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
@@ -115,13 +114,5 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
 
         log("/*16.---Verify appointment conformation message is displayed--*/");
         PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
     }
 }

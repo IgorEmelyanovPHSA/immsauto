@@ -1,7 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
+import bcvax.pages.ContainerAdjustmentForm;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -56,19 +56,11 @@ public class AdjustmentsCP extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin":
-				log("Login AS comunityqa_immsbc_admin");
-				TestcaseID = "245091"; //C245091
-				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-				break;
-			default:
-				log("Login as Clinician");
-				log("TestCase: C243117");
-				TestcaseID = "243117"; //C243117
-				loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login as Clinician --*/");
+		log("TestCase: C243117");
+		TestcaseID = "243117"; //C243117
+		loginPage.loginIntoCommunityPortalAsClinician();
+
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		cpMainPage.selectSupplyLocationName(supplyLocation);
@@ -88,7 +80,7 @@ public class AdjustmentsCP extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
 		log("/*6.----set Adjustment Doses amount --*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToAdjust));
+		ContainerAdjustmentForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToAdjust));
 
 		double remainingDosesAfterAdjustmentInPopUp = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Remaining Doses After Adjustment " + remainingDosesAfterAdjustmentInPopUp + " --*/");

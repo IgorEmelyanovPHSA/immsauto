@@ -12,27 +12,8 @@
     import static org.testng.Assert.assertTrue;
 
     public class MinorAilmentsPage extends BasePage {
-
-        @FindBy(xpath = "//input[@name='FirstName']")
-        private WebElement textLegalFirstName;
-
-        @FindBy(xpath = "//input[@name='LastName']")
-        private WebElement textLegalLastName;
-
-        @FindBy(xpath = "//input[@name='PersonBirthdate']")
-        private WebElement textDateOfBirth;
-
-        @FindBy(xpath = "//input[@name='HC_Personal_Health_Number']")
-        private WebElement textPersonalHealthNumber;
-
         @FindBy(xpath = "(//button[contains(text(),'Continue')])[1]")
         private WebElement btnContinueRegistration;
-
-        @FindBy(xpath = "//span[text() = 'Select One']")
-        private WebElement btnSelectOne;
-
-        @FindBy(xpath = "//*[@name='citizencomment']")
-        private WebElement textNotes;
 
         @FindBy(xpath = "//button[contains(text(), 'Book another appointment')]")
         private WebElement btnBookAnotherAppointment;
@@ -53,39 +34,61 @@
             click(btnContinueRegistration);
         }
 
-        public void fillMandatoryFieldsOnIdentificationSection(String firstName, String lastName, String dob, String phn) throws InterruptedException {
-            typeIn(textLegalFirstName, firstName);
-            typeIn(textLegalLastName, lastName);
-            typeIn(textDateOfBirth, dob);
-            typeIn(textPersonalHealthNumber, phn);
-            clickBtnContinue();
+        public static void fillMandatoryFieldsOnIdentificationSection(WebDriver driver, String firstName, String lastName, String dob, String phn) throws InterruptedException {
+            Thread.sleep(500);
+            By legal_first_name_field_path = By.xpath("//input[@name='FirstName']");
+            waitForElementToBeEnabled(driver, legal_first_name_field_path, 10);
+            WebElement legal_first_name_field = driver.findElement(legal_first_name_field_path);
+
+            By legal_last_name_field_path = By.xpath("//input[@name='LastName']");
+            WebElement legal_last_name_field = driver.findElement(legal_last_name_field_path);
+
+            By date_of_birth_field_path = By.xpath("//input[@name='PersonBirthdate']");
+            WebElement date_of_birth_field = driver.findElement(date_of_birth_field_path);
+
+            By phn_field_path = By.xpath("//input[@name='HC_Personal_Health_Number']");
+            WebElement phn_field = driver.findElement(phn_field_path);
+            legal_first_name_field.sendKeys(firstName);
+            legal_last_name_field.sendKeys(lastName);
+            date_of_birth_field.sendKeys(dob);
+            phn_field.sendKeys(phn);
+            By continue_registration_btn_path = By.xpath("//button[text()='Continue']");
+            WebElement continue_registration_btn = driver.findElement(continue_registration_btn_path);
+            continue_registration_btn.click();
         }
 
-        public void selectOneOption(String minorAilmentsToSelect) throws InterruptedException {
+        public static void selectOneOption(WebDriver driver, String minorAilmentsToSelect) throws InterruptedException {
             Thread.sleep(500);
-            waitForElementToBeClickable(btnSelectOne);
-            click(btnSelectOne);
+            By select_one_button_path = By.xpath("//span[text() = 'Select One']");
+            waitForElementToBeEnabled(driver, select_one_button_path, 10);
+            WebElement select_one_button = driver.findElement(select_one_button_path);
+            select_one_button.click();
             By textReasonXpath = By.xpath("//span[text() = '" + minorAilmentsToSelect + "']");
             waitForElementToBeEnabled(driver, textReasonXpath, 5);
             WebElement textReason = driver.findElement(textReasonXpath);
-            click(textReason);
+            textReason.click();
         }
 
-        public void verifyCountAndOrderOfTheList() throws InterruptedException {
+        public static void verifyCountAndOrderOfTheList(WebDriver driver) throws InterruptedException {
             //23items due to index 0 = "Select One" ignored for both Lists
+            Thread.sleep(500);
             List<String> givenListOfNamesInOrder = Arrays.asList("Select One", "Contraception", "Acne (mild)", "Allergies and hay fever",
                     "Canker sores (Oral ulcers)", "Cold sores", "Fungal infections", "Headaches", "Heartburn (acid reflux/ GERD)", "Hemorrhoids", "Hives and itching, including from bug bites (urticaria)", "Impetigo",
                     "Menstrual pain", "Nicotine dependence", "Pink eye (conjunctivitis)", "Pinworms or threadworms", "Shingles", "Skin rash (dermatitis)",
                     "Sprains and strains (musculoskeletal pain)", "Thrush (oral fungal infection)", "Upset stomach (indigestion)",
                     "Urinary tract infection (uncomplicated)", "Yeast infection (vaginal candidiasis)");
 
-            waitForElementToBeClickable(btnSelectOne);
-            click(btnSelectOne);
+            By select_one_button_path = By.xpath("//span[text() = 'Select One']");
+            waitForElementToBeEnabled(driver, select_one_button_path, 10);
+            WebElement select_one_button = driver.findElement(select_one_button_path);
+            select_one_button.click();
             Thread.sleep(750);
             List<WebElement> allInputElements = driver.findElements(By.xpath("//span[@class='slds-truncate']"));
             log("Size of allInputElements " + (allInputElements.size() - 1));
-            if (allInputElements.size() < 1) {
+            if (allInputElements.size() < 2) {
                 log("Cant read the list from dropDown");
+                Thread.sleep(1000);
+                allInputElements = driver.findElements(By.xpath("//span[@class='slds-truncate']"));
             }
 
             List<String> namesFromActualList = new ArrayList<String>();
@@ -98,12 +101,17 @@
                 assertTrue(namesFromActualList.get(i).equals(givenListOfNamesInOrder.get(i)), "Item " + givenListOfNamesInOrder.get(i) + " doesn't exist in Actual Drop Down List");
             }
             //Close the dropDown
-            click(btnSelectOne);
+            select_one_button.click();
         }
 
 
-        public void enterNotesForPharmacist(String notes) {
-            typeIn(textNotes, notes);
+        public static void enterNotesForPharmacist(WebDriver driver, String notes) throws InterruptedException {
+            Thread.sleep(500);
+            By notes_path = By.xpath("//textarea[@name='citizencomment']");
+            waitForElementToBeEnabled(driver, notes_path, 10);
+            WebElement notes_field = driver.findElement(notes_path);
+            scrollCenter(driver, notes_field);
+            notes_field.sendKeys(notes);
         }
 
         public void clickBtnBookAnotherAppointment() throws InterruptedException {

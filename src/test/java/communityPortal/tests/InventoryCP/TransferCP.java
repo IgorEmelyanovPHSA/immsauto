@@ -1,15 +1,13 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
+
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -65,7 +63,7 @@ public class TransferCP extends BaseTest {
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-		supplyConsolePage.enterTransferDosages("10");
+		ContainerTransferForm.enterTransferDosages(driver, "10");
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
@@ -86,7 +84,7 @@ public class TransferCP extends BaseTest {
 				Double.parseDouble(df.format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses) / dose_conversation_factor)));
 		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -100,7 +98,7 @@ public class TransferCP extends BaseTest {
 		supplyConsolePage.clickOnOutgoingTransactions(kk);
 		Thread.sleep(3000);
 		System.out.println("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
@@ -113,7 +111,7 @@ public class TransferCP extends BaseTest {
 		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
 		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
 		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
 		System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -287,7 +285,7 @@ public class TransferCP extends BaseTest {
 		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
 		System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 		System.out.println("/*12.----Entering 10 Doses in the Container-Transfer Form --*/");
-		supplyConsolePage.enterTransferDosages("10");
+		ContainerTransferForm.enterTransferDosages(driver, "10");
 		System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
 		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
 		System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
@@ -296,7 +294,7 @@ public class TransferCP extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		System.out.println("/*16.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
-		supplyConsolePage.refreshBrowser();
+		driver.navigate().refresh();
 		/////////////////////Doses and Quantity AFTER///////////////////////////////////
 		System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -410,18 +408,9 @@ public class TransferCP extends BaseTest {
 //	}
 
 	public void precondition() throws Exception {
-		if(env.contains("immsbc_admin")) {
-			log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-			orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-			Thread.sleep(1000);
-			orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-			Thread.sleep(3000);
-			cpMainPage = new MainPageCP(driver);
-			cpMainPage.clickGoToUserDefaultsButton();
-		} else {
-			log("/*1.----Login As Clinician --*/");
-			cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login As Clinician --*/");
+		cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+
 		Thread.sleep(3000);
 		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
 		supplyConsolePage.clickOnRelatedItemTab();

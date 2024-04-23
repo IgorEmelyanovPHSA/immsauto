@@ -57,7 +57,7 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
 
     public static String getLotNumber(WebDriver driver) throws InterruptedException {
         By lot_number_path = By.xpath("//span[text() = 'Lot Number']/..//input");
-        waitForElementToBeEnabled(driver, lot_number_path, 5);
+        waitForElementToBeEnabled(driver, lot_number_path, 10);
         driver.findElement(lot_number_path).click();
         Thread.sleep(1000);
         return driver.findElement(lot_number_path).getAttribute("title");
@@ -130,5 +130,25 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         waitForElementToBeEnabled(driver, my_dosage_path, 10);
         WebElement my_dosage = driver.findElement(my_dosage_path);
         my_dosage.click();
+    }
+
+    public static void clickEditImmunizationInformation(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By edit_immunization_info_btn_path = By.xpath("//c-bc-hc-immunization-info//button[@title='Edit']");
+        waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
+        WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
+        scrollIfNeeded(driver, edit_immunization_info_btn);
+        Thread.sleep(500);
+        edit_immunization_info_btn.click();
+    }
+
+    public static void clickSaveImmuneInfoButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By save_immunization_info_btn_path = By.xpath("//button[text()='Save']");
+        waitForElementToBeEnabled(driver, save_immunization_info_btn_path, 10);
+        WebElement save_immunization_info_btn = driver.findElement(save_immunization_info_btn_path);
+        scrollCenter(driver, save_immunization_info_btn);
+        Thread.sleep(500);
+        save_immunization_info_btn.click();
     }
 }

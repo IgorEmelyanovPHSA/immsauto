@@ -31,7 +31,7 @@ public class MinorAilmentsIdentificationPage extends BaseTest {
         Assert.assertTrue(minorAilmentsPage.isErrorMessagesForEachMandatoryFieldOnIdentificationPage());
 
         log("4. Fill all identification information WITH INCORRECT LAST NAME and click btn continue");
-        minorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(incorrectLegalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
+        MinorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(driver, incorrectLegalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
 
         log("5. Verify that a pop up window appears for the first 2 incorrect attempts and closing the message");
         Assert.assertTrue(minorAilmentsPage.isPopMessagesForInformationMissMatch());

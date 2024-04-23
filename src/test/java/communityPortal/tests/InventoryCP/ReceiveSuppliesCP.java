@@ -1,9 +1,6 @@
 package communityPortal.tests.InventoryCP;
 
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Tables;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +17,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 	Map<String, Object> testData;
 	MainPageCP communityPortalMainPage;
 	SupplyConsolePage supplyConsolePage;
-	Tables tables;
 	String vaccine;
 	String lot;
 	String supply_location;
@@ -34,7 +30,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 		testData = Utils.getTestData(env);
 		log("Login as Clinician");
 		communityPortalMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-		tables = loginPage.getTables();
 		vaccine = String.valueOf(testData.get("containerTo"));
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
 		supply_location = String.valueOf(testData.get("supplyLocationTo"));
@@ -57,10 +52,10 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
 		log("/*-- Receive Supplies --*/");
-		supplyConsolePage.clickBtnReceiveSuppliesCP();
+		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 		Thread.sleep(2000);
 		supplyConsolePage.selectSupplyItemTo(lot);
-		supplyConsolePage.enterTransferDosages(String.valueOf(doses));
+		ContainerTransferForm.enterTransferDosages(driver, String.valueOf(doses));
 		supplyConsolePage.selectReasonForReception();
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 
@@ -95,7 +90,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 		}
 
 		log("/----Count Supplies After Receiving--*/");
-		tables.hardWait(2);//needs couple seconds to refresh results
 
 		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
 		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
@@ -120,13 +114,13 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
 		log("/*-- Receive Supplies --*/");
-		supplyConsolePage.clickBtnReceiveSuppliesCP();
+		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 
 		supplyConsolePage.selectSupplyItemTo(lot);
 		Thread.sleep(500);
 		supplyConsolePage.selectReasonForReception();
 		Thread.sleep(500);
-		supplyConsolePage.enterTransferQuantity(String.valueOf(qty));
+		ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(qty));
 		Thread.sleep(500);
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 		supplyConsolePage.transferToDistributionOnSend(distribution);
@@ -134,7 +128,6 @@ public class ReceiveSuppliesCP extends BaseTest {
 		supplyConsolePage.successMessageAppear();
 
 		log("/----Count Supplies After Receiving--*/");
-		tables.hardWait(2);//needs couple seconds to refresh results
 		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
 		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
 		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);

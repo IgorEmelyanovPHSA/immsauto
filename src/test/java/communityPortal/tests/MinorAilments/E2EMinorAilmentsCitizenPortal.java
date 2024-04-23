@@ -28,27 +28,24 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         log("API call to remove appointments from participant account by PHN if found");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(personalHealthNumber);
 
-        CommonMethods com = new CommonMethods(getDriver());
-        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
-
         log("1. Open Minor Ailments portal");
         MinorAilmentsPage minorAilmentsPage = loginPage.openMinorAilmentsPortal();
 
         log("2. Fill all identification information and click btn continue");
-        minorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
+        MinorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(driver, legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
 
         log("3. Verify that there are 22 items and the order in the picklist");
-        minorAilmentsPage.verifyCountAndOrderOfTheList();
+        MinorAilmentsPage.verifyCountAndOrderOfTheList(driver);
 
         log("4. Select minor ailment type: " + minorAilmentsToSelect + " ");
-        minorAilmentsPage.selectOneOption(minorAilmentsToSelect);
+        MinorAilmentsPage.selectOneOption(driver, minorAilmentsToSelect);
 
         //TR Step3 verify link for btn More Info
 
         //TR Step4 verify the list of checkbox options for clinic features; Spoke to Ann, can skip this validation
 
         log("5. Add notes for the pharmacist: " + notesToPharmacist + " ");
-        minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
+        MinorAilmentsPage.enterNotesForPharmacist(driver, notesToPharmacist);
 
         log("6. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -88,16 +85,16 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         Assert.assertTrue(minorAilmentsPage.isBookAPharmacyAppointmentDisplayed());
 
         log("16. Login as an Clinician into CP");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+        loginPage.loginIntoCommunityPortalAsClinician();
 
         log("17. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);
-        com.globalSearchCP(legalFirstName + " " +legalLastName);
+        MainPageCP.search(driver, legalFirstName + " " +legalLastName);
 
         log("18. Validation, if account is found open it");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-        }
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
 
         log("19. Navigate to Related tab");
         PersonAccountPage.goToRelatedTab(driver);

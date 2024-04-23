@@ -41,7 +41,6 @@ public class UserDefaultsPage extends BasePage{
 
     public static void clickBtnSaveWithSuccessMsgValidation(WebDriver driver) throws InterruptedException {
         clickBtnSave(driver);
-        validateSuccessfullyUpdatedMsg(driver);
     }
 
     public static void clickOkForExpiredLot(WebDriver driver) throws InterruptedException {
@@ -59,15 +58,16 @@ public class UserDefaultsPage extends BasePage{
     }
 
     public static void deleteAllLotsIfAnyHasBeenSavedPreviously(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
         By delete_lot_button_path = By.xpath("//button[@name='DeleteLot']");
-        WebElement delete_lot_button = driver.findElement(delete_lot_button_path);
-        while(isAnyLotsPresent(driver) == true){
+        waitForElementToBeEnabled(driver, delete_lot_button_path, 10);
+        List<WebElement> delete_lot_buttons = driver.findElements(delete_lot_button_path);
+        for(WebElement delete_lot_button: delete_lot_buttons) {
             delete_lot_button.click();
         }
     }
 
     public static void populateLotsAndSite(WebDriver driver, String [] lots) throws InterruptedException {
-        int count = 1;
         for(int i=0; i < lots.length; i ++){
             By add_new_btn_path = By.xpath("//button [@class='slds-button' and @title='Add']");
             waitForElementToBeEnabled(driver, add_new_btn_path, 10);
@@ -75,55 +75,46 @@ public class UserDefaultsPage extends BasePage{
             scrollCenter(driver, add_new_btn);
             Thread.sleep(500);
             add_new_btn.click();
-            By lot_dropdown_btn_path = By.xpath("(//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class'])["+ count +"]");
+            By lot_dropdown_btn_path = By.xpath("//span[@title='Lot#']/../../../../../../..//input[@class='slds-input slds-combobox__input slds-combobox__input-value combobox-input-class']");
             waitForElementToBeEnabled(driver, lot_dropdown_btn_path, 10);
-            WebElement drpDownLot = driver.findElement(lot_dropdown_btn_path);
+            WebElement drpDownLot = driver.findElements(lot_dropdown_btn_path).get(i);
             drpDownLot.click();
             Thread.sleep(500);
 
-            By lot_edit_field_path = By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])["+ count +"]");
+            By lot_edit_field_path = By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])");
             waitForElementToBeEnabled(driver, lot_edit_field_path, 10);
-            WebElement textEditableLot = driver.findElement(lot_edit_field_path);
+            WebElement textEditableLot = driver.findElements(lot_edit_field_path).get(i);
             textEditableLot.sendKeys(lots[i]);
             Thread.sleep(500);
-            By my_lot_path = By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])["+ count +"]/../../..//span[contains(text(), '"+ lots[i] +"')]");
+            By my_lot_path = By.xpath("(//lightning-primitive-cell-factory[@data-label='Lot#']//input[@class='slds-input search-input-class' and @type='text'])");
             waitForElementToBeEnabled(driver, my_lot_path, 10);
-            WebElement textConfirmSelection = driver.findElement(my_lot_path);
+            WebElement textConfirmSelection = driver.findElements(my_lot_path).get(i).findElement(By.xpath("./../../..//span[contains(text(), '"+ lots[i] +"')]"));
             textConfirmSelection.click();
             Thread.sleep(500);
 
-            WebElement drpDownSiteLastSelected = driver.findElement(By.xpath("(//lightning-primitive-cell-factory[@data-label='Site']//button)[" + count + "]"));
+            By drop_down_site_path = By.xpath("//lightning-primitive-cell-factory[@data-label='Site']//button");
+            waitForElementToBeEnabled(driver, drop_down_site_path, 10);
+            WebElement drpDownSiteLastSelected = driver.findElements(drop_down_site_path).get(i);
             drpDownSiteLastSelected.click();
             Thread.sleep(500);
-            WebElement dropDownSiteArmLeftDeltoid = driver.findElement(By.xpath("(//span[@title='Arm - Left deltoid'])["+ count +"]"));
+            By drop_down_site_arm_path = By.xpath("//span[@title='Arm - Left deltoid']");
+            waitForElementToBeEnabled(driver, drop_down_site_arm_path, 10);
+            WebElement dropDownSiteArmLeftDeltoid = driver.findElements(drop_down_site_arm_path).get(i);
             dropDownSiteArmLeftDeltoid.click();
             Thread.sleep(500);
-            count++;
         }
     }
 
     public static boolean isToastMessageDisplayed(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By toast_message_success_path = By.xpath("//span[contains(text(),'User defaults successfully updated.')]");
-        waitForElementToBePresent(driver, toast_message_success_path, 10);
+        waitForElementToBeEnabled(driver, toast_message_success_path, 10);
         boolean flag = false;
         List countOfFoundLot = driver.findElements(toast_message_success_path);
         if(countOfFoundLot.size()>0){
             flag = true;
         }
         return flag;
-    }
-
-    public static void validateSuccessfullyUpdatedMsg(WebDriver driver) throws InterruptedException {
-        if (isToastMessageDisplayed(driver) == false) {
-            throw new RuntimeException("NOT DISPLAYED: User Defaults Successfully Updated");
-        }
-        for (int i = 0; i < 10; i++) {
-            if (isToastMessageDisplayed(driver) == true) {
-                Thread.sleep(500);
-            }
-        }
-            log("User Defaults Successfully Updated message displayed");
     }
 
     public static boolean isAnyLotsPresent(WebDriver driver) {

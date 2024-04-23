@@ -38,10 +38,11 @@ public class RegistrationNotificationCP extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -95,14 +96,16 @@ public class RegistrationNotificationCP extends BaseTest {
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
         try {
+            log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch(Exception ex) {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
             PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
+            log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
 
-        log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+
 
         log("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -135,7 +138,7 @@ public class RegistrationNotificationCP extends BaseTest {
         PersonAccountPage.goToRelatedTab(driver);
 
         log("/*35_1.----Refresh page again - should not be like that again --*/");
-        inClinicExperience_CP.refreshBrowser();
+        driver.navigate().refresh();
 
         log("To validate the actual email, please login into gmail account with following credentials:" +
                 "\nemail: " +email +"\npassword: Technology1990!!!!!!");

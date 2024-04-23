@@ -25,12 +25,6 @@ public class BookingDose2 extends BaseTest {
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	MainPageOrg orgMainPage;
 
-	@AfterMethod
-	public void afterMethod() throws Exception {
-		log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-	}
-
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Call_Center_Agent() throws Exception {
 		TestcaseID = "222525"; //C222525
@@ -42,12 +36,12 @@ public class BookingDose2 extends BaseTest {
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----CallCenter Console page displayed --*/");
 
-		String currentApp = orgMainPage.currentApp();
-		orgMainPage.closeAllTabs();
+		String currentApp = MainPageOrg.currentApp(driver);
+		MainPageOrg.closeAllTabs(driver);
 		if(!currentApp.equals(Apps.CALL_CENTER_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.CALL_CENTER_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.CALL_CENTER_CONSOLE.value);
 		}
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 
 		callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
@@ -82,9 +76,7 @@ public class BookingDose2 extends BaseTest {
 		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*17.--toast success message - 'Success' --*/");
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-		log("/*18.----click refresh forecast button to showcase 2nd dose --*/");
-		PersonAccountPage.clickRefreshForecastButton(driver);
-		Thread.sleep(2000);
+
 		log("/*21----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 
@@ -129,12 +121,4 @@ public class BookingDose2 extends BaseTest {
 		log("/*34----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-	}
-	
 }

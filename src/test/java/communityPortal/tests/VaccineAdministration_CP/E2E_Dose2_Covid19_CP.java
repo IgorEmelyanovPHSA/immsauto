@@ -54,7 +54,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
 
         log("/*3.----- Click on User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
         Thread.sleep(2000);
         log("/*4.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -63,10 +63,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         UserDefaultsPage.clickBtnSave(driver);
         Thread.sleep(7000);
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
@@ -103,25 +104,16 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-//        try {
-//            PersonAccountPage.selectEarlyBookingReason(driver);
-//        } catch(TimeoutException ex) {
-//            System.out.println("DEBUG No need to select Early Booking Reason. Continue...");
-//        }
 
-        //If override Eligibility is shown
         try {
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch(Exception ex) {
             System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
             PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
+            Thread.sleep(500);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 
-        ////////////////////
-        //May will be removed
-        //PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
-        ///////////////////
 
         System.out.println("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -197,7 +189,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         }
 
         try {
-            ProfilesPage.clickEditImmunizationInformation(driver);
+            InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
         } catch(Exception ex) {
             System.out.println("Edit Button disabled. Continue...");
         }
@@ -234,7 +226,7 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
             InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
         }
         log("/*46.---Click Save button for Immunisation Information --*/");
-        inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
+        InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         Thread.sleep(2000);
         inClinicExperience_CP.clickOkForExpiredLot();
         Thread.sleep(2000);
@@ -245,14 +237,6 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
 
         log("/*49.---the Home - Client Search showing up  --*/");
-        inClinicExperience_CP.validateHomePageShownUp();
+        InClinicExperiencePage.validateHomePageShownUp(driver);
     }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-    }
-
 }

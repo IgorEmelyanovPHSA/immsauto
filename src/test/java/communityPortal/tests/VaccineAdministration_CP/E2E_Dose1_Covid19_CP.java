@@ -30,7 +30,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     String consumptionRoute;
     String consumptionSite;
     String consentProvider;
-
+//Pneumo TC "243211",
 
     @Test(priority = 1)
     public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
@@ -39,7 +39,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-        CommonMethods commn = new CommonMethods(getDriver());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -57,7 +56,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
 
         log("/*3.----- Click on User Defaults Tab --*/");
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
 
         log("/*4.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -68,10 +67,11 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
@@ -107,21 +107,11 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
-        //If override Eligibility is shown
-//        try {
-//            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-//            PersonAccountSchedulePage.overrideEligibility(driver);
-//        } catch(Exception ex) {
-//            System.out.println("There is not Override Eligibility Option");
-//        }
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 
         try {
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-        } catch(NotFoundException ex) {
-            PersonAccountSchedulePage.overrideEligibility(driver);
-            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-        } catch(ElementClickInterceptedException ex) {
+        } catch(Exception ex) {
             PersonAccountSchedulePage.overrideEligibility(driver);
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
@@ -194,7 +184,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         }
 
         try {
-            ProfilesPage.clickEditImmunizationInformation(driver);
+            InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
         } catch(Exception ex) {
             System.out.println("Edit Button disabled. Continue...");
         }
@@ -232,7 +222,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
             InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
         }
         log("/*41.---Click Save button for Immunisation Information --*/");
-        inClinicExperience_CP.ClickSaveImmuneInfoSaveButton();
+        InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         Thread.sleep(2000);
         inClinicExperience_CP.clickOkForExpiredLot();
         Thread.sleep(2000);
@@ -243,14 +233,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
 
         log("/*44.---the Home - Client Search showing up  --*/");
-        inClinicExperience_CP.validateHomePageShownUp();
+        InClinicExperiencePage.validateHomePageShownUp(driver);
     }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-    }
-
 }

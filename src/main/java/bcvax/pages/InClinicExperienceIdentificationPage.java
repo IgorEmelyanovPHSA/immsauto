@@ -3,6 +3,8 @@ package bcvax.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import java.util.Map;
 import java.util.List;
 
@@ -107,5 +109,29 @@ public class InClinicExperienceIdentificationPage extends BasePage {
             }
         }
         return my_icon;
+    }
+
+    public static String getAppointmentDate(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By appointment_date_path = By.xpath("//label[text() = 'Date']/../../../lightning-formatted-text");
+        waitForElementToBeEnabled(driver, appointment_date_path, 10);
+        WebElement appointment_date = driver.findElement(appointment_date_path);
+        return appointment_date.getText();
+    }
+
+    public static String getAppointmentTime(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By appointment_time_path = By.xpath("//label[text() = 'Appointment Time']/../../../lightning-formatted-text");
+        waitForElementToBeEnabled(driver, appointment_time_path, 10);
+        WebElement appointment_time = driver.findElement(appointment_time_path);
+        return appointment_time.getText();
+    }
+
+    public static String getAppointmentLocation(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By appointment_location_path = By.xpath("//label[text() = 'Clinic Name']/../../../lightning-formatted-text");
+        waitForElementToBeEnabled(driver, appointment_location_path, 10);
+        WebElement appointment_location = driver.findElement(appointment_location_path);
+        return appointment_location.getText();
     }
 }

@@ -1,7 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
+import bcvax.pages.ContainerWastageForm;
 import bcvax.pages.MainPageCP;
 import bcvax.pages.SupplyConsolePage;
 import bcvax.pages.Utils;
@@ -32,19 +32,11 @@ public class WastageCP extends BaseTest {
 		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 		MainPageCP cpMainPage = new MainPageCP(getDriver());
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin":
-				log("Login AS comunityqa_immsbc_admin");
-				TestcaseID = "245090"; //C245090
-				loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-				break;
-			default:
-				log("Login as Clinician");
-				log("TestCase: C243116");
-				TestcaseID = "243116"; //C243116
-				loginPage.loginIntoCommunityPortalAsClinician();
-		}
+		log("/*1.----Login as Clinician --*/");
+		log("TestCase: C243116");
+		TestcaseID = "243116"; //C243116
+		loginPage.loginIntoCommunityPortalAsClinician();
+
 
 		log("/2.----Navigate to Supply Console Page --*/");
 		cpMainPage.selectSupplyLocationName(supplyLocation);
@@ -64,7 +56,7 @@ public class WastageCP extends BaseTest {
 		log("/*----Amount Wastage Doses " + amountOfDosesToWaste + " --*/");
 
 		log("/*6.----set Wastage Doses amount: " +amountOfDosesToWaste +"--*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToWaste));
+		ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToWaste));
 		double remainingDosesAfterWastage = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Quantity Remaining Doses After Wastage " + remainingDosesAfterWastage + " --*/");
 

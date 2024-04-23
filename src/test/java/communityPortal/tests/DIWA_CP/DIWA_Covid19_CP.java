@@ -3,6 +3,7 @@ package communityPortal.tests.DIWA_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.NotFoundException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -19,38 +20,30 @@ public class DIWA_Covid19_CP extends BaseTest {
     private String postal_code = "V2T0N1";
     Map<String, Object> testData;
     private String consentProvider;
+    private String lot_to_select;
+    private String dosage_to_select;
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         //TestcaseID = "223187"; //C223187
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        CommonMethods commonMethods = new CommonMethods(getDriver());
         String nameToSearch = "John Yuan bo BCVaxChan";
         String clinicLocation = "All Ages - Atlin Health Centre";
         consentProvider = String.valueOf(testData.get("consentProvider"));
+        lot_to_select = String.valueOf(testData.get("covidLot"));
+        dosage_to_select = String.valueOf(testData.get("covidDose"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login as ImmsBCAdmin");
-                TestcaseID = "245099"; //C245099
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician user");
-                TestcaseID = "243108"; //C223187
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.---Login as Clinician user---*");
+        TestcaseID = "243108"; //C223187
+        loginPage.loginIntoCommunityPortalAsClinician();
+
         log("TestRail test case ID: C" +TestcaseID);
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.---Search for Participant account --*/");
-        ProfilesPage profilesPage = cpMainPage.globalSearch_CP(nameToSearch);
-
-        log("/*----3. select Citizen Participant acc from search results --*/");
-        profilesPage.selectCitizenParticipantAcc(nameToSearch);
+        MainPageCP.search(driver, nameToSearch);
 
         //If the PIR Warning is shown close it
         try {
@@ -83,21 +76,22 @@ public class DIWA_Covid19_CP extends BaseTest {
         log("/*---11. Click Record Immunization ---*/");
         DiwaImmunizationRecord.clickRecordImmunization(driver);
 
-        //If the Potential Duplicate Warning is shown Click yes it
+        log("/*---12. Click X button on Diwa flow ---*/");
         try {
-            profilesPage.clickPotentialDuplicateYes();
-        } catch(Exception ex) {
-            System.out.println("No Potential Duplicate Warning. Continue...");
+            DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+        } catch(NotFoundException ex) {
+            System.out.println("---No Duplications. Continue---");
         }
 
-        log("/*---12. Click X button on Diwa flow ---*/");
-        profilesPage.clickToClose();
-
         log("/*---13. Validate message on clicking close button on modal popup ---*/");
-        profilesPage.validateoopsMessage();
+        try {
+            DiwaImmunizationRecord.clickOopsCancelAndClose(driver);
+        } catch(Exception ex) {
+            ;
+        }
 
-        log("/*---14. click on continue editing button to continue with the flow ---*/");
-        profilesPage.ContinueEditingButton();
+        //log("/*---14. click on continue editing button to continue with the flow ---*/");
+        //DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 
         try {
             PersonAccountRelatedPage.checkExistingConsent(driver);
@@ -107,39 +101,37 @@ public class DIWA_Covid19_CP extends BaseTest {
 
         log("/*---18. Select Immunizing Agent Provider ->: Auto Clinician_DIWA_CP ---*/");
         try {
-            profilesPage.selectImmunizingAgentProvider(consentProvider);
+            DiwaImmunizationRecord.setProvider(driver, consentProvider);
         } catch(Exception ex) {
-            ProfilesPage.clickEditImmunizationInformation(driver);
+            DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
             Thread.sleep(500);
-            profilesPage.selectImmunizingAgentProvider(consentProvider);
+            DiwaImmunizationRecord.setProvider(driver, consentProvider);
         }
 
         log("/*---19. Click Show all lot numbers Checkbox---*/");
-        profilesPage.clickShowAllLotNumbersCheckBox();
+        DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
         log("/*---20. click Lot Number dropdown component ---*/");
-        profilesPage.clickLotNumberDropDown();
-
-        log("/*---21. Select SPIKEVAX (Moderna) -> Lot -->300042698 - Exp. 2021 June 18 ---*/");
-        profilesPage.selectLot();
+        DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
 
         log("/*---22. Select Injection Site ---*/");
-        profilesPage.selectInjectionSite();
+        DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
+        DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 
         log("/*---23. Select Dosage---*/");
-        profilesPage.selectDosage();
+        DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
 
         log("/*---24. Save Immunization Information ---*/");
-        profilesPage.saveImmunizationInformation();
+        DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
 
         //Expired vax handler
-        commonMethods.expiredVaxHandler();
+        DiwaImmunizationRecord.clickOkForExpiredLot(driver);
 
         log("/*---25. Confirm and Save Administration ---*/");
-        profilesPage.confirmAndSaveAdministration();
+        DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
 
         log("/*---26. Vaccine Administration Summary Confirm and Save ---*/");
-        profilesPage.summaryConfirmAndSave();
+        DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
         Thread.sleep(2000);
         //If the PIR Warning is shown close it
         try {

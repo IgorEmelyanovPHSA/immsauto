@@ -33,15 +33,13 @@ public class BookingDose2 extends BaseTest {
 
 		log("/*1.----Login --*/");
 		loginPage.loginAsImmsBCAdmin();
-		orgMainPage = new MainPageOrg(driver);
 		TestcaseID = "225653"; //C225653
 
 		log("TestRail test case ID: C" +TestcaseID);
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
-		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -56,16 +54,16 @@ public class BookingDose2 extends BaseTest {
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
-		currentApp = orgMainPage.currentApp();
+		currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.closeAllTabs();
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.closeAllTabs(driver);
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
 		clinicInBox.verifyIsClinicInBoxPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
-		orgMainPage.closeAllTabs();
+		MainPageOrg.closeAllTabs(driver);
 		Thread.sleep(2000);
 		log("/*4.----click Register New Citizen --*/");
 		clinicInBox.clickRegisterButton();
@@ -103,22 +101,26 @@ public class BookingDose2 extends BaseTest {
 		log("/*17.--toast success message - 'Success' --*/");
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
-		try {
-			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-		} catch(Exception ex) {
-			System.out.println("Warning dialog didn't appear");
-		}
-
 		log("/*18.----click on person Account Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(1000);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		log("/*19----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 		//If override Eligibility is shown
 		try {
+			log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+		} catch(Exception ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 		}
 		log("/*20.A---Select vaccination type: " + vaccineToSelect + "--*/");
 		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
@@ -174,12 +176,5 @@ public class BookingDose2 extends BaseTest {
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		log("/*33----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();
-	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 	}
 }

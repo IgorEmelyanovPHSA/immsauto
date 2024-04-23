@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -49,18 +46,10 @@ public class DraftsCP extends BaseTest {
         int firstRow = 1; //Default value for first row in the grid (Supply container)
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                TestcaseID = "245092"; //C245092
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        TestcaseID = "243118"; //C243118
+        loginPage.loginIntoCommunityPortalAsClinician();
+
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.selectSupplyLocationName(supply_location_from);
@@ -87,11 +76,11 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.selectTransferFromDropDown();
 
         log("/*9.----Entering Doses amount, select supply location and Save as Draft -*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
         supplyConsolePage.draftToDistributionWithinSameClinic(supply_location_from, distribution_to_same_clinic);
 
         log("/*10.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -147,18 +136,9 @@ public class DraftsCP extends BaseTest {
 
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                TestcaseID = "245092"; //C245092
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        TestcaseID = "243118"; //C243118
+        loginPage.loginIntoCommunityPortalAsClinician();
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -192,7 +172,7 @@ public class DraftsCP extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -207,7 +187,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -221,7 +201,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*18.----Refresh Page to get doses/quantities updated--*/");
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/*19.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 
@@ -271,19 +251,11 @@ public class DraftsCP extends BaseTest {
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                TestcaseID = "245092"; //C245092
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                log("TestCase: C243118");
-                TestcaseID = "243118"; //C243118
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        log("TestCase: C243118");
+        TestcaseID = "243118"; //C243118
+        loginPage.loginIntoCommunityPortalAsClinician();
+
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
@@ -318,7 +290,7 @@ public class DraftsCP extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*9.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -333,7 +305,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();

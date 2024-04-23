@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -58,22 +59,21 @@ public class Consumption extends BaseTest {
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		supplyConsolePage = new SupplyConsolePage(driver);
 
 		log("/*-- 3. Close all open tabs --*/");
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
+
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
+		SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
@@ -81,9 +81,9 @@ public class Consumption extends BaseTest {
 		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
 		log("/*-- 10. Close all open tabs --*/");
 		double doseConversionFactor = Double.parseDouble(df.format(remainingDoses_before / remainingQty_before));
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
-		orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+		MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 
 		log("/*-- 12. Click on User Defaults Tab  --*/");
 		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
@@ -94,12 +94,12 @@ public class Consumption extends BaseTest {
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
 		inClinicExperiencePage.clickSaveDefaultsButton();
 		log("/*-- 15. Click on register Tab --*/");
-		inClinicExperiencePage.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*-- 17. Close any open Tabs --*/");
 		inClinicExperiencePage.closeTabsHCA();
 		log("/*-- 18. Register New User --*/");
-		inClinicExperiencePage.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 		log("/*-- 19.----Enter First Name " +legalFirstName +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
 		log("/*-- 20.----Enter Last Name " + legalLastName +"--*/");
@@ -131,31 +131,20 @@ public class Consumption extends BaseTest {
 		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
-		ProfilesPage profilesPage = new ProfilesPage(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
-//		try {
-//			PersonAccountPage.selectEarlyBookingReason(driver);
-//		} catch(Exception ex) {
-//			System.out.println("***Warning***");
-//			System.out.println("***No Early Booking Option***");
-//			System.out.println("***Warning***");
-//		}
 
 		//If override Eligibility is shown
 		try {
+			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		} catch(Exception ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
 
-		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		log("/*----scroll down a bit --*/");
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-		////////////////////
-		//May will be removed
-		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
-		///////////////////
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
 		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
@@ -220,7 +209,7 @@ public class Consumption extends BaseTest {
 		}
 
 		try {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}
@@ -228,7 +217,13 @@ public class Consumption extends BaseTest {
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
 
 
-		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		String provider = null;
+		try {
+			provider = InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
+			provider = InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		}
 		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
 		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
 		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
@@ -252,7 +247,7 @@ public class Consumption extends BaseTest {
 		if(!dose.equals(consumptionDose)) {
 			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
-		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperiencePage.clickOkForExpiredLot();
 		Thread.sleep(2000);
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
@@ -260,15 +255,15 @@ public class Consumption extends BaseTest {
 		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
-		inClinicExperiencePage.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
-		orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.closeTabsHCA(driver);
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
+		SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
 
 		//////////Validation for Dosages and Qty After Consumption
 		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
@@ -278,15 +273,7 @@ public class Consumption extends BaseTest {
 		double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
 		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/doseConversionFactor), 2);
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 58. Close all open tabs --*/");
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-	}
-
 }

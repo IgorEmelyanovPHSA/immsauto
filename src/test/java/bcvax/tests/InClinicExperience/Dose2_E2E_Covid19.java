@@ -51,15 +51,15 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			log("/*3.--- Navigate to In Clinic Experience App --*/");
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -76,10 +76,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
-		inClinicExperience.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
-		inClinicExperience.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 
 		log("/*11.----Enter First Name " +legalFirstName  +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -131,17 +131,22 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*26.----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 
-		log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		log("/*----scroll down a bit --*/");
 
-		//If override Eligibility is shown
+
+
 		try {
+			log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+
+		} catch(Exception ex) {
+			//If override Eligibility is shown
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			Thread.sleep(500);
+			log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+
 		////////////////////
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
@@ -172,7 +177,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
 		log("/*36.----Refresh page --*/");
-		inClinicExperience.refreshBrowser();
+		driver.navigate().refresh();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
@@ -222,7 +227,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
-		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperience.clickOkForExpiredLot();
 		log("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
@@ -231,7 +236,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 
 		log("/*45.---the Home - Client Search showing up  --*/");
-		inClinicExperience.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
 
 	@Test(priority = 2)
@@ -254,15 +259,15 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			log("/*3.--- Navigate to In Clinic Experience App --*/");
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -279,10 +284,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
 		log("/*8.----- Click on register Tab --*/");
-		inClinicExperience.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
-		inClinicExperience.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 
 		log("/*11.----Enter First Name " +legalFirstName  +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -376,7 +381,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
 		log("/*36.----Refresh page --*/");
-		inClinicExperience.refreshBrowser();
+		driver.navigate().refresh();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
@@ -425,7 +430,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			System.out.println("No Checkbox. Continue...");
 		}
 		try {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}
@@ -453,7 +458,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
-		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperience.clickOkForExpiredLot();
 		log("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
@@ -462,13 +467,6 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 
 		log("/*45.---the Home - Client Search showing up  --*/");
-		inClinicExperience.validateHomePageShownUp();
-	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
 }

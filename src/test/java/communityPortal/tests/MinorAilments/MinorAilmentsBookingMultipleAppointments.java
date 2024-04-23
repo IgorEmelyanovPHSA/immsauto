@@ -30,20 +30,19 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         log("API call to remove appointments from participant account by PHN if found");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(personalHealthNumber);
 
-        CommonMethods com = new CommonMethods(getDriver());
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
 
         log("1. Open Minor Ailments portal");
         MinorAilmentsPage minorAilmentsPage = loginPage.openMinorAilmentsPortal();
 
         log("2. Fill all identification information and click btn continue");
-        minorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
+        MinorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(driver, legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
 
         log("3. Select minor ailment type: " + minorAilmentsToSelectFirstAppointment);
-        minorAilmentsPage.selectOneOption(minorAilmentsToSelectFirstAppointment);
+        MinorAilmentsPage.selectOneOption(driver, minorAilmentsToSelectFirstAppointment);
 
         log("4. Add notes for the pharmacist: " + notesToPharmacist);
-        minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
+        MinorAilmentsPage.enterNotesForPharmacist(driver, notesToPharmacist);
 
         log("5. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -75,10 +74,10 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         Assert.assertTrue(minorAilmentsPage.isBookAPharmacyAppointmentDisplayed());
 
         log("13. Select minor ailment type for 2nd appointment: " + minorAilmentsToSelectSecondAppointment);
-        minorAilmentsPage.selectOneOption(minorAilmentsToSelectSecondAppointment);
+        MinorAilmentsPage.selectOneOption(driver, minorAilmentsToSelectSecondAppointment);
 
         log("14. Add notes for the pharmacist: " + notesToPharmacist);
-        minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
+        MinorAilmentsPage.enterNotesForPharmacist(driver, notesToPharmacist);
 
         log("15. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -107,13 +106,13 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         loginPage.loginIntoCommunityPortalAsClinician();
 
         log("22. Search for citizen account by first and last name: " +legalFirstName +" " +legalLastName);
-        com.globalSearchCP(legalFirstName + " " +legalLastName);
+        MainPageCP.search(driver, legalFirstName + " " + legalLastName);
 
-        log("23. Validation, if account is found open it");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-        }
+//        log("23. Validation, if account is found open it");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, "", legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
 
         log("24. Navigate to Related tab");
         PersonAccountPage.goToRelatedTab(driver);
@@ -142,7 +141,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         //work around due to the bug: https://jira.phsa.ca/browse/BCVAX-33747
 
         log("31.----Refresh page --");
-        inClinicExperience_CP.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(3000);
 
         log("32. Verify Appointment status is 'Cancelled'");

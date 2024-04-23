@@ -1,10 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import io.qameta.allure.Story;
@@ -44,14 +41,14 @@ public class BulkWastages extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		log("/*2.----Validate if Supply Console Page displayed --*/");log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		////// Supply Location_1 -> Outcoming
 		log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -59,32 +56,31 @@ public class BulkWastages extends BaseTest {
 		/////////////////////////////////////////////////
 		//Try generic method
 		/////////////////////////////////////////////////
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		//////////////////////////////////////////////////
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
-		
-		log("/*5.----Click on Container's records Checkboxes --*/");
+
+		Map<String, Map<String, String>> my_containers = new HashMap<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+			for (int k = 1; k <= 3; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
+
 		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
-		supplyConsolePage.clickBulkWastageButton();
+		SupplyLocationRelatedItems.clickWastageButton(driver);
 
 		log("/*8.----Enter the Dosages values for 3 row and reason for wastage: " +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkWastageByDosageWithReason(amountOfDosesToWaste, reasonForWastage);
@@ -147,38 +143,35 @@ public class BulkWastages extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*-- 3. Close all open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		log("/*5.----Click on Container's records Checkboxes --*/");
+		Map<String, Map<String, String>> my_containers = new HashMap<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+			for (int k = 1; k <= 3; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
+
 		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref BulkWastage step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*7.----Click on bulk Wastage button on Supply page--*/");
-		supplyConsolePage.clickBulkWastageButton();
+		SupplyLocationRelatedItems.clickWastageButton(driver);
 		Thread.sleep(2000);
 		log("/*8.----Enter the Quantity values for 3 row and reason for wastage:" +reasonForWastage +"--*/");
 		supplyConsolePage.enterBulkWastageByQuantitiesWithReason(amountOfQuantityToWaste, reasonForWastage);

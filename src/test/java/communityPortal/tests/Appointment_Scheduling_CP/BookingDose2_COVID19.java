@@ -31,10 +31,10 @@ public class BookingDose2_COVID19 extends BaseTest {
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
 
         log("/*3.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
 
         log("/*4.----Enter First Name: " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -75,33 +75,15 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*17.--toast success message - 'Success' --*/");
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
-        //log("/*18.----click on person Account Related Tab --*/");
-        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
-
         log("/*19.----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
-        //In case of Early Booking
-//        try {
-//            PersonAccountPage.selectEarlyBookingReason(driver);
-//        } catch(Exception ex) {
-//            System.out.println("No early Booking screen. Continue...");
-//        }
 
-        //If override Eligibility is shown
-        try {
-            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-            PersonAccountSchedulePage.overrideEligibility(driver);
-        } catch(Exception ex) {
-            System.out.println("There is not Override Eligibility Option");
-        }
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
-
         try {
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         } catch(NotFoundException ex) {
-            Thread.sleep(2000);
             PersonAccountSchedulePage.overrideEligibility(driver);
-            Thread.sleep(2000);
+            Thread.sleep(500);
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
         }
 
@@ -137,12 +119,5 @@ public class BookingDose2_COVID19 extends BaseTest {
         log("/*29.----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

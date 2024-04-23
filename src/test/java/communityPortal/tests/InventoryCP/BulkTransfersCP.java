@@ -1,15 +1,13 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.SupplyConsolePage;
 import bcvax.tests.BaseTest;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
+
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -84,7 +82,7 @@ public class BulkTransfersCP extends BaseTest {
         double lot_SPIKEVAX6_5Test001_conversion_factor = remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1;
         log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -140,7 +138,7 @@ public class BulkTransfersCP extends BaseTest {
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses) / lot_SPIKEVAX6_5Test001_conversion_factor)), 0.011);
         log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -154,7 +152,7 @@ public class BulkTransfersCP extends BaseTest {
         supplyConsolePage.clickOnOutgoingTransactions(kk);
         log("/*--transactions record number --*/:" + kk);
         log("/*18.----Close All Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*19.----Go to Supply Locations Tab --*/");
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
@@ -176,7 +174,7 @@ public class BulkTransfersCP extends BaseTest {
         double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
         log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
         log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         log("/*23----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -233,7 +231,7 @@ public class BulkTransfersCP extends BaseTest {
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)), 0.011);
         log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
     }
 
     //We don't use Quantity field anymore it will be in READ ONLY mode, Oct 12,2023 as per Sheila Artes
@@ -467,7 +465,7 @@ public class BulkTransfersCP extends BaseTest {
         log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2 for the same Clinic/////////
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -561,22 +559,13 @@ public class BulkTransfersCP extends BaseTest {
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)), 0.011);
         log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
     }
 
     public void precondition() throws Exception {
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login to CP (newUI) as Clinician --*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         supplyConsolePage.clickOnRelatedItemTab();
     }

@@ -15,8 +15,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Check_In_Client_CP extends BaseTest {
-    MainPageCP cpMainPage;
-    MainPageOrg orgMainPage;
     String env;
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
@@ -43,7 +41,7 @@ public class Check_In_Client_CP extends BaseTest {
 
         log("/*2.----Community Portal Home page displayed --*/");
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        cpMainPage.clickUserDefaultsTab();
+        MainPageCP.clickUserDefaultsTab(driver);
         log("/*9.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
@@ -52,8 +50,9 @@ public class Check_In_Client_CP extends BaseTest {
         Thread.sleep(7000);
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-        inClinicExperience_CP.clickRegisterButton();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
@@ -102,12 +101,12 @@ public class Check_In_Client_CP extends BaseTest {
         log("/*23.--Click check-in button --*/");
         PersonAccountPage.clickCheckInButton(driver);
         log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
-        String currentTab = inClinicExperience_CP.getCurrentTab();
+        String currentTab = InClinicExperiencePage.getCurrentTab(driver);
         assertEquals(currentTab, "Identification");
         log("/*25.--Get new appointment location, date and time --*/");
-        String appointmentDate = inClinicExperience_CP.getAppointmentDate();
-        String appointmentTime = inClinicExperience_CP.getAppointmentTime();
-        String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
+        String appointmentDate = InClinicExperienceIdentificationPage.getAppointmentDate(driver);
+        String appointmentTime = InClinicExperienceIdentificationPage.getAppointmentTime(driver);
+        String appointmentLocation = InClinicExperienceIdentificationPage.getAppointmentLocation(driver);
 
         LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
         assertEquals(appointmentDate, expectedDate);
@@ -115,12 +114,5 @@ public class Check_In_Client_CP extends BaseTest {
         assertTrue(Math.abs(appointmentTimeActual.getMinute() - currentTime.toLocalTime().getMinute()) <= 2, "Expected Time:" + currentTime.toLocalTime() + "; Actual Time: " + appointmentTime);
         assertEquals(appointmentLocation, clinicNameToSearch);
         System.out.println("Here");
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
     }
 }

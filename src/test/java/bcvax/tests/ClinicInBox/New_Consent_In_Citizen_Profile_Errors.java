@@ -48,14 +48,13 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         consentProvider = String.valueOf(testData.get("consentProvider"));
         participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
         loginPage.loginAsImmsBCAdmin();
-        CommonMethods commonMethods = new CommonMethods(getDriver());
         log("/*-- 2. Clinic In Box page displayed --*/");
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-            orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+            MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
         }
-        orgMainPage.selectFromNavigationMenu("Home");
+        MainPageOrg.selectFromNavigationMenu(driver, "Home");
         ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
         log("/*----3. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
@@ -89,7 +88,6 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
         log("/*----5. select Citizen from search results --*/");
-        ProfilesPage profilesPage = new ProfilesPage(driver);
         //profilesPage.openProfile(participant_name);
         log("/*----6. Navigated to Person Account related tab ---*/");
         PersonAccountPage.goToRelatedTab(driver);
@@ -213,14 +211,13 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         consentProvider = String.valueOf(testData.get("consentProvider"));
         participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
         loginPage.loginAsImmsBCAdmin();
-        CommonMethods commonMethods = new CommonMethods(getDriver());
         log("/*-- 2. Clinic In Box page displayed --*/");
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-            orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+            MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
         }
-        orgMainPage.selectFromNavigationMenu("Home");
+        MainPageOrg.selectFromNavigationMenu(driver, "Home");
         ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
         log("/*----3. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
@@ -254,7 +251,6 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
         log("/*----5. select Citizen from search results --*/");
-        ProfilesPage profilesPage = new ProfilesPage(driver);
         //profilesPage.openProfile(participant_name);
         log("/*----6. Navigated to Person Account related tab ---*/");
         PersonAccountPage.goToRelatedTab(driver);

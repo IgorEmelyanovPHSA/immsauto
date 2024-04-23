@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Listeners;
@@ -43,34 +40,24 @@ public class BulkDraftsCP extends BaseTest {
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login as Clinician");
-                log("TestCase: C245220");
-                TestcaseID = "245220"; //C245220
-                loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login as Clinician --*/");
+        log("TestCase: C245220");
+        TestcaseID = "245220"; //C245220
+        loginPage.loginIntoCommunityPortalAsClinician();
+
 
         log("/*2.----Navigate to Supply Console Page --*/");
         cpMainPage.selectSupplyLocationName(supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
-
+        Map<String, Map<String, String>> my_containers = new HashMap<>();
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            int k = 1;
-            while (k <= 3) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-                log("/*---     containers record number: " + k);
-                Thread.sleep(1000);
-                k++;
+            for (int k = 1; k <= 3; k++) {
+                Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
             }
         } else {
             log("/*--not enough records for Bulk actions--*/");
@@ -85,11 +72,9 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersButton();
 
         log("/*7.----Enter the Dosages values for 3 row Transfers --*/");
-        int k = 2;
-        while (k <= 7) {
-            supplyConsolePage.enterBulkTransferByDosages(k);
-            Thread.sleep(1000);
-            k = k + 2;
+        for(String my_container: my_containers.keySet()) {
+            ContainerTransferPage.enterTransferDose(driver, my_container, "1");
+            //supplyConsolePage.enterBulkTransferByDosages(k);
         }
 
         log("/*8.----select 'To' Automation Supply Location_2  --*/");
@@ -102,7 +87,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
         for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
@@ -128,7 +113,7 @@ public class BulkDraftsCP extends BaseTest {
         cpMainPage.selectSupplyLocationName(supply_location_to);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*17.----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();

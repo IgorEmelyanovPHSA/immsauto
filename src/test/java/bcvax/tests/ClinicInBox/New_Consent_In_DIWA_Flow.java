@@ -28,8 +28,8 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 	String consentProvider;
 	private String email = "accountToDelete@phsa.ca";
 	private String consent_effective_date = "November 29, 2023";
-	private String lot_to_select = "0486AA-CC01";
-	private String dosage_to_select = "0.5";
+	private String lot_to_select ;
+	private String dosage_to_select;
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
 	@Test(priority = 1, testName = "Create DIWA Immunisation record without Appointments(Java)")
@@ -39,20 +39,21 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("/---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
 		testData = Utils.getTestData(env);
+		lot_to_select = String.valueOf(testData.get("pneumoLot"));
+		dosage_to_select = String.valueOf(testData.get("pneumoDose"));
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
 		loginPage.loginAsImmsBCAdmin();
-		CommonMethods commonMethods = new CommonMethods(getDriver());
 		log("/*-- 2. Clinic In Box page displayed --*/");
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
-			orgMainPage.switchApp(Apps.CLINIC_IN_BOX.value);
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
-		orgMainPage.selectFromNavigationMenu("Home");
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		log("/*----3. Close all previously opened Tabs --*/");
 		clinicInBoxPage.closeAllTabs();
@@ -86,7 +87,6 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
 		log("/*----5. select Citizen from search results --*/");
-		ProfilesPage profilesPage = new ProfilesPage(driver);
 		//profilesPage.openProfile(participant_name);
 		log("/*----6. Navigated to Person Account related tab ---*/");
 		PersonAccountPage.goToRelatedTab(driver);
@@ -175,46 +175,45 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 
 		log("/*---15. select Informed Consent Provider -> Auto Clinician DIWA_CIB  ---*/");
 
-		boolean record_consent_message_exists = DiwaImmunizationRecord.recordConsentMessageExists(driver);
+		boolean record_consent_message_exists = DiwaImmunizationRecord.recordExistingConsentMessageExists(driver);
 		boolean confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
 
 
 		log("/*---17. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---*/");
 		try {
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		} catch(Exception ex) {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 			Thread.sleep(500);
-			profilesPage.selectImmunizingAgentProvider(consentProvider);
+			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		}
 
 		log("/*---18. Click Show all lot numbers Checkbox ---*/");
-		profilesPage.clickShowAllLotNumbersCheckBox();
+		DiwaImmunizationRecord.clickShowAllLotNumbersCheckBox(driver);
 
 		log("/*---19. click Lot Number DropDown component ---*/");
-		profilesPage.clickLotNumberDropDown();
+		DiwaImmunizationRecord.setLotNumber(driver, lot_to_select);
 
-		log("/*---20. Select SPIKEVAX (Moderna) ->Lot --> " + lot_to_select + " ---*/");
-		profilesPage.selectLot(lot_to_select);
 		//profilesPage.setRoute(consumptionRoute);
 		log("/*---21. Select Injection Site ---*/");
-		profilesPage.selectInjectionSite();
+		DiwaImmunizationRecord.setSite(driver, "Arm - Right deltoid");
 		log("/*---22. Select Dosage---*/");
-		profilesPage.selectDosage(dosage_to_select);
-		profilesPage.setRoute("Intramuscular");
+		DiwaImmunizationRecord.setDosage(driver, dosage_to_select);
+		DiwaImmunizationRecord.setRoute(driver, "Intramuscular");
 		log("/*---23. Save Immunization Information ---*/");
-		profilesPage.saveImmunizationInformation();
-
-		//Click Ok if the lot is expired
-		commonMethods.expiredVaxHandler();
-		///////
-
+		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
+		try {
+			DiwaImmunizationRecord.clickOkForExpiredLot(driver);
+		} catch(Exception ex) {
+			//Do nothing
+			;
+		}
 		confirm_and_save_btn_status = DiwaImmunizationRecord.confirmAndSaveButtonIsActive(driver);
 		Assert.assertTrue(confirm_and_save_btn_status);
 		log("/*---24. Confirm and Save Administration ---*/");
-		profilesPage.confirmAndSaveAdministration();
+		DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
 		log("/*---25. Vaccine Administration Summary Confirm and Save ---*/");
-		profilesPage.summaryConfirmAndSave();
+		DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
 		Thread.sleep(2000);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		PersonAccountPage.goToRelatedTab(driver);

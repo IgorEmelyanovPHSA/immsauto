@@ -1,10 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import io.qameta.allure.Allure;
@@ -16,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,45 +66,49 @@ public class BulkAdjustments extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*6.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
-		
-		log("/*7.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+
+		int numberOfRows = 3;
+		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
+		if (countSupplyContainers >= numberOfRows) {
+			for (int k = 1; k <= numberOfRows; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_data);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
+
 		//Remaining Doses and Quantity count // 3 rows, ref step7 containers count
 		log("/*8.----Read Remaining Doses And Quantity Before Deduction --*/");
+		List<String> my_conts = new ArrayList<>();
+		for(Map<String, Map<String, String>> cont: my_containers) {
+			for(String my_key: cont.keySet()) {
+				my_conts.add(my_key);
+			}
+		}
+
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*9.----Click on bulk Adjustment button on Supply page--*/");
-		supplyConsolePage.clickBulkAdjustmentButton();
+		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 		Thread.sleep(5000);
 		
 		log("/*10.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
@@ -117,7 +119,8 @@ public class BulkAdjustments extends BaseTest {
 		Thread.sleep(2000);
 		driver.navigate().refresh();
 		Thread.sleep(2000);
-		
+
+		//Map<String, Map<String, String>> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoses(driver, my_conts);
 		log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
@@ -184,42 +187,39 @@ public class BulkAdjustments extends BaseTest {
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
 		orgMainPage = new MainPageOrg(driver);
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		log("/*5.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+		int numberOfRows = 3;
+		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
+		if (countSupplyContainers >= numberOfRows) {
+			for (int k = 1; k <= numberOfRows; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_data);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
+
+		  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*7.----Click on bulk Adjustment button on Supply page--*/");
-		supplyConsolePage.clickBulkAdjustmentButton();
-		Thread.sleep(5000);
+		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 
 		log("/*8.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
 		supplyConsolePage.enterBulkAdjustmentByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment);

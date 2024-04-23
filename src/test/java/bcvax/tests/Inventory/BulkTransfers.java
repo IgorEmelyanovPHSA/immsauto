@@ -1,15 +1,13 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import bcvax.pages.SupplyConsolePage;
 import bcvax.tests.BaseTest;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
+
 import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
@@ -82,7 +80,7 @@ public class BulkTransfers extends BaseTest {
 		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		log("/*7.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 		log("/*8.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
@@ -139,7 +137,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -153,11 +151,11 @@ public class BulkTransfers extends BaseTest {
 //		supplyConsolePage.clickOnOutgoingTransactions(kk);
 //		log("/*--transactions record number --*/:" + kk);
 		log("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_to);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 		//supplyConsolePage.clickOnSupplyLocation_2();
 
 		///////////////////// Doses/Qty BEFORE Automation Location_2//////////////////////////////////
@@ -178,7 +176,7 @@ public class BulkTransfers extends BaseTest {
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
 		log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*23----Get how many Incoming Transactions 'To' count records --*/");
 		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -235,7 +233,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
 	//@Test(priority = 2)
@@ -266,7 +264,7 @@ public class BulkTransfers extends BaseTest {
 		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		log("/*7.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 		log("/*8.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
@@ -324,17 +322,17 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
 				Double.parseDouble(df.format(remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - quantity)));
 		log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		log("/*18.----Close All Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_to);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 
 		/////////////////////Doses/Qty BEFORE Automation Location_2//////////////////////////////////
 		log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
@@ -354,7 +352,7 @@ public class BulkTransfers extends BaseTest {
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
 		log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*23----Get how many Incoming Transactions 'To' count records --*/");
 		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -411,7 +409,7 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
 				Double.parseDouble(df.format(remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + quantity)));
 		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
 	@Test(priority = 3)
@@ -460,7 +458,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2);
 		/////////Do Transfer from Distribution_1_1 to Distribution_1_2 for the same Clinic/////////
 		log("/*7.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 		log("/*8.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
@@ -555,25 +553,22 @@ public class BulkTransfers extends BaseTest {
 		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_2,
 				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_2 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
 		log("/*37----Close Automation_Supply_Location_1 Tab --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
 	public void precondition() throws Exception {
 		log("/*1.----Login to ORG (oldUI) --*/");
-		orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-		String currentApp = orgMainPage.currentApp();
+		orgMainPage = loginPage.orgLoginAsPPHIS();
+		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
 		supplyConsolePage = new SupplyConsolePage(driver);
 
-		//Assert.assertTrue(false);
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		////// Supply Location_1 -> Outcoming
 		log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -581,7 +576,7 @@ public class BulkTransfers extends BaseTest {
 		/////////////////////////////////////////////////
 		//Try generic method
 		/////////////////////////////////////////////////
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver,supply_location_from);
 		//////////////////////////////////////////////////
 	}
 }

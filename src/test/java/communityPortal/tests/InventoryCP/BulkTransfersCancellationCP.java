@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
@@ -66,7 +63,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         log("/----Select Items to Transfer and Submit --*/");
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -113,7 +110,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         log("/----Count Remaining Supplies Before Transaction --*/");
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
         double remainingDosesBeforeLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
         double remainingDosesBeforeLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
@@ -124,9 +121,9 @@ public class BulkTransfersCancellationCP extends BaseTest {
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         Thread.sleep(2000);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         Thread.sleep(2000);
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
@@ -159,7 +156,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
@@ -294,16 +291,9 @@ public class BulkTransfersCancellationCP extends BaseTest {
 //    }
 
     public void precondition() throws Exception {
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        }
+        log("/*1.----Login to CP (newUI) as Clinician --*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
+
         supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
         supplyConsolePage.clickOnRelatedItemTab();
     }

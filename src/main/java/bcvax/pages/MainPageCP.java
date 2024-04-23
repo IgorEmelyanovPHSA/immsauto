@@ -5,90 +5,15 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 import static constansts.Header.SUPPLY_LOCATION_NAME;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 public class MainPageCP extends BasePage{
-
-    @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
-    private WebElement btnScanUsingCamera;
-
-    @FindBy(xpath = "//a[text()='Profiles']")
-    private WebElement tabProfiles;
-
-    @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, 's/hc-supply-location')]")
-    private WebElement supplyLocationNameAbby;
-
-    @FindBy(xpath = "//a[@title='Automation Supply Location_1' and contains(@href, 's/hc-supply-location')]")
-    private WebElement automationSupplyLocation_1;
-
-    @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
-    private WebElement tabRelatedItems;
-
-    @FindBy(xpath = "//a[@title = 'All Client']")
-    private WebElement sub_menu_AllClients;
-
-    @FindBy(xpath = "//a[@title = 'Profiles']")
-    private WebElement sub_menu_profiles;
-
-    @FindBy(xpath = "//a[text() = 'Participants']")
-    private WebElement main_menu_btn_Participants;
-
-    @FindBy(xpath = ".//button[text()='Save']")
-    private WebElement click_save_defaults_button;
-    private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
-
-    @FindBy(xpath = "//a[@title = 'Submit Requisition']")
-    private WebElement submitRequisitionButton;
-    private By submit_requisition_button = By.xpath("//a[@title = 'Submit Requisition']");
-    @FindBy(xpath = "//a[@title = 'Request Supplies']")
-    private WebElement request_supplies;
-
-    @FindBy(xpath = "//button[text() = 'Go to User Defaults']")
-    private WebElement go_to_user_defaults_btn;
-    private By request_supplies_1 = By.xpath("//a[@title = 'Request Supplies']");
-
-    @FindBy(xpath = "//div[@aria-modal='true']")
-    private WebElement modal_dialog;
-
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
-    private WebElement searchAssistant;
-
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
-    private WebElement searchInput;
-
-    @FindBy(xpath = "//button[@title='Select a List View']")
-    private WebElement select_list_view_btn;
-
-    @FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
-    private WebElement search_location_field;
-
-    @FindBy(xpath = "//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']")
-    private WebElement participantsTable;
-
     private Tables tables;
-
-    public void verifyYouAreOnTheMainPageCP(){
-    }
 
     public MainPageCP(WebDriver driver) {
         super(driver);
         tables = new Tables(driver);
-    }
-
-    public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
-        log("/----Go to Supply Locations Tab --*/");
-        goToSupplyLocation();
-        click(automationSupplyLocation_1);
-        selectRelatedTab();
-        Thread.sleep(2000);
-        return new SupplyConsolePage(driver);
     }
 
     @Step
@@ -116,46 +41,6 @@ public class MainPageCP extends BasePage{
     }
 
     @Step
-    public MainPageCP selectRelatedTab() throws InterruptedException {
-        waitForElementToBeVisible(driver, tabRelatedItems, 10);
-        moveToElement(tabRelatedItems);
-        click(tabRelatedItems);
-        return this;
-    }
-
-//    public ProfilesPage navigateToProfilesPage() throws InterruptedException {
-//        Thread.sleep(2000);
-//        if (tabProfiles.isDisplayed()) {
-//            tabProfiles.click();
-//        } else {
-//            waitForElementToBeClickable(main_menu_btn_More);
-//            Thread.sleep(2000);
-//            click(main_menu_btn_More);
-//            Thread.sleep(2000);
-//            sub_menu_profiles.click();
-//            Thread.sleep(2000);
-//        }
-//        return new ProfilesPage(driver);
-//    }
-
-    public ProfilesPage globalSearch_CP(String textToSearch) throws InterruptedException {
-        waitForElementToBeVisible(driver, searchAssistant, 10);
-        click(searchAssistant);
-        waitForElementToBeVisible(driver, searchInput, 10);
-        typeIn(searchInput,textToSearch);
-        searchInput.sendKeys(Keys.RETURN);
-        Thread.sleep(5000);
-        return new ProfilesPage(driver);
-    }
-
-    //This method is mostly used to navigate under admin role
-    @Step
-    public SupplyConsolePage navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = navigateToSupplyLocation(location);
-        selectRelatedTab();
-        return supplyConsolePage;
-    }
-    @Step
     public SupplyConsolePage navigateToSupplyLocation( String location) throws InterruptedException {
         SupplyConsolePage supplyConsolePage = goToSupplyLocation();
         new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
@@ -176,6 +61,9 @@ public class MainPageCP extends BasePage{
         System.out.println("/*---- Select Active Supply Locations --*/");
         driver.findElement(active_supply_pocation_item_path).click();
         Thread.sleep(2000);
+        By search_location_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
+        waitForElementToBeEnabled(driver, search_location_field_path, 10);
+        WebElement search_location_field = driver.findElement(search_location_field_path);
         System.out.println("/*---- Locate " + supplyLocation + " --*/");
         search_location_field.sendKeys(supplyLocation);
         Thread.sleep(500);
@@ -201,7 +89,7 @@ public class MainPageCP extends BasePage{
         client_search_label.isDisplayed();
     }
 
-    public void clickUserDefaultsTab() throws InterruptedException {
+    public static void clickUserDefaultsTab(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By user_default_tab_path = By.xpath("//a[text()='User Defaults']");
         waitForElementToBeEnabled(driver, user_default_tab_path, 10);
@@ -211,37 +99,17 @@ public class MainPageCP extends BasePage{
         Thread.sleep(2000);
     }
 
-    public void closeSuccessDialog() throws InterruptedException {
-        try {
-            WebElement alertCloseBtn = driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']"));
-            alertCloseBtn.click();
-            System.out.println("Alert dialog found and Closed.");
-        } catch(Exception ex) {
-            System.out.println("Alert Dialog not found, try again");
-            System.out.println("Exception: " + ex.getMessage());
-            Thread.sleep(500);
-            driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']")).click();
-            System.out.println("Alert dialog found and Closed.");
-        } finally {
-            System.out.println("Continue ....");
-        }
-    }
-    public void clickGoToUserDefaultsButton() throws InterruptedException {
-        List<String> windows = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(windows.get(1));
+    public static void clickClientListTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By client_list_tab_path = By.xpath("//a[text()='Client List']");
+        waitForElementToBeEnabled(driver, client_list_tab_path, 10);
+        WebElement element = driver.findElement(client_list_tab_path);
+        element.click();
+        //Try to avoid stale elelemnt exception
         Thread.sleep(2000);
-        try {
-            waitForElementToBeVisible(driver, modal_dialog, 20);
-            //driver.findElement(By.xpath("//div[@aria-modal='true']")).isDisplayed();
-            waitForElementToBeVisible(driver, go_to_user_defaults_btn, 10);
-            go_to_user_defaults_btn.click();
-            Thread.sleep(2000);
-        } catch(Exception ex) {
-            System.out.println("The Modal Dialog not thrown");
-            Thread.sleep(2000);
-        }
     }
-    public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
+
+    public static void navigateToRegisterClientPage(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");
         waitForElementToBeEnabled(driver, main_menu_more_btn_path, 30);
@@ -266,21 +134,9 @@ public class MainPageCP extends BasePage{
             sub_menu_register.click();
         }
         Thread.sleep(2000);
-        return new InClinicExperiencePage(driver);
     }
 
-    public void clickRequestSupplies() throws InterruptedException {
-        waitForElementToBeLocated(driver, request_supplies_1, 10);
-        WebElement element = driver.findElement(request_supplies_1);
-        request_supplies.click();
-    }
-
-    public void clickSubmitRequisition() throws InterruptedException {
-        waitForElementToBeLocated(driver, submit_requisition_button, 10);
-        submitRequisitionButton.click();
-    }
-
-    public void search(String criteria) throws InterruptedException {
+    public static void search(WebDriver driver, String criteria) throws InterruptedException {
         Thread.sleep(500);
         By search_field_path = By.xpath("//input[@class='search-input search-input--left']");
         waitForElementToBeEnabled(driver, search_field_path, 10);
@@ -289,11 +145,64 @@ public class MainPageCP extends BasePage{
         Thread.sleep(500);
         search_field.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        By table_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
-        waitForElementToBeEnabled(driver, table_path, 60);
-    }
-    public void refreshBrowser() throws InterruptedException {
-        driver.navigate().refresh();
+        By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
+
+        //In case not found
+        By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
+        try {
+            waitForElementToBeEnabled(driver, not_found_message_path, 1);
+            search_field.sendKeys(criteria);
+            Thread.sleep(500);
+            search_field.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            //Do Nothing;
+        }
+        int attempt = 0;
+        while(attempt < 10) {
+            try {
+                waitForElementToBeEnabled(driver, table_path, 10);
+                break;
+            } catch (Exception ex) {
+                System.out.println("-------------");
+                System.out.println("Search Attempt #" + attempt);
+                System.out.println("-------------");
+                search_field = driver.findElement(search_field_path);
+                search_field.sendKeys(criteria);
+                Thread.sleep(500);
+                search_field.sendKeys(Keys.ENTER);
+                Thread.sleep(500);
+                attempt++;
+            }
+        }
+        WebElement found_client_table_node = driver.findElement(table_path);
+
+        GenericTable found_client_table = new GenericTable(found_client_table_node);
+        List<Map<String, WebElement>> my_records = found_client_table.getRowsMappedToHeadings();
+        int row_count = my_records.size();
+        int loop_count = 0;
+        while(row_count < 2) {
+            System.out.println("-----------");
+            System.out.println("Found Client rows: " + row_count);
+            System.out.println("-----------");
+            Thread.sleep(1000);
+            my_records = found_client_table.getRowsMappedToHeadings();
+            row_count = my_records.size();
+            loop_count++;
+            if(loop_count > 10) {
+                break;
+            }
+        }
+        for(Map<String, WebElement> my_record: my_records) {
+            try {
+                    my_record.get("Email").findElement(By.xpath(".//a"));
+                    WebElement my_link = my_record.get("Name");
+                    my_link.click();
+                    break;
+            } catch(Exception ex) {
+                ;
+            }
+        }
     }
 
     public void logout() throws InterruptedException {
@@ -306,6 +215,19 @@ public class MainPageCP extends BasePage{
         By logout_link_path = By.xpath("//community_user-user-profile-menu//span[@title='Log Out']/..");
         waitForElementToBeEnabled(driver, logout_link_path, 10);
         WebElement logout_link = driver.findElement(logout_link_path);
-        logout_link.click();
+        try {
+            logout_link.click();
+        } catch(ElementNotInteractableException ex) {
+            profile_menu_button.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, logout_link_path, 10);
+            logout_link = driver.findElement(logout_link_path);
+            logout_link.click();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            waitForElementToBeEnabled(driver, logout_link_path, 10);
+            logout_link = driver.findElement(logout_link_path);
+            logout_link.click();
+        }
     }
 }

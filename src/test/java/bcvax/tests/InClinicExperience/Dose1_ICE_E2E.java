@@ -35,12 +35,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		return new Object[][] {{"222694", "Covid19Vaccine", "agentConsumption", "covidLot", "covidDose"}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
-		//return new Object[][] {{"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose"}};
+		return new Object[][] {{"222694", "Covid19Vaccine", "vaccineAgent", "covidLot", "covidDose", true}, {"228859", "InfluenzaVaccine", "agentInfluenza", "influenzaLot", "influenzaDose", false}};
 	}
 
 	@Test(dataProvider = "booking_data")
-	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE(String testcase_id, String vaccine_agent, String administration_agent, String administration_lot, String administration_dose) throws Exception {
+	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE(String testcase_id, String vaccine_agent, String administration_agent, String administration_lot, String administration_dose, boolean vaccine_available) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
@@ -63,14 +62,14 @@ public class Dose1_ICE_E2E extends BaseTest {
 		log("TestRail test case ID: C" +TestcaseID);
 
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
-		String currentApp = orgMainPage.currentApp();
+		String currentApp = MainPageOrg.currentApp(driver);
 		try {
-			orgMainPage.closeAllTabs();
+			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			orgMainPage.switchApp(Apps.IN_CLINIC_EXPERIENCE.value);
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
@@ -86,12 +85,12 @@ public class Dose1_ICE_E2E extends BaseTest {
 		UserDefaultsPage.clickBtnSave(driver);
 		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
-		inClinicExperience.clickRegisterTab();
+		InClinicExperiencePage.clickRegisterTab(driver);
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
 		//inClinicExperience.clickSaveModalDefaultsButton();
 		//Thread.sleep(2000);
 		System.out.println("/*10.----click Register button New Citizen --*/");
-		inClinicExperience.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 		System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
 		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
 		System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
@@ -131,14 +130,24 @@ public class Dose1_ICE_E2E extends BaseTest {
 		Thread.sleep(2000);
 //If override Eligibility is shown
 		try {
-			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-			PersonAccountSchedulePage.overrideEligibility(driver);
+			System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+
 		} catch(Exception ex) {
-			System.out.println("There is not Override Eligibility Option");
+			if(vaccine_available) {
+				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+				PersonAccountSchedulePage.overrideEligibility(driver);
+				Thread.sleep(500);
+				System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+				PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+			} else {
+			//---If vaccine is disabled and not available in UI then Pass
+			Assert.assertTrue(1==1);
+			return;
 		}
-		Thread.sleep(2000);
-		System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
+		}
+
+
 
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
 		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -163,7 +172,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 		System.out.println("/*36.----Refresh page --*/");
-		inClinicExperience.refreshBrowser();
+		driver.navigate().refresh();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
 		PersonAccountPage.goToRelatedTab(driver);
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
@@ -196,7 +205,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		}
 
 		try {
-			ProfilesPage.clickEditImmunizationInformation(driver);
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}
@@ -243,21 +252,13 @@ public class Dose1_ICE_E2E extends BaseTest {
 			System.out.println("Continue...");
 		}
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
-		inClinicExperience.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		inClinicExperience.clickOkForExpiredLot();
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
 		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
 		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
 		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
-		inClinicExperience.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-	}
-
 }

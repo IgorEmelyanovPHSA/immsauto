@@ -1,10 +1,7 @@
 package bcvax.tests.Inventory;
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.annotations.BeforeMethod;
@@ -66,21 +63,20 @@ public class Drafts extends BaseTest {
         }
 
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         supplyConsolePage = new SupplyConsolePage(driver);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*4.----Get a matching row for first row Lot number --*/");
         //int matchedRow = common.getMatchedRowToLotInRow1();
@@ -118,7 +114,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*10.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*11.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -134,7 +130,7 @@ public class Drafts extends BaseTest {
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
         String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
@@ -203,22 +199,21 @@ public class Drafts extends BaseTest {
         }
 
         orgMainPage = new MainPageOrg(driver);
-        String currentApp = orgMainPage.currentApp();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         supplyConsolePage = new SupplyConsolePage(driver);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(5000);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
@@ -254,7 +249,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*10.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*11.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -269,7 +264,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -345,17 +340,14 @@ public class Drafts extends BaseTest {
 
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
-
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -391,7 +383,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*11.----Entering Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(String.valueOf(amountOfDosesToAdjust));
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*12.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);;
@@ -406,7 +398,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -472,17 +464,15 @@ public class Drafts extends BaseTest {
         }
 
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
 
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         log("/*5.----Click on Automation Supply Location_1 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -517,7 +507,7 @@ public class Drafts extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 
         log("/*10.----Entering quantity in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferQuantity(String.valueOf(amountOfQuantityToAdjust));
+        ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(amountOfQuantityToAdjust));
 
         log("/*11.----select 'To' 'Automation Supply Location_1'  --*/");
         supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
@@ -532,7 +522,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*15.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
