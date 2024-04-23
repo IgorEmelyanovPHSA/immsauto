@@ -63,7 +63,7 @@ public class E2E_Consumption_CP extends BaseTest {
         SupplyConsolePage supplyConsolePage = cpMainPage.goToSupplyLocation();
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-        supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
+        SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
 
         double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
         log("/*6. remaining doses Before: -->" + remainingDoses_before);
@@ -240,7 +240,7 @@ public class E2E_Consumption_CP extends BaseTest {
         supplyConsolePage = new SupplyConsolePage(driver);
         supplyConsolePage = cpMainPage.goToSupplyLocation();
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-        supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
+        SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);

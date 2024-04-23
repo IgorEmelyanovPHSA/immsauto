@@ -84,7 +84,7 @@ public class TransferCP extends BaseTest {
 				Double.parseDouble(df.format(((remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses) / dose_conversation_factor)));
 		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
 		System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
 		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -111,7 +111,7 @@ public class TransferCP extends BaseTest {
 		double remainingQty_before_Lot_EK4241_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_2_1);
 		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-		supplyConsolePage.clickTransactionsTab();
+		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
 		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
 		System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
@@ -294,7 +294,7 @@ public class TransferCP extends BaseTest {
 		supplyConsolePage.clickBulkTransfersModalButton();
 		System.out.println("/*16.----click Close Modal button --*/");
 		supplyConsolePage.clickBulkTransfersDialogCloseButton();
-		supplyConsolePage.refreshBrowser();
+		driver.navigate().refresh();
 		/////////////////////Doses and Quantity AFTER///////////////////////////////////
 		System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);

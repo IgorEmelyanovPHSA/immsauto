@@ -138,7 +138,7 @@ public class BulkTransfersCP extends BaseTest {
         assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
                 Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses) / lot_SPIKEVAX6_5Test001_conversion_factor)), 0.011);
         log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -174,7 +174,7 @@ public class BulkTransfersCP extends BaseTest {
         double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
         log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1);
         log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
         log("/*23----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);

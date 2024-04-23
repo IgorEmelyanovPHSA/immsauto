@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.ContainerTransferForm;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -83,7 +80,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.draftToDistributionWithinSameClinic(supply_location_from, distribution_to_same_clinic);
 
         log("/*10.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -190,7 +187,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
@@ -204,7 +201,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickOnRelatedItemTab();
 
         log("/*18.----Refresh Page to get doses/quantities updated--*/");
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/*19.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 
@@ -308,7 +305,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();

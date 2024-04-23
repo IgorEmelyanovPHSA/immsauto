@@ -46,13 +46,13 @@ public class Returns extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
         SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
         SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*b.----Receive Supplies for Flu --*/");
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
 
         supplyConsolePage.clickSupplyItemTextBox();
-        supplyConsolePage.selectSupplyItem(supply_item);
+        SupplyConsolePage.selectSupplyItem(driver, supply_item);
         ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
         supplyConsolePage.selectIncomingSupplyDistributionReceive();
@@ -103,7 +103,7 @@ public class Returns extends BaseTest {
         log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
         SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
         SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*5. ----Click Return Button --*/");
         SupplyLocationPage.clickReturnButton(driver);

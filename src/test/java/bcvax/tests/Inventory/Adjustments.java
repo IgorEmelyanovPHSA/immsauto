@@ -84,10 +84,10 @@ public class Adjustments extends BaseTest {
 		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 

@@ -28,26 +28,24 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         log("API call to remove appointments from participant account by PHN if found");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(personalHealthNumber);
 
-        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(getDriver());
-
         log("1. Open Minor Ailments portal");
         MinorAilmentsPage minorAilmentsPage = loginPage.openMinorAilmentsPortal();
 
         log("2. Fill all identification information and click btn continue");
-        minorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
+        MinorAilmentsPage.fillMandatoryFieldsOnIdentificationSection(driver, legalFirstName, legalLastName, dateOfBirth, personalHealthNumber);
 
         log("3. Verify that there are 22 items and the order in the picklist");
-        minorAilmentsPage.verifyCountAndOrderOfTheList();
+        MinorAilmentsPage.verifyCountAndOrderOfTheList(driver);
 
         log("4. Select minor ailment type: " + minorAilmentsToSelect + " ");
-        minorAilmentsPage.selectOneOption(minorAilmentsToSelect);
+        MinorAilmentsPage.selectOneOption(driver, minorAilmentsToSelect);
 
         //TR Step3 verify link for btn More Info
 
         //TR Step4 verify the list of checkbox options for clinic features; Spoke to Ann, can skip this validation
 
         log("5. Add notes for the pharmacist: " + notesToPharmacist + " ");
-        minorAilmentsPage.enterNotesForPharmacist(notesToPharmacist);
+        MinorAilmentsPage.enterNotesForPharmacist(driver, notesToPharmacist);
 
         log("6. Go to tab search by clinic name and select clinic " + clinicNameToSearch + " ");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);

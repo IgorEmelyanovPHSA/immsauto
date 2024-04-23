@@ -48,7 +48,7 @@ public class BulkWastages extends BaseTest {
 		log("/*2.----Validate if Supply Console Page displayed --*/");log("/*3.----Close All previously opened Tab's --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		////// Supply Location_1 -> Outcoming
 		log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -56,7 +56,7 @@ public class BulkWastages extends BaseTest {
 		/////////////////////////////////////////////////
 		//Try generic method
 		/////////////////////////////////////////////////
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 		//////////////////////////////////////////////////
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
@@ -146,9 +146,9 @@ public class BulkWastages extends BaseTest {
 		log("/*-- 3. Close all open tabs --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);

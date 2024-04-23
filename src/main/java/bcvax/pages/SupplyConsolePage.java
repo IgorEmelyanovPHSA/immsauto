@@ -80,17 +80,8 @@ public class SupplyConsolePage extends BasePage {
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
 
-	@FindBy(xpath = "//button[text() = 'Ship Requisition'] | //a[@title = 'Ship Requisition']")
-	private WebElement shipRequisition;
-
 	@FindBy(xpath = "//input[@placeholder='Search Supply Distributions...']")
 	private WebElement click_on_search_supply_distributions_to_component;
-
-	@FindBy(xpath = "(//div[@class='primaryLabel slds-truncate slds-lookup__result-text'])[1]")
-	private WebElement select_supply_distributions_to;
-
-	@FindBy(xpath = "//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']")
-	private WebElement saveReceiveRequisition;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	Tables tables;
@@ -117,7 +108,7 @@ public class SupplyConsolePage extends BasePage {
 		save_btn.click();
 	}
 
-	public void clickSupplyLocationsTab() throws InterruptedException {
+	public static void clickSupplyLocationsTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By supply_location_tab_path = By.xpath("(//span[@class = 'slds-truncate'])[2]/..");
 		waitForElementToBeEnabled(driver, supply_location_tab_path, 10);
@@ -134,9 +125,13 @@ public class SupplyConsolePage extends BasePage {
 			supply_locations_tab.click();
 		}
 		boolean loaded = false;
+		By supply_locations_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+		waitForElementToBeEnabled(driver, supply_locations_table_path, 10);
+		WebElement supply_locations_table_node = driver.findElement(supply_locations_table_path);
 		while(!loaded) {
 			try {
-				loaded = tables.getSupplyLocationTable().getHeadings().get(0).isDisplayed();
+				GenericTable supply_locations_table = new GenericTable(supply_locations_table_node);
+				loaded = supply_locations_table.getHeadings().get(0).isDisplayed();
 			}
 			catch(Exception ex) {
 				System.out.println(ex.getMessage());
@@ -294,25 +289,6 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(2000);
 	}
 
-	@Step
-	public void clickTransactionsTab() throws InterruptedException {
-		Thread.sleep(500);
-		By transactions_tab_path = By.xpath("//a[text() = 'Transactions' or @title = 'Transactions']");
-		waitForElementToBeEnabled(driver, transactions_tab_path, 10);
-		WebElement transactions_tab = driver.findElement(transactions_tab_path);
-		scrollCenter(transactions_tab);
-		Thread.sleep(500);
-		for(int i = 0; i < 10; i++) {
-			try {
-				transactions_tab.click();
-				break;
-			} catch (ElementClickInterceptedException ex) {
-				System.out.println("Exception: " + ex.getMessage());
-				Thread.sleep(1000);
-			}
-		}
-	}
-
 	public int getRowsOutgoingTransactionsCount() throws InterruptedException {
 		waitForElementToBeVisible(driver, rows_outgoing_transactions_count_path, 10);
 		List<WebElement> rows = rows_outgoing_transactions_count_path.findElements(By.tagName("tr"));
@@ -402,7 +378,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
 		transfer_transaction_btn.click();
 		try {
-			clickCloseAlert();
+			AlertDialog.closeAlert(driver);
 			Thread.sleep(500);
 		} catch(Exception ex) {
 			System.out.println("Success Dialog not found. Continue...");
@@ -699,14 +675,14 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(btnWastageOnContainerWastagePopUp);
 		click(btnWastageOnContainerWastagePopUp);
 		Thread.sleep(500);
-		clickCloseAlert();
+		AlertDialog.closeAlert(driver);
 	}
 
 	public void clickBtnAdjustmentAtContainerAdjustmentPopUp() throws InterruptedException {
 		scrollCenter(btnAdjustmentOnContainerWastagePopUp);
 		click(btnAdjustmentOnContainerWastagePopUp);
 		Thread.sleep(500);
-		clickCloseAlert();
+		AlertDialog.closeAlert(driver);
 	}
 
 	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
@@ -900,15 +876,17 @@ public class SupplyConsolePage extends BasePage {
 		app_navigation_menu.click();
 	}
 
-	public void selectSupplyItemsFromDropdown() throws InterruptedException {
+	public static void selectSupplyItemsFromDropdown(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
-		waitForElementToBeVisible(driver, supplyItemsInDropdown, 10);
-		this.supplyItemsInDropdown.click();
+		By supply_items_option_path = By.xpath("//a[@role='menuitem' and @data-itemid='HC_Supply_Item__c']");
+		waitForElementToBeEnabled(driver, supply_items_option_path, 10);
+		WebElement supply_items_option = driver.findElement(supply_items_option_path);
+		supply_items_option.click();
 	}
 
-	public void clickSupplyItemName(String supply_item) throws InterruptedException {
+	public static void clickSupplyItemName(WebDriver driver, String supply_item) throws InterruptedException {
 		try {
-			switchToTableView();
+			switchToTableView(driver);
 		} catch(Exception ex) {
 			System.out.println("Cannot switch to Table view");
 		}
@@ -919,7 +897,7 @@ public class SupplyConsolePage extends BasePage {
 		my_supply_item.click();
 	}
 
-	public void selectSupplyItemName(String item) throws InterruptedException {
+	public static void selectSupplyItemName(WebDriver driver, String item) throws InterruptedException {
 		By select_list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Items']");
 		Thread.sleep(500);
 		waitForElementToBeEnabled(driver, select_list_view_btn_path, 10);
@@ -931,7 +909,7 @@ public class SupplyConsolePage extends BasePage {
 		WebElement all_supply_items =  driver.findElement(all_supply_items_path);
 		all_supply_items.click();
 		try {
-			switchToTableView();
+			switchToTableView(driver);
 		} catch (Exception ex) {
 			System.out.println("Cannot switch the view");
 		}
@@ -949,15 +927,17 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(1000);
 		search_location_field.sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
-		try {
-			tables.clickOnSupplyItemTableRow(ImmutableMap.of("Supply Item Name", item));
-		} catch (NullPointerException ex) {
-			Thread.sleep(2000);
-			tables.clickOnSupplyItemTableRow(ImmutableMap.of("Supply Item Name", item));
-		}
+
+		By supply_item_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+		waitForElementToBeEnabled(driver, supply_item_table_path, 10);
+		WebElement supply_items_table_node = driver.findElement(supply_item_table_path);
+		GenericTable supply_items_table = new GenericTable(supply_items_table_node);
+		Map<String, WebElement> my_row = supply_items_table.getMappedRow(ImmutableMap.of("Supply Item Name", item));
+		WebElement my_link = my_row.get("Supply Item Name").findElement(By.xpath(".//a"));
+		my_link.click();
 	}
 
-	public void switchToTableView() throws InterruptedException {
+	public static void switchToTableView(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By view_option_btn_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']");
 		waitForElementToBeEnabled(driver, view_option_btn_path, 10);
@@ -976,8 +956,9 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public void selectSupplyLocationName(String location) throws InterruptedException {
+	public static void selectSupplyLocationName(WebDriver driver, String location) throws InterruptedException {
 		By select_list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
+		//By select_list_view_btn_path = By.xpath("//button[@title='Select list display']");
 		Thread.sleep(500);
 		waitForElementToBeEnabled(driver, select_list_view_btn_path, 10);
 		WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
@@ -989,7 +970,7 @@ public class SupplyConsolePage extends BasePage {
 		active_supply_locations_item.click();
 		Thread.sleep(2000);
 		try {
-			switchToTableView();
+			switchToTableView(driver);
 		} catch(Exception ex) {
 			System.out.println("---Cannot switch the view---");
 		}
@@ -1008,15 +989,16 @@ public class SupplyConsolePage extends BasePage {
 		Thread.sleep(1000);
 		search_location_field.sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
-		try {
-			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
-			Thread.sleep(2000);
-		} catch (NullPointerException ex) {
-			System.out.println("Couldn't click on Supply Location " + SUPPLY_LOCATION_NAME + " and location " + location);
-			Thread.sleep(2000);
-			tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
-			Thread.sleep(2000);
-		}
+
+		By supply_location_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+		waitForElementToBeEnabled(driver, supply_location_table_path, 10);
+		WebElement supply_location_table_node = driver.findElement(supply_location_table_path);
+		GenericTable supply_items_table = new GenericTable(supply_location_table_node);
+		Map<String, WebElement> my_row = supply_items_table.getMappedRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
+		WebElement my_link = my_row.get(SUPPLY_LOCATION_NAME).findElement(By.xpath(".//a"));
+		waitForElementToBeVisible(driver, my_link, 10);
+		my_link.click();
+		Thread.sleep(2000);
 	}
 
 	public static void selectSupplyLocationFromDropdown(WebDriver driver) throws InterruptedException {
@@ -1042,7 +1024,7 @@ public class SupplyConsolePage extends BasePage {
 		executor1.executeScript("arguments[0].click();", element1);
 	}
 
-	public void selectSupplyItem(String supplyItem) throws InterruptedException {
+	public static void selectSupplyItem(WebDriver driver, String supplyItem) throws InterruptedException {
 		By supply_item_field = By.xpath("//label[@class='slds-form-element__label' and text() = 'Supply Item']/..//input");
 		waitForElementToBeLocated(driver, supply_item_field, 10);
 		WebElement element = driver.findElement(supply_item_field);
@@ -1262,17 +1244,6 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(driver.findElement(locationTo));
 		driver.findElement(locationTo).click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
-	}
-
-	public void clickOnSearchSupplyDistributions() throws InterruptedException {
-		waitForElementToBeVisible(driver, click_on_search_supply_distributions_to_component, 10);
-		Thread.sleep(2000);
-		this.click_on_search_supply_distributions_to_component.click();
-	}
-
-
-	public void refreshBrowser() throws InterruptedException {
-		driver.navigate().refresh();
 	}
 
 	public void clickCloseAlert() throws InterruptedException {

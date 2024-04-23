@@ -1,10 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.SupplyLocationRelatedItems;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
@@ -107,10 +104,10 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyConsolePage.selectSupplyLocationName(driver,supply_location_to);
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -120,12 +117,12 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
-        supplyConsolePage.refreshBrowser();
-        supplyConsolePage.clickTransactionsTab();
+        driver.navigate().refresh();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -154,10 +151,10 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
@@ -222,10 +219,10 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -234,12 +231,12 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
-        supplyConsolePage.refreshBrowser();
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        driver.navigate().refresh();
         Thread.sleep(2000);
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -265,11 +262,11 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelLocationDistribution1_3, remainingQtyBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.selectSupplyLocationName(supply_location_to);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
 
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -298,7 +295,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*3.----Close All previously opened Tab's --*/");
         SupplyConsolePage.closeTabsHCA(driver);
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         ////// Supply Location_1 -> Outcoming
         log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -306,7 +303,7 @@ public class BulkTransfersCancellation extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        supplyConsolePage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         //////////////////////////////////////////////////
     }
 }

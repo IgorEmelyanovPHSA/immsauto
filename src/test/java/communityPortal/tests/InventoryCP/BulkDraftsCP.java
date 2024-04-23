@@ -87,7 +87,7 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
         for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
@@ -113,7 +113,7 @@ public class BulkDraftsCP extends BaseTest {
         cpMainPage.selectSupplyLocationName(supply_location_to);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*17.----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
