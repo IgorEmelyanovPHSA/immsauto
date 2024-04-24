@@ -42,7 +42,7 @@ public class Check_In_Workflow extends BaseTest {
         }
         inClinicExperience = new InClinicExperiencePage(driver);
         log("/*2.----Close All previously opened Tab's --*/");
-        inClinicExperience.closeTabsHCA();
+        InClinicExperiencePage.closeTabsHCA(driver);
         log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
         log("/*----6. select Citizen from search results --*/");
         MainPageOrg.search(driver, citizenName);
@@ -106,7 +106,7 @@ public class Check_In_Workflow extends BaseTest {
         }
         inClinicExperience = new InClinicExperiencePage(driver);
         log("/*2.----Close All previously opened Tab's --*/");
-        inClinicExperience.closeTabsHCA();
+        InClinicExperiencePage.closeTabsHCA(driver);
         log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
         log("/*----6. select Citizen Previously registered citizen --*/");
         MainPageOrg.search(driver, citizenName);
@@ -164,7 +164,7 @@ public class Check_In_Workflow extends BaseTest {
 
         InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*4.----Close All previously opened Tab's --*/");
-        inClinicExperience.closeTabsHCA();
+        InClinicExperiencePage.closeTabsHCA(driver);
         log("/*5.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();
         log("/*6.----- Enter current date for UserDefaults --*/");
@@ -176,7 +176,7 @@ public class Check_In_Workflow extends BaseTest {
         AlertDialog.closeAlert(driver);
 
         log("/*3.----Close All previously opened Tab's --*/");
-        inClinicExperience.closeTabsHCA();
+        InClinicExperiencePage.closeTabsHCA(driver);
         log("/*4.----click Register New Citizen --*/");
 
         InClinicExperiencePage.clickRegisterTab(driver);

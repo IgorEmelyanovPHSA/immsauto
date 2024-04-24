@@ -64,7 +64,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
-		inClinicExperience.closeTabsHCA();
+		InClinicExperiencePage.closeTabsHCA(driver);
 
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
@@ -272,7 +272,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
-		inClinicExperience.closeTabsHCA();
+		InClinicExperiencePage.closeTabsHCA(driver);
 
 		log("/*5.----- Click on User Defaults Tab --*/");
 		inClinicExperience.clickUserDefaultsTab();
