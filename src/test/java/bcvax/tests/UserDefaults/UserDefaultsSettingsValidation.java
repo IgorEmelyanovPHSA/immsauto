@@ -39,7 +39,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         }
         InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*3.----Close All previously opened Tab's --*/");
-        inClinicExperience.closeTabsHCA();
+        InClinicExperiencePage.closeTabsHCA(driver);
 
         log("/*4.----- Click on User Defaults Tab --*/");
         inClinicExperience.clickUserDefaultsTab();

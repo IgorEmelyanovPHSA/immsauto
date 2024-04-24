@@ -66,20 +66,37 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 
-	public void closeTabsHCA() throws InterruptedException {
-		do {
-			try {
-				WebElement closetab = driver.findElement(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])"));
-				closetab.click();
-				Thread.sleep(2000);
-			} catch (NoSuchElementException e) {
-				System.out.println("/*---there are no Tab's to close");
+	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
+		Thread.sleep(500);
+		try {
+			waitForElementToBeLocated(driver, By.xpath("//div[@role='tablist']"), 5);
+		} catch(TimeoutException ex_notfound) {
+			List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+			int count = closeButtons.size();
+			int retry_count = 0;
+			while (count == 0) {
+				Thread.sleep(1000);
+				closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
+				retry_count++;
+				if (retry_count > 5) {
+					break;
+				}
 			}
-
-		} while (isDisplayed(By.xpath("(.//button[@class = 'slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-container'])")));
-
+			for (WebElement closeTabBtn : closeButtons) {
+				try {
+					closeTabBtn.click();
+					Thread.sleep(2000);
+				} catch (ElementNotInteractableException ex) {
+					System.out.println(ex.getMessage());
+					AlertDialog.closeAllAlerts(driver);
+					Thread.sleep(500);
+					closeTabBtn.click();
+				} catch (StaleElementReferenceException ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+		}
 	}
-
 	public static void clickRegisterButton(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By register_btn_path = By.xpath("//button[@title = ' Create New Profile']");

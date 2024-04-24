@@ -64,7 +64,7 @@ public class DIWA_ICE extends BaseTest {
 		//inClinicExperience.verifyIsICEpageDisplayed();
 
 		log("/*4.----Close All previously opened Tab's --*/");
-		inClinicExperience.closeTabsHCA();
+		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
 		MainPageOrg.search(driver, citizenName);

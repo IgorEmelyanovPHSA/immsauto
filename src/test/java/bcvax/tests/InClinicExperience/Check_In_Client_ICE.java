@@ -54,7 +54,7 @@ public class Check_In_Client_ICE extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
-        inClinicExperiencePage.closeTabsHCA();
+        InClinicExperiencePage.closeTabsHCA(driver);
         log("/*-- 2. Navigate to In Clinic Experience App --*/");
         Thread.sleep(2000);
         log("/*-- 3. Click on User Defaults Tab  --*/");
