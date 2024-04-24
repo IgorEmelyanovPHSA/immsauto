@@ -40,6 +40,10 @@ public class DiwaImmunizationRecord extends BasePage {
         By clinic_location_path = By.xpath("//input[@data-id = 'userinput']");
         waitForElementToBeEnabled(driver, clinic_location_path, 10);
         WebElement search_clinic = driver.findElement(clinic_location_path);
+        search_clinic.click();
+        Thread.sleep(500);
+        search_clinic.clear();
+        Thread.sleep(500);
         search_clinic.sendKeys(clinic);
         Thread.sleep(500);
         By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
@@ -78,9 +82,11 @@ public class DiwaImmunizationRecord extends BasePage {
         WebElement inputDate = driver.findElement(input_date_path);
         waitForElementToBeVisible(driver, inputDate, 10);
         inputDate.click();
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        inputDate.findElement(By.xpath(".//input")).clear();
+        Thread.sleep(500);
         inputDate.sendKeys(todayAsString);
-        Thread.sleep(2000);
+        Thread.sleep(500);
         inputDate.sendKeys(Keys.ENTER);
     }
 
