@@ -97,7 +97,7 @@ public class Consumption extends BaseTest {
 		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*-- 17. Close any open Tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*-- 18. Register New User --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
 		log("/*-- 19.----Enter First Name " +legalFirstName +"--*/");
