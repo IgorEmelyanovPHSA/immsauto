@@ -42,10 +42,11 @@ public class CheckInBetterManagement_CP extends BaseTest {
         log("/*10.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
 
-        log("/*7.----click Register button New Citizen --*/");
+
         log("/*6.----Navigate to More -> Register --*/");
         MainPageCP.navigateToRegisterClientPage(driver);
 
+        log("/*7.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
         CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
@@ -160,6 +161,10 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         //--- Verify that in Citizen profile->Related Tab New Imms Record was created in Statud New
         List<Map<String, WebElement>> imms_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
+        if(imms_records.size() < 2) {
+            Thread.sleep(2000);
+            imms_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
+        }
         String imms_record_status = imms_records.get(1).get("Pathway Status").getText();
         Assert.assertEquals("New", imms_record_status, "Pathway Status is incorrect");
 
@@ -262,7 +267,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
         ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
         my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
-        ClientListTodayAppointmentsTab.clickCheckInButton(my_row);
+        ClientListTodayAppointmentsTab.clickCheckInButton(driver, my_row);
 
         //--- Verify you are redirected to Identification Page
         current_tab = InClinicExperiencePage.getCurrentTab(driver);
