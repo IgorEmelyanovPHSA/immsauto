@@ -30,6 +30,7 @@
             <class name="communityPortal.tests.MinorAilments.MinorAilmentsIdentificationPage"/>
             <class name="communityPortal.tests.MinorAilments.MinorAilmentsBookingMultipleAppointments"/>
             <class name="communityPortal.tests.DIWA_CP.E2EConsentInDIWAFlow_CP"/>
+            <class name="communityPortal.tests.VaccineAdministration_CP.CheckInBetterManagement_CP"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
