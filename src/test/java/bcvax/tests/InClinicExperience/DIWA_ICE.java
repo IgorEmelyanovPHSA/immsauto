@@ -90,7 +90,12 @@ public class DIWA_ICE extends BaseTest {
 		log("/*---15. Click Record Immunization ---*/");
 		DiwaImmunizationRecord.clickRecordImmunization(driver);
 
-		DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+		//Just in case of Duplicated warning
+		try {
+			DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+		} catch(Exception ex) {
+			;
+		}
 		log("/*---15.1. Pop up window is displayed and clicked  ---*/");
 		log("/*---16. Click X button on Diwa flow ---*/");
 

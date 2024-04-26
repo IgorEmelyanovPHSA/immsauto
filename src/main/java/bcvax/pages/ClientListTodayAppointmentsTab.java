@@ -35,8 +35,10 @@ public class ClientListTodayAppointmentsTab extends BasePage {
         }
     }
 
-    public static void clickCheckInButton(Map<String, WebElement> my_client_appointment) throws InterruptedException {
+    public static void clickCheckInButton(WebDriver driver, Map<String, WebElement> my_client_appointment) throws InterruptedException {
         WebElement checkin_button = my_client_appointment.get("Check-in Client").findElement(By.xpath(".//lightning-button"));
+        scrollCenter(driver, checkin_button);
+        Thread.sleep(500);
         checkin_button.click();
     }
 

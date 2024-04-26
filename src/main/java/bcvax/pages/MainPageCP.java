@@ -106,7 +106,12 @@ public class MainPageCP extends BasePage{
         WebElement element = driver.findElement(client_list_tab_path);
         scrollCenter(driver, element);
         Thread.sleep(500);
-        element.click();
+        try {
+            element.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(2000);
+            element.click();
+        }
         //Try to avoid stale elelemnt exception
         Thread.sleep(2000);
     }
@@ -154,7 +159,7 @@ public class MainPageCP extends BasePage{
         //In case not found
         By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
         try {
-            waitForElementToBeEnabled(driver, not_found_message_path, 5);
+            waitForElementToBeEnabled(driver, not_found_message_path, 2);
             System.out.println("Client Not Found. Try again.");
             search_field.clear();
             Thread.sleep(1000);
@@ -163,7 +168,7 @@ public class MainPageCP extends BasePage{
             search_field.sendKeys(Keys.ENTER);
             Thread.sleep(500);
         } catch(Exception ex) {
-            //Do Nothing;
+            System.out.println("---THERE IS NO Not Found ERROR---");
         }
         int attempt = 0;
         while(attempt < 10) {
