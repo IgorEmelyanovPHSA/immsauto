@@ -1,10 +1,7 @@
 package bcvax.tests.Inventory;
 
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyLocationPage;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -63,12 +60,12 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		SupplyConsolePage.switchToTableView(driver);
 		Thread.sleep(1000);
-		SupplyConsolePage.selectSupplyItemName(driver, supply_item);
+		SupplyItemsPage.selectSupplyItemName(driver, supply_item);
 		//Validation for Doses/Qty Before Receiving needs to be add from supply container
 		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
-		double remainingQty_before = supplyConsolePage.getValueOfRemainingQuantity();
+		double remainingQty_before = SupplyItemDetailsPage.getRemainingQuantity(driver);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before);
-		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses();
+		double remainingDoses_before = SupplyItemDetailsPage.getRemainingDoses(driver);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_before);
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorReceive();
 		log("/*-- 7. Dose Conversation factor are: -->" + doseConversionFactor);
@@ -138,9 +135,9 @@ public class ReceiveSupplies extends BaseTest {
 
 		///Validation for Doses/Qty Before and After Reciaving needs to be add.
 		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");
-		double remainingQty_after = supplyConsolePage.getValueOfRemainingQuantity();
+		double remainingQty_after = SupplyItemDetailsPage.getRemainingQuantity(driver);
 		log("/*-- . remaining Quantity are: -->" + remainingQty_after);
-		double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses();
+		double remainingDoses_after = SupplyItemDetailsPage.getRemainingDoses(driver);
 		log("/*-- . remaining Doses are: -->" + remainingDoses_after);
 
 		Assert.assertEquals(remainingQty_after, remainingQty_before + 1);

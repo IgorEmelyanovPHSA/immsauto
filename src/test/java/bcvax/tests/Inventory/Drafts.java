@@ -97,16 +97,16 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
-            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
             Thread.sleep(500);
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         }
 
         log("/*9.----Picked up the Dose Conversation Factor --*/");
@@ -232,16 +232,16 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
-            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
             Thread.sleep(500);
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         }
 
         log("/*9.----Picked up the Dose Conversation Factor --*/");
@@ -365,16 +365,16 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*8.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         Thread.sleep(500);
         log("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
-            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
             Thread.sleep(500);
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         }
 
         log("/*10.----Picked up the Dose Conversation Factor --*/");
@@ -490,16 +490,16 @@ public class Drafts extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         Thread.sleep(500);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         try {
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         } catch (ElementNotInteractableException ex) {
             System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
-            supplyConsolePage.clickOnFirstContainerDropDownMenu();
+            SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
             Thread.sleep(500);
-            supplyConsolePage.selectTransferFromDropDown();
+            SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         }
 
         log("/*9.----Picked up the Dose Conversation Factor --*/");

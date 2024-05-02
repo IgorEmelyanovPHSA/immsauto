@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.ContainerWastageForm;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -44,11 +41,11 @@ public class WastageCP extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
 
 		log("/*4.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 		Thread.sleep(2000);
 
 		log("/*5.----select Wastage from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectWastageFromDropDown();
+		SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		double remainingDosesBeforeWastage = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorValue = supplyConsolePage.getDoseConversionFactor();
 		log("/*----Remaining Doses Before Wastage " + remainingDosesBeforeWastage + " --*/");
@@ -120,10 +117,10 @@ public class WastageCP extends BaseTest {
 
 		log("/*.----Extra steps to check the actual amount of doses wastage on Container - Wastage page --*/");
 		log("/*12.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 
 		log("/*13.----select Wastage from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectWastageFromDropDown();
+		SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 
 		double actualDosesAmount = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Actual Quantity Doses " + actualDosesAmount + " --*/");
