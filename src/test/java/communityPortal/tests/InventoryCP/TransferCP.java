@@ -52,9 +52,9 @@ public class TransferCP extends BaseTest {
 		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);;
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
 		log("/*7.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+		SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
 		log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectTransferFromDropDown();
+		SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
 		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
 		log("/*--  the Trade Name is:  " + tradeName);
@@ -274,9 +274,9 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_beforeLot_EK4241_Distribution_1_2);
 		/////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
 		System.out.println("/*8.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+		SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
 		System.out.println("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectTransferFromDropDown();
+		SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 		System.out.println("/*10.----Picked up the Trade Vaccine Name --*/");
 		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
 		System.out.println("/*--  the Trade Name is:  " + tradeName);

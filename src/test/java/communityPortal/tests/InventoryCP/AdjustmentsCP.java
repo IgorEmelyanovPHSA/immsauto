@@ -1,10 +1,7 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.ContainerAdjustmentForm;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
@@ -69,10 +66,10 @@ public class AdjustmentsCP extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*4.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 
 		log("/*5.----select Adjustment from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectAdjustmentFromDropDown();
+		SupplyLocationRelatedItems.selectAdjustmentFromDropDown(driver);
 		double remainingDosesBeforeAdjustment = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorRead = supplyConsolePage.getDoseConversionFactor();
 		log("/*----Remaining Doses Before Adjustment " + remainingDosesBeforeAdjustment + " --*/");
