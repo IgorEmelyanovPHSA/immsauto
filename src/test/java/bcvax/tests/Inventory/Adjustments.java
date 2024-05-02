@@ -94,18 +94,18 @@ public class Adjustments extends BaseTest {
 		List<String> my_containers = new ArrayList<>();
 		my_containers.add(container_from);
 
-		Map<String, Map<String, String>> doses_quantity_from = SupplyLocationRelatedItems.getSupplyContainerDoses(driver, my_containers);
+		Map<String, String> doses_quantity_from = SupplyLocationRelatedItems.getSupplyContainerDose(driver, container_from);
 		log("/*7.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 		Thread.sleep(1000);
 		log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
 		try {
-			supplyConsolePage.selectAdjustmentFromDropDown();
+			SupplyLocationRelatedItems.selectAdjustmentFromDropDown(driver);
 		} catch (ElementNotInteractableException ex) {
 			System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
-			supplyConsolePage.clickOnFirstContainerDropDownMenu();
+			SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 			Thread.sleep(1000);
-			supplyConsolePage.selectAdjustmentFromDropDown();
+			SupplyLocationRelatedItems.selectAdjustmentFromDropDown(driver);
 		}
 		double remainingDosesBeforeAdjustment = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorRead = supplyConsolePage.getDoseConversionFactor();

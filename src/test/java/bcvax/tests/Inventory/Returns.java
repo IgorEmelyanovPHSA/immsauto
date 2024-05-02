@@ -61,8 +61,8 @@ public class Returns extends BaseTest {
 
         log("/*d.----Create Wastage for the Flu Container --*/");
         //Create Wastage Record for Flu supply item
-        supplyConsolePage.clickOnContainerDropDownMenu(supply_item, distribution_to);
-        supplyConsolePage.selectWastageFromDropDown();
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, supply_item);
+        SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 
         log("/*f.----Add Doses and Reason for Wastage --*/");
         ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(doses));

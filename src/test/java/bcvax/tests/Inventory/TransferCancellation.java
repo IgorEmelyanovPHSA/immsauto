@@ -53,9 +53,9 @@ public class TransferCancellation extends BaseTest {
 
         log("/---- Perform doses transfer to  location " + supply_location_to + "--*/");
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*9.----Picked up the Trade Vaccine Name --*/");
         String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
@@ -155,9 +155,9 @@ public class TransferCancellation extends BaseTest {
 
         log("/---- Perform Quantity transfer to another location --*/");
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*9.----Picked up the Trade Vaccine Name --*/");
         String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241

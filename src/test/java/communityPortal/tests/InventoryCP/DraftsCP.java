@@ -70,10 +70,10 @@ public class DraftsCP extends BaseTest {
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*9.----Entering Doses amount, select supply location and Save as Draft -*/");
         ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
@@ -162,10 +162,10 @@ public class DraftsCP extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*8.----Picked up the Dose Conversation Factor --*/");
         double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
@@ -279,10 +279,10 @@ public class DraftsCP extends BaseTest {
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         log("/*6.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnFirstContainerDropDownMenu();
+        SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 
         log("/*7.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*8.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;

@@ -516,82 +516,6 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public void clickOnContainerDropDownMenu(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		tables.getSupplyLocationActions(supplyContainer);
-	}
-
-	public void clickOnFirstContainerDropDownMenu() throws InterruptedException {
-		Thread.sleep(1000);
-		driver.navigate().refresh();
-		Thread.sleep(1000);
-		WebElement action = tables.getSupplyContainerTable().getRowsMappedToHeadings().get(1).get("Actions");
-		action.click();
-		boolean menu_visible = false;
-		Thread.sleep(1000);
-		for (int i = 0; i < 10; i++) {
-			try {
-				menu_visible = driver.findElement(By.xpath("//div[@part='overlay dropdown']")).isDisplayed();
-				if(menu_visible) {
-					break;
-				} else {
-					action.click();
-					Thread.sleep(1000);
-				}
-			} catch (Exception ex) {
-				menu_visible = false;
-			}
-		}
-	}
-	@Step
-	public void selectTransferFromDropDown() throws InterruptedException {
-		selectActionFromDropDown("Transfer");
-	}
-
-	@Step
-	public void selectAdjustmentFromDropDown() throws InterruptedException {
-		selectActionFromDropDown("Adjustment");
-	}
-
-	@Step
-	public void selectWastageFromDropDown() throws InterruptedException {
-		selectActionFromDropDown("Wastage");
-	}
-
-	public void selectActionFromDropDown(String action) throws InterruptedException {
-		Thread.sleep(500);
-		By transfer_dropdawn_item_path = By.xpath("//a/span[text() = '" + action + "']");
-		waitForElementToBeEnabled(driver, transfer_dropdawn_item_path, 10);
-		WebElement transfer_item = driver.findElement(transfer_dropdawn_item_path);
-		scrollCenter(transfer_item);
-		Thread.sleep(500);
-		try {
-			transfer_item.click();
-		} catch(ElementNotInteractableException ex) {
-			Thread.sleep(500);
-			transfer_item.click();
-		}
-		Thread.sleep(500);
-	}
-
-	public Double getValueOfRemainingQuantity() throws InterruptedException {
-		By remaining_quantity_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Remaining_Quantity__c']//lightning-formatted-number");
-		waitForElementToBeEnabled(driver, remaining_quantity_path, 10);
-		WebElement element = driver.findElement(remaining_quantity_path);
-		String Quantity = element.getText();
-		Double doses = Double.parseDouble(Quantity.replaceAll(",", ""));
-		return (doses);
-	}
-
-	public Double getValueOfRemainingDoses() throws InterruptedException {
-		By remaining_dose_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Remaining_Measures__c']//lightning-formatted-number");
-		waitForElementToBeEnabled(driver, remaining_dose_path, 10);
-		WebElement element = driver.findElement(remaining_dose_path);
-		String Doses = element.getText();
-		Double doses = Double.parseDouble(Doses.replaceAll(",", ""));
-		return (doses);
-	}
-
 	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		double doses = 0;
@@ -886,7 +810,7 @@ public class SupplyConsolePage extends BasePage {
 
 	public static void clickSupplyItemName(WebDriver driver, String supply_item) throws InterruptedException {
 		try {
-			switchToTableView(driver);
+			SupplyConsolePage.switchToTableView(driver);
 		} catch(Exception ex) {
 			System.out.println("Cannot switch to Table view");
 		}
@@ -895,46 +819,6 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeLocated(driver, supply_item_path, 10);
 		WebElement my_supply_item = driver.findElement(supply_item_path);
 		my_supply_item.click();
-	}
-
-	public static void selectSupplyItemName(WebDriver driver, String item) throws InterruptedException {
-		By select_list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Items']");
-		Thread.sleep(500);
-		waitForElementToBeEnabled(driver, select_list_view_btn_path, 10);
-		WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
-		select_list_view_btn.click();
-		Thread.sleep(500);
-		By all_supply_items_path = By.xpath("//a[@role='option']/span[text() = 'All']");
-		waitForElementToBeEnabled(driver, all_supply_items_path, 10);
-		WebElement all_supply_items =  driver.findElement(all_supply_items_path);
-		all_supply_items.click();
-		try {
-			switchToTableView(driver);
-		} catch (Exception ex) {
-			System.out.println("Cannot switch the view");
-		}
-		By search_field_path = By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']");
-		waitForElementToBeEnabled(driver, search_field_path, 10);
-		WebElement search_location_field = driver.findElement(search_field_path);
-		try {
-			WebElement clear_btn = driver.findElement(By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']/..//button[@data-element-id = 'searchClear']"));
-			clear_btn.click();
-			Thread.sleep(2000);
-		} catch(Exception ex) {
-			System.out.println("Search field is empty. Continue...");
-		}
-		search_location_field.sendKeys(item);
-		Thread.sleep(1000);
-		search_location_field.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
-
-		By supply_item_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
-		waitForElementToBeEnabled(driver, supply_item_table_path, 10);
-		WebElement supply_items_table_node = driver.findElement(supply_item_table_path);
-		GenericTable supply_items_table = new GenericTable(supply_items_table_node);
-		Map<String, WebElement> my_row = supply_items_table.getMappedRow(ImmutableMap.of("Supply Item Name", item));
-		WebElement my_link = my_row.get("Supply Item Name").findElement(By.xpath(".//a"));
-		my_link.click();
 	}
 
 	public static void switchToTableView(WebDriver driver) throws InterruptedException {
@@ -970,7 +854,7 @@ public class SupplyConsolePage extends BasePage {
 		active_supply_locations_item.click();
 		Thread.sleep(2000);
 		try {
-			switchToTableView(driver);
+			SupplyConsolePage.switchToTableView(driver);
 		} catch(Exception ex) {
 			System.out.println("---Cannot switch the view---");
 		}

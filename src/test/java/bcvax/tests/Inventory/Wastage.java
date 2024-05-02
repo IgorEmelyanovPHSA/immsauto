@@ -1,11 +1,8 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.ContainerWastageForm;
-import bcvax.pages.MainPageOrg;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
 import constansts.Apps;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.annotations.BeforeMethod;
@@ -71,16 +68,16 @@ public class Wastage extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*5.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 		
 		log("/*6.----select Wastage from the DropDownMenu dropdown menu --*/");
 		try {
-			supplyConsolePage.selectWastageFromDropDown();
+			SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		} catch(ElementNotInteractableException ex) {
 			Thread.sleep(500);
-			supplyConsolePage.clickOnFirstContainerDropDownMenu();
+			SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 			Thread.sleep(500);
-			supplyConsolePage.selectWastageFromDropDown();
+			SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		}
 		double remainingDosesBeforeWastage = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorValue = supplyConsolePage.getDoseConversionFactor();
@@ -152,10 +149,10 @@ public class Wastage extends BaseTest {
 		
 		log("/*.----Extra steps to check the actual amount of doses wastage on Container - Wastage page --*/");
 		log("/*13.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 		
 		log("/*14.----select Wastage from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectWastageFromDropDown();
+		SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		
 		double actualDosesAmount = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Actual Quantity Doses " + actualDosesAmount + " --*/");
@@ -192,16 +189,16 @@ public class Wastage extends BaseTest {
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*5.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 
 		log("/*6.----select Wastage from the DropDownMenu dropdown menu --*/");
 		try {
-			supplyConsolePage.selectWastageFromDropDown();
+			SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		} catch(ElementNotInteractableException ex) {
 			Thread.sleep(500);
-			supplyConsolePage.clickOnFirstContainerDropDownMenu();
+			SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 			Thread.sleep(500);
-			supplyConsolePage.selectWastageFromDropDown();
+			SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		}
 		double remainingDosesBeforeWastage = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorValue = supplyConsolePage.getDoseConversionFactor();
@@ -275,10 +272,10 @@ public class Wastage extends BaseTest {
 
 		log("/*.----Extra steps to check the actual amount of doses wastage on Container - Wastage page --*/");
 		log("/*13.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 
 		log("/*14.----select Wastage from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectWastageFromDropDown();
+		SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 
 		double actualDosesAmount = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Actual Quantity Doses " + actualDosesAmount + " --*/");

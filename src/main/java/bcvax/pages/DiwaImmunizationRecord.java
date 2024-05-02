@@ -13,7 +13,7 @@ public class DiwaImmunizationRecord extends BasePage {
     }
     public static void clickSelectAnOptionDropdown(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By agent_option_path = By.xpath("//select[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @data-id='agent']");
+        By agent_option_path = By.xpath("//select[@data-id='agent']");
         waitForElementToBeEnabled(driver, agent_option_path, 10);
         WebElement agent_option = driver.findElement(agent_option_path);
         agent_option.click();
@@ -40,13 +40,13 @@ public class DiwaImmunizationRecord extends BasePage {
         By clinic_location_path = By.xpath("//input[@data-id = 'userinput']");
         waitForElementToBeEnabled(driver, clinic_location_path, 10);
         WebElement search_clinic = driver.findElement(clinic_location_path);
-        search_clinic.click();
-        Thread.sleep(500);
-        search_clinic.clear();
+        By clear_button_path = By.xpath("//input[@data-id = 'userinput']/..//button");
+        WebElement clear_button = driver.findElement(clear_button_path);
+        clear_button.click();
         Thread.sleep(500);
         search_clinic.sendKeys(clinic);
         Thread.sleep(500);
-        By select_dropdown_option = By.xpath(".//div[@class = 'slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta']");
+        By select_dropdown_option = By.xpath("//div[@c-bchcgenericcustomlookup_bchcgenericcustomlookup and @role='listbox']");
         waitForElementToBeEnabled(driver, select_dropdown_option, 10);
         List<WebElement> dropdown_list = driver.findElements(select_dropdown_option);
         WebElement my_option = dropdown_list.get(0);

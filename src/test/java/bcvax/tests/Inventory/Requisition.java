@@ -77,6 +77,7 @@ public class Requisition extends BaseTest {
 		ApproveRequisitionDialog.enterApproverComments(driver, "test test");
 		System.out.println("/*----23. Save Approved Request Dose--*/");
 		ApproveRequisitionDialog.clickSaveButton(driver);
+		Thread.sleep(2000);
 		System.out.println("/*----24. Ship Requisition--*/");
 		RequisitionPage.clickShipRequisition(driver);
 

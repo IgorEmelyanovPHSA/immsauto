@@ -104,7 +104,14 @@ public class MainPageCP extends BasePage{
         By client_list_tab_path = By.xpath("//a[text()='Client List']");
         waitForElementToBeEnabled(driver, client_list_tab_path, 10);
         WebElement element = driver.findElement(client_list_tab_path);
-        element.click();
+        scrollCenter(driver, element);
+        Thread.sleep(500);
+        try {
+            element.click();
+        } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(2000);
+            element.click();
+        }
         //Try to avoid stale elelemnt exception
         Thread.sleep(2000);
     }
@@ -141,6 +148,8 @@ public class MainPageCP extends BasePage{
         By search_field_path = By.xpath("//input[@class='search-input search-input--left']");
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_field = driver.findElement(search_field_path);
+        search_field.clear();
+        Thread.sleep(1000);
         search_field.sendKeys(criteria);
         Thread.sleep(500);
         search_field.sendKeys(Keys.ENTER);
@@ -150,13 +159,16 @@ public class MainPageCP extends BasePage{
         //In case not found
         By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
         try {
-            waitForElementToBeEnabled(driver, not_found_message_path, 1);
+            waitForElementToBeEnabled(driver, not_found_message_path, 2);
+            System.out.println("Client Not Found. Try again.");
+            search_field.clear();
+            Thread.sleep(1000);
             search_field.sendKeys(criteria);
             Thread.sleep(500);
             search_field.sendKeys(Keys.ENTER);
             Thread.sleep(500);
         } catch(Exception ex) {
-            //Do Nothing;
+            System.out.println("---THERE IS NO Not Found ERROR---");
         }
         int attempt = 0;
         while(attempt < 10) {
@@ -168,6 +180,8 @@ public class MainPageCP extends BasePage{
                 System.out.println("Search Attempt #" + attempt);
                 System.out.println("-------------");
                 search_field = driver.findElement(search_field_path);
+                search_field.clear();
+                Thread.sleep(1000);
                 search_field.sendKeys(criteria);
                 Thread.sleep(500);
                 search_field.sendKeys(Keys.ENTER);
