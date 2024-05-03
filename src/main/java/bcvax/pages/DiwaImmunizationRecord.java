@@ -22,14 +22,17 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static void selectOption(WebDriver driver, String vaccine) throws InterruptedException {
         Thread.sleep(500);
-        By select_agent_path = By.xpath("//select[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @data-id='agent']");
+        By select_agent_path = By.xpath("//select[@data-id='agent']");
         waitForElementToBeEnabled(driver, select_agent_path, 10);
         WebElement select_agent = driver.findElement(select_agent_path);
         Select my_select_option = new Select(select_agent);
         List<WebElement> my_options = my_select_option.getOptions();
         for(WebElement my_option: my_options) {
             if(my_option.getAttribute("label").equals(vaccine)) {
+                select_agent.click();
                 my_option.click();
+                Thread.sleep(500);
+                select_agent.sendKeys(Keys.ENTER);
                 break;
             }
         }
@@ -128,7 +131,7 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static List<Map<String, WebElement>> getInformedConsentTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By informed_consent_table_path = By.xpath("//c-bchc-active-consent-table[@c-createimmunizationrecordmodal_createimmunizationrecordmodal]");
+        By informed_consent_table_path = By.xpath("//section[@role='dialog']//c-bchc-active-consent-table");
         waitForElementToBeEnabled(driver, informed_consent_table_path, 10);
         WebElement informed_consent_table_node = driver.findElement(informed_consent_table_path);
         GenericTable informed_consent_table = new GenericTable(informed_consent_table_node);
@@ -172,7 +175,7 @@ public class DiwaImmunizationRecord extends BasePage {
     }
     public static boolean confirmAndSaveButtonIsActive(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By confirm_and_save_btn_path = By.xpath("//button[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @title='Confirm & Save Administration']");
+        By confirm_and_save_btn_path = By.xpath("//section[@role='dialog']//button[@title='Confirm & Save Administration']");
         waitForElementToBeLocated(driver, confirm_and_save_btn_path, 10);
         WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
         return confirm_and_save_btn.isEnabled();
@@ -180,7 +183,7 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static void clickConfirmAndSaveAdministration(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By confirm_and_save_btn_path = By.xpath("//button[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @title='Confirm & Save Administration']");
+        By confirm_and_save_btn_path = By.xpath("//section[@role='dialog']//button[@title='Confirm & Save Administration']");
         waitForElementToBeLocated(driver, confirm_and_save_btn_path, 10);
         WebElement confirm_and_save_btn = driver.findElement(confirm_and_save_btn_path);
         confirm_and_save_btn.click();
@@ -286,7 +289,7 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static void clickCancelAndCloseImmunization(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By cancel_btn_path = By.xpath("//div[@c-createimmunizationrecordmodal_createimmunizationrecordmodal and @class='slds-modal__container']//button[@title='Cancel and Close']");
+        By cancel_btn_path = By.xpath("//section[@role='dialog']//button[@title='Cancel and Close']");
         waitForElementToBeEnabled(driver, cancel_btn_path, 10);
         WebElement cancel_btn = driver.findElement(cancel_btn_path);
         scrollCenter(driver, cancel_btn);
