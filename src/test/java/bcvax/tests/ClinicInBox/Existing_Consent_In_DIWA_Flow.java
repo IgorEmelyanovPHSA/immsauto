@@ -81,8 +81,8 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         } catch(Exception ex) {
             System.out.println("No Confirm dialog");
         }
-        log("/*----9. Select an Option ---*/)");
-        DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
+        //log("/*----9. Select an Option ---*/)");
+        //DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
         log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
         DiwaImmunizationRecord.selectOption(driver, agent);
         log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
