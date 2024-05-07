@@ -157,43 +157,35 @@ public class MainPageCP extends BasePage{
         By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
 
         //In case not found
-        By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
-        try {
-            waitForElementToBeEnabled(driver, not_found_message_path, 2);
-            System.out.println("Client Not Found. Try again.");
-            search_field.clear();
-            Thread.sleep(1000);
-            search_field.sendKeys(criteria);
-            Thread.sleep(500);
-            search_field.sendKeys(Keys.ENTER);
-            Thread.sleep(500);
-        } catch(Exception ex) {
-            System.out.println("---THERE IS NO Not Found ERROR---");
-        }
+
         int attempt = 0;
         while(attempt < 10) {
             try {
                 waitForElementToBeEnabled(driver, table_path, 10);
+                System.out.println("Table is found");
                 break;
             } catch (Exception ex) {
                 System.out.println("-------------");
                 System.out.println("Search Attempt #" + attempt);
+                System.out.println(ex.getMessage());
                 System.out.println("-------------");
-                waitForElementToBeEnabled(driver, not_found_message_path, 2);
-                System.out.println("Client Not Found. Try again.");
-                search_field.clear();
-                Thread.sleep(1000);
-                search_field.sendKeys(criteria);
-                Thread.sleep(500);
-                search_field.sendKeys(Keys.ENTER);
-                Thread.sleep(500);
-                search_field = driver.findElement(search_field_path);
-                search_field.clear();
-                Thread.sleep(1000);
-                search_field.sendKeys(criteria);
-                Thread.sleep(500);
-                search_field.sendKeys(Keys.ENTER);
-                Thread.sleep(500);
+                boolean not_found_screen = clientNotFoundScreenDisplayed(driver);
+                if(not_found_screen) {
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                }
                 attempt++;
             }
         }
@@ -206,8 +198,30 @@ public class MainPageCP extends BasePage{
         while(row_count < 2) {
             System.out.println("-----------");
             System.out.println("Found Client rows: " + row_count);
+            if(row_count < 2) {
+                boolean not_found_screen = clientNotFoundScreenDisplayed(driver);
+                if(not_found_screen) {
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                }
+            }
             System.out.println("-----------");
             Thread.sleep(1000);
+            waitForElementToBeEnabled(driver, table_path, 10);
+            found_client_table_node = driver.findElement(table_path);
+            found_client_table = new GenericTable(found_client_table_node);
             my_records = found_client_table.getRowsMappedToHeadings();
             row_count = my_records.size();
             loop_count++;
@@ -224,6 +238,17 @@ public class MainPageCP extends BasePage{
             } catch(Exception ex) {
                 ;
             }
+        }
+    }
+
+    public static boolean clientNotFoundScreenDisplayed(WebDriver driver) {
+        By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
+        try {
+            waitForElementToBeEnabled(driver, not_found_message_path, 2);
+            return true;
+        } catch(Exception ex) {
+            System.out.println("---THERE IS NO Not Found ERROR---");
+            return false;
         }
     }
 
