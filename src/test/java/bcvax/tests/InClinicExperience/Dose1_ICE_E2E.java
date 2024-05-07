@@ -209,14 +209,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		} catch(Exception ex) {
 			System.out.println("Edit Button disabled. Continue...");
 		}
-		//String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
-		//if(consentProviderSelected.equals("")) {
-		//	consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
-		//}
 
-		//System.out.println("/*42.---Click Save Consent Button --*/");
-
-		//inClinicExperience.ClickSaveConsentButton();
 		String agent = InClinicExperienceVaccineAdministrationPage.getVaccineAgent(driver);
 		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
 		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);

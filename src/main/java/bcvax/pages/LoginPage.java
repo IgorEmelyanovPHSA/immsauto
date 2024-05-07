@@ -1,6 +1,7 @@
 package bcvax.pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,6 +55,23 @@ public class LoginPage extends BasePage {
 		return new SupplyConsolePage(driver);
 	}
 
+	public static void loginAsImmsBCAdmin(WebDriver driver) throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		By username_path = By.id("username");
+		waitForElementToBeEnabled(driver, username_path, 10);
+		WebElement textUserName = driver.findElement(username_path);
+
+		By password_path = By.id("password");
+		WebElement textPassword = driver.findElement(password_path);
+
+		By login_button_path = By.id("Login");
+		WebElement login_button = driver.findElement(login_button_path);
+
+
+		textUserName.sendKeys(Utils.getEnvConfigProperty("user_IMMSBC_ADMIN"));
+		textPassword.sendKeys(Utils.getEnvConfigProperty("password_IMMSBC_ADMIN_PW"));
+		login_button.click();
+	}
 	public CallCenterConsolePage loginAsCalCenterAgentCC() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		textUserName.sendKeys(Utils.getEnvConfigProperty("user_CALLCENTERAGENT"));
