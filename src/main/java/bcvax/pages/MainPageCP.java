@@ -179,6 +179,14 @@ public class MainPageCP extends BasePage{
                 System.out.println("-------------");
                 System.out.println("Search Attempt #" + attempt);
                 System.out.println("-------------");
+                waitForElementToBeEnabled(driver, not_found_message_path, 2);
+                System.out.println("Client Not Found. Try again.");
+                search_field.clear();
+                Thread.sleep(1000);
+                search_field.sendKeys(criteria);
+                Thread.sleep(500);
+                search_field.sendKeys(Keys.ENTER);
+                Thread.sleep(500);
                 search_field = driver.findElement(search_field_path);
                 search_field.clear();
                 Thread.sleep(1000);
