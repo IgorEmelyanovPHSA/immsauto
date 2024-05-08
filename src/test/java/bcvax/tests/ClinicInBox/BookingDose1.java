@@ -5,10 +5,13 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
+
+import java.util.Map;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
@@ -63,7 +66,7 @@ public class BookingDose1 extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*5.----- Click on User Defaults Tab --*/");
-		inClinicExperience.clickUserDefaultsTab();
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		log("/*-- 13. Enter current date for UserDefaults --*/");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -184,10 +187,11 @@ public class BookingDose1 extends BaseTest {
 		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 		log("/*46.---Open Today's appointments from Home page --*/");
 
-		inClinicExperience.clickTodayAppointments();
+		InClinicExperiencePage.clickTodayAppointments(driver);
 		log("/*47.---Open Today appointment Details --*/");
 		Thread.sleep(2000);
-		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();

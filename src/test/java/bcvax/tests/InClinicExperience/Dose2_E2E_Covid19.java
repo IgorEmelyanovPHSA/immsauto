@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -67,7 +68,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		InClinicExperiencePage.closeTabsHCA(driver);
 
 		log("/*5.----- Click on User Defaults Tab --*/");
-		inClinicExperience.clickUserDefaultsTab();
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		Thread.sleep(2000);
@@ -197,10 +198,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*46.---Open Today's appointments from Home page --*/");
 
-		inClinicExperience.clickTodayAppointments();
+		InClinicExperiencePage.clickTodayAppointments(driver);
 		Thread.sleep(2000);
 		log("/*47.---Open Today appointment Details --*/");
-		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
@@ -275,7 +277,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		InClinicExperiencePage.closeTabsHCA(driver);
 
 		log("/*5.----- Click on User Defaults Tab --*/");
-		inClinicExperience.clickUserDefaultsTab();
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		Thread.sleep(2000);
@@ -401,10 +403,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*46.---Open Today's appointments from Home page --*/");
 
-		inClinicExperience.clickTodayAppointments();
+		InClinicExperiencePage.clickTodayAppointments(driver);
 		Thread.sleep(2000);
 		log("/*47.---Open Today appointment Details --*/");
-		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 

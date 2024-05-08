@@ -97,6 +97,7 @@ public class InClinicExperiencePage extends BasePage {
 			}
 		}
 	}
+
 	public static void clickRegisterButton(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By register_btn_path = By.xpath("//button[@title = ' Create New Profile']");
@@ -124,7 +125,7 @@ public class InClinicExperiencePage extends BasePage {
 		WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
 		record_consent_btn.click();
 	}
-	public void clickTodayAppointments() throws InterruptedException {
+	public static void clickTodayAppointments(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"] | //a[text() = \"Today's Appointments\"]");
 		waitForElementToBeEnabled(driver, today_appointments_path, 10);
@@ -132,120 +133,6 @@ public class InClinicExperiencePage extends BasePage {
 		scrollIfNeeded(driver, todayAppointments);
 		Thread.sleep(500);
 		todayAppointments.click();
-	}
-
-	public GenericTable getTodayAppointmentTable() throws InterruptedException {
-		Thread.sleep(1000);
-
-		GenericTable today_Appointments = tables.getTodayAppointmentsTable();
-		int counter = 0;
-		while(today_Appointments.getRows().size() < 1) {
-			Thread.sleep(1000);
-			today_Appointments = tables.getTodayAppointmentsTable();
-			counter++;
-			if(counter > 5) {
-				break;
-			}
-		}
-		return today_Appointments;
-	}
-
-	public void clickTodayAppointmentCaseViewButton(String client_name) throws InterruptedException {
-		Thread.sleep(1000);
-
-		GenericTable today_Appointments = getTodayAppointmentTable();
-		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
-		System.out.println("Found " + my_table.size() + "rows");
-		for (Map<String, WebElement> my_row: my_table) {
-			if(my_row.get("Profile Name").getText().equals(client_name)) {
-				WebElement my_view = my_row.get("View");
-				Thread.sleep(500);
-				scrollIfNeeded(driver, my_view);
-				Thread.sleep(1000);
-				WebElement my_button = my_view.findElement(By.xpath(".//button"));
-				my_button.click();
-				Thread.sleep(1000);
-				break;
-			}
-		}
-	}
-
-	public void clickTodayAppointmentCheckinButton(String client_name) throws InterruptedException {
-		Thread.sleep(1000);
-
-		GenericTable today_Appointments = getTodayAppointmentTable();
-		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
-		System.out.println("Found " + my_table.size() + "rows");
-		for (Map<String, WebElement> my_row: my_table) {
-			if(my_row.get("Profile Name").getText().equals(client_name)) {
-				WebElement my_view = my_row.get("Check-in Client");
-				Thread.sleep(500);
-				scrollIfNeeded(driver, my_view);
-				Thread.sleep(1000);
-				WebElement my_button = my_view.findElement(By.xpath(".//button"));
-				my_button.click();
-				Thread.sleep(1000);
-				break;
-			}
-		}
-	}
-
-	public String getTodayAppointmentPathwayStatus(String client_name) throws InterruptedException {
-		Thread.sleep(1000);
-		String my_pathway_status = "";
-		GenericTable today_Appointments = getTodayAppointmentTable();
-		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
-		System.out.println("Found " + my_table.size() + "rows");
-		for (Map<String, WebElement> my_row: my_table) {
-			if(my_row.get("Profile Name").getText().equals(client_name)) {
-				WebElement my_view = my_row.get("Pathway Status");
-				my_pathway_status = my_view.getText();
-				break;
-			}
-		}
-		return my_pathway_status;
-	}
-
-	public boolean todayAppointmentViewButtonExists(String client_name) throws InterruptedException {
-		Thread.sleep(1000);
-		boolean button_exist = false;
-		GenericTable today_Appointments = getTodayAppointmentTable();
-		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
-		System.out.println("Found " + my_table.size() + "rows");
-		for (Map<String, WebElement> my_row: my_table) {
-			if(my_row.get("Profile Name").getText().equals(client_name)) {
-				WebElement my_view = my_row.get("View");
-				if(my_view.findElement(By.xpath(".//button")).isDisplayed()) {
-					button_exist = true;
-					break;
-				} else {
-					button_exist = false;
-					break;
-				}
-			}
-		}
-		return button_exist;
-	}
-
-	public boolean todayAppointmentCheckinButtonExists(String client_name) throws InterruptedException {
-		Thread.sleep(1000);
-		boolean button_exist = false;
-		GenericTable today_Appointments = getTodayAppointmentTable();
-		List<Map<String, WebElement>> my_table = today_Appointments.getRowsMappedToHeadings();
-		System.out.println("Found " + my_table.size() + "rows");
-		for (Map<String, WebElement> my_row: my_table) {
-			if(my_row.get("Profile Name").getText().equals(client_name)) {
-				WebElement my_view = my_row.get("Check-in Client");
-				if(my_view.findElement(By.xpath(".//button")).isDisplayed()) {
-					button_exist = true;
-					break;
-				} else {
-					button_exist = false;
-					break;
-				}
-			}
-		}
-		return button_exist;
 	}
 
 	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
@@ -305,7 +192,7 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 
-	public void clickUserDefaultsTab() throws InterruptedException {
+	public static void clickUserDefaultsTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By user_defaults_tab_path = By.xpath("//one-app-nav-bar-item-root[@data-target-selection-name='sfdc:TabDefinition.BCH_In_Clinic_User_Defaults']");
 		waitForElementToBeEnabled(driver, user_defaults_tab_path, 10);
@@ -313,7 +200,7 @@ public class InClinicExperiencePage extends BasePage {
 		user_defaults_tab.click();
 	}
 
-	public void clickClientListTab() throws InterruptedException {
+	public static void clickClientListTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By client_list_tab_path = By.xpath("//one-app-nav-bar-item-root[@data-target-selection-name='sfdc:TabDefinition.BCH_Client_List']");
 		waitForElementToBeEnabled(driver, client_list_tab_path, 10);

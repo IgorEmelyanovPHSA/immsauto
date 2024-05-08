@@ -75,7 +75,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         log("/*4.----Close All previously opened Tab's --*/");
         InClinicExperiencePage.closeTabsHCA(driver);
         log("/*5.----- Click on User Defaults Tab --*/");
-        inClinicExperience.clickUserDefaultsTab();
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
         log("/*6.----- Enter current date for UserDefaults --*/");
         log("/*-- 13. Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -237,9 +237,10 @@ public class Alerts_ICE_CIB extends BaseTest {
         Thread.sleep(1000);
         InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 
-        inClinicExperience.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
-        inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 
         String final_alerts_from_sidebar = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
 

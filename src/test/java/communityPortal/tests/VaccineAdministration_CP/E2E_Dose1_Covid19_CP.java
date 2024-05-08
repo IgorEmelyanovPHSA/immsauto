@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -168,10 +169,11 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*39.---Open Today's appointments from Home page --*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
         log("/*40.---Open Today appointment Details --*/");
-        inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         Thread.sleep(2000);
         Thread.sleep(1000);

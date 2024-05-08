@@ -150,7 +150,7 @@ public class MainPageOrg extends BasePage {
 
     public static void closeAllTabs(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
+        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 5);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
         int counter = 0;
         while(closeButtons.size() < 1) {
@@ -220,7 +220,7 @@ public class MainPageOrg extends BasePage {
             //search_input.sendKeys(Keys.ENTER);
         }
         Thread.sleep(500);
-        By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
+        By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"] | //mark[@class='data-match' and text()=\"" + search_value + "\"]/..");
         int counter = 10;
         for(int i = 0; i < counter; i++) {
             try {
