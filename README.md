@@ -1,5 +1,4 @@
-# bcvax
-BCVAX QA Automation
+HealthGateWay 2.0 QA Automation
 
 Automation framework installation steps:
 Download latest 8th version of JDK (E.g. Java SE 8u341):

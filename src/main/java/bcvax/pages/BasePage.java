@@ -216,6 +216,10 @@ public abstract class BasePage<T> {
 		return element.getAttribute("value");
 	}
 
+	String getText(WebElement element) {
+		return element.getText();
+	}
+
 	public boolean isElementPresent(WebElement element){
 		boolean isPresent;
 		try {

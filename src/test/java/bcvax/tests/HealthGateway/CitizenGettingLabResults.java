@@ -5,31 +5,23 @@ import bcvax.pages.MainPageHealthGateway;
 import bcvax.pages.TimeLineTabPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
-import org.json.JSONObject;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v120.network.Network;
-import org.openqa.selenium.devtools.v120.network.model.RequestId;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Listeners({TestListener.class})
 public class CitizenGettingLabResults extends BaseTest {
 
+	//Data for first record to match
+	private String orderStatus = "Completed w/Modification";
+	private String collectionDate = "2021-Jul-04, 11:45 AM";
+	private String orderingProvider = "PLISVCI, BROOKS";
+	private String reportingLab = "VIHA - Department of Laboratory Medicine, Pathology and Medical Genetics";
 
 	@Test
-	public void viewLabResult() throws Exception {
-		//Test Id
+	public void viewAndValidateLabResults() throws Exception {
 		TestcaseID = "291524"; //C291524
-
-		//Original TC id
-		//	TestcaseID = "291524"; //C291524
-
-
-		//TimeLine Lab results
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Test Case " +"C" +TestcaseID);
 
@@ -41,14 +33,16 @@ public class CitizenGettingLabResults extends BaseTest {
 
 		timeLine.selectFilterLabResults();
 
-		timeLine.openFirstLabResultRecordAndValidate();
+		timeLine.openFirstLabResultRecord();
 
-		//MainPageHealthGateway mainPageHealthGateway = loginPage.openHealthGatewayPortal();
-		Thread.sleep(5000);
+		//Validations
+		log(timeLine.getDisplayingNumberOfRecords());
+		Assert.assertTrue(timeLine.getOrderStatus().equals(orderStatus), "Order Status didn't match!");
+		Assert.assertTrue(timeLine.getCollectionDate().equals(collectionDate), "Collection date didn't match!");
+		Assert.assertTrue(timeLine.getOrderingProvider().equals(orderingProvider), "Ordering Provider didn't match!");
+		Assert.assertTrue(timeLine.getReportingLab().equals(reportingLab), "Reporting Lab didn't match!");
 
-
-		log("Exit test");
-
+		log("Order status, Collection date, Ordering Provider and Reporting Lab matched successfully");
 		}
 
 	}
