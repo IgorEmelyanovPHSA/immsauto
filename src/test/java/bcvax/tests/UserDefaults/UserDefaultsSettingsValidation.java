@@ -42,7 +42,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         InClinicExperiencePage.closeTabsHCA(driver);
 
         log("/*4.----- Click on User Defaults Tab --*/");
-        inClinicExperience.clickUserDefaultsTab();
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
 
         log("/*5.----- Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -84,7 +84,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("/*12.---- Navigate User Defaults Page --*/");
         MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
-        inClinicExperiencePage.clickUserDefaultsTab();
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicLocation);
 

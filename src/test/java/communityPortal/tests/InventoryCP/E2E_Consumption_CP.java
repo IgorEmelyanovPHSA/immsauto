@@ -3,6 +3,7 @@ package communityPortal.tests.InventoryCP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -173,9 +174,10 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(2000);
 
         log("/*39.---Open Today's appointments from Home page --*/");
-        inClinicExperience_CP.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         log("/*40.---Open Today appointment Details --*/");
-        inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);

@@ -58,7 +58,7 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*-- 2. Navigate to In Clinic Experience App --*/");
         Thread.sleep(2000);
         log("/*-- 3. Click on User Defaults Tab  --*/");
-        inClinicExperiencePage.clickUserDefaultsTab();
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
         Thread.sleep(2000);
         log("/*-- 4. Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);

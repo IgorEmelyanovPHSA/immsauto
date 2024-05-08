@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -76,7 +77,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*5.----- Click on User Defaults Tab --*/");
-		inClinicExperience.clickUserDefaultsTab();
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		log("/*-- 13. Enter current date for UserDefaults --*/");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -144,7 +145,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 			//---If vaccine is disabled and not available in UI then Pass
 			Assert.assertTrue(1==1);
 			return;
-		}
+			}
 		}
 
 
@@ -184,10 +185,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		log("/*46.---Open Today's appointments from Home page --*/");
 
-		inClinicExperience.clickTodayAppointments();
+		InClinicExperiencePage.clickTodayAppointments(driver);
 		log("/*47.---Open Today appointment Details --*/");
 		Thread.sleep(2000);
-		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 

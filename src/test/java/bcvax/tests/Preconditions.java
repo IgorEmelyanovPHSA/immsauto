@@ -2,7 +2,10 @@ package bcvax.tests;
 
 import bcvax.pages.*;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class Preconditions extends BasePage {
     public Preconditions(WebDriver driver) {
@@ -13,6 +16,7 @@ public class Preconditions extends BasePage {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         try {
             Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(data.getPersonalHealthNumber());
+            Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(data.getPersonalHealthNumber());
         } catch(Exception ex) {
             System.out.println("Exception was caught while deleting the existing citizen" + ex.getMessage());
         }
@@ -21,18 +25,21 @@ public class Preconditions extends BasePage {
         String currentApp = MainPageOrg.currentApp(driver);
         try {
             MainPageOrg.closeAllTabs(driver);
-        } catch(Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch(NotFoundException ex) {
+            System.out.println("No tabs to close");
         }
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
             MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
 
-        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*4.----Close All previously opened Tab's --*/");
-        InClinicExperiencePage.closeTabsHCA(driver);
+        try {
+            MainPageOrg.closeAllTabs(driver);
+        } catch (NotFoundException ex) {
+            System.out.println("No tabs to close");
+        }
         log("/*5.----- Click on User Defaults Tab --*/");
-        inClinicExperience.clickUserDefaultsTab();
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
         log("/*6.----- Enter current date for UserDefaults --*/");
         log("/*-- 13. Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
@@ -85,8 +92,48 @@ public class Preconditions extends BasePage {
         return result;
     }
     public static boolean appointmentBookedNewCitizen(WebDriver driver, VaccinationTestDataStruct data) throws InterruptedException {
-        citizenRegistered(driver, data);
-        return true;
+        try {
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        } catch (ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        }
+        try {
+            System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, data.getAgent());
+
+        } catch(Exception ex) {
+            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+            PersonAccountSchedulePage.overrideEligibility(driver);
+            Thread.sleep(500);
+            System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, data.getAgent());
+        }
+
+
+
+        System.out.println("/*27----select 'Search by Clinic name' tab --*/");
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+
+        log("/*28.----search the Clinic " + data.getClinicName() + " --*/");
+        PersonAccountSchedulePage.searchClinicName(driver, data.getClinicName());
+
+        System.out.println("/*29----click on Option Facility location  --*/");
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
+        System.out.println("/*30----select Active booking appointment day  --*/");
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        System.out.println("/*31----select the time slot  --*/");
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        System.out.println("/*32----click Next button  --*/");
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
+        System.out.println("/*33----click Verify Contact Information Checkbox  --*/");
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        System.out.println("/*34----click Confirm Appointment button  --*/");
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
+        System.out.println("/*35. ----see 'Appointment confirmed!' screen --*/");
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
+
+        return appointment_result;
     }
 
     public static boolean appointmentBookedExistingCitizen(WebDriver driver, VaccinationTestDataStruct data) throws InterruptedException {
