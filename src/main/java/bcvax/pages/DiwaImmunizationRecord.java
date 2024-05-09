@@ -192,9 +192,14 @@ public class DiwaImmunizationRecord extends BasePage {
     public static void setProvider(WebDriver driver, String provider) throws InterruptedException {
         Thread.sleep(500);
         By providerFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//input");
+        By providerClearFieldPath = By.xpath("//label[text() = 'Provider' and @c-bchcimmunizationinfo_bchcimmunizationinfo]/..//button[@title='Clear Selection']");
         waitForElementToBeEnabled(driver, providerFieldPath, 10);
         WebElement providerField =  driver.findElement(providerFieldPath);
+        WebElement provider_field_clear_button = driver.findElement(providerClearFieldPath);
         scrollCenter(driver, providerField);
+        Thread.sleep(500);
+        provider_field_clear_button.click();
+        Thread.sleep(500);
         providerField.sendKeys(provider);
         By providerItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + provider + "']");
         waitForElementToBeLocated(driver, providerItemPath, 10);
