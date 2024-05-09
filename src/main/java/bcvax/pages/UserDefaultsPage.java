@@ -31,12 +31,15 @@ public class UserDefaultsPage extends BasePage{
     }
 
     public static void clickBtnSave(WebDriver driver) throws InterruptedException {
-        Thread.sleep(500);
-        By save_btn_path = By.xpath("//button[text()='Save']");
-        waitForElementToBeEnabled(driver, save_btn_path, 10);
-        WebElement save_btn = driver.findElement(save_btn_path);
-        save_btn.click();
-       Thread.sleep(1000); //Save function
+            Thread.sleep(500);
+            By save_defaults_button_path = By.xpath("//button[text()='Save']");
+            waitForElementToBeEnabled(driver, save_defaults_button_path, 10);
+            WebElement save_defaults_button = driver.findElement(save_defaults_button_path);
+            scrollCenter(driver, save_defaults_button);
+            Thread.sleep(500);
+            save_defaults_button.click();
+            Thread.sleep(500);
+            AlertDialog.closeAllAlerts(driver);
     }
 
     public static void clickBtnSaveWithSuccessMsgValidation(WebDriver driver) throws InterruptedException {

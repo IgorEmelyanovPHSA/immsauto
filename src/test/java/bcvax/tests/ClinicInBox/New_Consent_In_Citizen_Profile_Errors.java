@@ -268,7 +268,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         log("/*----9. Select an Option ---*/)");
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consent_agent);
 
-        inClinicExperiencePage.clickRecordConsent();
+        InClinicExperienceVaccineAdministrationPage.clickRecordConsent(driver);
         boolean add_consent_dialog_exists = InformedConsentDialog.dialogExists(driver);
         Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
         //Verify Headers in Infromed Consent Table
@@ -306,7 +306,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         Assert.assertEquals(response_error, "Please select a choice.");
         InformedConsentDialog.clickCloseButton(driver);
 
-        inClinicExperiencePage.clickRecordConsent();
+        InClinicExperienceVaccineAdministrationPage.clickRecordConsent(driver);
         add_consent_dialog_exists = InformedConsentDialog.dialogExists(driver);
         Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
 

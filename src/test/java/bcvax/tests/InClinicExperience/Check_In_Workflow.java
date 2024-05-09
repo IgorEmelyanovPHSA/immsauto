@@ -178,7 +178,6 @@ public class Check_In_Workflow extends BaseTest {
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*7.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
-        AlertDialog.closeAlert(driver);
 
         log("/*3.----Close All previously opened Tab's --*/");
         InClinicExperiencePage.closeTabsHCA(driver);

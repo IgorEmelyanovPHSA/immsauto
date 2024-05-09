@@ -236,4 +236,46 @@ public class PersonAccountRelatedPage extends BasePage {
             }
         }
     }
+
+    public static void scrollToDeferrals(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        boolean referralNewButtonFound = false;
+        WebElement newReferralBtn = null;
+        while (!referralNewButtonFound) {
+            try {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("window.scrollBy(0, 200)");
+                newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
+                referralNewButtonFound = true;
+            } catch(Exception ex) {
+                Thread.sleep(2000);
+            }
+        }
+    }
+
+    public static void newDeferral(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        boolean referralNewButtonFound = false;
+        WebElement newReferralBtn = null;
+        while (!referralNewButtonFound) {
+            try {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("window.scrollBy(0, 200)");
+                newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
+                referralNewButtonFound = true;
+            } catch(Exception ex) {
+                Thread.sleep(2000);
+            }
+        }
+        newReferralBtn.click();
+    }
+
+    public static int getDeferralsCount(WebDriver driver) throws InterruptedException {
+        By deferrals_table_path = By.xpath("//table[@aria-label = 'Deferrals']");
+        waitForElementToBeEnabled(driver, deferrals_table_path, 10);
+        WebElement deferrals_table_node = driver.findElement(deferrals_table_path);
+        GenericTable deferrals_table = new GenericTable(deferrals_table_node);
+        int count = deferrals_table.getRows().size();
+        return count;
+    }
 }

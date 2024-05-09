@@ -230,13 +230,13 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         log("/*46.---Click Save button for Immunisation Information --*/");
         InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         Thread.sleep(2000);
-        inClinicExperience_CP.clickOkForExpiredLot();
+        InClinicExperiencePage.clickOkForExpiredLot(driver);
         Thread.sleep(2000);
         log("/*47.---Click Confirm and Save Administration Button --*/");
-        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
         Thread.sleep(2000);
         log("/*48.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 
         log("/*49.---the Home - Client Search showing up  --*/");
         InClinicExperiencePage.validateHomePageShownUp(driver);

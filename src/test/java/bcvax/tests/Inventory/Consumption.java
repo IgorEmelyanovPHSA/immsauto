@@ -93,7 +93,7 @@ public class Consumption extends BaseTest {
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
-		inClinicExperiencePage.clickSaveDefaultsButton();
+		UserDefaultsPage.clickBtnSave(driver);
 		log("/*-- 15. Click on register Tab --*/");
 		InClinicExperiencePage.clickRegisterTab(driver);
 
@@ -250,12 +250,12 @@ public class Consumption extends BaseTest {
 			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
 		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
-		inClinicExperiencePage.clickOkForExpiredLot();
+		InClinicExperiencePage.clickOkForExpiredLot(driver);
 		Thread.sleep(2000);
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
-		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
-		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
 		InClinicExperiencePage.validateHomePageShownUp(driver);
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");

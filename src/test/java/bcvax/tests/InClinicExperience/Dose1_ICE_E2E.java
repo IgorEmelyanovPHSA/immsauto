@@ -84,7 +84,6 @@ public class Dose1_ICE_E2E extends BaseTest {
 		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
-		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
 		InClinicExperiencePage.clickRegisterTab(driver);
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
@@ -242,17 +241,17 @@ public class Dose1_ICE_E2E extends BaseTest {
 		}
 
 		try {
-			inClinicExperience.selectNotApprovedAdministrationReason();
+			InClinicExperienceVaccineAdministrationPage.selectNotApprovedAdministrationReason(driver);
 		} catch(Exception ex) {
 			System.out.println("Continue...");
 		}
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
 		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
-		inClinicExperience.clickOkForExpiredLot();
+		InClinicExperiencePage.clickOkForExpiredLot(driver);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
-		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
-		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
