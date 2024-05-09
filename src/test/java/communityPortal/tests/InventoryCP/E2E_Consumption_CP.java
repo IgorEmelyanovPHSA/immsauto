@@ -230,12 +230,12 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*44.---Click Save button for Immunisation Information --*/");
         InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         // If expired vaccine click OK in confirmation dialogue
-        inClinicExperience_CP.clickOkForExpiredLot();
+        InClinicExperiencePage.clickOkForExpiredLot(driver);
 
         log("/*45.---Click Confirm and Save Administration Button --*/");
-        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
         log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
         log("/*47.---the Home - Client Search showing up  --*/");
         InClinicExperiencePage.validateHomePageShownUp(driver);
 

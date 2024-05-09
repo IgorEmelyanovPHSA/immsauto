@@ -64,7 +64,6 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*5.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
-        AlertDialog.closeAlert(driver);
         Thread.sleep(2000);
 
         log("/*6.----Navigate to More -> Register --*/");
@@ -226,13 +225,13 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*41.---Click Save button for Immunisation Information --*/");
         InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         Thread.sleep(2000);
-        inClinicExperience_CP.clickOkForExpiredLot();
+        InClinicExperiencePage.clickOkForExpiredLot(driver);
         Thread.sleep(2000);
         log("/*42.---Click Confirm and Save Administration Button --*/");
-        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
         Thread.sleep(2000);
         log("/*43.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 
         log("/*44.---the Home - Client Search showing up  --*/");
         InClinicExperiencePage.validateHomePageShownUp(driver);

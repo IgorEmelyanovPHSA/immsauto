@@ -82,7 +82,6 @@ public class Alerts_ICE_CIB extends BaseTest {
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*7.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
-        AlertDialog.closeAlert(driver);
         System.out.println("/*8.----- Click on register Tab --*/");
         InClinicExperiencePage.clickRegisterTab(driver);
         //System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");

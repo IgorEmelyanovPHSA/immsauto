@@ -73,7 +73,6 @@ public class BookingDose1 extends BaseTest {
 		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
-		AlertDialog.closeAlert(driver);
 		currentApp = MainPageOrg.currentApp(driver);
 		try {
 			clinicInBox.closeAllTabs();

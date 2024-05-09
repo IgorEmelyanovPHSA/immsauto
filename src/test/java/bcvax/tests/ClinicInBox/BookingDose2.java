@@ -56,7 +56,6 @@ public class BookingDose2 extends BaseTest {
 		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
-		AlertDialog.closeAlert(driver);
 		currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);

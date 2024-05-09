@@ -18,7 +18,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	/*---------Constructor-------*/
 	public InClinicExperiencePage(WebDriver driver) {
-
 		super(driver);
 		tables = new Tables(driver);
 	}
@@ -31,39 +30,6 @@ public class InClinicExperiencePage extends BasePage {
 		waitForElementToBeEnabled(driver, register_tab_path, 10);
 		WebElement register_tab = driver.findElement(register_tab_path);
 		register_tab.click();
-	}
-
-	public void newDeferral() throws InterruptedException {
-		Thread.sleep(2000);
-		boolean referralNewButtonFound = false;
-		WebElement newReferralBtn = null;
-		while (!referralNewButtonFound) {
-			try {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("window.scrollBy(0, 200)");
-				newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
-				referralNewButtonFound = true;
-			} catch(Exception ex) {
-				Thread.sleep(2000);
-			}
-		}
-		newReferralBtn.click();
-	}
-
-	public void scrollToDeferrals() throws InterruptedException {
-		Thread.sleep(2000);
-		boolean referralNewButtonFound = false;
-		WebElement newReferralBtn = null;
-		while (!referralNewButtonFound) {
-			try {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("window.scrollBy(0, 200)");
-				newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
-				referralNewButtonFound = true;
-			} catch(Exception ex) {
-				Thread.sleep(2000);
-			}
-		}
 	}
 
 	public static void closeTabsHCA(WebDriver driver) throws InterruptedException {
@@ -106,25 +72,6 @@ public class InClinicExperiencePage extends BasePage {
 		register_btn.click();
 	}
 
-	public void clickSaveDefaultsButton() throws InterruptedException {
-		Thread.sleep(500);
-		By save_defaults_button_path = By.xpath("//button[text()='Save']");
-		waitForElementToBeEnabled(driver, save_defaults_button_path, 10);
-		WebElement save_defaults_button = driver.findElement(save_defaults_button_path);
-		scrollCenter(save_defaults_button);
-		Thread.sleep(500);
-		save_defaults_button.click();
-		Thread.sleep(500);
-		clickCloseAlert();
-	}
-
-	public void clickRecordConsent() throws InterruptedException {
-		Thread.sleep(500);
-		By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
-		waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
-		WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
-		record_consent_btn.click();
-	}
 	public static void clickTodayAppointments(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"] | //a[text() = \"Today's Appointments\"]");
@@ -133,50 +80,6 @@ public class InClinicExperiencePage extends BasePage {
 		scrollIfNeeded(driver, todayAppointments);
 		Thread.sleep(500);
 		todayAppointments.click();
-	}
-
-	public void ClickConfirmAndSaveAdministrationButton() throws InterruptedException {
-		Thread.sleep(500);
-		By confirm_save_adm_btn_path = By.xpath("//button[@title='Confirm & Save Administration']");
-		waitForElementToBeEnabled(driver, confirm_save_adm_btn_path, 10);
-		WebElement confirm_save_adm_btn = driver.findElement(confirm_save_adm_btn_path);
-		scrollIfNeeded(driver, confirm_save_adm_btn);
-		Thread.sleep(1000);
-		confirm_save_adm_btn.click();
-	}
-
-	public void ClickModalConfirmAndSaveAdministrationButton() throws InterruptedException {
-		By confirm_save_btn_path = By.xpath("//button[text()='Confirm & Save Administration']");
-		waitForElementToBeEnabled(driver, confirm_save_btn_path, 10);
-		WebElement confirm_save_btn = driver.findElement(confirm_save_btn_path);
-		scrollCenter(confirm_save_btn);
-		Thread.sleep(500);
-		confirm_save_btn.click();
-		Thread.sleep(500);
-		By go_to_user_default_dialog_path = By.xpath("//button[@c-bchcmodal_bchcmodal and text()='Go to User Defaults']");
-
-		try {
-			clickCloseAlert();
-			Thread.sleep(500);
-		} catch(Exception ex) {
-			System.out.println("Couldn't close the success dialog. Continue...");
-		}
-
-		try {
-			waitForElementToBeEnabled(driver, go_to_user_default_dialog_path, 10);
-			System.out.println("Dialog Go to User Default is found. Wait until disappear...");
-			waitForElementNotToBePresent(driver, go_to_user_default_dialog_path, 5);
-		} catch(Exception ex) {
-			System.out.println("Go to User default dialog didn't appear or already gone. Continue...");
-		}
-//Try again to close success dialog
-		try {
-			System.out.println("Try again to close the success dialog...");
-			clickCloseAlert();
-			Thread.sleep(500);
-		} catch(Exception ex) {
-			System.out.println("Success dialog didn't appear or already gone. Continue...");
-		}
 	}
 
 	public boolean validateVaccineAdminPageOpen() throws InterruptedException {
@@ -221,7 +124,7 @@ public class InClinicExperiencePage extends BasePage {
 		}
 	}
 
-	public void clickOkForExpiredLot() throws InterruptedException {
+	public static void clickOkForExpiredLot(WebDriver driver) throws InterruptedException {
 		Thread.sleep(1000);
 		System.out.println("Check if the expired lot message appears. If yes click OK");
 		try {
@@ -235,15 +138,6 @@ public class InClinicExperiencePage extends BasePage {
 
 	}
 
-	public boolean checkInButtonAvailable() throws  InterruptedException {
-		Thread.sleep(500);
-		By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
-		waitForElementToBeEnabled(driver, checkin_btn_path, 10);
-		WebElement check_in_button = driver.findElement(checkin_btn_path);
-		waitForElementToBeVisible(driver, check_in_button, 10);
-		return check_in_button.isDisplayed();
-	}
-
 	public static String getCurrentTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By myXpath = By.xpath("//c-hc-lightning-progress-indicator/div/div");
@@ -255,36 +149,5 @@ public class InClinicExperiencePage extends BasePage {
 			}
 		}
 		return "";
-	}
-
-	public void selectNotApprovedAdministrationReason() throws InterruptedException {
-		Thread.sleep(500);
-		By administration_reason_path = By.xpath("//input[@type='radio' and @value='Intentional administration']/..//span[@part='indicator']");
-		waitForElementToBeEnabled(driver, administration_reason_path, 2);
-		WebElement administration_reason = driver.findElement(administration_reason_path);
-		scrollCenter(administration_reason);
-		Thread.sleep(500);
-		administration_reason.click();
-	}
-
-	public void clickCloseAlert() throws InterruptedException {
-		Thread.sleep(500);
-		By alert_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
-		waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
-		System.out.println("***Debug-- Alert Close Button is found");
-		WebElement alert_close_btn = driver.findElement(alert_close_btn_path);
-		try {
-			alert_close_btn.click();
-		} catch(ElementClickInterceptedException ex) {
-			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
-			Thread.sleep(1000);
-			alert_close_btn = driver.findElement(alert_close_btn_path);
-			alert_close_btn.click();
-		}
-	}
-
-	public int getDeferralsCount() {
-		int count = tables.getDeferralsTable().getRows().size();
-		return count;
 	}
 }

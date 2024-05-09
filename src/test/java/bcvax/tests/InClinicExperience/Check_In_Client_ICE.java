@@ -64,7 +64,7 @@ public class Check_In_Client_ICE extends BaseTest {
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         System.out.println("/*----- Click on Save defaults button --*/");
-        inClinicExperiencePage.clickSaveDefaultsButton();
+        UserDefaultsPage.clickBtnSave(driver);
         log("/*5.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterTab(driver);
         InClinicExperiencePage.clickRegisterButton(driver);
@@ -103,7 +103,7 @@ public class Check_In_Client_ICE extends BaseTest {
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
         Thread.sleep(2000);
         log("/*20.--Check if check-in button available --*/");
-        assertTrue(inClinicExperiencePage.checkInButtonAvailable());
+        assertTrue(PersonAccountPage.checkInButtonAvailable(driver));
         //Get Date/Time of Check-In
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");

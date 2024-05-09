@@ -88,6 +88,15 @@ public class PersonAccountPage extends BasePage {
         }
     }
 
+    public static boolean checkInButtonAvailable(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
+        waitForElementToBeEnabled(driver, checkin_btn_path, 10);
+        WebElement check_in_button = driver.findElement(checkin_btn_path);
+        waitForElementToBeVisible(driver, check_in_button, 10);
+        return check_in_button.isDisplayed();
+    }
+
     public static void clickCheckInButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");

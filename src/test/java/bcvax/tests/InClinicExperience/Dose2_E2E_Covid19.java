@@ -230,12 +230,12 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
 		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
-		inClinicExperience.clickOkForExpiredLot();
+		InClinicExperiencePage.clickOkForExpiredLot(driver);
 		log("/*43.---Click Confirm and Save Administration Button --*/");
-		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 
 		log("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
-		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 
 		log("/*45.---the Home - Client Search showing up  --*/");
 		InClinicExperiencePage.validateHomePageShownUp(driver);
@@ -258,6 +258,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		refusalAgent = String.valueOf(testData.get("agentRefusal"));
+		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -462,12 +463,12 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		}
 		log("/*42_.---Click Save button for Immunisation Information --*/");
 		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
-		inClinicExperience.clickOkForExpiredLot();
+		InClinicExperiencePage.clickOkForExpiredLot(driver);
 		log("/*43.---Click Confirm and Save Administration Button --*/");
-		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 
 		log("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
-		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 
 		log("/*45.---the Home - Client Search showing up  --*/");
 		InClinicExperiencePage.validateHomePageShownUp(driver);

@@ -91,7 +91,7 @@ public class Check_In_Client_CP extends BaseTest {
         Thread.sleep(1000);
 
         log("/*22.--Check if check-in button available --*/");
-        assertTrue(inClinicExperience_CP.checkInButtonAvailable());
+        assertTrue(PersonAccountPage.checkInButtonAvailable(driver));
         //Get Date/Time of Check-In
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
