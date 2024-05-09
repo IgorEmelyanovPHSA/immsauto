@@ -92,7 +92,7 @@ prodsuppqa:
   consumptionLot: "ABZ5320-CC01"
   covidLot: "EK4241"
   influenzaLot: "CK2138-CC01"
-  pneumoLot: "0486AA-CC01"
+  pneumoLot: "OK2-Pneumo-23"
   covidDose: "0.3"
   influenzaDose: "0.2"
   pneumoDose: "0.5"
