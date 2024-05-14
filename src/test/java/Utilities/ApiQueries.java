@@ -430,6 +430,62 @@ public class ApiQueries {
         return ImmunizationRecordList;
     }
 
+    public static ArrayList<String> queryToGetListOfHistoryImmunizationRecords(String AccountId) throws Exception {
+        log("/*---Query to get immunization record--*/ ");
+        ArrayList<String> ImmunizationRecordList = new ArrayList<String>();
+        String ImmunizationRecordId = null;
+        String oauthToken = getOauthToken();
+
+        String query ="/query?q=SELECT+ID+FROM+PatientImmunizationHistory+WHERE+PatientImmunization.PatientId='"+AccountId+"'";
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        ImmunizationRecordId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("ImmunizationRecordId: " + ImmunizationRecordId);
+                        ImmunizationRecordList.add(ImmunizationRecordId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        log("Found amount of immunization records: " + ImmunizationRecordList.size());
+        return ImmunizationRecordList;
+    }
+
     public static void deleteImmunizationRecord(String immunizationRecordId) throws Exception {
         log("/*---Delete immunization record " +immunizationRecordId +"--*/ ");
         String oauthToken = getOauthToken();
@@ -468,6 +524,45 @@ public class ApiQueries {
             npe.printStackTrace();
         }
     }
+
+//    public static void deleteHistoryImmunizationRecord(String immunizationRecordId) throws Exception {
+//        log("/*---Delete immunization record " +immunizationRecordId +"--*/ ");
+//        String oauthToken = getOauthToken();
+//        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+//
+//        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+//        String uri = baseUri + "/sobjects/PatientImmunizationHistory/" + immunizationRecordId;
+//        log("oauthToken: " + oauthToken);
+//        log("baseUri: "+ baseUri);
+//        log("Query URI: " + uri);
+//
+//        try {
+//            //Set up the objects necessary to make the request.
+//            HttpClient httpClient = HttpClientBuilder.create().build();
+//
+//            HttpDelete httpDelete = new HttpDelete(uri);
+//            httpDelete.addHeader(oauthHeader);
+//            httpDelete.addHeader(prettyPrintHeader);
+//
+//            //Make the request
+//            HttpResponse response = httpClient.execute(httpDelete);
+//
+//            //Process the response
+//            int statusCode = response.getStatusLine().getStatusCode();
+//            if (statusCode == 204) {
+//                log("Delete the immunization record successful.");
+//            } else {
+//                log("Immunization record delete NOT successful. Status code is " + statusCode);
+//            }
+//        } catch (JSONException e) {
+//            log("Issue creating JSON or processing results");
+//            e.printStackTrace();
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace();
+//        } catch (NullPointerException npe) {
+//            npe.printStackTrace();
+//        }
+//    }
 
     public static void deleteAccount(String AccountId) throws Exception {
         log("/*---Delete account " +AccountId +"--*/ ");
@@ -550,7 +645,8 @@ public class ApiQueries {
 
     public static void apiCallToRemoveAllImmunizationRecordsByPHN(String phn) throws Exception {
         String AccountId = queryToGetAccountId(phn, "participantAccount");
-        if(AccountId==null){
+        String pirAccountId = queryToGetAccountId(phn, "pirAccount");
+        if(AccountId == null && pirAccountId == null){
             log("Participant account not found");
         }
         else {
@@ -564,6 +660,16 @@ public class ApiQueries {
                     deleteImmunizationRecord(immunizationRecordId);
                 }
             }
+//            ArrayList<String> listOfHistoryImmunizationRecords = queryToGetListOfHistoryImmunizationRecords(pirAccountId);
+//            if (listOfHistoryImmunizationRecords.size() == 0) {
+//                log("Immunization records not found");
+//            } else {
+//                for(int i=0; i < listOfHistoryImmunizationRecords.size(); i++){
+//                    String immunizationRecordId = listOfHistoryImmunizationRecords.get(i);
+//                    log("Immunization record to delete " +immunizationRecordId);
+//                    deleteHistoryImmunizationRecord(immunizationRecordId);
+//                }
+//            }
         }
     }
 

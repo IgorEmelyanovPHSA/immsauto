@@ -31,7 +31,10 @@ public class AppointmentDayManagementPage extends BasePage {
         Map<String, String> search_criteria = new HashMap<String, String>();
         search_criteria.put("Name", appointment_name);
         search_criteria.put("Provider", provider);
-        GenericTable appointment_days_table = tables.getAppointmentDayTable();
+        By appointment_day_table_path = By.xpath("//table[@data-aura-class='uiVirtualDataTable']");
+        waitForElementToBeEnabled(driver, appointment_day_table_path, 30);
+        WebElement appointment_day_table = driver.findElement(appointment_day_table_path);
+        GenericTable appointment_days_table = new GenericTable(appointment_day_table);
         int retries = 5;
         int retry = 0;
         try {
@@ -39,8 +42,8 @@ public class AppointmentDayManagementPage extends BasePage {
             appointment_days_res = appointment_days_table.getMappedRow(search_criteria);
         } catch(AssertionError ex) {
             for(int i = 0; i < retries; i++) {
-                int mySize = tables.getAppointmentDayTable().getRows().size();
-                WebElement lastRow = tables.getAppointmentDayTable().getRows().get(mySize - 1).get(0);
+                int mySize = appointment_days_table.getRows().size();
+                WebElement lastRow = appointment_days_table.getRows().get(mySize - 1).get(0);
                 //Scrool to the last row
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].scrollIntoView();", lastRow);
@@ -108,23 +111,37 @@ public class AppointmentDayManagementPage extends BasePage {
         date_field.sendKeys(date);
 
         type_field.sendKeys(type);
-        By my_search_type_path = By.xpath("//span[@title='Show All Results for \"" + type + "\"']");
+        By my_search_type_path = By.xpath("//span[@title='Show All Results for \"" + type + "\"'] | //span[@title='Show more results for \"" + type + "\"']");
         waitForElementToBeEnabled(driver, my_search_type_path, 10);
         WebElement my_search_type = driver.findElement(my_search_type_path);
         my_search_type.click();
 
         Thread.sleep(500);
-        By my_type_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']//a[@title='" + type + "']");
+        By my_type_path = By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']//a[@title='" + type + "'] | //th[@data-cell-value='" + type + "']/../td/lightning-primitive-cell-checkbox");
         waitForElementToBeEnabled(driver, my_type_path, 10);
         WebElement my_type = driver.findElement(my_type_path);
         my_type.click();
 
         By save_appointment_day_btn_path = By.xpath("//button[@name='SaveEdit']");
+
         waitForElementToBeEnabled(driver, save_appointment_day_btn_path, 10);
         WebElement save_btn = driver.findElement(save_appointment_day_btn_path);
+
+        By select_appontment_type_button_path = By.xpath("//lightning-modal//lightning-button[@data-label='Select']/button");
+
         scrollCenter(save_btn);
         Thread.sleep(500);
-        save_btn.click();
+        try {
+            save_btn.click();
+        } catch (ElementClickInterceptedException ex) {
+            WebElement select_appointment_type_btn = driver.findElement(select_appontment_type_button_path);
+            scrollCenter(select_appointment_type_btn);
+            Thread.sleep(500);
+            select_appointment_type_btn.click();
+            Thread.sleep(500);
+            scrollCenter(save_btn);
+            save_btn.click();
+        }
     }
 
     public void selectShowAllAppointmentDays() throws InterruptedException {

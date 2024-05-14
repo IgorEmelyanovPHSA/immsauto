@@ -4,33 +4,38 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BookingDose2 extends BaseTest {
-	private String legalFirstName = "Gill";
-	private String legalLastName = "BCVaxOrigan";
-	private String dateOfBirth = "Feb 14, 1915";
-	private String postalCode = "V3L5L2";
-	private String personalHealthNumber = "9746172463";
-	//private boolean isIndigenous = false;
-	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	MainPageOrg orgMainPage;
+	Map<String, String> client_data;
+
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "dose2");
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+	}
 
 	@Test(priority = 1)
 	public void Can_Book_Dose2_Appointment_as_Call_Center_Agent() throws Exception {
 		TestcaseID = "222525"; //C222525
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
 		CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
 		orgMainPage = new MainPageOrg(driver);
@@ -48,16 +53,16 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.closeAllTabs();
 		log("/*4.----click Register New Citizen --*/");
 		callCenterConsole.clickRegisterButton();
-		log("/*5.----Enter First Name " +legalFirstName +"--*/");
-		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-		log("/*6.----Enter Last Name " +legalLastName +"--*/");
-		CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-		log("/*6.----Enter Date of birth " +dateOfBirth +"--*/");
-		CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-		log("/*7.----Enter Postal code " +postalCode +"--*/");
-		CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-		log("/*8.----Enter PHN " +personalHealthNumber +"--*/");
-		CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+		log("/*5.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
+		CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+		log("/*6.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
+		CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+		log("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+		CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+		log("/*7.----Enter Postal code " +client_data.get("postalCode") +"--*/");
+		CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+		log("/*8.----Enter PHN " +client_data.get("personalHealthNumber") +"--*/");
+		CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
 		log("/*9.----click on non-Indigenous person radiobutton --*/");
 		log("/*10.----click Verify PHN button --*/");
 		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -66,10 +71,10 @@ public class BookingDose2 extends BaseTest {
 		assertTrue(successMessageText.equals("Success") || successMessageText.equals(""), "Actual Result: " + successMessageText);
 		log("/*12.----click Next button --*/");
 		CitizenPrimaryInfo.clickNextButton(driver);
-		log("/*13.'Enter email address " +email +"--*/");
-		CitizenPrimaryInfo.enterEmail(driver, email);
-		log("/*14.'Confirm email address " +email +"--*/");
-		CitizenPrimaryInfo.confirmEmail(driver, email);
+		log("/*13.'Enter email address " + client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+		log("/*14.'Confirm email address " + client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
 		log("/*15.Click review details Button--*/");
 		CitizenPrimaryInfo.clickReviewDetails(driver);
 		log("/*16.Click register Button on confirmation page--*/");
@@ -78,7 +83,13 @@ public class BookingDose2 extends BaseTest {
 		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
 		log("/*21----Go to Appointment Tab --*/");
-		PersonAccountPage.goToVaccineScheduleTab(driver);
+		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		}
 
 		System.out.println("/*22.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 		log("/*----scroll down a bit --*/");

@@ -11,9 +11,9 @@ import java.util.List;
 public class AlertDialog {
     public static boolean alertFound(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By dialog_path = By.xpath("//div[@role = 'alertdialog']");
+        By dialog_path = By.xpath("//div[@role = 'alertdialog' or @role='alert']");
         try {
-            BasePage.waitForElementToBeLocated(driver, dialog_path, 10);
+            BasePage.waitForElementToBeLocated(driver, dialog_path, 2);
             return true;
         } catch (Exception ex) {
             return false;
@@ -22,15 +22,15 @@ public class AlertDialog {
 
     public static WebElement getAlertContent(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_content_path = By.xpath("//div[@role = 'alertdialog']//div[@class='toastContent slds-notify__content']");
-        BasePage.waitForElementToBeEnabled(driver, alert_content_path, 10);
+        By alert_content_path = By.xpath("//div[@role = 'alertdialog' or @role='alert']//div[@class='toastContent slds-notify__content']");
+        BasePage.waitForElementToBeEnabled(driver, alert_content_path, 2);
         WebElement alert_content = driver.findElement(alert_content_path);
         return alert_content;
     }
 
     public static List<String> getAllAlertsText(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_content_path = By.xpath("//div[@role = 'alertdialog']//div[@class='toastContent slds-notify__content']");
+        By alert_content_path = By.xpath("//div[@role = 'alertdialog' or @role = 'alert']//div[@class='toastContent slds-notify__content']");
         BasePage.waitForElementToBeEnabled(driver, alert_content_path, 10);
         List<WebElement> alert_contents = driver.findElements(alert_content_path);
         ArrayList alert_texts = new ArrayList();
@@ -42,7 +42,7 @@ public class AlertDialog {
 
     public static void closeAlert(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_close_btn_path = By.xpath("//div[@role = 'alertdialog']//button[@title='Close']");
+        By alert_close_btn_path = By.xpath("//div[@role = 'alertdialog' or @role = 'alert']//button[@title='Close'] | //div[@role='alert']//button");
         BasePage.waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
         WebElement close_alert_btn = driver.findElement(alert_close_btn_path);
         close_alert_btn.click();
@@ -50,7 +50,7 @@ public class AlertDialog {
 
     public static void closeAllAlerts(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_close_btn_path = By.xpath("//div[@role = 'alertdialog']//button[@title='Close']");
+        By alert_close_btn_path = By.xpath("//div[@role = 'alertdialog' or @role = 'alert']//button[@title='Close']");
         try {
             BasePage.waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
             List<WebElement> close_alert_btns = driver.findElements(alert_close_btn_path);
@@ -65,7 +65,7 @@ public class AlertDialog {
 
     public static String clickAlertLink(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_link_path = By.xpath("//div[@role = 'alertdialog']//a[@data-aura-class='forceActionLink']");
+        By alert_link_path = By.xpath("//div[@role = 'alertdialog' or @role = 'alert']//a[@data-aura-class='forceActionLink']");
         BasePage.waitForElementToBeEnabled(driver, alert_link_path, 10);
         WebElement alert_link = driver.findElement(alert_link_path);
         alert_link.click();

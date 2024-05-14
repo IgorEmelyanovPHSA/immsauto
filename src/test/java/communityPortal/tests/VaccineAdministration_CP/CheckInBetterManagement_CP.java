@@ -24,6 +24,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         TestcaseID = "273420";
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personalHealthNumber);
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         /////////////////////////////////////////////////////
@@ -87,7 +88,13 @@ public class CheckInBetterManagement_CP extends BaseTest {
         //--- Book the Appointment for Covid
         PersonAccountPage.goToVaccineScheduleTab(driver);
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        try {
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch (Exception ex) {
+            PersonAccountSchedulePage.overrideEligibility(driver);
+            Thread.sleep(500);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        }
 
         log("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
@@ -236,8 +243,13 @@ public class CheckInBetterManagement_CP extends BaseTest {
         //Book the Appointment for Covid
         PersonAccountPage.goToVaccineScheduleTab(driver);
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-
+        try {
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        } catch (Exception ex) {
+            PersonAccountSchedulePage.overrideEligibility(driver);
+            Thread.sleep(500);
+            PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+        }
         log("/*25----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
         log("/*26.----search the Clinic " +clinicNameToSearch +" --*/");

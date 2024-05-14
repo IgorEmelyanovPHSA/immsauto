@@ -6,37 +6,31 @@ import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
+import java.util.Map;
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
 public class Dose1CitizenBookingAppointment extends BaseTest {
-
-	private String legalFirstName = "Anne-marie";
-	private String legalLastName = "BCVaxJacketts";
-	private String legalMiddleName = "Elissa";
-	private String dateOfBirth = "Aug 16, 1903";
-	private String postalCode = "V3B0J5";
-	private String personalHealthNumber = "9746173988";
 	private boolean isIndigenous = false;
-	private String email = "accountToDelete@phsa.ca";
-	private String phoneNumber = "6041234568";
 	private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	private String vaccineToSelect = "Covid19Vaccine";
 	MainPageOrg orgMainPage;
+	Map<String, String> client_data;
 
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "dose1");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
 	}
 
 	@AfterMethod
 	public void afterMethod() throws Exception {
 		log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
 	}
 
 	@DataProvider(name="booking_data")
@@ -57,13 +51,13 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 		log("/*1.---Open citizen portal and click btn Register Now--*/");
 		RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
 		registerToGetVaccinatedPage.clickBtnRegisterNow();
-
 		log("/*2.---Fill all registration information and click btn continue--*/");
-		registerToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(legalFirstName, legalLastName, legalMiddleName, dateOfBirth, postalCode,
-				personalHealthNumber, isIndigenous);
+		registerToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(client_data.get("legalFirstName"),
+				client_data.get("legalLastName"), client_data.get("legalMiddleName"), Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"),
+				client_data.get("postalCode"), client_data.get("personalHealthNumber"), isIndigenous);
 
 		log("/*3.---Fill email and phone number on contact information section and click btn continue--*/");
-		registerToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(email, phoneNumber);
+		registerToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(client_data.get("email"), client_data.get("phone"));
 
 		log("/*4.---Check checkbox certify and click btn submit--*/");
 		registerToGetVaccinatedPage.certifyAndSubmit();
@@ -90,8 +84,10 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 		log("/*6.1.----Close All previously opened Tab's --*/");
 		clinicInBox.closeAllTabs();
 
+		String client_to_search = client_data.get("legalFirstName") + (client_data.get("legalMiddleName").isEmpty() ? "" : " " + client_data.get("legalMiddleName")) + " " +
+				client_data.get("legalLastName");
 		log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-		MainPageOrg.search(driver, legalFirstName + " " + legalMiddleName + " " + legalLastName);
+		MainPageOrg.search(driver, client_to_search);
 
 		log("/*7.1---Validation, isUserFound account validation --*/");
 //		boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
@@ -131,7 +127,7 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 		Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
 		log("/*10.---Open book an appointment portal from unique link--*/");
-		BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
+		BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, client_data.get("personalHealthNumber"));
 
 		log("/*11.---Schedule vaccination page is displayed--*/");
 		BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);

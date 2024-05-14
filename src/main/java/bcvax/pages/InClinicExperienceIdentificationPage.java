@@ -1,6 +1,7 @@
 package bcvax.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,7 +62,12 @@ public class InClinicExperienceIdentificationPage extends BasePage {
         WebElement add_alert_button = driver.findElement(add_alert_button_path);
         scrollCenter(driver, add_alert_button);
         Thread.sleep(500);
-        add_alert_button.click();
+        try {
+            add_alert_button.click();
+        } catch (ElementClickInterceptedException ex) {
+            Thread.sleep(1000);
+            add_alert_button.click();
+        }
     }
 
     public static boolean alertSectionEmpty(WebDriver driver) throws InterruptedException {

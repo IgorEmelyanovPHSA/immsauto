@@ -1,7 +1,10 @@
 package bcvax.tests.CallCenter;
 
 import Utilities.TestListener;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
@@ -9,24 +12,26 @@ import constansts.Apps;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
-    private String legalFirstName = "Ludovika";
-    private String legalLastName = "BcvaxLimeburn";
-    private String dateOfBirth = "Sep 21, 1923";
-    private String postalCode = "V3L5L2";
     MainPageOrg orgMainPage;
-    private String personalHealthNumber = "9746170911";
     //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-
+    Map<String, String> client_data;
     @DataProvider(name = "booking_data")
     public Object[][] dpMethod() {
         return new Object[][]{{"222524", "Covid19Vaccine", true}, {"228856", "InfluenzaVaccine", false}};
+    }
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose1");
     }
 
     @Test(dataProvider = "booking_data")
@@ -39,7 +44,8 @@ public class BookingDose1 extends BaseTest {
         log("Vaccine Agent: " + vaccine_agent);
         log("------------------------------");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
         System.out.println("/*1.----Login as an Call Center Agent to the Call Center Console --*/");
         CallCenterConsolePage callCenterConsole = loginPage.loginAsCalCenterAgentCC();
         System.out.println("/*2.----CallCenter Console page displayed --*/");
@@ -61,16 +67,16 @@ public class BookingDose1 extends BaseTest {
             callCenterConsole.closeAllTabs();
             callCenterConsole.clickRegisterButton();
         }
-        System.out.println("/*5.----Enter First Name " + legalFirstName + "--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        System.out.println("/*6.----Enter Last Name " + legalLastName + "--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        System.out.println("/*6.----Enter Date of birth " + dateOfBirth + "--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        System.out.println("/*7.----Enter Postal code " + postalCode + "--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        System.out.println("/*8.----Enter PHN " + personalHealthNumber + "--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+        System.out.println("/*5.----Enter First Name " + client_data.get("legalFirstName") + "--*/");
+        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+        System.out.println("/*6.----Enter Last Name " + client_data.get("legalLastName") + "--*/");
+        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+        System.out.println("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") + "--*/");
+        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+        System.out.println("/*7.----Enter Postal code " + client_data.get("postalCode") + "--*/");
+        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+        System.out.println("/*8.----Enter PHN " + client_data.get("personalHealthNumber") + "--*/");
+        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
         System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
         System.out.println("/*10.----click Verify PHN button --*/");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -78,19 +84,28 @@ public class BookingDose1 extends BaseTest {
         CitizenPrimaryInfo.successMessageAppear(driver);
         System.out.println("/*12.----click Next button --*/");
         CitizenPrimaryInfo.clickNextButton(driver);
-        System.out.println("/*13.'Enter email address " + email + "--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        System.out.println("/*14.'Confirm email address " + email + "--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
+        System.out.println("/*13.'Enter email address " + client_data.get("email") + "--*/");
+        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        System.out.println("/*14.'Confirm email address " + client_data.get("email") + "--*/");
+        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
         System.out.println("/*15.Click review details Button--*/");
         CitizenPrimaryInfo.clickReviewDetails(driver);
         System.out.println("/*16.Click register Button on confirmation page--*/");
         CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         System.out.println("/*17.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        try {
+            CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        } catch (NotFoundException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        }
 
         System.out.println("/*18.----click on person Account Related Tab --*/");
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch (ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
         //callCenterConsole.clickOnPersonAccountRelatedTab();
 
         System.out.println("/*21----Go to Appointment Tab --*/");

@@ -15,7 +15,7 @@ public class MainPageOrg extends BasePage {
     }
     public static String currentApp(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
+        By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span | //h1[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
         try {
             waitForElementToBeEnabled(driver, current_app_path, 30);
         } catch(NotFoundException ex) {
@@ -106,7 +106,8 @@ public class MainPageOrg extends BasePage {
                     driver.switchTo().window(windows.get(1));
                 }
                 String currentApp = currentApp(driver);
-                By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
+                //By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
+                By breadcrump_path = By.xpath("//lst-breadcrumbs//span");
                 while(!currentApp.equals(app)) {
                     List<WebElement> breadcrump_list = driver.findElements(breadcrump_path);
                     if(breadcrump_list.size() > 1) {

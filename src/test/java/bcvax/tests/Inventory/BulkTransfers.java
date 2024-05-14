@@ -3,6 +3,7 @@ package bcvax.tests.Inventory;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import constansts.Apps;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -195,7 +196,8 @@ public class BulkTransfers extends BaseTest {
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-		supplyConsolePage.successMessageAppear();
+		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 		log("/*29.----Click on Related Tab--*/");
 		supplyConsolePage.clickOnRelatedItemTab();
 		///////////////////// Doses/Qty AFTER Automation Location_2//////////////////////////////////
@@ -371,7 +373,8 @@ public class BulkTransfers extends BaseTest {
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
 		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-		supplyConsolePage.successMessageAppear();
+		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 		log("/*29.----Click on Related Tab--*/");
 		supplyConsolePage.clickOnRelatedItemTab();
 		///////////////////// Doses/Qty AFTER Automation Location_2//////////////////////////////////
