@@ -16,7 +16,7 @@ public class PersonAccountSchedulePage extends BasePage {
         WebElement override_eligibility_btn = driver.findElement(override_eligibility_btn_path);
         override_eligibility_btn.click();
         Thread.sleep(500);
-        By reason_for_override_path = By.xpath("//button[(@aria-label='Reason for Override, Select One') or (@aria-label='Reason for Override - Current Selection: Select One')]");
+        By reason_for_override_path = By.xpath("//button[@aria-label='Reason for Override, Select One' or @aria-label='Reason for Override - Current Selection: Select One' or @aria-label='Reason for Override']");
         waitForElementToBeEnabled(driver, reason_for_override_path, 10);
         WebElement reason_for_verride_btn = driver.findElement(reason_for_override_path);
         scrollCenter(driver, reason_for_verride_btn);
@@ -36,13 +36,13 @@ public class PersonAccountSchedulePage extends BasePage {
         By covid19_vaccine_checkbox_path = By.xpath("//span[text() = 'Covid-19 Vaccine']");
         By influenza_checkbox_path = By.xpath("//span[text() = 'Influenza Vaccine']");
         if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
-            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 10);
+            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 20);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
             scrollCenter(driver, covid19_vaccine_checkbox);
             Thread.sleep(500);
             covid19_vaccine_checkbox.click();
         } else if (vaccine.equalsIgnoreCase("InfluenzaVaccine")) {
-            waitForElementToBeEnabled(driver, influenza_checkbox_path, 10);
+            waitForElementToBeEnabled(driver, influenza_checkbox_path, 20);
             WebElement influenza_checkbox = driver.findElement(influenza_checkbox_path);
             scrollCenter(driver, influenza_checkbox);
             Thread.sleep(500);

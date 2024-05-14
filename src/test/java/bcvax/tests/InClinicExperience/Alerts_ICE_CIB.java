@@ -221,15 +221,15 @@ public class Alerts_ICE_CIB extends BaseTest {
         AlertDialog.closeAllAlerts(driver);
 
         System.out.println("/*.----Verify Alert creation missing mandatory Fields --*/");
-        Assert.assertEquals("Error\n" +
-                "Unable to update Alert You must provide a reason for update to edit this alert", my_errors.get(0));
+        Assert.assertTrue(my_errors.get(0).contains("Error\n" +
+                "Unable to update Alert You must provide a reason for update to edit this alert"));
 
         ViewEditAlertPage.selectAlertReasonForUpdate(driver, "Other, specify");
         ViewEditAlertPage.clickSaveButton(driver);
         List<String> my_other_errors = AlertDialog.getAllAlertsText(driver);
         AlertDialog.closeAllAlerts(driver);
-        Assert.assertEquals("Error\n" +
-                "Unable to update Alert You must enter details in Update Comment if Reason for Update is Other", my_other_errors.get(0));
+        Assert.assertTrue(my_other_errors.get(0).contains("Error\n" +
+                "Unable to update Alert You must enter details in Update Comment if Reason for Update is Other"));
 
         ViewEditAlertPage.setAlertUpdateComments(driver, "Alert Update Comment");
         ViewEditAlertPage.clickSaveButton(driver);

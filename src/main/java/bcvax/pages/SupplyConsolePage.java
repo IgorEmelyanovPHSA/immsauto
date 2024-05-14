@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
+
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import static constansts.Header.*;
 import static org.testng.Assert.assertEquals;
@@ -125,7 +127,8 @@ public class SupplyConsolePage extends BasePage {
 			supply_locations_tab.click();
 		}
 		boolean loaded = false;
-		By supply_locations_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+		By supply_locations_table_path = By.xpath("//div[contains(@class, 'listViewContent')]");
+		//By supply_locations_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
 		waitForElementToBeEnabled(driver, supply_locations_table_path, 10);
 		WebElement supply_locations_table_node = driver.findElement(supply_locations_table_path);
 		while(!loaded) {
@@ -497,24 +500,6 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(element);
 		click(element);
 	}
-	@Step
-	public void successMessageAppear() throws InterruptedException {
-		By alert_popup_path = By.xpath("//div[@role='alertdialog']");
-		waitForElementToBeEnabled(driver, alert_popup_path, 10);
-		WebElement alert_popup = driver.findElement(alert_popup_path);
-		String success_message = alert_popup.findElement(By.xpath(".//div[@class='toastTitle slds-text-heading--small']")).getText();
-		assertEquals(success_message, "Success!");
-		log(" -- Toast success message appears");
-		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
-		try {
-			Thread.sleep(500);
-			waitForElementToBeLocated(driver, close_modal_box_path, 10);
-			driver.findElement(close_modal_box_path).click();
-			System.out.println("Success message appered and closed...");
-		} catch(Exception ex) {
-			System.out.println("No modal box. Continue...");
-		}
-	}
 
 	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
@@ -874,7 +859,8 @@ public class SupplyConsolePage extends BasePage {
 		search_location_field.sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
 
-		By supply_location_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+		//By supply_location_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+		By supply_location_table_path = By.xpath("//div[contains(@class, 'listViewContent')]");
 		waitForElementToBeEnabled(driver, supply_location_table_path, 10);
 		WebElement supply_location_table_node = driver.findElement(supply_location_table_path);
 		GenericTable supply_items_table = new GenericTable(supply_location_table_node);
@@ -1101,7 +1087,8 @@ public class SupplyConsolePage extends BasePage {
 		waitForElementToBeEnabled(driver, cancel_transaction_btn_path, 10);
 		WebElement cancel_transaction_btn = driver.findElement(cancel_transaction_btn_path);
 		clickOnButtonInModalTransaction(cancel_transaction_btn);
-		successMessageAppear();
+		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 	}
 
 	public SupplyConsolePage transferToDistributionOnSend(String distribution) throws InterruptedException {

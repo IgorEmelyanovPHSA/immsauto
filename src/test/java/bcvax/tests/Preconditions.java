@@ -46,7 +46,7 @@ public class Preconditions extends BasePage {
         UserDefaultsPage.selectUserDefaultLocation(driver, data.getClinicName());
         log("/*7.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
-        AlertDialog.closeAlert(driver);
+        AlertDialog.closeAllAlerts(driver);
         System.out.println("/*8.----- Click on register Tab --*/");
         InClinicExperiencePage.clickRegisterTab(driver);
         //System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");

@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
@@ -165,7 +167,8 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 
         log("/*25.----Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        supplyConsolePage.successMessageAppear();
+        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 
         log("/*26.----Close Automation_Supply_Location_2 Tab --*/");
         SupplyConsolePage.closeTabsHCA(driver);

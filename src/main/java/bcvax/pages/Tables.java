@@ -73,17 +73,8 @@ public class Tables extends BasePage {
     }
 
     @Step
-    public Map<String, WebElement> getShippedTransactionsIncomingRow(Map<String, String> searchCriteria) {
-        return getTableRow(searchCriteria, getSingleTransactionsTable("Incoming"));
-    }
-
-    @Step
     public Map<String, WebElement> getContainerTransferRow(Map<String, String> searchCriteria) {
         return getTableRow(searchCriteria, getContainerTransferTable());
-    }
-    @Step
-    public Map<String, WebElement> getShippedTransactionsOutgoingRow(Map<String, String> searchCriteria) {
-        return getTableRow(searchCriteria, getSingleTransactionsTable("Outgoing"));
     }
 
     // ------  TABLE ACTIONS -------
