@@ -2,7 +2,9 @@ package communityPortal.tests.VaccineAdministration_CP;
 
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Map;
 import java.util.List;
@@ -10,22 +12,21 @@ import org.openqa.selenium.WebElement;
 
 public class CheckInBetterManagement_CP extends BaseTest {
     String env;
-    private String legalFirstName = "Ludovika";
-    private String legalLastName = "BcvaxLimeburn";
-    private String dateOfBirth = "Sep 21, 1923";
-    private String postalCode = "V3L5L2";
-    private String personalHealthNumber = "9746170911";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
+    Map<String, String> client_data;
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose1");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+    }
 
     @Test(priority = 1)
     public void verifyCheckInAvoidMultipleImmunizationRecords_CP() throws Exception {
         TestcaseID = "273420";
-
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personalHealthNumber);
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         /////////////////////////////////////////////////////
         //*** No Exisiting Imms Records in Statu New ***
@@ -49,16 +50,16 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         log("/*7.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*11.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+        log("/*8.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
+        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+        log("/*9.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
+        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+        log("/*10.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+        log("/*11.----Enter Postal code " + client_data.get("postalCode") +"--*/");
+        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+        log("/*12.----Enter PHN " + client_data.get("personalHealthNumber") +"--*/");
+        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
 
         log("/*14.----click Verify PHN button --*/");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -67,10 +68,10 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         log("/*16.----click Next button --*/");
         CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
+        log("/*17.----'Enter email address " + client_data.get("email") +"--*/");
+        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        log("/*18.----'Confirm email address " + client_data.get("email") +"--*/");
+        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
         log("/*19.---Click review details Button--*/");
         CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*20.----Click register Button on confirmation page--*/");
@@ -79,7 +80,13 @@ public class CheckInBetterManagement_CP extends BaseTest {
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
         //--- Navigate to Citizen Profile->Related Tab
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
 
         List<Map<String, WebElement>> immunization_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
         //--- Verify No Immunization records in Related Tab (Table has only Headers
@@ -137,7 +144,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
 
         //---Verify that in Client List the Pathway Status is blank
-        Map<String, WebElement> my_client_appointment = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_client_appointment = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         String my_pathway_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_client_appointment);
         Assert.assertEquals(my_pathway_status, "",  "Pathway Status is NOT Blank");
 
@@ -153,7 +160,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         //*** First Time to do Check In Client - Citizen Profile
         /////////////////////////////////////////////////////
 
-        MainPageCP.search(driver, personalHealthNumber);
+        MainPageCP.search(driver, client_data.get("personalHealthNumber"));
 
         //---In Citizen Profile click CheckIn button
         PersonAccountPage.clickCheckInButton(driver);
@@ -163,7 +170,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         Assert.assertEquals("Identification", current_tab, "Current Tab is not IDENTIFICATION");
 
         //--- Go back to Citizen profile->Related Tab
-        MainPageCP.search(driver, personalHealthNumber);
+        MainPageCP.search(driver, client_data.get("personalHealthNumber"));
         PersonAccountPage.goToRelatedTab(driver);
 
         //--- Verify that in Citizen profile->Related Tab New Imms Record was created in Statud New
@@ -180,8 +187,8 @@ public class CheckInBetterManagement_CP extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
 
         //--- Verify that in Client List Pathway Statud is New
-        ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
-        Map<String, WebElement> my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+        Map<String, WebElement> my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         String pathway_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_row);
         Assert.assertEquals("New", pathway_status, "Pathway Status Is Not NEW");
 
@@ -202,7 +209,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         /////////////////////////////////////////////////////
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
 
         //---Preconditions: Newly Registered Citizen with Booked Appointment
         log("/*6.----Navigate to More -> Register --*/");
@@ -211,16 +218,16 @@ public class CheckInBetterManagement_CP extends BaseTest {
         MainPageCP.navigateToRegisterClientPage(driver);
 
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*11.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+        log("/*8.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
+        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+        log("/*9.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
+        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+        log("/*10.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+        log("/*11.----Enter Postal code " + client_data.get("postalCode") +"--*/");
+        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+        log("/*12.----Enter PHN " + client_data.get("personalHealthNumber") +"--*/");
+        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
 
         log("/*14.----click Verify PHN button --*/");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -229,10 +236,10 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         log("/*16.----click Next button --*/");
         CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
+        log("/*17.----'Enter email address " + client_data.get("email") +"--*/");
+        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        log("/*18.----'Confirm email address " + client_data.get("email") +"--*/");
+        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
         log("/*19.---Click review details Button--*/");
         CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*20.----Click register Button on confirmation page--*/");
@@ -277,8 +284,8 @@ public class CheckInBetterManagement_CP extends BaseTest {
         driver.navigate().refresh();
         Thread.sleep(2000);
         ClientListPage.clickTodayAppointmentsTab(driver);
-        ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
-        my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+        my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         ClientListTodayAppointmentsTab.clickCheckInButton(driver, my_row);
 
         //--- Verify you are redirected to Identification Page
@@ -286,7 +293,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         Assert.assertEquals("Identification", current_tab, "Current Tab is not IDENTIFICATION");
 
         //--- Go to Citizen Profile->Related Tab
-        MainPageCP.search(driver, personalHealthNumber);
+        MainPageCP.search(driver, client_data.get("personalHealthNumber"));
         PersonAccountPage.goToRelatedTab(driver);
 
         //--- Verify that in Citizen Profile->Related Tab New Imms Record was created in Status New
@@ -299,8 +306,8 @@ public class CheckInBetterManagement_CP extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
 
         //--- Verify that in Client List Pathway Status in New
-        ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
-        my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+        my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 
         //--- Verify that View Button is displayed
         view_button_displayed = ClientListTodayAppointmentsTab.viewButtonIsDisplayed(my_row);
@@ -314,7 +321,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         //*** With existing Imms Record in Status New - Citizen Profile
         /////////////////////////////////////////////////////
 
-        MainPageCP.search(driver, personalHealthNumber);
+        MainPageCP.search(driver, client_data.get("personalHealthNumber"));
 
         //--- Navigate to Citizen Profile->Related Tab
         PersonAccountPage.goToRelatedTab(driver);
@@ -330,7 +337,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 
         //--- Go back to Citizen Profile->Related Tab
-        MainPageCP.search(driver, personalHealthNumber);
+        MainPageCP.search(driver, client_data.get("personalHealthNumber"));
         PersonAccountPage.goToRelatedTab(driver);
 
         //--- Verify that there is no New Imms Record created and the existing  Imms Record status is now Vaccine_Administration
@@ -343,7 +350,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
 
         //---Verify that in Client List Pathway Status is in Vaccine_Administration
-        my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 
         pathway_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_row);
         Assert.assertEquals("Vaccine_Administration", pathway_status, "Pathway Status Is Not Vaccine Administration");

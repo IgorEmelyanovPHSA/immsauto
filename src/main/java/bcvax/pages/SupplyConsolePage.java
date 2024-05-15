@@ -739,17 +739,6 @@ public class SupplyConsolePage extends BasePage {
 		drd_cance_btn.click();
 	}
 
-	public void clickOnRelatedItemTab() throws InterruptedException {
-		Thread.sleep(500);
-		By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related Items']");
-		waitForElementToBeEnabled(driver, related_tab_path, 10);
-		WebElement related_tab = driver.findElement(related_tab_path);
-		scrollCenter(driver, related_tab);
-		Thread.sleep(500);
-		related_tab.click();
-		Thread.sleep(2000);
-	}
-
 	public void selectSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
 		By searchSupplyDistributionPath = By.xpath(".//span[contains(text(),'Select an Option')]");
 		waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);

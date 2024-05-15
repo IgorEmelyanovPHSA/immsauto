@@ -39,7 +39,7 @@ public class Return_CP extends BaseTest {
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         //Get Flu supplies using Receive Supplies feature
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(2000);
         log("/*b.----Receive Supplies for Flu --*/");
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
@@ -75,7 +75,7 @@ public class Return_CP extends BaseTest {
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         log("/*5. ----Click Return Button --*/");
         SupplyLocationPage.clickReturnButton(driver);

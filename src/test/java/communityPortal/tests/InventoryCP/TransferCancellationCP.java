@@ -92,7 +92,7 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 
 		driver.navigate().refresh();
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -102,7 +102,7 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
 		driver.navigate().refresh();
 		SupplyLocationPage.clickTransactionsTab(driver);
@@ -119,7 +119,7 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*23.----Cancel Transfer --*/");
 		//tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
 		supplyConsolePage.cancelIncomingTransfer();
-		supplyConsolePage.clickOnRelatedItemTab();
+		SupplyLocationPage.clickOnRelatedItemTab(driver);
 
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
 		double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -130,7 +130,7 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
-		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 
 		driver.navigate().refresh();
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -251,7 +251,7 @@ public class TransferCancellationCP extends BaseTest {
 		log("/*1.----Login to CP (newUI) as Clinician --*/");
 		cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
-		supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
-		supplyConsolePage.clickOnRelatedItemTab();
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		SupplyLocationPage.clickOnRelatedItemTab(driver);
 	}
 }

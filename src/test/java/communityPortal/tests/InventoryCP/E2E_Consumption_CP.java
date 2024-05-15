@@ -61,7 +61,7 @@ public class E2E_Consumption_CP extends BaseTest {
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
 
         log("/*3.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.goToSupplyLocation();
+        SupplyConsolePage supplyConsolePage = MainPageCP.goToSupplyLocation(driver);
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
         SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
@@ -240,7 +240,7 @@ public class E2E_Consumption_CP extends BaseTest {
         InClinicExperiencePage.validateHomePageShownUp(driver);
 
         supplyConsolePage = new SupplyConsolePage(driver);
-        supplyConsolePage = cpMainPage.goToSupplyLocation();
+        MainPageCP.goToSupplyLocation(driver);
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
         SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
         Thread.sleep(2000);
