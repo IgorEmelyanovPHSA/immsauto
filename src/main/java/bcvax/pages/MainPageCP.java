@@ -17,7 +17,7 @@ public class MainPageCP extends BasePage{
     }
 
     @Step
-    public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
+    public static SupplyConsolePage goToSupplyLocation(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By tab_supply_location_path = By.xpath("//a[text()='Supply Locations']");
         System.out.println("/*----Locate Dropdown Menu --*/");
@@ -31,7 +31,7 @@ public class MainPageCP extends BasePage{
             waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
         }
         WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
-        scrollCenter(tab_supply_location);
+        scrollCenter(driver, tab_supply_location);
         Thread.sleep(1000);
         tab_supply_location.click();
         Thread.sleep(1000);
@@ -41,36 +41,9 @@ public class MainPageCP extends BasePage{
     }
 
     @Step
-    public SupplyConsolePage navigateToSupplyLocation( String location) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
+    public SupplyConsolePage navigateToSupplyLocation(String location) throws InterruptedException {
+        SupplyConsolePage supplyConsolePage = goToSupplyLocation(driver);
         new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
-        return supplyConsolePage;
-    }
-
-    public SupplyConsolePage selectSupplyLocationName(String supplyLocation) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
-        System.out.println("/*-- Choose List View --*/");
-        Thread.sleep(2000);
-        By list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Locations']");
-        waitForElementToBeLocated(driver, list_view_btn_path, 30);
-        WebElement list_view_btn = driver.findElement(list_view_btn_path);
-        list_view_btn.click();
-        Thread.sleep(500);
-        By active_supply_pocation_item_path = By.xpath("//a/span[text() = 'Active Supply Locations']");
-        waitForElementToBeEnabled(driver, active_supply_pocation_item_path, 10);
-        System.out.println("/*---- Select Active Supply Locations --*/");
-        driver.findElement(active_supply_pocation_item_path).click();
-        Thread.sleep(2000);
-        By search_location_field_path = By.xpath("//input[@name = 'HC_Supply_Location__c-search-input']");
-        waitForElementToBeEnabled(driver, search_location_field_path, 10);
-        WebElement search_location_field = driver.findElement(search_location_field_path);
-        System.out.println("/*---- Locate " + supplyLocation + " --*/");
-        search_location_field.sendKeys(supplyLocation);
-        Thread.sleep(500);
-        search_location_field.sendKeys(Keys.ENTER);
-        Thread.sleep(2000);
-        System.out.println("/*---- Go to " + supplyLocation + " --*/");
-        tables.clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
         return supplyConsolePage;
     }
 
@@ -94,9 +67,9 @@ public class MainPageCP extends BasePage{
         By user_default_tab_path = By.xpath("//a[text()='User Defaults']");
         waitForElementToBeEnabled(driver, user_default_tab_path, 10);
         WebElement element = driver.findElement(user_default_tab_path);
-        element.click();
-        //Try to avoid stale elelemnt exception
+        scrollCenter(driver, element);
         Thread.sleep(2000);
+        element.click();
     }
 
     public static void clickClientListTab(WebDriver driver) throws InterruptedException {
@@ -128,6 +101,8 @@ public class MainPageCP extends BasePage{
         } catch(ElementClickInterceptedException ex) {
             System.out.println("Tried to click Register Tab " + ex.getMessage());
             Thread.sleep(3000);
+            AlertDialog.closeAllAlerts(driver);
+            Thread.sleep(500);
             WebElement register_btn = driver.findElement(registerBtnPath);
             register_btn.click();
         } catch(Exception ex) {

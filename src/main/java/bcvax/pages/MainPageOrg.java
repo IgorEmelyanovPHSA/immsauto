@@ -15,7 +15,7 @@ public class MainPageOrg extends BasePage {
     }
     public static String currentApp(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
+        By current_app_path = By.xpath("//div[@class='appName slds-context-bar__label-action slds-context-bar__app-name'] | //span[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span | //h1[@class='appName slds-context-bar__label-action slds-context-bar__app-name']/span");
         try {
             waitForElementToBeEnabled(driver, current_app_path, 30);
         } catch(NotFoundException ex) {
@@ -106,7 +106,8 @@ public class MainPageOrg extends BasePage {
                     driver.switchTo().window(windows.get(1));
                 }
                 String currentApp = currentApp(driver);
-                By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
+                //By breadcrump_path = By.xpath("//div[@class='slds-breadcrumb__item slds-line-height--reset']/span");
+                By breadcrump_path = By.xpath("//lst-breadcrumbs//span");
                 while(!currentApp.equals(app)) {
                     List<WebElement> breadcrump_list = driver.findElements(breadcrump_path);
                     if(breadcrump_list.size() > 1) {
@@ -150,7 +151,7 @@ public class MainPageOrg extends BasePage {
 
     public static void closeAllTabs(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 30);
+        waitForElementToBeEnabled(driver, By.xpath("//div[@role='tablist']"), 5);
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
         int counter = 0;
         while(closeButtons.size() < 1) {
@@ -220,7 +221,7 @@ public class MainPageOrg extends BasePage {
             //search_input.sendKeys(Keys.ENTER);
         }
         Thread.sleep(500);
-        By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"]");
+        By found_client_path = By.xpath("//search_dialog-instant-result-item//span[@title=\"" + search_value + "\"] | //mark[@class='data-match' and text()=\"" + search_value + "\"]/..");
         int counter = 10;
         for(int i = 0; i < counter; i++) {
             try {

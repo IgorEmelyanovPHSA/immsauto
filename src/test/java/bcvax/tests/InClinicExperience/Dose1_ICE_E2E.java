@@ -4,7 +4,10 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -15,15 +18,8 @@ import java.util.Map;
 @Listeners({TestListener.class})
 public class Dose1_ICE_E2E extends BaseTest {
 	String env;
-	private String legalFirstName = "Ludovika";
-	private String legalLastName = "BcvaxLimeburn";
-	private String dateOfBirth = "Sep 21, 1923";
-	private String postalCode = "V3L5L2";
 	Map<String, Object> testData;
 	private String personalHealthNumber = "9746170911";
-	private boolean isIndigenous = false;
-	private String email = "accountToDelete@phsa.ca";
-	//private String email = "jason.yulghun@phsa.ca";
 	String clinicNameToSearch;
 	MainPageOrg orgMainPage;
 	String consumptionLot;
@@ -32,6 +28,16 @@ public class Dose1_ICE_E2E extends BaseTest {
 	String consumptionSite;
 	String consentProvider;
 	String consumptionAgent;
+	Map<String, String> client_data;
+
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "dose1");
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+	}
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
@@ -76,14 +82,13 @@ public class Dose1_ICE_E2E extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*5.----- Click on User Defaults Tab --*/");
-		inClinicExperience.clickUserDefaultsTab();
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		log("/*-- 13. Enter current date for UserDefaults --*/");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
-		AlertDialog.closeAlert(driver);
 		System.out.println("/*8.----- Click on register Tab --*/");
 		InClinicExperiencePage.clickRegisterTab(driver);
 		//System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
@@ -91,16 +96,16 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//Thread.sleep(2000);
 		System.out.println("/*10.----click Register button New Citizen --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
-		System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
-		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-		System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
-		CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-		System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
-		CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-		System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
-		CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-		System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
-		CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+		System.out.println("/*11.----Enter First Name " +client_data.get("legalFirstName") +"--*/");
+		CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+		System.out.println("/*12.----Enter Last Name " +client_data.get("legalLastName") +"--*/");
+		CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+		System.out.println("/*13.----Enter Date of birth " +Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+		CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+		System.out.println("/*14.----Enter Postal code " +client_data.get("postalCode") +"--*/");
+		CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+		System.out.println("/*15.----Enter PHN " +client_data.get("personalHealthNumber") +"--*/");
+		CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
 		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
 		System.out.println("/*17.----click Verify PHN button --*/");
 		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -108,10 +113,10 @@ public class Dose1_ICE_E2E extends BaseTest {
 		CitizenPrimaryInfo.successMessageAppear(driver);
 		System.out.println("/*19.----click Next button --*/");
 		CitizenPrimaryInfo.clickNextButton(driver);
-		System.out.println("/*20.----'Enter email address " +email +"--*/");
-		CitizenPrimaryInfo.enterEmail(driver, email);
-		System.out.println("/*21.----'Confirm email address " +email +"--*/");
-		CitizenPrimaryInfo.confirmEmail(driver, email);
+		System.out.println("/*20.----'Enter email address " +client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+		System.out.println("/*21.----'Confirm email address " +client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
 		System.out.println("/*22.---Click review details Button--*/");
 		CitizenPrimaryInfo.clickReviewDetails(driver);
 		System.out.println("/*23.----Click register Button on confirmation page--*/");
@@ -126,13 +131,22 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//System.out.println("/*25.----click on person Account Related Tab --*/");
 		//inClinicExperience.clickOnPersonAccountRelatedTab();
 		System.out.println("/*26----Go to Appointment Tab --*/");
-		PersonAccountPage.goToVaccineScheduleTab(driver);
+		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		}
 		Thread.sleep(2000);
 //If override Eligibility is shown
 		try {
 			System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
-
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 		} catch(Exception ex) {
 			if(vaccine_available) {
 				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
@@ -144,11 +158,8 @@ public class Dose1_ICE_E2E extends BaseTest {
 			//---If vaccine is disabled and not available in UI then Pass
 			Assert.assertTrue(1==1);
 			return;
+			}
 		}
-		}
-
-
-
 		System.out.println("/*27----select 'Search by Clinic name' tab --*/");
 		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
@@ -184,10 +195,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		log("/*46.---Open Today's appointments from Home page --*/");
 
-		inClinicExperience.clickTodayAppointments();
+		InClinicExperiencePage.clickTodayAppointments(driver);
 		log("/*47.---Open Today appointment Details --*/");
 		Thread.sleep(2000);
-		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
@@ -240,17 +252,17 @@ public class Dose1_ICE_E2E extends BaseTest {
 		}
 
 		try {
-			inClinicExperience.selectNotApprovedAdministrationReason();
+			InClinicExperienceVaccineAdministrationPage.selectNotApprovedAdministrationReason(driver);
 		} catch(Exception ex) {
 			System.out.println("Continue...");
 		}
 		System.out.println("/*42_.---Click Save button for Immunisation Information --*/");
 		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
-		inClinicExperience.clickOkForExpiredLot();
+		InClinicExperiencePage.clickOkForExpiredLot(driver);
 		System.out.println("/*43.---Click Confirm and Save Administration Button --*/");
-		inClinicExperience.ClickConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 		System.out.println("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
-		inClinicExperience.ClickModalConfirmAndSaveAdministrationButton();
+		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 		System.out.println("/*45.---the Home - Client Search showing up  --*/");
 		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}

@@ -88,12 +88,32 @@ public class PersonAccountPage extends BasePage {
         }
     }
 
+    public static boolean checkInButtonAvailable(WebDriver driver) throws  InterruptedException {
+        Thread.sleep(500);
+        By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
+        waitForElementToBeEnabled(driver, checkin_btn_path, 10);
+        WebElement check_in_button = driver.findElement(checkin_btn_path);
+        waitForElementToBeVisible(driver, check_in_button, 10);
+        return check_in_button.isDisplayed();
+    }
+
     public static void clickCheckInButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By checkin_btn_path = By.xpath("//button[@class = 'slds-button slds-button_brand' and @title = 'Check-in Client']");
         waitForElementToBeEnabled(driver, checkin_btn_path, 10);
         WebElement check_in_button = driver.findElement(checkin_btn_path);
-        check_in_button.click();
+        for(int i = 0; i < 10; i++) {
+            try {
+                check_in_button.click();
+                break;
+            } catch(ElementClickInterceptedException ex) {
+                System.out.println("Element not available yet. Wait 1 sec and try again. Attempt # " + i);
+                Thread.sleep(1000);
+                if(i == 9) {
+                    throw ex;
+                }
+            }
+        }
         try {
             PersonAccountPage.confirmNoForecastWarning(driver);
         } catch(Exception ex) {

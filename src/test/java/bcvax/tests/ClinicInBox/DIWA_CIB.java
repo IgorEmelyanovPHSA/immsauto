@@ -105,6 +105,7 @@ public class DIWA_CIB extends BaseTest {
 		try {
 			DiwaImmunizationRecord.setProvider(driver, consentProvider);
 		} catch(Exception ex) {
+			System.out.println("*** Exception: " + ex.getMessage());
 			DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 			Thread.sleep(500);
 			DiwaImmunizationRecord.setProvider(driver, consentProvider);

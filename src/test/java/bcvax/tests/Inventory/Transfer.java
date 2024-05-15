@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -13,6 +14,7 @@ import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
+import java.util.List;
 import java.util.Map;
 
 @Listeners({TestListener.class})
@@ -133,9 +135,10 @@ public class Transfer extends BaseTest {
         System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
         System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        supplyConsolePage.successMessageAppear();
+        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
         System.out.println("/*29.----click on Related Item Tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
         double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -243,9 +246,10 @@ public class Transfer extends BaseTest {
         System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
         System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        supplyConsolePage.successMessageAppear();
+        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
         System.out.println("/*29.----click on Related Item Tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
         double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
         System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_2_1);

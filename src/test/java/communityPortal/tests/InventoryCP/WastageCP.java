@@ -36,7 +36,8 @@ public class WastageCP extends BaseTest {
 
 
 		log("/2.----Navigate to Supply Console Page --*/");
-		cpMainPage.selectSupplyLocationName(supplyLocation);
+		MainPageCP.goToSupplyLocation(driver);
+		SupplyConsolePage.selectSupplyLocationName(driver, supplyLocation);
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeDeduction = supplyConsolePage.countDosesAndQuantityMap(firstRow);
 

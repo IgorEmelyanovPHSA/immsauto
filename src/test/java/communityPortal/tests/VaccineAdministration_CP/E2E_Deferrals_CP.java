@@ -91,10 +91,10 @@ public class E2E_Deferrals_CP extends BaseTest {
         log("/*22.--Click Related Tab --*/");
         PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(3000);
-        inClinicExperience_CP.scrollToDeferrals();
+        PersonAccountRelatedPage.scrollToDeferrals(driver);
         Thread.sleep(2000);
-        int deferralsCountBefore = inClinicExperience_CP.getDeferralsCount();
-        inClinicExperience_CP.newDeferral();
+        int deferralsCountBefore = PersonAccountRelatedPage.getDeferralsCount(driver);
+        PersonAccountRelatedPage.newDeferral(driver);
         DeferralForm newDeferral = new DeferralForm(driver);
         newDeferral.cleanupProfile();
         newDeferral.saveDeferral();
@@ -110,7 +110,7 @@ public class E2E_Deferrals_CP extends BaseTest {
         newDeferral.setEffectiveFrom();
         newDeferral.saveDeferral();
         Thread.sleep(2000);
-        int deferralsCountAfter = inClinicExperience_CP.getDeferralsCount();
+        int deferralsCountAfter = PersonAccountRelatedPage.getDeferralsCount(driver);
 
         assertEquals(deferralsCountAfter, deferralsCountBefore + 1);
     }

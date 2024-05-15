@@ -4,12 +4,14 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static constansts.Domain.SUPPLY_LOCATION_1;
@@ -47,7 +49,8 @@ public class BulkDraftsCP extends BaseTest {
 
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
@@ -110,7 +113,8 @@ public class BulkDraftsCP extends BaseTest {
         log("/*--transactions record number --*/:" + countOutgoingTransactions);
         Thread.sleep(2000);
         log("/*15.----Go to Supply Locations Tab --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_to);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -145,10 +149,12 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
 
         log("/*22.----Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        supplyConsolePage.successMessageAppear();
+        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 
         log("/*23.----Click on Automation Supply Location_1 --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(2000);
 
         log("/*24.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");

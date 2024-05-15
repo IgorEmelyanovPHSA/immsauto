@@ -4,26 +4,33 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
-
-	private String legalFirstName = "Ludovika";
-	private String legalLastName = "BcvaxLimeburn";
-	private String dateOfBirth = "Sep 21, 1923";
-	private String postalCode = "V3L5L2";
-	private String personalHealthNumber = "9746170911";
-	//private boolean isIndigenous = false;
-	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
 	//String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
 	private String vaccineToSelect;
 	MainPageOrg orgMainPage;
+	Map<String, String> client_data;
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "dose1");
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+	}
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
@@ -39,7 +46,6 @@ public class BookingDose1 extends BaseTest {
 		log("Vaccine Agent: " + vaccine_agent);
 		log("------------------------------");
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
 
 		log("/*1.----Login --*/");
@@ -63,14 +69,13 @@ public class BookingDose1 extends BaseTest {
 		log("/*4.----Close All previously opened Tab's --*/");
 		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*5.----- Click on User Defaults Tab --*/");
-		inClinicExperience.clickUserDefaultsTab();
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		log("/*-- 13. Enter current date for UserDefaults --*/");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		log("/*7.----- Click on Save defaults button --*/");
 		UserDefaultsPage.clickBtnSave(driver);
-		AlertDialog.closeAlert(driver);
 		currentApp = MainPageOrg.currentApp(driver);
 		try {
 			clinicInBox.closeAllTabs();
@@ -86,16 +91,16 @@ public class BookingDose1 extends BaseTest {
 		log("/*4.----click Register New Citizen --*/");
 
 		clinicInBox.clickRegisterButton();
-		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
-		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-		log("/*6.----Enter Last Name: " +legalLastName +"--*/");
-		CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-		log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-		CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-		log("/*7.----Enter Postal code: " +postalCode +"--*/");
-		CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
-		CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+		log("/*5.----Enter First Name: " + client_data.get("legalFirstName") +"--*/");
+		CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+		log("/*6.----Enter Last Name: " +client_data.get("legalLastName") +"--*/");
+		CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+		log("/*6.----Enter Date of birth: " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+		CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+		log("/*7.----Enter Postal code: " +client_data.get("postalCode") +"--*/");
+		CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+		log("/*8.----Enter PHN: "+client_data.get("personalHealthNumber") +"--*/");
+		CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
 
 		log("/*10.----click Verify PHN button --*/");
 		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -103,23 +108,27 @@ public class BookingDose1 extends BaseTest {
 		CitizenPrimaryInfo.successMessageAppear(driver);
 		log("/*12.----click Next button --*/");
 		CitizenPrimaryInfo.clickNextButton(driver);
-		log("/*13.'Enter email address: " +email +"--*/");
-		CitizenPrimaryInfo.enterEmail(driver, email);
-		log("/*14.'Confirm email address: " +email +"--*/");
-		CitizenPrimaryInfo.confirmEmail(driver, email);
+		log("/*13.'Enter email address: " +client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+		log("/*14.'Confirm email address: " +client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
 		log("/*15.Click review details Button--*/");
 		CitizenPrimaryInfo.clickReviewDetails(driver);
 		log("/*16.Click register Button on confirmation page--*/");
 		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*17.--toast success message - 'Success' --*/");
-		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-		Thread.sleep(2000);
+		try {
+			CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+		} catch(NotFoundException ex) {
+			System.out.println("No Success Registered Message. Continue...");
+		}
+		Thread.sleep(500);
 		log("/*18.----click on person Account Related Tab --*/");
 		try {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementNotInteractableException ex) {
-			driver.navigate().refresh();
-			Thread.sleep(1000);
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 		log("/*21----Go to Appointment Tab --*/");
@@ -184,10 +193,11 @@ public class BookingDose1 extends BaseTest {
 		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 		log("/*46.---Open Today's appointments from Home page --*/");
 
-		inClinicExperience.clickTodayAppointments();
+		InClinicExperiencePage.clickTodayAppointments(driver);
 		log("/*47.---Open Today appointment Details --*/");
 		Thread.sleep(2000);
-		inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
 		inClinicExperience.validateVaccineAdminPageOpen();

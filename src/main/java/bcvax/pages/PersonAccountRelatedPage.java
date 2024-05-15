@@ -11,6 +11,7 @@ public class PersonAccountRelatedPage extends BasePage {
     public PersonAccountRelatedPage(WebDriver driver) {
         super(driver);
     }
+
     public static int getImmunizationRecordsSize(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By immunization_records_table_path = By.xpath("//c-bc-hc-client-immunization-records");
@@ -46,8 +47,8 @@ public class PersonAccountRelatedPage extends BasePage {
         GenericTable related_active_consents = new GenericTable(active_consent_table_element);
         List<Map<String, WebElement>> my_rows = related_active_consents.getRowsMappedToHeadings();
         String my_response = null;
-        for(Map<String, WebElement> my_row : my_rows) {
-            if(my_row.get("Agent").getText().equals(agent)) {
+        for (Map<String, WebElement> my_row : my_rows) {
+            if (my_row.get("Agent").getText().equals(agent)) {
                 my_response = my_row.get("Response").getText();
                 break;
             }
@@ -81,7 +82,7 @@ public class PersonAccountRelatedPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         By alert_section_path = By.xpath("//article[@aria-label='Alerts']");
         boolean found = false;
-        while(!found) {
+        while (!found) {
             try {
                 waitForElementToBeEnabled(driver, alert_section_path, 1);
                 found = true;
@@ -90,7 +91,7 @@ public class PersonAccountRelatedPage extends BasePage {
                 Thread.sleep(500);
                 js.executeScript("window.scrollBy(0,200)");
                 counter++;
-                if(counter > 20) {
+                if (counter > 20) {
                     break;
                 }
             }
@@ -106,7 +107,7 @@ public class PersonAccountRelatedPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         By appointment_section_path = By.xpath("//div[@aria-label='Appointments|Appointments|List View']");
         boolean found = false;
-        while(!found) {
+        while (!found) {
             try {
                 waitForElementToBeEnabled(driver, appointment_section_path, 2);
                 found = true;
@@ -115,7 +116,7 @@ public class PersonAccountRelatedPage extends BasePage {
                 Thread.sleep(500);
                 js.executeScript("window.scrollBy(0,200)");
                 counter++;
-                if(counter > 20) {
+                if (counter > 20) {
                     break;
                 }
             }
@@ -131,7 +132,7 @@ public class PersonAccountRelatedPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         By active_consent_section_path = By.xpath("//c-bchc-active-consent-table//span[contains(text(), 'Active Consent')]");
         boolean found = false;
-        while(!found) {
+        while (!found) {
             try {
                 waitForElementToBeEnabled(driver, active_consent_section_path, 1);
                 found = true;
@@ -140,7 +141,7 @@ public class PersonAccountRelatedPage extends BasePage {
                 Thread.sleep(500);
                 js.executeScript("window.scrollBy(0,200)");
                 counter++;
-                if(counter > 20) {
+                if (counter > 20) {
                     break;
                 }
             }
@@ -206,7 +207,7 @@ public class PersonAccountRelatedPage extends BasePage {
         WebElement existing_consent_checkbox = driver.findElement(existing_consent_checkbox_path);
         scrollCenter(driver, existing_consent_checkbox);
         Thread.sleep(500);
-        if(existing_consent_checkbox.getAttribute("checked") == null) {
+        if (existing_consent_checkbox.getAttribute("checked") == null) {
             WebElement chkbox = existing_consent_checkbox.findElement(By.xpath(".//span[@part='indicator']"));
             chkbox.click();
         }
@@ -221,7 +222,7 @@ public class PersonAccountRelatedPage extends BasePage {
         GenericTable historical_immunization_records_table_gt = new GenericTable(historical_immunization_records_table);
         WebElement element = historical_immunization_records_table_gt.getRowsMappedToHeadings().get(0).get("PIR Submission Status");
 
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             try {
                 scrollCenter(driver, element);
                 Thread.sleep(1000);
@@ -233,6 +234,80 @@ public class PersonAccountRelatedPage extends BasePage {
                 waitForElementToBePresent(driver, historical_records_title, 10);
                 Thread.sleep(1000);
                 element = historical_immunization_records_table_gt.getRowsMappedToHeadings().get(0).get("PIR Submission Status");
+            }
+        }
+    }
+
+    public static void scrollToDeferrals(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        boolean referralNewButtonFound = false;
+        WebElement newReferralBtn = null;
+        while (!referralNewButtonFound) {
+            try {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("window.scrollBy(0, 200)");
+                newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
+                referralNewButtonFound = true;
+            } catch (Exception ex) {
+                Thread.sleep(2000);
+            }
+        }
+    }
+
+    public static void newDeferral(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        boolean referralNewButtonFound = false;
+        WebElement newReferralBtn = null;
+        while (!referralNewButtonFound) {
+            try {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("window.scrollBy(0, 200)");
+                newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
+                referralNewButtonFound = true;
+            } catch (Exception ex) {
+                Thread.sleep(2000);
+            }
+        }
+        newReferralBtn.click();
+    }
+
+    public static int getDeferralsCount(WebDriver driver) throws InterruptedException {
+        By deferrals_table_path = By.xpath("//table[@aria-label = 'Deferrals']");
+        waitForElementToBeEnabled(driver, deferrals_table_path, 10);
+        WebElement deferrals_table_node = driver.findElement(deferrals_table_path);
+        GenericTable deferrals_table = new GenericTable(deferrals_table_node);
+        int count = deferrals_table.getRows().size();
+        return count;
+    }
+
+    public static void deleteForecast(WebDriver driver, String agent) throws InterruptedException {
+        Thread.sleep(2000);
+        boolean forecastNewButtonFound = false;
+        WebElement newForecastBtn = null;
+        while (!forecastNewButtonFound) {
+            try {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("window.scrollBy(0, 200)");
+                newForecastBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.PIR_Agent_Forecast__c.New']/button"));
+                forecastNewButtonFound = true;
+            } catch (Exception ex) {
+                Thread.sleep(2000);
+            }
+        }
+        By forecasts_table_path = By.xpath("//table[@aria-label='Relevant Agent Forecasts']");
+        WebElement forecasts_table_node = driver.findElement(forecasts_table_path);
+        GenericTable forecasts_table = new GenericTable(forecasts_table_node);
+        List<Map<String, WebElement>> forecasts_table_map = forecasts_table.getRowsMappedToHeadings();
+        for (Map<String, WebElement> my_row : forecasts_table_map) {
+            WebElement my_agent = my_row.get("Agent");
+            if (my_agent.toString().equals(agent)) {
+                WebElement my_action_btn = my_row.get("Action").findElement(By.xpath(".//button"));
+                my_action_btn.click();
+                Thread.sleep(500);
+                By delete_popup_menu_item_path = By.xpath("//a[@role='menuitem' and @title='Delete']");
+                WebElement delete_option = driver.findElement(delete_popup_menu_item_path);
+                delete_option.click();
+                break;
             }
         }
     }

@@ -55,7 +55,7 @@ public class NewAlertPage extends BasePage {
 
     public static void setTypesOfAlert(WebDriver driver, String alert_type) throws InterruptedException {
         Thread.sleep(500);
-        By alert_types_input_path = By.xpath("//button[@aria-label='Type of Alert - Current Selection: --None--']");
+        By alert_types_input_path = By.xpath("//button[@aria-label='Type of Alert - Current Selection: --None--' or @aria-label='Type of Alert']");
         waitForElementToBeEnabled(driver, alert_types_input_path, 10);
         WebElement alert_types_input = driver.findElement(alert_types_input_path);
         alert_types_input.click();

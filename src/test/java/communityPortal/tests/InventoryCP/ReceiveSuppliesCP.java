@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static constansts.Domain.*;
@@ -33,7 +34,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		vaccine = String.valueOf(testData.get("containerTo"));
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
 		supply_location = String.valueOf(testData.get("supplyLocationTo"));
-		supplyConsolePage = communityPortalMainPage.selectSupplyLocationName(supply_location);
+		SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
 		distribution = String.valueOf(testData.get("distributionTo"));
 		lot = vaccine.substring(vaccine.indexOf("-") + 2, vaccine.indexOf("(", vaccine.indexOf("-")) - 1);
 	}
@@ -84,7 +85,8 @@ public class ReceiveSuppliesCP extends BaseTest {
 		Thread.sleep(2000);
 		supplyConsolePage.clickSaveButton();
 		try {
-			supplyConsolePage.successMessageAppear();
+			List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+			Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 		} catch(Exception ex) {
 			System.out.println("---Warning! Success message didn't apper. Continue anyway---");
 		}
@@ -125,7 +127,8 @@ public class ReceiveSuppliesCP extends BaseTest {
 		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
 		supplyConsolePage.transferToDistributionOnSend(distribution);
 		supplyConsolePage.clickSaveButton();
-		supplyConsolePage.successMessageAppear();
+		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 
 		log("/----Count Supplies After Receiving--*/");
 		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);

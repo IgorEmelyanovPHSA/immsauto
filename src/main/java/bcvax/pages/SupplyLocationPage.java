@@ -91,4 +91,14 @@ public class SupplyLocationPage extends BasePage {
             }
         }
     }
+
+    public static void clickOnRelatedItemTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related Items']");
+        waitForElementToBeEnabled(driver, related_tab_path, 10);
+        WebElement related_tab = driver.findElement(related_tab_path);
+        scrollCenter(driver, related_tab);
+        Thread.sleep(500);
+        related_tab.click();
+    }
 }

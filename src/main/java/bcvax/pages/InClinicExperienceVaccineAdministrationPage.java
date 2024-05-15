@@ -12,7 +12,7 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
 
     public static void selectVaccineAgent(WebDriver driver, String agent) throws InterruptedException {
         Thread.sleep(500);
-        By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option' or @aria-label='Agent - Current Selection: Select an option']");
+        By vaccine_agent_dropdown_path = By.xpath("//button[@aria-label = 'Agent, Select an option' or @aria-label='Agent - Current Selection: Select an option' or @aria-label='Agent']");
         waitForElementToBeEnabled(driver, vaccine_agent_dropdown_path, 30);
         WebElement click_vaccine_agent_dropdown = driver.findElement(vaccine_agent_dropdown_path);
         scrollCenter(driver, click_vaccine_agent_dropdown);
@@ -150,5 +150,69 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         scrollCenter(driver, save_immunization_info_btn);
         Thread.sleep(500);
         save_immunization_info_btn.click();
+    }
+
+    public static void clickRecordConsent(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By record_consent_btn_path = By.xpath("//button[@title='Primary action' and text()='Record Consent']");
+        waitForElementToBeEnabled(driver, record_consent_btn_path, 10);
+        WebElement record_consent_btn = driver.findElement(record_consent_btn_path);
+        scrollCenter(driver, record_consent_btn);
+        Thread.sleep(500);
+        record_consent_btn.click();
+    }
+
+    public static void ClickConfirmAndSaveAdministrationButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By confirm_save_adm_btn_path = By.xpath("//button[@title='Confirm & Save Administration']");
+        waitForElementToBeEnabled(driver, confirm_save_adm_btn_path, 10);
+        WebElement confirm_save_adm_btn = driver.findElement(confirm_save_adm_btn_path);
+        scrollIfNeeded(driver, confirm_save_adm_btn);
+        Thread.sleep(1000);
+        confirm_save_adm_btn.click();
+    }
+
+    public static void ClickModalConfirmAndSaveAdministrationButton(WebDriver driver) throws InterruptedException {
+        By confirm_save_btn_path = By.xpath("//button[text()='Confirm & Save Administration']");
+        waitForElementToBeEnabled(driver, confirm_save_btn_path, 10);
+        WebElement confirm_save_btn = driver.findElement(confirm_save_btn_path);
+        scrollCenter(driver, confirm_save_btn);
+        Thread.sleep(500);
+        confirm_save_btn.click();
+        Thread.sleep(500);
+        By go_to_user_default_dialog_path = By.xpath("//button[@c-bchcmodal_bchcmodal and text()='Go to User Defaults']");
+
+        try {
+            AlertDialog.closeAllAlerts(driver);
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            System.out.println("Couldn't close the success dialog. Continue...");
+        }
+
+        try {
+            waitForElementToBeEnabled(driver, go_to_user_default_dialog_path, 10);
+            System.out.println("Dialog Go to User Default is found. Wait until disappear...");
+            waitForElementNotToBePresent(driver, go_to_user_default_dialog_path, 5);
+        } catch(Exception ex) {
+            System.out.println("Go to User default dialog didn't appear or already gone. Continue...");
+        }
+//Try again to close success dialog
+        try {
+            System.out.println("Try again to close the success dialog...");
+            AlertDialog.closeAllAlerts(driver);
+            Thread.sleep(500);
+        } catch(Exception ex) {
+            System.out.println("Success dialog didn't appear or already gone. Continue...");
+        }
+    }
+
+    public static void selectNotApprovedAdministrationReason(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By administration_reason_path = By.xpath("//input[@type='radio' and @value='Intentional administration']/..//span[@part='indicator']");
+        waitForElementToBeEnabled(driver, administration_reason_path, 2);
+        WebElement administration_reason = driver.findElement(administration_reason_path);
+        scrollCenter(driver, administration_reason);
+        Thread.sleep(500);
+        administration_reason.click();
     }
 }

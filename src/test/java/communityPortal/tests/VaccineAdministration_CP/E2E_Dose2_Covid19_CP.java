@@ -3,6 +3,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -163,10 +164,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*40.---Open Today's appointments from Home page --*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
         log("/*41.---Open Today appointment Details --*/");
-        inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         Thread.sleep(2000);
         log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
@@ -228,13 +230,13 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         log("/*46.---Click Save button for Immunisation Information --*/");
         InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         Thread.sleep(2000);
-        inClinicExperience_CP.clickOkForExpiredLot();
+        InClinicExperiencePage.clickOkForExpiredLot(driver);
         Thread.sleep(2000);
         log("/*47.---Click Confirm and Save Administration Button --*/");
-        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
         Thread.sleep(2000);
         log("/*48.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 
         log("/*49.---the Home - Client Search showing up  --*/");
         InClinicExperiencePage.validateHomePageShownUp(driver);

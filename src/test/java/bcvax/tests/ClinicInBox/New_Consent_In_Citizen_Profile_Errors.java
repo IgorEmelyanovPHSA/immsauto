@@ -22,7 +22,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
     private String legalFirstName = "Celestyna";
     private String legalLastName = "BCVaxHeffy";
     private String legalMiddleName = "Anastassia";
-    private String personal_health_nunber = "9746173741";
+    private String personal_health_number = "9746173741";
     private String date_of_birth = "1962-07-09";
     private String postal_code = "V5Y9M1";
     String participant_name;
@@ -40,7 +40,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         TestcaseID = "278835";
         env = Utils.getTargetEnvironment();
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_number);
         testData = Utils.getTestData(env);
         log("Target Environment: "+ env);
         log("/*----1. Login as an DIWA to CIB  --*/");
@@ -68,8 +68,8 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         CitizenPrimaryInfo.enterDateOfBirth(driver, date_of_birth);
         log("/*7.----Enter Postal code: " + postal_code +"--*/");
         CitizenPrimaryInfo.enterPostalCode(driver, postal_code);
-        log("/*8.----Enter PHN: "+ personal_health_nunber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personal_health_nunber);
+        log("/*8.----Enter PHN: "+ personal_health_number +"--*/");
+        CitizenPrimaryInfo.enterPHN(driver, personal_health_number);
         log("/*10.----click Verify PHN button --*/");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -199,11 +199,11 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
     }
 
     @Test(testName = "Verify Errors when creating New Consent Record from Vaccine Administration")
-    public void Verify_Errors_When_Create_Vonsent_record_from_Vaccine_administration() throws Exception {
+    public void Verify_Errors_When_Create_Consent_record_from_Vaccine_administration() throws Exception {
         TestcaseID = "278971";
         env = Utils.getTargetEnvironment();
         log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_number);
         testData = Utils.getTestData(env);
         log("Target Environment: "+ env);
         log("/*----1. Login to CIB  --*/");
@@ -231,8 +231,8 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         CitizenPrimaryInfo.enterDateOfBirth(driver, date_of_birth);
         log("/*7.----Enter Postal code: " + postal_code +"--*/");
         CitizenPrimaryInfo.enterPostalCode(driver, postal_code);
-        log("/*8.----Enter PHN: "+ personal_health_nunber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personal_health_nunber);
+        log("/*8.----Enter PHN: "+ personal_health_number +"--*/");
+        CitizenPrimaryInfo.enterPHN(driver, personal_health_number);
         log("/*10.----click Verify PHN button --*/");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
@@ -260,14 +260,15 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
 
         InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
         InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
-        inClinicExperiencePage.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         log("/*47.---Open Today appointment Details --*/");
         Thread.sleep(2000);
-        inClinicExperiencePage.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personal_health_number);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         log("/*----9. Select an Option ---*/)");
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consent_agent);
 
-        inClinicExperiencePage.clickRecordConsent();
+        InClinicExperienceVaccineAdministrationPage.clickRecordConsent(driver);
         boolean add_consent_dialog_exists = InformedConsentDialog.dialogExists(driver);
         Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
         //Verify Headers in Infromed Consent Table
@@ -305,7 +306,7 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         Assert.assertEquals(response_error, "Please select a choice.");
         InformedConsentDialog.clickCloseButton(driver);
 
-        inClinicExperiencePage.clickRecordConsent();
+        InClinicExperienceVaccineAdministrationPage.clickRecordConsent(driver);
         add_consent_dialog_exists = InformedConsentDialog.dialogExists(driver);
         Assert.assertTrue(add_consent_dialog_exists, "Add Consent Dialog doesn't exist");
 

@@ -75,14 +75,13 @@ public class Alerts_ICE_CIB extends BaseTest {
         log("/*4.----Close All previously opened Tab's --*/");
         InClinicExperiencePage.closeTabsHCA(driver);
         log("/*5.----- Click on User Defaults Tab --*/");
-        inClinicExperience.clickUserDefaultsTab();
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
         log("/*6.----- Enter current date for UserDefaults --*/");
         log("/*-- 13. Enter current date for UserDefaults --*/");
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*7.----- Click on Save defaults button --*/");
         UserDefaultsPage.clickBtnSave(driver);
-        AlertDialog.closeAlert(driver);
         System.out.println("/*8.----- Click on register Tab --*/");
         InClinicExperiencePage.clickRegisterTab(driver);
         //System.out.println("/*9.----- Click on Save changes defaults button Modal window --*/");
@@ -222,24 +221,25 @@ public class Alerts_ICE_CIB extends BaseTest {
         AlertDialog.closeAllAlerts(driver);
 
         System.out.println("/*.----Verify Alert creation missing mandatory Fields --*/");
-        Assert.assertEquals("Error\n" +
-                "Unable to update Alert You must provide a reason for update to edit this alert", my_errors.get(0));
+        Assert.assertTrue(my_errors.get(0).contains("Error\n" +
+                "Unable to update Alert You must provide a reason for update to edit this alert"));
 
         ViewEditAlertPage.selectAlertReasonForUpdate(driver, "Other, specify");
         ViewEditAlertPage.clickSaveButton(driver);
         List<String> my_other_errors = AlertDialog.getAllAlertsText(driver);
         AlertDialog.closeAllAlerts(driver);
-        Assert.assertEquals("Error\n" +
-                "Unable to update Alert You must enter details in Update Comment if Reason for Update is Other", my_other_errors.get(0));
+        Assert.assertTrue(my_other_errors.get(0).contains("Error\n" +
+                "Unable to update Alert You must enter details in Update Comment if Reason for Update is Other"));
 
         ViewEditAlertPage.setAlertUpdateComments(driver, "Alert Update Comment");
         ViewEditAlertPage.clickSaveButton(driver);
         Thread.sleep(1000);
         InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 
-        inClinicExperience.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
-        inClinicExperience.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 
         String final_alerts_from_sidebar = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
 

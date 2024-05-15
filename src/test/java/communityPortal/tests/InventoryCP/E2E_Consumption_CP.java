@@ -3,6 +3,7 @@ package communityPortal.tests.InventoryCP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -60,7 +61,7 @@ public class E2E_Consumption_CP extends BaseTest {
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
 
         log("/*3.----Navigate to Supply Console Page --*/");
-        SupplyConsolePage supplyConsolePage = cpMainPage.goToSupplyLocation();
+        SupplyConsolePage supplyConsolePage = MainPageCP.goToSupplyLocation(driver);
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
         SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
@@ -173,9 +174,10 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(2000);
 
         log("/*39.---Open Today's appointments from Home page --*/");
-        inClinicExperience_CP.clickTodayAppointments();
+        InClinicExperiencePage.clickTodayAppointments(driver);
         log("/*40.---Open Today appointment Details --*/");
-        inClinicExperience_CP.clickTodayAppointmentCaseViewButton(legalFirstName + " " + legalLastName);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
@@ -228,17 +230,17 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*44.---Click Save button for Immunisation Information --*/");
         InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
         // If expired vaccine click OK in confirmation dialogue
-        inClinicExperience_CP.clickOkForExpiredLot();
+        InClinicExperiencePage.clickOkForExpiredLot(driver);
 
         log("/*45.---Click Confirm and Save Administration Button --*/");
-        inClinicExperience_CP.ClickConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
         log("/*46.---Click Modal screen Confirm&Save Administration Button --*/");
-        inClinicExperience_CP.ClickModalConfirmAndSaveAdministrationButton();
+        InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
         log("/*47.---the Home - Client Search showing up  --*/");
         InClinicExperiencePage.validateHomePageShownUp(driver);
 
         supplyConsolePage = new SupplyConsolePage(driver);
-        supplyConsolePage = cpMainPage.goToSupplyLocation();
+        MainPageCP.goToSupplyLocation(driver);
         log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
         SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
         Thread.sleep(2000);

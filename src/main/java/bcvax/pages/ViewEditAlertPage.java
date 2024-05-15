@@ -47,7 +47,8 @@ public class ViewEditAlertPage extends BasePage {
 
     public static void selectAlertReasonForUpdate(WebDriver driver, String reason_for_update) throws InterruptedException {
         Thread.sleep(500);
-        By alert_reason_for_update_input_path = By.xpath("//button[@aria-label='Reason for Update - Current Selection: --None--']");
+        //By alert_reason_for_update_input_path = By.xpath("//button[@aria-label='Reason for Update - Current Selection: --None--' or @aria-label='Reason for Update']");
+        By alert_reason_for_update_input_path = By.xpath("//button[@name='BCH_ReasonForUpdate__c']");
         waitForElementToBeEnabled(driver, alert_reason_for_update_input_path, 10);
         WebElement alert_reason_for_update_input = driver.findElement(alert_reason_for_update_input_path);
         scrollCenter(driver, alert_reason_for_update_input);
