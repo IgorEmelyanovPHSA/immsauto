@@ -7,6 +7,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -15,13 +16,7 @@ import java.util.Map;
 @Listeners({TestListener.class})
 public class E2E_Dose1_Covid19_CP extends BaseTest{
     String env;
-    private String legalFirstName = "Ludovika";
-    private String legalLastName = "BcvaxLimeburn";
-    private String dateOfBirth = "Sep 21, 1923";
-    private String postalCode = "V3L5L2";
-    private String personalHealthNumber = "9746170911";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
+    Map<String, String> client_data;
     String clinicNameToSearch;
     Map<String, Object> testData;
     String consumptionAgent;
@@ -33,13 +28,21 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
     String consentProvider;
 //Pneumo TC "243211",
 
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose1");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+    }
+
     @Test(priority = 1)
     public void Can_do_Dose1_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
         TestcaseID = "243203"; //C243203 needs to changed for CP e2E Manual Regresion
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -72,16 +75,16 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*7.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*11.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+        log("/*8.----Enter First Name " +client_data.get("legalFirstName") +"--*/");
+        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+        log("/*9.----Enter Last Name " +client_data.get("legalLastName") +"--*/");
+        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+        log("/*10.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+        log("/*11.----Enter Postal code " +client_data.get("postalCode") +"--*/");
+        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+        log("/*12.----Enter PHN " +client_data.get("personalHealthNumber") +"--*/");
+        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
 
         log("/*14.----click Verify PHN button --*/");
         CitizenPrimaryInfo.clickVerifyPHNButton(driver);
@@ -90,10 +93,10 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*16.----click Next button --*/");
         CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
+        log("/*17.----'Enter email address " +client_data.get("email") +"--*/");
+        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        log("/*18.----'Confirm email address " +client_data.get("email") +"--*/");
+        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
         log("/*19.---Click review details Button--*/");
         CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*20.----Click register Button on confirmation page--*/");
@@ -102,7 +105,13 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
         log("/*22.----click on person Account Related Tab --*/");
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch (ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
 
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
@@ -148,6 +157,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("/*33. ----see 'Appointment confirmed!' screen --*/");
         boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+
         PersonAccountPage.clickCheckInButton(driver);
         log("/*35.----Go to back to the Citizen Related Tab --*/");
         //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
@@ -171,7 +181,7 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
         log("/*40.---Open Today appointment Details --*/");
-        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         Thread.sleep(2000);

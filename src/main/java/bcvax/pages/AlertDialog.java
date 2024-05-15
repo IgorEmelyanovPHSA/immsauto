@@ -50,7 +50,7 @@ public class AlertDialog {
 
     public static void closeAllAlerts(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_close_btn_path = By.xpath("//div[@role = 'alertdialog' or @role = 'alert']//button[@title='Close']");
+        By alert_close_btn_path = By.xpath("//div[@role = 'alertdialog' or @role = 'alert']//button");
         try {
             BasePage.waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
             List<WebElement> close_alert_btns = driver.findElements(alert_close_btn_path);

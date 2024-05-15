@@ -115,7 +115,7 @@ public class TransferCancellation extends BaseTest {
         log("/*23.----Cancel Transfer --*/");
         //tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
         supplyConsolePage.cancelIncomingTransfer();
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -217,8 +217,7 @@ public class TransferCancellation extends BaseTest {
         log("/*23.----Cancel Transfer --*/");
         //tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
         supplyConsolePage.cancelIncomingTransfer();
-        supplyConsolePage.clickOnRelatedItemTab();
-
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);

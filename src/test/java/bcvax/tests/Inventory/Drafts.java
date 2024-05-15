@@ -140,7 +140,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions);
 
         log("/*18----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -275,7 +275,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickDropDownLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions, amountOfDosesToAdjustInDraftEdit);
 
         log("/*18----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/*18.1----Refresh Page to get doses/quantities updated--*/");
         Thread.sleep(2000);
@@ -409,7 +409,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickOnDraftTransactionsDropDownMenu(countDraftTransactions - 1);
 
         log("/*19----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -533,7 +533,7 @@ public class Drafts extends BaseTest {
         supplyConsolePage.clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions);
 
         log("/*18----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);

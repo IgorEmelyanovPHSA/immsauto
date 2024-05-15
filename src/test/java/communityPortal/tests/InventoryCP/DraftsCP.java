@@ -52,7 +52,8 @@ public class DraftsCP extends BaseTest {
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
@@ -91,7 +92,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions);
 
         log("/*13.----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/*14.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 
@@ -142,7 +143,8 @@ public class DraftsCP extends BaseTest {
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
 
@@ -198,7 +200,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickDropDownLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions, amountOfDosesToAdjustInDraftEdit);
 
         log("/*17.----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/*18.----Refresh Page to get doses/quantities updated--*/");
         driver.navigate().refresh();
@@ -259,7 +261,8 @@ public class DraftsCP extends BaseTest {
 
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.selectSupplyLocationName(supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
 
@@ -316,7 +319,7 @@ public class DraftsCP extends BaseTest {
         supplyConsolePage.clickOnDraftTransactionsDropDownMenu(countDraftTransactions - 1);
 
         log("/*17----Navigate to Related Item tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/*18----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
 

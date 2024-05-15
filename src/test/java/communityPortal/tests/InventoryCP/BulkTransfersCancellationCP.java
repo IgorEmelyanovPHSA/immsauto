@@ -107,7 +107,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         log("/----Count Remaining Supplies Before Transaction --*/");
         driver.navigate().refresh();
@@ -118,7 +118,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
 
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(2000);
 
         driver.navigate().refresh();
@@ -143,7 +143,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         supplyConsolePage.cancelTransfer();
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         double remainingDosesAfterLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
         double remainingDosesAfterLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
         double remainingDosesAfterLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
@@ -154,7 +154,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
 
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -294,7 +294,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         log("/*1.----Login to CP (newUI) as Clinician --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
-        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
     }
 }

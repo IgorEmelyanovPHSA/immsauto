@@ -138,7 +138,7 @@ public class Transfer extends BaseTest {
         List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
         Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
         System.out.println("/*29.----click on Related Item Tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
         double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -249,7 +249,7 @@ public class Transfer extends BaseTest {
         List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
         Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
         System.out.println("/*29.----click on Related Item Tab --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
         double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
         System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_2_1);

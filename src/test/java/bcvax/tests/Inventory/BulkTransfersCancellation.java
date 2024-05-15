@@ -140,7 +140,7 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.cancelTransfer();
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         double remainingDosesAfterLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
         double remainingDosesAfterLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
         double remainingDosesAfterLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
@@ -252,7 +252,7 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.clickBulkCancelButton();
         supplyConsolePage.cancelTransfer();
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         double remainingQtyAfterCancelLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
         double remainingQtyAfterCancelLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
         double remainingQtyAfterCancelLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);

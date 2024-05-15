@@ -199,7 +199,7 @@ public class BulkTransfers extends BaseTest {
 		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
 		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 		log("/*29.----Click on Related Tab--*/");
-		supplyConsolePage.clickOnRelatedItemTab();
+		SupplyLocationPage.clickOnRelatedItemTab(driver);
 		///////////////////// Doses/Qty AFTER Automation Location_2//////////////////////////////////
 		log("/*30.----Getting Remaining Doses/Remaining Quantity - AFTER - Automation Location_2 --*/");
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
@@ -376,7 +376,7 @@ public class BulkTransfers extends BaseTest {
 		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
 		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 		log("/*29.----Click on Related Tab--*/");
-		supplyConsolePage.clickOnRelatedItemTab();
+		SupplyLocationPage.clickOnRelatedItemTab(driver);
 		///////////////////// Doses/Qty AFTER Automation Location_2//////////////////////////////////
 		log("/*30.----Getting Remaining Doses/Remaining Quantity - AFTER - Automation Location_2 --*/");
 		log("/*- container#1 - Supply Distribution_2_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
