@@ -88,7 +88,7 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
         driver.navigate().refresh();
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
         double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
@@ -98,7 +98,7 @@ public class TransferCancellation extends BaseTest {
 
         log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         driver.navigate().refresh();
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -127,7 +127,7 @@ public class TransferCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         driver.navigate().refresh();
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -188,7 +188,7 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         driver.navigate().refresh();
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -199,7 +199,7 @@ public class TransferCancellation extends BaseTest {
 
         log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         driver.navigate().refresh();
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -228,7 +228,7 @@ public class TransferCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         Thread.sleep(2000);
         driver.navigate().refresh();
@@ -262,7 +262,7 @@ public class TransferCancellation extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         //////////////////////////////////////////////////
     }
 }

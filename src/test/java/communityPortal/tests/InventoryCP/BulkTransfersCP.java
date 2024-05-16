@@ -156,7 +156,7 @@ public class BulkTransfersCP extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
         log("/*19.----Go to Supply Locations Tab --*/");
         MainPageCP.goToSupplyLocation(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         ///////////////////// Doses/Qty BEFORE Automation Location_2//////////////////////////////////
         log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
@@ -385,7 +385,7 @@ public class BulkTransfersCP extends BaseTest {
         log("/*1.----Login to CP (newUI) as Clinician --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
         MainPageCP.goToSupplyLocation(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         SupplyLocationPage.clickOnRelatedItemTab(driver);
         supplyConsolePage = new SupplyConsolePage(driver);
     }

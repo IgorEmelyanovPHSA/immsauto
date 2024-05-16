@@ -48,7 +48,7 @@ public class ReturnsErrorValidation extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
         SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
         SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*b.----Receive Supplies for Flu --*/");
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
@@ -102,7 +102,7 @@ public class ReturnsErrorValidation extends BaseTest {
         log("/*4. ----Open Supply Location " + supply_location + " --*/");
         SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
         SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location);
 
         log("/*5. ----Click Return Button --*/");
         SupplyLocationPage.clickReturnButton(driver);

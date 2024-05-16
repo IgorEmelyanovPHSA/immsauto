@@ -61,7 +61,7 @@ public class AdjustmentsCP extends BaseTest {
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		MainPageCP.goToSupplyLocation(driver);
-		SupplyConsolePage.selectSupplyLocationName(driver, supplyLocation);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supplyLocation);
 
 		log("/*3.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);

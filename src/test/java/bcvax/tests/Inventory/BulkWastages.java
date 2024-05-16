@@ -56,7 +56,7 @@ public class BulkWastages extends BaseTest {
 		/////////////////////////////////////////////////
 		//Try generic method
 		/////////////////////////////////////////////////
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		//////////////////////////////////////////////////
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
@@ -148,7 +148,7 @@ public class BulkWastages extends BaseTest {
 		log("/*4.----Go to Supply Locations Tab --*/");
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		log("/*3.----Click on Automation Supply Location_1 --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
 		log("/*4.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);

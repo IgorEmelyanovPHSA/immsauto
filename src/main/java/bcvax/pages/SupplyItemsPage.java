@@ -44,12 +44,25 @@ public class SupplyItemsPage extends BasePage {
         search_location_field.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
-        By supply_item_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
+        By supply_item_table_path = By.xpath("//div[contains(@class, 'listViewContent')]");
         waitForElementToBeEnabled(driver, supply_item_table_path, 10);
         WebElement supply_items_table_node = driver.findElement(supply_item_table_path);
         GenericTable supply_items_table = new GenericTable(supply_items_table_node);
         Map<String, WebElement> my_row = supply_items_table.getMappedRow(ImmutableMap.of("Supply Item Name", item));
         WebElement my_link = my_row.get("Supply Item Name").findElement(By.xpath(".//a"));
         my_link.click();
+    }
+
+    public static void selectShowAllSupplyItems(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        By select_list_view_btn_path = By.xpath("//button[@title='Select a List View: Supply Items']");
+        waitForElementToBeEnabled(driver, select_list_view_btn_path, 10);
+        WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
+        select_list_view_btn.click();
+        Thread.sleep(2000);
+        By all_items_path = By.xpath("//a[@role='option']/span[text()='All']");
+        waitForElementToBeEnabled(driver, all_items_path, 10);
+        WebElement all_items = driver.findElement(all_items_path);
+        all_items.click();
     }
 }

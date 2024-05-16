@@ -156,7 +156,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*19.----Go to Supply Locations Tab --*/");
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 		//supplyConsolePage.clickOnSupplyLocation_2();
 
 		///////////////////// Doses/Qty BEFORE Automation Location_2//////////////////////////////////
@@ -334,7 +334,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*19.----Go to Supply Locations Tab --*/");
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
 		/////////////////////Doses/Qty BEFORE Automation Location_2//////////////////////////////////
 		log("/*21.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_2 --*/");
@@ -579,7 +579,7 @@ public class BulkTransfers extends BaseTest {
 		/////////////////////////////////////////////////
 		//Try generic method
 		/////////////////////////////////////////////////
-		SupplyConsolePage.selectSupplyLocationName(driver,supply_location_from);
+		SupplyLocationsPage.selectSupplyLocationName(driver,supply_location_from);
 		//////////////////////////////////////////////////
 	}
 }

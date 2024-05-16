@@ -73,7 +73,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("/*9.3----Go to Supply Locations Tab --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         log("/*9.4----Click on Automation Supply Location_1 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, clinicLocation);
+        SupplyLocationsPage.selectSupplyLocationName(driver, clinicLocation);
 
         log("/*10.---- Validating results, given lot numbers should match --*/");
         for(int i = 0; i < lots.length; i++) {

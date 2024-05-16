@@ -106,7 +106,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*19.----Go to Supply Locations Tab --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver,supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver,supply_location_to);
         driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
@@ -119,7 +119,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         driver.navigate().refresh();
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -153,7 +153,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
         driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -221,7 +221,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*19.----Go to Supply Locations Tab --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
         driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
@@ -233,7 +233,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         driver.navigate().refresh();
         Thread.sleep(2000);
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -264,7 +264,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -303,7 +303,7 @@ public class BulkTransfersCancellation extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         //////////////////////////////////////////////////
     }
 }

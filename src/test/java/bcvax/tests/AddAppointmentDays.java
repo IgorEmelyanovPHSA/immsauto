@@ -24,7 +24,7 @@ public class AddAppointmentDays extends BaseTest {
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate start_date = LocalDate.parse("2024-05-14", dtf);
+        LocalDate start_date = LocalDate.parse("2024-05-15", dtf);
         LocalDate end_date = LocalDate.parse("2024-05-19", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
@@ -65,7 +65,7 @@ public class AddAppointmentDays extends BaseTest {
                         Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_dates.get(d), appointment_type, provider_name);
 
                         WebElement my_name_link = my_row.get("Name");
-                        BasePage.scrollIfNeeded(driver, my_name_link);
+                        BasePage.scrollCenter(driver, my_name_link);
                         Thread.sleep(500);
                         my_name_link.click();
                     } else {
