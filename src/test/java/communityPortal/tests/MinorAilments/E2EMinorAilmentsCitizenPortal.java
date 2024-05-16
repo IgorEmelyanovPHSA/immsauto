@@ -62,7 +62,8 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("9. Validate the error message is displayed: Please complete all required fields before proceeding.");
-        Assert.assertTrue(BookAppointmentPage.isToastErrorMessageCompleteAllRequiredFieldsDisplayed(driver));
+        boolean toastErrorShown = BookAppointmentPage.isToastErrorMessageCompleteAllRequiredFieldsDisplayed(driver);
+        Assert.assertTrue(toastErrorShown, "No Error Found");
 
         log("10. Click the checkboxes: 1)I verify that the contact information and 2)I consent to notifications");
         PersonAccountSchedulePage.clickVerifyConsentInformation(driver);

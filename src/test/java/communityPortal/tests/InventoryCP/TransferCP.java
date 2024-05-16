@@ -104,7 +104,7 @@ public class TransferCP extends BaseTest {
 		SupplyConsolePage.closeTabsHCA(driver);
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
 		MainPageCP.goToSupplyLocation(driver);
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
 
 		///////////////// Supply Location_2 -> Incoming //////////////////////////
@@ -227,7 +227,7 @@ public class TransferCP extends BaseTest {
 
 		Thread.sleep(3000);
 		supplyConsolePage = MainPageCP.goToSupplyLocation(driver);
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		SupplyLocationPage.clickOnRelatedItemTab(driver);
 	}
 }

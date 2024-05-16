@@ -92,7 +92,8 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
 		System.out.println("/*19.----Go to Supply Locations Tab --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+		MainPageCP.goToSupplyLocation(driver);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
 		driver.navigate().refresh();
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -102,7 +103,8 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		MainPageCP.goToSupplyLocation(driver);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
 		driver.navigate().refresh();
 		SupplyLocationPage.clickTransactionsTab(driver);
@@ -130,7 +132,8 @@ public class TransferCancellationCP extends BaseTest {
 		assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
 		log("/----Go to Supply Location Related Tab where Transferring To --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+		MainPageCP.goToSupplyLocation(driver);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
 		driver.navigate().refresh();
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -250,8 +253,9 @@ public class TransferCancellationCP extends BaseTest {
 	public void precondition() throws Exception {
 		log("/*1.----Login to CP (newUI) as Clinician --*/");
 		cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		MainPageCP.goToSupplyLocation(driver);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		SupplyLocationPage.clickOnRelatedItemTab(driver);
+		supplyConsolePage = new SupplyConsolePage(driver);
 	}
 }

@@ -74,7 +74,7 @@ public class Consumption extends BaseTest {
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
+		SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
@@ -265,7 +265,7 @@ public class Consumption extends BaseTest {
 		SupplyConsolePage.closeTabsHCA(driver);
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, clinicNameToSearch);
+		SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
 
 		//////////Validation for Dosages and Qty After Consumption
 		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");

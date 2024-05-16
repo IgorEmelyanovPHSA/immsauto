@@ -34,7 +34,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		vaccine = String.valueOf(testData.get("containerTo"));
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
 		supply_location = String.valueOf(testData.get("supplyLocationTo"));
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location);
 		distribution = String.valueOf(testData.get("distributionTo"));
 		lot = vaccine.substring(vaccine.indexOf("-") + 2, vaccine.indexOf("(", vaccine.indexOf("-")) - 1);
 	}
