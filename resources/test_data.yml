@@ -443,6 +443,6 @@ igorauto:
         appointment_city: "Surrey"
         minor_ailments: "No"
     - "Kelowna - Asher Pharmacy - Asher Rd":
-        address_id: "Kelowna - Asher Pharmacy - Asher Rd"
+        address_id: "AD-0006760101"
         appointment_city: "Kelowna"
         minor_ailments: "No"
