@@ -52,7 +52,7 @@ public class BookAppointmentPage extends BasePage {
 
     public static boolean isToastErrorMessageCompleteAllRequiredFieldsDisplayed(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By close_toast_message_button_path = By.xpath("//button[@title='Close']");
+        By close_toast_message_button_path = By.xpath("//div[@role='alert' or @role='alertdialog']//button");
         waitForElementToBeEnabled(driver, close_toast_message_button_path, 10);
         WebElement close_toast_message_button = driver.findElement(close_toast_message_button_path);
 

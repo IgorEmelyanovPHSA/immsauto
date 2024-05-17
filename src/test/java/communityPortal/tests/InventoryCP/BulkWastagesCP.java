@@ -41,7 +41,7 @@ public class BulkWastagesCP extends BaseTest {
 
 		log("/*2.----Navigate to Supply Console Page --*/");
 		MainPageCP.goToSupplyLocation(driver);
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		
 		log("/*3.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);

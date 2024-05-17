@@ -68,8 +68,14 @@ public class MainPageCP extends BasePage{
         waitForElementToBeEnabled(driver, user_default_tab_path, 10);
         WebElement element = driver.findElement(user_default_tab_path);
         scrollCenter(driver, element);
-        Thread.sleep(2000);
-        element.click();
+        Thread.sleep(500);
+        try {
+            element.click();
+        } catch(ElementClickInterceptedException ex) {
+            AlertDialog.closeAllAlerts(driver);
+            Thread.sleep(500);
+            element.click();
+        }
     }
 
     public static void clickClientListTab(WebDriver driver) throws InterruptedException {

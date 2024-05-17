@@ -87,7 +87,7 @@ public class Adjustments extends BaseTest {
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 

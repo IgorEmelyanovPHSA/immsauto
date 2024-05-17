@@ -107,7 +107,8 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
         log("/----Count Remaining Supplies Before Transaction --*/");
         driver.navigate().refresh();
@@ -117,8 +118,8 @@ public class BulkTransfersCancellationCP extends BaseTest {
         double remainingDosesBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(2000);
 
         driver.navigate().refresh();
@@ -153,8 +154,8 @@ public class BulkTransfersCancellationCP extends BaseTest {
         assertEquals(remainingDosesAfterLocationDistribution1_3, remainingDosesBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -293,8 +294,9 @@ public class BulkTransfersCancellationCP extends BaseTest {
     public void precondition() throws Exception {
         log("/*1.----Login to CP (newUI) as Clinician --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         SupplyLocationPage.clickOnRelatedItemTab(driver);
+        supplyConsolePage = new SupplyConsolePage(driver);
     }
 }

@@ -60,6 +60,7 @@ public class ReceiveSupplies extends BaseTest {
 		log("/*-- 6. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		SupplyConsolePage.switchToTableView(driver);
 		Thread.sleep(1000);
+		SupplyItemsPage.selectShowAllSupplyItems(driver);
 		SupplyItemsPage.selectSupplyItemName(driver, supply_item);
 		//Validation for Doses/Qty Before Receiving needs to be add from supply container
 		log("/*-- . We need to see Dosages and Qty Before Receiving here to Validate at the end---*/");
@@ -79,7 +80,7 @@ public class ReceiveSupplies extends BaseTest {
 		SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
 
 		log("/*-- 11. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location);
 
 		log("/*-- 18. Navigate and Select Dropdown to Receive Supplies Button --*/");
 		SupplyLocationPage.clickReceiveSuppliesButton(driver);

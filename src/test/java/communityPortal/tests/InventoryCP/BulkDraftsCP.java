@@ -50,7 +50,7 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*2.----Navigate to Supply Console Page --*/");
         MainPageCP.goToSupplyLocation(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
@@ -114,7 +114,7 @@ public class BulkDraftsCP extends BaseTest {
         Thread.sleep(2000);
         log("/*15.----Go to Supply Locations Tab --*/");
         MainPageCP.goToSupplyLocation(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -154,7 +154,7 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*23.----Click on Automation Supply Location_1 --*/");
         MainPageCP.goToSupplyLocation(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(2000);
 
         log("/*24.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");

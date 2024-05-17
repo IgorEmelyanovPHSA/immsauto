@@ -34,7 +34,7 @@ public class Requisition extends BaseTest {
 
 		SupplyConsolePage.closeTabsHCA(driver);
 		SupplyConsolePage.clickSupplyLocationsTab(driver);
-		SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location);
 		System.out.println("/*----2. Locate Dropdown Menu --*/");
 		System.out.println("/*----3. Close Other Tabs --*/");
 		System.out.println("/*----4. Navigate to Supply Locations --*/");

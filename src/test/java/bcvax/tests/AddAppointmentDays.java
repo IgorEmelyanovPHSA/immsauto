@@ -65,7 +65,7 @@ public class AddAppointmentDays extends BaseTest {
                         Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_dates.get(d), appointment_type, provider_name);
 
                         WebElement my_name_link = my_row.get("Name");
-                        BasePage.scrollIfNeeded(driver, my_name_link);
+                        BasePage.scrollCenter(driver, my_name_link);
                         Thread.sleep(500);
                         my_name_link.click();
                     } else {

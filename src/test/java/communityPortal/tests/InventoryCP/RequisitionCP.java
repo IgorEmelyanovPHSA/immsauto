@@ -32,7 +32,7 @@ public class RequisitionCP extends BaseTest {
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         MainPageCP.goToSupplyLocation(driver);
-        SupplyConsolePage.selectSupplyLocationName(driver, supply_location);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location);
 
         System.out.println("/*----6. Navigate to Request Supplies --*/");
         SupplyLocationPage.clickCreateRequisitionButton(driver);
