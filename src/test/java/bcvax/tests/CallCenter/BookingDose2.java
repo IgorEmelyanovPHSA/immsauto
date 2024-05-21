@@ -99,6 +99,11 @@ public class BookingDose2 extends BaseTest {
 			Thread.sleep(500);
 			PersonAccountPage.goToVaccineScheduleTab(driver);
 			Thread.sleep(500);
+			try {
+				PersonAccountSchedulePage.overrideEligibility(driver);
+			} catch(NotFoundException ex1) {
+				System.out.println("Try to override eligibility");
+			}
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		} catch(StaleElementReferenceException ex) {
 			Thread.sleep(500);
@@ -130,6 +135,11 @@ public class BookingDose2 extends BaseTest {
 		log("/*33----Refresh page --*/");
 		driver.navigate().refresh();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 	}
 }

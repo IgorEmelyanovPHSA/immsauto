@@ -305,7 +305,7 @@ regress2:
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.5"
-  consumptionLot: "1875739-CC01-RCL"
+  consumptionLot: "MT0055"
   covidLot: "1875739-CC01-RCL"
   pneumoLot: "0486AA-CC01"
   influenzaLot: "CM1216"
@@ -385,5 +385,5 @@ bcvaxqa:
         minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006764994"
-        appointment_city: "Coquitlam"
+        appointment_city: "Golden"
         minor_ailments: "No"

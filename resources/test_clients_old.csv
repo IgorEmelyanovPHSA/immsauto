@@ -1,9 +1,9 @@
 personalHealthNumber,dateOfBirth,gender,legalLastName,legalFirstName,legalMiddleName,address,city,province,postalCode,country,phone,email,purpose
 9746170911,21-09-1923,F,BcvaxLimeburn,Ludovika,,,,BC,V3L5L2,CA,555-555-6145,accountToDelete@phsa.ca,dose1
-9746172463,14-02-1915,M,BCVaxOrigan,Gill,,,,BC,V3L5L2,CA,555-555-6146,accountToDelete@phsa.ca,dose2
-9746172069,06-05-1977,F,BCVaxDa Costa,Alexandro,,,,BC,V8W7P2,CA,555-555-6147,accountToDelete@phsa.ca,
-9746173039,23-01-1959,F,BCVaxIsmirnioglou,Rawley,Marijo,,,BC,V2X9T1,CA,555-555-6148,accountToDelete@phsa.ca,
-9746173741,09-07-1962,M,BCVaxHeffy,Celestyna,Anastassia,,,BC,V5Y9M1,CA,555-555-6149,accountToDelete@phsa.ca,
+9746172463,14-02-1915,M,BCVaxOrigan,Gill,,,,BC,V3L5L2,CA,555-555-6146,accountToDelete@phsa.ca,new_consent
+9746172069,06-05-1977,F,BCVaxDa Costa,Alexandro,,,,BC,V8W7P2,CA,555-555-6147,accountToDelete@phsa.ca,dose2
+9746173039,23-01-1959,F,BCVaxIsmirnioglou,Rawley,Marijo,,,BC,V2X9T1,CA,555-555-6148,accountToDelete@phsa.ca,consent
+9746173741,09-07-1962,M,BCVaxHeffy,Celestyna,Anastassia,,,BC,V5Y9M1,CA,555-555-6149,accountToDelete@phsa.ca,no_consent
 9746172961,29-11-1949,F,BCVaxGoncaves,Courtnay,,,,BC,V3J3Y1,CA,555-555-6150,accountToDelete@phsa.ca,
 9746171121,03-03-1904,M,BCVaxLampard,Hugues,,,,BC,V1N3Q3,CA,555-555-6151,accountToDelete@phsa.ca,
 9879450975,02-01-2023,M,Said,Ab,,,,BC,V3L5L2,CA,555-555-6152,accountToDelete@phsa.ca,
