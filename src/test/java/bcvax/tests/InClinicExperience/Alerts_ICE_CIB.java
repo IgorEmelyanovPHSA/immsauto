@@ -4,6 +4,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -127,7 +128,12 @@ public class Alerts_ICE_CIB extends BaseTest {
             System.out.println(ex.getMessage());
         }
         System.out.println("/*25.----click on CheckIn button --*/");
-        PersonAccountPage.clickCheckInButton(driver);
+        try {
+            PersonAccountPage.clickCheckInButton(driver);
+        } catch(ElementNotInteractableException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.clickCheckInButton(driver);
+        }
         String sidebar_alerts_text = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
 
         System.out.println("/*.----Verify Sidebar contains Alerts(0) --*/");
@@ -216,10 +222,10 @@ public class Alerts_ICE_CIB extends BaseTest {
 
         InClinicExperienceIdentificationPage.clickViewEditAlert(driver, "Alert For Editing");
         ViewEditAlertPage.setAlertEffectiveTo(driver, sdf.format(sdf.parse(today_date.minusDays(1).toString())));
+        AlertDialog.closeAllAlerts(driver);
         ViewEditAlertPage.clickSaveButton(driver);
         List<String> my_errors = AlertDialog.getAllAlertsText(driver);
         AlertDialog.closeAllAlerts(driver);
-
         System.out.println("/*.----Verify Alert creation missing mandatory Fields --*/");
         Assert.assertTrue(my_errors.get(0).contains("Error\n" +
                 "Unable to update Alert You must provide a reason for update to edit this alert"));

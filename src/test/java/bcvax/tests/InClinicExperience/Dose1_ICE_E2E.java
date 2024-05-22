@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -148,6 +149,12 @@ public class Dose1_ICE_E2E extends BaseTest {
 			Thread.sleep(500);
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccine_agent);
 		} catch(Exception ex) {
+			try {
+				PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+				Thread.sleep(500);
+			} catch(Exception ex1) {
+				;
+			}
 			if(vaccine_available) {
 				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 				PersonAccountSchedulePage.overrideEligibility(driver);
@@ -185,7 +192,13 @@ public class Dose1_ICE_E2E extends BaseTest {
 		System.out.println("/*36.----Refresh page --*/");
 		driver.navigate().refresh();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		System.out.println("/*38.----click on In-clinic Experience button --*/");
 		PersonAccountPage.clickCheckInButton(driver);
 

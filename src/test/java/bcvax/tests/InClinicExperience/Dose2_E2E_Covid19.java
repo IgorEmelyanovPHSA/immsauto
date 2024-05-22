@@ -419,7 +419,13 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		driver.navigate().refresh();
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 
 		log("/*38.----click on In-clinic Experience button --*/");
 		PersonAccountPage.clickCheckInButton(driver);

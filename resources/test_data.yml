@@ -306,10 +306,10 @@ regress2:
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.5"
   consumptionLot: "MT0055"
-  covidLot: "1875739-CC01-RCL"
+  covidLot: "EK4241"
   pneumoLot: "0486AA-CC01"
   influenzaLot: "CM1216"
-  covidDose: "0.5"
+  covidDose: "0.3"
   pneumoDose: "0.5"
   influenzaDose: "0.2"
   useDefaultSettingsLots:

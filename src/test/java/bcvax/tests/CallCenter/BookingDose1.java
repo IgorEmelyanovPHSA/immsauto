@@ -55,7 +55,13 @@ public class BookingDose1 extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.CALL_CENTER_CONSOLE.value);
         }
         callCenterConsole.closeAllTabs();
-        MainPageOrg.selectFromNavigationMenu(driver, "Home");
+        try {
+            MainPageOrg.selectFromNavigationMenu(driver, "Home");
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            MainPageOrg.selectFromNavigationMenu(driver, "Home");
+        }
         callCenterConsole.verifyIsCallCenterConsolePageDisplayed();
         System.out.println("/*3.----Close All previously opened Tab's --*/");
 
