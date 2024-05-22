@@ -128,7 +128,7 @@ public class BookingDose1 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementNotInteractableException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 		log("/*21----Go to Appointment Tab --*/");
@@ -185,7 +185,13 @@ public class BookingDose1 extends BaseTest {
 		log("/*33----Refresh page --*/");
 		driver.navigate().refresh();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		log("/*35----click on Check-In button --*/");
 		inClinicExperience = new InClinicExperiencePage(driver);
 		PersonAccountPage.clickCheckInButton(driver);

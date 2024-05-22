@@ -30,7 +30,7 @@ public class AlertDialog {
 
     public static List<String> getAllAlertsText(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By alert_content_path = By.xpath("//div[(@role = 'alertdialog' or @role='alert') and @data-key='success']//div[@class='toastContent slds-notify__content']");
+        By alert_content_path = By.xpath("//div[@role = 'alertdialog' or @role='alert']//div[@class='toastContent slds-notify__content']");
         BasePage.waitForElementToBeEnabled(driver, alert_content_path, 10);
         List<WebElement> alert_contents = driver.findElements(alert_content_path);
         ArrayList alert_texts = new ArrayList();

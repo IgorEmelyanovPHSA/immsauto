@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -15,12 +16,7 @@ public class DIWA_CIB extends BaseTest {
 	String env;
 	String consumptionRoute;
 	Map<String, Object> testData;
-	private String legalFirstName = "Rawley";
-	private String legalLastName = "BCVaxIsmirnioglou";
-	private String legalMiddleName = "Marijo";
-	private String personal_health_number = "9746173039";
-	private String date_of_birth = "1959-01-23";
-	private String postal_code = "V2X9T1";
+	Map<String, String> client_data;
 	String participant_name;
 	String consentProvider;
 	private String lot_to_select;
@@ -28,6 +24,13 @@ public class DIWA_CIB extends BaseTest {
 
 	String clinic_location = "All Ages - Atlin Health Centre";
 	MainPageOrg orgMainPage;
+
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "consent");
+	}
+
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
@@ -42,7 +45,7 @@ public class DIWA_CIB extends BaseTest {
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		lot_to_select = String.valueOf(testData.get("covidLot"));
 		dosage_to_select = String.valueOf(testData.get("covidDose"));
-		participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
+		participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
 		loginPage.loginAsImmsBCAdmin();
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");
