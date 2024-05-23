@@ -17,6 +17,9 @@
         @FindBy(xpath = "//input[@type='checkbox'][@value='Imaging Reports']/../label[@class='slds-checkbox__label']")
         private WebElement dropDownSelectionImagingReports;
 
+        @FindBy(xpath = "//input[@type='checkbox'][@value='My Notes']/../label[@class='slds-checkbox__label']")
+        private WebElement dropDownSelectionMyNotes;
+
         @FindBy(xpath = "//button[text() = 'Apply']")
         private WebElement btnApply;
 
@@ -64,7 +67,7 @@
         private WebElement textWriteAComment;
 
         @FindBy(xpath = "//button[text()='Save']")
-        private WebElement btnSaveForComment;
+        private WebElement btnSave;
 
         @FindBy(xpath = "(//*[@class='slds-card']//p[@class='slds-p-horizontal_small'])[2]")
         private WebElement textGetCreateComment;
@@ -79,10 +82,42 @@
         private WebElement btnDeleteFirstCommentForFirstImgReport;
 
         @FindBy(xpath = "//button[text()='Ok']")
-        private WebElement btnOkForDeleteComment;
+        private WebElement btnOkForDelete;
 
         @FindBy(xpath = "//button[@aria-label='Cancel and close']")
         private WebElement btnCancelForDeleteComment;
+
+        /////Notes related xpath's
+        @FindBy(xpath = "(//div[@class='card-header']/..//span[text()='Note'])[1]")
+        private WebElement textBoxFirstNote;
+
+        @FindBy(xpath = "(//div[@class='card-content']/slot/p)[1]")
+        private WebElement textBodyFirstNote;
+
+        @FindBy(xpath = "(//div[@class='card-header']/..//span[text()='Note'])[1]/../../../..//a[text()='Delete']")
+        private WebElement btnDeleteFirstNote;
+
+        @FindBy(xpath = "//button[text()='Add a note']")
+        private WebElement btnAddANote;
+
+        @FindBy(xpath = "//input[@placeholder='Title']")
+        private WebElement textTitleOfNote;
+
+        @FindBy(xpath = "//*[@placeholder='Enter your note here. Your notes are only available for your own viewing.']")
+        private WebElement textNote;
+
+        @FindBy(xpath = "//button[text()='Add a note']/../../../..//a[text()='Edit']")
+        private WebElement btnEditFirstNote;
+
+        /////Protective Word Xpath's
+        @FindBy(xpath = "//input[@placeholder='Protective word']")
+        private WebElement textInputProtectiveWord;
+
+        @FindBy(xpath = "//button[text()='Add a note']/../../../..//a[text()='Edit']")
+        private WebElement btnContinue;
+
+        @FindBy(xpath = "//input[@placeholder='Protective word']")
+        private WebElement btnCloseWindowX;
 
         public TimeLineTabPage(WebDriver driver) {
             super(driver);
@@ -104,6 +139,16 @@
             Thread.sleep(12000);
             click(btnDropDownCategories);
             click(dropDownSelectionImagingReports);
+            click(btnApply);
+            Thread.sleep(2000);
+        }
+
+        @Step
+        public void selectFilterMyNotes() throws InterruptedException {
+            //waitForElementToBeClickable(driver, btnDropDownCategories,15);
+            Thread.sleep(12000);
+            click(btnDropDownCategories);
+            click(dropDownSelectionMyNotes);
             click(btnApply);
             Thread.sleep(2000);
         }
@@ -158,23 +203,68 @@
             click(btnAddACommentForFirstImagingReport);
             Thread.sleep(2000);
             typeIn(textWriteAComment, textComment);
-            click(btnSaveForComment);
+            click(btnSave);
             Thread.sleep(2000);
         }
 
         public void updateAComment(String textComment) throws InterruptedException {
             click(btnEditFirstCommentForFirstImgReport);
             typeIn(textWriteAComment, textComment);
-            click(btnSaveForComment);
+            click(btnSave);
             Thread.sleep(2000);
         }
 
         public void deleteCommentsForRecord() throws InterruptedException {
-            for(int i = 0; i < getNumberOfCommentsForFirstImgReport(); i++){
+            int numberOfComments = getNumberOfCommentsForFirstImgReport();
+            for(int i = 0; i < numberOfComments; i++){
                 click(btnDeleteFirstCommentForFirstImgReport);
-                click(btnOkForDeleteComment);
+                click(btnOkForDelete);
                 Thread.sleep(2000);
             }
         }
+
+        public int getNumberOfMyNotes(){
+            return Integer.parseInt(getText(textDisplayingNumberOfRecords).split("\\s+")[3]);
+        }
+
+        public void deleteMyNotes() throws InterruptedException {
+            int numberOfNotes = getNumberOfMyNotes();
+            for(int i = 0; i <numberOfNotes; i++){
+                click(textBoxFirstNote);
+                click(btnDeleteFirstNote);
+                click(btnOkForDelete);
+                Thread.sleep(2000);
+            }
+        }
+
+        public void createANote(String noteText) throws InterruptedException {
+            click(btnAddANote);
+            typeIn(textTitleOfNote, "Created by Automation");
+            typeIn(textNote, noteText);
+            click(btnSave);
+            Thread.sleep(3000);
+        }
+
+        public void clickToExpendFirstNote() throws InterruptedException {
+            click(textBoxFirstNote);
+        }
+
+        public String getTextBodyFromFirstMyNote(){
+            return getText(textBodyFirstNote);
+        }
+
+        public void editAndUpdateANote(String noteText) throws InterruptedException {
+            click(btnEditFirstNote);
+           // typeIn(textTitleOfNote, "Created by Automation");
+            typeIn(textNote, noteText);
+            click(btnSave);
+            Thread.sleep(3000);
+        }
+
+        public void enterProtectiveWordAndContinue(String text) throws InterruptedException {
+            typeIn(textInputProtectiveWord, text);
+            click(textBoxFirstNote);
+        }
+
 
     }

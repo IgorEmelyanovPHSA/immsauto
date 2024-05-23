@@ -172,7 +172,7 @@ public class LoginPage extends BasePage {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//HEALTH GATEWAY
 
-	@FindBy(xpath = "//button[@value='BC_Services_Card_Login']")
+	@FindBy(xpath = "//h2[text()='Test with username and password']")
 	private WebElement btnLoginWithBCServiceCard;
 
 	//Next screen //BC Services Card Login
@@ -195,8 +195,8 @@ public class LoginPage extends BasePage {
 	}
 
 	public void enterCredentialsForHGPortalAs(String user, String pass) throws Exception {
-		click(btnTestWithUserNameAndPassword);
-		Thread.sleep(1000);
+	//	click(btnTestWithUserNameAndPassword);
+	//	Thread.sleep(1000);
 		typeIn(emailOrUsernameId, Utils.getEnvConfigProperty(user));
 		typeIn(passwordId, Utils.getEnvConfigProperty(pass));
 		Thread.sleep(500);
@@ -209,6 +209,16 @@ public class LoginPage extends BasePage {
 		click(btnLoginWithBCServiceCard);
 		Thread.sleep(3000);
 		enterCredentialsForHGPortalAs("user_HTHGTWY11","password_HTHGTWY11_PW");
+		Thread.sleep(3000);
+		return new MainPageHealthGateway(driver);
+	}
+
+	public MainPageHealthGateway loginIntoHGWithBCServiceCardAsUser14() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		Thread.sleep(4000);
+		click(btnLoginWithBCServiceCard);
+		Thread.sleep(3000);
+		enterCredentialsForHGPortalAs("user_HTHGTWY14","password_HTHGTWY14_PW");
 		Thread.sleep(3000);
 		return new MainPageHealthGateway(driver);
 	}
