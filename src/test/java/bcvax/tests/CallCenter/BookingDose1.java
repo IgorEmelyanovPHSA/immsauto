@@ -163,6 +163,11 @@ public class BookingDose1 extends BaseTest {
 
         driver.navigate().refresh();
         System.out.println("/*34----Go to back to the Citizen Related Tab --*/");
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
     }
 }
