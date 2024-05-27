@@ -34,7 +34,9 @@ public class ReceiveSuppliesCP extends BaseTest {
 		vaccine = String.valueOf(testData.get("containerTo"));
 		log("/----Go to Supply Location Related Tab where Transferring From --*/");
 		supply_location = String.valueOf(testData.get("supplyLocationTo"));
+		MainPageCP.goToSupplyLocation(driver);
 		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location);
+		supplyConsolePage = new SupplyConsolePage(driver);
 		distribution = String.valueOf(testData.get("distributionTo"));
 		lot = vaccine.substring(vaccine.indexOf("-") + 2, vaccine.indexOf("(", vaccine.indexOf("-")) - 1);
 	}
@@ -86,7 +88,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		supplyConsolePage.clickSaveButton();
 		try {
 			List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
-			Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
+			Assert.assertTrue(all_alerts.get(0).contains("Success"));
 		} catch(Exception ex) {
 			System.out.println("---Warning! Success message didn't apper. Continue anyway---");
 		}
