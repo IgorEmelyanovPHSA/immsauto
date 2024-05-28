@@ -3,7 +3,10 @@ package bcvax.tests.Portal;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.junit.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -14,7 +17,6 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
     private String legalFirstName = "Alexandro";
     private String legalLastName = "BCVaxDa Costa";
-    private String legalLastNameASCII = "BCVaxDa%20Costa";
     private String legalMiddleName = "";
     private String dateOfBirth = "May 06, 1977";
     private String postalCode = "V8W7P2";
@@ -24,15 +26,28 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
     private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
+    MainPageOrg orgMainPage;
 
-    @Test(priority = 1)
-    public void citizenPortalFlowDoseTwo() throws Exception {
-        TestcaseID = "222522"; //C222522
-        log("Target Environment: "+ Utils.getTargetEnvironment());
-        CommonMethods com = new CommonMethods(getDriver());
-
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
+    }
+
+    @AfterMethod
+    public void afterMethod() throws Exception {
+        log("/*0.---API call to remove duplicate citizen participant account after test finished--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
+    }
+
+    @Test()
+    public void citizenPortalFlowDoseTwo() throws Exception {
+        TestcaseID = "222522";
+        log("TestCase: C222522");
+        log("Target Environment: "+ Utils.getTargetEnvironment());
+        //CommonMethods com = new CommonMethods(getDriver());
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -55,66 +70,86 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         //InClinicExperiencePage inClinicExperiencePage = loginPage.loginAsClinicianICE();
         //Thread.sleep(5000);
         log("/*6.----Login as an Clinician to CIB --*/");
-        ClinicInBoxPage clinicInBox = loginPage.loginAsClinicianCIB();
-        Thread.sleep(10000);
-
+        //ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
+        loginPage.orgLoginAsPPHIS();
+        ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
+        orgMainPage = new MainPageOrg(driver);
+        String currentApp = MainPageOrg.currentApp(driver);
+        if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+            MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
+        }
+        MainPageOrg.closeAllTabs(driver);
+        MainPageOrg.selectFromNavigationMenu(driver, "Home");
         clinicInBox.verifyIsClinicInBoxPageDisplayed();
-        Thread.sleep(10000);
 
         log("/*6.1.----Close All previously opened Tab's --*/");
         clinicInBox.closeAllTabs();
-        Thread.sleep(5000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         //inClinicExperiencePage.SearchForCitizen(conformationNumberText);
-        com.globalSearch(conformationNumberText);
+        MainPageOrg.search(driver, legalFirstName + " " + legalLastName);
 
-        log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        log("/*7.1---Validation, isUserFound account validation --*/");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
+
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
         }
 
+        PersonAccountPage.clickVerifyPHNButton(driver);
+        PersonAccountPage.successMessageAppear(driver);
+        Thread.sleep(2000);
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            PersonAccountPage.clickVerifyPHNButton(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        BookAnAppointmentPage bookAnAppointmentPage = loginPage.openBookAnAppointmentPage(uniqueLink);
-        bookAnAppointmentPage.bookAnAppointmentPageDisplayed();
+        BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
+        BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
-        String registrationConfirmationNumber = bookAnAppointmentPage.getRegistrationConfirmationNumber();
+        String registrationConfirmationNumber = BookAppointmentPage.getRegistrationConfirmationNumber(driver);
         log("Compering registration confirmation number from registration page: " + conformationNumberText
                 + " vs registration confirmation number from book an appointment page " + registrationConfirmationNumber);
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        bookAnAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
 
         log("/*11.---Schedule vaccination page is displayed--*/");
-        bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
+        BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
-        bookAnAppointmentPage.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 
         log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*14.---Select date and time for appointment and click btn Next--*/");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*15---Click verify contact information checkbox--*/");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*16---Verify appointment conformation message is displayed--*/");
-        bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastNameASCII, legalFirstName);
+        boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
+        Assert.assertTrue(appointment_result);
     }
 
 }

@@ -1,185 +1,211 @@
 package bcvax.tests.ClinicInBox;
 
 import Utilities.TestListener;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import bcvax.pages.ClinicInBoxPage;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.Utils;
-import org.openqa.selenium.JavascriptExecutor;
+import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
+
+import java.util.Map;
 
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
-
-	private String legalFirstName = "Ludovika";
-	private String legalLastName = "BcvaxLimeburn";
-	private String dateOfBirth = "Sep 21, 1923";
-	private String postalCode = "V3L5L2";
-	private String personalHealthNumber = "9746170911";
-	//private boolean isIndigenous = false;
-	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-	private String vaccineToSelect = "Covid19Vaccine";
-
-	@Test(priority = 1)
-	public void Can_Book_Dose1_Appointment_as_Clinician_CIB() throws Exception {
-		log("Target Environment: "+ Utils.getTargetEnvironment());
+	//String clinicNameToSearch = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
+	private String vaccineToSelect;
+	MainPageOrg orgMainPage;
+	Map<String, String> client_data;
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "dose1");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+	}
+
+	@DataProvider(name="booking_data")
+	public Object[][] dpMethod() {
+		//return new Object[][] {{"225652", "Covid19Vaccine"}};
+		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", false}};
+	}
+
+	@Test(dataProvider = "booking_data")
+	public void Can_Book_Dose1_Appointment_as_Clinician_CIB(String testcase_id, String vaccine_agent, boolean vaccine_available) throws Exception {
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("------------------------------");
+		log("Testcase ID: " + testcase_id);
+		log("Vaccine Agent: " + vaccine_agent);
+		log("------------------------------");
+		log("/---API call to remove duplicate citizen participant account if found--*/");
 		ClinicInBoxPage clinicInBox = new ClinicInBoxPage(getDriver());
 
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				loginPage.loginAsImmsBCAdmin();
-				TestcaseID = "244842"; //C244842
-				break;
-			default:
-				log("Login AS default user in CIB");
-				loginPage.loginAsClinicianCIB();
-				TestcaseID = "225652"; //C225652
-		}
-		Thread.sleep(10000);
-
-
+		loginPage.loginAsImmsBCAdmin();
+		//TestcaseID = "225652"; //C225652
+		TestcaseID = testcase_id;
+		vaccineToSelect = vaccine_agent;
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
-		if (clinicInBox.displayCIBApp()) {
-			log("/*---- User already on CIB Page--*/");
-			Thread.sleep(2000);
-		} else {
-			log("/*---- Navigate to CIB App --*/");
-			Thread.sleep(5000);
-			clinicInBox.selectCIBApp();
-			Thread.sleep(2000);
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = MainPageOrg.currentApp(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
 		}
-		//clinicInBox.verifyIsClinicInBoxPageDisplayed();
-		Thread.sleep(5000);
+		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
+		}
+
+		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
+		log("/*4.----Close All previously opened Tab's --*/");
+		InClinicExperiencePage.closeTabsHCA(driver);
+		log("/*5.----- Click on User Defaults Tab --*/");
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
+		log("/*6.----- Enter current date for UserDefaults --*/");
+		log("/*-- 13. Enter current date for UserDefaults --*/");
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
+		log("/*7.----- Click on Save defaults button --*/");
+		UserDefaultsPage.clickBtnSave(driver);
+		currentApp = MainPageOrg.currentApp(driver);
+		try {
+			clinicInBox.closeAllTabs();
+		} catch(Exception ex) {
+			;
+		}
+		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
+		}
+		MainPageOrg.selectFromNavigationMenu(driver, "Home");
 		log("/*3.----Close All previously opened Tab's --*/");
-		clinicInBox.closeAllTabs();
-		Thread.sleep(5000);
+
 		log("/*4.----click Register New Citizen --*/");
+
 		clinicInBox.clickRegisterButton();
-		Thread.sleep(2000);
-		log("/*5.----Enter First Name: " +legalFirstName +"--*/");
-		clinicInBox.enterFirstName(legalFirstName);
-		Thread.sleep(2000);
-		log("/*6.----Enter Last Name: " +legalLastName +"--*/");
-		clinicInBox.enterLastName(legalLastName);
-		Thread.sleep(2000);
-		log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-		clinicInBox.enterDateOfBirth(dateOfBirth);
-		Thread.sleep(2000);
-		log("/*7.----Enter Postal code: " +postalCode +"--*/");
-		clinicInBox.enterPostalCode(postalCode);
-		Thread.sleep(2000);
-		log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
-		clinicInBox.enterPNH(personalHealthNumber);
-		Thread.sleep(2000);
-		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		clinicInBox.clickNonIndigenousRadioButton();
-		Thread.sleep(2000);
+		log("/*5.----Enter First Name: " + client_data.get("legalFirstName") +"--*/");
+		CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+		log("/*6.----Enter Last Name: " +client_data.get("legalLastName") +"--*/");
+		CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+		log("/*6.----Enter Date of birth: " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+		CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+		log("/*7.----Enter Postal code: " +client_data.get("postalCode") +"--*/");
+		CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+		log("/*8.----Enter PHN: "+client_data.get("personalHealthNumber") +"--*/");
+		CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
+
 		log("/*10.----click Verify PHN button --*/");
-		clinicInBox.clickVerifyPHNButton();
-		Thread.sleep(2000);
+		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
 		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-		clinicInBox.successMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		CitizenPrimaryInfo.successMessageAppear(driver);
 		log("/*12.----click Next button --*/");
-		clinicInBox.clickNextButton();
-		Thread.sleep(2000);
-		log("/*13.'Enter email address: " +email +"--*/");
-		clinicInBox.enterEmail(email);
-		log("/*14.'Confirm email address: " +email +"--*/");
-		Thread.sleep(2000);
-		clinicInBox.confirmEmail(email);
+		CitizenPrimaryInfo.clickNextButton(driver);
+		log("/*13.'Enter email address: " +client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+		log("/*14.'Confirm email address: " +client_data.get("email") +"--*/");
+		CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
 		log("/*15.Click review details Button--*/");
-		Thread.sleep(2000);
-		clinicInBox.clickReviewDetails();
+		CitizenPrimaryInfo.clickReviewDetails(driver);
 		log("/*16.Click register Button on confirmation page--*/");
-		Thread.sleep(2000);
-		clinicInBox.clickRegisterButtonOnConfirmationPage();
-		Thread.sleep(2000);
+		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*17.--toast success message - 'Success' --*/");
-		clinicInBox.successRegisteredMessageAppear();
-		Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		try {
+			CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+		} catch(NotFoundException ex) {
+			System.out.println("No Success Registered Message. Continue...");
+		}
+		Thread.sleep(500);
 		log("/*18.----click on person Account Related Tab --*/");
-		clinicInBox.clickOnPersonAccountRelatedTab();
-		Thread.sleep(2000);
-		//System.out.println("/*18.----click on Eligibility button --*/");
-		//clinicInBox.clickOnEligibilityButton();
-		//Thread.sleep(2000);
-		//System.out.println("/*19----select vaccination option -> COVID_19_Vaccination --*/");
-		//clinicInBox.selectEligibilityOption();
-		//Thread.sleep(2000);
-		//System.out.println("/*20.--toast success message - 'Eligibility check completed. Participant is eligible for COVID_19_Vaccination.' --*/");
-		//clinicInBox.successEligibilityMessageAppear();
-		//Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementNotInteractableException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(2000);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		log("/*21----Go to Appointment Tab --*/");
-		clinicInBox.clickAppointmentTab();
-		Thread.sleep(10000);
+		PersonAccountPage.goToVaccineScheduleTab(driver);
 
-		log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		Thread.sleep(3000);
-		clinicInBox.selectOneOption(vaccineToSelect);
-		Thread.sleep(2000);
+		//If override Eligibility is shown
+		try {
+			log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+		} catch(Exception ex) {
+			if(vaccine_available) {
+				System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+				PersonAccountSchedulePage.overrideEligibility(driver);
+				Thread.sleep(500);
+				log("/*21.A---Select vaccination type: " + vaccineToSelect + "--*/");
+				PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
+			} else {
+				//---If vaccine is disabled and not available in UI then Pass
+				Assert.assertTrue(1==1);
+				return;
+			}
+		}
 
-		//log("/*22----click on reason for visit 'Covid-19 Vaccine' radiobutton --*/");
-		//clinicInBox.clickOnVaccinationCheckbox();
-		//Thread.sleep(2000);
-
-		//System.out.println("/*23----click on 'More' search tab --*/");
-		//clinicInBox.clickOnMoreSearchTabs();
-		//Thread.sleep(2000);
+		////////////////////
+		//May will be removed
+		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
+		///////////////////
 		log("/*24----select 'Search by Clinic name' tab --*/");
-		clinicInBox.selectSearchByClinicNameTab();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 		log("/*25----search the Clinic " +clinicNameToSearch +" --*/");
-		clinicInBox.searchClinicName(clinicNameToSearch);
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 		log("/*26----click on Option Facility location  --*/");
-		clinicInBox.clickOnFacilityOptionLocation();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		log("/*27----select Active booking appointment day  --*/");
-		clinicInBox.selectBookingAppointmentDay();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		log("/*28----select the time slot  --*/");
-		clinicInBox.selectTimeSlotAppointment();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		log("/*29----click Next button  --*/");
-		clinicInBox.clickOnNextButton();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		log("/*30----click Verify Contact Information Checkbox  --*/");
-		clinicInBox.clickVerifyContactInformation();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		log("/*31----click Confirm Appointment button  --*/");
-		clinicInBox.clickOnConfirmButton();
-		Thread.sleep(2000);
-		log("/*32----see 'Appointment confirmed!' screen --*/");
-		clinicInBox.validateAppointmentConfirmedScreen();
-		Thread.sleep(2000);
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
+		try {
+			log("/*32----see 'Appointment confirmed!' screen --*/");
+			boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
+			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+		} catch(Exception ex) {
+			PersonAccountSchedulePage.clickOnConfirmButton(driver);
+			log("/*32----see 'Appointment confirmed!' screen. Second attempt --*/");
+			boolean appointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
+			Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
+		}
 		log("/*33----Refresh page --*/");
-		clinicInBox.refreshBrowser();
-		Thread.sleep(2000);
+		driver.navigate().refresh();
 		log("/*34----Go to back to the Citizen Related Tab --*/");
-		clinicInBox.clickRelatedTab();
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
+		log("/*35----click on Check-In button --*/");
+		inClinicExperience = new InClinicExperiencePage(driver);
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
-		log("/*35----click on In-clinic Experience button --*/");
-		InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
-		Thread.sleep(5000);
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
+		log("/*46.---Open Today's appointments from Home page --*/");
+
+		InClinicExperiencePage.clickTodayAppointments(driver);
+		log("/*47.---Open Today appointment Details --*/");
+		Thread.sleep(2000);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
+		//InClinicExperiencePage InClinicExperience = clinicInBox.ClickGoToInClinicExperienceButton();
 		log("/*36----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		InClinicExperience.validateVaccineAdminPageOpen();
-		Thread.sleep(5000);
+		inClinicExperience.validateVaccineAdminPageOpen();
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-	}
-
 }

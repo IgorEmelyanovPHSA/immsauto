@@ -15,8 +15,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Check_In_Client_CP extends BaseTest {
-    MainPageCP cpMainPage;
-    MainPageOrg orgMainPage;
     String env;
     private String legalFirstName = "Ludovika";
     private String legalLastName = "BcvaxLimeburn";
@@ -34,70 +32,66 @@ public class Check_In_Client_CP extends BaseTest {
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
-        log("/*1.----Login as an Inventory Clinician to Community Portal --*/");
-        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinicianInventory();
+
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+
+        log("/*1.----Login as Clinician to Community Portal --*/");
+        MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
         log("/*2.----Community Portal Home page displayed --*/");
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
-        cpMainPage.clickUserDefaultsTab();
-        Thread.sleep(2000);
+        MainPageCP.clickUserDefaultsTab(driver);
         log("/*9.----- Enter current date for UserDefaults --*/");
-        cpMainPage.inputCurrentDateUserDefaults();
-        cpMainPage.selectUserDefaultLocation(clinicNameToSearch);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
-        cpMainPage.clickSaveDefaultsButton();
-        Thread.sleep(2000);
+        UserDefaultsPage.clickBtnSave(driver);
+        Thread.sleep(7000);
         log("/*7.----click Register button New Citizen --*/");
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
-        Thread.sleep(2000);
-        inClinicExperience_CP.clickRegisterButton();
-        Thread.sleep(2000);
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
+        InClinicExperiencePage.clickRegisterButton(driver);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        inClinicExperience_CP.enterFirstName(legalFirstName);
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        inClinicExperience_CP.enterLastName(legalLastName);
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
         log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
         log("/*11.----Enter Postal code " +postalCode +"--*/");
-        inClinicExperience_CP.enterPostalCode(postalCode);
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        inClinicExperience_CP.enterPNH(personalHealthNumber);
-        Thread.sleep(2000);
-        log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
+
         log("/*14.----click Verify PHN button --*/");
-        inClinicExperience_CP.clickVerifyPHNButton();
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience_CP.successMessage();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        CitizenPrimaryInfo.successMessageAppear(driver);
 
         log("/*16.----click Next button --*/");
-        inClinicExperience_CP.clickNextButton();
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.clickNextButton(driver);
         log("/*17.----'Enter email address " +email +"--*/");
-        inClinicExperience_CP.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*18.----'Confirm email address " +email +"--*/");
-        Thread.sleep(2000);
-        inClinicExperience_CP.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
         log("/*19.---Click review details Button--*/");
-        Thread.sleep(2000);
-        inClinicExperience_CP.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*20.----Click register Button on confirmation page--*/");
-        Thread.sleep(2000);
-        inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
-        Thread.sleep(2000);
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         log("/*21.--toast success message - 'Success' --*/");
-        inClinicExperience_CP.successRegisteredMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
+        }
+
+        Thread.sleep(1000);
+
         log("/*22.--Check if check-in button available --*/");
-        assertTrue(inClinicExperience_CP.checkInButtonAvailable());
+        assertTrue(PersonAccountPage.checkInButtonAvailable(driver));
         //Get Date/Time of Check-In
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
@@ -105,15 +99,14 @@ public class Check_In_Client_CP extends BaseTest {
         String expectedDate = df.format(currentTime).replace(".", "");
         String expectedTime = tf.format(currentTime).replace("a.m.", "AM").replace("p.m.","PM");
         log("/*23.--Click check-in button --*/");
-        inClinicExperience_CP.clickCheckInButton();
-        Thread.sleep(5000);
+        PersonAccountPage.clickCheckInButton(driver);
         log("/*24.--Verify if the landing tab is IDENTIFICATION --*/");
-        String currentTab = inClinicExperience_CP.getCurrentTab();
+        String currentTab = InClinicExperiencePage.getCurrentTab(driver);
         assertEquals(currentTab, "Identification");
         log("/*25.--Get new appointment location, date and time --*/");
-        String appointmentDate = inClinicExperience_CP.getAppointmentDate();
-        String appointmentTime = inClinicExperience_CP.getAppointmentTime();
-        String appointmentLocation = inClinicExperience_CP.getAppointmentLocation();
+        String appointmentDate = InClinicExperienceIdentificationPage.getAppointmentDate(driver);
+        String appointmentTime = InClinicExperienceIdentificationPage.getAppointmentTime(driver);
+        String appointmentLocation = InClinicExperienceIdentificationPage.getAppointmentLocation(driver);
 
         LocalTime appointmentTimeActual = LocalTime.parse(appointmentTime, tf);
         assertEquals(appointmentDate, expectedDate);
@@ -121,12 +114,5 @@ public class Check_In_Client_CP extends BaseTest {
         assertTrue(Math.abs(appointmentTimeActual.getMinute() - currentTime.toLocalTime().getMinute()) <= 2, "Expected Time:" + currentTime.toLocalTime() + "; Actual Time: " + appointmentTime);
         assertEquals(appointmentLocation, clinicNameToSearch);
         System.out.println("Here");
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
     }
 }

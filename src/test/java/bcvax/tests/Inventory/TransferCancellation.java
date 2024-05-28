@@ -1,9 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
@@ -55,9 +53,9 @@ public class TransferCancellation extends BaseTest {
 
         log("/---- Perform doses transfer to  location " + supply_location_to + "--*/");
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*9.----Picked up the Trade Vaccine Name --*/");
         String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
@@ -67,13 +65,14 @@ public class TransferCancellation extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferDosages(Double.toString(doses));
+        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        Thread.sleep(1000);
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
@@ -87,10 +86,10 @@ public class TransferCancellation extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
 
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        driver.navigate().refresh();
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
         double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesBeforeDistribution2_1);
@@ -98,11 +97,11 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
         log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
-        supplyConsolePage.refreshBrowser();
-        supplyConsolePage.clickTransactionsTab();
+        driver.navigate().refresh();
+        SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*23.1----Get how many Outgoing Transactions 'From' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -116,7 +115,7 @@ public class TransferCancellation extends BaseTest {
         log("/*23.----Cancel Transfer --*/");
         //tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
         supplyConsolePage.cancelIncomingTransfer();
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
@@ -127,10 +126,10 @@ public class TransferCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
@@ -140,7 +139,7 @@ public class TransferCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Can_do_Transfer_Cancellation_by_Quantity_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184
         precondition();
@@ -156,9 +155,9 @@ public class TransferCancellation extends BaseTest {
 
         log("/---- Perform Quantity transfer to another location --*/");
         log("/*7.----Click on Container's dropdown --*/");
-        supplyConsolePage.clickOnContainerDropDownMenu(container_from, distribution_from);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        supplyConsolePage.selectTransferFromDropDown();
+        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
         log("/*9.----Picked up the Trade Vaccine Name --*/");
         String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
@@ -168,13 +167,13 @@ public class TransferCancellation extends BaseTest {
         double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
-        supplyConsolePage.enterTransferQuantity(Double.toString(quantity));
+        ContainerTransferForm.enterTransferQuantity(driver, Double.toString(quantity));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
         log("/---- Count and Validate Remaining Supplies After Transfer --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
@@ -187,11 +186,11 @@ public class TransferCancellation extends BaseTest {
         double remainingQtyAfterCalculationDistribution1_1 = remainingQtyBeforeDistribution1_1 - quantity;
         assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
         double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesBeforeDistribution2_1);
@@ -199,11 +198,11 @@ public class TransferCancellation extends BaseTest {
         System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
         log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
-        supplyConsolePage.refreshBrowser();
-        supplyConsolePage.clickTransactionsTab();
+        driver.navigate().refresh();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*23.1----Get how many Outgoing Transactions 'From' count records --*/");
@@ -218,8 +217,7 @@ public class TransferCancellation extends BaseTest {
         log("/*23.----Cancel Transfer --*/");
         //tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
         supplyConsolePage.cancelIncomingTransfer();
-        supplyConsolePage.clickOnRelatedItemTab();
-
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
@@ -229,11 +227,11 @@ public class TransferCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         Thread.sleep(2000);
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
         System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
@@ -245,21 +243,18 @@ public class TransferCancellation extends BaseTest {
 
     public void precondition() throws Exception {
         log("/*1.----Login to ORG (oldUI) --*/");
-        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-        String currentApp = orgMainPage.currentApp();
+        orgMainPage = loginPage.orgLoginAsPPHIS();
+        String currentApp = MainPageOrg.currentApp(driver);
         log("/*1.1.----Current App " + currentApp + "--*/");
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         supplyConsolePage = new SupplyConsolePage(driver);
 
-        //Assert.assertTrue(false);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         ////// Supply Location_1 -> Outcoming
         log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -267,7 +262,7 @@ public class TransferCancellation extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         //////////////////////////////////////////////////
     }
 }

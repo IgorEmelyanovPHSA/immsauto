@@ -5,305 +5,257 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 import static constansts.Header.SUPPLY_LOCATION_NAME;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 public class MainPageCP extends BasePage{
+    private Tables tables;
 
-    public MainPageCP(WebDriver driver) { super(driver);}
-
-    @FindBy(xpath = "//button[@class='slds-button slds-button_brand' and contains(text(),'Camera')]")
-    private WebElement btnScanUsingCamera;
-
-    @FindBy(xpath = "//a[text()='Supply Locations']")
-    private WebElement tabSupplyLocation;
-
-    @FindBy(xpath = "//a[text()='Profiles']")
-    private WebElement tabProfiles;
-
-    @FindBy(xpath = "//a[@title='Age 12 and Above - Abbotsford - Abby Pharmacy' and contains(@href, 's/hc-supply-location')]")
-    private WebElement supplyLocationNameAbby;
-
-    @FindBy(xpath = "//a[@title='Automation Supply Location_1' and contains(@href, 's/hc-supply-location')]")
-    private WebElement automationSupplyLocation_1;
-
-    @FindBy(xpath = "//span[@class='title' and text()='Related Items']")
-    private WebElement tabRelatedItems;
-
-    @FindBy(xpath = "//button[text() = 'More']")
-    private WebElement main_menu_btn_More;
-
-    @FindBy(xpath = "//a[@title = 'All Client']")
-    private WebElement sub_menu_AllClients;
-
-    @FindBy(xpath = "//a[@title = 'Profiles']")
-    private WebElement sub_menu_profiles;
-
-    @FindBy(xpath = "//a[text() = 'Participants']")
-    private WebElement main_menu_btn_Participants;
-
-    @FindBy(xpath = "//div/h1[text()='Client Search']")
-    private WebElement community_portal_home_page_displayed;
-
-    @FindBy(xpath = ".//a[text()='User Defaults']")
-    private WebElement user_defaults_main_menu;
-    private By user_defaults_main_menu1 = By.xpath(".//a[text()='User Defaults']");
-
-    @FindBy(xpath = "//input[@name='BCH_Date__c']")
-    private WebElement input_current_date;
-    private By input_current_date1 = By.xpath("//input[@name='BCH_Date__c']");
-
-    @FindBy(xpath = ".//button[text()='Save']")
-    private WebElement click_save_defaults_button;
-    private By click_save_defaults_button_ = By.xpath(".//button[text()='Save']");
-
-    @FindBy(xpath = "//a[@title = 'Register']")
-    private WebElement sub_menu_Register;
-
-    @FindBy(xpath = "//a[@title = 'Submit Requisition']")
-    private WebElement submitRequisitionButton;
-    private By submit_requisition_button = By.xpath("//a[@title = 'Submit Requisition']");
-    @FindBy(xpath = "//a[@title = 'Request Supplies']")
-    private WebElement request_supplies;
-
-    @FindBy(xpath = "//button[text() = 'Go to User Defaults']")
-    private WebElement go_to_user_defaults_btn;
-    private By request_supplies_1 = By.xpath("//a[@title = 'Request Supplies']");
-
-    @FindBy(xpath = "//div[@aria-modal='true']")
-    private WebElement modal_dialog;
-
-    @FindBy(xpath = "//input[@class='search-input search-input--left']")
-    private WebElement search_field;
-
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
-    private WebElement searchAssistant;
-
-    @FindBy(xpath = "//input[@placeholder = 'Search...']")
-    private WebElement searchInput;
-
-    @FindBy(xpath = "//button[@title='Select a List View']")
-    private WebElement select_list_view_btn;
-
-    @FindBy(xpath = "//input[@name = 'HC_Supply_Location__c-search-input']")
-    private WebElement search_location_field;
-
-    @FindBy(xpath = "//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']")
-    private WebElement participantsTable;
-
-    public void verifyYouAreOnTheMainPageCP(){
-
+    public MainPageCP(WebDriver driver) {
+        super(driver);
+        tables = new Tables(driver);
     }
 
-    public SupplyConsolePage navigateToSupplyConsolePage() throws InterruptedException {
-        log("/----Go to Supply Locations Tab --*/");
-        goToSupplyLocation();
-        click(automationSupplyLocation_1);
-        selectRelatedTab();
-        Thread.sleep(2000);
+    @Step
+    public static SupplyConsolePage goToSupplyLocation(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By tab_supply_location_path = By.xpath("//a[text()='Supply Locations']");
+        System.out.println("/*----Locate Dropdown Menu --*/");
+        try {
+            waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("--- Try again... ---");
+            driver.navigate().refresh();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, tab_supply_location_path, 30);
+        }
+        WebElement tab_supply_location = driver.findElement(tab_supply_location_path);
+        scrollCenter(driver, tab_supply_location);
+        Thread.sleep(1000);
+        tab_supply_location.click();
+        Thread.sleep(1000);
+        By supply_location_header_path = By.xpath("//lst-breadcrumbs//span[text()='Supply Locations']");
+        waitForElementToBeEnabled(driver, supply_location_header_path, 10);
         return new SupplyConsolePage(driver);
     }
 
     @Step
-    public SupplyConsolePage goToSupplyLocation() throws InterruptedException {
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, tabSupplyLocation, 30);
-        Thread.sleep(2000);
-        tabSupplyLocation.click();
-        return new SupplyConsolePage(driver);
-    }
-
-    @Step
-    public MainPageCP selectRelatedTab() throws InterruptedException {
-        waitForElementToBeVisible(driver, tabRelatedItems, 10);
-        moveToElement(tabRelatedItems);
-        click(tabRelatedItems);
-        return this;
-    }
-
-//    public ProfilesPage navigateToProfilesPage() throws InterruptedException {
-//        Thread.sleep(2000);
-//        if (tabProfiles.isDisplayed()) {
-//            tabProfiles.click();
-//        } else {
-//            waitForElementToBeClickable(main_menu_btn_More);
-//            Thread.sleep(2000);
-//            click(main_menu_btn_More);
-//            Thread.sleep(2000);
-//            sub_menu_profiles.click();
-//            Thread.sleep(2000);
-//        }
-//        return new ProfilesPage(driver);
-//    }
-
-    public ProfilesPage globalSearch_CP(String textToSearch) throws InterruptedException {
-        waitForElementToBeVisible(driver, searchAssistant, 10);
-        click(searchAssistant);
-        waitForElementToBeVisible(driver, searchInput, 10);
-        typeIn(searchInput,textToSearch);
-        searchInput.sendKeys(Keys.RETURN);
-        Thread.sleep(5000);
-        return new ProfilesPage(driver);
-    }
-
-    //This method is mostly used to navigate under admin role
-    @Step
-    public SupplyConsolePage navigateToSupplyLocationRelatedTab( String location) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = navigateToSupplyLocation(location);
-        selectRelatedTab();
-        return supplyConsolePage;
-    }
-    @Step
-    public SupplyConsolePage navigateToSupplyLocation( String location) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
+    public SupplyConsolePage navigateToSupplyLocation(String location) throws InterruptedException {
+        SupplyConsolePage supplyConsolePage = goToSupplyLocation(driver);
         new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
         return supplyConsolePage;
     }
 
-    public SupplyConsolePage selectSupplyLocationName(String supplyLocation) throws InterruptedException {
-        SupplyConsolePage supplyConsolePage = goToSupplyLocation();
-        waitForElementToBeVisible(driver, select_list_view_btn, 10);
-        select_list_view_btn.click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//a/span[text() = 'Active Supply Locations']")).click();
-        Thread.sleep(2000);
-        search_location_field.sendKeys(supplyLocation);
-        search_location_field.sendKeys(Keys.ENTER);
-        Thread.sleep(2000);
-
-        new Tables(driver).clickOnSupplyLocationTableRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, supplyLocation));
-        return supplyConsolePage;
-    }
-
     public void verifyIsCommunityPortalHomePageDisplayed() throws InterruptedException{
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, community_portal_home_page_displayed, 10);
-        community_portal_home_page_displayed.isDisplayed();
-    }
-
-    public UserDefaultsPage clickUserDefaultsTab() throws InterruptedException {
-        waitForElementToBeLocated(driver, user_defaults_main_menu1, 10);
-        WebElement element = driver.findElement(user_defaults_main_menu1);
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-        return new UserDefaultsPage(driver);
-    }
-
-    public void inputCurrentDateUserDefaults() throws InterruptedException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 0);
-        Date today = calendar.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        waitForElementToBeVisible(driver, input_current_date, 10);
-        String todayAsString = dateFormat.format(today);
-        input_current_date.click();
-        Thread.sleep(2000);
-        input_current_date.clear();
-        Thread.sleep(2000);
-        input_current_date.sendKeys(todayAsString);
-        Thread.sleep(2000);
-        input_current_date.sendKeys(Keys.ENTER);
         Thread.sleep(500);
-        closeSuccessDialog();
-    }
-
-    public void selectUserDefaultLocation(String location) throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//c-bc-hc-input-search-drop-down//input")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//ul[@class='slds-listbox slds-listbox_vertical']")).sendKeys(location);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[text() = '" + location + "']")).click();
-        Thread.sleep(1000);
-    }
-
-    public void clickSaveDefaultsButton() throws InterruptedException {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
-        Thread.sleep(2000);
-        waitForElementToBeVisible(driver, click_save_defaults_button, 10);
-        WebElement element = driver.findElement(click_save_defaults_button_);
-        click_save_defaults_button.click();
-        Thread.sleep(500);
-        closeSuccessDialog();
-    }
-
-    public void closeSuccessDialog() throws InterruptedException {
+        By client_search_label_path = By.xpath("//div/h1[text()='Client Search']");
         try {
-            WebElement alertCloseBtn = driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']"));
-            alertCloseBtn.click();
-            System.out.println("Alert dialog found and Closed.");
-        } catch(Exception ex) {
-            System.out.println("Alert Dialog not found, try again");
-            System.out.println("Exception: " + ex.getMessage());
+            waitForElementToBeLocated(driver, client_search_label_path, 30);
+        }
+        catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            driver.navigate().refresh();
+            waitForElementToBeLocated(driver, client_search_label_path, 30);
+        }
+        WebElement client_search_label = driver.findElement(client_search_label_path);
+        client_search_label.isDisplayed();
+    }
+
+    public static void clickUserDefaultsTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By user_default_tab_path = By.xpath("//a[text()='User Defaults']");
+        waitForElementToBeEnabled(driver, user_default_tab_path, 10);
+        WebElement element = driver.findElement(user_default_tab_path);
+        scrollCenter(driver, element);
+        Thread.sleep(500);
+        try {
+            element.click();
+        } catch(ElementClickInterceptedException ex) {
+            AlertDialog.closeAllAlerts(driver);
             Thread.sleep(500);
-            driver.findElement(By.xpath("//div[@role='alertdialog']/button[@title='Close']")).click();
-            System.out.println("Alert dialog found and Closed.");
-        } finally {
-            System.out.println("Continue ....");
+            element.click();
         }
     }
-    public void clickGoToUserDefaultsButton() throws InterruptedException {
-        List<String> windows = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(windows.get(1));
-        Thread.sleep(2000);
+
+    public static void clickClientListTab(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By client_list_tab_path = By.xpath("//a[text()='Client List']");
+        waitForElementToBeEnabled(driver, client_list_tab_path, 10);
+        WebElement element = driver.findElement(client_list_tab_path);
+        scrollCenter(driver, element);
+        Thread.sleep(500);
         try {
-            waitForElementToBeVisible(driver, modal_dialog, 20);
-            //driver.findElement(By.xpath("//div[@aria-modal='true']")).isDisplayed();
-            waitForElementToBeVisible(driver, go_to_user_defaults_btn, 10);
-            go_to_user_defaults_btn.click();
+            element.click();
+        } catch(ElementClickInterceptedException ex) {
             Thread.sleep(2000);
-        } catch(Exception ex) {
-            System.out.println("The Modal Dialog not thrown");
-            Thread.sleep(2000);
+            element.click();
         }
-    }
-    public InClinicExperiencePage navigateToRegisterClientPage() throws InterruptedException {
-        waitForElementToBeClickable(driver, main_menu_btn_More, 30);
+        //Try to avoid stale elelemnt exception
         Thread.sleep(2000);
+    }
+
+    public static void navigateToRegisterClientPage(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By main_menu_more_btn_path = By.xpath("//button[text() = 'More']");
+        waitForElementToBeEnabled(driver, main_menu_more_btn_path, 30);
         By registerBtnPath = By.xpath("//a[@class='comm-navigation__top-level-item-link js-top-level-menu-item linkBtn' and text()='Register']");
-        if(driver.findElement(registerBtnPath).isDisplayed()) {
-            try {
-                driver.findElement(registerBtnPath).click();
-            } catch(ElementClickInterceptedException ex) {
-                Thread.sleep(3000);
-                driver.findElement(registerBtnPath).click();
-            }
-        } else {
-            click(main_menu_btn_More);
+        try {
+            waitForElementToBeEnabled(driver, registerBtnPath, 10);
+            WebElement register_btn = driver.findElement(registerBtnPath);
+            register_btn.click();
+        } catch(ElementClickInterceptedException ex) {
+            System.out.println("Tried to click Register Tab " + ex.getMessage());
+            Thread.sleep(3000);
+            AlertDialog.closeAllAlerts(driver);
+            Thread.sleep(500);
+            WebElement register_btn = driver.findElement(registerBtnPath);
+            register_btn.click();
+        } catch(Exception ex) {
+            System.out.println("Tried to click Register Tab " + ex.getMessage());
+            WebElement main_menu_more_btn = driver.findElement(main_menu_more_btn_path);
+            main_menu_more_btn.click();
             Thread.sleep(2000);
-            waitForElementToBeClickable(sub_menu_Register);
-            Thread.sleep(2000);
-            click(sub_menu_Register);
+            By submenu_register_item_path = By.xpath("//a[@title = 'Register']");
+            waitForElementToBeEnabled(driver, submenu_register_item_path, 10);
+            WebElement sub_menu_register = driver.findElement(submenu_register_item_path);
+            sub_menu_register.click();
         }
         Thread.sleep(2000);
-        return new InClinicExperiencePage(driver);
     }
 
-    public void clickRequestSupplies() throws InterruptedException {
-        waitForElementToBeLocated(driver, request_supplies_1, 10);
-        WebElement element = driver.findElement(request_supplies_1);
-        request_supplies.click();
-    }
-
-    public void clickSubmitRequisition() throws InterruptedException {
-        waitForElementToBeLocated(driver, submit_requisition_button, 10);
-        submitRequisitionButton.click();
-    }
-
-    public void search(String criteria) {
-        waitForElementToBeVisible(driver, search_field, 30);
+    public static void search(WebDriver driver, String criteria) throws InterruptedException {
+        Thread.sleep(500);
+        By search_field_path = By.xpath("//input[@class='search-input search-input--left']");
+        waitForElementToBeEnabled(driver, search_field_path, 10);
+        WebElement search_field = driver.findElement(search_field_path);
+        search_field.clear();
+        Thread.sleep(1000);
         search_field.sendKeys(criteria);
+        Thread.sleep(500);
         search_field.sendKeys(Keys.ENTER);
+        Thread.sleep(500);
+        By table_path = By.xpath("//a[text()='Profiles']/../../../../..//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']");
 
-        waitForElementToBePresent(driver, By.xpath("//table[@data-aura-class='uiVirtualDataGrid--default uiVirtualDataGrid']"), 30);
+        //In case not found
+
+        int attempt = 0;
+        while(attempt < 10) {
+            try {
+                waitForElementToBeEnabled(driver, table_path, 10);
+                System.out.println("Table is found");
+                break;
+            } catch (Exception ex) {
+                System.out.println("-------------");
+                System.out.println("Search Attempt #" + attempt);
+                System.out.println(ex.getMessage());
+                System.out.println("-------------");
+                boolean not_found_screen = clientNotFoundScreenDisplayed(driver);
+                if(not_found_screen) {
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                }
+                attempt++;
+            }
+        }
+        WebElement found_client_table_node = driver.findElement(table_path);
+
+        GenericTable found_client_table = new GenericTable(found_client_table_node);
+        List<Map<String, WebElement>> my_records = found_client_table.getRowsMappedToHeadings();
+        int row_count = my_records.size();
+        int loop_count = 0;
+        while(row_count < 2) {
+            System.out.println("-----------");
+            System.out.println("Found Client rows: " + row_count);
+            if(row_count < 2) {
+                boolean not_found_screen = clientNotFoundScreenDisplayed(driver);
+                if(not_found_screen) {
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                    search_field = driver.findElement(search_field_path);
+                    search_field.clear();
+                    Thread.sleep(1000);
+                    search_field.sendKeys(criteria);
+                    Thread.sleep(500);
+                    search_field.sendKeys(Keys.ENTER);
+                    Thread.sleep(500);
+                }
+            }
+            System.out.println("-----------");
+            Thread.sleep(1000);
+            waitForElementToBeEnabled(driver, table_path, 10);
+            found_client_table_node = driver.findElement(table_path);
+            found_client_table = new GenericTable(found_client_table_node);
+            my_records = found_client_table.getRowsMappedToHeadings();
+            row_count = my_records.size();
+            loop_count++;
+            if(loop_count > 10) {
+                break;
+            }
+        }
+        for(Map<String, WebElement> my_record: my_records) {
+            try {
+                    my_record.get("Email").findElement(By.xpath(".//a"));
+                    WebElement my_link = my_record.get("Name");
+                    my_link.click();
+                    break;
+            } catch(Exception ex) {
+                ;
+            }
+        }
     }
-    public void refreshBrowser() throws InterruptedException {
-        driver.navigate().refresh();
+
+    public static boolean clientNotFoundScreenDisplayed(WebDriver driver) {
+        By not_found_message_path = By.xpath("//div[@data-aura-class='forceSearchNoResults']");
+        try {
+            waitForElementToBeEnabled(driver, not_found_message_path, 2);
+            return true;
+        } catch(Exception ex) {
+            System.out.println("---THERE IS NO Not Found ERROR---");
+            return false;
+        }
+    }
+
+    public void logout() throws InterruptedException {
+        Thread.sleep(500);
+        By profile_menu_btn_path = By.xpath("//community_user-user-profile-menu//button");
+        waitForElementToBeEnabled(driver, profile_menu_btn_path, 10);
+        WebElement profile_menu_button = driver.findElement(profile_menu_btn_path);
+        profile_menu_button.click();
+        Thread.sleep(500);
+        By logout_link_path = By.xpath("//community_user-user-profile-menu//span[@title='Log Out']/..");
+        waitForElementToBeEnabled(driver, logout_link_path, 10);
+        WebElement logout_link = driver.findElement(logout_link_path);
+        try {
+            logout_link.click();
+        } catch(ElementNotInteractableException ex) {
+            profile_menu_button.click();
+            Thread.sleep(500);
+            waitForElementToBeEnabled(driver, logout_link_path, 10);
+            logout_link = driver.findElement(logout_link_path);
+            logout_link.click();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            waitForElementToBeEnabled(driver, logout_link_path, 10);
+            logout_link = driver.findElement(logout_link_path);
+            logout_link.click();
+        }
     }
 }

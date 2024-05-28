@@ -1,12 +1,12 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.InClinicExperiencePage;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.UserDefaultsPage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import org.openqa.selenium.JavascriptExecutor;
+import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -18,11 +18,11 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class Consumption extends BaseTest {
 	String env;
-	private String legalFirstName = "Dacia";
-	private String legalLastName = "Bcvaxdod";
-	private String dateOfBirth = "May 19, 1904";
-	private String postalCode = "V7N3K1";
-	private String personalHealthNumber = "9746172456";
+	private String legalFirstName = "Courtnay";
+	private String legalLastName = "BCVaxGoncaves";
+	private String dateOfBirth = "Nov 29, 1949";
+	private String postalCode = "V3J3Y1";
+	private String personalHealthNumber = "9746172961";
 	//private boolean isIndigenous = false;
 	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch;
@@ -35,10 +35,13 @@ public class Consumption extends BaseTest {
 	String consumptionSite;
 	String consumptionLot;
 	String consumptionDose;
+	SupplyConsolePage supplyConsolePage;
+	MainPageOrg orgMainPage;
+	String consentProvider;
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
-		TestcaseID = "223355"; //C223355
+		TestcaseID = "222359"; //C222359
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
@@ -52,205 +55,218 @@ public class Consumption extends BaseTest {
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+		consentProvider = String.valueOf(testData.get("consentProvider"));
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
-		InClinicExperiencePage inClinicExperiencePage = loginPage.loginWithClinicianCon();
-		inClinicExperiencePage.closeTabsHCA();
-		if (inClinicExperiencePage.displaySupplyConsolePage()) {
-			log("/*-- 2. User already on Health Connect - Supply Console --*/");
-		} else {
-			log("/*-- 2.1. Navigate to Health Connect - Supply Console --*/");
-			inClinicExperiencePage.selectHealthConnectApp();
+		loginPage.loginAsImmsBCAdmin();
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = MainPageOrg.currentApp(driver);
+		if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		}
+		supplyConsolePage = new SupplyConsolePage(driver);
+
 		log("/*-- 3. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
-		if (inClinicExperiencePage.supplyLocDisplayed()) {
-			log("/*-- 4. User is already on Supply loc--*/");
-		} else {
-			log("/*-- 4.1. Click Dropdown Menu --*/");
-			inClinicExperiencePage.clickDropdownMenu();
-			log("/*-- 4.2. Navigate and Select Supply Locations --*/");
-			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-		}
-		log("/*-- 5. Close all open tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+
+		log("/*3.----Close All previously opened Tab's --*/");
+		SupplyConsolePage.closeTabsHCA(driver);
+		log("/*4.----Go to Supply Locations Tab --*/");
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
+
 		log("/*-- 6. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-		inClinicExperiencePage.selectSupplyLocationName(clinicNameToSearch);
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(driver);
+		SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
 		log("/*-- 7. Click and navigate to the supply container --> 'COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)' --*/");
 		double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
 		log("/*-- 8. remaining doses Before: -->" + remainingDoses_before);
 		double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 9. remaining Qty Before: -->" + remainingQty_before);
 		log("/*-- 10. Close all open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
+		double doseConversionFactor = Double.parseDouble(df.format(remainingDoses_before / remainingQty_before));
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 11. Navigate to In Clinic Experience App --*/");
-		inClinicExperiencePage.selectICEFromApp();
+		MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
+
 		log("/*-- 12. Click on User Defaults Tab  --*/");
-		inClinicExperiencePage.clickUserDefaultsTab();
-		UserDefaultsPage userDefaultsPage = new UserDefaultsPage(driver);
+		InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*-- 13. Enter current date for UserDefaults --*/");
-		userDefaultsPage.inputUserDefaultsCurrentDate();
-		userDefaultsPage.selectUserDefaultLocation(clinicNameToSearch);
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+		UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
 		System.out.println("/*-- 14.----- Click on Save defaults button --*/");
-		inClinicExperiencePage.clickSaveDefaultsButton();
+		UserDefaultsPage.clickBtnSave(driver);
 		log("/*-- 15. Click on register Tab --*/");
-		inClinicExperiencePage.clickRegisterTab();
-		//System.out.println("/*-- 16.----- Click on Save changes defaults button Modal window --*/");
-		//inClinicExperiencePage.clickSaveModalDefaultsButton();
-		//Thread.sleep(2000);
+		InClinicExperiencePage.clickRegisterTab(driver);
+
 		log("/*-- 17. Close any open Tabs --*/");
-		inClinicExperiencePage.closeTabsHCA();
+		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*-- 18. Register New User --*/");
-		inClinicExperiencePage.clickRegisterButton();
+		InClinicExperiencePage.clickRegisterButton(driver);
 		log("/*-- 19.----Enter First Name " +legalFirstName +"--*/");
-		inClinicExperiencePage.enterFirstName(legalFirstName);
+		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
 		log("/*-- 20.----Enter Last Name " + legalLastName +"--*/");
-		inClinicExperiencePage.enterLastName(legalLastName);
+		CitizenPrimaryInfo.enterLastName(driver, legalLastName);
 		log("/*-- 21.----Enter Date of birth " +dateOfBirth + "--*/");
-		inClinicExperiencePage.enterDateOfBirth(dateOfBirth);
+		CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
 		log("/*-- 22.----Enter Postal code " +postalCode  +"--*/");
-		inClinicExperiencePage.enterPostalCode(postalCode);
+		CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
 		log("/*-- 23.----Enter PHN --*/");
-		inClinicExperiencePage.enterPNH(personalHealthNumber);
-		log("/*-- 24.----click on non-Indigenous person radiobutton --*/");
-		inClinicExperiencePage.clickNonIndigenousRadioButton();
+		CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
 		log("/*-- 25.----click Verify PHN button --*/");
-		inClinicExperiencePage.clickVerifyPHNButton();
+		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
 		log("/*-- 26.'PNH match successful' --*/");
-		inClinicExperiencePage.successMessage();
+		CitizenPrimaryInfo.successMessageAppear(driver);
 		log("/*-- 27.'Click next button --*/");
-		inClinicExperiencePage.clickNextButton();
+		try {
+			CitizenPrimaryInfo.clickNextButton(driver);
+		} catch(ElementClickInterceptedException ex) {
+			CitizenPrimaryInfo.successMessageAppear(driver);
+			CitizenPrimaryInfo.clickNextButton(driver);
+		}
 		log("/*-- 28.'Enter email address " +email +"--*/");
-		inClinicExperiencePage.enterEmail(email);
+		CitizenPrimaryInfo.enterEmail(driver, email);
 		log("/*-- 29.'Confirm email address " +email +"--*/");
-		inClinicExperiencePage.confirmEmail(email);
+		CitizenPrimaryInfo.confirmEmail(driver, email);
 		log("/*-- 30.Click review details Button --*/");
-		inClinicExperiencePage.clickReviewDetails();
+		CitizenPrimaryInfo.clickReviewDetails(driver);
 		log("/*-- 31.Click register Button on confirmation page --*/");
-		inClinicExperiencePage.clickRegisterButtonOnConfirmationPage();
-		Thread.sleep(2000);
+		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
-		inClinicExperiencePage.navigateAppointmentSchedulingTab();
+		PersonAccountPage.goToVaccineScheduleTab(driver);
+		log("/*-- 33.Select Early Booking Reason --*/");
 
-		log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
-		log("/*----scroll down a bit --*/");
-		//((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
-		inClinicExperiencePage.clickOnVaccinationCheckbox();
+		//If override Eligibility is shown
+		try {
+			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		} catch(Exception ex) {
+			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+			PersonAccountSchedulePage.overrideEligibility(driver);
+			Thread.sleep(500);
+			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		}
 
-		//System.out.println("/*--33.----click on reason Early Booking Reason - Travel --*/");
-		//inClinicExperiencePage.selectEarlyBookingReason();
-		//Thread.sleep(2000);
 		log("/*--34.----select 'Search by Clinic name' tab --*/");
-		inClinicExperiencePage.selectSearchByClinicNameTab();
+		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
 		log("/*35.----search the Clinic " +clinicNameToSearch +" --*/");
-		log("/*----scroll down a bit --*/");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)");
-		inClinicExperiencePage.searchClinicName(clinicNameToSearch);
+		PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
 
 		log("/*--36.----click on Option Facility location  --*/");
-		inClinicExperiencePage.clickFacilityOptionLocation();
+		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 		log("/*--37.----select Appointment Day --*/");
-		inClinicExperiencePage.selectBookingAppointmentDay();
+		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 		log("/*--38.---- select time slot for Appointment --*/");
-		inClinicExperiencePage.selectTimeSlotForAppointment();
+		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 		log("/*--39.---Click Next Button to Schedule Appointment --*/");
-		inClinicExperiencePage.clickNextButtonApptSchedulingPage();
+		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 		log("/*40.----click Verify Contact Info checkbox  --*/");
-		inClinicExperiencePage.clickVerifyContactInformation();
+		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		log("/*-- 41.---Click Appointment Confirm Button --*/");
-		inClinicExperiencePage.clickAppointmentConfirmButton();
+		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 		log("/*-- 42.---'Appointment confirmed!' - message Displayed --*/");
-		inClinicExperiencePage.AppointmentConfirmationMessage();
+		PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 		log("/*-- 43.---Navigate to person account Related Tab --*/");
-		inClinicExperiencePage.clickRelatedTab();
+		PersonAccountPage.goToRelatedTab(driver);
 		log("/*-- 44.---Click Go To In clinic experience button --*/");
-		inClinicExperiencePage.ClickGoToInClinicExperienceButton();
+		PersonAccountPage.clickCheckInButton(driver);
 		Thread.sleep(2000);
 		log("/*-- 45---Click confirm and Save Button on Home Page --*/");
-		inClinicExperiencePage.HomePageClickConfirmAndSaveButton();
-		Thread.sleep(2000);
+		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 		System.out.println("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+
+		log("/*46.---Open Today's appointments from Home page --*/");
+		InClinicExperiencePage.clickTodayAppointments(driver);
+		log("/*47.---Open Today appointment Details --*/");
+		Thread.sleep(2000);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
+		Thread.sleep(2000);
+		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+		String agent = InClinicExperienceVaccineAdministrationPage.getVaccineAgent(driver);
+		if(agent.equals("")) {
+			InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
+		}
+		Thread.sleep(2000);
+
+		//If Incorrect vaccine warning is displayed
 		try {
-			log("/*46.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			inClinicExperiencePage.selectVaccineAgent();
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
-			log("/*46.---Open Today's appointments from Home page --*/");
+			System.out.println("No Warning found");
+		}
 
-			inClinicExperiencePage.clickTodayAppointments();
-			log("/*47.---Open Today appointment Details --*/");
-			inClinicExperiencePage.clickTodayAppointmentCaseViewButton();
-			log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
-			inClinicExperiencePage.selectVaccineAgent();
+//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		log("/*-- 48---Click Save Consent Button --*/");
+//		if(consentProviderSelected.equals("")) {
+//			ProfilesPage.selectConsentProvider(driver, consentProvider);
+//			consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		}
+//		inClinicExperiencePage.ClickSaveConsentButton();
+
+		try {
+			PersonAccountRelatedPage.checkExistingConsent(driver);
+		} catch(Exception ex) {
+			System.out.println("No Checkbox. Continue...");
 		}
-		log("/*-- 48---Click Save Consent Button --*/");
-		if(inClinicExperiencePage.consentProviderSelected().equals("")) {
-			inClinicExperiencePage.selectConsentProvider();
+
+		try {
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
+		} catch(Exception ex) {
+			System.out.println("Edit Button disabled. Continue...");
 		}
-		inClinicExperiencePage.ClickSaveConsentButton();
-		Thread.sleep(2000);
+
 		System.out.println("/*48_.---Click Save button for Immunisation Information --*/");
-		if(inClinicExperiencePage.consentProviderSelected().equals("")) {
-			inClinicExperiencePage.selectConsentProvider();
-		}
 
-		String agent = inClinicExperiencePage.getVaccineAgent();
-		Thread.sleep(2000);
-		String provider =  inClinicExperiencePage.getProvider();
-		String route = inClinicExperiencePage.getRoute();
-		String site = inClinicExperiencePage.getSite();
-		String lot = inClinicExperiencePage.getLotNumber();
+
+		String provider = null;
+		try {
+			provider = InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
+			provider = InClinicExperienceVaccineAdministrationPage.getProvider(driver);
+		}
+		String route = InClinicExperienceVaccineAdministrationPage.getRoute(driver);
+		String site = InClinicExperienceVaccineAdministrationPage.getSite(driver);
+		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 
 		if(agent.equals("")) {
-			inClinicExperiencePage.setVaccineAgent(consumptionAgent);
+			InClinicExperienceVaccineAdministrationPage.setVaccineAgent(driver, consumptionAgent);
 		}
 		if(provider.equals("")) {
-			inClinicExperiencePage.setProvider(consumptionProvider);
+			InClinicExperienceVaccineAdministrationPage.setProvider(driver, consentProvider);
 		}
 		if(route.equals("")) {
-			inClinicExperiencePage.setRoute(consumptionRoute);
+			InClinicExperienceVaccineAdministrationPage.setRoute(driver, consumptionRoute);
 		}
 		if(site.equals("")) {
-			inClinicExperiencePage.setSite(consumptionSite);
+			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		if(!lot.equals(consumptionLot)) {
-			inClinicExperiencePage.setLotNumber(consumptionLot);
+			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
-		String dose = inClinicExperiencePage.getDosage();
+		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 		if(!dose.equals(consumptionDose)) {
-			inClinicExperiencePage.setDosage(consumptionDose);
+			InClinicExperienceVaccineAdministrationPage.setDosage(driver, consumptionDose);
 		}
-		inClinicExperiencePage.ClickSaveImmuneInfoSaveButton();
+		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
+		InClinicExperiencePage.clickOkForExpiredLot(driver);
 		Thread.sleep(2000);
 		log("/*-- 49---Click Confirm and Save Administration Button --*/");
-		inClinicExperiencePage.ClickConfirmAndSaveAdministrationButton();
-		Thread.sleep(2000);
+		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 		System.out.println("/*49.---Click Modal screen Confirm&Save Administration Button --*/");
-		inClinicExperiencePage.ClickModalConfirmAndSaveAdministrationButton();
-		Thread.sleep(2000);
+		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 		log("/*-- 50---the Home - Client Search supposed to showing up  --*/");
-		inClinicExperiencePage.validateHomePageShownUp();
+		InClinicExperiencePage.validateHomePageShownUp(driver);
 		log("/*-- 51. Navigate to Health Connect - Supply Console --*/");
-		inClinicExperiencePage.selectHealthConnectApp();
+		MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		log("/*-- 52. Close any open tabs --*/");
-		supplyConsolePage.closeTabsHCA();
-//		if (inClinicExperiencePage.supplyLocDisplayed()) {
-//			log("/*-- 52.1 User is already on Supply loc --*/");
-//		} else {
-//			log("/*-- 52.1. Click Dropdown Menu --*/");
-//			inClinicExperiencePage.clickDropdownMenu();
-//			Thread.sleep(5000);
-//			log("/*-- 52.2. Navigate and Select Supply Locations --*/");
-//			inClinicExperiencePage.selectSupplyLocationFromDropdown();
-//			Thread.sleep(2000);
-//		}
+		SupplyConsolePage.closeTabsHCA(driver);
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		log("/*-- 53. Locate and click Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic location --*/");
-		supplyConsolePage.selectSupplyLocationName(clinicNameToSearch);
-//		log("/*-- 54. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EL0203' --*/");
-//		inClinicExperiencePage.selectSupplyContainer();
-//		Thread.sleep(2000);
+		SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
+
 		//////////Validation for Dosages and Qty After Consumption
 		System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
 		double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(container, distribution);
@@ -258,16 +274,8 @@ public class Consumption extends BaseTest {
 		assertEquals(remainingDoses_after, remainingDoses_before - 1);
 		double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(container, distribution);
 		log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
-		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/5), 2);
-		supplyConsolePage.closeTabsHCA();
+		assertEquals(remainingQty_after, round((remainingDoses_before - 1)/doseConversionFactor), 2);
+		SupplyConsolePage.closeTabsHCA(driver);
 		log("/*-- 58. Close all open tabs --*/");
 	}
-
-	@Test(priority = 2)
-	public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-		TestcaseID = "219865"; //C219865
-		log("/---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-	}
-
 }

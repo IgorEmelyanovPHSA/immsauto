@@ -10,7 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.sql.Timestamp;
@@ -20,7 +19,6 @@ import java.util.Map;
 
 import static constansts.Header.SUPPLY_CONTAINER_NAME_FULL;
 import static constansts.Header.SUPPLY_DISTRIBUTION_DESCRIPTION_FULL;
-
 
 public class BaseTest {
 	public final static SimpleDateFormat LOG_TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
@@ -37,6 +35,9 @@ public class BaseTest {
 		captureBothStreams();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--remote-allow-origins=*");
+		if(System.getProperty("os.name").equals("Mac OS X")) {
+			options.setBinary("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
+		}
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(getDriver());

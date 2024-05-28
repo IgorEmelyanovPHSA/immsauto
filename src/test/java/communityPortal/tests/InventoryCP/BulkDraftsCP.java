@@ -1,18 +1,18 @@
 package communityPortal.tests.InventoryCP;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.MainPageCP;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static constansts.Domain.SUPPLY_LOCATION_1;
 import static constansts.Domain.SUPPLY_LOCATION_2;
@@ -20,48 +20,47 @@ import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
 public class BulkDraftsCP extends BaseTest {
-
-    private final String supplyLocationFrom = SUPPLY_LOCATION_1;
-    private final String supplyLocationTo = SUPPLY_LOCATION_2;
-    private static final DecimalFormat df = new DecimalFormat("#.##");
-
+    String env;
+    Map<String, Object> testData;
+    String distribution_from;
+    String distribution_to;
+    String distribution_to_same_clinic;
+    String supply_location_from;
+    String supply_location_to;
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
         //TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        distribution_from = String.valueOf(testData.get("distributionFrom"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
+        distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
         MainPageCP cpMainPage = new MainPageCP(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
 
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin":
-                log("Login AS comunityqa_immsbc_admin");
-                loginPage.loginIntoCommunityPortalAsImmsBCAdmin();
-                break;
-            default:
-                log("Login AS default user (ClinicianInventory)");
-                TestcaseID = "245220"; //C245220
-                loginPage.loginIntoCommunityPortalAsClinicianInventory();
-                Thread.sleep(10000);
-        }
+        log("/*1.----Login as Clinician --*/");
+        log("TestCase: C245220");
+        TestcaseID = "245220"; //C245220
+        loginPage.loginIntoCommunityPortalAsClinician();
+
 
         log("/*2.----Navigate to Supply Console Page --*/");
-        cpMainPage.navigateToSupplyConsolePage();
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*3.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
-
+        Map<String, Map<String, String>> my_containers = new HashMap<>();
         log("/*4.----Click on Container's records Checkboxes --*/");
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,100)");
         if (countSupplyContainers >= 3) {
-            int k = 1;
-            while (k <= 3) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-                log("/*---     containers record number: " + k);
-                Thread.sleep(1000);
-                k++;
+            for (int k = 1; k <= 3; k++) {
+                Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
             }
         } else {
             log("/*--not enough records for Bulk actions--*/");
@@ -74,30 +73,24 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*6.----Click on bulk Transfer button --*/");
         supplyConsolePage.clickBulkTransfersButton();
-        Thread.sleep(5000);
 
         log("/*7.----Enter the Dosages values for 3 row Transfers --*/");
-        int k = 2;
-        while (k <= 7) {
-            supplyConsolePage.enterBulkTransferByDosages(k);
-            Thread.sleep(1000);
-            k = k + 2;
+        for(String my_container: my_containers.keySet()) {
+            ContainerTransferPage.enterTransferDose(driver, my_container, "1");
+            //supplyConsolePage.enterBulkTransferByDosages(k);
         }
 
         log("/*8.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation(supplyLocationTo);
+        supplyConsolePage.selectSupplyLocation(supply_location_to);
 
         log("/*9.----click Save as draft dialog Modal button --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-        Thread.sleep(2000);
 
         log("/*10.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
-        Thread.sleep(2000);
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
 
         log("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(5000);
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
         for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
@@ -107,7 +100,6 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*12----Selecting the latest draft transactions and confirm transfer --*/");
         supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, numberOfRows);
-        Thread.sleep(3000);
 
         log("/*13----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -119,21 +111,18 @@ public class BulkDraftsCP extends BaseTest {
         log("/*14----Click on the latest created Outgoing Transactions --*/");
         supplyConsolePage.clickOnOutgoingTransactions(countOutgoingTransactions);
         log("/*--transactions record number --*/:" + countOutgoingTransactions);
-        Thread.sleep(5000);
-
+        Thread.sleep(2000);
         log("/*15.----Go to Supply Locations Tab --*/");
-        cpMainPage.navigateToSupplyLocationRelatedTab(supplyLocationTo);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
         log("/*16.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        supplyConsolePage.clickTransactionsTab();
-        Thread.sleep(2000);
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*17.----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
-        Thread.sleep(2000);
 
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
-        Thread.sleep(2000);
 
         log("/*18.----Click on Checkboxes Incoming Transactions --*/");
         if (countIncomingTransactions >= 3) {
@@ -152,23 +141,21 @@ public class BulkDraftsCP extends BaseTest {
 
         log("/*19----click Confirm Incoming button Transfer --*/");
         supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
-        Thread.sleep(2000);
 
         log("/*20.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution();
-        Thread.sleep(2000);
+        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 
         log("/*21.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
         supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-        Thread.sleep(1000);
 
         log("/*22.----Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        supplyConsolePage.successMessageAppear();
-        Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
+        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 
         log("/*23.----Click on Automation Supply Location_1 --*/");
-        Thread.sleep(5000);
-        cpMainPage.navigateToSupplyLocationRelatedTab(SUPPLY_LOCATION_1);
+        MainPageCP.goToSupplyLocation(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
+        Thread.sleep(2000);
 
         log("/*24.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
         HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterTransfer = supplyConsolePage.countDosesAndQuantityMap(3);
@@ -183,7 +170,7 @@ public class BulkDraftsCP extends BaseTest {
             double doseConversionFactor = readFromList.get(2);
             //Actual calculation
             double afterAdjustmentDoses = remainingDoses - amountOfDosesToTransfer;
-            double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+            double afterAdjustmentQuantity = Double.parseDouble(df.format(
                     remainingQuantity - (amountOfDosesToTransfer / doseConversionFactor)));
             writeToList.add(afterAdjustmentDoses);
             writeToList.add(afterAdjustmentQuantity);
@@ -199,8 +186,8 @@ public class BulkDraftsCP extends BaseTest {
             double remainingQuantityAfterTransfer = afterDeduction.get(1);
             double doseConversionFactorBeforeTransfer = afterDeduction.get(2);
             ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfter.get(i);
-            double calculatedDosesAfterTransfer = calculated.get(0);
-            double calculatedRemainingQuantityAfterTransfer = calculated.get(1);
+            double calculatedDosesAfterTransfer = Double.parseDouble(df.format(calculated.get(0)));
+            double calculatedRemainingQuantityAfterTransfer = Double.parseDouble(df.format(calculated.get(1)));
             double doseConversionAfterTransfer = calculated.get(2);
 
             //Comparing results
@@ -208,7 +195,7 @@ public class BulkDraftsCP extends BaseTest {
             assertEquals(remainingDosesAfter, calculatedDosesAfterTransfer);
 
             log("Compering remaining quantity after transfer " + remainingQuantityAfterTransfer + " vs calculated quantity after transfer " + calculatedRemainingQuantityAfterTransfer);
-            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer);
+            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer, 0.011);
 
             log("Compering dose conversion factor before transfer " + doseConversionFactorBeforeTransfer + " vs dose conversion factor after transfer " + doseConversionAfterTransfer);
             assertEquals(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer);

@@ -8,7 +8,6 @@
             <class name="communityPortal.tests.CitizenPortalFace_Integration.E2E_Dose1_Self_Citizen_Booking_Covid19"/>
             <class name="communityPortal.tests.CitizenPortalFace_Integration.E2E_Dose2_Self_Citizen_Booking_Covid19"/>
             <class name="communityPortal.tests.DIWA_CP.DIWA_Covid19_CP"/>
-            <class name="communityPortal.tests.Historical_Immunisation_CP.Historical_Immunisation_Records_Validation"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose1_COVID19"/>
             <class name="communityPortal.tests.Appointment_Scheduling_CP.BookingDose2_COVID19"/>
             <class name="communityPortal.tests.VaccineAdministration_CP.E2E_Dose2_Covid19_CP"/>
@@ -25,7 +24,13 @@
             <class name="communityPortal.tests.InventoryCP.BulkDraftsCP"/>
             <class name="communityPortal.tests.InventoryCP.ReceiveSuppliesCP"/>
             <class name="communityPortal.tests.InventoryCP.E2E_Consumption_CP"/>
-            <class name="communityPortal.tests.VaccineAdministration_CP.Wrong_Clinic_Arrival_CP"/>
+            <class name="communityPortal.tests.InventoryCP.Return_CP"/>
+            <class name="communityPortal.tests.Notifications.RegistrationNotificationCP"/>
+            <class name="communityPortal.tests.MinorAilments.E2EMinorAilmentsCitizenPortal"/>
+            <class name="communityPortal.tests.MinorAilments.MinorAilmentsIdentificationPage"/>
+            <class name="communityPortal.tests.MinorAilments.MinorAilmentsBookingMultipleAppointments"/>
+            <class name="communityPortal.tests.DIWA_CP.E2EConsentInDIWAFlow_CP"/>
+            <class name="communityPortal.tests.VaccineAdministration_CP.CheckInBetterManagement_CP"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

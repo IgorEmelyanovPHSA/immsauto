@@ -12,28 +12,27 @@ import static Utilities.ApiQueries.queryToGetUniqueLink;
 @Listeners({TestListener.class})
 public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
 
-    private String legalFirstName = "Anne-marie";
-    private String legalLastName = "BCVaxJacketts";
-    private String legalMiddleName = "Elissa";
-    private String dateOfBirth = "Aug 16, 1903";
-    private String postalCode = "V3B0J5";
-    private String personalHealthNumber = "9746173988";
+    private String legalFirstName = "Candis";
+    private String legalLastName = "BCVaxHobden";
+    private String legalMiddleName = "Aube";
+    private String dateOfBirth = "Mar 30, 1991";
+    private String postalCode = "V2G1V5";
+    private String personalHealthNumber = "9746171683";
     private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
     private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
-    //Login as an admin for now, needs to be updated to ICE
-    //Needs to update TestcaseId
     @Test(priority = 1)
-    public void CP_CitizenPortalBookDoseOneCovid19() throws Exception {
+    public void CP_CitizenPortalBookDoseOneCovid19_C245217() throws Exception {
         TestcaseID = "245217"; //C245217
+        log("TestCase: C245217");
         log("Target Environment: " + Utils.getTargetEnvironment());
-        CommonMethods com = new CommonMethods(getDriver());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
 
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
@@ -54,59 +53,68 @@ public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
 
         log("/*6.---Login as an Clinician--*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-        Thread.sleep(10000);
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
-        com.globalSearchCP(conformationNumberText);
+        MainPageCP.search(driver, conformationNumberText);
+//
+//        log("/*7.1---Validation, isUserFound account validation --*/");
+//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
+//        if (!isUserFound){
+//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+//        }
 
-        log("/*7.1---Validation, isUserFound account validation --*/");
-        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-        if (!isUserFound){
-            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
+        try {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+        } catch(Exception ex) {
+            System.out.println("Warning dialog didn't appear");
         }
 
+        log("---click Verify PHN button ---");
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
+        Thread.sleep(2000);
+        log("---Expecting to see the toast success message - 'PNH match successful' ---");
+        CitizenPrimaryInfo.successMessageAppear(driver);
+
         //Extra step to log out from CP
-        loginPage.logOutCommunityPortal();
+        cpMainPage.logout();
 
         log("/*8.---Get unique link using Sales Force query over API--*/");
         String uniqueLink = queryToGetUniqueLink(conformationNumberText);
 
         log("/*9.---Open book an appointment portal from unique link--*/");
-        BookAnAppointmentPage bookAnAppointmentPage = loginPage.openBookAnAppointmentPage(uniqueLink);
-        bookAnAppointmentPage.bookAnAppointmentPageDisplayed();
+        BookAppointmentPage.openBookAnAppointmentPage(driver, uniqueLink);
+        BookAppointmentPage.bookAnAppointmentPageDisplayed(driver);
 
         //Unique registration code validation
-        String registrationConfirmationNumber = bookAnAppointmentPage.getRegistrationConfirmationNumber();
+        String registrationConfirmationNumber = BookAppointmentPage.getRegistrationConfirmationNumber(driver);
         log("Compering registration confirmation number from registration page: " + conformationNumberText
                 + " vs registration confirmation number from book an appointment page " + registrationConfirmationNumber);
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        bookAnAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
 
         log("/*11.---Schedule vaccination page is displayed--*/");
-        bookAnAppointmentPage.scheduleVaccinationAppointmentPageDisplayed();
-
+        BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
+        Thread.sleep(1000);
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
-        bookAnAppointmentPage.selectOneOption(vaccineToSelect);
+        PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);
 
         log("/*13.---Go to tab search by clinic and select clinic " + clinicNameToSearch + "--*/");
-        bookAnAppointmentPage.searchByClinicName(clinicNameToSearch);
+        PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
+        PersonAccountSchedulePage.searchClinicName(driver, clinicNameToSearch);
+        PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
         log("/*14.---Select date and time for appointment and click btn Next--*/");
-        bookAnAppointmentPage.selectDateAndTimeForAppointmentAndClickBtnNext();
+        PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
+        PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
+        PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
         log("/*15.---Click verify contact information checkbox--*/");
-        bookAnAppointmentPage.clickCheckBoxVerifyContactInformationAndConfirmAppointment();
+        PersonAccountSchedulePage.clickVerifyContactInformation(driver);
+        PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
         log("/*16.---Verify appointment conformation message is displayed--*/");
-        bookAnAppointmentPage.appointmentConfirmationPageDisplayed();
-    }
-
-    @Test(priority = 2)
-    public void Post_conditions_step_Remove_Dups_Citizen_participant_account() throws Exception {
-        TestcaseID = "219865"; //C219865
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
+        PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
     }
 }

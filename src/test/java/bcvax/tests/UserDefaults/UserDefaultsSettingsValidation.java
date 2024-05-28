@@ -3,6 +3,7 @@ package bcvax.tests.UserDefaults;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
     //private final String[] lots = {"016F21A-CC07", "T005729-CC07"};
     private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     Map<String, Object> testData;
+    MainPageOrg orgMainPage;
 
     @Test()
     public void UserDefaultsSettingsValidationTest() throws Exception {
@@ -25,70 +27,76 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         log("Target Environment: " + env);
         testData = Utils.getTestData(env);
         String[] lots = ((ArrayList<String>)testData.get("useDefaultSettingsLots")).toArray(new String[0]);
-        UserDefaultsPage userDefaultsPage = new UserDefaultsPage(getDriver());
-        CommonMethods common = new CommonMethods(getDriver());
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
         log("/*1.----Login as clinician ICE --*/");
-        InClinicExperiencePage inClinicExperience = loginPage.loginAsClinicianICEUserDefaults();
-        Thread.sleep(15000);
-
+        loginPage.loginAsImmsBCAdmin();
+        orgMainPage = new MainPageOrg(driver);
         log("/*2.----In Clinic Experience(ICE) page is displayed --*/");
-        if (inClinicExperience.displayIceApp()) {
-            log("/*-- User already on In-Clinic Experience page --*/");
-        } else {
-            log("/*-- Navigate to In-Clinic Experience page --*/");
-            Thread.sleep(5000);
-            inClinicExperience.selectICEFromApp();
-            Thread.sleep(5000);
+        String currentApp = MainPageOrg.currentApp(driver);
+        if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
+            MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
-
+        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*3.----Close All previously opened Tab's --*/");
-        inClinicExperience.closeTabsHCA();
-        Thread.sleep(5000);
+        InClinicExperiencePage.closeTabsHCA(driver);
 
         log("/*4.----- Click on User Defaults Tab --*/");
-        inClinicExperience.clickUserDefaultsTab();
-        Thread.sleep(2000);
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
 
         log("/*5.----- Enter current date for UserDefaults --*/");
-        userDefaultsPage.inputCurrentDateUserDefaults();
-        Thread.sleep(2000);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 
         log("/*6.----- Enter clinic for UserDefaults: " + clinicLocation + "--*/");
        // userDefaultsPage.selectClinicUserDefaults(clinicLocation);
 
         log("/*7.----- Open Advanced Settings--*/");
-        userDefaultsPage.clickOnAdvancedSettings();
+        UserDefaultsPage.clickOnAdvancedSettings(driver);
 
         log("/*8.----- Delete lots if any present and save--*/");
-        Boolean isAnyLotsPresent = userDefaultsPage.isAnyLotsPresent();
-        if(isAnyLotsPresent==true){
-            userDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously();
+        Boolean isAnyLotsPresent = UserDefaultsPage.isAnyLotsPresent(driver);
+        if(isAnyLotsPresent) {
+            UserDefaultsPage.deleteAllLotsIfAnyHasBeenSavedPreviously(driver);
             log("All lots are deleted");
-            userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+            UserDefaultsPage.clickBtnSaveWithSuccessMsgValidation(driver);
         }
 
         log("/*9.---- Navigate to Supply Console Page --*/");
-        common.goToSupplyPageIfNeededAndConfirmPageIsDisplayedNew();
+        orgMainPage = new MainPageOrg(getDriver());
+        currentApp = MainPageOrg.currentApp(driver);
+        if (!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
 
-        Thread.sleep(3000);
+        log("/*9.2----Close All previously opened Tab's --*/");
+        SupplyConsolePage.closeTabsHCA(driver);
+        log("/*9.3----Go to Supply Locations Tab --*/");
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
+        log("/*9.4----Click on Automation Supply Location_1 --*/");
+        SupplyLocationsPage.selectSupplyLocationName(driver, clinicLocation);
+
         log("/*10.---- Validating results, given lot numbers should match --*/");
         for(int i = 0; i < lots.length; i++) {
-            Assert.assertTrue(supplyConsolePage.validateLotUserDefaults(lots[i]));
+            boolean lot_exist = supplyConsolePage.validateLotUserDefaults(lots[i]);
+            Assert.assertTrue(lot_exist);
         }
 
         log("/*12.---- Navigate User Defaults Page --*/");
-        common.goToUserDefaultsIfNeededAndConfirmPageIsDisplayed();
+        MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
+        InClinicExperiencePage inClinicExperiencePage = new InClinicExperiencePage(driver);
+        InClinicExperiencePage.clickUserDefaultsTab(driver);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicLocation);
 
         log("/*13.----- Open Advanced Settings --*/");
-        userDefaultsPage.clickOnAdvancedSettings();
+        UserDefaultsPage.clickOnAdvancedSettings(driver);
 
         log("/*14.----- Populate Lots and Sites --*/");
-        userDefaultsPage.populateLotsAndSite(lots);
+        UserDefaultsPage.populateLotsAndSite(driver, lots);
 
         log("/*15.----- Click btn Save and validate success msg --*/");
-        userDefaultsPage.clickBtnSaveWithSuccessMsgValidation();
+        UserDefaultsPage.clickBtnSave(driver);
+        UserDefaultsPage.clickOkForExpiredLot(driver);
     }
 }
 

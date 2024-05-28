@@ -1,0 +1,11 @@
+personalHealthNumber,dateOfBirth,gender,legalLastName,legalFirstName,legalMiddleName,address,city,province,postalCode,country,phone,email,purpose
+9746201557,11-10-1991,F,BCVaxBabe,Filmer,Smittoune,3 8th Lane,Burnaby,BC,V5G2V4,CA,555-555-6145,BCVaxBabe@test.ca,dose1
+9746201532,10-02-1995,M,BCVaxRiggey,Eldridge,Rubinfeld,5687 Coleman Park,Grand Forks,BC,V0H5J7,CA,555-555-6146,BCVaxRiggey@test.ca,dose2
+9746201525,14-01-1985,F,BCVaxLockyer,Lorrayne,Tatlow,74 Pleasure Circle,Surrey,BC,V3T8B8,CA,555-555-6147,BCVaxLockyer@test.ca,consent
+9746201518,08-02-2019,F,BCVaxBrozsset,Ulrike,Capstaff,70 Boyd Terrace,Victoria,BC,V8W0B2,CA,555-555-6148,BCVaxBrozsset@test.ca,no_consent
+9746201492,29-08-1993,M,BCVaxMolan,Wylie,Rattenberie,1511 Caliangt Circle,Kamloops,BC,V2C8F4,CA,555-555-6149,BCVaxMolan@test.ca,new_consent
+9746201485,01-04-1977,F,BCVaxShorland,Fay,Luck,79 Ryan Terrace,Port Alberni,BC,V9Y9N2,CA,555-555-6150,BCVaxShorland@test.ca,
+9746201478,10-02-2005,M,BCVaxWheway,Rochester,McArte,110 Aberg Plaza,West Kelowna,BC,V1Z3V5,CA,555-555-6151,BCVaxWheway@test.ca,
+9746201453,13-06-1998,M,BCVaxDiben,Claybourne,Larmett,22097 Corry Crossing,Colwood,BC,V9C5Y0,CA,555-555-6152,BCVaxDiben@test.ca,
+9746201446,24-03-1959,M,BCVaxGoodred,Ali,Edden,9 Lerdahl Alley,Merritt,BC,V1K4W7,CA,555-555-6153,BCVaxGoodred@test.ca,
+9746201439,25-08-2003,M,BCVaxLempertz,Dicky,,6 Bayside Trail,Penticton,BC,V2A6D2,CA,555-555-6154,BCVaxLempertz@test.ca,

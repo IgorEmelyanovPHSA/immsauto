@@ -4,15 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class RegisterToGetVaccinatedPage extends BasePage{
-
-    @FindBy(xpath = "//span[@class='button-label-primary' and contains(text(), 'Register')]")
-    private WebElement btnRegisterNow;
-
-    @FindBy(xpath = "//div[@class='confirmation-number']")
-    private WebElement conformationNumber;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Registration information section //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,9 +67,6 @@ public class RegisterToGetVaccinatedPage extends BasePage{
     @FindBy(xpath = "//input[@name='DDH_HC_Patient_Consent']")
     private WebElement checkBoxCertify;
 
-    @FindBy(xpath = "//button[contains(text(),'Edit')]")
-    private WebElement btnEdit;
-
     @FindBy(xpath = "//button[contains(text(),'Submit')]")
     private WebElement btnSubmit;
 
@@ -85,7 +76,12 @@ public class RegisterToGetVaccinatedPage extends BasePage{
     public RegisterToGetVaccinatedPage(WebDriver driver) {super(driver);}
 
     public void clickBtnRegisterNow() throws InterruptedException {
-        click(btnRegisterNow);
+        By btn_register_now_path = By.xpath("//button[text()='Register Now'] | //span[text()='Register now']/..");
+        waitForElementToBeEnabled(driver, btn_register_now_path, 10);
+        WebElement btnRegisterNow = driver.findElement(btn_register_now_path);
+        scrollCenter(driver, btnRegisterNow);
+        Thread.sleep(1000);
+        btnRegisterNow.click();
     }
 
     public void fillMandatoryFieldsOnRegistrationSection(String firstName, String lastName, String middleName, String dob, String postalCode,
@@ -96,17 +92,33 @@ public class RegisterToGetVaccinatedPage extends BasePage{
         typeIn(textDateOfBirth, dob);
         typeIn(textPostalCode, postalCode);
         typeIn(textPersonalHealthNumber, phn);
+        String nonIndigenousDialog = "";
+        try {
+            nonIndigenousDialog = Utils.getEnvConfigProperty("nonIndigenousDialog");
+        } catch(Exception ex) {
+            nonIndigenousDialog = "";
+        }
+        if(nonIndigenousDialog.equals("yes")) {
+            if (isIndigenous == false) {
+                click(radioBtnNoIndigenous);
+            } else {
+                click(radioBtnYesIndigenous);
+            }
+        }
+        click(btnContinueRegistration);
+        By success_error_msg_path = By.xpath("//div[@class='toastTitle slds-text-heading--small' and text()='Error']");
+        try {
+            waitForElementToBeLocated(driver, success_error_msg_path, 2);
+            WebElement success_error_msg = driver.findElement(success_error_msg_path);
+            Assert.assertFalse(success_error_msg.getText().equals("Error"), "Registration not Successful...");
+        } catch(Exception ex) {
+            System.out.println("No Registration Errors. Continue...");
+        }
 
-        if (isIndigenous==false){
-            click(radioBtnNoIndigenous);
-        }
-        else{
-            click(radioBtnYesIndigenous);
-        }
-            click(btnContinueRegistration);
     }
 
     public void fillMandatoryFieldsOnContactInformationSection(String email, String phoneNumber) throws InterruptedException {
+        Thread.sleep(500);
         typeIn(textEmail, email);
         typeIn(textEmailConfirm, email);
         typeIn(textPhoneNumber, phoneNumber);
@@ -126,9 +138,12 @@ public class RegisterToGetVaccinatedPage extends BasePage{
         } catch (Exception e){
             log("/*---Registration is NOT Successful, check for duplicates ---*/");
         }
-        String conformationNumberText = (conformationNumber.getText()).replaceAll("\\s+","");
-        log("/*---Registration Successful message displayed, conformation number: " +conformationNumberText +" ---*/");
-        return conformationNumberText;
+        By confirmation_number_path = By.xpath("//div[@class='confirmation-number']");
+        waitForElementToBeLocated(driver, confirmation_number_path, 10);
+        WebElement confirmation_number = driver.findElement(confirmation_number_path);
+        String confirmation_number_value = (confirmation_number.getText()).replaceAll("\\s+","");
+        log("/*---Registration Successful message displayed, conformation number: " + confirmation_number_value +" ---*/");
+        return confirmation_number_value;
     }
 
 }

@@ -78,13 +78,15 @@ public abstract class BasePage<T> {
 	public Boolean isInputActive(WebElement element){
 		//This method to be used ONLY when isClickable method is not successful
 		try{
-			scrollTop(element);
+			scrollCenter(element);
 			click(element);
 			element.sendKeys("T");
 			element.sendKeys(Keys.BACK_SPACE);
 			return true;
 		}
 		catch (Exception e){
+			System.out.println("Consent Date is not Active.....");
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
@@ -106,7 +108,7 @@ public abstract class BasePage<T> {
 		wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(xpath)));
 	}
 
-	public void waitForElement(By xpath, int seconds) throws InterruptedException {
+	public static void waitForElementToBeEnabled(WebDriver driver, By xpath, int seconds) throws InterruptedException {
 		int timeout = seconds * 1000;
 		boolean found = false;
 		Instant start = Instant.now();
@@ -114,12 +116,71 @@ public abstract class BasePage<T> {
 		while(!found) {
 			try {
 				found = driver.findElement(xpath).isEnabled();
-				System.out.println("Element found");
+				try {
+					if (Utils.getConfigProperty("debug_info").equals("yes")) {
+						System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Element found, Enabled Status is: " + String.valueOf(found));
+					}
+				}catch(Exception ex) {
+					continue;
+				}
 				System.out.println(end.toString());
+				if(!found) {
+					end = Instant.now();
+					if(Duration.between(start, end).toMillis() > timeout) {
+						throw new NotFoundException("***DEBUG*** Element " + xpath + " is Found but not Enabled after " + seconds + " seconds");
+					}
+					Thread.sleep(200);
+				}
 			} catch (NotFoundException ex) {
 				end = Instant.now();
-				if(Duration.between(start, end).toMillis() > timeout) {
-					throw new NotFoundException("Element not found after " + seconds + " seconds");
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("***DEBUG*** Next attempt. Waiting for Element xpath " + xpath + " Element not found after " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			} catch (StaleElementReferenceException ex) {
+				end = Instant.now();
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Stale Element " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			}
+		}
+	}
+
+	public static void waitForAttribute(WebDriver driver, By xpath, String attribute, String attribute_value, int seconds) throws InterruptedException {
+		int timeout = seconds * 1000;
+		boolean attribute_match = false;
+		Instant start = Instant.now();
+		Instant end = Instant.now();
+		while(!attribute_match) {
+			try {
+				String found_attribute_value = driver.findElement(xpath).getAttribute(attribute);
+				attribute_match = found_attribute_value.equals(attribute_value);
+				try {
+					if (Utils.getEnvConfigProperty("debug_info").equals("yes")) {
+						System.out.println("***DEBUG*** First attempt. Waiting for Element xpath " + xpath + " to be enabled... Attribute " + attribute + " value is: " + String.valueOf(found_attribute_value));
+					}
+				} catch(Exception ex) {
+					continue;
+				}
+				System.out.println(end.toString());
+				if(!attribute_match) {
+					end = Instant.now();
+					if(Duration.between(start, end).toMillis() > timeout) {
+						throw new NotFoundException("***DEBUG*** Element " + xpath + " is Found but " + attribute + " value is " + found_attribute_value + " after " + seconds + " seconds");
+					}
+					Thread.sleep(200);
+				}
+			} catch (NotFoundException ex) {
+				end = Instant.now();
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("***DEBUG*** Next attempt. Waiting for Element xpath " + xpath + " Element not found after " + seconds + " seconds");
+				}
+				Thread.sleep(200);
+			} catch (StaleElementReferenceException ex) {
+				end = Instant.now();
+				if (Duration.between(start, end).toMillis() > timeout) {
+					throw new NotFoundException("Stale Element " + seconds + " seconds");
 				}
 				Thread.sleep(200);
 			}
@@ -243,6 +304,36 @@ public abstract class BasePage<T> {
 		return (T) this;
 	}
 
+	public T scrollCenter(WebElement element) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+		return (T) this;
+	}
+
+
+	public static void scrollCenter(WebDriver driver, WebElement element) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"nearest\"});", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+	}
+
 	public T scrollTop(WebElement element, boolean allignTop) {
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(" + Boolean.toString(allignTop) + ");", element);
@@ -256,6 +347,29 @@ public abstract class BasePage<T> {
 			log(e.toString());
 		}
 		return (T) this;
+	}
+
+	public static void scrollTop(WebDriver driver, WebElement element, boolean allignTop) {
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(" + Boolean.toString(allignTop) + ");", element);
+		} catch (WebDriverException e) {
+			log("WebDriverException occurred while scrolling: " + e.getMessage());
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+		}
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
+	}
+
+	public static void scrollIfNeeded(WebDriver driver, WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoViewIfNeeded();", element);
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			log(e.toString());
+		}
 	}
 	
 	public static String getLogTime() {

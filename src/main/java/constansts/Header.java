@@ -21,4 +21,5 @@ public class Header {
     public static final String SUPPLY_LOCATION_NAME_FULL = SORT + SUPPLY_LOCATION_NAME + COLUMN_ACTION;
     public static final String SUPPLY_TRANSACTION_NAME_FULL = SORT_BY + SUPPLY_TRANSACTION_NAME + SORT_NONE + SHOW_ACTION;
     public static final String LOT_NUMBER_FULL = SORT_BY + "Lot Number" + SORT_NONE;
+    public static final String SUPPLY_LOCATION_ADDRESS = SORT_BY + "Address" + SORT_NONE;
 }

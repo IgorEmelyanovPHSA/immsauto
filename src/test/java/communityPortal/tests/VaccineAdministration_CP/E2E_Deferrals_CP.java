@@ -39,62 +39,62 @@ public class E2E_Deferrals_CP extends BaseTest {
         TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "235260";
         precondition();
         log("/*6.----Navigate to More -> Register --*/");
-        InClinicExperiencePage inClinicExperience_CP = cpMainPage.navigateToRegisterClientPage();
+        MainPageCP.navigateToRegisterClientPage(driver);
+        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
         Thread.sleep(2000);
 
         log("/*7.----click Register button New Citizen --*/");
-        inClinicExperience_CP.clickRegisterButton();
+        InClinicExperiencePage.clickRegisterButton(driver);
         Thread.sleep(2000);
         log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        inClinicExperience_CP.enterFirstName(legalFirstName);
+        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
         Thread.sleep(2000);
         log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        inClinicExperience_CP.enterLastName(legalLastName);
+        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
         Thread.sleep(2000);
         log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        inClinicExperience_CP.enterDateOfBirth(dateOfBirth);
+        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
         Thread.sleep(2000);
         log("/*11.----Enter Postal code " +postalCode +"--*/");
-        inClinicExperience_CP.enterPostalCode(postalCode);
+        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
         Thread.sleep(2000);
         log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        inClinicExperience_CP.enterPNH(personalHealthNumber);
+        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
         Thread.sleep(2000);
-        log("/*13.----click on non-Indigenous person radiobutton --*/");
-        inClinicExperience_CP.clickNonIndigenousRadioButton();
+
         Thread.sleep(2000);
         log("/*14.----click Verify PHN button --*/");
-        inClinicExperience_CP.clickVerifyPHNButton();
+        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
         Thread.sleep(2000);
         log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        inClinicExperience_CP.successMessage();
+        CitizenPrimaryInfo.successMessageAppear(driver);
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
 
         log("/*16.----click Next button --*/");
-        inClinicExperience_CP.clickNextButton();
+        CitizenPrimaryInfo.clickNextButton(driver);
         Thread.sleep(2000);
         log("/*17.----'Enter email address " +email +"--*/");
-        inClinicExperience_CP.enterEmail(email);
+        CitizenPrimaryInfo.enterEmail(driver, email);
         log("/*18.----'Confirm email address " +email +"--*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.confirmEmail(email);
+        CitizenPrimaryInfo.confirmEmail(driver, email);
         log("/*19.---Click review details Button--*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.clickReviewDetails();
+        CitizenPrimaryInfo.clickReviewDetails(driver);
         log("/*20.----Click register Button on confirmation page--*/");
         Thread.sleep(2000);
-        inClinicExperience_CP.clickRegisterButtonOnConfirmationPage();
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
         Thread.sleep(2000);
         log("/*21.--toast success message - 'Success' --*/");
-        inClinicExperience_CP.successRegisteredMessageAppear();
+        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
         Thread.sleep(5000); //wait for the popup toast success message disappeared before closing all Tabs
         log("/*22.--Click Related Tab --*/");
-        inClinicExperience_CP.clickRelatedTab();
+        PersonAccountPage.goToRelatedTab(driver);
         Thread.sleep(3000);
-        inClinicExperience_CP.scrollToDeferrals();
+        PersonAccountRelatedPage.scrollToDeferrals(driver);
         Thread.sleep(2000);
-        int deferralsCountBefore = inClinicExperience_CP.getDeferralsCount();
-        inClinicExperience_CP.newDeferral();
+        int deferralsCountBefore = PersonAccountRelatedPage.getDeferralsCount(driver);
+        PersonAccountRelatedPage.newDeferral(driver);
         DeferralForm newDeferral = new DeferralForm(driver);
         newDeferral.cleanupProfile();
         newDeferral.saveDeferral();
@@ -110,7 +110,7 @@ public class E2E_Deferrals_CP extends BaseTest {
         newDeferral.setEffectiveFrom();
         newDeferral.saveDeferral();
         Thread.sleep(2000);
-        int deferralsCountAfter = inClinicExperience_CP.getDeferralsCount();
+        int deferralsCountAfter = PersonAccountRelatedPage.getDeferralsCount(driver);
 
         assertEquals(deferralsCountAfter, deferralsCountBefore + 1);
     }
@@ -135,18 +135,9 @@ public class E2E_Deferrals_CP extends BaseTest {
     public void precondition() throws Exception {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-        if(env.contains("immsbc_admin")) {
-            log("/*1.----Login to CP (newUI) as ImmsBC_Admin --*/");
-            orgMainPage = loginPage.orgLoginAsImmsBCAdminCP();
-            Thread.sleep(1000);
-            orgMainPage.switchApp(Apps.BCH_VACCINATION_PORTAL.value);
-            Thread.sleep(3000);
-            cpMainPage = new MainPageCP(driver);
-            cpMainPage.clickGoToUserDefaultsButton();
-        } else {
-            log("/*1.----Login to CP (newUI) as Clinician --*/");
-            cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();;
-        }
+        log("/*1.----Login to CP (newUI) as Clinician --*/");
+        cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();;
+
         Thread.sleep(5000);
     }
 }

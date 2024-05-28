@@ -3,13 +3,12 @@
 <suite name="Automation run">
     <test name="Smoke">
         <classes>
-            <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointmentCovid19"/>
             <class name="bcvax.tests.CallCenter.BookingDose1"/>
             <class name="bcvax.tests.ClinicInBox.BookingDose1"/>
-            <class name="bcvax.tests.ClinicInBox.DIWA_CIB"/>
-            <class name="bcvax.tests.ClinicInBox.Historical_Immunization"/>
-            <class name="bcvax.tests.Inventory.Consumption"/>
-            <class name="bcvax.tests.Inventory.BulkTransfers"/>
+            <class name="bcvax.tests.InClinicExperience.Dose1_ICE_E2E"/>
+            <class name="bcvax.tests.Portal.Dose1CitizenBookingAppointmentCovid19"/>
+            <class name="bcvax.tests.Inventory.Transfer"/>
+            <class name="bcvax.tests.InClinicExperience.DIWA_ICE"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

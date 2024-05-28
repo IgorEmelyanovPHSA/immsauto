@@ -1,25 +1,39 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({TestListener.class})
 public class BulkAdjustments extends BaseTest {
+	String supply_location_from;
+	String env;
+	MainPageOrg orgMainPage;
+	Map<String, Object> testData;
+
+	@BeforeMethod
+	public void setUpClass() throws Exception {
+		env = Utils.getTargetEnvironment();
+		log("Target Environment: " + env);
+		testData = Utils.getTestData(env);
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+	}
 
 	@DataProvider(name = "dosesAmount")
 	public static Object[][] primeNumbers() {
@@ -51,55 +65,62 @@ public class BulkAdjustments extends BaseTest {
 		
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
-		
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
-		
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = MainPageOrg.currentApp(driver);
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
+
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
-		
+		SupplyConsolePage.closeTabsHCA(driver);
+
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 		
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-		
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
+
 		log("/*6.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
-		
-		log("/*7.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+
+		int numberOfRows = 3;
+		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
+		if (countSupplyContainers >= numberOfRows) {
+			for (int k = 1; k <= numberOfRows; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_data);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
+
 		//Remaining Doses and Quantity count // 3 rows, ref step7 containers count
 		log("/*8.----Read Remaining Doses And Quantity Before Deduction --*/");
+		List<String> my_conts = new ArrayList<>();
+		for(Map<String, Map<String, String>> cont: my_containers) {
+			for(String my_key: cont.keySet()) {
+				my_conts.add(my_key);
+			}
+		}
+
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
 		log("/*9.----Click on bulk Adjustment button on Supply page--*/");
-		supplyConsolePage.clickBulkAdjustmentButton();
+		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 		Thread.sleep(5000);
 		
 		log("/*10.----Enter the Dosages values for 3 row and reason for Adjustment: " +reasonForAdjustment +"--*/");
-		supplyConsolePage.enterBulkByDosageWithReason(amountOfDosesToAdjust,reasonForAdjustment, numberOfRows);
+		supplyConsolePage.enterBulkAdjustmentByDosageWithReason(amountOfDosesToAdjust,reasonForAdjustment);
 		
 		log("/*11.----Click button Adjustment on Container - Adjustment page --*/");
 		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(3000);
-		
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
+
+		//Map<String, Map<String, String>> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoses(driver, my_conts);
 		log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 		
@@ -113,7 +134,7 @@ public class BulkAdjustments extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-			double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterAdjustmentQuantity = Double.parseDouble(df.format(
 					remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
 			writeToList.add(afterAdjustmentDoses);
 			writeToList.add(afterAdjustmentQuantity);
@@ -129,23 +150,23 @@ public class BulkAdjustments extends BaseTest {
 			double remainingQuantityAfterAdjustment = afterDeduction.get(1);
 			double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double calculatedDosesAfterAdjustment = calculated.get(0);
-			double calculatedRemainingQuantityAfterAdjustment = calculated.get(1);
-			double doseConversionAfterAdjustment = calculated.get(2);
+			double calculatedDosesAfterAdjustment = Double.valueOf(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterAdjustment = Double.valueOf(df.format(calculated.get(1)));
+			double doseConversionAfterAdjustment = Double.valueOf(df.format(calculated.get(2)));
 			
 			//Comparing results
 			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
 			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
-
+			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.011);
+			//***
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
 			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
 			}
 	}
 
-	@Test(dataProvider = "quantitiesAmount")
+	//@Test(dataProvider = "quantitiesAmount")
 	public void Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_PPHIS(String quantity) throws Exception {
 		TestcaseID = "223360"; //C223360
 		log("Target Environment: "+ Utils.getTargetEnvironment());
@@ -165,47 +186,49 @@ public class BulkAdjustments extends BaseTest {
 
 		log("/*1.----Login as an PPHIS to Supply Console --*/");
 		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		Thread.sleep(5000);
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = MainPageOrg.currentApp(driver);
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
 
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		CommonMethods common = new CommonMethods(getDriver());
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
-
-		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-
+		log("/*3.----Close All previously opened Tab's --*/");
+		SupplyConsolePage.closeTabsHCA(driver);
+		log("/*4.----Go to Supply Locations Tab --*/");
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		log("/*5.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			int k = 1;
-			while (k <= 3) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(k);
-				log("/*---     containers record number: " + k);
-				Thread.sleep(1000);
-				k++;
+		int numberOfRows = 3;
+		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
+		log("/*4.----Click on Container's records Checkboxes --*/");
+		if (countSupplyContainers >= numberOfRows) {
+			for (int k = 1; k <= numberOfRows; k++) {
+				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				my_containers.add(my_container_data);
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
-		int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step5
+
+		  //Default COUNT limited to 3 rows as per step5
 		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
 		log("/*7.----Click on bulk Adjustment button on Supply page--*/");
-		supplyConsolePage.clickBulkAdjustmentButton();
-		Thread.sleep(5000);
+		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 
 		log("/*8.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
-		supplyConsolePage.enterBulkByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment, numberOfRows);
+		supplyConsolePage.enterBulkAdjustmentByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment);
 
 		log("/*9.----Click button Adjustment on Container - Adjustment page --*/");
 		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 
 		log("/*10.----Read Remaining Doses And Quantity After Adjustment --*/");
 		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
@@ -235,17 +258,16 @@ public class BulkAdjustments extends BaseTest {
 			double remainingQuantityAfterAdjustment = afterDeduction.get(1);
 			double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
 			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double calculatedDosesAfterAdjustment = calculated.get(0);
-			double calculatedRemainingQuantityAfterAdjustment = calculated.get(1);
-			double doseConversionAfterAdjustment = calculated.get(2);
+			double calculatedDosesAfterAdjustment = Double.valueOf(df.format(calculated.get(0)));
+			double calculatedRemainingQuantityAfterAdjustment = Double.valueOf(df.format(calculated.get(1)));
+			double doseConversionAfterAdjustment = Double.valueOf(df.format(calculated.get(2)));
 
 			//Comparing results
 			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
 			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
 
 			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment);
-
+			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.011);
 			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
 			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
 		}

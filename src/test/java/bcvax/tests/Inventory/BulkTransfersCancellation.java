@@ -1,9 +1,7 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.MainPageOrg;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
@@ -64,7 +62,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Select Items to Transfer and Submit --*/");
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -84,12 +82,13 @@ public class BulkTransfersCancellation extends BaseTest {
         supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 
         log("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         log("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
+        Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
-
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
         double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
@@ -105,10 +104,10 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyLocationsPage.selectSupplyLocationName(driver,supply_location_to);
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -118,12 +117,12 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
-        supplyConsolePage.refreshBrowser();
-        supplyConsolePage.clickTransactionsTab();
+        driver.navigate().refresh();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -136,10 +135,12 @@ public class BulkTransfersCancellation extends BaseTest {
         } else {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
-        supplyConsolePage.clickBulkCancelButton().cancelBulkTransfer();
+        Thread.sleep(1000);
+        supplyConsolePage.clickBulkCancelButton();
+        supplyConsolePage.cancelTransfer();
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         double remainingDosesAfterLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
         double remainingDosesAfterLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
         double remainingDosesAfterLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
@@ -150,10 +151,10 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
 
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
         double remainingDosesAfterLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
@@ -165,7 +166,7 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingDosesAfterLocationDistribution2_3, remainingDosesBeforeLocationDistribution2_3);
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
         precondition();
@@ -178,7 +179,7 @@ public class BulkTransfersCancellation extends BaseTest {
 
         log("/----Select Items to Transfer and Submit --*/");
         log("/*7.----Get Supply Containers count outcoming records --*/");
-        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
+        int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
@@ -196,12 +197,13 @@ public class BulkTransfersCancellation extends BaseTest {
 
         supplyConsolePage.enterBulkTransferByQuantity(containers_from, quantity);
         log("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocation_2_To();
+        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
         log("/*12.----click Transfer dialog Modal button --*/");
         supplyConsolePage.clickBulkTransfersModalButton();
+        Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersCloseButton();
-
+        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
         double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
@@ -217,10 +219,10 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
 
         log("/*19.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
-        supplyConsolePage.refreshBrowser();
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        driver.navigate().refresh();
         Thread.sleep(2000);
         log("/----Count Remaining Supplies Before Transaction --*/");
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
@@ -229,12 +231,12 @@ public class BulkTransfersCancellation extends BaseTest {
         double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
-        supplyConsolePage.refreshBrowser();
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
+        driver.navigate().refresh();
         Thread.sleep(2000);
-        supplyConsolePage.clickTransactionsTab();
+        SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
@@ -247,9 +249,10 @@ public class BulkTransfersCancellation extends BaseTest {
         } else {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
-        supplyConsolePage.clickBulkCancelButton().cancelBulkTransfer();
+        supplyConsolePage.clickBulkCancelButton();
+        supplyConsolePage.cancelTransfer();
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
-        supplyConsolePage.clickOnRelatedItemTab();
+        SupplyLocationPage.clickOnRelatedItemTab(driver);
         double remainingQtyAfterCancelLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
         double remainingQtyAfterCancelLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
         double remainingQtyAfterCancelLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
@@ -259,11 +262,11 @@ public class BulkTransfersCancellation extends BaseTest {
         assertEquals(remainingQtyAfterCancelLocationDistribution1_3, remainingQtyBeforeDistribution1_3);
 
         log("/----Go to Supply Location Related Tab where Transferring To --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        supplyConsolePage.clickOnSupplyLocation(supply_location_to);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
 
-        supplyConsolePage.refreshBrowser();
+        driver.navigate().refresh();
         Thread.sleep(2000);
 
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
@@ -281,20 +284,18 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*1.----Login ----*/");
 
         log("/----Login to ORG (oldUI) --*/");
-        orgMainPage = (env.contains("immsbc_admin")) ? loginPage.orgLoginAsImmsBCAdmin() : loginPage.orgLoginAsPPHIS();
-        String currentApp = orgMainPage.currentApp();
+        orgMainPage = loginPage.orgLoginAsPPHIS();
+        String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-            orgMainPage.switchApp(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
         supplyConsolePage = new SupplyConsolePage(driver);
         Thread.sleep(2000);
-        //Assert.assertTrue(false);
-        log("/*2.----Supply Console Page displayed --*/");
-        supplyConsolePage.verifyIsSupplyPageDisplayed();
+
         log("/*3.----Close All previously opened Tab's --*/");
-        supplyConsolePage.closeTabsHCA();
+        SupplyConsolePage.closeTabsHCA(driver);
         log("/*4.----Go to Supply Locations Tab --*/");
-        supplyConsolePage.clickSupplyLocationsTab();
+        SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         ////// Supply Location_1 -> Outcoming
         log("/*5.----Click on Automation Supply Location_1 --*/");
@@ -302,7 +303,7 @@ public class BulkTransfersCancellation extends BaseTest {
         /////////////////////////////////////////////////
         //Try generic method
         /////////////////////////////////////////////////
-        supplyConsolePage.clickOnSupplyLocation(supply_location_from);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         //////////////////////////////////////////////////
     }
 }

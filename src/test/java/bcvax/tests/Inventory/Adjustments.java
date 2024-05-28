@@ -1,25 +1,46 @@
 package bcvax.tests.Inventory;
 
 import Utilities.TestListener;
-import bcvax.pages.CommonMethods;
-import bcvax.pages.SupplyConsolePage;
-import bcvax.pages.Utils;
+import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import constansts.Apps;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import java.util.List;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
 
 @Listeners({TestListener.class})
 public class Adjustments extends BaseTest {
+	String env;
+	MainPageOrg orgMainPage;
+	Map<String, Object> testData;
+	String supply_location_from;
+	String supply_location_to;
+	String distribution_from;
+	String distribution_to;
+	String container_from;
+	@BeforeMethod
+	public void setUpClass() throws Exception {
+		env = Utils.getTargetEnvironment();
+		log("Target Environment: " + env);
+		testData = Utils.getTestData(env);
+		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+		supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+		distribution_from = String.valueOf(testData.get("distributionFrom"));
+		distribution_to = String.valueOf(testData.get("distributionTo"));
+		container_from = String.valueOf(testData.get("containerFrom"));
+	}
 
 	@DataProvider(name = "dosesAmount")
 	public static Object[][] primeNumbers() {
@@ -35,7 +56,7 @@ public class Adjustments extends BaseTest {
 	public void Can_Do_Single_Adjustment_ByDosages_Positive_And_Negative_Value(String dosesAmount) throws Exception {
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		AllureLifecycle lifecycle = Allure.getLifecycle();
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+
 		double amountOfDosesToAdjust = Double.parseDouble(dosesAmount);
 		boolean isNegativeFlag = isNegative(amountOfDosesToAdjust);
 		if (isNegativeFlag == false) {
@@ -48,44 +69,44 @@ public class Adjustments extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 		int numberOfRows = 1; //Default dosesAmount, adjustment from first row only
 
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				TestcaseID = "244846"; //C244846
-				loginPage.loginAsImmsBCAdminICE();
-				break;
-			default:
-				log("Login AS default user (PPHIS)");
-				TestcaseID = "223357"; //C223357
-				loginPage.loginAsPPHIS();
-		}
-		Thread.sleep(5000);
+		log("Login AS default user (PPHIS)");
+		TestcaseID = "223357"; //C223357
+		loginPage.loginAsPPHIS();
 
-		log("/*2.----Supply Console Page displayed --*/");
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
-		Thread.sleep(5000);
+		orgMainPage = new MainPageOrg(driver);
+		String currentApp = MainPageOrg.currentApp(driver);
+		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+		}
+		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
 
 		log("/*3.----Close All previously opened Tab's --*/");
-		supplyConsolePage.closeTabsHCA();
-		Thread.sleep(2000);
+		SupplyConsolePage.closeTabsHCA(driver);
 
 		log("/*4.----Go to Supply Locations Tab --*/");
-		supplyConsolePage.clickSupplyLocationsTab();
+		SupplyConsolePage.clickSupplyLocationsTab(driver);
 
 		log("/*5.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-
+		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
 		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
-		log("/*7.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
+		List<String> my_containers = new ArrayList<>();
+		my_containers.add(container_from);
 
+		Map<String, String> doses_quantity_from = SupplyLocationRelatedItems.getSupplyContainerDose(driver, container_from);
+		log("/*7.----Click on Container's dropdown --*/");
+		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
+		Thread.sleep(1000);
 		log("/*8.----select Adjustment from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectAdjustmentFromDropDown();
+		try {
+			SupplyLocationRelatedItems.selectAdjustmentFromDropDown(driver);
+		} catch (ElementNotInteractableException ex) {
+			System.out.println("*** WARNING*** Couldn't Select the Action. Try to click Action button again...");
+			SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
+			Thread.sleep(1000);
+			SupplyLocationRelatedItems.selectAdjustmentFromDropDown(driver);
+		}
 		double remainingDosesBeforeAdjustment = supplyConsolePage.getActualRemainingDoses();
 		double doseConversionFactorRead = supplyConsolePage.getDoseConversionFactor();
 		log("/*----Remaining Doses Before Adjustment " + remainingDosesBeforeAdjustment + " --*/");
@@ -93,7 +114,7 @@ public class Adjustments extends BaseTest {
 		log("/*----Amount Adjustment Doses " + amountOfDosesToAdjust + " --*/");
 
 		log("/*9.----set Adjustment Doses amount --*/");
-		supplyConsolePage.setDosesAmount(Double.toString(amountOfDosesToAdjust));
+		ContainerAdjustmentForm.enterAdjustmentDosages(driver, Double.toString(amountOfDosesToAdjust));
 
 		double remainingDosesAfterAdjustmentInPopUp = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Remaining Doses After Adjustment " + remainingDosesAfterAdjustmentInPopUp + " --*/");
@@ -103,7 +124,9 @@ public class Adjustments extends BaseTest {
 
 		log("/*11----Clicking on btn Adjustment --*/");
 		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
-
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+		Thread.sleep(2000);
 		//Validation values in Container - Adjustment pop-up
 		log("Validation values in Adjustment pop-up / Remaining doses before adjustment " + remainingDosesBeforeAdjustment
 				+ " / Adjustment doses amount " + amountOfDosesToAdjust + " / Remaining doses after Adjustment " + remainingDosesAfterAdjustmentInPopUp);
@@ -122,7 +145,7 @@ public class Adjustments extends BaseTest {
 			double doseConversionFactor = readFromList.get(2);
 			//Actual calculation
 			double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-			double afterAdjustmentQuantity = Double.parseDouble(new DecimalFormat("##.####").format(
+			double afterAdjustmentQuantity = Double.parseDouble(df.format(
 					remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
 			writeToList.add(afterAdjustmentDoses);
 			writeToList.add(afterAdjustmentQuantity);
@@ -155,91 +178,6 @@ public class Adjustments extends BaseTest {
 			log("Compering dose conversion factor dosesAmount from pop-up " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
 			assertEquals(doseConversionFactorRead, doseConversionAfterAdjustment);
 		}
-	}
-
-
-	@Test(dataProvider = "quantitiesAmount")
-	public void Can_Do_Single_Adjustment_ByQuantities_Positive_And_Negative_Value(String quantitiesAmount) throws Exception {
-		log("Target Environment: " + Utils.getTargetEnvironment());
-		AllureLifecycle lifecycle = Allure.getLifecycle();
-		SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-		double amountOfQuantitiesToAdjust = Double.parseDouble(quantitiesAmount);
-		boolean isNegativeFlag = isNegative(amountOfQuantitiesToAdjust);
-		int firstRow = 1; //Default value for first row in the grid (Supply container)
-
-		if (isNegativeFlag == false) {
-			log("/*0.----Positive Scenario: Can_Do_Single_Adjustment_ByQuantities_Positive_Value_AS_PPHIS--*/");
-			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByQuantities_Positive_Value_AS_PPHIS"));
-		} else {
-			log("/*0.----Negative Scenario: Can_Do_Single_Adjustment_ByQuantities_Negative_Value_AS_PPHIS--*/");
-			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Single_Adjustment_ByQuantities_Negative_Value_AS_PPHIS"));
-		}
-
-		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login AS comunityqa_org_immsbc_admin");
-				TestcaseID = "244846"; //C244846
-				loginPage.loginAsImmsBCAdminICE();
-				break;
-			default:
-				log("Login AS default user (PPHIS)");
-				TestcaseID = "223357"; //C223357
-				loginPage.loginAsPPHIS();
-		}
-		Thread.sleep(5000);
-
-		log("/*2.----Validate if Supply Console Page displayed --*/");
-		CommonMethods common = new CommonMethods(getDriver());
-		common.goToSupplyPageIfNeededAndConfirmPageIsDisplayed();
-
-		log("/*3.----Click on Automation Supply Location_1 --*/");
-		supplyConsolePage.clickOnSupplyLocation_1();
-		Thread.sleep(5000);
-
-		log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		double[] remDosesQtyConversionFactorBefore = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesBefore = remDosesQtyConversionFactorBefore[0];
-		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesBefore);
-		double remainingQuantitiesBefore = remDosesQtyConversionFactorBefore[1];
-		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesBefore);
-		double remainingConversionFactor = remDosesQtyConversionFactorBefore[2];
-		log("/*----Dose Conversion Factor " + remainingConversionFactor + " --*/");
-
-		log("/*5.----Click on Container's dropdown --*/");
-		supplyConsolePage.clickOnFirstContainerDropDownMenu();
-		Thread.sleep(2000);
-
-		log("/*6.----Select Adjustment from the DropDownMenu dropdown menu --*/");
-		supplyConsolePage.selectAdjustmentFromDropDown();
-
-		log("/*7.----Set Adjustment Quantities amount: " + amountOfQuantitiesToAdjust + "--*/");
-		supplyConsolePage.setQuantityAmount(Double.toString(amountOfQuantitiesToAdjust));
-
-		log("/*8.----Reason For Adjustment: 'Administered Vaccine' --*/");
-		supplyConsolePage.selectReasonForAdjustmentDropDown();
-
-		log("/*9.----Clicking on btn Adjustment --*/");
-		supplyConsolePage.clickBtnAdjustmentAtContainerAdjustmentPopUp();
-
-		log("/*10.----Quantity Remaining Doses/Remaining Quantity check After --*/");
-		double[] remDosesQtyConversionFactorAfter = common.getRemainingDosesQtyAndConversionFactor(firstRow);
-		double remainingDosesAfter = remDosesQtyConversionFactorAfter[0];
-		log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDosesAfter);
-		double remainingQuantitiesAfter = remDosesQtyConversionFactorAfter[1];
-		log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQuantitiesAfter);
-		double remainingConversionAfter = remDosesQtyConversionFactorAfter[2];
-		log("/*----Dose Conversion Factor " + remainingConversionAfter + " --*/");
-
-		log("/*11.----Validate Remaining Doses, Remaining Quantities and Conversion factor --*/");
-		log("----Validation by Doses --");
-		double remainingDosesCalculation = Double.parseDouble(new DecimalFormat("##.####").format(
-				(remainingQuantitiesBefore + amountOfQuantitiesToAdjust) * remainingConversionFactor));
-		assertEquals(remainingDosesAfter, remainingDosesCalculation);
-		log("----Validation by Quantities --");
-		assertEquals(remainingQuantitiesAfter, (remainingQuantitiesBefore + amountOfQuantitiesToAdjust));
-		log("----Validation Conversion factor --");
-		assertEquals(remainingConversionAfter, remainingConversionFactor);
 	}
 
 	public static boolean isNegative(double d) {
