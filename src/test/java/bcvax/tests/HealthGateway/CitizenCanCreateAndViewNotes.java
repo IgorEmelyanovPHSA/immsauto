@@ -2,7 +2,6 @@ package bcvax.tests.HealthGateway;
 
 import Utilities.TestListener;
 import bcvax.pages.MainPageHealthGateway;
-import bcvax.pages.ProfilePage;
 import bcvax.pages.TimeLineTabPage;
 import bcvax.pages.Utils;
 import bcvax.tests.BaseTest;
@@ -32,15 +31,15 @@ public class CitizenCanCreateAndViewNotes extends BaseTest {
 		log(timeLine.getDisplayingNumberOfRecords());
 
 		//Delete any previously created notes
-		if(timeLine.getNumberOfMyNotes()>1);{
+		if(timeLine.getNumberOfRecords()>1);{
 			timeLine.deleteMyNotes();}
 
 		//Validate all My Notes are deleted
-		Assert.assertTrue(timeLine.getNumberOfMyNotes() <1, "Error. My Notes found!");
+		Assert.assertTrue(timeLine.getNumberOfRecords() <1, "Error. My Notes found!");
 
 		//Creating a new note and validate note count =1 and note body
 		timeLine.createANote(timeStamp);
-		Assert.assertTrue(timeLine.getNumberOfMyNotes() ==1, "Error. Note is not saved!");
+		Assert.assertTrue(timeLine.getNumberOfRecords() ==1, "Error. Note is not saved!");
 		timeLine.clickToExpendFirstNote();
 		Assert.assertTrue(timeLine.getTextBodyFromFirstMyNote().equals(timeStamp), "Note text body didn't match");
 
@@ -50,7 +49,7 @@ public class CitizenCanCreateAndViewNotes extends BaseTest {
 		//Delete Note and validate
 		timeLine.clickToExpendFirstNote(); // Need to minimize note
 		timeLine.deleteMyNotes();
-		Assert.assertTrue(timeLine.getNumberOfMyNotes() <1, "Error. My Notes found!");
+		Assert.assertTrue(timeLine.getNumberOfRecords() <1, "Error. My Notes found!");
 
 		log("Create, update, delete Notes performed successfully");
 		}

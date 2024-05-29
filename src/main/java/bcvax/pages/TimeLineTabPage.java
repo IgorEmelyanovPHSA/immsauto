@@ -1,9 +1,12 @@
     package bcvax.pages;
 
     import io.qameta.allure.Step;
+    import org.openqa.selenium.By;
     import org.openqa.selenium.WebDriver;
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.support.FindBy;
+
+    import java.util.List;
 
 
     public class TimeLineTabPage extends BasePage{
@@ -19,6 +22,9 @@
 
         @FindBy(xpath = "//input[@type='checkbox'][@value='My Notes']/../label[@class='slds-checkbox__label']")
         private WebElement dropDownSelectionMyNotes;
+
+        @FindBy(xpath = "//input[@type='checkbox'][@value='Medications']/../label[@class='slds-checkbox__label']")
+        private WebElement dropDownSelectionMedications;
 
         @FindBy(xpath = "//button[text() = 'Apply']")
         private WebElement btnApply;
@@ -55,6 +61,9 @@
 
         @FindBy(xpath = "(//span[text()=' Imaging Reports | X-Ray - Recently Updated'])[1]")
         private WebElement selectFirstImagingReport;
+
+        @FindBy(xpath = "(//span[text()=' | Medications | APO-FUROSEMIDE'])[1]")
+        private WebElement selectFirstMedicationRecord;
 
         /////Comments related xpath's
         @FindBy(xpath = "(//p[@class='slds-text-align_right hg-cmt-count'])[1]")
@@ -113,10 +122,10 @@
         @FindBy(xpath = "//input[@placeholder='Protective word']")
         private WebElement textInputProtectiveWord;
 
-        @FindBy(xpath = "//button[text()='Add a note']/../../../..//a[text()='Edit']")
+        @FindBy(xpath = "//button[text()='Continue']")
         private WebElement btnContinue;
 
-        @FindBy(xpath = "//input[@placeholder='Protective word']")
+        @FindBy(xpath = "//span[text()='Cancel and close']/..")
         private WebElement btnCloseWindowX;
 
         public TimeLineTabPage(WebDriver driver) {
@@ -153,6 +162,14 @@
             Thread.sleep(2000);
         }
 
+        public void selectFilerMedications() throws InterruptedException {
+           // Thread.sleep(12000);
+            click(btnDropDownCategories);
+            click(dropDownSelectionMedications);
+            click(btnApply);
+            Thread.sleep(7000);
+        }
+
         public void openFirstLabResultRecord() throws InterruptedException {
             click(selectFirstLabResult);
             Thread.sleep(8000);
@@ -161,6 +178,11 @@
         public void openFirstImagingReport() throws InterruptedException {
             click(selectFirstImagingReport);
             Thread.sleep(8000);
+        }
+
+        public void openFirstMedicationRecord() throws InterruptedException {
+            click(selectFirstMedicationRecord);
+            Thread.sleep(2000);
         }
 
         public String getStatusImgReport(){
@@ -223,12 +245,12 @@
             }
         }
 
-        public int getNumberOfMyNotes(){
+        public int getNumberOfRecords(){
             return Integer.parseInt(getText(textDisplayingNumberOfRecords).split("\\s+")[3]);
         }
 
         public void deleteMyNotes() throws InterruptedException {
-            int numberOfNotes = getNumberOfMyNotes();
+            int numberOfNotes = getNumberOfRecords();
             for(int i = 0; i <numberOfNotes; i++){
                 click(textBoxFirstNote);
                 click(btnDeleteFirstNote);
@@ -263,8 +285,15 @@
 
         public void enterProtectiveWordAndContinue(String text) throws InterruptedException {
             typeIn(textInputProtectiveWord, text);
-            click(textBoxFirstNote);
+            click(btnContinue);
+            Thread.sleep(2000);
         }
 
+        public void textValidationInvalidProtectiveWord(){
+            List<WebElement> elements = driver.findElements(By.xpath("//div[contains(@class, 'slds-text-color_error') and contains(text(), 'Invalid protective word.Try again.')]"));
+            if (elements.isEmpty()) {
+                throw new RuntimeException("Text not found: Invalid protective word.Try again.");
+            }
+        }
 
     }

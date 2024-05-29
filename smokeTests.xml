@@ -8,6 +8,7 @@
             <class name="bcvax.tests.HealthGateway.CitizenCanAddAndEditComments"/>
             <class name="bcvax.tests.HealthGateway.ProfileCheck"/>
             <class name="bcvax.tests.HealthGateway.CitizenCanCreateAndViewNotes"/>
+            <class name="bcvax.tests.HealthGateway.CitizenWithProtectiveWordRetrieveMedication"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

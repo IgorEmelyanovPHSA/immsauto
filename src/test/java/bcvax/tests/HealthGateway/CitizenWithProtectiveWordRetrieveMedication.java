@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 @Listeners({TestListener.class})
 public class CitizenWithProtectiveWordRetrieveMedication extends BaseTest {
 
-	private String timeStamp = String.valueOf(System.currentTimeMillis());
 	private String protectiveWord = "KEYWORD";
 
 	@Test
@@ -23,37 +22,31 @@ public class CitizenWithProtectiveWordRetrieveMedication extends BaseTest {
 		log("Test Case " +"C" +TestcaseID);
 
 		//CITIZEN with protective word to retrieve MEDICATION
-
-		//Login as user 14 ONLY, data sets are for user 14
+		//Login as user 14 ONLY, user is set up with protective word
 		MainPageHealthGateway mainPageHealthGateway = loginPage.loginIntoHGWithBCServiceCardAsUser14();
 
 		TimeLineTabPage timeLine = mainPageHealthGateway.goToTabTimeLine();
 
+		//Enter incorrect protective word
+		timeLine.enterProtectiveWordAndContinue("incorrectPass");
+		timeLine.textValidationInvalidProtectiveWord();
+
 		//Happy Path
 		timeLine.enterProtectiveWordAndContinue(protectiveWord);
 
-		timeLine.selectFilterMyNotes();
+		//Thread sleep to load 1869 records for the user
+		timeLine.selectFilerMedications();
+
 		log(timeLine.getDisplayingNumberOfRecords());
 
-		//Delete any previously created notes
-		if(timeLine.getNumberOfMyNotes()>1);{
-			timeLine.deleteMyNotes();}
+		//Validate medications records displayed
+		log("value " +timeLine.getNumberOfRecords());
+		Assert.assertTrue(timeLine.getNumberOfRecords() >= 1, "Error. No medications records found");
 
-		//Validate all My Notes are deleted
-		Assert.assertTrue(timeLine.getNumberOfMyNotes() <1, "Error. My Notes found!");
+		//Validation open first medication record
+		timeLine.openFirstMedicationRecord();
 
-		//Creating a new note and validate note count =1 and note body
-		timeLine.createANote(timeStamp);
-		Assert.assertTrue(timeLine.getNumberOfMyNotes() ==1, "Error. Note is not saved!");
-		timeLine.clickToExpendFirstNote();
-		Assert.assertTrue(timeLine.getTextBodyFromFirstMyNote().equals(timeStamp), "Note text body didn't match");
-
-		//Delete Note and validate
-		timeLine.clickToExpendFirstNote(); // Need to minimize note
-		timeLine.deleteMyNotes();
-		Assert.assertTrue(timeLine.getNumberOfMyNotes() <1, "Error. My Notes found!");
-
-		log("Create, update, delete Notes performed successfully");
+		log("Citizen with protective word retrieved medication successfully");
 		}
 
 	}
