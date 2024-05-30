@@ -15,7 +15,7 @@ public class CitizenGettingLabResults extends BaseTest {
 
 	//Data for first record to match
 	private String orderStatus = "Completed w/Modification";
-	private String collectionDate = "2021-Jul-04, 11:45 AM";
+	private String collectionDate = "2021-Jul-04, 6:45 PM";
 	private String orderingProvider = "PLISVCI, BROOKS";
 	private String reportingLab = "VIHA - Department of Laboratory Medicine, Pathology and Medical Genetics";
 
