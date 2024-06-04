@@ -3,7 +3,9 @@ package communityPortal.tests.VaccineAdministration_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -12,13 +14,6 @@ import java.util.Map;
 @Listeners({TestListener.class})
 public class E2E_Dose2_Covid19_CP extends BaseTest {
     String env;
-    private String legalFirstName = "Hugues";
-    private String legalLastName = "BCVaxLampard";
-    private String dateOfBirth = "March 3, 1904";
-    private String postalCode = "V1N3Q3";
-    private String personalHealthNumber = "9746171121";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch;
     Map<String, Object> testData;
     String consumptionAgent;
@@ -29,14 +24,19 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
     String consumptionRoute;
     String consumptionSite;
     String consentProvider;
+    Map<String, String> client_data;
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose2");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+    }
 
     @Test(priority = 1)
     public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
         TestcaseID = "243156"; //C243156
         log("Target Environment: " + Utils.getTargetEnvironment());
-
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -69,40 +69,15 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*7.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*11.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-
-        log("/*14.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*16.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-        log("/*19.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        log("/*20.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        log("/*21.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-
-        //log("/*22.----click on person Account Related Tab --*/");
-        //inClinicExperience_CP.clickOnPersonAccountRelatedTab();
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 
         log("/*23----Go to Appointment Tab --*/");
-        PersonAccountPage.goToVaccineScheduleTab(driver);
+        try {
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        } catch (ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        }
 
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 
@@ -167,22 +142,11 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
         log("/*41.---Open Today appointment Details --*/");
-        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         Thread.sleep(2000);
         log("/*42.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
         InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
-//        String consentProvider = inClinicExperience_CP.consentProviderSelected();
-//        Thread.sleep(2000);
-//        if(consentProvider.equals("")) {
-//            consentProvider = inClinicExperience_CP.selectConsentProvider();
-//        }
-//        Thread.sleep(2000);
-//        log("/*43.---Click Save Consent Button --*/");
-//        inClinicExperience_CP.ClickSaveConsentButton();
-//        if(consentProvider.equals("")) {
-//            consentProvider = inClinicExperience_CP.selectConsentProvider();
-//        }
 
         try {
             PersonAccountRelatedPage.checkExistingConsent(driver);

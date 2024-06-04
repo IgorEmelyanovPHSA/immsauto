@@ -53,34 +53,8 @@ public class BookingDose2 extends BaseTest {
 		callCenterConsole.closeAllTabs();
 		log("/*4.----click Register New Citizen --*/");
 		callCenterConsole.clickRegisterButton();
-		log("/*5.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
-		CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
-		log("/*6.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
-		CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
-		log("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
-		CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
-		log("/*7.----Enter Postal code " +client_data.get("postalCode") +"--*/");
-		CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
-		log("/*8.----Enter PHN " +client_data.get("personalHealthNumber") +"--*/");
-		CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
-		log("/*9.----click on non-Indigenous person radiobutton --*/");
-		log("/*10.----click Verify PHN button --*/");
-		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-		log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-		String successMessageText = CitizenPrimaryInfo.successMessageAppear(driver);
-		assertTrue(successMessageText.equals("Success") || successMessageText.equals(""), "Actual Result: " + successMessageText);
-		log("/*12.----click Next button --*/");
-		CitizenPrimaryInfo.clickNextButton(driver);
-		log("/*13.'Enter email address " + client_data.get("email") +"--*/");
-		CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
-		log("/*14.'Confirm email address " + client_data.get("email") +"--*/");
-		CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
-		log("/*15.Click review details Button--*/");
-		CitizenPrimaryInfo.clickReviewDetails(driver);
-		log("/*16.Click register Button on confirmation page--*/");
-		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-		log("/*17.--toast success message - 'Success' --*/");
-		CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+
+		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 
 		log("/*21----Go to Appointment Tab --*/");
 		try {

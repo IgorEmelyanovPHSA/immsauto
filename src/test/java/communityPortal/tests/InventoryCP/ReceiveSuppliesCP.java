@@ -49,9 +49,10 @@ public class ReceiveSuppliesCP extends BaseTest {
 		double doses = 10;
 
 		log("/----Count Remaining Supplies --*/");
-		double remainingDosesBeforeReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
+		Map<String, String> remaining_before_receiving = SupplyLocationRelatedItems.getSupplyContainerDose(driver, vaccine);
+		double remainingDosesBeforeReceiving = Double.parseDouble(remaining_before_receiving.get("Remaining Doses").replace(",", ""));
 		log("/*-- . remaining doses are: -->" + remainingDosesBeforeReceiving);
-		double remainingQtyBeforeReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);
+		double remainingQtyBeforeReceiving = Double.parseDouble(remaining_before_receiving.get("Remaining Quantity").replace(",", ""));
 		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
 		log("/*-- Receive Supplies --*/");
@@ -94,10 +95,10 @@ public class ReceiveSuppliesCP extends BaseTest {
 		}
 
 		log("/----Count Supplies After Receiving--*/");
-
-		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
+		Map<String, String> remaining_after_receiving = SupplyLocationRelatedItems.getSupplyContainerDose(driver, vaccine);
+		double remainingDosesAfterReceiving = Double.parseDouble(remaining_after_receiving.get("Remaining Doses").replace(",", ""));
 		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
-		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);
+		double remainingQtyAfterReceiving = Double.parseDouble(remaining_after_receiving.get("Remaining Quantity").replace(",", ""));
 		log("/*-- . after qty are: -->" + remainingQtyAfterReceiving);
 
 		double dosesToQty =Double.parseDouble(df.format(doses / doseConversionFactor));

@@ -7,6 +7,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -20,15 +21,7 @@ import java.util.Map;
 @Listeners({TestListener.class})
 public class Alerts_ICE_CIB extends BaseTest {
     String env;
-    private String legalFirstName = "Ludovika";
-    private String legalLastName = "BcvaxLimeburn";
-    private String dateOfBirth = "Sep 21, 1923";
-    private String postalCode = "V3L5L2";
     Map<String, Object> testData;
-    private String personalHealthNumber = "9746170911";
-    private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
-    //private String email = "jason.yulghun@phsa.ca";
     String clinicNameToSearch;
     MainPageOrg orgMainPage;
     String consumptionLot;
@@ -37,12 +30,18 @@ public class Alerts_ICE_CIB extends BaseTest {
     String consumptionSite;
     String consentProvider;
     String consumptionAgent;
+    Map<String, String> client_data;
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose1");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+    }
 
     @Test(priority = 1)
     public void verifyAlerts_ICE_CIB() throws Exception {
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -90,43 +89,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         //Thread.sleep(2000);
         System.out.println("/*10.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-        System.out.println("/*11.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        System.out.println("/*12.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        System.out.println("/*13.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        System.out.println("/*14.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        System.out.println("/*15.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-        System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
-        System.out.println("/*17.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-        System.out.println("/*19.----click Next button --*/");
-        try {
-            CitizenPrimaryInfo.clickNextButton(driver);
-        } catch(ElementClickInterceptedException ex) {
-            CitizenPrimaryInfo.successMessageAppear(driver);
-            CitizenPrimaryInfo.clickNextButton(driver);
-        }
-        System.out.println("/*20.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        System.out.println("/*21.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-        System.out.println("/*22.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        System.out.println("/*23.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        System.out.println("/*24.--toast success message - 'Success' --*/");
-        try {
-            CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-        } catch(Exception ex) {
-            System.out.println("No Success Message. Contrinue ...");
-            System.out.println(ex.getMessage());
-        }
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
         System.out.println("/*25.----click on CheckIn button --*/");
         try {
             PersonAccountPage.clickCheckInButton(driver);
@@ -244,13 +207,13 @@ public class Alerts_ICE_CIB extends BaseTest {
 
         InClinicExperiencePage.clickTodayAppointments(driver);
         Thread.sleep(2000);
-        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 
         String final_alerts_from_sidebar = InClinicExperienceIdentificationPage.getSidebarAlertText(driver);
 
         System.out.println("/*.----Verify Sidebar contains Alerts(2) after alert updated to be not active --*/");
-        Assert.assertEquals("Alerts(2)", final_alerts_from_sidebar);
+        Assert.assertEquals(final_alerts_from_sidebar, "Alerts(2)");
 
         alert_section_minimized = InClinicExperienceIdentificationPage.alertSectionMinimized(driver);
 
@@ -268,7 +231,7 @@ public class Alerts_ICE_CIB extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
         }
         MainPageOrg.closeAllTabs(driver);
-        MainPageOrg.search(driver, legalFirstName + " " + legalLastName);
+        MainPageOrg.search(driver, client_data.get("legalFirstName") + " " + client_data.get("legalLastName"));
         PersonAccountPage.goToRelatedTab(driver);
         String alerts_text = PersonAccountPage.getClientAlerts(driver);
 
@@ -290,7 +253,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         NewAlertPage.clickSaveButton(driver);
         Thread.sleep(2000);
         MainPageOrg.closeAllTabs(driver);
-        MainPageOrg.search(driver, legalFirstName + " " + legalLastName);
+        MainPageOrg.search(driver, client_data.get("legalFirstName") + " " + client_data.get("legalLastName"));
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountRelatedPage.scrollToAlertsSection(driver);
         List<Map<String, WebElement>> alerts_table = PersonAccountRelatedPage.getAlertSectionTable(driver);

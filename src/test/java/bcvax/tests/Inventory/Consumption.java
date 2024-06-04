@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -18,13 +19,6 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class Consumption extends BaseTest {
 	String env;
-	private String legalFirstName = "Courtnay";
-	private String legalLastName = "BCVaxGoncaves";
-	private String dateOfBirth = "Nov 29, 1949";
-	private String postalCode = "V3J3Y1";
-	private String personalHealthNumber = "9746172961";
-	//private boolean isIndigenous = false;
-	private String email = "accountToDelete@phsa.ca";
 	String clinicNameToSearch;
 	Map<String, Object> testData;
 	String distribution;
@@ -38,6 +32,15 @@ public class Consumption extends BaseTest {
 	SupplyConsolePage supplyConsolePage;
 	MainPageOrg orgMainPage;
 	String consentProvider;
+	Map<String, String> client_data;
+
+	@BeforeMethod
+	public void beforeMethod() throws Exception {
+		String client_data_file = Utils.getClientsDataFile();
+		client_data = Utils.getTestClientData(client_data_file, "consumption");
+		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+	}
 
 	@Test(priority = 1)
 	public void Validate_Consumption_as_an_Clinician() throws Exception {
@@ -56,7 +59,6 @@ public class Consumption extends BaseTest {
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 		log("/*-- 1.Login as an Clinician for Consumption in Supply Console--*/");
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
@@ -101,35 +103,7 @@ public class Consumption extends BaseTest {
 		InClinicExperiencePage.closeTabsHCA(driver);
 		log("/*-- 18. Register New User --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
-		log("/*-- 19.----Enter First Name " +legalFirstName +"--*/");
-		CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-		log("/*-- 20.----Enter Last Name " + legalLastName +"--*/");
-		CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-		log("/*-- 21.----Enter Date of birth " +dateOfBirth + "--*/");
-		CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-		log("/*-- 22.----Enter Postal code " +postalCode  +"--*/");
-		CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-		log("/*-- 23.----Enter PHN --*/");
-		CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-		log("/*-- 25.----click Verify PHN button --*/");
-		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-		log("/*-- 26.'PNH match successful' --*/");
-		CitizenPrimaryInfo.successMessageAppear(driver);
-		log("/*-- 27.'Click next button --*/");
-		try {
-			CitizenPrimaryInfo.clickNextButton(driver);
-		} catch(ElementClickInterceptedException ex) {
-			CitizenPrimaryInfo.successMessageAppear(driver);
-			CitizenPrimaryInfo.clickNextButton(driver);
-		}
-		log("/*-- 28.'Enter email address " +email +"--*/");
-		CitizenPrimaryInfo.enterEmail(driver, email);
-		log("/*-- 29.'Confirm email address " +email +"--*/");
-		CitizenPrimaryInfo.confirmEmail(driver, email);
-		log("/*-- 30.Click review details Button --*/");
-		CitizenPrimaryInfo.clickReviewDetails(driver);
-		log("/*-- 31.Click register Button on confirmation page --*/");
-		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
+		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 		log("/*-- 33.Select Early Booking Reason --*/");
@@ -179,7 +153,7 @@ public class Consumption extends BaseTest {
 		InClinicExperiencePage.clickTodayAppointments(driver);
 		log("/*47.---Open Today appointment Details --*/");
 		Thread.sleep(2000);
-		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		Thread.sleep(2000);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");

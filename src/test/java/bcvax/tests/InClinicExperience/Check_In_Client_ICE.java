@@ -26,15 +26,18 @@ public class Check_In_Client_ICE extends BaseTest {
     private String dateOfBirth = "Nov 29, 1949";
     private String postalCode = "V3J3Y1";
     private String personalHealthNumber = "9746172961";
-//    private String legalFirstName = "Ludovika";
-//    private String legalLastName = "BcvaxLimeburn";
-//    private String dateOfBirth = "Sep 21, 1923";
-//    private String postalCode = "V3L5L2";
-//    private String personalHealthNumber = "9746170911";
-    //private boolean isIndigenous = false;
+
     Map<String, Object> testData;
     private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    Map<String, String> client_data;
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "consumption");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+    }
 
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment() throws Exception {
@@ -43,8 +46,6 @@ public class Check_In_Client_ICE extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*1.----Navigate to More -> Register --*/");
         loginPage.loginAsImmsBCAdmin();
@@ -68,39 +69,7 @@ public class Check_In_Client_ICE extends BaseTest {
         log("/*5.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterTab(driver);
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*6.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*7.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*8.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*9.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*10.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-        log("/*11.----click on non-Indigenous person radiobutton --*/");
-//        if(Utils.getEnvConfigProperty("nonIndigenousDialog").equals("yes")) {
-//            inClinicExperiencePage.clickNonIndigenousRadioButton();
-//        }
-        log("/*12.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*13.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*14.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*15.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*16.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-        log("/*17.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        Thread.sleep(2000);
-        log("/*18.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        Thread.sleep(2000);
-        log("/*19.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
         Thread.sleep(2000);
         log("/*20.--Check if check-in button available --*/");
         assertTrue(PersonAccountPage.checkInButtonAvailable(driver));

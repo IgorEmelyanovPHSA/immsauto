@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -14,27 +15,29 @@ import java.util.Map;
 public class Check_In_Workflow extends BaseTest {
     MainPageOrg orgMainPage;
     String env;
-    private String legalFirstName = "Courtnay";
-    private String legalLastName = "BCVaxGoncaves";
-    private String dateOfBirth = "Nov 29, 1949";
-    private String postalCode = "V3J3Y1";
-    private String personalHealthNumber = "9746172961";
     private String citizenName;
     Map<String, Object> testData;
-    private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
     InClinicExperiencePage inClinicExperience;
+    Map<String, String> client_data;
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "consent");
+        citizenName = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+    }
+
     @Test(priority = 1)
     public void verify_Check_In_Citizen_Workflow_From_Appointment() throws Exception {
         TestcaseID = "273419"; //C223614
         log("Target Environment: "+ Utils.getTargetEnvironment());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         registerCitizen();
-        citizenName = legalFirstName + " " + legalLastName;
         orgMainPage.logout();
         loginPage.loginAsImmsBCAdmin();
         String currentApp = MainPageOrg.currentApp(driver);
@@ -57,7 +60,7 @@ public class Check_In_Workflow extends BaseTest {
         InClinicExperiencePage.clickUserDefaultsTab(driver);
         InClinicExperiencePage.clickClientListTab(driver);
         InClinicExperiencePage.clickTodayAppointments(driver);
-        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         String my_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_appointment_info);
         log("/*6.----Verify no Imms record was created --*/");
         Assert.assertTrue(my_status.isEmpty());
@@ -78,7 +81,7 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(pathway_status.equals("New"));
         InClinicExperiencePage.clickClientListTab(driver);
         InClinicExperiencePage.clickTodayAppointments(driver);
-        my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         my_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_appointment_info);
         log("/*11.----Verify Pthway Status is New --*/");
         Assert.assertTrue(my_status.equals("New"));
@@ -97,10 +100,7 @@ public class Check_In_Workflow extends BaseTest {
         log("Target Environment: "+ Utils.getTargetEnvironment());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
         registerCitizen();
-        citizenName = legalFirstName + " " + legalLastName;
         orgMainPage.logout();
         loginPage.loginAsImmsBCAdmin();
         String currentApp = MainPageOrg.currentApp(driver);
@@ -125,7 +125,7 @@ public class Check_In_Workflow extends BaseTest {
         Assert.assertTrue(pathway_status.equals("New"));
         InClinicExperiencePage.clickClientListTab(driver);
         InClinicExperiencePage.clickTodayAppointments(driver);
-        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         String my_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_appointment_info);
         log("/*----10. Verify the Pathway Status is New --*/");
         Assert.assertTrue(my_status.equals("New"));
@@ -146,7 +146,7 @@ public class Check_In_Workflow extends BaseTest {
         Thread.sleep(500);
         driver.navigate().refresh();
         Thread.sleep(500);
-        my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         my_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_appointment_info);
         log("/*----14. Verify the Pathway Status is Vaccine_Administration --*/");
         Assert.assertEquals(my_status,"Vaccine_Administration");
@@ -186,38 +186,7 @@ public class Check_In_Workflow extends BaseTest {
         InClinicExperiencePage.clickRegisterTab(driver);
         System.out.println("/*10.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*5.----Enter First Name: " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*6.----Enter Last Name: " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*7.----Enter Postal code: " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-
-        log("/*10.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-        log("/*12.----click Next button --*/");
-        try {
-            CitizenPrimaryInfo.clickNextButton(driver);
-        } catch(ElementClickInterceptedException ex) {
-            CitizenPrimaryInfo.successMessageAppear(driver);
-            CitizenPrimaryInfo.clickNextButton(driver);
-        }
-        log("/*13.'Enter email address: " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*14.'Confirm email address: " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-        log("/*15.Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        log("/*16.Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        log("/*17.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
     }
 
     private void bookAppointment() throws InterruptedException {
