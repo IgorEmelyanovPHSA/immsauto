@@ -97,40 +97,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		//Thread.sleep(2000);
 		System.out.println("/*10.----click Register button New Citizen --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
-		System.out.println("/*11.----Enter First Name " +client_data.get("legalFirstName") +"--*/");
-		CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
-		System.out.println("/*12.----Enter Last Name " +client_data.get("legalLastName") +"--*/");
-		CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
-		System.out.println("/*13.----Enter Date of birth " +Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
-		CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
-		System.out.println("/*14.----Enter Postal code " +client_data.get("postalCode") +"--*/");
-		CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
-		System.out.println("/*15.----Enter PHN " +client_data.get("personalHealthNumber") +"--*/");
-		CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
-		System.out.println("/*16.----click on non-Indigenous person radiobutton --*/");
-		System.out.println("/*17.----click Verify PHN button --*/");
-		CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-		System.out.println("/*18.--Expecting to see the toast success message - 'PNH match successful' --*/");
-		CitizenPrimaryInfo.successMessageAppear(driver);
-		System.out.println("/*19.----click Next button --*/");
-		CitizenPrimaryInfo.clickNextButton(driver);
-		System.out.println("/*20.----'Enter email address " +client_data.get("email") +"--*/");
-		CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
-		System.out.println("/*21.----'Confirm email address " +client_data.get("email") +"--*/");
-		CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
-		System.out.println("/*22.---Click review details Button--*/");
-		CitizenPrimaryInfo.clickReviewDetails(driver);
-		System.out.println("/*23.----Click register Button on confirmation page--*/");
-		CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-		System.out.println("/*24.--toast success message - 'Success' --*/");
-		try {
-			CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-		} catch(Exception ex) {
-			System.out.println("No Success Message. Contrinue ...");
-			System.out.println(ex.getMessage());
-		}
-		//System.out.println("/*25.----click on person Account Related Tab --*/");
-		//inClinicExperience.clickOnPersonAccountRelatedTab();
+		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		try {
 			PersonAccountPage.goToVaccineScheduleTab(driver);

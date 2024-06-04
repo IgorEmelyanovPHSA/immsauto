@@ -10,31 +10,28 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
+import java.util.Map;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Check_In_Client_CP extends BaseTest {
     String env;
-    private String legalFirstName = "Ludovika";
-    private String legalLastName = "BcvaxLimeburn";
-    private String dateOfBirth = "Sep 21, 1923";
-    private String postalCode = "V3L5L2";
-    private String personalHealthNumber = "9746170911";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
     String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    Map<String, String> client_data;
     @BeforeMethod
-    public void setUpClass() throws Exception {
+    public void beforeMethod() throws Exception {
         env = Utils.getTargetEnvironment();
         log("Target Environment: " + env);
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose1");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
     }
+
     @Test(priority = 1)
     public void Can_do_Check_In_Citizen_to_start_vaccine_administration_process_for_citizen_without_appointment_CP() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "250544" : "242265";
-
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*1.----Login as Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
@@ -53,34 +50,7 @@ public class Check_In_Client_CP extends BaseTest {
         MainPageCP.navigateToRegisterClientPage(driver);
         InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-        log("/*9.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-        log("/*10.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*11.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-
-        log("/*14.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*16.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-        log("/*19.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        log("/*20.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        log("/*21.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 
         try {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

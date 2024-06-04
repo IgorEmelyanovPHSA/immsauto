@@ -6,6 +6,7 @@ import bcvax.tests.BaseTest;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -17,20 +18,6 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
     String env;
     String consumptionRoute;
     Map<String, Object> testData;
-    private String legal_first_name = "Rawley";
-    private String legal_last_name = "BCVaxIsmirnioglou";
-    private String legal_middle_name = "Marijo";
-    private String personal_health_number = "9746173039";
-    private String date_of_birth = "1959-01-23";
-    private String postal_code = "V2X9T1";
-
-    private String legal_first_name_new = "Gill";
-    private String legal_last_name_new = "BCVaxOrigan";
-    private String legal_middle_name_new = "Ashely";
-    private String personal_health_number_new = "9746172463";
-    private String date_of_birth_new = "1915-02-14";
-    private String postal_code_new = "V2T8T1";
-    private String email = "accountToDelete@phsa.ca";
     String participant_name;
     String consentProvider;
     String agent = "COVID-19 mRNA";
@@ -39,7 +26,16 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
     private String site_to_select = "Arm - Right deltoid";
     private String route_to_select = "Intramuscular";
     String clinic_location = "All Ages - Atlin Health Centre";
-
+    Map<String, String> client_data;
+    Map<String, String> client_data_new;
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "consent");
+        client_data_new = Utils.getTestClientData(client_data_file, "new_consent");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data_new.get("personalHealthNumber"));
+    }
     @Test(testName = "Document Consent in DIWA flow CP. Existing Consent")
     public void Can_Create_DIWA_Immunisation_record_with_Active_consent() throws Exception {
         TestcaseID = "273416";
@@ -50,16 +46,10 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         dosage_to_select = String.valueOf(testData.get("pneumoDose"));
         log("Target Environment: " + env);
 
-        //---Delete the existing client's immunization records ----
-        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personal_health_number);
-
-        //---Make sure the new client profile doesn't exist. Remove otherwise
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_number_new);
-
         //---Verify the EXISTING CONSENT flows---
 
         log("/*----1. Login as an DIWA to CIB  --*/");
-        participant_name = legal_first_name + " " + legal_middle_name + " " + legal_last_name;
+        participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
         loginPage.loginIntoCommunityPortalAsClinician();
         MainPageCP cpMainPage = new MainPageCP(driver);
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
@@ -122,50 +112,13 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
 
         //---Verify the NEW CONSENT flows---
 
-        participant_name = legal_first_name_new + " " + legal_middle_name_new + " " + legal_last_name_new;
+        participant_name = client_data_new.get("legalFirstName" + " " + client_data_new.get("legalMiddleName") + " " + client_data_new.get("legalLastName"));
         MainPageCP.navigateToRegisterClientPage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
 
-        log("/*8.----Enter First Name " +legal_first_name_new +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legal_first_name_new);
-
-        log("/*9.----Enter Last Name " +legal_last_name_new +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legal_last_name_new);
-
-        log("/*10.----Enter Date of birth " +date_of_birth_new +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, date_of_birth_new);
-
-        log("/*11.----Enter Postal code " +postal_code_new +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postal_code_new);
-
-        log("/*12.----Enter PHN " +personal_health_number_new +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personal_health_number_new);
-
-        log("/*14.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*16.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-
-        log("/*19.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-
-        log("/*20.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-
-        log("/*21.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data_new);
 
         log("/*----6. Navigated to Person Account related tab ---*/");
         PersonAccountPage.goToRelatedTab(driver);

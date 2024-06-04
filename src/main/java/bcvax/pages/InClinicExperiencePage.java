@@ -66,7 +66,7 @@ public class InClinicExperiencePage extends BasePage {
 
 	public static void clickRegisterButton(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
-		By register_btn_path = By.xpath("//button[@title = ' Create New Profile']");
+		By register_btn_path = By.xpath("//button[@title = ' Create New Profile' or text()='Register New Citizen']");
 		waitForElementToBeEnabled(driver, register_btn_path, 30);
 		WebElement register_btn = driver.findElement(register_btn_path);
 		register_btn.click();

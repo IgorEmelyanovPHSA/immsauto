@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -16,13 +17,6 @@ import static org.testng.Assert.assertEquals;
 @Listeners({TestListener.class})
 public class E2E_Consumption_CP extends BaseTest {
     String env;
-    private String legalFirstName = "Courtnay";
-    private String legalLastName = "BCVaxGoncaves";
-    private String dateOfBirth = "Nov 29, 1949";
-    private String postalCode = "V3J3Y1";
-    private String personalHealthNumber = "9746172961";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
     Map<String, Object> testData;
     String clinicNameToSearch;
     String supplyContainer;
@@ -34,6 +28,15 @@ public class E2E_Consumption_CP extends BaseTest {
     String consentProvider;
     String consumptionRoute;
     String consumptionSite;
+
+    Map<String, String> client_data;
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "consumption");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+    }
 
     @Test(priority = 1)
     public void Validate_Consumption_as_an_Inventory_Clinician_CP() throws Exception {
@@ -52,7 +55,6 @@ public class E2E_Consumption_CP extends BaseTest {
         consumptionSite = String.valueOf(testData.get("siteConsumption"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*1.----Login as Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
@@ -87,37 +89,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*12.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
 
-        log("/*13.----Enter First Name " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-
-        log("/*14.----Enter Last Name " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-
-        log("/*15.----Enter Date of birth " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-        log("/*11.----Enter Postal code " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-        log("/*12.----Enter PHN " +personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-
-        log("/*14.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*16.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-        log("/*18.----'Confirm email address " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-        log("/*19.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        log("/*20.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        log("/*21.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
         log("/*23----Go to Appointment Tab --*/");
         PersonAccountPage.goToVaccineScheduleTab(driver);
 
@@ -176,7 +148,7 @@ public class E2E_Consumption_CP extends BaseTest {
         log("/*39.---Open Today's appointments from Home page --*/");
         InClinicExperiencePage.clickTodayAppointments(driver);
         log("/*40.---Open Today appointment Details --*/");
-        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+        Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
         log("/*41.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 

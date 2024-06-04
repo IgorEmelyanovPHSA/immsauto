@@ -42,42 +42,45 @@ public class CheckInBetterManagement_CP extends BaseTest {
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
+        Thread.sleep(500);
         UserDefaultsPage.clickBtnSave(driver);
 
 
         log("/*6.----Navigate to More -> Register --*/");
+        Thread.sleep(500);
         MainPageCP.navigateToRegisterClientPage(driver);
 
         log("/*7.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
-        log("/*9.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
-        log("/*10.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
-        log("/*11.----Enter Postal code " + client_data.get("postalCode") +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
-        log("/*12.----Enter PHN " + client_data.get("personalHealthNumber") +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
-
-        log("/*14.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*16.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " + client_data.get("email") +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
-        log("/*18.----'Confirm email address " + client_data.get("email") +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
-        log("/*19.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        log("/*20.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        log("/*21.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
+//        log("/*8.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
+//        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+//        log("/*9.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
+//        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+//        log("/*10.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
+//        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
+//        log("/*11.----Enter Postal code " + client_data.get("postalCode") +"--*/");
+//        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+//        log("/*12.----Enter PHN " + client_data.get("personalHealthNumber") +"--*/");
+//        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
+//
+//        log("/*14.----click Verify PHN button --*/");
+//        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
+//        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
+//        CitizenPrimaryInfo.successMessageAppear(driver);
+//
+//        log("/*16.----click Next button --*/");
+//        CitizenPrimaryInfo.clickNextButton(driver);
+//        log("/*17.----'Enter email address " + client_data.get("email") +"--*/");
+//        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+//        log("/*18.----'Confirm email address " + client_data.get("email") +"--*/");
+//        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
+//        log("/*19.---Click review details Button--*/");
+//        CitizenPrimaryInfo.clickReviewDetails(driver);
+//        log("/*20.----Click register Button on confirmation page--*/");
+//        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
+//        log("/*21.--toast success message - 'Success' --*/");
+//        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
 
         //--- Navigate to Citizen Profile->Related Tab
         try {
@@ -218,34 +221,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         MainPageCP.navigateToRegisterClientPage(driver);
 
         InClinicExperiencePage.clickRegisterButton(driver);
-        log("/*8.----Enter First Name " + client_data.get("legalFirstName") +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
-        log("/*9.----Enter Last Name " + client_data.get("legalLastName") +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
-        log("/*10.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy") +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"));
-        log("/*11.----Enter Postal code " + client_data.get("postalCode") +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
-        log("/*12.----Enter PHN " + client_data.get("personalHealthNumber") +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
-
-        log("/*14.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-        log("/*15.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*16.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-        log("/*17.----'Enter email address " + client_data.get("email") +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
-        log("/*18.----'Confirm email address " + client_data.get("email") +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
-        log("/*19.---Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-        log("/*20.----Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        log("/*21.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 
         //Book the Appointment for Covid
         PersonAccountPage.goToVaccineScheduleTab(driver);

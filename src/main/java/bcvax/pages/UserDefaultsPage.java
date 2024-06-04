@@ -151,17 +151,24 @@ public class UserDefaultsPage extends BasePage{
             input_date = driver.findElement(input_date_path);
             input_date.isEnabled();
             input_date.clear();
+            Thread.sleep(500);
+            input_date.sendKeys(todayAsString);
+            Thread.sleep(500);
+            input_date.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
         } catch(StaleElementReferenceException ex) {
             System.out.println("***DEBUG*** Stale element exception ***");
             Thread.sleep(500);
             waitForElementToBeEnabled(driver, input_date_path, 10);
             input_date = driver.findElement(input_date_path);
             input_date.clear();
+            Thread.sleep(500);
+            input_date.sendKeys(todayAsString);
+            Thread.sleep(500);
+            input_date.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
         }
-        input_date.sendKeys(todayAsString);
-        Thread.sleep(2000);
-        input_date.sendKeys(Keys.ENTER);
-        Thread.sleep(500);
+
         try {
             closeSuccessDialog(driver);
             Thread.sleep(500);

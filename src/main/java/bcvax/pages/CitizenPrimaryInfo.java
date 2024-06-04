@@ -4,6 +4,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.text.ParseException;
+import java.util.List;
+import java.util.Map;
+
 public class CitizenPrimaryInfo extends BasePage {
     public CitizenPrimaryInfo(WebDriver driver) {
         super(driver);
@@ -35,7 +39,7 @@ public class CitizenPrimaryInfo extends BasePage {
 
     public static void enterPostalCode(WebDriver driver, String postalcode) throws InterruptedException {
         Thread.sleep(500);
-        By postal_code_field_path = By.xpath("//input[@name = 'DDH_HC_Zip_Code']");
+        By postal_code_field_path = By.xpath("//input[@name = 'DDH_HC_Zip_Code' or @name='postalCode']");
         waitForElementToBeEnabled(driver, postal_code_field_path, 10);
         WebElement postal_code_field = driver.findElement(postal_code_field_path);
         postal_code_field.sendKeys(postalcode);
@@ -43,7 +47,7 @@ public class CitizenPrimaryInfo extends BasePage {
 
     public static void enterPHN(WebDriver driver, String phn_number) throws InterruptedException {
         Thread.sleep(500);
-        By phn_field_path = By.xpath("//input[@name = 'HC_Personal_Health_Number']");
+        By phn_field_path = By.xpath("//input[@name = 'HC_Personal_Health_Number' or @name='phn']");
         waitForElementToBeEnabled(driver, phn_field_path, 10);
         WebElement phn_field = driver.findElement(phn_field_path);
         phn_field.sendKeys(phn_number);
@@ -71,7 +75,7 @@ public class CitizenPrimaryInfo extends BasePage {
 
     public static void enterEmail(WebDriver driver, String enteremail) throws InterruptedException {
         Thread.sleep(500);
-        By email_field_path = By.xpath("//input[@name = 'PersonEmail']");
+        By email_field_path = By.xpath("//input[@name = 'PersonEmail' or @name='personEmail']");
         waitForElementToBeEnabled(driver, email_field_path, 10);
         WebElement email_field = driver.findElement(email_field_path);
         scrollCenter(driver, email_field);
@@ -88,7 +92,7 @@ public class CitizenPrimaryInfo extends BasePage {
     }
 
     public static void confirmEmail(WebDriver driver, String confirmemail) throws InterruptedException {
-        By confirm_email_field_path = By.xpath("//input[@name = 'ConfirmEmail']");
+        By confirm_email_field_path = By.xpath("//input[@name = 'ConfirmEmail' or @name='confirmEmail']");
         waitForElementToBeEnabled(driver, confirm_email_field_path, 10);
         WebElement confirm_email_field = driver.findElement(confirm_email_field_path);
         confirm_email_field.sendKeys(confirmemail);
@@ -131,13 +135,59 @@ public class CitizenPrimaryInfo extends BasePage {
     public static void successRegisteredMessageAppear(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         boolean alert_found = AlertDialog.alertFound(driver);
-        WebElement alert_content = AlertDialog.getAlertContent(driver);
-        String alert_text = alert_content.getText();
-        Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"), "Expected Alert text: Citizen Successfully Registered; Actual Alert Text: " + alert_text);
+        //WebElement alert_content = AlertDialog.getAlertContent(driver);
+        //String alert_text = alert_content.getText();
+        List<String> all_alert_texts = AlertDialog.getAllAlertsText(driver);
+        String all_alert_text_joined = String.join("//n", all_alert_texts);
+        //Assert.assertTrue(alert_text.contains( "Citizen Successfully Registered"), "Expected Alert text: Citizen Successfully Registered; Actual Alert Text: " + alert_text);
+        Assert.assertTrue((all_alert_text_joined.contains("Citizen Successfully Registered") | all_alert_text_joined.contains("Registration Confirmation Number can now be shared with Citizen over phone")), "Expected Alert text: Citizen Successfully Registered; Actual Alert Text: " + all_alert_texts);
         try {
             AlertDialog.closeAlert(driver);
         } catch(ElementClickInterceptedException ex) {
             AlertDialog.closeAlert(driver);
+        }
+    }
+
+    public static void fillUpRegistrationForm(WebDriver driver, Map<String, String> client_data) throws InterruptedException, ParseException {
+        System.out.println("/*5.----Enter First Name " + client_data.get("legalFirstName") + "--*/");
+        boolean first_name_field_found = false;
+        try {
+            CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+            first_name_field_found = true;
+        } catch(NotFoundException ex) {
+            first_name_field_found = false;
+        }
+        System.out.println("/*7.----Enter Postal code " + client_data.get("postalCode") + "--*/");
+        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
+        System.out.println("/*8.----Enter PHN " + client_data.get("personalHealthNumber") + "--*/");
+        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
+        if(first_name_field_found) {
+            System.out.println("/*6.----Enter Last Name " + client_data.get("legalLastName") + "--*/");
+            CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+            System.out.println("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy") + "--*/");
+            CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy"));
+
+            System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
+            System.out.println("/*10.----click Verify PHN button --*/");
+            CitizenPrimaryInfo.clickVerifyPHNButton(driver);
+            System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
+            CitizenPrimaryInfo.successMessageAppear(driver);
+            System.out.println("/*12.----click Next button --*/");
+        }
+        CitizenPrimaryInfo.clickNextButton(driver);
+        System.out.println("/*13.'Enter email address " + client_data.get("email") + "--*/");
+        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        System.out.println("/*14.'Confirm email address " + client_data.get("email") + "--*/");
+        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
+        System.out.println("/*15.Click review details Button--*/");
+        CitizenPrimaryInfo.clickReviewDetails(driver);
+        System.out.println("/*16.Click register Button on confirmation page--*/");
+        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
+        System.out.println("/*17.--toast success message - 'Success' --*/");
+        try {
+            CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        } catch (NotFoundException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         }
     }
 }

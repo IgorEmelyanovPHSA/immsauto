@@ -2,9 +2,13 @@ package communityPortal.tests.Appointment_Scheduling_CP;
 
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Map;
 
 public class BookingDose2_COVID19 extends BaseTest {
     private String legalFirstName = "Hugues";
@@ -14,18 +18,25 @@ public class BookingDose2_COVID19 extends BaseTest {
     private String personalHealthNumber = "9746171121";
     //private boolean isIndigenous = false;
     private String email = "accountToDelete@phsa.ca";
-
+    Map<String, String> client_data;
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     //workaround
     //private String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "dose2");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+    }
+
     @Test(priority = 1)
     public void Can_Book_Dose2_Appointment_as_Clerk_CP() throws Exception {
         TestcaseID = "243155";
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
 
         log("/*1.----Login as Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
@@ -35,48 +46,16 @@ public class BookingDose2_COVID19 extends BaseTest {
 
         log("/*3.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
-
-        log("/*4.----Enter First Name: " +legalFirstName +"--*/");
-        CitizenPrimaryInfo.enterFirstName(driver, legalFirstName);
-
-        log("/*5.----Enter Last Name: " +legalLastName +"--*/");
-        CitizenPrimaryInfo.enterLastName(driver, legalLastName);
-
-        log("/*6.----Enter Date of birth: " +dateOfBirth +"--*/");
-        CitizenPrimaryInfo.enterDateOfBirth(driver, dateOfBirth);
-
-        log("/*7.----Enter Postal code: " +postalCode +"--*/");
-        CitizenPrimaryInfo.enterPostalCode(driver, postalCode);
-
-        log("/*8.----Enter PHN: "+personalHealthNumber +"--*/");
-        CitizenPrimaryInfo.enterPHN(driver, personalHealthNumber);
-
-        log("/*10.----click Verify PHN button --*/");
-        CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-
-        log("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-        CitizenPrimaryInfo.successMessageAppear(driver);
-
-        log("/*12.----click Next button --*/");
-        CitizenPrimaryInfo.clickNextButton(driver);
-
-        log("/*13.'Enter email address: " +email +"--*/");
-        CitizenPrimaryInfo.enterEmail(driver, email);
-
-        log("/*14.'Confirm email address: " +email +"--*/");
-        CitizenPrimaryInfo.confirmEmail(driver, email);
-
-        log("/*15.Click review details Button--*/");
-        CitizenPrimaryInfo.clickReviewDetails(driver);
-
-        log("/*16.Click register Button on confirmation page--*/");
-        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-
-        log("/*17.--toast success message - 'Success' --*/");
-        CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
+        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 
         log("/*19.----Go to Appointment Tab --*/");
-        PersonAccountPage.goToVaccineScheduleTab(driver);
+        try {
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        }
 
         log("/*20.---Select vaccination type: " + vaccineToSelect + "--*/");
         try {

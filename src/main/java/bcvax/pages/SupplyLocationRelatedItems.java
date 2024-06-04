@@ -123,7 +123,7 @@ public class SupplyLocationRelatedItems extends BasePage {
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
         for(Map<String, WebElement> my_record: my_records) {
-            if(container.equals(my_record.get("Supply Container Name").getText())) {
+            if(my_record.get("Supply Container Name").getText().contains(container)) {
                 WebElement action = my_record.get("Actions");
                 action.click();
                 boolean menu_visible = false;

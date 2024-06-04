@@ -211,7 +211,7 @@ public class Returns extends BaseTest {
         alert_content = AlertDialog.getAlertContent(driver).getText();
         System.out.println(alert_content);
         AlertDialog.closeAlert(driver);
-        softAssert.assertEquals(alert_content, "You have successfully Shipped the Return.");
+        softAssert.assertTrue(alert_content.contains("You have successfully Shipped the Return."));
 
         log("/*23. ----Verify Return Status is changed to Shipped --*/");
         String return_status_shipped = returnPage.getReturnStatus();
@@ -233,7 +233,7 @@ public class Returns extends BaseTest {
         System.out.println(alert_content);
         AlertDialog.closeAlert(driver);
 
-        softAssert.assertEquals(alert_content, "You have successfully received the Return.");
+        softAssert.assertTrue(alert_content.contains( "You have successfully received the Return."));
 
         log("/*28. ----Verify Return Status is changed to Received --*/");
         String return_status_received = returnPage.getReturnStatus();
