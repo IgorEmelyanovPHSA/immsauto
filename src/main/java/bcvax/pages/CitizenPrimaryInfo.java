@@ -29,6 +29,14 @@ public class CitizenPrimaryInfo extends BasePage {
         last_name_field.sendKeys(lastname);
     }
 
+    public static void enterMiddleName(WebDriver driver, String middlename) throws InterruptedException {
+        Thread.sleep(500);
+        By middle_name_field_path = By.xpath("//input[@name = 'MiddleName']");
+        waitForElementToBeEnabled(driver, middle_name_field_path, 10);
+        WebElement last_name_field = driver.findElement(middle_name_field_path);
+        last_name_field.sendKeys(middlename);
+    }
+
     public static void enterDateOfBirth(WebDriver driver, String dateofbirth) throws InterruptedException {
         Thread.sleep(500);
         By date_of_birth_field_path = By.xpath("//input[@name = 'PersonBirthdate']");
@@ -164,6 +172,8 @@ public class CitizenPrimaryInfo extends BasePage {
         if(first_name_field_found) {
             System.out.println("/*6.----Enter Last Name " + client_data.get("legalLastName") + "--*/");
             CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
+            System.out.println("/*6.----Enter Middle Name " + client_data.get("legalMiddleName") + "--*/");
+            CitizenPrimaryInfo.enterMiddleName(driver, client_data.get("legalMiddleName"));
             System.out.println("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy") + "--*/");
             CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy"));
 

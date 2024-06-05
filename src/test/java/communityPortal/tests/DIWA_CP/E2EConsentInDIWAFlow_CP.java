@@ -94,9 +94,15 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         DiwaImmunizationRecord.clickTimeBox(driver);
         log("/*---13. Click Record Immunization ---*/");
         DiwaImmunizationRecord.clickRecordImmunization(driver);
-        List<Map<String, WebElement>> consent_table = DiwaImmunizationRecord.getInformedConsentTable(driver);
-        Assert.assertTrue(consent_table.size() > 1, "Active Consent record is not displayed");
-
+        try {
+            List<Map<String, WebElement>> consent_table = DiwaImmunizationRecord.getInformedConsentTable(driver);
+            Assert.assertTrue(consent_table.size() > 1, "Active Consent record is not displayed");
+        } catch(NotFoundException ex) {
+            DiwaImmunizationRecord.clickPotentialDuplicateYes(driver);
+            Thread.sleep(500);
+            List<Map<String, WebElement>> consent_table = DiwaImmunizationRecord.getInformedConsentTable(driver);
+            Assert.assertTrue(consent_table.size() > 1, "Active Consent record is not displayed");
+        }
         boolean record_consent_btn_exists = DiwaImmunizationRecord.recordConsentBtnExists(driver);
         Assert.assertTrue(record_consent_btn_exists, "Record Consent button is not displayed");
 

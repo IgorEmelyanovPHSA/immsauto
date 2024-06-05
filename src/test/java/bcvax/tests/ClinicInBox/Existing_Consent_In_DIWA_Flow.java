@@ -7,6 +7,7 @@ import constansts.Apps;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -18,12 +19,6 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     String env;
     String consumptionRoute;
     Map<String, Object> testData;
-    private String legalFirstName = "Rawley";
-    private String legalLastName = "BCVaxIsmirnioglou";
-    private String legalMiddleName = "Marijo";
-    private String personal_health_number = "9746173039";
-    private String date_of_birth = "1959-01-23";
-    private String postal_code = "V2X9T1";
     String participant_name;
     String consentProvider;
     String agent;
@@ -32,7 +27,12 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     String site_to_select;
     String clinic_location = "All Ages - Atlin Health Centre";
     MainPageOrg orgMainPage;
-
+    Map<String, String> client_data;
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "consent");
+    }
     @Test(testName = "Create DIWA Immunisation record with Active Consent for the selected agent")
     public void Can_Create_DIWA_Immunisation_record_with_Active_consent() throws Exception {
         TestcaseID = "275966";
@@ -44,9 +44,9 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         agent = String.valueOf(testData.get("vaccineAgent"));
         lot_to_select = String.valueOf(testData.get("covidLot"));
         log("Target Environment: "+ env);
-        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(personal_health_number);
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
         log("/*----1. Login as an DIWA to CIB  --*/");
-        participant_name = legalFirstName + " " + legalMiddleName + " " + legalLastName;
+        participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
         loginPage.loginAsImmsBCAdmin();
         ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
         orgMainPage = new MainPageOrg(driver);

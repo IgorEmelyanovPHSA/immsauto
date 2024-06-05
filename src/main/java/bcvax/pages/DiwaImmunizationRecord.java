@@ -385,9 +385,9 @@ public class DiwaImmunizationRecord extends BasePage {
 
     public static void clickPotentialDuplicateYes(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By cancel_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']/footer//button[text()='Yes']");
-        waitForElementToBeEnabled(driver, cancel_btn_path, 20);
-        WebElement cnncel_btn = driver.findElement(cancel_btn_path);
-        cnncel_btn.click();
+        By yes_btn_path = By.xpath("//div[@c-bchcmodal_bchcmodal and @class='slds-modal__container']/footer//button[text()='Yes']");
+        waitForElementToBeEnabled(driver, yes_btn_path, 20);
+        WebElement yes_btn = driver.findElement(yes_btn_path);
+        yes_btn.click();
     }
 }
