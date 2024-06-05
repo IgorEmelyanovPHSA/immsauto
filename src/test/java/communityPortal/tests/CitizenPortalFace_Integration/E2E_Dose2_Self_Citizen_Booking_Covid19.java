@@ -8,19 +8,6 @@ import org.testng.annotations.Test;
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
-
-//    private String legalFirstName = "Hugues";
-//    private String legalLastName = "BCVaxLampard";
-//    private String legalMiddleName = "";
-//    private String dateOfBirth = "March 3, 1904";
-//    private String postalCode = "V1N3Q3";
-//    private String personalHealthNumber = "9746171121";
-//    private boolean isIndigenous = false;
-//    private String email = "accountToDelete@phsa.ca";
-//    private String phoneNumber = "6041234568";
-//    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-//    private String vaccineToSelect = "Covid19Vaccine";
-
     private String legalFirstName = "Alexandro";
     private String legalLastName = "BCVaxDa Costa";
     private String legalLastNameASCII = "BCVaxDa%20Costa";

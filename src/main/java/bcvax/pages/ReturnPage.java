@@ -45,11 +45,7 @@ public class ReturnPage extends BasePage {
                 .concat("//span[@class='test-id__field-label' and text()='Returned From']//a"));
         waitForElementToBeEnabled(driver, return_from_path, 10);
         WebElement return_from = driver.findElement(return_from_path);
-        if(return_from.getText().isEmpty()) {
-            return return_from.findElement(By.xpath(".//span")).getText();
-        } else {
-            return return_from.getText();
-        }
+        return return_from.getAttribute("innerText");
     }
 
     public Map<String, WebElement> getReturnLineItemsTable() throws InterruptedException {
@@ -71,7 +67,7 @@ public class ReturnPage extends BasePage {
     }
 
     public String getReturnLocationHistoryId(WebElement table_value) {
-        return table_value.findElement(By.xpath(".//a//span")).getText();
+        return table_value.findElement(By.xpath(".//a//span")).getAttribute("innerText");
     }
 
     public String getReturnLocationHistoryIdCP(WebElement table_value) {
