@@ -61,6 +61,12 @@ public class Check_In_Workflow extends BaseTest {
         InClinicExperiencePage.clickClientListTab(driver);
         InClinicExperiencePage.clickTodayAppointments(driver);
         Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+        if(my_appointment_info.size() == 0) {
+            driver.navigate().refresh();
+            Thread.sleep(500);
+            InClinicExperiencePage.clickTodayAppointments(driver);
+            my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+        }
         String my_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_appointment_info);
         log("/*6.----Verify no Imms record was created --*/");
         Assert.assertTrue(my_status.isEmpty());

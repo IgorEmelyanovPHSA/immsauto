@@ -70,11 +70,11 @@ public class DIWA_CIB extends BaseTest {
 		log("/*----8. Click confirm Button on the popup window---*/");
 		try {
 			log("/*----10. Select COVID19-mRNA as an Option  ---*/");
-			DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
+			DiwaImmunizationRecord.selectAgent(driver, "COVID-19 mRNA");
 		} catch(Exception ex) {
 			PersonAccountPage.confirmNoForecastWarning(driver);
 			log("/*----10. Select COVID19-mRNA as an Option  ---*/");
-			DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
+			DiwaImmunizationRecord.selectAgent(driver, "COVID-19 mRNA");
 		}
 
 

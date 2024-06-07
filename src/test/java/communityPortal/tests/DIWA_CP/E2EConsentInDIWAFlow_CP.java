@@ -87,7 +87,7 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         log("/*----9. Select an Option ---*/)");
         DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
         log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
-        DiwaImmunizationRecord.selectOption(driver, agent);
+        DiwaImmunizationRecord.selectAgent(driver, agent);
         log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
         DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
         log("/*---12. Select a Date and Time of Administration ---*/");
@@ -141,7 +141,7 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         log("/*----9. Select an Option ---*/)");
         DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
         log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
-        DiwaImmunizationRecord.selectOption(driver, "Pneumo-P-23");
+        DiwaImmunizationRecord.selectAgent(driver, "Pneumo-P-23");
         log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
         DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
         log("/*---12. Select a Date and Time of Administration ---*/");
