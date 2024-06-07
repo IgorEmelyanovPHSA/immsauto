@@ -18,7 +18,7 @@ public class CitizenCanCreateAndViewNotes extends BaseTest {
 
 	@Test
 	public void citizenCreateMyNote() throws Exception {
-		TestcaseID = "291362"; //C291362
+		TestcaseID = "306812"; //Original TC C291362
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Test Case " +"C" +TestcaseID);
 

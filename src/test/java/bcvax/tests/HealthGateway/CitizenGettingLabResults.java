@@ -21,7 +21,7 @@ public class CitizenGettingLabResults extends BaseTest {
 
 	@Test
 	public void viewAndValidateLabResults() throws Exception {
-		TestcaseID = "291524"; //C291524
+		TestcaseID = "306813"; //Original TC C291524
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Test Case " +"C" +TestcaseID);
 

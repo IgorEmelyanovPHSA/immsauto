@@ -17,7 +17,7 @@ public class CitizenWithProtectiveWordRetrieveMedication extends BaseTest {
 
 	@Test
 	public void citizenCanAccessProtectiveInformation() throws Exception {
-		TestcaseID = "296513"; //C296513
+		TestcaseID = "306816"; //Original TC C296513
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Test Case " +"C" +TestcaseID);
 

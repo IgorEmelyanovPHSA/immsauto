@@ -2,6 +2,7 @@
 
     import io.qameta.allure.Step;
     import org.openqa.selenium.By;
+    import org.openqa.selenium.JavascriptExecutor;
     import org.openqa.selenium.WebDriver;
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.support.FindBy;
@@ -135,7 +136,7 @@
         @Step
         public void selectFilterLabResults() throws InterruptedException {
             //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(12000);
+            Thread.sleep(14000);
             click(btnDropDownCategories);
             click(dropDownSelectionLabResults);
             click(btnApply);
@@ -145,7 +146,7 @@
         @Step
         public void selectFilterImagingReports() throws InterruptedException {
             //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(12000);
+            Thread.sleep(14000);
             click(btnDropDownCategories);
             click(dropDownSelectionImagingReports);
             click(btnApply);
@@ -237,6 +238,9 @@
         }
 
         public void deleteCommentsForRecord() throws InterruptedException {
+            //Temp solution for status bar on the battom
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0, 500)");
             int numberOfComments = getNumberOfCommentsForFirstImgReport();
             for(int i = 0; i < numberOfComments; i++){
                 click(btnDeleteFirstCommentForFirstImgReport);

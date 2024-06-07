@@ -20,7 +20,7 @@ public class CitizenGettingImagingReports extends BaseTest {
 
 	@Test
 	public void viewAndValidateImagingReports() throws Exception {
-		TestcaseID = "293392"; //C293392
+		TestcaseID = "306814"; //Original TC C293392
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Test Case " +"C" +TestcaseID);
 

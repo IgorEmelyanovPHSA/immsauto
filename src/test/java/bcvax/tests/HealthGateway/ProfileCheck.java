@@ -24,7 +24,7 @@ public class ProfileCheck extends BaseTest {
 
 	@Test
 	public void citizenChekOwnProfileData() throws Exception {
-		TestcaseID = "299850"; //C299850
+		TestcaseID = "306817"; //Original TC C299850
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Test Case " +"C" +TestcaseID);
 
