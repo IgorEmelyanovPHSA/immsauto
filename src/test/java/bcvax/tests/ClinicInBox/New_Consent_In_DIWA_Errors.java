@@ -4,8 +4,6 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -13,7 +11,6 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,7 +73,7 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		log("/*----9. Select an Option ---*/)");
 		DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
 		log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
-		DiwaImmunizationRecord.selectOption(driver, "Pneumo-P-23");
+		DiwaImmunizationRecord.selectAgent(driver, "Pneumo-P-23");
 		log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
 		log("/*---12. Select a Date and Time of Administration ---*/");

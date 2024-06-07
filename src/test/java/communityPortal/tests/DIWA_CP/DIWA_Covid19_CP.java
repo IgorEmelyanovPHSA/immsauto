@@ -65,7 +65,7 @@ public class DIWA_Covid19_CP extends BaseTest {
         }
         Thread.sleep(2000);
         log("/*----8. Select COVID19-mRNA as an Option  ---*/");
-        DiwaImmunizationRecord.selectOption(driver, "COVID-19 mRNA");
+        DiwaImmunizationRecord.selectAgent(driver, "COVID-19 mRNA");
 
         log("/*----9. Enter a Clinic Location: " +clinicLocation +"---*/");
         DiwaImmunizationRecord.searchClinicLocation(driver, clinicLocation);

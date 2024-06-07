@@ -66,9 +66,17 @@ public class ClientListTodayAppointmentsTab extends BasePage {
         WebElement today_appointments_table_node = driver.findElement(today_appointments_table_path);
         GenericTable today_appointments_table = new GenericTable(today_appointments_table_node);
         List<Map<String, WebElement>> today_appointments_map = today_appointments_table.getRowsMappedToHeadings();
-        if(today_appointments_map.size() < 2) {
+        int attempts = 0;
+        while(today_appointments_map.size() < 2) {
             Thread.sleep(2000);
             today_appointments_map = today_appointments_table.getRowsMappedToHeadings();
+            attempts++;
+            //Try 10 times
+            System.out.println("Map Size: " + today_appointments_map.size());
+            System.out.println("Attempt: " + attempts);
+            if(attempts > 10) {
+                break;
+            }
         }
         for(Map<String, WebElement> my_row: today_appointments_map) {
             if(my_row.get("PHN").getText().equals(client_phn)) {

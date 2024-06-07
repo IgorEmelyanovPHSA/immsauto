@@ -77,10 +77,10 @@ public class DIWA_ICE extends BaseTest {
 		log("/*----10. Click confirm Button on the popup window---*/");
 		try {
 			log("/*----12. Select COVID19-mRNA as an Option  ---*/");
-			DiwaImmunizationRecord.selectOption(driver, vaccine_to_select);
+			DiwaImmunizationRecord.selectAgent(driver, vaccine_to_select);
 		} catch(Exception ex) {
 			PersonAccountPage.confirmNoForecastWarning(driver);
-			DiwaImmunizationRecord.selectOption(driver, vaccine_to_select);
+			DiwaImmunizationRecord.selectAgent(driver, vaccine_to_select);
 		}
 
 

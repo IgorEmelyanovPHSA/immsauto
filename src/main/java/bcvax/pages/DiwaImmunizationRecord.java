@@ -1,7 +1,6 @@
 package bcvax.pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,7 +19,7 @@ public class DiwaImmunizationRecord extends BasePage {
         Thread.sleep(500);
     }
 
-    public static void selectOption(WebDriver driver, String vaccine) throws InterruptedException {
+    public static void selectAgent(WebDriver driver, String vaccine) throws InterruptedException {
         Thread.sleep(500);
         By select_agent_path = By.xpath("//select[@data-id='agent']");
         waitForElementToBeEnabled(driver, select_agent_path, 10);
@@ -31,8 +30,7 @@ public class DiwaImmunizationRecord extends BasePage {
             if(my_option.getAttribute("label").equals(vaccine)) {
                 select_agent.click();
                 my_option.click();
-                Thread.sleep(500);
-                select_agent.sendKeys(Keys.ENTER);
+                Thread.sleep(1000);
                 break;
             }
         }
