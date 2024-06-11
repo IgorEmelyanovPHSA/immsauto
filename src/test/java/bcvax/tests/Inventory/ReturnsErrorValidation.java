@@ -3,7 +3,6 @@ package bcvax.tests.Inventory;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.Assert;
@@ -52,13 +51,13 @@ public class ReturnsErrorValidation extends BaseTest {
 
         log("/*b.----Receive Supplies for Flu --*/");
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
-        supplyConsolePage.clickSupplyItemTextBox();
-        SupplyConsolePage.selectSupplyItem(driver, supply_item);
-        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
+        ReceiveSuppliesDialog.clickSupplyItemTextBox(driver);
+        ReceiveSuppliesDialog.selectSupplyItem(driver, supply_item);
+        ReceiveSuppliesDialog.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
-        supplyConsolePage.selectIncomingSupplyDistributionReceive();
-        supplyConsolePage.selectReasonForReception();
-        supplyConsolePage.ClickSaveButton();
+        ReceiveSuppliesDialog.selectSupplyDistributionTo(driver);
+        ReceiveSuppliesDialog.selectReasonForReception(driver);
+        ReceiveSuppliesDialog.clickSaveButton(driver);
 
         log("/*d.----Create Wastage for the Flu Container --*/");
         //Create Wastage Record for Flu supply item

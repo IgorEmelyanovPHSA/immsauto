@@ -247,6 +247,8 @@ public class DiwaImmunizationRecord extends BasePage {
         By dosage_field_path = By.xpath("//label[text() = 'Dosage']/..//button");
         waitForElementToBeEnabled(driver, dosage_field_path, 10);
         WebElement dosage_input_field = driver.findElement(dosage_field_path);
+        scrollCenter(driver, dosage_input_field);
+        Thread.sleep(500);
         dosage_input_field.click();
         Thread.sleep(500);
         By my_dosage_path = By.xpath("//span[@title = '" + dose + "']");

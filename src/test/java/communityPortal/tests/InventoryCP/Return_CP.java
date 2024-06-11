@@ -2,9 +2,7 @@ package communityPortal.tests.InventoryCP;
 
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import constansts.Apps;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -37,19 +35,20 @@ public class Return_CP extends BaseTest {
         //Login as Admin
         log("/*----Login as Admin --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-
+        MainPageCP.goToSupplyLocation(driver);
         //Get Flu supplies using Receive Supplies feature
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         Thread.sleep(2000);
         log("/*b.----Receive Supplies for Flu --*/");
         SupplyLocationPage.clickReceiveSuppliesButton(driver);
-        supplyConsolePage.clickSupplyItemTextBox();
-        SupplyConsolePage.selectSupplyItem(driver, supply_item);
-        ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
+        supplyConsolePage = new SupplyConsolePage(driver);
+        ReceiveSuppliesDialog.clickSupplyItemTextBox(driver);
+        ReceiveSuppliesDialog.selectSupplyItem(driver, supply_item);
+        ReceiveSuppliesDialog.enterTransferDosages(driver, Double.toString(doses));
         //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
-        supplyConsolePage.selectIncomingSupplyDistributionReceive();
-        supplyConsolePage.selectReasonForReception();
-        supplyConsolePage.ClickSaveButton();
+        ReceiveSuppliesDialog.selectSupplyDistributionTo(driver);
+        ReceiveSuppliesDialog.selectReasonForReception(driver);
+        ReceiveSuppliesDialog.clickSaveButton(driver);
 
         log("/*d.----Create Wastage for the Flu Container --*/");
         //Create Wastage Record for Flu supply item
@@ -73,7 +72,7 @@ public class Return_CP extends BaseTest {
 
         log("/*1.----Login as Clinician--*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
-
+        MainPageCP.goToSupplyLocation(driver);
         log("/*4. ----Open Supply Location " + supply_location_from + " --*/");
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
