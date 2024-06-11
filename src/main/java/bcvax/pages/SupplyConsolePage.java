@@ -47,30 +47,11 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
 	private WebElement btnEditOnTrasactionPage;
 
-	@FindBy(xpath = "//html/body/div[4]/div[1]/section/div[1]/div/div[1]/div[1]/div/div[3]/div/section/div/div/ul/li[6]/div/a/span[2]/span")
-	private WebElement supplyItemsInDropdown;
-
-	private By click_to_select_supply_item1 = By.xpath("//input[@placeholder='Search Supply Items...']");
-
-	private By validate_qty_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Quantity']");
-
-	private By click_to_select_quantity1 = By.xpath("(//input[@class='slds-input'])[2]");
-
-	private By validate_dcf_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Dose Conversion Factor']");
-
-	private By validate_doses_field1 = By.xpath("//label[@class='slds-form-element__label slds-no-flex'][text()='Doses']");
-
-	private By supply_distribution_to_field1 = By.xpath("//label[@class='slds-form-element__label'][text()='Supply Distribution To']");
-
-	private By get_dose_conversion_factor2 = By.xpath("//label[contains(text(),'Dose Conversion Factor')]/parent::div//input");
-
 	@FindBy(xpath = "//label[(text()='Dose Conversion Factor')]/..//input[@type='text']")
 	private WebElement doseConversionFactorForSingleWastage;
 
 	@FindBy(xpath = "//h2[text()='Container - Adjustment']/../..//button[(text()='Adjustment')]")
 	private WebElement btnAdjustmentOnContainerWastagePopUp;
-
-
 
 	@FindBy(xpath = "//h2[text() = 'Container - Wastage']/../..//button[text() = 'Wastage']")
 	private WebElement btnBulkWastageContainerWastagePage;
@@ -81,9 +62,6 @@ public class SupplyConsolePage extends BasePage {
 	///////////////////////////////////////////////////////////////////////////////
 	//Requisition elements
 	///////////////////////////////////////////////////////////////////////////////
-
-	@FindBy(xpath = "//input[@placeholder='Search Supply Distributions...']")
-	private WebElement click_on_search_supply_distributions_to_component;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	Tables tables;
@@ -102,14 +80,6 @@ public class SupplyConsolePage extends BasePage {
 	}
 
 	/*-------------Methods--------------*/
-	public void clickSaveButton() throws InterruptedException {
-		By save_btn_path = By.xpath("//button[contains(text(),'Save')]");
-		waitForElementToBeEnabled(driver, save_btn_path, 10);
-		WebElement save_btn = driver.findElement(save_btn_path);
-		scrollCenter(save_btn);
-		save_btn.click();
-	}
-
 	public static void clickSupplyLocationsTab(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
 		By supply_location_tab_path = By.xpath("(//span[@class = 'slds-truncate'])[2]/..");
@@ -822,50 +792,6 @@ public class SupplyConsolePage extends BasePage {
 		supply_location_item.click();
 	}
 
-	public String validateSupplyItemField() throws InterruptedException {
-		Thread.sleep(500);
-		By supply_item_label = By.xpath("//label[@class='slds-form-element__label' and text() = 'Supply Item']");
-		waitForElementToBeLocated(driver, supply_item_label, 10);
-		WebElement element = driver.findElement(supply_item_label);
-		return element.getText();
-	}
-
-	public void clickSupplyItemTextBox() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_to_select_supply_item1, 10);
-		WebElement element1 = driver.findElement(click_to_select_supply_item1);
-		JavascriptExecutor executor1 = (JavascriptExecutor) driver;
-		executor1.executeScript("arguments[0].click();", element1);
-	}
-
-	public static void selectSupplyItem(WebDriver driver, String supplyItem) throws InterruptedException {
-		By supply_item_field = By.xpath("//label[@class='slds-form-element__label' and text() = 'Supply Item']/..//input");
-		waitForElementToBeLocated(driver, supply_item_field, 10);
-		WebElement element = driver.findElement(supply_item_field);
-		element.sendKeys(supplyItem);
-		Thread.sleep(500);
-		By supply_item = By.xpath("//lightning-base-combobox-formatted-text[@title = '" + supplyItem + "']");
-		waitForElementToBeLocated(driver, supply_item, 10);
-		WebElement search_input = driver.findElement(supply_item);
-		search_input.click();
-		By close_modal_box_path = By.xpath("//button[@data-aura-class = 'uiButton--modal-closeBtn uiButton' and @title = 'Close this window']");
-		try {
-			Thread.sleep(500);
-			driver.findElement(close_modal_box_path).click();
-		} catch(Exception ex) {
-			System.out.println("No modal box. Continue...");
-		}
-	}
-
-	public SupplyConsolePage selectSupplyItemTo(String supplyItem) throws InterruptedException {
-		Thread.sleep(500);
-		log(" -- select supply item  -  " + supplyItem);
-		By search_supply_item_path = By.xpath("//input[contains(@placeholder,'Search Supply Items')]");
-		waitForElementToBeEnabled(driver, search_supply_item_path, 10);
-		WebElement search_supply_items = driver.findElement(search_supply_item_path);
-		selectSupplyTo(search_supply_items, supplyItem);
-		return this;
-	}
-
 	@Step
 	private void selectSupplyTo(WebElement element, String location) throws InterruptedException {
 		log(" -- select to  -  " + location);
@@ -890,97 +816,6 @@ public class SupplyConsolePage extends BasePage {
 		return this;
 	}
 
-	public String validateQTYField() throws InterruptedException {
-		WebElement element = driver.findElement(validate_qty_field1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
-	}
-
-	public void enterQuantity() throws InterruptedException {
-		waitForElementToBeLocated(driver, click_to_select_quantity1, 10);
-		WebElement element = driver.findElement(click_to_select_quantity1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		click(click_to_select_quantity1);
-		element.clear();
-		Thread.sleep(500);
-		element.sendKeys("1");
-	}
-
-	public String validateDCFField() throws InterruptedException {
-		WebElement element = driver.findElement(validate_dcf_field1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
-	}
-
-	public String validateDosesField() throws InterruptedException {
-		WebElement element = driver.findElement(validate_doses_field1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
-	}
-
-	public String validateSupplyDistributionToField() throws InterruptedException {
-		WebElement element = driver.findElement(supply_distribution_to_field1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		element.getText();
-		return (element.getText());
-	}
-
-	public SupplyConsolePage selectReasonForReception() throws InterruptedException {
-		Thread.sleep(500);
-		By select_reason_path = By.xpath("//button[@name='BCH_Reason_for_Reception__c']");
-		waitForElementToBeEnabled(driver, select_reason_path, 10);
-		WebElement select_reason_btn = driver.findElement(select_reason_path);
-		select_reason_btn.click();
-		Thread.sleep(500);
-		By select_other_reason_path = By.xpath("//lightning-base-combobox-item[@data-value='Other']");
-		waitForElementToBeEnabled(driver, select_other_reason_path, 10);
-		WebElement reason_other_item = driver.findElement(select_other_reason_path);
-		reason_other_item.click();
-		return this;
-	}
-
-	public void ValidateSaveButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
-		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
-		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
-		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
-		save_receive_supplies_btn.isDisplayed();
-	}
-
-	public void ValidateCancelButtonIsDisplayedOnReceiveSupplies() throws InterruptedException {
-		By cancel_receive_supplies_btn_path = By.xpath("(//span[contains(text(),'Cancel')])[2]");
-		waitForElementToBeEnabled(driver, cancel_receive_supplies_btn_path, 10);
-		WebElement cancel_receive_supplies_btn = driver.findElement(cancel_receive_supplies_btn_path);
-		cancel_receive_supplies_btn.isDisplayed();
-	}
-
-	public void ClickSaveButton() throws InterruptedException {
-		Thread.sleep(500);
-		By save_receive_supplies_btn_path = By.xpath("//button[contains(text(),'Save')]");
-		waitForElementToBeEnabled(driver, save_receive_supplies_btn_path, 10);
-		WebElement save_receive_supplies_btn = driver.findElement(save_receive_supplies_btn_path);
-		scrollCenter(save_receive_supplies_btn);
-		Thread.sleep(500);
-		save_receive_supplies_btn.click();
-		Thread.sleep(500);
-		//Try to find and close the Success Dialogue
-		By success_message_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
-		try {
-			waitForElementToBeEnabled(driver, success_message_close_btn_path, 5);
-			WebElement close_success_dialog = driver.findElement(success_message_close_btn_path);
-			close_success_dialog.click();
-			Thread.sleep(500);
-		} catch(Exception ex) {
-			System.out.println("*** Warning *** No Receive Supplies success message Appeared. Continue...");
-		}
-	}
-
 	public double getDoseConversionFactorReceive() throws InterruptedException {
 		By dose_conversion_factor_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Supply_Item__c.HC_Product_Measure__c']//lightning-formatted-number");
 		waitForElementToBeEnabled(driver, dose_conversion_factor_path, 10);
@@ -988,34 +823,6 @@ public class SupplyConsolePage extends BasePage {
 		String dose_conversion_factor_string = element.getText();
 		Double dose_conversion_factor = Double.parseDouble(dose_conversion_factor_string.replaceAll(",", ""));
 		return (dose_conversion_factor);
-	}
-	public double getDoseConversionFactorOnReceive() {
-		waitForElementToBePresent(driver, get_dose_conversion_factor2, 10);
-		double value = Double.parseDouble(driver.findElement(get_dose_conversion_factor2).getAttribute("value"));
-		log(" -- dose conversation factore  -  " + value);
-		return value;
-	}
-
-	public void selectIncomingSupplyDistributionReceive() throws InterruptedException {
-		Thread.sleep(500);
-		By supply_distribution_to_path = By.xpath("//button[@name='distributionBox']");
-		waitForElementToBeEnabled(driver, supply_distribution_to_path, 5);
-		WebElement element = driver.findElement(supply_distribution_to_path);
-		scrollCenter(element);
-		element.click();
-		Thread.sleep(500);
-		By supply_distributor_path = By.xpath("(//span[contains(text(),'- SDST-000')])[1]");
-		try {
-			waitForElementToBeEnabled(driver, supply_distributor_path, 5);
-			WebElement myDistributor = driver.findElement(supply_distributor_path);
-			myDistributor.click();
-		} catch(Exception ex) {
-			element.click();
-			Thread.sleep(500);
-			waitForElementToBeEnabled(driver, supply_distributor_path, 10);
-			WebElement myDistributor = driver.findElement(supply_distributor_path);
-			myDistributor.click();
-		}
 	}
 
 	@Step
@@ -1058,27 +865,5 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(driver.findElement(locationTo));
 		driver.findElement(locationTo).click();
 		waitForElementNotToBeVisible(driver, locationTo, 10);
-	}
-
-	public void clickCloseAlert() throws InterruptedException {
-		Thread.sleep(500);
-		By alert_close_btn_path = By.xpath("//div[@role='alertdialog']/button[@title='Close']");
-		waitForElementToBeEnabled(driver, alert_close_btn_path, 10);
-		System.out.println("***Debug-- Alert Close Button is found");
-		WebElement alert_close_btn = driver.findElement(alert_close_btn_path);
-		try {
-			alert_close_btn.click();
-		} catch(ElementClickInterceptedException ex) {
-			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
-			Thread.sleep(1000);
-			alert_close_btn = driver.findElement(alert_close_btn_path);
-			alert_close_btn.click();
-		}
-		catch(ElementNotInteractableException ex) {
-			System.out.println("***DEBUG*** Element not clickable. Wait 1 sec and try again");
-			Thread.sleep(1000);
-			alert_close_btn = driver.findElement(alert_close_btn_path);
-			alert_close_btn.click();
-		}
 	}
 }

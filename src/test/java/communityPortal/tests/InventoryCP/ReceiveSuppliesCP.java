@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.Map;
 
-import static constansts.Domain.*;
 import static org.testng.Assert.assertEquals;
 
 
@@ -58,35 +57,35 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- Receive Supplies --*/");
 		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 		Thread.sleep(2000);
-		supplyConsolePage.selectSupplyItemTo(lot);
-		ContainerTransferForm.enterTransferDosages(driver, String.valueOf(doses));
-		supplyConsolePage.selectReasonForReception();
-		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
+		ReceiveSuppliesDialog.selectSupplyItem(driver, lot);
+		ReceiveSuppliesDialog.enterTransferDosages(driver, String.valueOf(doses));
+		ReceiveSuppliesDialog.selectReasonForReception(driver);
+		double doseConversionFactor = ReceiveSuppliesDialog.getDoseConversionFactor(driver);
 
 		log("/*-- Validate Layout Text --*/");
-		String supplyItem = supplyConsolePage.validateSupplyItemField();
+		String supplyItem = ReceiveSuppliesDialog.validateSupplyItemField(driver);
 		String expectedSupplyItemLabel = "*Supply Item";
 		Assert.assertEquals((supplyItem), (expectedSupplyItemLabel));
 
-		String qty = supplyConsolePage.validateQTYField();
+		String qty = ReceiveSuppliesDialog.getQuantityLabel(driver);
 		String expectedQtyLabel = "Quantity";
 		Assert.assertEquals(qty, expectedQtyLabel);
 
-		String dcf = supplyConsolePage.validateDCFField();
+		String dcf = ReceiveSuppliesDialog.getDoseConversionFactorLabel(driver);
 		String expectedDcfLabel = "Dose Conversion Factor";
 		Assert.assertEquals(dcf, expectedDcfLabel);
 
-		String dosesField = supplyConsolePage.validateDosesField();
+		String dosesField = ReceiveSuppliesDialog.getDosesLabel(driver);
 		String expectedDosesLabel = "*Doses";
 		Assert.assertEquals(dosesField, expectedDosesLabel);
 
-		String supplyDistribution = supplyConsolePage.validateSupplyDistributionToField();
+		String supplyDistribution = ReceiveSuppliesDialog.getSupplyDistributionToLabel(driver);
 		String expectedSupplyDistributionToLabel = "*Supply Distribution To";
 		Assert.assertEquals(supplyDistribution, (expectedSupplyDistributionToLabel));
 
 		supplyConsolePage.transferToDistributionOnSend(distribution);
 		Thread.sleep(2000);
-		supplyConsolePage.clickSaveButton();
+		ReceiveSuppliesDialog.clickSaveButton(driver);
 		try {
 			List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
 			Assert.assertTrue(all_alerts.get(0).contains("Success"));
@@ -121,15 +120,15 @@ public class ReceiveSuppliesCP extends BaseTest {
 		log("/*-- Receive Supplies --*/");
 		SupplyLocationPage.clickReceiveSuppliesButton(driver);
 
-		supplyConsolePage.selectSupplyItemTo(lot);
+		ReceiveSuppliesDialog.selectSupplyItem(driver, lot);
 		Thread.sleep(500);
-		supplyConsolePage.selectReasonForReception();
+		ReceiveSuppliesDialog.selectReasonForReception(driver);
 		Thread.sleep(500);
 		ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(qty));
 		Thread.sleep(500);
-		double doseConversionFactor = supplyConsolePage.getDoseConversionFactorOnReceive();
+		double doseConversionFactor = ReceiveSuppliesDialog.getDoseConversionFactor(driver);
 		supplyConsolePage.transferToDistributionOnSend(distribution);
-		supplyConsolePage.clickSaveButton();
+		ReceiveSuppliesDialog.clickSaveButton(driver);
 		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
 		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
 
