@@ -12,9 +12,7 @@ import java.text.DecimalFormat;
 import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 @Listeners({TestListener.class})
 public class BulkTransfersCP extends BaseTest {
@@ -30,6 +28,7 @@ public class BulkTransfersCP extends BaseTest {
     String distribution_to;
     String distribution_to_same_clinic;
     List<String> containers_from;
+    HashMap<String, String> containers_from_map;
     List<String> containers_to;
     List<String> containers_to_same_clinic;
     double doses;
@@ -46,7 +45,15 @@ public class BulkTransfersCP extends BaseTest {
         distribution_from = String.valueOf(testData.get("distributionFrom"));
         distribution_to = String.valueOf(testData.get("distributionTo"));
         distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
-        containers_from = (ArrayList)testData.get("bulkContainersFrom");
+        ArrayList<LinkedHashMap<String, LinkedHashMap<String, String>>> containers_from_with_cf = (ArrayList)testData.get("bulkContainersFrom");
+        containers_from_map = new HashMap<String, String>();
+        containers_from = new ArrayList<>();
+        for(LinkedHashMap<String, LinkedHashMap<String, String>> container_from_with_cf: containers_from_with_cf) {
+            String my_key = container_from_with_cf.keySet().toArray(new String[0])[0];
+            containers_from.add(my_key);
+            LinkedHashMap<String, String> my_value = container_from_with_cf.get(my_key);
+            containers_from_map.put(my_key, my_value.get("conversionFactor"));
+        }
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
     }
