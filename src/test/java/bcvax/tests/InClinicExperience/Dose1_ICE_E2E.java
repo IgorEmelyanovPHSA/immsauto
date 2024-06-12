@@ -20,7 +20,6 @@ import java.util.Map;
 public class Dose1_ICE_E2E extends BaseTest {
 	String env;
 	Map<String, Object> testData;
-	private String personalHealthNumber = "9746170911";
 	String clinicNameToSearch;
 	MainPageOrg orgMainPage;
 	String consumptionLot;
@@ -49,7 +48,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 	public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE(String testcase_id, String vaccine_agent, String administration_agent, String administration_lot, String administration_dose, boolean vaccine_available) throws Exception {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
@@ -178,7 +177,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 		InClinicExperiencePage.clickTodayAppointments(driver);
 		log("/*47.---Open Today appointment Details --*/");
 		Thread.sleep(2000);
-		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, personalHealthNumber);
+		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);

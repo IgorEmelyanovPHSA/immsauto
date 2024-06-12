@@ -12,7 +12,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import java.util.List;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,7 +93,7 @@ public class Adjustments extends BaseTest {
 		List<String> my_containers = new ArrayList<>();
 		my_containers.add(container_from);
 
-		Map<String, String> doses_quantity_from = SupplyLocationRelatedItems.getSupplyContainerDose(driver, container_from);
+		Map<String, Double> doses_quantity_from = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
 		log("/*7.----Click on Container's dropdown --*/");
 		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 		Thread.sleep(1000);

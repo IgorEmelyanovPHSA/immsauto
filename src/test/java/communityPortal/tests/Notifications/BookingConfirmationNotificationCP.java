@@ -4,25 +4,28 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.util.Map;
 
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
 public class BookingConfirmationNotificationCP extends BaseTest {
-
-    private String legalFirstName = "Barb";
-    private String legalLastName = "BCVaxHaverty";
-    private String legalMiddleName = "Ariella";
-    private String dateOfBirth = "Sep 20, 1958";
-    private String postalCode = "V3B0J5";
-    private String personalHealthNumber = "9746174016";
-    private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
-    private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
+    Map<String, String> client_data;
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "notification");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+    }
 
     @Test
     public void CP_BookingConfirmationNotification_C246565() throws Exception {
@@ -30,19 +33,15 @@ public class BookingConfirmationNotificationCP extends BaseTest {
         log("Target Environment: " + Utils.getTargetEnvironment());
         log("TestCase: C246565");
 
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveDuplicateCitizenParticipantAccount(email, legalLastName, legalFirstName);
-
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
-        registerToGetVaccinatedPage.clickBtnRegisterNow();
+        RegisterToGetVaccinatedPage.clickBtnRegisterNow(driver);
 
         log("/*2.---Fill all registration information and click btn continue--*/");
-        registerToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(legalFirstName, legalLastName, legalMiddleName, dateOfBirth, postalCode,
-                personalHealthNumber, isIndigenous);
+        RegisterToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(driver, client_data);
 
         log("/*3.---Fill email and phone number on contact information section and click btn continue--*/");
-        registerToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(email, phoneNumber);
+        RegisterToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(driver, client_data);
 
         log("/*4.---Check checkbox certify and click btn submit--*/");
         registerToGetVaccinatedPage.certifyAndSubmit();
@@ -79,7 +78,7 @@ public class BookingConfirmationNotificationCP extends BaseTest {
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, client_data.get("personalHealthNumber"));
 
         log("/*11.---Schedule vaccination page is displayed--*/");
         BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);

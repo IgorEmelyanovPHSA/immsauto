@@ -113,31 +113,6 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public void clickOnSupplyContainerCheckbox(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		String tabindex_before_check =  tables.getSupplyContainerRow(supplyContainer).get("Choose a Row\n" +
-				"Select All").getAttribute("tabindex");
-		System.out.println("DEBUG: Tabindex attribute before check:" + tabindex_before_check);
-		WebElement myCheckbox = tables.getSupplyContainerRow(supplyContainer).get("Choose a Row\n" +
-				"Select All");
-		scrollCenter(myCheckbox);
-		Thread.sleep(1000);
-		myCheckbox.click();
-		Thread.sleep(1000);
-		String tabindex_after_check =  tables.getSupplyContainerRow(supplyContainer).get("Choose a Row\n" +
-				"Select All").getAttribute("tabindex");
-		System.out.println("DEBUG: Tabindex attribute after check:" + tabindex_after_check);
-		if(tabindex_before_check.equals(tabindex_after_check)) {
-			System.out.println("DEBUG: !!!!!!!!!!!!!!------------------------------------");
-			System.out.println("DEBUG: !!!!!!!!!!!!!!Container Checkbox is not checked!!!!!!!!!!!!!");
-			System.out.println("DEBUG: !!!!!!!!!!!!!!------------------------------------");
-		} else {
-			System.out.println("DEBUG: ------------------------------------");
-			System.out.println("DEBUG: Container Checkbox is checked");
-			System.out.println("DEBUG: ------------------------------------");
-		}
-	}
-
 	public void clickBulkTransfersButton() throws InterruptedException{
 		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
 		waitForElementToBeEnabled(driver, transfer_button_path, 10);

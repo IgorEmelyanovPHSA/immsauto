@@ -50,14 +50,12 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 
 		log("/*1.---Open citizen portal and click btn Register Now--*/");
 		RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
-		registerToGetVaccinatedPage.clickBtnRegisterNow();
+		RegisterToGetVaccinatedPage.clickBtnRegisterNow(driver);
 		log("/*2.---Fill all registration information and click btn continue--*/");
-		registerToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(client_data.get("legalFirstName"),
-				client_data.get("legalLastName"), client_data.get("legalMiddleName"), Utils.convertDate(client_data.get("dateOfBirth"),"MMM dd, yyyy"),
-				client_data.get("postalCode"), client_data.get("personalHealthNumber"), isIndigenous);
+		RegisterToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(driver, client_data);
 
 		log("/*3.---Fill email and phone number on contact information section and click btn continue--*/");
-		registerToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(client_data.get("email"), client_data.get("phone"));
+		RegisterToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(driver, client_data);
 
 		log("/*4.---Check checkbox certify and click btn submit--*/");
 		registerToGetVaccinatedPage.certifyAndSubmit();
