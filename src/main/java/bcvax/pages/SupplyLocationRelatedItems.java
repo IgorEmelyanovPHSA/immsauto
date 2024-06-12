@@ -1,15 +1,14 @@
 package bcvax.pages;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.Map;
 
 public class SupplyLocationRelatedItems extends BasePage {
@@ -40,41 +39,69 @@ public class SupplyLocationRelatedItems extends BasePage {
         return my_container_rec;
     }
 
-    public static Map<String, String> getSupplyContainerDose(WebDriver driver, String container) throws InterruptedException {
+    public static Map<String, Double> checkSupplyContainer(WebDriver driver, String container) throws InterruptedException {
+        ArrayList<String> containers = new ArrayList<>();
+        containers.add(container);
+        Map<String, Map<String, Double>> resp = checkSupplyContainers(driver, containers);
+        return resp.get(container);
+    }
+    public static Map<String, Map<String, Double>> checkSupplyContainers(WebDriver driver, List<String> containers) throws InterruptedException {
         Thread.sleep(500);
-        Map<String, String> my_container_rec = new HashMap<>();
+        DecimalFormat df = new DecimalFormat("#.##");
+        Map<String, Map<String, Double>> my_container_rec = new HashMap<>();
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
-        for(Map<String, WebElement> my_record: my_records) {
-            if(container.equals(my_record.get("Supply Container Name").getText())) {
+        for(String container: containers) {
+            for (Map<String, WebElement> my_record : my_records) {
                 String my_container_name = my_record.get("Supply Container Name").getText();
-                String my_dose = my_record.get("Remaining Doses").getText();
-                String my_quantity = my_record.get("Remaining Quantity").getText();
-                my_container_rec.put("Remaining Doses", my_dose);
-                my_container_rec.put("Remaining Quantity", my_quantity);
+                if (my_container_name.equals(container)) {
+                    String my_dose = my_record.get("Remaining Doses").getText();
+                    Double dose_num = Double.parseDouble(my_dose.replace(",", ""));
+                    String my_quantity = my_record.get("Remaining Quantity").getText();
+                    Double quantity_num = Double.parseDouble(my_quantity.replace(",", ""));
+                    Map<String, Double> my_rec = new HashMap<>();
+                    my_rec.put("Remaining Doses", dose_num);
+                    my_rec.put("Remaining Quantity", quantity_num);
+                    my_container_rec.put(my_container_name, my_rec);
+                    WebElement my_checkbox = my_record.get("Choose a Row\n" +
+                            "Select All");
+                    my_checkbox.click();
+                    break;
+                }
             }
         }
         return my_container_rec;
     }
 
-    public static Map<String, Map<String, String>> getSupplyContainerDoses(WebDriver driver, List<String> containers) throws InterruptedException {
+    public static Map<String, Map<String, Double>> getSupplyContainers(WebDriver driver, List<String> containers) throws InterruptedException {
         Thread.sleep(500);
-        Map<String, Map<String, String>> my_container_rec = new HashMap<>();
+        Map<String, Map<String, Double>> my_container_rec = new HashMap<>();
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
-        for(Map<String, WebElement> my_record: my_records) {
-            if(containers.contains(my_record.get("Supply Container Name").getText())) {
+        for(String container: containers) {
+            for (Map<String, WebElement> my_record : my_records) {
                 String my_container_name = my_record.get("Supply Container Name").getText();
-                String my_dose = my_record.get("Remaining Doses").getText();
-                String my_quantity = my_record.get("Remaining Quantity").getText();
-                Map<String, String> my_rec = new HashMap<>();
-                my_rec.put("Remaining Doses", my_dose);
-                my_rec.put("Remaining Quantity", my_quantity);
-                my_container_rec.put(my_container_name, my_rec);
+                if (my_container_name.equals(container)) {
+                    String my_dose = my_record.get("Remaining Doses").getText();
+                    Double dose_num = Double.parseDouble(my_dose.replace(",", ""));
+                    String my_quantity = my_record.get("Remaining Quantity").getText();
+                    Double quantity_num = Double.parseDouble(my_quantity.replace(",", ""));
+                    Map<String, Double> my_rec = new HashMap<>();
+                    my_rec.put("Remaining Doses", dose_num);
+                    my_rec.put("Remaining Quantity", quantity_num);
+                    my_container_rec.put(my_container_name, my_rec);
+                    break;
+                }
             }
         }
-
         return my_container_rec;
+    }
+
+    public static Map<String, Double> getSupplyContainerDoseQuantity(WebDriver driver, String container) throws InterruptedException {
+        ArrayList<String> containers = new ArrayList<>();
+        containers.add(container);
+        Map<String, Map<String, Double>> resp = getSupplyContainers(driver, containers);
+        return resp.get(container);
     }
 
     public static void clickAdjustmentButton(WebDriver driver) throws InterruptedException {

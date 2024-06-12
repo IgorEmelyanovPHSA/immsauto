@@ -13,9 +13,12 @@ bcvaxdevit:
   containerConsumption: "COVISHIELD - 4120Z029 (2023-08-30 23:27:54)"
   #containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-09-11 09:03:17)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:27:19)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:26:33)"
-    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-09-07 09:29:00)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:27:19)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:26:33)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-09-07 09:29:00)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:36:09)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:36:09)"
@@ -70,9 +73,12 @@ prodsuppqa:
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-08-31 13:57:13)"
   containerConsumption: "JANSSEN COVID-19 VACCINE - ABZ5320-CC01 (2023-08-30 14:14:00)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-01 12:41:44)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-08-31 13:53:04)"
-    - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-01 12:44:53)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-01 12:41:44)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-08-31 13:53:04)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-01 12:44:53)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-01 12:48:01)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-08-31 14:00:50)"
@@ -126,9 +132,12 @@ comuat:
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:45:47)"
   containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-03-27 16:43:35)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:44:53)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:42:38)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:44:08)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:44:53)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:42:38)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:44:08)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:52:19)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:49:54)"
@@ -158,9 +167,12 @@ bcvaxuat:
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
   containerConsumption: "SPIKEVAX (Moderna) - 300042698-CC04 (2022-08-16 16:00:57)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:07:03)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:08:41)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:07:03)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:08:41)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:55:49)"
     - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
@@ -201,9 +213,12 @@ ssotdev:
   lotConsumption: "EL0203"
   doseConsumption: "0.3"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-04-04 13:21:51)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-04-03 14:21:18)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAXnfantTEST001 (2023-04-04 13:21:02)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-04-04 13:21:51)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-04-03 14:21:18)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAXnfantTEST001 (2023-04-04 13:21:02)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-04-04 13:27:52)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-04-04 10:43:25)"
@@ -226,9 +241,12 @@ regression:
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:31:43)"
   containerConsumption: "VAXZEVRIA (AstraZeneca) - MT0055 (2024-05-23 11:26:00)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-14 11:17:26)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:16:34)"
-    - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-14 11:18:48)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-14 11:17:26)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:16:34)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-14 11:18:48)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-14 11:23:15)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:23:15)"
@@ -284,9 +302,12 @@ regress2:
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:31:43)"
   containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-10-02 10:41:04)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-14 11:17:26)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:16:34)"
-    - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-14 11:18:48)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-14 11:17:26)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:16:34)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX (Moderna) - 3001530-CC02 (2023-09-14 11:18:48)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-14 11:23:15)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-09-14 11:23:15)"
@@ -343,9 +364,12 @@ bcvaxqa:
   containerConsumption: "JANSSEN COVID-19 VACCINE - ABZ5320 (2024-04-11 11:40:44)"
   #containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-09-11 09:03:17)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:23:58)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:25:02)"
-    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-12-04 12:25:43)"
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:23:58)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:25:02)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-12-04 12:25:43)":
+        conversionFactor: "10.00"
   bulkContainersTo:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:59:11)"
     - "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:43:35)"

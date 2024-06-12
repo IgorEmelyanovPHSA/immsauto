@@ -3,43 +3,41 @@ package communityPortal.tests.CitizenPortalFace_Integration;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Map;
 
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
-
-    private String legalFirstName = "Anne-marie";
-    private String legalLastName = "BCVaxJacketts";
-    private String legalMiddleName = "Elissa";
-    private String dateOfBirth = "Aug 16, 1903";
-    private String postalCode = "V3B0J5";
-    private String personalHealthNumber = "9746173988";
-    private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
-    private String phoneNumber = "6041234568";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "InfluenzaVaccine";
 
+    Map<String, String> client_data;
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "influenza");
+        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+    }
     @Test(priority = 1)
     public void CP_CitizenPortalBookDoseOneInfluenza_C245219() throws Exception {
         TestcaseID = "245219"; //C245219
         log("Target Environment: " + Utils.getTargetEnvironment());
 
-        log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personalHealthNumber);
-        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(personalHealthNumber);
-
         log("/*1.---Open citizen portal and click btn Register Now--*/");
         RegisterToGetVaccinatedPage registerToGetVaccinatedPage = loginPage.openRegisterToGetVaccinatedPage();
-        registerToGetVaccinatedPage.clickBtnRegisterNow();
+        RegisterToGetVaccinatedPage.clickBtnRegisterNow(driver);
 
         log("/*2.---Fill all registration information and click btn continue--*/");
-        registerToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(legalFirstName, legalLastName, legalMiddleName, dateOfBirth, postalCode,
-                personalHealthNumber, isIndigenous);
+        RegisterToGetVaccinatedPage.fillMandatoryFieldsOnRegistrationSection(driver, client_data);
 
         log("/*3.---Fill email and phone number on contact information section and click btn continue--*/");
-        registerToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(email, phoneNumber);
+        RegisterToGetVaccinatedPage.fillMandatoryFieldsOnContactInformationSection(driver, client_data);
 
         log("/*4.---Check checkbox certify and click btn submit--*/");
         registerToGetVaccinatedPage.certifyAndSubmit();
@@ -90,7 +88,7 @@ public class E2E_Dose1_Self_Citizen_Booking_Influenza extends BaseTest {
         Assert.assertTrue(conformationNumberText.equalsIgnoreCase(registrationConfirmationNumber));
 
         log("/*10.---Open book an appointment portal from unique link--*/");
-        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, personalHealthNumber);
+        BookAppointmentPage.enterPhnNumberAndClickBtnBookAppointment(driver, client_data.get("personalHealthNumber"));
 
         log("/*11.---Schedule vaccination page is displayed--*/");
         BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);

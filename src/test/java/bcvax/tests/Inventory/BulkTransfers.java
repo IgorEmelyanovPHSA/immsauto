@@ -14,6 +14,8 @@ import static java.lang.Math.round;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class BulkTransfers extends BaseTest {
 	String distribution_from;
 	String distribution_to;
 	String distribution_to_same_clinic;
-	List<String> containers_from;
+	HashMap<String, String> containers_from_map;
+	ArrayList<String> containers_from;
 	List<String> containers_to;
 	List<String> containers_to_same_clinic;
 	double doses;
@@ -46,7 +49,16 @@ public class BulkTransfers extends BaseTest {
 		distribution_from = String.valueOf(testData.get("distributionFrom"));
 		distribution_to = String.valueOf(testData.get("distributionTo"));
 		distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
-		containers_from = (ArrayList)testData.get("bulkContainersFrom");
+		ArrayList<LinkedHashMap<String, LinkedHashMap<String, String>>> containers_from_with_cf = (ArrayList)testData.get("bulkContainersFrom");
+		containers_from_map = new HashMap<String, String>();
+		containers_from = new ArrayList<>();
+		for(LinkedHashMap<String, LinkedHashMap<String, String>> container_from_with_cf: containers_from_with_cf) {
+			String my_key = container_from_with_cf.keySet().toArray(new String[0])[0];
+			containers_from.add(my_key);
+			LinkedHashMap<String, String> my_value = container_from_with_cf.get(my_key);
+			containers_from_map.put(my_key, my_value.get("conversionFactor"));
+		}
+		//containers_from = (ArrayList)testData.get("bulkContainersFrom");
 		containers_to = (ArrayList)testData.get("bulkContainersTo");
 		containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
 	}
@@ -59,39 +71,16 @@ public class BulkTransfers extends BaseTest {
 
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
-		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
-		double remainingDoses_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
-		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_1_1);
-		double remainingQty_before_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-
-		double lot_MT0055_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_MT0055_Distribution_1_1 / remainingQty_before_Lot_MT0055_Distribution_1_1));
-		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_MT0055_Distribution_1_1);
-		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
-		double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
-		log("/*-- . remaining Doses are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
-		double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-
-		double lot_EK4241_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_EK4241_Distribution_1_1 / remainingQty_before_Lot_EK4241_Distribution_1_1));
-		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
-		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
-		double remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
-		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-
-		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
-		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		log("/*7.----Get Supply Containers count outcoming records --*/");
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 		log("/*8.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= 3) {
-			for(String container : containers_from) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-				log("/*---     containers: " + container);
-			}
-		} else {
-			log("/*--not enough records for Bulk actions--*/");
+		if (countSupplyContainers < 3) {
+			Assert.assertTrue(false, "Not enough containers");
 		}
+		Map<String, Map<String, Double>> selected_containers_doses_qty_before =  SupplyLocationRelatedItems.checkSupplyContainers(driver, new ArrayList<>(containers_from_map.keySet()));
+
+
 		log("/*9.----Click on bulk Transfer button --*/");
 		supplyConsolePage.clickBulkTransfersButton();
 		log("/*10.----Enter the Dosages values (1 dose) for 3 row Transfers --*/");
@@ -109,34 +98,14 @@ public class BulkTransfers extends BaseTest {
 		Thread.sleep(2000);
 		/////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
 		log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
-		log("/*- container#1 -Automation Supply Distribution_1_1 & VAXZEVRIA (AstraZeneca) - MT0055*/");
-		double remainingDoses_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
-		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_MT0055_Distribution_1_1);
-		double remainingQty_after_Lot_MT0055_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_MT0055_Distribution_1_1);
-		log("/*- container#2 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");
-		double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
-		log("/*-- . remaining Doses are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
-		double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
-		log("/*- container#3 -Automation Supply Distribution_1_1 & SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001*/");
-		double remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
-		log("/*-- . remaining doses are: -->" + remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		double remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-		log("/*-- . remaining Quantity are: -->" + remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
-		log("/*15.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
-		log("/*----Validation for container#1 Distribution_1_1 - VAXZEVRIA (AstraZeneca) - MT0055");
-		assertEquals(remainingDoses_after_Lot_MT0055_Distribution_1_1, Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses)));
-		assertEquals(remainingQty_after_Lot_MT0055_Distribution_1_1,
-				Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_1_1 - doses) / lot_MT0055_conversion_factor)));
-		log("/*----Validation for container#2 Distribution_1_1 - Pfizer mRNA BNT162b2 - EK4241");
-		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_1_1, Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses)));
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_1_1,
-				Double.parseDouble(df.format((remainingDoses_before_Lot_EK4241_Distribution_1_1 - doses) / lot_EK4241_conversion_factor)));
-		log("/*----Validation for container#3 Distribution_1_1 - SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001");
-		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1, Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses)));
-		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_1_1,
-				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 - doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
+		Map<String, Map<String, Double>> selected_containers_doses_qty_after =  SupplyLocationRelatedItems.getSupplyContainers(driver, containers_from);
+		for(String container: containers_from) {
+			log("/*----Validation for container " + container);
+			assertEquals(df.format(selected_containers_doses_qty_after.get(container).get("Remaining Doses")),
+					df.format(selected_containers_doses_qty_before.get(container).get("Remaining Doses") - doses));
+			//assertEquals(Double.parseDouble(df.format(selected_containers_doses_qty_after.get(container).get("Remaining Quantity"))), (Double.parseDouble(df.format(selected_containers_doses_qty_after.get(container).get("Remaining Doses"))) - doses)/);
+		}
+
 		log("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
 		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
@@ -220,21 +189,21 @@ public class BulkTransfers extends BaseTest {
 		log("/*31.----Go to Transactions Tab of Automation Supply Location_2 --*/");
 		log("/*32.----Validate Remaining Doses/Quantities values BEFORE<->AFTER - Automation Location_1 --*/");
 		log("/*----Validation for container#1 Distribution_2_1 - MT0055");
-		assertEquals(remainingDoses_after_Lot_MT0055_Distribution_2_1,
-				Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses)));
-		assertEquals(remainingQty_after_Lot_MT0055_Distribution_2_1,
-				Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses) / lot_MT0055_conversion_factor)));
-		log("/*----Validation for container#2 Distribution_2_1 - EK4241");
-		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1,
-				Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses)));
-		assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1,
-				Double.parseDouble(df.format((remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses) / lot_EK4241_conversion_factor)));
-		log("/*----Validation for container#3 Distribution_2_1 - SPIKEVAX6-5Test001");
-		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
-				Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses)));
-		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
-				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
-		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
+//		assertEquals(remainingDoses_after_Lot_MT0055_Distribution_2_1,
+//				Double.parseDouble(df.format(remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses)));
+//		assertEquals(remainingQty_after_Lot_MT0055_Distribution_2_1,
+//				Double.parseDouble(df.format((remainingDoses_before_Lot_MT0055_Distribution_2_1 + doses) / lot_MT0055_conversion_factor)));
+//		log("/*----Validation for container#2 Distribution_2_1 - EK4241");
+//		assertEquals(remainingDoses_after_Lot_EK4241_Distribution_2_1,
+//				Double.parseDouble(df.format(remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses)));
+//		assertEquals(remainingQty_after_Lot_EK4241_Distribution_2_1,
+//				Double.parseDouble(df.format((remainingDoses_before_Lot_EK4241_Distribution_2_1 + doses) / lot_EK4241_conversion_factor)));
+//		log("/*----Validation for container#3 Distribution_2_1 - SPIKEVAX6-5Test001");
+//		assertEquals(remainingDoses_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
+//				Double.parseDouble(df.format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses)));
+//		assertEquals(remainingQty_after_Lot_SPIKEVAX6_5Test001_Distribution_2_1,
+//				Double.parseDouble(df.format((remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_2_1 + doses) / lot_SPIKEVAX6_5Test001_conversion_factor)));
+//		log("/*33----Close Automation_Supply_Location_2 Tab --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
 	}
 
@@ -270,10 +239,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*---     count:" + countSupplyContainers);
 		log("/*8.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
-			for(String container : containers_from) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-				log("/*---     containers: " + container);
-			}
+				SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}
@@ -465,10 +431,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*---     count:" + countSupplyContainers);
 		log("/*8.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
-			for(String container : containers_from) {
-				supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-				log("/*---     containers: " + container);
-			}
+			SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
 		}

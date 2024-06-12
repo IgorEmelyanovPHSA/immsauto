@@ -3,7 +3,6 @@ package communityPortal.tests.InventoryCP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
-import constansts.Apps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -67,11 +66,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            for(String container : containers_from) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-                log("/*---     containers: " + container);
-                Thread.sleep(1000);
-            }
+            SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
         } else {
             log("/*--not enough records for Bulk actions--*/");
         }

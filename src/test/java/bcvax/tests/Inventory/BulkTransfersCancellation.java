@@ -8,9 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.testng.Assert.assertEquals;
 
@@ -27,7 +25,8 @@ public class BulkTransfersCancellation extends BaseTest {
     String distribution_from;
     String distribution_to;
     String distribution_to_same_clinic;
-    List<String> containers_from;
+    ArrayList<String> containers_from;
+    HashMap<String, String> containers_from_map;
     List<String> containers_to;
     List<String> containers_to_same_clinic;
 
@@ -42,6 +41,15 @@ public class BulkTransfersCancellation extends BaseTest {
         distribution_to = String.valueOf(testData.get("distributionTo"));
         distribution_to_same_clinic = String.valueOf(testData.get("distributionToSameClinic"));
         containers_from = (ArrayList)testData.get("bulkContainersFrom");
+        ArrayList<LinkedHashMap<String, LinkedHashMap<String, String>>> containers_from_with_cf = (ArrayList)testData.get("bulkContainersFrom");
+        containers_from_map = new HashMap<String, String>();
+        containers_from = new ArrayList<>();
+        for(LinkedHashMap<String, LinkedHashMap<String, String>> container_from_with_cf: containers_from_with_cf) {
+            String my_key = container_from_with_cf.keySet().toArray(new String[0])[0];
+            containers_from.add(my_key);
+            LinkedHashMap<String, String> my_value = container_from_with_cf.get(my_key);
+            containers_from_map.put(my_key, my_value.get("conversionFactor"));
+        }
         containers_to = (ArrayList)testData.get("bulkContainersTo");
         containers_to_same_clinic = (ArrayList)testData.get("bulkContainersToSameClinic");
     }
@@ -66,11 +74,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            for(String container : containers_from) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-                log("/*---     containers: " + container);
-                Thread.sleep(1000);
-            }
+            SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
         } else {
             log("/*--not enough records for Bulk actions--*/");
         }
@@ -183,10 +187,7 @@ public class BulkTransfersCancellation extends BaseTest {
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            for(String container : containers_from) {
-                supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-                log("/*---     containers: " + container);
-            }
+            SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
         } else {
             log("/*--not enough records for Bulk actions--*/");
         }

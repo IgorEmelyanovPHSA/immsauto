@@ -49,8 +49,8 @@ public class Transfer extends BaseTest {
         String container_to = String.valueOf(testData.get("containerTo"));
 
         log("/*6.----Getting Remaining Doses/Remaining Quantity - Before --*/");
-        Map<String, String> doses_before = SupplyLocationRelatedItems.getSupplyContainerDose(driver, container_from);
-        double doses_before_distribution_1_1 = Double.parseDouble(doses_before.get("Remaining Doses").replace(",", ""));
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double doses_before_distribution_1_1 = doses_before.get("Remaining Doses");
 
         log("/*-- . remaining doses are: -->" + doses_before_distribution_1_1);
         double qty_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);

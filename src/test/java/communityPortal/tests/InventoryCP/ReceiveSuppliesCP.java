@@ -48,10 +48,10 @@ public class ReceiveSuppliesCP extends BaseTest {
 		double doses = 10;
 
 		log("/----Count Remaining Supplies --*/");
-		Map<String, String> remaining_before_receiving = SupplyLocationRelatedItems.getSupplyContainerDose(driver, vaccine);
-		double remainingDosesBeforeReceiving = Double.parseDouble(remaining_before_receiving.get("Remaining Doses").replace(",", ""));
+		Map<String, Double> remaining_before_receiving = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, vaccine);
+		double remainingDosesBeforeReceiving = remaining_before_receiving.get("Remaining Doses");
 		log("/*-- . remaining doses are: -->" + remainingDosesBeforeReceiving);
-		double remainingQtyBeforeReceiving = Double.parseDouble(remaining_before_receiving.get("Remaining Quantity").replace(",", ""));
+		double remainingQtyBeforeReceiving = remaining_before_receiving.get("Remaining Quantity");
 		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
 
 		log("/*-- Receive Supplies --*/");
@@ -94,10 +94,10 @@ public class ReceiveSuppliesCP extends BaseTest {
 		}
 
 		log("/----Count Supplies After Receiving--*/");
-		Map<String, String> remaining_after_receiving = SupplyLocationRelatedItems.getSupplyContainerDose(driver, vaccine);
-		double remainingDosesAfterReceiving = Double.parseDouble(remaining_after_receiving.get("Remaining Doses").replace(",", ""));
+		Map<String, Double> remaining_after_receiving = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, vaccine);
+		double remainingDosesAfterReceiving = remaining_after_receiving.get("Remaining Doses");
 		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
-		double remainingQtyAfterReceiving = Double.parseDouble(remaining_after_receiving.get("Remaining Quantity").replace(",", ""));
+		double remainingQtyAfterReceiving = remaining_after_receiving.get("Remaining Quantity");
 		log("/*-- . after qty are: -->" + remainingQtyAfterReceiving);
 
 		double dosesToQty =Double.parseDouble(df.format(doses / doseConversionFactor));
