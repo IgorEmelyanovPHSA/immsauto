@@ -5,7 +5,7 @@ personalHealthNumber,dateOfBirth,gender,legalLastName,legalFirstName,legalMiddle
 9746201518,08-02-2019,F,BCVaxBrozsset,Ulrike,Capstaff,70 Boyd Terrace,Victoria,BC,V8W0B2,CA,555-555-6148,BCVaxBrozsset@test.ca,no_consent
 9746201492,29-08-1993,M,BCVaxMolan,Wylie,Rattenberie,1511 Caliangt Circle,Kamloops,BC,V2C8F4,CA,555-555-6149,BCVaxMolan@test.ca,new_consent
 9746201485,01-04-1977,F,BCVaxShorland,Fay,Luck,79 Ryan Terrace,Port Alberni,BC,V9Y9N2,CA,555-555-6150,BCVaxShorland@test.ca,consumption
-9746201478,10-02-2005,M,BCVaxWheway,Rochester,McArte,110 Aberg Plaza,West Kelowna,BC,V1Z3V5,CA,555-555-6151,BCVaxWheway@test.ca,
-9746201453,13-06-1998,M,BCVaxDiben,Claybourne,Larmett,22097 Corry Crossing,Colwood,BC,V9C5Y0,CA,555-555-6152,BCVaxDiben@test.ca,
+9746201478,10-02-2005,M,BCVaxWheway,Rochester,McArte,110 Aberg Plaza,West Kelowna,BC,V1Z3V5,CA,555-555-6151,BCVaxWheway@test.ca,deferral
+9746201453,13-06-1998,M,BCVaxDiben,Claybourne,Larmett,22097 Corry Crossing,Colwood,BC,V9C5Y0,CA,555-555-6152,BCVaxDiben@test.ca,influenza
 9746201446,24-03-1959,M,BCVaxGoodred,Ali,Edden,9 Lerdahl Alley,Merritt,BC,V1K4W7,CA,555-555-6153,BCVaxGoodred@test.ca,
 9746201439,25-08-2003,M,BCVaxLempertz,Dicky,,6 Bayside Trail,Penticton,BC,V2A6D2,CA,555-555-6154,BCVaxLempertz@test.ca,notification

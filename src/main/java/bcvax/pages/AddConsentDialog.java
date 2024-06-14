@@ -87,8 +87,10 @@ public class AddConsentDialog extends BasePage {
         provider_type_radio.click();
     }
 
-    public static void selectFormOfConsentInPerson(WebDriver driver) {
+    public static void selectFormOfConsentInPerson(WebDriver driver) throws InterruptedException {
         WebElement provider_type_radio = driver.findElement(By.xpath("//input[@value='FormofConsentValues.In Person']/..//span[@class='slds-radio_faux']"));
+        scrollCenter(driver, provider_type_radio);
+        Thread.sleep(500);
         provider_type_radio.click();
     }
 
@@ -390,10 +392,10 @@ public class AddConsentDialog extends BasePage {
 
     public static String getAgent(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By agent_path = By.xpath("//strong[text()='Agent']/..");
+        By agent_path = By.xpath("//strong[contains(text(), 'Agent')]/../..");
         waitForElementToBeEnabled(driver, agent_path, 10);
         WebElement agent = driver.findElement(agent_path);
-        String[] agent_text = agent.getText().split(": ");
+        String[] agent_text = agent.getText().replace("\n", "").replace(" ", "").split(":");
         if(agent_text.length < 2) {
             return "";
         } else {
@@ -442,7 +444,7 @@ public class AddConsentDialog extends BasePage {
 
     public static String getInformedConsentObtainedFrom(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By consent_obtained_from_path = By.xpath("//strong[text()='Informed Consent for Series Obtained from: ']/..");
+        By consent_obtained_from_path = By.xpath("//strong[contains(text(), 'Informed Consent for Series Obtained from')]/..");
         waitForElementToBeEnabled(driver, consent_obtained_from_path, 10);
         WebElement consent_obtained_from = driver.findElement(consent_obtained_from_path);
         String[] consent_obtained_from_text = consent_obtained_from.getText().split(": ");
