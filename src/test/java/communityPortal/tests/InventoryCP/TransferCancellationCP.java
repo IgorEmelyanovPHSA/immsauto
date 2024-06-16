@@ -49,9 +49,10 @@ public class TransferCancellationCP extends BaseTest {
 		double doses = 5;
 
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - Before --*/");
-		double remainingDosesBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+		Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+		double remainingDosesBeforeDistribution1_1 = doses_before.get("Remaining Doses");
 		log("/*-- . remaining doses are: -->" + remainingDosesBeforeDistribution1_1);
-		double remainingQtyBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);;
+		double remainingQtyBeforeDistribution1_1 = doses_before.get("Remaining Quantity");
 		log("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution1_1);
 
 		log("/---- Perform doses transfer to  location " + supply_location_to + "--*/");
@@ -61,27 +62,28 @@ public class TransferCancellationCP extends BaseTest {
 		SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
 
 		log("/*9.----Picked up the Trade Vaccine Name --*/");
-		String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+		String tradeName = ContainerTransferForm.getVaccineName(driver);//Pfizer mRNA BNT162b2 - EK4241
 		log("/*--  the Trade Name is:  " + tradeName);
 		log("/*10.----Picked up the Dose Conversation Factor --*/");
 		//Double dose_conversation_factor = 5.0;
-		double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+		double dose_conversation_factor = ContainerTransferForm.getConversationFactor(driver);
 		log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
 		log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
 		ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
 		System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+		ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_to);
 		System.out.println("/*12.----click Transfer dialog Modal button --*/");
-		supplyConsolePage.clickBulkTransfersModalButton();
+		ContainerTransferForm.clickTransferButton(driver);
 		System.out.println("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		ContainerPrintDialog.clickCloseButton(driver);
 		Thread.sleep(1000);
 		driver.navigate().refresh();
 		Thread.sleep(1000);
 		log("/---- Count and Validate Remaining Supplies After Transfer --*/");
-		double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+		Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+		double remainingDosesAfterDistribution1_1 = doses_after.get("Remaining Doses");
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterDistribution1_1);
-		double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+		double remainingQtyAfterDistribution1_1 = doses_after.get("Remaining Quantity");
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterDistribution1_1);
 		double remainingDosesAfterCalculationDistribution1_1 = Double.parseDouble(df.
 				format(remainingDosesBeforeDistribution1_1 - doses));
@@ -97,9 +99,10 @@ public class TransferCancellationCP extends BaseTest {
 
 		driver.navigate().refresh();
 		System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-		double remainingDosesBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
+		Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to);
+		double remainingDosesBeforeDistribution2_1 = doses_destination_before.get("Remaining Doses");
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesBeforeDistribution2_1);
-		double remainingQtyBeforeDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
+		double remainingQtyBeforeDistribution2_1 = doses_destination_before.get("Remaining Quantity");
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyBeforeDistribution2_1);
 
 		log("/*22.----Go to Supply Location Related Tab where Transferring From --*/");
@@ -124,9 +127,10 @@ public class TransferCancellationCP extends BaseTest {
 		SupplyLocationPage.clickOnRelatedItemTab(driver);
 
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
-		double remainingDosesAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+		Map<String, Double> doses_after_cancel = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+		double remainingDosesAfterCancelDistribution1_1 = doses_after_cancel.get("Remaining Doses");
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution1_1);
-		double remainingQtyAfterCancelDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+		double remainingQtyAfterCancelDistribution1_1 = doses_after_cancel.get("Remaining Quantity");
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution1_1);
 		assertEquals(remainingDosesAfterCancelDistribution1_1, remainingDosesBeforeDistribution1_1);
 		assertEquals(remainingQtyAfterCancelDistribution1_1, remainingQtyBeforeDistribution1_1);
@@ -137,9 +141,10 @@ public class TransferCancellationCP extends BaseTest {
 
 		driver.navigate().refresh();
 		log("/----Count Remaining Supplies After Cancel Transaction --*/");
-		double remainingDosesAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
+		Map<String, Double> doses_destinastion_after_cancel = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to);
+		double remainingDosesAfterCancelDistribution2_1 = doses_destinastion_after_cancel.get("Remaining Doses");
 		System.out.println("/*-- . remaining doses are: -->" + remainingDosesAfterCancelDistribution2_1);
-		double remainingQtyAfterCancelDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
+		double remainingQtyAfterCancelDistribution2_1 = doses_destinastion_after_cancel.get("Remaining Quantity");
 		System.out.println("/*-- . remaining Quantity are: -->" + remainingQtyAfterCancelDistribution2_1);
 		assertEquals(remainingDosesAfterCancelDistribution2_1, remainingDosesBeforeDistribution2_1);
 		assertEquals(remainingQtyAfterCancelDistribution2_1, remainingQtyBeforeDistribution2_1);

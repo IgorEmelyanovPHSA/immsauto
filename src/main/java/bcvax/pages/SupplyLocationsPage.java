@@ -58,6 +58,8 @@ public class SupplyLocationsPage extends BasePage {
         Map<String, WebElement> my_row = supply_items_table.getMappedRow(ImmutableMap.of(SUPPLY_LOCATION_NAME, location));
         WebElement my_link = my_row.get(SUPPLY_LOCATION_NAME).findElement(By.xpath(".//a"));
         waitForElementToBeVisible(driver, my_link, 10);
+        scrollCenter(driver, my_link);
+        Thread.sleep(500);
         my_link.click();
         Thread.sleep(2000);
     }

@@ -53,7 +53,7 @@ public class Transfer extends BaseTest {
         double doses_before_distribution_1_1 = doses_before.get("Remaining Doses");
 
         log("/*-- . remaining doses are: -->" + doses_before_distribution_1_1);
-        double qty_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double qty_before_distribution_1_1 = doses_before.get("Remaining Quantity");
         ;
         log("/*-- . remaining Quantity are: -->" + qty_before_distribution_1_1);
         log("/*7.----Click on Container's dropdown --*/");
@@ -61,30 +61,32 @@ public class Transfer extends BaseTest {
         log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
         SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         log("/*9.----Picked up the Trade Vaccine Name --*/");
-        String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+        String tradeName = ContainerTransferForm.getVaccineName(driver);//Pfizer mRNA BNT162b2 - EK4241
         log("/*--  the Trade Name is:  " + tradeName);
         log("/*10.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;
 
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = ContainerTransferForm.getConversationFactor(driver);
         log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
         ContainerTransferForm.enterTransferDosages(driver, "10");
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
+        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
-        supplyConsolePage.clickBulkTransfersModalButton();
+        ContainerTransferForm.clickTransferButton(driver);
         System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
         Thread.sleep(2000);
         driver.navigate().refresh();
         Thread.sleep(2000);
 
         System.out.println("/*14----Getting Remaining Doses/Remaining Quantity - After --*/");
-        double doses_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double doses_after_distribution_1_1 = doses_after.get("Remaining Doses");
 
         System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_1_1);
-        double qty_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double qty_after_distribution_1_1 = doses_after.get("Remaining Quantity");
 
         System.out.println("/*-- . remaining Quantity are: -->" + qty_after_distribution_1_1);
         System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
@@ -115,10 +117,11 @@ public class Transfer extends BaseTest {
         ///////////////// Supply Location_2 -> Incoming //////////////////////////
 
         System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        double doses_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
+        Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to);
+        double doses_before_distribution_2_1 = doses_destination_before.get("Remaining Doses");
 
         System.out.println("/*-- . remaining doses are: -->" + doses_before_distribution_2_1);
-        double qty_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
+        double qty_before_distribution_2_1 = doses_destination_before.get("Remaining Quantity");
 
         System.out.println("/*-- . remaining Quantity are: -->" + qty_before_distribution_2_1);
         System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
@@ -142,10 +145,11 @@ public class Transfer extends BaseTest {
         SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         System.out.println("/*14----Getting Remaining Doses/Remaining Quantity After --*/");
-        double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
+        Map<String, Double> doses_destination_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to);
+        double doses_after_distribution_2_1 = doses_destination_after.get("Remaining Doses");
 
         System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_2_1);
-        double qty_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
+        double qty_after_distribution_2_1 = doses_destination_after.get("Remaining Quantity");
 
         System.out.println("/*-- . remaining Quantity are: -->" + qty_after_distribution_2_1);
         System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
@@ -153,113 +157,113 @@ public class Transfer extends BaseTest {
         assertEquals(qty_after_distribution_2_1, round((doses_before_distribution_2_1 + 10) / dose_conversation_factor), 2);
     }
 
-    //@Test(priority = 2)
-    public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184 //C223184
-        precondition();
-        String container_from = String.valueOf(testData.get("containerFrom"));
-        String container_to = String.valueOf(testData.get("containerTo"));
-        int quantity = 10;
-
-        ////// Supply Location_1 -> Outcoming
-        //log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
-        //supplyConsolePage.selectSupplyContainer();
-        log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        double doses_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
-        log("/*-- . remaining doses are: -->" + doses_before_distribution_1_1);
-        double qty_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
-        ;
-        log("/*-- . remaining Quantity are: -->" + qty_before_distribution_1_1);
-        log("/*7.----Click on Container's dropdown --*/");
-        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
-        log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
-        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
-        log("/*9.----Picked up the Trade Vaccine Name --*/");
-        String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
-        log("/*--  the Trade Name is:  " + tradeName);
-        log("/*10.----Picked up the Dose Conversation Factor --*/");
-        //Double dose_conversation_factor = 5.0;
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
-        log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
-        log("/*10.----Entering 10 Quantity in the Container-Transfer Form --*/");
-        ContainerTransferForm.enterTransferQuantity(driver, Integer.toString(quantity));
-        System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-        Thread.sleep(1000);
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
-        System.out.println("/*12.----click Transfer dialog Modal button --*/");
-        supplyConsolePage.clickBulkTransfersModalButton();
-        System.out.println("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
-        System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
-        double doses_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
-        System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_1_1);
-        double qty_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
-        System.out.println("/*-- . remaining Quantity are: -->" + qty_after_distribution_1_1);
-        System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-        double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 =
-                Double.parseDouble(new DecimalFormat("##.##").
-                        format((doses_before_distribution_1_1 - quantity * dose_conversation_factor)));
-        assertEquals(doses_after_distribution_1_1, remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1);
-        double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 =
-                Double.parseDouble(new DecimalFormat("##.##").
-                        format(((doses_before_distribution_1_1 - quantity * dose_conversation_factor) / dose_conversation_factor)));
-        assertEquals(qty_after_distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
-        System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
-        SupplyLocationPage.clickTransactionsTab(driver);
-        System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
-        System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-        System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
-//		int kk = countOutgoingTransactions;
-//		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
-//		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
-//		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
-//		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
-//		supplyConsolePage.clickOnOutgoingTransactions(kk);
-        System.out.println("/*18.----Close All Tab's --*/");
-        SupplyConsolePage.closeTabsHCA(driver);
-        System.out.println("/*19.----Go to Supply Locations Tab --*/");
-
-        SupplyConsolePage.clickSupplyLocationsTab(driver);
-        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
-        //supplyConsolePage.clickOnSupplyLocation_2();
-
-        ///////////////// Supply Location_2 -> Incoming //////////////////////////
-
-        System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
-        double doses_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
-        System.out.println("/*-- . remaining doses are: -->" + doses_before_distribution_2_1);
-        double qty_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
-        System.out.println("/*-- . remaining Quantity are: -->" + qty_before_distribution_2_1);
-        System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
-        SupplyLocationPage.clickTransactionsTab(driver);
-        System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
-        int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
-        System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
-        System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
-        int j = countIncomingTransactions;
-        supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
-        System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
-        supplyConsolePage.selectConfirmIncomingDropDown();
-        System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
-        System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
-        supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
-        System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
-        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
-        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
-        System.out.println("/*29.----click on Related Item Tab --*/");
-        SupplyLocationPage.clickOnRelatedItemTab(driver);
-        System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
-        double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
-        System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_2_1);
-        double qty_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
-        System.out.println("/*-- . remaining Quantity are: -->" + qty_after_distribution_2_1);
-        System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
-        assertEquals(doses_after_distribution_2_1, round(doses_before_distribution_2_1 + quantity * dose_conversation_factor));
-        assertEquals(qty_after_distribution_2_1, qty_before_distribution_2_1 + quantity);
-    }
+//    //@Test(priority = 2)
+//    public void Can_do_Transfer_by_Quantity_from_one_Clinic_to_Another() throws Exception {
+//        TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184 //C223184
+//        precondition();
+//        String container_from = String.valueOf(testData.get("containerFrom"));
+//        String container_to = String.valueOf(testData.get("containerTo"));
+//        int quantity = 10;
+//
+//        ////// Supply Location_1 -> Outcoming
+//        //log("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
+//        //supplyConsolePage.selectSupplyContainer();
+//        log("/*6.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+//        double doses_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+//        log("/*-- . remaining doses are: -->" + doses_before_distribution_1_1);
+//        double qty_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+//        ;
+//        log("/*-- . remaining Quantity are: -->" + qty_before_distribution_1_1);
+//        log("/*7.----Click on Container's dropdown --*/");
+//        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, container_from);
+//        log("/*8.----select Transfer from the DropDownMenu dropdown menu --*/");
+//        SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
+//        log("/*9.----Picked up the Trade Vaccine Name --*/");
+//        String tradeName = ContainerTransferForm.getVaccineName(driver);//Pfizer mRNA BNT162b2 - EK4241
+//        log("/*--  the Trade Name is:  " + tradeName);
+//        log("/*10.----Picked up the Dose Conversation Factor --*/");
+//        //Double dose_conversation_factor = 5.0;
+//        double dose_conversation_factor = ContainerTransferForm.getConversationFactor(driver);
+//        log("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
+//        log("/*10.----Entering 10 Quantity in the Container-Transfer Form --*/");
+//        ContainerTransferForm.enterTransferQuantity(driver, Integer.toString(quantity));
+//        System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
+//        Thread.sleep(1000);
+//        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
+//        System.out.println("/*12.----click Transfer dialog Modal button --*/");
+//        ContainerTransferForm.clickTransferButton(driver);
+//        System.out.println("/*13.----click Close Modal button --*/");
+//        ContainerPrintDialog.clickCloseButton(driver);
+//        System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
+//        double doses_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+//        System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_1_1);
+//        double qty_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+//        System.out.println("/*-- . remaining Quantity are: -->" + qty_after_distribution_1_1);
+//        System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
+//        double remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1 =
+//                Double.parseDouble(new DecimalFormat("##.##").
+//                        format((doses_before_distribution_1_1 - quantity * dose_conversation_factor)));
+//        assertEquals(doses_after_distribution_1_1, remainingDoses_after_Calculation_Lot_EK4241_Distribution_1_1);
+//        double remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1 =
+//                Double.parseDouble(new DecimalFormat("##.##").
+//                        format(((doses_before_distribution_1_1 - quantity * dose_conversation_factor) / dose_conversation_factor)));
+//        assertEquals(qty_after_distribution_1_1, remainingQty_after_Calculation_Lot_EK4241_Distribution_1_1);
+//        System.out.println("/*16.----Go to Transactions Tab of Automation Supply Location_1 --*/");
+//        SupplyLocationPage.clickTransactionsTab(driver);
+//        System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
+//        System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
+//        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+//        System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
+////		int kk = countOutgoingTransactions;
+////		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
+////		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+////		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
+////		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
+////		supplyConsolePage.clickOnOutgoingTransactions(kk);
+//        System.out.println("/*18.----Close All Tab's --*/");
+//        SupplyConsolePage.closeTabsHCA(driver);
+//        System.out.println("/*19.----Go to Supply Locations Tab --*/");
+//
+//        SupplyConsolePage.clickSupplyLocationsTab(driver);
+//        System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
+//        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+//        //supplyConsolePage.clickOnSupplyLocation_2();
+//
+//        ///////////////// Supply Location_2 -> Incoming //////////////////////////
+//
+//        System.out.println("/*21.----Quantity Remaining Doses/Remaining Quantity check Before --*/");
+//        double doses_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
+//        System.out.println("/*-- . remaining doses are: -->" + doses_before_distribution_2_1);
+//        double qty_before_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
+//        System.out.println("/*-- . remaining Quantity are: -->" + qty_before_distribution_2_1);
+//        System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
+//        SupplyLocationPage.clickTransactionsTab(driver);
+//        System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
+//        int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+//        System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
+//        System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
+//        int j = countIncomingTransactions;
+//        supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
+//        System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
+//        supplyConsolePage.selectConfirmIncomingDropDown();
+//        System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
+//        supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
+//        System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
+//        supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+//        System.out.println("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
+//        List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+//        Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
+//        System.out.println("/*29.----click on Related Item Tab --*/");
+//        SupplyLocationPage.clickOnRelatedItemTab(driver);
+//        System.out.println("/*14----Quantity Remaining Doses/Remaining Quantity check After --*/");
+//        double doses_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingDoses(container_to, distribution_to);
+//        System.out.println("/*-- . remaining doses are: -->" + doses_after_distribution_2_1);
+//        double qty_after_distribution_2_1 = supplyConsolePage.getValueOfRemainingQty(container_to, distribution_to);
+//        System.out.println("/*-- . remaining Quantity are: -->" + qty_after_distribution_2_1);
+//        System.out.println("/*15.----Validate Remaining Doses and Remaining Quantities values --*/");
+//        assertEquals(doses_after_distribution_2_1, round(doses_before_distribution_2_1 + quantity * dose_conversation_factor));
+//        assertEquals(qty_after_distribution_2_1, qty_before_distribution_2_1 + quantity);
+//    }
 
     @Test(priority = 3)
     public void Can_do_Transfer_by_Dosages_within_the_same_Clinic() throws Exception {
@@ -271,15 +275,20 @@ public class Transfer extends BaseTest {
         //System.out.println("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
         //supplyConsolePage.selectSupplyContainer();
         /////////////////////Doses and Quantity BEFORE//////////////////////////////////
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+
         System.out.println("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double doses_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        double doses_before_distribution_1_1 = doses_before.get("Remaining Doses");
         System.out.println("/*-- . Distribution_1_1 remaining doses Before are: -->" + doses_before_distribution_1_1);
-        double qty_before_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double qty_before_distribution_1_1 = doses_before.get("Remaining Quantity");
         System.out.println("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + qty_before_distribution_1_1);
+
         log("/*7.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double doses_before_distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+
+        double doses_before_distribution_1_2 = doses_destination_before.get("Remaining Doses");
         System.out.println("/*-- . Distribution_1_2 remaining doses Before are: -->" + doses_before_distribution_1_2);
-        double qty_before_distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double qty_before_distribution_1_2 = doses_destination_before.get("Remaining Quantity");
         System.out.println("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + qty_before_distribution_1_2);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         System.out.println("/*8.----Click on Container's dropdown --*/");
@@ -287,33 +296,37 @@ public class Transfer extends BaseTest {
         System.out.println("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
         SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         System.out.println("/*10.----Picked up the Trade Vaccine Name --*/");
-        String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+        String tradeName = ContainerTransferForm.getVaccineName(driver);//Pfizer mRNA BNT162b2 - EK4241
         System.out.println("/*--  the Trade Name is:  " + tradeName);
         System.out.println("/*11.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = ContainerTransferForm.getConversationFactor(driver);
         System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         System.out.println("/*12.----Entering 10 Doses in the Container-Transfer Form --*/");
         ContainerTransferForm.enterTransferDosages(driver, "10");
         System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
         System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
+        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
         System.out.println("/*15.----click Transfer dialog Modal button --*/");
-        supplyConsolePage.clickBulkTransfersModalButton();
+        ContainerTransferForm.clickTransferButton(driver);
         System.out.println("/*16.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
         driver.navigate().refresh();
         /////////////////////Doses and Quantity AFTER///////////////////////////////////
         System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double doses_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+
+        double doses_after_distribution_1_1 = doses_after.get("Remaining Doses");
         System.out.println("/*-- . remaining doses Distribution_1_1 After are: -->" + doses_after_distribution_1_1);
-        double qty_after_distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double qty_after_distribution_1_1 = doses_after.get("Remaining Quantity");
         System.out.println("/*-- . remaining Quantity  Distribution_1_1 After are: -->" + qty_after_distribution_1_1);
         System.out.println("/*18----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double doses_after_distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+
+        Map<String, Double> doses_destination_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double doses_after_distribution_1_2 = doses_destination_after.get("Remaining Doses");
         System.out.println("/*-- . remaining doses  Distribution_1_2 After are: -->" + doses_after_distribution_1_2);
-        double qty_after_distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double qty_after_distribution_1_2 = doses_destination_after.get("Remaining Quantity");
         System.out.println("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + qty_after_distribution_1_2);
         //////////Validation for Distribution_1_1(From) and Distribution_1_2(To)
         System.out.println("/*19.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
@@ -344,18 +357,18 @@ public class Transfer extends BaseTest {
         String container_to_same_clinic = String.valueOf(testData.get("containerToSameClinic"));
         int quantity = 10;
 
-        //System.out.println("/*-- 6. Click and navigate to the supply container --> 'Pfizer mRNA BNT162b2 - EK4241' --*/");
-        //supplyConsolePage.selectSupplyContainer();
         /////////////////////Doses and Quantity BEFORE//////////////////////////////////
         System.out.println("/*6.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-        double remainingDoses_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_before_Lot_EK4241_Distribution_1_1 = doses_before.get("Remaining Doses");
         System.out.println("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_1);
-        double remainingQty_before_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_before_Lot_EK4241_Distribution_1_1 = doses_before.get("Remaining Quantity");
         System.out.println("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_1);
         log("/*7.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-        double remainingDoses_before_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_before_Lot_EK4241_Distribution_1_2 = doses_destination_before.get("Remaining Doses");
         System.out.println("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Lot_EK4241_Distribution_1_2);
-        double remainingQty_before_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_before_Lot_EK4241_Distribution_1_2 = doses_destination_before.get("Remaining Quantity");
         System.out.println("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Lot_EK4241_Distribution_1_2);
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
         System.out.println("/*8.----Click on Container's dropdown --*/");
@@ -363,33 +376,36 @@ public class Transfer extends BaseTest {
         System.out.println("/*9.----select Transfer from the DropDownMenu dropdown menu --*/");
         SupplyLocationRelatedItems.selectTransferFromDropDown(driver);
         System.out.println("/*10.----Picked up the Trade Vaccine Name --*/");
-        String tradeName = supplyConsolePage.getVaccineName();//Pfizer mRNA BNT162b2 - EK4241
+        String tradeName = ContainerTransferForm.getVaccineName(driver);//Pfizer mRNA BNT162b2 - EK4241
         System.out.println("/*--  the Trade Name is:  " + tradeName);
         System.out.println("/*11.----Picked up the Dose Conversation Factor --*/");
         //Double dose_conversation_factor = 5.0;
-        double dose_conversation_factor = supplyConsolePage.getDoseConversationFactor();
+        double dose_conversation_factor = ContainerTransferForm.getConversationFactor(driver);
         System.out.println("/*--  the Dose Conversation Factor is:  " + dose_conversation_factor);
         System.out.println("/*12.----Entering 10 Quantity in the Container-Transfer Form --*/");
         ContainerTransferForm.enterTransferQuantity(driver, Integer.toString(quantity));
         System.out.println("/*13.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
         System.out.println("/*14.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
+        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
         System.out.println("/*15.----click Transfer dialog Modal button --*/");
-        supplyConsolePage.clickBulkTransfersModalButton();
+        ContainerTransferForm.clickTransferButton(driver);
         System.out.println("/*16.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
         driver.navigate().refresh();
         /////////////////////Doses and Quantity AFTER///////////////////////////////////
+
         System.out.println("/*17----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-        double remainingDoses_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_after_Lot_EK4241_Distribution_1_1 = doses_after.get("Remaining Doses");
         System.out.println("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_1);
-        double remainingQty_after_Lot_EK4241_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_after_Lot_EK4241_Distribution_1_1 = doses_after.get("Remaining Quantity");
         System.out.println("/*-- . remaining Quantity  Distribution_1_1 After are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_1);
         System.out.println("/*18----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-        double remainingDoses_after_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_after_Lot_EK4241_Distribution_1_2 = doses_destination_after.get("Remaining Doses");
         System.out.println("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Lot_EK4241_Distribution_1_2);
-        double remainingQty_after_Lot_EK4241_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_after_Lot_EK4241_Distribution_1_2 = doses_destination_after.get("Remaining Quantity");
         System.out.println("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Lot_EK4241_Distribution_1_2);
         //////////Validation for Distribution_1_1(From) and Distribution_1_2(To)
         System.out.println("/*19.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");

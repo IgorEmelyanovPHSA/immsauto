@@ -21,17 +21,23 @@ public class SupplyLocationRelatedItems extends BasePage {
         return supply_container_table.getRows().size() - 1;
     }
 
-    public static Map<String, Map<String, String>> checkSupplyContainer(WebDriver driver, int row) throws InterruptedException {
+    public static Map<String, Map<String, Double>> checkSupplyContainer(WebDriver driver, int row) throws InterruptedException {
         Thread.sleep(500);
-        Map<String, Map<String, String>> my_container_rec = new HashMap<>();
+        DecimalFormat df = new DecimalFormat("0.00");
+        Map<String, Map<String, Double>> my_container_rec = new HashMap<>();
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
         String my_container_name = my_records.get(row).get("Supply Container Name").getText();
         String my_dose = my_records.get(row).get("Remaining Doses").getText();
+        Double dose_num = Double.parseDouble(my_dose.replace(",", ""));
         String my_quantity = my_records.get(row).get("Remaining Quantity").getText();
-        Map<String, String> my_rec = new HashMap<>();
-        my_rec.put("Remaining Doses", my_dose);
-        my_rec.put("Remaining Quantity", my_quantity);
+        Double quantity_num = Double.parseDouble(my_quantity.replace(",", ""));
+        Double conversion_factor = Double.valueOf(df.format(dose_num / quantity_num));
+        Map<String, Double> my_rec = new HashMap<>();
+        my_rec.put("Remaining Doses", dose_num);
+        my_rec.put("Remaining Quantity", quantity_num);
+        my_rec.put("Conversion Factor", conversion_factor);
+
         my_container_rec.put(my_container_name, my_rec);
         WebElement my_checkbox = my_records.get(row).get("Choose a Row\n" +
                 "Select All");
@@ -62,6 +68,8 @@ public class SupplyLocationRelatedItems extends BasePage {
                     Map<String, Double> my_rec = new HashMap<>();
                     my_rec.put("Remaining Doses", dose_num);
                     my_rec.put("Remaining Quantity", quantity_num);
+                    Double conversion_factor = Double.valueOf(df.format(dose_num / quantity_num));
+                    my_rec.put("Conversion Factor", conversion_factor);
                     my_container_rec.put(my_container_name, my_rec);
                     WebElement my_checkbox = my_record.get("Choose a Row\n" +
                             "Select All");
@@ -75,6 +83,7 @@ public class SupplyLocationRelatedItems extends BasePage {
 
     public static Map<String, Map<String, Double>> getSupplyContainers(WebDriver driver, List<String> containers) throws InterruptedException {
         Thread.sleep(500);
+        DecimalFormat df = new DecimalFormat("#.##");
         Map<String, Map<String, Double>> my_container_rec = new HashMap<>();
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
@@ -89,6 +98,8 @@ public class SupplyLocationRelatedItems extends BasePage {
                     Map<String, Double> my_rec = new HashMap<>();
                     my_rec.put("Remaining Doses", dose_num);
                     my_rec.put("Remaining Quantity", quantity_num);
+                    Double conversion_factor = Double.valueOf(df.format(dose_num / quantity_num));
+                    my_rec.put("Conversion Factor", conversion_factor);
                     my_container_rec.put(my_container_name, my_rec);
                     break;
                 }
@@ -124,6 +135,15 @@ public class SupplyLocationRelatedItems extends BasePage {
         wastage_button.click();
     }
 
+    public static void clickTransfersButton(WebDriver driver) throws InterruptedException{
+        Thread.sleep(500);
+        By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
+        waitForElementToBeEnabled(driver, transfer_button_path, 10);
+        WebElement transfer_button = driver.findElement(transfer_button_path);
+        scrollIfNeeded(driver, transfer_button);
+        Thread.sleep(500);
+        transfer_button.click();
+    }
     public static void clickOnFirstContainerDropDownMenu(WebDriver driver) throws InterruptedException {
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();

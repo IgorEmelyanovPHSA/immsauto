@@ -54,17 +54,18 @@ public class DraftsCP extends BaseTest {
         log("/*2.----Navigate to Supply Console Page --*/");
         MainPageCP.goToSupplyLocation(driver);
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
-
-        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_before_Distribution_1_1 = doses_before.get("Remaining Doses");
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_before_Distribution_1_1 = doses_before.get("Remaining Quantity");
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
-        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_before_Distribution_1_2 = doses_destination_before.get("Remaining Doses");
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_before_Distribution_1_2 = doses_destination_before.get("Remaining Quantity");
         log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
         log("/*8.----Picked up the Dose Conversation Factor --*/");
         double dose_conversation_factor = Double.valueOf(df.format(remainingDoses_before_Distribution_1_1 / remainingQty_before_Distribution_1_1));
@@ -95,17 +96,17 @@ public class DraftsCP extends BaseTest {
         SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/*14.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-
-        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_after_Distribution_1_1 = doses_after.get("Remaining Doses");
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
-        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_after_Distribution_1_1 = doses_after.get("Remaining Quantity");
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*15.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-
-        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_after_Distribution_1_2 = doses_destination_after.get("Remaining Doses");
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
-        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_after_Distribution_1_2 = doses_destination_after.get("Remaining Quantity");
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*16.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
@@ -147,19 +148,19 @@ public class DraftsCP extends BaseTest {
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-
-        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_before_Distribution_1_1 = doses_before.get("Remaining Doses");
             log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_before_Distribution_1_1 = doses_before.get("Remaining Quantity");
             log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-
-        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_before_Distribution_1_2 = doses_destination_before.get("Remaining Doses");
             log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_before_Distribution_1_2 = doses_destination_before.get("Remaining Quantity");
             log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
@@ -177,16 +178,16 @@ public class DraftsCP extends BaseTest {
         ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
+        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -206,19 +207,19 @@ public class DraftsCP extends BaseTest {
         driver.navigate().refresh();
         Thread.sleep(2000);
         log("/*19.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-
-        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_after_Distribution_1_1 = doses_after.get("Remaining Doses");
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
 
-        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_after_Distribution_1_1 = doses_after.get("Remaining Quantity");
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*20.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-
-        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_after_Distribution_1_2 = doses_destination_after.get("Remaining Doses");
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
 
-        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_after_Distribution_1_2 = doses_destination_after.get("Remaining Quantity");
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*21.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
@@ -265,19 +266,19 @@ public class DraftsCP extends BaseTest {
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*4.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_1 --*/");
-
-        double remainingDoses_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_before_Distribution_1_1 = doses_before.get("Remaining Doses");
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
 
-        double remainingQty_before_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_before_Distribution_1_1 = doses_before.get("Remaining Quantity");
         log("/*-- . Distribution_1_1 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_1);
 
         log("/*5.----Quantity Remaining Doses/Remaining Quantity check Before for Distribution_1_2 --*/");
-
-        double remainingDoses_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_before_Distribution_1_2 = doses_destination_before.get("Remaining Doses");
         log("/*-- . Distribution_1_2 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_2);
 
-        double remainingQty_before_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_before_Distribution_1_2 = doses_destination_before.get("Remaining Quantity");
         log("/*-- . Distribution_1_2 remaining Quantity Before are: -->" + remainingQty_before_Distribution_1_2);
 
         /////////Do Transfer from Distribution_1_1 to Distribution_1_2/////////
@@ -296,16 +297,16 @@ public class DraftsCP extends BaseTest {
         ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
 
         log("/*10.----select 'To' 'Automation Supply Location_1'  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
 
         log("/*11.----select 'Supply Distribution_1_2' 'To'  --*/");
-        supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
+        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
         supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
 
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
 
         log("/*14.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -322,19 +323,19 @@ public class DraftsCP extends BaseTest {
         SupplyLocationPage.clickOnRelatedItemTab(driver);
 
         log("/*18----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
-
-        double remainingDoses_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingDoses(container_from, distribution_from);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
+        double remainingDoses_after_Distribution_1_1 = doses_after.get("Remaining Doses");
         log("/*-- . remaining doses Distribution_1_1 After are: -->" + remainingDoses_after_Distribution_1_1);
 
-        double remainingQty_after_Distribution_1_1 = supplyConsolePage.getValueOfRemainingQty(container_from, distribution_from);
+        double remainingQty_after_Distribution_1_1 = doses_after.get("Remaining Quantity");
         log("/*-- . remaining Quantity Distribution_1_1 After are: -->" + remainingQty_after_Distribution_1_1);
 
         log("/*19----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_2 --*/");
-
-        double remainingDoses_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingDoses(container_to_same_clinic, distribution_to_same_clinic);
+        Map<String, Double> doses_destination_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_to_same_clinic);
+        double remainingDoses_after_Distribution_1_2 = doses_destination_after.get("Remaining Doses");
         log("/*-- . remaining doses  Distribution_1_2 After are: -->" + remainingDoses_after_Distribution_1_2);
 
-        double remainingQty_after_Distribution_1_2 = supplyConsolePage.getValueOfRemainingQty(container_to_same_clinic, distribution_to_same_clinic);
+        double remainingQty_after_Distribution_1_2 = doses_destination_after.get("Remaining Quantity");
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*20.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");

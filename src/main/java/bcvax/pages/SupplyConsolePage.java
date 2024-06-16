@@ -36,14 +36,6 @@ public class SupplyConsolePage extends BasePage {
 	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
 	private WebElement search_incoming_supply_distributor_1_2;
 
-	@FindBy(xpath = ".//input[@name = 'HC_Product_Measure__c']")
-	private WebElement get_dose_conversation_factor;
-	private By get_dose_conversation_factor1 = By.xpath(".//input[@name = 'HC_Product_Measure__c']");
-
-	@FindBy(xpath = ".//input[@name = 'BCH_Product_Name__c']")
-	private WebElement get_trade_name;
-	private By get_trade_name1 = By.xpath(".//input[@name = 'BCH_Product_Name__c']");
-
 	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
 	private WebElement btnEditOnTrasactionPage;
 
@@ -113,25 +105,6 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public void clickBulkTransfersButton() throws InterruptedException{
-		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
-		waitForElementToBeEnabled(driver, transfer_button_path, 10);
-		WebElement transfer_button = driver.findElement(transfer_button_path);
-		scrollIfNeeded(driver, transfer_button);
-		transfer_button.click();
-	}
-	public SupplyConsolePage clickBulkCancelButton() throws InterruptedException {
-		By cancel_transfer_button_path = By.xpath("//button[text() = 'Cancel Transfer']");
-		By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
-		waitForElementToBeEnabled(driver, cancel_transfer_button_path, 10);
-		WebElement bulk_cancel_button = driver.findElement(cancel_transfer_button_path);
-		waitForElementToBeEnabled(driver, transfer_button_path, 10);
-		scrollCenter(driver, bulk_cancel_button);
-		Thread.sleep(1000);
-		bulk_cancel_button.click();
-		return this;
-	}
-
 	public boolean verifyIsSupplyPageDisplayed() throws InterruptedException {
 		int timeout = 30000;
 		boolean found = false;
@@ -181,60 +154,6 @@ public class SupplyConsolePage extends BasePage {
 			Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container);
 			tables.typeQtyIntoTransferRow(supplyContainer, Double.toString(quantity));
 		}
-	}
-
-	public void selectSupplyLocationToFromDropdown(String supplyLocation) throws InterruptedException {
-		log(" -- select 'To' " + supplyLocation + "  -");
-		Thread.sleep(500);
-		By search_supplu_location_path = By.xpath("//label[@class='slds-form-element__label' and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
-		waitForElementToBeEnabled(driver, search_supplu_location_path, 30);
-		WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
-		log(" -- Combobox Supply Location To is found  -");
-		searchSupplyLocationCombobox.sendKeys(supplyLocation);
-		log(" -- Start typing into Search Combobox  -");
-		By supplyLocationItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title='" + supplyLocation + "']");
-		waitForElementToBeEnabled(driver, supplyLocationItemPath, 10);
-		WebElement supplyLocationItem = driver.findElement(supplyLocationItemPath);
-		scrollCenter(supplyLocationItem);
-		log(" -- Drop down with supply required Supply location appeared  -");
-		try {
-			supplyLocationItem.click();
-		} catch(Exception ex) {
-			searchSupplyLocationCombobox.click();
-			supplyLocationItem.click();
-		}
-		//Probable delay when select supply location causing teh javascript error
-		Thread.sleep(2000);
-		log(" -- Selected Supply location successfully  -");
-	}
-
-	@Step
-	public SupplyConsolePage clickBulkTransfersModalButton() throws InterruptedException {
-		Thread.sleep(500);
-		By transfer_btn_path = By.xpath("(//section[@role='dialog']//button[text() = 'Transfer'])");
-		waitForElementToBeEnabled(driver, transfer_btn_path, 10);
-		WebElement transfer_btn = driver.findElement(transfer_btn_path);
-		scrollCenter(transfer_btn);
-		transfer_btn.click();
-		return this;
-	}
-	@Step
-	public void clickBulkTransfersDialogCloseButton() throws InterruptedException {
-		Thread.sleep(2000);
-		By bulk_dialog_close_button_path = By.xpath("//section[@role='dialog']//button[text()='Close']");
-		waitForElementToBeEnabled(driver, bulk_dialog_close_button_path, 10);
-		WebElement bulk_dialog_close_button = driver.findElement(bulk_dialog_close_button_path);
-		bulk_dialog_close_button.click();
-		try {
-			Thread.sleep(500);
-			WebElement javascript_error_close_button = driver.findElement(By.xpath("//button[@title='Close this window']"));
-			javascript_error_close_button.click();
-			System.out.println("***WARNING. Probable Javascript performance ***");
-		} catch(Exception ex) {
-			;
-		}
-		waitForElementNotToBeVisible(driver, bulk_dialog_close_button_path, 10);
-		Thread.sleep(2000);
 	}
 
 	public int getRowsOutgoingTransactionsCount() throws InterruptedException {
@@ -379,7 +298,7 @@ public class SupplyConsolePage extends BasePage {
 		clickUsingJS(btnTransferDraftOnContainerTransferPage);
 		//click(btnTransferDraftOnContainerTransferPage);
 		Thread.sleep(2000);
-		clickBulkTransfersDialogCloseButton();
+		ContainerPrintDialog.clickCloseButton(driver);
 		Thread.sleep(2000);
 	}
 
@@ -397,16 +316,6 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(checkbox);
 		checkbox.click();
 		Thread.sleep(1000);
-	}
-
-	public void clickBulkConfirmIncomingTransfersButton() throws InterruptedException {
-		Thread.sleep(500);
-		By bulk_confirm_incoming_transfers_button_path = By.xpath(".//button[text() = 'Confirm Transfer']");
-		waitForElementToBeEnabled(driver, bulk_confirm_incoming_transfers_button_path, 10);
-		WebElement bulk_confirm_incoming_transfers_button = driver.findElement(bulk_confirm_incoming_transfers_button_path);
-		scrollCenter(bulk_confirm_incoming_transfers_button);
-		Thread.sleep(500);
-		bulk_confirm_incoming_transfers_button.click();
 	}
 
 	public void selectIncomingSupplyDistribution(String distribution) throws InterruptedException {
@@ -628,28 +537,6 @@ public class SupplyConsolePage extends BasePage {
 			reason_link.click();
 		}
 	}
-	@Step
-	public String getVaccineName() throws InterruptedException {
-		log("/*9.----Picked up the Trade Vaccine Name --*/");
-		waitForElementToBeLocated(driver, get_trade_name1, 10);
-		WebElement element = driver.findElement(get_trade_name1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		String tradeName = getValue(get_trade_name);
-		return (tradeName);
-	}
-	@Step
-	public double getDoseConversationFactor() throws InterruptedException {
-
-		waitForElementToBeLocated(driver, get_dose_conversation_factor1, 10);
-		WebElement element = driver.findElement(get_dose_conversation_factor1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
-		Thread.sleep(2000);
-		String conversationFactor = getValue(get_dose_conversation_factor);
-		double Factor = Double.parseDouble(conversationFactor.replaceAll(",", ""));
-		log(" -- the Dose Conversation Factor is: " + Factor);
-		return (Factor);
-	}
 
 	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
 		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("Actions").click();
@@ -682,20 +569,6 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(driver, drd_cance_btn);
 		Thread.sleep(500);
 		drd_cance_btn.click();
-	}
-
-	public void selectSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
-		By searchSupplyDistributionPath = By.xpath(".//span[contains(text(),'Select an Option')]");
-		waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);
-		WebElement searchDistributionField = driver.findElement(searchSupplyDistributionPath);
-		scrollCenter(searchDistributionField);
-		searchDistributionField.click();
-		Thread.sleep(2000);
-		By supplyDistributor = By.xpath("//span[contains(text(),'" + supplyDistribution + "')]");
-		waitForElementToBePresent(driver, supplyDistributor, 10);
-		WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
-		scrollCenter(driver, supplyDistributorItem);
-		supplyDistributorItem.click();
 	}
 
 	public void selectTransferSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
@@ -825,8 +698,8 @@ public class SupplyConsolePage extends BasePage {
 	public void draftToDistributionWithinSameClinic(String location, String distribution) throws InterruptedException {
 		selectSupplyLocation(location);
 		transferToDistributionOnSend(distribution);
-		clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
-		clickBulkTransfersDialogCloseButton();
+		ContainerTransferPage.clickSaveAsDraftButton(driver);
+		ContainerPrintDialog.clickCloseButton(driver);
 	}
 
 	@Step

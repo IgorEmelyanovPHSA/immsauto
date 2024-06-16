@@ -6,6 +6,7 @@ import bcvax.tests.BaseTest;
 import constansts.Apps;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -85,12 +86,13 @@ public class BulkAdjustments extends BaseTest {
 		log("/*---     count:" + countSupplyContainers);
 
 		int numberOfRows = 3;
-		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
+		Map<String, Map<String, Double>> my_containers = new HashMap<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= numberOfRows) {
 			for (int k = 1; k <= numberOfRows; k++) {
-				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-				my_containers.add(my_container_data);
+				Map<String, Map<String, Double>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				String my_cont_name = my_container_data.keySet().toArray()[0].toString();
+				my_containers.put(my_cont_name, my_container_data.get(my_cont_name));
 			}
 		} else {
 			log("/*--not enough records for Bulk actions--*/");
@@ -99,14 +101,10 @@ public class BulkAdjustments extends BaseTest {
 		//Remaining Doses and Quantity count // 3 rows, ref step7 containers count
 		log("/*8.----Read Remaining Doses And Quantity Before Deduction --*/");
 		List<String> my_conts = new ArrayList<>();
-		for(Map<String, Map<String, String>> cont: my_containers) {
-			for(String my_key: cont.keySet()) {
-				my_conts.add(my_key);
-			}
+		for(String cont_name: my_containers.keySet()) {
+			my_conts.add(cont_name);
 		}
 
-		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
-		
 		log("/*9.----Click on bulk Adjustment button on Supply page--*/");
 		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
 		Thread.sleep(5000);
@@ -122,155 +120,30 @@ public class BulkAdjustments extends BaseTest {
 
 		//Map<String, Map<String, String>> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoses(driver, my_conts);
 		log("/*12.----Read Remaining Doses And Quantity After Adjustment --*/");
-		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
+		Map<String, Map<String, Double>> my_containers_after = SupplyLocationRelatedItems.getSupplyContainers(driver, my_conts);
 		
 		log("/*13.----Calculating Remaining Doses And Quantity After Adjustment --*/");
-		HashMap<Integer, ArrayList<Double>> calculatedRemainingDosesAndQuantityAfterAdjustment = new HashMap<>();
-		for (int i = 0; i < remainingDosesAndQuantityBeforeAdjustment.size(); i++) {
-			ArrayList<Double> writeToList = new ArrayList<>();
-			ArrayList<Double> readFromList = remainingDosesAndQuantityBeforeAdjustment.get(i);
-			double remainingDoses = readFromList.get(0);
-			double remainingQuantity = readFromList.get(1);
-			double doseConversionFactor = readFromList.get(2);
-			//Actual calculation
-			double afterAdjustmentDoses = remainingDoses + amountOfDosesToAdjust;
-			double afterAdjustmentQuantity = Double.parseDouble(df.format(
-					remainingQuantity + (amountOfDosesToAdjust / doseConversionFactor)));
-			writeToList.add(afterAdjustmentDoses);
-			writeToList.add(afterAdjustmentQuantity);
-			writeToList.add(doseConversionFactor);
-			calculatedRemainingDosesAndQuantityAfterAdjustment.put(i, writeToList);
-		}
+
 		
 		log("/*14.----Compering Remaining Doses and Quantity actual vs calculated--*/");
 		//Comparing 2 objects actualRemainingDosesAndQuantityAfterAdjustment vs calculatedRemainingDosesAndQuantityAfterAdjustment
-		for (int i = 0; i < actualRemainingDosesAndQuantityAfterAdjustment.size(); i++) {
-			ArrayList<Double> afterDeduction = actualRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double remainingDosesAfterAdjustment = afterDeduction.get(0);
-			double remainingQuantityAfterAdjustment = afterDeduction.get(1);
-			double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
-			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double calculatedDosesAfterAdjustment = Double.valueOf(df.format(calculated.get(0)));
-			double calculatedRemainingQuantityAfterAdjustment = Double.valueOf(df.format(calculated.get(1)));
-			double doseConversionAfterAdjustment = Double.valueOf(df.format(calculated.get(2)));
-			
+		for (String my_container_after: my_containers_after.keySet()) {
 			//Comparing results
-			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
-			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
+			log("Compering remaining doses after adjustment");
+			double dose_before = my_containers.get(my_container_after).get("Remaining Doses");
+			double dose_after = my_containers_after.get(my_container_after).get("Remaining Doses");
+			double conversion_factor_before = my_containers.get(my_container_after).get("Conversion Factor");
+			Assert.assertEquals(dose_after, dose_before + amountOfDosesToAdjust);
 
-			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.011);
+			double qty_before = my_containers.get(my_container_after).get("Remaining Quantity");
+			double qty_after = my_containers_after.get(my_container_after).get("Remaining Quantity");
+			double conversion_factor_after = my_containers_after.get(my_container_after).get("Conversion Factor");
+			log("Compering remaining quantity after adjustment " + qty_after + " vs calculated quantity after adjustment " + qty_before);
+			assertEquals(qty_after, qty_before + amountOfDosesToAdjust/conversion_factor_after, 0.011);
 			//***
-			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
-			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
+			log("Compering dose conversion factor before adjustment");
+			assertEquals(conversion_factor_after, conversion_factor_before);
 			}
-	}
-
-	//@Test(dataProvider = "quantitiesAmount")
-	public void Can_Do_Bulk_Adjustment_ByQuantities_Positive_And_Negative_Value_AS_PPHIS(String quantity) throws Exception {
-		TestcaseID = "223360"; //C223360
-		log("Target Environment: "+ Utils.getTargetEnvironment());
-		AllureLifecycle lifecycle = Allure.getLifecycle();
-		double amountOfQuantityToAdjust = Double.parseDouble(quantity);
-		boolean isNegativeFlag = isNegative(amountOfQuantityToAdjust);
-		String reasonForAdjustment = "Administered Vaccine";
-
-		if (isNegativeFlag == false) {
-			log("/*0.----Positive Scenario: Can_Do_Bulk_Adjustment_ByQuantities_Positive_Value_AS_PPHIS--*/");
-			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Bulk_Adjustment_ByQuantities_Positive_Value_AS_PPHIS"));
-		} else {
-			log("/*0.----Negative Scenario: Can_Do_Bulk_Adjustment_ByQuantities_Negative_Value_AS_PPHIS--*/");
-			lifecycle.updateTestCase(testResult -> testResult.setName("Can_Do_Bulk_Adjustment_ByQuantities_Negative_Value_AS_PPHIS"));
-		}
-		log("/*----Amount Adjustment Quantities " + amountOfQuantityToAdjust + " --*/");
-
-		log("/*1.----Login as an PPHIS to Supply Console --*/");
-		SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();
-		orgMainPage = new MainPageOrg(driver);
-		String currentApp = MainPageOrg.currentApp(driver);
-		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
-			MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
-		}
-
-		log("/*3.----Close All previously opened Tab's --*/");
-		SupplyConsolePage.closeTabsHCA(driver);
-		log("/*4.----Go to Supply Locations Tab --*/");
-		SupplyConsolePage.clickSupplyLocationsTab(driver);
-		SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
-		log("/*4.----Get Supply Containers count outcoming records --*/");
-		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
-		log("/*---     count:" + countSupplyContainers);
-
-		int numberOfRows = 3;
-		ArrayList<Map<String, Map<String, String>>> my_containers = new ArrayList<>();
-		log("/*4.----Click on Container's records Checkboxes --*/");
-		if (countSupplyContainers >= numberOfRows) {
-			for (int k = 1; k <= numberOfRows; k++) {
-				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
-				my_containers.add(my_container_data);
-			}
-		} else {
-			log("/*--not enough records for Bulk actions--*/");
-		}
-
-		  //Default COUNT limited to 3 rows as per step5
-		//Remaining Doses and Quantity count // 3 rows, ref step5 containers count
-		log("/*6.----Read Remaining Doses And Quantity Before Deduction --*/");
-		HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
-
-		log("/*7.----Click on bulk Adjustment button on Supply page--*/");
-		SupplyLocationRelatedItems.clickAdjustmentButton(driver);
-
-		log("/*8.----Enter the Quantities values for 3 rows and reason for adjustment: " +reasonForAdjustment +"--*/");
-		supplyConsolePage.enterBulkAdjustmentByQuantitiesWithReason(amountOfQuantityToAdjust, reasonForAdjustment);
-
-		log("/*9.----Click button Adjustment on Container - Adjustment page --*/");
-		supplyConsolePage.clickAdjustmentButtonContainerAdjustmentPage();
-		Thread.sleep(2000);
-		driver.navigate().refresh();
-		Thread.sleep(2000);
-
-		log("/*10.----Read Remaining Doses And Quantity After Adjustment --*/");
-		HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterAdjustment = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
-
-		log("/*11.----Calculating Remaining Doses And Quantity After Adjustment --*/");
-		HashMap<Integer, ArrayList<Double>> calculatedRemainingDosesAndQuantityAfterAdjustment = new HashMap<>();
-		for (int i = 0; i < remainingDosesAndQuantityBeforeAdjustment.size(); i++) {
-			ArrayList<Double> writeToList = new ArrayList<>();
-			ArrayList<Double> readFromList = remainingDosesAndQuantityBeforeAdjustment.get(i);
-			double remainingDoses = readFromList.get(0);
-			double remainingQuantity = readFromList.get(1);
-			double doseConversionFactor = readFromList.get(2);
-			//Actual calculation
-			double afterAdjustmentDoses =  remainingDoses + (amountOfQuantityToAdjust * doseConversionFactor);
-			double afterAdjustmentQuantity = remainingQuantity + amountOfQuantityToAdjust;
-			writeToList.add(afterAdjustmentDoses);
-			writeToList.add(afterAdjustmentQuantity);
-			writeToList.add(doseConversionFactor);
-			calculatedRemainingDosesAndQuantityAfterAdjustment.put(i, writeToList);
-		}
-
-		log("/*12.----Compering Remaining Doses and Quantity actual vs calculated--*/");
-		//Comparing 2 objects actualRemainingDosesAndQuantityAfterAdjustment vs calculatedRemainingDosesAndQuantityAfterAdjustment
-		for (int i = 0; i < actualRemainingDosesAndQuantityAfterAdjustment.size(); i++) {
-			ArrayList<Double> afterDeduction = actualRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double remainingDosesAfterAdjustment = afterDeduction.get(0);
-			double remainingQuantityAfterAdjustment = afterDeduction.get(1);
-			double doseConversionFactorBeforeAdjustment = afterDeduction.get(2);
-			ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfterAdjustment.get(i);
-			double calculatedDosesAfterAdjustment = Double.valueOf(df.format(calculated.get(0)));
-			double calculatedRemainingQuantityAfterAdjustment = Double.valueOf(df.format(calculated.get(1)));
-			double doseConversionAfterAdjustment = Double.valueOf(df.format(calculated.get(2)));
-
-			//Comparing results
-			log("Compering remaining doses after adjustment " + remainingDosesAfterAdjustment + " vs calculated doses after adjustment " + calculatedDosesAfterAdjustment);
-			assertEquals(remainingDosesAfterAdjustment, calculatedDosesAfterAdjustment);
-
-			log("Compering remaining quantity after adjustment " + remainingQuantityAfterAdjustment + " vs calculated quantity after adjustment " + calculatedRemainingQuantityAfterAdjustment);
-			assertEquals(remainingQuantityAfterAdjustment, calculatedRemainingQuantityAfterAdjustment, 0.011);
-			log("Compering dose conversion factor before adjustment " + doseConversionFactorBeforeAdjustment + " vs dose conversion factor after adjustment " + doseConversionAfterAdjustment);
-			assertEquals(doseConversionFactorBeforeAdjustment, doseConversionAfterAdjustment);
-		}
 	}
 	
 	public static boolean isNegative(double d) {
