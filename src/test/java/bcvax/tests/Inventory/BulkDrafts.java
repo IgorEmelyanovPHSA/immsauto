@@ -67,24 +67,26 @@ public class BulkDrafts extends BaseTest {
         int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
 
-        Map<String, Map<String, String>> my_containers = new HashMap<>();
+        Map<String, Map<String, Double>> my_containers = new HashMap<>();
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
             for (int k = 1; k <= 3; k++) {
-                Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                Map<String, Map<String, Double>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
                 my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
             }
         } else {
             log("/*--not enough records for Bulk actions--*/");
         }
 
-        int numberOfRows = 3;  //Default COUNT limited to 3 rows as per step7
+        List<String> my_conts = new ArrayList<>();
+        for(String cont_name: my_containers.keySet()) {
+            my_conts.add(cont_name);
+        }
         //Remaining Doses and Quantity count // 3 rows, ref BulkWastage step7 containers count
-        log("/*8.----Read Remaining Doses And Quantity Before transfer --*/");
-        HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeTransfer = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
+
 
         log("/*8.----Click on bulk Transfer button --*/");
-        supplyConsolePage.clickBulkTransfersButton();
+        SupplyLocationRelatedItems.clickTransfersButton(driver);
 
         log("/*9.----Enter the Dosages values for 3 row Transfers --*/");
         for(String my_container: my_containers.keySet()) {
@@ -93,31 +95,31 @@ public class BulkDrafts extends BaseTest {
         }
 
         log("/*10.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+        ContainerTransferPage.selectSupplyLocationToFromDropdown(driver, supply_location_to);
 
         log("/*11.----click Save as draft dialog Modal button --*/");
-        supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
+        ContainerTransferPage.clickSaveAsDraftButton(driver);
 
         //Need some wait time otherwise the java script error will be thrown
         Thread.sleep(2000);
         log("/*12.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
 
         log("/*13.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
 
         int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
-        for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
+        for(int i=countDraftTransactions; i > (countDraftTransactions-3); i--) {
             String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(i);
             log("/*----Getting id for the latest created Transaction Draft " + latestDraftTransactionId + " --*/");
         }
 
         log("/*14----Selecting the latest draft transactions and confirm transfer --*/");
-        supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, numberOfRows);
+        supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, 3);
 
         log("/*15----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-        for(int i=countOutgoingTransactions; i > (countOutgoingTransactions-numberOfRows); i--) {
+        for(int i=countOutgoingTransactions; i > (countOutgoingTransactions-3); i--) {
             String latestDraftTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(i);
             log("/*----Getting id for the latest created Outgoing Transaction " + latestDraftTransactionId + " --*/");
         }
@@ -158,13 +160,13 @@ public class BulkDrafts extends BaseTest {
         }
 
         log("/*22----click Confirm Incoming button Transfer --*/");
-        supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
+        SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
 
         log("/*23.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
-        supplyConsolePage.selectIncomingSupplyDistribution(supply_distribution_to);
+        ConfirmTransferPage.selectTransferSupplyDistributionFromDropdown(driver, supply_distribution_to);
 
         log("/*24.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
-        supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+        ConfirmTransferPage.clickConfirmTransactionButton(driver);
 
         log("/*25.----Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
         List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
@@ -177,50 +179,28 @@ public class BulkDrafts extends BaseTest {
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*28.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");
-        HashMap<Integer, ArrayList<Double>> actualRemainingDosesAndQuantityAfterTransfer = supplyConsolePage.countDosesAndQuantityMap(3);
-
-        log("/*29.----Calculating Remaining Doses And Quantity After Transfer --*/");
-        HashMap<Integer, ArrayList<Double>> calculatedRemainingDosesAndQuantityAfter = new HashMap<>();
-        for (int i = 0; i < remainingDosesAndQuantityBeforeTransfer.size(); i++) {
-            ArrayList<Double> writeToList = new ArrayList<>();
-            ArrayList<Double> readFromList = remainingDosesAndQuantityBeforeTransfer.get(i);
-            double remainingDoses = readFromList.get(0);
-            double remainingQuantity = readFromList.get(1);
-            double doseConversionFactor = readFromList.get(2);
-            //Actual calculation
-            double afterAdjustmentDoses = remainingDoses - amountOfDosesToTransfer;
-            double afterAdjustmentQuantity = Double.parseDouble(df.format(
-                    remainingQuantity - (amountOfDosesToTransfer / doseConversionFactor)));
-            writeToList.add(afterAdjustmentDoses);
-            writeToList.add(afterAdjustmentQuantity);
-            writeToList.add(doseConversionFactor);
-            calculatedRemainingDosesAndQuantityAfter.put(i, writeToList);
-        }
+        Map<String, Map<String, Double>> my_containers_after = SupplyLocationRelatedItems.getSupplyContainers(driver, my_conts);
 
         log("/*30.----Compering Remaining Doses and Quantity actual vs calculated--*/");
         //Comparing 2 objects actualRemainingDosesAndQuantityAfterTransfer vs calculatedRemainingDosesAndQuantityAfterTransfer
-        for (int i = 0; i < actualRemainingDosesAndQuantityAfterTransfer.size(); i++) {
-            ArrayList<Double> afterDeduction = actualRemainingDosesAndQuantityAfterTransfer.get(i);
-            double remainingDosesAfter = afterDeduction.get(0);
-            double remainingQuantityAfterTransfer = afterDeduction.get(1);
-            double doseConversionFactorBeforeTransfer = afterDeduction.get(2);
-            ArrayList<Double> calculated = calculatedRemainingDosesAndQuantityAfter.get(i);
-            double calculatedDosesAfterTransfer = Double.valueOf(df.format(calculated.get(0)));
-            double calculatedRemainingQuantityAfterTransfer = Double.valueOf(df.format(calculated.get(1)));
-            double doseConversionAfterTransfer = Double.valueOf(df.format(calculated.get(2)));
+        for (String my_container_name: my_containers.keySet()) {
+            double remainingDosesAfter = my_containers_after.get(my_container_name).get("Remaining Doses");
+            double remainingDosesBefore = my_containers.get(my_container_name).get("Remaining Doses");
+            double remainingQuantityAfter = my_containers_after.get(my_container_name).get("Remaining Quantity");
+            double remainingQuantityBefore = my_containers.get(my_container_name).get("Remaining Quantity");
+            double doseConversionFactorBefore = my_containers.get(my_container_name).get("Conversion Factor");
+            double doseConversionFactorAfter = my_containers_after.get(my_container_name).get("Conversion Factor");
 
             //Comparing results
-            log("Compering remaining doses after transfer " + remainingDosesAfter + " vs calculated doses after transfer " + calculatedDosesAfterTransfer);
-            assertEquals(remainingDosesAfter, calculatedDosesAfterTransfer);
-           //assertTrue(Double.compare(remainingDosesAfter, calculatedDosesAfterTransfer) == 0, "Values are different!");
+            log("Compering remaining doses after transfer vs calculated doses after transfer");
+            Assert.assertEquals(remainingDosesAfter, remainingDosesBefore - amountOfDosesToTransfer);
 
-            log("Compering remaining quantity after transfer " + remainingQuantityAfterTransfer + " vs calculated quantity after transfer " + calculatedRemainingQuantityAfterTransfer);
-            assertEquals(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer, 0.011);
+            log("Compering remaining quantity after transfer vs calculated quantity after transfer");
+            Assert.assertEquals(remainingQuantityAfter, remainingQuantityBefore - amountOfDosesToTransfer/doseConversionFactorAfter, 0.011);
             //assertTrue(Double.compare(remainingQuantityAfterTransfer, calculatedRemainingQuantityAfterTransfer) == 0, "Values are different!");
 
-            log("Compering dose conversion factor before transfer " + doseConversionFactorBeforeTransfer + " vs dose conversion factor after transfer " + doseConversionAfterTransfer);
-            assertEquals(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer);
-            //assertTrue(Double.compare(doseConversionFactorBeforeTransfer, doseConversionAfterTransfer) == 0, "Values are different!");
+            log("Compering dose conversion factor before transfer vs dose conversion factor after transfer");
+            assertEquals(doseConversionFactorBefore, doseConversionFactorAfter);
         }
     }
 

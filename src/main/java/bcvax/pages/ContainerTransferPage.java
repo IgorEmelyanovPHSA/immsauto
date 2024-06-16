@@ -24,4 +24,62 @@ public class ContainerTransferPage extends BasePage {
             }
         }
     }
+
+    public static void selectSupplyLocationToFromDropdown(WebDriver driver, String supplyLocation) throws InterruptedException {
+        log(" -- select 'To' " + supplyLocation + "  -");
+        Thread.sleep(500);
+        By search_supplu_location_path = By.xpath("//label[@class='slds-form-element__label' and text()='Supply Location']/..//input[@class='slds-combobox__input slds-input']");
+        waitForElementToBeEnabled(driver, search_supplu_location_path, 30);
+        WebElement searchSupplyLocationCombobox = driver.findElement(search_supplu_location_path);
+        log(" -- Combobox Supply Location To is found  -");
+        searchSupplyLocationCombobox.sendKeys(supplyLocation);
+        log(" -- Start typing into Search Combobox  -");
+        By supplyLocationItemPath = By.xpath("//lightning-base-combobox-formatted-text[@title='" + supplyLocation + "']");
+        waitForElementToBeEnabled(driver, supplyLocationItemPath, 10);
+        WebElement supplyLocationItem = driver.findElement(supplyLocationItemPath);
+        scrollCenter(driver, supplyLocationItem);
+        log(" -- Drop down with supply required Supply location appeared  -");
+        try {
+            supplyLocationItem.click();
+        } catch(Exception ex) {
+            searchSupplyLocationCombobox.click();
+            supplyLocationItem.click();
+        }
+        //Probable delay when select supply location causing teh javascript error
+        Thread.sleep(2000);
+        log(" -- Selected Supply location successfully  -");
+    }
+
+    public static void selectSupplyDistributionFromDropdown(WebDriver driver, String supplyDistribution) throws InterruptedException {
+        By searchSupplyDistributionPath = By.xpath(".//span[contains(text(),'Select an Option')]");
+        waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);
+        WebElement searchDistributionField = driver.findElement(searchSupplyDistributionPath);
+        scrollCenter(driver, searchDistributionField);
+        searchDistributionField.click();
+        Thread.sleep(2000);
+        By supplyDistributor = By.xpath("//span[contains(text(),'" + supplyDistribution + "')]");
+        waitForElementToBePresent(driver, supplyDistributor, 10);
+        WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
+        scrollCenter(driver, supplyDistributorItem);
+        supplyDistributorItem.click();
+    }
+
+    public static void clickSaveAsDraftButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By save_draft_btn_path = By.xpath("//button[text()='Save as draft']");
+        waitForElementToBeEnabled(driver, save_draft_btn_path, 10);
+        WebElement btnSaveAsDraftOnContainerWastagePopUp = driver.findElement(save_draft_btn_path);
+        scrollCenter(driver, btnSaveAsDraftOnContainerWastagePopUp);
+        Thread.sleep(500);
+        btnSaveAsDraftOnContainerWastagePopUp.click();
+    }
+
+    public static void clickTransferButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By transfer_btn_path = By.xpath("(//section[@role='dialog']//button[text() = 'Transfer'])");
+        waitForElementToBeEnabled(driver, transfer_btn_path, 10);
+        WebElement transfer_btn = driver.findElement(transfer_btn_path);
+        scrollCenter(driver, transfer_btn);
+        transfer_btn.click();
+    }
 }

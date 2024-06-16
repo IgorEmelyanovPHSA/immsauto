@@ -47,11 +47,11 @@ public class BulkWastagesCP extends BaseTest {
 		int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
 		log("/*---     count:" + countSupplyContainers);
 
-		Map<String, Map<String, String>> my_containers = new HashMap<>();
+		Map<String, Map<String, Double>> my_containers = new HashMap<>();
 		log("/*4.----Click on Container's records Checkboxes --*/");
 		if (countSupplyContainers >= 3) {
 			for (int k = 1; k <= 3; k++) {
-				Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+				Map<String, Map<String, Double>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
 				my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
 			}
 		} else {

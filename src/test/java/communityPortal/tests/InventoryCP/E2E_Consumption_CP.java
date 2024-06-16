@@ -67,11 +67,11 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
         SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
-
-        double remainingDoses_before = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
+        Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, supplyContainer);
+        double remainingDoses_before = doses_before.get("Remaining Doses");
         log("/*6. remaining doses Before: -->" + remainingDoses_before);
 
-        double remainingQty_before = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
+        double remainingQty_before = doses_before.get("Remaining Quantity");
         log("/*7. remaining Qty Before: -->" + remainingQty_before);
         long conversionFactor = round(remainingDoses_before / remainingQty_before);
         log("/*8.----- Click on User Defaults Tab --*/");
@@ -220,10 +220,11 @@ public class E2E_Consumption_CP extends BaseTest {
         Thread.sleep(2000);
         //////////Validation for Dosages and Qty After Consumption
         System.out.println("/*--55.----Validate Remaining Doses and Remaining Quantities values after Consuming --*/");
-        double remainingDoses_after = supplyConsolePage.getValueOfRemainingDoses(supplyContainer, supplyDistribution);
+        Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, supplyContainer);
+        double remainingDoses_after = doses_after.get("Remaining Doses");
         log("/*-- 56. remaining doses After Consumption: -->" + remainingDoses_after);
         assertEquals(remainingDoses_after, remainingDoses_before - 1);
-        double remainingQty_after = supplyConsolePage.getValueOfRemainingQty(supplyContainer, supplyDistribution);
+        double remainingQty_after = doses_after.get("Remaining Quantity");
         log("/*-- 57. remaining Qty After: -->" + remainingQty_after);
         assertEquals(remainingQty_after, round((remainingDoses_before - 1)/conversionFactor), 2);
         SupplyConsolePage.closeTabsHCA(driver);

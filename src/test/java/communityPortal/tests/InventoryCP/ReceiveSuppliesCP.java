@@ -106,41 +106,43 @@ public class ReceiveSuppliesCP extends BaseTest {
 		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + dosesToQty, 0.011);
 	}
 
-	//@Test()
-	public void Validate_Receive_Supplies_By_Qty_as_Clinician_CP() throws Exception {
-		TestcaseID = "243133"; //C243133
-		double qty = 1;
-
-		log("/----Count Remaining Supplies --*/");
-		double remainingDosesBeforeReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
-		log("/*-- . remaining doses are: -->" + remainingDosesBeforeReceiving);
-		double remainingQtyBeforeReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);
-		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
-
-		log("/*-- Receive Supplies --*/");
-		SupplyLocationPage.clickReceiveSuppliesButton(driver);
-
-		ReceiveSuppliesDialog.selectSupplyItem(driver, lot);
-		Thread.sleep(500);
-		ReceiveSuppliesDialog.selectReasonForReception(driver);
-		Thread.sleep(500);
-		ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(qty));
-		Thread.sleep(500);
-		double doseConversionFactor = ReceiveSuppliesDialog.getDoseConversionFactor(driver);
-		supplyConsolePage.transferToDistributionOnSend(distribution);
-		ReceiveSuppliesDialog.clickSaveButton(driver);
-		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
-		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
-
-		log("/----Count Supplies After Receiving--*/");
-		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
-		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
-		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);
-		log("/*-- . after qty are: -->" + remainingQtyAfterReceiving);
-
-		double dosesToQty = qty * doseConversionFactor;
-
-		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + qty, 0.011);
-		assertEquals(remainingDosesAfterReceiving, remainingDosesBeforeReceiving + dosesToQty);
-	}
+//	//@Test()
+//	public void Validate_Receive_Supplies_By_Qty_as_Clinician_CP() throws Exception {
+//		TestcaseID = "243133"; //C243133
+//		double qty = 1;
+//
+//		log("/----Count Remaining Supplies --*/");
+//		Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, vaccine);
+//		double remainingDosesBeforeReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
+//		log("/*-- . remaining doses are: -->" + remainingDosesBeforeReceiving);
+//		double remainingQtyBeforeReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);
+//		log("/*-- . remaining qty are: -->" + remainingQtyBeforeReceiving);
+//
+//		log("/*-- Receive Supplies --*/");
+//		SupplyLocationPage.clickReceiveSuppliesButton(driver);
+//
+//		ReceiveSuppliesDialog.selectSupplyItem(driver, lot);
+//		Thread.sleep(500);
+//		ReceiveSuppliesDialog.selectReasonForReception(driver);
+//		Thread.sleep(500);
+//		ContainerTransferForm.enterTransferQuantity(driver, String.valueOf(qty));
+//		Thread.sleep(500);
+//		double doseConversionFactor = ReceiveSuppliesDialog.getDoseConversionFactor(driver);
+//		supplyConsolePage.transferToDistributionOnSend(distribution);
+//		ReceiveSuppliesDialog.clickSaveButton(driver);
+//		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
+//		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
+//
+//		log("/----Count Supplies After Receiving--*/");
+//		Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, vaccine);
+//		double remainingDosesAfterReceiving = supplyConsolePage.getValueOfRemainingDoses(vaccine, distribution);
+//		log("/*-- . after doses are: -->" + remainingDosesAfterReceiving);
+//		double remainingQtyAfterReceiving = supplyConsolePage.getValueOfRemainingQty(vaccine, distribution);
+//		log("/*-- . after qty are: -->" + remainingQtyAfterReceiving);
+//
+//		double dosesToQty = qty * doseConversionFactor;
+//
+//		assertEquals(remainingQtyAfterReceiving, remainingQtyBeforeReceiving + qty, 0.011);
+//		assertEquals(remainingDosesAfterReceiving, remainingDosesBeforeReceiving + dosesToQty);
+//	}
 }

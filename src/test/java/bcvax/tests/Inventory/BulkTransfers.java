@@ -82,17 +82,17 @@ public class BulkTransfers extends BaseTest {
 
 
 		log("/*9.----Click on bulk Transfer button --*/");
-		supplyConsolePage.clickBulkTransfersButton();
+		SupplyLocationRelatedItems.clickTransfersButton(driver);
 		log("/*10.----Enter the Dosages values (1 dose) for 3 row Transfers --*/");
 
 		supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 
 		log("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+		ContainerTransferPage.selectSupplyLocationToFromDropdown(driver, supply_location_to);
 		log("/*12.----click Transfer dialog Modal button --*/");
-		supplyConsolePage.clickBulkTransfersModalButton();
+		ContainerTransferPage.clickTransferButton(driver);
 		log("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		ContainerPrintDialog.clickCloseButton(driver);
 		Thread.sleep(2000);
 		driver.navigate().refresh();
 		Thread.sleep(2000);
@@ -159,11 +159,11 @@ public class BulkTransfers extends BaseTest {
 			log("/*--not all 3 Incoming Transaction records are there--*/");
 		}
 		log("/*25----click Confirm Incoming button Transfer --*/");
-		supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
+		SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
 		supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
-		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+		ConfirmTransferPage.clickConfirmTransactionButton(driver);
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
 		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
 		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
@@ -244,15 +244,15 @@ public class BulkTransfers extends BaseTest {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 		log("/*9.----Click on bulk Transfer button --*/");
-		supplyConsolePage.clickBulkTransfersButton();
+		SupplyLocationRelatedItems.clickTransfersButton(driver);
 		log("/*10.----Enter the Quantity values for 3 row Transfers --*/");
 		supplyConsolePage.enterBulkTransferByQuantity(containers_from, doses);
 		log("/*11.----select 'To' Automation Supply Location_2  --*/");
-		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+		ContainerTransferPage.selectSupplyLocationToFromDropdown(driver, supply_location_to);
 		log("/*12.----click Transfer dialog Modal button --*/");
-		supplyConsolePage.clickBulkTransfersModalButton();
+		ContainerTransferPage.clickTransferButton(driver);
 		log("/*13.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		ContainerPrintDialog.clickCloseButton(driver);
 		Thread.sleep(2000);
 		driver.navigate().refresh();
 		Thread.sleep(2000);
@@ -333,11 +333,11 @@ public class BulkTransfers extends BaseTest {
 			log("/*--not all 3 Incoming Transaction records are there--*/");
 		}
 		log("/*25----click Confirm Incoming button Transfer --*/");
-		supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
+		SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
 		supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 		log("/*27.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
-		supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+		ConfirmTransferPage.clickConfirmTransactionButton(driver);
 		log("/*28.--Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
 		List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
 		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Confirmed the Transaction"));
@@ -436,17 +436,17 @@ public class BulkTransfers extends BaseTest {
 			log("/*--not enough records for Bulk actions--*/");
 		}
 		log("/*9.----Click on bulk Transfer button --*/");
-		supplyConsolePage.clickBulkTransfersButton();
+		SupplyLocationRelatedItems.clickTransfersButton(driver);
 		log("/*10.----Enter the Dosages values (1 Dose) for 3 row Transfers --*/");
 		supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 		log("/*11.----select 'To' Automation Supply Location_1  --*/");
-		supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_from);
+		ContainerTransferPage.selectSupplyLocationToFromDropdown(driver, supply_location_from);
 		log("/*12.----select 'To' Distribution_1_2 for the same Clinic  --*/");
-		supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to_same_clinic);
+		ContainerTransferPage.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
 		log("/*13.----click Transfer dialog Modal button --*/");
-		supplyConsolePage.clickBulkTransfersModalButton();
+		ContainerTransferPage.clickTransferButton(driver);
 		log("/*14.----click Close Modal button --*/");
-		supplyConsolePage.clickBulkTransfersDialogCloseButton();
+		ContainerPrintDialog.clickCloseButton(driver);
 		Thread.sleep(2000);
 		driver.navigate().refresh();
 		Thread.sleep(2000);

@@ -79,19 +79,19 @@ public class BulkTransfersCancellation extends BaseTest {
             log("/*--not enough records for Bulk actions--*/");
         }
         log("/*9.----Click on bulk Transfer button --*/");
-        supplyConsolePage.clickBulkTransfersButton();
+        SupplyLocationRelatedItems.clickTransfersButton(driver);
 
         log("/*10.----Enter the Dosages values (1 dose) for 3 row Transfers --*/");
 
         supplyConsolePage.enterBulkTransferByDosages(containers_from, doses);
 
         log("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+        ContainerTransferPage.selectSupplyLocationToFromDropdown(driver, supply_location_to);
         log("/*12.----click Transfer dialog Modal button --*/");
-        supplyConsolePage.clickBulkTransfersModalButton();
+        ContainerTransferPage.clickTransferButton(driver);
         Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
         Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
@@ -140,7 +140,7 @@ public class BulkTransfersCancellation extends BaseTest {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
         Thread.sleep(1000);
-        supplyConsolePage.clickBulkCancelButton();
+        SupplyLocationTransactions.clickCancelButton(driver);
         supplyConsolePage.cancelTransfer();
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
@@ -192,18 +192,18 @@ public class BulkTransfersCancellation extends BaseTest {
             log("/*--not enough records for Bulk actions--*/");
         }
         log("/*9.----Click on bulk Transfer button --*/");
-        supplyConsolePage.clickBulkTransfersButton();
+        SupplyLocationRelatedItems.clickTransfersButton(driver);
 
         log("/*10.----Enter the Quantity values (1 quantity) for 3 row Transfers --*/");
 
         supplyConsolePage.enterBulkTransferByQuantity(containers_from, quantity);
         log("/*11.----select 'To' Automation Supply Location_2  --*/");
-        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
+        ContainerTransferPage.selectSupplyLocationToFromDropdown(driver, supply_location_to);
         log("/*12.----click Transfer dialog Modal button --*/");
-        supplyConsolePage.clickBulkTransfersModalButton();
+        ContainerTransferPage.clickTransferButton(driver);
         Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
         Thread.sleep(2000);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
@@ -250,7 +250,7 @@ public class BulkTransfersCancellation extends BaseTest {
         } else {
             log("/*--not all 3 Incoming Transaction records are there--*/");
         }
-        supplyConsolePage.clickBulkCancelButton();
+        SupplyLocationTransactions.clickCancelButton(driver);
         supplyConsolePage.cancelTransfer();
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         SupplyLocationPage.clickOnRelatedItemTab(driver);

@@ -55,11 +55,11 @@ public class BulkDraftsCP extends BaseTest {
         log("/*3.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
         log("/*---     count:" + countSupplyContainers);
-        Map<String, Map<String, String>> my_containers = new HashMap<>();
+        Map<String, Map<String, Double>> my_containers = new HashMap<>();
         log("/*4.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
             for (int k = 1; k <= 3; k++) {
-                Map<String, Map<String, String>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
+                Map<String, Map<String, Double>> my_container_data = SupplyLocationRelatedItems.checkSupplyContainer(driver, k);
                 my_containers.put(my_container_data.keySet().toArray()[0].toString(), my_container_data.get(my_container_data.keySet().toArray()[0].toString()));
             }
         } else {
@@ -72,7 +72,7 @@ public class BulkDraftsCP extends BaseTest {
         HashMap<Integer, ArrayList<Double>> remainingDosesAndQuantityBeforeTransfer = supplyConsolePage.countDosesAndQuantityMap(numberOfRows);
 
         log("/*6.----Click on bulk Transfer button --*/");
-        supplyConsolePage.clickBulkTransfersButton();
+        SupplyLocationRelatedItems.clickTransfersButton(driver);
 
         log("/*7.----Enter the Dosages values for 3 row Transfers --*/");
         for(String my_container: my_containers.keySet()) {
@@ -84,10 +84,10 @@ public class BulkDraftsCP extends BaseTest {
         supplyConsolePage.selectSupplyLocation(supply_location_to);
 
         log("/*9.----click Save as draft dialog Modal button --*/");
-        supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
+        ContainerTransferPage.clickSaveAsDraftButton(driver);
 
         log("/*10.----click Close Modal button --*/");
-        supplyConsolePage.clickBulkTransfersDialogCloseButton();
+        ContainerPrintDialog.clickCloseButton(driver);
 
         log("/*11.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -140,13 +140,13 @@ public class BulkDraftsCP extends BaseTest {
         }
 
         log("/*19----click Confirm Incoming button Transfer --*/");
-        supplyConsolePage.clickBulkConfirmIncomingTransfersButton();
+        SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
 
         log("/*20.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
         supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
 
         log("/*21.----click on Confirm Incoming Transfer Modal Bulk in the screen --*/");
-        supplyConsolePage.clickOnConfirmModalIncomingTransactionButton();
+        ConfirmTransferPage.clickConfirmTransactionButton(driver);
 
         log("/*22.----Expecting to see the toast success message - 'You have successfully Confirmed the Transaction' --*/");
         List<String> all_alerts = AlertDialog.getAllAlertsText(driver);
