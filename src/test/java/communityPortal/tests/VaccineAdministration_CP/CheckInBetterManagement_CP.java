@@ -3,6 +3,7 @@ package communityPortal.tests.VaccineAdministration_CP;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -43,8 +44,12 @@ public class CheckInBetterManagement_CP extends BaseTest {
         UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
         log("/*10.----- Click on Save defaults button --*/");
         Thread.sleep(500);
-        UserDefaultsPage.clickBtnSave(driver);
-
+        try {
+            UserDefaultsPage.clickBtnSave(driver);
+        } catch (StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            UserDefaultsPage.clickBtnSave(driver);
+        }
 
         log("/*6.----Navigate to More -> Register --*/");
         Thread.sleep(500);
@@ -329,7 +334,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 
         pathway_status = ClientListTodayAppointmentsTab.getPathwayStatus(my_row);
-        Assert.assertEquals("Vaccine_Administration", pathway_status, "Pathway Status Is Not Vaccine Administration");
+        Assert.assertEquals(pathway_status, "Vaccine_Administration", "Pathway Status Is Not Vaccine Administration");
 
         //--- verify that View Button is Displayed
         view_button_displayed = ClientListTodayAppointmentsTab.viewButtonIsDisplayed(my_row);

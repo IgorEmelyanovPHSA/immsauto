@@ -82,8 +82,10 @@ public class AddConsentDialog extends BasePage {
         provider_type_radio.click();
     }
 
-    public static void selectObtainedFromClientGuardian(WebDriver driver) {
+    public static void selectObtainedFromClientGuardian(WebDriver driver) throws InterruptedException {
         WebElement provider_type_radio = driver.findElement(By.xpath("//input[@value='InformedConsentForSeriesObtainedFrom.Substitute Decision Maker']/..//span[@class='slds-radio_faux']"));
+        scrollCenter(driver, provider_type_radio);
+        Thread.sleep(500);
         provider_type_radio.click();
     }
 

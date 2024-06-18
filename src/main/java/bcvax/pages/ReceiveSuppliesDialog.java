@@ -110,8 +110,8 @@ public class ReceiveSuppliesDialog {
     }
 
     public static boolean ValidateCancelButtonIsDisplayedOnReceiveSupplies(WebDriver driver) throws InterruptedException {
-        By cancel_receive_supplies_btn_path = By.xpath("(//span[contains(text(),'Cancel')])[2]");
-        BasePage. waitForElementToBeEnabled(driver, cancel_receive_supplies_btn_path, 10);
+        By cancel_receive_supplies_btn_path = By.xpath("//div[@class='runtime_platform_actionsQuickActionWrapper']//span[text()='Cancel']");
+        BasePage.waitForElementToBeEnabled(driver, cancel_receive_supplies_btn_path, 10);
         WebElement cancel_receive_supplies_btn = driver.findElement(cancel_receive_supplies_btn_path);
         return cancel_receive_supplies_btn.isDisplayed();
     }
