@@ -88,21 +88,6 @@ public class SupplyConsolePage extends BasePage {
 			Thread.sleep(5000);
 			supply_locations_tab.click();
 		}
-		boolean loaded = false;
-		By supply_locations_table_path = By.xpath("//div[contains(@class, 'listViewContent')]");
-		//By supply_locations_table_path = By.xpath("//div[@class='listViewContent slds-table--header-fixed_container']");
-		waitForElementToBeEnabled(driver, supply_locations_table_path, 10);
-		WebElement supply_locations_table_node = driver.findElement(supply_locations_table_path);
-		while(!loaded) {
-			try {
-				GenericTable supply_locations_table = new GenericTable(supply_locations_table_node);
-				loaded = supply_locations_table.getHeadings().get(0).isDisplayed();
-			}
-			catch(Exception ex) {
-				System.out.println(ex.getMessage());
-				Thread.sleep(1000);
-			}
-		}
 	}
 
 	public boolean verifyIsSupplyPageDisplayed() throws InterruptedException {
@@ -615,21 +600,16 @@ public class SupplyConsolePage extends BasePage {
 
 	public static void switchToTableView(WebDriver driver) throws InterruptedException {
 		Thread.sleep(500);
-		By view_option_btn_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']");
+		By view_option_btn_path = By.xpath("//button[@title='Select list display']");
 		waitForElementToBeEnabled(driver, view_option_btn_path, 10);
-		By selected_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']/div");
-		WebElement selected_view_option = driver.findElement(selected_view_option_path);
-		String selected_view_option_title = selected_view_option.getAttribute("title");
-		if(!selected_view_option_title.equals("Display as Table")) {
-			WebElement view_switch_btn = driver.findElement(view_option_btn_path);
-			view_switch_btn.click();
-			Thread.sleep(500);
-			By select_table_view_option_path = By.xpath("//div[@class='test-listviewdisplayswitcher forceListViewManagerDisplaySwitcher']//li[@role='presentation'][@title='Display as table' or @title='Table']/a");
-			waitForElementToBeEnabled(driver, view_option_btn_path, 10);
-			WebElement table_view_option = driver.findElement(select_table_view_option_path);
-			table_view_option.click();
-			Thread.sleep(500);
-		}
+		WebElement view_option_btn = driver.findElement(view_option_btn_path);
+		view_option_btn.click();
+		Thread.sleep(500);
+		By select_table_view_option_path = By.xpath("//lightning-menu-item[@title='Display as table'] | //li[@title='Display as table']");
+		waitForElementToBeEnabled(driver, select_table_view_option_path, 10);
+		WebElement table_view_option = driver.findElement(select_table_view_option_path);
+		table_view_option.click();
+		Thread.sleep(500);
 	}
 
 	public static void selectSupplyLocationFromDropdown(WebDriver driver) throws InterruptedException {

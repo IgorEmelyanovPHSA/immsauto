@@ -176,6 +176,11 @@ public class BulkDrafts extends BaseTest {
         SupplyConsolePage.closeTabsHCA(driver);
 
         log("/*27.----Click on Automation Supply Location_1 --*/");
+        try {
+            SupplyConsolePage.switchToTableView(driver);
+        } catch(Exception ex) {
+            ;
+        }
         SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
         log("/*28.----Read Remaining Doses And Quantity After transfer is completed in Location_1--*/");

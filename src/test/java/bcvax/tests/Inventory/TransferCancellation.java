@@ -68,8 +68,7 @@ public class TransferCancellation extends BaseTest {
         log("/*10.----Entering 10 Doses in the Container-Transfer Form --*/");
         ContainerTransferForm.enterTransferDosages(driver, Double.toString(doses));
         System.out.println("/*11.----select 'To' Automation Supply Location_2  --*/");
-        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
-        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_to);
         System.out.println("/*12.----click Transfer dialog Modal button --*/");
         ContainerTransferForm.clickTransferButton(driver);
         System.out.println("/*13.----click Close Modal button --*/");
