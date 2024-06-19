@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -44,6 +45,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         agent = String.valueOf(testData.get("vaccineAgent"));
         lot_to_select = String.valueOf(testData.get("covidLot"));
         log("Target Environment: "+ env);
+        Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
         log("/*----1. Login as an DIWA to CIB  --*/");
         participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
@@ -119,7 +121,12 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         DiwaImmunizationRecord.clickConfirmAndSaveAdministration(driver);
         DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
         Thread.sleep(2000);
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
         int immunization_records_count_new = PersonAccountRelatedPage.getImmunizationRecords(driver).size();
         Assert.assertTrue(immunization_records_count_new == immunization_records_count + 1, "Expected: " + (immunization_records_count + 1) + ";  Actual: " + immunization_records_count_new);
         System.out.println();

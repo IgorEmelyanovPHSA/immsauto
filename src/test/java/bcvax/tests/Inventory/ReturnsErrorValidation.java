@@ -109,47 +109,44 @@ public class ReturnsErrorValidation extends BaseTest {
         log("/*6. ----Leave the Supply Location for the Returned To blank --*/");
 
         log("/*7. ----Enter Sender Comment --*/");
-        ReturnDialog returnDialog = new ReturnDialog(driver);
-        String supply_location_from_value = returnDialog.getReturnFromValue();
-        returnDialog.typeReturnComments("This is to Add Return");
+        String supply_location_from_value = ReturnDialog.getReturnFromValue(driver);
+        ReturnDialog.typeReturnComments(driver, "This is to Add Return");
 
         log("/*8. ----Save Return --*/");
-        returnDialog.clickSaveBtn();
+        ReturnDialog.clickSaveBtn(driver);
 
         log("/*9. ----Verify the error message --*/");
-        String errorMsg = returnDialog.getReturnError();
+        String errorMsg = ReturnDialog.getReturnError(driver);
         softAssert = new SoftAssert();
         softAssert.assertEquals(errorMsg, "These required fields must be completed: Returned To", "Error message mismatch");
 
         log("/*10. ----Select Supply Location Return To --*/");
-        returnDialog.selectReturnTo(supply_location_to);
+        ReturnDialog.selectReturnTo(driver, supply_location_to);
 
         log("/*11. ----Save Return --*/");
-        returnDialog.clickSaveBtn();
+        ReturnDialog.clickSaveBtn(driver);
 
         log("/*11. ----Verify The Return with Return_ID is created and click Return_ID link from Toast Box --*/");
         String return_id = AlertDialog.clickAlertLink(driver);
 
         log("/* Result: ----The Return with Return_ID " + return_id +" is created --*/");
-        //supplyConsolePage.clickReturnsTab();
-        //supplyConsolePage.openReturnDetails(return_id);
 
         log("/*12. ----Verify The Return Status and Sender Comment --*/");
         Thread.sleep(2000);
-        ReturnPage returnPage = new ReturnPage(driver);
-        String return_status = returnPage.getReturnStatus();
+
+        String return_status = ReturnPage.getReturnStatus(driver);
 
         softAssert.assertEquals(return_status, "Draft");
 
-        String return_id_from_details = returnPage.getReturnId();
-        String returned_from = returnPage.getReturnedFromValue();
-        String returned_to = returnPage.getReturnedToValue();
-        String sender_comment = returnPage.getSenderComment();
+        String return_id_from_details = ReturnPage.getReturnId(driver);
+        String returned_from = ReturnPage.getReturnedFromValue(driver);
+        String returned_to = ReturnPage.getReturnedToValue(driver);
+        String sender_comment = ReturnPage.getSenderComment(driver);
 
         softAssert.assertEquals(sender_comment, "This is to Add Return");
 
         log("/*13. ----Click Add Line Item Button --*/");
-        returnPage.clickAddLineItemButton();
+        ReturnPage.clickAddLineItemButton(driver);
 
         log("/*14. ----Verify the Add Return Line Item popup window is displayed with correct Return ID and Supply Location --*/");
         String return_id_from_add_line_items = AddReturnLineItemsDialog.getReturnId(driver);
@@ -170,7 +167,7 @@ public class ReturnsErrorValidation extends BaseTest {
         log("/*18. ----Click Save Button --*/");
         AddReturnLineItemsDialog.clickSaveBtn(driver);
         //Check if errors found
-        String errorMsgForWastage = returnDialog.getReturnWastageError();
+        String errorMsgForWastage = ReturnDialog.getReturnWastageError(driver);
         Assert.assertEquals(errorMsgForWastage, "Returned Doses must be less than or equal to Wastage Doses.", "Error message mismatch for excessive doses");
 
         // e. Enter a value of 0
@@ -180,7 +177,7 @@ public class ReturnsErrorValidation extends BaseTest {
         log("/*20. ----Click Save Button --*/");
         AddReturnLineItemsDialog.clickSaveBtn(driver);
         //Check if errors found
-        errorMsgForWastage = returnDialog.getReturnWastageError();
+        errorMsgForWastage = ReturnDialog.getReturnWastageError(driver);
         Assert.assertEquals(errorMsgForWastage, "Returned Doses cannot be zero or negative. Cancel the line item instead.", "Error message mismatch for excessive doses");
 
         // f. Enter a negative value
@@ -189,7 +186,7 @@ public class ReturnsErrorValidation extends BaseTest {
         log("/*22. ----Click Save Button --*/");
         AddReturnLineItemsDialog.clickSaveBtn(driver);
         //Check if errors found
-        errorMsgForWastage = returnDialog.getReturnWastageError();
+        errorMsgForWastage = ReturnDialog.getReturnWastageError(driver);
         Assert.assertEquals(errorMsgForWastage, "Returned Doses cannot be zero or negative. Cancel the line item instead.", "Error message mismatch for excessive doses");
 
         // f. Enter a value with two decimal places that is greater than 0 but less than or equal to with the Wastage Doses
@@ -208,13 +205,13 @@ public class ReturnsErrorValidation extends BaseTest {
         softAssert.assertEquals(alert_content, "Success\nReturn Line Items added successfully.");
 
         log("/*26. ----Click Ad hoc Line Item Button --*/");
-        returnPage.clickAdHocLineItemButton();
+        ReturnPage.clickAdHocLineItemButton(driver);
 
         log("/*27. ----Click the Save button --*/");
         AddAdHocLineItemsDialog.clickSaveBtn(driver);
 
         log("/*28. ----Verify the error message: 'These required fields must be completed: Returned Doses' --*/");
-        errorMsg = returnDialog.getReturnError();
+        errorMsg = ReturnDialog.getReturnError(driver);
         softAssert.assertEquals(errorMsg, "These required fields must be completed: Returned Doses", "Error message mismatch");
 
         log("/*29. ---- Enter a value with two decimal places that is greater than 0 --*/");
@@ -231,7 +228,7 @@ public class ReturnsErrorValidation extends BaseTest {
         Thread.sleep(500);
         driver.navigate().back();
         log("/*32. ----Click Ship Return button --*/");
-        returnPage.clickShipReturnButton();
+        ReturnPage.clickShipReturnButton(driver);
         ShipReturnDialog shipReturnDialog = new ShipReturnDialog(driver);
 
         shipReturnDialog.removeReturnedTo();
@@ -239,7 +236,7 @@ public class ReturnsErrorValidation extends BaseTest {
         shipReturnDialog.clickSaveBtn(driver);
 
         //The error message "These required fields must be completed: Returned To" is displayed
-        String errorMsgForShipReturn = returnDialog.getReturnError();
+        String errorMsgForShipReturn = ReturnDialog.getReturnError(driver);
         Assert.assertEquals(errorMsgForShipReturn, "These required fields must be completed: Returned To", "Error message mismatch for excessive doses");
         //put returned to again
         shipReturnDialog.selectSupplyLocationFromDropdown(supply_location_to);
@@ -253,11 +250,11 @@ public class ReturnsErrorValidation extends BaseTest {
         softAssert.assertEquals(alert_content, "You have successfully Shipped the Return.");
 
         log("/*35. ----Verify Return Status is changed to Shipped --*/");
-        String return_status_shipped = returnPage.getReturnStatus();
+        String return_status_shipped = ReturnPage.getReturnStatus(driver);
         softAssert.assertEquals(return_status_shipped, "Shipped");
 
         log("/*36. ----Click Receive Return Button --*/");
-        returnPage.clickReceiveReturnButton();
+        ReturnPage.clickReceiveReturnButton(driver);
 
         log("/*37. ----Enter Receiver Comment --*/");
         ReceiveReturnDialog.typeReceiverComment(driver, receiver_comment);
@@ -274,11 +271,11 @@ public class ReturnsErrorValidation extends BaseTest {
         softAssert.assertEquals(alert_content, "You have successfully received the Return.");
 
         log("/*40. ----Verify Return Status is changed to Received --*/");
-        String return_status_received = returnPage.getReturnStatus();
+        String return_status_received = ReturnPage.getReturnStatus(driver);
         softAssert.assertEquals(return_status_received, "Received");
 
         log("/*41. ----Verify Forward Return Dialog --*/");
-        returnPage.clickForwardReturnButton();
+        ReturnPage.clickForwardReturnButton(driver);
         String forward_return_id = ForwardReturnDialog.getReturnId(driver);
         String forward_supply_location = ForwardReturnDialog.getOriginalSupplyLocation(driver);
         String forward_returned_to = ForwardReturnDialog.getReturnedTo(driver);

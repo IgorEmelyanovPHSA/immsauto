@@ -3,6 +3,7 @@ package communityPortal.tests.DIWA_CP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -61,6 +62,9 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         } catch (NotFoundException ex) {
             driver.navigate().refresh();
             Thread.sleep(1000);
+        } catch (ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToRelatedTab(driver);
         }
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountRelatedPage.scrollToActiveConsentsSection(driver);

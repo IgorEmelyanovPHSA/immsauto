@@ -159,27 +159,11 @@ public class Tables extends BasePage {
         return singleTable;
     }
 
-    public GenericTable getReturnLineItemsTable() {
-        WebElement singleTable = null;
-        By returns_line_items_table_path = By.xpath("//article[@aria-label='Return Line Items']");
-        waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
-        singleTable = driver.findElement(returns_line_items_table_path);
-        return new GenericTable(singleTable);
-    }
-
     public GenericTable getReturnLineItemsTableCP() {
         WebElement singleTable = null;
         By returns_line_items_table_path = By.xpath("//div[@class='simpleEmptyState autoHeight  test-listViewManager slds-card slds-card_boundary slds-grid slds-grid--vertical forceListViewManager' and @aria-label='Return Line Items|Return Line Items|List View']");
         waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
         singleTable = driver.findElement(returns_line_items_table_path);
-        return new GenericTable(singleTable);
-    }
-
-    public GenericTable getReturnsLocationHistoryTable() {
-        WebElement singleTable = null;
-        By returns_location_history_table_path = By.xpath("//article[@aria-label='Returns Location History']");
-        waitForElementToBeLocated(driver, returns_location_history_table_path, 10);
-        singleTable = driver.findElement(returns_location_history_table_path);
         return new GenericTable(singleTable);
     }
 

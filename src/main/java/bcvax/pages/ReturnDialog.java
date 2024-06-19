@@ -9,14 +9,14 @@ public class ReturnDialog extends BasePage {
         super(driver);
     }
 
-    public String getReturnFromValue() throws InterruptedException {
+    public static String getReturnFromValue(WebDriver driver) throws InterruptedException {
         By return_from_path = By.xpath("//span[@class='test-id__field-label' and text()='Returned From']/../..//span[@class='uiOutputText forceOutputLookup']");
         waitForElementToBeEnabled(driver, return_from_path, 5);
         WebElement return_from_element = driver.findElement(return_from_path);
         return return_from_element.getText();
     };
 
-    public void selectReturnTo(String return_to_location) throws InterruptedException {
+    public static void selectReturnTo(WebDriver driver, String return_to_location) throws InterruptedException {
         Thread.sleep(500);
         By return_to_location_field_path = By.xpath("//input[@title='Search Supply Locations']");
         waitForElementToBeEnabled(driver, return_to_location_field_path, 10);
@@ -29,7 +29,7 @@ public class ReturnDialog extends BasePage {
         my_item.click();
     }
 
-    public void typeReturnComments(String comment) throws InterruptedException {
+    public static void typeReturnComments(WebDriver driver, String comment) throws InterruptedException {
         Thread.sleep(500);
         By comment_field_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Sender_Comment__c']//textarea");
         waitForElementToBeEnabled(driver, comment_field_path, 10);
@@ -37,7 +37,7 @@ public class ReturnDialog extends BasePage {
         comment_field.sendKeys(comment);
     }
 
-    public void clickSaveBtn() throws InterruptedException {
+    public static void clickSaveBtn(WebDriver driver) throws InterruptedException {
         By save_btn_path = By.xpath("//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']");
         waitForElementToBeEnabled(driver, save_btn_path, 10);
         WebElement save_btn = driver.findElement(save_btn_path);
@@ -45,14 +45,14 @@ public class ReturnDialog extends BasePage {
         Thread.sleep(2000);
     }
 
-    public String getReturnError() throws InterruptedException {
+    public static String getReturnError(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By generic_error_path = By.xpath("//ul[@class='errorsList']");
         waitForElementToBeEnabled(driver, generic_error_path, 10);
         WebElement generic_error = driver.findElement(generic_error_path);
         return generic_error.getText();
     }
-    public String getReturnWastageError() throws InterruptedException {
+    public static String getReturnWastageError(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By generic_error_path = By.xpath("//div[@class='slds-form-element__help']");
         waitForElementToBeEnabled(driver, generic_error_path, 10);
