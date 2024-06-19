@@ -29,6 +29,8 @@ public class DIWA_ICE extends BaseTest {
 	public void beforeMethod() throws Exception {
 		String client_data_file = Utils.getClientsDataFile();
 		client_data = Utils.getTestClientData(client_data_file, "consent");
+		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
 	}
 
 	@Test()

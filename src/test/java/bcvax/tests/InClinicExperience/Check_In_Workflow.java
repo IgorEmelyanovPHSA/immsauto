@@ -28,7 +28,10 @@ public class Check_In_Workflow extends BaseTest {
         client_data = Utils.getTestClientData(client_data_file, "consent");
         citizenName = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
     }
 
     @Test(priority = 1)
@@ -107,7 +110,12 @@ public class Check_In_Workflow extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         registerCitizen();
-        orgMainPage.logout();
+        try {
+            orgMainPage.logout();
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            orgMainPage.logout();
+        }
         loginPage.loginAsImmsBCAdmin();
         String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {

@@ -39,7 +39,10 @@ public class Consumption extends BaseTest {
 		String client_data_file = Utils.getClientsDataFile();
 		client_data = Utils.getTestClientData(client_data_file, "consumption");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
 	}
 
 	@Test(priority = 1)
@@ -106,7 +109,12 @@ public class Consumption extends BaseTest {
 		InClinicExperiencePage.clickRegisterButton(driver);
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
-		PersonAccountPage.goToVaccineScheduleTab(driver);
+		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		}
 		log("/*-- 33.Select Early Booking Reason --*/");
 
 		//If override Eligibility is shown

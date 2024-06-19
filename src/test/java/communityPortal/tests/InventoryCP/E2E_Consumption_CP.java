@@ -3,6 +3,7 @@ package communityPortal.tests.InventoryCP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -35,7 +36,10 @@ public class E2E_Consumption_CP extends BaseTest {
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "consumption");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
     }
 
     @Test(priority = 1)
@@ -84,14 +88,18 @@ public class E2E_Consumption_CP extends BaseTest {
         UserDefaultsPage.clickBtnSave(driver);
         log("/*11.----Navigate to More -> Register --*/");
         MainPageCP.navigateToRegisterClientPage(driver);
-        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
 
         log("/*12.----click Register button New Citizen --*/");
         InClinicExperiencePage.clickRegisterButton(driver);
 
         CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
         log("/*23----Go to Appointment Tab --*/");
-        PersonAccountPage.goToVaccineScheduleTab(driver);
+        try {
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToVaccineScheduleTab(driver);
+        }
 
         //If override Eligibility is shown
         try {

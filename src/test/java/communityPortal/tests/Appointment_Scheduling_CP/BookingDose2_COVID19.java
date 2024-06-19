@@ -11,17 +11,8 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 public class BookingDose2_COVID19 extends BaseTest {
-    private String legalFirstName = "Hugues";
-    private String legalLastName = "BCVaxLampard";
-    private String dateOfBirth = "March 3, 1904";
-    private String postalCode = "V1N3Q3";
-    private String personalHealthNumber = "9746171121";
-    //private boolean isIndigenous = false;
-    private String email = "accountToDelete@phsa.ca";
     Map<String, String> client_data;
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    //workaround
-    //private String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
     @BeforeMethod

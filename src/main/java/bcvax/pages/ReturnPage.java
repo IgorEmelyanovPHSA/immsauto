@@ -14,7 +14,7 @@ public class ReturnPage extends BasePage {
         tables = new Tables(driver);
     }
 
-    public String getReturnId() throws InterruptedException {
+    public static String getReturnId(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By return_id_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.Name']//lightning-formatted-text"
                 .concat(" | ")
@@ -24,7 +24,7 @@ public class ReturnPage extends BasePage {
         return return_id.getText();
     }
 
-    public String getReturnStatus() throws InterruptedException {
+    public static String getReturnStatus(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By return_status_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Status__c']//lightning-formatted-text[@slot='outputField']"
                 .concat(" | ")
@@ -34,11 +34,7 @@ public class ReturnPage extends BasePage {
         return return_status.getText();
     }
 
-    public String getPageTitle() throws InterruptedException {
-        return new String();
-    }
-
-    public String getReturnedFromValue() throws InterruptedException {
+    public static String getReturnedFromValue(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By return_from_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_From__c']//a"
                 .concat(" | ")
@@ -48,35 +44,28 @@ public class ReturnPage extends BasePage {
         return return_from.getAttribute("innerText");
     }
 
-    public Map<String, WebElement> getReturnLineItemsTable() throws InterruptedException {
+    public static Map<String, WebElement> getReturnLineItemsTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        GenericTable return_line_items_table = tables.getReturnLineItemsTable();
+        GenericTable return_line_items_table = getReturnLineItemsGenericTable(driver);
         Map<String, WebElement> first_row = return_line_items_table.getRowsMappedToHeadings().get(1);
         return first_row;
     }
 
-    public Map<String, WebElement> getReturnLineItemsTableCP() throws InterruptedException {
-        Thread.sleep(500);
-        GenericTable return_line_items_table = tables.getReturnLineItemsTableCP();
-        Map<String, WebElement> first_row = return_line_items_table.getRowsMappedToHeadings().get(1);
-        return first_row;
-    }
-
-    public String getLinkTextFromCellValue(WebElement table_value) {
+    public static String getLinkTextFromCellValue(WebElement table_value) {
         return table_value.findElement(By.xpath(".//a")).getAttribute("title");
     }
 
-    public String getReturnLocationHistoryId(WebElement table_value) {
+    public static String getReturnLocationHistoryId(WebElement table_value) {
         return table_value.findElement(By.xpath(".//a//span")).getAttribute("innerText");
     }
 
-    public String getReturnLocationHistoryIdCP(WebElement table_value) {
+    public static String getReturnLocationHistoryIdCP(WebElement table_value) {
         return table_value.findElement(By.xpath(".//a")).getText();
     }
 
-    public Map<String, WebElement> getReturnLocationHistoryTable() throws InterruptedException {
+    public static Map<String, WebElement> getReturnLocationHistoryTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        GenericTable return_location_history_table = tables.getReturnsLocationHistoryTable();
+        GenericTable return_location_history_table = getReturnsLocationHistoryGenericTable(driver);
         int table_size = return_location_history_table.getRows().size();
         if(table_size > 0) {
             Map<String, WebElement> first_row = return_location_history_table.getRowsMappedToHeadings().get(1);
@@ -87,20 +76,7 @@ public class ReturnPage extends BasePage {
         }
     }
 
-    public Map<String, WebElement> getReturnLocationHistoryTableCP() throws InterruptedException {
-        Thread.sleep(500);
-        GenericTable return_location_history_table = tables.getReturnsLocationHistoryTableCP();
-        int table_size = return_location_history_table.getRows().size();
-        if(table_size > 0) {
-            Map<String, WebElement> first_row = return_location_history_table.getRowsMappedToHeadings().get(1);
-            return first_row;
-        } else {
-            Map<String, WebElement> empty_row = new HashMap<>();
-            return empty_row;
-        }
-    }
-
-    public String getReturnedToValue() throws InterruptedException {
+    public static String getReturnedToValue(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By return_to_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Returned_To__c']//a//span"
                 .concat(" | ")
@@ -110,7 +86,7 @@ public class ReturnPage extends BasePage {
         return return_to.getText();
     }
 
-    public String getSenderComment() throws InterruptedException {
+    public static String getSenderComment(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By sender_comment_path = By.xpath("//div[@data-target-selection-name='sfdc:RecordField.HC_Return__c.HC_Sender_Comment__c']//lightning-formatted-text"
                 .concat(" | ")
@@ -120,7 +96,7 @@ public class ReturnPage extends BasePage {
         return sender_comment.getText();
     }
 
-    public void clickAddLineItemButton() throws InterruptedException {
+    public static void clickAddLineItemButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By add_line_item_btn_path = By.xpath("//button[@name='HC_Return__c.Add_Line_Items']"
                 .concat(" | ")
@@ -130,7 +106,7 @@ public class ReturnPage extends BasePage {
         add_line_items_btn.click();
     }
 
-    public void clickAdHocLineItemButton() throws InterruptedException {
+    public static void clickAdHocLineItemButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By adHocLineItemBtnPath = By.xpath("//button[@name='HC_Return__c.Add_Ad_Hoc_Line_Item']"
                 .concat(" | ")
@@ -140,7 +116,7 @@ public class ReturnPage extends BasePage {
         adHocLineItemBtn.click();
     }
 
-    public void clickShipReturnButton() throws InterruptedException {
+    public static void clickShipReturnButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By ship_return_btn_path = By.xpath("//button[@name='HC_Return__c.Ship_Return']"
                 .concat(" | ")
@@ -149,31 +125,8 @@ public class ReturnPage extends BasePage {
         WebElement ship_return_btn = driver.findElement(ship_return_btn_path);
         ship_return_btn.click();
     }
-    public void removeReturnedTo() throws InterruptedException {
-        Thread.sleep(500);
-        By return_to_path = By.xpath("//a[@tabindex='deleteAction']");
-        waitForElementToBeEnabled(driver, return_to_path, 10);
-        WebElement return_to = driver.findElement(return_to_path);
-        return_to.findElement(By.xpath(".//button")).click();
 
-    }
-
-    public void selectSupplyLocationFromDropdown(String supply_location_to) throws InterruptedException {
-        Thread.sleep(500);
-        By loc_field_path = By.xpath("//input[@role='combobox']");
-        waitForElementToBeEnabled(driver, loc_field_path, 10);
-        WebElement loc_field = driver.findElement(loc_field_path);
-        loc_field.sendKeys(supply_location_to);
-
-        Thread.sleep(500);
-        By location_path = By.xpath("//a[@role='option']"); //click dropdown
-        waitForElementToBeEnabled(driver, location_path, 10);
-        WebElement location = driver.findElement(location_path);
-        location.click();
-
-    }
-
-    public void clickReceiveReturnButton() throws InterruptedException {
+    public static void clickReceiveReturnButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Receive_Return']");
         waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
@@ -181,15 +134,7 @@ public class ReturnPage extends BasePage {
         receive_return_btn.click();
     }
 
-    public void clickReceiveReturnButtonCP() throws InterruptedException {
-        Thread.sleep(500);
-        By receive_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Receive_Return']/a | //li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Receive_Return']//button");
-        waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
-        WebElement receive_return_btn = driver.findElement(receive_return_btn_path);
-        receive_return_btn.click();
-    }
-
-    public void clickPrintButton() throws InterruptedException {
+    public static void clickPrintButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Print']");
         waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
@@ -197,7 +142,7 @@ public class ReturnPage extends BasePage {
         receive_return_btn.click();
     }
 
-    public void clickPrintButtonCP() throws InterruptedException {
+    public static void clickPrintButtonFromExtended(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By extend_list_btn_path = By.xpath("//li[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Return__c.Print')]//a | //lightning-button-menu[contains(@data-target-reveals, 'sfdc:QuickAction.HC_Return__c.Print')]//button");
         waitForElementToBeEnabled(driver, extend_list_btn_path, 10);
@@ -210,7 +155,7 @@ public class ReturnPage extends BasePage {
         print_return_btn.click();
     }
 
-    public void clickForwardReturnButton() throws InterruptedException {
+    public static void clickForwardReturnButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By receive_return_btn_path = By.xpath("//button[@name='HC_Return__c.Forward_Return_Flow']");
         waitForElementToBeEnabled(driver, receive_return_btn_path, 10);
@@ -218,12 +163,19 @@ public class ReturnPage extends BasePage {
         receive_return_btn.click();
     }
 
-    public void clickForwardReturnButtonCP() throws InterruptedException {
-        Thread.sleep(500);
-        By forward_return_btn_path = By.xpath("//li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Forward_Return_Flow']/a | //li[@data-target-selection-name='sfdc:QuickAction.HC_Return__c.Forward_Return_Flow']//button");
-        waitForElementToBeEnabled(driver, forward_return_btn_path, 10);
-        WebElement forward_return_btn = driver.findElement(forward_return_btn_path);
-        forward_return_btn.click();
+    public static GenericTable getReturnLineItemsGenericTable(WebDriver driver) {
+        WebElement singleTable = null;
+        By returns_line_items_table_path = By.xpath("//article[@aria-label='Return Line Items'] | //table[@aria-label='Return Line Items']");
+        waitForElementToBeLocated(driver, returns_line_items_table_path, 10);
+        singleTable = driver.findElement(returns_line_items_table_path);
+        return new GenericTable(singleTable);
     }
 
+    public static GenericTable getReturnsLocationHistoryGenericTable(WebDriver driver) {
+        WebElement singleTable = null;
+        By returns_location_history_table_path = By.xpath("//article[@aria-label='Returns Location History'] | //table[@aria-label='Returns Location History']");
+        waitForElementToBeLocated(driver, returns_location_history_table_path, 10);
+        singleTable = driver.findElement(returns_location_history_table_path);
+        return new GenericTable(singleTable);
+    }
 }

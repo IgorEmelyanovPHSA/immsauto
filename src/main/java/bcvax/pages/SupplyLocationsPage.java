@@ -1,10 +1,8 @@
 package bcvax.pages;
 
 import com.google.common.collect.ImmutableMap;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +53,12 @@ public class SupplyLocationsPage extends BasePage {
         waitForElementToBeVisible(driver, my_link, 10);
         scrollCenter(driver, my_link);
         Thread.sleep(500);
-        my_link.click();
+        try {
+            my_link.click();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            my_link.click();
+        }
         Thread.sleep(2000);
     }
 

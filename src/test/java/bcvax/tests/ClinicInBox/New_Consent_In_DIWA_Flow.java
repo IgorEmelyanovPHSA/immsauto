@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -32,7 +33,10 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		String client_data_file = Utils.getClientsDataFile();
 		client_data = Utils.getTestClientData(client_data_file, "new_consent");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
 	}
 	@Test(priority = 1, testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
@@ -62,7 +66,12 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		clinicInBoxPage.clickRegisterButton();
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 		log("/*----6. Navigated to Person Account related tab ---*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch (ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 		log("/*----7. Click Create Immunization Record ---*/");
 		PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 		log("/*----8. Click confirm Button on the popup window---*/");
@@ -189,6 +198,11 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		DiwaImmunizationRecord.clickSaveAdministrationSummary(driver);
 		Thread.sleep(2000);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
-		PersonAccountPage.goToRelatedTab(driver);
+		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch (ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			PersonAccountPage.goToRelatedTab(driver);
+		}
 	}
 }
