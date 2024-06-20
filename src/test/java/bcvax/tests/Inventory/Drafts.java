@@ -136,7 +136,7 @@ public class Drafts extends BaseTest {
 
         SupplyLocationPage.clickTransactionsTab(driver);
         //Draft transaction count, offset -1
-        int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
+        int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
         String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
         log("/*16----Getting id for the latest created Transaction Draft " +latestDraftTransactionId +" --*/");
 
@@ -273,7 +273,7 @@ public class Drafts extends BaseTest {
         SupplyLocationPage.clickTransactionsTab(driver);
 
         //Draft transaction count, offset -1
-        int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
+        int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
         String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
         log("/*16----Getting id for the latest created Transaction Draft " +latestDraftTransactionId +" --*/");
 

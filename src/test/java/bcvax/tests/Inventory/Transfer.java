@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -103,7 +104,7 @@ public class Transfer extends BaseTest {
         SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 
         System.out.println("/*18.----Close All Tab's --*/");
@@ -111,7 +112,12 @@ public class Transfer extends BaseTest {
         System.out.println("/*19.----Go to Supply Locations Tab --*/");
         SupplyConsolePage.clickSupplyLocationsTab(driver);
         System.out.println("/*20.----Click on Automation Supply Location_2 --*/");
-        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        try {
+            SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        } catch (StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        }
         //supplyConsolePage.clickOnSupplyLocation_2();
         ///////////////// Supply Location_2 -> Incoming //////////////////////////
 
@@ -126,7 +132,7 @@ public class Transfer extends BaseTest {
         System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
-        int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+        int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
         System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
         System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
         int j = countIncomingTransactions;

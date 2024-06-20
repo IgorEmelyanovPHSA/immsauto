@@ -129,7 +129,7 @@ public class BulkTransfersCancellation extends BaseTest {
         SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
         log("/*24.----Click on Checkboxes Outgoing Transactions --*/");
         if (countOutgoingTransactions >= 3) {
@@ -240,7 +240,7 @@ public class BulkTransfersCancellation extends BaseTest {
         SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
         log("/*24.----Click on Checkboxes Outgoing Transactions --*/");
         if (countOutgoingTransactions >= 3) {

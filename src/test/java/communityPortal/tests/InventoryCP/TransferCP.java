@@ -93,7 +93,7 @@ public class TransferCP extends BaseTest {
 		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		System.out.println("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+		int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
 		Thread.sleep(5000);
 		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		int kk = countOutgoingTransactions;
@@ -121,7 +121,7 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
 		SupplyLocationPage.clickTransactionsTab(driver);
 		System.out.println("/*23----Get how many Incoming Transactions 'To' count records --*/");
-		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+		int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
 		System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 		System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
 		int j = countIncomingTransactions;

@@ -141,12 +141,6 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public int getRowsOutgoingTransactionsCount() throws InterruptedException {
-		waitForElementToBeVisible(driver, rows_outgoing_transactions_count_path, 10);
-		List<WebElement> rows = rows_outgoing_transactions_count_path.findElements(By.tagName("tr"));
-		return (rows.size());
-	}
-
 	public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
 		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
 		return (supplyTransactionId);
@@ -192,14 +186,6 @@ public class SupplyConsolePage extends BasePage {
 	public int getRowsIncomingTransactionsCount() throws InterruptedException {
 		waitForElementToBeVisible(driver, rows_incoming_transactions_count_path, 10);
 		List<WebElement> rows = rows_incoming_transactions_count_path.findElements(By.tagName("tr"));
-		return (rows.size());
-	}
-
-	public int getRowsDraftTransactionsCount() throws InterruptedException {
-		Thread.sleep(500);
-		By draft_transactions_path = By.xpath("//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux']");
-		waitForElementToBeLocated(driver, draft_transactions_path, 10);
-		List<WebElement> rows = driver.findElements(By.xpath("//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux']"));
 		return (rows.size());
 	}
 
