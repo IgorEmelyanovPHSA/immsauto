@@ -100,6 +100,7 @@ public class ContainerTransferForm extends BasePage {
         waitForElementToBePresent(driver, supplyDistributor, 10);
         WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
         scrollCenter(driver, supplyDistributorItem);
+        Thread.sleep(500);
         supplyDistributorItem.click();
     }
 

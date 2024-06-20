@@ -138,6 +138,7 @@ public class ReceiveSupplies extends BaseTest {
 		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
 		SupplyConsolePage.selectSupplyItemsFromDropdown(driver);
+		SupplyItemsPage.selectShowAllSupplyItems(driver);
 		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
 		SupplyConsolePage.clickSupplyItemName(driver, supply_item);
 

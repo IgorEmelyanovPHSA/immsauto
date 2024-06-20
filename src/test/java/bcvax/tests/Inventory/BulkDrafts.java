@@ -108,9 +108,9 @@ public class BulkDrafts extends BaseTest {
         log("/*13.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
 
-        int countDraftTransactions = supplyConsolePage.getRowsDraftTransactionsCount();
+        int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
         for(int i=countDraftTransactions; i > (countDraftTransactions-3); i--) {
-            String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(i);
+            String latestDraftTransactionId = SupplyLocationTransactions.getDraftTransactionId(driver, i);
             log("/*----Getting id for the latest created Transaction Draft " + latestDraftTransactionId + " --*/");
         }
 
@@ -118,7 +118,7 @@ public class BulkDrafts extends BaseTest {
         supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, 3);
 
         log("/*15----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         for(int i=countOutgoingTransactions; i > (countOutgoingTransactions-3); i--) {
             String latestDraftTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(i);
             log("/*----Getting id for the latest created Outgoing Transaction " + latestDraftTransactionId + " --*/");
@@ -141,7 +141,7 @@ public class BulkDrafts extends BaseTest {
         SupplyLocationPage.clickTransactionsTab(driver);
 
         log("/*20.----Get how many Incoming Transactions 'To' count records --*/");
-        int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+        int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
 
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 

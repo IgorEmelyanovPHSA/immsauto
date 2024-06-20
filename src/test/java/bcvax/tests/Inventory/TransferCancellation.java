@@ -107,7 +107,7 @@ public class TransferCancellation extends BaseTest {
         SupplyLocationPage.clickTransactionsTab(driver);
         System.out.println("/*23----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         System.out.println("/*23.1----Get how many Outgoing Transactions 'From' count records --*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
         int kk = countOutgoingTransactions;
         System.out.println("/*23.2---Get Outgoing Transaction id 'from' --*/");

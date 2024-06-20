@@ -130,7 +130,7 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         Thread.sleep(2000);
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
-        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+        int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         Thread.sleep(2000);
         log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
         Thread.sleep(2000);

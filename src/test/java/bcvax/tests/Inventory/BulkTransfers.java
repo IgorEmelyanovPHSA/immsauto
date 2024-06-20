@@ -110,7 +110,7 @@ public class BulkTransfers extends BaseTest {
 		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+		int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		log("/*18.----Close All Tab's --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
@@ -147,7 +147,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
 		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*23----Get how many Incoming Transactions 'To' count records --*/");
-		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+		int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 		log("/*24.----Click on Checkboxes Incoming Transactions --*/");
 		if (countIncomingTransactions >= 3) {
@@ -284,7 +284,7 @@ public class BulkTransfers extends BaseTest {
 		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*17----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
 		log("/*17.1----Get how many Outgoing Transactions 'From' count records --*/");
-		int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
+		int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
 		log("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		log("/*18.----Close All Tab's --*/");
 		SupplyConsolePage.closeTabsHCA(driver);
@@ -313,7 +313,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*22.----Go to Transactions Tab of Automation Supply Location_2 --*/");
 		SupplyLocationPage.clickTransactionsTab(driver);
 		log("/*23----Get how many Incoming Transactions 'To' count records --*/");
-		int countIncomingTransactions = supplyConsolePage.getRowsIncomingTransactionsCount();
+		int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 		log("/*24.----Click on Checkboxes Incoming Transactions --*/");
 		if (countIncomingTransactions >= 3) {
