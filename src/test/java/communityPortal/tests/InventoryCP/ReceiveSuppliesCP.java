@@ -83,7 +83,7 @@ public class ReceiveSuppliesCP extends BaseTest {
 		String expectedSupplyDistributionToLabel = "*Supply Distribution To";
 		Assert.assertEquals(supplyDistribution, (expectedSupplyDistributionToLabel));
 
-		supplyConsolePage.transferToDistributionOnSend(distribution);
+		ReceiveSuppliesDialog.selectSupplyDistributionTo(driver);
 		Thread.sleep(2000);
 		ReceiveSuppliesDialog.clickSaveButton(driver);
 		try {

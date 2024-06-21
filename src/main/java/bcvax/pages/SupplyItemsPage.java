@@ -57,7 +57,8 @@ public class SupplyItemsPage extends BasePage {
         WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
         select_list_view_btn.click();
         Thread.sleep(2000);
-        By all_items_path = By.xpath("//lightning-base-combobox-item[@role='option' and @data-value='All']");
+        By all_items_path = By.xpath("//lightning-base-combobox-item[@role='option' and @data-value='All'] | //ul[@aria-label='Supply Items | List Views']//span[text()='All']");
+        //"//ul[@aria-label='Supply Items | List Views']//span[text()='All']
         waitForElementToBeEnabled(driver, all_items_path, 10);
         WebElement all_items = driver.findElement(all_items_path);
         all_items.click();

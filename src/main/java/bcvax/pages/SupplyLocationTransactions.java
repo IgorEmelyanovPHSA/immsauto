@@ -1,5 +1,6 @@
 package bcvax.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,6 +60,54 @@ public class SupplyLocationTransactions extends BasePage {
         String draftTransactionId = draft_table.getRowsMappedToHeadings().get(row_num).get("Supply Transaction Name").getText();
         return draftTransactionId;
     }
+
+    public static void clickOnIncomingTransactionsDropDownMenu(WebDriver driver, int j) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
+        WebElement my_action = incoming_table.getRowsMappedToHeadings().get(j).get("Actions");
+        scrollCenter(driver, my_action);
+        Thread.sleep(500);
+        my_action.click();
+    }
+
+    public static void clickOnOutgoingTransactionsDropDownMenu(WebDriver driver, int j) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable outgoing_table = getShippedTransactionsOutgoingTable(driver);
+        WebElement my_action = outgoing_table.getRowsMappedToHeadings().get(j).get("Actions");
+        scrollCenter(driver, my_action);
+        Thread.sleep(500);
+        my_action.click();
+    }
+
+    public static void clickOnDraftTransactionsDropDownMenu(WebDriver driver, int j) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable draft_table = getShippedTransactionsDraftTable(driver);
+        WebElement my_action = draft_table.getRowsMappedToHeadings().get(j).get("Actions");
+        scrollCenter(driver, my_action);
+        Thread.sleep(500);
+        my_action.click();
+    }
+
+    public static void selectConfirmIncomingDropDown(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By select_confirm_in_dropdown_path = By.xpath("//span[text() = 'Confirm']/..");
+        waitForElementToBeEnabled(driver, select_confirm_in_dropdown_path, 10);
+        WebElement select_confirm_in_dropdown = driver.findElement(select_confirm_in_dropdown_path);
+        scrollCenter(driver, select_confirm_in_dropdown);
+        Thread.sleep(500);
+        select_confirm_in_dropdown.click();
+    }
+
+    public static void selectCancelInDropDown(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By drd_cancel_btn_path = By.xpath("//a/span[text() = 'Cancel Transfer']");
+        waitForElementToBeEnabled(driver, drd_cancel_btn_path, 10);
+        WebElement drd_cance_btn = driver.findElement(drd_cancel_btn_path);
+        scrollCenter(driver, drd_cance_btn);
+        Thread.sleep(500);
+        drd_cance_btn.click();
+    }
+
 
     public static GenericTable getShippedTransactionsIncomingTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);

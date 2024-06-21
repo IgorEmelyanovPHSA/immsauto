@@ -136,9 +136,9 @@ public class Transfer extends BaseTest {
         System.out.println("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
         System.out.println("/*24----Click on the latest created Incoming Transactions DropDown Menu --*/");
         int j = countIncomingTransactions;
-        supplyConsolePage.clickOnIncomingTransactionsDropDownMenu(j);
+        SupplyLocationTransactions.clickOnIncomingTransactionsDropDownMenu(driver, j);
         System.out.println("/*25.----select Confirm from the Incoming dropdown menu --*/");
-        supplyConsolePage.selectConfirmIncomingDropDown();
+        SupplyLocationTransactions.selectConfirmIncomingDropDown(driver);
         System.out.println("/*26.----select Incoming Supply Distributor 2_1 --*/");
         supplyConsolePage.selectIncomingSupplyDistribution(distribution_to);
         System.out.println("/*27.----click on Confirm Incoming Transfer button in the Modal screen --*/");
