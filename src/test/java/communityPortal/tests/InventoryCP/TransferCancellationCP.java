@@ -120,7 +120,7 @@ public class TransferCancellationCP extends BaseTest {
 		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
 		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
 		System.out.println("/*23.3----Click on the latest created Outgoing Transactions --*/");
-		supplyConsolePage.clickOnOutgoingTransactionsDropDownMenu(kk);
+		SupplyLocationTransactions.clickOnOutgoingTransactionsDropDownMenu(driver, kk);
 		log("/*23.----Cancel Transfer --*/");
 		//tables.openShippedTransactionsOutgoingActions(ImmutableMap.of(SUPPLY_ITEM_NAME, vaccine));
 		supplyConsolePage.cancelIncomingTransfer();

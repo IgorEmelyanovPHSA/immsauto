@@ -509,28 +509,6 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public void clickOnIncomingTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(j).get("Actions").click();
-	}
-
-	public void clickOnOutgoingTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(j).get("Actions").click();
-	}
-
-	public void clickOnDraftTransactionsDropDownMenu(int j) throws InterruptedException {
-		tables.getSingleTransactionsTable("Draft").getRowsMappedToHeadings().get(j).get("Actions").click();
-	}
-
-	@Step
-	public void selectConfirmIncomingDropDown() throws InterruptedException {
-		Thread.sleep(500);
-		By select_confirm_in_dropdown_path = By.xpath("//span[text() = 'Confirm']/..");
-		waitForElementToBeEnabled(driver, select_confirm_in_dropdown_path, 10);
-		WebElement select_confirm_in_dropdown = driver.findElement(select_confirm_in_dropdown_path);
-		scrollCenter(driver, select_confirm_in_dropdown);
-		Thread.sleep(500);
-		select_confirm_in_dropdown.click();
-	}
 	@Step
 	public void selectCancelInDropDown() throws InterruptedException {
 		Thread.sleep(500);
@@ -540,19 +518,6 @@ public class SupplyConsolePage extends BasePage {
 		scrollCenter(driver, drd_cance_btn);
 		Thread.sleep(500);
 		drd_cance_btn.click();
-	}
-
-	public void selectTransferSupplyDistributionFromDropdown(String supplyDistribution) throws InterruptedException {
-		By searchSupplyDistributionPath = By.xpath("//span[text() = 'Select Supply Distributor']");
-		waitForElementToBePresent(driver, searchSupplyDistributionPath, 10);
-		WebElement searchDistributionField = driver.findElement(searchSupplyDistributionPath);
-		scrollCenter(searchDistributionField);
-		searchDistributionField.click();
-		Thread.sleep(2000);
-		By supplyDistributor = By.xpath("//span[contains(text(),'" + supplyDistribution + "')]");
-		waitForElementToBePresent(driver, supplyDistributor, 10);
-		WebElement supplyDistributorItem = driver.findElement(supplyDistributor);
-		supplyDistributorItem.click();
 	}
 
 	public static void clickSupplyConsoleAppNavigationMenu(WebDriver driver) throws InterruptedException {
@@ -658,14 +623,6 @@ public class SupplyConsolePage extends BasePage {
 	public SupplyConsolePage transferToDistributionOnSend(String distribution) throws InterruptedException {
 		selectTransferToDistribution(search_incoming_supply_distributor_1_2, distribution);
 		return this;
-	}
-
-	@Step
-	public void draftToDistributionWithinSameClinic(String location, String distribution) throws InterruptedException {
-		selectSupplyLocation(location);
-		transferToDistributionOnSend(distribution);
-		ContainerTransferPage.clickSaveAsDraftButton(driver);
-		ContainerPrintDialog.clickCloseButton(driver);
 	}
 
 	@Step

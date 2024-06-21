@@ -79,7 +79,10 @@ public class DraftsCP extends BaseTest {
 
         log("/*9.----Entering Doses amount, select supply location and Save as Draft -*/");
         ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjust));
-        supplyConsolePage.draftToDistributionWithinSameClinic(supply_location_from, distribution_to_same_clinic);
+        ContainerTransferForm.selectSupplyLocationToFromDropdown(driver, supply_location_from);
+        ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
+        ContainerTransferForm.clickSaveAsDraftButton(driver);
+        ContainerPrintDialog.clickCloseButton(driver);
 
         log("/*10.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -94,7 +97,7 @@ public class DraftsCP extends BaseTest {
 
         log("/*13.----Navigate to Related Item tab --*/");
         SupplyLocationPage.clickOnRelatedItemTab(driver);
-
+        Thread.sleep(2000);
         log("/*14.----Quantity Remaining Doses/Remaining Quantity check After for Distribution_1_1 --*/");
         Map<String, Double> doses_after = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
         double remainingDoses_after_Distribution_1_1 = doses_after.get("Remaining Doses");
@@ -110,18 +113,20 @@ public class DraftsCP extends BaseTest {
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*16.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
-        assertEquals((remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjust), remainingDoses_after_Distribution_1_1);
+        double expected_doses = remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjust;
+        assertEquals(expected_doses, remainingDoses_after_Distribution_1_1);
 
-        double remainingQuantityCalculationDist1 = Double.parseDouble(df.format(
+        double expected_qty = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjust)/ dose_conversation_factor));
-        assertEquals(remainingQuantityCalculationDist1, remainingQty_after_Distribution_1_1);
+        assertEquals(expected_qty, remainingQty_after_Distribution_1_1);
 
         log("/*17.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
-        assertEquals((remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjust), remainingDoses_after_Distribution_1_2);
+        double expected_doses_destination = remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjust;
+        assertEquals(expected_doses_destination, remainingDoses_after_Distribution_1_2);
 
-        double remainingQuantityCalculationDist2 = Double.parseDouble(df.format(
+        double remainingqty_destination = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjust)/ dose_conversation_factor));
-        assertEquals(remainingQuantityCalculationDist2, remainingQty_after_Distribution_1_2);
+        assertEquals(remainingqty_destination, remainingQty_after_Distribution_1_2);
     }
 
   
@@ -184,7 +189,7 @@ public class DraftsCP extends BaseTest {
         ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
-        supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
+        ContainerTransferForm.clickSaveAsDraftButton(driver);
 
         log("/*13.----click Close Modal button --*/");
         ContainerPrintDialog.clickCloseButton(driver);
@@ -223,10 +228,11 @@ public class DraftsCP extends BaseTest {
         log("/*-- . remaining Quantity  Distribution_1_2 After are: -->" + remainingQty_after_Distribution_1_2);
 
         log("/*21.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_1 --*/");
-        log("Distribution_1_1 Compering before transfer doses " +remainingDoses_before_Distribution_1_1 + " amount to adjust upon edit "
-                +amountOfDosesToAdjustInDraftEdit + " calculation of reminder " +(remainingDoses_before_Distribution_1_1- amountOfDosesToAdjust)
+        double expected_doses = remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjustInDraftEdit;
+        log("Distribution_1_1 Compering before transfer doses " + remainingDoses_before_Distribution_1_1 + " amount to adjust upon edit "
+                + amountOfDosesToAdjustInDraftEdit + " calculation of reminder " +(remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjust)
                 + " vs actual doses after adjustment " +remainingDoses_after_Distribution_1_1);
-        assertEquals((remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjustInDraftEdit), remainingDoses_after_Distribution_1_1);
+        assertEquals(expected_doses, remainingDoses_after_Distribution_1_1);
 
 
         log("Distribution_1_1 Compering before transfer quantities vs actual quantities after adjustment " +remainingDoses_after_Distribution_1_1);
@@ -234,8 +240,9 @@ public class DraftsCP extends BaseTest {
                 (remainingDoses_before_Distribution_1_1 - amountOfDosesToAdjustInDraftEdit) / dose_conversation_factor));
         assertEquals(remainingQuantitiesBeforeDist1, remainingQty_after_Distribution_1_1);
 
+        double expected_doses_destination = remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjustInDraftEdit;
         log("/*22.----Validate Remaining Doses and Remaining Quantities values for Distribution_1_2 --*/");
-        assertEquals((remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjustInDraftEdit), remainingDoses_after_Distribution_1_2);
+        assertEquals(expected_doses_destination, remainingDoses_after_Distribution_1_2);
 
         double remainingQuantitiesBeforeDist2 = Double.parseDouble(df.format(
                 (remainingDoses_before_Distribution_1_2 + amountOfDosesToAdjustInDraftEdit) / dose_conversation_factor));
@@ -303,7 +310,7 @@ public class DraftsCP extends BaseTest {
         ContainerTransferForm.selectSupplyDistributionFromDropdown(driver, distribution_to_same_clinic);
 
         log("/*12.----click btn Save as Draft --*/");
-        supplyConsolePage.clickBtnSaveAsDraftAtContainerAdjustmentPopUp();
+        ContainerTransferForm.clickSaveAsDraftButton(driver);
 
         log("/*13.----click Close Modal button --*/");
         ContainerPrintDialog.clickCloseButton(driver);
@@ -313,11 +320,11 @@ public class DraftsCP extends BaseTest {
 
         //Draft transaction count, offset -1
         int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
-        String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
-        log("/*15----Getting id for the latest created Transaction Draft " +latestDraftTransactionId +" --*/");
+        String latestDraftTransactionId = SupplyLocationTransactions.getDraftTransactionId(driver, countDraftTransactions);
+        log("/*15----Getting id for the latest created Transaction Draft " + latestDraftTransactionId +" --*/");
 
         log("/*16----Selecting the latest draft transactions and Edit, update doses: --*/");
-        supplyConsolePage.clickOnDraftTransactionsDropDownMenu(countDraftTransactions - 1);
+        SupplyLocationTransactions.clickOnDraftTransactionsDropDownMenu(driver, countDraftTransactions - 1);
 
         log("/*17----Navigate to Related Item tab --*/");
         SupplyLocationPage.clickOnRelatedItemTab(driver);
