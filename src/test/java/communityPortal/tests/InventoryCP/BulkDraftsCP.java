@@ -94,12 +94,15 @@ public class BulkDraftsCP extends BaseTest {
 
         int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
         for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
-            String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(i);
+            String latestDraftTransactionId = SupplyLocationTransactions.getDraftTransactionId(driver, i);;
             log("/*----Getting id for the latest created Transaction Draft " + latestDraftTransactionId + " --*/");
         }
 
         log("/*12----Selecting the latest draft transactions and confirm transfer --*/");
-        supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, numberOfRows);
+        SupplyLocationTransactions.checkLastDraftTransactions(driver, numberOfRows);
+        SupplyLocationTransactions.clickTransferDraftButton(driver);
+        TransferTransactionsDialog.clickTransferTransactionsButton(driver);
+        AlertDialog.closeAllAlerts(driver);
 
         log("/*13----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
@@ -125,19 +128,7 @@ public class BulkDraftsCP extends BaseTest {
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 
         log("/*18.----Click on Checkboxes Incoming Transactions --*/");
-        if (countIncomingTransactions >= 3) {
-            int j = countIncomingTransactions;
-            int i = 1;
-            while (i <= 3) {
-                supplyConsolePage.clickOnIncomingTransactionsCheckbox(j);
-                log("/*---     incoming transaction record number: " + j);
-                j = --j;
-                Thread.sleep(1000);
-                i++;
-            }
-        } else {
-            log("/*--not all 3 Incoming Transaction records are there--*/");
-        }
+        SupplyLocationTransactions.checkLastIncomingTransactions(driver, 3);
 
         log("/*19----click Confirm Incoming button Transfer --*/");
         SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);

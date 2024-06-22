@@ -128,20 +128,11 @@ public class BulkTransfersCancellationCP extends BaseTest {
         Thread.sleep(2000);
         SupplyLocationPage.clickTransactionsTab(driver);
 
-        Thread.sleep(2000);
         log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
         int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
-        Thread.sleep(2000);
         log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
-        Thread.sleep(2000);
         log("/*24.----Click on Checkboxes Outgoing Transactions --*/");
-        if (countOutgoingTransactions >= 3) {
-            for (int i = 0; i < containers_from.size(); i++) {
-                supplyConsolePage.clickOnOutgoingTransactionsCheckbox(countOutgoingTransactions - i);
-            }
-        } else {
-            log("/*--not all 3 Incoming Transaction records are there--*/");
-        }
+        SupplyLocationTransactions.checkLastOutgoingTransactions(driver, 3);
         SupplyLocationTransactions.clickCancelButton(driver);
         supplyConsolePage.cancelTransfer();
 

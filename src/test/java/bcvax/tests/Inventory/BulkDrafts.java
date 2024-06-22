@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -108,19 +109,16 @@ public class BulkDrafts extends BaseTest {
         log("/*13.----Go to Transactions Tab of Automation Supply Location_1 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
 
-        int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
-        for(int i=countDraftTransactions; i > (countDraftTransactions-3); i--) {
-            String latestDraftTransactionId = SupplyLocationTransactions.getDraftTransactionId(driver, i);
-            log("/*----Getting id for the latest created Transaction Draft " + latestDraftTransactionId + " --*/");
-        }
-
         log("/*14----Selecting the latest draft transactions and confirm transfer --*/");
-        supplyConsolePage.clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(countDraftTransactions, 3);
+        SupplyLocationTransactions.checkLastDraftTransactions(driver, 3);
+        SupplyLocationTransactions.clickTransferDraftButton(driver);
+        TransferTransactionsDialog.clickTransferTransactionsButton(driver);
+        AlertDialog.closeAllAlerts(driver);
 
         log("/*15----Getting id for the latest created Transaction Outgoing 'From' and Incoming 'To'--*/");
         int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         for(int i=countOutgoingTransactions; i > (countOutgoingTransactions-3); i--) {
-            String latestDraftTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(i);
+            String latestDraftTransactionId = SupplyLocationTransactions.getOutgoingTransactionId(driver, i);
             log("/*----Getting id for the latest created Outgoing Transaction " + latestDraftTransactionId + " --*/");
         }
 
@@ -135,7 +133,12 @@ public class BulkDrafts extends BaseTest {
         SupplyConsolePage.clickSupplyLocationsTab(driver);
 
         log("/*18.----Click on Automation Supply Location_2 --*/");
-        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        try {
+            SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_to);
+        }
 
         log("/*19.----Go to Transactions Tab of Automation Supply Location_2 --*/");
         SupplyLocationPage.clickTransactionsTab(driver);
@@ -146,18 +149,7 @@ public class BulkDrafts extends BaseTest {
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 
         log("/*21.----Click on Checkboxes Incoming Transactions --*/");
-        if (countIncomingTransactions >= 3) {
-            int j = countIncomingTransactions;
-            int i = 1;
-            while (i <= 3) {
-                supplyConsolePage.clickOnIncomingTransactionsCheckbox(j);
-                log("/*---     incoming transaction record number: " + j);
-                j = --j;
-                i++;
-            }
-        } else {
-            log("/*--not all 3 Incoming Transaction records are there--*/");
-        }
+        SupplyLocationTransactions.checkLastIncomingTransactions(driver, 3);
 
         log("/*22----click Confirm Incoming button Transfer --*/");
         SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);

@@ -5,7 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SupplyLocationTransactions extends BasePage {
     public SupplyLocationTransactions(WebDriver driver) {
@@ -61,32 +65,173 @@ public class SupplyLocationTransactions extends BasePage {
         return draftTransactionId;
     }
 
-    public static void clickOnIncomingTransactionsDropDownMenu(WebDriver driver, int j) throws InterruptedException {
-        Thread.sleep(500);
-        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
-        WebElement my_action = incoming_table.getRowsMappedToHeadings().get(j).get("Actions");
-        scrollCenter(driver, my_action);
-        Thread.sleep(500);
-        my_action.click();
-    }
-
-    public static void clickOnOutgoingTransactionsDropDownMenu(WebDriver driver, int j) throws InterruptedException {
+    public static String getOutgoingTransactionId(WebDriver driver, int row_num) throws InterruptedException {
         Thread.sleep(500);
         GenericTable outgoing_table = getShippedTransactionsOutgoingTable(driver);
-        WebElement my_action = outgoing_table.getRowsMappedToHeadings().get(j).get("Actions");
+        String outgoingTransactionId = outgoing_table.getRowsMappedToHeadings().get(row_num).get("Supply Transaction Name").getText();
+        return outgoingTransactionId;
+    }
+
+    public static String getIncomingTransactionId(WebDriver driver, int row_num) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
+        String incomingTransactionId = incoming_table.getRowsMappedToHeadings().get(row_num).get("Supply Transaction Name").getText();
+        return incomingTransactionId;
+    }
+
+    public static void clickOnIncomingTransactionsDropDownMenu(WebDriver driver, int row_num) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
+        WebElement my_action = incoming_table.getRowsMappedToHeadings().get(row_num).get("Actions");
         scrollCenter(driver, my_action);
         Thread.sleep(500);
         my_action.click();
     }
 
-    public static void clickOnDraftTransactionsDropDownMenu(WebDriver driver, int j) throws InterruptedException {
+    public static void clickOnOutgoingTransactionsDropDownMenu(WebDriver driver, int row_num) throws InterruptedException {
         Thread.sleep(500);
-        GenericTable draft_table = getShippedTransactionsDraftTable(driver);
-        WebElement my_action = draft_table.getRowsMappedToHeadings().get(j).get("Actions");
+        GenericTable outgoing_table = getShippedTransactionsOutgoingTable(driver);
+        WebElement my_action = outgoing_table.getRowsMappedToHeadings().get(row_num).get("Actions");
         scrollCenter(driver, my_action);
         Thread.sleep(500);
         my_action.click();
     }
+
+    public static void clickOnDraftTransactionsDropDownMenu(WebDriver driver, int row_num) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable draft_table = getShippedTransactionsDraftTable(driver);
+        WebElement my_action = draft_table.getRowsMappedToHeadings().get(row_num).get("Actions");
+        scrollCenter(driver, my_action);
+        Thread.sleep(500);
+        my_action.click();
+    }
+
+    public static String checkDraftTransaction(WebDriver driver, int row_num) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable draft_table = getShippedTransactionsDraftTable(driver);
+        Map<String, WebElement> my_map = draft_table.getRowsMappedToHeadings().get(row_num);
+        WebElement my_checkbox = my_map.get("Choose a Row\n" +
+                "Select All");
+        String draftTransactionId = my_map.get("Supply Transaction Name").getText();
+        my_checkbox.click();
+        return draftTransactionId;
+    }
+
+    public static List<String> checkFirstDraftTransactions(WebDriver driver, int num_of_rows) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable draft_table = getShippedTransactionsDraftTable(driver);
+        List<Map<String, WebElement>> my_list_map = draft_table.getRowsMappedToHeadings();
+        List<String> my_transactions = new ArrayList<>();
+        for(int i = 1; i <= num_of_rows; i++) {
+            WebElement my_checkbox = my_list_map.get(i).get("Choose a Row\n" +
+                    "Select All");
+            String draftTransactionId = my_list_map.get(i).get("Supply Transaction Name").getText();
+            my_transactions.add(draftTransactionId);
+            my_checkbox.click();
+        }
+        return my_transactions;
+    }
+
+    public static List<String> checkLastDraftTransactions(WebDriver driver, int num_of_rows) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable draft_table = getShippedTransactionsDraftTable(driver);
+        List<Map<String, WebElement>> my_list_map = draft_table.getRowsMappedToHeadings();
+        int table_size = my_list_map.size();
+        List<String> my_transactions = new ArrayList<>();
+        for(int i = 1; i <= num_of_rows; i++) {
+            WebElement my_checkbox = my_list_map.get(table_size - i).get("Choose a Row\n" +
+                    "Select All");
+            String draftTransactionId = my_list_map.get(table_size - i).get("Supply Transaction Name").getText();
+            my_transactions.add(draftTransactionId);
+            my_checkbox.click();
+        }
+        return my_transactions;
+    }
+
+    public static String checkOutgoingTransaction(WebDriver driver, int row_num) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable outgoing_table = getShippedTransactionsOutgoingTable(driver);
+        Map<String, WebElement> my_map = outgoing_table.getRowsMappedToHeadings().get(row_num);
+        WebElement my_checkbox = my_map.get("Choose a Row\n" +
+                "Select All");
+        String outgoingTransactionId = my_map.get("Supply Transaction Name").getText();
+        my_checkbox.click();
+        return outgoingTransactionId;
+    }
+
+    public static List<String> checkFirstOutgoingTransactions(WebDriver driver, int num_of_rows) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable outgoing_table = getShippedTransactionsOutgoingTable(driver);
+        List<Map<String, WebElement>> my_list_map = outgoing_table.getRowsMappedToHeadings();
+        List<String> my_transactions = new ArrayList<>();
+        for(int i = 1; i <= num_of_rows; i++) {
+            WebElement my_checkbox = my_list_map.get(i).get("Choose a Row\n" +
+                    "Select All");
+            String outgoingTransactionId = my_list_map.get(i).get("Supply Transaction Name").getText();
+            my_transactions.add(outgoingTransactionId);
+            my_checkbox.click();
+        }
+        return my_transactions;
+    }
+
+    public static List<String> checkLastOutgoingTransactions(WebDriver driver, int num_of_rows) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable outgoing_table = getShippedTransactionsOutgoingTable(driver);
+        List<Map<String, WebElement>> my_list_map = outgoing_table.getRowsMappedToHeadings();
+        List<String> my_transactions = new ArrayList<>();
+        int table_size = my_list_map.size();
+        for(int i = 1; i <= num_of_rows; i++) {
+            WebElement my_checkbox = my_list_map.get(table_size - i).get("Choose a Row\n" +
+                    "Select All");
+            String outgoingTransactionId = my_list_map.get(table_size - i).get("Supply Transaction Name").getText();
+            my_transactions.add(outgoingTransactionId);
+            my_checkbox.click();
+        }
+        return my_transactions;
+    }
+
+    public static String checkIncomingTransaction(WebDriver driver, int row_num) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
+        Map<String, WebElement> my_map = incoming_table.getRowsMappedToHeadings().get(row_num);
+        WebElement my_checkbox = my_map.get("Choose a Row\n" +
+                "Select All");
+        String incomingTransactionId = my_map.get("Supply Transaction Name").getText();
+        my_checkbox.click();
+        return incomingTransactionId;
+    }
+
+    public static List<String> checkFirstIncomingTransactions(WebDriver driver, int num_of_rows) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
+        List<Map<String, WebElement>> my_list_map = incoming_table.getRowsMappedToHeadings();
+        List<String> my_transactions = new ArrayList<>();
+        for(int i = 1; i <= num_of_rows; i++) {
+            WebElement my_checkbox = my_list_map.get(i).get("Choose a Row\n" +
+                    "Select All");
+            String incomingTransactionId = my_list_map.get(i).get("Supply Transaction Name").getText();
+            my_transactions.add(incomingTransactionId);
+            my_checkbox.click();
+        }
+        return my_transactions;
+    }
+
+    public static List<String> checkLastIncomingTransactions(WebDriver driver, int num_of_rows) throws InterruptedException {
+        Thread.sleep(500);
+        GenericTable incoming_table = getShippedTransactionsIncomingTable(driver);
+        List<Map<String, WebElement>> my_list_map = incoming_table.getRowsMappedToHeadings();
+        List<String> my_transactions = new ArrayList<>();
+        int table_size = my_list_map.size();
+        for(int i = 1; i <= num_of_rows; i++) {
+            WebElement my_checkbox = my_list_map.get(table_size - i).get("Choose a Row\n" +
+                    "Select All");
+            String incomingTransactionId = my_list_map.get(table_size - i).get("Supply Transaction Name").getText();
+            my_transactions.add(incomingTransactionId);
+            my_checkbox.click();
+        }
+        return my_transactions;
+    }
+
 
     public static void selectConfirmIncomingDropDown(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
@@ -108,6 +253,15 @@ public class SupplyLocationTransactions extends BasePage {
         drd_cance_btn.click();
     }
 
+    public static void selectEditInDropDown(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By drd_cancel_btn_path = By.xpath("//a/span[text() = 'Edit']");
+        waitForElementToBeEnabled(driver, drd_cancel_btn_path, 10);
+        WebElement drd_cance_btn = driver.findElement(drd_cancel_btn_path);
+        scrollCenter(driver, drd_cance_btn);
+        Thread.sleep(500);
+        drd_cance_btn.click();
+    }
 
     public static GenericTable getShippedTransactionsIncomingTable(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
@@ -134,5 +288,15 @@ public class SupplyLocationTransactions extends BasePage {
         WebElement transactions_draft_table_node = driver.findElement(transactions_draft_table_path);
         GenericTable transactions_draft_table = new GenericTable(transactions_draft_table_node);
         return transactions_draft_table;
+    }
+
+    public static void clickTransferDraftButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By transfer_draft_btn_path = By.xpath("//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']");
+        waitForElementToBeEnabled(driver, transfer_draft_btn_path, 10);
+        WebElement transfer_draft_btn = driver.findElement(transfer_draft_btn_path);
+        scrollCenter(driver, transfer_draft_btn);
+        Thread.sleep(500);
+        transfer_draft_btn.click();
     }
 }

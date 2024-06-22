@@ -150,13 +150,7 @@ public class BulkTransfers extends BaseTest {
 		int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 		log("/*24.----Click on Checkboxes Incoming Transactions --*/");
-		if (countIncomingTransactions >= 3) {
-			for (int i = 0; i < containers_from.size(); i++) {
-				supplyConsolePage.clickOnIncomingTransactionsCheckbox(countIncomingTransactions - i);
-			}
-		} else {
-			log("/*--not all 3 Incoming Transaction records are there--*/");
-		}
+		SupplyLocationTransactions.checkLastIncomingTransactions(driver, 3);
 		log("/*25----click Confirm Incoming button Transfer --*/");
 		SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");
@@ -316,13 +310,7 @@ public class BulkTransfers extends BaseTest {
 		int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
 		log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
 		log("/*24.----Click on Checkboxes Incoming Transactions --*/");
-		if (countIncomingTransactions >= 3) {
-			for (int i = 0; i < containers_from.size(); i++) {
-				supplyConsolePage.clickOnIncomingTransactionsCheckbox(countIncomingTransactions - i);
-			}
-		} else {
-			log("/*--not all 3 Incoming Transaction records are there--*/");
-		}
+		SupplyLocationTransactions.checkLastIncomingTransactions(driver, 3);
 		log("/*25----click Confirm Incoming button Transfer --*/");
 		SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
 		log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");

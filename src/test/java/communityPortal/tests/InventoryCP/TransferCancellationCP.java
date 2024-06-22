@@ -117,7 +117,7 @@ public class TransferCancellationCP extends BaseTest {
 		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		int kk = countOutgoingTransactions;
 		System.out.println("/*23.2---Get Outgoing Transaction id 'from' --*/");
-		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+		String outgoingSupplyTransactionId = SupplyLocationTransactions.getOutgoingTransactionId(driver, kk);
 		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
 		System.out.println("/*23.3----Click on the latest created Outgoing Transactions --*/");
 		SupplyLocationTransactions.clickOnOutgoingTransactionsDropDownMenu(driver, kk);
