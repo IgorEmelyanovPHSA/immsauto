@@ -149,7 +149,7 @@ public class BulkTransfersCP extends BaseTest {
         int nn = 1;
         int kk = countOutgoingTransactions;
         log("/*17.2---Get Outgoing Transaction id 'from' --*/");
-        String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+        String outgoingSupplyTransactionId = SupplyLocationTransactions.getOutgoingTransactionId(driver, kk);
         log("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
         log("/*17.3----Click on the latest created Outgoing Transactions --*/");
         supplyConsolePage.clickOnOutgoingTransactions(kk);
@@ -182,14 +182,9 @@ public class BulkTransfersCP extends BaseTest {
         log("/*23----Get how many Incoming Transactions 'To' count records --*/");
         int countIncomingTransactions = SupplyLocationTransactions.getRowsIncomingTransactionsCount(driver);
         log("/*---  Incoming transactions 'to' count:" + countIncomingTransactions);
+
         log("/*24.----Click on Checkboxes Incoming Transactions --*/");
-        if (countIncomingTransactions >= 3) {
-            for (int i = 0; i < containers_from.size(); i++) {
-                supplyConsolePage.clickOnIncomingTransactionsCheckbox(countIncomingTransactions - i);
-            }
-        } else {
-            log("/*--not all 3 Incoming Transaction records are there--*/");
-        }
+        SupplyLocationTransactions.checkLastIncomingTransactions(driver, 3);
         log("/*25----click Confirm Incoming button Transfer --*/");
         SupplyLocationTransactions.clickConfirmIncomingTransfersButton(driver);
         log("/*26.----select incoming Supply Distribution for Automation Supply Location_2  --*/");

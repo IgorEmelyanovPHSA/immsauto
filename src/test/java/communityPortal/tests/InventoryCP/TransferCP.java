@@ -98,7 +98,7 @@ public class TransferCP extends BaseTest {
 		System.out.println("/*---  Outgoing transactions 'from' count:" + countOutgoingTransactions);
 		int kk = countOutgoingTransactions;
 		System.out.println("/*17.2---Get Outgoing Transaction id 'from' --*/");
-		String outgoingSupplyTransactionId = supplyConsolePage.getOutgoingSupplyTransactionId(kk);
+		String outgoingSupplyTransactionId = SupplyLocationTransactions.getOutgoingTransactionId(driver, kk);
 		System.out.println("/*--outgoing Supply Transaction From id --*/:" + outgoingSupplyTransactionId);
 		System.out.println("/*17.3----Click on the latest created Outgoing Transactions --*/");
 		supplyConsolePage.clickOnOutgoingTransactions(kk);

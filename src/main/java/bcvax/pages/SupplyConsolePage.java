@@ -21,23 +21,8 @@ import static org.testng.Assert.assertTrue;
 
 public class SupplyConsolePage extends BasePage {
 	/*---------Properties-------*/
-	@FindBy(xpath = "//h2[@class='slds-text-heading_medium slds-hyphenate']/../..//button[text() = 'Transfer']")
-	private WebElement btnTransferDraftOnContainerTransferPage;
-
 	@FindBy(xpath = "//label[contains(text(),'Comments')]")
 	private WebElement labelComments;
-
-	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[2]")
-	private WebElement rows_outgoing_transactions_count_path;
-
-	@FindBy(xpath = "(//table[@class = 'slds-table slds-table_header-fixed slds-table_bordered slds-table_edit slds-table_resizable-cols']/tbody)[1]")
-	private WebElement rows_incoming_transactions_count_path;
-
-	@FindBy(xpath = ".//span[contains(text(),'Select an Option')]")
-	private WebElement search_incoming_supply_distributor_1_2;
-
-	@FindBy(xpath = "//span[@class='slds-truncate' and contains(text(),'Edit')]")
-	private WebElement btnEditOnTrasactionPage;
 
 	@FindBy(xpath = "//label[(text()='Dose Conversion Factor')]/..//input[@type='text']")
 	private WebElement doseConversionFactorForSingleWastage;
@@ -141,11 +126,6 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public String getOutgoingSupplyTransactionId(int kk) throws InterruptedException {
-		String supplyTransactionId = tables.getSingleTransactionsTable("Outgoing").getRowsAsStringMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
-		return (supplyTransactionId);
-	}
-
 	public void clickOnOutgoingTransactions(int kk) throws InterruptedException {
 		WebElement transaction = tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(kk).get(SUPPLY_TRANSACTION_NAME);
 		waitForElementToBeVisible(driver, transaction, 10);
@@ -181,112 +161,6 @@ public class SupplyConsolePage extends BasePage {
 				System.out.println(ex.getMessage());
 			}
 		}
-	}
-
-	public int getRowsIncomingTransactionsCount() throws InterruptedException {
-		waitForElementToBeVisible(driver, rows_incoming_transactions_count_path, 10);
-		List<WebElement> rows = rows_incoming_transactions_count_path.findElements(By.tagName("tr"));
-		return (rows.size());
-	}
-
-	public String getLatestDraftTransactionId(int value) {
-		//Offset due to 0 is not a real value
-		int offset = value-1;
-		WebElement draftTransactionElement = driver.findElement(By.xpath("(//a[@title='draftTransactionFromName'])[" + offset + "]"));
-		String draftTransactionId = draftTransactionElement.getText();
-		return draftTransactionId;
-	}
-
-	public void clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(int value) throws InterruptedException {
-		Thread.sleep(500);
-		By draft_transaction_element_path = By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + value + "]");
-		waitForElementToBeEnabled(driver, draft_transaction_element_path, 10);
-		WebElement draft_transaction_element = driver.findElement(draft_transaction_element_path);
-		scrollCenter(draft_transaction_element);
-		draft_transaction_element.click();
-		Thread.sleep(500);
-		By transfer_draft_btn_path = By.xpath("//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']");
-		waitForElementToBeEnabled(driver, transfer_draft_btn_path, 10);
-		WebElement transfer_draft_btn = driver.findElement(transfer_draft_btn_path);
-		scrollCenter(transfer_draft_btn);
-		transfer_draft_btn.click();
-		Thread.sleep(500);
-		By transfer_transaction_btn_path = By.xpath("//button[text() = 'Transfer Transactions']");
-		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
-		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
-		transfer_transaction_btn.click();
-		try {
-			AlertDialog.closeAlert(driver);
-			Thread.sleep(500);
-		} catch(Exception ex) {
-			System.out.println("Success Dialog not found. Continue...");
-		}
-	}
-
-	public void clickCheckBoxLatestDraftBulkTransactionsAndConfirmTransfer(int countDraftTransactions, int numberOfRows) throws InterruptedException {
-
-		for(int i=countDraftTransactions; i > (countDraftTransactions-numberOfRows); i--) {
-			Thread.sleep(200);
-			By draft_transaction_element_path = By.xpath("(//span[contains(text(),'Draft')]/../../../../..//span[@class='slds-checkbox_faux'])[" + Integer.toString(i) + "]");
-			waitForElementToBeEnabled(driver, draft_transaction_element_path, 10);
-			WebElement draft_transaction_element = driver.findElement(draft_transaction_element_path);
-			draft_transaction_element.click();
-		}
-
-		Thread.sleep(200);
-		By transfer_draft_btn_path = By.xpath("//span[contains(text(),'Draft')]/../../../../../../..//button[text() = 'Transfer']");
-		waitForElementToBeEnabled(driver, transfer_draft_btn_path, 10);
-		WebElement transfer_draft_btn = driver.findElement(transfer_draft_btn_path);
-		scrollCenter(transfer_draft_btn);
-		click(transfer_draft_btn);
-
-		Thread.sleep(200);
-		By transfer_transaction_btn_path = By.xpath("//button[contains(text(),'Transfer Transactions')]");
-		waitForElementToBeEnabled(driver, transfer_transaction_btn_path, 10);
-		WebElement transfer_transaction_btn = driver.findElement(transfer_transaction_btn_path);
-		transfer_transaction_btn.click();
-		Thread.sleep(500);
-		By close_modal_box_path = By.xpath("//div[@role = 'alertdialog']//button[@title = 'Close']");
-		try {
-			Thread.sleep(500);
-			waitForElementToBeLocated(driver, close_modal_box_path, 10);
-			driver.findElement(close_modal_box_path).click();
-			System.out.println("Success message appered and closed...");
-		} catch(Exception ex) {
-			System.out.println("No modal box. Continue...");
-		}
-	}
-
-	public void clickDropDownLatestDraftTransactionsAndConfirmTransfer(int countDraftTransactions, double amountOfDosesToAdjustInDraftEdit) throws InterruptedException {
-		//Offset due to 0 is not a real value
-		int offset = countDraftTransactions-1;
-		WebElement draftTransactionElement = driver.findElement
-				(By.xpath("(//span[contains(text(),'Draft')]/../../../../..//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small'])[" + offset + "]"));
-		click(draftTransactionElement);
-		click(btnEditOnTrasactionPage);
-		Thread.sleep(2000);
-		ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjustInDraftEdit));
-		clickUsingJS(btnTransferDraftOnContainerTransferPage);
-		//click(btnTransferDraftOnContainerTransferPage);
-		Thread.sleep(2000);
-		ContainerPrintDialog.clickCloseButton(driver);
-		Thread.sleep(2000);
-	}
-
-	public void clickOnIncomingTransactionsCheckbox(int k) throws InterruptedException {
-		WebElement checkbox = tables.getSingleTransactionsTable("Incoming").getRowsMappedToHeadings().get(k).get("Choose a Row\n" +
-				"Select All");
-		scrollCenter(checkbox);
-		checkbox.click();
-		Thread.sleep(1000);
-	}
-
-	public void clickOnOutgoingTransactionsCheckbox(int k) throws InterruptedException {
-		WebElement checkbox = tables.getSingleTransactionsTable("Outgoing").getRowsMappedToHeadings().get(k).get("Choose a Row\n" +
-				"Select All");
-		scrollCenter(checkbox);
-		checkbox.click();
-		Thread.sleep(1000);
 	}
 
 	public void selectIncomingSupplyDistribution(String distribution) throws InterruptedException {
@@ -487,11 +361,6 @@ public class SupplyConsolePage extends BasePage {
 				"Help", reason);
 	}
 
-	public void enterBulkAdjustmentByQuantitiesWithReason(double amount, String reason) throws InterruptedException {
-		enterBulkValuesWithReason("Quantity", amount, "Reason For Adjustment\n" +
-				"Help", reason);
-	}
-
 	public void enterBulkValuesWithReason(String dose_qty_column, double amount, String reason_column, String reason) throws InterruptedException {
 		Thread.sleep(500);
 		List<Map<String, WebElement>> wastage_table = tables.getContainerAdjustmentWastageTable().getRowsMappedToHeadings();
@@ -620,21 +489,4 @@ public class SupplyConsolePage extends BasePage {
 		Assert.assertTrue(all_alerts.get(0).contains("You have successfully Cancelled the Transaction"));
 	}
 
-	public SupplyConsolePage transferToDistributionOnSend(String distribution) throws InterruptedException {
-		selectTransferToDistribution(search_incoming_supply_distributor_1_2, distribution);
-		return this;
-	}
-
-	@Step
-	private void selectTransferToDistribution(WebElement element, String distribution) throws InterruptedException {
-		log(" -- select to distribution  -  " + distribution);
-		waitForElementToBeVisible(driver, element, 20);
-		moveToElement(element);
-		click(element);
-		By locationTo = By.xpath("//*[contains(@title, '" + distribution + "')]");
-		waitForElementToBePresent(driver, locationTo, 20);
-		scrollCenter(driver.findElement(locationTo));
-		driver.findElement(locationTo).click();
-		waitForElementNotToBeVisible(driver, locationTo, 10);
-	}
 }

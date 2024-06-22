@@ -65,6 +65,16 @@ public class ClientListTodayAppointmentsTab extends BasePage {
         waitForElementToBeEnabled(driver, today_appointments_table_path, 10);
         WebElement today_appointments_table_node = driver.findElement(today_appointments_table_path);
         GenericTable today_appointments_table = new GenericTable(today_appointments_table_node);
+        for(int i = 0; i < 10; i++) {
+            try {
+                today_appointments_table.getRowsMappedToHeadings();
+                break;
+            } catch (IndexOutOfBoundsException ex) {
+                Thread.sleep(2000);
+                today_appointments_table_node = driver.findElement(today_appointments_table_path);
+                today_appointments_table = new GenericTable(today_appointments_table_node);
+            }
+        }
         List<Map<String, WebElement>> today_appointments_map = today_appointments_table.getRowsMappedToHeadings();
         int attempts = 0;
         while(today_appointments_map.size() < 2) {

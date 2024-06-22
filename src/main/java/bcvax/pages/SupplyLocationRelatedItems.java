@@ -51,6 +51,7 @@ public class SupplyLocationRelatedItems extends BasePage {
         Map<String, Map<String, Double>> resp = checkSupplyContainers(driver, containers);
         return resp.get(container);
     }
+
     public static Map<String, Map<String, Double>> checkSupplyContainers(WebDriver driver, List<String> containers) throws InterruptedException {
         Thread.sleep(500);
         DecimalFormat df = new DecimalFormat("#.##");

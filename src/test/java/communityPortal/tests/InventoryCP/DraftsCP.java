@@ -3,6 +3,7 @@ package communityPortal.tests.InventoryCP;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -53,7 +54,12 @@ public class DraftsCP extends BaseTest {
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
         log("/*2.----Navigate to Supply Console Page --*/");
         MainPageCP.goToSupplyLocation(driver);
-        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
+        try {
+            SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
+        } catch (StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
+        }
         Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, container_from);
         double remainingDoses_before_Distribution_1_1 = doses_before.get("Remaining Doses");
         log("/*-- . Distribution_1_1 remaining doses Before are: -->" + remainingDoses_before_Distribution_1_1);
@@ -89,11 +95,13 @@ public class DraftsCP extends BaseTest {
 
         //Draft transaction count, offset -1
         int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
-        String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
+        String latestDraftTransactionId = SupplyLocationTransactions.getDraftTransactionId(driver, countDraftTransactions);
         log("/*11.----Getting id for the latest created Transaction Draft " +latestDraftTransactionId +" --*/");
 
         log("/*12.----Selecting the latest draft transactions and confirm transfer --*/");
-        supplyConsolePage.clickCheckBoxLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions);
+        SupplyLocationTransactions.checkDraftTransaction(driver, countDraftTransactions);
+        SupplyLocationTransactions.clickTransferDraftButton(driver);
+        TransferTransactionsDialog.clickTransferTransactionsButton(driver);
 
         log("/*13.----Navigate to Related Item tab --*/");
         SupplyLocationPage.clickOnRelatedItemTab(driver);
@@ -199,12 +207,15 @@ public class DraftsCP extends BaseTest {
 
         //Draft transaction count, offset -1
         int countDraftTransactions = SupplyLocationTransactions.getRowsDraftTransactionsCount(driver);
-        String latestDraftTransactionId = supplyConsolePage.getLatestDraftTransactionId(countDraftTransactions);
+        String latestDraftTransactionId = SupplyLocationTransactions.getDraftTransactionId(driver, countDraftTransactions);
         log("/*15.----Getting id for the latest created Transaction Draft " +latestDraftTransactionId +" --*/");
 
         log("/*16.----Selecting the latest draft transactions and Edit, update doses: " +amountOfDosesToAdjustInDraftEdit +" --*/");
-        supplyConsolePage.clickDropDownLatestDraftTransactionsAndConfirmTransfer(countDraftTransactions, amountOfDosesToAdjustInDraftEdit);
-
+        SupplyLocationTransactions.clickOnDraftTransactionsDropDownMenu(driver, countDraftTransactions);
+        SupplyLocationTransactions.selectEditInDropDown(driver);
+        ContainerTransferForm.enterTransferDosages(driver, String.valueOf(amountOfDosesToAdjustInDraftEdit));
+        ContainerTransferForm.clickTransferButton(driver);
+        ContainerPrintDialog.clickCloseButton(driver);
         log("/*17.----Navigate to Related Item tab --*/");
         SupplyLocationPage.clickOnRelatedItemTab(driver);
 

@@ -132,13 +132,7 @@ public class BulkTransfersCancellation extends BaseTest {
         int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
         log("/*24.----Click on Checkboxes Outgoing Transactions --*/");
-        if (countOutgoingTransactions >= 3) {
-            for (int i = 0; i < containers_from.size(); i++) {
-                supplyConsolePage.clickOnOutgoingTransactionsCheckbox(countOutgoingTransactions - i);
-            }
-        } else {
-            log("/*--not all 3 Incoming Transaction records are there--*/");
-        }
+        SupplyLocationTransactions.checkLastOutgoingTransactions(driver, 3);
         Thread.sleep(1000);
         SupplyLocationTransactions.clickCancelButton(driver);
         supplyConsolePage.cancelTransfer();
@@ -243,13 +237,7 @@ public class BulkTransfersCancellation extends BaseTest {
         int countOutgoingTransactions = SupplyLocationTransactions.getRowsOutgoingTransactionsCount(driver);
         log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
         log("/*24.----Click on Checkboxes Outgoing Transactions --*/");
-        if (countOutgoingTransactions >= 3) {
-            for (int i = 0; i < containers_from.size(); i++) {
-                supplyConsolePage.clickOnOutgoingTransactionsCheckbox(countOutgoingTransactions - i);
-            }
-        } else {
-            log("/*--not all 3 Incoming Transaction records are there--*/");
-        }
+        SupplyLocationTransactions.checkLastOutgoingTransactions(driver, 3);
         SupplyLocationTransactions.clickCancelButton(driver);
         supplyConsolePage.cancelTransfer();
         log("/----Count And Validate Remaining Supplies After Transaction --*/");

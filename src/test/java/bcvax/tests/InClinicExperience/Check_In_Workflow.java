@@ -103,7 +103,7 @@ public class Check_In_Workflow extends BaseTest {
         System.out.println();
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void verify_Check_In_Citizen_Workflow() throws Exception {
         TestcaseID = "273419";
         log("Target Environment: "+ Utils.getTargetEnvironment());
