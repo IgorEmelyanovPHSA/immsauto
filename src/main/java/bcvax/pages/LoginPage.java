@@ -172,7 +172,7 @@ public class LoginPage extends BasePage {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//HEALTH GATEWAY
 
-	@FindBy(xpath = "//h2[text()='Test with username and password']")
+	@FindBy(xpath = "//button[@value='BC_Services_Card_Login']")
 	private WebElement btnLoginWithBCServiceCard;
 
 	//Next screen //BC Services Card Login
@@ -205,8 +205,12 @@ public class LoginPage extends BasePage {
 
 	public MainPageHealthGateway loginIntoHGWithBCServiceCardAsUser11() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		if(Utils.getEnvConfigProperty("url").equalsIgnoreCase("https://uat-beta.healthgateway.gov.bc.ca/s/")){
+			Thread.sleep(4000);
+			click(btnLoginWithBCServiceCard);
+		}
 		Thread.sleep(4000);
-		click(btnLoginWithBCServiceCard);
+		click(btnTestWithUserNameAndPassword);
 		Thread.sleep(3000);
 		enterCredentialsForHGPortalAs("user_HTHGTWY11","password_HTHGTWY11_PW");
 		Thread.sleep(3000);
@@ -215,8 +219,12 @@ public class LoginPage extends BasePage {
 
 	public MainPageHealthGateway loginIntoHGWithBCServiceCardAsUser14() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		if(Utils.getEnvConfigProperty("url").equalsIgnoreCase("https://uat-beta.healthgateway.gov.bc.ca/s/")){
+			Thread.sleep(4000);
+			click(btnLoginWithBCServiceCard);
+		}
 		Thread.sleep(4000);
-		click(btnLoginWithBCServiceCard);
+		click(btnTestWithUserNameAndPassword);
 		Thread.sleep(3000);
 		enterCredentialsForHGPortalAs("user_HTHGTWY14","password_HTHGTWY14_PW");
 		Thread.sleep(3000);

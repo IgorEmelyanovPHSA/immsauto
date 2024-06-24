@@ -10,6 +10,9 @@ public class MainPageHealthGateway extends BasePage {
     @FindBy(xpath = "//a[@title = 'Timeline']")
     private WebElement tabTimeLine;
 
+    @FindBy(xpath = "//a[@title = 'Dependents']")
+    private WebElement tabDependents;
+
     @FindBy(xpath = "//div[@data-region-name ='themeHeaderProfileMenu']")
     private WebElement profileIcon;
 
@@ -29,9 +32,18 @@ public class MainPageHealthGateway extends BasePage {
     }
 
     @Step
-    public ProfilePage goToProfilePage() throws InterruptedException {
+    public DependentsTabPage goToTabDependents() throws InterruptedException {
         // waitForElementToBeClickable(driver, tabTimeLine,5);
         Thread.sleep(5000);
+        click(tabDependents);
+        Thread.sleep(5000);
+        return new DependentsTabPage(driver);
+    }
+
+    @Step
+    public ProfilePage goToProfilePage() throws InterruptedException {
+        // waitForElementToBeClickable(driver, tabTimeLine,5);
+        Thread.sleep(7000);
         click(profileIcon);
         click(dropDownProfile);
         Thread.sleep(5000);
