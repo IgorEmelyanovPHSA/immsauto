@@ -192,7 +192,13 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
 
         log("/*43.---select Dosage ->  -.5 --*/");
         if(!lot.equals(consumptionLot)) {
-            InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            try {
+                InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            } catch (NotFoundException ex) {
+                InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+                Thread.sleep(2000);
+                InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            }
         }
         Thread.sleep(2000);
         String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);

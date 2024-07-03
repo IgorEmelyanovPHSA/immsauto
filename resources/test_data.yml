@@ -1,8 +1,7 @@
 bcvaxdevit:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
-  #supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
   distributionToSameClinic: "Same Clinic"
@@ -10,8 +9,7 @@ bcvaxdevit:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:26:33)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:36:09)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:44:53)"
-  containerConsumption: "COVISHIELD - 4120Z029 (2023-08-30 23:27:54)"
-  #containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-09-11 09:03:17)"
+  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2023-09-07 13:16:45)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:27:19)":
         conversionFactor: "10.00"
@@ -34,8 +32,8 @@ bcvaxdevit:
   agentConsumption: "COVID-19 Non-replicating Viral Vector"
   agentRefusal: "COVID-19 mRNA"
   agentInfluenza: "Influenza-LAIV"
-  consumptionDose: "0.5"
-  consumptionLot: "4120Z029"
+  consumptionDose: "0.3"
+  consumptionLot: "35035BD-CC01"
   covidLot: "EK4241"
   #consumptionLot: "EK4241"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
@@ -63,7 +61,7 @@ bcvaxdevit:
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
-  supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
   distributionToSameClinic: "Same Clinic"
@@ -119,38 +117,6 @@ prodsuppqa:
         address_id: "AD-0006760075"
         appointment_city: "Coquitlam"
         minor_ailments: "No"
-comuat:
-  supplyLocationFrom: "Automation Supply Location_1"
-  supplyLocationTo: "Automation Supply Location_2"
-  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  distributionFrom: "Automation Supply Distribution_1_1"
-  distributionTo: "Supply Distribution_2_1"
-  distributionToSameClinic: "Supply Distribution_1_2"
-  distributionConsumption: "Supply Distribution_1"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:42:38)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:49:54)"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:45:47)"
-  containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-03-27 16:43:35)"
-  bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:44:53)":
-        conversionFactor: "10.00"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:42:38)":
-        conversionFactor: "5.00"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:44:08)":
-        conversionFactor: "10.00"
-  bulkContainersTo:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:52:19)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:49:54)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:51:52)"
-  bulkContainersToSameClinic:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-03-07 12:48:00)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-03-07 12:45:47)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2023-03-07 12:47:07)"
-  consumptionDose: "0.3"
-  routeConsumption: "Intramuscular"
-  siteConsumption: "Arm - Right deltoid"
-  vaccineAgent: "COVID-19 mRNA"
-  diwaCitizen: "Rawley BCVaxIsmirnioglou"
 bcvaxuat:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -194,44 +160,10 @@ bcvaxuat:
   useDefaultSettingsLots:
     - "300042698-CC04"
     - "NK2858B"
-ssotdev:
-  supplyLocationFrom: "Automation Supply Location_1"
-  supplyLocationTo: "Automation Supply Location_2"
-  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  distributionFrom: "Automation Supply Distribution_1_1"
-  distributionTo: "Supply Distribution_2_1"
-  distributionToSameClinic: "Supply Distribution_1_2"
-  distributionConsumption: "Supply Distribution_1"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-04-03 14:21:18)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-04-04 10:43:25)"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-04-04 11:27:38)"
-  containerConsumption: "COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)"
-  agentConsumption: "COVID-19 mRNA"
-  providerConsumption: "PPhis Automation"
-  routeConsumption: "Intramuscular"
-  siteConsumption: "Arm - Left deltoid"
-  lotConsumption: "EL0203"
-  doseConsumption: "0.3"
-  bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-04-04 13:21:51)":
-        conversionFactor: "10.00"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-04-03 14:21:18)":
-        conversionFactor: "5.00"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAXnfantTEST001 (2023-04-04 13:21:02)":
-        conversionFactor: "10.00"
-  bulkContainersTo:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-04-04 13:27:52)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-04-04 10:43:25)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAXnfantTEST001 (2023-04-04 13:27:52)"
-  bulkContainersToSameClinic:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-04-04 13:30:57)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-04-04 11:27:38)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAXnfantTEST001 (2023-04-04 13:30:57)"
 regression:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
-  #supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
   distributionToSameClinic: "Same Clinic"
@@ -352,8 +284,7 @@ regress2:
 bcvaxqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
-  #supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
   distributionToSameClinic: "Same Clinic"
@@ -361,8 +292,7 @@ bcvaxqa:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:25:02)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:43:35)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-12-04 12:31:36)"
-  containerConsumption: "JANSSEN COVID-19 VACCINE - ABZ5320 (2024-04-11 11:40:44)"
-  #containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2023-09-11 09:03:17)"
+  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2024-05-10 13:45:41)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-12-04 12:23:58)":
         conversionFactor: "10.00"
@@ -385,8 +315,8 @@ bcvaxqa:
   agentConsumption: "COVID-19 Non-replicating Viral Vector"
   agentRefusal: "COVID-19 mRNA"
   agentInfluenza: "Influenza-LAIV"
-  consumptionDose: "0.5"
-  consumptionLot: "ABZ5320"
+  consumptionDose: "0.3"
+  consumptionLot: "35035BD-CC01"
   covidLot: "CXBBBLUE"
   pneumoLot: "OK_Pneumo_test_Oct_5_2023"
   #consumptionLot: "EK4241"
@@ -409,5 +339,5 @@ bcvaxqa:
         minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006764994"
-        appointment_city: "Golden"
+        appointment_city: "Coquitlam"
         minor_ailments: "No"

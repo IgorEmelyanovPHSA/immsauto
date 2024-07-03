@@ -4,6 +4,8 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -52,7 +54,7 @@ public class E2E_Consumption_CP extends BaseTest {
         supplyDistribution = String.valueOf(testData.get("distributionConsumption"));
         supplyContainer = String.valueOf(testData.get("containerConsumption"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
-        consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+        consumptionAgent = String.valueOf(testData.get("vaccineAgent"));
         consumptionProvider = String.valueOf(testData.get("providerConsumption"));
         consentProvider = String.valueOf(testData.get("consentProvider"));
         consumptionRoute = String.valueOf(testData.get("routeConsumption"));
@@ -70,7 +72,12 @@ public class E2E_Consumption_CP extends BaseTest {
         SupplyConsolePage supplyConsolePage = MainPageCP.goToSupplyLocation(driver);
 
         log("/*4. Locate and Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic --*/");
-        SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
+        try {
+            SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            SupplyLocationsPage.selectSupplyLocationName(driver, clinicNameToSearch);
+        }
         Map<String, Double> doses_before = SupplyLocationRelatedItems.getSupplyContainerDoseQuantity(driver, supplyContainer);
         double remainingDoses_before = doses_before.get("Remaining Doses");
         log("/*6. remaining doses Before: -->" + remainingDoses_before);
@@ -194,7 +201,13 @@ public class E2E_Consumption_CP extends BaseTest {
 
         log("/*43.---select Dosage ->  -.5 --*/");
         if(!lot.equals(consumptionLot)) {
-            InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            try {
+                InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            } catch (NotFoundException ex) {
+                InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+                Thread.sleep(2000);
+                InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            }
         }
         String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 

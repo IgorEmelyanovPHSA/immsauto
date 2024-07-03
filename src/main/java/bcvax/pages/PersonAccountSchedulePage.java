@@ -84,7 +84,7 @@ public class PersonAccountSchedulePage extends BasePage {
 
     public static void clickOnFacilityOptionLocation(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By option_location__facility_path = By.xpath("//button[@name = 'facility'][1]");
+        By option_location__facility_path = By.xpath("//button[@name = 'facility']");
         waitForElementToBeEnabled(driver, option_location__facility_path, 10);
         WebElement option_location_facility = driver.findElement(option_location__facility_path);
         scrollCenter(driver, option_location_facility);

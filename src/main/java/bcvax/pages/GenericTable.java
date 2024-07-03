@@ -77,7 +77,7 @@ public class GenericTable {
 
     private boolean validateRowContainsMapIndexes(Map<String, WebElement> row, Map<String, String> searchCriteria, int index) {
         List<String> stringsList = new ArrayList<>(searchCriteria.keySet());
-        return row.containsKey(stringsList.get(index)) && row.get(stringsList.get(index)).getText().contains(searchCriteria.get(stringsList.get(index)));
+        return row.containsKey(stringsList.get(index)) && row.get(stringsList.get(index)).getAttribute("innerText").contains(searchCriteria.get(stringsList.get(index)));
     }
 
     /**
