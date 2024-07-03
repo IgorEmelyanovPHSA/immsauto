@@ -113,6 +113,8 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
             lot_field.click();
         }
         Thread.sleep(1000);
+        scrollCenter(driver, lotSearchInputField);
+        Thread.sleep(500);
         lotSearchInputField.sendKeys(lot);
         Thread.sleep(1000);
         waitForElementToBeEnabled(driver, lot_item_path, 10);
@@ -214,5 +216,47 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         scrollCenter(driver, administration_reason);
         Thread.sleep(500);
         administration_reason.click();
+    }
+
+    public static String getActiveDeferralsNumber(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By active_deferrals_number_path = By.xpath("//c-deferrals//span[@c-deferrals_deferrals and contains(@style, 'float:right')]");
+        waitForElementToBeEnabled(driver, active_deferrals_number_path, 10);
+        WebElement active_deferrals_number_text = driver.findElement(active_deferrals_number_path);
+        scrollCenter(driver, active_deferrals_number_text);
+        Thread.sleep(500);
+        String active_deferrals_number = active_deferrals_number_text.getText();
+        return active_deferrals_number;
+    }
+
+    public static void clickAddDeferralButton(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By add_deferral_button_path = By.xpath("//c-deferrals//button[@title='Add']");
+        waitForElementToBeEnabled(driver, add_deferral_button_path, 10);
+        WebElement add_deferral_button = driver.findElement(add_deferral_button_path);
+        scrollCenter(driver, add_deferral_button);
+        Thread.sleep(500);
+        add_deferral_button.click();
+    }
+
+    public static GenericTable getDeferralsTable(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By deferrals_table_path = By.xpath("//c-deferrals");
+        waitForElementToBeEnabled(driver, deferrals_table_path, 10);
+        WebElement deferrals_table_node = driver.findElement(deferrals_table_path);
+        GenericTable deferrals_table = new GenericTable(deferrals_table_node);
+        return deferrals_table;
+    }
+
+    public static void checkShowDepletedLots(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By show_depeleted_chkbox_path = By.xpath("//span[text()='Show depleted lot numbers']/../../input");
+        By show_depeleted_chkbox_click_path = By.xpath("//span[text()='Show depleted lot numbers']");
+        WebElement chkbox_status = driver.findElement(show_depeleted_chkbox_path);
+        boolean my_checkbox_status = chkbox_status.isSelected();
+        if(!my_checkbox_status) {
+            WebElement my_checkbox = driver.findElement(show_depeleted_chkbox_click_path);
+            my_checkbox.click();
+        }
     }
 }

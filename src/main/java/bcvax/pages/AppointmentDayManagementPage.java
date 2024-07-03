@@ -31,7 +31,7 @@ public class AppointmentDayManagementPage extends BasePage {
         Map<String, String> search_criteria = new HashMap<String, String>();
         search_criteria.put("Name", appointment_name);
         search_criteria.put("Provider", provider);
-        By appointment_day_table_path = By.xpath("//table[@data-aura-class='uiVirtualDataTable']");
+        By appointment_day_table_path = By.xpath("//table[@data-aura-class='uiVirtualDataTable'] | //table[@aria-label='All']");
         waitForElementToBeEnabled(driver, appointment_day_table_path, 30);
         WebElement appointment_day_table = driver.findElement(appointment_day_table_path);
         GenericTable appointment_days_table = new GenericTable(appointment_day_table);
@@ -151,7 +151,7 @@ public class AppointmentDayManagementPage extends BasePage {
         WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
         select_list_view_btn.click();
         Thread.sleep(2000);
-        By all_items_path = By.xpath("//a[@role='option']/span[text()='All']");
+        By all_items_path = By.xpath("//a[@role='option']/span[text()='All'] | //lightning-base-combobox-item[@data-value='DDH__All']//span[@title='All']");
         waitForElementToBeEnabled(driver, all_items_path, 10);
         WebElement all_items = driver.findElement(all_items_path);
         all_items.click();

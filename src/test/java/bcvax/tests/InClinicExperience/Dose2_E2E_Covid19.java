@@ -31,29 +31,30 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
+		env = Utils.getTargetEnvironment();
 		String client_data_file = Utils.getClientsDataFile();
+		testData = Utils.getTestData(env);
 		client_data = Utils.getTestClientData(client_data_file, "dose2");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
-	}
-	@Test(priority = 1)
-	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-		TestcaseID = "222811"; //C222811
-		env = Utils.getTargetEnvironment();
-		testData = Utils.getTestData(env);
-		log("TestRail test case ID: C" +TestcaseID);
-		log("Target Environment: "+ Utils.getTargetEnvironment());
-		log("/*1.----Login as an Clinician to ICE --*/");
 		consumptionLot = String.valueOf(testData.get("consumptionLot"));
 		consumptionDose = String.valueOf(testData.get("consumptionDose"));
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
-		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));
-		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+		consumptionAgent = String.valueOf(testData.get("vaccineAgent"));
+		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
+	}
+	@Test(priority = 1)
+	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
+		TestcaseID = "222811"; //C222811
+
+		log("TestRail test case ID: C" +TestcaseID);
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("/*1.----Login as an Clinician to ICE --*/");
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -187,7 +188,13 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 		}
 		if(!lot.equals(consumptionLot)) {
-			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+			try {
+				InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+			} catch (NotFoundException ex) {
+				InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+				Thread.sleep(2000);
+				InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+			}
 		}
 
 		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);
@@ -228,14 +235,8 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("TestRail test case ID: C" +TestcaseID);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to ICE --*/");
-		consumptionLot = String.valueOf(testData.get("consumptionLot"));
-		consumptionDose = String.valueOf(testData.get("consumptionDose"));
-		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
-		consumptionSite = String.valueOf(testData.get("siteConsumption"));
-		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
-		consentProvider = String.valueOf(testData.get("consentProvider"));
+
 		refusalAgent = String.valueOf(testData.get("agentRefusal"));
-		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -387,6 +388,8 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 		if(!lot.equals(consumptionLot)) {
+			InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+			Thread.sleep(500);
 			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
 

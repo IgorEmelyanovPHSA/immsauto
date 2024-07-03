@@ -131,7 +131,12 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data_new);
 
         log("/*----6. Navigated to Person Account related tab ---*/");
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
 
         log("/*----7. Click Create Immunization Record ---*/");
         PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);

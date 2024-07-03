@@ -55,7 +55,7 @@ public class Consumption extends BaseTest {
 		clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
 		distribution = String.valueOf(testData.get("distributionConsumption"));
 		container = String.valueOf(testData.get("containerConsumption"));
-		consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+		consumptionAgent = String.valueOf(testData.get("vaccineAgent"));
 		consumptionProvider = String.valueOf(testData.get("providerConsumption"));
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consumptionSite = String.valueOf(testData.get("siteConsumption"));
@@ -110,6 +110,7 @@ public class Consumption extends BaseTest {
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 		log("/*-- 32.Navigate to Appointment Scheduling Tab --*/");
 		try {
+			Thread.sleep(1000);
 			PersonAccountPage.goToVaccineScheduleTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
@@ -121,7 +122,7 @@ public class Consumption extends BaseTest {
 		try {
 			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-		} catch(Exception ex) {
+		} catch(NotFoundException ex) {
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
 			Thread.sleep(500);
@@ -226,6 +227,8 @@ public class Consumption extends BaseTest {
 			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
 		if(!lot.equals(consumptionLot)) {
+			InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+			Thread.sleep(500);
 			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
 		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);

@@ -1,10 +1,15 @@
 package bcvax.pages;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import java.util.Map;
 import java.util.List;
+
+import static constansts.Header.SUPPLY_CONTAINER_NAME;
 
 public class ContainerTransferPage extends BasePage {
     public ContainerTransferPage(WebDriver driver) {
@@ -81,5 +86,13 @@ public class ContainerTransferPage extends BasePage {
         WebElement transfer_btn = driver.findElement(transfer_btn_path);
         scrollCenter(driver, transfer_btn);
         transfer_btn.click();
+    }
+
+    public static GenericTable getTransfersTable(WebDriver driver) throws InterruptedException {
+        By transfer_table_path = By.xpath("//table[@c-bchbulktransfermodal_bchbulktransfermodal]");
+        waitForElementToBeEnabled(driver, transfer_table_path, 10);
+        WebElement transfer_table_node = driver.findElement(transfer_table_path);
+        GenericTable transfer_table = new GenericTable(transfer_table_node);
+        return transfer_table;
     }
 }

@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -177,7 +178,13 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
 
         log("/*45.---select Dosage ->  -.5 --*/");
         if(!lot.equals(consumptionLot)) {
-            InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            try {
+                InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            } catch (NotFoundException ex) {
+                InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+                Thread.sleep(2000);
+                InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+            }
         }
         Thread.sleep(2000);
         String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);

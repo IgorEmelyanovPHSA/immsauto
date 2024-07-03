@@ -38,7 +38,7 @@ public class E2E_Deferrals_CP extends BaseTest {
 
     @Test(priority = 1)
     public void can_create_new_deferral() throws Exception {
-        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "235260";
+        TestcaseID = "243157";
         log("/*1.----Login to CP (newUI) as Clinician --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();;
         Thread.sleep(500);

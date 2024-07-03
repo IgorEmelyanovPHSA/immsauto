@@ -4,6 +4,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import bcvax.tests.Preconditions;
 import constansts.Apps;
+import java.util.List;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -24,26 +25,16 @@ public class E2E_Deferrals extends BaseTest {
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
     }
     @Test
     public void Can_do_Dose1_Vaccine_Administration_as_Clinician_ICE() throws Exception {
+        ////////////////////////////////////////////////////////
+        //Precondition: Load the Citizen Vaccine Administration
+        ////////////////////////////////////////////////////////
+        TestcaseID = "225659";
         String env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
-//        test_data.setFirstName("Ab");
-//        test_data.setLastName("Said");
-//        test_data.setDateOfBirth("Jan 02, 2023");
-//        test_data.setPostalCode("V3L5L2");
-//        test_data.setPersonalHealthNumber("9879450975");
-//        test_data.setEmail("accountToDelete@phsa.ca");
-//        test_data.setClinicName(String.valueOf(testData.get("supplyLocationConsumption")));
-//        test_data.setDose(String.valueOf(testData.get("covidDose")));
-//        test_data.setLot(String.valueOf(testData.get("covidLot")));
-//        test_data.setRoute(String.valueOf(testData.get("routeConsumption")));
-//        test_data.setSite(String.valueOf(testData.get("siteConsumption")));
-//        test_data.setConsentProvider(String.valueOf(testData.get("consentProvider")));
-//        test_data.setAgent("Covid19Vaccine");
+
         log("/*1.----Login --*/");
         try {
             LoginPage.loginAsImmsBCAdmin(driver);
@@ -78,9 +69,8 @@ public class E2E_Deferrals extends BaseTest {
         log("/*3.----Close All previously opened Tab's --*/");
 
         log("/*4.----click Register New Citizen --*/");
-
-        InClinicExperiencePage.clickRegisterButton(driver);
-        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
+        String citizenName = client_data.get("legalFirstName") + " " + (client_data.get("legalMiddleName").equals("") ? "" : client_data.get("legalMiddleName") + " ") + client_data.get("legalLastName");
+        MainPageOrg.search(driver, citizenName);
         Thread.sleep(500);
         try {
             PersonAccountPage.goToVaccineScheduleTab(driver);
@@ -133,6 +123,21 @@ public class E2E_Deferrals extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
         Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
+
+        ///////////////////////////////////////////
+        //End Of Precondition
+        ///////////////////////////////////////////
+        String active_deferrals_number = InClinicExperienceVaccineAdministrationPage.getActiveDeferralsNumber(driver);
+        InClinicExperienceVaccineAdministrationPage.getDeferralsTable(driver);
+        InClinicExperienceVaccineAdministrationPage.clickAddDeferralButton(driver);
+        List<String> reasons = AddDeferralDialog.getListOfReasons(driver);
+        AddDeferralDialog.selectAgent(driver, "COVID-19 mRNA");
+        AddDeferralDialog.selectReasonForDeferral(driver, "Vaccine supply issues");
+        AddDeferralDialog.setEffectiveFromDate(driver, 10);
+        AddDeferralDialog.clickSaveButton(driver);
+//--- Go back to Citizen profile->Related Tab
+        MainPageOrg.search(driver, client_data.get("personalHealthNumber"));
+        PersonAccountPage.goToRelatedTab(driver);
         System.out.println();
     }
 }

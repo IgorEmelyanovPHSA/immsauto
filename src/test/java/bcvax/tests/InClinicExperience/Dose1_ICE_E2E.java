@@ -218,7 +218,13 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		log("/*43.---select Dosage ->  -.5 --*/");
 		if(!lot.equals(consumptionLot)) {
-			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+			try {
+				InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+			} catch (NotFoundException ex) {
+				InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+				Thread.sleep(2000);
+				InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
+			}
 		}
 		String dose = InClinicExperienceVaccineAdministrationPage.getDosage(driver);
 
