@@ -69,7 +69,7 @@ prodsuppqa:
   containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-08-31 13:53:04)"
   containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-08-31 14:00:50)"
   containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-08-31 13:57:13)"
-  containerConsumption: "JANSSEN COVID-19 VACCINE - ABZ5320-CC01 (2023-08-30 14:14:00)"
+  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2023-08-31 15:35:46)"
   bulkContainersFrom:
     - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-01 12:41:44)":
         conversionFactor: "10.00"
@@ -92,8 +92,8 @@ prodsuppqa:
   agentConsumption: "COVID-19 Non-replicating Viral Vector"
   agentRefusal: "COVID-19 mRNA"
   agentInfluenza: "Influenza-LAIV"
-  consumptionDose: "0.5"
-  consumptionLot: "ABZ5320-CC01"
+  consumptionDose: "0.3"
+  consumptionLot: "35035BD-CC01"
   covidLot: "EK4241"
   influenzaLot: "CK2138-CC01"
   pneumoLot: "OK2-Pneumo-23"
@@ -221,9 +221,8 @@ regression:
         appointment_city: "Coquitlam"
         minor_ailments: "No"
 regress2:
-  supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
-  supplyLocationTo: "Guildford Public Health Unit - (Family)"
-  #supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
+  supplyLocationFrom: "Automation Supply Location_1"
+  supplyLocationTo: "Automation Supply Location_2"
   supplyLocationConsumption: "All Ages - Atlin Health Centre"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"

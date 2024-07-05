@@ -152,6 +152,7 @@ public class CitizenPrimaryInfo extends BasePage {
         try {
             AlertDialog.closeAlert(driver);
         } catch(ElementClickInterceptedException ex) {
+            Thread.sleep(1000);
             AlertDialog.closeAlert(driver);
         }
     }
@@ -186,7 +187,12 @@ public class CitizenPrimaryInfo extends BasePage {
         }
         CitizenPrimaryInfo.clickNextButton(driver);
         System.out.println("/*13.'Enter email address " + client_data.get("email") + "--*/");
-        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        try {
+            CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        } catch(ElementNotInteractableException ex) {
+            Thread.sleep(2000);
+            CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        }
         System.out.println("/*14.'Confirm email address " + client_data.get("email") + "--*/");
         CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
         System.out.println("/*15.Click review details Button--*/");

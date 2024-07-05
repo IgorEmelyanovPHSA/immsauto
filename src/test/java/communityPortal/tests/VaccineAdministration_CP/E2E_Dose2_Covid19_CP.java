@@ -32,16 +32,10 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         client_data = Utils.getTestClientData(client_data_file, "dose2");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-    }
-
-    @Test(priority = 1)
-    public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
-        TestcaseID = "243156"; //C243156
-        log("Target Environment: " + Utils.getTargetEnvironment());
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
-        consumptionAgent = String.valueOf(testData.get("agentConsumption"));
+        consumptionAgent = String.valueOf(testData.get("vaccineAgent"));
         vaccineAgent = String.valueOf(testData.get("vaccineAgent"));
         consumptionDose = String.valueOf(testData.get("consumptionDose"));
         consumptionLot = String.valueOf(testData.get("consumptionLot"));
@@ -49,6 +43,13 @@ public class E2E_Dose2_Covid19_CP extends BaseTest {
         consentProvider = String.valueOf(testData.get("consentProvider"));
         consumptionRoute = String.valueOf(testData.get("routeConsumption"));
         consumptionSite = String.valueOf(testData.get("siteConsumption"));
+    }
+
+    @Test(priority = 1)
+    public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_CP() throws Exception {
+        TestcaseID = "243156"; //C243156
+        log("Target Environment: " + Utils.getTargetEnvironment());
+
         log("/*1.----Login as an Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
