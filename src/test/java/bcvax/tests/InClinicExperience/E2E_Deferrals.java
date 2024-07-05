@@ -138,6 +138,7 @@ public class E2E_Deferrals extends BaseTest {
 //--- Go back to Citizen profile->Related Tab
         MainPageOrg.search(driver, client_data.get("personalHealthNumber"));
         PersonAccountPage.goToRelatedTab(driver);
+        PersonAccountRelatedPage.scrollToDeferrals(driver);
         System.out.println();
     }
 }

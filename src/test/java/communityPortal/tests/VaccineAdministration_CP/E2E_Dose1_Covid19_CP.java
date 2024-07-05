@@ -37,6 +37,16 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
+        consumptionAgent = String.valueOf(testData.get("vaccineAgent"));
+        consumptionDose = String.valueOf(testData.get("consumptionDose"));
+        consumptionLot = String.valueOf(testData.get("consumptionLot"));
+        consumptionProvider = String.valueOf(testData.get("providerConsumption"));
+        consentProvider = String.valueOf(testData.get("consentProvider"));
+        consumptionRoute = String.valueOf(testData.get("routeConsumption"));
+        consumptionSite = String.valueOf(testData.get("siteConsumption"));
     }
 
     @Test(priority = 1)
@@ -45,16 +55,8 @@ public class E2E_Dose1_Covid19_CP extends BaseTest{
         log("Target Environment: " + Utils.getTargetEnvironment());
 
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        env = Utils.getTargetEnvironment();
-        testData = Utils.getTestData(env);
-        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
-        consumptionAgent = String.valueOf(testData.get("agentConsumption"));
-        consumptionDose = String.valueOf(testData.get("consumptionDose"));
-        consumptionLot = String.valueOf(testData.get("consumptionLot"));
-        consumptionProvider = String.valueOf(testData.get("providerConsumption"));
-        consentProvider = String.valueOf(testData.get("consentProvider"));
-        consumptionRoute = String.valueOf(testData.get("routeConsumption"));
-        consumptionSite = String.valueOf(testData.get("siteConsumption"));
+
+
         log("/*1.----Login as an Clinician to Community Portal --*/");
         MainPageCP cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();
 
