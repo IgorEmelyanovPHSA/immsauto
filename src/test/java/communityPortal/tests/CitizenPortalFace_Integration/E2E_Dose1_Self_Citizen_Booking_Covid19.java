@@ -14,13 +14,18 @@ import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
 public class E2E_Dose1_Self_Citizen_Booking_Covid19 extends BaseTest {
-    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String env;
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     private String vaccineToSelect = "Covid19Vaccine";
 
     Map<String, String> client_data;
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "dose1");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

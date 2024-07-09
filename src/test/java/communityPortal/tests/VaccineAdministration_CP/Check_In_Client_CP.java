@@ -17,11 +17,14 @@ import org.testng.annotations.Test;
 
 public class Check_In_Client_CP extends BaseTest {
     String env;
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     Map<String, String> client_data;
     @BeforeMethod
     public void beforeMethod() throws Exception {
         env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         log("Target Environment: " + env);
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "dose1");

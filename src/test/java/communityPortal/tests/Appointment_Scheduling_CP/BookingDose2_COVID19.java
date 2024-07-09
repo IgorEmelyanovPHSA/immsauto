@@ -12,12 +12,17 @@ import java.util.Map;
 
 public class BookingDose2_COVID19 extends BaseTest {
     Map<String, String> client_data;
-    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String env;
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     private String vaccineToSelect = "Covid19Vaccine";
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
         String client_data_file = Utils.getClientsDataFile();
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         client_data = Utils.getTestClientData(client_data_file, "dose2");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));

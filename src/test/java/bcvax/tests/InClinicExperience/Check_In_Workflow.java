@@ -15,17 +15,20 @@ import java.util.Map;
 public class Check_In_Workflow extends BaseTest {
     MainPageOrg orgMainPage;
     String env;
-    private String citizenName;
     Map<String, Object> testData;
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String clinicNameToSearch;
+    private String citizenName;
     private String vaccineToSelect = "Covid19Vaccine";
     InClinicExperiencePage inClinicExperience;
     Map<String, String> client_data;
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "consent");
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         citizenName = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));

@@ -16,8 +16,9 @@ import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 @Listeners({TestListener.class})
 public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
-    private boolean isIndigenous = false;
-    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String env;
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     private String vaccineToSelect = "Covid19Vaccine";
     MainPageOrg orgMainPage;
 
@@ -25,6 +26,9 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "dose2");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

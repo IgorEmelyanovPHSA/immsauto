@@ -75,14 +75,16 @@ public class SupplyConsolePage extends BasePage {
 		}
 	}
 
-	public boolean verifyIsSupplyPageDisplayed() throws InterruptedException {
+	public static boolean verifyIsSupplyPageDisplayed(WebDriver driver) throws InterruptedException {
 		int timeout = 30000;
 		boolean found = false;
 		Instant start = Instant.now();
 		Instant end = Instant.now();
 		while(!found) {
 			try {
-				found = driver.findElement(By.xpath(".//span[@title='Health Connect - Supply Console']")).isDisplayed();
+				By supply_console_title_path = By.xpath("//span[@title='Health Connect - Supply Console']");
+				WebElement supply_console_title = driver.findElement(supply_console_title_path);
+				found = supply_console_title.isDisplayed();
 				System.out.println("Health Connect found");
 				System.out.println(end.toString());
 			} catch (NotFoundException ex) {

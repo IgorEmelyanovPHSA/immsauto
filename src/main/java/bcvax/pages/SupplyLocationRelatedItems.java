@@ -1,9 +1,6 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -201,8 +198,13 @@ public class SupplyLocationRelatedItems extends BasePage {
         int count_before = 0;
         WebElement supply_container_table_node = driver.findElement(supply_container_table_path);
         GenericTable supply_container_table = new GenericTable(supply_container_table_node);
-        int count_after = supply_container_table.getRows().size();
-
+        int count_after = 0;
+        try {
+            count_after = supply_container_table.getRows().size();
+        } catch(StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            count_after = supply_container_table.getRows().size();
+        }
         //---Wait until the table is populated
         for(int i = 0; i < 10; i++) {
             if (count_before == count_after && count_before != 0) {

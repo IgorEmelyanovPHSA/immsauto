@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -54,7 +55,13 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
         if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
             MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
         }
-        MainPageOrg.selectFromNavigationMenu(driver, "Home");
+        try {
+            MainPageOrg.selectFromNavigationMenu(driver, "Home");
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            MainPageOrg.selectFromNavigationMenu(driver, "Home");
+        }
         ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
         log("/*----3. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
