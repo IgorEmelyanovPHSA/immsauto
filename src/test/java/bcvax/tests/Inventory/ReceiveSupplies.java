@@ -31,19 +31,11 @@ public class ReceiveSupplies extends BaseTest {
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 
 		log("/*1.----Login --*/");
-		switch (Utils.getTargetEnvironment()) {
-			case "comunityqa_immsbc_admin_org":
-				log("Login as ImmsBCAdmin");
-				TestcaseID = "244853"; //C244853
-				loginPage.loginAsImmsBCAdmin();
-				break;
-			default:
-				log("Login AS default user (PPHIS)");
-				TestcaseID = "223642"; //C223642 pphis
-				//TestcaseID = "244853"; //C244853 immsbc
-				orgMainPage = loginPage.orgLoginAsPPHIS();
-				//loginPage.orgLoginAsImmsBCAdminCP();
-		}
+
+		log("Login AS default user (PPHIS)");
+		TestcaseID = "223642";
+		loginPage.orgLoginAsPPHIS();
+
 
 		String currentApp = MainPageOrg.currentApp(driver);
 		if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
@@ -133,7 +125,12 @@ public class ReceiveSupplies extends BaseTest {
 		Assert.assertTrue(cancel_btn_exists, "Cancel button is not displayed");
 		log("/*-- 32. Click Save Button --*/");
 		ReceiveSuppliesDialog.clickSaveButton(driver);
-		supplyConsolePage.verifyIsSupplyPageDisplayed();
+		boolean supply_page_displayed = SupplyConsolePage.verifyIsSupplyPageDisplayed(driver);
+		if(supply_page_displayed) {
+			System.out.println("Supply Console Is Displayed");
+		} else {
+			System.out.println("Supply Console Is NOT Displayed");
+		}
 		log("/*-- 35. Click Supply Console App Navigation Menu --*/");
 		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");

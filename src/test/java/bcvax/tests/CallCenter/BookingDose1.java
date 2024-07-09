@@ -20,8 +20,9 @@ import static org.testng.Assert.assertTrue;
 @Listeners({TestListener.class})
 public class BookingDose1 extends BaseTest {
     MainPageOrg orgMainPage;
-    //private boolean isIndigenous = false;
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String env;
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     Map<String, String> client_data;
     @DataProvider(name = "booking_data")
     public Object[][] dpMethod() {
@@ -30,6 +31,9 @@ public class BookingDose1 extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "dose1");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -78,46 +82,6 @@ public class BookingDose1 extends BaseTest {
             callCenterConsole.clickRegisterButton();
         }
         CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
-//        System.out.println("/*5.----Enter First Name " + client_data.get("legalFirstName") + "--*/");
-//        boolean first_name_field_found = false;
-//        try {
-//            CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
-//            first_name_field_found = true;
-//        } catch(NotFoundException ex) {
-//            first_name_field_found = false;
-//        }
-//        System.out.println("/*7.----Enter Postal code " + client_data.get("postalCode") + "--*/");
-//        CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
-//        System.out.println("/*8.----Enter PHN " + client_data.get("personalHealthNumber") + "--*/");
-//        CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
-//        if(first_name_field_found) {
-//            System.out.println("/*6.----Enter Last Name " + client_data.get("legalLastName") + "--*/");
-//            CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
-//            System.out.println("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy") + "--*/");
-//            CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy"));
-//
-//            System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
-//            System.out.println("/*10.----click Verify PHN button --*/");
-//            CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-//            System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
-//            CitizenPrimaryInfo.successMessageAppear(driver);
-//            System.out.println("/*12.----click Next button --*/");
-//        }
-//        CitizenPrimaryInfo.clickNextButton(driver);
-//        System.out.println("/*13.'Enter email address " + client_data.get("email") + "--*/");
-//        CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
-//        System.out.println("/*14.'Confirm email address " + client_data.get("email") + "--*/");
-//        CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
-//        System.out.println("/*15.Click review details Button--*/");
-//        CitizenPrimaryInfo.clickReviewDetails(driver);
-//        System.out.println("/*16.Click register Button on confirmation page--*/");
-//        CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-//        System.out.println("/*17.--toast success message - 'Success' --*/");
-//        try {
-//            CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
-//        } catch (NotFoundException ex) {
-//            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-//        }
 
         System.out.println("/*18.----click on person Account Related Tab --*/");
         try {

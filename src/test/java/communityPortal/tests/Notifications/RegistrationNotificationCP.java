@@ -13,25 +13,18 @@ import java.util.Map;
 
 @Listeners({TestListener.class})
 public class RegistrationNotificationCP extends BaseTest {
-
-    // Gmail registered to verify email notifications:
-    // email: verify.notifications.now@gmail.com
-    // password: Technology1990!!!!!!
-    // email registration details, for password recovery only: 01 Jan 1980, Male
-
-    private String legalFirstName = "Lockwood";
-    private String legalLastName = "BCVaxPenketh";
-    private String dateOfBirth = "Jan 23, 1993";
-    private String postalCode = "V3L5L2";
-    private String personalHealthNumber = "9746173963";
+    String env;
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     private String email = "verify.notifications.now@gmail.com";
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
-    //String clinicNameToSearch = "All Ages - Atlin Health Centre";
     private String vaccineToSelect = "Covid19Vaccine";
 
     Map<String, String> client_data;
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "notification");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");

@@ -11,14 +11,19 @@ import java.util.Map;
 import static Utilities.ApiQueries.queryToGetUniqueLink;
 
 public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
+    String env;
+    Map<String, Object> testData;
+    String clinicNameToSearch;
     private boolean isIndigenous = false;
-    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String vaccineToSelect = "Covid19Vaccine";
 
     Map<String, String> client_data;
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "dose2");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -54,11 +59,6 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         MainPageCP.search(driver, conformationNumberText);
 
-//        log("/*7.1---Validation, isUserFound account validation --*/");
-//        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);
-//        if (!isUserFound){
-//            throw new RuntimeException("Exception: User " + legalFirstName + " " + legalLastName + " not found!!!");
-//        }
         try {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
         } catch(Exception ex) {
@@ -88,14 +88,6 @@ public class E2E_Dose2_Self_Citizen_Booking_Covid19 extends BaseTest {
 
         log("/*11.---Schedule vaccination page is displayed--*/");
         BookAppointmentPage.scheduleVaccinationAppointmentPageDisplayed(driver);
-
-        //If override Eligibility is shown
-//        try {
-//            System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
-//            PersonAccountPage.overrideEligibility(driver);
-//        } catch(Exception ex) {
-//            System.out.println("There is not Override Eligibility Option");
-//        }
 
         log("/*12.---Select vaccination type: " + vaccineToSelect + "--*/");
         PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, vaccineToSelect);

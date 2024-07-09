@@ -1,9 +1,6 @@
 package bcvax.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
@@ -23,8 +20,12 @@ public class PersonAccountPage extends BasePage {
         scrollCenter(driver, related_tab);
         Thread.sleep(500);
         waitForElementToBeEnabled(driver, related_tab_path, 10);
-        related_tab.click();
-        Thread.sleep(2000);
+        try {
+            related_tab.click();
+        } catch(ElementNotInteractableException ex) {
+            Thread.sleep(2000);
+            related_tab.click();
+        }
     }
     public static void goToVaccineScheduleTab(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
