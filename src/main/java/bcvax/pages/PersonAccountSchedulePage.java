@@ -1,6 +1,7 @@
 package bcvax.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -57,6 +58,25 @@ public class PersonAccountSchedulePage extends BasePage {
             scrollCenter(driver, influenza_checkbox);
             Thread.sleep(500);
             influenza_checkbox.click();
+        }
+    }
+
+    public static void selectCovidAgent(WebDriver driver, String agent) throws InterruptedException {
+        Thread.sleep(500);
+        By covid_agent_combo_path = By.xpath("//lightning-combobox[@data-id='Covid-19 Vaccine']");
+        waitForElementToBeEnabled(driver, covid_agent_combo_path, 10);
+        WebElement covid_agent_combo = driver.findElement(covid_agent_combo_path);
+        scrollCenter(driver, covid_agent_combo);
+        Thread.sleep(500);
+        WebElement combo_button = covid_agent_combo.findElement(By.xpath(".//button"));
+        combo_button.click();
+        List<WebElement> my_items = covid_agent_combo.findElements(By.xpath(".//lightning-base-combobox-item"));
+        for(WebElement my_item: my_items) {
+            if(my_item.getAttribute("data-value").equals(agent)) {
+                my_item.click();
+                Thread.sleep(500);
+                break;
+            }
         }
     }
 

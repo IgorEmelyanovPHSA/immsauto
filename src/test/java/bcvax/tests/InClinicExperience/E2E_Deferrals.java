@@ -4,13 +4,19 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import bcvax.tests.Preconditions;
 import constansts.Apps;
+
+import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Map;
+
+import static org.testng.Assert.assertEquals;
 
 public class E2E_Deferrals extends BaseTest {
 
@@ -23,6 +29,7 @@ public class E2E_Deferrals extends BaseTest {
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "deferral");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
+        //Utilities.ApiQueries.deleteDeferralRecord("a4RAs000000Uce9MAC");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
     }
@@ -59,7 +66,12 @@ public class E2E_Deferrals extends BaseTest {
         UserDefaultsPage.inputCurrentDateUserDefaults(driver);
         UserDefaultsPage.selectUserDefaultLocation(driver, String.valueOf(testData.get("supplyLocationConsumption")));
         log("/*7.----- Click on Save defaults button --*/");
-        UserDefaultsPage.clickBtnSave(driver);
+        try {
+            UserDefaultsPage.clickBtnSave(driver);
+        } catch (StaleElementReferenceException ex) {
+            Thread.sleep(2000);
+            UserDefaultsPage.clickBtnSave(driver);
+        }
         currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
             MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
@@ -90,8 +102,7 @@ public class E2E_Deferrals extends BaseTest {
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
 
-
-
+        PersonAccountSchedulePage.selectCovidAgent(driver, "COVID-19 non-mRNA vaccine (Novavax) — 12+");
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
@@ -135,10 +146,54 @@ public class E2E_Deferrals extends BaseTest {
         AddDeferralDialog.selectReasonForDeferral(driver, "Vaccine supply issues");
         AddDeferralDialog.setEffectiveFromDate(driver, 10);
         AddDeferralDialog.clickSaveButton(driver);
+        List<String> my_alerts = AlertDialog.getAllAlertsText(driver);
+        String my_deferral_id = null;
+        for(String my_alert: my_alerts) {
+            if(my_alert.contains("Deferral created, Record ID")) {
+                String[] my_lines = my_alert.split("\n");
+                String[] deferral_line = my_lines[1].split(": ");
+                my_deferral_id = deferral_line[1];
+            }
+        }
 //--- Go back to Citizen profile->Related Tab
+        String my_deferral_name = null;
+        for(int i = 0; i < 10; i++ ) {
+            try {
+                my_deferral_name = Utilities.ApiQueries.getDeferralName(my_deferral_id);
+                break;
+            } catch(Exception ex) {
+                System.out.println(ex.getMessage());
+                Thread.sleep(1000);
+            }
+        }
         MainPageOrg.search(driver, client_data.get("personalHealthNumber"));
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountRelatedPage.scrollToDeferrals(driver);
-        System.out.println();
+        PersonAccountRelatedPage.openDeferralDetails(driver, my_deferral_name);
+        Utilities.ApiQueries.deleteDeferralRecord(my_deferral_id);
+
+        MainPageOrg.search(driver, client_data.get("personalHealthNumber"));
+        PersonAccountPage.goToRelatedTab(driver);
+        PersonAccountRelatedPage.scrollToDeferrals(driver);
+        int deferralsCountBefore = PersonAccountRelatedPage.getDeferralsCount(driver);
+        PersonAccountRelatedPage.newDeferral(driver);
+        DeferralForm newDeferral = new DeferralForm(driver);
+        DeferralForm.cleanupProfile(driver);
+        DeferralForm.saveDeferral(driver);
+        //String[] myErrors = DeferralForm.getMissingValuesError(driver);
+        //Arrays.sort(myErrors);
+        //String[] expectedErrors = {"Effective From", "Profile", "Agent", "Reason for Deferral"};
+        //Arrays.sort(expectedErrors);
+        //Assert.assertTrue(Arrays.equals(myErrors, expectedErrors));
+
+        DeferralForm.setProfile(driver, citizenName);
+        DeferralForm.setAgent(driver, "COVID-19 mRNA");
+        newDeferral.setReasonForDeferral("No Valid Consent");
+        DeferralForm.setEffectiveFrom(driver);
+        DeferralForm.saveDeferral(driver);
+        Thread.sleep(2000);
+        int deferralsCountAfter = PersonAccountRelatedPage.getDeferralsCount(driver);
+
+        assertEquals(deferralsCountAfter, deferralsCountBefore + 1);
     }
 }

@@ -46,6 +46,10 @@ bcvaxdevit:
     - "EK4241"
     - "CM1216"
   supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006759689"
+        appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006759693"
         appointment_city: "Atlin"
@@ -53,7 +57,7 @@ bcvaxdevit:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006759691"
         appointment_city: "Coquitlam"
-        minor_ailments: "Yes"
+        minor_ailments: "No"
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -101,6 +105,10 @@ prodsuppqa:
     - "ABZ5320-CC01"
     - "TL0006"
   supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006760073"
+        appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006760077"
         appointment_city: "Atlin"
@@ -108,7 +116,50 @@ prodsuppqa:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006760075"
         appointment_city: "Coquitlam"
-        minor_ailments: "Yes"
+        minor_ailments: "No"
+bcvaxuat:
+  supplyLocationFrom: "Automation Supply Location_1"
+  supplyLocationTo: "Automation Supply Location_2"
+  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
+  #Workaround
+  #supplyLocationConsumption: "All Ages - Atlin Health Centre"
+  #supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  distributionFrom: "Automation Supply Distribution_1_1"
+  distributionTo: "Supply Distribution_2_1"
+  distributionToSameClinic: "Supply Distribution_1_2"
+  distributionConsumption: "Fridge"
+  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
+  containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
+  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
+  containerConsumption: "SPIKEVAX (Moderna) - 300042698-CC04 (2022-08-16 16:00:57)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:07:03)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:08:41)":
+        conversionFactor: "10.00"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:55:49)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 15:24:13)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:38:29)"
+    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
+    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:39:50)"
+  vaccineAgent: "COVID-19 mRNA"
+  consentProvider: "Auto Bchcomclinician"
+  agentConsumption: "COVID-19 mRNA"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
+  consumptionDose: "0.5"
+  consumptionLot: "300042698-CC04"
+  #consumptionLot: "EL0203"
+
+  diwaCitizen: "Ping an Penelope BCVaxZhang"
+  useDefaultSettingsLots:
+    - "300042698-CC04"
+    - "NK2858B"
 regression:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -157,6 +208,10 @@ regression:
     - "NK2858B"
     - "EK4241"
   supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006752443"
+        appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006752447"
         appointment_city: "Atlin"
@@ -164,7 +219,7 @@ regression:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006752445"
         appointment_city: "Coquitlam"
-        minor_ailments: "Yes"
+        minor_ailments: "No"
 regress2:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -213,6 +268,10 @@ regress2:
     - "NK2858B"
     - "EK4241"
   supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006752443"
+        appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006752447"
         appointment_city: "Atlin"
@@ -220,7 +279,7 @@ regress2:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006752445"
         appointment_city: "Coquitlam"
-        minor_ailments: "Yes"
+        minor_ailments: "No"
 bcvaxqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
@@ -269,6 +328,10 @@ bcvaxqa:
     - "35035BD-CC01"
     - "HL2478-CC01"
   supplyLocationsDayManagement:
+    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
+        address_id: "AD-0006762018"
+        appointment_city: "Abbotsford"
+        minor_ailments: "Yes"
     - "All Ages - Atlin Health Centre":
         address_id: "AD-0006762022"
         appointment_city: "Atlin"
@@ -276,7 +339,7 @@ bcvaxqa:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006764994"
         appointment_city: "Coquitlam"
-        minor_ailments: "Yes"
+        minor_ailments: "No"
 igorauto:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
