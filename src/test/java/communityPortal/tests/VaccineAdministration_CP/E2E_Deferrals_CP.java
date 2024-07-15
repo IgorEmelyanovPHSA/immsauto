@@ -32,8 +32,8 @@ public class E2E_Deferrals_CP extends BaseTest {
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "deferral");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-        Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
     }
 
     @Test(priority = 1)
@@ -42,13 +42,7 @@ public class E2E_Deferrals_CP extends BaseTest {
         log("/*1.----Login to CP (newUI) as Clinician --*/");
         cpMainPage = loginPage.loginIntoCommunityPortalAsClinician();;
         Thread.sleep(500);
-        log("/*6.----Navigate to More -> Register --*/");
-        MainPageCP.navigateToRegisterClientPage(driver);
-        InClinicExperiencePage inClinicExperience_CP = new InClinicExperiencePage(driver);
-
-        log("/*7.----click Register button New Citizen --*/");
-        InClinicExperiencePage.clickRegisterButton(driver);
-        CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
+        MainPageCP.search(driver, client_data.get("personalHealthNumber"));
         log("/*22.--Click Related Tab --*/");
         try {
             PersonAccountPage.goToRelatedTab(driver);
@@ -60,19 +54,19 @@ public class E2E_Deferrals_CP extends BaseTest {
         int deferralsCountBefore = PersonAccountRelatedPage.getDeferralsCount(driver);
         PersonAccountRelatedPage.newDeferral(driver);
         DeferralForm newDeferral = new DeferralForm(driver);
-        newDeferral.cleanupProfile();
-        newDeferral.saveDeferral();
-        String[] myErrors = newDeferral.getMissingValuesError();
+        DeferralForm.cleanupProfile(driver);
+        DeferralForm.saveDeferral(driver);
+        String[] myErrors = DeferralForm.getMissingValuesError(driver);
         Arrays.sort(myErrors);
         String[] expectedErrors = {"Effective From", "Profile", "Agent", "Reason for Deferral"};
         Arrays.sort(expectedErrors);
         Assert.assertTrue(Arrays.equals(myErrors, expectedErrors));
 
-        newDeferral.setProfile(client_data.get("legalFirstName") + " " + client_data.get("legalLastName"));
-        newDeferral.setAgent("COVID-19 mRNA");
+        DeferralForm.setProfile(driver, client_data.get("legalFirstName") + " " + client_data.get("legalLastName"));
+        DeferralForm.setAgent(driver, "COVID-19 mRNA");
         newDeferral.setReasonForDeferral("No Valid Consent");
-        newDeferral.setEffectiveFrom();
-        newDeferral.saveDeferral();
+        DeferralForm.setEffectiveFrom(driver);
+        DeferralForm.saveDeferral(driver);
         Thread.sleep(2000);
         int deferralsCountAfter = PersonAccountRelatedPage.getDeferralsCount(driver);
 

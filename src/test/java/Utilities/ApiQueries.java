@@ -525,6 +525,90 @@ public class ApiQueries {
         }
     }
 
+    public static void deleteDeferralRecord(String deferralRecordId) throws Exception {
+        log("/*---Delete Deferral record " + deferralRecordId +"--*/ ");
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + "/sobjects/Deferrals__c/" + deferralRecordId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpDelete httpDelete = new HttpDelete(uri);
+            httpDelete.addHeader(oauthHeader);
+            httpDelete.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpDelete);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                log("Delete the Deferral record successful.");
+            } else {
+                log("Deferral record delete NOT successful. Status code is " + statusCode);
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+    }
+
+    public static String getDeferralName(String deferralRecordId) throws Exception {
+        log("/*---Delete Deferral record " + deferralRecordId +"--*/ ");
+        String oauthToken = getOauthToken();
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        String uri = baseUri + "/sobjects/Deferrals__c/" + deferralRecordId;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+        String deferral_name = null;
+        try {
+            //Set up the objects necessary to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            //Make the request
+            HttpResponse response = httpClient.execute(httpGet);
+
+            //Process the response
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                JSONObject json = new JSONObject(response_string);
+                deferral_name = json.getString("Name");
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (JSONException e) {
+            log("Issue creating JSON or processing results");
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        return deferral_name;
+    }
+
 //    public static void deleteHistoryImmunizationRecord(String immunizationRecordId) throws Exception {
 //        log("/*---Delete immunization record " +immunizationRecordId +"--*/ ");
 //        String oauthToken = getOauthToken();

@@ -239,45 +239,61 @@ public class PersonAccountRelatedPage extends BasePage {
     }
 
     public static void scrollToDeferrals(WebDriver driver) throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(500);
+        By new_deferral_btn_path = By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']//button | //c-deferral-list//button[text()='New']");
         boolean referralNewButtonFound = false;
         WebElement newReferralBtn = null;
         while (!referralNewButtonFound) {
             try {
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("window.scrollBy(0, 200)");
-                newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
-                referralNewButtonFound = true;
+                newReferralBtn = driver.findElement(new_deferral_btn_path);
+                referralNewButtonFound = newReferralBtn.isDisplayed();
+                Thread.sleep(500);
             } catch (Exception ex) {
-                Thread.sleep(2000);
+                Thread.sleep(500);
+            }
+        }
+        scrollCenter(driver, newReferralBtn);
+        Thread.sleep(500);
+    }
+
+    public static void openDeferralDetails(WebDriver driver, String deferral_name) throws InterruptedException {
+        GenericTable deferrals_table = getDeferralsTable(driver);
+        List<Map<String, WebElement>> deferrals_table_rows = deferrals_table.getRowsMappedToHeadings();
+        for(int i = 1; i < deferrals_table_rows.size(); i++) {
+            WebElement my_def_name = deferrals_table_rows.get(i).get("Deferral Name");
+            WebElement my_def_link = my_def_name.findElement(By.xpath(".//a"));
+            String my_def_text = my_def_link.getAttribute("innerText");
+            if(my_def_text.equals(deferral_name)) {
+                WebElement my_def_clickable_link = my_def_name.findElement(By.xpath(".//records-hoverable-link"));
+                my_def_clickable_link.click();
+                Thread.sleep(500);
+                break;
             }
         }
     }
 
     public static void newDeferral(WebDriver driver) throws InterruptedException {
         Thread.sleep(2000);
-        boolean referralNewButtonFound = false;
-        WebElement newReferralBtn = null;
-        while (!referralNewButtonFound) {
-            try {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                js.executeScript("window.scrollBy(0, 200)");
-                newReferralBtn = driver.findElement(By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New']/a"));
-                referralNewButtonFound = true;
-            } catch (Exception ex) {
-                Thread.sleep(2000);
-            }
-        }
-        newReferralBtn.click();
+        By new_deferral_button_path = By.xpath("//li[@data-target-selection-name = 'sfdc:StandardButton.Deferrals__c.New'] | //c-deferral-list//button[text()='New']");
+        waitForElementToBeEnabled(driver, new_deferral_button_path, 10);
+        WebElement new_deferral_btn = driver.findElement(new_deferral_button_path);
+        new_deferral_btn.click();
     }
 
     public static int getDeferralsCount(WebDriver driver) throws InterruptedException {
-        By deferrals_table_path = By.xpath("//table[@aria-label = 'Deferrals']");
+        GenericTable deferrals_table = getDeferralsTable(driver);
+        int count = deferrals_table.getRows().size();
+        return count;
+    }
+
+    public static GenericTable getDeferralsTable(WebDriver driver) throws InterruptedException {
+        By deferrals_table_path = By.xpath("//table[@aria-label = 'Deferrals'] | //c-deferral-list");
         waitForElementToBeEnabled(driver, deferrals_table_path, 10);
         WebElement deferrals_table_node = driver.findElement(deferrals_table_path);
         GenericTable deferrals_table = new GenericTable(deferrals_table_node);
-        int count = deferrals_table.getRows().size();
-        return count;
+        return deferrals_table;
     }
 
     public static void deleteForecast(WebDriver driver, String agent) throws InterruptedException {
