@@ -64,8 +64,7 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
-		//orgMainPage = loginPage.orgLoginAsPPHIS();
-		TestcaseID = testcase_id; //
+		TestcaseID = testcase_id;
 
 		log("TestRail test case ID: C" +TestcaseID);
 

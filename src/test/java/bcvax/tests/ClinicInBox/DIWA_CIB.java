@@ -22,23 +22,23 @@ public class DIWA_CIB extends BaseTest {
 	private String lot_to_select;
 	private String dosage_to_select;
 
-	String clinic_location = "All Ages - Atlin Health Centre";
+	String clinic_location;
 	MainPageOrg orgMainPage;
 
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
 		String client_data_file = Utils.getClientsDataFile();
+		clinic_location = String.valueOf(testData.get("supplyLocationConsumption"));
 		client_data = Utils.getTestClientData(client_data_file, "consent");
 	}
 
 	@Test(testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "222289"; //C222289
-		env = Utils.getTargetEnvironment();
-
 		//Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(personal_health_nunber);
 
-		testData = Utils.getTestData(env);
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));

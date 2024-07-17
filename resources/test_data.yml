@@ -1,6 +1,7 @@
 bcvaxdevit:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
@@ -61,6 +62,7 @@ bcvaxdevit:
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
@@ -120,6 +122,7 @@ prodsuppqa:
 bcvaxuat:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   #Workaround
   #supplyLocationConsumption: "All Ages - Atlin Health Centre"
@@ -163,6 +166,7 @@ bcvaxuat:
 regression:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
@@ -223,6 +227,7 @@ regression:
 regress2:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "All Ages - Atlin Health Centre"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
@@ -283,6 +288,7 @@ regress2:
 bcvaxqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
@@ -340,9 +346,71 @@ bcvaxqa:
         address_id: "AD-0006764994"
         appointment_city: "Coquitlam"
         minor_ailments: "No"
+immsbcuat:
+  supplyLocationFrom: "Automation Supply Location_1"
+  supplyLocationTo: "Automation Supply Location_2"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
+  supplyLocationConsumption: "West Kelowna The Heritage Retirement Residence - All Ages"
+  distributionFrom: "Operational Fridge"
+  distributionTo: "Operational Fridge"
+  distributionToSameClinic: "Same Clinic"
+  distributionConsumption: "Operational Fridge"
+  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:08:46)"
+  containerTo: "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:18:01)"
+  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:22:43)"
+  containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:28:06)"
+  bulkContainersFrom:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2024-07-16 08:10:32)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:08:46)":
+        conversionFactor: "5.00"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2024-07-16 08:11:25)":
+        conversionFactor: "10.00"
+  bulkContainersTo:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2024-07-16 08:18:01)"
+    - "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:18:01)"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2024-07-16 08:18:01)"
+  bulkContainersToSameClinic:
+    - "VAXZEVRIA (AstraZeneca) - MT0055 (2024-07-16 08:22:22)"
+    - "COMIRNATY (Pfizer) - EK4241 (2024-07-16 08:22:43)"
+    - "SPIKEVAX (Moderna) - 3001530-CC01 (2024-07-16 08:23:04)"
+  vaccineAgent: "COVID-19 mRNA"
+  consentProvider: "Auto Immsbcadmin"
+  routeConsumption: "Intramuscular"
+  siteConsumption: "Arm - Right deltoid"
+  agentConsumption: "COVID-19 Non-replicating Viral Vector"
+  agentRefusal: "COVID-19 mRNA"
+  agentInfluenza: "Influenza-LAIV"
+  consumptionDose: "0.3"
+  consumptionLot: "EK4241"
+  covidLot: "CXBBBLUE"
+  pneumoLot: "OK_Pneumo_test_Oct_5_2023"
+  #consumptionLot: "EK4241"
+  diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
+  influenzaLot: "HL2478-CC01"
+  covidDose: "0.5"
+  pneumoDose: "0.5"
+  influenzaDose: "0.2"
+  useDefaultSettingsLots:
+    - "3001530"
+    - "CM1216"
+  supplyLocationsDayManagement:
+    - "New Westminster - Buchanan Lodge - LTC_AL_IL":
+        address_id: "AD-0006760191"
+        appointment_city: "New Westminster"
+        minor_ailments: "Yes"
+    - "Surrey - Kinsmen Lodge - LTC_AL_IL":
+        address_id: "AD-0006760192"
+        appointment_city: "Surrey"
+        minor_ailments: "No"
+    - "West Kelowna The Heritage Retirement Residence - All Ages":
+        address_id: "AD-0006760202"
+        appointment_city: "West Kelowna"
+        minor_ailments: "No"
 igorauto:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
+  supplyItem: "COMIRNATY (Pfizer) - EK4241"
   supplyLocationConsumption: "Guildford Public Health Unit - (Family)"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"

@@ -12,18 +12,22 @@ import java.util.Map;
 
 public class ReceiveSupplies extends BaseTest {
 	String env;
-	String supply_location = "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic";
-	String distribution = "Supply Distribution_1";
-	String supply_container = "COMIRNATY (Pfizer) - EL0203 (2022-08-02 03:12 p.m)";
+	String supply_location;
+	String distribution;
+	String supply_container;
 	Map<String, Object> testData;
 	MainPageOrg orgMainPage;
-	String supply_item = "COMIRNATY (Pfizer) - EK4241";
+	String supply_item;
 
 	@BeforeMethod
 	public void setUpClass() throws Exception {
 		env = Utils.getTargetEnvironment();
 		log("Target Environment: " + env);
 		testData = Utils.getTestData(env);
+		supply_location = String.valueOf(testData.get("supplyLocationTo"));
+		supply_container = String.valueOf(testData.get("containerTo"));
+		distribution = String.valueOf(testData.get("distributionTo"));
+		supply_item = String.valueOf(testData.get("supplyItem"));
 	}
 
 	@Test()

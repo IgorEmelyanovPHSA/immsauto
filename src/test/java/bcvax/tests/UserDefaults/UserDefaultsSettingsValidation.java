@@ -16,7 +16,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
     String env;
     //private final String[] lots = {"016F21A-CC07", "0649AA"};
     //private final String[] lots = {"016F21A-CC07", "T005729-CC07"};
-    private final String clinicLocation = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String clinicLocation = "West Kelowna The Heritage Retirement Residence - All Ages";
     Map<String, Object> testData;
     MainPageOrg orgMainPage;
 
