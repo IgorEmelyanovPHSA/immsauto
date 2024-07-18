@@ -231,6 +231,21 @@ public class LoginPage extends BasePage {
 		return new MainPageHealthGateway(driver);
 	}
 
+	//This login method ONLY for unregistered user test
+	public RegistrationPage loginIntoHGWithBCServiceCardAsUser08() throws Exception {
+		driver.navigate().to(Utils.getEnvConfigProperty("url"));
+		if(Utils.getEnvConfigProperty("url").equalsIgnoreCase("https://uat-beta.healthgateway.gov.bc.ca/s/")){
+			Thread.sleep(4000);
+			click(btnLoginWithBCServiceCard);
+		}
+		Thread.sleep(4000);
+		click(btnTestWithUserNameAndPassword);
+		Thread.sleep(3000);
+		enterCredentialsForHGPortalAs("user_HTHGTWY08","password_HTHGTWY08_PW");
+		Thread.sleep(3000);
+		return new RegistrationPage(driver);
+	}
+
 //	private void loginWithBCServiceCard() throws InterruptedException {
 //		String userName = "HTHGTWY11";
 //		String password = "00098911";

@@ -23,6 +23,7 @@ public class CitizenGettingLabResults extends BaseTest {
 	public void viewAndValidateLabResults() throws Exception {
 		TestcaseID = "306813"; //Original TC C291524
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
 		//Login as user 11

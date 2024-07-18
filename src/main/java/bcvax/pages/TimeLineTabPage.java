@@ -21,6 +21,9 @@
         @FindBy(xpath = "//input[@type='checkbox'][@value='Imaging Reports']/../label[@class='slds-checkbox__label']")
         private WebElement dropDownSelectionImagingReports;
 
+        @FindBy(xpath = "//input[@type='checkbox'][@value='Hospital Visits']/../label[@class='slds-checkbox__label']")
+        private WebElement dropDownSelectionHospitalVisits;
+
         @FindBy(xpath = "//input[@type='checkbox'][@value='My Notes']/../label[@class='slds-checkbox__label']")
         private WebElement dropDownSelectionMyNotes;
 
@@ -57,11 +60,17 @@
         @FindBy(xpath = "(//b[text()='Reporting Lab:'])[1]/parent::p")
         private WebElement textReportingLab;
 
+        @FindBy(xpath = "(//b[text()='Location: '])[1]/parent::p")
+        private WebElement textLocation;
+
         @FindBy(xpath = "//div[@class='dislpay-result-text slds-m-bottom_medium slds-m-top_medium']")
         private WebElement textDisplayingNumberOfRecords;
 
         @FindBy(xpath = "(//span[text()=' Imaging Reports | X-Ray - Recently Updated'])[1]")
         private WebElement selectFirstImagingReport;
+
+        @FindBy(xpath = "(//span[text()='| Sechelt Shishalh Hospital'])[1]")
+        private WebElement selectFirstHospitalVisit;
 
         @FindBy(xpath = "(//span[text()=' | Medications | APO-FUROSEMIDE'])[1]")
         private WebElement selectFirstMedicationRecord;
@@ -136,7 +145,7 @@
         @Step
         public void selectFilterLabResults() throws InterruptedException {
             //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(14000);
+            Thread.sleep(15000);
             click(btnDropDownCategories);
             click(dropDownSelectionLabResults);
             click(btnApply);
@@ -146,9 +155,19 @@
         @Step
         public void selectFilterImagingReports() throws InterruptedException {
             //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(14000);
+            Thread.sleep(15000);
             click(btnDropDownCategories);
             click(dropDownSelectionImagingReports);
+            click(btnApply);
+            Thread.sleep(2000);
+        }
+
+        @Step
+        public void selectFilterHospitalVisits() throws InterruptedException {
+            //waitForElementToBeClickable(driver, btnDropDownCategories,15);
+            Thread.sleep(15000);
+            click(btnDropDownCategories);
+            click(dropDownSelectionHospitalVisits);
             click(btnApply);
             Thread.sleep(2000);
         }
@@ -164,7 +183,7 @@
         }
 
         public void selectFilerMedications() throws InterruptedException {
-           // Thread.sleep(12000);
+            Thread.sleep(12000);
             click(btnDropDownCategories);
             click(dropDownSelectionMedications);
             click(btnApply);
@@ -183,6 +202,11 @@
 
         public void openFirstMedicationRecord() throws InterruptedException {
             click(selectFirstMedicationRecord);
+            Thread.sleep(2000);
+        }
+
+        public void openFirstHospitalVisit() throws InterruptedException {
+            click(selectFirstHospitalVisit);
             Thread.sleep(2000);
         }
 
@@ -208,6 +232,10 @@
 
         public String getReportingLab(){
             return getText(textReportingLab).split(": ")[1];
+        }
+
+        public String getLocation(){
+            return getText(textLocation).split(": ")[1];
         }
 
         public String getDisplayingNumberOfRecords(){

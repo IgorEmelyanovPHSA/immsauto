@@ -23,6 +23,13 @@ public class Utils {
 		return env;
 	}
 
+	public static String getTargetBrowser() throws Exception {
+		String env = System.getProperty("browser");
+		if (env == null)
+			env = getConfigProperty("browser");
+		return env;
+	}
+
 	public static Boolean isCommunityPortal() throws Exception {
 		String env = getTargetEnvironment();
 		int ind = env.split("_").length - 1;

@@ -26,6 +26,7 @@ public class ProfileCheck extends BaseTest {
 	public void citizenChekOwnProfileData() throws Exception {
 		TestcaseID = "306817"; //Original TC C299850
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
 		//Login as user 11 ONLY, data sets are for user 11
@@ -41,7 +42,6 @@ public class ProfileCheck extends BaseTest {
 		Assert.assertTrue(profile.getCellNumber().equalsIgnoreCase(cellNumber), "Cell Number didn't match!");
 		Assert.assertTrue(profile.getMailingAddress().equalsIgnoreCase(mailingAddress), "Mailing Address didn't match!");
 		Assert.assertTrue(profile.getMailingAddress().equalsIgnoreCase(physicalAddress), "Physical Address didn't match!");
-
 
 		log("Full Name, Personal Health Number, Email address, Cell number (SMS notifications), Mailing address, Physical matched successfully.");
 		}

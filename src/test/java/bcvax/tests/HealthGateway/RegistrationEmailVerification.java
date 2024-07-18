@@ -1,0 +1,90 @@
+package bcvax.tests.HealthGateway;
+
+import Utilities.TestListener;
+import bcvax.pages.*;
+import bcvax.tests.BaseTest;
+import org.testng.Assert;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+
+@Listeners({TestListener.class})
+public class RegistrationEmailVerification extends BaseTest {
+
+
+	@Test
+	public void registrationEmailVerificationFromTheList() throws Exception {
+		TestcaseID = "C314563"; //Original TC C314563
+		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
+		log("Test Case " +"C" +TestcaseID);
+
+	//	String emailToVerify = "test@abc@com";
+		//Both email addresses must match
+		// email and phone number length limit??? no limit
+
+		String[] validEmails = {
+				"\"vijaya<pitta\"@gmail.com", "\"vijaya>pitta\"@gmail.com", "\"vijaya(pitta\"@gmail.com", "\"vijaya)pitta\"@gmail.com", "\"vijaya[pitta\"@gmail.com",
+				"\"vijaya]pitta\"@gmail.com", "\"vijaya\\pitta\"@gmail.com", "\"vijaya,pitta\"@gmail.com", "\"vijaya;pitta\"@gmail.com", "\"vijaya:pitta\"@gmail.com",
+				"\"vijaya pitta\"@gmail.com", "\"vijaya@pitta\"@gmail.com", "\"vijaya\"pitta\"@gmail.com", "vijaya.pitta@gmail.com", "vijaya_pitta@gmail.com",
+				"vijaya.pitta00123@gmail.com", "john#doe@gmail.com", "vijaya.pitta.test@gmail.com", "vijaya!pitta@gmail.com", "vijaya$pitta@gmail.com",
+				"vijaya%@gmail.com", "vijaya^pitta@gmail.com", "vijaya&pitta@gmail.com", "vijaya*pittta@gmail.com", "vijaya-pitta@gmail.com", "vijaya+pitta@gmail.com",
+				"vijaya=pitta@gmail.com", "vijaya~pitta@gmail.com", "vijaya`pitta@gmail.com", "vijaya{pitta@gmail.com", "vijaya}pitta@gmail.com",
+				"vijaya'pitta@gmail.com", "VIJAYA.PITTA@gmail.com", "vijaya'pitta'test@gmail.com", "vijaya.pitta@gmail.com", "vijaya.pitta@1234.com",
+				"vijaya.pitta@GMAIL.com", "vijaya.pitta@zzz.YT", "user@email.co.uk"};
+
+		String[] invalidEmails = {
+				"vijaya<pitta@gmail.com", "vijaya>pitta@gmail.com", "vijaya(pitta@gmail.com", "vijaya)pitta@gmail.com", "vijaya[pitta@gmail.com",
+				"vijaya]pitta@gmail.com", "vijaya\\pitta@gmail.com", "vijaya,pitta@gmail.com", "vijaya;pitta@gmail.com", "vijaya:pitta@gmail.com",
+				"vijaya pitta@gmail.com", "vijaya@pitta@gmail.com", "vijaya\"pitta@gmail.com", "vijaya.pitta@", "vijaya..pitta@gmail.com", "vijaya@gmai l.com",
+				"vijaya@gmail..com", "user@", "vijaya.pitta@gmail@com", "vijaya.pitta@gmail_com", "vijaya.pitta@gmail>com", "vijaya.pitta@gmail<com",
+				"vijaya.pitta@gmail(com", "vijaya.pitta@gmail)com", "vijaya.pitta@gmail[com", "vijaya.pitta@gmail]com", "vijaya.pitta@gmail\\com",
+				"vijaya.pitta@gmail,com", "vijaya.pitta@gmail;com", "vijaya.pitta@gmail:com", "vijaya.pitta@gmail com", "@gmail.com"};
+
+//		String[] validEmails = {
+//				"test@test.com", "test2@test.com", "test3@test.com"};
+//
+//
+//		String[] invalidEmails = {
+//				"test@test@com", "test2@test@com", "test3@test@com"};
+
+
+		//Login as user 08
+		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();
+
+		//To test valid emails
+		for (int i = 0; i < validEmails.length; i++) {
+			registration.emailCheckTest(validEmails[i]);
+			int errorCountCheck = registration.checkForEmailValidationErrorMessages();
+
+			//Validation for valid email
+			Assert.assertTrue(errorCountCheck == 0,  "Valid email validation failed for " +validEmails[i]);
+
+			//Print the status of checked email
+			log("Validation pass for valid email: " +validEmails[i]);
+
+			//Click on email notifications checkbox to refresh the last entered email
+			registration.clickOnEmailNotificationCheckbox();
+		}
+
+		//To test invalid emails
+		for (int i = 0; i < invalidEmails.length; i++) {
+			registration.emailCheckTest(invalidEmails[i]);
+			int errorCountCheck = registration.checkForEmailValidationErrorMessages();
+
+			//Validation for invalid email
+			Assert.assertTrue(errorCountCheck == 2,  "Invalid email validation failed for " +invalidEmails[i]);
+
+			//Print the status of checked email
+			log("Validation pass for invalid email, 'Invalid email' message displayed for: " +invalidEmails[i]);
+
+			//Click on email notifications checkbox to refresh the last entered email
+			registration.clickOnEmailNotificationCheckbox();
+		}
+
+		log("Validation PASS for " +validEmails.length +" valid emails");
+		log("Validation PASS for " +invalidEmails.length +" invalid emails, 'Invalid email' message was displayed");
+		log("Test case for valid and invalid email pass");
+		}
+
+	}

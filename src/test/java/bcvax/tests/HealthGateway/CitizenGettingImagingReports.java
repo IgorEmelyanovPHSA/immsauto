@@ -22,6 +22,7 @@ public class CitizenGettingImagingReports extends BaseTest {
 	public void viewAndValidateImagingReports() throws Exception {
 		TestcaseID = "306814"; //Original TC C293392
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
 		//Login as user 11

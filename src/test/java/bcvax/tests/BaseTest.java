@@ -8,6 +8,8 @@ import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import java.io.ByteArrayOutputStream;
@@ -32,15 +34,22 @@ public class BaseTest {
 	@BeforeMethod(alwaysRun = true)
 	public void setUp() throws Exception {
 		log("Environment: "+Utils.getTargetEnvironment());
+		log("Browser: "+Utils.getTargetBrowser());
 		captureBothStreams();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--remote-allow-origins=*");
-		if(System.getProperty("os.name").equals("Mac OS X")) {
-			options.setBinary("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
+		if(Utils.getTargetBrowser().equalsIgnoreCase("chrome")) {
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--remote-allow-origins=*");
+			if (System.getProperty("os.name").equals("Mac OS X")) {
+				options.setBinary("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
+			}
+			driver = new ChromeDriver(options);
 		}
-		driver = new ChromeDriver(options);
+		else if(Utils.getTargetBrowser().equalsIgnoreCase("firefox")){
+			driver = new FirefoxDriver();
+		}
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(getDriver());
+
 	}
 	
 	/////////////////After///////////////////

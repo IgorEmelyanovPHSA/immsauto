@@ -28,11 +28,28 @@ public class DependentTests extends BaseTest {
 //	private String dateOfBirth = "2021-Feb-21";
 //	private String PHN = "9746208843";
 
+//	private String firstName = "Jeffrey Lawrence Stallings";
+//	private String lastName = "Jeffrey Lawrence Stallings";
+//	private String dateOfBirth = "2020-Oct-18";
+//	private String PHN = "9872868095";
+
+//	private String firstName = "MICHAEL";
+//	private String lastName = "TESTERTWO";
+//	private String dateOfBirth = "2016-Dec-01";
+//	private String PHN = "9874307208";
+
+//	private String firstName = "John";
+//	private String lastName = "Tester";
+//	private String dateOfBirth = "";
+//	private String PHN = "";
+// Your access has expired
+// You no longer have access to this dependent as they have turned 12.
 
 	@Test
 	public void createUpdateDeleteComment() throws Exception {
 		TestcaseID = "306815"; //Original TC C295751
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
 		String timeStamp = String.valueOf(System.currentTimeMillis());

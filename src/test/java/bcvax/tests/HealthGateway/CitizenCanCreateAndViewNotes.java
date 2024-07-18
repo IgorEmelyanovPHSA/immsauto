@@ -20,6 +20,7 @@ public class CitizenCanCreateAndViewNotes extends BaseTest {
 	public void citizenCreateMyNote() throws Exception {
 		TestcaseID = "306812"; //Original TC C291362
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
 		//Login as user 11 ONLY, data sets are for user 11

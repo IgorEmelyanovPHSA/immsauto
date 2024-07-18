@@ -26,7 +26,7 @@ public class MainPageHealthGateway extends BasePage {
     @Step
     public TimeLineTabPage goToTabTimeLine() throws InterruptedException {
         // waitForElementToBeClickable(driver, tabTimeLine,5);
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         click(tabTimeLine);
         return new TimeLineTabPage(driver);
     }

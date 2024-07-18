@@ -19,6 +19,7 @@ public class CitizenCanAddAndEditComments extends BaseTest {
 	public void createUpdateDeleteComment() throws Exception {
 		TestcaseID = "306815"; //Original TC C295751
 		log("Target Environment: " + Utils.getTargetEnvironment());
+		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 		String timeStamp = String.valueOf(System.currentTimeMillis());
 
