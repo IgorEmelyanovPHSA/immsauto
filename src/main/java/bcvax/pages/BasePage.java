@@ -211,7 +211,11 @@ public abstract class BasePage<T> {
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(webElement));
 		return element;
 	}
-	
+
+	public String getLink(WebElement element) {
+		return element.getAttribute("href");
+	}
+
 	public String getValue(WebElement element) {
 		return element.getAttribute("value");
 	}

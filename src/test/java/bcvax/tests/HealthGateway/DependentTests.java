@@ -46,7 +46,7 @@ public class DependentTests extends BaseTest {
 // You no longer have access to this dependent as they have turned 12.
 
 	@Test
-	public void createUpdateDeleteComment() throws Exception {
+	public void dependentsTests() throws Exception {
 		TestcaseID = "306815"; //Original TC C295751
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Target Browser: " + Utils.getTargetBrowser());

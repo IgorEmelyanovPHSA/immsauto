@@ -7,11 +7,17 @@ import org.openqa.selenium.support.FindBy;
 
 public class MainPageHealthGateway extends BasePage {
 
+    @FindBy(xpath = "//a[@title = 'Home']")
+    private WebElement tabHome;
+
     @FindBy(xpath = "//a[@title = 'Timeline']")
     private WebElement tabTimeLine;
 
     @FindBy(xpath = "//a[@title = 'Dependents']")
     private WebElement tabDependents;
+
+    @FindBy(xpath = "//a[@title = 'Services']")
+    private WebElement tabServices;
 
     @FindBy(xpath = "//div[@data-region-name ='themeHeaderProfileMenu']")
     private WebElement profileIcon;
@@ -19,13 +25,15 @@ public class MainPageHealthGateway extends BasePage {
     @FindBy(xpath = "//span[@title ='Profile']")
     private WebElement dropDownProfile;
 
+    @FindBy(xpath = "//*[text()='Organ Donor Registration']/../..//span")
+    private WebElement widgetOrganDonorRegistration;
+
     public MainPageHealthGateway(WebDriver driver) {
         super(driver);
     }
 
     @Step
     public TimeLineTabPage goToTabTimeLine() throws InterruptedException {
-        // waitForElementToBeClickable(driver, tabTimeLine,5);
         Thread.sleep(10000);
         click(tabTimeLine);
         return new TimeLineTabPage(driver);
@@ -33,7 +41,6 @@ public class MainPageHealthGateway extends BasePage {
 
     @Step
     public DependentsTabPage goToTabDependents() throws InterruptedException {
-        // waitForElementToBeClickable(driver, tabTimeLine,5);
         Thread.sleep(5000);
         click(tabDependents);
         Thread.sleep(5000);
@@ -41,8 +48,15 @@ public class MainPageHealthGateway extends BasePage {
     }
 
     @Step
+    public ServicesTabPage goToOrganDonorPage() throws InterruptedException {
+        Thread.sleep(5000);
+        click(tabServices);
+        Thread.sleep(5000);
+        return new ServicesTabPage(driver);
+    }
+
+    @Step
     public ProfilePage goToProfilePage() throws InterruptedException {
-        // waitForElementToBeClickable(driver, tabTimeLine,5);
         Thread.sleep(7000);
         click(profileIcon);
         click(dropDownProfile);

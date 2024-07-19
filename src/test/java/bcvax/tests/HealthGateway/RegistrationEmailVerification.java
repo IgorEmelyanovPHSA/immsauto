@@ -14,7 +14,7 @@ public class RegistrationEmailVerification extends BaseTest {
 
 	@Test
 	public void registrationEmailVerificationFromTheList() throws Exception {
-		TestcaseID = "C314563"; //Original TC C314563
+		TestcaseID = "314563"; //Original TC C314563
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
