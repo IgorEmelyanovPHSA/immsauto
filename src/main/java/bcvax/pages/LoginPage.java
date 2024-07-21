@@ -213,7 +213,7 @@ public class LoginPage extends BasePage {
 		click(btnTestWithUserNameAndPassword);
 		Thread.sleep(3000);
 		enterCredentialsForHGPortalAs("user_HTHGTWY11","password_HTHGTWY11_PW");
-		Thread.sleep(3000);
+		Thread.sleep(11000);
 		return new MainPageHealthGateway(driver);
 	}
 

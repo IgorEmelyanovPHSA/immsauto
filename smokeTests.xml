@@ -3,15 +3,18 @@
 <suite name="Automation run">
     <test name="Regression">
         <classes>
+            <class name="bcvax.tests.HealthGateway.AuthenticationWithBCServicesCard"/>
             <class name="bcvax.tests.HealthGateway.CitizenGettingLabResults"/>
             <class name="bcvax.tests.HealthGateway.CitizenGettingImagingReports"/>
             <class name="bcvax.tests.HealthGateway.CitizenGettingHospitalVisits"/>
             <class name="bcvax.tests.HealthGateway.CitizenCanRetrieveMedicationNoProtectiveWordSet"/>
             <class name="bcvax.tests.HealthGateway.CitizenCanRetrieveMedicationWithProtectiveWord"/>
+            <class name="bcvax.tests.HealthGateway.CitizenCanRetrieveImmunizationRecords"/>
             <class name="bcvax.tests.HealthGateway.ProfileCheck"/>
             <class name="bcvax.tests.HealthGateway.CitizenCanAddAndEditComments"/>
             <class name="bcvax.tests.HealthGateway.CitizenCanCreateAndViewNotes"/>
             <class name="bcvax.tests.HealthGateway.OrganDonorRegistration"/>
+            <class name="bcvax.tests.HealthGateway.DependentTests"/>
             <!--    <class name="bcvax.tests.HealthGateway.RegistrationEmailVerification"/>
               <class name="bcvax.tests.HealthGateway.RegistrationPhoneVerification"/>   -->
               <!-- <class name="bcvax.tests.HealthGateway.CitizenCanCreateAndViewNotes"/> -->

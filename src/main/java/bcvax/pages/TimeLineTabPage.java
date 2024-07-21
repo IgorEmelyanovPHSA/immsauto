@@ -24,17 +24,23 @@
         @FindBy(xpath = "//input[@type='checkbox'][@value='Hospital Visits']/../label[@class='slds-checkbox__label']")
         private WebElement dropDownSelectionHospitalVisits;
 
-        @FindBy(xpath = "//input[@type='checkbox'][@value='My Notes']/../label[@class='slds-checkbox__label']")
-        private WebElement dropDownSelectionMyNotes;
+        @FindBy(xpath = "//input[@type='checkbox'][@value='Immunizations']/../label[@class='slds-checkbox__label']")
+        private WebElement dropDownSelectionImmunizations;
 
         @FindBy(xpath = "//input[@type='checkbox'][@value='Medications']/../label[@class='slds-checkbox__label']")
         private WebElement dropDownSelectionMedications;
+
+        @FindBy(xpath = "//input[@type='checkbox'][@value='My Notes']/../label[@class='slds-checkbox__label']")
+        private WebElement dropDownSelectionMyNotes;
 
         @FindBy(xpath = "//button[text() = 'Apply']")
         private WebElement btnApply;
 
         @FindBy(xpath = "(//*[contains(text(), 'Chemistry Lab Results')])[1]")
         private WebElement selectFirstLabResult;
+
+        @FindBy(xpath = "(//*[contains(text(), 'Immunizations | COVID-19 mRNA')])[1]")
+        private WebElement selectFirstImmunizationRecord;
 
         @FindBy(xpath = "(//b[text()='Status: '])[1]/parent::p")
         private WebElement textStatusImgReport;
@@ -63,6 +69,15 @@
         @FindBy(xpath = "(//b[text()='Location: '])[1]/parent::p")
         private WebElement textLocation;
 
+        @FindBy(xpath = "(//b[text()='Product: '])[1]/parent::p")
+        private WebElement textProduct;
+
+        @FindBy(xpath = "(//b[text()='Immunizing Agent: '])[1]/parent::p")
+        private WebElement textImmunizingAgent;
+
+        @FindBy(xpath = "(//b[text()='Lot Number: '])[1]/parent::p")
+        private WebElement textLotNumber;
+
         @FindBy(xpath = "//div[@class='dislpay-result-text slds-m-bottom_medium slds-m-top_medium']")
         private WebElement textDisplayingNumberOfRecords;
 
@@ -72,8 +87,11 @@
         @FindBy(xpath = "(//span[text()='| Sechelt Shishalh Hospital'])[1]")
         private WebElement selectFirstHospitalVisit;
 
-        @FindBy(xpath = "(//span[text()=' | Medications | APO-FUROSEMIDE'])[1]")
-        private WebElement selectFirstMedicationRecord;
+        @FindBy(xpath = "(//span[text()=' | APO-FUROSEMIDE'])[1]")
+        private WebElement selectFirstMedicationRecordUser14;
+
+        @FindBy(xpath = "(//span[text()=' | Pharmacist Assessment'])")
+        private WebElement selectFirstMedicationRecordUser11;
 
         /////Comments related xpath's
         @FindBy(xpath = "(//p[@class='slds-text-align_right hg-cmt-count'])[1]")
@@ -144,8 +162,6 @@
 
         @Step
         public void selectFilterLabResults() throws InterruptedException {
-            //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(15000);
             click(btnDropDownCategories);
             click(dropDownSelectionLabResults);
             click(btnApply);
@@ -154,8 +170,6 @@
 
         @Step
         public void selectFilterImagingReports() throws InterruptedException {
-            //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(15000);
             click(btnDropDownCategories);
             click(dropDownSelectionImagingReports);
             click(btnApply);
@@ -164,8 +178,6 @@
 
         @Step
         public void selectFilterHospitalVisits() throws InterruptedException {
-            //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(15000);
             click(btnDropDownCategories);
             click(dropDownSelectionHospitalVisits);
             click(btnApply);
@@ -173,9 +185,15 @@
         }
 
         @Step
+        public void selectFilterImmunizations() throws InterruptedException {
+            click(btnDropDownCategories);
+            click(dropDownSelectionImmunizations);
+            click(btnApply);
+            Thread.sleep(3000);
+        }
+
+        @Step
         public void selectFilterMyNotes() throws InterruptedException {
-            //waitForElementToBeClickable(driver, btnDropDownCategories,15);
-            Thread.sleep(12000);
             click(btnDropDownCategories);
             click(dropDownSelectionMyNotes);
             click(btnApply);
@@ -183,7 +201,6 @@
         }
 
         public void selectFilerMedications() throws InterruptedException {
-            Thread.sleep(12000);
             click(btnDropDownCategories);
             click(dropDownSelectionMedications);
             click(btnApply);
@@ -200,13 +217,22 @@
             Thread.sleep(8000);
         }
 
-        public void openFirstMedicationRecord() throws InterruptedException {
-            click(selectFirstMedicationRecord);
+        public void openFirstMedicationRecordUser14() throws InterruptedException {
+            click(selectFirstMedicationRecordUser14);
+            Thread.sleep(2000);
+        }
+        public void openFirstMedicationRecordUser11() throws InterruptedException {
+            click(selectFirstMedicationRecordUser11);
             Thread.sleep(2000);
         }
 
         public void openFirstHospitalVisit() throws InterruptedException {
             click(selectFirstHospitalVisit);
+            Thread.sleep(2000);
+        }
+
+        public void openFirstImmunizationRecord() throws InterruptedException {
+            click(selectFirstImmunizationRecord);
             Thread.sleep(2000);
         }
 
@@ -232,6 +258,18 @@
 
         public String getReportingLab(){
             return getText(textReportingLab).split(": ")[1];
+        }
+
+        public String getProduct(){
+            return getText(textProduct).split(": ")[1];
+        }
+
+        public String getImmunizingAgent(){
+            return getText(textImmunizingAgent).split(": ")[1];
+        }
+
+        public String getLotNumber(){
+            return getText(textLotNumber).split(": ")[1];
         }
 
         public String getLocation(){

@@ -35,7 +35,7 @@ public class CitizenCanRetrieveMedicationWithProtectiveWord extends BaseTest {
 		//Happy Path
 		timeLine.enterProtectiveWordAndContinue(protectiveWord);
 
-		//Thread sleep to load 1869 records for the user
+		//Thread sleep to load 1869 records for the user14
 		timeLine.selectFilerMedications();
 
 		log(timeLine.getDisplayingNumberOfRecords());
@@ -44,8 +44,8 @@ public class CitizenCanRetrieveMedicationWithProtectiveWord extends BaseTest {
 		log("value " +timeLine.getNumberOfRecords());
 		Assert.assertTrue(timeLine.getNumberOfRecords() >= 1, "Error. No medications records found");
 
-		//Validation open first medication record
-		timeLine.openFirstMedicationRecord();
+		//Validation open first medication record for user14
+		timeLine.openFirstMedicationRecordUser14();
 
 		log("Citizen with protective word retrieved medication successfully");
 		}

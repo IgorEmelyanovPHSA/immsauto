@@ -34,22 +34,20 @@ public class MainPageHealthGateway extends BasePage {
 
     @Step
     public TimeLineTabPage goToTabTimeLine() throws InterruptedException {
-        Thread.sleep(10000);
         click(tabTimeLine);
+        Thread.sleep(22000);
         return new TimeLineTabPage(driver);
     }
 
     @Step
     public DependentsTabPage goToTabDependents() throws InterruptedException {
-        Thread.sleep(5000);
         click(tabDependents);
         Thread.sleep(5000);
         return new DependentsTabPage(driver);
     }
 
     @Step
-    public ServicesTabPage goToOrganDonorPage() throws InterruptedException {
-        Thread.sleep(5000);
+    public ServicesTabPage goToTabServices() throws InterruptedException {
         click(tabServices);
         Thread.sleep(5000);
         return new ServicesTabPage(driver);
@@ -57,7 +55,6 @@ public class MainPageHealthGateway extends BasePage {
 
     @Step
     public ProfilePage goToProfilePage() throws InterruptedException {
-        Thread.sleep(7000);
         click(profileIcon);
         click(dropDownProfile);
         Thread.sleep(5000);

@@ -28,7 +28,7 @@ public class OrganDonorRegistration extends BaseTest {
 		MainPageHealthGateway mainPageHealthGateway = loginPage.loginIntoHGWithBCServiceCardAsUser11();
 
 		//GoTo Services Page
-		ServicesTabPage services = mainPageHealthGateway.goToOrganDonorPage();
+		ServicesTabPage services = mainPageHealthGateway.goToTabServices();
 
 		//Validate Status: Registered
 		services.validateStatusRegistered();

@@ -79,8 +79,29 @@
             Thread.sleep(4000);
         }
 
-        public String getFirstAndLastNameOfFirstDependent() { return getText(textGetFirstAndLastNameOfFirstDependent);}
+        public String getFirstAndLastNameOfFirstDependent() {
+        //Needs to be updated
+        return getText(textGetFirstAndLastNameOfFirstDependent);}
 
+        public String getPhnOfDependent(String name) {
+        //Needs to be updated
+        return getText(textGetFirstAndLastNameOfFirstDependent);}
 
+        public String getDateOfBirthDependent() { return getText(textGetFirstAndLastNameOfFirstDependent);}
 
+        public void clickOnProfileOfDependentByName(String name) throws InterruptedException{
+            By selectProfileByNameXpath = By.xpath("//*[contains(text(),'" + name + "')]/../../..//span[@title='Section Title']/b[text()='Profile']");
+            click(selectProfileByNameXpath);
+            Thread.sleep(500);
+        }
+
+        public void validateAccessExpired(String name) {
+            By textYourAccessHasExpired = By.xpath("//*[contains(text(),'" + name + "')]/../../..//span[@title='Section Title']/b[text()='Profile']/../../../..//div[text()='Your access has expired']");
+            By textYouNoLongerHaveAccess = By.xpath("//*[contains(text(),'" + name + "')]/../../..//span[@title='Section Title']/b[text()='Profile']/../../../..//div[text()='You no longer have access to this dependent as they have turned 12.']");
+            List<WebElement> textAccessExpiredFound = driver.findElements(textYourAccessHasExpired);
+            List<WebElement> textYouNoLongerHaveAccessFound = driver.findElements(textYouNoLongerHaveAccess);
+            if(textAccessExpiredFound.size()!=1 && textYouNoLongerHaveAccessFound.size()!= 1) {
+                throw new RuntimeException("NOT FOUND TEXT: Your access has expired 'OR' You no longer have access to this dependent as they have turned 12.");
+            }
+        }
     }
