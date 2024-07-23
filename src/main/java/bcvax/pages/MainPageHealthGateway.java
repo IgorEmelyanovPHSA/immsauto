@@ -42,7 +42,7 @@ public class MainPageHealthGateway extends BasePage {
     @Step
     public DependentsTabPage goToTabDependents() throws InterruptedException {
         click(tabDependents);
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         return new DependentsTabPage(driver);
     }
 

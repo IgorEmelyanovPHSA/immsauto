@@ -1,9 +1,12 @@
 package bcvax.pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class LoginPage extends BasePage {
 
@@ -189,6 +192,9 @@ public class LoginPage extends BasePage {
 	@FindBy(xpath = "//button[text() = 'Continue']")
 	private WebElement btnContinue;
 
+	@FindBy(xpath = "//span[contains(text(),'I agree to the Terms of Service above')]")
+	private WebElement checkBoxIAgreeToTheTermsOfService;
+
 	public MainPageHealthGateway openHealthGatewayPortal() throws Exception {
 		driver.navigate().to(Utils.getEnvConfigProperty("url"));
 		return new MainPageHealthGateway(driver);
@@ -209,11 +215,25 @@ public class LoginPage extends BasePage {
 			Thread.sleep(4000);
 			click(btnLoginWithBCServiceCard);
 		}
+		//Temp fix July 23, 2024 after env refresh
+		Thread.sleep(4000);
+		click(btnLoginWithBCServiceCard);
+		//
 		Thread.sleep(4000);
 		click(btnTestWithUserNameAndPassword);
 		Thread.sleep(3000);
 		enterCredentialsForHGPortalAs("user_HTHGTWY11","password_HTHGTWY11_PW");
-		Thread.sleep(11000);
+		//Temp fix July 22, 2024
+		Thread.sleep(10000);
+		By xpathUpdateTermsAndConditionsBannerPresentXpath = By.xpath("//h2[contains(text(),'Update to our Terms of Service')]");
+		List<WebElement> TAndCBanner = driver.findElements(xpathUpdateTermsAndConditionsBannerPresentXpath);
+		if (TAndCBanner.size() == 1) {
+		click(checkBoxIAgreeToTheTermsOfService);
+		Thread.sleep(1000);
+		click(btnContinue);
+		}
+		///
+		Thread.sleep(15000);
 		return new MainPageHealthGateway(driver);
 	}
 

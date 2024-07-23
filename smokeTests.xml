@@ -14,9 +14,14 @@
             <class name="bcvax.tests.HealthGateway.CitizenCanAddAndEditComments"/>
             <class name="bcvax.tests.HealthGateway.CitizenCanCreateAndViewNotes"/>
             <class name="bcvax.tests.HealthGateway.OrganDonorRegistration"/>
-            <class name="bcvax.tests.HealthGateway.DependentTests"/>
-            <!--    <class name="bcvax.tests.HealthGateway.RegistrationEmailVerification"/>
-              <class name="bcvax.tests.HealthGateway.RegistrationPhoneVerification"/>   -->
+            <class name="bcvax.tests.HealthGateway.DependentAddedWithoutConsentBoxCheckedError"/>
+            <class name="bcvax.tests.HealthGateway.DependentInformationRetrieval"/>
+            <class name="bcvax.tests.HealthGateway.DependentOver12YearsOldAccessDenied"/>
+            <class name="bcvax.tests.HealthGateway.DependentRemovingAndAddingBack"/>
+            <!--     <class name="bcvax.tests.HealthGateway.DependentRegistrationFailWhenDataNotMatching"/>    -->
+             <class name="bcvax.tests.HealthGateway.DependentDataRecreationUser11"/>
+             <!--    <class name="bcvax.tests.HealthGateway.RegistrationEmailVerification"/>
+               <class name="bcvax.tests.HealthGateway.RegistrationPhoneVerification"/>   -->
               <!-- <class name="bcvax.tests.HealthGateway.CitizenCanCreateAndViewNotes"/> -->
         </classes>
     </test> <!-- Test -->
