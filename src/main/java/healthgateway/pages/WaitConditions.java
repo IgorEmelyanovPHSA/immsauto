@@ -1,4 +1,4 @@
-package bcvax.pages;
+package healthgateway.pages;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;

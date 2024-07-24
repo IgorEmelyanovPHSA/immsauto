@@ -1,8 +1,8 @@
-package bcvax.tests;
+package healthgateway.tests;
 
-import bcvax.pages.LoginPage;
-import bcvax.pages.TestRailManager;
-import bcvax.pages.Utils;
+import healthgateway.pages.LoginPage;
+import healthgateway.pages.TestRailManager;
+import healthgateway.pages.Utils;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

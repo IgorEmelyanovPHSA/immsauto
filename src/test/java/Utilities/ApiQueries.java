@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import bcvax.pages.Utils;
+import healthgateway.pages.Utils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,7 +25,7 @@ import org.json.JSONTokener;
 import org.json.JSONException;
 
 
-import static bcvax.tests.BaseTest.log;
+import static healthgateway.tests.BaseTest.log;
 
 public class ApiQueries {
 

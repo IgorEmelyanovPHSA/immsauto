@@ -1,4 +1,4 @@
-package bcvax.pages;
+package healthgateway.pages;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

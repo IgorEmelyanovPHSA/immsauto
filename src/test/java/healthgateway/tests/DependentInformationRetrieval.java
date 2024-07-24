@@ -1,13 +1,10 @@
-package bcvax.tests.HealthGateway;
+package healthgateway.tests;
 
 import Utilities.TestListener;
-import bcvax.pages.DependentsTabPage;
-import bcvax.pages.MainPageHealthGateway;
-import bcvax.pages.TimeLineTabPage;
-import bcvax.pages.Utils;
-import bcvax.tests.BaseTest;
+import healthgateway.pages.DependentsTabPage;
+import healthgateway.pages.MainPageHealthGateway;
+import healthgateway.pages.Utils;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 

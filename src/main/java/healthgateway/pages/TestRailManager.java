@@ -1,4 +1,4 @@
-package bcvax.pages;
+package healthgateway.pages;
 
 import com.gurock.testrail.APIClient;
 import com.gurock.testrail.APIException;
@@ -18,7 +18,6 @@ public class TestRailManager {
 			e.printStackTrace();
 		}
 	}
-	//public static String TEST_RUN_ID = "4038";
 	public static String TESTRAIL_USERNAME = "Igor.Emelyanov@phsa.ca";
 	public static String TESTRAIL_PASSWORD = "Bcvaxtestrail07*";
 	public static String RAILS_ENGINE_URL = "https://qmsoftwaretest.testrail.io/";

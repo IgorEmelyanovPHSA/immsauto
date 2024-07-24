@@ -1,4 +1,4 @@
-package bcvax.pages;
+package healthgateway.pages;
 // All Pages are inheriting from this class
 
 import io.qameta.allure.Step;

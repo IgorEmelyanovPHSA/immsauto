@@ -1,8 +1,9 @@
-package bcvax.tests.HealthGateway;
+package healthgateway.tests;
 
 import Utilities.TestListener;
-import bcvax.pages.*;
-import bcvax.tests.BaseTest;
+import healthgateway.pages.MainPageHealthGateway;
+import healthgateway.pages.ServicesTabPage;
+import healthgateway.pages.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

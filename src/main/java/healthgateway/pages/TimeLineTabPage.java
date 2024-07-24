@@ -1,4 +1,4 @@
-    package bcvax.pages;
+    package healthgateway.pages;
 
     import io.qameta.allure.Step;
     import org.openqa.selenium.By;
