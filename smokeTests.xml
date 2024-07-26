@@ -18,8 +18,8 @@
             <class name="healthgateway.tests.DependentInformationRetrieval"/>
             <class name="healthgateway.tests.DependentOver12YearsOldAccessDenied"/>
             <class name="healthgateway.tests.DependentRemovingAndAddingBack"/>
-            <!--     <class name="healthgateway.tests.DependentRegistrationFailWhenDataNotMatching"/>    -->
-             <class name="healthgateway.tests.DependentDataRecreationUser11"/>
+            <class name="healthgateway.tests.DependentRegistrationFailWhenDataNotMatching"/>
+            <class name="healthgateway.tests.DependentDataRecreationUser11"/>
              <!--    <class name="healthgateway.tests.RegistrationEmailVerification"/>
                <class name="healthgateway.tests.RegistrationPhoneVerification"/>   -->
               <!-- <class name="healthgateway.tests.CitizenCanCreateAndViewNotes"/> -->

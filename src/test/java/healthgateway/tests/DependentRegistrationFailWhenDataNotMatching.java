@@ -51,11 +51,10 @@ public class DependentRegistrationFailWhenDataNotMatching extends BaseTest {
 		Assert.assertTrue(dependent.iSWarningInformationDoesNotMatchDisplayed(), "Warning message was not displayed. Incorrect lastName");
 		dependent.clickOnBtnCancelDependentRegistration(); //Click btn Cancel to close registration pop-up
 
-		//NEEDS INVESTIGATION!!!!!!!!!!!!!!!!!!!!!!
 		//Try to add dependent with incorrect phn
-		//dependent.addDependent(firstName,lastName,dateOfBirth,"9715491522");
-		//Assert.assertTrue(dependent.iSWarningInformationDoesNotMatchDisplayed(), "Warning message was not displayed. Incorrect phn");
-		//dependent.clickOnBtnCancelDependentRegistration(); //Click btn Cancel to close registration pop-up
+		dependent.addDependent(firstName,lastName,dateOfBirth,"9715491522");
+		Assert.assertTrue(dependent.iSWarningInformationDoesNotMatchDisplayed(), "Warning message was not displayed. Incorrect phn");
+		dependent.clickOnBtnCancelDependentRegistration(); //Click btn Cancel to close registration pop-up
 
 		//Try to add dependent with incorrect dateOfBirth
 		dependent.addDependent(firstName,lastName,"Dec 01, 2017",PHN);
