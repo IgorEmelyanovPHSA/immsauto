@@ -58,16 +58,16 @@ public class LoginPage extends BasePage {
 		click(btnTestWithUserNameAndPassword);
 		Thread.sleep(3000);
 		enterCredentialsForHGPortalAs("user_HTHGTWY11", "password_HTHGTWY11_PW");
-		//Temp fix July 22, 2024
-//		Thread.sleep(10000);
-//		By xpathUpdateTermsAndConditionsBannerPresentXpath = By.xpath("//h2[contains(text(),'Update to our Terms of Service')]");
-//		List<WebElement> TAndCBanner = driver.findElements(xpathUpdateTermsAndConditionsBannerPresentXpath);
-//		if (TAndCBanner.size() == 1) {
-//			click(checkBoxIAgreeToTheTermsOfService);
-//			Thread.sleep(1000);
-//			click(btnContinue);
-//		}
-//		///
+	//	Temp fix July 22, 2024
+		Thread.sleep(10000);
+		By xpathUpdateTermsAndConditionsBannerPresentXpath = By.xpath("//h2[contains(text(),'Update to our Terms of Service')]");
+		List<WebElement> TAndCBanner = driver.findElements(xpathUpdateTermsAndConditionsBannerPresentXpath);
+		if (TAndCBanner.size() == 1) {
+			click(checkBoxIAgreeToTheTermsOfService);
+			Thread.sleep(1000);
+			click(btnContinue);
+		}
+		///
 //		//	Thread.sleep(15000);
 		wait.until(ExpectedConditions.titleIs("Home"));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@title = 'Timeline']")));
