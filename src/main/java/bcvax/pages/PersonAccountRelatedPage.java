@@ -71,9 +71,22 @@ public class PersonAccountRelatedPage extends BasePage {
     public static List<Map<String, WebElement>> getImmunizationRecords(WebDriver driver) throws InterruptedException {
         Thread.sleep(2000);
         By immunization_records_table_path = By.xpath("//c-bc-hc-client-immunization-records");
+        waitForElementToBeEnabled(driver, immunization_records_table_path, 10);
         WebElement immunization_records_table_node = driver.findElement(immunization_records_table_path);
         GenericTable immunization_table = new GenericTable(immunization_records_table_node);
-        return immunization_table.getRowsMappedToHeadings();
+        for(int i = 0; i < 10; i++) {
+            try {
+                immunization_table.getRowsMappedToHeadings();
+                break;
+            } catch (IndexOutOfBoundsException ex) {
+                System.out.println("Counter: " + i);
+                Thread.sleep(1000);
+                immunization_records_table_node = driver.findElement(immunization_records_table_path);
+                immunization_table = new GenericTable(immunization_records_table_node);
+            }
+        }
+        List<Map<String, WebElement>> my_table =  immunization_table.getRowsMappedToHeadings();
+        return my_table;
     }
 
     public static void scrollToAlertsSection(WebDriver driver) throws InterruptedException {

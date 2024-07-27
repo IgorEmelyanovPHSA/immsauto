@@ -173,6 +173,16 @@ public class PersonAccountSchedulePage extends BasePage {
         Thread.sleep(500);
     }
 
+    public static void checkEmailPreferredContactMethod(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By email_checkbox_path = By.xpath("//lightning-input[@data-id='email-radio']");
+        waitForElementToBeEnabled(driver, email_checkbox_path, 10);
+        WebElement email_checkbox = driver.findElement(email_checkbox_path);
+        boolean email_checked = Boolean.parseBoolean(email_checkbox.getAttribute("checked"));
+        if(!email_checked) {
+            email_checkbox.click();
+        }
+    }
     public static void clickOnConfirmButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By confirm_appointment_btn_path = By.xpath("//button[@c-bchschedulerreviewfooter_bchschedulerreviewfooter and text() = 'Confirm appointment']");

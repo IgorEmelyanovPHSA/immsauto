@@ -730,10 +730,9 @@ public class ApiQueries {
     public static void apiCallToRemoveAllImmunizationRecordsByPHN(String phn) throws Exception {
         String AccountId = queryToGetAccountId(phn, "participantAccount");
         String pirAccountId = queryToGetAccountId(phn, "pirAccount");
-        if(AccountId == null && pirAccountId == null){
+        if(AccountId == null) {
             log("Participant account not found");
-        }
-        else {
+        } else {
             ArrayList<String> listOfImmunizationRecords = queryToGetListOfImmunizationRecords(AccountId);
             if (listOfImmunizationRecords.size() == 0) {
                 log("Immunization records not found");

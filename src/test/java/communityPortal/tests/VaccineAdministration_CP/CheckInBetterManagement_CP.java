@@ -13,13 +13,17 @@ import org.openqa.selenium.WebElement;
 
 public class CheckInBetterManagement_CP extends BaseTest {
     String env;
+    Map<String, Object> testData;
     Map<String, String> client_data;
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String clinicNameToSearch;
 
     @BeforeMethod
     public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "dose1");
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationConsumption"));
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
@@ -69,7 +73,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
             Thread.sleep(500);
             PersonAccountPage.goToRelatedTab(driver);
         }
-
+        Thread.sleep(2000);
         List<Map<String, WebElement>> immunization_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
         //--- Verify No Immunization records in Related Tab (Table has only Headers
         Assert.assertEquals(immunization_records.size(), 1);
@@ -154,7 +158,7 @@ public class CheckInBetterManagement_CP extends BaseTest {
         //--- Go back to Citizen profile->Related Tab
         MainPageCP.search(driver, client_data.get("personalHealthNumber"));
         PersonAccountPage.goToRelatedTab(driver);
-
+        Thread.sleep(2000);
         //--- Verify that in Citizen profile->Related Tab New Imms Record was created in Statud New
         List<Map<String, WebElement>> imms_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
         if(imms_records.size() < 2) {
@@ -241,7 +245,13 @@ public class CheckInBetterManagement_CP extends BaseTest {
         ClientListPage.clickTodayAppointmentsTab(driver);
         ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
         my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
-        ClientListTodayAppointmentsTab.clickCheckInButton(driver, my_row);
+        try {
+            ClientListTodayAppointmentsTab.clickCheckInButton(driver, my_row);
+        } catch (NullPointerException ex) {
+            Thread.sleep(2000);
+            my_row = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
+            ClientListTodayAppointmentsTab.clickCheckInButton(driver, my_row);
+        }
 
         //--- Verify you are redirected to Identification Page
         current_tab = InClinicExperiencePage.getCurrentTab(driver);
@@ -253,6 +263,18 @@ public class CheckInBetterManagement_CP extends BaseTest {
 
         //--- Verify that in Citizen Profile->Related Tab New Imms Record was created in Status New
         imms_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
+
+        for(int i = 0; i < 10; i++) {
+            System.out.println("###########################");
+            System.out.println("Records Count: " + imms_records.size());
+            System.out.println("###########################");
+            if(imms_records.size() < 2) {
+                Thread.sleep(1000);
+                imms_records = PersonAccountRelatedPage.getImmunizationRecords(driver);
+            } else {
+                break;
+            }
+        }
         imms_record_status = imms_records.get(1).get("Pathway Status").getText();
         Assert.assertEquals("New", imms_record_status, "Pathway Status is incorrect");
 

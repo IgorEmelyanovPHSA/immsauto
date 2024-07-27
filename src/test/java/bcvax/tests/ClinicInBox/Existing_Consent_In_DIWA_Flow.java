@@ -26,7 +26,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
     String lot_to_select;
     String dosage_to_select;
     String site_to_select;
-    String clinic_location = "All Ages - Atlin Health Centre";
+    String clinic_location;
     MainPageOrg orgMainPage;
     Map<String, String> client_data;
     @BeforeMethod
@@ -39,6 +39,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         TestcaseID = "275966";
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
+        clinic_location = String.valueOf(testData.get("diwaLocation"));
         consentProvider = String.valueOf(testData.get("consentProvider"));
         dosage_to_select = String.valueOf(testData.get("covidDose"));
         site_to_select = String.valueOf(testData.get("siteConsumption"));
@@ -59,6 +60,7 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         MainPageOrg.selectFromNavigationMenu(driver, "Home");
         log("/*----3. Close all previously opened Tabs --*/");
         clinicInBoxPage.closeAllTabs();
+
         log("/*----4. Search for Participant account: " +participant_name +" ---*/");
         MainPageOrg.search(driver, participant_name);
         log("/*----5. select Citizen from search results --*/");

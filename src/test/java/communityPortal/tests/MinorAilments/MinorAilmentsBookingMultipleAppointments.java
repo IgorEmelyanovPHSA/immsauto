@@ -4,22 +4,41 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 @Listeners({TestListener.class})
 public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
-
-    private String legalFirstName = "Ivy";
-    private String legalLastName = "BCVaxHanna";
-    private String dateOfBirth = "Dec 17, 1992";
-    private String personalHealthNumber = "9746173078";
-    private String postalCode = "V9L6G8";
-    private String email = "accountToDelete@phsa.ca";
+    String env;
+    Map<String, Object> testData;
+    Map<String, String> client_data;
+    private String legalFirstName;
+    private String legalLastName;
+    private String dateOfBirth;
+    private String personalHealthNumber;
+    private String postalCode;
+    private String email;
     private String minorAilmentsToSelectFirstAppointment = "Contraception";
     private String minorAilmentsToSelectSecondAppointment = "Headaches";
     private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
     private String notesToPharmacist = "C259543 - This message was created by automation";
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "minor_ailment");
+        legalFirstName = client_data.get("legalFirstName");
+        legalLastName = client_data.get("legalLastName");
+        dateOfBirth = Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy");
+        personalHealthNumber = client_data.get("personalHealthNumber");
+        postalCode = client_data.get("postalCode");
+        email = client_data.get("email");
+    }
 
     @Test
     public void MinorAilmentsBookingMultipleAppointments_C259543() throws Exception {
