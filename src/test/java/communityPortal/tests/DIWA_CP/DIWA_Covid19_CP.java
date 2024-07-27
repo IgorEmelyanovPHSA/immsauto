@@ -4,6 +4,7 @@ import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import org.openqa.selenium.NotFoundException;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -12,24 +13,28 @@ import java.util.Map;
 @Listeners({TestListener.class})
 public class DIWA_Covid19_CP extends BaseTest {
     String env;
-    private String legalFirstName = "John";
-    private String legalLastName = "BCVaxChan";
-    private String legalMiddleName = "Yuan bo";
-    private String personal_health_nunber = "9746170785";
-    private String date_of_birth = "1934-02-28";
-    private String postal_code = "V2T0N1";
+    Map<String, String> client_data;
     Map<String, Object> testData;
     private String consentProvider;
     private String lot_to_select;
     private String dosage_to_select;
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
+        env = Utils.getTargetEnvironment();
+        testData = Utils.getTestData(env);
+        String client_data_file = Utils.getClientsDataFile();
+        client_data = Utils.getTestClientData(client_data_file, "consent");
+        Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
+    }
     @Test
     public void Can_Create_DIWA_Immunisation_record_without_Appointments_CP() throws Exception {
         //TestcaseID = "223187"; //C223187
-        env = Utils.getTargetEnvironment();
-        testData = Utils.getTestData(env);
+
         log("Target Environment: "+ Utils.getTargetEnvironment());
-        String nameToSearch = "John Yuan bo BCVaxChan";
-        String clinicLocation = "All Ages - Atlin Health Centre";
+        String nameToSearch = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");;
+        String clinicLocation = String.valueOf(testData.get("diwaLocation"));
         consentProvider = String.valueOf(testData.get("consentProvider"));
         lot_to_select = String.valueOf(testData.get("covidLot"));
         dosage_to_select = String.valueOf(testData.get("covidDose"));

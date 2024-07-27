@@ -64,6 +64,10 @@ public class Check_In_Workflow extends BaseTest {
         log("/*5.----Verify nteh appointment is booked successfully --*/");
         bookAppointment();
         InClinicExperiencePage.clickUserDefaultsTab(driver);
+        UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+        UserDefaultsPage.selectUserDefaultLocation(driver, clinicNameToSearch);
+        log("/*7.----- Click on Save defaults button --*/");
+        UserDefaultsPage.clickBtnSave(driver);
         InClinicExperiencePage.clickClientListTab(driver);
         InClinicExperiencePage.clickTodayAppointments(driver);
         Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
@@ -184,7 +188,6 @@ public class Check_In_Workflow extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
 
-        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*4.----Close All previously opened Tab's --*/");
         InClinicExperiencePage.closeTabsHCA(driver);
         log("/*5.----- Click on User Defaults Tab --*/");

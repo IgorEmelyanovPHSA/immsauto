@@ -24,12 +24,15 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 	private String consent_effective_date = "November 29, 2023";
 	private String lot_to_select = "0486AA-CC01";
 	private String dosage_to_select = "0.5";
-	String clinic_location = "All Ages - Atlin Health Centre";
+	String clinic_location;
 	MainPageOrg orgMainPage;
 	String consent_agent = "COVID-19 mRNA";
 	Map<String, String> client_data;
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
+		clinic_location = String.valueOf(testData.get("diwaLocation"));
 		String client_data_file = Utils.getClientsDataFile();
 		client_data = Utils.getTestClientData(client_data_file, "no_consent");
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
@@ -38,9 +41,7 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 	@Test(testName = "Verify Errors when creating New Consent Record from DIWA")
 	public void Verify_Errors_When_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "278975";
-		env = Utils.getTargetEnvironment();
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		testData = Utils.getTestData(env);
 		log("Target Environment: "+ env);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));

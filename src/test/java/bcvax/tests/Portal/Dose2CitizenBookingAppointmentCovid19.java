@@ -66,7 +66,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
         //Thread.sleep(5000);
         log("/*6.----Login as an Clinician to CIB --*/");
         //ClinicInBoxPage clinicInBox = loginPage.loginAsClerk();
-        loginPage.orgLoginAsPPHIS();
+        loginPage.loginAsImmsBCAdmin();
         ClinicInBoxPage clinicInBox = new ClinicInBoxPage(driver);
         orgMainPage = new MainPageOrg(driver);
         String currentApp = MainPageOrg.currentApp(driver);
@@ -82,7 +82,7 @@ public class Dose2CitizenBookingAppointmentCovid19 extends BaseTest {
 
         log("/*7.---Search for Participant account by conformation number " + conformationNumberText + "--*/");
         //inClinicExperiencePage.SearchForCitizen(conformationNumberText);
-        MainPageOrg.search(driver, client_data.get("legalFirstName") + " " + (client_data.get("clientMiddleName") == null ? "" : client_data.get("clientMiddleName") + " ") + client_data.get("legalLastName"));
+        MainPageOrg.search(driver, client_data.get("legalFirstName") + " " + (client_data.get("legalMiddleName") == null ? "" : client_data.get("legalMiddleName") + " ") + client_data.get("legalLastName"));
 
 //        log("/*7.1---Validation, isUserFound account validation --*/");
 //        boolean isUserFound =  com.isUserFoundValidation(legalFirstName, legalMiddleName, legalLastName);

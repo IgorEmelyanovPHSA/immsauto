@@ -139,9 +139,11 @@ public class ReceiveSupplies extends BaseTest {
 		SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
 		log("/*-- 36. Select Supply Items Option from the Drop Down --*/");
 		SupplyConsolePage.selectSupplyItemsFromDropdown(driver);
+		SupplyConsolePage.switchToTableView(driver);
 		SupplyItemsPage.selectShowAllSupplyItems(driver);
 		log("/*-- 37. Click on 'COMIRNATY (Pfizer) - 35035BD-CC01' Supply Item--*/");
-		SupplyConsolePage.clickSupplyItemName(driver, supply_item);
+		SupplyItemsPage.selectSupplyItemName(driver, supply_item);
+		//SupplyConsolePage.clickSupplyItemName(driver, supply_item);
 
 		///Validation for Doses/Qty Before and After Reciaving needs to be add.
 		log("/*-- . Wee need to see Dosages and Qty After/Before Receiving here to Validate at the end---*/");

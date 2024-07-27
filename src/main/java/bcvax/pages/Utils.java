@@ -33,7 +33,7 @@ public class Utils {
 	}
 
 	public static String getClientsDataFile() throws Exception {
-		String client_data_file = System.getProperty("client_data_file");
+		String client_data_file = Utils.getEnvConfigProperty("client_data_file");
 		if (client_data_file == null)
 			client_data_file = getConfigProperty("client_data_file");
 		return client_data_file;

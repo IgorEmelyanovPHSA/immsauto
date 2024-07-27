@@ -25,13 +25,16 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 	private String consent_effective_date = "November 29, 2023";
 	private String lot_to_select ;
 	private String dosage_to_select;
-	String clinic_location = "All Ages - Atlin Health Centre";
+	String clinic_location;
 	MainPageOrg orgMainPage;
 	Map<String, String> client_data;
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
 		String client_data_file = Utils.getClientsDataFile();
 		client_data = Utils.getTestClientData(client_data_file, "new_consent");
+		clinic_location = String.valueOf(testData.get("diwaLocation"));
 		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
 		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
@@ -41,9 +44,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 	@Test(priority = 1, testName = "Create DIWA Immunisation record without Appointments(Java)")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "273661";
-		env = Utils.getTargetEnvironment();
 		log("/---API call to remove duplicate citizen participant account if found--*/");
-		testData = Utils.getTestData(env);
 		lot_to_select = String.valueOf(testData.get("pneumoLot"));
 		dosage_to_select = String.valueOf(testData.get("pneumoDose"));
 		log("Target Environment: "+ env);

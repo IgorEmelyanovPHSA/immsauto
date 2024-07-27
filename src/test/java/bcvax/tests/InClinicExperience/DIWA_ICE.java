@@ -43,11 +43,10 @@ public class DIWA_ICE extends BaseTest {
 
 		lot_to_select = String.valueOf(testData.get("covidLot"));
 		dosage_to_select = String.valueOf(testData.get("covidDose"));
-		String clinicLocation = "All Ages - Atlin Health Centre";
-		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(getDriver());
+		String clinicLocation = String.valueOf(testData.get("diwaLocation"));
 
 		log("/*1.----Login --*/");
-		loginPage.loginAsPPHIS();
+		loginPage.loginAsImmsBCAdmin();
 
 		log("Login AS default user (Clinician to ICE)");
 		TestcaseID = "223187"; //C223187
@@ -68,6 +67,13 @@ public class DIWA_ICE extends BaseTest {
 
 		log("/*4.----Close All previously opened Tab's --*/");
 		InClinicExperiencePage.closeTabsHCA(driver);
+		InClinicExperiencePage.clickUserDefaultsTab(driver);
+		log("/*6.----- Enter current date for UserDefaults --*/");
+		log("/*-- 13. Enter current date for UserDefaults --*/");
+		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
+		UserDefaultsPage.selectUserDefaultLocation(driver, clinicLocation);
+		log("/*7.----- Click on Save defaults button --*/");
+		UserDefaultsPage.clickBtnSave(driver);
 		log("/*----5. Global Search for Participant account: " +citizenName +" ---*/");
 		log("/*----6. select Citizen from search results --*/");
 		MainPageOrg.search(driver, citizenName);
