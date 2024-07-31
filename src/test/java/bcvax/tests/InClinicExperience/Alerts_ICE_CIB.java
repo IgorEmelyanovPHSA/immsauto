@@ -22,6 +22,7 @@ import java.util.Map;
 public class Alerts_ICE_CIB extends BaseTest {
     String env;
     Map<String, Object> testData;
+    String client_name;
     String clinicNameToSearch;
     MainPageOrg orgMainPage;
     String consumptionLot;
@@ -37,6 +38,8 @@ public class Alerts_ICE_CIB extends BaseTest {
         client_data = Utils.getTestClientData(client_data_file, "dose1");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+        client_name = client_data.get("legalFirstName") + (client_data.get("legalMiddleName").isEmpty() ? "" : " " + client_data.get("legalMiddleName")) + " " +
+                client_data.get("legalLastName");
     }
 
     @Test(priority = 1)
@@ -231,7 +234,7 @@ public class Alerts_ICE_CIB extends BaseTest {
             MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
         }
         MainPageOrg.closeAllTabs(driver);
-        MainPageOrg.search(driver, client_data.get("legalFirstName") + " " + client_data.get("legalLastName"));
+        MainPageOrg.search(driver, client_name);
         PersonAccountPage.goToRelatedTab(driver);
         String alerts_text = PersonAccountPage.getClientAlerts(driver);
 
@@ -253,7 +256,7 @@ public class Alerts_ICE_CIB extends BaseTest {
         NewAlertPage.clickSaveButton(driver);
         Thread.sleep(2000);
         MainPageOrg.closeAllTabs(driver);
-        MainPageOrg.search(driver, client_data.get("legalFirstName") + " " + client_data.get("legalLastName"));
+        MainPageOrg.search(driver, client_name);
         PersonAccountPage.goToRelatedTab(driver);
         PersonAccountRelatedPage.scrollToAlertsSection(driver);
         List<Map<String, WebElement>> alerts_table = PersonAccountRelatedPage.getAlertSectionTable(driver);
@@ -262,6 +265,4 @@ public class Alerts_ICE_CIB extends BaseTest {
         Assert.assertEquals(6, alerts_table.size());
         System.out.println();
     }
-
-
 }
