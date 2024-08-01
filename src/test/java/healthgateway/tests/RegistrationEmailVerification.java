@@ -40,17 +40,10 @@ public class RegistrationEmailVerification extends BaseTest {
 				"vijaya@gmail..com", "user@", "vijaya.pitta@gmail@com", "vijaya.pitta@gmail_com", "vijaya.pitta@gmail>com", "vijaya.pitta@gmail<com",
 				"vijaya.pitta@gmail(com", "vijaya.pitta@gmail)com", "vijaya.pitta@gmail[com", "vijaya.pitta@gmail]com", "vijaya.pitta@gmail\\com",
 				"vijaya.pitta@gmail,com", "vijaya.pitta@gmail;com", "vijaya.pitta@gmail:com", "vijaya.pitta@gmail com", "@gmail.com"};
-
-//		String[] validEmails = {
-//				"test@test.com", "test2@test.com", "test3@test.com"};
-//
-//
-//		String[] invalidEmails = {
-//				"test@test@com", "test2@test@com", "test3@test@com"};
-
-
+		
 		//Login as user 08
 		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();
+		registration.clickOnEmailNotificationCheckbox();
 
 		//To test valid emails
 		for (int i = 0; i < validEmails.length; i++) {

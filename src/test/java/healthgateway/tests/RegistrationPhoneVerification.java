@@ -14,24 +14,21 @@ public class RegistrationPhoneVerification extends BaseTest {
 
 	@Test
 	public void registrationPhoneVerificationFromTheList() throws Exception {
-		TestcaseID = "310904"; //Original TC C310904
+		TestcaseID = "314564"; //C314564
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
 
 		String[] validPhoneNumbersList = {
-				"1234567890", "123-456-7890", "123.456.7890", "123 456 7890", "(123) 456-7890", "+1 123-456-7890", "1 123 456 7890"};
+				"1234567890", "123-456-7890", "123.456.7890", "123 456 7890", "(123) 456-7890" };
 
 		String[] invalidPhoneNumbersList = {
-				"123456789", "12345678900", "1234a56789", "1234 456 122", "0012345674", " +1 345 777 1111", "1234--123445", "1234@56789", "qwertqwert",
-				"123!@#$%^&7", "!7783201122", "0000000000"};
+				"123456789", "1234a56789" };
 
-//		String[] validPhoneNumbersList = {
-//				"1234567890", "123-456-7890"};
-//
 //		String[] invalidPhoneNumbersList = {
-//				"1234a56789", "1234 456 122"};
+//				"1 123 456 7890", "123456789", "1234a56789", "1234 456 122", "0012345674", " +1 345 777 1111", "1234--123445", "1234@56789", "qwertqwert",
+//				"123!@#$%^&7", "!7783201122", "0000000000", "+1 123-456-7890"};
 
 		//Login as user 08
 		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();

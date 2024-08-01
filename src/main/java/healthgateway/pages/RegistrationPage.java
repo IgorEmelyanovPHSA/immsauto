@@ -22,7 +22,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//input[@name='emailUpdates2']")
     private WebElement textEmailConfirmation;
 
-    @FindBy(xpath = "//input[@name='textUpdates']")
+    @FindBy(xpath = "//input[@name='phoneNumber']")
     private WebElement textPhoneNumber;
 
     By warningInvalidEMailXpath = By.xpath("//span[text()='Invalid email']");
