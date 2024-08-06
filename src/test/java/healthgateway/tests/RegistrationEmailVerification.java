@@ -19,10 +19,6 @@ public class RegistrationEmailVerification extends BaseTest {
 		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
-	//	String emailToVerify = "test@abc@com";
-		//Both email addresses must match
-		// email and phone number length limit??? no limit
-
 		String[] validEmails = {
 				"\"vijaya<pitta\"@gmail.com", "\"vijaya>pitta\"@gmail.com", "\"vijaya(pitta\"@gmail.com", "\"vijaya)pitta\"@gmail.com", "\"vijaya[pitta\"@gmail.com",
 				"\"vijaya]pitta\"@gmail.com", "\"vijaya\\pitta\"@gmail.com", "\"vijaya,pitta\"@gmail.com", "\"vijaya;pitta\"@gmail.com", "\"vijaya:pitta\"@gmail.com",
@@ -40,7 +36,7 @@ public class RegistrationEmailVerification extends BaseTest {
 				"vijaya@gmail..com", "user@", "vijaya.pitta@gmail@com", "vijaya.pitta@gmail_com", "vijaya.pitta@gmail>com", "vijaya.pitta@gmail<com",
 				"vijaya.pitta@gmail(com", "vijaya.pitta@gmail)com", "vijaya.pitta@gmail[com", "vijaya.pitta@gmail]com", "vijaya.pitta@gmail\\com",
 				"vijaya.pitta@gmail,com", "vijaya.pitta@gmail;com", "vijaya.pitta@gmail:com", "vijaya.pitta@gmail com", "@gmail.com"};
-		
+
 		//Login as user 08
 		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();
 		registration.clickOnEmailNotificationCheckbox();

@@ -22,6 +22,9 @@ public class MainPageHealthGateway extends BasePage {
     @FindBy(xpath = "//div[@data-region-name ='themeHeaderProfileMenu']")
     private WebElement profileIcon;
 
+    @FindBy(xpath = "//span[@title ='Logout']")
+    private WebElement btnLogOutUnderProfile;
+
     @FindBy(xpath = "//span[@title ='Profile']")
     private WebElement dropDownProfile;
 
@@ -57,6 +60,14 @@ public class MainPageHealthGateway extends BasePage {
     public ProfilePage goToProfilePage() throws InterruptedException {
         click(profileIcon);
         click(dropDownProfile);
+        Thread.sleep(5000);
+        return new ProfilePage(driver);
+    }
+
+    @Step
+    public ProfilePage goToLogOut() throws InterruptedException {
+        click(profileIcon);
+        click(btnLogOutUnderProfile);
         Thread.sleep(5000);
         return new ProfilePage(driver);
     }
