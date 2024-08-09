@@ -564,6 +564,63 @@ public class ApiQueries {
         }
     }
 
+    public static ArrayList<String> getListOfDeferrals(String AccountId) throws Exception {
+        log("/*---Query to get Deferral records--*/ ");
+        ArrayList<String> ImmunizationRecordList = new ArrayList<String>();
+        String ImmunizationRecordId = null;
+        String oauthToken = getOauthToken();
+
+        String query ="/query?q=SELECT+ID,+Name,+Profile__c,+Deferral_Agent__c+FROM+Deferrals__c+WHERE+Profile__c='"+AccountId+"'";
+        //String query ="/query?q=SELECT+ID,+Name,+Profile__c,+Profile__r.Id,+Profile__r.Name,+Deferral_Agent__c+FROM+Deferrals__c";
+
+        baseUri = LOGINURL + REST_ENDPOINT + API_VERSION ;
+        oauthHeader = new BasicHeader("Authorization", "OAuth " + oauthToken) ;
+        String uri = baseUri + query;
+        log("oauthToken: " + oauthToken);
+        log("baseUri: "+ baseUri);
+        log("Query URI: " + uri);
+
+        try {
+            //Set up the HTTP objects needed to make the request.
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet httpGet = new HttpGet(uri);
+            httpGet.addHeader(oauthHeader);
+            httpGet.addHeader(prettyPrintHeader);
+
+            // Make the request.
+            HttpResponse response = httpClient.execute(httpGet);
+
+            // Process the result
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String response_string = EntityUtils.toString(response.getEntity());
+                try {
+                    JSONObject json = new JSONObject(response_string);
+                    log("JSON result of Query:\n" + json.toString(1));
+                    JSONArray j = json.getJSONArray("records");
+                    for (int i = 0; i < j.length(); i++){
+                        ImmunizationRecordId = json.getJSONArray("records").getJSONObject(i).getString("Id");
+                        log("ImmunizationRecordId: " + ImmunizationRecordId);
+                        ImmunizationRecordList.add(ImmunizationRecordId);
+                    }
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                }
+            } else {
+                log("Query was unsuccessful. Status code returned is " + statusCode);
+                log("An error has occured. Http status: " + response.getStatusLine().getStatusCode());
+                log(getBody(response.getEntity().getContent()));
+                throw new Exception("API request failed");
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        log("Found amount of immunization records: " + ImmunizationRecordList.size());
+        return ImmunizationRecordList;
+    }
+
     public static String getDeferralName(String deferralRecordId) throws Exception {
         log("/*---Delete Deferral record " + deferralRecordId +"--*/ ");
         String oauthToken = getOauthToken();
