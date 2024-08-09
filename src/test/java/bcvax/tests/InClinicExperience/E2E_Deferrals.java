@@ -29,7 +29,9 @@ public class E2E_Deferrals extends BaseTest {
         String client_data_file = Utils.getClientsDataFile();
         client_data = Utils.getTestClientData(client_data_file, "deferral");
         log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-        //Utilities.ApiQueries.deleteDeferralRecord("a4RAs000000Uce9MAC");
+        String account_id = Utilities.ApiQueries.queryToGetAccountId(client_data.get("personalHealthNumber"), "HC_Participant");
+        //Utilities.ApiQueries.getListOfDeferrals(account_id);
+        //Utilities.ApiQueries.deleteDeferralRecord("a4RAs000000WWeHMAW");
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
     }

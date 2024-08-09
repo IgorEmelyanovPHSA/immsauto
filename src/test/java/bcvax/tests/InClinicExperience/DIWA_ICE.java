@@ -38,7 +38,7 @@ public class DIWA_ICE extends BaseTest {
 		env = Utils.getTargetEnvironment();
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		testData = Utils.getTestData(env);
-		citizenName = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
+		citizenName = client_data.get("legalFirstName") + " " + (client_data.get("legalMiddleName").equals("") ? "" : client_data.get("legalMiddleName") + " ") + client_data.get("legalLastName");
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 
 		lot_to_select = String.valueOf(testData.get("covidLot"));
@@ -57,8 +57,10 @@ public class DIWA_ICE extends BaseTest {
 		if (!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
 			try {
 				MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
-			} catch(Exception ex) {
-				Thread.sleep(5000);
+			} catch(ElementClickInterceptedException ex) {
+				Thread.sleep(1000);
+				PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+				Thread.sleep(500);
 				MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 			}
 		}

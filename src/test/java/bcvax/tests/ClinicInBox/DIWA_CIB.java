@@ -45,7 +45,7 @@ public class DIWA_CIB extends BaseTest {
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		lot_to_select = String.valueOf(testData.get("covidLot"));
 		dosage_to_select = String.valueOf(testData.get("covidDose"));
-		participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
+		participant_name = client_data.get("legalFirstName") + " " + (client_data.get("legalMiddleName").equals("") ? "" : client_data.get("legalMiddleName") + " ") + client_data.get("legalLastName");
 		loginPage.loginAsImmsBCAdmin();
 		ClinicInBoxPage clinicInBoxPage = new ClinicInBoxPage(driver);
 		log("/*-- 2. Clinic In Box page displayed --*/");

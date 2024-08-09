@@ -239,8 +239,12 @@ public class DiwaImmunizationRecord extends BasePage {
         lotSearchInputField.sendKeys(lot);
         Thread.sleep(1000);
         waitForElementToBeEnabled(driver, lot_item_path, 10);
-        WebElement lot_item = driver.findElement(lot_item_path);
-        lot_item.click();
+        List<WebElement> lot_items = driver.findElements(lot_item_path);
+        for(WebElement lot_item : lot_items) {
+            if(lot_item.isDisplayed()) {
+                lot_item.click();
+            }
+        }
     }
 
     public static void setDosage(WebDriver driver, String dose) throws InterruptedException {
