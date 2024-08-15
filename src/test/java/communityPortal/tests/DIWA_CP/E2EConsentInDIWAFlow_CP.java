@@ -26,7 +26,7 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
     private String dosage_to_select;
     private String site_to_select = "Arm - Right deltoid";
     private String route_to_select = "Intramuscular";
-    String clinic_location = "All Ages - Atlin Health Centre";
+    String clinic_location;
     Map<String, String> client_data;
     Map<String, String> client_data_new;
     @BeforeMethod
@@ -43,6 +43,7 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         consentProvider = String.valueOf(testData.get("consentProvider"));
+        clinic_location = String.valueOf(testData.get("diwaLocation"));
         lot_to_select = String.valueOf(testData.get("pneumoLot"));
         dosage_to_select = String.valueOf(testData.get("pneumoDose"));
         log("Target Environment: " + env);
