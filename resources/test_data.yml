@@ -1,31 +1,31 @@
 bcvaxdevit:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
-  supplyItem: "COMIRNATY (Pfizer) - EK4241"
-  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
+  supplyItem: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA"
+  supplyLocationConsumption: "Automation Supply Location_1"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
   distributionToSameClinic: "Same Clinic"
   distributionConsumption: "Operational Fridge"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:26:33)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:36:09)"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:44:53)"
-  containerConsumption: "COMIRNATY (Pfizer) - 35035BD-CC01 (2023-09-07 13:16:45)"
+  containerFrom: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 12:49:16)"
+  containerTo: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 12:56:03)"
+  containerToSameClinic: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 12:53:51)"
+  containerConsumption: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 16:24:25)"
   bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:27:19)":
+    - "VAXZEVRIA (AstraZeneca) - AUTO-ASTRAZ (2024-08-14 18:16:17)":
         conversionFactor: "10.00"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:26:33)":
+    - "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 16:24:25)":
         conversionFactor: "5.00"
-    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-09-07 09:29:00)":
+    - "SPIKEVAX (Moderna) - AUTO-Covid-SPIKEVAX (2024-08-14 13:09:08)":
         conversionFactor: "10.00"
   bulkContainersTo:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:36:09)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:36:09)"
-    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-09-07 09:36:09)"
+    - "VAXZEVRIA (AstraZeneca) - AUTO-ASTRAZ (2024-08-14 13:06:27)"
+    - "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 12:56:03)"
+    - "SPIKEVAX (Moderna) - AUTO-Covid-SPIKEVAX (2024-08-14 13:14:30)"
   bulkContainersToSameClinic:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2023-09-07 09:44:11)"
-    - "COMIRNATY (Pfizer) - EK4241 (2023-09-07 09:44:53)"
-    - "SPIKEVAX (Moderna) - 3001530-CC01 (2023-09-07 09:45:20)"
+    - "VAXZEVRIA (AstraZeneca) - AUTO-ASTRAZ (2024-08-14 13:04:13)"
+    - "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-14 12:53:51)"
+    - "SPIKEVAX (Moderna) - AUTO-Covid-SPIKEVAX (2024-08-14 13:12:54)"
   vaccineAgent: "COVID-19 mRNA"
   consentProvider: "Auto Bchcomclinician"
   routeConsumption: "Intramuscular"
@@ -34,13 +34,12 @@ bcvaxdevit:
   agentRefusal: "COVID-19 mRNA"
   agentInfluenza: "Influenza-LAIV"
   consumptionDose: "0.3"
-  consumptionLot: "35035BD-CC01"
-  covidLot: "EK4241"
-  #consumptionLot: "EK4241"
+  consumptionLot: "AUTO-Covid-mRNA"
+  covidLot: "AUTO-Covid-mRNA"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
-  diwaLocation: "All Ages - Atlin Health Centre"
-  influenzaLot: "HL2478-CC01"
-  pneumoLot: "0820Z-CC01"
+  diwaLocation: "Automation Supply Location_1"
+  influenzaLot: "AUTO-FLU"
+  pneumoLot: "AUTO-PNEUMO"
   covidDose: "0.3"
   influenzaDose: "0.2"
   pneumoDose: "0.5"
@@ -52,13 +51,13 @@ bcvaxdevit:
         address_id: "AD-0006759689"
         appointment_city: "Abbotsford"
         minor_ailments: "Yes"
-    - "All Ages - Atlin Health Centre":
-        address_id: "AD-0006759693"
-        appointment_city: "Atlin"
+    - "Automation Supply Location_1":
+        address_id: "AD-0006759765"
+        appointment_city: "Vancouver"
         minor_ailments: "No"
-    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
-        address_id: "AD-0006759691"
-        appointment_city: "Coquitlam"
+    - "Automation Supply Location_2":
+        address_id: "AD-0006759766"
+        appointment_city: "Nanaimo"
         minor_ailments: "No"
 prodsuppqa:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
@@ -328,10 +327,10 @@ bcvaxqa:
   consumptionDose: "0.3"
   consumptionLot: "35035BD-CC01"
   covidLot: "CXBBBLUE"
-  pneumoLot: "OK_Pneumo_test_Oct_5_2023"
+  pneumoLot: "0486AA-CC01"
   #consumptionLot: "EK4241"
   diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
-  diwaLocation: "All Ages - Atlin Health Centre"
+  diwaLocation: "New Westminster - Buchanan Lodge - LTC_AL_IL"
   influenzaLot: "HL2478-CC01"
   covidDose: "0.3"
   pneumoDose: "0.5"
@@ -344,9 +343,9 @@ bcvaxqa:
         address_id: "AD-0006762018"
         appointment_city: "Abbotsford"
         minor_ailments: "Yes"
-    - "All Ages - Atlin Health Centre":
-        address_id: "AD-0006762022"
-        appointment_city: "Atlin"
+    - "New Westminster - Buchanan Lodge - LTC_AL_IL":
+        address_id: "AD-0006761978"
+        appointment_city: "New Westminster"
         minor_ailments: "No"
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006764994"
