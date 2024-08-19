@@ -37,10 +37,10 @@ bcvaxdevit:
   consumptionDose: "0.3"
   consumptionLot: "AUTO-Covid-mRNA"
   covidLot: "AUTO-Covid-mRNA"
-  diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
-  diwaLocation: "Automation Supply Location_1"
   influenzaLot: "AUTO-FLU"
   pneumoLot: "AUTO-PNEUMO"
+  diwaCitizen: "Rawley Marijo BCVaxIsmirnioglou"
+  diwaLocation: "Automation Supply Location_1"
   covidDose: "0.3"
   influenzaDose: "0.2"
   pneumoDose: "0.5"
@@ -118,52 +118,6 @@ prodsuppqa:
         address_id: "AD-0006760075"
         appointment_city: "Coquitlam"
         minor_ailments: "No"
-bcvaxuat:
-  supplyLocationFrom: "Automation Supply Location_1"
-  supplyLocationTo: "Automation Supply Location_2"
-  supplyItem: "COMIRNATY (Pfizer) - EK4241"
-  supplyLocationConsumption: "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic"
-  supplyLocationMinorAilment: "Age 12 and Above - Abbotsford - Abby Pharmacy"
-  #Workaround
-  #supplyLocationConsumption: "All Ages - Atlin Health Centre"
-  #supplyLocationConsumption: "Age 12 and Above - Abbotsford - Abby Pharmacy"
-  distributionFrom: "Automation Supply Distribution_1_1"
-  distributionTo: "Supply Distribution_2_1"
-  distributionToSameClinic: "Supply Distribution_1_2"
-  distributionConsumption: "Fridge"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
-  containerConsumption: "SPIKEVAX (Moderna) - 300042698-CC04 (2022-08-16 16:00:57)"
-  bulkContainersFrom:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:07:03)":
-        conversionFactor: "10.00"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:07:46)":
-        conversionFactor: "5.00"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:08:41)":
-        conversionFactor: "10.00"
-  bulkContainersTo:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:55:49)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:56:30)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 15:24:13)"
-  bulkContainersToSameClinic:
-    - "VAXZEVRIA (AstraZeneca) - MT0055 (2022-08-11 14:38:29)"
-    - "COMIRNATY (Pfizer) - EK4241 (2022-08-11 14:39:06)"
-    - "SPIKEVAX 6mo-5y 0.1mg/mL (Moderna) - SPIKEVAX6-5Test001 (2022-08-11 14:39:50)"
-  vaccineAgent: "COVID-19 mRNA"
-  consentProvider: "Auto Bchcomclinician"
-  agentConsumption: "COVID-19 mRNA"
-  routeConsumption: "Intramuscular"
-  siteConsumption: "Arm - Right deltoid"
-  consumptionDose: "0.5"
-  consumptionLot: "300042698-CC04"
-  #consumptionLot: "EL0203"
-
-  diwaCitizen: "Ping an Penelope BCVaxZhang"
-  diwaLocation: "All Ages - Atlin Health Centre"
-  useDefaultSettingsLots:
-    - "300042698-CC04"
-    - "NK2858B"
 regression:
   supplyLocationFrom: "Vancouver - VCH Clinic - (aged 5 - 11 years)"
   supplyLocationTo: "Guildford Public Health Unit - (Family)"
@@ -230,47 +184,47 @@ regression:
 regress2:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
-  supplyItem: "COMIRNATY (Pfizer) - EK4241"
-  supplyLocationConsumption: "All Ages - Atlin Health Centre"
-  supplyLocationMinorAilment: "Age 12 and Above - Abbotsford - Abby Pharmacy"
+  supplyItem: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA"
+  supplyLocationConsumption: "Automation Supply Location_1"
+  supplyLocationMinorAilment: "Automation Supply Location_2"
   distributionFrom: "Operational Fridge"
   distributionTo: "Operational Fridge"
   distributionToSameClinic: "Same Clinic"
   distributionConsumption: "Operational Fridge"
-  containerFrom: "COMIRNATY (Pfizer) - EK4241 (2024-07-24 16:06:46)"
-  containerTo: "COMIRNATY (Pfizer) - EK4241 (2024-07-24 19:02:11)"
-  containerToSameClinic: "COMIRNATY (Pfizer) - EK4241 (2024-07-24 16:18:27)"
-  containerConsumption: "COMIRNATY (Pfizer) - EK4241 (2024-07-24 19:07:32)"
+  containerFrom: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 09:53:22)"
+  containerTo: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 10:03:57)"
+  containerToSameClinic: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 10:00:22)"
+  containerConsumption: "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 09:53:22)"
   bulkContainersFrom:
-    - "SPIKEVAX (Moderna) - 052C21A-CC02 (2024-07-24 16:14:36)":
-        conversionFactor: "14.00"
-    - "COMIRNATY (Pfizer) - EK4241 (2024-07-24 16:06:46)":
+    - "VAXZEVRIA (AstraZeneca) - AUTO-ASTRAZ (2024-08-19 09:52:48)":
+        conversionFactor: "10.00"
+    - "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 09:53:22)":
         conversionFactor: "5.00"
-    - "SPIKEVAX (Moderna) - 3001530-CC02 (2024-07-24 16:07:55)":
+    - "SPIKEVAX (Moderna) - AUTO-Covid-SPIKEVAX (2024-08-19 09:53:54)":
         conversionFactor: "10.00"
   bulkContainersTo:
-    - "SPIKEVAX (Moderna) - 052C21A-CC02 (2024-07-24 19:02:22)"
-    - "COMIRNATY (Pfizer) - EK4241 (2024-07-24 19:02:11)"
-    - "SPIKEVAX (Moderna) - 3001530-CC02 (2024-07-24 19:02:32)"
+    - "VAXZEVRIA (AstraZeneca) - AUTO-ASTRAZ (2024-08-19 10:03:57)"
+    - "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 10:03:57)"
+    - "SPIKEVAX (Moderna) - AUTO-Covid-SPIKEVAX (2024-08-19 10:03:57)"
   bulkContainersToSameClinic:
-    - "SPIKEVAX (Moderna) - 052C21A-CC02 (2024-07-24 16:18:49)"
-    - "COMIRNATY (Pfizer) - EK4241 (2024-07-24 16:18:27)"
-    - "SPIKEVAX (Moderna) - 3001530-CC02 (2024-07-24 16:19:16)"
+    - "VAXZEVRIA (AstraZeneca) - AUTO-ASTRAZ (2024-08-19 09:59:28)"
+    - "COMIRNATY (Pfizer) - AUTO-Covid-mRNA (2024-08-19 10:00:22)"
+    - "SPIKEVAX (Moderna) - AUTO-Covid-SPIKEVAX (2024-08-19 10:01:18)"
   vaccineAgent: "COVID-19 mRNA"
   consentProvider: "Auto Bchcomclinician"
   agentConsumption: "COVID-19 Non-replicating Viral Vector"
   agentRefusal: "COVID-19 mRNA"
   agentInfluenza: "Influenza-LAIV"
   diwaCitizen: "Rawley BCVaxIsmirnioglou"
-  diwaLocation: "All Ages - Atlin Health Centre"
+  diwaLocation: "Automation Supply Location_1"
   providerConsumption: "Auto Bchcomclinician"
   routeConsumption: "Intramuscular"
   siteConsumption: "Arm - Right deltoid"
   consumptionDose: "0.3"
-  consumptionLot: "EK4241"
-  covidLot: "EK4241"
-  pneumoLot: "0486AA-CC01"
-  influenzaLot: "CM1216"
+  consumptionLot: "AUTO-Covid-mRNA"
+  covidLot: "AUTO-Covid-mRNA"
+  influenzaLot: "AUTO-FLU"
+  pneumoLot: "AUTO-PNEUMO"
   covidDose: "0.3"
   pneumoDose: "0.5"
   influenzaDose: "0.2"
@@ -278,18 +232,14 @@ regress2:
     - "ABZ5320-CC01"
     - "EK4241"
   supplyLocationsDayManagement:
-    - "Age 12 and Above - Abbotsford - Abby Pharmacy":
-        address_id: "AD-0007200778"
-        appointment_city: "Abbotsford"
+    - "Automation Supply Location_1":
+        address_id: "AD-0007200776"
+        appointment_city: "Vancouver"
+        minor_ailments: "No"
+    - "Automation Supply Location_2":
+        address_id: "AD-0007200777"
+        appointment_city: "Nanaimo"
         minor_ailments: "Yes"
-    - "All Ages - Atlin Health Centre":
-        address_id: "AD-0007200782"
-        appointment_city: "Atlin"
-        minor_ailments: "No"
-    - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
-        address_id: "AD-0007200780"
-        appointment_city: "Coquitlam"
-        minor_ailments: "No"
 bcvaxqa:
   supplyLocationFrom: "Automation Supply Location_1"
   supplyLocationTo: "Automation Supply Location_2"
