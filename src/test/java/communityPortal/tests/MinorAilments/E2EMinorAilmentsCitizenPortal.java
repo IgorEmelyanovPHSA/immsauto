@@ -22,7 +22,7 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
     String postalCode;
     String email;
     String minorAilmentsToSelect = "Contraception";
-    String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    String clinicNameToSearch;
     String notesToPharmacist = "This message created by automation";
 
     @BeforeMethod
@@ -33,6 +33,7 @@ public class E2EMinorAilmentsCitizenPortal extends BaseTest {
         client_data = Utils.getTestClientData(client_data_file, "minor_ailment");
         legalFirstName = client_data.get("legalFirstName");
         legalLastName = client_data.get("legalLastName");
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationMinorAilment"));
         dateOfBirth = Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy");
         personalHealthNumber = client_data.get("personalHealthNumber");
         postalCode = client_data.get("postalCode");

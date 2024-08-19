@@ -24,8 +24,8 @@ public class AddAppointmentDays extends BaseTest {
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate start_date = LocalDate.parse("2024-08-14", dtf);
-        LocalDate end_date = LocalDate.parse("2024-08-18", dtf);
+        LocalDate start_date = LocalDate.parse("2024-08-19", dtf);
+        LocalDate end_date = LocalDate.parse("2024-08-25", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
@@ -59,7 +59,7 @@ public class AddAppointmentDays extends BaseTest {
                 String address_id = ((HashMap<String, String>)providers.get(i).get(provider_name)).get("address_id");
                 String appointment_city = ((HashMap<String, String>)providers.get(i).get(provider_name)).get("appointment_city");
                 String minor_ailments = ((HashMap<String, String>)providers.get(i).get(provider_name)).get("minor_ailments");
-                if((appointment_type.equals("Minor Ailments and Contraception") && minor_ailments.equals("Yes")) || (appointment_type.equals("BC Immunization Program") && !minor_ailments.equals("Yes"))) {
+                if((appointment_type.equals("Minor Ailments and Contraception") && minor_ailments.equals("Yes")) || (appointment_type.equals("BC Immunization Program"))) {
                     String appointment_day_id = Utilities.ApiQueries.getAppointmentDays(appointment_dates.get(d), appointment_type, appointment_city);
                     if (!appointment_day_id.equals("")) {
                         Map<String, WebElement> my_row = appointment_day_page.findAppointmentDay(appointment_dates.get(d), appointment_type, provider_name);

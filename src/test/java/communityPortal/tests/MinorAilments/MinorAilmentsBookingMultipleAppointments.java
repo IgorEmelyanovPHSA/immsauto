@@ -23,7 +23,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
     private String email;
     private String minorAilmentsToSelectFirstAppointment = "Contraception";
     private String minorAilmentsToSelectSecondAppointment = "Headaches";
-    private String clinicNameToSearch = "Age 12 and Above - Abbotsford - Abby Pharmacy";
+    private String clinicNameToSearch;
     private String notesToPharmacist = "C259543 - This message was created by automation";
 
     @BeforeMethod
@@ -34,6 +34,7 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         client_data = Utils.getTestClientData(client_data_file, "minor_ailment");
         legalFirstName = client_data.get("legalFirstName");
         legalLastName = client_data.get("legalLastName");
+        clinicNameToSearch = String.valueOf(testData.get("supplyLocationMinorAilment"));
         dateOfBirth = Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy");
         personalHealthNumber = client_data.get("personalHealthNumber");
         postalCode = client_data.get("postalCode");
