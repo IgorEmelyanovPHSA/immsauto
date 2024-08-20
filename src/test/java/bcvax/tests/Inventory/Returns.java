@@ -14,8 +14,8 @@ public class Returns extends BaseTest {
     String env;
     Map<String, Object> testData;
     MainPageOrg orgMainPage;
-    String supply_item = "FluMist-Tri - BK2024B";
-    String lot_number = "BK2024B";
+    String supply_item;
+    String lot_number;
     String supply_location_from;
     String supply_location_to;
     double doses = 100;
@@ -32,6 +32,8 @@ public class Returns extends BaseTest {
         supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
         supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
         distribution_to = String.valueOf(testData.get("distributionTo"));
+        supply_item = String.valueOf(testData.get("supplyItemInfluenza"));
+        lot_number = String.valueOf(testData.get("influenzaLot"));
         //Login as Admin
         log("/*----Login as Admin --*/");
         orgMainPage = loginPage.orgLoginAsPPHIS();
