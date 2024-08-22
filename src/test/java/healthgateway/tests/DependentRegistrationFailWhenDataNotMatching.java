@@ -18,7 +18,6 @@ public class DependentRegistrationFailWhenDataNotMatching extends BaseTest {
 	private String PHN = "9874307208";
 
 
-	///THIS TC NEED some work JULY 22, 2024
 	@Test
 	public void dependentRegistrationFailWhenDataNotMatching() throws Exception {
 		TestcaseID = "315205"; //Original TC C315205

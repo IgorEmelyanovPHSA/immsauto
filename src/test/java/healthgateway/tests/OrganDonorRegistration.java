@@ -35,14 +35,12 @@ public class OrganDonorRegistration extends BaseTest {
 		services.validateStatusRegistered();
 
 		//Validation Sensitive wording
-		String getText = services.checkSensitiveWording();
-		Assert.assertTrue(getText.equalsIgnoreCase(textSensitiveWording),  "Sensitive wording didn't match");
+		Assert.assertTrue(services.checkSensitiveWording().equalsIgnoreCase(textSensitiveWording),  "Sensitive wording didn't match");
 
 		services.clickBtnCancel();
 
 		//Validation external link
-		String getLink = services.getLinkValue();
-		Assert.assertTrue(getLink.equalsIgnoreCase(textExternalLink),  "External link is not valid");
+		Assert.assertTrue(services.getLinkValue().equalsIgnoreCase(textExternalLink),  "External link is not valid");
 
 		log("Organ Donor Registration performed successfully");
 		}

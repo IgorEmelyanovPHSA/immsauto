@@ -19,6 +19,12 @@ public class MainPageHealthGateway extends BasePage {
     @FindBy(xpath = "//a[@title = 'Services']")
     private WebElement tabServices;
 
+    @FindBy(xpath = "//a[@title = 'Export']")
+    private WebElement tabExport;
+
+    @FindBy(xpath = "//a[@title = 'Feedback']")
+    private WebElement tabFeedBack;
+
     @FindBy(xpath = "//div[@data-region-name ='themeHeaderProfileMenu']")
     private WebElement profileIcon;
 
@@ -54,6 +60,13 @@ public class MainPageHealthGateway extends BasePage {
         click(tabServices);
         Thread.sleep(5000);
         return new ServicesTabPage(driver);
+    }
+
+    @Step
+    public ExportTabPage goToTabExport() throws InterruptedException {
+        click(tabExport);
+        Thread.sleep(5000);
+        return new ExportTabPage(driver);
     }
 
     @Step

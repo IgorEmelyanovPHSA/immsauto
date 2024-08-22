@@ -8,6 +8,8 @@
     import org.openqa.selenium.support.FindBy;
 
     import java.util.List;
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
 
 
     public class TimeLineTabPage extends BasePage{
@@ -155,6 +157,20 @@
 
         @FindBy(xpath = "//span[text()='Cancel and close']/..")
         private WebElement btnCloseWindowX;
+
+        /////Search related Xpath's
+        @FindBy(xpath = "//input[@placeholder='Search']")
+        private WebElement textSearch;
+
+        @FindBy(xpath = "//button[@title='Remove']")
+        private WebElement btnXRemoveSearchResults;
+
+        @FindBy(xpath = "//input[@placeholder='Start Date']")
+        private WebElement textSearchStartDate;
+
+        @FindBy(xpath = "//input[@placeholder='End Date']")
+        private WebElement textSearchEndDate;
+
 
         public TimeLineTabPage(WebDriver driver) {
             super(driver);
@@ -319,6 +335,23 @@
             return Integer.parseInt(getText(textDisplayingNumberOfRecords).split("\\s+")[3]);
         }
 
+        public int getNumberOfRecordsRegex() {
+            // Define the regex pattern to match numbers
+            Pattern pattern = Pattern.compile("\\d+");
+            Matcher matcher = pattern.matcher(getText(textDisplayingNumberOfRecords));
+
+            int lastNumber = 0;
+
+            // Iterate through all matches
+            while (matcher.find()) {
+                // Update lastNumber with the current match
+                lastNumber = Integer.parseInt(matcher.group());
+            }
+
+            // Return the last matched number
+            return lastNumber;
+        }
+
         public void deleteMyNotes() throws InterruptedException {
             int numberOfNotes = getNumberOfRecords();
             for(int i = 0; i <numberOfNotes; i++){
@@ -356,7 +389,7 @@
         public void enterProtectiveWordAndContinue(String text) throws InterruptedException {
             typeIn(textInputProtectiveWord, text);
             click(btnContinue);
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         }
 
         public void textValidationInvalidProtectiveWord(){
@@ -364,6 +397,25 @@
             if (elements.isEmpty()) {
                 throw new RuntimeException("Text not found: Invalid protective word.Try again.");
             }
+        }
+
+        public void filterBySearch(String text) throws InterruptedException {
+            typeIn(textSearch, text);
+            Thread.sleep(500);
+            click(btnApply);
+            Thread.sleep(1000);
+        }
+
+        public void removeSearchResults() throws InterruptedException {
+            click(btnXRemoveSearchResults);
+            Thread.sleep(2000);
+        }
+
+        public void filterByStartAndEndDate(String textStartDate, String textEndDate) throws InterruptedException {
+            typeIn(textSearchStartDate, textStartDate);
+            typeIn(textSearchEndDate, textEndDate);
+            click(btnApply);
+            Thread.sleep(1000);
         }
 
     }

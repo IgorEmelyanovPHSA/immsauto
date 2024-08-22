@@ -83,7 +83,7 @@
 
         public void clickOnBtnRegisterDependent() throws  InterruptedException{
             click(btnRegisterDependent);
-            Thread.sleep(5000);
+            Thread.sleep(7000);
         }
 
         public boolean isBtnRegisterDependentEnabled(){

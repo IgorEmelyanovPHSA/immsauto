@@ -16,7 +16,7 @@
         @FindBy(xpath = "//p[strong='Email address']")
         private WebElement textEmailAddress;
 
-        @FindBy(xpath = "//p[strong='Cell number (SMS notifications)']")
+        @FindBy(xpath = "//input[@placeholder='Your phone number']")
         private WebElement textCellNumber;
 
         @FindBy(xpath = "//p[strong='Mailing address']")
@@ -42,6 +42,7 @@
         }
 
         public String getCellNumber(){
+            log("cell: " +getText(textCellNumber));
             return getText(textCellNumber).split("\n")[1].trim();
         }
 

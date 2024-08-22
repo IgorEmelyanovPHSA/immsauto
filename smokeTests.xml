@@ -21,6 +21,10 @@
             <class name="healthgateway.tests.DependentRegistrationFailWhenDataNotMatching"/>
             <class name="healthgateway.tests.DependentDataRecreationUser11"/>
             <class name="healthgateway.tests.CitizenCanLoginToPortalAsUser11"/>
+            <class name="healthgateway.tests.CitizenCanFilterResultsByDate"/>
+            <class name="healthgateway.tests.CitizenCanFilterResultsByUsingSearchBox"/>
+            <class name="healthgateway.tests.ExportFilteringByDateRange"/>
+            <class name="healthgateway.tests.ExportFilteringByRecommendedImmunization"/>
              <!--    <class name="healthgateway.tests.RegistrationEmailVerification"/>
                <class name="healthgateway.tests.RegistrationPhoneVerification"/>   -->
               <!-- <class name="healthgateway.tests.CitizenCanCreateAndViewNotes"/> -->

@@ -40,7 +40,7 @@ public class CitizenCanRetrieveMedicationWithProtectiveWord extends BaseTest {
 		log(timeLine.getDisplayingNumberOfRecords());
 
 		//Validate medications records displayed
-		log("value " +timeLine.getNumberOfRecords());
+		log("Number of medication records displayed " +timeLine.getNumberOfRecords());
 		Assert.assertTrue(timeLine.getNumberOfRecords() >= 1, "Error. No medications records found");
 
 		//Validation open first medication record for user14
