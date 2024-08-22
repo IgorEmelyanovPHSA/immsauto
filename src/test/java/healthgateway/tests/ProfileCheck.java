@@ -15,7 +15,7 @@ public class ProfileCheck extends BaseTest {
 	//Data for user 11
 	private String fullName = "GATEWAY Carlos ELEVEN";
 	private String personalHealthNumber = "9735353315";
-	private String emailAddress = "mani.bhatti@phsa.ckewrfmr";
+	private String emailAddress = "mani.bhatti@phsa.ca";
 	private String cellNumber = "2506715000";
 	private String mailingAddress = "3815 HILLSPOINT STREET, CHATHAM, BC, V0G8B8";
 	private String physicalAddress = "3815 HILLSPOINT STREET, CHATHAM, BC, V0G8B8";

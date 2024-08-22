@@ -45,7 +45,6 @@ public class ExportFilteringByRecommendedImmunization extends BaseTest {
 		Assert.assertTrue(export.getLinkValueBCVaccineSchedule().equalsIgnoreCase(textBCVaccineScheduleURL),  "BC Vaccine Schedule link is not valid");
 		Assert.assertTrue(export.getLinkValueBCGovernmentImmunizationPage().equalsIgnoreCase(textBCGovernmentImmunizationPageURL),  "BC Government Immunization Page link is not valid");
 
-
 		log("Filtering using the search box pass successfully");
 		}
 
