@@ -25,7 +25,7 @@
             <class name="healthgateway.tests.CitizenCanFilterResultsByUsingSearchBox"/>
             <class name="healthgateway.tests.ExportFilteringByDateRange"/>
             <class name="healthgateway.tests.ExportFilteringByRecommendedImmunization"/>
-            <class name="healthgateway.tests.RegistrationEmailVerification"/>
+            <class name="healthgateway.tests.ProfileCheckEmail"/>
             <class name="healthgateway.tests.ProfileCheckPhoneNumber"/>
              <!--    <class name="healthgateway.tests.RegistrationEmailVerification"/>
                <class name="healthgateway.tests.RegistrationPhoneVerification"/>   -->
