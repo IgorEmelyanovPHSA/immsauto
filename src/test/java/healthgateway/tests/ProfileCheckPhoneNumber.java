@@ -20,10 +20,10 @@ public class ProfileCheckPhoneNumber extends BaseTest {
 		log("Test Case " + "C" + TestcaseID);
 
 		String[] validPhoneNumbersList = {
-				"1234567890", "123-456-7890", "123.456.7890", "123 456 7890", "(123) 456-7890" };
+				"604-456-7890", "236-456-7890", "672-456-7890", "778-456-7890", "779-456-7890" };
 
 		String[] invalidPhoneNumbersList = {
-				"123456789", "1234a56789" };
+				"345-456-7890", "555-456-7890" };
 
 		//Login as user 11 ONLY, data sets are for user 11
 		MainPageHealthGateway mainPageHealthGateway = loginPage.loginIntoHGWithBCServiceCardAsUser11();
