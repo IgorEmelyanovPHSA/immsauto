@@ -39,6 +39,9 @@ public class RegistrationEmailVerification extends BaseTest {
 
 		//Login as user 08
 		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();
+
+		//Site is slow
+		Thread.sleep(2000);
 		registration.clickOnEmailNotificationCheckbox();
 
 		//To test valid emails

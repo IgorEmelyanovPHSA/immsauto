@@ -41,18 +41,6 @@ public class RegistrationPage extends BasePage {
         click(checkboxTextNotifications);
     }
 
-    public void clickOnTest() throws InterruptedException {
-        Thread.sleep(5000);
-        click(checkboxEmailNotifications);
-        Thread.sleep(5000);
-        typeIn(textEmail,"test@abc.com");
-        typeIn(textEmailConfirmation,"test@abc.com");
-        click(checkboxTextNotifications);
-        Thread.sleep(1000);
-        typeIn(textPhoneNumber,"7783201950");
-        Thread.sleep(1000);
-    }
-
     public void emailCheckTest(String email) throws InterruptedException {
         clickOnEmailNotificationCheckbox();
         Thread.sleep(1000);
@@ -70,8 +58,8 @@ public class RegistrationPage extends BasePage {
         typeIn(textPhoneNumber,phoneNumber);
 
         //Click anywhere outside the box to trigger validation
-        click(checkboxEmailNotifications);
-        Thread.sleep(1000);
+        //click(checkboxEmailNotifications);
+        Thread.sleep(2000);
     }
 
     public int checkForEmailValidationErrorMessages(){

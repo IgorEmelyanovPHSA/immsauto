@@ -19,14 +19,18 @@ public class RegistrationPhoneVerification extends BaseTest {
 		log("Target Browser: " + Utils.getTargetBrowser());
 		log("Test Case " +"C" +TestcaseID);
 
-		String[] validPhoneNumbersList = {
-				"1234567890", "123-456-7890", "123.456.7890", "123 456 7890", "(123) 456-7890" };
+		String[] validPhoneNumbersList = { "604-456-7890", "236-456-7890", "672-456-7890", "778-456-7890", "779-456-7890" };
 
-		String[] invalidPhoneNumbersList = {
-				"123456789", "1234a56789" };
+		String[] invalidPhoneNumbersList = { "345-456-7890", "555-456-7890" };
 
 		//Login as user 08
 		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();
+
+		//Site is slow
+		Thread.sleep(2000);
+
+		//By default, checkbox is checked, to uncheck it
+		registration.clickOnTextNotificationCheckbox();
 
 		//To test valid phone number
 		for (int i = 0; i < validPhoneNumbersList.length; i++) {
@@ -41,6 +45,7 @@ public class RegistrationPhoneVerification extends BaseTest {
 
 			//Click on text notifications checkbox to refresh the last entered phone number
 			registration.clickOnTextNotificationCheckbox();
+			Thread.sleep(500);
 		}
 
 		//To test invalid phone number
