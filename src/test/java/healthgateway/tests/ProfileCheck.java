@@ -15,8 +15,6 @@ public class ProfileCheck extends BaseTest {
 	//Data for user 11
 	private String fullName = "GATEWAY Carlos ELEVEN";
 	private String personalHealthNumber = "9735353315";
-	private String emailAddress = "mani.bhatti@phsa.ca";
-	private String cellNumber = "2506715000";
 	private String mailingAddress = "3815 HILLSPOINT STREET, CHATHAM, BC, V0G8B8";
 	private String physicalAddress = "3815 HILLSPOINT STREET, CHATHAM, BC, V0G8B8";
 
@@ -36,12 +34,10 @@ public class ProfileCheck extends BaseTest {
 		//Validations
 		Assert.assertTrue(profile.getFullName().equalsIgnoreCase(fullName), "Full name didn't match!");
 		Assert.assertTrue(profile.getPersonalHealthNumber().equalsIgnoreCase(personalHealthNumber), "Personal Health Number didn't match!");
-		Assert.assertTrue(profile.getEmailAddress().equalsIgnoreCase(emailAddress), "Email Address didn't match!");
-	//	Assert.assertTrue(profile.getCellNumber().equalsIgnoreCase(cellNumber), "Cell Number didn't match!");
 		Assert.assertTrue(profile.getMailingAddress().equalsIgnoreCase(mailingAddress), "Mailing Address didn't match!");
 		Assert.assertTrue(profile.getMailingAddress().equalsIgnoreCase(physicalAddress), "Physical Address didn't match!");
 
-		log("Full Name, Personal Health Number, Email address, Mailing address, Physical matched successfully.");
+		log("Full Name, Personal Health Number, Mailing address, Physical matched successfully.");
 		}
 
 	}

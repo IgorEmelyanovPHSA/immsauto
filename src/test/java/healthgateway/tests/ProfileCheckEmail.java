@@ -1,7 +1,8 @@
 package healthgateway.tests;
 
 import Utilities.TestListener;
-import healthgateway.pages.RegistrationPage;
+import healthgateway.pages.MainPageHealthGateway;
+import healthgateway.pages.ProfilePage;
 import healthgateway.pages.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -9,15 +10,14 @@ import org.testng.annotations.Test;
 
 
 @Listeners({TestListener.class})
-public class RegistrationEmailVerification extends BaseTest {
-
+public class ProfileCheckEmail extends BaseTest {
 
 	@Test
-	public void registrationEmailVerificationFromTheList() throws Exception {
-		TestcaseID = "314563"; //Original TC C314563
+	public void profileEmailVerificationFromTheList() throws Exception {
+		TestcaseID = "322436"; //Original TC C320052
 		log("Target Environment: " + Utils.getTargetEnvironment());
 		log("Target Browser: " + Utils.getTargetBrowser());
-		log("Test Case " +"C" +TestcaseID);
+		log("Test Case " + "C" + TestcaseID);
 
 		String[] validEmails = {
 				"\"vijaya<pitta\"@gmail.com", "\"vijaya>pitta\"@gmail.com", "\"vijaya(pitta\"@gmail.com", "\"vijaya)pitta\"@gmail.com", "\"vijaya[pitta\"@gmail.com",
@@ -37,43 +37,39 @@ public class RegistrationEmailVerification extends BaseTest {
 				"vijaya.pitta@gmail(com", "vijaya.pitta@gmail)com", "vijaya.pitta@gmail[com", "vijaya.pitta@gmail]com", "vijaya.pitta@gmail\\com",
 				"vijaya.pitta@gmail,com", "vijaya.pitta@gmail;com", "vijaya.pitta@gmail:com", "vijaya.pitta@gmail com", "@gmail.com"};
 
-		//Login as user 08
-		RegistrationPage registration = loginPage.loginIntoHGWithBCServiceCardAsUser08();
-		registration.clickOnEmailNotificationCheckbox();
+		//Login as user 11 ONLY, data sets are for user 11
+		MainPageHealthGateway mainPageHealthGateway = loginPage.loginIntoHGWithBCServiceCardAsUser11();
+
+		//GoTo Profile
+		ProfilePage profile = mainPageHealthGateway.goToProfilePage();
 
 		//To test valid emails
 		for (int i = 0; i < validEmails.length; i++) {
-			registration.emailCheckTest(validEmails[i]);
-			int errorCountCheck = registration.checkForEmailValidationErrorMessages();
+			profile.emailCheck(validEmails[i]);
+			int errorCountCheck = profile.checkForEmailValidationErrorMessages();
 
 			//Validation for valid email
-			Assert.assertTrue(errorCountCheck == 0,  "Valid email validation failed for " +validEmails[i]);
+			Assert.assertTrue(errorCountCheck == 0, "Valid email validation failed for " + validEmails[i]);
 
 			//Print the status of checked email
-			log("Validation pass for valid email: " +validEmails[i]);
-
-			//Click on email notifications checkbox to refresh the last entered email
-			registration.clickOnEmailNotificationCheckbox();
+			log("Validation pass for valid email: " + validEmails[i]);
 		}
 
 		//To test invalid emails
 		for (int i = 0; i < invalidEmails.length; i++) {
-			registration.emailCheckTest(invalidEmails[i]);
-			int errorCountCheck = registration.checkForEmailValidationErrorMessages();
+			profile.emailCheck(invalidEmails[i]);
+			int errorCountCheck = profile.checkForEmailValidationErrorMessages();
 
 			//Validation for invalid email
-			Assert.assertTrue(errorCountCheck == 2,  "Invalid email validation failed for " +invalidEmails[i]);
+			Assert.assertTrue(errorCountCheck == 1, "Invalid email validation failed for " + invalidEmails[i]);
 
 			//Print the status of checked email
-			log("Validation pass for invalid email, 'Invalid email' message displayed for: " +invalidEmails[i]);
-
-			//Click on email notifications checkbox to refresh the last entered email
-			registration.clickOnEmailNotificationCheckbox();
+			log("Validation pass for invalid email, 'Invalid email' message displayed for: " + invalidEmails[i]);
 		}
 
-		log("Validation PASS for " +validEmails.length +" valid emails");
-		log("Validation PASS for " +invalidEmails.length +" invalid emails, 'Invalid email' message was displayed");
-		log("Test case PASS for valid and invalid email");
-		}
-
+		log("Validation PASS for " + validEmails.length + " valid emails");
+		log("Validation PASS for " + invalidEmails.length + " invalid emails, 'Valid email is required' message was displayed");
+		log("Test case PASS for valid and invalid email on user profile page");
 	}
+
+}

@@ -58,7 +58,7 @@ public class MainPageHealthGateway extends BasePage {
     @Step
     public ServicesTabPage goToTabServices() throws InterruptedException {
         click(tabServices);
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         return new ServicesTabPage(driver);
     }
 

@@ -60,7 +60,7 @@ public class RegistrationPhoneVerification extends BaseTest {
 
 		log("Validation PASS for " +validPhoneNumbersList.length +" valid phone numbers");
 		log("Validation PASS for " +invalidPhoneNumbersList.length +" invalid phone number, 'Invalid phone number' message was displayed");
-		log("Test case for valid and invalid phone number pass");
+		log("Test case PASS for valid and invalid phone number");
 		}
 
 	}
