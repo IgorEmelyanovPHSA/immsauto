@@ -24,15 +24,15 @@ public class AddAppointmentDays extends BaseTest {
         testData = Utils.getTestData(env);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate start_date = LocalDate.parse("2024-09-02", dtf);
+        LocalDate start_date = LocalDate.parse("2024-09-03", dtf);
         LocalDate end_date = LocalDate.parse("2024-09-08", dtf);
         ArrayList<String> appointment_dates = new ArrayList();
         for (LocalDate my_appointment_date = start_date; !my_appointment_date.isAfter(end_date); my_appointment_date = my_appointment_date.plusDays(1))
         {
             appointment_dates.add(my_appointment_date.format(dtf));
         }
-        String appointment_type = "Minor Ailments and Contraception";
-        //String appointment_type = "BC Immunization Program";
+        //String appointment_type = "Minor Ailments and Contraception";
+        String appointment_type = "BC Immunization Program";
 
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         String appointment_name = appointment_type + " " + appointment_date;

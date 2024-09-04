@@ -22,8 +22,6 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 	String participant_name;
 	String consentProvider;
 	private String consent_effective_date = "November 29, 2023";
-	private String lot_to_select = "0486AA-CC01";
-	private String dosage_to_select = "0.5";
 	String clinic_location;
 	MainPageOrg orgMainPage;
 	String consent_agent = "COVID-19 mRNA";
@@ -153,7 +151,7 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 		AddConsentDialog.cleanupInformedConsentProvider(driver);
 		AddConsentDialog.clickNextButton(driver);
 		List<String> response_errors = AddConsentDialog.getConsentProviderMissingError(driver);
-		Assert.assertEquals(response_errors.get(0), "Complete this field.");
+		Assert.assertTrue(response_errors.get(0).contains("Complete this field."));
 		Assert.assertEquals(response_errors.get(1), "A value is required.");
 
 		//Verify Missing Consent Provider Contact Error

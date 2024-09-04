@@ -300,7 +300,7 @@ public class SupplyConsolePage extends BasePage {
 		By save_draft_btn_path = By.xpath("//button[text()='Save as draft']");
 		waitForElementToBeEnabled(driver, save_draft_btn_path, 10);
 		WebElement btnSaveAsDraftOnContainerWastagePopUp = driver.findElement(save_draft_btn_path);
-		scrollIfNeeded(driver, btnSaveAsDraftOnContainerWastagePopUp);
+		scrollCenter(driver, btnSaveAsDraftOnContainerWastagePopUp);
 		Thread.sleep(500);
 		btnSaveAsDraftOnContainerWastagePopUp.click();
 	}

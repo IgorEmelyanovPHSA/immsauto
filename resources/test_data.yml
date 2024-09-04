@@ -165,8 +165,8 @@ regression:
   pneumoDose: "0.5"
   influenzaDose: "0.2"
   useDefaultSettingsLots:
-    - "NK2858B"
-    - "EK4241"
+    - "AUTO-Covid-mRNA"
+    - "AUTO-PNEUMO"
   supplyLocationsDayManagement:
     - "Age 12 and Above - Coquitlam - Lincoln Pharmacy & Coquitlam Travel Clinic":
         address_id: "AD-0006752445"

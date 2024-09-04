@@ -288,21 +288,6 @@ public abstract class BasePage<T> {
 			actions.moveToElement(element).perform();
 		}
 	}
-	
-	public T scrollTop(WebElement element) {
-		try {
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
-		} catch (WebDriverException e) {
-			log("WebDriverException occurred while scrolling: " + e.getMessage());
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
-		}
-		try {
-			Thread.sleep(500);
-		} catch (Exception e) {
-			log(e.toString());
-		}
-		return (T) this;
-	}
 
 	public T scrollCenter(WebElement element) {
 		try {
@@ -356,15 +341,6 @@ public abstract class BasePage<T> {
 			log("WebDriverException occurred while scrolling: " + e.getMessage());
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
 		}
-		try {
-			Thread.sleep(500);
-		} catch (Exception e) {
-			log(e.toString());
-		}
-	}
-
-	public static void scrollIfNeeded(WebDriver driver, WebElement element) {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoViewIfNeeded();", element);
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {

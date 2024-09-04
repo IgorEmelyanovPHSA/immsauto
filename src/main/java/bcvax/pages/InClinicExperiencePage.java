@@ -77,7 +77,7 @@ public class InClinicExperiencePage extends BasePage {
 		By today_appointments_path = By.xpath("//h2[text() = \"Today's Appointments\"] | //a[text() = \"Today's Appointments\"]");
 		waitForElementToBeEnabled(driver, today_appointments_path, 10);
 		WebElement todayAppointments = driver.findElement(today_appointments_path);
-		scrollIfNeeded(driver, todayAppointments);
+		scrollCenter(driver, todayAppointments);
 		Thread.sleep(500);
 		todayAppointments.click();
 	}

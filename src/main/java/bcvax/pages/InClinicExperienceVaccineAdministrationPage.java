@@ -139,7 +139,7 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         By edit_immunization_info_btn_path = By.xpath("//c-bc-hc-immunization-info//button[@title='Edit']");
         waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
         WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
-        scrollIfNeeded(driver, edit_immunization_info_btn);
+        scrollCenter(driver, edit_immunization_info_btn);
         Thread.sleep(500);
         edit_immunization_info_btn.click();
     }
@@ -169,7 +169,7 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         By confirm_save_adm_btn_path = By.xpath("//button[@title='Confirm & Save Administration']");
         waitForElementToBeEnabled(driver, confirm_save_adm_btn_path, 10);
         WebElement confirm_save_adm_btn = driver.findElement(confirm_save_adm_btn_path);
-        scrollIfNeeded(driver, confirm_save_adm_btn);
+        scrollCenter(driver, confirm_save_adm_btn);
         Thread.sleep(1000);
         confirm_save_adm_btn.click();
     }
@@ -235,8 +235,16 @@ public class InClinicExperienceVaccineAdministrationPage extends BasePage {
         waitForElementToBeEnabled(driver, add_deferral_button_path, 10);
         WebElement add_deferral_button = driver.findElement(add_deferral_button_path);
         scrollCenter(driver, add_deferral_button);
-        Thread.sleep(500);
-        add_deferral_button.click();
+        if(add_deferral_button.isDisplayed()) {
+            Thread.sleep(500);
+            add_deferral_button.click();
+        } else {
+            By expand_deferrals_path = By.xpath("//span[@c-deferrals_deferrals and @class='collapsible-toggle']");
+            WebElement expand_deferrals = driver.findElement(expand_deferrals_path);
+            expand_deferrals.click();
+            Thread.sleep(500);
+            add_deferral_button.click();
+        }
     }
 
     public static GenericTable getDeferralsTable(WebDriver driver) throws InterruptedException {
