@@ -11,6 +11,7 @@
             <class name="bcvax.tests.InClinicExperience.DIWA_ICE"/>
             <class name="bcvax.tests.InClinicExperience.Dose1_ICE_E2E"/>
             <class name="bcvax.tests.InClinicExperience.Dose2_E2E_Covid19"/>
+            <class name="bcvax.tests.InClinicExperience.Refusal_Consent"/>
             <!--class name="bcvax.tests.InClinicExperience.Dose1_E2E_Influenza"/-->
             <!--class name="bcvax.tests.InClinicExperience.Dose1_E2E_Pneumo"/-->
             <!--class name="bcvax.tests.InClinicExperience.Dose1_E2E_Influenza_Pneumo"/-->

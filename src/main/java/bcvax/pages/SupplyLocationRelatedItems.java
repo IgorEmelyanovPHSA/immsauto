@@ -138,7 +138,7 @@ public class SupplyLocationRelatedItems extends BasePage {
         By transfer_button_path = By.xpath(".//button[text() = 'Transfer']");
         waitForElementToBeEnabled(driver, transfer_button_path, 10);
         WebElement transfer_button = driver.findElement(transfer_button_path);
-        scrollIfNeeded(driver, transfer_button);
+        scrollCenter(driver, transfer_button);
         Thread.sleep(500);
         transfer_button.click();
     }

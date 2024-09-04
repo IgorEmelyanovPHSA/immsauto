@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 @Listeners({TestListener.class})
-public class Dose2_E2E_Covid19 extends BaseTest {
+public class Refusal_Consent extends BaseTest {
 	String env;
 	Map<String, Object> testData;
 	String supplyLocationConsumption;
@@ -48,13 +48,17 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		consumptionAgent = String.valueOf(testData.get("vaccineAgent"));
 		supplyLocationConsumption = String.valueOf(testData.get("supplyLocationConsumption"));
 	}
-	@Test()
-	public void Can_do_Dose2_Covid19_Vaccine_Administration_as_Clinician_ICE() throws Exception {
-		TestcaseID = "222811"; //C222811
 
+	@Test()
+	public void verify_cannot_proceed_with_consent_refusal() throws Exception {
+		TestcaseID = "276033"; //C222811
+		env = Utils.getTargetEnvironment();
+		testData = Utils.getTestData(env);
 		log("TestRail test case ID: C" +TestcaseID);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
 		log("/*1.----Login as an Clinician to ICE --*/");
+
+		refusalAgent = String.valueOf(testData.get("agentRefusal"));
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
 		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
@@ -94,26 +98,21 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-			Thread.sleep(500);
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 
 		log("/*26.----Go to Appointment Tab --*/");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 
+
+		//If override Eligibility is shown
 		try {
 			log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
-		} catch(ElementClickInterceptedException ex) {
-			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-			Thread.sleep(500);
-			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+
 		} catch(Exception ex) {
-			//If override Eligibility is shown
 			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
-			Thread.sleep(500);
-			log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
 
@@ -126,6 +125,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("/*29.----search the Clinic " + supplyLocationConsumption +" --*/");
 		PersonAccountSchedulePage.searchClinicName(driver, supplyLocationConsumption);
+
 		log("/*30.----click on Option Facility location  --*/");
 		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
@@ -154,6 +154,7 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 
@@ -180,21 +181,38 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
-		String lot = null;
+		Thread.sleep(2000);
+		//If Incorrect vaccine warning is displayed
 		try {
-			lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
+			PersonAccountPage.confirmNoForecastWarning(driver);
 		} catch(Exception ex) {
-			PersonAccountRelatedPage.checkExistingConsent(driver);
-			lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
+			System.out.println("No Warning found");
 		}
+
+//		String consentProviderSelected = ProfilesPage.consentProviderSelected(driver);
+//		if(consentProviderSelected.equals("")) {
+//			consentProviderSelected = ProfilesPage.selectConsentProvider(driver, consentProvider);
+//		}
+//
+//		log("/*42.---Click Save Consent Button --*/");
+//		inClinicExperience.ClickSaveConsentButton();
+
+		try {
+			PersonAccountRelatedPage.checkExistingConsent(driver);
+		} catch(Exception ex) {
+			System.out.println("No Checkbox. Continue...");
+		}
+		try {
+			InClinicExperienceVaccineAdministrationPage.clickEditImmunizationInformation(driver);
+		} catch(Exception ex) {
+			System.out.println("Edit Button disabled. Continue...");
+		}
+
+		String lot = InClinicExperienceVaccineAdministrationPage.getLotNumber(driver);
 		if(!lot.equals(consumptionLot)) {
-			try {
-				InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
-			} catch (NotFoundException ex) {
-				InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
-				Thread.sleep(2000);
-				InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
-			}
+			InClinicExperienceVaccineAdministrationPage.checkShowDepletedLots(driver);
+			Thread.sleep(500);
+			InClinicExperienceVaccineAdministrationPage.setLotNumber(driver, consumptionLot);
 		}
 
 		String provider =  InClinicExperienceVaccineAdministrationPage.getProvider(driver);

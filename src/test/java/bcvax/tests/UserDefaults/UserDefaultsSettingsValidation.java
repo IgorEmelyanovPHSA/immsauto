@@ -16,7 +16,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
     String env;
     //private final String[] lots = {"016F21A-CC07", "0649AA"};
     //private final String[] lots = {"016F21A-CC07", "T005729-CC07"};
-    String clinicLocation = "West Kelowna The Heritage Retirement Residence - All Ages";
+    String clinicLocation;
     Map<String, Object> testData;
     MainPageOrg orgMainPage;
 
@@ -28,7 +28,7 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         testData = Utils.getTestData(env);
         String[] lots = ((ArrayList<String>)testData.get("useDefaultSettingsLots")).toArray(new String[0]);
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
-
+        clinicLocation = String.valueOf(testData.get("supplyLocationConsumption"));
         log("/*1.----Login as clinician ICE --*/");
         loginPage.loginAsImmsBCAdmin();
         orgMainPage = new MainPageOrg(driver);

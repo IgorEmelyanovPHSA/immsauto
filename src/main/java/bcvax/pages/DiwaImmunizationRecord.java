@@ -265,7 +265,7 @@ public class DiwaImmunizationRecord extends BasePage {
         By show_all_chkbox_path = By.xpath("//span[@part='label' and text()='Show all lot numbers.']/../..");
         waitForElementToBeEnabled(driver, show_all_chkbox_path, 10);
         WebElement show_all_lot_numbers_checkbox = driver.findElement(show_all_chkbox_path);
-        scrollIfNeeded(driver, show_all_lot_numbers_checkbox);
+        scrollCenter(driver, show_all_lot_numbers_checkbox);
         Thread.sleep(1000);
         show_all_lot_numbers_checkbox.click();
     }
@@ -374,7 +374,7 @@ public class DiwaImmunizationRecord extends BasePage {
         By edit_immunization_info_btn_path = By.xpath("//c-bc-hc-immunization-info//button[@title='Edit']");
         waitForElementToBeEnabled(driver, edit_immunization_info_btn_path, 10);
         WebElement edit_immunization_info_btn = driver.findElement(edit_immunization_info_btn_path);
-        scrollIfNeeded(driver, edit_immunization_info_btn);
+        scrollCenter(driver, edit_immunization_info_btn);
         Thread.sleep(500);
         edit_immunization_info_btn.click();
     }
