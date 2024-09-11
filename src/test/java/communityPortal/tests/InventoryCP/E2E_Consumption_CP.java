@@ -116,6 +116,7 @@ public class E2E_Consumption_CP extends BaseTest {
             System.out.println("There is not Override Eligibility Option");
         }
         log("/*24.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+
         PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 
         ////////////////////

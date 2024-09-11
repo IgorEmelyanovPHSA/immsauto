@@ -22,7 +22,6 @@ public class BookingDose1 extends BaseTest {
 	Map<String, Object> testData;
 	String clinicNameToSearch;
 	private String vaccineToSelect;
-	MainPageOrg orgMainPage;
 	Map<String, String> client_data;
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
@@ -60,7 +59,6 @@ public class BookingDose1 extends BaseTest {
 		TestcaseID = testcase_id;
 		vaccineToSelect = vaccine_agent;
 		log("/*2.----Check that Clinic In Box(IPM) page displayed --*/");
-		orgMainPage = new MainPageOrg(driver);
 		String currentApp = MainPageOrg.currentApp(driver);
 		try {
 			MainPageOrg.closeAllTabs(driver);
@@ -73,7 +71,11 @@ public class BookingDose1 extends BaseTest {
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
-		InClinicExperiencePage.closeTabsHCA(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
+		}
 		log("/*5.----- Click on User Defaults Tab --*/");
 		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
@@ -105,7 +107,7 @@ public class BookingDose1 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementNotInteractableException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
-			Thread.sleep(2000);
+			Thread.sleep(500);
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 		log("/*21----Go to Appointment Tab --*/");

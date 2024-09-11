@@ -155,7 +155,7 @@ public class MainPageOrg extends BasePage {
         List<WebElement> closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
         int counter = 0;
         while(closeButtons.size() < 1) {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             closeButtons = driver.findElements(By.xpath("//div[@role='tablist']//button[@type='button']"));
             counter++;
             if(counter > 5) {
@@ -165,7 +165,7 @@ public class MainPageOrg extends BasePage {
         for(WebElement closeTabBtn : closeButtons) {
             try {
                 closeTabBtn.click();
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }

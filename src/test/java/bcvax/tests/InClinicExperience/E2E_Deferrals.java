@@ -60,7 +60,11 @@ public class E2E_Deferrals extends BaseTest {
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
             MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
-        InClinicExperiencePage.closeTabsHCA(driver);
+        try {
+            MainPageOrg.closeAllTabs(driver);
+        } catch(Exception ex) {
+            ;
+        }
         log("/*5.----- Click on User Defaults Tab --*/");
         InClinicExperiencePage.clickUserDefaultsTab(driver);
         log("/*6.----- Enter current date for UserDefaults --*/");

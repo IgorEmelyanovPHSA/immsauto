@@ -81,7 +81,11 @@ public class Dose1_ICE_E2E extends BaseTest {
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
-		InClinicExperiencePage.closeTabsHCA(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
+		}
 		log("/*5.----- Click on User Defaults Tab --*/");
 		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
@@ -100,6 +104,9 @@ public class Dose1_ICE_E2E extends BaseTest {
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 		System.out.println("/*26----Go to Appointment Tab --*/");
 		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch (NotFoundException ex) {
+			Thread.sleep(2000);
 			PersonAccountPage.goToVaccineScheduleTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
@@ -160,6 +167,9 @@ public class Dose1_ICE_E2E extends BaseTest {
 		driver.navigate().refresh();
 		System.out.println("/*37.----Go to back to the Citizen Related Tab --*/");
 		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

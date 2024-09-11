@@ -37,9 +37,12 @@ public class UserDefaultsSettingsValidation extends BaseTest {
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
             MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
         }
-        InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
         log("/*3.----Close All previously opened Tab's --*/");
-        InClinicExperiencePage.closeTabsHCA(driver);
+        try {
+            MainPageOrg.closeAllTabs(driver);
+        } catch(Exception ex) {
+            ;
+        }
 
         log("/*4.----- Click on User Defaults Tab --*/");
         InClinicExperiencePage.clickUserDefaultsTab(driver);

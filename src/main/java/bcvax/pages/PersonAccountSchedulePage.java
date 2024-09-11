@@ -37,19 +37,19 @@ public class PersonAccountSchedulePage extends BasePage {
         By covid19_vaccine_checkbox_path = By.xpath("//span[text() = 'Covid-19 Vaccine']");
         By influenza_checkbox_path = By.xpath("//span[text() = 'Influenza Vaccine']");
         if (vaccine.equalsIgnoreCase("Covid19Vaccine")) {
-            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 10);
+            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 5);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
             scrollCenter(driver, covid19_vaccine_checkbox);
             Thread.sleep(500);
             covid19_vaccine_checkbox.click();
         } else if (vaccine.equalsIgnoreCase("InfluenzaVaccine")) {
-            waitForElementToBeEnabled(driver, influenza_checkbox_path, 10);
+            waitForElementToBeEnabled(driver, influenza_checkbox_path, 5);
             WebElement influenza_checkbox = driver.findElement(influenza_checkbox_path);
             scrollCenter(driver, influenza_checkbox);
             Thread.sleep(500);
             influenza_checkbox.click();
         } else {
-            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 10);
+            waitForElementToBeEnabled(driver, covid19_vaccine_checkbox_path, 5);
             WebElement covid19_vaccine_checkbox = driver.findElement(covid19_vaccine_checkbox_path);
             scrollCenter(driver, covid19_vaccine_checkbox);
             Thread.sleep(500);

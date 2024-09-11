@@ -15,11 +15,11 @@ public class PersonAccountPage extends BasePage {
     public static void goToRelatedTab(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By related_tab_path = By.xpath("//a[text() = 'Related'] | //span[text() = 'Related']");
-        waitForElementToBeEnabled(driver, related_tab_path, 10);
+        waitForElementToBeEnabled(driver, related_tab_path, 2);
         WebElement related_tab = driver.findElement(related_tab_path);
-        scrollCenter(driver, related_tab);
-        Thread.sleep(500);
-        waitForElementToBeEnabled(driver, related_tab_path, 10);
+        //scrollCenter(driver, related_tab);
+        //Thread.sleep(500);
+        //waitForElementToBeEnabled(driver, related_tab_path, 5);
         try {
             related_tab.click();
         } catch(ElementNotInteractableException ex) {

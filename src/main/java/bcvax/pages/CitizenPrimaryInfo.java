@@ -160,12 +160,13 @@ public class CitizenPrimaryInfo extends BasePage {
     public static void fillUpRegistrationForm(WebDriver driver, Map<String, String> client_data) throws InterruptedException, ParseException {
         System.out.println("/*5.----Enter First Name " + client_data.get("legalFirstName") + "--*/");
         boolean first_name_field_found = false;
-        try {
-            CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
-            first_name_field_found = true;
-        } catch(NotFoundException ex) {
-            first_name_field_found = false;
-        }
+        //////// No need ///////
+//        try {
+//            CitizenPrimaryInfo.enterFirstName(driver, client_data.get("legalFirstName"));
+//            first_name_field_found = true;
+//        } catch(NotFoundException ex) {
+//            first_name_field_found = false;
+//        }
         System.out.println("/*7.----Enter Postal code " + client_data.get("postalCode") + "--*/");
         CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
         System.out.println("/*8.----Enter PHN " + client_data.get("personalHealthNumber") + "--*/");

@@ -54,7 +54,11 @@ public class BookingDose2 extends BaseTest {
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
-		InClinicExperiencePage.closeTabsHCA(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
+		}
 		log("/*5.----- Click on User Defaults Tab --*/");
 		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");

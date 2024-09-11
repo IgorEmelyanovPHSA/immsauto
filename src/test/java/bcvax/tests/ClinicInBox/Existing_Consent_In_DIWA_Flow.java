@@ -125,6 +125,9 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         Thread.sleep(2000);
         try {
             PersonAccountPage.goToRelatedTab(driver);
+        } catch(NotFoundException ex) {
+            Thread.sleep(2000);
+            PersonAccountPage.goToRelatedTab(driver);
         } catch(ElementClickInterceptedException ex) {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
             PersonAccountPage.goToRelatedTab(driver);

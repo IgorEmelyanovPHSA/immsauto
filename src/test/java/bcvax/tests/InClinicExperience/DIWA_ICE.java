@@ -68,7 +68,11 @@ public class DIWA_ICE extends BaseTest {
 		//inClinicExperience.verifyIsICEpageDisplayed();
 
 		log("/*4.----Close All previously opened Tab's --*/");
-		InClinicExperiencePage.closeTabsHCA(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
+		}
 		InClinicExperiencePage.clickUserDefaultsTab(driver);
 		log("/*6.----- Enter current date for UserDefaults --*/");
 		log("/*-- 13. Enter current date for UserDefaults --*/");
