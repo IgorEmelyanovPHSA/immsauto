@@ -5,6 +5,7 @@ import bcvax.pages.*;
 import bcvax.tests.BaseTest;
 import constansts.Apps;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -200,6 +201,9 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		Thread.sleep(2000);
 		log("/*---26. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch (ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

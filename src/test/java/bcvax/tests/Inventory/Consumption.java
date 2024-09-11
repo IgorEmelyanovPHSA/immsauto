@@ -104,7 +104,11 @@ public class Consumption extends BaseTest {
 		InClinicExperiencePage.clickRegisterTab(driver);
 
 		log("/*-- 17. Close any open Tabs --*/");
-		InClinicExperiencePage.closeTabsHCA(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
+		}
 		log("/*-- 18. Register New User --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
@@ -127,6 +131,10 @@ public class Consumption extends BaseTest {
 			PersonAccountSchedulePage.overrideEligibility(driver);
 			Thread.sleep(500);
 			log("/*33.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
+		} catch(ElementClickInterceptedException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
 

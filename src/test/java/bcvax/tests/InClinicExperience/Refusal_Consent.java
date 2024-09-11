@@ -75,7 +75,11 @@ public class Refusal_Consent extends BaseTest {
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
 		log("/*4.----Close All previously opened Tab's --*/");
-		InClinicExperiencePage.closeTabsHCA(driver);
+		try {
+			MainPageOrg.closeAllTabs(driver);
+		} catch(Exception ex) {
+			;
+		}
 
 		log("/*5.----- Click on User Defaults Tab --*/");
 		InClinicExperiencePage.clickUserDefaultsTab(driver);
@@ -151,6 +155,9 @@ public class Refusal_Consent extends BaseTest {
 
 		log("/*37.----Go to back to the Citizen Related Tab --*/");
 		try {
+			PersonAccountPage.goToRelatedTab(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);

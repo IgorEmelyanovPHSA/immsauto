@@ -35,11 +35,11 @@ public class UserDefaultsPage extends BasePage{
             By save_defaults_button_path = By.xpath("//button[text()='Save']");
             waitForElementToBeEnabled(driver, save_defaults_button_path, 10);
             WebElement save_defaults_button = driver.findElement(save_defaults_button_path);
-            scrollCenter(driver, save_defaults_button);
-            Thread.sleep(500);
+            //scrollCenter(driver, save_defaults_button);
+            //Thread.sleep(500);
             save_defaults_button.click();
-            Thread.sleep(500);
-            AlertDialog.closeAllAlerts(driver);
+            //Thread.sleep(500);
+            //AlertDialog.closeAllAlerts(driver);
     }
 
     public static void clickBtnSaveWithSuccessMsgValidation(WebDriver driver) throws InterruptedException {
