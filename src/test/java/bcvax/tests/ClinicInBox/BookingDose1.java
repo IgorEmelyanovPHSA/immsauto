@@ -166,6 +166,9 @@ public class BookingDose1 extends BaseTest {
 		log("/*34----Go to back to the Citizen Related Tab --*/");
 		try {
 			PersonAccountPage.goToRelatedTab(driver);
+		} catch(NotFoundException ex) {
+			Thread.sleep(2000);
+			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
 			Thread.sleep(500);
