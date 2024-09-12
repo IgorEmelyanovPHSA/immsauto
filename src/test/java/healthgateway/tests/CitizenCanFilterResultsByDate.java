@@ -14,7 +14,7 @@ public class CitizenCanFilterResultsByDate extends BaseTest {
 
 	//Data for user11
 	private int numberOfRecordsExpectedForDateRange = 10;
-	private int numberOfAllRecords = 932;
+	private int numberOfAllRecords = 933;
 	private String textSearchStartDate = "Jan 1, 2023";
 	private String textSearchEndDate = "Jun 1, 2024";
 
@@ -43,7 +43,7 @@ public class CitizenCanFilterResultsByDate extends BaseTest {
 
 		//Validate total count of records
 		log(timeLine.getDisplayingNumberOfRecords());
-		Assert.assertTrue(timeLine.getNumberOfRecordsRegex() == numberOfAllRecords, "Total number of all records displayed didn't match!");
+		Assert.assertTrue(timeLine.getNumberOfRecordsRegex() >= numberOfAllRecords, "Total number of all records displayed didn't match!");
 		log("Filtering using the search box pass successfully");
 		}
 

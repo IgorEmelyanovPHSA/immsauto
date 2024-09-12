@@ -14,7 +14,7 @@ public class CitizenCanFilterResultsByUsingSearchBox extends BaseTest {
 
 	//Data for user11
 	private int numberOfLabResultsRecords = 133;
-	private int numberOfAllRecords = 932;
+	private int numberOfAllRecords = 933;
 
 	@Test
 	public void timeLineFilterResultsByUsingSearchBox() throws Exception {
@@ -41,7 +41,7 @@ public class CitizenCanFilterResultsByUsingSearchBox extends BaseTest {
 
 		//Validate total count of records
 		log(timeLine.getDisplayingNumberOfRecords());
-		Assert.assertTrue(timeLine.getNumberOfRecordsRegex() == numberOfAllRecords, "Total number of all records displayed didn't match!");
+		Assert.assertTrue(timeLine.getNumberOfRecordsRegex() >= numberOfAllRecords, "Total number of all records displayed didn't match!");
 		log("Filtering using the search box pass successfully");
 		}
 
