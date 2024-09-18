@@ -194,6 +194,10 @@ public class CitizenPrimaryInfo extends BasePage {
             Thread.sleep(2000);
             CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
         }
+        catch(NotFoundException ex) {
+            Thread.sleep(2000);
+            CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
+        }
         System.out.println("/*14.'Confirm email address " + client_data.get("email") + "--*/");
         CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
         System.out.println("/*15.Click review details Button--*/");

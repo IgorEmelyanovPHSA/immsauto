@@ -107,8 +107,9 @@ public class E2E_Deferrals extends BaseTest {
             System.out.println("/*27.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
             PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
         }
-
-        PersonAccountSchedulePage.selectCovidAgent(driver, "COVID-19 non-mRNA vaccine (Novavax) — 12+");
+//COVID-19 Non-replicating Viral Vector
+        //COVID-19 non-mRNA vaccine (Novavax) — 12+
+        PersonAccountSchedulePage.selectCovidAgent(driver, "COVID-19 Non-replicating Viral Vector");
         System.out.println("/*27----select 'Search by Clinic name' tab --*/");
         PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 

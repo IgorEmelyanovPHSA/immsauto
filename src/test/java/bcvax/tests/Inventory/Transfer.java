@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Listeners({TestListener.class})
-public class Transfer extends BaseTest {
+public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Transfer extends BaseTest {
     String env;
     Map<String, Object> testData;
     SupplyConsolePage supplyConsolePage;

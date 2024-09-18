@@ -202,23 +202,6 @@ public class SupplyConsolePage extends BasePage {
 		click(element);
 	}
 
-	public Double getValueOfRemainingDoses(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double doses = 0;
-		int tries = 0;
-		while(tries < 10) {
-			try {
-				doses = tables.getRemainingDoses(supplyContainer);
-				break;
-			} catch (Exception ex) {
-				driver.navigate().refresh();
-				Thread.sleep(1000);
-				tries++;
-			}
-		}
-		return (doses);
-	}
-
 	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
 		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
 		double quantity = 0;
@@ -293,16 +276,6 @@ public class SupplyConsolePage extends BasePage {
 		click(btnAdjustmentOnContainerWastagePopUp);
 		Thread.sleep(500);
 		AlertDialog.closeAlert(driver);
-	}
-
-	public void clickBtnSaveAsDraftAtContainerAdjustmentPopUp() throws InterruptedException {
-		Thread.sleep(500);
-		By save_draft_btn_path = By.xpath("//button[text()='Save as draft']");
-		waitForElementToBeEnabled(driver, save_draft_btn_path, 10);
-		WebElement btnSaveAsDraftOnContainerWastagePopUp = driver.findElement(save_draft_btn_path);
-		scrollCenter(driver, btnSaveAsDraftOnContainerWastagePopUp);
-		Thread.sleep(500);
-		btnSaveAsDraftOnContainerWastagePopUp.click();
 	}
 
 	public void clickWastageButtonContainerWastagePage() throws InterruptedException {

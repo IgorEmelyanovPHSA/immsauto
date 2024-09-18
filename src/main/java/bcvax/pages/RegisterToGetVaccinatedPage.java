@@ -1,6 +1,7 @@
 package bcvax.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -103,7 +104,12 @@ public class RegisterToGetVaccinatedPage extends BasePage{
         By email_path = By.xpath("//input[@name='PersonEmail']");
         waitForElementToBeEnabled(driver, email_path, 10);
         WebElement email = driver.findElement(email_path);
-        email.sendKeys(client_data.get("email"));
+        try {
+            email.sendKeys(client_data.get("email"));
+        } catch(ElementNotInteractableException ex) {
+            Thread.sleep(2000);
+            email.sendKeys(client_data.get("email"));
+        }
 
         By email_confirm_path = By.xpath("//input[@name='ConfirmEmail']");
         waitForElementToBeEnabled(driver, email_confirm_path, 10);

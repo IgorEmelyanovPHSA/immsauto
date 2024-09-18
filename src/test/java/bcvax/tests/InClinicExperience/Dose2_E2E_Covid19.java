@@ -96,6 +96,9 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("/*25.----click on person Account Related Tab --*/");
 		try {
 			PersonAccountPage.goToRelatedTab(driver);
+		} catch (NotFoundException ex) {
+			Thread.sleep(2000);
+			PersonAccountPage.goToRelatedTab(driver);
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
 			Thread.sleep(500);
