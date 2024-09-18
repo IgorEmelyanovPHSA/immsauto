@@ -59,24 +59,25 @@ public class BulkTransfersCancellationCP extends BaseTest {
         precondition();
         double doses = 10;
 
-        log("/----Count Remaining Supplies --*/");
-        double remainingDosesBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
-        double remainingQtyBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-        double remainingDosesBeforeDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
-        double remainingQtyBeforeDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-        double remainingDosesBeforeDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
-        double remainingQtyBeforeDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-
         log("/----Select Items to Transfer and Submit --*/");
         log("/*7.----Get Supply Containers count outcoming records --*/");
         int countSupplyContainers = SupplyLocationRelatedItems.countSupplyContainers(driver);
+        Map<String, Map<String, Double>> selected_containers_from_before = new HashMap<>();
         log("/*---     count:" + countSupplyContainers);
         log("/*8.----Click on Container's records Checkboxes --*/");
         if (countSupplyContainers >= 3) {
-            SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
+            selected_containers_from_before = SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
         } else {
             log("/*--not enough records for Bulk actions--*/");
         }
+        log("/----Count Remaining Supplies --*/");
+        double remainingDosesBeforeDistribution1_1 = selected_containers_from_before.get(containers_from.get(0)).get("Remaining Doses");
+        double remainingQtyBeforeDistribution1_1 = selected_containers_from_before.get(containers_from.get(0)).get("Remaining Quantity");
+        double remainingDosesBeforeDistribution1_2 = selected_containers_from_before.get(containers_from.get(1)).get("Remaining Doses");
+        double remainingQtyBeforeDistribution1_2 = selected_containers_from_before.get(containers_from.get(1)).get("Remaining Quantity");
+        double remainingDosesBeforeDistribution1_3 = selected_containers_from_before.get(containers_from.get(2)).get("Remaining Doses");
+        double remainingQtyBeforeDistribution1_3 = selected_containers_from_before.get(containers_from.get(2)).get("Remaining Quantity");
+
         log("/*9.----Click on bulk Transfer button --*/");
         SupplyLocationRelatedItems.clickTransfersButton(driver);
 
@@ -92,19 +93,20 @@ public class BulkTransfersCancellationCP extends BaseTest {
         Thread.sleep(2000);
         log("/*13.----click Close Modal button --*/");
         ContainerPrintDialog.clickCloseButton(driver);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
 
+        Map<String, Map<String, Double>> selected_containers_from_after =  SupplyLocationRelatedItems.getSupplyContainers(driver, containers_from);
         /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
         log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
-        double remainingDosesAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
+        double remainingDosesAfterDistribution1_1 = selected_containers_from_after.get(containers_from.get(0)).get("Remaining Doses");
         double remainingDosesAfterCalculationDistribution1_1 = remainingDosesBeforeDistribution1_1 - doses;
         assertEquals(remainingDosesAfterDistribution1_1, remainingDosesAfterCalculationDistribution1_1);
 
-        double remainingDosesAfterDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
+        double remainingDosesAfterDistribution1_2 = selected_containers_from_after.get(containers_from.get(1)).get("Remaining Doses");
         double remainingDosesAfterCalculationDistribution1_2 = remainingDosesBeforeDistribution1_2 - doses;
         assertEquals(remainingDosesAfterDistribution1_2, remainingDosesAfterCalculationDistribution1_2);
 
-        double remainingDosesAfterDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
+        double remainingDosesAfterDistribution1_3 = selected_containers_from_after.get(containers_from.get(2)).get("Remaining Doses");
         double remainingDosesAfterCalculationDistribution1_3 = remainingDosesBeforeDistribution1_3 - doses;
         assertEquals(remainingDosesAfterDistribution1_3, remainingDosesAfterCalculationDistribution1_3);
 
@@ -115,9 +117,10 @@ public class BulkTransfersCancellationCP extends BaseTest {
         log("/----Count Remaining Supplies Before Transaction --*/");
         driver.navigate().refresh();
         Thread.sleep(2000);
-        double remainingDosesBeforeLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
-        double remainingDosesBeforeLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
-        double remainingDosesBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
+        Map<String, Map<String, Double>> selected_containers_to_before =  SupplyLocationRelatedItems.getSupplyContainers(driver, containers_to);
+        double remainingDosesBeforeLocationDistribution2_1 = selected_containers_to_before.get(containers_to.get(0)).get("Remaining Doses");
+        double remainingDosesBeforeLocationDistribution2_2 = selected_containers_to_before.get(containers_to.get(1)).get("Remaining Doses");
+        double remainingDosesBeforeLocationDistribution2_3 = selected_containers_to_before.get(containers_to.get(2)).get("Remaining Doses");
 
         log("/----Go to Supply Location Related Tab where Transferring From --*/");
         MainPageCP.goToSupplyLocation(driver);
@@ -138,9 +141,11 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         log("/----Count And Validate Remaining Supplies After Transaction --*/");
         SupplyLocationPage.clickOnRelatedItemTab(driver);
-        double remainingDosesAfterLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(0), distribution_from);
-        double remainingDosesAfterLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(1), distribution_from);
-        double remainingDosesAfterLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingDoses(containers_from.get(2), distribution_from);
+
+        Map<String, Map<String, Double>> selected_containers_location_from_after =  SupplyLocationRelatedItems.getSupplyContainers(driver, containers_from);
+        double remainingDosesAfterLocationDistribution1_1 = selected_containers_location_from_after.get(containers_from.get(0)).get("Remaining Doses");
+        double remainingDosesAfterLocationDistribution1_2 = selected_containers_location_from_after.get(containers_from.get(1)).get("Remaining Doses");
+        double remainingDosesAfterLocationDistribution1_3 = selected_containers_location_from_after.get(containers_from.get(2)).get("Remaining Doses");
 
         assertEquals(remainingDosesAfterLocationDistribution1_1, remainingDosesBeforeDistribution1_1);
         assertEquals(remainingDosesAfterLocationDistribution1_2, remainingDosesBeforeDistribution1_2);
@@ -152,137 +157,16 @@ public class BulkTransfersCancellationCP extends BaseTest {
 
         driver.navigate().refresh();
         Thread.sleep(2000);
+        Map<String, Map<String, Double>> selected_containers_location_to_after =  SupplyLocationRelatedItems.getSupplyContainers(driver, containers_to);
         log("/----Count Remaining Supplies After Cancel Transaction --*/");
-        double remainingDosesAfterLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(0), distribution_to);
-        double remainingDosesAfterLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(1), distribution_to);
-        double remainingDosesAfterLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingDoses(containers_to.get(2), distribution_to);
+        double remainingDosesAfterLocationDistribution2_1 = selected_containers_location_to_after.get(containers_to.get(0)).get("Remaining Doses");
+        double remainingDosesAfterLocationDistribution2_2 = selected_containers_location_to_after.get(containers_to.get(1)).get("Remaining Doses");
+        double remainingDosesAfterLocationDistribution2_3 = selected_containers_location_to_after.get(containers_to.get(2)).get("Remaining Doses");
 
         assertEquals(remainingDosesAfterLocationDistribution2_1, remainingDosesBeforeLocationDistribution2_1);
         assertEquals(remainingDosesAfterLocationDistribution2_2, remainingDosesAfterLocationDistribution2_2);
         assertEquals(remainingDosesAfterLocationDistribution2_3, remainingDosesBeforeLocationDistribution2_3);
     }
-
-    //We don't use Quantity field anymore it will be in READ ONLY mode, Oct 12,2023 as per Sheila Artes
-    //Testcase will be disabled
-//    @Test(priority = 2)
-//    public void Can_doBulk_transfers_Cancellation_By_Quantity_form_one_Clinic_to_Another() throws Exception {
-//        TestcaseID = (env.contains("immsbc_admin")) ? "245096" : "243119";
-//        precondition();
-//        double quantity = 1;
-//
-//        log("/----Count Remaining Supplies --*/");
-//        double remainingQtyBeforeDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-//        double remainingQtyBeforeDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-//        double remainingQtyBeforeDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-//
-//        log("/----Select Items to Transfer and Submit --*/");
-//        log("/*7.----Get Supply Containers count outcoming records --*/");
-//        int countSupplyContainers = supplyConsolePage.getRowsSupplyContainersFromCount();
-//        log("/*---     count:" + countSupplyContainers);
-//        log("/*8.----Click on Container's records Checkboxes --*/");
-//        if (countSupplyContainers >= 3) {
-//            for(String container : containers_from) {
-//                supplyConsolePage.clickOnSupplyContainerCheckbox(container, distribution_from);
-//                log("/*---     containers: " + container);
-//                Thread.sleep(1000);
-//            }
-//        } else {
-//            log("/*--not enough records for Bulk actions--*/");
-//        }
-//        log("/*9.----Click on bulk Transfer button --*/");
-//        supplyConsolePage.clickBulkTransfersButton();
-//
-//        log("/*10.----Enter the Quantity values (1 quantity) for 3 row Transfers --*/");
-//
-//        supplyConsolePage.enterBulkTransferByQuantity(containers_from, quantity);
-//        log("/*11.----select 'To' Automation Supply Location_2  --*/");
-//        supplyConsolePage.selectSupplyLocationToFromDropdown(supply_location_to);
-//        Thread.sleep(2000);
-//        log("/*12.----click Transfer dialog Modal button --*/");
-//        supplyConsolePage.clickBulkTransfersModalButton();
-//        Thread.sleep(2000);
-//        log("/*13.----click Close Modal button --*/");
-//        supplyConsolePage.clickBulkTransfersDialogCloseButton();
-//        Thread.sleep(5000);
-//
-//        /////////////////////Doses and Quantity AFTER Automation Location_1//////////////////////////////////
-//        log("/*14.----Getting Remaining Doses/Quantity - AFTER - Automation Location_1 --*/");
-//        double remainingQtyAfterDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-//        double remainingQtyAfterCalculationDistribution1_1 = Double.parseDouble(df.format(remainingQtyBeforeDistribution1_1 - quantity));
-//        assertEquals(remainingQtyAfterDistribution1_1, remainingQtyAfterCalculationDistribution1_1);
-//
-//        double remainingQtyAfterDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-//        double remainingQtyAfterCalculationDistribution1_2 = Double.parseDouble(df.format(remainingQtyBeforeDistribution1_2 - quantity));
-//        assertEquals(remainingQtyAfterDistribution1_2, remainingQtyAfterCalculationDistribution1_2);
-//
-//        double remainingQtyAfterDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-//        double remainingQtyAfterCalculationDistribution1_3 = Double.parseDouble(df.format(remainingQtyBeforeDistribution1_3 - quantity));
-//        assertEquals(remainingQtyAfterDistribution1_3, remainingQtyAfterCalculationDistribution1_3);
-//
-//        log("/*19.----Go to Supply Locations Tab --*/");
-//        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
-//        Thread.sleep(2000);
-//
-//        log("/----Count Remaining Supplies Before Transaction --*/");
-//        supplyConsolePage.refreshBrowser();
-//        Thread.sleep(2000);
-//
-//        log("/----Count Remaining Supplies Before Transaction --*/");
-//
-//        double remainingQtyBeforeLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(0), distribution_to);
-//        double remainingQtyBeforeLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
-//        double remainingQtyBeforeLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
-//
-//        log("/----Go to Supply Location Related Tab where Transferring From --*/");
-//        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_from);
-//        Thread.sleep(2000);
-//
-//        supplyConsolePage.refreshBrowser();
-//        Thread.sleep(2000);
-//        supplyConsolePage.clickTransactionsTab();
-//
-//        Thread.sleep(2000);
-//        log("/*23----Get how many Outgoing Transactions 'To' count records --*/");
-//        int countOutgoingTransactions = supplyConsolePage.getRowsOutgoingTransactionsCount();
-//        Thread.sleep(2000);
-//        log("/*---  Outgoing transactions 'to' count:" + countOutgoingTransactions);
-//        Thread.sleep(2000);
-//        log("/*24.----Click on Checkboxes Outgoing Transactions --*/");
-//        if (countOutgoingTransactions >= 3) {
-//            for (int i = 0; i < containers_from.size(); i++) {
-//                supplyConsolePage.clickOnOutgoingTransactionsCheckbox(countOutgoingTransactions - i);
-//            }
-//        } else {
-//            log("/*--not all 3 Incoming Transaction records are there--*/");
-//        }
-//        supplyConsolePage.clickBulkCancelButton();
-//        supplyConsolePage.cancelTransfer();
-//        log("/----Count And Validate Remaining Supplies After Transaction --*/");
-//        supplyConsolePage.clickOnRelatedItemTab();
-//        Thread.sleep(2000);
-//        double remainingQtyAfterCancelLocationDistribution1_1 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(0), distribution_from);
-//        double remainingQtyAfterCancelLocationDistribution1_2 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(1), distribution_from);
-//        double remainingQtyAfterCancelLocationDistribution1_3 = supplyConsolePage.getValueOfRemainingQty(containers_from.get(2), distribution_from);
-//
-//        assertEquals(remainingQtyAfterCancelLocationDistribution1_1, remainingQtyBeforeDistribution1_1);
-//        assertEquals(remainingQtyAfterCancelLocationDistribution1_2, remainingQtyBeforeDistribution1_2);
-//        assertEquals(remainingQtyAfterCancelLocationDistribution1_3, remainingQtyBeforeDistribution1_3);
-//
-//        log("/----Go to Supply Location Related Tab where Transferring To --*/");
-//        supplyConsolePage = cpMainPage.selectSupplyLocationName(supply_location_to);
-//        Thread.sleep(2000);
-//        supplyConsolePage.refreshBrowser();
-//        Thread.sleep(2000);
-//
-//        log("/----Count Remaining Supplies After Cancel Transaction --*/");
-//        double remainingQtyAfterCancelLocationDistribution2_1 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(0), distribution_to);
-//        double remainingQtyAfterCancelLocationDistribution2_2 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(1), distribution_to);
-//        double remainingQtyAfterCancelLocationDistribution2_3 = supplyConsolePage.getValueOfRemainingQty(containers_to.get(2), distribution_to);
-//
-//        assertEquals(remainingQtyAfterCancelLocationDistribution2_1, remainingQtyBeforeLocationDistribution2_1);
-//        assertEquals(remainingQtyAfterCancelLocationDistribution2_2, remainingQtyBeforeLocationDistribution2_2);
-//        assertEquals(remainingQtyAfterCancelLocationDistribution2_3, remainingQtyBeforeLocationDistribution2_3);
-//    }
 
     public void precondition() throws Exception {
         log("/*1.----Login to CP (newUI) as Clinician --*/");

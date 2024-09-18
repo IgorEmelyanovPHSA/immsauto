@@ -199,11 +199,13 @@ public class SupplyLocationRelatedItems extends BasePage {
         WebElement supply_container_table_node = driver.findElement(supply_container_table_path);
         GenericTable supply_container_table = new GenericTable(supply_container_table_node);
         int count_after = 0;
-        try {
-            count_after = supply_container_table.getRows().size();
-        } catch(StaleElementReferenceException ex) {
-            Thread.sleep(2000);
-            count_after = supply_container_table.getRows().size();
+        for(int i = 0; i < 20; i++) {
+            try {
+                count_after = supply_container_table.getRows().size();
+                break;
+            } catch (StaleElementReferenceException ex) {
+                Thread.sleep(500);
+            }
         }
         //---Wait until the table is populated
         for(int i = 0; i < 10; i++) {

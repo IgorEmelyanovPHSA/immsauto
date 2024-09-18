@@ -3,6 +3,7 @@ package communityPortal.tests.MinorAilments;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -135,7 +136,12 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
 //        }
 
         log("24. Navigate to Related tab");
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch(NotFoundException ex) {
+            Thread.sleep(2000);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
 
         log("25. Navigate to Appointments and click view all");
         PersonAccountRelatedPage.scrollToAppointmentsSection(driver);
