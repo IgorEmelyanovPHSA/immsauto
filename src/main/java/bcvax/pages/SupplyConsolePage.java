@@ -202,24 +202,6 @@ public class SupplyConsolePage extends BasePage {
 		click(element);
 	}
 
-	public Double getValueOfRemainingQty(String container, String distribution) throws InterruptedException {
-		Map<String,String> supplyContainer = ImmutableMap.of(SUPPLY_CONTAINER_NAME, container, SUPPLY_DISTRIBUTION_DESCRIPTION, distribution);
-		double quantity = 0;
-		int tries = 0;
-		while(tries < 10) {
-			try {
-				quantity = tables.getRemainingQty(supplyContainer);
-				break;
-			} catch (Exception ex) {
-				driver.navigate().refresh();
-				Thread.sleep(1000);
-				tries++;
-			}
-		}
-
-		return (quantity);
-	}
-
 	public double getActualRemainingDoses() throws InterruptedException {
 		Thread.sleep(500);
 		By actual_remaining_doses_path = By.xpath("//input[@name='HC_Remaining_Measures__c']");

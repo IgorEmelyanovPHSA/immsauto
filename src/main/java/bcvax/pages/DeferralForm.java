@@ -16,10 +16,6 @@ public class DeferralForm extends BasePage {
     @FindBy(xpath = "//span[text() = 'Reason for Deferral']/../..//a[@class = 'select']")
     private WebElement reasoForDeferralField;
 
-    @FindBy(xpath = "//span[text() = 'Effective From']/../..//input")
-    private WebElement effectiveFromField;
-
-
     public DeferralForm(WebDriver driver) {
         super(driver);
     }
