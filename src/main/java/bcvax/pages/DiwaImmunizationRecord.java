@@ -77,6 +77,25 @@ public class DiwaImmunizationRecord extends BasePage {
         calendar.add(Calendar.DATE, 0);
         Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+        By input_date_path = By.xpath("//lightning-input[contains(@class, 'dateCmp')]/lightning-datepicker");
+        waitForElementToBeEnabled(driver, input_date_path, 10);
+        String todayAsString = dateFormat.format(today);
+        WebElement inputDate = driver.findElement(input_date_path);
+        waitForElementToBeVisible(driver, inputDate, 10);
+        inputDate.click();
+        Thread.sleep(500);
+        inputDate.findElement(By.xpath(".//input")).clear();
+        Thread.sleep(500);
+        inputDate.sendKeys(todayAsString);
+        Thread.sleep(500);
+        inputDate.sendKeys(Keys.ENTER);
+    }
+
+    public static void enterTodayDateInTimeBox(WebDriver driver) throws InterruptedException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 0);
+        Date today = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
         By input_date_path = By.xpath("//lightning-input[@class='dateCmp slds-form-element']/lightning-datepicker");
         waitForElementToBeEnabled(driver, input_date_path, 10);
         String todayAsString = dateFormat.format(today);

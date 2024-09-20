@@ -44,7 +44,13 @@ public class Check_In_Workflow extends BaseTest {
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         registerCitizen();
-        orgMainPage.logout();
+        try {
+            orgMainPage.logout();
+        } catch (ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            orgMainPage.logout();
+        }
         loginPage.loginAsImmsBCAdmin();
         String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {

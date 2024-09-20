@@ -3,6 +3,7 @@ package communityPortal.tests.MinorAilments;
 import Utilities.TestListener;
 import bcvax.pages.*;
 import bcvax.tests.BaseTest;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -138,8 +139,9 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         log("24. Navigate to Related tab");
         try {
             PersonAccountPage.goToRelatedTab(driver);
-        } catch(NotFoundException ex) {
-            Thread.sleep(2000);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
             PersonAccountPage.goToRelatedTab(driver);
         }
 
