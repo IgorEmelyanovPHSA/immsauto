@@ -20,7 +20,7 @@ public class SupplyItemsPage extends BasePage {
         WebElement select_list_view_btn = driver.findElement(select_list_view_btn_path);
         select_list_view_btn.click();
         Thread.sleep(500);
-        By all_supply_items_path = By.xpath("//lightning-base-combobox-item[@role='option' and @data-value='All']");
+        By all_supply_items_path = By.xpath("//span[text()='All']");
         waitForElementToBeEnabled(driver, all_supply_items_path, 10);
         WebElement all_supply_items =  driver.findElement(all_supply_items_path);
         all_supply_items.click();
@@ -29,7 +29,7 @@ public class SupplyItemsPage extends BasePage {
         } catch (Exception ex) {
             System.out.println("Cannot switch the view");
         }
-        By search_field_path = By.xpath("//input[@name = 'Supply Item-search-input']");
+        By search_field_path = By.xpath("//input[@name = 'HC_Supply_Item__c-search-input']");
         waitForElementToBeEnabled(driver, search_field_path, 10);
         WebElement search_location_field = driver.findElement(search_field_path);
         try {
