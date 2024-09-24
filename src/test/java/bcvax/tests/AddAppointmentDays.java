@@ -31,8 +31,8 @@ public class AddAppointmentDays extends BaseTest {
         {
             appointment_dates.add(my_appointment_date.format(dtf));
         }
-        String appointment_type = "Minor Ailments and Contraception";
-        //String appointment_type = "BC Immunization Program";
+        //String appointment_type = "Minor Ailments and Contraception";
+        String appointment_type = "BC Immunization Program";
 
         ArrayList<HashMap> providers = new ArrayList<HashMap>();
         String appointment_name = appointment_type + " " + appointment_date;
