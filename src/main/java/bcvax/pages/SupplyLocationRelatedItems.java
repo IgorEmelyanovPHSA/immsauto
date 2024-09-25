@@ -164,9 +164,10 @@ public class SupplyLocationRelatedItems extends BasePage {
         }
     }
 
-    public static void clickOnContainerDropDownMenu(WebDriver driver, String container) throws InterruptedException {
+    public static Map<String, WebElement> clickOnContainerDropDownMenu(WebDriver driver, String container) throws InterruptedException {
         GenericTable supply_container_table = getContainersTable(driver);
         List<Map<String, WebElement>> my_records = supply_container_table.getRowsMappedToHeadings();
+        Map<String, WebElement> return_record = new HashMap<>();
         for(Map<String, WebElement> my_record: my_records) {
             if(my_record.get("Supply Container Name").getText().contains(container)) {
                 WebElement action = my_record.get("Actions");
@@ -175,20 +176,22 @@ public class SupplyLocationRelatedItems extends BasePage {
                 Thread.sleep(1000);
                 for (int i = 0; i < 10; i++) {
                     try {
-                        menu_visible = driver.findElement(By.xpath("//div[@part='overlay dropdown']")).isDisplayed();
-                        if(menu_visible) {
-                            break;
-                        } else {
-                            action.click();
-                            Thread.sleep(1000);
+                        List<WebElement> my_menues = driver.findElements(By.xpath("//div[@part='overlay dropdown']"));
+                        for(WebElement my_menu: my_menues) {
+                            menu_visible = my_menu.isDisplayed();
+                            if (menu_visible) {
+                                break;
+                            }
                         }
                     } catch (Exception ex) {
                         menu_visible = false;
                     }
                 }
+                return_record = my_record;
                 break;
             }
         }
+        return return_record;
     }
 
     public static GenericTable getContainersTable(WebDriver driver) throws InterruptedException {
