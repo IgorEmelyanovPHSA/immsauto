@@ -54,7 +54,7 @@ public class Return_CP extends BaseTest {
 
         log("/*d.----Create Wastage for the Flu Container --*/");
         //Create Wastage Record for Flu supply item
-        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, supply_item);
+        Map<String, WebElement> my_row = SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, supply_item);
         SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 
         log("/*f.----Add Doses and Reason for Wastage --*/");
