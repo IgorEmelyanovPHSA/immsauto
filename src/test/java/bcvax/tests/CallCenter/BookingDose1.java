@@ -26,7 +26,7 @@ public class BookingDose1 extends BaseTest {
     Map<String, String> client_data;
     @DataProvider(name = "booking_data")
     public Object[][] dpMethod() {
-        return new Object[][]{{"222524", "Covid19Vaccine", true}, {"228856", "InfluenzaVaccine", false}};
+        return new Object[][]{{"222524", "Covid19Vaccine", true}, {"228856", "InfluenzaVaccine", true}};
     }
 
     @BeforeMethod

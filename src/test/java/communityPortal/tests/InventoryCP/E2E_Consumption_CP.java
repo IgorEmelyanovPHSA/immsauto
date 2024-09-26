@@ -153,7 +153,13 @@ public class E2E_Consumption_CP extends BaseTest {
         Assert.assertTrue(appointment_result, "Appointment Confirmation screen didn't appear");
 
         log("/*35.----Go to back to the Citizen Related Tab --*/");
-        PersonAccountPage.goToRelatedTab(driver);
+        try {
+            PersonAccountPage.goToRelatedTab(driver);
+        } catch(ElementClickInterceptedException ex) {
+            PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+            Thread.sleep(500);
+            PersonAccountPage.goToRelatedTab(driver);
+        }
         Thread.sleep(500);
         log("/*36.----click on In-clinic Experience button --*/");
         PersonAccountPage.clickCheckInButton(driver);

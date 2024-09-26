@@ -40,7 +40,7 @@ public class BookingDose1 extends BaseTest {
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
 		//return new Object[][] {{"225652", "Covid19Vaccine"}};
-		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", false}};
+		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", true}};
 	}
 
 	@Test(dataProvider = "booking_data")
@@ -111,7 +111,14 @@ public class BookingDose1 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 		log("/*21----Go to Appointment Tab --*/");
-		PersonAccountPage.goToVaccineScheduleTab(driver);
+		try {
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		} catch(ElementNotInteractableException ex) {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+			Thread.sleep(500);
+			PersonAccountPage.goToVaccineScheduleTab(driver);
+		}
+
 
 		//If override Eligibility is shown
 		try {
