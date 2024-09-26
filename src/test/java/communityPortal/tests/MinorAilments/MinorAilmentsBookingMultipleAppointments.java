@@ -139,6 +139,9 @@ public class MinorAilmentsBookingMultipleAppointments extends BaseTest {
         log("24. Navigate to Related tab");
         try {
             PersonAccountPage.goToRelatedTab(driver);
+        } catch(NotFoundException ex) {
+            Thread.sleep(2000);
+            PersonAccountPage.goToRelatedTab(driver);
         } catch(ElementClickInterceptedException ex) {
             PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
             Thread.sleep(500);
