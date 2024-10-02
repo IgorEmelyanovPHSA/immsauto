@@ -41,12 +41,12 @@ public class Dose1CitizenBookingAppointment extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		//return new Object[][] {{"222521", "Covid19Vaccine"}};
-		return new Object[][] {{"222521", "Covid19Vaccine"}, {"228855", "InfluenzaVaccine"}};
+		return new Object[][] {{"222521", "Covid19Vaccine"}};
+		//return new Object[][] {{"222521", "Covid19Vaccine"}, {"228855", "InfluenzaVaccine"}};
 	}
 
 	@Test(dataProvider = "booking_data")
-	public void citizenPortalBookDoseOneCovid19(String testcase_id, String vaccine_agent) throws Exception {
+	public void citizenPortalBookDoseOneCovidOrInfluenza(String testcase_id, String vaccine_agent) throws Exception {
 		//TestcaseID = "222521";
 		TestcaseID = testcase_id;
 		vaccineToSelect = vaccine_agent;

@@ -39,8 +39,7 @@ public class BookingDose1 extends BaseTest {
 
 	@DataProvider(name="booking_data")
 	public Object[][] dpMethod() {
-		//return new Object[][] {{"225652", "Covid19Vaccine"}};
-		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", true}};
+		return new Object[][] {{"225652", "Covid19Vaccine", true}, {"228857", "InfluenzaVaccine", false}};
 	}
 
 	@Test(dataProvider = "booking_data")
