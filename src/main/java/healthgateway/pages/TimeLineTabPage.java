@@ -108,7 +108,7 @@
         @FindBy(xpath = "//button[text()='Save']")
         private WebElement btnSave;
 
-        @FindBy(xpath = "(//*[@class='slds-card']//p[@class='slds-p-horizontal_small'])[2]")
+        @FindBy(xpath = "(//*[@class='slds-card']//p[@class='slds-p-horizontal_small hg-comment-p'])[2]")
         private WebElement textGetCreateComment;
 
         @FindBy(xpath = "//textarea[@placeholder='write a comment']/../../../..//button[text()='Cancel']")
