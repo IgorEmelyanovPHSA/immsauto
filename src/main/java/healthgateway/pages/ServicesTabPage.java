@@ -11,7 +11,7 @@
 
     public class ServicesTabPage extends BasePage{
 
-        By textStatusRegisteredXpath = By.xpath("//span[contains(text(), 'Registered')]");
+        By textStatusRegisteredXpath = By.xpath("//span[contains(@class, 'slds-text-body_regular')]");
 
         @FindBy(xpath = "//a[text()='Download']")
         private WebElement btnDownload;
