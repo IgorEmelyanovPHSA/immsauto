@@ -28,7 +28,7 @@ public class MainPageHealthGateway extends BasePage {
     @FindBy(xpath = "//div[@data-region-name ='themeHeaderProfileMenu']")
     private WebElement profileIcon;
 
-    @FindBy(xpath = "//span[@title ='Logout']")
+    @FindBy(xpath = "//span[text()='Logout']")
     private WebElement btnLogOutUnderProfile;
 
     @FindBy(xpath = "//span[@title ='Profile']")
