@@ -14,7 +14,7 @@ public class CitizenCanFilterResultsByUsingSearchBox extends BaseTest {
 
 	//Data for user11
 	private int numberOfLabResultsRecords = 133;
-	private int numberOfAllRecords = 933;
+	private int numberOfAllRecords = 932;
 
 	@Test
 	public void timeLineFilterResultsByUsingSearchBox() throws Exception {

@@ -31,7 +31,9 @@ public class MainPageHealthGateway extends BasePage {
     @FindBy(xpath = "//span[text()='Logout']")
     private WebElement btnLogOutUnderProfile;
 
-    @FindBy(xpath = "//span[@title ='Profile']")
+    @FindBy(xpath = "//a[@role='menuitem']")
+
+
     private WebElement dropDownProfile;
 
     @FindBy(xpath = "//*[text()='Organ Donor Registration']/../..//span")

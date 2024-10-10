@@ -254,6 +254,10 @@ public abstract class BasePage<T> {
 		element.sendKeys(text);
 		return (T) this;
 	}
+	public void moveCursor(){
+		Actions actions = new Actions(driver);
+		actions.moveByOffset(100, 200).perform();
+	}
 
 	public T typeInWithoutClear(WebElement element, String text) {
 		waitForVisibility(element);

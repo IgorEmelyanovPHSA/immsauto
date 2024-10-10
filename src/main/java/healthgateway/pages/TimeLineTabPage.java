@@ -83,7 +83,8 @@
         @FindBy(xpath = "//div[@class='dislpay-result-text slds-m-bottom_medium slds-m-top_medium']")
         private WebElement textDisplayingNumberOfRecords;
 
-        @FindBy(xpath = "(//span[text()=' | X-Ray - Recently Updated'])[1]")
+        @FindBy(xpath = "(//span[contains(text(), 'X-Ray - Recently Updated')])[1]")
+
         private WebElement selectFirstImagingReport;
 
         @FindBy(xpath = "(//span[text()='| Sechelt Shishalh Hospital'])[1]")

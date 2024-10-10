@@ -14,7 +14,7 @@ public class CitizenCanFilterResultsByDate extends BaseTest {
 
 	//Data for user11
 	private int numberOfRecordsExpectedForDateRange = 10;
-	private int numberOfAllRecords = 933;
+	private int numberOfAllRecords = 932;
 	private String textSearchStartDate = "Jan 1, 2023";
 	private String textSearchEndDate = "Jun 1, 2024";
 

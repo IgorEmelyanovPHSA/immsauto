@@ -62,6 +62,7 @@
         public void filterByStartAndEndDate(String textStartDate, String textEndDate) throws InterruptedException {
             typeIn(textSearchStartDate, textStartDate);
             typeIn(textSearchEndDate, textEndDate);
+            moveCursor();
             click(btnApply);
             Thread.sleep(5000);
         }
