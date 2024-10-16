@@ -66,6 +66,8 @@ public class BulkTransfers extends BaseTest {
 	@Test(priority = 1)
 	public void Can_do_Bulk_transfers_by_Dosages_form_one_Clinic_to_Another() throws Exception {
 		TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("Test Case Id: " +"C"+TestcaseID);
 		precondition();
 		testData.get("bulkContainersFrom");
 
@@ -79,7 +81,6 @@ public class BulkTransfers extends BaseTest {
 			Assert.assertTrue(false, "Not enough containers");
 		}
 		Map<String, Map<String, Double>> selected_containers_doses_qty_before =  SupplyLocationRelatedItems.checkSupplyContainers(driver, containers_from);
-
 
 		log("/*9.----Click on bulk Transfer button --*/");
 		SupplyLocationRelatedItems.clickTransfersButton(driver);
@@ -183,6 +184,12 @@ public class BulkTransfers extends BaseTest {
 	@Test(priority = 2)
 	public void Can_do_Bulk_transfers_by_Dosages_within_the_same_Clinic() throws Exception {
 		TestcaseID = (env.contains("immsbc_admin")) ? "244852" : "223363";
+		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("Test Case Id: " +"C"+TestcaseID);
+		//Print out all containers:
+		for (int i = 0; i < containers_from.size(); i++) {
+			log("Contains in containers_from: " +containers_from.get(i));
+		}
 		precondition();
 		/////////////////////Doses and Quantity BEFORE Automation Location_1//////////////////////////////////
 		log("/*6.----Getting Remaining Doses/Remaining Quantity - BEFORE - Automation Location_1 --*/");
@@ -216,6 +223,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		double remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 = selected_containers_from_before.get(containers_from.get(2)).get("Remaining Quantity");
 
+		//lot_EK4241 = AUTO-Covid-mRNA?
 		double lot_EK4241_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_EK4241_Distribution_1_1 / remainingQty_before_Lot_EK4241_Distribution_1_1));
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1);
 		//// for the same Clinic, but - Supply Distribution_1_2 - containers#4 and #5, #6
@@ -224,6 +232,7 @@ public class BulkTransfers extends BaseTest {
 		log("/*-- . remaining doses are: -->" + remainingDoses_before_Lot_MT0055_Distribution_1_2);
 		double remainingQty_before_Lot_MT0055_Distribution_1_2 = selected_containers_to_before.get(containers_to_same_clinic.get(0)).get("Remaining Quantity");
 
+		//lot_SPIKEVAX6_5Test001 = AUTO-Covid-SPIKEVAX
 		double lot_SPIKEVAX6_5Test001_conversion_factor = Double.parseDouble(new DecimalFormat("##.##").format(remainingDoses_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1 / remainingQty_before_Lot_SPIKEVAX6_5Test001_Distribution_1_1));
 		log("/*-- . remaining Quantity are: -->" + remainingQty_before_Lot_MT0055_Distribution_1_2);
 		log("/*- container#5 -Automation Supply Distribution_1_1 & Pfizer mRNA BNT162b2 - EK4241*/");

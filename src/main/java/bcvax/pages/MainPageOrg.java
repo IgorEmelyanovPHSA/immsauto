@@ -34,7 +34,7 @@ public class MainPageOrg extends BasePage {
                 current_app = driver.findElement(current_app_path);
                 found = current_app.isDisplayed();
                 System.out.println("Current App found");
-                System.out.println(end.toString());
+               // System.out.println(end.toString());
                 current_app_text = current_app.getText();
             } catch (NotFoundException ex) {
                 end = Instant.now();

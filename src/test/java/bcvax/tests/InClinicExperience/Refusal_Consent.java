@@ -185,7 +185,7 @@ public class Refusal_Consent extends BaseTest {
 		log("/*47.---Open Today appointment Details --*/");
 		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
-		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA: " +consumptionAgent +"  --*/");
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
 		Thread.sleep(2000);

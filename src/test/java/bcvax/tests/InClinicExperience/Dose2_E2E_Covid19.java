@@ -54,10 +54,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 
 		log("TestRail test case ID: C" +TestcaseID);
 		log("Target Environment: "+ Utils.getTargetEnvironment());
-		log("/*1.----Login as an Clinician to ICE --*/");
+		log("---1. Login as an Clinician to ICE---");
 		loginPage.loginAsImmsBCAdmin();
 		orgMainPage = new MainPageOrg(driver);
-		log("/*2.----In Clinic Experience(ICE) page displayed --*/");
+		log("---2. In Clinic Experience(ICE) page displayed---");
 		String currentApp = MainPageOrg.currentApp(driver);
 		try {
 			MainPageOrg.closeAllTabs(driver);
@@ -65,35 +65,35 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			;
 		}
 		if(!currentApp.equals(Apps.IN_CLINIC_EXPERIENCE.value)) {
-			log("/*3.--- Navigate to In Clinic Experience App --*/");
+			log("---3. Navigate to In Clinic Experience App---");
 			MainPageOrg.switchApp(driver, Apps.IN_CLINIC_EXPERIENCE.value);
 		}
 
 		InClinicExperiencePage inClinicExperience = new InClinicExperiencePage(driver);
-		log("/*4.----Close All previously opened Tab's --*/");
+		log("---4. Close All previously opened Tab's---");
 		try {
 			MainPageOrg.closeAllTabs(driver);
 		} catch(Exception ex) {
 			;
 		}
 
-		log("/*5.----- Click on User Defaults Tab --*/");
+		log("---5. Click on User Defaults Tab---");
 		InClinicExperiencePage.clickUserDefaultsTab(driver);
-		log("/*6.----- Enter current date for UserDefaults --*/");
+		log("---6. Enter current date for UserDefaults---");
 		UserDefaultsPage.inputCurrentDateUserDefaults(driver);
 		Thread.sleep(2000);
 		UserDefaultsPage.selectUserDefaultLocation(driver, supplyLocationConsumption);
-		log("/*7.----- Click on Save defaults button --*/");
+		log("---7. Click on Save defaults button ---");
 		UserDefaultsPage.clickBtnSave(driver);
 		Thread.sleep(500);
-		log("/*8.----- Click on register Tab --*/");
+		log("---8. Click on register Tab ---");
 		InClinicExperiencePage.clickRegisterTab(driver);
 
-		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
+		log("---9. Click Register button New Citizen -Hugues BCVaxLampard ---");
 		InClinicExperiencePage.clickRegisterButton(driver);
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
 
-		log("/*25.----click on person Account Related Tab --*/");
+		log("---10. Click on person Account Related Tab ---");
 		try {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch (NotFoundException ex) {
@@ -105,11 +105,11 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 
-		log("/*26.----Go to Appointment Tab --*/");
+		log("---11. Go to Appointment Tab ---");
 		PersonAccountPage.goToVaccineScheduleTab(driver);
 
 		try {
-			log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			log("---12. Click on the Vaccine 'Covid-19 Vaccine' checkbox ---");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		} catch(ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
@@ -117,10 +117,10 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		} catch(Exception ex) {
 			//If override Eligibility is shown
-			System.out.println("---click on reason Override Eligibility Reason - Travel --*/");
+			log("---Click on reason Override Eligibility Reason - Travel --*/");
 			PersonAccountSchedulePage.overrideEligibility(driver);
 			Thread.sleep(500);
-			log("/*28.----click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
+			log("---13. Click on the Vaccine 'Covid-19 Vaccine' checkbox --*/");
 			PersonAccountSchedulePage.checkBookingVaccineCheckbox(driver, "Covid19Vaccine");
 		}
 
@@ -128,35 +128,35 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		//May will be removed
 		//PersonAccountPage.select_covid_19_agent(driver, "COVID-19 mRNA Vaccine (Pfizer-BioNTech Comirnaty/Moderna Spikevax)");
 		///////////////////
-		log("/*28.----select 'Search by Clinic name' tab --*/");
+		log("---14. Select 'Search by Clinic name' tab ---");
 		PersonAccountSchedulePage.selectSearchByClinicNameTab(driver);
 
-		log("/*29.----search the Clinic " + supplyLocationConsumption +" --*/");
+		log("---15. Search the Clinic " + supplyLocationConsumption);
 		PersonAccountSchedulePage.searchClinicName(driver, supplyLocationConsumption);
-		log("/*30.----click on Option Facility location  --*/");
+		log("---16. Click on Option Facility location---");
 		PersonAccountSchedulePage.clickOnFacilityOptionLocation(driver);
 
-		log("/*31.----select Active booking appointment day  --*/");
+		log("---17. Select Active booking appointment day---");
 		PersonAccountSchedulePage.selectBookingAppointmentDay(driver);
 
-		log("/*32.----select the time slot  --*/");
+		log("---18. Select the time slot---");
 		PersonAccountSchedulePage.selectTimeSlotForAppointment(driver);
 
-		log("/*33.----click Next button  --*/");
+		log("---19. Click Next button ---");
 		PersonAccountSchedulePage.clickNextButtonApptSchedulingPage(driver);
 
-		log("/*34.----click Verify Contact Info checkbox  --*/");
+		log("---20. Click Verify Contact Info checkbox ---");
 		PersonAccountSchedulePage.clickVerifyContactInformation(driver);
 		PersonAccountSchedulePage.clickOnConfirmButton(driver);
 
-		log("/*35.----see 'Appointment confirmed!' screen --*/");
+		log("---21. See 'Appointment confirmed!' screen ---");
 		boolean apointment_result = PersonAccountSchedulePage.appointmentConfirmationMessage(driver);
 		Assert.assertTrue(apointment_result, "Appointment Confirmation screen didn't appear");
 
-		log("/*36.----Refresh page --*/");
+		log("---Refresh page ---");
 		driver.navigate().refresh();
 
-		log("/*37.----Go to back to the Citizen Related Tab --*/");
+		log("---22. Go to back to the Citizen Related Tab ---");
 		try {
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch(NotFoundException ex) {
@@ -167,27 +167,22 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 			PersonAccountPage.goToRelatedTab(driver);
 		}
 
-		log("/*38.----click on In-clinic Experience button --*/");
+		log("---23. Click on In-clinic Experience button ---");
 		PersonAccountPage.clickCheckInButton(driver);
-		//inClinicExperience.ClickGoToInClinicExperienceButton();
 
-		log("/*39.----In-clinic Experience ->Vaccine Admin page appears up --*/");
-		//inClinicExperience.validateVaccineAdminPageOpen();
-
-		log("/*40.---Click confirm and Save Button --*/");
+		log("---24. Click confirm and Save Button---");
 		Thread.sleep(2000);
 		InClinicExperienceIdentificationPage.clickConfirmAndSaveIdentificationButton(driver);
 
-		log("/*41.---select Vaccine Agent picklist value -> COVID-19 mRNA --*/");
-
-		log("/*46.---Open Today's appointments from Home page --*/");
-
+		log("---25. Open Today's appointments from Home page--");
 		InClinicExperiencePage.clickTodayAppointments(driver);
 		Thread.sleep(2000);
-		log("/*47.---Open Today appointment Details --*/");
+
+		log("---26. Open Today appointment Details ---");
 		Map<String, WebElement> my_appointment_info = ClientListTodayAppointmentsTab.getTodayAppoitmentsTableRow(driver, client_data.get("personalHealthNumber"));
 		ClientListTodayAppointmentsTab.clickViewButton(driver, my_appointment_info);
-		log("/*48.---select Vaccine Agent picklist Value ->  COVID-19 mRNA --*/");
+
+		log("---27. Select Vaccine Agent picklist Value: " +consumptionAgent);
 		InClinicExperienceVaccineAdministrationPage.selectVaccineAgent(driver, consumptionAgent);
 
 		String lot = null;
@@ -224,16 +219,16 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		if(site.equals("")) {
 			InClinicExperienceVaccineAdministrationPage.setSite(driver, consumptionSite);
 		}
-		log("/*42_.---Click Save button for Immunisation Information --*/");
+		log("---28. Click Save button for Immunisation Information ---");
 		InClinicExperienceVaccineAdministrationPage.clickSaveImmuneInfoButton(driver);
 		InClinicExperiencePage.clickOkForExpiredLot(driver);
-		log("/*43.---Click Confirm and Save Administration Button --*/");
+		log("---29. Click Confirm and Save Administration Button ---");
 		InClinicExperienceVaccineAdministrationPage.ClickConfirmAndSaveAdministrationButton(driver);
 
-		log("/*44.---Click Modal screen Confirm&Save Administration Button --*/");
+		log("---30. Click Modal screen Confirm&Save Administration Button ---");
 		InClinicExperienceVaccineAdministrationPage.ClickModalConfirmAndSaveAdministrationButton(driver);
 
-		log("/*45.---the Home - Client Search showing up  --*/");
+		log("---31. The Home - Client Search showing up---");
 		InClinicExperiencePage.validateHomePageShownUp(driver);
 	}
 }

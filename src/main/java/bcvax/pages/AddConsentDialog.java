@@ -69,6 +69,7 @@ public class AddConsentDialog extends BasePage {
 
     public static void selectObtainedFromClient(WebDriver driver) {
         WebElement provider_type_radio = driver.findElement(By.xpath("//input[@value='InformedConsentForSeriesObtainedFrom.Client']/..//span[@class='slds-radio_faux']"));
+        scrollCenter(driver, provider_type_radio);
         provider_type_radio.click();
     }
 
@@ -394,9 +395,11 @@ public class AddConsentDialog extends BasePage {
 
     public static String getAgent(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-        By agent_path = By.xpath("//strong[contains(text(), 'Agent')]/../..");
+        //By agent_path = By.xpath("//strong[contains(text(), 'Agent')]/../..");
+        By agent_path = By.xpath("//strong[(text()= 'Agent(s):')]/../..");
         waitForElementToBeEnabled(driver, agent_path, 10);
         WebElement agent = driver.findElement(agent_path);
+        log("Agent: "+agent.getText());
         String[] agent_text = agent.getText().replace("\n", "").replace(" ", "").split(":");
         if(agent_text.length < 2) {
             return "";

@@ -123,7 +123,7 @@ public abstract class BasePage<T> {
 				}catch(Exception ex) {
 					continue;
 				}
-				System.out.println(end.toString());
+			//	System.out.println(end.toString());
 				if(!found) {
 					end = Instant.now();
 					if(Duration.between(start, end).toMillis() > timeout) {
@@ -163,7 +163,7 @@ public abstract class BasePage<T> {
 				} catch(Exception ex) {
 					continue;
 				}
-				System.out.println(end.toString());
+				//System.out.println(end.toString());
 				if(!attribute_match) {
 					end = Instant.now();
 					if(Duration.between(start, end).toMillis() > timeout) {

@@ -51,6 +51,9 @@ public class SupplyLocationRelatedItems extends BasePage {
 
     public static Map<String, Map<String, Double>> checkSupplyContainers(WebDriver driver, List<String> containers) throws InterruptedException {
         Thread.sleep(500);
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("window.scrollBy(0, 250);");
+//        Thread.sleep(500);
         DecimalFormat df = new DecimalFormat("#.##");
         Map<String, Map<String, Double>> my_container_rec = new HashMap<>();
         GenericTable supply_container_table = getContainersTable(driver);
@@ -71,6 +74,8 @@ public class SupplyLocationRelatedItems extends BasePage {
                     my_container_rec.put(my_container_name, my_rec);
                     WebElement my_checkbox = my_record.get("Choose a Row\n" +
                             "Select All");
+                    Thread.sleep(500);
+                    scrollCenter(driver, my_checkbox);
                     my_checkbox.click();
                     break;
                 }

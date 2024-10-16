@@ -158,7 +158,7 @@ public class CitizenPrimaryInfo extends BasePage {
     }
 
     public static void fillUpRegistrationForm(WebDriver driver, Map<String, String> client_data) throws InterruptedException, ParseException {
-        System.out.println("/*5.----Enter First Name " + client_data.get("legalFirstName") + "--*/");
+        log("---Enter First Name " + client_data.get("legalFirstName"));
         boolean first_name_field_found = false;
         //////// No need ///////
 //        try {
@@ -167,27 +167,25 @@ public class CitizenPrimaryInfo extends BasePage {
 //        } catch(NotFoundException ex) {
 //            first_name_field_found = false;
 //        }
-        System.out.println("/*7.----Enter Postal code " + client_data.get("postalCode") + "--*/");
+        log("---Enter Postal code " + client_data.get("postalCode"));
         CitizenPrimaryInfo.enterPostalCode(driver, client_data.get("postalCode"));
-        System.out.println("/*8.----Enter PHN " + client_data.get("personalHealthNumber") + "--*/");
+        log("---Enter PHN " + client_data.get("personalHealthNumber"));
         CitizenPrimaryInfo.enterPHN(driver, client_data.get("personalHealthNumber"));
         if(first_name_field_found) {
-            System.out.println("/*6.----Enter Last Name " + client_data.get("legalLastName") + "--*/");
+            log("---Enter Last Name " + client_data.get("legalLastName"));
             CitizenPrimaryInfo.enterLastName(driver, client_data.get("legalLastName"));
-            System.out.println("/*6.----Enter Middle Name " + client_data.get("legalMiddleName") + "--*/");
+            log("---Enter Middle Name " + client_data.get("legalMiddleName"));
             CitizenPrimaryInfo.enterMiddleName(driver, client_data.get("legalMiddleName"));
-            System.out.println("/*6.----Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy") + "--*/");
+            log("---Enter Date of birth " + Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy"));
             CitizenPrimaryInfo.enterDateOfBirth(driver, Utils.convertDate(client_data.get("dateOfBirth"), "MMM dd, yyyy"));
-
-            System.out.println("/*9.----click on non-Indigenous person radiobutton --*/");
-            System.out.println("/*10.----click Verify PHN button --*/");
+            log("---Click Verify PHN button---");
             CitizenPrimaryInfo.clickVerifyPHNButton(driver);
-            System.out.println("/*11.--Expecting to see the toast success message - 'PNH match successful' --*/");
+            log("---Expecting to see the toast success message - 'PNH match successful'---");
             CitizenPrimaryInfo.successMessageAppear(driver);
-            System.out.println("/*12.----click Next button --*/");
         }
+        log("---click Next button---");
         CitizenPrimaryInfo.clickNextButton(driver);
-        System.out.println("/*13.'Enter email address " + client_data.get("email") + "--*/");
+        log("---Enter email address " + client_data.get("email"));
         try {
             CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
         } catch(ElementNotInteractableException ex) {
@@ -198,13 +196,13 @@ public class CitizenPrimaryInfo extends BasePage {
             Thread.sleep(2000);
             CitizenPrimaryInfo.enterEmail(driver, client_data.get("email"));
         }
-        System.out.println("/*14.'Confirm email address " + client_data.get("email") + "--*/");
+        log("---Confirm email address " + client_data.get("email"));
         CitizenPrimaryInfo.confirmEmail(driver, client_data.get("email"));
-        System.out.println("/*15.Click review details Button--*/");
+        log("---Click review details Button---");
         CitizenPrimaryInfo.clickReviewDetails(driver);
-        System.out.println("/*16.Click register Button on confirmation page--*/");
+        log("---Click register Button on confirmation page---");
         CitizenPrimaryInfo.clickRegisterButtonOnConfirmationPage(driver);
-        System.out.println("/*17.--toast success message - 'Success' --*/");
+        log("---toast success message - 'Success'---");
         try {
             CitizenPrimaryInfo.successRegisteredMessageAppear(driver);
         } catch (NotFoundException ex) {
