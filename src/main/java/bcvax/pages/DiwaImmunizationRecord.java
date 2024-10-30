@@ -413,4 +413,20 @@ public class DiwaImmunizationRecord extends BasePage {
         WebElement yes_btn = driver.findElement(yes_btn_path);
         yes_btn.click();
     }
+    public static boolean youthWarningMessage(WebDriver driver) throws InterruptedException{
+        List<WebElement> youthWarningMessage;
+            for (int i = 1; i <= 3; i++) {
+                youthWarningMessage = driver.findElements(By.xpath("//legend[contains(text(), 'You have selected a vaccine which is not approved for use for the person')]"));
+                if (youthWarningMessage.isEmpty()) {
+                    Thread.sleep(1000);
+                    log("Re-try: to check for youth warning message");
+                } else {
+                    log("Youth warning message displayed");
+                    return true;
+                }
+            }
+        return false;
+    }
+
+
 }

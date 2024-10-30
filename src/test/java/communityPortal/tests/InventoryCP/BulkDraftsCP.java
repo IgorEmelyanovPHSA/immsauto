@@ -29,8 +29,9 @@ public class BulkDraftsCP extends BaseTest {
     String supply_location_to;
     @Test
     public void CP_Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another() throws Exception {
-        //TestcaseID = "222374"; //C222374
+        TestcaseID = "245220"; //C245220
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        log("Test Case Id: " +"C"+TestcaseID);
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
         distribution_from = String.valueOf(testData.get("distributionFrom"));
@@ -43,10 +44,7 @@ public class BulkDraftsCP extends BaseTest {
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 7 need some refactoring in the future
 
         log("/*1.----Login as Clinician --*/");
-        log("TestCase: C245220");
-        TestcaseID = "245220"; //C245220
         loginPage.loginIntoCommunityPortalAsClinician();
-
 
         log("/*2.----Navigate to Supply Console Page --*/");
         MainPageCP.goToSupplyLocation(driver);

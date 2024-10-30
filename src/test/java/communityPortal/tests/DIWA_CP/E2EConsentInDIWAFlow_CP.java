@@ -38,7 +38,7 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data_new.get("personalHealthNumber"));
     }
     @Test(testName = "Document Consent in DIWA flow CP. Existing Consent")
-    public void Can_Create_DIWA_Immunisation_record_with_Active_consent() throws Exception {
+    public void Can_Create_DIWA_Immunisation_record_with_Active_consent_CP() throws Exception {
         TestcaseID = "273416";
         env = Utils.getTargetEnvironment();
         testData = Utils.getTestData(env);
@@ -47,17 +47,19 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         lot_to_select = String.valueOf(testData.get("pneumoLot"));
         dosage_to_select = String.valueOf(testData.get("pneumoDose"));
         log("Target Environment: " + env);
+        log("Test Case Id: " +"C"+TestcaseID);
 
         //---Verify the EXISTING CONSENT flows---
 
-        log("/*----1. Login as an DIWA to CIB  --*/");
-        participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
+        log("---1. Login as an DIWA to CIB ---");
         loginPage.loginIntoCommunityPortalAsClinician();
         MainPageCP cpMainPage = new MainPageCP(driver);
         cpMainPage.verifyIsCommunityPortalHomePageDisplayed();
+        participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
+        log("Citizen to search: " +participant_name);
         MainPageCP.search(driver, participant_name);
 
-        log("/*----6. Navigated to Person Account related tab ---*/");
+        log("---2. Navigated to Person Account related tab ---");
         try {
             PersonAccountPage.goToRelatedTab(driver);
         } catch (NotFoundException ex) {
@@ -81,23 +83,23 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
             }
         }
         Assert.assertEquals(active_consent_resp, "Grant");
-        log("/*----7. Click Create Immunization Record ---*/");
+        log("---3. Click Create Immunization Record ---");
         PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
-        log("/*----8. Click confirm Button on the popup window---*/");
+        log("---4. Click confirm Button on the popup window---");
         try {
             PersonAccountPage.confirmNoForecastWarning(driver);
         } catch (Exception ex) {
             System.out.println("No Confirm dialog");
         }
-        log("/*----9. Select an Option ---*/)");
+        log("---5. Select an Option ---*/)");
         DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
-        log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
+        log("---6. Select option: " +agent);
         DiwaImmunizationRecord.selectAgent(driver, agent);
-        log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
+        log("---7. Enter a Clinic Location: " +clinic_location);
         DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
-        log("/*---12. Select a Date and Time of Administration ---*/");
+        log("---8. Select a Date and Time of Administration ---");
         DiwaImmunizationRecord.clickTimeBox(driver);
-        log("/*---13. Click Record Immunization ---*/");
+        log("---9. Click Record Immunization ---");
         DiwaImmunizationRecord.clickRecordImmunization(driver);
         try {
             List<Map<String, WebElement>> consent_table = DiwaImmunizationRecord.getInformedConsentTable(driver);
@@ -123,15 +125,15 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
 
         //---Verify the NEW CONSENT flows---
 
-        participant_name = client_data_new.get("legalFirstName" + " " + client_data_new.get("legalMiddleName") + " " + client_data_new.get("legalLastName"));
+    //    participant_name = client_data_new.get("legalFirstName" + " " + client_data_new.get("legalMiddleName") + " " + client_data_new.get("legalLastName"));
         MainPageCP.navigateToRegisterClientPage(driver);
 
-        log("/*7.----click Register button New Citizen --*/");
+        log("---10. Click Register button New Citizen ---");
         InClinicExperiencePage.clickRegisterButton(driver);
 
         CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data_new);
 
-        log("/*----6. Navigated to Person Account related tab ---*/");
+        log("---11. Navigated to Person Account related tab ---");
         try {
             PersonAccountPage.goToRelatedTab(driver);
         } catch(ElementClickInterceptedException ex) {
@@ -139,24 +141,24 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
             PersonAccountPage.goToRelatedTab(driver);
         }
 
-        log("/*----7. Click Create Immunization Record ---*/");
+        log("---12. Click Create Immunization Record---");
         PersonAccountRelatedPage.clickCreateImmunizationRecord(driver);
 
-        log("/*----8. Click confirm Button on the popup window---*/");
+        log("---13. Click confirm Button on the popup window---");
         try {
             PersonAccountPage.confirmNoForecastWarning(driver);
         } catch(Exception ex) {
             System.out.println("No Confirm dialog");
         }
-        log("/*----9. Select an Option ---*/)");
+        log("---14. Select an Option ---");
         DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
-        log("/*----10. Select Pneumo-P-23 as an Option  ---*/");
+        log("---15. Select Pneumo-P-23 as an Option  ---");
         DiwaImmunizationRecord.selectAgent(driver, "Pneumo-P-23");
-        log("/*----11. Enter a Clinic Location --> All Ages - Atlin Health Centre ---*/");
+        log("---16. Enter a Clinic Location: " +clinic_location);
         DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
-        log("/*---12. Select a Date and Time of Administration ---*/");
+        log("---17. Select a Date and Time of Administration ---*/");
         DiwaImmunizationRecord.clickTimeBox(driver);
-        log("/*---13. Click Record Immunization ---*/");
+        log("---18. Click Record Immunization ---");
         DiwaImmunizationRecord.clickRecordImmunization(driver);
         boolean recordConsentBtnExists = DiwaImmunizationRecord.recordConsentBtnExists(driver);
         Assert.assertTrue(recordConsentBtnExists, "Record Consent Button doesn't exist");
@@ -164,10 +166,8 @@ public class E2EConsentInDIWAFlow_CP extends BaseTest {
         boolean recordConsentBtnActive = DiwaImmunizationRecord.recordConsentBtnIsActive(driver);
         Assert.assertTrue(recordConsentBtnActive, "Record Consent Button is not Enabled");
 
-
         boolean use_previous_consent = DiwaImmunizationRecord.usePrviousConsentChkboxExists(driver);
         Assert.assertTrue(use_previous_consent, "Use Previous Consent checkbox is not Displayed");
-
 
         boolean record_new_consent_msg_exists = DiwaImmunizationRecord.recordNewConsentMessageExists(driver);
         Assert.assertTrue(record_new_consent_msg_exists, "New Consent Message is not Displayed");

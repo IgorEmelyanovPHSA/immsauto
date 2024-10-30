@@ -57,6 +57,8 @@ public class BulkTransfersCancellation extends BaseTest {
     @Test(priority = 1)
     public void Can_doBulk_transfers_Cancellation_By_Doses_form_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244849" : "223359";
+        log("Target Environment: "+ Utils.getTargetEnvironment());
+        log("Test Case Id: " +"C"+TestcaseID);
         precondition();
         double doses = 10;
 

@@ -8,6 +8,8 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -24,11 +26,12 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 	String participant_name;
 	String consentProvider;
 	private String consent_effective_date = "November 29, 2023";
-	private String lot_to_select ;
+	private String lot_to_select;
 	private String dosage_to_select;
 	String clinic_location;
 	MainPageOrg orgMainPage;
 	Map<String, String> client_data;
+
 	@BeforeMethod
 	public void beforeMethod() throws Exception {
 		env = Utils.getTargetEnvironment();
@@ -42,6 +45,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
 		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
 	}
+
 	@Test(priority = 1, testName = "Create DIWA Immunisation record without Appointments")
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "273661";
@@ -51,8 +55,8 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		consentProvider = String.valueOf(testData.get("consentProvider"));
 		participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
 
-		log("Target Environment: "+ env);
-		log("Test Case Id: " +"C"+TestcaseID);
+		log("Target Environment: " + env);
+		log("Test Case Id: " + "C" + TestcaseID);
 		log("---Before Method API call to remove duplicate citizen participant account if found---");
 
 		log("---1. Login as an DIWA to CIB---");
@@ -61,7 +65,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("---2. Clinic In Box page displayed---");
 		orgMainPage = new MainPageOrg(driver);
 		String currentApp = MainPageOrg.currentApp(driver);
-		if(!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
+		if (!currentApp.equals(Apps.CLINIC_IN_BOX.value)) {
 			MainPageOrg.switchApp(driver, Apps.CLINIC_IN_BOX.value);
 		}
 		MainPageOrg.selectFromNavigationMenu(driver, "Home");
@@ -85,14 +89,14 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("---6. Click confirm Button on the popup window---");
 		try {
 			PersonAccountPage.confirmNoForecastWarning(driver);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println("No Confirm dialog");
 		}
 		log("---7. Select an Option ---");
 		DiwaImmunizationRecord.clickSelectAnOptionDropdown(driver);
 		log("---8. Select Pneumo-P-23 as an Option  ---");
 		DiwaImmunizationRecord.selectAgent(driver, "Pneumo-P-23");
-		log("---9. Enter a Clinic Location: " +clinic_location);
+		log("---9. Enter a Clinic Location: " + clinic_location);
 		DiwaImmunizationRecord.searchClinicLocation(driver, clinic_location);
 		log("---10. Select a Date and Time of Administration---");
 		DiwaImmunizationRecord.clickTimeBox(driver);
@@ -114,7 +118,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		expected_headers.add("Consent Effective To Date");
 		List<String> actual_headers = AddConsentDialog.getInformedConsentTableHeaders(driver);
 
-		for(String header : expected_headers) {
+		for (String header : expected_headers) {
 			Assert.assertTrue(actual_headers.contains(header), "Table doesn't contain header " + header);
 		}
 
@@ -124,7 +128,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		AddConsentDialog.selectFormOfConsentInPerson(driver);
 		AddConsentDialog.selectInformedConsentProvider(driver, consentProvider);
 		String date_effective_from = AddConsentDialog.getConsentEffectiveDateFromSelected(driver);
-		if(!date_effective_from.equals("Nov 29, 2023")) {
+		if (!date_effective_from.equals("Nov 29, 2023")) {
 			AddConsentDialog.setConsentEffectiveDateFrom(driver, consent_effective_date);
 		}
 		AddConsentDialog.clickNextButton(driver);
@@ -171,7 +175,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("---13. Select Immunizing Agent Provider ->: Auto Clinician DIWA_CIB ---");
 		try {
 			DiwaImmunizationRecord.setProvider(driver, consentProvider);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			DiwaImmunizationRecord.clickEditImmunizationInformation(driver);
 			Thread.sleep(500);
 			DiwaImmunizationRecord.setProvider(driver, consentProvider);
@@ -193,7 +197,7 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		DiwaImmunizationRecord.clickSaveImmunizationInfo(driver);
 		try {
 			DiwaImmunizationRecord.clickOkForExpiredLot(driver);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			//Do nothing
 			;
 		}
@@ -207,12 +211,23 @@ public class New_Consent_In_DIWA_Flow extends BaseTest {
 		log("---21. Navigate to Related tab and Confirm new Imms Record is created ---*/");
 		try {
 			PersonAccountPage.goToRelatedTab(driver);
-		} catch(NotFoundException ex) {
+		} catch (NotFoundException ex) {
 			Thread.sleep(2000);
 			PersonAccountPage.goToRelatedTab(driver);
 		} catch (ElementClickInterceptedException ex) {
 			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
 			PersonAccountPage.goToRelatedTab(driver);
 		}
+		//Clean up data
+		afterMethod();
 	}
+
+	public void afterMethod() throws Exception {
+		log("--- AFTER METHOD TO DELETE THE CREATED DATA ---");
+		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
+		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
+	}
+
 }

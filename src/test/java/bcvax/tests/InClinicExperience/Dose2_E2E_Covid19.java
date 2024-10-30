@@ -92,6 +92,13 @@ public class Dose2_E2E_Covid19 extends BaseTest {
 		log("---9. Click Register button New Citizen -Hugues BCVaxLampard ---");
 		InClinicExperiencePage.clickRegisterButton(driver);
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
+		Thread.sleep(2000);
+		//If the PIR Warning is shown close it
+		try {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+		} catch(Exception ex) {
+			System.out.println("No PIR Warning. Continue...");
+		}
 
 		log("---10. Click on person Account Related Tab ---");
 		try {

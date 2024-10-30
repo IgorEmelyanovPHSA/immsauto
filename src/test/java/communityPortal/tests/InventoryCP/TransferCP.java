@@ -32,7 +32,6 @@ public class TransferCP extends BaseTest {
 	@BeforeMethod
 	public void setUpClass() throws Exception {
 		env = Utils.getTargetEnvironment();
-		log("Target Environment: " + env);
 		testData = Utils.getTestData(env);
 		supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
 		supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
@@ -45,6 +44,8 @@ public class TransferCP extends BaseTest {
 	public void Can_do_Transfer_by_Dosages_from_one_Clinic_to_Another_CP() throws Exception {
 		//TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "223184"; //C223184
 		TestcaseID = (env.contains("immsbc_admin")) ? "245093" : "243105"; //C243105
+		log("Target Environment: " + env);
+		log("Test Case Id: " +"C"+TestcaseID);
 		precondition();
 		int doses = 10;
 		String container_from = String.valueOf(testData.get("containerFrom"));

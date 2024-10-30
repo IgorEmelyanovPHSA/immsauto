@@ -13,3 +13,5 @@ personalHealthNumber,dateOfBirth,gender,legalLastName,legalFirstName,legalMiddle
 9746173078,17-12-1992,F,BCVaxHanna,Ivy,,,,BC,V9L6G8,CA,555-555-6156,accountToDelete@phsa.ca,minor_ailment
 9746174016,20-09-1958,F,BCVaxHaverty,Barb,Ariella,,,BC,V3B0J5,CA,555-555-6157,accountToDelete@phsa.ca,notification
 9746173963,23-01-1993,M,BCVaxPenketh,Lockwood,Rodger,,,BC,V3L5L2,CA,555-555-6158,accountToDelete@phsa.ca,consent
+9746206982,26-04-2021,M,BCVaxRowley,Charlotte,,,,BC,V7N6L9,CA,555-555-6154,BCVaxBCVaxRowley@test.ca,under5year
+9746173078,17-12-1992,F,BCVaxHanna,Ivy,,,,BC,V9L6G8,CA,555-555-6156,accountToDelete@phsa.ca,over12years

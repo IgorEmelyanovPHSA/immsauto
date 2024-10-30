@@ -45,9 +45,10 @@ public class Existing_Consent_In_DIWA_Flow extends BaseTest {
         site_to_select = String.valueOf(testData.get("siteConsumption"));
         agent = String.valueOf(testData.get("vaccineAgent"));
         lot_to_select = String.valueOf(testData.get("covidLot"));
-        log("Target Environment: "+ env);
         Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
         Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
+        log("Target Environment: "+ env);
+        log("Test Case Id: " +"C"+TestcaseID);
         log("/*----1. Login as an DIWA to CIB  --*/");
         participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
         loginPage.loginAsImmsBCAdmin();
