@@ -28,7 +28,6 @@ public class TransferCancellation extends BaseTest {
     @BeforeMethod
     public void setUpClass() throws Exception {
         env = Utils.getTargetEnvironment();
-        log("Target Environment: " + env);
         testData = Utils.getTestData(env);
         supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
         supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
@@ -40,6 +39,8 @@ public class TransferCancellation extends BaseTest {
     @Test(priority = 1)
     public void Can_do_Transfer_Cancellation_by_Dosages_from_one_Clinic_to_Another() throws Exception {
         TestcaseID = (env.contains("immsbc_admin")) ? "244845" : "223184"; //C223184
+        log("Target Environment: "+ Utils.getTargetEnvironment());
+        log("Test Case Id: " +"C"+TestcaseID);
         precondition();
 		String container_from = String.valueOf(testData.get("containerFrom"));
 		String container_to = String.valueOf(testData.get("containerTo"));

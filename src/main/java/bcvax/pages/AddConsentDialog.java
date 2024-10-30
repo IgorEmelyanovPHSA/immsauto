@@ -366,7 +366,23 @@ public class AddConsentDialog extends BasePage {
         WebElement create_consent_record_btn = driver.findElement(create_consent_record_btn_path);
         create_consent_record_btn.click();
     }
+    public static void clickBtnReturnToInformedConsent(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By create_consent_record_btn_path = By.xpath("//button[@type='button' and text() ='Return to Informed Consent']");
+        waitForElementToBeEnabled(driver, create_consent_record_btn_path, 10);
+        WebElement btnReturnToInformedConsent = driver.findElement(create_consent_record_btn_path);
+        btnReturnToInformedConsent.click();
+        Thread.sleep(2000);
+    }
 
+    public static void clickBtnClose(WebDriver driver) throws InterruptedException {
+        Thread.sleep(500);
+        By create_consent_record_btn_path = By.xpath("//button[text() ='Close']");
+        waitForElementToBeEnabled(driver, create_consent_record_btn_path, 10);
+        WebElement btnClose = driver.findElement(create_consent_record_btn_path);
+        btnClose.click();
+        Thread.sleep(2000);
+    }
     public static String getProfile(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
         By profile_path = By.xpath("//strong[text()='Profile']/..");

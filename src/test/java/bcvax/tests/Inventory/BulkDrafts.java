@@ -46,6 +46,7 @@ public class BulkDrafts extends BaseTest {
     public void Can_do_Bulk_draft_by_Dosages_form_one_Clinic_to_Another_as_PPHIS() throws Exception {
         TestcaseID = "222374"; //C222374
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        log("Test Case Id: " +"C"+TestcaseID);
         double amountOfDosesToTransfer = 1; //Hardcoded in bulktransfer method in step 9 need some refactoring in the future
         log("/*1.----Login as an PPHIS_bcvaxdevit to Supply Console --*/");
         SupplyConsolePage supplyConsolePage = loginPage.loginAsPPHIS();

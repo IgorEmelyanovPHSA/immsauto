@@ -35,8 +35,10 @@ public class DIWA_ICE extends BaseTest {
 
 	@Test()
 	public void Can_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician_in_ICE() throws Exception {
-		env = Utils.getTargetEnvironment();
+		TestcaseID = "223187"; //C223187
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("Test Case Id: " +"C"+TestcaseID);
+		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		citizenName = client_data.get("legalFirstName") + " " + (client_data.get("legalMiddleName").equals("") ? "" : client_data.get("legalMiddleName") + " ") + client_data.get("legalLastName");
 		consentProvider = String.valueOf(testData.get("consentProvider"));
@@ -47,9 +49,6 @@ public class DIWA_ICE extends BaseTest {
 
 		log("/*1.----Login --*/");
 		loginPage.loginAsImmsBCAdmin();
-
-		log("Login AS default user (Clinician to ICE)");
-		TestcaseID = "223187"; //C223187
 
 		log("/*2.--- Navigate to In Clinic Experience App --*/");
 		mainPageOrg = new MainPageOrg(driver);

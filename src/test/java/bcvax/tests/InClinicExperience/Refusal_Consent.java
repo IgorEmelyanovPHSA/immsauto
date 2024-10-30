@@ -51,7 +51,7 @@ public class Refusal_Consent extends BaseTest {
 
 	@Test()
 	public void verify_cannot_proceed_with_consent_refusal() throws Exception {
-		TestcaseID = "276033"; //C222811
+		TestcaseID = "276033"; //C276033
 		env = Utils.getTargetEnvironment();
 		testData = Utils.getTestData(env);
 		log("TestRail test case ID: C" +TestcaseID);
@@ -96,6 +96,13 @@ public class Refusal_Consent extends BaseTest {
 		log("/*10.----click Register button New Citizen -Hugues BCVaxLampard --*/");
 		InClinicExperiencePage.clickRegisterButton(driver);
 		CitizenPrimaryInfo.fillUpRegistrationForm(driver, client_data);
+		Thread.sleep(2000);
+		//If the PIR Warning is shown close it
+		try {
+			PersonAccountPage.cancelProfileNotLinkedToPIRWarning(driver);
+		} catch(Exception ex) {
+			System.out.println("No PIR Warning. Continue...");
+		}
 
 		log("/*25.----click on person Account Related Tab --*/");
 		try {
