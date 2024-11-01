@@ -90,6 +90,7 @@ public class Returns extends BaseTest {
                 TestcaseID = "261384";
                 orgMainPage = loginPage.orgLoginAsPPHIS();
         }
+        log("Test Case Id: " + "C" + TestcaseID);
 
         String currentApp = MainPageOrg.currentApp(driver);
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
