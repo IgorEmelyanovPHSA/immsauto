@@ -39,15 +39,17 @@ public class New_Consent_In_Citizen_Profile_Errors  extends BaseTest {
     }
     @Test(testName = "Verify Errors when creating new Consent from Citizen Profile")
     public void Verify_Errors_When_Create_New_Consent_From_Citizen_Profile() throws Exception {
+        //Nov5, the bug is open  https://www.jira.healthcarebc.ca/browse/BCVAX-42699
+
         TestcaseID = "278835";
         env = Utils.getTargetEnvironment();
-        log("/---API call to remove duplicate citizen participant account if found--*/");
-        testData = Utils.getTestData(env);
         log("Target Environment: "+ env);
-        log("/*----1. Login as an DIWA to CIB  --*/");
+        log("Test Case Id: " + "C" + TestcaseID);
+        testData = Utils.getTestData(env);
         consumptionRoute = String.valueOf(testData.get("routeConsumption"));
         consentProvider = String.valueOf(testData.get("consentProvider"));
         participant_name = client_data.get("legalFirstName") + " " + client_data.get("legalMiddleName") + " " + client_data.get("legalLastName");
+        log("/*----1. Login as an DIWA to CIB  --*/");
         loginPage.loginAsImmsBCAdmin();
         log("/*-- 2. Clinic In Box page displayed --*/");
         orgMainPage = new MainPageOrg(driver);

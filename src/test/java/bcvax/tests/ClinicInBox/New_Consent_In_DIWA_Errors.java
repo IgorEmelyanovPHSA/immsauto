@@ -39,8 +39,8 @@ public class New_Consent_In_DIWA_Errors extends BaseTest {
 	@Test(testName = "Verify Errors when creating New Consent Record from DIWA")
 	public void Verify_Errors_When_Create_DIWA_Immunisation_record_without_Appointments_as_Clinician() throws Exception {
 		TestcaseID = "278975";
-		log("/---API call to remove duplicate citizen participant account if found--*/");
 		log("Target Environment: "+ env);
+		log("Test Case Id: " + "C" + TestcaseID);
 		log("/*----1. Login as an DIWA to CIB  --*/");
 		consumptionRoute = String.valueOf(testData.get("routeConsumption"));
 		consentProvider = String.valueOf(testData.get("consentProvider"));

@@ -162,17 +162,49 @@ public class AddConsentDialog extends BasePage {
         return provider_type_radio.isSelected();
     }
 
+//    public static void selectInformedConsentProvider(WebDriver driver, String provider) throws InterruptedException {
+//        Thread.sleep(500);
+//        By informed_consent_provider_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input");
+//        waitForElementToBeEnabled(driver, informed_consent_provider_path, 10);
+//        WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_path);
+//        informed_consent_provider_input.sendKeys(provider);
+//        Thread.sleep(500);
+//       // By consent_provider_item_path = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
+//        By consent_provider_item_path = By.xpath("//span[contains(@class, 'slds-listbox__option-text') and text()='" + provider + "']");
+//        ////span[contains(@class, 'slds-listbox__option-text') and text()='Auto Immsbcadmin']
+//        waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
+//        WebElement provider_item = driver.findElement(consent_provider_item_path);
+//        provider_item.click();
+//    }
+
     public static void selectInformedConsentProvider(WebDriver driver, String provider) throws InterruptedException {
         Thread.sleep(500);
         By informed_consent_provider_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input");
         waitForElementToBeEnabled(driver, informed_consent_provider_path, 10);
         WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_path);
         informed_consent_provider_input.sendKeys(provider);
-        Thread.sleep(500);
-        By consent_provider_item_path = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
-        waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
-        WebElement provider_item = driver.findElement(consent_provider_item_path);
-        provider_item.click();
+        Thread.sleep(1000);
+
+        // Define both XPath expressions
+        By consent_provider_item_path1 = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
+        By consent_provider_item_path2 = By.xpath("//span[contains(@class, 'slds-listbox__option-text') and text()='" + provider + "']");
+        WebElement consentProviderElement = null;
+        // First try finding the consentProviderElement with the first XPath
+        try {
+            consentProviderElement = driver.findElement(consent_provider_item_path1);
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found using either XPath1. Will try xpath2");
+            try {
+                consentProviderElement = driver.findElement(consent_provider_item_path2);
+            } catch (NoSuchElementException ex) {
+                System.out.println("Element not found using either XPath2.");
+            }
+        }
+        // If we found the consentProviderElement, print message or perform further actions
+        if (consentProviderElement != null) {
+            System.out.println("Element found: " + consentProviderElement.getText());
+            consentProviderElement.click();
+        }
     }
 
     public static void cleanupInformedConsentProvider(WebDriver driver) throws InterruptedException {

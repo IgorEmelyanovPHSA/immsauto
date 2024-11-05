@@ -42,6 +42,7 @@ public class Wastage extends BaseTest {
 	public void Can_Do_Single_Wastage_ByDosages() throws Exception {
 		TestcaseID = "223356"; //C223356
 		log("Target Environment: "+ Utils.getTargetEnvironment());
+		log("Test Case Id: " + "C" + TestcaseID);
 		supplyConsolePage = new SupplyConsolePage(driver);
 		int numberOfRows = 1; //Default value, wasting from first row only
 		double amountOfDosesToWaste = 3;
@@ -152,7 +153,15 @@ public class Wastage extends BaseTest {
 		SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
 		
 		log("/*14.----select Wastage from the DropDownMenu dropdown menu --*/");
-		SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
+		try {
+			SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
+		} catch(ElementNotInteractableException ex) {
+			Thread.sleep(500);
+			SupplyLocationRelatedItems.clickOnFirstContainerDropDownMenu(driver);
+			Thread.sleep(500);
+			SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
+		}
+		//SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 		
 		double actualDosesAmount = supplyConsolePage.getActualRemainingDoses();
 		log("/*----Actual Quantity Doses " + actualDosesAmount + " --*/");

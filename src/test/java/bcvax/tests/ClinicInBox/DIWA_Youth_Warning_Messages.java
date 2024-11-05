@@ -25,33 +25,6 @@ public class DIWA_Youth_Warning_Messages extends BaseTest {
 	MainPageOrg orgMainPage;
 	Map<String, String> client_data;
 
-//	@BeforeMethod
-//	public void beforeMethod() throws Exception {
-//		env = Utils.getTargetEnvironment();
-//		testData = Utils.getTestData(env);
-//		String client_data_file = Utils.getClientsDataFile();
-//		log("LOG " +client_data_file );
-//		client_data = Utils.getTestClientData(client_data_file, "five_years_old");
-//		clinic_location = String.valueOf(testData.get("diwaLocation"));
-//		log("/*0.---API call to remove duplicate citizen participant account if found--*/");
-//		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-//		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
-//		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-//		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
-//	}
-
-
-	// Trade name	           Dosage	6 mos - 5 yrs		6-11 yrs		12+ yrs
-	// NewSPIKEVAXTestLot001	0.25	No warning			No warning		Warning
-	// NewSPIKEVAXTestLot001	0.5  	Warning				Warning			No warning
-//	@DataProvider(name = "loginData")
-//	public Object[][] loginDataProvider() {
-//		return new Object[][] {
-//				{"under5year", "NewSPIKEVAXTestLot001", "0.25", false, "0.5", true},
-//				{"over6under11year", "NewSPIKEVAXTestLot001", "0.25", false, "0.5", true},
-//				{"over12years", "NewSPIKEVAXTestLot001", "0.25", true, "0.5", false}
-//		};
-//	}
 
 	@DataProvider(name = "userData")
 	public Object[][] loginDataProvider() {
@@ -164,13 +137,5 @@ public class DIWA_Youth_Warning_Messages extends BaseTest {
 		log("---18. Validate present yes/no warning message, flag value: " +warningFlag2) ;
 		Assert.assertTrue(warningFlag2 == DiwaImmunizationRecord.youthWarningMessage(driver), "The two boolean values are not equal!");
 	}
-
-//	public void afterMethod() throws Exception {
-//		log("--- AFTER METHOD TO DELETE THE CREATED DATA ---");
-//		Utilities.ApiQueries.apiCallToRemoveAppointmentsFromParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-//		Utilities.ApiQueries.apiCallToRemoveAllImmunizationRecordsByPHN(client_data.get("personalHealthNumber"));
-//		Utilities.ApiQueries.apiCallToRemoveParticipantAccountByPHN(client_data.get("personalHealthNumber"));
-//		Utilities.ApiQueries.apiCallToRemovePIRAccountByPHN(client_data.get("personalHealthNumber"));
-//	}
 
 }
