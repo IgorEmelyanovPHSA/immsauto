@@ -23,7 +23,7 @@ public class Returns extends BaseTest {
     String reason_for_wastage = "CCI: Equipment Malfunction";
     String receiver_comment = "This is to test the Receiver Comment";
 
-    @BeforeMethod
+
     public void setUpClass() throws Exception {
         env = Utils.getTargetEnvironment();
         log("Target Environment: " + env);
@@ -62,6 +62,7 @@ public class Returns extends BaseTest {
 
         log("/*d.----Create Wastage for the Flu Container --*/");
         //Create Wastage Record for Flu supply item
+        scrollDown(driver, 200);
         SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, supply_item);
         SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
 
@@ -76,28 +77,64 @@ public class Returns extends BaseTest {
 
     @Test()
     public void Validate_Return_Inventory_as_PPHIS() throws Exception {
-        log("Target Environment: "+ Utils.getTargetEnvironment());
-        SoftAssert softAssert = new SoftAssert();
-        log("/*1.----Login --*/");
-        switch (Utils.getTargetEnvironment()) {
-            case "comunityqa_immsbc_admin_org":
-                log("Login as ImmsBCAdmin");
-                TestcaseID = "261439"; //C261439
-                loginPage.loginAsImmsBCAdmin();
-                break;
-            default:
-                log("Login AS default user (PPHIS)");
-                TestcaseID = "261384";
-                orgMainPage = loginPage.orgLoginAsPPHIS();
-        }
+        env = Utils.getTargetEnvironment();
+        TestcaseID = "261384";
+        log("Target Environment: " + env);
         log("Test Case Id: " + "C" + TestcaseID);
+        SoftAssert softAssert = new SoftAssert();
 
+        log("/*----Run Pre-conditions --*/");
+        testData = Utils.getTestData(env);
+        supply_location_from = String.valueOf(testData.get("supplyLocationFrom"));
+        supply_location_to = String.valueOf(testData.get("supplyLocationTo"));
+        distribution_to = String.valueOf(testData.get("distributionTo"));
+        supply_item = String.valueOf(testData.get("supplyItemInfluenza"));
+        lot_number = String.valueOf(testData.get("influenzaLot"));
+
+        orgMainPage = loginPage.orgLoginAsPPHIS();
         String currentApp = MainPageOrg.currentApp(driver);
+        log("/*a.----Go to Health Connect Supply Location --*/");
         if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
             MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
         }
+        //Get Flu supplies using Receive Supplies feature
         SupplyConsolePage supplyConsolePage = new SupplyConsolePage(getDriver());
+        SupplyConsolePage.closeTabsHCA(driver);
+        SupplyConsolePage.clickSupplyConsoleAppNavigationMenu(driver);
+        SupplyConsolePage.selectSupplyLocationFromDropdown(driver);
+        SupplyLocationsPage.selectSupplyLocationName(driver, supply_location_from);
 
+        log("/*b.----Receive Supplies for Flu --*/");
+        SupplyLocationPage.clickReceiveSuppliesButton(driver);
+
+        ReceiveSuppliesDialog.clickSupplyItemTextBox(driver);
+        ReceiveSuppliesDialog.selectSupplyItem(driver, supply_item);
+        ReceiveSuppliesDialog.enterTransferDosages(driver, Double.toString(doses));
+        //supplyConsolePage.selectSupplyDistributionFromDropdown(distribution_to);
+        ReceiveSuppliesDialog.selectSupplyDistributionTo(driver);
+        ReceiveSuppliesDialog.selectReasonForReception(driver);
+        ReceiveSuppliesDialog.clickSaveButton(driver);
+
+        log("/*d.----Create Wastage for the Flu Container --*/");
+        //Create Wastage Record for Flu supply item
+        scrollDown(driver, 200);
+        SupplyLocationRelatedItems.clickOnContainerDropDownMenu(driver, supply_item);
+        SupplyLocationRelatedItems.selectWastageFromDropDown(driver);
+
+        log("/*f.----Add Doses and Reason for Wastage --*/");
+        ContainerWastageForm.enterAdjustmentDosages(driver, Double.toString(doses));
+        supplyConsolePage.selectReasonForWastageDropDown();
+
+        log("/*g.----Click Wastage Button--*/");
+        supplyConsolePage.clickBtnWastageAtContainerWastagePopUp();
+        orgMainPage.logout();
+
+        //TC itself
+        log("/*1.----Login --*/");
+        orgMainPage = loginPage.orgLoginAsPPHIS();
+        if(!currentApp.equals(Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value)) {
+            MainPageOrg.switchApp(driver, Apps.HEALTH_CONNECT_SUPPLY_CONSOLE.value);
+        }
 
         log("/*3. ----Close all open tabs --*/");
         SupplyConsolePage.closeTabsHCA(driver);

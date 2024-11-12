@@ -5,6 +5,7 @@ import bcvax.pages.TestRailManager;
 import bcvax.pages.Utils;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.output.TeeOutputStream;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -87,6 +88,12 @@ public class BaseTest {
 	protected static Map<String, String> searchCriteria(String vaccine, String fromDistributionLocation) {
 		return ImmutableMap.of(SUPPLY_CONTAINER_NAME_FULL, vaccine,
 				SUPPLY_DISTRIBUTION_DESCRIPTION_FULL, fromDistributionLocation);
+	}
+	public static void scrollDown(WebDriver driver, int scrollDistance) throws InterruptedException {
+		Thread.sleep(1000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, " + scrollDistance + ")");
+		Thread.sleep(1000);
 	}
 
 	public static void log(String msg) {
