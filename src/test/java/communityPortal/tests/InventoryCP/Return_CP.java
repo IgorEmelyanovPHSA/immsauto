@@ -70,6 +70,7 @@ public class Return_CP extends BaseTest {
     public void Validate_Return_Inventory_as_Clinician() throws Exception {
         TestcaseID = "261523";
         log("Target Environment: "+ Utils.getTargetEnvironment());
+        log("Testcase ID: " + TestcaseID);
         SoftAssert softAssert = new SoftAssert();
 
         log("/*1.----Login as Clinician--*/");

@@ -183,19 +183,44 @@ public class InformedConsentDialog extends BasePage {
         return provider_type_radio.isSelected();
     }
 
+//    public static void selectInformedConsentProvider(WebDriver driver, String provider) throws InterruptedException {
+//        Thread.sleep(500);
+//        By informed_consent_provider_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input");
+//        waitForElementToBeEnabled(driver, informed_consent_provider_path, 10);
+//        WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_path);
+//        informed_consent_provider_input.sendKeys(provider);
+//        Thread.sleep(500);
+//
+//      //  By consent_provider_item_path = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
+//        By consent_provider_item_path = By.xpath("//span[contains(@class, 'slds-listbox__option-text') and text()='" + provider + "']");
+//        waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
+//        WebElement provider_item = driver.findElement(consent_provider_item_path);
+//        provider_item.click();
+//    }
+
     public static void selectInformedConsentProvider(WebDriver driver, String provider) throws InterruptedException {
         Thread.sleep(500);
         By informed_consent_provider_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//input");
         waitForElementToBeEnabled(driver, informed_consent_provider_path, 10);
         WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_path);
         informed_consent_provider_input.sendKeys(provider);
-        Thread.sleep(500);
+        Thread.sleep(2000);
 
-      //  By consent_provider_item_path = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
-        By consent_provider_item_path = By.xpath("//span[contains(@class, 'slds-listbox__option-text') and text()='" + provider + "']");
-        waitForElementToBeEnabled(driver, consent_provider_item_path, 10);
-        WebElement provider_item = driver.findElement(consent_provider_item_path);
-        provider_item.click();
+        By consent_provider_item_path1 = By.xpath("//span[contains(@class, 'slds-listbox__option-text') and text()='" + provider + "']");
+        By consent_provider_item_path2 = By.xpath("//lightning-base-combobox-formatted-text[@title='" + provider + "']");
+        List<WebElement> elements1 = driver.findElements(consent_provider_item_path1);
+        List<WebElement> elements2 = driver.findElements(consent_provider_item_path2);
+
+        if (!elements1.isEmpty()) {
+            elements1.get(0).click();
+            System.out.println("Clicked on element from XPath 1");
+        } else if (!elements2.isEmpty()) {
+            elements2.get(0).click();
+            System.out.println("Clicked on element from XPath 2");
+        } else {
+            System.out.println("1. No element found for either XPath.");
+        }
+        Thread.sleep(1000);
     }
 
     public static void selectInformedConsentAgent(WebDriver driver, String agent) throws InterruptedException {
@@ -216,13 +241,35 @@ public class InformedConsentDialog extends BasePage {
         }
     }
 
+//    public static void cleanupInformedConsentProvider(WebDriver driver) throws InterruptedException {
+//        Thread.sleep(500);
+//       // By informed_consent_provider_clear_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='Clear Selection']");
+//        By informed_consent_provider_clear_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='icon']");
+//        waitForElementToBeEnabled(driver, informed_consent_provider_clear_path, 10);
+//        WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_clear_path);
+//        informed_consent_provider_input.click();
+//        Thread.sleep(1000);
+//    }
+
     public static void cleanupInformedConsentProvider(WebDriver driver) throws InterruptedException {
         Thread.sleep(500);
-       // By informed_consent_provider_clear_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='Clear Selection']");
-        By informed_consent_provider_clear_path = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='icon']");
-        waitForElementToBeEnabled(driver, informed_consent_provider_clear_path, 10);
-        WebElement informed_consent_provider_input = driver.findElement(informed_consent_provider_clear_path);
-        informed_consent_provider_input.click();
+        By informed_consent_provider_clear_path1 = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='icon']");
+        By informed_consent_provider_clear_path2 = By.xpath("//label[text()='Informed Consent Provider (User)']/..//button[@title='Clear Selection']");
+
+        // Try to find both elements
+        List<WebElement> elements1 = driver.findElements(informed_consent_provider_clear_path1);
+        List<WebElement> elements2 = driver.findElements(informed_consent_provider_clear_path2);
+
+        // Check if any element is found and click the first one that is found
+        if (!elements1.isEmpty()) {
+            elements1.get(0).click();
+          //  System.out.println("Clicked on element from XPath 1");
+        } else if (!elements2.isEmpty()) {
+            elements2.get(0).click();
+         //   System.out.println("Clicked on element from XPath 2");
+        } else {
+            System.out.println("2. No element found for either XPath.");
+        }
         Thread.sleep(1000);
     }
 
